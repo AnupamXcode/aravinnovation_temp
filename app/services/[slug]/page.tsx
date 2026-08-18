@@ -59,13 +59,13 @@ export async function generateMetadata({
 }
 
 const iconMap: Record<string, React.ReactNode> = {
-  Compass: <Compass className="w-8 h-8 text-[#E8672A]" />,
-  Code2: <Code2 className="w-8 h-8 text-[#E8672A]" />,
-  TrendingUp: <TrendingUp className="w-8 h-8 text-[#E8672A]" />,
-  Search: <Search className="w-8 h-8 text-[#E8672A]" />,
-  ShieldCheck: <ShieldCheck className="w-8 h-8 text-[#E8672A]" />,
-  BarChart3: <BarChart3 className="w-8 h-8 text-[#E8672A]" />,
-  Users2: <Users2 className="w-8 h-8 text-[#E8672A]" />,
+  Compass: <Compass className="w-8 h-8 transition-colors duration-300" />,
+  Code2: <Code2 className="w-8 h-8 transition-colors duration-300" />,
+  TrendingUp: <TrendingUp className="w-8 h-8 transition-colors duration-300" />,
+  Search: <Search className="w-8 h-8 transition-colors duration-300" />,
+  ShieldCheck: <ShieldCheck className="w-8 h-8 transition-colors duration-300" />,
+  BarChart3: <BarChart3 className="w-8 h-8 transition-colors duration-300" />,
+  Users2: <Users2 className="w-8 h-8 transition-colors duration-300" />,
 };
 
 export default async function DynamicServicePage({ params }: ServicePageProps) {
@@ -141,9 +141,9 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
             {/* Right Feature Card */}
             <div className="lg:col-span-4">
               <ScrollReveal direction="left" delay={0.2}>
-                <TiltCard maxTilt={5}>
+                <TiltCard maxTilt={5} className="group">
                   <div className="rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] p-8 border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-6">
-                    <div className="p-4 rounded-2xl bg-white dark:bg-[#12100E] w-fit border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xs">
+                    <div className="p-4 rounded-2xl bg-white dark:bg-[#12100E] w-fit border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xs group-hover:bg-[#E8672A] group-hover:text-white transition-all duration-300 [&>svg]:text-[#E8672A] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
                       {iconMap[service.icon]}
                     </div>
                     <div>

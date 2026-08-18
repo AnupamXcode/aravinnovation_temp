@@ -15,9 +15,6 @@ import {
   ArrowRight,
   MapPin,
   CheckCircle2,
-  Sparkles,
-  Award,
-  Layers,
 } from "lucide-react";
 
 export const metadata = {
@@ -32,25 +29,25 @@ export default function AboutPage() {
       title: "Engineering Precision Over Fluff",
       description:
         "We reject superficial vanity metrics and non-actionable reports. Every initiative is backed by architectural sound principles, clean code, and provable business ROI.",
-      icon: <Zap className="w-5 h-5 text-[#E8672A]" />,
+      icon: <Zap className="w-5 h-5" />,
     },
     {
       title: "Cross-Border Integrity & Compliance",
       description:
         "With active operations in India and the UAE, we adhere strictly to global security frameworks, DPDP Act mandates, and regional data governance requirements.",
-      icon: <ShieldCheck className="w-5 h-5 text-[#E8672A]" />,
+      icon: <ShieldCheck className="w-5 h-5" />,
     },
     {
       title: "Radical Transparency & Code Ownership",
       description:
         "You own 100% of your source code, infrastructure configurations, ad accounts, and IP. No vendor lock-in, no hidden markups, and zero proprietary black boxes.",
-      icon: <Target className="w-5 h-5 text-[#E8672A]" />,
+      icon: <Target className="w-5 h-5" />,
     },
     {
       title: "Long-Term Client Partnership",
       description:
         "We measure our success by the longevity and compound growth of the enterprises we serve, evolving from initial sprint execution into long-term strategic advisory.",
-      icon: <Users className="w-5 h-5 text-[#E8672A]" />,
+      icon: <Users className="w-5 h-5" />,
     },
   ];
 
@@ -134,11 +131,11 @@ export default function AboutPage() {
 
           <div className="lg:col-span-5">
             <ScrollReveal direction="left" delay={0.2}>
-              <TiltCard maxTilt={5}>
+              <TiltCard maxTilt={5} className="group">
                 <div className="p-8 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] space-y-6 shadow-xl">
                   <div className="flex items-center gap-3">
-                    <div className="p-3 rounded-2xl bg-[#E8672A] text-white shadow-xs">
-                      <Globe2 className="w-6 h-6" />
+                    <div className="p-3 rounded-2xl bg-[#E8672A] text-white shadow-xs group-hover:scale-105 transition-transform duration-300">
+                      <Globe2 className="w-6 h-6 text-white" />
                     </div>
                     <div>
                       <h3 className="text-xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
@@ -201,10 +198,12 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {values.map((v, i) => (
               <ScrollReveal key={i} delay={i * 0.1} direction="up">
-                <TiltCard maxTilt={5} scale={1.01} className="h-full">
+                <TiltCard maxTilt={5} scale={1.01} className="h-full group">
                   <div className="h-full p-8 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-xl hover:border-[#E8672A]/40 transition-all space-y-3">
-                    <div className="p-3.5 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] w-fit border border-[#F4A97F]/30 dark:border-[#3D332B]">{v.icon}</div>
-                    <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
+                    <div className="p-3.5 rounded-2xl icon-box-hover w-fit shadow-xs">
+                      {v.icon}
+                    </div>
+                    <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] transition-colors">
                       {v.title}
                     </h3>
                     <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">

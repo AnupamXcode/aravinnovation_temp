@@ -18,13 +18,13 @@ import {
 import { cn } from "@/lib/utils";
 
 const iconMap: Record<string, React.ReactNode> = {
-  Compass: <Compass className="w-6 h-6 text-[#E8672A]" />,
-  Code2: <Code2 className="w-6 h-6 text-[#E8672A]" />,
-  TrendingUp: <TrendingUp className="w-6 h-6 text-[#E8672A]" />,
-  Search: <Search className="w-6 h-6 text-[#E8672A]" />,
-  ShieldCheck: <ShieldCheck className="w-6 h-6 text-[#E8672A]" />,
-  BarChart3: <BarChart3 className="w-6 h-6 text-[#E8672A]" />,
-  Users2: <Users2 className="w-6 h-6 text-[#E8672A]" />,
+  Compass: <Compass className="w-6 h-6" />,
+  Code2: <Code2 className="w-6 h-6" />,
+  TrendingUp: <TrendingUp className="w-6 h-6" />,
+  Search: <Search className="w-6 h-6" />,
+  ShieldCheck: <ShieldCheck className="w-6 h-6" />,
+  BarChart3: <BarChart3 className="w-6 h-6" />,
+  Users2: <Users2 className="w-6 h-6" />,
 };
 
 export function ServiceCard({
@@ -40,19 +40,19 @@ export function ServiceCard({
     <TiltCard
       maxTilt={6}
       scale={1.02}
-      className="h-full cursor-pointer"
+      className="h-full cursor-pointer group"
       onClick={() => router.push(`/services/${service.slug}`)}
     >
       <div
         className={cn(
-          "group relative h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-[#171411] p-7 sm:p-8 border border-[#EFE2D6] dark:border-[#2C241E] transition-all duration-300 shadow-sm hover:shadow-2xl hover:shadow-[#E8672A]/10 hover:border-[#E8672A]/50 dark:hover:border-[#E8672A]/50",
+          "relative h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-[#171411] p-7 sm:p-8 border border-[#EFE2D6] dark:border-[#2C241E] transition-all duration-300 shadow-sm hover:shadow-2xl hover:shadow-[#E8672A]/10 hover:border-[#E8672A]/50 dark:hover:border-[#E8672A]/50",
           featured && "bg-radial from-[#FFFDF9] to-[#FBF3EA] dark:from-[#1E1915] dark:to-[#171411] border-[#E8672A]/40 ring-1 ring-[#E8672A]/20"
         )}
       >
         <div>
           <div className="flex items-center justify-between mb-5">
-            <div className="p-3.5 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] group-hover:bg-[#E8672A] group-hover:text-white transition-colors duration-300 border border-[#F4A97F]/30 dark:border-[#3D332B] shadow-xs">
-              {iconMap[service.icon] || <Compass className="w-6 h-6 text-[#E8672A]" />}
+            <div className="p-3.5 rounded-2xl icon-box-hover shadow-xs">
+              {iconMap[service.icon] || <Compass className="w-6 h-6" />}
             </div>
             <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] group-hover:text-[#E8672A] transition-colors">
               Practice
@@ -89,7 +89,7 @@ export function ServiceCard({
           <Link
             href={`/services/${service.slug}`}
             onClick={(e) => e.stopPropagation()}
-            className="inline-flex items-center text-sm font-semibold text-[#E8672A] hover:text-[#d4581f] transition-colors gap-1.5 cursor-pointer py-1"
+            className="inline-flex items-center text-sm font-semibold text-[#E8672A] group-hover:text-[#FF7D42] transition-colors gap-1.5 cursor-pointer py-1"
           >
             <span>Explore Practice</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

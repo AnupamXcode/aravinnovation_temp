@@ -26,7 +26,7 @@ const stepsData: Step[] = [
     description:
       "Deep-dive technical, business, and operational audits to uncover root bottlenecks, technical debt, and market opportunities.",
     deliverable: "Audit Report & Opportunity Matrix",
-    icon: <Lightbulb className="w-5 h-5 text-[#E8672A]" />,
+    icon: <Lightbulb className="w-5 h-5" />,
   },
   {
     step: "02",
@@ -34,7 +34,7 @@ const stepsData: Step[] = [
     description:
       "Formulate precise architectural blueprints, technology roadmaps, and commercial go-to-market strategies aligned with measurable KPIs.",
     deliverable: "Target Architecture & Roadmap",
-    icon: <Workflow className="w-5 h-5 text-[#E8672A]" />,
+    icon: <Workflow className="w-5 h-5" />,
   },
   {
     step: "03",
@@ -42,7 +42,7 @@ const stepsData: Step[] = [
     description:
       "High-velocity agile execution using modern stacks (Next.js, Cloud-Native, React Native) and vetted full-stack engineering pods.",
     deliverable: "Production Code & Automated CI/CD",
-    icon: <Zap className="w-5 h-5 text-[#E8672A]" />,
+    icon: <Zap className="w-5 h-5" />,
   },
   {
     step: "04",
@@ -50,7 +50,7 @@ const stepsData: Step[] = [
     description:
       "Continuous performance tuning, Core Web Vitals remediation, data privacy compliance (DPDP/SOC-2), and conversion rate optimization.",
     deliverable: "Compliance Signoff & SLA Tuning",
-    icon: <ShieldCheck className="w-5 h-5 text-[#E8672A]" />,
+    icon: <ShieldCheck className="w-5 h-5" />,
   },
   {
     step: "05",
@@ -58,7 +58,7 @@ const stepsData: Step[] = [
     description:
       "Rigorous verification, post-launch observability, SLA-backed maintenance, and long-term capability transfer to internal teams.",
     deliverable: "Verified ROI & Knowledge Handover",
-    icon: <CheckCircle className="w-5 h-5 text-[#E8672A]" />,
+    icon: <CheckCircle className="w-5 h-5" />,
   },
 ];
 
@@ -116,7 +116,7 @@ export function ProcessTimeline() {
                 <span className="font-mono text-2xl font-extrabold text-[#E8672A] tracking-tight">
                   {step.step}
                 </span>
-                <div className="p-3 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] border border-[#F4A97F]/30 dark:border-[#3D332B] group-hover:bg-[#E8672A] group-hover:text-white transition-colors duration-300 shadow-xs">
+                <div className="p-3 rounded-2xl icon-box-hover shadow-xs">
                   {step.icon}
                 </div>
               </div>

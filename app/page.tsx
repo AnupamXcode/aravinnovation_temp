@@ -37,25 +37,25 @@ export default function HomePage() {
       title: "Multidisciplinary Engineering Depth",
       description:
         "We combine enterprise cloud architecture, full-stack software development, technical SEO, and regulatory compliance under one cohesive leadership team.",
-      icon: <Users className="w-6 h-6 text-[#E8672A]" />,
+      icon: <Users className="w-6 h-6" />,
     },
     {
       title: "Cross-Border India & UAE Presence",
       description:
         "Regional delivery hubs in India and the UAE providing seamless timezone overlap, localized regulatory compliance (DPDP, GDPR, GCC mandates), and cost-effective scaling.",
-      icon: <Award className="w-6 h-6 text-[#E8672A]" />,
+      icon: <Award className="w-6 h-6" />,
     },
     {
       title: "Client-Centric, Zero Shelfware",
       description:
         "We reject bloated 200-page theoretical reports. Every audit, strategy sprint, and architecture blueprint is actionable and backed by code-level execution.",
-      icon: <Sparkles className="w-6 h-6 text-[#E8672A]" />,
+      icon: <Sparkles className="w-6 h-6" />,
     },
     {
       title: "Rigorous Outcome Verification",
       description:
         "From sub-second page loads and cloud bill reductions to closed-loop B2B pipeline attribution, our deliverables are tied directly to business ROI.",
-      icon: <ShieldCheck className="w-6 h-6 text-[#E8672A]" />,
+      icon: <ShieldCheck className="w-6 h-6" />,
     },
   ];
 
@@ -146,18 +146,18 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {industriesData.map((ind, idx) => (
               <ScrollReveal key={ind.slug} delay={idx * 0.08} direction="up">
-                <TiltCard maxTilt={6} scale={1.02} className="h-full">
+                <TiltCard maxTilt={6} scale={1.02} className="h-full group">
                   <div className="h-full rounded-3xl bg-white dark:bg-[#1A1613] p-7 border border-[#EFE2D6] dark:border-[#2C241E] hover:shadow-xl hover:border-[#E8672A]/40 dark:hover:border-[#E8672A]/40 transition-all duration-300 flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between mb-4">
-                        <div className="p-2.5 rounded-xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] text-[#E8672A] border border-[#F4A97F]/30 dark:border-[#3D332B]">
+                        <div className="p-2.5 rounded-xl icon-box-hover shadow-xs">
                           <Building2 className="w-5 h-5" />
                         </div>
-                        <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-md bg-[#FCE3D3]/60 dark:bg-[#261F1A] text-[#3A2E27] dark:text-[#FAF5EE] font-semibold">
+                        <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-md bg-[#FCE3D3]/60 dark:bg-[#261F1A] text-[#3A2E27] dark:text-[#FAF5EE] font-semibold border border-[#EFE2D6] dark:border-[#2C241E]">
                           {ind.statusNote || "[CONFIRMED]"}
                         </span>
                       </div>
-                      <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] mb-2">
+                      <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] transition-colors mb-2">
                         {ind.name}
                       </h3>
                       <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed mb-4">
@@ -209,12 +209,12 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {differentiators.map((diff, index) => (
               <ScrollReveal key={index} delay={index * 0.1} direction="up">
-                <TiltCard maxTilt={5} scale={1.01} className="h-full">
+                <TiltCard maxTilt={5} scale={1.01} className="h-full group">
                   <div className="h-full rounded-3xl bg-[#FBF3EA]/60 dark:bg-[#1A1613] p-8 border border-[#EFE2D6] dark:border-[#2C241E] hover:bg-white dark:hover:bg-[#1F1A16] hover:shadow-xl transition-all duration-300 space-y-4">
-                    <div className="p-3.5 rounded-2xl bg-white dark:bg-[#261F1A] w-fit border border-[#EFE2D6] dark:border-[#3D332B] shadow-2xs">
+                    <div className="p-3.5 rounded-2xl icon-box-hover w-fit shadow-xs">
                       {diff.icon}
                     </div>
-                    <h3 className="text-xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
+                    <h3 className="text-xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] transition-colors">
                       {diff.title}
                     </h3>
                     <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">

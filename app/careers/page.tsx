@@ -78,12 +78,12 @@ export default function CareersPage() {
         {/* Culture / Perks */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <ScrollReveal direction="up" delay={0.1}>
-            <TiltCard maxTilt={6} scale={1.02} className="h-full">
-              <div className="h-full p-8 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] space-y-3 shadow-xs">
-                <div className="p-3 rounded-2xl bg-white dark:bg-[#261F1A] w-fit text-[#E8672A] shadow-2xs">
-                  <Zap className="w-5 h-5" />
+            <TiltCard maxTilt={6} scale={1.02} className="h-full group">
+              <div className="h-full p-8 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] space-y-3 shadow-xs hover:border-[#E8672A]/40 transition-all duration-300">
+                <div className="p-3 rounded-2xl bg-white dark:bg-[#261F1A] w-fit text-[#E8672A] shadow-2xs group-hover:bg-[#E8672A] group-hover:text-white transition-all duration-300 [&>svg]:text-[#E8672A] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
+                  <Zap className="w-5 h-5 transition-colors duration-300" />
                 </div>
-                <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
+                <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] transition-colors">
                   High Agency & Autonomy
                 </h3>
                 <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
@@ -94,12 +94,12 @@ export default function CareersPage() {
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={0.2}>
-            <TiltCard maxTilt={6} scale={1.02} className="h-full">
-              <div className="h-full p-8 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm space-y-3">
-                <div className="p-3 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] w-fit text-[#E8672A]">
-                  <Globe2 className="w-5 h-5" />
+            <TiltCard maxTilt={6} scale={1.02} className="h-full group">
+              <div className="h-full p-8 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm space-y-3 hover:border-[#E8672A]/40 transition-all duration-300">
+                <div className="p-3 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] w-fit text-[#E8672A] group-hover:bg-[#E8672A] group-hover:text-white transition-all duration-300 shadow-xs [&>svg]:text-[#E8672A] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
+                  <Globe2 className="w-5 h-5 transition-colors duration-300" />
                 </div>
-                <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
+                <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] transition-colors">
                   Cross-Border Exposure
                 </h3>
                 <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
@@ -110,12 +110,12 @@ export default function CareersPage() {
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={0.3}>
-            <TiltCard maxTilt={6} scale={1.02} className="h-full">
-              <div className="h-full p-8 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] space-y-3 shadow-xs">
-                <div className="p-3 rounded-2xl bg-white dark:bg-[#261F1A] w-fit text-[#E8672A] shadow-2xs">
-                  <Sparkles className="w-5 h-5" />
+            <TiltCard maxTilt={6} scale={1.02} className="h-full group">
+              <div className="h-full p-8 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] space-y-3 shadow-xs hover:border-[#E8672A]/40 transition-all duration-300">
+                <div className="p-3 rounded-2xl bg-white dark:bg-[#261F1A] w-fit text-[#E8672A] shadow-2xs group-hover:bg-[#E8672A] group-hover:text-white transition-all duration-300 [&>svg]:text-[#E8672A] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
+                  <Sparkles className="w-5 h-5 transition-colors duration-300" />
                 </div>
-                <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
+                <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] transition-colors">
                   Continuous Upskilling
                 </h3>
                 <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
