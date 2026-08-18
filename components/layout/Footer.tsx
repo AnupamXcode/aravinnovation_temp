@@ -6,7 +6,6 @@ import {
   MapPin,
   Mail,
   Phone,
-  ArrowUpRight,
   Globe2,
 } from "lucide-react";
 
@@ -36,14 +35,14 @@ function TwitterIcon({ className }: { className?: string }) {
 
 export function Footer() {
   return (
-    <footer className="bg-[#FBF3EA] border-t border-[#EFE2D6] pt-16 pb-12 text-[#3A2E27]">
+    <footer className="bg-[#FBF3EA] dark:bg-[#12100E] border-t border-[#EFE2D6] dark:border-[#2C241E] pt-16 pb-12 text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main 4-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-12 border-b border-[#EFE2D6]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-12 border-b border-[#EFE2D6] dark:border-[#2C241E]">
           {/* Col 1: Brand & Positioning */}
           <div className="lg:col-span-2 space-y-4">
             <BrandLogo variant="footer" />
-            <p className="text-sm text-[#7A6A5F] max-w-sm leading-relaxed">
+            <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0] max-w-sm leading-relaxed">
               Arav Innovations is a multidisciplinary technology, strategy, digital growth, governance, and staff augmentation firm partnering with ambitious enterprises across India, the UAE, and global markets.
             </p>
 
@@ -52,7 +51,7 @@ export function Footer() {
                 href={companyContactInfo.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-[#FFFDF9] border border-[#EFE2D6] flex items-center justify-center text-[#7A6A5F] hover:text-[#E8672A] hover:border-[#E8672A] transition-colors"
+                className="w-9 h-9 rounded-full bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#3D332B] flex items-center justify-center text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:border-[#E8672A] dark:hover:border-[#E8672A] transition-colors"
                 aria-label="LinkedIn"
               >
                 <LinkedInIcon className="w-4 h-4" />
@@ -61,7 +60,7 @@ export function Footer() {
                 href={companyContactInfo.socials.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-[#FFFDF9] border border-[#EFE2D6] flex items-center justify-center text-[#7A6A5F] hover:text-[#E8672A] hover:border-[#E8672A] transition-colors"
+                className="w-9 h-9 rounded-full bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#3D332B] flex items-center justify-center text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:border-[#E8672A] dark:hover:border-[#E8672A] transition-colors"
                 aria-label="Instagram"
               >
                 <InstagramIcon className="w-4 h-4" />
@@ -70,14 +69,14 @@ export function Footer() {
                 href={companyContactInfo.socials.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-[#FFFDF9] border border-[#EFE2D6] flex items-center justify-center text-[#7A6A5F] hover:text-[#E8672A] hover:border-[#E8672A] transition-colors"
+                className="w-9 h-9 rounded-full bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#3D332B] flex items-center justify-center text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:border-[#E8672A] dark:hover:border-[#E8672A] transition-colors"
                 aria-label="Twitter / X"
               >
                 <TwitterIcon className="w-4 h-4" />
               </a>
             </div>
 
-            <div className="pt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#FCE3D3]/60 border border-[#F4A97F]/30 text-xs font-semibold text-[#3A2E27]">
+            <div className="pt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] border border-[#F4A97F]/30 dark:border-[#3D332B] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
               <Globe2 className="w-3.5 h-3.5 text-[#E8672A]" />
               <span>Operating Across India & United Arab Emirates</span>
             </div>
@@ -85,7 +84,7 @@ export function Footer() {
 
           {/* Col 2: 7 Services */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#3A2E27] mb-4">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#3A2E27] dark:text-[#FAF5EE] mb-4">
               Our 7 Practices
             </h4>
             <ul className="space-y-2.5 text-sm">
@@ -93,7 +92,7 @@ export function Footer() {
                 <li key={service.href}>
                   <Link
                     href={service.href}
-                    className="text-[#7A6A5F] hover:text-[#E8672A] transition-colors inline-flex items-center gap-1 group"
+                    className="text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#E8672A] dark:hover:text-[#E8672A] transition-colors inline-flex items-center gap-1 group"
                   >
                     <span>{service.label}</span>
                   </Link>
@@ -104,10 +103,10 @@ export function Footer() {
 
           {/* Col 3: Company & Resources */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#3A2E27] mb-4">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#3A2E27] dark:text-[#FAF5EE] mb-4">
               Company & Insights
             </h4>
-            <ul className="space-y-2.5 text-sm text-[#7A6A5F]">
+            <ul className="space-y-2.5 text-sm text-[#7A6A5F] dark:text-[#B8ACA0]">
               <li>
                 <Link href="/about" className="hover:text-[#E8672A] transition-colors">
                   About Us
@@ -148,28 +147,28 @@ export function Footer() {
 
           {/* Col 4: Dual Regional Locations */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#3A2E27] mb-4">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#3A2E27] dark:text-[#FAF5EE] mb-4">
               Regional Operations
             </h4>
-            <div className="space-y-4 text-xs text-[#7A6A5F]">
-              <div className="p-3 rounded-xl bg-[#FFFDF9] border border-[#EFE2D6]">
-                <div className="font-semibold text-[#3A2E27] flex items-center gap-1.5 mb-1">
+            <div className="space-y-4 text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+              <div className="p-3.5 rounded-2xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E]">
+                <div className="font-semibold text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-1.5 mb-1">
                   <MapPin className="w-3.5 h-3.5 text-[#E8672A]" />
                   <span>India Headquarters</span>
                 </div>
-                <p className="text-[11px] text-[#7A6A5F]">{companyContactInfo.offices[0].address}</p>
-                <div className="mt-1 font-medium text-[#3A2E27]">
+                <p className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">{companyContactInfo.offices[0].address}</p>
+                <div className="mt-1 font-medium text-[#3A2E27] dark:text-[#FAF5EE]">
                   Tel: {companyContactInfo.phoneIndia}
                 </div>
               </div>
 
-              <div className="p-3 rounded-xl bg-[#FFFDF9] border border-[#EFE2D6]">
-                <div className="font-semibold text-[#3A2E27] flex items-center gap-1.5 mb-1">
+              <div className="p-3.5 rounded-2xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E]">
+                <div className="font-semibold text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-1.5 mb-1">
                   <MapPin className="w-3.5 h-3.5 text-[#E8672A]" />
                   <span>UAE & Middle East</span>
                 </div>
-                <p className="text-[11px] text-[#7A6A5F]">{companyContactInfo.offices[1].address}</p>
-                <div className="mt-1 font-medium text-[#3A2E27]">
+                <p className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">{companyContactInfo.offices[1].address}</p>
+                <div className="mt-1 font-medium text-[#3A2E27] dark:text-[#FAF5EE]">
                   Tel: {companyContactInfo.phoneUAE}
                 </div>
               </div>
@@ -177,7 +176,7 @@ export function Footer() {
               <div className="space-y-1 pt-1">
                 <a
                   href={`mailto:${companyContactInfo.email}`}
-                  className="flex items-center gap-1.5 text-xs text-[#3A2E27] hover:text-[#E8672A] font-medium"
+                  className="flex items-center gap-1.5 text-xs text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#E8672A] font-medium"
                 >
                   <Mail className="w-3.5 h-3.5 text-[#E8672A]" />
                   <span>{companyContactInfo.email}</span>
@@ -188,7 +187,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#7A6A5F]">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
           <p>© {new Date().getFullYear()} Arav Innovations. All rights reserved.</p>
           <div className="flex items-center space-x-6">
             <Link href="/contact" className="hover:text-[#E8672A]">

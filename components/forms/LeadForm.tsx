@@ -20,7 +20,6 @@ interface LeadFormProps {
 
 export function LeadForm({
   initialService,
-  className,
   source = "general_form",
 }: LeadFormProps) {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -102,14 +101,14 @@ export function LeadForm({
 
   if (isSubmitted) {
     return (
-      <div className="rounded-3xl bg-white p-8 sm:p-12 border border-[#EFE2D6] shadow-xl text-center space-y-5">
-        <div className="w-16 h-16 rounded-full bg-[#FCE3D3] text-[#E8672A] mx-auto flex items-center justify-center border border-[#F4A97F]/40">
+      <div className="rounded-3xl bg-white dark:bg-[#171411] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl text-center space-y-5">
+        <div className="w-16 h-16 rounded-2xl bg-[#FCE3D3] dark:bg-[#261F1A] text-[#E8672A] mx-auto flex items-center justify-center border border-[#F4A97F]/40 dark:border-[#3D332B] shadow-xs">
           <CheckCircle2 className="w-8 h-8" />
         </div>
-        <h3 className="text-2xl font-bold font-display text-[#3A2E27]">
+        <h3 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
           Requirement Received!
         </h3>
-        <p className="text-sm text-[#7A6A5F] max-w-md mx-auto leading-relaxed">
+        <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0] max-w-md mx-auto leading-relaxed">
           Thank you for reaching out to Arav Innovations. Our strategy & engineering team will review your requirements and schedule an exploratory discussion within 1 business day.
         </p>
         <div className="pt-2">
@@ -128,19 +127,19 @@ export function LeadForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="rounded-3xl bg-white p-7 sm:p-10 border border-[#EFE2D6] shadow-xl space-y-6"
+      className="rounded-3xl bg-white dark:bg-[#171411] p-7 sm:p-10 border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl space-y-6"
     >
-      <div className="border-b border-[#EFE2D6] pb-4">
-        <h3 className="text-2xl font-bold font-display text-[#3A2E27]">
+      <div className="border-b border-[#EFE2D6] dark:border-[#2C241E] pb-4">
+        <h3 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
           Initiate a Project Discussion
         </h3>
-        <p className="text-xs text-[#7A6A5F] mt-1">
+        <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] mt-1">
           Tell us about your organization and requirements. All inquiries are covered under NDA.
         </p>
       </div>
 
       {errorMessage && (
-        <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2">
+        <div className="p-3.5 rounded-2xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800/40 text-red-700 dark:text-red-400 text-xs flex items-center gap-2">
           <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{errorMessage}</span>
         </div>
@@ -226,7 +225,7 @@ export function LeadForm({
           type="submit"
           variant="primary"
           size="lg"
-          className="w-full justify-center shadow-md hover:shadow-lg"
+          className="w-full justify-center shadow-md hover:shadow-xl hover:shadow-[#E8672A]/25"
           isLoading={isSubmitting}
           rightIcon={<ArrowRight className="w-4 h-4" />}
         >
@@ -234,7 +233,7 @@ export function LeadForm({
         </Button>
       </div>
 
-      <div className="flex items-center justify-center gap-2 text-xs text-[#7A6A5F] text-center pt-1">
+      <div className="flex items-center justify-center gap-2 text-xs text-[#7A6A5F] dark:text-[#B8ACA0] text-center pt-1">
         <ShieldCheck className="w-4 h-4 text-[#E8672A]" />
         <span>Strict Confidentiality Guaranteed. Operating in India & UAE.</span>
       </div>

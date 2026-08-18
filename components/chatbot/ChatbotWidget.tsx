@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { MessageSquare, X, Send, Bot, User, ArrowRight, CheckCircle2 } from "lucide-react";
+import { MessageSquare, X, Send, Bot, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
@@ -49,14 +49,12 @@ export function ChatbotWidget() {
   };
 
   const handleOptionClick = (option: { label: string; action: string; payload?: string }) => {
-    // Add user message
     const userMsg: ChatMessage = {
       id: `user-${Date.now()}`,
       sender: "user",
       text: option.label,
     };
 
-    // Bot response generator (Pluggable interface for future AI API)
     let botMsg: ChatMessage;
 
     switch (option.action) {
@@ -129,7 +127,6 @@ export function ChatbotWidget() {
       text: userText,
     };
 
-    // Simple Intent Parser
     const lower = userText.toLowerCase();
     let botMsg: ChatMessage;
 
@@ -204,12 +201,12 @@ export function ChatbotWidget() {
 
   return (
     <>
-      {/* Floating Chat Trigger Button */}
+      {/* Floating 3D Chat Trigger Button */}
       {!isOpen && (
         <button
           type="button"
           onClick={handleOpen}
-          className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-[#E8672A] px-4 py-3 text-white shadow-xl hover:bg-[#d4581f] hover:scale-105 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#E8672A] focus:ring-offset-2"
+          className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-2xl bg-[#E8672A] px-4 py-3 text-white shadow-2xl shadow-[#E8672A]/40 hover:bg-[#d4581f] hover:scale-105 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#E8672A] focus:ring-offset-2"
           aria-label="Open Arav Assistant"
         >
           <MessageSquare className="w-5 h-5" />
@@ -221,27 +218,27 @@ export function ChatbotWidget() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-4 sm:right-6 z-50 w-[92vw] sm:w-[380px] h-[520px] rounded-3xl bg-[#FFFDF9] border border-[#EFE2D6] shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200">
+        <div className="fixed bottom-6 right-4 sm:right-6 z-50 w-[92vw] sm:w-[380px] h-[520px] rounded-3xl bg-[#FFFDF9] dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200">
           {/* Header */}
-          <div className="bg-[#FBF3EA] border-b border-[#EFE2D6] px-5 py-4 flex items-center justify-between">
+          <div className="bg-[#FBF3EA] dark:bg-[#1E1915] border-b border-[#EFE2D6] dark:border-[#2C241E] px-5 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-[#E8672A] text-white flex items-center justify-center">
+              <div className="w-8 h-8 rounded-xl bg-[#E8672A] text-white flex items-center justify-center shadow-xs">
                 <Bot className="w-4 h-4" />
               </div>
               <div>
-                <h4 className="text-sm font-bold font-display text-[#3A2E27]">
+                <h4 className="text-sm font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
                   Arav Assistant
                 </h4>
-                <div className="flex items-center gap-1.5 text-[11px] text-[#7A6A5F]">
+                <div className="flex items-center gap-1.5 text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">
                   <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                  <span>Online • India & UAE</span>
+                  <span>Online &bull; India & UAE</span>
                 </div>
               </div>
             </div>
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="text-[#7A6A5F] hover:text-[#3A2E27] p-1 rounded-lg hover:bg-[#FCE3D3]/40"
+              className="text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#3A2E27] dark:hover:text-[#FAF5EE] p-1.5 rounded-xl hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A]"
               aria-label="Close Chat"
             >
               <X className="w-5 h-5" />
@@ -263,7 +260,7 @@ export function ChatbotWidget() {
                     "max-w-[85%] rounded-2xl p-3.5 leading-relaxed",
                     msg.sender === "user"
                       ? "bg-[#E8672A] text-white rounded-br-xs"
-                      : "bg-[#FBF3EA] text-[#3A2E27] border border-[#EFE2D6] rounded-bl-xs whitespace-pre-line"
+                      : "bg-[#FBF3EA] dark:bg-[#1E1915] text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#2C241E] rounded-bl-xs whitespace-pre-line"
                   )}
                 >
                   {msg.text}
@@ -277,7 +274,7 @@ export function ChatbotWidget() {
                         key={idx}
                         type="button"
                         onClick={() => handleOptionClick(opt)}
-                        className="text-[11px] px-2.5 py-1.5 rounded-xl bg-white border border-[#EFE2D6] hover:border-[#E8672A] text-[#3A2E27] font-medium transition-colors hover:bg-[#FCE3D3]/30 text-left cursor-pointer"
+                        className="text-[11px] px-3 py-1.5 rounded-xl bg-white dark:bg-[#1F1A16] border border-[#EFE2D6] dark:border-[#2C241E] hover:border-[#E8672A] text-[#3A2E27] dark:text-[#FAF5EE] font-medium transition-colors hover:bg-[#FCE3D3]/30 dark:hover:bg-[#261F1A] text-left cursor-pointer"
                       >
                         {opt.label}
                       </button>
@@ -285,13 +282,13 @@ export function ChatbotWidget() {
                   </div>
                 )}
 
-                {/* Level 2 Lead Capture Form in Chat */}
+                {/* Lead Capture in Chat */}
                 {msg.isLeadForm && !leadSubmitted && (
                   <form
                     onSubmit={handleLeadSubmit}
-                    className="w-full mt-2 p-3.5 rounded-2xl bg-white border border-[#EFE2D6] space-y-2.5 shadow-xs"
+                    className="w-full mt-2 p-3.5 rounded-2xl bg-white dark:bg-[#1F1A16] border border-[#EFE2D6] dark:border-[#2C241E] space-y-2.5 shadow-xs"
                   >
-                    <div className="text-[11px] font-bold text-[#3A2E27]">
+                    <div className="text-[11px] font-bold text-[#3A2E27] dark:text-[#FAF5EE]">
                       Quick Contact Request
                     </div>
                     <input
@@ -302,7 +299,7 @@ export function ChatbotWidget() {
                       onChange={(e) =>
                         setLeadFormState({ ...leadFormState, name: e.target.value })
                       }
-                      className="w-full text-xs p-2 rounded-lg border border-[#EFE2D6] bg-[#FFFDF9] focus:outline-none focus:ring-1 focus:ring-[#E8672A]"
+                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FFFDF9] dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-1 focus:ring-[#E8672A]"
                     />
                     <input
                       type="email"
@@ -312,7 +309,7 @@ export function ChatbotWidget() {
                       onChange={(e) =>
                         setLeadFormState({ ...leadFormState, email: e.target.value })
                       }
-                      className="w-full text-xs p-2 rounded-lg border border-[#EFE2D6] bg-[#FFFDF9] focus:outline-none focus:ring-1 focus:ring-[#E8672A]"
+                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FFFDF9] dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-1 focus:ring-[#E8672A]"
                     />
                     <input
                       type="tel"
@@ -322,7 +319,7 @@ export function ChatbotWidget() {
                       onChange={(e) =>
                         setLeadFormState({ ...leadFormState, phone: e.target.value })
                       }
-                      className="w-full text-xs p-2 rounded-lg border border-[#EFE2D6] bg-[#FFFDF9] focus:outline-none focus:ring-1 focus:ring-[#E8672A]"
+                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FFFDF9] dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-1 focus:ring-[#E8672A]"
                     />
                     <textarea
                       placeholder="Brief requirement..."
@@ -334,7 +331,7 @@ export function ChatbotWidget() {
                           requirement: e.target.value,
                         })
                       }
-                      className="w-full text-xs p-2 rounded-lg border border-[#EFE2D6] bg-[#FFFDF9] focus:outline-none focus:ring-1 focus:ring-[#E8672A] resize-none"
+                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FFFDF9] dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-1 focus:ring-[#E8672A] resize-none"
                     />
                     <Button
                       type="submit"
@@ -354,18 +351,18 @@ export function ChatbotWidget() {
           {/* Bottom Chat Input Bar */}
           <form
             onSubmit={handleCustomSend}
-            className="p-3 border-t border-[#EFE2D6] bg-[#FBF3EA] flex items-center gap-2"
+            className="p-3 border-t border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1E1915] flex items-center gap-2"
           >
             <input
               type="text"
               placeholder="Ask anything about Arav..."
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              className="flex-1 text-xs px-3 py-2 rounded-xl border border-[#EFE2D6] bg-white text-[#3A2E27] focus:outline-none focus:ring-1 focus:ring-[#E8672A]"
+              className="flex-1 text-xs px-3 py-2 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-white dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-1 focus:ring-[#E8672A]"
             />
             <button
               type="submit"
-              className="w-8 h-8 rounded-xl bg-[#E8672A] text-white flex items-center justify-center hover:bg-[#d4581f] transition-colors shrink-0 cursor-pointer"
+              className="w-8 h-8 rounded-xl bg-[#E8672A] text-white flex items-center justify-center hover:bg-[#d4581f] transition-colors shrink-0 cursor-pointer shadow-xs"
               aria-label="Send message"
             >
               <Send className="w-3.5 h-3.5" />

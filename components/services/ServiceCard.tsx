@@ -1,6 +1,10 @@
+"use client";
+
 import * as React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Service } from "@/data/services";
+import { TiltCard } from "@/components/motion/TiltCard";
 import {
   Compass,
   Code2,
@@ -30,58 +34,68 @@ export function ServiceCard({
   service: Service;
   featured?: boolean;
 }) {
+  const router = useRouter();
+
   return (
-    <div
-      className={cn(
-        "group relative flex flex-col justify-between rounded-2xl bg-white p-7 border border-[#EFE2D6] transition-all duration-200 hover:shadow-xl hover:border-[#E8672A]/40 hover:-translate-y-1",
-        featured && "bg-radial from-[#FFFDF9] to-[#FBF3EA] border-[#E8672A]/30 ring-1 ring-[#E8672A]/20"
-      )}
+    <TiltCard
+      maxTilt={6}
+      scale={1.02}
+      className="h-full cursor-pointer"
+      onClick={() => router.push(`/services/${service.slug}`)}
     >
-      <div>
-        <div className="flex items-center justify-between mb-5">
-          <div className="p-3.5 rounded-xl bg-[#FCE3D3]/60 group-hover:bg-[#E8672A] group-hover:text-white transition-colors duration-200 border border-[#F4A97F]/30">
-            {iconMap[service.icon] || <Compass className="w-6 h-6 text-[#E8672A]" />}
+      <div
+        className={cn(
+          "group relative h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-[#171411] p-7 sm:p-8 border border-[#EFE2D6] dark:border-[#2C241E] transition-all duration-300 shadow-sm hover:shadow-2xl hover:shadow-[#E8672A]/10 hover:border-[#E8672A]/50 dark:hover:border-[#E8672A]/50",
+          featured && "bg-radial from-[#FFFDF9] to-[#FBF3EA] dark:from-[#1E1915] dark:to-[#171411] border-[#E8672A]/40 ring-1 ring-[#E8672A]/20"
+        )}
+      >
+        <div>
+          <div className="flex items-center justify-between mb-5">
+            <div className="p-3.5 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] group-hover:bg-[#E8672A] group-hover:text-white transition-colors duration-300 border border-[#F4A97F]/30 dark:border-[#3D332B] shadow-xs">
+              {iconMap[service.icon] || <Compass className="w-6 h-6 text-[#E8672A]" />}
+            </div>
+            <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] group-hover:text-[#E8672A] transition-colors">
+              Practice
+            </span>
           </div>
-          <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#7A6A5F] group-hover:text-[#E8672A] transition-colors">
-            Practice
-          </span>
+
+          <h3 className="text-xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] dark:group-hover:text-[#E8672A] transition-colors">
+            {service.title}
+          </h3>
+
+          <p className="mt-2.5 text-sm text-[#7A6A5F] dark:text-[#B8ACA0] line-clamp-3 leading-relaxed">
+            {service.description}
+          </p>
+
+          {/* Core Capabilities Snippet */}
+          <div className="mt-5 pt-4 border-t border-[#EFE2D6] dark:border-[#2C241E] space-y-1.5">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] block">
+              Key Capabilities
+            </span>
+            <div className="flex flex-wrap gap-1.5">
+              {service.capabilities[0]?.items.slice(0, 3).map((item, i) => (
+                <span
+                  key={i}
+                  className="text-[11px] px-2.5 py-1 rounded-lg bg-[#FBF3EA] dark:bg-[#201B17] text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#2C241E]"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <h3 className="text-xl font-bold font-display text-[#3A2E27] group-hover:text-[#E8672A] transition-colors">
-          {service.title}
-        </h3>
-
-        <p className="mt-2.5 text-sm text-[#7A6A5F] line-clamp-3 leading-relaxed">
-          {service.description}
-        </p>
-
-        {/* Core Capabilities Snippet */}
-        <div className="mt-5 pt-4 border-t border-[#EFE2D6] space-y-1.5">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-[#7A6A5F]/80 block">
-            Key Capabilities
-          </span>
-          <div className="flex flex-wrap gap-1.5">
-            {service.capabilities[0]?.items.slice(0, 3).map((item, i) => (
-              <span
-                key={i}
-                className="text-[11px] px-2 py-0.5 rounded-md bg-[#FBF3EA] text-[#3A2E27] border border-[#EFE2D6]"
-              >
-                {item}
-              </span>
-            ))}
-          </div>
+        <div className="mt-6 pt-4 border-t border-[#EFE2D6]/60 dark:border-[#2C241E] relative z-20">
+          <Link
+            href={`/services/${service.slug}`}
+            onClick={(e) => e.stopPropagation()}
+            className="inline-flex items-center text-sm font-semibold text-[#E8672A] hover:text-[#d4581f] transition-colors gap-1.5 cursor-pointer py-1"
+          >
+            <span>Explore Practice</span>
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </Link>
         </div>
       </div>
-
-      <div className="mt-6 pt-4">
-        <Link
-          href={`/services/${service.slug}`}
-          className="inline-flex items-center text-sm font-semibold text-[#E8672A] group-hover:text-[#d4581f] transition-colors gap-1.5 cursor-pointer"
-        >
-          <span>Explore Practice</span>
-          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-        </Link>
-      </div>
-    </div>
+    </TiltCard>
   );
 }

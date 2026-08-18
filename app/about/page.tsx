@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { TiltCard } from "@/components/motion/TiltCard";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { companyContactInfo } from "@/data/navigation";
 import {
   Globe2,
@@ -12,8 +14,10 @@ import {
   Target,
   ArrowRight,
   MapPin,
-  CheckCircle,
-  Building,
+  CheckCircle2,
+  Sparkles,
+  Award,
+  Layers,
 } from "lucide-react";
 
 export const metadata = {
@@ -50,129 +54,187 @@ export default function AboutPage() {
     },
   ];
 
+  const highlights = [
+    "7 Integrated Practices under unified leadership",
+    "Dual Delivery Centers in Bengaluru/Noida & Dubai",
+    "100% Code & IP Ownership guaranteed to clients",
+    "Zero shelfware: actionable blueprints & engineering",
+    "Strict compliance with DPDP, GDPR & SOC-2 standards",
+    "Agile sprint delivery with dedicated practice directors",
+  ];
+
   return (
-    <div className="pt-28 pb-20 bg-[#FFFDF9]">
+    <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 md:space-y-32">
-        {/* Hero */}
+        {/* 1. Hero Section */}
         <section className="space-y-6 max-w-3xl">
-          <Breadcrumb items={[{ label: "About Us" }]} />
-          <Badge variant="secondary" size="md">
-            Our Purpose & Vision
-          </Badge>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display text-[#3A2E27] tracking-tight leading-[1.12]">
-            Redefining Enterprise Technology & Growth Consulting
-          </h1>
-          <p className="text-lg sm:text-xl text-[#7A6A5F] leading-relaxed">
-            Arav Innovations was founded to eliminate the traditional divide between high-level management consulting and hands-on technical execution. We combine seven specialized practices under one roof to deliver cohesive, resilient digital transformation for ambitious organizations.
-          </p>
+          <ScrollReveal direction="up">
+            <Breadcrumb items={[{ label: "About Us" }]} />
+          </ScrollReveal>
+          <ScrollReveal direction="up" delay={0.1}>
+            <div className="inline-flex items-center gap-2">
+              <Badge variant="secondary" size="md">
+                <span className="w-2 h-2 rounded-full bg-[#E8672A] animate-pulse" />
+                <span>Result-Driven Digital Excellence</span>
+              </Badge>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal direction="up" delay={0.2}>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight leading-[1.12]">
+              Shaping Future-Ready Enterprises Across India & the UAE
+            </h1>
+          </ScrollReveal>
+          <ScrollReveal direction="up" delay={0.3}>
+            <p className="text-lg sm:text-xl text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed font-normal">
+              Arav Innovations is a multidisciplinary technology, strategy, digital growth, governance, and staff augmentation firm. We bridge the gap between high-level management consulting and hands-on technical execution to deliver lasting business impact.
+            </p>
+          </ScrollReveal>
         </section>
 
-        {/* Story / Mission */}
+        {/* 2. Story & Differentiators */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-6 space-y-6">
-            <Badge variant="secondary" size="sm">
-              Our Journey
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold font-display text-[#3A2E27]">
-              Built for Modern Enterprise Demands
-            </h2>
-            <p className="text-sm text-[#7A6A5F] leading-relaxed">
-              In an era where technology dictates commercial survivability, businesses often struggle with fragmented vendor ecosystems: hiring one agency for digital marketing, another for cloud migrations, a third for software development, and distinct legal advisors for privacy compliance.
-            </p>
-            <p className="text-sm text-[#7A6A5F] leading-relaxed">
-              At Arav Innovations, we provide a unified multidisciplinary model. Our senior architects, developers, growth strategists, and governance specialists work in tight synchronization, ensuring that your IT infrastructure directly accelerates your top-line revenue while remaining rock-solid and compliant.
-            </p>
-            <div className="pt-2">
-              <Link href="/services">
-                <Button variant="primary" size="md" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                  Explore Our 7 Core Practices
-                </Button>
-              </Link>
-            </div>
-          </div>
-
-          <div className="lg:col-span-6">
-            <div className="p-8 rounded-3xl bg-[#FBF3EA] border border-[#EFE2D6] space-y-6">
-              <div className="flex items-center gap-3">
-                <Globe2 className="w-6 h-6 text-[#E8672A]" />
-                <h3 className="text-xl font-bold font-display text-[#3A2E27]">
-                  Dual-Regional Presence
-                </h3>
-              </div>
-              <p className="text-xs text-[#7A6A5F] leading-relaxed">
-                Operating across two of the world’s most dynamic economic corridors: India (fastest-growing engineering powerhouse) and the United Arab Emirates (premier global commerce hub).
+          <div className="lg:col-span-7 space-y-6">
+            <ScrollReveal direction="up">
+              <Badge variant="secondary" size="sm">
+                Our Foundation
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] mt-3">
+                Built to Solve Complex Modern Challenges
+              </h2>
+              <p className="text-sm sm:text-base text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed mt-4">
+                In today’s fast-moving market, growing businesses struggle with fragmented vendors: hiring one agency for digital marketing, another for cloud migrations, a third for software development, and distinct legal advisors for privacy compliance.
+              </p>
+              <p className="text-sm sm:text-base text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed mt-3">
+                At Arav Innovations, we provide a cohesive multidisciplinary model. Our senior architects, developers, growth strategists, and governance specialists work in tight synchronization, ensuring that your IT infrastructure directly accelerates your top-line revenue while remaining rock-solid, secure, and compliant.
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                <div className="p-4 rounded-2xl bg-white border border-[#EFE2D6] space-y-1">
-                  <span className="text-xs font-bold text-[#3A2E27] flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-[#E8672A]" /> India Hub
-                  </span>
-                  <p className="text-[11px] text-[#7A6A5F]">
-                    {companyContactInfo.offices[0].status}
-                  </p>
-                </div>
-                <div className="p-4 rounded-2xl bg-white border border-[#EFE2D6] space-y-1">
-                  <span className="text-xs font-bold text-[#3A2E27] flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-[#E8672A]" /> UAE Hub
-                  </span>
-                  <p className="text-[11px] text-[#7A6A5F]">
-                    {companyContactInfo.offices[1].status}
-                  </p>
-                </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3">
+                {highlights.map((item, i) => (
+                  <div key={i} className="flex items-center gap-2 text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
+                    <CheckCircle2 className="w-4 h-4 text-[#E8672A] shrink-0" />
+                    <span>{item}</span>
+                  </div>
+                ))}
               </div>
-            </div>
+
+              <div className="pt-4 flex flex-wrap gap-4">
+                <Link href="/services">
+                  <Button variant="primary" size="md" rightIcon={<ArrowRight className="w-4 h-4" />}>
+                    Explore Our 7 Practices
+                  </Button>
+                </Link>
+                <Link href="/contact">
+                  <Button variant="outline" size="md">
+                    Talk to an Advisor
+                  </Button>
+                </Link>
+              </div>
+            </ScrollReveal>
+          </div>
+
+          <div className="lg:col-span-5">
+            <ScrollReveal direction="left" delay={0.2}>
+              <TiltCard maxTilt={5}>
+                <div className="p-8 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] space-y-6 shadow-xl">
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 rounded-2xl bg-[#E8672A] text-white shadow-xs">
+                      <Globe2 className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
+                        Dual-Regional Presence
+                      </h3>
+                      <span className="text-xs text-[#E8672A] font-semibold">India & UAE Delivery Hubs</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
+                    Operating across two of the world’s most dynamic economic corridors: India (fastest-growing engineering powerhouse) and the United Arab Emirates (premier global commerce and tech hub).
+                  </p>
+
+                  <div className="space-y-3 pt-2">
+                    <div className="p-4 rounded-2xl bg-white dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] space-y-1">
+                      <span className="text-xs font-bold text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-1.5">
+                        <MapPin className="w-3.5 h-3.5 text-[#E8672A]" /> India Headquarters
+                      </span>
+                      <p className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">
+                        {companyContactInfo.offices[0].status}
+                      </p>
+                      <p className="text-[11px] font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
+                        {companyContactInfo.phoneIndia}
+                      </p>
+                    </div>
+
+                    <div className="p-4 rounded-2xl bg-white dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] space-y-1">
+                      <span className="text-xs font-bold text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-1.5">
+                        <MapPin className="w-3.5 h-3.5 text-[#E8672A]" /> UAE & Middle East Hub
+                      </span>
+                      <p className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">
+                        {companyContactInfo.offices[1].status}
+                      </p>
+                      <p className="text-[11px] font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
+                        {companyContactInfo.phoneUAE}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </TiltCard>
+            </ScrollReveal>
           </div>
         </section>
 
-        {/* Core Values Grid */}
+        {/* 3. Core Principles Grid */}
         <section className="space-y-12">
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              Core Principles
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-extrabold font-display text-[#3A2E27]">
-              The Values That Guide Our Engagements
-            </h2>
-            <p className="text-sm text-[#7A6A5F]">
-              How we work with our team, our enterprise partners, and our broader ecosystem.
-            </p>
-          </div>
+          <ScrollReveal direction="up">
+            <div className="text-center max-w-2xl mx-auto space-y-3">
+              <Badge variant="secondary" size="md">
+                Guiding Philosophy
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
+                The Values That Drive Every Sprint
+              </h2>
+              <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0]">
+                How we work with our engineering pods, enterprise clients, and leadership teams.
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {values.map((v, i) => (
-              <div
-                key={i}
-                className="p-8 rounded-3xl bg-white border border-[#EFE2D6] shadow-sm hover:shadow-xl hover:border-[#E8672A]/40 transition-all space-y-3"
-              >
-                <div className="p-3 rounded-2xl bg-[#FCE3D3]/60 w-fit">{v.icon}</div>
-                <h3 className="text-lg font-bold font-display text-[#3A2E27]">
-                  {v.title}
-                </h3>
-                <p className="text-sm text-[#7A6A5F] leading-relaxed">
-                  {v.description}
-                </p>
-              </div>
+              <ScrollReveal key={i} delay={i * 0.1} direction="up">
+                <TiltCard maxTilt={5} scale={1.01} className="h-full">
+                  <div className="h-full p-8 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-xl hover:border-[#E8672A]/40 transition-all space-y-3">
+                    <div className="p-3.5 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] w-fit border border-[#F4A97F]/30 dark:border-[#3D332B]">{v.icon}</div>
+                    <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
+                      {v.title}
+                    </h3>
+                    <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
+                      {v.description}
+                    </p>
+                  </div>
+                </TiltCard>
+              </ScrollReveal>
             ))}
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="rounded-3xl bg-[#FBF3EA] p-8 sm:p-12 border border-[#EFE2D6] text-center max-w-3xl mx-auto space-y-5">
-          <h3 className="text-2xl sm:text-3xl font-bold font-display text-[#3A2E27]">
-            Connect With Our Leadership
-          </h3>
-          <p className="text-sm text-[#7A6A5F] leading-relaxed">
-            Ready to explore how Arav Innovations can augment your technical team or optimize your digital strategy?
-          </p>
-          <div className="pt-2">
-            <Link href="/contact">
-              <Button variant="primary" size="lg" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                Get In Touch
-              </Button>
-            </Link>
-          </div>
-        </section>
+        {/* 4. Bottom CTA */}
+        <ScrollReveal direction="up">
+          <section className="rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#2C241E] text-center max-w-3xl mx-auto space-y-5 shadow-xl">
+            <h3 className="text-2xl sm:text-3xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
+              Connect With Our Practice Leadership
+            </h3>
+            <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
+              Ready to explore how Arav Innovations can engineer your next digital platform or optimize your enterprise growth?
+            </p>
+            <div className="pt-2">
+              <Link href="/contact">
+                <Button variant="primary" size="lg" rightIcon={<ArrowRight className="w-4 h-4" />}>
+                  Start a Confidential Discussion
+                </Button>
+              </Link>
+            </div>
+          </section>
+        </ScrollReveal>
       </div>
     </div>
   );

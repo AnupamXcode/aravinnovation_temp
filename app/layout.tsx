@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { PageLoader } from "@/components/layout/PageLoader";
 import { ChatbotWidget } from "@/components/chatbot/ChatbotWidget";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -20,7 +22,10 @@ const inter = Inter({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#FFFDF9",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FFFDF9" },
+    { media: "(prefers-color-scheme: dark)", color: "#12100E" },
+  ],
   width: "device-width",
   initialScale: 1,
 };
@@ -62,6 +67,25 @@ export const metadata: Metadata = {
   },
 };
 
+const themeInitScript = `
+(function() {
+  try {
+    var stored = localStorage.getItem('arav_theme_preference');
+    var isDark = stored === 'dark';
+    var root = document.documentElement;
+    if (isDark) {
+      root.classList.add('dark');
+      root.setAttribute('data-theme', 'dark');
+      root.style.colorScheme = 'dark';
+    } else {
+      root.classList.remove('dark');
+      root.setAttribute('data-theme', 'light');
+      root.style.colorScheme = 'light';
+    }
+  } catch (e) {}
+})();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -70,14 +94,23 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      data-scroll-behavior="smooth"
+      suppressHydrationWarning
       className={`${plusJakartaSans.variable} ${inter.variable} scroll-smooth`}
     >
-      <body className="min-h-screen flex flex-col bg-[#FFFDF9] text-[#3A2E27] font-sans antialiased selection:bg-[#FCE3D3] selection:text-[#E8672A]">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <ChatbotWidget />
+      <head>
+        <script
+          dangerouslySetInnerHTML={{ __html: themeInitScript }}
+          id="theme-init-script"
+        />
+      </head>
+      <body className="min-h-screen flex flex-col bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans antialiased selection:bg-[#FCE3D3] dark:selection:bg-[#E8672A]/30 selection:text-[#E8672A]">
+        <ThemeProvider>
+          <PageLoader />
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <ChatbotWidget />
+        </ThemeProvider>
       </body>
     </html>
   );

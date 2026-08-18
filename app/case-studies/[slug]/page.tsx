@@ -1,21 +1,16 @@
 import * as React from "react";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { Metadata } from "next";
 import { getCaseStudyBySlug, caseStudiesData } from "@/data/case-studies";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { LeadForm } from "@/components/forms/LeadForm";
+import { TiltCard } from "@/components/motion/TiltCard";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import {
   Building,
   MapPin,
   CheckCircle2,
-  ArrowRight,
-  Shield,
-  Layers,
-  Code2,
-  TrendingUp,
 } from "lucide-react";
 
 interface CaseStudyPageProps {
@@ -55,161 +50,185 @@ export default async function CaseStudyDetailPage({
   }
 
   return (
-    <div className="pt-28 pb-20 bg-[#FFFDF9]">
+    <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Header & Meta */}
         <div className="space-y-6">
-          <Breadcrumb
-            items={[
-              { label: "Case Studies", href: "/case-studies" },
-              { label: caseStudy.serviceCategory },
-            ]}
-          />
+          <ScrollReveal direction="up">
+            <Breadcrumb
+              items={[
+                { label: "Case Studies", href: "/case-studies" },
+                { label: caseStudy.serviceCategory },
+              ]}
+            />
+          </ScrollReveal>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <Badge variant="secondary" size="md">
-              {caseStudy.serviceCategory}
-            </Badge>
-            <span className="text-xs text-[#7A6A5F] flex items-center gap-1">
-              <Building className="w-3.5 h-3.5 text-[#E8672A]" />
-              {caseStudy.clientIndustry}
-            </span>
-            <span className="text-xs text-[#7A6A5F] flex items-center gap-1">
-              <MapPin className="w-3.5 h-3.5 text-[#E8672A]" />
-              {caseStudy.location}
-            </span>
-          </div>
+          <ScrollReveal direction="up" delay={0.1}>
+            <div className="flex flex-wrap items-center gap-3">
+              <Badge variant="secondary" size="md">
+                {caseStudy.serviceCategory}
+              </Badge>
+              <span className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center gap-1">
+                <Building className="w-3.5 h-3.5 text-[#E8672A]" />
+                {caseStudy.clientIndustry}
+              </span>
+              <span className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center gap-1">
+                <MapPin className="w-3.5 h-3.5 text-[#E8672A]" />
+                {caseStudy.location}
+              </span>
+            </div>
+          </ScrollReveal>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#3A2E27] tracking-tight leading-tight">
-            {caseStudy.title}
-          </h1>
+          <ScrollReveal direction="up" delay={0.2}>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight leading-tight">
+              {caseStudy.title}
+            </h1>
+          </ScrollReveal>
 
-          <p className="text-lg text-[#7A6A5F] leading-relaxed border-l-4 border-[#E8672A] pl-4 italic bg-[#FBF3EA] py-3 rounded-r-xl">
-            {caseStudy.summary}
-          </p>
+          <ScrollReveal direction="up" delay={0.3}>
+            <p className="text-lg text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed border-l-4 border-[#E8672A] pl-4 italic bg-[#FBF3EA] dark:bg-[#1A1613] py-3 rounded-r-2xl border border-[#EFE2D6] dark:border-[#2C241E]">
+              {caseStudy.summary}
+            </p>
+          </ScrollReveal>
         </div>
 
         {/* Section 1: Challenge & Objective */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div className="p-6 rounded-3xl bg-[#FBF3EA] border border-[#EFE2D6] space-y-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#E8672A] block">
-              01. The Challenge
-            </span>
-            <h3 className="text-lg font-bold font-display text-[#3A2E27]">
-              Initial Operational Bottlenecks
-            </h3>
-            <p className="text-xs text-[#7A6A5F] leading-relaxed">
-              {caseStudy.challenge}
-            </p>
-          </div>
+          <ScrollReveal direction="up" delay={0.1}>
+            <TiltCard maxTilt={5} scale={1.01} className="h-full">
+              <div className="h-full p-6 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] space-y-3 shadow-xs">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#E8672A] block">
+                  01. The Challenge
+                </span>
+                <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
+                  Initial Operational Bottlenecks
+                </h3>
+                <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
+                  {caseStudy.challenge}
+                </p>
+              </div>
+            </TiltCard>
+          </ScrollReveal>
 
-          <div className="p-6 rounded-3xl bg-[#FFFDF9] border border-[#EFE2D6] shadow-xs space-y-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#E8672A] block">
-              02. Project Objective
-            </span>
-            <h3 className="text-lg font-bold font-display text-[#3A2E27]">
-              Key Desired Milestones
-            </h3>
-            <p className="text-xs text-[#7A6A5F] leading-relaxed">
-              {caseStudy.objective}
-            </p>
-          </div>
+          <ScrollReveal direction="up" delay={0.2}>
+            <TiltCard maxTilt={5} scale={1.01} className="h-full">
+              <div className="h-full p-6 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm space-y-3">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#E8672A] block">
+                  02. Project Objective
+                </span>
+                <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
+                  Key Desired Milestones
+                </h3>
+                <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
+                  {caseStudy.objective}
+                </p>
+              </div>
+            </TiltCard>
+          </ScrollReveal>
         </div>
 
         {/* Section 2: Approach & Technical Solution */}
-        <div className="p-8 rounded-3xl bg-white border border-[#EFE2D6] shadow-sm space-y-6">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-[#E8672A] block mb-2">
-              03. Strategic Approach
-            </span>
-            <h3 className="text-2xl font-bold font-display text-[#3A2E27] mb-3">
-              How Arav Innovations Executed
-            </h3>
-            <p className="text-sm text-[#7A6A5F] leading-relaxed">
-              {caseStudy.approach}
-            </p>
-          </div>
+        <ScrollReveal direction="up">
+          <div className="p-8 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm space-y-6">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#E8672A] block mb-2">
+                03. Strategic Approach
+              </span>
+              <h3 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] mb-3">
+                How Arav Innovations Executed
+              </h3>
+              <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
+                {caseStudy.approach}
+              </p>
+            </div>
 
-          <div className="pt-6 border-t border-[#EFE2D6]">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#E8672A] block mb-2">
-              04. Deployed Solution
-            </span>
-            <p className="text-sm text-[#7A6A5F] leading-relaxed">
-              {caseStudy.solution}
-            </p>
-          </div>
+            <div className="pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E]">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#E8672A] block mb-2">
+                04. Deployed Solution
+              </span>
+              <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
+                {caseStudy.solution}
+              </p>
+            </div>
 
-          {/* Technologies Used */}
-          <div className="pt-4">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#3A2E27] block mb-2">
-              Technologies & Frameworks Deployed:
-            </span>
-            <div className="flex flex-wrap gap-2">
-              {caseStudy.technologiesUsed.map((tech, i) => (
-                <span
+            {/* Technologies Used */}
+            <div className="pt-4">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#3A2E27] dark:text-[#FAF5EE] block mb-2">
+                Technologies & Frameworks Deployed:
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {caseStudy.technologiesUsed.map((tech, i) => (
+                  <span
+                    key={i}
+                    className="px-3 py-1 rounded-xl bg-[#FBF3EA] dark:bg-[#1F1A16] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#2C241E]"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Section 3: Documented Results */}
+        <ScrollReveal direction="up">
+          <div className="p-8 rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] space-y-6">
+            <div className="text-center max-w-xl mx-auto space-y-2">
+              <Badge variant="secondary" size="md">
+                Verified Metrics
+              </Badge>
+              <h3 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
+                Realized Project Impact
+              </h3>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {caseStudy.results.map((res, i) => (
+                <div
                   key={i}
-                  className="px-3 py-1 rounded-lg bg-[#FBF3EA] text-xs font-semibold text-[#3A2E27] border border-[#EFE2D6]"
+                  className="p-5 rounded-2xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] text-center space-y-2 shadow-2xs"
                 >
-                  {tech}
-                </span>
+                  <div className="text-sm font-mono font-bold text-[#E8672A]">
+                    {res.metric}
+                  </div>
+                  <div className="text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
+                    {res.label}
+                  </div>
+                  <p className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">
+                    {res.description}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
-        </div>
-
-        {/* Section 3: Documented Results */}
-        <div className="p-8 rounded-3xl bg-[#FBF3EA] border border-[#EFE2D6] space-y-6">
-          <div className="text-center max-w-xl mx-auto space-y-2">
-            <Badge variant="secondary" size="md">
-              Verified Metrics
-            </Badge>
-            <h3 className="text-2xl font-bold font-display text-[#3A2E27]">
-              Realized Project Impact
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {caseStudy.results.map((res, i) => (
-              <div
-                key={i}
-                className="p-5 rounded-2xl bg-white border border-[#EFE2D6] text-center space-y-2 shadow-2xs"
-              >
-                <div className="text-sm font-mono font-bold text-[#E8672A]">
-                  {res.metric}
-                </div>
-                <div className="text-xs font-semibold text-[#3A2E27]">
-                  {res.label}
-                </div>
-                <p className="text-[11px] text-[#7A6A5F]">
-                  {res.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
+        </ScrollReveal>
 
         {/* Testimonial Quote */}
         {caseStudy.testimonial && (
-          <div className="p-8 rounded-3xl bg-white border border-[#EFE2D6] shadow-sm space-y-4">
-            <div className="text-xs font-bold uppercase tracking-wider text-[#E8672A]">
-              Client Executive Endorsement
+          <ScrollReveal direction="up">
+            <div className="p-8 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm space-y-4">
+              <div className="text-xs font-bold uppercase tracking-wider text-[#E8672A]">
+                Client Executive Endorsement
+              </div>
+              <blockquote className="text-base italic text-[#3A2E27] dark:text-[#FAF5EE] font-medium leading-relaxed">
+                “{caseStudy.testimonial.quote}”
+              </blockquote>
+              <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#2C241E] text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+                <span className="font-bold text-[#3A2E27] dark:text-[#FAF5EE]">{caseStudy.testimonial.author}</span> &bull; {caseStudy.testimonial.designation}, {caseStudy.testimonial.company}
+              </div>
             </div>
-            <blockquote className="text-base italic text-[#3A2E27] font-medium leading-relaxed">
-              “{caseStudy.testimonial.quote}”
-            </blockquote>
-            <div className="pt-2 border-t border-[#EFE2D6] text-xs text-[#7A6A5F]">
-              <span className="font-bold text-[#3A2E27]">{caseStudy.testimonial.author}</span> &bull; {caseStudy.testimonial.designation}, {caseStudy.testimonial.company}
-            </div>
-          </div>
+          </ScrollReveal>
         )}
 
         {/* CTA Lead Form */}
-        <div className="pt-8">
-          <LeadForm
-            initialService={caseStudy.serviceCategory}
-            source={`case_study_${caseStudy.slug}`}
-          />
-        </div>
+        <ScrollReveal direction="up">
+          <div className="pt-8">
+            <LeadForm
+              initialService={caseStudy.serviceCategory}
+              source={`case_study_${caseStudy.slug}`}
+            />
+          </div>
+        </ScrollReveal>
       </div>
     </div>
   );
