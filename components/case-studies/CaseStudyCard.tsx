@@ -46,35 +46,24 @@ export function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
             </p>
           </div>
 
-          {/* Breakdown: Challenge -> Solution */}
-          <div className="space-y-2.5 text-xs bg-[#FBF3EA] dark:bg-[#1C1814] p-4 rounded-2xl border border-[#EFE2D6] dark:border-[#2C241E]">
+          {/* Teaser Outcome */}
+          <div className="space-y-3 text-xs bg-[#FBF3EA] dark:bg-[#1C1814] p-4 rounded-2xl border border-[#EFE2D6] dark:border-[#2C241E]">
             <div>
-              <span className="font-bold text-[#3A2E27] dark:text-[#FAF5EE] uppercase tracking-wider block text-[10px] text-[#E8672A]">
-                Challenge
+              <span className="font-bold text-[#3A2E27] dark:text-[#FAF5EE] uppercase tracking-wider block text-[10px] text-[#E8672A] mb-1">
+                Execution & Outcome
               </span>
-              <p className="text-[#7A6A5F] dark:text-[#B8ACA0] mt-0.5 line-clamp-2">{caseStudy.challenge}</p>
+              <p className="text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed line-clamp-2">
+                {caseStudy.solution}
+              </p>
             </div>
-            <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#2C241E]">
-              <span className="font-bold text-[#3A2E27] dark:text-[#FAF5EE] uppercase tracking-wider block text-[10px] text-[#E8672A]">
-                Solution & Execution
-              </span>
-              <p className="text-[#7A6A5F] dark:text-[#B8ACA0] mt-0.5 line-clamp-2">{caseStudy.solution}</p>
-            </div>
-          </div>
-
-          {/* Key Result Metrics */}
-          <div className="space-y-1.5">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#3A2E27] dark:text-[#FAF5EE]">
-              Documented Results
-            </span>
-            <div className="grid grid-cols-1 gap-2">
-              {caseStudy.results.map((res, idx) => (
-                <div key={idx} className="flex items-start gap-2 text-xs text-[#3A2E27] dark:text-[#FAF5EE]">
+            {caseStudy.results?.[0] && (
+              <div className="pt-3 border-t border-[#EFE2D6] dark:border-[#2C241E]">
+                <div className="flex items-start gap-2 text-[#3A2E27] dark:text-[#FAF5EE]">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#E8672A] shrink-0 mt-0.5" />
-                  <span className="text-[#7A6A5F] dark:text-[#B8ACA0] font-medium">{res.description}</span>
+                  <span className="text-[#7A6A5F] dark:text-[#B8ACA0] font-medium leading-relaxed line-clamp-2">{caseStudy.results[0].description}</span>
                 </div>
-              ))}
-            </div>
+              </div>
+            )}
           </div>
         </div>
 
