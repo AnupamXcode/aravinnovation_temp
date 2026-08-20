@@ -1,13 +1,91 @@
 {
   "Navigation": {
+    "whatWeDo": "What We Do",
+    "sevenServices": "Our 7 Core Service Lines",
+    "viewAllServices": "View All Services",
     "products": "Products",
+    "workingWithUs": "Working With Us",
+    "process": "Our 5-Step Process",
+    "testimonials": "Clients & Testimonials",
+    "solutions": "Industry Solutions",
     "caseStudies": "Case Studies",
     "insights": "Insights",
     "careers": "Careers",
-    "about": "About"
+    "about": "About",
+    "contact": "Contact & Inquiries",
+    "contactUs": "Contact Us",
+    "talkToExpert": "Talk to an Expert"
   },
   "Hero": {
+    "eyebrow": "RESULT-DRIVEN DIGITAL EXCELLENCE • GLOBAL",
+    "headlinePrefix": "Shaping Online Futures & Scaling Enterprises",
+    "headlineHighlight": "Globally",
+    "supportingText": "Partner with Arav Innovations for IT strategy, full-stack software development, performance digital marketing, compliance, audits, and dedicated talent solutions engineered for business growth.",
     "contactCta": "Contact Us →",
-    "exploreCta": "Explore 7 Practices"
+    "exploreCta": "Explore 7 Practices",
+    "badgeScalability": "Enterprise Scalability",
+    "badgeSla": "Strict SLA Protection",
+    "badgeIp": "100% Client IP Ownership"
+  },
+  "Services": {
+    "badge": "Enterprise Capabilities",
+    "title": "Multidisciplinary Technology & Strategy Practices",
+    "description": "Seven specialized business units working seamlessly under one unified technical leadership team.",
+    "inquire": "Inquire About",
+    "learnMore": "Learn More",
+    "viewAll": "View All Services"
+  },
+  "CaseStudies": {
+    "badge": "Proven Enterprise Outcomes",
+    "title": "Featured Enterprise Case Studies",
+    "description": "Verified digital transformation, architecture modernization, and growth milestones delivered for global clients.",
+    "challenge": "Challenge",
+    "solution": "Solution & Execution",
+    "executionOutcome": "Execution & Outcome",
+    "fullCaseStudy": "Full Case Study →",
+    "clientConfidential": "CLIENT CONFIDENTIAL / LOGO PENDING APPROVAL",
+    "viewAll": "View All Case Studies"
+  },
+  "WorkingWithUs": {
+    "processBadge": "Methodical Execution",
+    "processTitle": "Our 5-Step Value Creation Model",
+    "processDescription": "A transparent, milestone-driven framework designed to minimize risk and accelerate production readiness.",
+    "testimonialsBadge": "Client Proof",
+    "testimonialsTitle": "What Enterprise Leaders Say",
+    "testimonialsDescription": "Direct feedback and verified business outcomes from technology executives."
+  },
+  "LeadForm": {
+    "title": "Initiate a Project Discussion",
+    "subtitle": "Tell us about your organization and requirements. All inquiries are covered under NDA.",
+    "nameLabel": "Your Full Name",
+    "companyLabel": "Company / Enterprise Name",
+    "emailLabel": "Official Work Email",
+    "phoneLabel": "Phone / WhatsApp Number",
+    "serviceLabel": "Target Practice / Service",
+    "timelineLabel": "Estimated Timeline",
+    "requirementLabel": "Project Scope & Specific Objectives",
+    "requirementPlaceholder": "Briefly describe your current challenge, desired deliverables, technology stack (if known), or team expansion goals...",
+    "budgetLabel": "Target Budget Band (Optional)",
+    "submitButton": "Submit Project Inquiry",
+    "submitting": "Submitting Inquiry...",
+    "successTitle": "Requirement Received!",
+    "successMessage": "Thank you for reaching out to Arav Innovations. Our strategy & engineering team will review your requirements and schedule an exploratory discussion within 1 business day.",
+    "submitAnother": "Submit Another Requirement",
+    "confidentiality": "Strict Confidentiality Guaranteed. Operating Globally."
+  },
+  "Footer": {
+    "tagline": "Arav Innovations is a multidisciplinary technology, strategy, digital growth, governance, and staff augmentation firm partnering with ambitious enterprises globally.",
+    "practicesHeading": "Our 7 Practices",
+    "companyHeading": "Company & Governance",
+    "presenceHeading": "Global Presence",
+    "operatingGlobally": "Operating Globally",
+    "rights": "All rights reserved."
+  },
+  "Common": {
+    "language": "Language",
+    "en": "EN",
+    "hi": "हिं",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode"
   }
 }

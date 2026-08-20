@@ -57,6 +57,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Arav Innovations" }],
   creator: "Arav Innovations",
+  alternates: {
+    canonical: "https://aravinnovations.com",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",

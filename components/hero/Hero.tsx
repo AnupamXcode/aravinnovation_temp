@@ -41,7 +41,7 @@ export function Hero() {
               {/* Headline */}
               <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight leading-[1.12]">
                 Shaping Online Futures & Scaling Enterprises{" "}
-                <span className="text-[#E8672A] underline decoration-[#F4A97F]/60 decoration-wavy decoration-2">
+                <span className="text-[#E8672A]">
                   Globally
                 </span>
               </h1>

@@ -46,6 +46,12 @@ export const servicesNavigation: NavItem[] = [
 
 export const workingWithUsNavigation: NavItem[] = [
   {
+    label: "Contact & Inquiries",
+    href: "/contact",
+    description: "Connect with our practice leads for NDAs, scoping, and enterprise proposals.",
+    badge: "Direct",
+  },
+  {
     label: "Our 5-Step Process",
     href: "/#process",
     description: "How we move from discovery to execution and measurable business outcomes.",
@@ -56,6 +62,11 @@ export const workingWithUsNavigation: NavItem[] = [
     description: "Feedback and proof of execution from cross-industry partners.",
   },
   {
+    label: "Case Studies",
+    href: "/case-studies",
+    description: "Documented enterprise outcomes across cloud, SaaS, and engineering.",
+  },
+  {
     label: "Industry Solutions",
     href: "/solutions",
     description: "Tailored technology and growth frameworks for your vertical.",
@@ -64,6 +75,11 @@ export const workingWithUsNavigation: NavItem[] = [
     label: "Careers at Arav",
     href: "/careers",
     description: "Join our multidisciplinary engineering and strategy practice.",
+  },
+  {
+    label: "About Arav Innovations",
+    href: "/about",
+    description: "Our leadership, global footprint, code ownership, and culture.",
   },
 ];
 
@@ -83,16 +99,8 @@ export const mainNavigation: NavItem[] = [
     children: workingWithUsNavigation,
   },
   {
-    label: "Case Studies",
-    href: "/case-studies",
-  },
-  {
     label: "Insights",
     href: "/insights",
-  },
-  {
-    label: "About Us",
-    href: "/about",
   },
 ];
 

@@ -24,6 +24,13 @@ import {
   ShieldCheck,
   BarChart3,
   Users2,
+  Mail,
+  Workflow,
+  Quote,
+  Briefcase,
+  Layers,
+  GraduationCap,
+  Building2,
 } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 
@@ -35,6 +42,16 @@ const serviceIcons: Record<string, React.ReactNode> = {
   "/services/risk-governance-compliance": <ShieldCheck className="w-4 h-4 text-[#E8672A]" />,
   "/services/audit-improvement": <BarChart3 className="w-4 h-4 text-[#E8672A]" />,
   "/services/training-staff-augmentation": <Users2 className="w-4 h-4 text-[#E8672A]" />,
+};
+
+const workingWithUsIcons: Record<string, React.ReactNode> = {
+  "/contact": <Mail className="w-4 h-4 text-[#E8672A]" />,
+  "/#process": <Workflow className="w-4 h-4 text-[#E8672A]" />,
+  "/testimonials": <Quote className="w-4 h-4 text-[#E8672A]" />,
+  "/case-studies": <Layers className="w-4 h-4 text-[#E8672A]" />,
+  "/solutions": <Briefcase className="w-4 h-4 text-[#E8672A]" />,
+  "/careers": <GraduationCap className="w-4 h-4 text-[#E8672A]" />,
+  "/about": <Building2 className="w-4 h-4 text-[#E8672A]" />,
 };
 
 export function Navbar() {
@@ -69,6 +86,17 @@ export function Navbar() {
     return pathname.startsWith(href);
   };
 
+  const isWorkingWithUsActive = () => {
+    return (
+      pathname.startsWith("/contact") ||
+      pathname.startsWith("/testimonials") ||
+      pathname.startsWith("/solutions") ||
+      pathname.startsWith("/case-studies") ||
+      pathname.startsWith("/careers") ||
+      pathname.startsWith("/about")
+    );
+  };
+
   return (
     <header
       className={cn(
@@ -85,9 +113,9 @@ export function Navbar() {
             <BrandLogo />
           </div>
 
-          {/* Desktop Navigation Links */}
+          {/* Desktop Navigation Links (Decluttered 4 primary items) */}
           <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
-            {/* What We Do Dropdown */}
+            {/* 1. What We Do Dropdown */}
             <div
               className="relative"
               onMouseEnter={() => setActiveDropdown("services")}
@@ -167,7 +195,20 @@ export function Navbar() {
               )}
             </div>
 
-            {/* Working With Us Dropdown */}
+            {/* 2. Products */}
+            <Link
+              href="/products"
+              className={cn(
+                "px-3.5 py-2 rounded-xl text-sm font-medium transition-colors",
+                isActive("/products")
+                  ? "text-[#E8672A] font-semibold"
+                  : "text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A]"
+              )}
+            >
+              Products
+            </Link>
+
+            {/* 3. Working With Us Dropdown (Folded: Process, Clients, Case Studies, Solutions, Careers, About, Contact) */}
             <div
               className="relative"
               onMouseEnter={() => setActiveDropdown("working-with-us")}
@@ -177,7 +218,7 @@ export function Navbar() {
                 type="button"
                 className={cn(
                   "inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-medium transition-colors cursor-pointer",
-                  isActive("/testimonials") || isActive("/solutions") || isActive("/careers")
+                  isWorkingWithUsActive()
                     ? "text-[#E8672A] font-semibold"
                     : "text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A]"
                 )}
@@ -193,56 +234,67 @@ export function Navbar() {
               </button>
 
               {activeDropdown === "working-with-us" && (
-                <div className="absolute top-full left-0 w-[360px] pt-2">
+                <div className="absolute top-full left-0 w-[420px] pt-2">
                   <div className="rounded-3xl bg-[#FFFDF9] dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] p-3 shadow-2xl space-y-1">
-                    {workingWithUsNavigation.map((item) => (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        onClick={() => setActiveDropdown(null)}
-                        className={cn(
-                          "block p-3 rounded-2xl transition-all hover:bg-[#FBF3EA] dark:hover:bg-[#221D18] group",
-                          pathname === item.href && "bg-[#FCE3D3]/40 dark:bg-[#2C221B]"
-                        )}
-                      >
-                        <div className="text-sm font-semibold text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] dark:group-hover:text-[#E8672A] transition-colors">
-                          {item.label}
+                    {/* Emphasized Direct Contact Entry */}
+                    <Link
+                      href="/contact"
+                      onClick={() => setActiveDropdown(null)}
+                      className="flex items-center justify-between p-3 rounded-2xl bg-[#FCE3D3]/70 dark:bg-[#2C221B] border border-[#F4A97F]/40 dark:border-[#E8672A]/30 transition-all hover:shadow-sm group"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <div className="p-1.5 rounded-lg bg-[#E8672A] text-white">
+                          <Mail className="w-4 h-4" />
                         </div>
-                        <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] mt-0.5 line-clamp-1">
-                          {item.description}
-                        </p>
-                      </Link>
-                    ))}
+                        <div>
+                          <div className="text-sm font-bold text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] transition-colors">
+                            Contact & Project Inquiries
+                          </div>
+                          <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+                            Schedule an exploratory consultation & NDA
+                          </p>
+                        </div>
+                      </div>
+                      <ArrowRight className="w-4 h-4 text-[#E8672A] group-hover:translate-x-0.5 transition-transform" />
+                    </Link>
+
+                    <div className="pt-1.5 pb-1 px-3 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0]">
+                        Company & Engagements
+                      </span>
+                    </div>
+
+                    <div className="max-h-[300px] overflow-y-auto space-y-0.5">
+                      {workingWithUsNavigation.filter(item => item.href !== "/contact").map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          onClick={() => setActiveDropdown(null)}
+                          className={cn(
+                            "flex items-start gap-2.5 p-2.5 rounded-xl transition-all hover:bg-[#FBF3EA] dark:hover:bg-[#221D18] group",
+                            pathname === item.href && "bg-[#FCE3D3]/40 dark:bg-[#2C221B]"
+                          )}
+                        >
+                          <div className="p-1.5 rounded-lg bg-[#FCE3D3]/50 dark:bg-[#261F1A] text-[#E8672A] shrink-0 mt-0.5">
+                            {workingWithUsIcons[item.href] || <Sparkles className="w-3.5 h-3.5" />}
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] dark:group-hover:text-[#E8672A] transition-colors">
+                              {item.label}
+                            </div>
+                            <p className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0] mt-0.5 line-clamp-1">
+                              {item.description}
+                            </p>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 </div>
               )}
             </div>
 
-            {/* Direct Links */}
-            <Link
-              href="/products"
-              className={cn(
-                "px-3.5 py-2 rounded-xl text-sm font-medium transition-colors",
-                isActive("/products")
-                  ? "text-[#E8672A] font-semibold"
-                  : "text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A]"
-              )}
-            >
-              Products
-            </Link>
-
-            <Link
-              href="/case-studies"
-              className={cn(
-                "px-3.5 py-2 rounded-xl text-sm font-medium transition-colors",
-                isActive("/case-studies")
-                  ? "text-[#E8672A] font-semibold"
-                  : "text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A]"
-              )}
-            >
-              Case Studies
-            </Link>
-
+            {/* 4. Insights */}
             <Link
               href="/insights"
               className={cn(
@@ -254,48 +306,28 @@ export function Navbar() {
             >
               Insights
             </Link>
-
-            <Link
-              href="/careers"
-              className={cn(
-                "px-3.5 py-2 rounded-xl text-sm font-medium transition-colors",
-                isActive("/careers")
-                  ? "text-[#E8672A] font-semibold"
-                  : "text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A]"
-              )}
-            >
-              Careers
-            </Link>
-
-            <Link
-              href="/about"
-              className={cn(
-                "px-3.5 py-2 rounded-xl text-sm font-medium transition-colors",
-                isActive("/about")
-                  ? "text-[#E8672A] font-semibold"
-                  : "text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A]"
-              )}
-            >
-              About
-            </Link>
           </nav>
 
-          {/* Right CTAs + Theme Toggle */}
-          <div className="hidden lg:flex items-center gap-3">
-            {/* Language Switcher Scaffold */}
-            <div
-              className="relative group"
-            >
+          {/* Right Utility Cluster: Language Switcher + Theme Toggle */}
+          <div className="hidden lg:flex items-center gap-2.5">
+            {/* Language Switcher */}
+            <div className="relative group">
               <button
                 type="button"
-                className="inline-flex items-center gap-1.5 p-2 rounded-xl text-sm font-medium transition-colors text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FBF3EA] dark:hover:bg-[#221D18] border border-[#EFE2D6] dark:border-[#2C241E]"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-[#FFFDF9] dark:bg-[#171411] hover:bg-[#FBF3EA] dark:hover:bg-[#221D18] border border-[#EFE2D6] dark:border-[#2C241E] text-[#3A2E27] dark:text-[#FAF5EE]"
+                aria-label="Language selection"
               >
                 <span>EN</span>
-                <ChevronDown className="w-3 h-3 text-[#7A6A5F] dark:text-[#B8ACA0]" />
+                <ChevronDown className="w-3 h-3 text-[#7A6A5F] dark:text-[#B8ACA0] group-hover:rotate-180 transition-transform duration-200" />
               </button>
-              <div className="absolute top-full right-0 mt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                <div className="rounded-xl bg-[#FFFDF9] dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] p-3 shadow-lg">
-                  <div className="text-xs font-semibold text-[#7A6A5F] dark:text-[#B8ACA0] text-center">
+
+              <div className="absolute top-full right-0 mt-1.5 w-44 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <div className="rounded-2xl bg-[#FFFDF9] dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] p-2 shadow-xl space-y-1">
+                  <div className="flex items-center justify-between px-2.5 py-1.5 rounded-xl bg-[#FCE3D3]/60 dark:bg-[#2C221B] text-[#E8672A] text-xs font-semibold">
+                    <span>English</span>
+                    <span className="text-[10px] font-mono">EN</span>
+                  </div>
+                  <div className="px-2.5 py-1 text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0] text-center font-medium">
                     More languages coming soon
                   </div>
                 </div>
@@ -303,37 +335,12 @@ export function Navbar() {
             </div>
 
             <ThemeToggle />
-
-            <Link href="/contact">
-              <Button
-                variant="primary"
-                size="sm"
-                rightIcon={<ArrowRight className="w-4 h-4" />}
-                onClick={() => {
-                  trackEvent({
-                    type: "cta_click",
-                    label: "Contact Us (Navbar)",
-                    location: "navbar",
-                    targetUrl: "/contact",
-                  });
-                }}
-              >
-                Contact Us
-              </Button>
-            </Link>
           </div>
 
-          {/* Mobile Actions (Theme Toggle + Menu) */}
-          <div className="flex lg:hidden items-center gap-2">
-            <div
-              className="relative group"
-            >
-              <button
-                type="button"
-                className="p-2 rounded-xl text-sm font-medium transition-colors text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FBF3EA] dark:hover:bg-[#221D18] border border-[#EFE2D6] dark:border-[#2C241E] flex items-center gap-1"
-              >
-                <span>EN</span>
-              </button>
+          {/* Mobile Actions (Language Badge + Theme Toggle + Menu) */}
+          <div className="flex lg:hidden items-center gap-1.5">
+            <div className="px-2 py-1 rounded-xl text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E]">
+              EN
             </div>
             <ThemeToggle />
             <button
@@ -352,13 +359,14 @@ export function Navbar() {
       {mobileMenuOpen && (
         <div className="lg:hidden fixed inset-x-0 top-[65px] bottom-0 bg-[#FFFDF9] dark:bg-[#12100E] border-t border-[#EFE2D6] dark:border-[#2C241E] px-5 py-6 overflow-y-auto z-50">
           <div className="space-y-6">
+            {/* Group 1: What We Do */}
             <div>
               <button
                 type="button"
                 className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] mb-3 py-2 border-b border-transparent focus:outline-none"
                 onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
               >
-                <span>Services (7 Core Practices)</span>
+                <span>What We Do (7 Core Practices)</span>
                 <ChevronDown
                   className={cn(
                     "w-4 h-4 transition-transform duration-200",
@@ -387,7 +395,19 @@ export function Navbar() {
               </div>
             </div>
 
-            <div>
+            {/* Group 2: Products */}
+            <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#2C241E]">
+              <Link
+                href="/products"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-2 text-base font-semibold text-[#3A2E27] dark:text-[#FAF5EE]"
+              >
+                Products & Platforms
+              </Link>
+            </div>
+
+            {/* Group 3: Working With Us */}
+            <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#2C241E]">
               <button
                 type="button"
                 className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] mb-3 py-2 border-b border-transparent focus:outline-none"
@@ -405,7 +425,7 @@ export function Navbar() {
               <div
                 className={cn(
                   "grid grid-cols-1 gap-2 overflow-hidden transition-all duration-300 ease-in-out",
-                  mobileWorkingWithUsOpen ? "max-h-[300px] opacity-100" : "max-h-0 opacity-0"
+                  mobileWorkingWithUsOpen ? "max-h-[450px] opacity-100" : "max-h-0 opacity-0"
                 )}
               >
                 {workingWithUsNavigation.map((item) => (
@@ -413,29 +433,22 @@ export function Navbar() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center p-3 rounded-xl bg-[#FBF3EA]/60 dark:bg-[#1A1613] text-sm font-medium text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#2C241E] min-h-[44px]"
+                    className={cn(
+                      "flex items-center gap-3 p-3 rounded-xl text-sm font-medium border border-[#EFE2D6] dark:border-[#2C241E] min-h-[44px]",
+                      item.href === "/contact"
+                        ? "bg-[#FCE3D3]/80 dark:bg-[#2C221B] font-bold text-[#E8672A]"
+                        : "bg-[#FBF3EA]/60 dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE]"
+                    )}
                   >
-                    {item.label}
+                    <div className="shrink-0">{workingWithUsIcons[item.href]}</div>
+                    <div className="truncate">{item.label}</div>
                   </Link>
                 ))}
               </div>
             </div>
 
-            <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#2C241E] space-y-2">
-              <Link
-                href="/products"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block py-2 text-base font-semibold text-[#3A2E27] dark:text-[#FAF5EE]"
-              >
-                Products & Platforms
-              </Link>
-              <Link
-                href="/case-studies"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block py-2 text-base font-semibold text-[#3A2E27] dark:text-[#FAF5EE]"
-              >
-                Case Studies
-              </Link>
+            {/* Group 4: Insights */}
+            <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#2C241E]">
               <Link
                 href="/insights"
                 onClick={() => setMobileMenuOpen(false)}
@@ -443,25 +456,12 @@ export function Navbar() {
               >
                 Insights & Research
               </Link>
-              <Link
-                href="/about"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block py-2 text-base font-semibold text-[#3A2E27] dark:text-[#FAF5EE]"
-              >
-                About Arav Innovations
-              </Link>
-              <Link
-                href="/careers"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block py-2 text-base font-semibold text-[#3A2E27] dark:text-[#FAF5EE]"
-              >
-                Careers
-              </Link>
             </div>
 
-            <div className="pt-4">
+            {/* Mobile Bottom Conversion CTA */}
+            <div className="pt-4 border-t border-[#EFE2D6] dark:border-[#2C241E]">
               <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="block w-full">
-                <Button variant="primary" size="lg" className="w-full justify-center">
+                <Button variant="primary" size="lg" className="w-full justify-center shadow-md">
                   Talk to an Expert <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </Link>
@@ -472,3 +472,4 @@ export function Navbar() {
     </header>
   );
 }
+
