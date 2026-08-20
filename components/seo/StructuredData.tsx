@@ -10,7 +10,7 @@ export function OrganizationSchema() {
     name: "Arav Innovations",
     alternateName: "Arav Innovations Consulting",
     url: "https://aravinnovations.com",
-    logo: "https://aravinnovations.com/favicon.ico",
+    logo: "https://aravinnovations.com/logos/arav-logo.png",
     description:
       "Arav Innovations is a multidisciplinary B2B technology consulting, full-stack software engineering, digital marketing, risk & governance, and staff augmentation firm operating globally.",
     sameAs: [
@@ -65,7 +65,7 @@ export function LocalBusinessSchema({ location }: { location: "india" | "uae" | 
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       name: "Arav Innovations - India Delivery Center",
-      image: "https://aravinnovations.com/favicon.ico",
+      image: "https://aravinnovations.com/logos/arav-logo.png",
       url: "https://aravinnovations.com",
       telephone: "+91-80-00000000",
       priceRange: "$$$",
@@ -96,7 +96,7 @@ export function LocalBusinessSchema({ location }: { location: "india" | "uae" | 
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       name: "Arav Innovations - Middle East Operations",
-      image: "https://aravinnovations.com/favicon.ico",
+      image: "https://aravinnovations.com/logos/arav-logo.png",
       url: "https://aravinnovations.com",
       telephone: "+971-4-0000000",
       priceRange: "$$$",
@@ -177,7 +177,7 @@ export function ArticleSchema({
       name: "Arav Innovations",
       logo: {
         "@type": "ImageObject",
-        url: "https://aravinnovations.com/favicon.ico",
+        url: "https://aravinnovations.com/logos/arav-logo.png",
       },
     },
     articleSection: category,

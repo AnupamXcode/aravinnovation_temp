@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { AravLogo } from "./AravLogoSvg";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface BrandLogoProps {
@@ -15,9 +15,17 @@ export function BrandLogo({ className, variant = "header" }: BrandLogoProps) {
     <Link
       href="/"
       className={cn("inline-flex items-center group select-none transition-transform hover:scale-[1.02]", className)}
-      aria-label="Arav Innovations - Elevating Growth, One Click at a Time"
+      aria-label="Arav Innovations - Elevating Brands, One Click at a Time"
     >
-      <AravLogo showTagline={variant === "header"} />
+      <div className="relative w-48 h-12 flex items-center dark:bg-white/10 dark:p-1.5 dark:rounded-lg">
+        <Image
+          src="/logos/arav-logo.png"
+          alt="Arav Innovations Logo"
+          fill
+          className="object-contain object-left"
+          priority
+        />
+      </div>
     </Link>
   );
 }

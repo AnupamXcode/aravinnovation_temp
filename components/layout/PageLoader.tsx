@@ -3,7 +3,6 @@
 import * as React from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { AravLogoIcon } from "./AravLogoSvg";
 
 export function PageLoader() {
   const pathname = usePathname();
@@ -54,20 +53,10 @@ export function PageLoader() {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="relative w-20 h-20 mb-4 flex items-center justify-center filter drop-shadow-lg"
+              className="relative w-48 h-16 mb-4 flex items-center justify-center filter drop-shadow-lg dark:bg-white/10 dark:p-2 dark:rounded-xl"
             >
-              <AravLogoIcon className="w-20 h-20" />
+              <img src="/logos/arav-logo.png" alt="Arav Innovations Logo" className="w-full h-full object-contain" />
             </motion.div>
-
-            {/* Typography */}
-            <div className="space-y-1 mb-5">
-              <div className="font-display font-extrabold text-2xl sm:text-3xl tracking-tight text-[#FF5722]">
-                Arav <span className="text-[#E84E1B]">Innovations</span>
-              </div>
-              <p className="text-[10px] sm:text-xs font-semibold tracking-wide text-[#008055] dark:text-[#00C48C]">
-                — Elevating Growth, One Click at a Time. —
-              </p>
-            </div>
 
             {/* Glowing 3D Progress Indicator */}
             <div className="w-48 h-1.5 rounded-full bg-[#EFE2D6] dark:bg-[#2C241E] overflow-hidden relative shadow-inner">
