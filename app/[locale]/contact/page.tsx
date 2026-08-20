@@ -15,14 +15,14 @@ import {
 export const metadata = {
   title: "Contact Us & Regional Offices | Arav Innovations",
   description:
-    "Get in touch with Arav Innovations' leadership and practice directors in India and UAE to discuss your technology, growth, or staffing requirements.",
+    "Get in touch with Arav Innovations' leadership and practice directors globally to discuss your technology, growth, or staffing requirements.",
   alternates: {
     canonical: "https://aravinnovations.com/contact",
   },
   openGraph: {
     title: "Contact Us & Regional Offices | Arav Innovations",
     description:
-      "Connect with our solutions architects in India & UAE for confidential discovery discussions and engagement scoping.",
+      "Connect with our solutions architects globally for confidential discovery discussions and engagement scoping.",
     url: "https://aravinnovations.com/contact",
     siteName: "Arav Innovations",
   },
@@ -30,7 +30,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Contact Us & Regional Offices | Arav Innovations",
     description:
-      "Connect with our solutions architects in India & UAE for confidential discovery discussions and engagement scoping.",
+      "Connect with our solutions architects globally for confidential discovery discussions and engagement scoping.",
   },
 };
 
@@ -57,7 +57,7 @@ export default function ContactPage() {
           </ScrollReveal>
           <ScrollReveal direction="up" delay={0.3}>
             <p className="text-lg text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
-              Our practice leads and solutions architects in India and UAE are available for confidential discovery discussions, technical audits, and engagement scoping.
+              Global reach with active presence in India & UAE, plus operations across the US, EU, and Canada. Our practice leads and solutions architects are available for confidential discovery discussions, technical audits, and engagement scoping.
             </p>
           </ScrollReveal>
         </div>

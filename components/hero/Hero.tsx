@@ -31,7 +31,7 @@ export function Hero() {
                 <Badge variant="secondary" size="md" className="py-1.5 px-3.5 border-[#E8672A]/30">
                   <span className="w-2 h-2 rounded-full bg-[#E8672A] animate-pulse" />
                   <span className="text-[#3A2E27] dark:text-[#FAF5EE] font-semibold text-xs tracking-wider">
-                    RESULT-DRIVEN DIGITAL EXCELLENCE &bull; INDIA & UAE
+                    RESULT-DRIVEN DIGITAL EXCELLENCE &bull; GLOBAL
                   </span>
                 </Badge>
               </div>
@@ -40,9 +40,9 @@ export function Hero() {
             <ScrollReveal direction="up" delay={0.2}>
               {/* Headline */}
               <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight leading-[1.12]">
-                Shaping Online Futures & Scaling Enterprises in{" "}
+                Shaping Online Futures & Scaling Enterprises{" "}
                 <span className="text-[#E8672A] underline decoration-[#F4A97F]/60 decoration-wavy decoration-2">
-                  India & UAE
+                  Globally
                 </span>
               </h1>
             </ScrollReveal>
@@ -107,8 +107,8 @@ export function Hero() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Globe2 className="w-4 h-4 text-[#E8672A] shrink-0" />
-                  <span className="text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
-                    India & UAE Operations
+                  <span className="text-[10px] sm:text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] leading-tight">
+                    India, UAE, US, EU & Canada Operations
                   </span>
                 </div>
                 <div className="flex items-center gap-2">

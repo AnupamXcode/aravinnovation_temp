@@ -231,7 +231,7 @@ export function ChatbotWidget() {
                 </h4>
                 <div className="flex items-center gap-1.5 text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">
                   <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                  <span>Online &bull; India & UAE</span>
+                  <span>Online &bull; Operating Globally</span>
                 </div>
               </div>
             </div>

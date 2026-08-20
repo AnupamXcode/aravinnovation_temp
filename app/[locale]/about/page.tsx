@@ -21,14 +21,14 @@ import {
 export const metadata = {
   title: "About Us | Arav Innovations",
   description:
-    "Learn about Arav Innovations — a multidisciplinary B2B technology consulting, full-stack software development, digital marketing, and governance firm operating in India and UAE.",
+    "Learn about Arav Innovations — a multidisciplinary B2B technology consulting, full-stack software development, digital marketing, and governance firm operating globally.",
   alternates: {
     canonical: "https://aravinnovations.com/about",
   },
   openGraph: {
     title: "About Us | Arav Innovations",
     description:
-      "Multidisciplinary B2B technology consulting, full-stack software engineering, digital marketing, risk & governance across India and UAE.",
+      "Multidisciplinary B2B technology consulting, full-stack software engineering, digital marketing, risk & governance globally.",
     url: "https://aravinnovations.com/about",
     siteName: "Arav Innovations",
   },
@@ -36,7 +36,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "About Us | Arav Innovations",
     description:
-      "Multidisciplinary B2B technology consulting, software engineering, digital marketing, risk & governance across India and UAE.",
+      "Multidisciplinary B2B technology consulting, software engineering, digital marketing, risk & governance globally.",
   },
 };
 
@@ -51,7 +51,7 @@ export default function AboutPage() {
     {
       title: "Cross-Border Integrity & Compliance",
       description:
-        "With active operations in India and the UAE, we adhere strictly to global security frameworks, DPDP Act mandates, and regional data governance requirements.",
+        "With a global footprint and active operations in India and the UAE, we adhere strictly to global security frameworks, DPDP Act mandates, and regional data governance requirements.",
       icon: <ShieldCheck className="w-5 h-5" />,
     },
     {
@@ -97,7 +97,7 @@ export default function AboutPage() {
           </ScrollReveal>
           <ScrollReveal direction="up" delay={0.2}>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight leading-[1.12]">
-              Shaping Future-Ready Enterprises Across India & the UAE
+              Shaping Future-Ready Enterprises Globally
             </h1>
           </ScrollReveal>
           <ScrollReveal direction="up" delay={0.3}>
@@ -160,7 +160,7 @@ export default function AboutPage() {
                       <h3 className="text-xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
                         Dual-Regional Presence
                       </h3>
-                      <span className="text-xs text-[#E8672A] font-semibold">India & UAE Delivery Hubs</span>
+                      <span className="text-xs text-[#E8672A] font-semibold">Global Operations</span>
                     </div>
                   </div>
                   <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">

@@ -242,7 +242,7 @@ export function LeadForm({
 
       <div className="flex items-center justify-center gap-2 text-xs text-[#7A6A5F] dark:text-[#B8ACA0] text-center pt-1">
         <ShieldCheck className="w-4 h-4 text-[#E8672A]" />
-        <span>Strict Confidentiality Guaranteed. Operating in India & UAE.</span>
+        <span>Strict Confidentiality Guaranteed. Operating Globally.</span>
       </div>
     </form>
   );

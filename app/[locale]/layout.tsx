@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     template: "%s | Arav Innovations",
   },
   description:
-    "Arav Innovations is a multidisciplinary B2B technology consulting, full-stack engineering, digital marketing, risk & governance, and staff augmentation firm operating in India and UAE.",
+    "Arav Innovations is a multidisciplinary B2B technology consulting, full-stack engineering, digital marketing, risk & governance, and staff augmentation firm operating globally.",
   keywords: [
     "IT Strategy Consulting",
     "Web & App Development",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     siteName: "Arav Innovations",
     title: "Arav Innovations | Technology, IT Strategy & Digital Growth",
     description:
-      "Enterprise IT Strategy, Full-Stack Software Engineering, Performance Marketing, Governance, and Staff Augmentation across India & UAE.",
+      "Enterprise IT Strategy, Full-Stack Software Engineering, Performance Marketing, Governance, and Staff Augmentation globally.",
   },
   robots: {
     index: true,

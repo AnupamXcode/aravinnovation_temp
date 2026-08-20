@@ -40,7 +40,7 @@ export const testimonialsData: Testimonial[] = [
     designation: "Head of Growth & Demand Gen",
     company: "[CLIENT - PROFESSIONAL SERVICES]",
     service: "Digital Marketing & SEO",
-    location: "India & UAE",
+    location: "Global",
     rating: 5,
   },
   {

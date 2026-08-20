@@ -12,14 +12,14 @@ import { ArrowRight } from "lucide-react";
 export const metadata = {
   title: "Case Studies & Enterprise Results | Arav Innovations",
   description:
-    "Explore how Arav Innovations delivers verifiable impact across enterprise cloud architecture, Next.js web applications, SEO expansion, and regulatory compliance in India & UAE.",
+    "Explore how Arav Innovations delivers verifiable impact across enterprise cloud architecture, Next.js web applications, SEO expansion, and regulatory compliance globally.",
   alternates: {
     canonical: "https://aravinnovations.com/case-studies",
   },
   openGraph: {
     title: "Case Studies & Enterprise Results | Arav Innovations",
     description:
-      "Verifiable case studies in cloud architecture, sub-second web applications, and DPDP compliance in India & UAE.",
+      "Verifiable case studies in cloud architecture, sub-second web applications, and regulatory compliance globally.",
     url: "https://aravinnovations.com/case-studies",
     siteName: "Arav Innovations",
   },
@@ -27,7 +27,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Case Studies & Enterprise Results | Arav Innovations",
     description:
-      "Verifiable case studies in cloud architecture, sub-second web applications, and DPDP compliance in India & UAE.",
+      "Verifiable case studies in cloud architecture, sub-second web applications, and regulatory compliance globally.",
   },
 };
 

@@ -63,7 +63,7 @@ export default async function InsightsPage() {
           </ScrollReveal>
           <ScrollReveal direction="up" delay={0.3}>
             <p className="text-lg text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
-              In-depth analysis on modern software architecture, B2B demand generation, regulatory data privacy, and cloud FinOps optimization authored by our practice leads in India and UAE.
+              In-depth analysis on modern software architecture, B2B demand generation, regulatory data privacy, and cloud FinOps optimization authored by our global practice leads.
             </p>
           </ScrollReveal>
         </div>
@@ -194,7 +194,7 @@ export default async function InsightsPage() {
               Need Architectural Guidance on Any of These Topics?
             </h3>
             <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed max-w-xl mx-auto">
-              Our practice directors in India and UAE consult with enterprise teams on cloud architecture, DPDP compliance, and performance marketing frameworks.
+              Our practice directors consult globally with enterprise teams on cloud architecture, DPDP compliance, and performance marketing frameworks.
             </p>
             <div className="pt-2">
               <Link href="/contact">

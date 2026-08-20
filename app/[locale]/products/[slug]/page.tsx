@@ -202,8 +202,8 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
                     <div className="space-y-3 text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
                       <div className="flex items-center justify-between">
-                        <span>Delivery Center:</span>
-                        <span className="font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">India & UAE</span>
+                        <span>Delivery:</span>
+                        <span className="font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">Global (India & UAE Hubs)</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span>Deployment Time:</span>

@@ -1,8 +1,7 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { Link, useRouter } from "@/i18n/routing";
 import { CaseStudy } from "@/data/case-studies";
 import { Badge } from "@/components/ui/badge";
 import { TiltCard } from "@/components/motion/TiltCard";

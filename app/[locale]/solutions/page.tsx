@@ -19,7 +19,7 @@ export const metadata = {
   openGraph: {
     title: "Industry Solutions | Arav Innovations",
     description:
-      "Tailored digital architecture, governance, and demand generation frameworks for Fintech, Healthcare, Logistics, and SaaS in India & UAE.",
+      "Tailored digital architecture, governance, and demand generation frameworks for Fintech, Healthcare, Logistics, and SaaS globally.",
     url: "https://aravinnovations.com/solutions",
     siteName: "Arav Innovations",
   },
@@ -27,7 +27,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Industry Solutions | Arav Innovations",
     description:
-      "Tailored digital architecture, governance, and demand generation frameworks for Fintech, Healthcare, Logistics, and SaaS in India & UAE.",
+      "Tailored digital architecture, governance, and demand generation frameworks for Fintech, Healthcare, Logistics, and SaaS globally.",
   },
 };
 

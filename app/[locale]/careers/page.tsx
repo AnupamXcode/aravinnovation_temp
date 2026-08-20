@@ -16,14 +16,14 @@ import {
 export const metadata = {
   title: "Careers & Culture | Arav Innovations",
   description:
-    "Join Arav Innovations — work on mission-critical enterprise software, IT consulting, digital marketing, and governance projects across India and UAE.",
+    "Join Arav Innovations — work on mission-critical enterprise software, IT consulting, digital marketing, and governance projects globally.",
   alternates: {
     canonical: "https://aravinnovations.com/careers",
   },
   openGraph: {
     title: "Careers & Culture | Arav Innovations",
     description:
-      "Join our multidisciplinary engineering, strategy, and governance teams operating across India and UAE.",
+      "Join our multidisciplinary engineering, strategy, and governance teams operating globally.",
     url: "https://aravinnovations.com/careers",
     siteName: "Arav Innovations",
   },
@@ -31,7 +31,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Careers & Culture | Arav Innovations",
     description:
-      "Join our multidisciplinary engineering, strategy, and governance teams operating across India and UAE.",
+      "Join our multidisciplinary engineering, strategy, and governance teams operating globally.",
   },
 };
 
@@ -53,7 +53,7 @@ export default function CareersPage() {
     },
     {
       title: "Senior Technical SEO & Growth Strategist",
-      location: "Remote (India & UAE)",
+      location: "Remote (Global)",
       type: "Full-Time",
       department: "Digital Marketing",
       experience: "3 - 6 Years",
@@ -118,10 +118,10 @@ export default function CareersPage() {
                   <Globe2 className="w-5 h-5 transition-colors duration-300" />
                 </div>
                 <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] transition-colors">
-                  Cross-Border Exposure
+                  Global Client Exposure
                 </h3>
                 <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
-                  Collaborate directly with enterprise clients and cross-functional teams in both India and the UAE.
+                  Collaborate directly with ambitious enterprise clients and cross-functional teams globally.
                 </p>
               </div>
             </TiltCard>

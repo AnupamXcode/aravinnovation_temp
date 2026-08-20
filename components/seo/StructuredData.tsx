@@ -12,7 +12,7 @@ export function OrganizationSchema() {
     url: "https://aravinnovations.com",
     logo: "https://aravinnovations.com/favicon.ico",
     description:
-      "Arav Innovations is a multidisciplinary B2B technology consulting, full-stack software engineering, digital marketing, risk & governance, and staff augmentation firm operating across India and the UAE.",
+      "Arav Innovations is a multidisciplinary B2B technology consulting, full-stack software engineering, digital marketing, risk & governance, and staff augmentation firm operating globally.",
     sameAs: [
       "https://www.linkedin.com/company/arav-innovations",
       "https://www.instagram.com/aravinnovations",
@@ -55,7 +55,7 @@ export function OrganizationSchema() {
 }
 
 /**
- * Local Business JSON-LD Schema for India & UAE
+ * Local Business JSON-LD Schema
  */
 export function LocalBusinessSchema({ location }: { location: "india" | "uae" | "both" }) {
   const businesses = [];

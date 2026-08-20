@@ -33,7 +33,7 @@ export const caseStudiesData: CaseStudy[] = [
     clientIndustry: "Financial Technology & Logistics",
     serviceCategory: "IT Strategy & Consulting",
     serviceSlug: "it-strategy-consulting",
-    location: "India & UAE",
+    location: "Global",
     summary:
       "Transitioning an on-premise monolithic architecture to a high-availability cloud-native microservices infrastructure.",
     challenge:

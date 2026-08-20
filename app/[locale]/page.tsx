@@ -28,14 +28,14 @@ import {
 export const metadata = {
   title: "Arav Innovations | Enterprise IT Strategy, Software Engineering & Growth",
   description:
-    "Arav Innovations is a multidisciplinary technology, strategy, digital growth, governance, and staff augmentation firm operating across India and the UAE.",
+    "Arav Innovations is a multidisciplinary technology, strategy, digital growth, governance, and staff augmentation firm operating globally.",
   alternates: {
     canonical: "https://aravinnovations.com",
   },
   openGraph: {
     title: "Arav Innovations | Enterprise IT Strategy, Software Engineering & Growth",
     description:
-      "Enterprise IT Strategy, Full-Stack Software Engineering, Performance Marketing, Governance, and Staff Augmentation across India & UAE.",
+      "Enterprise IT Strategy, Full-Stack Software Engineering, Performance Marketing, Governance, and Staff Augmentation globally.",
     url: "https://aravinnovations.com",
     siteName: "Arav Innovations",
     type: "website",
@@ -44,7 +44,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Arav Innovations | Enterprise IT Strategy, Software Engineering & Growth",
     description:
-      "Enterprise IT Strategy, Full-Stack Software Engineering, Performance Marketing, Governance, and Staff Augmentation across India & UAE.",
+      "Enterprise IT Strategy, Full-Stack Software Engineering, Performance Marketing, Governance, and Staff Augmentation globally.",
   },
 };
 
@@ -57,9 +57,9 @@ export default function HomePage() {
       icon: <Users className="w-6 h-6" />,
     },
     {
-      title: "Cross-Border India & UAE Presence",
+      title: "Global Footprint, Cross-Border Hubs",
       description:
-        "Regional delivery hubs in India and the UAE providing seamless timezone overlap, localized regulatory compliance (DPDP, GDPR, GCC mandates), and cost-effective scaling.",
+        "Seamless delivery through hubs in India and the UAE with localized regulatory compliance (DPDP, GDPR, GCC mandates) and cost-effective scaling for clients worldwide.",
       icon: <Award className="w-6 h-6" />,
     },
     {
@@ -87,7 +87,7 @@ export default function HomePage() {
           <ScrollReveal direction="up">
             <div className="text-center mb-6">
               <span className="text-[11px] font-bold uppercase tracking-widest text-[#7A6A5F] dark:text-[#B8ACA0]">
-                Trusted By Fast-Growing Enterprises & Industry Leaders Across India & UAE
+                Trusted By Fast-Growing Enterprises & Industry Leaders Globally
               </span>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 items-center">

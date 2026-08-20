@@ -589,7 +589,7 @@ export const servicesData: Service[] = [
       {
         title: "Organic Growth Retainer",
         description: "Comprehensive monthly technical audits, content publishing, authority building, and reporting.",
-        bestFor: "Brands targeting aggressive multi-region organic search dominance in India & UAE.",
+        bestFor: "Brands targeting aggressive multi-region organic search dominance across global target markets.",
         ctaText: "Start SEO Retainer",
       },
       {
@@ -618,9 +618,9 @@ export const servicesData: Service[] = [
           "Technical fixes and indexing improvements typically yield noticeable indexation gains in 4 to 8 weeks, with substantial compound organic traffic growth realized between months 3 and 6.",
       },
       {
-        question: "Can you help rank our website in both India and UAE search results?",
+        question: "Can you help rank our website across multiple regional and international search results?",
         answer:
-          "Yes. We implement precise geo-targeting, hreflang tag configurations, localized content hubs, and regional entity citations for dual-market search visibility.",
+          "Yes. We implement precise geo-targeting, hreflang tag configurations, localized content hubs, and international entity citations for multi-market search visibility.",
       },
     ],
     relatedCaseStudySlugs: ["organic-traffic-expansion"],

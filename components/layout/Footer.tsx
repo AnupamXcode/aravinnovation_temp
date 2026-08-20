@@ -43,7 +43,7 @@ export function Footer() {
           <div className="lg:col-span-2 space-y-4">
             <BrandLogo variant="footer" />
             <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0] max-w-sm leading-relaxed">
-              Arav Innovations is a multidisciplinary technology, strategy, digital growth, governance, and staff augmentation firm partnering with ambitious enterprises across India, the UAE, and global markets.
+              Arav Innovations is a multidisciplinary technology, strategy, digital growth, governance, and staff augmentation firm partnering with ambitious enterprises globally.
             </p>
 
             <div className="flex items-center space-x-3 pt-2">
@@ -78,7 +78,7 @@ export function Footer() {
 
             <div className="pt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] border border-[#F4A97F]/30 dark:border-[#3D332B] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
               <Globe2 className="w-3.5 h-3.5 text-[#E8672A]" />
-              <span>Operating Across India & United Arab Emirates</span>
+              <span>Operating Globally</span>
             </div>
           </div>
 
