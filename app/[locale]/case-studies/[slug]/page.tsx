@@ -2,6 +2,7 @@ import * as React from "react";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { getCaseStudyBySlug, caseStudiesData } from "@/data/case-studies";
+import { setRequestLocale } from "next-intl/server";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
 import { LeadForm } from "@/components/forms/LeadForm";
@@ -63,7 +64,8 @@ export async function generateMetadata({
 export default async function CaseStudyDetailPage({
   params,
 }: CaseStudyPageProps) {
-  const { slug } = await params;
+  const { slug, locale } = (await params) as any;
+  setRequestLocale(locale);
   const caseStudy = getCaseStudyBySlug(slug);
 
   if (!caseStudy) {

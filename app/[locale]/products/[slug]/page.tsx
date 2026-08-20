@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Metadata } from "next";
 import { getProductBySlug, getAllProductSlugs } from "@/lib/cms";
+import { setRequestLocale } from "next-intl/server";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -94,7 +95,8 @@ const iconDict: Record<string, React.ReactNode> = {
 };
 
 export default async function ProductDetailPage({ params }: ProductPageProps) {
-  const { slug } = await params;
+  const { slug, locale } = (await params) as any;
+  setRequestLocale(locale);
   const product = await getProductBySlug(slug);
 
   if (!product) {

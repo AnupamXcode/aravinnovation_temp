@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { getServiceBySlug, getAllServiceSlugs } from "@/data/services";
 import { caseStudiesData } from "@/data/case-studies";
+import { setRequestLocale } from "next-intl/server";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -83,7 +84,8 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 export default async function DynamicServicePage({ params }: ServicePageProps) {
-  const { slug } = await params;
+  const { slug, locale } = (await params) as any;
+  setRequestLocale(locale);
   const service = getServiceBySlug(slug);
 
   if (!service) {

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { setRequestLocale } from "next-intl/server";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
@@ -40,7 +41,9 @@ export const metadata = {
   },
 };
 
-export default function AboutPage() {
+export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const values = [
     {
       title: "Engineering Precision Over Fluff",

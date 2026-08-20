@@ -56,14 +56,6 @@ export function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
                 {caseStudy.solution}
               </p>
             </div>
-            {caseStudy.results?.[0] && (
-              <div className="pt-3 border-t border-[#EFE2D6] dark:border-[#2C241E]">
-                <div className="flex items-start gap-2 text-[#3A2E27] dark:text-[#FAF5EE]">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#E8672A] shrink-0 mt-0.5" />
-                  <span className="text-[#7A6A5F] dark:text-[#B8ACA0] font-medium leading-relaxed line-clamp-2">{caseStudy.results[0].description}</span>
-                </div>
-              </div>
-            )}
           </div>
         </div>
 

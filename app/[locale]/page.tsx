@@ -1,4 +1,5 @@
 import * as React from "react";
+import { setRequestLocale } from "next-intl/server";
 import Link from "next/link";
 import { Hero } from "@/components/hero/Hero";
 import { ServiceCard } from "@/components/services/ServiceCard";
@@ -48,7 +49,9 @@ export const metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const differentiators = [
     {
       title: "Multidisciplinary Engineering Depth",

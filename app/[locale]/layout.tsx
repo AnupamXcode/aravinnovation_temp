@@ -8,7 +8,7 @@ import { Footer } from "@/components/layout/Footer";
 import { PageLoader } from "@/components/layout/PageLoader";
 import { ChatbotWidget } from "@/components/chatbot/ChatbotWidget";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 
@@ -91,6 +91,10 @@ const themeInitScript = `
 })();
 `;
 
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
 export default async function RootLayout({
   children,
   params,
@@ -102,6 +106,9 @@ export default async function RootLayout({
   if (!routing.locales.includes(locale as any)) {
     notFound();
   }
+
+  // Enable static rendering
+  setRequestLocale(locale);
 
   const messages = await getMessages();
 
