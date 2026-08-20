@@ -42,6 +42,8 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [activeDropdown, setActiveDropdown] = React.useState<string | null>(null);
+  const [mobileServicesOpen, setMobileServicesOpen] = React.useState(false);
+  const [mobileWorkingWithUsOpen, setMobileWorkingWithUsOpen] = React.useState(false);
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -280,6 +282,26 @@ export function Navbar() {
 
           {/* Right CTAs + Theme Toggle */}
           <div className="hidden lg:flex items-center gap-3">
+            {/* Language Switcher Scaffold */}
+            <div
+              className="relative group"
+            >
+              <button
+                type="button"
+                className="inline-flex items-center gap-1.5 p-2 rounded-xl text-sm font-medium transition-colors text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FBF3EA] dark:hover:bg-[#221D18] border border-[#EFE2D6] dark:border-[#2C241E]"
+              >
+                <span>EN</span>
+                <ChevronDown className="w-3 h-3 text-[#7A6A5F] dark:text-[#B8ACA0]" />
+              </button>
+              <div className="absolute top-full right-0 mt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <div className="rounded-xl bg-[#FFFDF9] dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] p-3 shadow-lg">
+                  <div className="text-xs font-semibold text-[#7A6A5F] dark:text-[#B8ACA0] text-center">
+                    More languages coming soon
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <ThemeToggle />
 
             <Link href="/contact">
@@ -303,6 +325,16 @@ export function Navbar() {
 
           {/* Mobile Actions (Theme Toggle + Menu) */}
           <div className="flex lg:hidden items-center gap-2">
+            <div
+              className="relative group"
+            >
+              <button
+                type="button"
+                className="p-2 rounded-xl text-sm font-medium transition-colors text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FBF3EA] dark:hover:bg-[#221D18] border border-[#EFE2D6] dark:border-[#2C241E] flex items-center gap-1"
+              >
+                <span>EN</span>
+              </button>
+            </div>
             <ThemeToggle />
             <button
               type="button"
@@ -321,15 +353,32 @@ export function Navbar() {
         <div className="lg:hidden fixed inset-x-0 top-[65px] bottom-0 bg-[#FFFDF9] dark:bg-[#12100E] border-t border-[#EFE2D6] dark:border-[#2C241E] px-5 py-6 overflow-y-auto z-50">
           <div className="space-y-6">
             <div>
-              <div className="text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] mb-3">
-                Services (7 Core Practices)
-              </div>
-              <div className="grid grid-cols-1 gap-2">
+              <button
+                type="button"
+                className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] mb-3 py-2 border-b border-transparent focus:outline-none"
+                onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+              >
+                <span>Services (7 Core Practices)</span>
+                <ChevronDown
+                  className={cn(
+                    "w-4 h-4 transition-transform duration-200",
+                    mobileServicesOpen ? "rotate-180" : ""
+                  )}
+                />
+              </button>
+              
+              <div
+                className={cn(
+                  "grid grid-cols-1 gap-2 overflow-hidden transition-all duration-300 ease-in-out",
+                  mobileServicesOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                )}
+              >
                 {servicesNavigation.map((s) => (
                   <Link
                     key={s.href}
                     href={s.href}
-                    className="flex items-center gap-3 p-2.5 rounded-xl bg-[#FBF3EA]/60 dark:bg-[#1A1613] hover:bg-[#FCE3D3]/50 dark:hover:bg-[#261F1A] text-sm font-semibold text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#2C241E]"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-3 p-3 rounded-xl bg-[#FBF3EA]/60 dark:bg-[#1A1613] hover:bg-[#FCE3D3]/50 dark:hover:bg-[#261F1A] text-sm font-semibold text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#2C241E] min-h-[44px]"
                   >
                     <div className="shrink-0">{serviceIcons[s.href]}</div>
                     <span className="truncate">{s.label}</span>
@@ -339,15 +388,32 @@ export function Navbar() {
             </div>
 
             <div>
-              <div className="text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] mb-3">
-                Working With Us
-              </div>
-              <div className="grid grid-cols-1 gap-2">
+              <button
+                type="button"
+                className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] mb-3 py-2 border-b border-transparent focus:outline-none"
+                onClick={() => setMobileWorkingWithUsOpen(!mobileWorkingWithUsOpen)}
+              >
+                <span>Working With Us</span>
+                <ChevronDown
+                  className={cn(
+                    "w-4 h-4 transition-transform duration-200",
+                    mobileWorkingWithUsOpen ? "rotate-180" : ""
+                  )}
+                />
+              </button>
+              
+              <div
+                className={cn(
+                  "grid grid-cols-1 gap-2 overflow-hidden transition-all duration-300 ease-in-out",
+                  mobileWorkingWithUsOpen ? "max-h-[300px] opacity-100" : "max-h-0 opacity-0"
+                )}
+              >
                 {workingWithUsNavigation.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="p-2.5 rounded-xl bg-[#FBF3EA]/60 dark:bg-[#1A1613] text-sm font-medium text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#2C241E]"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center p-3 rounded-xl bg-[#FBF3EA]/60 dark:bg-[#1A1613] text-sm font-medium text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#2C241E] min-h-[44px]"
                   >
                     {item.label}
                   </Link>
@@ -358,30 +424,35 @@ export function Navbar() {
             <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#2C241E] space-y-2">
               <Link
                 href="/products"
+                onClick={() => setMobileMenuOpen(false)}
                 className="block py-2 text-base font-semibold text-[#3A2E27] dark:text-[#FAF5EE]"
               >
                 Products & Platforms
               </Link>
               <Link
                 href="/case-studies"
+                onClick={() => setMobileMenuOpen(false)}
                 className="block py-2 text-base font-semibold text-[#3A2E27] dark:text-[#FAF5EE]"
               >
                 Case Studies
               </Link>
               <Link
                 href="/insights"
+                onClick={() => setMobileMenuOpen(false)}
                 className="block py-2 text-base font-semibold text-[#3A2E27] dark:text-[#FAF5EE]"
               >
                 Insights & Research
               </Link>
               <Link
                 href="/about"
+                onClick={() => setMobileMenuOpen(false)}
                 className="block py-2 text-base font-semibold text-[#3A2E27] dark:text-[#FAF5EE]"
               >
                 About Arav Innovations
               </Link>
               <Link
                 href="/careers"
+                onClick={() => setMobileMenuOpen(false)}
                 className="block py-2 text-base font-semibold text-[#3A2E27] dark:text-[#FAF5EE]"
               >
                 Careers
@@ -389,7 +460,7 @@ export function Navbar() {
             </div>
 
             <div className="pt-4">
-              <Link href="/contact" className="block w-full">
+              <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="block w-full">
                 <Button variant="primary" size="lg" className="w-full justify-center">
                   Talk to an Expert <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>

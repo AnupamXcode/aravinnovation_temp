@@ -1,12 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { OrganizationSchema } from "@/components/seo/StructuredData";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageLoader } from "@/components/layout/PageLoader";
 import { ChatbotWidget } from "@/components/chatbot/ChatbotWidget";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { routing } from "@/i18n/routing";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-display",
@@ -87,14 +91,23 @@ const themeInitScript = `
 })();
 `;
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }>) {
+  const { locale } = await params;
+  if (!routing.locales.includes(locale as any)) {
+    notFound();
+  }
+
+  const messages = await getMessages();
+
   return (
     <html
-      lang="en"
+      lang={locale}
       suppressHydrationWarning
       className={`${plusJakartaSans.variable} ${inter.variable} scroll-smooth`}
     >
@@ -105,14 +118,16 @@ export default function RootLayout({
           id="theme-init-script"
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans antialiased selection:bg-[#FCE3D3] dark:selection:bg-[#E8672A]/30 selection:text-[#E8672A]">
-        <ThemeProvider>
-          <PageLoader />
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <ChatbotWidget />
-        </ThemeProvider>
+      <body className="min-h-screen flex flex-col w-full bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans antialiased selection:bg-[#FCE3D3] dark:selection:bg-[#E8672A]/30 selection:text-[#E8672A]">
+        <NextIntlClientProvider messages={messages}>
+          <ThemeProvider>
+            <PageLoader />
+            <Navbar />
+            <main className="flex-1 w-full">{children}</main>
+            <Footer />
+            <ChatbotWidget />
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

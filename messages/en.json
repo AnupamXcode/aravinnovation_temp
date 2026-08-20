@@ -1,0 +1,13 @@
+{
+  "Navigation": {
+    "products": "Products",
+    "caseStudies": "Case Studies",
+    "insights": "Insights",
+    "careers": "Careers",
+    "about": "About"
+  },
+  "Hero": {
+    "contactCta": "Contact Us →",
+    "exploreCta": "Explore 7 Practices"
+  }
+}
