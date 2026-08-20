@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { companyContactInfo } from "@/data/navigation";
+import { BreadcrumbSchema } from "@/components/seo/StructuredData";
 import {
   Globe2,
   Zap,
@@ -16,6 +17,22 @@ export const metadata = {
   title: "Careers & Culture | Arav Innovations",
   description:
     "Join Arav Innovations — work on mission-critical enterprise software, IT consulting, digital marketing, and governance projects across India and UAE.",
+  alternates: {
+    canonical: "https://aravinnovations.com/careers",
+  },
+  openGraph: {
+    title: "Careers & Culture | Arav Innovations",
+    description:
+      "Join our multidisciplinary engineering, strategy, and governance teams operating across India and UAE.",
+    url: "https://aravinnovations.com/careers",
+    siteName: "Arav Innovations",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Careers & Culture | Arav Innovations",
+    description:
+      "Join our multidisciplinary engineering, strategy, and governance teams operating across India and UAE.",
+  },
 };
 
 export default function CareersPage() {
@@ -52,6 +69,7 @@ export default function CareersPage() {
 
   return (
     <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+      <BreadcrumbSchema items={[{ name: "Careers & Culture", url: "/careers" }]} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
         {/* Header */}
         <div className="max-w-3xl space-y-4">

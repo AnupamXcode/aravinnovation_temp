@@ -6,17 +6,35 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { BreadcrumbSchema } from "@/components/seo/StructuredData";
 import { ArrowRight, Globe2 } from "lucide-react";
 
 export const metadata = {
   title: "Our 7 Core Practices | Arav Innovations",
   description:
     "Explore Arav Innovations' 7 enterprise practice areas: IT Strategy, Web & App Development, Digital Marketing, SEO, Risk Governance & Compliance, Auditing, and Staff Augmentation.",
+  alternates: {
+    canonical: "https://aravinnovations.com/services",
+  },
+  openGraph: {
+    title: "Our 7 Core Practices | Arav Innovations",
+    description:
+      "Enterprise IT Strategy, High-Scale Software Engineering, Performance Marketing, DPDP Governance, and Staff Augmentation.",
+    url: "https://aravinnovations.com/services",
+    siteName: "Arav Innovations",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Our 7 Core Practices | Arav Innovations",
+    description:
+      "Enterprise IT Strategy, High-Scale Software Engineering, Performance Marketing, DPDP Governance, and Staff Augmentation.",
+  },
 };
 
 export default function ServicesHubPage() {
   return (
     <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+      <BreadcrumbSchema items={[{ name: "Services & Practices", url: "/services" }]} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
         <ScrollReveal direction="up">

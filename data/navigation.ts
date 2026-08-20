@@ -74,6 +74,10 @@ export const mainNavigation: NavItem[] = [
     children: servicesNavigation,
   },
   {
+    label: "Products",
+    href: "/products",
+  },
+  {
     label: "Working With Us",
     href: "/#process",
     children: workingWithUsNavigation,

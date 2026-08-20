@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { companyContactInfo } from "@/data/navigation";
+import { LocalBusinessSchema, BreadcrumbSchema } from "@/components/seo/StructuredData";
 import {
   MapPin,
   Mail,
@@ -15,11 +16,29 @@ export const metadata = {
   title: "Contact Us & Regional Offices | Arav Innovations",
   description:
     "Get in touch with Arav Innovations' leadership and practice directors in India and UAE to discuss your technology, growth, or staffing requirements.",
+  alternates: {
+    canonical: "https://aravinnovations.com/contact",
+  },
+  openGraph: {
+    title: "Contact Us & Regional Offices | Arav Innovations",
+    description:
+      "Connect with our solutions architects in India & UAE for confidential discovery discussions and engagement scoping.",
+    url: "https://aravinnovations.com/contact",
+    siteName: "Arav Innovations",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Us & Regional Offices | Arav Innovations",
+    description:
+      "Connect with our solutions architects in India & UAE for confidential discovery discussions and engagement scoping.",
+  },
 };
 
 export default function ContactPage() {
   return (
     <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+      <BreadcrumbSchema items={[{ name: "Contact Us", url: "/contact" }]} />
+      <LocalBusinessSchema location="both" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Header */}
         <div className="max-w-3xl space-y-4">

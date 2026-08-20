@@ -1,6 +1,8 @@
 import { MetadataRoute } from "next";
 import { servicesData } from "@/data/services";
 import { caseStudiesData } from "@/data/case-studies";
+import { productsData } from "@/data/products";
+import { blogPostsData } from "@/data/insights";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://aravinnovations.com";
@@ -9,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/about",
     "/services",
+    "/products",
     "/solutions",
     "/case-studies",
     "/testimonials",
@@ -29,6 +32,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
+  const productRoutes = productsData.map((product) => ({
+    url: `${baseUrl}/products/${product.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.9,
+  }));
+
   const caseStudyRoutes = caseStudiesData.map((cs) => ({
     url: `${baseUrl}/case-studies/${cs.slug}`,
     lastModified: new Date(),
@@ -36,5 +46,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...serviceRoutes, ...caseStudyRoutes];
+  const insightRoutes = blogPostsData.map((post) => ({
+    url: `${baseUrl}/insights/${post.slug}`,
+    lastModified: new Date(post.publishedAt),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [
+    ...staticRoutes,
+    ...serviceRoutes,
+    ...productRoutes,
+    ...caseStudyRoutes,
+    ...insightRoutes,
+  ];
 }

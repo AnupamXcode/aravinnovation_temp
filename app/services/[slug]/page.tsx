@@ -12,6 +12,7 @@ import { LeadForm } from "@/components/forms/LeadForm";
 import { CaseStudyCard } from "@/components/case-studies/CaseStudyCard";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { BreadcrumbSchema, ServiceSchema, FAQSchema } from "@/components/seo/StructuredData";
 import {
   Compass,
   Code2,
@@ -48,10 +49,23 @@ export async function generateMetadata({
     };
   }
 
+  const url = `https://aravinnovations.com/services/${slug}`;
+
   return {
     title: `${service.title} | Arav Innovations`,
     description: service.description,
+    alternates: {
+      canonical: url,
+    },
     openGraph: {
+      title: `${service.title} | Arav Innovations`,
+      description: service.description,
+      url,
+      siteName: "Arav Innovations",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
       title: `${service.title} | Arav Innovations`,
       description: service.description,
     },
@@ -85,6 +99,19 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
 
   return (
     <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+      <BreadcrumbSchema
+        items={[
+          { name: "Services", url: "/services" },
+          { name: service.shortTitle, url: `/services/${service.slug}` },
+        ]}
+      />
+      <ServiceSchema
+        name={service.title}
+        description={service.description}
+        url={`https://aravinnovations.com/services/${service.slug}`}
+        category={service.eyebrow}
+      />
+      <FAQSchema faqs={service.faqs} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 md:space-y-32">
         {/* 1. SERVICE HERO SECTION */}
         <section className="space-y-6">

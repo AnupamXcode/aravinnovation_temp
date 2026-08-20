@@ -1,0 +1,258 @@
+export interface BlogPostSection {
+  heading: string;
+  body: string[];
+}
+
+export interface BlogPost {
+  slug: string;
+  title: string;
+  summary: string;
+  category: string;
+  readTime: string;
+  publishedAt: string; // e.g. "August 2026" / "2026-08-15"
+  dateFormatted: string;
+  author: {
+    name: string;
+    role: string;
+    avatarUrl?: string;
+  };
+  tags: string[];
+  keyTakeaways: string[];
+  sections: BlogPostSection[];
+  relatedServiceSlug?: string;
+  relatedProductSlug?: string;
+  cta: {
+    badge?: string;
+    headline: string;
+    description: string;
+    buttonText: string;
+    buttonHref: string;
+  };
+}
+
+export const blogPostsData: BlogPost[] = [
+  {
+    slug: "dpdp-act-readiness-guide-enterprises",
+    title: "Navigating India's Digital Personal Data Protection (DPDP) Act: A CTO's Implementation Checklist",
+    summary:
+      "Practical engineering steps to identify personal data touchpoints, establish Data Principal consent workflows, and avoid regulatory liabilities under India's DPDP Act.",
+    category: "Risk Governance",
+    readTime: "7 min read",
+    publishedAt: "2026-08-10",
+    dateFormatted: "August 2026",
+    author: {
+      name: "Strategy & Governance Practice Lead",
+      role: "Director of Enterprise Risk & Compliance, Arav Innovations",
+    },
+    tags: ["DPDP Act", "Data Privacy", "Enterprise Security", "Compliance Architecture", "India Tech"],
+    keyTakeaways: [
+      "DPDP mandates verifiable consent mechanisms that can be withdrawn at any time with equal ease.",
+      "Data Fiduciaries face statutory penalties of up to ₹250 Crores for significant personal data breaches.",
+      "Legacy databases and logging pipelines must be scrubbed of unencrypted PII and shadow data stores.",
+      "Organizations must implement structured Data Subject Access Request (DSAR) workflows with clear SLA tracking.",
+    ],
+    sections: [
+      {
+        heading: "1. The New Paradigm of Data Governance in India",
+        body: [
+          "India's Digital Personal Data Protection (DPDP) Act represents a fundamental shift in how digital enterprises handle consumer information. Unlike previous guidelines, the DPDP Act carries strict statutory penalties of up to ₹250 Crores per violation and places direct personal accountability on executive leadership.",
+          "For Chief Technology Officers and engineering leaders, compliance is not merely a legal checkbox — it is a foundational architectural challenge that requires refactoring data ingestion pipelines, consent capture frontends, and database storage schemas.",
+        ],
+      },
+      {
+        heading: "2. Identifying and Tagging Sensitive Data Flows",
+        body: [
+          "The first priority is conducting an exhaustive automated audit across all persistence layers (PostgreSQL, MongoDB, Snowflake, and log aggregators like Datadog and CloudWatch). Often, PII is inadvertently exposed in server telemetry, debug headers, or staging database clones.",
+          "Establish automated schema scanning tools and enforce strict Data Classification tags: Public, Internal, Confidential, and Restricted PII. Ensure all sensitive fields employ AES-256 field-level encryption at rest.",
+        ],
+      },
+      {
+        heading: "3. Building Verifiable Consent Lifecycle Engines",
+        body: [
+          "Under DPDP, pre-ticked checkboxes and ambiguous terms of service are strictly invalid. Enterprises must implement itemized, multi-lingual consent notices explaining the exact purpose of data collection.",
+          "Furthermore, the backend must store immutable, time-stamped consent receipts linked to individual Data Principal identifiers, enabling seamless audit verification when regulators request inspection.",
+        ],
+      },
+      {
+        heading: "4. Executing Automated DSAR and Erasure Pipelines",
+        body: [
+          "When a consumer exercises their right to data erasure or grievance redressal, manual database querying across dozens of microservices is prone to failure and breach of SLA.",
+          "Modern engineering teams must implement event-driven erasure orchestrators (via Kafka or RabbitMQ) that propagate anonymization commands downstream across all microservices and third-party SaaS vendors.",
+        ],
+      },
+    ],
+    relatedServiceSlug: "risk-governance-compliance",
+    relatedProductSlug: "arav-compliance-guard",
+    cta: {
+      badge: "DPDP Compliance Audit",
+      headline: "Accelerate Your DPDP Readiness Without Slowing Product Velocity",
+      description:
+        "Our Risk & Governance practice conducts comprehensive architecture discovery audits and delivers automated consent orchestration tailored to your tech stack.",
+      buttonText: "Schedule a DPDP Architecture Assessment",
+      buttonHref: "/contact?service=risk-governance-compliance",
+    },
+  },
+  {
+    slug: "nextjs-app-router-subsecond-performance",
+    title: "Architecting Sub-Second Enterprise Portals with Next.js App Router & Cloudflare Edge",
+    summary:
+      "How server-side rendering, selective hydration, and edge caching combine to produce perfect 100/100 Core Web Vitals on high-concurrency enterprise web portals.",
+    category: "Web & App Dev",
+    readTime: "6 min read",
+    publishedAt: "2026-08-04",
+    dateFormatted: "August 2026",
+    author: {
+      name: "Full-Stack Engineering Director",
+      role: "Head of Web & App Practice, Arav Innovations",
+    },
+    tags: ["Next.js", "Core Web Vitals", "React 19", "Cloudflare", "Performance Engineering"],
+    keyTakeaways: [
+      "Server Components (RSC) drastically reduce client-side JavaScript bundle sizes by rendering on the server.",
+      "Selective hydration and Suspense boundaries prevent layout shifts and deliver sub-500ms Largest Contentful Paint (LCP).",
+      "Layering Cloudflare Edge caching with Next.js incremental static regeneration (ISR) enables global low-latency delivery.",
+      "Optimized asset pipelines and modern font loading strategies prevent Cumulative Layout Shift (CLS).",
+    ],
+    sections: [
+      {
+        heading: "1. The Performance Imperative for Enterprise Portals",
+        body: [
+          "In modern B2B SaaS and enterprise customer portals, page load speed directly governs user conversion, retention, and search engine ranking. Research consistently demonstrates that every 100ms decrease in latency correlates with a 1.2% lift in conversion rates.",
+          "With Google's Core Web Vitals algorithms heavily penalizing slow interaction states (Interaction to Next Paint - INP), building high-performance web frontends requires modern architectural patterns rather than post-launch cosmetic tweaks.",
+        ],
+      },
+      {
+        heading: "2. Leveraging React Server Components (RSC)",
+        body: [
+          "Traditional Single Page Applications (SPAs) ship megabytes of client-side JavaScript just to render static views, resulting in sluggish first loads on mobile devices. Next.js App Router shifts heavy business logic, markdown parsing, and data querying entirely to the server.",
+          "By streaming HTML via React Suspense, users receive instantaneous visual feedback while heavier interactive widgets hydrate asynchronously in the background.",
+        ],
+      },
+      {
+        heading: "3. Edge Compute and Smart Cache Invalidation",
+        body: [
+          "By placing Next.js instances behind Cloudflare's global edge network, enterprise web applications can serve pre-rendered pages directly from regional Points of Presence (PoPs) in Mumbai, Dubai, Singapore, and London.",
+          "Utilizing tag-based Incremental Static Regeneration (ISR), content updates from headless CMS systems trigger on-demand cache revalidation in milliseconds without requiring full site rebuilds.",
+        ],
+      },
+    ],
+    relatedServiceSlug: "web-app-development",
+    cta: {
+      badge: "High-Performance Engineering",
+      headline: "Upgrade Your Web Platforms to Sub-Second Next.js Architecture",
+      description:
+        "Partner with our specialized engineering squads to modernize your web applications, achieve 100/100 Core Web Vitals, and eliminate technical debt.",
+      buttonText: "Explore Web Engineering Services",
+      buttonHref: "/services/web-app-development",
+    },
+  },
+  {
+    slug: "b2b-demand-generation-closed-loop-attribution",
+    title: "Why Traditional B2B Agency Retainers Fail: Building Closed-Loop CRM Attribution",
+    summary:
+      "Moving past vanity impressions to measure closed-won pipeline directly tied to LinkedIn ABM and high-intent Google Search campaigns.",
+    category: "Digital Marketing",
+    readTime: "5 min read",
+    publishedAt: "2026-07-22",
+    dateFormatted: "July 2026",
+    author: {
+      name: "Digital Growth & Demand Practice Lead",
+      role: "Director of Performance Marketing, Arav Innovations",
+    },
+    tags: ["B2B Demand Gen", "CRM Attribution", "LinkedIn ABM", "Technical SEO", "Growth Strategy"],
+    keyTakeaways: [
+      "Vanity metrics (clicks, impressions, raw leads) fail to predict closed-won revenue in high-value enterprise sales cycles.",
+      "Closed-loop CRM integration binds ad spend directly to opportunity stages and contracted annual contract value (ACV).",
+      "Account-Based Marketing (ABM) on LinkedIn combined with high-intent search capture generates qualified enterprise pipeline.",
+      "Continuous conversion rate optimization (CRO) on service landing pages doubles qualification velocity.",
+    ],
+    sections: [
+      {
+        heading: "1. The Crisis of Agency Vanity Metrics",
+        body: [
+          "Too many enterprise marketing teams find themselves trapped in retainer models where marketing agencies celebrate record high traffic or form submissions, while sales executives report zero qualified opportunities.",
+          "The flaw lies in optimizing for top-of-funnel volume rather than downstream revenue pipeline. In enterprise B2B sales cycles ranging from 3 to 12 months, attribution must follow the lead all the way to closed-won revenue.",
+        ],
+      },
+      {
+        heading: "2. Setting Up Full-Funnel Closed-Loop Tracking",
+        body: [
+          "By passing UTM parameters, GCLID/LinkedIn click tokens, and intent metadata into CRM systems (Salesforce, HubSpot) via API webhooks, growth teams can identify the exact campaigns and content assets that yield enterprise contracts.",
+          "This data allows algorithmic ad platforms to bid on qualified pipeline rather than generic low-intent form fills.",
+        ],
+      },
+    ],
+    relatedServiceSlug: "digital-marketing",
+    cta: {
+      badge: "Revenue-Driven Growth",
+      headline: "Scale Your B2B Qualified Pipeline With Engineering Rigor",
+      description:
+        "Let our performance marketing and technical SEO team build an attribution engine that delivers predictable enterprise client acquisition.",
+      buttonText: "Discuss Demand Generation Strategy",
+      buttonHref: "/services/digital-marketing",
+    },
+  },
+  {
+    slug: "cloud-finops-slashing-aws-azure-waste",
+    title: "Cloud FinOps 101: How We Uncover 30%+ Unused Cloud Spend in Enterprise Workloads",
+    summary:
+      "Practical strategies for right-sizing overprovisioned Kubernetes clusters, database query indexing, and automated lifecycle policies.",
+    category: "IT Strategy",
+    readTime: "8 min read",
+    publishedAt: "2026-06-18",
+    dateFormatted: "June 2026",
+    author: {
+      name: "Cloud Architecture Practice Director",
+      role: "Lead Enterprise Architect, Arav Innovations",
+    },
+    tags: ["Cloud FinOps", "AWS", "Azure", "Kubernetes", "Cost Optimization", "Infrastructure"],
+    keyTakeaways: [
+      "Overprovisioned Kubernetes pod resource limits and unused cluster nodes account for 40% of excess cloud spend.",
+      "Orphaned EBS volumes, unattached IP addresses, and stale database snapshots silently accumulate monthly charges.",
+      "Aligning workload commitments with Reserved Instances (RI) and Savings Plans reduces baseline costs by 30-50%.",
+      "Establishing unit cost economics gives engineering squads clear visibility into the margin profile of each microservice.",
+    ],
+    sections: [
+      {
+        heading: "1. The Hidden Drain of Cloud Infrastructure Sprawl",
+        body: [
+          "As enterprise engineering teams build and deploy dozens of microservices, cloud bills on AWS and Azure compound rapidly. Without strict governance, over-provisioned staging environments and zombie databases quietly consume enterprise capital.",
+          "FinOps is not about arbitrary cost-cutting that risks uptime — it is the engineering discipline of aligning cloud architecture with business efficiency.",
+        ],
+      },
+      {
+        heading: "2. Right-Sizing Kubernetes Fleets",
+        body: [
+          "Most Kubernetes deployments assign static CPU and memory request ceilings that assume permanent peak traffic. By implementing Horizontal Pod Autoscaling (HPA) and Karpenter node provisioning, clusters dynamically scale down during non-peak windows.",
+          "Combining Spot instances for stateless worker nodes with On-Demand instances for core stateful services unlocks dramatic savings with zero disruption to SLAs.",
+        ],
+      },
+    ],
+    relatedServiceSlug: "it-strategy-consulting",
+    relatedProductSlug: "arav-cloud-finops-optimizer",
+    cta: {
+      badge: "Cloud Optimization Sprint",
+      headline: "Uncover 25%+ Immediate Cloud Savings in 14 Days",
+      description:
+        "Our cloud architects conduct non-intrusive read-only audits to pinpoint waste and deliver production-ready Terraform remediations.",
+      buttonText: "Request a Cloud FinOps Audit",
+      buttonHref: "/contact?service=it-strategy-consulting",
+    },
+  },
+];
+
+export function getAllBlogPosts(): BlogPost[] {
+  return blogPostsData;
+}
+
+export function getBlogPostBySlug(slug: string): BlogPost | undefined {
+  return blogPostsData.find((p) => p.slug === slug);
+}
+
+export function getAllBlogPostSlugs(): string[] {
+  return blogPostsData.map((p) => p.slug);
+}
+
+export function getBlogCategories(): string[] {
+  const cats = new Set(blogPostsData.map((p) => p.category));
+  return Array.from(cats);
+}

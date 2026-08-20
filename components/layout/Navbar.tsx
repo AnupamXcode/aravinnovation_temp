@@ -218,6 +218,18 @@ export function Navbar() {
 
             {/* Direct Links */}
             <Link
+              href="/products"
+              className={cn(
+                "px-3.5 py-2 rounded-xl text-sm font-medium transition-colors",
+                isActive("/products")
+                  ? "text-[#E8672A] font-semibold"
+                  : "text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A]"
+              )}
+            >
+              Products
+            </Link>
+
+            <Link
               href="/case-studies"
               className={cn(
                 "px-3.5 py-2 rounded-xl text-sm font-medium transition-colors",
@@ -344,6 +356,12 @@ export function Navbar() {
             </div>
 
             <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#2C241E] space-y-2">
+              <Link
+                href="/products"
+                className="block py-2 text-base font-semibold text-[#3A2E27] dark:text-[#FAF5EE]"
+              >
+                Products & Platforms
+              </Link>
               <Link
                 href="/case-studies"
                 className="block py-2 text-base font-semibold text-[#3A2E27] dark:text-[#FAF5EE]"

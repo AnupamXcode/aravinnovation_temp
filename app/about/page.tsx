@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { companyContactInfo } from "@/data/navigation";
+import { LocalBusinessSchema, BreadcrumbSchema } from "@/components/seo/StructuredData";
 import {
   Globe2,
   ShieldCheck,
@@ -21,6 +22,22 @@ export const metadata = {
   title: "About Us | Arav Innovations",
   description:
     "Learn about Arav Innovations — a multidisciplinary B2B technology consulting, full-stack software development, digital marketing, and governance firm operating in India and UAE.",
+  alternates: {
+    canonical: "https://aravinnovations.com/about",
+  },
+  openGraph: {
+    title: "About Us | Arav Innovations",
+    description:
+      "Multidisciplinary B2B technology consulting, full-stack software engineering, digital marketing, risk & governance across India and UAE.",
+    url: "https://aravinnovations.com/about",
+    siteName: "Arav Innovations",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us | Arav Innovations",
+    description:
+      "Multidisciplinary B2B technology consulting, software engineering, digital marketing, risk & governance across India and UAE.",
+  },
 };
 
 export default function AboutPage() {
@@ -62,6 +79,8 @@ export default function AboutPage() {
 
   return (
     <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+      <BreadcrumbSchema items={[{ name: "About Us", url: "/about" }]} />
+      <LocalBusinessSchema location="both" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 md:space-y-32">
         {/* 1. Hero Section */}
         <section className="space-y-6 max-w-3xl">

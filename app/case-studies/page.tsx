@@ -6,17 +6,35 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { BreadcrumbSchema } from "@/components/seo/StructuredData";
 import { ArrowRight } from "lucide-react";
 
 export const metadata = {
   title: "Case Studies & Enterprise Results | Arav Innovations",
   description:
     "Explore how Arav Innovations delivers verifiable impact across enterprise cloud architecture, Next.js web applications, SEO expansion, and regulatory compliance in India & UAE.",
+  alternates: {
+    canonical: "https://aravinnovations.com/case-studies",
+  },
+  openGraph: {
+    title: "Case Studies & Enterprise Results | Arav Innovations",
+    description:
+      "Verifiable case studies in cloud architecture, sub-second web applications, and DPDP compliance in India & UAE.",
+    url: "https://aravinnovations.com/case-studies",
+    siteName: "Arav Innovations",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Case Studies & Enterprise Results | Arav Innovations",
+    description:
+      "Verifiable case studies in cloud architecture, sub-second web applications, and DPDP compliance in India & UAE.",
+  },
 };
 
 export default function CaseStudiesPage() {
   return (
     <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+      <BreadcrumbSchema items={[{ name: "Case Studies", url: "/case-studies" }]} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Header */}
         <div className="space-y-4 max-w-3xl">

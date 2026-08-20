@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { BreadcrumbSchema } from "@/components/seo/StructuredData";
 import { industriesData } from "@/data/industries";
 import { Building2, ArrowRight, CheckCircle2 } from "lucide-react";
 
@@ -12,11 +13,28 @@ export const metadata = {
   title: "Industry Solutions | Arav Innovations",
   description:
     "Explore tailored digital architecture, governance, and demand generation frameworks for Fintech, Healthcare, E-Commerce, Logistics, SaaS, and Real Estate.",
+  alternates: {
+    canonical: "https://aravinnovations.com/solutions",
+  },
+  openGraph: {
+    title: "Industry Solutions | Arav Innovations",
+    description:
+      "Tailored digital architecture, governance, and demand generation frameworks for Fintech, Healthcare, Logistics, and SaaS in India & UAE.",
+    url: "https://aravinnovations.com/solutions",
+    siteName: "Arav Innovations",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Industry Solutions | Arav Innovations",
+    description:
+      "Tailored digital architecture, governance, and demand generation frameworks for Fintech, Healthcare, Logistics, and SaaS in India & UAE.",
+  },
 };
 
 export default function SolutionsPage() {
   return (
     <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+      <BreadcrumbSchema items={[{ name: "Industry Solutions", url: "/solutions" }]} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Header */}
         <div className="space-y-4 max-w-3xl">

@@ -29,6 +29,23 @@ export const metadata = {
   title: "Arav Innovations | Enterprise IT Strategy, Software Engineering & Growth",
   description:
     "Arav Innovations is a multidisciplinary technology, strategy, digital growth, governance, and staff augmentation firm operating across India and the UAE.",
+  alternates: {
+    canonical: "https://aravinnovations.com",
+  },
+  openGraph: {
+    title: "Arav Innovations | Enterprise IT Strategy, Software Engineering & Growth",
+    description:
+      "Enterprise IT Strategy, Full-Stack Software Engineering, Performance Marketing, Governance, and Staff Augmentation across India & UAE.",
+    url: "https://aravinnovations.com",
+    siteName: "Arav Innovations",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Arav Innovations | Enterprise IT Strategy, Software Engineering & Growth",
+    description:
+      "Enterprise IT Strategy, Full-Stack Software Engineering, Performance Marketing, Governance, and Staff Augmentation across India & UAE.",
+  },
 };
 
 export default function HomePage() {

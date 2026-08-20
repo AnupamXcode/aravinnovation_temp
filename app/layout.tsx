@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { OrganizationSchema } from "@/components/seo/StructuredData";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageLoader } from "@/components/layout/PageLoader";
@@ -98,6 +99,7 @@ export default function RootLayout({
       className={`${plusJakartaSans.variable} ${inter.variable} scroll-smooth`}
     >
       <head>
+        <OrganizationSchema />
         <script
           dangerouslySetInnerHTML={{ __html: themeInitScript }}
           id="theme-init-script"

@@ -6,17 +6,35 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { BreadcrumbSchema } from "@/components/seo/StructuredData";
 import { Star, Quote, MapPin, ArrowRight } from "lucide-react";
 
 export const metadata = {
   title: "Clients & Testimonials | Arav Innovations",
   description:
     "Read verified client reviews and feedback on Arav Innovations' enterprise engineering, strategy, digital growth, and staff augmentation partnerships.",
+  alternates: {
+    canonical: "https://aravinnovations.com/testimonials",
+  },
+  openGraph: {
+    title: "Clients & Testimonials | Arav Innovations",
+    description:
+      "Verified feedback from CTOs and growth executives on Arav Innovations' engineering and digital consulting.",
+    url: "https://aravinnovations.com/testimonials",
+    siteName: "Arav Innovations",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Clients & Testimonials | Arav Innovations",
+    description:
+      "Verified feedback from CTOs and growth executives on Arav Innovations' engineering and digital consulting.",
+  },
 };
 
 export default function TestimonialsPage() {
   return (
     <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+      <BreadcrumbSchema items={[{ name: "Testimonials & Reviews", url: "/testimonials" }]} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Header */}
         <div className="max-w-3xl space-y-4">

@@ -7,10 +7,14 @@ import { Badge } from "@/components/ui/badge";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import Link from "next/link";
+import { BreadcrumbSchema } from "@/components/seo/StructuredData";
 import {
   Building,
   MapPin,
   CheckCircle2,
+  ArrowRight,
+  Sparkles,
 } from "lucide-react";
 
 interface CaseStudyPageProps {
@@ -33,9 +37,26 @@ export async function generateMetadata({
     return { title: "Case Study Not Found" };
   }
 
+  const url = `https://aravinnovations.com/case-studies/${slug}`;
+
   return {
     title: `${caseStudy.title} | Arav Innovations`,
     description: caseStudy.summary,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title: `${caseStudy.title} | Arav Innovations`,
+      description: caseStudy.summary,
+      url,
+      siteName: "Arav Innovations",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${caseStudy.title} | Arav Innovations`,
+      description: caseStudy.summary,
+    },
   };
 }
 
@@ -51,6 +72,12 @@ export default async function CaseStudyDetailPage({
 
   return (
     <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+      <BreadcrumbSchema
+        items={[
+          { name: "Case Studies", url: "/case-studies" },
+          { name: caseStudy.title, url: `/case-studies/${caseStudy.slug}` },
+        ]}
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Header & Meta */}
         <div className="space-y-6">
@@ -65,9 +92,11 @@ export default async function CaseStudyDetailPage({
 
           <ScrollReveal direction="up" delay={0.1}>
             <div className="flex flex-wrap items-center gap-3">
-              <Badge variant="secondary" size="md">
-                {caseStudy.serviceCategory}
-              </Badge>
+              <Link href={`/services/${caseStudy.serviceSlug}`}>
+                <Badge variant="secondary" size="md" className="hover:border-[#E8672A] transition-colors">
+                  {caseStudy.serviceCategory} &rarr;
+                </Badge>
+              </Link>
               <span className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center gap-1">
                 <Building className="w-3.5 h-3.5 text-[#E8672A]" />
                 {caseStudy.clientIndustry}

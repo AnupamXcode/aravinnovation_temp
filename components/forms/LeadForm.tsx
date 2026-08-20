@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { leadFormSchema, LeadFormData } from "@/lib/validations";
 import { servicesData } from "@/data/services";
+import { productsData } from "@/data/products";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
@@ -26,9 +27,9 @@ export function LeadForm({
   const [isSubmitted, setIsSubmitted] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
 
-  const defaultService =
-    servicesData.find((s) => s.slug === initialService || s.title === initialService)?.title ||
-    servicesData[0].title;
+  const foundService = servicesData.find((s) => s.slug === initialService || s.title === initialService)?.title;
+  const foundProduct = productsData.find((p) => p.slug === initialService || p.name === initialService)?.name;
+  const defaultService = foundService || (foundProduct ? `Product Demo: ${foundProduct}` : (initialService || servicesData[0].title));
 
   const {
     register,
@@ -87,10 +88,16 @@ export function LeadForm({
     }
   };
 
-  const serviceOptions = servicesData.map((s) => ({
-    value: s.title,
-    label: s.title,
-  }));
+  const serviceOptions = [
+    ...servicesData.map((s) => ({
+      value: s.title,
+      label: s.title,
+    })),
+    ...productsData.map((p) => ({
+      value: `Product Demo: ${p.name}`,
+      label: `Product Demo: ${p.name}`,
+    })),
+  ];
 
   const timelineOptions = [
     { value: "Immediate (within 2 weeks)", label: "Immediate (within 2 weeks)" },
