@@ -151,8 +151,8 @@ export function Hero3DScene() {
 
             {/* Layer 3 */}
             <div className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] flex items-start gap-3.5 transition-transform hover:translate-x-1 duration-200">
-              <div className="p-2.5 rounded-xl bg-[#3A2E27] dark:bg-[#2A231D] text-[#FFFDF9] shrink-0 border border-[#EFE2D6] dark:border-[#3D332B]">
-                <ShieldCheck className="w-4 h-4 text-[#E8672A]" />
+              <div className="p-2.5 rounded-xl bg-[#E8672A] dark:bg-[#FF7D42] text-white shrink-0 border border-[#F4A97F]/50 dark:border-[#F4A97F]/40">
+                <ShieldCheck className="w-4 h-4 text-white" />
               </div>
               <div>
                 <h4 className="text-sm font-bold text-[#3A2E27] dark:text-[#FAF5EE]">

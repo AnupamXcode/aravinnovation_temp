@@ -174,7 +174,7 @@ export function AdminSidebar({
 
       {/* Mobile Sidebar Drawer */}
       {mobileDrawerOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex">
+        <div className="lg:hidden fixed inset-0 z-50 bg-[#3A2E27]/55 backdrop-blur-xs flex">
           {sidebarContent}
           <div
             className="flex-1"
