@@ -129,9 +129,9 @@ export function Navbar() {
               <button
                 type="button"
                 className={cn(
-                  "inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-medium transition-colors cursor-pointer",
+                  "relative inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer group",
                   isActive("/services")
-                    ? "text-[#E8672A] font-semibold"
+                    ? "text-[#E8672A] font-semibold bg-[#FCE3D3]/30 dark:bg-[#261F1A]"
                     : "text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A]"
                 )}
                 aria-expanded={activeDropdown === "services"}
@@ -303,9 +303,9 @@ export function Navbar() {
             <Link
               href="/insights"
               className={cn(
-                "px-3.5 py-2 rounded-xl text-sm font-medium transition-colors",
+                "relative px-3.5 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer group",
                 isActive("/insights") || isActive("/blog") || isActive("/blogs")
-                  ? "text-[#E8672A] font-semibold"
+                  ? "text-[#E8672A] font-semibold bg-[#FCE3D3]/30 dark:bg-[#261F1A]"
                   : "text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A]"
               )}
             >

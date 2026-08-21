@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { companyContactInfo, servicesNavigation } from "@/data/navigation";
 import { ArrowRight, Phone } from "lucide-react";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 
 function LinkedInIcon({ className }: { className?: string }) {
   return (
@@ -193,30 +194,37 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar: Legal Links on Left, Copyright on Right */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/90">
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6 font-medium">
-            <Link href="/privacy-policy" className="hover:underline transition-all">
-              Privacy Policy
-            </Link>
-            <span className="text-white/40">&bull;</span>
-            <Link href="/refund-policy" className="hover:underline transition-all">
-              Refund Policy
-            </Link>
-            <span className="text-white/40">&bull;</span>
-            <Link href="/terms-and-conditions" className="hover:underline transition-all">
-              Terms &amp; Conditions
-            </Link>
-            <span className="text-white/40">&bull;</span>
-            <Link href="/security-dpdp" className="hover:underline transition-all">
-              Security &amp; DPDP
-            </Link>
-          </div>
+        {/* Bottom Bar: Legal Links on Left, Copyright on Right (Tasks E & L) */}
+        <ScrollReveal direction="up" delay={0.2}>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/95 border-t border-white/20 pt-6">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-6 font-semibold">
+              {[
+                { label: "Privacy Policy", href: "/privacy-policy" },
+                { label: "Refund Policy", href: "/refund-policy" },
+                { label: "Terms & Conditions", href: "/terms-and-conditions" },
+                { label: "Security & DPDP", href: "/security-dpdp" },
+              ].map((link, idx, arr) => (
+                <React.Fragment key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="group relative inline-flex items-center gap-1.5 py-1 text-white/90 hover:text-white font-bold transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
+                  >
+                    <span>{link.label}</span>
+                    <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-white" />
+                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-white group-hover:w-full transition-all duration-300 rounded-full" />
+                  </Link>
+                  {idx < arr.length - 1 && (
+                    <span className="text-white/40 font-normal">&bull;</span>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
 
-          <div className="font-medium text-white/90">
-            &copy; {new Date().getFullYear()} Arav Innovations. All rights reserved.
+            <div className="font-medium text-white/90">
+              &copy; {new Date().getFullYear()} Arav Innovations. All rights reserved.
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </footer>
   );

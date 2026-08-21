@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { motion, useInView } from "framer-motion";
+import { useSiteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
 interface ScrollRevealProps {
@@ -20,22 +21,44 @@ export function ScrollReveal({
   delay = 0,
   direction = "up",
   distance = 24,
-  duration = 0.6,
+  duration = 0.5,
   once = true,
 }: ScrollRevealProps) {
   const ref = React.useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once, margin: "-50px" });
+  const isInView = useInView(ref, { once, margin: "-40px" });
+  const { config } = useSiteConfig();
+
+  const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
+
+  React.useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+    const handler = () => setPrefersReducedMotion(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
+
+  const animationsDisabled =
+    config.animationsEnabled === false ||
+    config.scrollAnimationsEnabled === false ||
+    prefersReducedMotion;
+
+  if (animationsDisabled) {
+    return <div className={cn(className)}>{children}</div>;
+  }
 
   const getInitialPosition = () => {
+    // Reduce distance on mobile viewports
+    const actualDistance = typeof window !== "undefined" && window.innerWidth < 640 ? Math.min(distance, 12) : distance;
     switch (direction) {
       case "up":
-        return { y: distance, opacity: 0 };
+        return { y: actualDistance, opacity: 0 };
       case "down":
-        return { y: -distance, opacity: 0 };
+        return { y: -actualDistance, opacity: 0 };
       case "left":
-        return { x: distance, opacity: 0 };
+        return { x: actualDistance, opacity: 0 };
       case "right":
-        return { x: -distance, opacity: 0 };
+        return { x: -actualDistance, opacity: 0 };
       default:
         return { opacity: 0 };
     }

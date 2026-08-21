@@ -6,6 +6,10 @@ export interface SiteConfig {
   chatbotEnabled: boolean;
   chatbotDelaySeconds: number;
   animationsEnabled: boolean;
+  hoverEffectsEnabled: boolean;
+  scrollAnimationsEnabled: boolean;
+  entranceAnimationsEnabled: boolean;
+  animationIntensity: "subtle" | "standard" | "enhanced";
   trustedClientsVisible: boolean;
   servicesVisible: boolean;
   industriesVisible: boolean;
@@ -31,6 +35,10 @@ const defaultConfig: SiteConfig = {
   chatbotEnabled: true,
   chatbotDelaySeconds: 10,
   animationsEnabled: true,
+  hoverEffectsEnabled: true,
+  scrollAnimationsEnabled: true,
+  entranceAnimationsEnabled: true,
+  animationIntensity: "standard",
   trustedClientsVisible: true,
   servicesVisible: true,
   industriesVisible: true,

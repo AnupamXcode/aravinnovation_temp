@@ -501,6 +501,125 @@ export default function AdminDashboardPage() {
             </div>
           </div>
         )}
+
+        {/* TAB 6: SYSTEM & ANIMATION CONTROLS (Task R) */}
+        {activeTab === "system" && (
+          <div className="space-y-6">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+              <h2 className="text-lg font-bold font-display flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-[#E8672A]" />
+                <span>Global Animation &amp; System Controls</span>
+              </h2>
+              <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+                Control global page animations, scroll reveals, hover interactions, and service maintenance states
+              </p>
+            </div>
+
+            {/* Animation Controls Matrix */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
+                <div>
+                  <span className="text-xs font-bold font-display block">Global Animations</span>
+                  <span className="text-[11px] text-[#7A6A5F]">Master switch for all website motion</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    updateConfig("animationsEnabled", !config.animationsEnabled);
+                    showToast(`Global Animations ${!config.animationsEnabled ? "ON" : "OFF"}`);
+                  }}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                    config.animationsEnabled !== false ? "bg-emerald-500 text-white" : "bg-rose-500 text-white"
+                  }`}
+                >
+                  {config.animationsEnabled !== false ? "ON" : "OFF"}
+                </button>
+              </div>
+
+              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
+                <div>
+                  <span className="text-xs font-bold font-display block">Hover Effects</span>
+                  <span className="text-[11px] text-[#7A6A5F]">Button &amp; card hover feedback</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    updateConfig("hoverEffectsEnabled", !config.hoverEffectsEnabled);
+                    showToast(`Hover Effects ${!config.hoverEffectsEnabled ? "ON" : "OFF"}`);
+                  }}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                    config.hoverEffectsEnabled !== false ? "bg-emerald-500 text-white" : "bg-rose-500 text-white"
+                  }`}
+                >
+                  {config.hoverEffectsEnabled !== false ? "ON" : "OFF"}
+                </button>
+              </div>
+
+              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
+                <div>
+                  <span className="text-xs font-bold font-display block">Scroll Reveal Animations</span>
+                  <span className="text-[11px] text-[#7A6A5F]">Intersection Observer section entrances</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    updateConfig("scrollAnimationsEnabled", !config.scrollAnimationsEnabled);
+                    showToast(`Scroll Animations ${!config.scrollAnimationsEnabled ? "ON" : "OFF"}`);
+                  }}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                    config.scrollAnimationsEnabled !== false ? "bg-emerald-500 text-white" : "bg-rose-500 text-white"
+                  }`}
+                >
+                  {config.scrollAnimationsEnabled !== false ? "ON" : "OFF"}
+                </button>
+              </div>
+
+              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
+                <div>
+                  <span className="text-xs font-bold font-display block">Page Entrance Sequence</span>
+                  <span className="text-[11px] text-[#7A6A5F]">Smooth top-level page loading</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    updateConfig("entranceAnimationsEnabled", !config.entranceAnimationsEnabled);
+                    showToast(`Entrance Animations ${!config.entranceAnimationsEnabled ? "ON" : "OFF"}`);
+                  }}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                    config.entranceAnimationsEnabled !== false ? "bg-emerald-500 text-white" : "bg-rose-500 text-white"
+                  }`}
+                >
+                  {config.entranceAnimationsEnabled !== false ? "ON" : "OFF"}
+                </button>
+              </div>
+            </div>
+
+            {/* Service Maintenance Controls */}
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-4">
+              <h3 className="text-sm font-bold font-display">Per-Service Maintenance Toggles</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                {Object.entries(config.serviceStates || {}).map(([slug, state]) => (
+                  <button
+                    key={slug}
+                    type="button"
+                    onClick={() => {
+                      toggleServiceState(slug);
+                      showToast(`${slug} state updated`);
+                    }}
+                    className={`p-3 rounded-2xl border text-xs font-bold transition-all text-left cursor-pointer ${
+                      state
+                        ? "bg-[#FCE3D3]/50 border-[#E8672A]/40 text-[#E8672A]"
+                        : "bg-rose-500/10 border-rose-500/30 text-rose-500"
+                    }`}
+                  >
+                    <div className="font-mono text-[10px] uppercase truncate">{slug}</div>
+                    <div>{state ? "✓ ACTIVE" : "⚠️ MAINTENANCE"}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );
