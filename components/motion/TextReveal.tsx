@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface TextRevealProps {
@@ -28,7 +28,7 @@ export function TextReveal({
 
   const words = text.split(" ");
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: {},
     visible: {
       transition: {
@@ -38,7 +38,7 @@ export function TextReveal({
     },
   };
 
-  const wordVariants = {
+  const wordVariants: Variants = {
     hidden: {
       y: "100%",
       opacity: 0,
@@ -48,7 +48,7 @@ export function TextReveal({
       opacity: 1,
       transition: {
         duration: 0.7,
-        ease: [0.16, 1, 0.3, 1], // Natural custom cubic-bezier
+        ease: [0.16, 1, 0.3, 1] as const,
       },
     },
   };
