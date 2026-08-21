@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "../globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { SiteConfigProvider } from "@/lib/site-config";
 import { OrganizationSchema } from "@/components/seo/StructuredData";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -130,13 +131,15 @@ export default async function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col w-full bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans antialiased selection:bg-[#FCE3D3] dark:selection:bg-[#E8672A]/30 selection:text-[#E8672A]">
         <NextIntlClientProvider messages={messages}>
-          <ThemeProvider>
-            <PageLoader />
-            <Navbar />
-            <main className="flex-1 w-full">{children}</main>
-            <Footer />
-            <ChatbotWidget />
-          </ThemeProvider>
+          <SiteConfigProvider>
+            <ThemeProvider>
+              <PageLoader />
+              <Navbar />
+              <main className="flex-1 w-full">{children}</main>
+              <Footer />
+              <ChatbotWidget />
+            </ThemeProvider>
+          </SiteConfigProvider>
         </NextIntlClientProvider>
       </body>
     </html>

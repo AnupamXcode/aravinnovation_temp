@@ -5,6 +5,8 @@ import { MessageSquare, X, Send, Bot, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
+import { useSiteConfig } from "@/lib/site-config";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface ChatMessage {
   id: string;
@@ -15,6 +17,8 @@ interface ChatMessage {
 }
 
 export function ChatbotWidget() {
+  const { config } = useSiteConfig();
+  const [shouldShowLauncher, setShouldShowLauncher] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
   const [messages, setMessages] = React.useState<ChatMessage[]>([
     {
@@ -39,13 +43,76 @@ export function ChatbotWidget() {
   const [leadSubmitted, setLeadSubmitted] = React.useState(false);
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
 
+  // Task B: Delayed trigger behavior (user interaction or idle timer)
+  React.useEffect(() => {
+    if (!config.chatbotEnabled) return;
+
+    // Check if dismissed in this session
+    try {
+      if (sessionStorage.getItem("arav_chat_dismissed") === "true") {
+        return;
+      }
+    } catch {
+      // ignore
+    }
+
+    let triggered = false;
+
+    const showLauncher = () => {
+      if (!triggered) {
+        triggered = true;
+        setShouldShowLauncher(true);
+        cleanup();
+      }
+    };
+
+    // Interaction triggers (Scroll > 150px, Click)
+    const handleScroll = () => {
+      if (window.scrollY > 150) {
+        showLauncher();
+      }
+    };
+
+    const handleClick = () => {
+      showLauncher();
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("click", handleClick, { passive: true });
+
+    // Idle Timer trigger (default 10s or configured in admin)
+    const timer = setTimeout(() => {
+      showLauncher();
+    }, (config.chatbotDelaySeconds || 10) * 1000);
+
+    const cleanup = () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("click", handleClick);
+      clearTimeout(timer);
+    };
+
+    return cleanup;
+  }, [config.chatbotEnabled, config.chatbotDelaySeconds]);
+
   React.useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isOpen]);
 
+  if (!config.chatbotEnabled) return null;
+
   const handleOpen = () => {
     setIsOpen(true);
     trackEvent({ type: "chatbot_started" });
+  };
+
+  const handleDismiss = () => {
+    setIsOpen(false);
+    setShouldShowLauncher(false);
+    try {
+      sessionStorage.setItem("arav_chat_dismissed", "true");
+    } catch {
+      // ignore
+    }
   };
 
   const handleOptionClick = (option: { label: string; action: string; payload?: string }) => {
@@ -76,7 +143,7 @@ export function ChatbotWidget() {
         botMsg = {
           id: `bot-${Date.now()}`,
           sender: "bot",
-          text: "We operate dual regional delivery centers in India (Bengaluru / Noida) and the UAE (Dubai), serving clients globally across cross-border technical standards.",
+          text: "We operate dual regional delivery centers in India (Gurgaon HQ) and the UAE (Dubai), serving clients globally across cross-border technical standards.",
           options: [
             { label: "Start a project with India team", action: "start_project" },
             { label: "Start a project with UAE team", action: "start_project" },
@@ -150,7 +217,7 @@ export function ChatbotWidget() {
       botMsg = {
         id: `bot-${Date.now()}`,
         sender: "bot",
-        text: "You can reach us at connect@aravinnovations.com or fill out the quick callback form below:",
+        text: "You can reach us at support@aravinnovations.com or fill out the quick callback form below:",
         isLeadForm: true,
       };
     } else {
@@ -201,34 +268,54 @@ export function ChatbotWidget() {
 
   return (
     <>
-      {/* Floating Chat Launcher Button (Image 1 pattern) */}
-      {!isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 sm:gap-3">
-          {/* Rounded Pill Label Prompt */}
-          <button
-            type="button"
-            onClick={handleOpen}
-            className="flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white dark:bg-[#1E1915] text-[#3A2E27] dark:text-[#FAF5EE] text-xs sm:text-sm font-semibold border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl hover:shadow-2xl hover:border-[#E8672A] dark:hover:border-[#E8672A] transition-all duration-200 cursor-pointer motion-reduce:transition-none"
+      {/* Task B: Delayed Launcher with Motion & Dismissal State */}
+      <AnimatePresence>
+        {shouldShowLauncher && !isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.85, y: 20 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 sm:gap-3 motion-reduce:transition-none"
           >
-            <span>Chat with us</span>
-            <span className="text-sm sm:text-base">👋</span>
-          </button>
+            {/* Rounded Pill Label Prompt */}
+            <button
+              type="button"
+              onClick={handleOpen}
+              className="flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white dark:bg-[#1E1915] text-[#3A2E27] dark:text-[#FAF5EE] text-xs sm:text-sm font-semibold border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl hover:shadow-2xl hover:border-[#E8672A] dark:hover:border-[#E8672A] transition-all duration-200 cursor-pointer"
+            >
+              <span>Chat with us</span>
+              <span className="text-sm sm:text-base">👋</span>
+            </button>
 
-          {/* Circular Launcher Button with Notification Badge */}
-          <button
-            type="button"
-            onClick={handleOpen}
-            className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#E8672A] text-white flex items-center justify-center shadow-2xl shadow-[#E8672A]/40 hover:bg-[#d4581f] hover:scale-105 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#E8672A] focus:ring-offset-2 motion-reduce:transition-none motion-reduce:hover:scale-100 shrink-0"
-            aria-label="Open Arav Assistant Chat"
-          >
-            <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6 fill-current" />
-            {/* Notification Badge */}
-            <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#E53E3E] text-white text-[11px] font-bold flex items-center justify-center border-2 border-white dark:border-[#12100E] shadow-xs">
-              1
-            </span>
-          </button>
-        </div>
-      )}
+            {/* Circular Launcher Button with Notification Badge */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={handleOpen}
+                className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#E8672A] text-white flex items-center justify-center shadow-2xl shadow-[#E8672A]/40 hover:bg-[#d4581f] hover:scale-105 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#E8672A] focus:ring-offset-2 shrink-0"
+                aria-label="Open Arav Assistant Chat"
+              >
+                <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6 fill-current" />
+                <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#E53E3E] text-white text-[11px] font-bold flex items-center justify-center border-2 border-white dark:border-[#12100E] shadow-xs">
+                  1
+                </span>
+              </button>
+
+              {/* Small Close/Dismiss Cross */}
+              <button
+                type="button"
+                onClick={handleDismiss}
+                className="absolute -top-2 -left-2 w-5 h-5 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-300 flex items-center justify-center text-[10px] hover:bg-red-500 hover:text-white transition-colors"
+                title="Dismiss Chatbot"
+                aria-label="Dismiss Chatbot"
+              >
+                <X className="w-3 h-3" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Chat Window */}
       {isOpen && (
@@ -251,7 +338,7 @@ export function ChatbotWidget() {
             </div>
             <button
               type="button"
-              onClick={() => setIsOpen(false)}
+              onClick={handleDismiss}
               className="text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#3A2E27] dark:hover:text-[#FAF5EE] p-1.5 rounded-xl hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A]"
               aria-label="Close Chat"
             >

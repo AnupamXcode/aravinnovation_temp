@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { ProcessTimeline } from "@/components/motion/ProcessTimeline";
+import { MovingLogoStrip } from "@/components/motion/MovingLogoStrip";
 import { servicesData } from "@/data/services";
 import { industriesData } from "@/data/industries";
 import { caseStudiesData } from "@/data/case-studies";
@@ -84,27 +85,16 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* 1. HERO SECTION */}
       <Hero />
 
-      {/* 2. TRUSTED CLIENTS STRIP */}
+      {/* 2. TRUSTED CLIENTS MOVING STRIP (Task H) */}
       <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <section className="py-10 px-6 sm:px-10 rounded-[2.5rem] bg-white dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl transition-all duration-300">
+        <section className="py-8 px-6 sm:px-10 rounded-[2.5rem] bg-white dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl transition-all duration-300">
           <ScrollReveal direction="up">
-            <div className="text-center mb-6">
+            <div className="text-center mb-4">
               <span className="text-[11px] font-bold font-mono uppercase tracking-widest text-[#7A6A5F] dark:text-[#B8ACA0]">
                 Trusted By Fast-Growing Enterprises &amp; Industry Leaders Globally
               </span>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 items-center">
-              {[1, 2, 3, 4, 5, 6].map((item) => (
-                <div
-                  key={item}
-                  className="h-16 rounded-2xl bg-[#FFFDF9] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] flex items-center justify-center p-3 text-center transition-all hover:border-[#E8672A]/40 dark:hover:border-[#E8672A]/40 shadow-xs"
-                >
-                  <span className="text-[11px] font-mono font-medium text-[#7A6A5F] dark:text-[#B8ACA0]">
-                    [LOGO PENDING APPROVAL]
-                  </span>
-                </div>
-              ))}
-            </div>
+            <MovingLogoStrip />
           </ScrollReveal>
         </section>
       </div>

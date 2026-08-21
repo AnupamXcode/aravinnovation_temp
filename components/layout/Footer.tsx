@@ -173,14 +173,15 @@ export function Footer() {
                 <FacebookIcon className="w-4 h-4" />
               </a>
 
-              {/* LinkedIn - Disabled per spec */}
-              <span
-                className="w-10 h-10 rounded-full bg-white/10 text-white/50 flex items-center justify-center cursor-not-allowed shadow-xs"
-                title="LinkedIn page coming soon"
-                aria-disabled="true"
+              <a
+                href={companyContactInfo.socials.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] flex items-center justify-center transition-all duration-200 shadow-xs"
+                aria-label="LinkedIn"
               >
                 <LinkedInIcon className="w-4 h-4" />
-              </span>
+              </a>
 
               <a
                 href={companyContactInfo.socials.whatsapp}
