@@ -56,6 +56,9 @@ const workingWithUsIcons: Record<string, React.ReactNode> = {
 
 export function Navbar() {
   const pathname = usePathname();
+  if (pathname?.includes("/admin")) {
+    return null;
+  }
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [activeDropdown, setActiveDropdown] = React.useState<string | null>(null);

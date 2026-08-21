@@ -54,10 +54,16 @@ function YoutubeIcon({ className }: { className?: string }) {
 }
 
 import { useSiteContent } from "@/lib/site-content";
+import { usePathname } from "next/navigation";
 
 export function Footer() {
+  const pathname = usePathname();
   const { content } = useSiteContent();
   const footer = content.footer;
+
+  if (pathname?.includes("/admin")) {
+    return null;
+  }
 
   return (
     <footer className="bg-gradient-to-br from-[#FFA270] via-[#F87B42] to-[#E8672A] text-white pt-16 pb-8 transition-colors duration-300 relative overflow-hidden">

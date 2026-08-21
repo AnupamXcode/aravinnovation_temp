@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { MessageSquare, X, Send, Bot, ArrowRight, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -24,8 +24,13 @@ interface ChatMessage {
 }
 
 export function ChatbotWidget() {
+  const pathname = usePathname();
   const { config } = useSiteConfig();
   const router = useRouter();
+
+  if (pathname?.includes("/admin")) {
+    return null;
+  }
 
   const [shouldShowLauncher, setShouldShowLauncher] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
