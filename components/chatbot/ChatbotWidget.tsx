@@ -201,19 +201,33 @@ export function ChatbotWidget() {
 
   return (
     <>
-      {/* Floating 3D Chat Trigger Button */}
+      {/* Floating Chat Launcher Button (Image 1 pattern) */}
       {!isOpen && (
-        <button
-          type="button"
-          onClick={handleOpen}
-          className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-2xl bg-[#E8672A] px-4 py-3 text-white shadow-2xl shadow-[#E8672A]/40 hover:bg-[#d4581f] hover:scale-105 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#E8672A] focus:ring-offset-2"
-          aria-label="Open Arav Assistant"
-        >
-          <MessageSquare className="w-5 h-5" />
-          <span className="text-xs font-bold font-display hidden sm:inline">
-            Arav Advisor
-          </span>
-        </button>
+        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 sm:gap-3">
+          {/* Rounded Pill Label Prompt */}
+          <button
+            type="button"
+            onClick={handleOpen}
+            className="flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white dark:bg-[#1E1915] text-[#3A2E27] dark:text-[#FAF5EE] text-xs sm:text-sm font-semibold border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl hover:shadow-2xl hover:border-[#E8672A] dark:hover:border-[#E8672A] transition-all duration-200 cursor-pointer motion-reduce:transition-none"
+          >
+            <span>Chat with us</span>
+            <span className="text-sm sm:text-base">👋</span>
+          </button>
+
+          {/* Circular Launcher Button with Notification Badge */}
+          <button
+            type="button"
+            onClick={handleOpen}
+            className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#E8672A] text-white flex items-center justify-center shadow-2xl shadow-[#E8672A]/40 hover:bg-[#d4581f] hover:scale-105 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#E8672A] focus:ring-offset-2 motion-reduce:transition-none motion-reduce:hover:scale-100 shrink-0"
+            aria-label="Open Arav Assistant Chat"
+          >
+            <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6 fill-current" />
+            {/* Notification Badge */}
+            <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#E53E3E] text-white text-[11px] font-bold flex items-center justify-center border-2 border-white dark:border-[#12100E] shadow-xs">
+              1
+            </span>
+          </button>
+        </div>
       )}
 
       {/* Chat Window */}

@@ -107,28 +107,34 @@ export const mainNavigation: NavItem[] = [
 export const companyContactInfo = {
   name: "Arav Innovations",
   tagline: "Technology • Strategy • Digital Growth",
-  email: "connect@aravinnovations.com",
+  email: "support@aravinnovations.com",
+  connectEmail: "connect@aravinnovations.com",
   salesEmail: "sales@aravinnovations.com",
   careersEmail: "careers@aravinnovations.com",
-  phoneIndia: "+91 [CONTACT NUMBER PENDING]",
-  phoneUAE: "+971 [CONTACT NUMBER PENDING]",
+  phoneIndia: "+91 9650625777",
+  phoneIndiaRaw: "+919650625777",
+  phoneUAE: "+971 521555792",
+  phoneUAERaw: "+971521555792",
   offices: [
     {
       country: "India",
-      city: "Bengaluru / Noida",
-      address: "[OFFICE ADDRESS PENDING APPROVAL - INDIA HQ]",
+      city: "Gurgaon",
+      address: "Platinum Floor D 14/23, Ardee City Sec 52, Gurgaon 122002",
       status: "Regional Headquarters & Delivery Center",
     },
     {
       country: "UAE",
       city: "Dubai",
-      address: "[OFFICE ADDRESS PENDING APPROVAL - UAE REGION]",
+      address: "AravInnovations Consultancy - FZCO, 55764-001 IFZA Business Park FZCO, Building A1 Dubai Silicon Oasis, Dubai, U.A.E",
       status: "Middle East Operations & Strategy",
     },
   ],
   socials: {
-    linkedin: "https://www.linkedin.com/company/arav-innovations",
     instagram: "https://www.instagram.com/aravinnovations",
-    twitter: "https://x.com/aravinnovations",
+    facebook: "https://www.facebook.com/people/Arav-Innovations/61566419637071/",
+    linkedin: "", // Icon shown, non-clickable (disabled/no URL per spec)
+    whatsapp: "https://api.whatsapp.com/send?phone=919650625777",
+    twitter: "https://x.com/AravInnovations",
+    youtube: "https://www.youtube.com/@AravInnovations",
   },
 };

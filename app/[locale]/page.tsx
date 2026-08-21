@@ -309,10 +309,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <ScrollReveal direction="up">
             <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
               <Badge variant="secondary" size="md">
-                Client Feedback
+                Client Testimonials
               </Badge>
               <h2 className="text-3xl sm:text-4xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-                What Enterprise Leaders Say About Arav
+                What They Say
               </h2>
               <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0]">
                 Verified testimonials from CTOs, Engineering Heads, and Growth Directors across India and the GCC.
