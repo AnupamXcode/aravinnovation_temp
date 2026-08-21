@@ -53,7 +53,7 @@ export function PageLoader() {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="relative w-48 h-16 mb-4 flex items-center justify-center filter drop-shadow-lg dark:bg-white/10 dark:p-2 dark:rounded-xl"
+              className="relative w-48 h-16 mb-4 flex items-center justify-center filter drop-shadow-lg"
             >
               <img src="/logos/arav-logo.png" alt="Arav Innovations Logo" className="w-full h-full object-contain" />
             </motion.div>

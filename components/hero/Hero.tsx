@@ -3,31 +3,33 @@
 import * as React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Hero3DScene } from "@/components/motion/Hero3DScene";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { TextReveal } from "@/components/motion/TextReveal";
+import { ParallaxContainer } from "@/components/motion/ParallaxContainer";
 import {
   ArrowRight,
   ShieldCheck,
   Zap,
   Globe2,
-  Sparkles,
 } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 
 export function Hero() {
   return (
     <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300 min-h-[90vh] flex items-center">
-      {/* Soft Ambient Background 3D Glows */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] md:w-[950px] md:h-[950px] bg-radial from-[#FCE3D3]/70 via-[#FBF3EA]/30 to-transparent dark:from-[#E8672A]/15 dark:via-[#1A1613]/40 dark:to-transparent rounded-full blur-3xl -z-10 pointer-events-none" />
-      <div className="absolute top-12 right-12 w-80 h-80 bg-[#F4A97F]/20 dark:bg-[#E8672A]/10 rounded-full blur-3xl -z-10 pointer-events-none" />
+      {/* Soft Ambient Background 3D Glows with Parallax Depth */}
+      <ParallaxContainer speed={-15} className="absolute inset-0 pointer-events-none -z-10">
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] md:w-[950px] md:h-[950px] bg-radial from-[#FCE3D3]/70 via-[#FBF3EA]/30 to-transparent dark:from-[#E8672A]/15 dark:via-[#1A1613]/40 dark:to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-12 right-12 w-80 h-80 bg-[#F4A97F]/20 dark:bg-[#E8672A]/10 rounded-full blur-3xl" />
+      </ParallaxContainer>
 
       <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Messaging & CTAs */}
           <div className="lg:col-span-7 space-y-7 text-center lg:text-left">
-            <ScrollReveal direction="up" delay={0.1}>
-              {/* Konrad-Style Eyebrow Pill Badge */}
+            <ScrollReveal direction="up" delay={0.05}>
+              {/* Eyebrow Pill Badge */}
               <div className="inline-flex items-center gap-2">
                 <div className="px-4 py-1.5 rounded-full bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-2 shadow-xs">
                   <span className="w-2 h-2 rounded-full bg-[#E8672A] animate-pulse" />
@@ -38,25 +40,23 @@ export function Hero() {
               </div>
             </ScrollReveal>
 
-            <ScrollReveal direction="up" delay={0.2}>
-              {/* Konrad-Style Big Impact Headline */}
-              <h1 className="font-display font-extrabold text-4xl sm:text-6xl lg:text-[64px] text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight leading-[1.08]">
-                Shaping Online Futures &amp; Scaling Enterprises{" "}
-                <span className="text-[#E8672A] relative inline-block">
-                  Globally
-                  <span className="absolute bottom-1 left-0 w-full h-1 bg-[#E8672A]/30 rounded-full" />
-                </span>
-              </h1>
+            <ScrollReveal direction="up" delay={0.15}>
+              {/* Word-by-Word Masked Text Reveal Headline */}
+              <TextReveal
+                text="Shaping Online Futures & Scaling Enterprises Globally"
+                className="font-display font-extrabold text-4xl sm:text-6xl lg:text-[64px] text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight leading-[1.08]"
+                stagger={0.05}
+              />
             </ScrollReveal>
 
-            <ScrollReveal direction="up" delay={0.3}>
-              {/* Supporting Line */}
+            <ScrollReveal direction="up" delay={0.25}>
+              {/* Supporting Copy */}
               <p className="text-base sm:text-xl text-[#7A6A5F] dark:text-[#B8ACA0] max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
                 Partner with Arav Innovations for IT strategy, full-stack software development, performance digital marketing, compliance, audits, and dedicated talent solutions.
               </p>
             </ScrollReveal>
 
-            <ScrollReveal direction="up" delay={0.4}>
+            <ScrollReveal direction="up" delay={0.35}>
               {/* Pill Action Buttons */}
               <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                 <Link href="/contact" className="w-full sm:w-auto">
@@ -98,7 +98,7 @@ export function Hero() {
               </div>
             </ScrollReveal>
 
-            <ScrollReveal direction="up" delay={0.5}>
+            <ScrollReveal direction="up" delay={0.45}>
               {/* Trust Badges */}
               <div className="pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
                 <div className="flex items-center gap-2">

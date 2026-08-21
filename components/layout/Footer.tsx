@@ -2,17 +2,8 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { BrandLogo } from "./BrandLogo";
-import { servicesNavigation, companyContactInfo } from "@/data/navigation";
-import {
-  MapPin,
-  Mail,
-  Phone,
-  Globe2,
-  ArrowRight,
-  Calendar,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { companyContactInfo, servicesNavigation } from "@/data/navigation";
+import { ArrowRight, Phone } from "lucide-react";
 
 function LinkedInIcon({ className }: { className?: string }) {
   return (
@@ -64,269 +55,188 @@ function YoutubeIcon({ className }: { className?: string }) {
 
 export function Footer() {
   return (
-    <footer className="bg-[#FBF3EA] dark:bg-[#12100E] border-t-2 border-[#E8672A]/30 pt-16 pb-12 text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 relative overflow-hidden">
-      {/* Background ambient glow */}
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#FCE3D3]/40 dark:bg-[#E8672A]/5 rounded-full blur-3xl -z-10 pointer-events-none" />
+    <footer className="bg-gradient-to-br from-[#FFA270] via-[#F87B42] to-[#E8672A] text-white pt-16 pb-8 transition-colors duration-300 relative overflow-hidden">
+      {/* Background ambient radial highlights */}
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-3xl -z-0 pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-black/10 rounded-full blur-3xl -z-0 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main 4-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-12 border-b border-[#EFE2D6] dark:border-[#2C241E]">
-          {/* Col 1: Brand & Positioning */}
-          <div className="lg:col-span-2 space-y-5">
-            <BrandLogo variant="footer" />
-            <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0] max-w-sm leading-relaxed">
-              Arav Innovations is a multidisciplinary technology, strategy, digital growth, governance, and staff augmentation firm partnering with ambitious enterprises globally.
-            </p>
+      <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
+        {/* Main Grid: Left Closing Statement + Right Information Columns */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pb-12 border-b border-white/25">
+          {/* Left Column (5 Cols): Massive Reference Headline + Pill Buttons */}
+          <div className="lg:col-span-6 space-y-8">
+            <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.08] text-white uppercase drop-shadow-xs">
+              WE <span className="inline-block mx-1 animate-pulse">🤍</span> WORKING WITH AMBITIOUS BRANDS, ACROSS EVERY SECTOR
+            </h2>
 
-            {/* 6 Social Icons Row (C2) */}
-            <div className="space-y-2 pt-1">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] block">
-                Connect With Us
-              </span>
-              <div className="flex items-center space-x-2.5 flex-wrap gap-y-2">
-                {/* Instagram */}
-                <a
-                  href={companyContactInfo.socials.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#3D332B] flex items-center justify-center text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:border-[#E8672A] dark:hover:border-[#E8672A] hover:scale-105 transition-all shadow-2xs"
-                  aria-label="Instagram"
-                >
-                  <InstagramIcon className="w-4 h-4" />
-                </a>
-
-                {/* Facebook */}
-                <a
-                  href={companyContactInfo.socials.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#3D332B] flex items-center justify-center text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:border-[#E8672A] dark:hover:border-[#E8672A] hover:scale-105 transition-all shadow-2xs"
-                  aria-label="Facebook"
-                >
-                  <FacebookIcon className="w-4 h-4" />
-                </a>
-
-                {/* LinkedIn - Icon displayed, non-clickable per Task C2 spec */}
-                <span
-                  className="w-9 h-9 rounded-full bg-white/60 dark:bg-[#1A1613]/60 border border-[#EFE2D6] dark:border-[#3D332B] flex items-center justify-center text-[#7A6A5F]/60 dark:text-[#B8ACA0]/60 cursor-not-allowed shadow-2xs"
-                  title="LinkedIn page coming soon"
-                  aria-label="LinkedIn (Coming Soon)"
-                  aria-disabled="true"
-                >
-                  <LinkedInIcon className="w-4 h-4" />
-                </span>
-
-                {/* WhatsApp */}
-                <a
-                  href={companyContactInfo.socials.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#3D332B] flex items-center justify-center text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:border-[#E8672A] dark:hover:border-[#E8672A] hover:scale-105 transition-all shadow-2xs"
-                  aria-label="WhatsApp Direct Chat"
-                >
-                  <WhatsAppIcon className="w-4 h-4" />
-                </a>
-
-                {/* X / Twitter */}
-                <a
-                  href={companyContactInfo.socials.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#3D332B] flex items-center justify-center text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:border-[#E8672A] dark:hover:border-[#E8672A] hover:scale-105 transition-all shadow-2xs"
-                  aria-label="Twitter / X"
-                >
-                  <TwitterIcon className="w-4 h-4" />
-                </a>
-
-                {/* YouTube */}
-                <a
-                  href={companyContactInfo.socials.youtube}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#3D332B] flex items-center justify-center text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:border-[#E8672A] dark:hover:border-[#E8672A] hover:scale-105 transition-all shadow-2xs"
-                  aria-label="YouTube Channel"
-                >
-                  <YoutubeIcon className="w-4 h-4" />
-                </a>
-              </div>
-            </div>
-
-            {/* Book a Call + Contact Us side by side buttons (C3) */}
-            <div className="pt-3 flex flex-wrap items-center gap-3">
+            {/* Side-by-Side Pill Action Buttons */}
+            <div className="flex flex-wrap items-center gap-4 pt-2">
               <a
                 href={`tel:${companyContactInfo.phoneIndiaRaw}`}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#E8672A] hover:bg-[#d4581f] text-white text-xs font-bold shadow-md hover:shadow-lg transition-all duration-200"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] border border-white/40 backdrop-blur-md text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
-                <Phone className="w-3.5 h-3.5" />
-                <span>Book a Call</span>
+                <span>Book a call</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
 
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white dark:bg-[#1A1613] hover:bg-[#FCE3D3]/50 dark:hover:bg-[#261F1A] border border-[#EFE2D6] dark:border-[#3D332B] text-[#3A2E27] dark:text-[#FAF5EE] text-xs font-bold transition-all duration-200"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] border border-white/40 backdrop-blur-md text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
-                <span>Contact Us</span>
-                <ArrowRight className="w-3.5 h-3.5 text-[#E8672A]" />
+                <span>Contact us</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
-
-            <div className="pt-2 inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] border border-[#F4A97F]/30 dark:border-[#3D332B] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
-              <Globe2 className="w-3.5 h-3.5 text-[#E8672A]" />
-              <span>Operating Globally</span>
-            </div>
           </div>
 
-          {/* Col 2: 7 Services */}
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#3A2E27] dark:text-[#FAF5EE] mb-4">
-              Our 7 Practices
-            </h4>
-            <ul className="space-y-2.5 text-sm">
-              {servicesNavigation.map((service) => (
-                <li key={service.href}>
+          {/* Right Column (6 Cols): Services Strip, Dual Office Cards, Email & Socials */}
+          <div className="lg:col-span-6 space-y-8 lg:pl-4">
+            {/* Practice Strip */}
+            <div className="text-xs font-semibold text-white/95 leading-relaxed tracking-wide space-x-1.5 border-b border-white/20 pb-5">
+              {servicesNavigation.map((service, idx) => (
+                <React.Fragment key={service.href}>
                   <Link
                     href={service.href}
-                    className="text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#E8672A] dark:hover:text-[#E8672A] transition-colors inline-flex items-center gap-1 group"
+                    className="hover:underline hover:text-white transition-colors"
                   >
-                    <span>{service.label}</span>
+                    {service.label}
                   </Link>
-                </li>
+                  {idx < servicesNavigation.length - 1 && (
+                    <span className="text-white/60 mx-1">&bull;</span>
+                  )}
+                </React.Fragment>
               ))}
-            </ul>
-          </div>
+            </div>
 
-          {/* Col 3: Company & Resources */}
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#3A2E27] dark:text-[#FAF5EE] mb-4">
-              Company & Insights
-            </h4>
-            <ul className="space-y-2.5 text-sm text-[#7A6A5F] dark:text-[#B8ACA0]">
-              <li>
-                <Link href="/about" className="hover:text-[#E8672A] transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/products" className="hover:text-[#E8672A] transition-colors">
-                  Products & Platforms
-                </Link>
-              </li>
-              <li>
-                <Link href="/case-studies" className="hover:text-[#E8672A] transition-colors">
-                  Case Studies & Proof
-                </Link>
-              </li>
-              <li>
-                <Link href="/solutions" className="hover:text-[#E8672A] transition-colors">
-                  Industry Solutions
-                </Link>
-              </li>
-              <li>
-                <Link href="/testimonials" className="hover:text-[#E8672A] transition-colors">
-                  Clients & Testimonials
-                </Link>
-              </li>
-              <li>
-                <Link href="/insights" className="hover:text-[#E8672A] transition-colors">
-                  Insights & Strategy
-                </Link>
-              </li>
-              <li>
-                <Link href="/careers" className="hover:text-[#E8672A] transition-colors">
-                  Careers at Arav
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-[#E8672A] transition-colors">
-                  Contact & Inquiries
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Col 4: Dual Regional Locations (C1 Real Contact Info & Hover Cards) */}
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#3A2E27] dark:text-[#FAF5EE] mb-4">
-              Regional Operations
-            </h4>
-            <div className="space-y-4 text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
-              {/* India Office Card */}
-              <div className="p-4 rounded-2xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] hover:border-[#E8672A]/40 dark:hover:border-[#E8672A]/40 hover:-translate-y-1 hover:shadow-lg transition-all duration-200 group">
-                <div className="font-bold text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-1.5 mb-1.5 group-hover:text-[#E8672A] transition-colors">
-                  <MapPin className="w-3.5 h-3.5 text-[#E8672A] shrink-0" />
-                  <span>India Headquarters</span>
-                </div>
-                <p className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
-                  {companyContactInfo.offices[0].address}
+            {/* Dual Regional Operations Details */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs text-white/90">
+              {/* India */}
+              <div className="space-y-1.5">
+                <a
+                  href={`tel:${companyContactInfo.phoneIndiaRaw}`}
+                  className="font-bold text-sm text-white hover:underline block"
+                >
+                  {companyContactInfo.phoneIndia} - India
+                </a>
+                <div className="w-full h-px bg-white/30 my-2" />
+                <p className="text-white/85 leading-relaxed">
+                  Platinum Floor D 14/23<br />
+                  Ardee City Sec 52<br />
+                  Gurgaon 122002
                 </p>
-                <div className="mt-2 pt-2 border-t border-[#EFE2D6]/60 dark:border-[#2C241E]/60">
+                <div className="pt-2">
                   <a
-                    href={`tel:${companyContactInfo.phoneIndiaRaw}`}
-                    className="inline-flex items-center gap-1.5 font-bold text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#E8672A] transition-colors"
+                    href={`mailto:${companyContactInfo.email}`}
+                    className="font-medium text-white hover:underline"
                   >
-                    <Phone className="w-3 h-3 text-[#E8672A]" />
-                    <span>{companyContactInfo.phoneIndia}</span>
+                    {companyContactInfo.email}
                   </a>
                 </div>
               </div>
 
-              {/* UAE Office Card */}
-              <div className="p-4 rounded-2xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] hover:border-[#E8672A]/40 dark:hover:border-[#E8672A]/40 hover:-translate-y-1 hover:shadow-lg transition-all duration-200 group">
-                <div className="font-bold text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-1.5 mb-1.5 group-hover:text-[#E8672A] transition-colors">
-                  <MapPin className="w-3.5 h-3.5 text-[#E8672A] shrink-0" />
-                  <span>UAE & Middle East</span>
-                </div>
-                <p className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
-                  {companyContactInfo.offices[1].address}
+              {/* UAE */}
+              <div className="space-y-1.5">
+                <a
+                  href={`tel:${companyContactInfo.phoneUAERaw}`}
+                  className="font-bold text-sm text-white hover:underline block"
+                >
+                  {companyContactInfo.phoneUAE} - UAE
+                </a>
+                <div className="w-full h-px bg-white/30 my-2" />
+                <p className="text-white/85 leading-relaxed">
+                  ARAVINNOVATIONS CONSULTANCY - FZCO<br />
+                  55764-001 IFZA Bussiness Park FZCO<br />
+                  Building A1 Dubai Silicon Oasis Dubai, U.A.E
                 </p>
-                <div className="mt-2 pt-2 border-t border-[#EFE2D6]/60 dark:border-[#2C241E]/60">
-                  <a
-                    href={`tel:${companyContactInfo.phoneUAERaw}`}
-                    className="inline-flex items-center gap-1.5 font-bold text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#E8672A] transition-colors"
-                  >
-                    <Phone className="w-3 h-3 text-[#E8672A]" />
-                    <span>{companyContactInfo.phoneUAE}</span>
-                  </a>
-                </div>
               </div>
+            </div>
 
-              {/* Email Addresses */}
-              <div className="space-y-1.5 pt-2">
-                <a
-                  href={`mailto:${companyContactInfo.email}`}
-                  className="flex items-center gap-2 text-xs text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#E8672A] font-semibold transition-colors"
-                >
-                  <Mail className="w-3.5 h-3.5 text-[#E8672A] shrink-0" />
-                  <span>{companyContactInfo.email}</span>
-                </a>
-                <a
-                  href={`mailto:${companyContactInfo.connectEmail}`}
-                  className="flex items-center gap-2 text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#E8672A] transition-colors"
-                >
-                  <Mail className="w-3.5 h-3.5 text-[#7A6A5F] shrink-0" />
-                  <span>{companyContactInfo.connectEmail}</span>
-                </a>
-              </div>
+            {/* Social Icons Row (6 Platforms) */}
+            <div className="pt-2 flex items-center space-x-3">
+              <a
+                href={companyContactInfo.socials.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] flex items-center justify-center transition-all duration-200 shadow-xs"
+                aria-label="Instagram"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+
+              <a
+                href={companyContactInfo.socials.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] flex items-center justify-center transition-all duration-200 shadow-xs"
+                aria-label="Facebook"
+              >
+                <FacebookIcon className="w-4 h-4" />
+              </a>
+
+              {/* LinkedIn - Disabled per spec */}
+              <span
+                className="w-10 h-10 rounded-full bg-white/10 text-white/50 flex items-center justify-center cursor-not-allowed shadow-xs"
+                title="LinkedIn page coming soon"
+                aria-disabled="true"
+              >
+                <LinkedInIcon className="w-4 h-4" />
+              </span>
+
+              <a
+                href={companyContactInfo.socials.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] flex items-center justify-center transition-all duration-200 shadow-xs"
+                aria-label="WhatsApp"
+              >
+                <WhatsAppIcon className="w-4 h-4" />
+              </a>
+
+              <a
+                href={companyContactInfo.socials.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] flex items-center justify-center transition-all duration-200 shadow-xs"
+                aria-label="Twitter / X"
+              >
+                <TwitterIcon className="w-4 h-4" />
+              </a>
+
+              <a
+                href={companyContactInfo.socials.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] flex items-center justify-center transition-all duration-200 shadow-xs"
+                aria-label="YouTube"
+              >
+                <YoutubeIcon className="w-4 h-4" />
+              </a>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar with Legal Links (C4) */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
-          <p>© {new Date().getFullYear()} Arav Innovations. All rights reserved.</p>
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-            <Link href="/privacy-policy" className="hover:text-[#E8672A] transition-colors">
+        {/* Bottom Bar: Legal Links on Left, Copyright on Right */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/90">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 font-medium">
+            <Link href="/privacy-policy" className="hover:underline transition-all">
               Privacy Policy
             </Link>
-            <Link href="/refund-policy" className="hover:text-[#E8672A] transition-colors">
+            <span className="text-white/40">&bull;</span>
+            <Link href="/refund-policy" className="hover:underline transition-all">
               Refund Policy
             </Link>
-            <Link href="/terms-and-conditions" className="hover:text-[#E8672A] transition-colors">
-              Terms & Conditions
+            <span className="text-white/40">&bull;</span>
+            <Link href="/terms-and-conditions" className="hover:underline transition-all">
+              Terms &amp; Conditions
             </Link>
-            <Link href="/security-dpdp" className="hover:text-[#E8672A] transition-colors">
-              Security & DPDP
+            <span className="text-white/40">&bull;</span>
+            <Link href="/security-dpdp" className="hover:underline transition-all">
+              Security &amp; DPDP
             </Link>
+          </div>
+
+          <div className="font-medium text-white/90">
+            &copy; {new Date().getFullYear()} Arav Innovations. All rights reserved.
           </div>
         </div>
       </div>
