@@ -60,7 +60,7 @@ export function Footer() {
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-3xl -z-0 pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-black/10 rounded-full blur-3xl -z-0 pointer-events-none" />
 
-      <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
+      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10 space-y-12">
         {/* Main Grid: Left Closing Statement + Right Information Columns */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pb-12 border-b border-white/25">
           {/* Left Column (5 Cols): Massive Reference Headline + Pill Buttons */}

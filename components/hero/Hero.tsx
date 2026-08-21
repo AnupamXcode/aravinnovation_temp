@@ -24,7 +24,7 @@ export function Hero() {
         <div className="absolute top-12 right-12 w-80 h-80 bg-[#F4A97F]/20 dark:bg-[#E8672A]/10 rounded-full blur-3xl" />
       </ParallaxContainer>
 
-      <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Messaging & CTAs */}
           <div className="lg:col-span-7 space-y-7 text-center lg:text-left">
