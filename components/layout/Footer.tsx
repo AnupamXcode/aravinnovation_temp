@@ -53,7 +53,12 @@ function YoutubeIcon({ className }: { className?: string }) {
   );
 }
 
+import { useSiteContent } from "@/lib/site-content";
+
 export function Footer() {
+  const { content } = useSiteContent();
+  const footer = content.footer;
+
   return (
     <footer className="bg-gradient-to-br from-[#FFA270] via-[#F87B42] to-[#E8672A] text-white pt-16 pb-8 transition-colors duration-300 relative overflow-hidden">
       {/* Background ambient radial highlights */}
@@ -113,10 +118,10 @@ export function Footer() {
               {/* India */}
               <div className="space-y-1.5">
                 <a
-                  href={`tel:${companyContactInfo.phoneIndiaRaw}`}
+                  href={`tel:${footer.indiaPhone.replace(/\s+/g, "")}`}
                   className="font-bold text-sm text-white hover:underline block"
                 >
-                  {companyContactInfo.phoneIndia} - India
+                  {footer.indiaPhone} - India
                 </a>
                 <div className="w-full h-px bg-white/30 my-2" />
                 <p className="text-white/85 leading-relaxed">
@@ -126,10 +131,10 @@ export function Footer() {
                 </p>
                 <div className="pt-2">
                   <a
-                    href={`mailto:${companyContactInfo.email}`}
+                    href={`mailto:${footer.supportEmail}`}
                     className="font-medium text-white hover:underline"
                   >
-                    {companyContactInfo.email}
+                    {footer.supportEmail}
                   </a>
                 </div>
               </div>
@@ -137,8 +142,6 @@ export function Footer() {
               {/* UAE */}
               <div className="space-y-1.5">
                 <a
-                  href={`tel:${companyContactInfo.phoneUAERaw}`}
-                  className="font-bold text-sm text-white hover:underline block"
                 >
                   {companyContactInfo.phoneUAE} - UAE
                 </a>
@@ -154,7 +157,7 @@ export function Footer() {
             {/* Social Icons Row (6 Platforms) */}
             <div className="pt-2 flex items-center space-x-3">
               <a
-                href={companyContactInfo.socials.instagram}
+                href={footer.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] flex items-center justify-center transition-all duration-200 shadow-xs"
@@ -164,7 +167,7 @@ export function Footer() {
               </a>
 
               <a
-                href={companyContactInfo.socials.facebook}
+                href={footer.facebookUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] flex items-center justify-center transition-all duration-200 shadow-xs"
@@ -174,7 +177,7 @@ export function Footer() {
               </a>
 
               <a
-                href={companyContactInfo.socials.linkedin}
+                href={footer.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] flex items-center justify-center transition-all duration-200 shadow-xs"
@@ -184,7 +187,7 @@ export function Footer() {
               </a>
 
               <a
-                href={companyContactInfo.socials.whatsapp}
+                href={footer.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] flex items-center justify-center transition-all duration-200 shadow-xs"
@@ -194,7 +197,7 @@ export function Footer() {
               </a>
 
               <a
-                href={companyContactInfo.socials.twitter}
+                href={footer.twitterUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] flex items-center justify-center transition-all duration-200 shadow-xs"
@@ -204,7 +207,7 @@ export function Footer() {
               </a>
 
               <a
-                href={companyContactInfo.socials.youtube}
+                href={footer.youtubeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] flex items-center justify-center transition-all duration-200 shadow-xs"

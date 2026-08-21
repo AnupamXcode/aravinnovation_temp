@@ -6,18 +6,24 @@ import { Quote, ChevronLeft, ChevronRight, Star, MapPin } from "lucide-react";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { cn } from "@/lib/utils";
 
+import { useSiteContent } from "@/lib/site-content";
+
 export function TestimonialSlider() {
+  const { content } = useSiteContent();
+  const list = content.testimonials && content.testimonials.length > 0
+    ? content.testimonials
+    : testimonialsData;
   const [currentIndex, setCurrentIndex] = React.useState(0);
 
   const next = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonialsData.length);
+    setCurrentIndex((prev) => (prev + 1) % list.length);
   };
 
   const prev = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonialsData.length) % testimonialsData.length);
+    setCurrentIndex((prev) => (prev - 1 + list.length) % list.length);
   };
 
-  const current = testimonialsData[currentIndex];
+  const current = list[currentIndex] || list[0];
 
   return (
     <div className="relative max-w-4xl mx-auto">
@@ -81,7 +87,7 @@ export function TestimonialSlider() {
 
       {/* Dots Indicator */}
       <div className="flex justify-center items-center space-x-2 mt-6">
-        {testimonialsData.map((_, idx) => (
+        {list.map((_, idx) => (
           <button
             key={idx}
             type="button"

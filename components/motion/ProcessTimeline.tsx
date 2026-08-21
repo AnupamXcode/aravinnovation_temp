@@ -92,7 +92,19 @@ const itemVariants: Variants = {
   },
 };
 
+import { useSiteContent } from "@/lib/site-content";
+
+const stepIcons = [
+  <Lightbulb className="w-5 h-5 text-[#E8672A]" key="1" />,
+  <Workflow className="w-5 h-5 text-[#E8672A]" key="2" />,
+  <Zap className="w-5 h-5 text-[#E8672A]" key="3" />,
+  <ShieldCheck className="w-5 h-5 text-[#E8672A]" key="4" />,
+  <CheckCircle className="w-5 h-5 text-[#E8672A]" key="5" />,
+];
+
 export function ProcessTimeline() {
+  const { content } = useSiteContent();
+  const steps = content.processSteps || [];
   const [activeStep, setActiveStep] = React.useState<number>(0);
 
   return (
@@ -115,8 +127,9 @@ export function ProcessTimeline() {
         viewport={{ once: true, amount: 0.15 }}
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5 relative z-10"
       >
-        {stepsData.map((step, idx) => {
+        {steps.map((step, idx) => {
           const isActive = activeStep === idx;
+          const icon = stepIcons[idx % stepIcons.length];
 
           return (
             <motion.div
@@ -151,7 +164,7 @@ export function ProcessTimeline() {
                         : "bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E]"
                     )}
                   >
-                    {step.icon}
+                    {icon}
                   </div>
                 </div>
 
