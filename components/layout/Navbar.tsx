@@ -98,8 +98,9 @@ export function Navbar() {
   };
 
   return (
-    <header
-      className={cn(
+    <>
+      <header
+        className={cn(
         "fixed top-0 left-0 right-0 z-40 transition-all duration-300 border-b",
         isScrolled
           ? "bg-[#FFFDF9]/95 dark:bg-[#12100E]/95 backdrop-blur-md border-[#EFE2D6] dark:border-[#2C241E] shadow-sm py-3"
@@ -354,6 +355,7 @@ export function Navbar() {
           </div>
         </div>
       </div>
+      </header>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
@@ -481,7 +483,7 @@ export function Navbar() {
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 }
 
