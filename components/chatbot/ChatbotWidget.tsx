@@ -1,23 +1,32 @@
 "use client";
 
 import * as React from "react";
-import { MessageSquare, X, Send, Bot, ArrowRight } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { MessageSquare, X, Send, Bot, ArrowRight, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
 import { useSiteConfig } from "@/lib/site-config";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  findMatchingService,
+  isGreeting,
+  isBuyingIntent,
+  servicesKnowledge,
+} from "@/data/chatbot-knowledge";
 
 interface ChatMessage {
   id: string;
   sender: "bot" | "user";
   text: string;
-  options?: { label: string; action: string; payload?: string }[];
+  options?: { label: string; action: string; payload?: string; route?: string }[];
   isLeadForm?: boolean;
 }
 
 export function ChatbotWidget() {
   const { config } = useSiteConfig();
+  const router = useRouter();
+
   const [shouldShowLauncher, setShouldShowLauncher] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
   const [messages, setMessages] = React.useState<ChatMessage[]>([
@@ -26,10 +35,12 @@ export function ChatbotWidget() {
       sender: "bot",
       text: "Hello! Welcome to Arav Innovations. How can we help you today?",
       options: [
-        { label: "What services do you offer?", action: "services" },
+        { label: "Digital Marketing", action: "service_lookup", payload: "digital-marketing" },
+        { label: "Web & App Development", action: "service_lookup", payload: "web-app-development" },
+        { label: "AI & Automation", action: "service_lookup", payload: "ai-solutions" },
+        { label: "What services do you offer?", action: "all_services" },
         { label: "Where are your offices?", action: "locations" },
-        { label: "I want to start a project", action: "start_project" },
-        { label: "Speak with an advisor", action: "talk_advisor" },
+        { label: "Start a project", action: "start_project" },
       ],
     },
   ]);
@@ -43,13 +54,13 @@ export function ChatbotWidget() {
   const [leadSubmitted, setLeadSubmitted] = React.useState(false);
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
 
-  // Task B: Delayed trigger behavior (user interaction or idle timer)
+  // Task B: Delayed trigger behavior (interaction or 10s idle timer)
   React.useEffect(() => {
     if (!config.chatbotEnabled) return;
 
-    // Check if dismissed in this session
     try {
       if (sessionStorage.getItem("arav_chat_dismissed") === "true") {
+        setShouldShowLauncher(true);
         return;
       }
     } catch {
@@ -66,7 +77,6 @@ export function ChatbotWidget() {
       }
     };
 
-    // Interaction triggers (Scroll > 150px, Click)
     const handleScroll = () => {
       if (window.scrollY > 150) {
         showLauncher();
@@ -80,7 +90,6 @@ export function ChatbotWidget() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("click", handleClick, { passive: true });
 
-    // Idle Timer trigger (default 10s or configured in admin)
     const timer = setTimeout(() => {
       showLauncher();
     }, (config.chatbotDelaySeconds || 10) * 1000);
@@ -102,12 +111,14 @@ export function ChatbotWidget() {
 
   const handleOpen = () => {
     setIsOpen(true);
+    setShouldShowLauncher(true);
     trackEvent({ type: "chatbot_started" });
   };
 
-  const handleDismiss = () => {
+  // Task A: Minimize chat window without clearing conversation or resetting state
+  const handleMinimize = () => {
     setIsOpen(false);
-    setShouldShowLauncher(false);
+    setShouldShowLauncher(true);
     try {
       sessionStorage.setItem("arav_chat_dismissed", "true");
     } catch {
@@ -115,7 +126,13 @@ export function ChatbotWidget() {
     }
   };
 
-  const handleOptionClick = (option: { label: string; action: string; payload?: string }) => {
+  const handleOptionClick = (option: { label: string; action: string; payload?: string; route?: string }) => {
+    // If option has a direct route (e.g. [ Explore Digital Marketing ])
+    if (option.route) {
+      router.push(option.route);
+      return;
+    }
+
     const userMsg: ChatMessage = {
       id: `user-${Date.now()}`,
       sender: "user",
@@ -124,58 +141,85 @@ export function ChatbotWidget() {
 
     let botMsg: ChatMessage;
 
-    switch (option.action) {
-      case "services":
+    if (option.action === "service_lookup" && option.payload) {
+      const match = servicesKnowledge.find((s) => s.slug === option.payload);
+      if (match) {
+        // Check admin service status
+        const isEnabled = config.serviceStates[match.slug] !== false;
+        if (!isEnabled) {
+          botMsg = {
+            id: `bot-${Date.now()}`,
+            sender: "bot",
+            text: `${match.name} is currently under maintenance.\n\nOur team is working on it and it will be available again soon. Feel free to contact us for specific inquiries.`,
+            options: [
+              { label: "Start a Project", action: "start_project" },
+              { label: "Explore Other Services", action: "all_services" },
+            ],
+          };
+        } else {
+          botMsg = {
+            id: `bot-${Date.now()}`,
+            sender: "bot",
+            text: `**${match.name}**\n\n${match.description}`,
+            options: [
+              { label: `Explore ${match.name}`, action: "navigate", route: match.route },
+              { label: "Start a Project", action: "start_project" },
+              { label: "Contact Us", action: "talk_advisor" },
+            ],
+          };
+        }
+      } else {
         botMsg = {
           id: `bot-${Date.now()}`,
           sender: "bot",
-          text: "Arav Innovations provides 7 core practices:\n\n1. IT Strategy & Consulting\n2. Web & App Development\n3. Digital Marketing (B2B)\n4. SEO & Organic Growth\n5. Risk Governance & Compliance (DPDP/SOC2/ISO)\n6. Audit & Improvement\n7. Training & Staff Augmentation\n\nWhich area are you interested in?",
-          options: [
-            { label: "Web & App Development", action: "start_project", payload: "Web & App Development" },
-            { label: "IT Strategy & Cloud", action: "start_project", payload: "IT Strategy" },
-            { label: "Risk & Compliance", action: "start_project", payload: "Risk Governance" },
-            { label: "Digital Marketing / SEO", action: "start_project", payload: "Digital Marketing" },
-          ],
+          text: "Thank you for asking! How can our team help with your requirements?",
+          options: [{ label: "Start a Project", action: "start_project" }],
         };
-        break;
-
-      case "locations":
-        botMsg = {
-          id: `bot-${Date.now()}`,
-          sender: "bot",
-          text: "We operate dual regional delivery centers in India (Gurgaon HQ) and the UAE (Dubai), serving clients globally across cross-border technical standards.",
-          options: [
-            { label: "Start a project with India team", action: "start_project" },
-            { label: "Start a project with UAE team", action: "start_project" },
-          ],
-        };
-        break;
-
-      case "start_project":
-      case "talk_advisor":
-        botMsg = {
-          id: `bot-${Date.now()}`,
-          sender: "bot",
-          text: "Great! Let's get your details so our leadership team can prepare an exploratory briefing for you.",
-          isLeadForm: true,
-        };
-        trackEvent({
-          type: "chatbot_lead",
-          intent: option.action,
-          service: option.payload,
-        });
-        break;
-
-      default:
-        botMsg = {
-          id: `bot-${Date.now()}`,
-          sender: "bot",
-          text: "Thank you for reaching out! You can explore our services or schedule a direct consultation.",
-          options: [
-            { label: "Explore All 7 Services", action: "services" },
-            { label: "Talk to an Expert", action: "start_project" },
-          ],
-        };
+      }
+    } else if (option.action === "all_services") {
+      botMsg = {
+        id: `bot-${Date.now()}`,
+        sender: "bot",
+        text: "Arav Innovations provides 7 core practices:\n\n• IT Strategy & Consulting\n• Web & App Development\n• Digital Marketing (B2B)\n• Search Engine Optimization (SEO)\n• Risk Governance & Compliance\n• Audit & Improvement\n• Training & Staff Augmentation\n\nWhich area would you like to explore?",
+        options: [
+          { label: "Digital Marketing", action: "service_lookup", payload: "digital-marketing" },
+          { label: "Web & App Development", action: "service_lookup", payload: "web-app-development" },
+          { label: "IT Strategy", action: "service_lookup", payload: "it-strategy-consulting" },
+          { label: "SEO & Growth", action: "service_lookup", payload: "seo" },
+          { label: "Risk & Compliance", action: "service_lookup", payload: "risk-governance-compliance" },
+          { label: "View All Practices", action: "navigate", route: "/services" },
+        ],
+      };
+    } else if (option.action === "locations") {
+      botMsg = {
+        id: `bot-${Date.now()}`,
+        sender: "bot",
+        text: "We operate dual regional headquarters in India (Gurgaon HQ) and the UAE (Dubai), serving enterprise clients globally across India, UAE, US, EU, and Canada.",
+        options: [
+          { label: "Contact Gurgaon Office", action: "start_project" },
+          { label: "Contact Dubai Office", action: "start_project" },
+        ],
+      };
+    } else if (option.action === "start_project" || option.action === "talk_advisor") {
+      botMsg = {
+        id: `bot-${Date.now()}`,
+        sender: "bot",
+        text: "Great! Let's get your project details so our senior advisory team can contact you within 24 hours.",
+        isLeadForm: true,
+      };
+      trackEvent({ type: "chatbot_lead", intent: option.action });
+    } else {
+      botMsg = {
+        id: `bot-${Date.now()}`,
+        sender: "bot",
+        text: "Hey there! 👋 How can I help you?",
+        options: [
+          { label: "Digital Marketing", action: "service_lookup", payload: "digital-marketing" },
+          { label: "Web & App Development", action: "service_lookup", payload: "web-app-development" },
+          { label: "AI & Automation", action: "service_lookup", payload: "ai-solutions" },
+          { label: "Start a Project", action: "start_project" },
+        ],
+      };
     }
 
     setMessages((prev) => [...prev, userMsg, botMsg]);
@@ -194,43 +238,82 @@ export function ChatbotWidget() {
       text: userText,
     };
 
-    const lower = userText.toLowerCase();
     let botMsg: ChatMessage;
 
-    if (
-      lower.includes("website") ||
-      lower.includes("app") ||
-      lower.includes("hire") ||
-      lower.includes("price") ||
-      lower.includes("cost") ||
-      lower.includes("quote") ||
-      lower.includes("project")
-    ) {
+    // Task B1: Conversational Greetings
+    if (isGreeting(userText)) {
       botMsg = {
         id: `bot-${Date.now()}`,
         sender: "bot",
-        text: "I can help connect you with our engineering & advisory team for that. Please share your contact details below:",
-        isLeadForm: true,
-      };
-      trackEvent({ type: "chatbot_lead", intent: "high_intent_keyword" });
-    } else if (lower.includes("contact") || lower.includes("email") || lower.includes("phone")) {
-      botMsg = {
-        id: `bot-${Date.now()}`,
-        sender: "bot",
-        text: "You can reach us at support@aravinnovations.com or fill out the quick callback form below:",
-        isLeadForm: true,
-      };
-    } else {
-      botMsg = {
-        id: `bot-${Date.now()}`,
-        sender: "bot",
-        text: "Thanks for your question! Here are a few quick options to help you navigate:",
+        text: "Hey there! 👋 How can I help you?",
         options: [
-          { label: "View Our 7 Practices", action: "services" },
-          { label: "Our Regional Offices", action: "locations" },
-          { label: "Start a Project Discussion", action: "start_project" },
+          { label: "Digital Marketing", action: "service_lookup", payload: "digital-marketing" },
+          { label: "Web Development", action: "service_lookup", payload: "web-app-development" },
+          { label: "AI & Automation", action: "service_lookup", payload: "ai-solutions" },
+          { label: "Start a Project", action: "start_project" },
         ],
       };
+    } else {
+      // Task B2: Service-aware Keyword Match
+      const matchedService = findMatchingService(userText);
+      if (matchedService) {
+        // Check admin per-service maintenance state
+        const isEnabled = config.serviceStates[matchedService.slug] !== false;
+
+        if (!isEnabled) {
+          botMsg = {
+            id: `bot-${Date.now()}`,
+            sender: "bot",
+            text: `${matchedService.name} is currently under maintenance.\n\nOur team is working on it and it will be available again soon. Feel free to contact us for specific inquiries.`,
+            options: [
+              { label: "Start a Project", action: "start_project" },
+              { label: "Explore Other Services", action: "all_services" },
+            ],
+          };
+        } else {
+          botMsg = {
+            id: `bot-${Date.now()}`,
+            sender: "bot",
+            text: `**${matchedService.name}**\n\n${matchedService.description}`,
+            options: [
+              { label: `Explore ${matchedService.name}`, action: "navigate", route: matchedService.route },
+              { label: "Start a Project", action: "start_project" },
+              { label: "Contact Us", action: "talk_advisor" },
+            ],
+          };
+        }
+      } else if (isBuyingIntent(userText)) {
+        botMsg = {
+          id: `bot-${Date.now()}`,
+          sender: "bot",
+          text: "Absolutely! We'd be happy to discuss your requirements. Please share your project details below so our advisory team can contact you:",
+          isLeadForm: true,
+        };
+        trackEvent({ type: "chatbot_lead", intent: "high_intent_input" });
+      } else if (userText.toLowerCase().includes("office") || userText.toLowerCase().includes("location")) {
+        botMsg = {
+          id: `bot-${Date.now()}`,
+          sender: "bot",
+          text: "We operate dual regional delivery centers in Gurgaon (India HQ) and Dubai (UAE), serving clients globally across cross-border technical standards.",
+          options: [
+            { label: "Start a Project", action: "start_project" },
+            { label: "Contact Us", action: "talk_advisor" },
+          ],
+        };
+      } else {
+        // Task B7: Unknown Questions (Non-hallucinating fallback)
+        botMsg = {
+          id: `bot-${Date.now()}`,
+          sender: "bot",
+          text: "I can help you with Arav Innovations' services, projects and getting in touch with our team. Could you tell me what you're looking for?",
+          options: [
+            { label: "Digital Marketing", action: "service_lookup", payload: "digital-marketing" },
+            { label: "Web Development", action: "service_lookup", payload: "web-app-development" },
+            { label: "What services do you offer?", action: "all_services" },
+            { label: "Start a Project", action: "start_project" },
+          ],
+        };
+      }
     }
 
     setMessages((prev) => [...prev, userMsg, botMsg]);
@@ -268,17 +351,17 @@ export function ChatbotWidget() {
 
   return (
     <>
-      {/* Task B: Delayed Launcher with Motion & Dismissal State */}
+      {/* Floating Launcher (Always visible when Chat window is closed/minimized) */}
       <AnimatePresence>
         {shouldShowLauncher && !isOpen && (
           <motion.div
             initial={{ opacity: 0, scale: 0.85, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 20 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 sm:gap-3 motion-reduce:transition-none"
           >
-            {/* Rounded Pill Label Prompt */}
+            {/* Rounded Pill Prompt */}
             <button
               type="button"
               onClick={handleOpen}
@@ -288,31 +371,18 @@ export function ChatbotWidget() {
               <span className="text-sm sm:text-base">👋</span>
             </button>
 
-            {/* Circular Launcher Button with Notification Badge */}
-            <div className="relative">
-              <button
-                type="button"
-                onClick={handleOpen}
-                className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#E8672A] text-white flex items-center justify-center shadow-2xl shadow-[#E8672A]/40 hover:bg-[#d4581f] hover:scale-105 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#E8672A] focus:ring-offset-2 shrink-0"
-                aria-label="Open Arav Assistant Chat"
-              >
-                <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6 fill-current" />
-                <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#E53E3E] text-white text-[11px] font-bold flex items-center justify-center border-2 border-white dark:border-[#12100E] shadow-xs">
-                  1
-                </span>
-              </button>
-
-              {/* Small Close/Dismiss Cross */}
-              <button
-                type="button"
-                onClick={handleDismiss}
-                className="absolute -top-2 -left-2 w-5 h-5 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-300 flex items-center justify-center text-[10px] hover:bg-red-500 hover:text-white transition-colors"
-                title="Dismiss Chatbot"
-                aria-label="Dismiss Chatbot"
-              >
-                <X className="w-3 h-3" />
-              </button>
-            </div>
+            {/* Circular Launcher Button */}
+            <button
+              type="button"
+              onClick={handleOpen}
+              className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#E8672A] text-white flex items-center justify-center shadow-2xl shadow-[#E8672A]/40 hover:bg-[#d4581f] hover:scale-105 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#E8672A] focus:ring-offset-2 shrink-0"
+              aria-label="Open Arav Assistant Chat"
+            >
+              <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6 fill-current" />
+              <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#E53E3E] text-white text-[11px] font-bold flex items-center justify-center border-2 border-white dark:border-[#12100E] shadow-xs">
+                1
+              </span>
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -320,7 +390,7 @@ export function ChatbotWidget() {
       {/* Chat Window */}
       {isOpen && (
         <div className="fixed bottom-6 right-4 sm:right-6 z-50 w-[92vw] sm:w-[380px] h-[520px] rounded-3xl bg-[#FFFDF9] dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200">
-          {/* Header */}
+          {/* Header with Minimize Button (Task A1) */}
           <div className="bg-[#FBF3EA] dark:bg-[#1E1915] border-b border-[#EFE2D6] dark:border-[#2C241E] px-5 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-xl bg-[#E8672A] text-white flex items-center justify-center shadow-xs">
@@ -336,11 +406,14 @@ export function ChatbotWidget() {
                 </div>
               </div>
             </div>
+
+            {/* X Minimize Button (Task A1: Minimize to floating launcher) */}
             <button
               type="button"
-              onClick={handleDismiss}
-              className="text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#3A2E27] dark:hover:text-[#FAF5EE] p-1.5 rounded-xl hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A]"
-              aria-label="Close Chat"
+              onClick={handleMinimize}
+              className="text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#3A2E27] dark:hover:text-[#FAF5EE] p-1.5 rounded-xl hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A] cursor-pointer"
+              aria-label="Minimize Chat Window"
+              title="Minimize Chat Window"
             >
               <X className="w-5 h-5" />
             </button>
@@ -367,7 +440,7 @@ export function ChatbotWidget() {
                   {msg.text}
                 </div>
 
-                {/* Quick Option Buttons */}
+                {/* Quick Option & Page-directed Buttons (Task B5) */}
                 {msg.options && (
                   <div className="flex flex-wrap gap-1.5 mt-2 max-w-[90%]">
                     {msg.options.map((opt, idx) => (
@@ -375,22 +448,28 @@ export function ChatbotWidget() {
                         key={idx}
                         type="button"
                         onClick={() => handleOptionClick(opt)}
-                        className="text-[11px] px-3 py-1.5 rounded-xl bg-white dark:bg-[#1F1A16] border border-[#EFE2D6] dark:border-[#2C241E] hover:border-[#E8672A] text-[#3A2E27] dark:text-[#FAF5EE] font-medium transition-colors hover:bg-[#FCE3D3]/30 dark:hover:bg-[#261F1A] text-left cursor-pointer"
+                        className={cn(
+                          "text-[11px] px-3 py-1.5 rounded-xl border font-medium transition-colors text-left cursor-pointer flex items-center gap-1",
+                          opt.route
+                            ? "bg-[#E8672A] text-white border-[#E8672A] hover:bg-[#d4581f]"
+                            : "bg-white dark:bg-[#1F1A16] border-[#EFE2D6] dark:border-[#2C241E] hover:border-[#E8672A] text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FCE3D3]/30 dark:hover:bg-[#261F1A]"
+                        )}
                       >
-                        {opt.label}
+                        <span>{opt.label}</span>
+                        {opt.route && <ExternalLink className="w-3 h-3" />}
                       </button>
                     ))}
                   </div>
                 )}
 
-                {/* Lead Capture in Chat */}
+                {/* Lead Capture Form */}
                 {msg.isLeadForm && !leadSubmitted && (
                   <form
                     onSubmit={handleLeadSubmit}
                     className="w-full mt-2 p-3.5 rounded-2xl bg-white dark:bg-[#1F1A16] border border-[#EFE2D6] dark:border-[#2C241E] space-y-2.5 shadow-xs"
                   >
                     <div className="text-[11px] font-bold text-[#3A2E27] dark:text-[#FAF5EE]">
-                      Quick Contact Request
+                      Quick Project Consultation Request
                     </div>
                     <input
                       type="text"

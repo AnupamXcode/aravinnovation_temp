@@ -14,6 +14,7 @@ import { CaseStudyCard } from "@/components/case-studies/CaseStudyCard";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { BreadcrumbSchema, ServiceSchema, FAQSchema } from "@/components/seo/StructuredData";
+import { ServiceMaintenanceBanner } from "@/components/services/ServiceMaintenanceBanner";
 import {
   Compass,
   Code2,
@@ -125,6 +126,8 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
               ]}
             />
           </ScrollReveal>
+
+          <ServiceMaintenanceBanner slug={service.slug} />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-4">
             <div className="lg:col-span-8 space-y-6">
