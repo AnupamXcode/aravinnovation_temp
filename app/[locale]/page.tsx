@@ -85,19 +85,17 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* 1. HERO SECTION */}
       <Hero />
 
-      {/* 2. TRUSTED CLIENTS MOVING STRIP (Task H) */}
-      <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <section className="py-8 px-6 sm:px-10 rounded-[2.5rem] bg-white dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl transition-all duration-300">
-          <ScrollReveal direction="up">
-            <div className="text-center mb-4">
-              <span className="text-[11px] font-bold font-mono uppercase tracking-widest text-[#7A6A5F] dark:text-[#B8ACA0]">
-                Trusted By Fast-Growing Enterprises &amp; Industry Leaders Globally
-              </span>
-            </div>
-            <MovingLogoStrip />
-          </ScrollReveal>
-        </section>
-      </div>
+      {/* 2. TRUSTED CLIENTS MOVING STRIP (Full-Bleed Viewport Width) */}
+      <section className="w-full py-8 bg-white dark:bg-[#161310] border-y border-[#EFE2D6] dark:border-[#2C241E] shadow-sm transition-all duration-300 overflow-hidden">
+        <ScrollReveal direction="up">
+          <div className="text-center mb-4 px-4">
+            <span className="text-[11px] font-bold font-mono uppercase tracking-widest text-[#7A6A5F] dark:text-[#B8ACA0]">
+              Trusted By Fast-Growing Enterprises &amp; Industry Leaders Globally
+            </span>
+          </div>
+          <MovingLogoStrip />
+        </ScrollReveal>
+      </section>
 
       {/* 3. WHAT WE DO — 7 DISTINCT SERVICE CARDS (Full-Bleed Rounded Container) */}
       <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 w-full" id="services">
