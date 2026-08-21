@@ -80,24 +80,24 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   ];
 
   return (
-    <div className="flex flex-col min-h-screen w-full">
+    <div className="flex flex-col min-h-screen w-full bg-[#FAF5EE] dark:bg-[#0E0C0A] space-y-6 pb-12">
       {/* 1. HERO SECTION */}
       <Hero />
 
-      {/* 2. TRUSTED CLIENTS STRIP (Strict Placeholder Rule) */}
-      <section className="py-10 bg-[#FBF3EA] dark:bg-[#161310] border-y border-[#EFE2D6] dark:border-[#2C241E] transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 2. TRUSTED CLIENTS STRIP */}
+      <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <section className="py-10 px-6 sm:px-10 rounded-[2.5rem] bg-white dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl transition-all duration-300">
           <ScrollReveal direction="up">
             <div className="text-center mb-6">
-              <span className="text-[11px] font-bold uppercase tracking-widest text-[#7A6A5F] dark:text-[#B8ACA0]">
-                Trusted By Fast-Growing Enterprises & Industry Leaders Globally
+              <span className="text-[11px] font-bold font-mono uppercase tracking-widest text-[#7A6A5F] dark:text-[#B8ACA0]">
+                Trusted By Fast-Growing Enterprises &amp; Industry Leaders Globally
               </span>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 items-center">
               {[1, 2, 3, 4, 5, 6].map((item) => (
                 <div
                   key={item}
-                  className="h-16 rounded-2xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] flex items-center justify-center p-3 text-center transition-all hover:border-[#E8672A]/40 dark:hover:border-[#E8672A]/40 shadow-2xs"
+                  className="h-16 rounded-2xl bg-[#FFFDF9] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] flex items-center justify-center p-3 text-center transition-all hover:border-[#E8672A]/40 dark:hover:border-[#E8672A]/40 shadow-xs"
                 >
                   <span className="text-[11px] font-mono font-medium text-[#7A6A5F] dark:text-[#B8ACA0]">
                     [LOGO PENDING APPROVAL]
@@ -106,27 +106,27 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               ))}
             </div>
           </ScrollReveal>
-        </div>
-      </section>
+        </section>
+      </div>
 
-      {/* 3. WHAT WE DO — 7 DISTINCT SERVICE CARDS */}
-      <section className="py-20 md:py-28 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300" id="services">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 3. WHAT WE DO — 7 DISTINCT SERVICE CARDS (Full-Bleed Rounded Container) */}
+      <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 w-full" id="services">
+        <section className="py-16 md:py-24 px-6 sm:px-12 rounded-[2.5rem] bg-[#FFFDF9] dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl transition-all duration-300">
           <ScrollReveal direction="up">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
               <div className="max-w-2xl space-y-3">
                 <Badge variant="secondary" size="md">
                   Our 7 Core Practices
                 </Badge>
-                <h2 className="text-3xl sm:text-4xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-                  Comprehensive Technology & Growth Services
+                <h2 className="text-3xl sm:text-5xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight">
+                  Comprehensive Technology &amp; Growth Services
                 </h2>
                 <p className="text-base text-[#7A6A5F] dark:text-[#B8ACA0]">
                   We go far beyond basic digital marketing. Discover our dedicated engineering, strategic advisory, compliance, and staff augmentation capabilities.
                 </p>
               </div>
               <Link href="/services">
-                <Button variant="outline" size="md" rightIcon={<ArrowRight className="w-4 h-4" />}>
+                <Button variant="outline" size="md" className="rounded-full px-6 border-[#EFE2D6] dark:border-[#2C241E] hover:border-[#E8672A]" rightIcon={<ArrowRight className="w-4 h-4" />}>
                   View All Practices
                 </Button>
               </Link>
@@ -143,12 +143,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </ScrollReveal>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* 4. WHO WE HELP — INDUSTRY GRID */}
-      <section className="py-20 bg-[#FBF3EA] dark:bg-[#161310] border-y border-[#EFE2D6] dark:border-[#2C241E] transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <section className="py-16 md:py-24 px-6 sm:px-12 rounded-[2.5rem] bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl transition-all duration-300">
           <ScrollReveal direction="up">
             <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
               <Badge variant="secondary" size="md">
@@ -167,11 +167,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             {industriesData.map((ind, idx) => (
               <ScrollReveal key={ind.slug} delay={idx * 0.08} direction="up">
                 <TiltCard maxTilt={6} scale={1.02} className="h-full group">
-                  <div className="h-full rounded-3xl bg-white dark:bg-[#1A1613] p-7 border border-[#EFE2D6] dark:border-[#2C241E] hover:shadow-xl hover:border-[#E8672A]/40 dark:hover:border-[#E8672A]/40 transition-all duration-300 flex flex-col justify-between">
+                  <div className="h-full rounded-[2rem] bg-white dark:bg-[#1A1613] p-7 border border-[#EFE2D6] dark:border-[#2C241E] hover:shadow-xl hover:border-[#E8672A]/40 dark:hover:border-[#E8672A]/40 transition-all duration-300 flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between mb-4">
                         <div className="p-2.5 rounded-xl icon-box-hover shadow-xs">
-                          <Building2 className="w-5 h-5" />
+                          <Building2 className="w-5 h-5 text-[#E8672A]" />
                         </div>
                         <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-md bg-[#FCE3D3]/60 dark:bg-[#261F1A] text-[#3A2E27] dark:text-[#FAF5EE] font-semibold border border-[#EFE2D6] dark:border-[#2C241E]">
                           {ind.statusNote || "[CONFIRMED]"}
@@ -201,24 +201,24 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
           <div className="mt-10 text-center">
             <Link href="/solutions">
-              <Button variant="secondary" size="md" rightIcon={<ChevronRight className="w-4 h-4" />}>
+              <Button variant="secondary" size="md" className="rounded-full px-6" rightIcon={<ChevronRight className="w-4 h-4" />}>
                 Explore Full Industry Solutions Matrix
               </Button>
             </Link>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* 5. WHY ARAV — 4-TILE DIFFERENTIATOR GRID */}
-      <section className="py-20 md:py-28 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <section className="py-16 md:py-24 px-6 sm:px-12 rounded-[2.5rem] bg-[#FFFDF9] dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl transition-all duration-300">
           <ScrollReveal direction="up">
             <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
               <Badge variant="secondary" size="md">
                 Why Partner With Arav
               </Badge>
               <h2 className="text-3xl sm:text-4xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-                Engineered for Precision, Speed & Integrity
+                Engineered for Precision, Speed &amp; Integrity
               </h2>
               <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0]">
                 We eliminate the traditional disconnect between high-level management consulting and hands-on technical execution.
@@ -230,8 +230,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             {differentiators.map((diff, index) => (
               <ScrollReveal key={index} delay={index * 0.1} direction="up">
                 <TiltCard maxTilt={5} scale={1.01} className="h-full group">
-                  <div className="h-full rounded-3xl bg-[#FBF3EA]/60 dark:bg-[#1A1613] p-8 border border-[#EFE2D6] dark:border-[#2C241E] hover:bg-white dark:hover:bg-[#1F1A16] hover:shadow-xl transition-all duration-300 space-y-4">
-                    <div className="p-3.5 rounded-2xl icon-box-hover w-fit shadow-xs">
+                  <div className="h-full rounded-[2rem] bg-[#FBF3EA]/60 dark:bg-[#1A1613] p-8 border border-[#EFE2D6] dark:border-[#2C241E] hover:bg-white dark:hover:bg-[#1F1A16] hover:shadow-xl transition-all duration-300 space-y-4">
+                    <div className="p-3.5 rounded-2xl icon-box-hover w-fit shadow-xs text-[#E8672A]">
                       {diff.icon}
                     </div>
                     <h3 className="text-xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] transition-colors">
@@ -245,12 +245,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </ScrollReveal>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* 6. CASE STUDIES / RESULTS PREVIEW */}
-      <section className="py-20 bg-[#FBF3EA] dark:bg-[#161310] border-y border-[#EFE2D6] dark:border-[#2C241E] transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <section className="py-16 md:py-24 px-6 sm:px-12 rounded-[2.5rem] bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl transition-all duration-300">
           <ScrollReveal direction="up">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
               <div className="max-w-2xl space-y-3">
@@ -265,7 +265,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </p>
               </div>
               <Link href="/case-studies">
-                <Button variant="outline" size="md" rightIcon={<ArrowRight className="w-4 h-4" />}>
+                <Button variant="outline" size="md" className="rounded-full px-6 border-[#EFE2D6] dark:border-[#2C241E] hover:border-[#E8672A]" rightIcon={<ArrowRight className="w-4 h-4" />}>
                   All Case Studies
                 </Button>
               </Link>
@@ -279,12 +279,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </ScrollReveal>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* 7. HOW WE WORK — 5-STEP STAGGERED PROCESS TIMELINE */}
-      <section className="py-20 md:py-28 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300" id="process">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 w-full" id="process">
+        <section className="py-16 md:py-24 px-6 sm:px-12 rounded-[2.5rem] bg-[#FFFDF9] dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl transition-all duration-300">
           <ScrollReveal direction="up">
             <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
               <Badge variant="secondary" size="md">
@@ -300,12 +300,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </ScrollReveal>
 
           <ProcessTimeline />
-        </div>
-      </section>
+        </section>
+      </div>
 
-      {/* 8. TESTIMONIALS */}
-      <section className="py-20 bg-[#FBF3EA] dark:bg-[#161310] border-y border-[#EFE2D6] dark:border-[#2C241E] transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 8. WHAT THEY SAY (TESTIMONIALS) */}
+      <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <section className="py-16 md:py-24 px-6 sm:px-12 rounded-[2.5rem] bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl transition-all duration-300">
           <ScrollReveal direction="up">
             <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
               <Badge variant="secondary" size="md">
@@ -315,7 +315,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 What They Say
               </h2>
               <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0]">
-                Verified testimonials from CTOs, Engineering Heads, and Growth Directors across India and the GCC.
+                Verified testimonials from CTOs, Founders, and Marketing Heads partnering with Arav Innovations.
               </p>
             </div>
           </ScrollReveal>
@@ -323,12 +323,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <ScrollReveal direction="up" delay={0.2}>
             <TestimonialSlider />
           </ScrollReveal>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* 9. FINAL CTA SECTION & LEAD FORM */}
-      <section className="py-20 md:py-28 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300" id="contact">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 w-full" id="contact">
+        <section className="py-16 md:py-24 px-6 sm:px-12 rounded-[2.5rem] bg-[#FFFDF9] dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl transition-all duration-300">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Col: Messaging */}
             <div className="lg:col-span-5 space-y-6">
@@ -354,7 +354,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-3.5 h-3.5 text-[#E8672A]" />
-                      <span>Technical scope definition & preliminary milestone roadmap</span>
+                      <span>Technical scope definition &amp; preliminary milestone roadmap</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-3.5 h-3.5 text-[#E8672A]" />
@@ -372,8 +372,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </ScrollReveal>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }

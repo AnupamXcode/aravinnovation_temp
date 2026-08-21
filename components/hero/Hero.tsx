@@ -11,58 +11,60 @@ import {
   ShieldCheck,
   Zap,
   Globe2,
+  Sparkles,
 } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 
 export function Hero() {
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+    <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300 min-h-[90vh] flex items-center">
       {/* Soft Ambient Background 3D Glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[850px] md:h-[850px] bg-radial from-[#FCE3D3]/70 via-[#FBF3EA]/40 to-transparent dark:from-[#E8672A]/10 dark:via-[#1A1613]/50 dark:to-transparent rounded-full blur-3xl -z-10 pointer-events-none" />
-      <div className="absolute top-10 right-10 w-72 h-72 bg-[#F4A97F]/20 dark:bg-[#E8672A]/10 rounded-full blur-2xl -z-10 pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] md:w-[950px] md:h-[950px] bg-radial from-[#FCE3D3]/70 via-[#FBF3EA]/30 to-transparent dark:from-[#E8672A]/15 dark:via-[#1A1613]/40 dark:to-transparent rounded-full blur-3xl -z-10 pointer-events-none" />
+      <div className="absolute top-12 right-12 w-80 h-80 bg-[#F4A97F]/20 dark:bg-[#E8672A]/10 rounded-full blur-3xl -z-10 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Messaging & CTAs */}
-          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div className="lg:col-span-7 space-y-7 text-center lg:text-left">
             <ScrollReveal direction="up" delay={0.1}>
-              {/* Eyebrow */}
+              {/* Konrad-Style Eyebrow Pill Badge */}
               <div className="inline-flex items-center gap-2">
-                <Badge variant="secondary" size="md" className="py-1.5 px-3.5 border-[#E8672A]/30">
+                <div className="px-4 py-1.5 rounded-full bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-2 shadow-xs">
                   <span className="w-2 h-2 rounded-full bg-[#E8672A] animate-pulse" />
-                  <span className="text-[#3A2E27] dark:text-[#FAF5EE] font-semibold text-xs tracking-wider">
-                    RESULT-DRIVEN DIGITAL EXCELLENCE &bull; GLOBAL
+                  <span className="font-mono text-[11px] uppercase tracking-widest text-[#E8672A]">
+                    TECHNOLOGY &amp; GROWTH FOR TOMORROW
                   </span>
-                </Badge>
+                </div>
               </div>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.2}>
-              {/* Headline */}
-              <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight leading-[1.12]">
-                Shaping Online Futures & Scaling Enterprises{" "}
-                <span className="text-[#E8672A]">
+              {/* Konrad-Style Big Impact Headline */}
+              <h1 className="font-display font-extrabold text-4xl sm:text-6xl lg:text-[64px] text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight leading-[1.08]">
+                Shaping Online Futures &amp; Scaling Enterprises{" "}
+                <span className="text-[#E8672A] relative inline-block">
                   Globally
+                  <span className="absolute bottom-1 left-0 w-full h-1 bg-[#E8672A]/30 rounded-full" />
                 </span>
               </h1>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.3}>
               {/* Supporting Line */}
-              <p className="text-base sm:text-lg text-[#7A6A5F] dark:text-[#B8ACA0] max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-                Partner with Arav Innovations for IT strategy, full-stack software development, performance digital marketing, compliance, audits, and dedicated talent solutions engineered for business growth.
+              <p className="text-base sm:text-xl text-[#7A6A5F] dark:text-[#B8ACA0] max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                Partner with Arav Innovations for IT strategy, full-stack software development, performance digital marketing, compliance, audits, and dedicated talent solutions.
               </p>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.4}>
-              {/* Action Buttons */}
+              {/* Pill Action Buttons */}
               <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                 <Link href="/contact" className="w-full sm:w-auto">
                   <Button
                     variant="primary"
                     size="lg"
-                    className="w-full sm:w-auto shadow-md hover:shadow-xl hover:shadow-[#E8672A]/25"
-                    rightIcon={<ArrowRight className="w-4 h-4" />}
+                    className="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm shadow-lg hover:shadow-xl hover:shadow-[#E8672A]/25"
+                    rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
                     onClick={() => {
                       trackEvent({
                         type: "cta_click",
@@ -72,7 +74,7 @@ export function Hero() {
                       });
                     }}
                   >
-                    Contact Us →
+                    Contact Us
                   </Button>
                 </Link>
 
@@ -80,7 +82,7 @@ export function Hero() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="w-full sm:w-auto"
+                    className="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm border-[#EFE2D6] dark:border-[#2C241E] hover:border-[#E8672A]"
                     onClick={() => {
                       trackEvent({
                         type: "cta_click",
@@ -108,13 +110,13 @@ export function Hero() {
                 <div className="flex items-center gap-2">
                   <Globe2 className="w-4 h-4 text-[#E8672A] shrink-0" />
                   <span className="text-[10px] sm:text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] leading-tight">
-                    India, UAE, US, EU & Canada Operations
+                    India, UAE, US, EU &amp; Canada
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Zap className="w-4 h-4 text-[#E8672A] shrink-0" />
                   <span className="text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
-                    Engineering & ROI Led
+                    Engineering &amp; ROI Led
                   </span>
                 </div>
               </div>
