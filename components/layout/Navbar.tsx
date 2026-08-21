@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { BrandLogo } from "./BrandLogo";
+import { LanguageSelector } from "./LanguageSelector";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Button } from "@/components/ui/button";
 import {
@@ -314,38 +315,13 @@ export function Navbar() {
 
           {/* Right Utility Cluster: Language Switcher + Theme Toggle */}
           <div className="hidden lg:flex items-center gap-2.5">
-            {/* Language Switcher */}
-            <div className="relative group">
-              <button
-                type="button"
-                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold transition-all bg-[#FFFDF9] dark:bg-[#171411] hover:bg-[#FBF3EA] dark:hover:bg-[#221D18] border border-[#EFE2D6] dark:border-[#2C241E] text-[#3A2E27] dark:text-[#FAF5EE]"
-                aria-label="Language selection"
-              >
-                <span>EN</span>
-                <ChevronDown className="w-3 h-3 text-[#7A6A5F] dark:text-[#B8ACA0] group-hover:rotate-180 transition-transform duration-200" />
-              </button>
-
-              <div className="absolute top-full right-0 mt-1.5 w-44 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                <div className="rounded-2xl bg-[#FFFDF9] dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] p-2 shadow-xl space-y-1">
-                  <div className="flex items-center justify-between px-2.5 py-1.5 rounded-xl bg-[#FCE3D3]/60 dark:bg-[#2C221B] text-[#E8672A] text-xs font-semibold">
-                    <span>English</span>
-                    <span className="text-[10px] font-mono">EN</span>
-                  </div>
-                  <div className="px-2.5 py-1 text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0] text-center font-medium">
-                    More languages coming soon
-                  </div>
-                </div>
-              </div>
-            </div>
-
+            <LanguageSelector />
             <ThemeToggle />
           </div>
 
-          {/* Mobile Actions (Language Badge + Theme Toggle + Menu) */}
+          {/* Mobile Actions (Language Selector + Theme Toggle + Menu) */}
           <div className="flex lg:hidden items-center gap-1.5">
-            <div className="px-2 py-1 rounded-xl text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E]">
-              EN
-            </div>
+            <LanguageSelector />
             <ThemeToggle />
             <button
               type="button"

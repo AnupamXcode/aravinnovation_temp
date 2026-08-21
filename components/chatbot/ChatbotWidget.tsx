@@ -10,9 +10,11 @@ import { useSiteConfig } from "@/lib/site-config";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   findMatchingService,
+  findCombinationIntent,
   isGreeting,
   isBuyingIntent,
   servicesKnowledge,
+  ServiceKnowledge,
 } from "@/data/chatbot-knowledge";
 
 interface ChatMessage {
@@ -34,6 +36,7 @@ export function ChatbotWidget() {
 
   const [shouldShowLauncher, setShouldShowLauncher] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
+  const [lastMatchedService, setLastMatchedService] = React.useState<ServiceKnowledge | null>(null);
   const [messages, setMessages] = React.useState<ChatMessage[]>([
     {
       id: "welcome",
@@ -259,10 +262,24 @@ export function ChatbotWidget() {
         ],
       };
     } else {
-      // Task B2: Service-aware Keyword Match
-      const matchedService = findMatchingService(userText);
-      if (matchedService) {
-        // Check admin per-service maintenance state
+      const combo = findCombinationIntent(userText);
+      const matchedService = combo ? combo.service : findMatchingService(userText);
+      const activeService = matchedService || lastMatchedService;
+
+      if (combo) {
+        setLastMatchedService(combo.service);
+        botMsg = {
+          id: `bot-${Date.now()}`,
+          sender: "bot",
+          text: `**${combo.service.name} for ${combo.industryOrContext}**\n\n${combo.response}`,
+          options: [
+            { label: `Explore ${combo.service.name}`, action: "navigate", route: combo.route },
+            { label: "Start a Project", action: "start_project" },
+            { label: "Contact Us", action: "talk_advisor" },
+          ],
+        };
+      } else if (matchedService) {
+        setLastMatchedService(matchedService);
         const isEnabled = config.serviceStates[matchedService.slug] !== false;
 
         if (!isEnabled) {
@@ -287,6 +304,17 @@ export function ChatbotWidget() {
             ],
           };
         }
+      } else if (lastMatchedService && (userText.toLowerCase().includes("what kind") || userText.toLowerCase().includes("how can it help") || userText.toLowerCase().includes("details") || userText.toLowerCase().includes("more"))) {
+        botMsg = {
+          id: `bot-${Date.now()}`,
+          sender: "bot",
+          text: `Regarding **${lastMatchedService.name}**: ${lastMatchedService.description}\n\nWould you like to discuss your custom project requirements with an advisor?`,
+          options: [
+            { label: `Explore ${lastMatchedService.name}`, action: "navigate", route: lastMatchedService.route },
+            { label: "Start a Project", action: "start_project" },
+            { label: "Talk to Advisor", action: "talk_advisor" },
+          ],
+        };
       } else if (isBuyingIntent(userText)) {
         botMsg = {
           id: `bot-${Date.now()}`,

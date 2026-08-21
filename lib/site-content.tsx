@@ -47,6 +47,41 @@ export interface FooterContent {
   copyrightText: string;
 }
 
+export interface SocialLinkItem {
+  id: string;
+  name: string;
+  icon: string;
+  url: string;
+  enabled: boolean;
+  openNewTab: boolean;
+  order: number;
+  customLabel?: string;
+}
+
+export interface LanguageItem {
+  code: string;
+  name: string;
+  nativeName: string;
+  dir: "ltr" | "rtl";
+  enabled: boolean;
+  order: number;
+}
+
+export interface ChatbotIntentItem {
+  id: string;
+  name: string;
+  keywords: string[];
+  response: string;
+  ctaText?: string;
+  ctaRoute?: string;
+}
+
+export interface ChatbotKB {
+  defaultGreeting: string;
+  fallbackResponse: string;
+  intents: ChatbotIntentItem[];
+}
+
 export interface SEOContent {
   globalTitle: string;
   metaDescription: string;
@@ -68,8 +103,12 @@ export interface SiteContent {
   processSteps: ProcessStepItem[];
   testimonials: TestimonialItem[];
   footer: FooterContent;
+  socialLinks: SocialLinkItem[];
+  languages: LanguageItem[];
+  chatbotKB: ChatbotKB;
   seo: SEOContent;
   legal: LegalContent;
+  translations: Record<string, Record<string, string>>;
 }
 
 const defaultHero: HeroContent = {
@@ -155,6 +194,102 @@ const defaultTestimonials: TestimonialItem[] = [
   },
 ];
 
+const defaultSocialLinks: SocialLinkItem[] = [
+  {
+    id: "instagram",
+    name: "Instagram",
+    icon: "Instagram",
+    url: "https://www.instagram.com/aravinnovations",
+    enabled: true,
+    openNewTab: true,
+    order: 1,
+  },
+  {
+    id: "facebook",
+    name: "Facebook",
+    icon: "Facebook",
+    url: "https://www.facebook.com/people/Arav-Innovations/61566419637071/",
+    enabled: true,
+    openNewTab: true,
+    order: 2,
+  },
+  {
+    id: "linkedin",
+    name: "LinkedIn",
+    icon: "Linkedin",
+    url: "https://www.linkedin.com/company/aravinnovations/",
+    enabled: true,
+    openNewTab: true,
+    order: 3,
+  },
+  {
+    id: "whatsapp",
+    name: "WhatsApp",
+    icon: "MessageCircle",
+    url: "https://api.whatsapp.com/send?phone=919650625777",
+    enabled: true,
+    openNewTab: true,
+    order: 4,
+  },
+  {
+    id: "twitter",
+    name: "X / Twitter",
+    icon: "Twitter",
+    url: "https://x.com/AravInnovations",
+    enabled: true,
+    openNewTab: true,
+    order: 5,
+  },
+  {
+    id: "youtube",
+    name: "YouTube",
+    icon: "Youtube",
+    url: "https://www.youtube.com/@AravInnovations",
+    enabled: true,
+    openNewTab: true,
+    order: 6,
+  },
+];
+
+const defaultLanguages: LanguageItem[] = [
+  { code: "en", name: "English", nativeName: "English", dir: "ltr", enabled: true, order: 1 },
+  { code: "hi", name: "Hindi", nativeName: "हिन्दी", dir: "ltr", enabled: true, order: 2 },
+  { code: "ar", name: "Arabic", nativeName: "العربية", dir: "rtl", enabled: true, order: 3 },
+  { code: "fr", name: "French", nativeName: "Français", dir: "ltr", enabled: true, order: 4 },
+  { code: "es", name: "Spanish", nativeName: "Español", dir: "ltr", enabled: true, order: 5 },
+];
+
+const defaultChatbotKB: ChatbotKB = {
+  defaultGreeting: "Hey there! 👋 Welcome to Arav Innovations. How can our team help accelerate your project today?",
+  fallbackResponse: "Thank you for reaching out! I've noted your inquiry. Would you like to schedule an exploratory call with an IT strategy advisor?",
+  intents: [
+    {
+      id: "intent-web",
+      name: "Web & App Development",
+      keywords: ["website", "web app", "software", "nextjs", "react", "app"],
+      response: "We engineer subsecond Next.js web applications, SaaS platforms, and enterprise digital products built for scale.",
+      ctaText: "Explore Web Development",
+      ctaRoute: "/services/web-app-development",
+    },
+    {
+      id: "intent-marketing",
+      name: "Digital Marketing & SEO",
+      keywords: ["marketing", "seo", "leads", "demand gen", "linkedin", "google ads"],
+      response: "Our B2B performance marketing & technical SEO pods deliver closed-loop attribution and high-intent pipeline growth.",
+      ctaText: "Explore Digital Marketing",
+      ctaRoute: "/services/digital-marketing",
+    },
+    {
+      id: "intent-compliance",
+      name: "Risk & DPDP Compliance",
+      keywords: ["dpdp", "compliance", "soc-2", "security", "gdpr", "privacy"],
+      response: "We ensure full readiness with India's DPDP Act, SOC-2 data security, and enterprise privacy compliance.",
+      ctaText: "Explore Compliance",
+      ctaRoute: "/services/risk-governance-compliance",
+    },
+  ],
+};
+
 const defaultFooter: FooterContent = {
   indiaPhone: "+91 9650625777",
   uaePhone: "+971 521555792",
@@ -190,8 +325,12 @@ const defaultContent: SiteContent = {
   processSteps: defaultProcessSteps,
   testimonials: defaultTestimonials,
   footer: defaultFooter,
+  socialLinks: defaultSocialLinks,
+  languages: defaultLanguages,
+  chatbotKB: defaultChatbotKB,
   seo: defaultSEO,
   legal: defaultLegal,
+  translations: {},
 };
 
 interface SiteContentContextType {
@@ -203,8 +342,15 @@ interface SiteContentContextType {
   updateProcessStep: (idx: number, updated: Partial<ProcessStepItem>) => void;
   updateTestimonial: (idx: number, updated: Partial<TestimonialItem>) => void;
   updateFooter: (footer: Partial<FooterContent>) => void;
+  updateSocialLink: (id: string, updated: Partial<SocialLinkItem>) => void;
+  addSocialLink: (link: SocialLinkItem) => void;
+  deleteSocialLink: (id: string) => void;
+  updateLanguage: (code: string, updated: Partial<LanguageItem>) => void;
+  toggleLanguage: (code: string) => void;
+  updateChatbotKB: (kb: Partial<ChatbotKB>) => void;
   updateSEO: (seo: Partial<SEOContent>) => void;
   updateLegal: (legal: Partial<LegalContent>) => void;
+  updateTranslation: (locale: string, key: string, val: string) => void;
   resetAllContent: () => void;
 }
 
@@ -217,8 +363,15 @@ const SiteContentContext = React.createContext<SiteContentContextType>({
   updateProcessStep: () => {},
   updateTestimonial: () => {},
   updateFooter: () => {},
+  updateSocialLink: () => {},
+  addSocialLink: () => {},
+  deleteSocialLink: () => {},
+  updateLanguage: () => {},
+  toggleLanguage: () => {},
+  updateChatbotKB: () => {},
   updateSEO: () => {},
   updateLegal: () => {},
+  updateTranslation: () => {},
   resetAllContent: () => {},
 });
 
@@ -294,6 +447,48 @@ export function SiteContentProvider({ children }: { children: React.ReactNode })
     });
   };
 
+  const updateSocialLink = (id: string, updatedPartial: Partial<SocialLinkItem>) => {
+    const updatedSocials = content.socialLinks.map((s) =>
+      s.id === id ? { ...s, ...updatedPartial } : s
+    );
+    saveContent({ ...content, socialLinks: updatedSocials });
+  };
+
+  const addSocialLink = (link: SocialLinkItem) => {
+    saveContent({
+      ...content,
+      socialLinks: [...content.socialLinks, link],
+    });
+  };
+
+  const deleteSocialLink = (id: string) => {
+    saveContent({
+      ...content,
+      socialLinks: content.socialLinks.filter((s) => s.id !== id),
+    });
+  };
+
+  const updateLanguage = (code: string, updatedPartial: Partial<LanguageItem>) => {
+    const updatedLangs = content.languages.map((l) =>
+      l.code === code ? { ...l, ...updatedPartial } : l
+    );
+    saveContent({ ...content, languages: updatedLangs });
+  };
+
+  const toggleLanguage = (code: string) => {
+    const updatedLangs = content.languages.map((l) =>
+      l.code === code ? { ...l, enabled: !l.enabled } : l
+    );
+    saveContent({ ...content, languages: updatedLangs });
+  };
+
+  const updateChatbotKB = (kbPartial: Partial<ChatbotKB>) => {
+    saveContent({
+      ...content,
+      chatbotKB: { ...content.chatbotKB, ...kbPartial },
+    });
+  };
+
   const updateSEO = (seoPartial: Partial<SEOContent>) => {
     saveContent({
       ...content,
@@ -305,6 +500,17 @@ export function SiteContentProvider({ children }: { children: React.ReactNode })
     saveContent({
       ...content,
       legal: { ...content.legal, ...legalPartial },
+    });
+  };
+
+  const updateTranslation = (locale: string, key: string, val: string) => {
+    const currentLoc = content.translations[locale] || {};
+    saveContent({
+      ...content,
+      translations: {
+        ...content.translations,
+        [locale]: { ...currentLoc, [key]: val },
+      },
     });
   };
 
@@ -328,8 +534,15 @@ export function SiteContentProvider({ children }: { children: React.ReactNode })
         updateProcessStep,
         updateTestimonial,
         updateFooter,
+        updateSocialLink,
+        addSocialLink,
+        deleteSocialLink,
+        updateLanguage,
+        toggleLanguage,
+        updateChatbotKB,
         updateSEO,
         updateLegal,
+        updateTranslation,
         resetAllContent,
       }}
     >

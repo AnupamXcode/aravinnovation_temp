@@ -3,24 +3,15 @@
 import * as React from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useSiteConfig } from "@/lib/site-config";
-import { useSiteContent } from "@/lib/site-content";
+import { useSiteContent, SocialLinkItem, LanguageItem } from "@/lib/site-content";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import {
   Shield,
   MessageSquare,
   Layout,
-  Phone,
   RotateCcw,
-  CheckCircle2,
-  XCircle,
   Sparkles,
-  Sliders,
-  LogOut,
-  Server,
   Save,
-  Eye,
-  Plus,
-  Trash2,
   ExternalLink,
   Globe,
   Briefcase,
@@ -31,6 +22,12 @@ import {
   Share2,
   Search,
   ShieldCheck,
+  Languages,
+  Plus,
+  Trash2,
+  Eye,
+  CheckCircle2,
+  XCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -57,19 +54,29 @@ export default function AdminDashboardPage() {
     updateProcessStep,
     updateTestimonial,
     updateFooter,
+    updateSocialLink,
+    addSocialLink,
+    deleteSocialLink,
+    updateLanguage,
+    toggleLanguage,
+    updateChatbotKB,
     updateSEO,
-    updateLegal,
     resetAllContent,
   } = useSiteContent();
 
   const [activeTab, setActiveTab] = React.useState("dashboard");
+  const [searchQuery, setSearchQuery] = React.useState("");
   const [toastMessage, setToastMessage] = React.useState<string | null>(null);
 
-  // Local form states for active tab
+  // Local form states
   const [heroForm, setHeroForm] = React.useState(content.hero);
   const [footerForm, setFooterForm] = React.useState(content.footer);
   const [seoForm, setSeoForm] = React.useState(content.seo);
-  const [legalForm, setLegalForm] = React.useState(content.legal);
+  const [newSocialForm, setNewSocialForm] = React.useState({
+    name: "",
+    icon: "Globe",
+    url: "",
+  });
 
   React.useEffect(() => {
     if (!isAuthenticated) {
@@ -81,7 +88,6 @@ export default function AdminDashboardPage() {
     setHeroForm(content.hero);
     setFooterForm(content.footer);
     setSeoForm(content.seo);
-    setLegalForm(content.legal);
   }, [content]);
 
   if (!isAuthenticated) {
@@ -125,8 +131,8 @@ export default function AdminDashboardPage() {
 
       {/* Main CMS Editor Area */}
       <main className="flex-1 p-4 sm:p-8 lg:p-10 overflow-y-auto mt-14 lg:mt-0 space-y-8">
-        {/* Header Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl">
+        {/* Top Header Bar & Global Admin Search (Task T) */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <span className="p-2 rounded-xl bg-[#FCE3D3]/60 dark:bg-[#2C221B] text-[#E8672A]">
@@ -141,7 +147,19 @@ export default function AdminDashboardPage() {
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
+            {/* Global Admin Search Bar (Task T) */}
+            <div className="relative">
+              <Search className="w-4 h-4 text-[#7A6A5F] absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                placeholder="Search CMS settings..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-9 pr-3 py-2 rounded-xl text-xs bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] focus:border-[#E8672A] w-48 sm:w-60"
+              />
+            </div>
+
             <a
               href={`/${locale}`}
               target="_blank"
@@ -170,50 +188,18 @@ export default function AdminDashboardPage() {
         {/* TAB 1: DASHBOARD OVERVIEW */}
         {activeTab === "dashboard" && (
           <div className="space-y-8">
-            {/* Live Status Indicators */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {[
-                { label: "Website Status", value: "LIVE", active: true },
-                { label: "Chatbot Widget", value: config.chatbotEnabled ? "ENABLED" : "DISABLED", active: config.chatbotEnabled },
-                { label: "Animations", value: config.animationsEnabled ? "ENABLED" : "DISABLED", active: config.animationsEnabled },
-                { label: "Practices Active", value: `${Object.values(config.serviceStates || {}).filter(Boolean).length} / 8 ACTIVE`, active: true },
-              ].map((stat, idx) => (
-                <div
-                  key={idx}
-                  className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm flex flex-col justify-between space-y-2"
-                >
-                  <span className="text-xs font-mono text-[#7A6A5F] dark:text-[#B8ACA0] uppercase">
-                    {stat.label}
-                  </span>
-                  <div className="flex items-center justify-between">
-                    <span className="text-base font-extrabold font-display">
-                      {stat.value}
-                    </span>
-                    <span
-                      className={`w-3 h-3 rounded-full ${
-                        stat.active ? "bg-emerald-500 animate-pulse" : "bg-rose-500"
-                      }`}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Quick Action Shortcuts */}
+            {/* Quick Actions Shortcuts (Task S) */}
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-4">
               <h2 className="text-base font-bold font-display flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-[#E8672A]" />
-                <span>Quick Content Management Shortcuts</span>
+                <span>Quick Actions Shortcuts</span>
               </h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
                 {[
-                  { label: "Edit Hero & Positioning", tab: "hero" },
+                  { label: "Edit Hero Text", tab: "hero" },
                   { label: "Manage 7 Practices", tab: "services" },
-                  { label: "Edit Industry Verticals", tab: "industries" },
-                  { label: "Manage Case Studies", tab: "casestudies" },
-                  { label: "Edit 5-Step Process", tab: "methodology" },
-                  { label: "Manage Testimonials", tab: "testimonials" },
-                  { label: "Footer & Social Links", tab: "footer" },
+                  { label: "Manage Social URLs", tab: "socials" },
+                  { label: "Languages & RTL", tab: "languages" },
                   { label: "Chatbot Settings", tab: "chatbot" },
                 ].map((act, i) => (
                   <button
@@ -228,44 +214,29 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
-            {/* Section Visibility Toggles */}
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-4">
-              <h2 className="text-base font-bold font-display flex items-center gap-2">
-                <Layout className="w-4 h-4 text-[#E8672A]" />
-                <span>Homepage Section Visibilities</span>
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                {[
-                  { key: "trustedClientsVisible", label: "Moving Client Logo Strip" },
-                  { key: "servicesVisible", label: "7 Core Practices Grid" },
-                  { key: "industriesVisible", label: "Industry Verticals Matrix" },
-                  { key: "processVisible", label: "5-Step Execution Timeline" },
-                  { key: "testimonialsVisible", label: "Client Testimonials Slider" },
-                  { key: "caseStudiesVisible", label: "Featured Case Studies" },
-                ].map((sec) => {
-                  const isVis = config[sec.key as keyof typeof config] !== false;
-                  return (
-                    <div
-                      key={sec.key}
-                      className="flex items-center justify-between p-3.5 rounded-2xl bg-[#FBF3EA] dark:bg-[#1A1613]"
-                    >
-                      <span className="text-xs font-bold">{sec.label}</span>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          updateConfig(sec.key as any, !isVis);
-                          showToast(`${sec.label} ${!isVis ? "Visible" : "Hidden"}`);
-                        }}
-                        className={`px-3 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                          isVis ? "bg-emerald-500 text-white" : "bg-[#EFE2D6] dark:bg-[#2C241E] text-[#7A6A5F]"
-                        }`}
-                      >
-                        {isVis ? "Visible" : "Hidden"}
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
+            {/* Live Status Indicators */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                { label: "Website Status", value: "LIVE", active: true },
+                { label: "Active Social Links", value: `${(content.socialLinks || []).filter((s) => s.enabled).length} ACTIVE`, active: true },
+                { label: "Languages Enabled", value: `${(content.languages || []).filter((l) => l.enabled).length} ACTIVE`, active: true },
+                { label: "Practices Active", value: `${Object.values(config.serviceStates || {}).filter(Boolean).length} / 8 ACTIVE`, active: true },
+              ].map((stat, idx) => (
+                <div
+                  key={idx}
+                  className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm flex flex-col justify-between space-y-2"
+                >
+                  <span className="text-xs font-mono text-[#7A6A5F] dark:text-[#B8ACA0] uppercase">
+                    {stat.label}
+                  </span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-base font-extrabold font-display">
+                      {stat.value}
+                    </span>
+                    <span className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse" />
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         )}
@@ -292,7 +263,7 @@ export default function AdminDashboardPage() {
                   type="text"
                   value={heroForm.eyebrow}
                   onChange={(e) => setHeroForm({ ...heroForm, eyebrow: e.target.value })}
-                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE]"
+                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
                 />
               </div>
 
@@ -302,7 +273,7 @@ export default function AdminDashboardPage() {
                   rows={2}
                   value={heroForm.title}
                   onChange={(e) => setHeroForm({ ...heroForm, title: e.target.value })}
-                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE]"
+                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
                 />
               </div>
 
@@ -312,29 +283,8 @@ export default function AdminDashboardPage() {
                   rows={3}
                   value={heroForm.description}
                   onChange={(e) => setHeroForm({ ...heroForm, description: e.target.value })}
-                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE]"
+                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
                 />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold">Primary CTA Button Text</label>
-                  <input
-                    type="text"
-                    value={heroForm.primaryCtaText}
-                    onChange={(e) => setHeroForm({ ...heroForm, primaryCtaText: e.target.value })}
-                    className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold">Primary CTA Link URL</label>
-                  <input
-                    type="text"
-                    value={heroForm.primaryCtaUrl}
-                    onChange={(e) => setHeroForm({ ...heroForm, primaryCtaUrl: e.target.value })}
-                    className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                  />
-                </div>
               </div>
 
               <Button type="submit" variant="primary" size="md" className="rounded-xl" leftIcon={<Save className="w-4 h-4" />}>
@@ -344,436 +294,211 @@ export default function AdminDashboardPage() {
           </div>
         )}
 
-        {/* TAB 3: 7 CORE PRACTICES MANAGER */}
-        {activeTab === "services" && (
+        {/* TAB 3: SOCIAL MEDIA & DIGITAL PRESENCE MANAGER (Tasks C & D) */}
+        {activeTab === "socials" && (
           <div className="space-y-6">
-            <div className="flex items-center justify-between p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl">
-              <div>
-                <h2 className="text-lg font-bold font-display flex items-center gap-2">
-                  <Briefcase className="w-5 h-5 text-[#E8672A]" />
-                  <span>7 Core Practices / Services Manager</span>
-                </h2>
-                <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] mt-0.5">
-                  Edit titles, descriptions, capabilities, and Maintenance Mode status
-                </p>
-              </div>
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+              <h2 className="text-lg font-bold font-display flex items-center gap-2">
+                <Share2 className="w-5 h-5 text-[#E8672A]" />
+                <span>Social Media &amp; Digital Presence Manager</span>
+              </h2>
+              <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+                Add, edit, enable/disable, or remove social channels and digital presence links dynamically
+              </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {content.services.map((svc) => {
-                const isEnabled = config.serviceStates?.[svc.slug] !== false;
-                return (
-                  <div
-                    key={svc.slug}
-                    className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-4"
-                  >
-                    <div className="flex items-center justify-between pb-3 border-b border-[#EFE2D6] dark:border-[#2C241E]">
-                      <span className="text-sm font-bold font-display text-[#E8672A]">
-                        {svc.title}
-                      </span>
+            {/* Social Links List */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {(content.socialLinks || []).map((social) => (
+                <div
+                  key={social.id}
+                  className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-3"
+                >
+                  <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                    <span className="text-xs font-bold font-display text-[#E8672A]">
+                      {social.name}
+                    </span>
+                    <div className="flex items-center gap-2">
                       <button
                         type="button"
                         onClick={() => {
-                          toggleServiceState(svc.slug);
-                          showToast(`${svc.title} status updated`);
+                          updateSocialLink(social.id, { enabled: !social.enabled });
+                          showToast(`${social.name} ${!social.enabled ? "Enabled" : "Disabled"}`);
                         }}
-                        className={`text-xs px-3 py-1 rounded-xl font-bold transition-all cursor-pointer ${
-                          isEnabled ? "bg-emerald-500 text-white" : "bg-amber-500 text-white"
+                        className={`px-3 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                          social.enabled ? "bg-emerald-500 text-white" : "bg-rose-500 text-white"
                         }`}
                       >
-                        {isEnabled ? "Active" : "Maintenance"}
+                        {social.enabled ? "Enabled" : "Disabled"}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          deleteSocialLink(social.id);
+                          showToast(`${social.name} deleted`);
+                        }}
+                        className="p-1 text-rose-500 hover:bg-rose-500/10 rounded-lg"
+                      >
+                        <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
-
-                    <div className="space-y-2">
-                      <label className="text-[11px] font-bold">Short Description</label>
-                      <textarea
-                        rows={2}
-                        value={svc.description}
-                        onChange={(e) => updateService(svc.slug, { description: e.target.value })}
-                        className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-[11px] font-bold">Key Capabilities (Category: items; Category2: items)</label>
-                      <input
-                        type="text"
-                        value={svc.capabilities.map((c) => `${c.category}: ${c.items.join(", ")}`).join("; ")}
-                        onChange={(e) => {
-                          const categories = e.target.value.split(";").map((catStr) => {
-                            const parts = catStr.split(":");
-                            const catName = (parts[0] || "Capability").trim();
-                            const items = (parts[1] || "").split(",").map((i) => i.trim()).filter(Boolean);
-                            return { category: catName, items };
-                          });
-                          updateService(svc.slug, { capabilities: categories });
-                        }}
-                        className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                      />
-                    </div>
-
-                    <div className="pt-2 flex justify-between items-center text-xs">
-                      <a
-                        href={`/services/${svc.slug}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[#E8672A] font-semibold hover:underline inline-flex items-center gap-1"
-                      >
-                        Preview Service Page &rarr;
-                      </a>
-                    </div>
                   </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
 
-        {/* TAB 4: INDUSTRY SOLUTIONS MANAGER */}
-        {activeTab === "industries" && (
-          <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl">
-              <h2 className="text-lg font-bold font-display flex items-center gap-2">
-                <Building2 className="w-5 h-5 text-[#E8672A]" />
-                <span>Industry Verticals Matrix Manager</span>
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {content.industries.map((ind) => (
-                <div
-                  key={ind.slug}
-                  className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-4"
-                >
                   <div className="space-y-1">
-                    <label className="text-[11px] font-bold">Vertical Name</label>
+                    <label className="text-[11px] font-bold">Target URL</label>
                     <input
-                      type="text"
-                      value={ind.name}
-                      onChange={(e) => updateIndustry(ind.slug, { name: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                    />
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="text-[11px] font-bold">Description</label>
-                    <textarea
-                      rows={3}
-                      value={ind.description}
-                      onChange={(e) => updateIndustry(ind.slug, { description: e.target.value })}
+                      type="url"
+                      value={social.url}
+                      onChange={(e) => updateSocialLink(social.id, { url: e.target.value })}
                       className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-        )}
 
-        {/* TAB 5: CASE STUDIES MANAGER */}
-        {activeTab === "casestudies" && (
-          <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl">
-              <h2 className="text-lg font-bold font-display flex items-center gap-2">
-                <FileText className="w-5 h-5 text-[#E8672A]" />
-                <span>Enterprise Case Studies Manager</span>
-              </h2>
-            </div>
+            {/* Add New Social Platform Form */}
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-4">
+              <h3 className="text-sm font-bold font-display flex items-center gap-2">
+                <Plus className="w-4 h-4 text-[#E8672A]" />
+                <span>Add New Social / Digital Platform</span>
+              </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {content.caseStudies.map((cs) => (
-                <div
-                  key={cs.slug}
-                  className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-4"
-                >
-                  <div className="space-y-1">
-                    <label className="text-[11px] font-bold">Case Study Title</label>
-                    <input
-                      type="text"
-                      value={cs.title}
-                      onChange={(e) => updateCaseStudy(cs.slug, { title: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                    />
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="text-[11px] font-bold">Client Name</label>
-                    <input
-                      type="text"
-                      value={cs.client}
-                      onChange={(e) => updateCaseStudy(cs.slug, { client: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* TAB 6: METHODOLOGY MANAGER */}
-        {activeTab === "methodology" && (
-          <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl">
-              <h2 className="text-lg font-bold font-display flex items-center gap-2">
-                <Workflow className="w-5 h-5 text-[#E8672A]" />
-                <span>5-Step Execution Methodology Manager</span>
-              </h2>
-            </div>
-
-            <div className="space-y-4">
-              {content.processSteps.map((step, idx) => (
-                <div
-                  key={idx}
-                  className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl grid grid-cols-1 md:grid-cols-3 gap-4"
-                >
-                  <div className="space-y-1">
-                    <label className="text-[11px] font-bold">Step {step.step} Title</label>
-                    <input
-                      type="text"
-                      value={step.title}
-                      onChange={(e) => updateProcessStep(idx, { title: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <label className="text-[11px] font-bold">Description</label>
-                    <input
-                      type="text"
-                      value={step.description}
-                      onChange={(e) => updateProcessStep(idx, { description: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <label className="text-[11px] font-bold">Deliverable Badge</label>
-                    <input
-                      type="text"
-                      value={step.deliverable}
-                      onChange={(e) => updateProcessStep(idx, { deliverable: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* TAB 7: TESTIMONIALS MANAGER */}
-        {activeTab === "testimonials" && (
-          <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl">
-              <h2 className="text-lg font-bold font-display flex items-center gap-2">
-                <Quote className="w-5 h-5 text-[#E8672A]" />
-                <span>Client Testimonials Manager</span>
-              </h2>
-            </div>
-
-            <div className="space-y-4">
-              {content.testimonials.map((t, idx) => (
-                <div
-                  key={t.id}
-                  className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-4"
-                >
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="space-y-1">
-                      <label className="text-[11px] font-bold">Author Name</label>
-                      <input
-                        type="text"
-                        value={t.author}
-                        onChange={(e) => updateTestimonial(idx, { author: e.target.value })}
-                        className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                      />
-                    </div>
-                    <div className="space-y-1">
-                      <label className="text-[11px] font-bold">Role &amp; Company</label>
-                      <input
-                        type="text"
-                        value={`${t.role}, ${t.company}`}
-                        onChange={(e) => updateTestimonial(idx, { role: e.target.value.split(",")[0], company: e.target.value.split(",")[1] || "" })}
-                        className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                      />
-                    </div>
-                    <div className="space-y-1">
-                      <label className="text-[11px] font-bold">Location</label>
-                      <input
-                        type="text"
-                        value={t.location}
-                        onChange={(e) => updateTestimonial(idx, { location: e.target.value })}
-                        className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="text-[11px] font-bold">Quote Text</label>
-                    <textarea
-                      rows={2}
-                      value={t.quote}
-                      onChange={(e) => updateTestimonial(idx, { quote: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* TAB 8: FOOTER & SOCIAL LINKS */}
-        {activeTab === "footer" && (
-          <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-6">
-            <h2 className="text-lg font-bold font-display flex items-center gap-2">
-              <Share2 className="w-5 h-5 text-[#E8672A]" />
-              <span>Footer, Regional Offices &amp; Social Links</span>
-            </h2>
-
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                updateFooter(footerForm);
-                showToast("Footer and contact links saved successfully");
-              }}
-              className="space-y-4"
-            >
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold">India Regional Phone</label>
-                  <input
-                    type="text"
-                    value={footerForm.indiaPhone}
-                    onChange={(e) => setFooterForm({ ...footerForm, indiaPhone: e.target.value })}
-                    className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold">UAE Regional Phone</label>
-                  <input
-                    type="text"
-                    value={footerForm.uaePhone}
-                    onChange={(e) => setFooterForm({ ...footerForm, uaePhone: e.target.value })}
-                    className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold">Support Email</label>
-                  <input
-                    type="email"
-                    value={footerForm.supportEmail}
-                    onChange={(e) => setFooterForm({ ...footerForm, supportEmail: e.target.value })}
-                    className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold">LinkedIn Company URL</label>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <input
+                  type="text"
+                  placeholder="Platform Name (e.g. GitHub)"
+                  value={newSocialForm.name}
+                  onChange={(e) => setNewSocialForm({ ...newSocialForm, name: e.target.value })}
+                  className="text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                />
                 <input
                   type="url"
-                  value={footerForm.linkedinUrl}
-                  onChange={(e) => setFooterForm({ ...footerForm, linkedinUrl: e.target.value })}
-                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                  placeholder="Platform URL (https://...)"
+                  value={newSocialForm.url}
+                  onChange={(e) => setNewSocialForm({ ...newSocialForm, url: e.target.value })}
+                  className="text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
                 />
+                <Button
+                  type="button"
+                  variant="primary"
+                  size="md"
+                  onClick={() => {
+                    if (!newSocialForm.name || !newSocialForm.url) return;
+                    addSocialLink({
+                      id: newSocialForm.name.toLowerCase().replace(/\s+/g, "-"),
+                      name: newSocialForm.name,
+                      icon: newSocialForm.icon,
+                      url: newSocialForm.url,
+                      enabled: true,
+                      openNewTab: true,
+                      order: (content.socialLinks || []).length + 1,
+                    });
+                    setNewSocialForm({ name: "", icon: "Globe", url: "" });
+                    showToast(`${newSocialForm.name} platform added`);
+                  }}
+                  className="rounded-xl"
+                  leftIcon={<Plus className="w-4 h-4" />}
+                >
+                  Add Platform
+                </Button>
               </div>
-
-              <Button type="submit" variant="primary" size="md" className="rounded-xl" leftIcon={<Save className="w-4 h-4" />}>
-                Save Footer &amp; Contact Info
-              </Button>
-            </form>
+            </div>
           </div>
         )}
 
-        {/* TAB 9: CHATBOT CONTROL CENTER */}
+        {/* TAB 4: LANGUAGES & MULTILINGUAL MANAGER (Tasks L, O, P) */}
+        {activeTab === "languages" && (
+          <div className="space-y-6">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+              <h2 className="text-lg font-bold font-display flex items-center gap-2">
+                <Languages className="w-5 h-5 text-[#E8672A]" />
+                <span>Languages &amp; Multilingual System Manager</span>
+              </h2>
+              <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+                Control active languages, LTR/RTL layout direction, and language availability
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {(content.languages || []).map((lang) => (
+                <div
+                  key={lang.code}
+                  className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-3"
+                >
+                  <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-bold font-mono uppercase text-[#E8672A]">
+                        {lang.code}
+                      </span>
+                      <span className="text-sm font-bold font-display">
+                        {lang.name} ({lang.nativeName})
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        toggleLanguage(lang.code);
+                        showToast(`${lang.name} ${!lang.enabled ? "Enabled" : "Disabled"}`);
+                      }}
+                      className={`px-3 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                        lang.enabled ? "bg-emerald-500 text-white" : "bg-rose-500 text-white"
+                      }`}
+                    >
+                      {lang.enabled ? "Enabled" : "Disabled"}
+                    </button>
+                  </div>
+
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-semibold text-[#7A6A5F]">Direction:</span>
+                    <span className="font-bold uppercase font-mono">{lang.dir}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 5: CHATBOT KNOWLEDGE BASE (Tasks E, F, G, H, I) */}
         {activeTab === "chatbot" && (
           <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-6">
             <h2 className="text-lg font-bold font-display flex items-center gap-2">
               <MessageSquare className="w-5 h-5 text-[#E8672A]" />
-              <span>Arav Assistant Chatbot Control Center</span>
+              <span>Arav Assistant Chatbot Knowledge Base</span>
             </h2>
 
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#1A1613]">
-                <div>
-                  <div className="text-sm font-bold">Global Chatbot Launcher</div>
-                  <div className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
-                    Toggle assistant visibility on the public website
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    updateConfig("chatbotEnabled", !config.chatbotEnabled);
-                    showToast(`Chatbot ${!config.chatbotEnabled ? "Enabled" : "Disabled"}`);
-                  }}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
-                    config.chatbotEnabled ? "bg-[#E8672A] text-white" : "bg-[#EFE2D6] dark:bg-[#2C241E] text-[#7A6A5F]"
-                  }`}
-                >
-                  {config.chatbotEnabled ? "Enabled" : "Disabled"}
-                </button>
-              </div>
-
-              <div className="space-y-2 p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#1A1613]">
-                <div className="flex justify-between items-center text-xs font-bold">
-                  <span>Idle Trigger Delay (Seconds)</span>
-                  <span className="text-[#E8672A]">{config.chatbotDelaySeconds}s</span>
-                </div>
-                <input
-                  type="range"
-                  min={3}
-                  max={30}
-                  step={1}
-                  value={config.chatbotDelaySeconds}
-                  onChange={(e) => updateConfig("chatbotDelaySeconds", Number(e.target.value))}
-                  className="w-full accent-[#E8672A] cursor-pointer"
-                />
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* TAB 10: GLOBAL SEO & LEGAL */}
-        {activeTab === "seo" && (
-          <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-6">
-            <h2 className="text-lg font-bold font-display flex items-center gap-2">
-              <Search className="w-5 h-5 text-[#E8672A]" />
-              <span>Global SEO &amp; Meta Settings</span>
-            </h2>
-
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                updateSEO(seoForm);
-                showToast("Global SEO metadata saved successfully");
-              }}
-              className="space-y-4"
-            >
               <div className="space-y-1.5">
-                <label className="text-xs font-bold">Global Title Tag</label>
+                <label className="text-xs font-bold">Default Greeting Message</label>
                 <input
                   type="text"
-                  value={seoForm.globalTitle}
-                  onChange={(e) => setSeoForm({ ...seoForm, globalTitle: e.target.value })}
+                  value={content.chatbotKB?.defaultGreeting || ""}
+                  onChange={(e) => updateChatbotKB({ defaultGreeting: e.target.value })}
                   className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-bold">Global Meta Description</label>
+                <label className="text-xs font-bold">Fallback Response</label>
                 <textarea
-                  rows={3}
-                  value={seoForm.metaDescription}
-                  onChange={(e) => setSeoForm({ ...seoForm, metaDescription: e.target.value })}
+                  rows={2}
+                  value={content.chatbotKB?.fallbackResponse || ""}
+                  onChange={(e) => updateChatbotKB({ fallbackResponse: e.target.value })}
                   className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
                 />
               </div>
 
-              <Button type="submit" variant="primary" size="md" className="rounded-xl" leftIcon={<Save className="w-4 h-4" />}>
-                Save SEO Metadata
+              <Button
+                type="button"
+                variant="primary"
+                size="md"
+                onClick={() => showToast("Chatbot Knowledge Base saved")}
+                className="rounded-xl"
+                leftIcon={<Save className="w-4 h-4" />}
+              >
+                Save Knowledge Base
               </Button>
-            </form>
+            </div>
           </div>
         )}
       </main>

@@ -1,0 +1,38 @@
+{
+  "Navigation": {
+    "whatWeDo": "Nos Services",
+    "sevenServices": "Nos 7 Domaines d'Expertise",
+    "viewAllServices": "Voir Tous les Services",
+    "products": "Produits",
+    "workingWithUs": "Travailler Avec Nous",
+    "process": "Notre Processus en 5 Étapes",
+    "testimonials": "Témoignages Clients",
+    "solutions": "Solutions Sectorielles",
+    "caseStudies": "Études de Cas",
+    "insights": "Blog & Insights",
+    "careers": "Carrières",
+    "about": "À Propos",
+    "contact": "Contact & Demandes",
+    "contactUs": "Contactez-nous",
+    "talkToExpert": "Parler à un Expert"
+  },
+  "Hero": {
+    "eyebrow": "EXCELLENCE NUMÉRIQUE AXÉE SUR LES RÉSULTATS • MONDIAL",
+    "headlinePrefix": "Façonner l'Avenir Numérique et Développer les Entreprises",
+    "headlineHighlight": "À l'Échelle Mondiale",
+    "supportingText": "Partenaire d'Arav Innovations pour la stratégie IT, le développement logiciel full-stack, le marketing digital et la conformité des données.",
+    "contactCta": "Contactez-nous →",
+    "exploreCta": "Découvrir nos 7 Expertises",
+    "badgeScalability": "Scalabilité Entreprise",
+    "badgeSla": "Garantie SLA Stricte",
+    "badgeIp": "Propriété Intellectuelle 100% Client"
+  },
+  "Footer": {
+    "tagline": "Arav Innovations est un cabinet multidisciplinaire de technologie, de stratégie et de croissance numérique accompagnant des entreprises mondiales.",
+    "practicesHeading": "Nos 7 Expertises",
+    "companyHeading": "Entreprise & Gouvernance",
+    "presenceHeading": "Présence Mondiale",
+    "operatingGlobally": "Présence Internationale",
+    "rights": "Tous droits réservés."
+  }
+}

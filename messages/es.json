@@ -1,0 +1,38 @@
+{
+  "Navigation": {
+    "whatWeDo": "Qué Hacemos",
+    "sevenServices": "Nuestras 7 Prácticas Principales",
+    "viewAllServices": "Ver Todos los Servicios",
+    "products": "Productos",
+    "workingWithUs": "Trabaja Con Nosotros",
+    "process": "Proceso de 5 Pasos",
+    "testimonials": "Testimonios de Clientes",
+    "solutions": "Soluciones Sectoriales",
+    "caseStudies": "Casos de Éxito",
+    "insights": "Blog e Insights",
+    "careers": "Carreras",
+    "about": "Sobre Nosotros",
+    "contact": "Contacto y Consultas",
+    "contactUs": "Contáctanos",
+    "talkToExpert": "Hablar con un Experto"
+  },
+  "Hero": {
+    "eyebrow": "EXCELENCIA DIGITAL ORIENTADA A RESULTADOS • GLOBAL",
+    "headlinePrefix": "Construyendo el Futuro Digital y Escalando Empresas",
+    "headlineHighlight": "A Nivel Global",
+    "supportingText": "Asóciese con Arav Innovations para estrategia de TI, desarrollo de software full-stack, marketing digital de alto rendimiento y cumplimiento de datos.",
+    "contactCta": "Contáctanos →",
+    "exploreCta": "Explorar 7 Prácticas",
+    "badgeScalability": "Escalabilidad Empresarial",
+    "badgeSla": "Protección de SLA",
+    "badgeIp": "Propiedad Intelectual 100% del Cliente"
+  },
+  "Footer": {
+    "tagline": "Arav Innovations es una firma multidisciplinaria de tecnología, estrategia y crecimiento digital que colabora con empresas líderes a nivel mundial.",
+    "practicesHeading": "Nuestras 7 Prácticas",
+    "companyHeading": "Empresa y Gobernanza",
+    "presenceHeading": "Presencia Global",
+    "operatingGlobally": "Operando a Nivel Global",
+    "rights": "Todos los derechos reservados."
+  }
+}

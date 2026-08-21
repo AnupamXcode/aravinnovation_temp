@@ -19,6 +19,8 @@ import {
   ChevronRight,
   Menu,
   X,
+  Languages,
+  Zap,
 } from "lucide-react";
 import { BrandLogo } from "@/components/layout/BrandLogo";
 import { cn } from "@/lib/utils";
@@ -56,15 +58,22 @@ export function AdminSidebar({
       ],
     },
     {
+      groupLabel: "DIGITAL PRESENCE & SOCIAL",
+      items: [
+        { id: "socials", label: "Social Media & URLs", icon: Share2 },
+      ],
+    },
+    {
       groupLabel: "COMMUNICATION",
       items: [
-        { id: "chatbot", label: "Chatbot Control Center", icon: MessageSquare },
+        { id: "chatbot", label: "Chatbot & Knowledge Base", icon: MessageSquare },
         { id: "contact", label: "Contact Info & Leads", icon: PhoneCall },
       ],
     },
     {
-      groupLabel: "SEO & LEGAL",
+      groupLabel: "LOCALIZATION & SEO",
       items: [
+        { id: "languages", label: "Languages & RTL", icon: Languages },
         { id: "seo", label: "Global SEO & Metadata", icon: Search },
         { id: "legal", label: "Legal & DPDP Content", icon: ShieldCheck },
       ],
@@ -72,7 +81,7 @@ export function AdminSidebar({
     {
       groupLabel: "SYSTEM",
       items: [
-        { id: "system", label: "Maintenance & Controls", icon: SlidersHorizontal },
+        { id: "system", label: "Maintenance Controls", icon: SlidersHorizontal },
       ],
     },
   ];

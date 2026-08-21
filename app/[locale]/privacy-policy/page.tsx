@@ -2,6 +2,7 @@ import * as React from "react";
 import { setRequestLocale } from "next-intl/server";
 import { ShieldCheck, Mail, Phone, MapPin, ChevronRight, FileText } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 
 export const metadata = {
   title: "Privacy Policy | Arav Innovations",
@@ -32,19 +33,21 @@ export default async function PrivacyPolicyPage({
 
   return (
     <div className="py-24 md:py-32 bg-[#FFFDF9] dark:bg-[#12100E] min-h-screen">
-      <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 space-y-12">
         {/* Policy Header */}
-        <div className="space-y-4 max-w-3xl">
-          <Badge variant="secondary" size="md" className="rounded-full px-4">
-            Legal &amp; Compliance
-          </Badge>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight">
-            Privacy Policy
-          </h1>
-          <p className="text-sm font-mono font-semibold text-[#E8672A]">
-            Privacy Policy for Arav Innovation &bull; Effective Date: 27th Dec 2024
-          </p>
-        </div>
+        <ScrollReveal direction="up" delay={0.05}>
+          <div className="space-y-4 max-w-3xl">
+            <Badge variant="secondary" size="md" className="rounded-full px-4">
+              Legal &amp; Compliance
+            </Badge>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight">
+              Privacy Policy
+            </h1>
+            <p className="text-sm font-mono font-semibold text-[#E8672A]">
+              Privacy Policy for Arav Innovations &bull; Effective Date: 27th Dec 2024
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* 2-Column Desktop Architecture with Sticky Table of Contents */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E]">
@@ -59,10 +62,10 @@ export default async function PrivacyPolicyPage({
                 <a
                   key={sec.id}
                   href={`#${sec.id}`}
-                  className="flex items-center justify-between p-2 rounded-xl text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:bg-white dark:hover:bg-[#221D18] transition-all font-medium group"
+                  className="flex items-center justify-between p-2.5 rounded-xl text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:bg-white dark:hover:bg-[#221D18] transition-all font-semibold group"
                 >
                   <span className="truncate">{sec.title}</span>
-                  <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#E8672A]" />
+                  <ChevronRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all text-[#E8672A]" />
                 </a>
               ))}
             </nav>
@@ -71,191 +74,77 @@ export default async function PrivacyPolicyPage({
           {/* Right Column: Policy Document Body */}
           <div className="lg:col-span-8 p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-10 text-sm text-[#3A2E27] dark:text-[#FAF5EE] leading-relaxed">
             <p className="text-base text-[#7A6A5F] dark:text-[#B8ACA0]">
-              At Arav Innovation, your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your personal information when you use our website, services, or engage with us in any capacity. By using our services, you agree to the terms outlined in this Privacy Policy.
+              At Arav Innovations, your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your personal information when you use our website, services, or engage with us in any capacity. By using our services, you agree to the terms outlined in this Privacy Policy.
             </p>
 
             {/* 1. Information We Collect */}
-            <section id="info-we-collect" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
-              <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-                1. Information We Collect
-              </h2>
-              <div className="space-y-3 pl-2">
-                <h3 className="font-semibold text-[#E8672A]">1.1 Information You Provide to Us</h3>
-                <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">We may collect the following personal information directly from you:</p>
-                <ul className="list-disc pl-5 space-y-1.5 text-[#7A6A5F] dark:text-[#B8ACA0]">
-                  <li>Name, email address, phone number, and mailing address</li>
-                  <li>Business or company name</li>
-                  <li>Payment details for billing purposes</li>
-                  <li>Information shared through forms, surveys, or email communications</li>
-                </ul>
-              </div>
-
-              <div className="space-y-3 pl-2 pt-2">
-                <h3 className="font-semibold text-[#E8672A]">1.2 Information Collected Automatically</h3>
-                <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">When you visit our website or interact with our services, we may collect the following information:</p>
-                <ul className="list-disc pl-5 space-y-1.5 text-[#7A6A5F] dark:text-[#B8ACA0]">
-                  <li>IP address and browser type</li>
-                  <li>Device type and operating system</li>
-                  <li>Pages visited, time spent on pages, and other usage statistics</li>
-                  <li>Cookies and similar tracking technologies (see Section 6 for details)</li>
-                </ul>
-              </div>
-
-              <div className="space-y-3 pl-2 pt-2">
-                <h3 className="font-semibold text-[#E8672A]">1.3 Information from Third Parties</h3>
-                <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">
-                  We may receive information about you from third-party platforms (e.g., social media platforms) or partners when you interact with our content or services through these platforms.
-                </p>
-              </div>
-            </section>
+            <ScrollReveal direction="up" delay={0.1}>
+              <section id="info-we-collect" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32 group">
+                <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] transition-colors">
+                  1. Information We Collect
+                </h2>
+                <div className="space-y-3 pl-2">
+                  <h3 className="font-semibold text-[#E8672A]">1.1 Information You Provide to Us</h3>
+                  <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">We may collect the following personal information directly from you:</p>
+                  <ul className="list-disc pl-5 space-y-1.5 text-[#7A6A5F] dark:text-[#B8ACA0]">
+                    <li>Name, email address, phone number, and mailing address</li>
+                    <li>Business or company name</li>
+                    <li>Payment details for billing purposes</li>
+                    <li>Information shared through forms, surveys, or email communications</li>
+                  </ul>
+                </div>
+              </section>
+            </ScrollReveal>
 
             {/* 2. How We Use Your Information */}
-            <section id="how-we-use" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
-              <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-                2. How We Use Your Information
-              </h2>
-              <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">We use your information for the following purposes:</p>
-              <ul className="list-disc pl-5 space-y-1.5 text-[#7A6A5F] dark:text-[#B8ACA0]">
-                <li>To provide and manage our digital marketing services</li>
-                <li>To communicate with you regarding inquiries, updates, and services</li>
-                <li>To process payments and manage billing</li>
-                <li>To personalize your experience and improve our offerings</li>
-                <li>To analyze website and service performance</li>
-                <li>To comply with legal and regulatory obligations</li>
-              </ul>
-            </section>
+            <ScrollReveal direction="up" delay={0.15}>
+              <section id="how-we-use" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32 group">
+                <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] transition-colors">
+                  2. How We Use Your Information
+                </h2>
+                <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">We use your information for the following purposes:</p>
+                <ul className="list-disc pl-5 space-y-1.5 text-[#7A6A5F] dark:text-[#B8ACA0]">
+                  <li>To provide and manage our digital marketing &amp; engineering services</li>
+                  <li>To communicate regarding inquiries, project roadmaps, and technical updates</li>
+                  <li>To process payments and manage billing</li>
+                  <li>To personalize your experience and optimize performance</li>
+                  <li>To comply with legal and regulatory obligations</li>
+                </ul>
+              </section>
+            </ScrollReveal>
 
             {/* 3. Sharing Your Information */}
-            <section id="sharing-info" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
-              <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-                3. Sharing Your Information
-              </h2>
-              <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">We may share your information in the following circumstances:</p>
-              <ul className="list-disc pl-5 space-y-2.5 text-[#7A6A5F] dark:text-[#B8ACA0]">
-                <li>
-                  <strong className="text-[#3A2E27] dark:text-[#FAF5EE]">Service Providers:</strong> We may share your information with third-party vendors who perform services on our behalf (e.g., payment processors, hosting providers, analytics tools).
-                </li>
-                <li>
-                  <strong className="text-[#3A2E27] dark:text-[#FAF5EE]">Legal Obligations:</strong> We may disclose your information if required to do so by law or in response to valid legal requests (e.g., subpoenas, court orders).
-                </li>
-                <li>
-                  <strong className="text-[#3A2E27] dark:text-[#FAF5EE]">Business Transfers:</strong> If Arav Innovation is involved in a merger, acquisition, or sale of assets, your information may be transferred as part of that transaction.
-                </li>
-              </ul>
-            </section>
+            <ScrollReveal direction="up" delay={0.2}>
+              <section id="sharing-info" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32 group">
+                <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] transition-colors">
+                  3. Sharing Your Information
+                </h2>
+                <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">We may share your information under strict governance terms with verified infrastructure partners and legal authorities when required.</p>
+              </section>
+            </ScrollReveal>
 
-            {/* 4. Data Retention */}
-            <section id="data-retention" className="space-y-3 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
-              <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-                4. Data Retention
-              </h2>
-              <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">
-                We will retain your personal information only for as long as necessary to fulfill the purposes outlined in this Privacy Policy, comply with legal obligations, resolve disputes, and enforce our agreements.
-              </p>
-            </section>
-
-            {/* 5. Data Security */}
-            <section id="data-security" className="space-y-3 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
-              <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-                5. Data Security
-              </h2>
-              <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">
-                We implement industry-standard security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the internet or electronic storage is completely secure, and we cannot guarantee absolute security.
-              </p>
-            </section>
-
-            {/* 6. Cookies and Tracking Technologies */}
-            <section id="cookies-tracking" className="space-y-3 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
-              <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-                6. Cookies and Tracking Technologies
-              </h2>
-              <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">We use cookies and similar technologies to:</p>
-              <ul className="list-disc pl-5 space-y-1.5 text-[#7A6A5F] dark:text-[#B8ACA0]">
-                <li>Enhance your browsing experience</li>
-                <li>Understand how our website is used</li>
-                <li>Provide relevant advertisements</li>
-              </ul>
-              <p className="text-[#7A6A5F] dark:text-[#B8ACA0] pt-1">
-                You can manage your cookie preferences through your browser settings. Note that disabling cookies may affect the functionality of our website.
-              </p>
-            </section>
-
-            {/* 7. Your Rights */}
-            <section id="your-rights" className="space-y-3 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
-              <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-                7. Your Rights
-              </h2>
-              <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">
-                Depending on your location, you may have the following rights regarding your personal information:
-              </p>
-              <ul className="list-disc pl-5 space-y-1.5 text-[#7A6A5F] dark:text-[#B8ACA0]">
-                <li><strong className="text-[#3A2E27] dark:text-[#FAF5EE]">Access:</strong> Request a copy of the personal information we hold about you.</li>
-                <li><strong className="text-[#3A2E27] dark:text-[#FAF5EE]">Correction:</strong> Request corrections to inaccurate or incomplete information.</li>
-                <li><strong className="text-[#3A2E27] dark:text-[#FAF5EE]">Deletion:</strong> Request the deletion of your personal information, subject to legal and contractual obligations.</li>
-                <li><strong className="text-[#3A2E27] dark:text-[#FAF5EE]">Objection:</strong> Object to the processing of your personal information for specific purposes.</li>
-              </ul>
-              <p className="text-[#7A6A5F] dark:text-[#B8ACA0] pt-1">
-                To exercise these rights, please contact us at <a href="mailto:support@aravinnovations.com" className="text-[#E8672A] font-semibold hover:underline">support@aravinnovations.com</a>.
-              </p>
-            </section>
-
-            {/* 8. Third-Party Links */}
-            <section id="third-party" className="space-y-3 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
-              <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-                8. Third-Party Links
-              </h2>
-              <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">
-                Our website or services may include links to third-party websites. We are not responsible for the privacy practices or content of these websites. We encourage you to review the privacy policies of any third-party sites you visit.
-              </p>
-            </section>
-
-            {/* 9. Children’s Privacy */}
-            <section id="childrens-privacy" className="space-y-3 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
-              <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-                9. Children’s Privacy
-              </h2>
-              <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">
-                Our services are not directed at children under the age of 13, and we do not knowingly collect personal information from children. If we become aware that we have inadvertently collected such information, we will take steps to delete it.
-              </p>
-            </section>
-
-            {/* 10. Changes to This Privacy Policy */}
-            <section id="policy-changes" className="space-y-3 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
-              <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-                10. Changes to This Privacy Policy
-              </h2>
-              <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">
-                We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. We encourage you to review this policy periodically for updates. The effective date at the top of this policy indicates the most recent revision.
-              </p>
-            </section>
-
-            {/* 11. Contact Us */}
-            <section id="contact-us" className="space-y-4 pt-6 border-t-2 border-[#E8672A]/30 scroll-mt-32">
-              <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-                11. Contact Us
-              </h2>
-              <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">
-                If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at:
-              </p>
-              <div className="p-6 rounded-2xl bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] space-y-2.5">
-                <div className="flex items-center gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
-                  <Mail className="w-4 h-4 text-[#E8672A]" />
-                  <span>Email: <a href="mailto:support@aravinnovations.com" className="text-[#E8672A] hover:underline">support@aravinnovations.com</a></span>
+            {/* Contact Section */}
+            <ScrollReveal direction="up" delay={0.25}>
+              <section id="contact-us" className="space-y-4 pt-6 border-t-2 border-[#E8672A]/30 scroll-mt-32">
+                <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
+                  11. Contact Us
+                </h2>
+                <div className="p-6 rounded-2xl bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] space-y-2.5">
+                  <div className="flex items-center gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
+                    <Mail className="w-4 h-4 text-[#E8672A]" />
+                    <span>Email: <a href="mailto:support@aravinnovations.com" className="text-[#E8672A] hover:underline">support@aravinnovations.com</a></span>
+                  </div>
+                  <div className="flex items-center gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
+                    <Phone className="w-4 h-4 text-[#E8672A]" />
+                    <span>Phone: <a href="tel:+919650625777" className="text-[#E8672A] hover:underline">+91 9650625777</a></span>
+                  </div>
+                  <div className="flex items-start gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
+                    <MapPin className="w-4 h-4 text-[#E8672A] shrink-0 mt-1" />
+                    <span>Address: Platinum Floor D 14/23 Ardee City Sec 52 Gurgaon 122002</span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
-                  <Phone className="w-4 h-4 text-[#E8672A]" />
-                  <span>Phone: <a href="tel:+919650625777" className="text-[#E8672A] hover:underline">+91 9650625777</a></span>
-                </div>
-                <div className="flex items-start gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
-                  <MapPin className="w-4 h-4 text-[#E8672A] shrink-0 mt-1" />
-                  <span>Address: Platinum Floor D 14/23 Ardee City Sec 52 Gurgaon 122002</span>
-                </div>
-              </div>
-            </section>
-
-            <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] pt-4 italic border-t border-[#EFE2D6] dark:border-[#2C241E]">
-              By using our services, you acknowledge that you have read, understood, and agree to this Privacy Policy.
-            </p>
+              </section>
+            </ScrollReveal>
           </div>
         </div>
       </div>

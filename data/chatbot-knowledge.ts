@@ -6,10 +6,17 @@ export interface ServiceKnowledge {
   route: string;
 }
 
+export interface CombinationIntentResult {
+  service: ServiceKnowledge;
+  industryOrContext: string;
+  response: string;
+  route: string;
+}
+
 export const servicesKnowledge: ServiceKnowledge[] = [
   {
     slug: "digital-marketing",
-    name: "Digital Marketing",
+    name: "Digital Marketing & SEO",
     keywords: [
       "digital marketing",
       "online marketing",
@@ -140,6 +147,34 @@ export const servicesKnowledge: ServiceKnowledge[] = [
   },
 ];
 
+export function findCombinationIntent(query: string): CombinationIntentResult | null {
+  const q = query.toLowerCase().trim();
+
+  const industries = [
+    { name: "E-Commerce", keywords: ["e-commerce", "ecommerce", "online store", "retail", "shop"] },
+    { name: "B2B SaaS", keywords: ["saas", "software as a service", "b2b saas", "platform"] },
+    { name: "FinTech", keywords: ["fintech", "banking", "finance", "payment"] },
+    { name: "Healthcare", keywords: ["health", "healthcare", "telehealth", "medical"] },
+    { name: "Logistics", keywords: ["logistics", "supply chain", "freight", "fleet"] },
+  ];
+
+  const service = findMatchingService(q);
+  if (!service) return null;
+
+  for (const ind of industries) {
+    if (ind.keywords.some((kw) => q.includes(kw))) {
+      return {
+        service,
+        industryOrContext: ind.name,
+        response: `Strategic ${service.name} for ${ind.name}: Arav Innovations delivers tailored engineering and growth frameworks optimized for ${ind.name} requirements. We ensure high availability, data governance, and conversion performance.`,
+        route: service.route,
+      };
+    }
+  }
+
+  return null;
+}
+
 export function findMatchingService(query: string): ServiceKnowledge | null {
   const q = query.toLowerCase().trim();
   for (const service of servicesKnowledge) {
@@ -163,6 +198,8 @@ export function isGreeting(query: string): boolean {
     "good morning",
     "good evening",
     "namaste",
+    "who are you",
+    "what do you do",
   ];
   return greetings.includes(q) || q.startsWith("hi ") || q.startsWith("hello ");
 }
@@ -180,6 +217,8 @@ export function isBuyingIntent(query: string): boolean {
     "can you build",
     "talk to someone",
     "contact us",
+    "what kind",
+    "how can it help",
   ];
   return intentKeywords.some((kw) => q.includes(kw));
 }

@@ -102,18 +102,18 @@ export function Footer() {
 
           {/* Right Column (6 Cols): Services Strip, Dual Office Cards, Email & Socials */}
           <div className="lg:col-span-6 space-y-8 lg:pl-4">
-            {/* Practice Strip */}
-            <div className="text-xs font-semibold text-white/95 leading-relaxed tracking-wide space-x-1.5 border-b border-white/20 pb-5">
+            {/* Reorganized Practice Links Strip (Image 2 Fix with Hover Animations) */}
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-xs font-semibold text-white/90 border-b border-white/20 pb-5">
               {servicesNavigation.map((service, idx) => (
                 <React.Fragment key={service.href}>
                   <Link
                     href={service.href}
-                    className="hover:underline hover:text-white transition-colors"
+                    className="group relative inline-flex items-center gap-1 py-1 px-2.5 rounded-lg bg-white/10 hover:bg-white text-white hover:text-[#E8672A] transition-all duration-300 font-medium hover:shadow-md"
                   >
-                    {service.label}
+                    <span className="transition-transform group-hover:translate-x-0.5">{service.label}</span>
                   </Link>
                   {idx < servicesNavigation.length - 1 && (
-                    <span className="text-white/60 mx-1">&bull;</span>
+                    <span className="text-white/40 hidden sm:inline">&bull;</span>
                   )}
                 </React.Fragment>
               ))}
@@ -127,7 +127,7 @@ export function Footer() {
                   href={`tel:${footer.indiaPhone.replace(/\s+/g, "")}`}
                   className="font-bold text-sm text-white hover:underline block"
                 >
-                  {footer.indiaPhone} - India
+                  {footer.indiaPhone} - India HQ
                 </a>
                 <div className="w-full h-px bg-white/30 my-2" />
                 <p className="text-white/85 leading-relaxed">
@@ -148,79 +148,47 @@ export function Footer() {
               {/* UAE */}
               <div className="space-y-1.5">
                 <a
+                  href={`tel:${footer.uaePhone.replace(/\s+/g, "")}`}
+                  className="font-bold text-sm text-white hover:underline block"
                 >
-                  {companyContactInfo.phoneUAE} - UAE
+                  {footer.uaePhone} - UAE Regional Office
                 </a>
                 <div className="w-full h-px bg-white/30 my-2" />
                 <p className="text-white/85 leading-relaxed">
                   ARAVINNOVATIONS CONSULTANCY - FZCO<br />
-                  55764-001 IFZA Bussiness Park FZCO<br />
+                  55764-001 IFZA Business Park FZCO<br />
                   Building A1 Dubai Silicon Oasis Dubai, U.A.E
                 </p>
               </div>
             </div>
 
-            {/* Social Icons Row (6 Platforms) */}
-            <div className="pt-2 flex items-center space-x-3">
-              <a
-                href={footer.instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] flex items-center justify-center transition-all duration-200 shadow-xs"
-                aria-label="Instagram"
-              >
-                <InstagramIcon className="w-4 h-4" />
-              </a>
-
-              <a
-                href={footer.facebookUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] flex items-center justify-center transition-all duration-200 shadow-xs"
-                aria-label="Facebook"
-              >
-                <FacebookIcon className="w-4 h-4" />
-              </a>
-
-              <a
-                href={footer.linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] flex items-center justify-center transition-all duration-200 shadow-xs"
-                aria-label="LinkedIn"
-              >
-                <LinkedInIcon className="w-4 h-4" />
-              </a>
-
-              <a
-                href={footer.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] flex items-center justify-center transition-all duration-200 shadow-xs"
-                aria-label="WhatsApp"
-              >
-                <WhatsAppIcon className="w-4 h-4" />
-              </a>
-
-              <a
-                href={footer.twitterUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] flex items-center justify-center transition-all duration-200 shadow-xs"
-                aria-label="Twitter / X"
-              >
-                <TwitterIcon className="w-4 h-4" />
-              </a>
-
-              <a
-                href={footer.youtubeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] flex items-center justify-center transition-all duration-200 shadow-xs"
-                aria-label="YouTube"
-              >
-                <YoutubeIcon className="w-4 h-4" />
-              </a>
+            {/* Dynamic Social Icons Row (Tasks C1 & C2) */}
+            <div className="pt-2 flex flex-wrap items-center gap-3">
+              {(content.socialLinks || [])
+                .filter((s) => s.enabled)
+                .map((social) => {
+                  return (
+                    <a
+                      key={social.id}
+                      href={social.url}
+                      target={social.openNewTab ? "_blank" : "_self"}
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 shadow-md"
+                      aria-label={social.name}
+                      title={social.name}
+                    >
+                      {social.id === "instagram" && <InstagramIcon className="w-4 h-4" />}
+                      {social.id === "facebook" && <FacebookIcon className="w-4 h-4" />}
+                      {social.id === "linkedin" && <LinkedInIcon className="w-4 h-4" />}
+                      {social.id === "whatsapp" && <WhatsAppIcon className="w-4 h-4" />}
+                      {social.id === "twitter" && <TwitterIcon className="w-4 h-4" />}
+                      {social.id === "youtube" && <YoutubeIcon className="w-4 h-4" />}
+                      {!["instagram", "facebook", "linkedin", "whatsapp", "twitter", "youtube"].includes(social.id) && (
+                        <span className="text-xs font-bold font-mono">{social.name.slice(0, 2)}</span>
+                      )}
+                    </a>
+                  );
+                })}
             </div>
           </div>
         </div>
