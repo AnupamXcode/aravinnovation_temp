@@ -363,35 +363,41 @@ export function Navbar() {
             <div>
               <button
                 type="button"
-                className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] mb-3 py-2 border-b border-transparent focus:outline-none"
-                onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] mb-3 py-2 border-b border-transparent focus:outline-none cursor-pointer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setMobileServicesOpen(!mobileServicesOpen);
+                }}
               >
-                <span>What We Do (7 Core Practices)</span>
+                <span className="pointer-events-none">What We Do (7 Core Practices)</span>
                 <ChevronDown
                   className={cn(
-                    "w-4 h-4 transition-transform duration-200",
-                    mobileServicesOpen ? "rotate-180" : ""
+                    "w-5 h-5 transition-transform duration-200 pointer-events-none",
+                    mobileServicesOpen ? "rotate-180 text-[#E8672A]" : ""
                   )}
                 />
               </button>
               
               <div
                 className={cn(
-                  "grid grid-cols-1 gap-2 overflow-hidden transition-all duration-300 ease-in-out",
-                  mobileServicesOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                  "grid transition-all duration-300 ease-in-out",
+                  mobileServicesOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                 )}
               >
-                {servicesNavigation.map((s) => (
-                  <Link
-                    key={s.href}
-                    href={s.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center gap-3 p-3 rounded-xl bg-[#FBF3EA]/60 dark:bg-[#1A1613] hover:bg-[#FCE3D3]/50 dark:hover:bg-[#261F1A] text-sm font-semibold text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#2C241E] min-h-[44px]"
-                  >
-                    <div className="shrink-0">{serviceIcons[s.href]}</div>
-                    <span className="truncate">{s.label}</span>
-                  </Link>
-                ))}
+                <div className="overflow-hidden flex flex-col gap-2">
+                  {servicesNavigation.map((s) => (
+                    <Link
+                      key={s.href}
+                      href={s.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center gap-3 p-3 rounded-xl bg-[#FBF3EA]/60 dark:bg-[#1A1613] hover:bg-[#FCE3D3]/50 dark:hover:bg-[#261F1A] text-sm font-semibold text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#2C241E] min-h-[44px]"
+                    >
+                      <div className="shrink-0">{serviceIcons[s.href]}</div>
+                      <span className="truncate">{s.label}</span>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -410,40 +416,46 @@ export function Navbar() {
             <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#2C241E]">
               <button
                 type="button"
-                className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] mb-3 py-2 border-b border-transparent focus:outline-none"
-                onClick={() => setMobileWorkingWithUsOpen(!mobileWorkingWithUsOpen)}
+                className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] mb-3 py-2 border-b border-transparent focus:outline-none cursor-pointer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setMobileWorkingWithUsOpen(!mobileWorkingWithUsOpen);
+                }}
               >
-                <span>Working With Us</span>
+                <span className="pointer-events-none">Working With Us</span>
                 <ChevronDown
                   className={cn(
-                    "w-4 h-4 transition-transform duration-200",
-                    mobileWorkingWithUsOpen ? "rotate-180" : ""
+                    "w-5 h-5 transition-transform duration-200 pointer-events-none",
+                    mobileWorkingWithUsOpen ? "rotate-180 text-[#E8672A]" : ""
                   )}
                 />
               </button>
               
               <div
                 className={cn(
-                  "grid grid-cols-1 gap-2 overflow-hidden transition-all duration-300 ease-in-out",
-                  mobileWorkingWithUsOpen ? "max-h-[450px] opacity-100" : "max-h-0 opacity-0"
+                  "grid transition-all duration-300 ease-in-out",
+                  mobileWorkingWithUsOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                 )}
               >
-                {workingWithUsNavigation.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={cn(
-                      "flex items-center gap-3 p-3 rounded-xl text-sm font-medium border border-[#EFE2D6] dark:border-[#2C241E] min-h-[44px]",
-                      item.href === "/contact"
-                        ? "bg-[#FCE3D3]/80 dark:bg-[#2C221B] font-bold text-[#E8672A]"
-                        : "bg-[#FBF3EA]/60 dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE]"
-                    )}
-                  >
-                    <div className="shrink-0">{workingWithUsIcons[item.href]}</div>
-                    <div className="truncate">{item.label}</div>
-                  </Link>
-                ))}
+                <div className="overflow-hidden flex flex-col gap-2">
+                  {workingWithUsNavigation.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={cn(
+                        "flex items-center gap-3 p-3 rounded-xl text-sm font-medium border border-[#EFE2D6] dark:border-[#2C241E] min-h-[44px]",
+                        item.href === "/contact"
+                          ? "bg-[#FCE3D3]/80 dark:bg-[#2C221B] font-bold text-[#E8672A]"
+                          : "bg-[#FBF3EA]/60 dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE]"
+                      )}
+                    >
+                      <div className="shrink-0">{workingWithUsIcons[item.href]}</div>
+                      <div className="truncate">{item.label}</div>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
 
