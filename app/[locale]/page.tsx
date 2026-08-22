@@ -87,8 +87,8 @@ export default async function HomePage({
       {/* 1. HERO SECTION */}
       <Hero />
 
-      {/* 2. TRUSTED CLIENTS MOVING STRIP (Full-Bleed Viewport Width) */}
-      <section className="w-full py-9 bg-white dark:bg-[#161310] border-y border-[#EFE2D6] dark:border-[#2C241E] shadow-sm transition-all duration-300 overflow-hidden">
+      {/* 2. TRUSTED CLIENTS MOVING STRIP (Full-Bleed Viewport Width - Light Neutral Base) */}
+      <section className="w-full py-9 bg-[#F9F6F0] dark:bg-[#14110E] border-y border-[#EFE2D6] dark:border-[#2C241E] shadow-sm transition-all duration-300 overflow-hidden">
         <ScrollReveal direction="up">
           <div className="text-center mb-4 px-4">
             <span className="text-[11px] font-bold font-mono uppercase tracking-widest text-[#7A6A5F] dark:text-[#B8ACA0]">
@@ -99,9 +99,12 @@ export default async function HomePage({
         </ScrollReveal>
       </section>
 
-      {/* 3. WHAT WE DO — 7 DISTINCT SERVICE CARDS (Full-Width Expansive Container) */}
+      {/* 3. WHAT WE DO — 7 DISTINCT SERVICE CARDS (Soft Warm-Orange Section Base + Elevated White Cards) */}
       <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full" id="services">
-        <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#FFFDF9] dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl transition-all duration-300">
+        <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#FCEFE6]/80 dark:bg-[#181411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl transition-all duration-300 relative overflow-hidden">
+          {/* Subtle Top Accent Divider */}
+          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#E8672A]/60 to-transparent" />
+
           <ScrollReveal direction="up">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
               <div className="max-w-3xl space-y-3">
@@ -116,7 +119,7 @@ export default async function HomePage({
                 </p>
               </div>
               <Link href="/services">
-                <Button variant="outline" size="md" className="rounded-full px-7 py-3 border-[#EFE2D6] dark:border-[#2C241E] hover:border-[#E8672A]" rightIcon={<ArrowRight className="w-4 h-4" />}>
+                <Button variant="outline" size="md" className="rounded-full px-7 py-3 border-[#EFE2D6] dark:border-[#2C241E] bg-white dark:bg-[#1F1A16] hover:border-[#E8672A]" rightIcon={<ArrowRight className="w-4 h-4" />}>
                   View All Practices
                 </Button>
               </Link>
@@ -133,9 +136,12 @@ export default async function HomePage({
         </section>
       </div>
 
-      {/* 4. WHO WE HELP — INDUSTRY GRID */}
+      {/* 4. WHO WE HELP — INDUSTRY GRID (Warm Beige Base + Contrast Cards) */}
       <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full">
-        <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl transition-all duration-300">
+        <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#F7EFE6]/80 dark:bg-[#16120F] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl transition-all duration-300 relative overflow-hidden">
+          {/* Subtle Top Accent Line */}
+          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#E8672A]/40 to-transparent" />
+
           <ScrollReveal direction="up">
             <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
               <Badge variant="secondary" size="md">
@@ -154,7 +160,7 @@ export default async function HomePage({
             {industriesData.map((ind, idx) => (
               <ScrollReveal key={ind.slug} delay={idx * 0.08} direction="up">
                 <TiltCard maxTilt={5} scale={1.02} className="h-full group">
-                  <div className="h-full rounded-[2rem] bg-white dark:bg-[#1A1613] p-8 border border-[#EFE2D6] dark:border-[#2C241E] hover:shadow-2xl hover:border-[#E8672A]/50 dark:hover:border-[#E8672A]/50 transition-all duration-300 flex flex-col justify-between">
+                  <div className="h-full rounded-[2rem] bg-white dark:bg-[#1F1A16] p-8 border border-[#EFE2D6] dark:border-[#2C241E] shadow-md hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-[#E8672A]/10 hover:border-[#E8672A]/50 dark:hover:border-[#E8672A]/50 transition-all duration-300 flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between mb-5">
                         <div className="p-3 rounded-2xl icon-box-hover shadow-xs">
@@ -188,7 +194,7 @@ export default async function HomePage({
 
           <div className="mt-12 text-center">
             <Link href="/solutions">
-              <Button variant="secondary" size="lg" className="rounded-full px-8 py-3.5" rightIcon={<ChevronRight className="w-4 h-4" />}>
+              <Button variant="secondary" size="lg" className="rounded-full px-8 py-3.5 bg-white dark:bg-[#1F1A16] border border-[#EFE2D6] dark:border-[#2C241E]" rightIcon={<ChevronRight className="w-4 h-4" />}>
                 Explore Full Industry Solutions Matrix
               </Button>
             </Link>
@@ -196,7 +202,7 @@ export default async function HomePage({
         </section>
       </div>
 
-      {/* 5. WHY ARAV — DIFFERENTIATOR GRID */}
+      {/* 5. WHY ARAV — DIFFERENTIATOR GRID (Light Neutral Foundation) */}
       <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full">
         <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#FFFDF9] dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl transition-all duration-300">
           <ScrollReveal direction="up">
@@ -217,7 +223,7 @@ export default async function HomePage({
             {differentiators.map((diff, index) => (
               <ScrollReveal key={index} delay={index * 0.1} direction="up">
                 <TiltCard maxTilt={5} scale={1.01} className="h-full group">
-                  <div className="h-full rounded-[2.2rem] bg-[#FBF3EA]/60 dark:bg-[#1A1613] p-8 sm:p-10 border border-[#EFE2D6] dark:border-[#2C241E] hover:bg-white dark:hover:bg-[#1F1A16] hover:shadow-2xl transition-all duration-300 space-y-4">
+                  <div className="h-full rounded-[2.2rem] bg-white dark:bg-[#171411] p-8 sm:p-10 border border-[#EFE2D6] dark:border-[#2C241E] hover:-translate-y-1.5 hover:shadow-2xl hover:border-[#E8672A]/40 dark:hover:border-[#E8672A]/40 transition-all duration-300 space-y-4 shadow-sm">
                     <div className="p-4 rounded-2xl icon-box-hover w-fit shadow-xs text-[#E8672A]">
                       {diff.icon}
                     </div>
@@ -235,9 +241,12 @@ export default async function HomePage({
         </section>
       </div>
 
-      {/* 6. CASE STUDIES / RESULTS PREVIEW */}
+      {/* 6. CASE STUDIES / RESULTS PREVIEW (Soft Warm-Orange Base + Elevated White Cards) */}
       <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full">
-        <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl transition-all duration-300">
+        <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#FCEFE6]/80 dark:bg-[#181411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl transition-all duration-300 relative overflow-hidden">
+          {/* Subtle Accent Line */}
+          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#E8672A]/50 to-transparent" />
+
           <ScrollReveal direction="up">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
               <div className="max-w-3xl space-y-3">
@@ -252,7 +261,7 @@ export default async function HomePage({
                 </p>
               </div>
               <Link href="/case-studies">
-                <Button variant="outline" size="md" className="rounded-full px-7 py-3 border-[#EFE2D6] dark:border-[#2C241E] hover:border-[#E8672A]" rightIcon={<ArrowRight className="w-4 h-4" />}>
+                <Button variant="outline" size="md" className="rounded-full px-7 py-3 border-[#EFE2D6] dark:border-[#2C241E] bg-white dark:bg-[#1F1A16] hover:border-[#E8672A]" rightIcon={<ArrowRight className="w-4 h-4" />}>
                   All Case Studies
                 </Button>
               </Link>
@@ -269,9 +278,9 @@ export default async function HomePage({
         </section>
       </div>
 
-      {/* 7. HOW WE WORK — 5-STEP STAGGERED PROCESS TIMELINE */}
+      {/* 7. HOW WE WORK — 5-STEP STAGGERED PROCESS TIMELINE (Light Neutral Base) */}
       <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full" id="process">
-        <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#FFFDF9] dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl transition-all duration-300">
+        <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#F9F6F0] dark:bg-[#14110E] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl transition-all duration-300">
           <ScrollReveal direction="up">
             <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
               <Badge variant="secondary" size="md">
@@ -290,9 +299,12 @@ export default async function HomePage({
         </section>
       </div>
 
-      {/* 8. WHAT THEY SAY (TESTIMONIALS) */}
+      {/* 8. WHAT THEY SAY (TESTIMONIALS - Warm Beige Base + White Testimonial Cards) */}
       <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full">
-        <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl transition-all duration-300">
+        <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#F7EFE6]/80 dark:bg-[#16120F] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl transition-all duration-300 relative overflow-hidden">
+          {/* Subtle Top Accent Line */}
+          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#E8672A]/40 to-transparent" />
+
           <ScrollReveal direction="up">
             <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
               <Badge variant="secondary" size="md">
@@ -313,9 +325,9 @@ export default async function HomePage({
         </section>
       </div>
 
-      {/* 9. FINAL CTA SECTION & LEAD FORM */}
+      {/* 9. FINAL CTA SECTION & LEAD FORM (High Impact Warm Gradient Container) */}
       <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full" id="contact">
-        <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#FFFDF9] dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl transition-all duration-300">
+        <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-gradient-to-br from-[#FFFDF9] via-[#FCEFE6] to-[#F7EFE6] dark:from-[#181411] dark:via-[#16120F] dark:to-[#12100E] border-2 border-[#E8672A]/40 shadow-2xl transition-all duration-300">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Col: Messaging */}
             <div className="lg:col-span-5 space-y-6">
@@ -330,7 +342,7 @@ export default async function HomePage({
                   Whether you are modernizing legacy infrastructure, launching an enterprise web application, accelerating B2B demand generation, or augmenting your engineering sprint with senior talent, we are ready to assist.
                 </p>
 
-                <div className="p-6 sm:p-8 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] space-y-3.5 mt-6 shadow-sm">
+                <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] space-y-3.5 mt-6 shadow-md">
                   <h4 className="text-base font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
                     What Happens Next:
                   </h4>

@@ -28,7 +28,7 @@ export function TestimonialSlider() {
   return (
     <div className="relative max-w-4xl mx-auto">
       <TiltCard maxTilt={5} scale={1.01}>
-        <div className="rounded-3xl bg-white dark:bg-[#171411] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl relative overflow-hidden transition-colors duration-300">
+        <div className="rounded-3xl bg-white dark:bg-[#1F1A16] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl relative overflow-hidden transition-colors duration-300">
           {/* Large Decorative Quote Icon */}
           <Quote className="absolute top-6 right-8 w-20 h-20 text-[#FCE3D3]/60 dark:text-[#E8672A]/10 -z-0 pointer-events-none" />
 

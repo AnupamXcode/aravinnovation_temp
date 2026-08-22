@@ -45,7 +45,7 @@ export function ServiceCard({
     >
       <div
         className={cn(
-          "relative h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-[#171411] p-7 sm:p-8 border border-[#EFE2D6] dark:border-[#2C241E] transition-all duration-300 shadow-sm hover:shadow-2xl hover:shadow-[#E8672A]/10 hover:border-[#E8672A]/50 dark:hover:border-[#E8672A]/50"
+          "relative h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-[#1F1A16] p-7 sm:p-8 border border-[#EFE2D6] dark:border-[#2C241E] shadow-md hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-[#E8672A]/15 hover:border-[#E8672A]/60 dark:hover:border-[#E8672A]/60 transition-all duration-300"
         )}
       >
         <div>

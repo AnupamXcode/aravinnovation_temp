@@ -2,6 +2,17 @@
 
 import * as React from "react";
 
+export interface SectionThemes {
+  services: "soft_orange" | "warm_beige" | "light_neutral" | "default";
+  industries: "warm_beige" | "soft_orange" | "light_neutral" | "default";
+  caseStudies: "soft_orange" | "warm_beige" | "light_neutral" | "default";
+  methodology: "light_neutral" | "warm_beige" | "default";
+  testimonials: "warm_beige" | "light_neutral" | "default";
+  cta: "gradient" | "dark" | "default";
+}
+
+export type CardStyleOption = "elevated" | "bordered" | "minimal" | "standard";
+
 export interface SiteConfig {
   chatbotEnabled: boolean;
   chatbotDelaySeconds: number;
@@ -29,6 +40,8 @@ export interface SiteConfig {
   twitterUrl: string;
   youtubeUrl: string;
   serviceStates: Record<string, boolean>;
+  sectionThemes: SectionThemes;
+  cardStyle: CardStyleOption;
 }
 
 const defaultConfig: SiteConfig = {
@@ -67,11 +80,22 @@ const defaultConfig: SiteConfig = {
     "training-staff-augmentation": true,
     "ai-solutions": true,
   },
+  sectionThemes: {
+    services: "soft_orange",
+    industries: "warm_beige",
+    caseStudies: "soft_orange",
+    methodology: "light_neutral",
+    testimonials: "warm_beige",
+    cta: "gradient",
+  },
+  cardStyle: "elevated",
 };
 
 interface SiteConfigContextType {
   config: SiteConfig;
   updateConfig: (key: keyof SiteConfig, value: any) => void;
+  updateSectionTheme: (section: keyof SectionThemes, theme: string) => void;
+  updateCardStyle: (style: CardStyleOption) => void;
   toggleServiceState: (slug: string) => void;
   resetConfig: () => void;
   isAuthenticated: boolean;
@@ -82,6 +106,8 @@ interface SiteConfigContextType {
 const SiteConfigContext = React.createContext<SiteConfigContextType>({
   config: defaultConfig,
   updateConfig: () => {},
+  updateSectionTheme: () => {},
+  updateCardStyle: () => {},
   toggleServiceState: () => {},
   resetConfig: () => {},
   isAuthenticated: false,
@@ -118,6 +144,26 @@ export function SiteConfigProvider({ children }: { children: React.ReactNode }) 
       }
       return updated;
     });
+  };
+
+  const updateSectionTheme = (section: keyof SectionThemes, theme: string) => {
+    setConfig((prev) => {
+      const updatedThemes = {
+        ...(prev.sectionThemes || defaultConfig.sectionThemes),
+        [section]: theme,
+      };
+      const updated = { ...prev, sectionThemes: updatedThemes };
+      try {
+        localStorage.setItem("arav_site_config", JSON.stringify(updated));
+      } catch {
+        // ignore
+      }
+      return updated;
+    });
+  };
+
+  const updateCardStyle = (style: CardStyleOption) => {
+    updateConfig("cardStyle", style);
   };
 
   const toggleServiceState = (slug: string) => {
@@ -173,6 +219,8 @@ export function SiteConfigProvider({ children }: { children: React.ReactNode }) 
       value={{
         config,
         updateConfig,
+        updateSectionTheme,
+        updateCardStyle,
         toggleServiceState,
         resetConfig,
         isAuthenticated,

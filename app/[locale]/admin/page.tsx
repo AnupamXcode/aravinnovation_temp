@@ -46,6 +46,7 @@ import {
   Mail,
   ChevronDown,
   Edit3,
+  Palette,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -57,6 +58,8 @@ export default function AdminDashboardPage() {
   const {
     config,
     updateConfig,
+    updateSectionTheme,
+    updateCardStyle,
     toggleServiceState,
     resetConfig,
     isAuthenticated,
@@ -1547,18 +1550,118 @@ export default function AdminDashboardPage() {
         )}
 
         {/* ========================================================================= */}
-        {/* TAB 15: MAINTENANCE CONTROLS */}
+        {/* TAB 15: MAINTENANCE & APPEARANCE CONTROLS */}
         {/* ========================================================================= */}
         {activeTab === "system" && (
           <div className="space-y-6">
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
                 <SlidersHorizontal className="w-5 h-5 text-[#E8672A]" />
-                <span>Global Animation &amp; Maintenance Controls</span>
+                <span>Global System, Section Styling &amp; Maintenance Controls</span>
               </h2>
               <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
-                Control global page motion, hover feedback, scroll reveals, and per-service maintenance toggles
+                Manage section background themes, card design styles, global motion feedback, and service status switches
               </p>
+            </div>
+
+            {/* APPEARANCE & SECTION STYLING CMS */}
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-lg space-y-5">
+              <div className="flex items-center justify-between pb-3 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                <h3 className="text-sm font-bold font-display text-[#E8672A] flex items-center gap-2">
+                  <Palette className="w-4 h-4" />
+                  <span>Appearance &amp; Section Visual Hierarchy CMS</span>
+                </h3>
+                <span className="text-[10px] font-mono font-semibold px-2.5 py-1 rounded-lg bg-[#FCE3D3] text-[#3A2E27]">
+                  Controlled Color System
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold">7 Core Practices Base Theme</label>
+                  <select
+                    value={config.sectionThemes?.services || "soft_orange"}
+                    onChange={(e) => {
+                      updateSectionTheme("services", e.target.value);
+                      showToast(`Services section base set to ${e.target.value}`);
+                    }}
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613] font-medium cursor-pointer"
+                  >
+                    <option value="soft_orange">Soft Warm Orange (Recommended)</option>
+                    <option value="warm_beige">Warm Beige Base</option>
+                    <option value="light_neutral">Light Neutral Base</option>
+                    <option value="default">Default Cream Base</option>
+                  </select>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold">Industry Solutions Base Theme</label>
+                  <select
+                    value={config.sectionThemes?.industries || "warm_beige"}
+                    onChange={(e) => {
+                      updateSectionTheme("industries", e.target.value);
+                      showToast(`Industries section base set to ${e.target.value}`);
+                    }}
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613] font-medium cursor-pointer"
+                  >
+                    <option value="warm_beige">Warm Beige (Recommended)</option>
+                    <option value="soft_orange">Soft Warm Orange Base</option>
+                    <option value="light_neutral">Light Neutral Base</option>
+                    <option value="default">Default Cream Base</option>
+                  </select>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold">Case Studies Base Theme</label>
+                  <select
+                    value={config.sectionThemes?.caseStudies || "soft_orange"}
+                    onChange={(e) => {
+                      updateSectionTheme("caseStudies", e.target.value);
+                      showToast(`Case Studies section base set to ${e.target.value}`);
+                    }}
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613] font-medium cursor-pointer"
+                  >
+                    <option value="soft_orange">Soft Warm Orange (Recommended)</option>
+                    <option value="warm_beige">Warm Beige Base</option>
+                    <option value="light_neutral">Light Neutral Base</option>
+                    <option value="default">Default Cream Base</option>
+                  </select>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold">Testimonials Base Theme</label>
+                  <select
+                    value={config.sectionThemes?.testimonials || "warm_beige"}
+                    onChange={(e) => {
+                      updateSectionTheme("testimonials", e.target.value);
+                      showToast(`Testimonials section base set to ${e.target.value}`);
+                    }}
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613] font-medium cursor-pointer"
+                  >
+                    <option value="warm_beige">Warm Beige (Recommended)</option>
+                    <option value="soft_orange">Soft Warm Orange Base</option>
+                    <option value="light_neutral">Light Neutral Base</option>
+                    <option value="default">Default Cream Base</option>
+                  </select>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold">Card Contrast &amp; Elevation Style</label>
+                  <select
+                    value={config.cardStyle || "elevated"}
+                    onChange={(e) => {
+                      updateCardStyle(e.target.value as any);
+                      showToast(`Card style updated to ${e.target.value}`);
+                    }}
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613] font-semibold text-[#E8672A] cursor-pointer"
+                  >
+                    <option value="elevated">Elevated (White Card + Shadow + Lift) [Recommended]</option>
+                    <option value="bordered">Bordered (Clean High-Contrast Outline)</option>
+                    <option value="minimal">Minimal (Flat Soft Tint)</option>
+                    <option value="standard">Standard Default</option>
+                  </select>
+                </div>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
