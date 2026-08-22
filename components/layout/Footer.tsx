@@ -75,16 +75,16 @@ export function Footer() {
       <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10 space-y-12">
         {/* Main Grid: Left Closing Statement + Right Information Columns */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pb-12 border-b border-white/25">
-          {/* Left Column (5 Cols): Massive Reference Headline + Pill Buttons */}
+          {/* Left Column (6 Cols): Massive Dynamic Headline + Pill Buttons */}
           <div className="lg:col-span-6 space-y-8">
-            <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.08] text-white uppercase drop-shadow-xs">
-              WE <span className="inline-block mx-1 animate-pulse">🤍</span> WORKING WITH AMBITIOUS BRANDS, ACROSS EVERY SECTOR
+            <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.08] text-white uppercase drop-shadow-xs">
+              {footer?.mainHeading || "WE 🤍 WORKING WITH AMBITIOUS BRANDS, ACROSS EVERY SECTOR"}
             </h2>
 
             {/* Side-by-Side Pill Action Buttons */}
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <a
-                href={`tel:${companyContactInfo.phoneIndiaRaw}`}
+                href={footer?.bookCallUrl || `tel:${footer?.indiaPhone?.replace(/\s+/g, "") || "+919650625777"}`}
                 className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] border border-white/40 backdrop-blur-md text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
                 <span>Book a call</span>
@@ -92,7 +92,7 @@ export function Footer() {
               </a>
 
               <Link
-                href="/contact"
+                href={footer?.contactUsUrl || "/contact"}
                 className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] border border-white/40 backdrop-blur-md text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
                 <span>Contact us</span>
@@ -103,7 +103,7 @@ export function Footer() {
 
           {/* Right Column (6 Cols): Services Strip, Dual Office Cards, Email & Socials */}
           <div className="lg:col-span-6 space-y-8 lg:pl-4">
-            {/* Reorganized Practice Links Strip (Image 2 Fix with Hover Animations) */}
+            {/* Reorganized Practice Links Strip */}
             <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-xs font-semibold text-white/90 border-b border-white/20 pb-5">
               {servicesNavigation.map((service, idx) => (
                 <React.Fragment key={service.href}>
@@ -123,47 +123,58 @@ export function Footer() {
             {/* Dual Regional Operations Details */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs text-white/90">
               {/* India */}
-              <div className="space-y-1.5">
-                <a
-                  href={`tel:${footer.indiaPhone.replace(/\s+/g, "")}`}
-                  className="font-bold text-sm text-white hover:underline block"
-                >
-                  {footer.indiaPhone} - India HQ
-                </a>
-                <div className="w-full h-px bg-white/30 my-2" />
-                <p className="text-white/85 leading-relaxed">
-                  Platinum Floor D 14/23<br />
-                  Ardee City Sec 52<br />
-                  Gurgaon 122002
-                </p>
-                <div className="pt-2">
+              {footer?.indiaVisible !== false && (
+                <div className="space-y-1.5">
                   <a
-                    href={`mailto:${footer.supportEmail}`}
-                    className="font-medium text-white hover:underline"
+                    href={`tel:${footer?.indiaPhone?.replace(/\s+/g, "") || "+919650625777"}`}
+                    className="font-bold text-sm text-white hover:underline block"
                   >
-                    {footer.supportEmail}
+                    {footer?.indiaDisplayLabel || `${footer?.indiaPhone} - India HQ`}
                   </a>
+                  <div className="w-full h-px bg-white/30 my-2" />
+                  <p className="text-white/85 leading-relaxed whitespace-pre-line">
+                    {footer?.indiaAddress || "Platinum Floor D 14/23\nArdee City Sec 52\nGurgaon 122002"}
+                  </p>
+                  <div className="pt-2">
+                    <a
+                      href={`mailto:${footer?.supportEmail || "support@aravinnovations.com"}`}
+                      className="font-medium text-white hover:underline block"
+                    >
+                      {footer?.supportEmail || "support@aravinnovations.com"}
+                    </a>
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* UAE */}
-              <div className="space-y-1.5">
-                <a
-                  href={`tel:${footer.uaePhone.replace(/\s+/g, "")}`}
-                  className="font-bold text-sm text-white hover:underline block"
-                >
-                  {footer.uaePhone} - UAE Regional Office
-                </a>
-                <div className="w-full h-px bg-white/30 my-2" />
-                <p className="text-white/85 leading-relaxed">
-                  ARAVINNOVATIONS CONSULTANCY - FZCO<br />
-                  55764-001 IFZA Business Park FZCO<br />
-                  Building A1 Dubai Silicon Oasis Dubai, U.A.E
-                </p>
-              </div>
+              {footer?.uaeVisible !== false && (
+                <div className="space-y-1.5">
+                  <a
+                    href={`tel:${footer?.uaePhone?.replace(/\s+/g, "") || "+971521555792"}`}
+                    className="font-bold text-sm text-white hover:underline block"
+                  >
+                    {footer?.uaeDisplayLabel || `${footer?.uaePhone} - UAE Regional Office`}
+                  </a>
+                  <div className="w-full h-px bg-white/30 my-2" />
+                  <p className="text-white/85 leading-relaxed whitespace-pre-line">
+                    {footer?.uaeCompanyName ? `${footer.uaeCompanyName}\n` : ""}
+                    {footer?.uaeAddress || "55764-001 IFZA Business Park FZCO\nBuilding A1 Dubai Silicon Oasis Dubai, U.A.E"}
+                  </p>
+                  {footer?.secondaryEmail && (
+                    <div className="pt-2">
+                      <a
+                        href={`mailto:${footer.secondaryEmail}`}
+                        className="font-medium text-white hover:underline block"
+                      >
+                        {footer.secondaryEmail}
+                      </a>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
-            {/* Dynamic Social Icons Row (Tasks C1 & C2) */}
+            {/* Dynamic Social Icons Row */}
             <div className="pt-2 flex flex-wrap items-center gap-3">
               {(content.socialLinks || [])
                 .filter((s) => s.enabled)
@@ -194,7 +205,7 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar: Legal Links on Left, Copyright on Right (Tasks E & L) */}
+        {/* Bottom Bar: Legal Links on Left, Copyright on Right */}
         <ScrollReveal direction="up" delay={0.2}>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/95 border-t border-white/20 pt-6">
             <div className="flex flex-wrap items-center gap-3 sm:gap-6 font-semibold">
@@ -221,7 +232,7 @@ export function Footer() {
             </div>
 
             <div className="font-medium text-white/90">
-              &copy; {new Date().getFullYear()} Arav Innovations. All rights reserved.
+              {footer?.copyrightText || `© ${new Date().getFullYear()} Arav Innovations. All rights reserved.`}
             </div>
           </div>
         </ScrollReveal>

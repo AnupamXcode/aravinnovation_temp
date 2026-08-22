@@ -5,6 +5,11 @@ import { servicesData as initialServices, Service } from "@/data/services";
 import { industriesData as initialIndustries, IndustrySolution } from "@/data/industries";
 import { caseStudiesData as initialCaseStudies, CaseStudy } from "@/data/case-studies";
 
+export type { Service } from "@/data/services";
+export type { IndustrySolution } from "@/data/industries";
+export type { CaseStudy } from "@/data/case-studies";
+
+
 export interface HeroContent {
   eyebrow: string;
   title: string;
@@ -35,15 +40,30 @@ export interface TestimonialItem {
 }
 
 export interface FooterContent {
+  mainHeading: string;
+  description: string;
+  indiaCountry: string;
   indiaPhone: string;
+  indiaAddress: string;
+  indiaDisplayLabel: string;
+  indiaVisible: boolean;
+  uaeCountry: string;
+  uaeCompanyName: string;
   uaePhone: string;
+  uaeAddress: string;
+  uaeDisplayLabel: string;
+  uaeVisible: boolean;
   supportEmail: string;
+  secondaryEmail: string;
+  whatsappNumber: string;
+  whatsappUrl: string;
   linkedinUrl: string;
   instagramUrl: string;
   facebookUrl: string;
-  whatsappUrl: string;
   twitterUrl: string;
   youtubeUrl: string;
+  bookCallUrl: string;
+  contactUsUrl: string;
   copyrightText: string;
 }
 
@@ -67,19 +87,31 @@ export interface LanguageItem {
   order: number;
 }
 
-export interface ChatbotIntentItem {
+export interface ChatbotCTAButton {
+  label: string;
+  type: "text" | "page" | "contact" | "whatsapp" | "email" | "project_form";
+  value?: string;
+}
+
+export interface ChatbotCommandItem {
   id: string;
-  name: string;
-  keywords: string[];
+  keyword: string;
+  alternativeKeywords: string[];
+  userIntent: string;
   response: string;
-  ctaText?: string;
-  ctaRoute?: string;
+  followUpResponse?: string;
+  relatedService?: string;
+  relatedPage?: string;
+  ctaButtons: ChatbotCTAButton[];
+  priority: number;
+  enabled: boolean;
 }
 
 export interface ChatbotKB {
+  masterEnabled: boolean;
   defaultGreeting: string;
   fallbackResponse: string;
-  intents: ChatbotIntentItem[];
+  commands: ChatbotCommandItem[];
 }
 
 export interface SEOContent {
@@ -259,47 +291,137 @@ const defaultLanguages: LanguageItem[] = [
   { code: "es", name: "Spanish", nativeName: "Español", dir: "ltr", enabled: true, order: 5 },
 ];
 
+const defaultChatbotCommands: ChatbotCommandItem[] = [
+  {
+    id: "cmd-marketing",
+    keyword: "digital marketing",
+    alternativeKeywords: ["online marketing", "social media marketing", "marketing", "b2b marketing", "demand generation", "leads"],
+    userIntent: "Inquire about B2B digital marketing, paid social, and lead generation",
+    response: "Arav Innovations provides high-intent B2B digital marketing, multi-channel performance campaigns, and closed-loop attribution modeling across LinkedIn, Google Search, and enterprise networks.",
+    followUpResponse: "Would you like to discuss campaign strategies or schedule a demand generation audit with our marketing pod?",
+    relatedService: "digital-marketing",
+    relatedPage: "/services/digital-marketing",
+    ctaButtons: [
+      { label: "Explore Digital Marketing", type: "page", value: "/services/digital-marketing" },
+      { label: "Start a Project", type: "project_form" },
+      { label: "WhatsApp Us", type: "whatsapp", value: "https://api.whatsapp.com/send?phone=919650625777" },
+    ],
+    priority: 10,
+    enabled: true,
+  },
+  {
+    id: "cmd-web-dev",
+    keyword: "web development",
+    alternativeKeywords: ["website", "web app", "software", "nextjs", "react", "app engineering", "saas platform"],
+    userIntent: "Inquire about full-stack web and SaaS application engineering",
+    response: "We engineer subsecond Next.js web platforms, enterprise SaaS portals, microservices architectures, and cloud-native software built for global performance.",
+    followUpResponse: "Are you building a new platform from scratch or modernizing an existing legacy infrastructure?",
+    relatedService: "web-app-development",
+    relatedPage: "/services/web-app-development",
+    ctaButtons: [
+      { label: "Explore Web Engineering", type: "page", value: "/services/web-app-development" },
+      { label: "Schedule Tech Call", type: "contact" },
+      { label: "Start a Project", type: "project_form" },
+    ],
+    priority: 10,
+    enabled: true,
+  },
+  {
+    id: "cmd-seo",
+    keyword: "seo",
+    alternativeKeywords: ["search engine optimization", "google ranking", "search marketing", "organic traffic", "technical seo"],
+    userIntent: "Inquire about SEO and technical web performance tuning",
+    response: "Our technical SEO pods focus on Core Web Vitals optimization, semantic architecture, and high-converting B2B search visibility for target industry keywords.",
+    followUpResponse: "We can perform a preliminary SEO & Core Web Vitals audit for your domain.",
+    relatedService: "seo",
+    relatedPage: "/services/seo",
+    ctaButtons: [
+      { label: "Explore Technical SEO", type: "page", value: "/services/seo" },
+      { label: "Request SEO Audit", type: "project_form" },
+    ],
+    priority: 9,
+    enabled: true,
+  },
+  {
+    id: "cmd-compliance",
+    keyword: "dpdp compliance",
+    alternativeKeywords: ["compliance", "soc-2", "security", "gdpr", "privacy act", "risk governance"],
+    userIntent: "Inquire about India DPDP Act and SOC-2 data compliance audit",
+    response: "We provide comprehensive DPDP Act readiness audits, SOC-2 framework alignment, data pipeline encryption, and cross-border data governance strategy.",
+    followUpResponse: "Our compliance team assists enterprise clients across India and the GCC in achieving total data sovereignty readiness.",
+    relatedService: "risk-governance-compliance",
+    relatedPage: "/services/risk-governance-compliance",
+    ctaButtons: [
+      { label: "Explore Risk & Compliance", type: "page", value: "/services/risk-governance-compliance" },
+      { label: "Contact Compliance Pod", type: "email", value: "mailto:support@aravinnovations.com" },
+    ],
+    priority: 9,
+    enabled: true,
+  },
+  {
+    id: "cmd-contact",
+    keyword: "contact info",
+    alternativeKeywords: ["contact", "phone", "email", "address", "location", "gurgaon", "dubai", "office", "headquarters"],
+    userIntent: "Request company contact details and regional office addresses",
+    response: "Arav Innovations operates dual regional headquarters:\n\n• **India HQ**: Gurgaon, Haryana (Tel: +91 9650625777)\n• **UAE Regional Office**: Dubai Silicon Oasis, Dubai (Tel: +971 521555792)\n• **Email**: support@aravinnovations.com",
+    followUpResponse: "Would you like to connect directly via WhatsApp or email?",
+    relatedPage: "/contact",
+    ctaButtons: [
+      { label: "Contact Page", type: "page", value: "/contact" },
+      { label: "WhatsApp Us", type: "whatsapp", value: "https://api.whatsapp.com/send?phone=919650625777" },
+      { label: "Email Us", type: "email", value: "mailto:support@aravinnovations.com" },
+    ],
+    priority: 8,
+    enabled: true,
+  },
+  {
+    id: "cmd-pricing",
+    keyword: "pricing",
+    alternativeKeywords: ["cost", "rates", "budget", "quote", "pricing model", "retainer"],
+    userIntent: "Inquire about project pricing and engagement models",
+    response: "We offer three transparent engagement models tailored to enterprise goals: Fixed Scope Sprints, Dedicated Engineering/Marketing Pods, and Ongoing Strategic Retainers.",
+    followUpResponse: "Let us know your project requirements to receive a customized estimate.",
+    ctaButtons: [
+      { label: "Start a Project Request", type: "project_form" },
+      { label: "Speak with Advisor", type: "contact" },
+    ],
+    priority: 7,
+    enabled: true,
+  },
+];
+
 const defaultChatbotKB: ChatbotKB = {
-  defaultGreeting: "Hey there! 👋 Welcome to Arav Innovations. How can our team help accelerate your project today?",
-  fallbackResponse: "Thank you for reaching out! I've noted your inquiry. Would you like to schedule an exploratory call with an IT strategy advisor?",
-  intents: [
-    {
-      id: "intent-web",
-      name: "Web & App Development",
-      keywords: ["website", "web app", "software", "nextjs", "react", "app"],
-      response: "We engineer subsecond Next.js web applications, SaaS platforms, and enterprise digital products built for scale.",
-      ctaText: "Explore Web Development",
-      ctaRoute: "/services/web-app-development",
-    },
-    {
-      id: "intent-marketing",
-      name: "Digital Marketing & SEO",
-      keywords: ["marketing", "seo", "leads", "demand gen", "linkedin", "google ads"],
-      response: "Our B2B performance marketing & technical SEO pods deliver closed-loop attribution and high-intent pipeline growth.",
-      ctaText: "Explore Digital Marketing",
-      ctaRoute: "/services/digital-marketing",
-    },
-    {
-      id: "intent-compliance",
-      name: "Risk & DPDP Compliance",
-      keywords: ["dpdp", "compliance", "soc-2", "security", "gdpr", "privacy"],
-      response: "We ensure full readiness with India's DPDP Act, SOC-2 data security, and enterprise privacy compliance.",
-      ctaText: "Explore Compliance",
-      ctaRoute: "/services/risk-governance-compliance",
-    },
-  ],
+  masterEnabled: true,
+  defaultGreeting: "Hey there! 👋 Welcome to Arav Innovations. How can our team help accelerate your technology & growth goals today?",
+  fallbackResponse: "I'm here to help with Arav Innovations' services, projects, industries and contact options. Could you tell me what you're looking for?",
+  commands: defaultChatbotCommands,
 };
 
 const defaultFooter: FooterContent = {
+  mainHeading: "WE 🤍 WORKING WITH AMBITIOUS BRANDS, ACROSS EVERY SECTOR",
+  description: "Arav Innovations delivers enterprise technology platforms, IT strategy, full-stack software, data compliance, and B2B growth.",
+  indiaCountry: "India HQ",
   indiaPhone: "+91 9650625777",
+  indiaAddress: "Platinum Floor D 14/23, Ardee City Sec 52, Gurgaon 122002",
+  indiaDisplayLabel: "+91 9650625777 - India HQ",
+  indiaVisible: true,
+  uaeCountry: "UAE Regional Office",
+  uaeCompanyName: "ARAVINNOVATIONS CONSULTANCY - FZCO",
   uaePhone: "+971 521555792",
+  uaeAddress: "55764-001 IFZA Business Park FZCO, Building A1 Dubai Silicon Oasis Dubai, U.A.E",
+  uaeDisplayLabel: "+971 521555792 - UAE Regional Office",
+  uaeVisible: true,
   supportEmail: "support@aravinnovations.com",
+  secondaryEmail: "contact@aravinnovations.com",
+  whatsappNumber: "+91 9650625777",
+  whatsappUrl: "https://api.whatsapp.com/send?phone=919650625777",
   linkedinUrl: "https://www.linkedin.com/company/aravinnovations/",
   instagramUrl: "https://www.instagram.com/aravinnovations",
   facebookUrl: "https://www.facebook.com/people/Arav-Innovations/61566419637071/",
-  whatsappUrl: "https://api.whatsapp.com/send?phone=919650625777",
   twitterUrl: "https://x.com/AravInnovations",
   youtubeUrl: "https://www.youtube.com/@AravInnovations",
+  bookCallUrl: "tel:+919650625777",
+  contactUsUrl: "/contact",
   copyrightText: "© 2026 Arav Innovations. All rights reserved.",
 };
 
@@ -337,10 +459,18 @@ interface SiteContentContextType {
   content: SiteContent;
   updateHero: (hero: Partial<HeroContent>) => void;
   updateService: (slug: string, updated: Partial<Service>) => void;
+  addService: (service: Service) => void;
+  deleteService: (slug: string) => void;
   updateIndustry: (slug: string, updated: Partial<IndustrySolution>) => void;
+  addIndustry: (industry: IndustrySolution) => void;
+  deleteIndustry: (slug: string) => void;
   updateCaseStudy: (slug: string, updated: Partial<CaseStudy>) => void;
+  addCaseStudy: (study: CaseStudy) => void;
+  deleteCaseStudy: (slug: string) => void;
   updateProcessStep: (idx: number, updated: Partial<ProcessStepItem>) => void;
   updateTestimonial: (idx: number, updated: Partial<TestimonialItem>) => void;
+  addTestimonial: (testimonial: TestimonialItem) => void;
+  deleteTestimonial: (id: string) => void;
   updateFooter: (footer: Partial<FooterContent>) => void;
   updateSocialLink: (id: string, updated: Partial<SocialLinkItem>) => void;
   addSocialLink: (link: SocialLinkItem) => void;
@@ -348,6 +478,10 @@ interface SiteContentContextType {
   updateLanguage: (code: string, updated: Partial<LanguageItem>) => void;
   toggleLanguage: (code: string) => void;
   updateChatbotKB: (kb: Partial<ChatbotKB>) => void;
+  addChatbotCommand: (cmd: ChatbotCommandItem) => void;
+  updateChatbotCommand: (id: string, updated: Partial<ChatbotCommandItem>) => void;
+  deleteChatbotCommand: (id: string) => void;
+  toggleChatbotCommand: (id: string) => void;
   updateSEO: (seo: Partial<SEOContent>) => void;
   updateLegal: (legal: Partial<LegalContent>) => void;
   updateTranslation: (locale: string, key: string, val: string) => void;
@@ -358,10 +492,18 @@ const SiteContentContext = React.createContext<SiteContentContextType>({
   content: defaultContent,
   updateHero: () => {},
   updateService: () => {},
+  addService: () => {},
+  deleteService: () => {},
   updateIndustry: () => {},
+  addIndustry: () => {},
+  deleteIndustry: () => {},
   updateCaseStudy: () => {},
+  addCaseStudy: () => {},
+  deleteCaseStudy: () => {},
   updateProcessStep: () => {},
   updateTestimonial: () => {},
+  addTestimonial: () => {},
+  deleteTestimonial: () => {},
   updateFooter: () => {},
   updateSocialLink: () => {},
   addSocialLink: () => {},
@@ -369,6 +511,10 @@ const SiteContentContext = React.createContext<SiteContentContextType>({
   updateLanguage: () => {},
   toggleLanguage: () => {},
   updateChatbotKB: () => {},
+  addChatbotCommand: () => {},
+  updateChatbotCommand: () => {},
+  deleteChatbotCommand: () => {},
+  toggleChatbotCommand: () => {},
   updateSEO: () => {},
   updateLegal: () => {},
   updateTranslation: () => {},
@@ -412,6 +558,14 @@ export function SiteContentProvider({ children }: { children: React.ReactNode })
     saveContent({ ...content, services: updatedServices });
   };
 
+  const addService = (service: Service) => {
+    saveContent({ ...content, services: [...content.services, service] });
+  };
+
+  const deleteService = (slug: string) => {
+    saveContent({ ...content, services: content.services.filter((s) => s.slug !== slug) });
+  };
+
   const updateIndustry = (slug: string, updatedPartial: Partial<IndustrySolution>) => {
     const updatedIndustries = content.industries.map((ind) =>
       ind.slug === slug ? { ...ind, ...updatedPartial } : ind
@@ -419,11 +573,27 @@ export function SiteContentProvider({ children }: { children: React.ReactNode })
     saveContent({ ...content, industries: updatedIndustries });
   };
 
+  const addIndustry = (industry: IndustrySolution) => {
+    saveContent({ ...content, industries: [...content.industries, industry] });
+  };
+
+  const deleteIndustry = (slug: string) => {
+    saveContent({ ...content, industries: content.industries.filter((ind) => ind.slug !== slug) });
+  };
+
   const updateCaseStudy = (slug: string, updatedPartial: Partial<CaseStudy>) => {
     const updatedStudies = content.caseStudies.map((cs) =>
       cs.slug === slug ? { ...cs, ...updatedPartial } : cs
     );
     saveContent({ ...content, caseStudies: updatedStudies });
+  };
+
+  const addCaseStudy = (study: CaseStudy) => {
+    saveContent({ ...content, caseStudies: [...content.caseStudies, study] });
+  };
+
+  const deleteCaseStudy = (slug: string) => {
+    saveContent({ ...content, caseStudies: content.caseStudies.filter((cs) => cs.slug !== slug) });
   };
 
   const updateProcessStep = (idx: number, updatedPartial: Partial<ProcessStepItem>) => {
@@ -438,6 +608,14 @@ export function SiteContentProvider({ children }: { children: React.ReactNode })
       i === idx ? { ...t, ...updatedPartial } : t
     );
     saveContent({ ...content, testimonials: updatedTests });
+  };
+
+  const addTestimonial = (t: TestimonialItem) => {
+    saveContent({ ...content, testimonials: [...content.testimonials, t] });
+  };
+
+  const deleteTestimonial = (id: string) => {
+    saveContent({ ...content, testimonials: content.testimonials.filter((t) => t.id !== id) });
   };
 
   const updateFooter = (footerPartial: Partial<FooterContent>) => {
@@ -489,6 +667,56 @@ export function SiteContentProvider({ children }: { children: React.ReactNode })
     });
   };
 
+  const addChatbotCommand = (cmd: ChatbotCommandItem) => {
+    const currentCommands = content.chatbotKB?.commands || defaultChatbotCommands;
+    saveContent({
+      ...content,
+      chatbotKB: {
+        ...content.chatbotKB,
+        commands: [cmd, ...currentCommands],
+      },
+    });
+  };
+
+  const updateChatbotCommand = (id: string, updatedPartial: Partial<ChatbotCommandItem>) => {
+    const currentCommands = content.chatbotKB?.commands || defaultChatbotCommands;
+    const updatedCommands = currentCommands.map((c) =>
+      c.id === id ? { ...c, ...updatedPartial } : c
+    );
+    saveContent({
+      ...content,
+      chatbotKB: {
+        ...content.chatbotKB,
+        commands: updatedCommands,
+      },
+    });
+  };
+
+  const deleteChatbotCommand = (id: string) => {
+    const currentCommands = content.chatbotKB?.commands || defaultChatbotCommands;
+    saveContent({
+      ...content,
+      chatbotKB: {
+        ...content.chatbotKB,
+        commands: currentCommands.filter((c) => c.id !== id),
+      },
+    });
+  };
+
+  const toggleChatbotCommand = (id: string) => {
+    const currentCommands = content.chatbotKB?.commands || defaultChatbotCommands;
+    const updatedCommands = currentCommands.map((c) =>
+      c.id === id ? { ...c, enabled: !c.enabled } : c
+    );
+    saveContent({
+      ...content,
+      chatbotKB: {
+        ...content.chatbotKB,
+        commands: updatedCommands,
+      },
+    });
+  };
+
   const updateSEO = (seoPartial: Partial<SEOContent>) => {
     saveContent({
       ...content,
@@ -529,10 +757,18 @@ export function SiteContentProvider({ children }: { children: React.ReactNode })
         content,
         updateHero,
         updateService,
+        addService,
+        deleteService,
         updateIndustry,
+        addIndustry,
+        deleteIndustry,
         updateCaseStudy,
+        addCaseStudy,
+        deleteCaseStudy,
         updateProcessStep,
         updateTestimonial,
+        addTestimonial,
+        deleteTestimonial,
         updateFooter,
         updateSocialLink,
         addSocialLink,
@@ -540,6 +776,10 @@ export function SiteContentProvider({ children }: { children: React.ReactNode })
         updateLanguage,
         toggleLanguage,
         updateChatbotKB,
+        addChatbotCommand,
+        updateChatbotCommand,
+        deleteChatbotCommand,
+        toggleChatbotCommand,
         updateSEO,
         updateLegal,
         updateTranslation,
@@ -554,3 +794,4 @@ export function SiteContentProvider({ children }: { children: React.ReactNode })
 export function useSiteContent() {
   return React.useContext(SiteContentContext);
 }
+

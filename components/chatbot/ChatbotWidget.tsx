@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
 import { useSiteConfig } from "@/lib/site-config";
+import { useSiteContent, ChatbotCommandItem, ChatbotCTAButton } from "@/lib/site-content";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   findMatchingService,
@@ -21,31 +22,36 @@ interface ChatMessage {
   id: string;
   sender: "bot" | "user";
   text: string;
-  options?: { label: string; action: string; payload?: string; route?: string }[];
+  options?: { label: string; action: string; payload?: string; route?: string; ctaType?: string }[];
   isLeadForm?: boolean;
 }
 
 export function ChatbotWidget() {
   const pathname = usePathname();
   const { config } = useSiteConfig();
+  const { content } = useSiteContent();
   const router = useRouter();
 
   if (pathname?.includes("/admin")) {
     return null;
   }
 
+  const chatbotKB = content.chatbotKB;
+  const isMasterOn = config.chatbotEnabled && chatbotKB?.masterEnabled !== false;
+
   const [shouldShowLauncher, setShouldShowLauncher] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
   const [lastMatchedService, setLastMatchedService] = React.useState<ServiceKnowledge | null>(null);
+  const [lastMatchedCommand, setLastMatchedCommand] = React.useState<ChatbotCommandItem | null>(null);
   const [messages, setMessages] = React.useState<ChatMessage[]>([
     {
       id: "welcome",
       sender: "bot",
-      text: "Hello! Welcome to Arav Innovations. How can we help you today?",
+      text: chatbotKB?.defaultGreeting || "Hello! Welcome to Arav Innovations. How can we help you today?",
       options: [
         { label: "Digital Marketing", action: "service_lookup", payload: "digital-marketing" },
         { label: "Web & App Development", action: "service_lookup", payload: "web-app-development" },
-        { label: "AI & Automation", action: "service_lookup", payload: "ai-solutions" },
+        { label: "Risk & Compliance", action: "service_lookup", payload: "risk-governance-compliance" },
         { label: "What services do you offer?", action: "all_services" },
         { label: "Where are your offices?", action: "locations" },
         { label: "Start a project", action: "start_project" },
@@ -62,9 +68,9 @@ export function ChatbotWidget() {
   const [leadSubmitted, setLeadSubmitted] = React.useState(false);
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
 
-  // Task B: Delayed trigger behavior (interaction or 10s idle timer)
+  // Delayed trigger behavior
   React.useEffect(() => {
-    if (!config.chatbotEnabled) return;
+    if (!isMasterOn) return;
 
     try {
       if (sessionStorage.getItem("arav_chat_dismissed") === "true") {
@@ -109,13 +115,13 @@ export function ChatbotWidget() {
     };
 
     return cleanup;
-  }, [config.chatbotEnabled, config.chatbotDelaySeconds]);
+  }, [isMasterOn, config.chatbotDelaySeconds]);
 
   React.useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isOpen]);
 
-  if (!config.chatbotEnabled) return null;
+  if (!isMasterOn) return null;
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -123,7 +129,6 @@ export function ChatbotWidget() {
     trackEvent({ type: "chatbot_started" });
   };
 
-  // Task A: Minimize chat window without clearing conversation or resetting state
   const handleMinimize = () => {
     setIsOpen(false);
     setShouldShowLauncher(true);
@@ -134,8 +139,41 @@ export function ChatbotWidget() {
     }
   };
 
-  const handleOptionClick = (option: { label: string; action: string; payload?: string; route?: string }) => {
-    // If option has a direct route (e.g. [ Explore Digital Marketing ])
+  const executeCTAAction = (type: string, value?: string) => {
+    if (type === "page" && value) {
+      router.push(value);
+    } else if (type === "contact") {
+      router.push(value || "/contact");
+    } else if (type === "whatsapp") {
+      window.open(value || content.footer?.whatsappUrl || "https://api.whatsapp.com/send?phone=919650625777", "_blank");
+    } else if (type === "email") {
+      window.location.href = value || `mailto:${content.footer?.supportEmail || "support@aravinnovations.com"}`;
+    }
+  };
+
+  const handleOptionClick = (option: { label: string; action: string; payload?: string; route?: string; ctaType?: string }) => {
+    if (option.ctaType) {
+      if (option.ctaType === "project_form") {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: `user-${Date.now()}`,
+            sender: "user",
+            text: option.label,
+          },
+          {
+            id: `bot-${Date.now()}`,
+            sender: "bot",
+            text: "Great! Please share your project requirements below:",
+            isLeadForm: true,
+          },
+        ]);
+        return;
+      }
+      executeCTAAction(option.ctaType, option.route || option.payload);
+      return;
+    }
+
     if (option.route) {
       router.push(option.route);
       return;
@@ -152,7 +190,6 @@ export function ChatbotWidget() {
     if (option.action === "service_lookup" && option.payload) {
       const match = servicesKnowledge.find((s) => s.slug === option.payload);
       if (match) {
-        // Check admin service status
         const isEnabled = config.serviceStates[match.slug] !== false;
         if (!isEnabled) {
           botMsg = {
@@ -202,7 +239,7 @@ export function ChatbotWidget() {
       botMsg = {
         id: `bot-${Date.now()}`,
         sender: "bot",
-        text: "We operate dual regional headquarters in India (Gurgaon HQ) and the UAE (Dubai), serving enterprise clients globally across India, UAE, US, EU, and Canada.",
+        text: `We operate dual regional headquarters:\n\n• **India HQ**: ${content.footer?.indiaPhone || "+91 9650625777"}\n• **UAE Regional Office**: ${content.footer?.uaePhone || "+971 521555792"}\n\nServing enterprise clients globally across India, UAE, US, EU, and Canada.`,
         options: [
           { label: "Contact Gurgaon Office", action: "start_project" },
           { label: "Contact Dubai Office", action: "start_project" },
@@ -224,13 +261,26 @@ export function ChatbotWidget() {
         options: [
           { label: "Digital Marketing", action: "service_lookup", payload: "digital-marketing" },
           { label: "Web & App Development", action: "service_lookup", payload: "web-app-development" },
-          { label: "AI & Automation", action: "service_lookup", payload: "ai-solutions" },
           { label: "Start a Project", action: "start_project" },
         ],
       };
     }
 
     setMessages((prev) => [...prev, userMsg, botMsg]);
+  };
+
+  const findMatchingAdminCommand = (query: string): ChatbotCommandItem | null => {
+    const activeCmds = (chatbotKB?.commands || []).filter((c) => c.enabled !== false);
+    const qLower = query.toLowerCase();
+
+    const matches = activeCmds.filter((cmd) => {
+      const kwLower = cmd.keyword.toLowerCase();
+      if (qLower.includes(kwLower)) return true;
+      return (cmd.alternativeKeywords || []).some((alt) => qLower.includes(alt.toLowerCase()));
+    });
+
+    if (matches.length === 0) return null;
+    return matches.sort((a, b) => (b.priority || 0) - (a.priority || 0))[0];
   };
 
   const handleCustomSend = (e: React.FormEvent) => {
@@ -248,23 +298,49 @@ export function ChatbotWidget() {
 
     let botMsg: ChatMessage;
 
-    // Task B1: Conversational Greetings
-    if (isGreeting(userText)) {
+    // Check configured Admin commands first
+    const matchedCmd = findMatchingAdminCommand(userText);
+
+    if (matchedCmd) {
+      setLastMatchedCommand(matchedCmd);
+      const opts = (matchedCmd.ctaButtons || []).map((btn) => ({
+        label: btn.label,
+        action: "command_cta",
+        payload: btn.value,
+        route: btn.value,
+        ctaType: btn.type,
+      }));
+
       botMsg = {
         id: `bot-${Date.now()}`,
         sender: "bot",
-        text: "Hey there! 👋 How can I help you?",
+        text: matchedCmd.response,
+        options: opts.length > 0 ? opts : undefined,
+      };
+    } else if (lastMatchedCommand && (userText.toLowerCase().includes("how can it help") || userText.toLowerCase().includes("tell me more") || userText.toLowerCase().includes("details") || userText.toLowerCase().includes("more"))) {
+      botMsg = {
+        id: `bot-${Date.now()}`,
+        sender: "bot",
+        text: lastMatchedCommand.followUpResponse || `Regarding **${lastMatchedCommand.keyword}**: We deliver end-to-end strategy, execution, and handover. Would you like to connect with an advisor?`,
+        options: [
+          { label: "Start a Project", action: "start_project" },
+          { label: "Contact Us", action: "talk_advisor" },
+        ],
+      };
+    } else if (isGreeting(userText)) {
+      botMsg = {
+        id: `bot-${Date.now()}`,
+        sender: "bot",
+        text: chatbotKB?.defaultGreeting || "Hey there! 👋 How can I help you today?",
         options: [
           { label: "Digital Marketing", action: "service_lookup", payload: "digital-marketing" },
           { label: "Web Development", action: "service_lookup", payload: "web-app-development" },
-          { label: "AI & Automation", action: "service_lookup", payload: "ai-solutions" },
           { label: "Start a Project", action: "start_project" },
         ],
       };
     } else {
       const combo = findCombinationIntent(userText);
       const matchedService = combo ? combo.service : findMatchingService(userText);
-      const activeService = matchedService || lastMatchedService;
 
       if (combo) {
         setLastMatchedService(combo.service);
@@ -304,17 +380,6 @@ export function ChatbotWidget() {
             ],
           };
         }
-      } else if (lastMatchedService && (userText.toLowerCase().includes("what kind") || userText.toLowerCase().includes("how can it help") || userText.toLowerCase().includes("details") || userText.toLowerCase().includes("more"))) {
-        botMsg = {
-          id: `bot-${Date.now()}`,
-          sender: "bot",
-          text: `Regarding **${lastMatchedService.name}**: ${lastMatchedService.description}\n\nWould you like to discuss your custom project requirements with an advisor?`,
-          options: [
-            { label: `Explore ${lastMatchedService.name}`, action: "navigate", route: lastMatchedService.route },
-            { label: "Start a Project", action: "start_project" },
-            { label: "Talk to Advisor", action: "talk_advisor" },
-          ],
-        };
       } else if (isBuyingIntent(userText)) {
         botMsg = {
           id: `bot-${Date.now()}`,
@@ -327,18 +392,17 @@ export function ChatbotWidget() {
         botMsg = {
           id: `bot-${Date.now()}`,
           sender: "bot",
-          text: "We operate dual regional delivery centers in Gurgaon (India HQ) and Dubai (UAE), serving clients globally across cross-border technical standards.",
+          text: `We operate dual regional delivery centers in Gurgaon (India HQ: ${content.footer?.indiaPhone}) and Dubai (UAE: ${content.footer?.uaePhone}), serving clients globally.`,
           options: [
             { label: "Start a Project", action: "start_project" },
             { label: "Contact Us", action: "talk_advisor" },
           ],
         };
       } else {
-        // Task B7: Unknown Questions (Non-hallucinating fallback)
         botMsg = {
           id: `bot-${Date.now()}`,
           sender: "bot",
-          text: "I can help you with Arav Innovations' services, projects and getting in touch with our team. Could you tell me what you're looking for?",
+          text: chatbotKB?.fallbackResponse || "I'm here to help with Arav Innovations' services, projects, industries and contact options. Could you tell me what you're looking for?",
           options: [
             { label: "Digital Marketing", action: "service_lookup", payload: "digital-marketing" },
             { label: "Web Development", action: "service_lookup", payload: "web-app-development" },
@@ -384,7 +448,7 @@ export function ChatbotWidget() {
 
   return (
     <>
-      {/* Floating Launcher (Always visible when Chat window is closed/minimized) */}
+      {/* Floating Launcher */}
       <AnimatePresence>
         {shouldShowLauncher && !isOpen && (
           <motion.div
@@ -423,7 +487,7 @@ export function ChatbotWidget() {
       {/* Chat Window */}
       {isOpen && (
         <div className="fixed bottom-6 right-4 sm:right-6 z-50 w-[92vw] sm:w-[380px] h-[520px] rounded-3xl bg-[#FFFDF9] dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200">
-          {/* Header with Minimize Button (Task A1) */}
+          {/* Header with Minimize Button */}
           <div className="bg-[#FBF3EA] dark:bg-[#1E1915] border-b border-[#EFE2D6] dark:border-[#2C241E] px-5 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-xl bg-[#E8672A] text-white flex items-center justify-center shadow-xs">
@@ -440,7 +504,6 @@ export function ChatbotWidget() {
               </div>
             </div>
 
-            {/* X Minimize Button (Task A1: Minimize to floating launcher) */}
             <button
               type="button"
               onClick={handleMinimize}
@@ -473,7 +536,7 @@ export function ChatbotWidget() {
                   {msg.text}
                 </div>
 
-                {/* Quick Option & Page-directed Buttons (Task B5) */}
+                {/* Option Buttons */}
                 {msg.options && (
                   <div className="flex flex-wrap gap-1.5 mt-2 max-w-[90%]">
                     {msg.options.map((opt, idx) => (
@@ -483,13 +546,13 @@ export function ChatbotWidget() {
                         onClick={() => handleOptionClick(opt)}
                         className={cn(
                           "text-[11px] px-3 py-1.5 rounded-xl border font-medium transition-colors text-left cursor-pointer flex items-center gap-1",
-                          opt.route
+                          opt.route || opt.ctaType === "page"
                             ? "bg-[#E8672A] text-white border-[#E8672A] hover:bg-[#d4581f]"
                             : "bg-white dark:bg-[#1F1A16] border-[#EFE2D6] dark:border-[#2C241E] hover:border-[#E8672A] text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FCE3D3]/30 dark:hover:bg-[#261F1A]"
                         )}
                       >
                         <span>{opt.label}</span>
-                        {opt.route && <ExternalLink className="w-3 h-3" />}
+                        {(opt.route || opt.ctaType === "page") && <ExternalLink className="w-3 h-3" />}
                       </button>
                     ))}
                   </div>
@@ -586,3 +649,4 @@ export function ChatbotWidget() {
     </>
   );
 }
+

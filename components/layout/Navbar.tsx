@@ -319,14 +319,16 @@ export function Navbar() {
             <ThemeToggle />
           </div>
 
-          {/* Mobile Actions (Language Selector + Theme Toggle + Menu) */}
-          <div className="flex lg:hidden items-center gap-1.5">
-            <LanguageSelector />
+          {/* Mobile Header Right Bar (Clean, uncluttered [LOGO] --- [☰]) */}
+          <div className="flex lg:hidden items-center gap-2">
+            <div className="hidden sm:block">
+              <LanguageSelector />
+            </div>
             <ThemeToggle />
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FBF3EA] dark:hover:bg-[#221D18] transition-colors border border-[#EFE2D6] dark:border-[#2C241E]"
+              className="p-2.5 rounded-xl bg-[#E8672A] text-white hover:bg-[#d4581f] transition-all shadow-md flex items-center justify-center shrink-0 min-w-[44px] min-h-[44px] cursor-pointer"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -338,8 +340,13 @@ export function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-[65px] bottom-0 bg-[#FFFDF9] dark:bg-[#12100E] border-t border-[#EFE2D6] dark:border-[#2C241E] px-5 py-6 overflow-y-auto z-50">
+        <div className="lg:hidden fixed inset-x-0 top-[65px] bottom-0 bg-[#FFFDF9] dark:bg-[#12100E] border-t border-[#EFE2D6] dark:border-[#2C241E] px-5 py-6 overflow-y-auto z-50 animate-in fade-in slide-in-from-top-2 duration-200">
           <div className="space-y-6">
+            {/* Mobile Utility Controls (Language & Theme inside drawer for small screens) */}
+            <div className="sm:hidden flex items-center justify-between pb-4 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+              <span className="text-xs font-bold text-[#7A6A5F] dark:text-[#B8ACA0]">Preferences</span>
+              <LanguageSelector />
+            </div>
             {/* Group 1: What We Do */}
             <div>
               <button

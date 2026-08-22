@@ -3,7 +3,18 @@
 import * as React from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useSiteConfig } from "@/lib/site-config";
-import { useSiteContent, SocialLinkItem, LanguageItem } from "@/lib/site-content";
+import {
+  useSiteContent,
+  SocialLinkItem,
+  LanguageItem,
+  ChatbotCommandItem,
+  ChatbotCTAButton,
+  Service,
+  IndustrySolution,
+  CaseStudy,
+  ProcessStepItem,
+  TestimonialItem,
+} from "@/lib/site-content";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import {
   Shield,
@@ -28,6 +39,13 @@ import {
   Eye,
   CheckCircle2,
   XCircle,
+  ToggleLeft,
+  ToggleRight,
+  PhoneCall,
+  SlidersHorizontal,
+  Mail,
+  ChevronDown,
+  Edit3,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -49,10 +67,18 @@ export default function AdminDashboardPage() {
     content,
     updateHero,
     updateService,
+    addService,
+    deleteService,
     updateIndustry,
+    addIndustry,
+    deleteIndustry,
     updateCaseStudy,
+    addCaseStudy,
+    deleteCaseStudy,
     updateProcessStep,
     updateTestimonial,
+    addTestimonial,
+    deleteTestimonial,
     updateFooter,
     updateSocialLink,
     addSocialLink,
@@ -60,7 +86,12 @@ export default function AdminDashboardPage() {
     updateLanguage,
     toggleLanguage,
     updateChatbotKB,
+    addChatbotCommand,
+    updateChatbotCommand,
+    deleteChatbotCommand,
+    toggleChatbotCommand,
     updateSEO,
+    updateLegal,
     resetAllContent,
   } = useSiteContent();
 
@@ -72,11 +103,31 @@ export default function AdminDashboardPage() {
   const [heroForm, setHeroForm] = React.useState(content.hero);
   const [footerForm, setFooterForm] = React.useState(content.footer);
   const [seoForm, setSeoForm] = React.useState(content.seo);
+  const [legalForm, setLegalForm] = React.useState(content.legal);
+
+  // Social form state
   const [newSocialForm, setNewSocialForm] = React.useState({
     name: "",
     icon: "Globe",
     url: "",
   });
+
+  // Chatbot command form state
+  const [showAddCommandForm, setShowAddCommandForm] = React.useState(false);
+  const [newCmdKeyword, setNewCmdKeyword] = React.useState("");
+  const [newCmdAltKeywords, setNewCmdAltKeywords] = React.useState("");
+  const [newCmdIntent, setNewCmdIntent] = React.useState("");
+  const [newCmdResponse, setNewCmdResponse] = React.useState("");
+  const [newCmdFollowUp, setNewCmdFollowUp] = React.useState("");
+  const [newCmdRelatedService, setNewCmdRelatedService] = React.useState("");
+  const [newCmdRelatedPage, setNewCmdRelatedPage] = React.useState("");
+  const [newCmdPriority, setNewCmdPriority] = React.useState(10);
+  const [newCmdCtaLabel, setNewCmdCtaLabel] = React.useState("Explore More");
+  const [newCmdCtaType, setNewCmdCtaType] = React.useState<ChatbotCTAButton["type"]>("page");
+  const [newCmdCtaValue, setNewCmdCtaValue] = React.useState("/services");
+
+  // Inline editing states
+  const [editingServiceSlug, setEditingServiceSlug] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     if (!isAuthenticated) {
@@ -88,6 +139,7 @@ export default function AdminDashboardPage() {
     setHeroForm(content.hero);
     setFooterForm(content.footer);
     setSeoForm(content.seo);
+    setLegalForm(content.legal);
   }, [content]);
 
   if (!isAuthenticated) {
@@ -113,25 +165,50 @@ export default function AdminDashboardPage() {
     router.replace(`/${locale}/admin/login`);
   };
 
+  // Admin Search filter logic
+  const filteredTabItems = () => {
+    if (!searchQuery.trim()) return null;
+    const q = searchQuery.toLowerCase();
+    const matches: { label: string; tab: string }[] = [];
+    if ("homepage hero title eyebrow cta".includes(q)) matches.push({ label: "Homepage & Hero", tab: "hero" });
+    if ("services 7 practices marketing web dev seo compliance audit".includes(q)) matches.push({ label: "7 Core Practices", tab: "services" });
+    if ("industry solutions verticals ecommerce fintech saas".includes(q)) matches.push({ label: "Industry Solutions", tab: "industries" });
+    if ("case studies proven track record metrics outcomes".includes(q)) matches.push({ label: "Case Studies", tab: "casestudies" });
+    if ("methodology 5-step process execution delivery".includes(q)) matches.push({ label: "5-Step Methodology", tab: "methodology" });
+    if ("testimonials client reviews quote author".includes(q)) matches.push({ label: "Client Testimonials", tab: "testimonials" });
+    if ("footer india uae phone email address location copyright regional".includes(q)) matches.push({ label: "Footer & Regional", tab: "footer" });
+    if ("social media linkedin instagram facebook whatsapp twitter youtube".includes(q)) matches.push({ label: "Social Media & URLs", tab: "socials" });
+    if ("chatbot commands response intent keywords bot knowledge base".includes(q)) matches.push({ label: "Chatbot & Knowledge Base", tab: "chatbot" });
+    if ("contact info leads phone email address form".includes(q)) matches.push({ label: "Contact Info & Leads", tab: "contact" });
+    if ("languages translation rtl english hindi arabic".includes(q)) matches.push({ label: "Languages & RTL", tab: "languages" });
+    if ("seo title meta canonical indexing search".includes(q)) matches.push({ label: "Global SEO", tab: "seo" });
+    if ("legal privacy terms refund security dpdp".includes(q)) matches.push({ label: "Legal & DPDP Content", tab: "legal" });
+    if ("system animations hover maintenance toggle".includes(q)) matches.push({ label: "Maintenance Controls", tab: "system" });
+    return matches;
+  };
+
+  const searchMatches = filteredTabItems();
+
   return (
     <div className="min-h-screen bg-[#FAF5EE] dark:bg-[#0E0C0A] text-[#3A2E27] dark:text-[#FAF5EE] flex flex-col lg:flex-row transition-colors duration-300">
-      {/* Toast Banner */}
+      {/* Toast Notification Banner */}
       {toastMessage && (
-        <div className="fixed top-6 right-6 z-50 px-4 py-3 rounded-2xl bg-[#E8672A] text-white text-xs font-semibold shadow-2xl animate-in fade-in slide-in-from-top-4">
-          ✓ {toastMessage}
+        <div className="fixed top-6 right-6 z-50 px-5 py-3 rounded-2xl bg-[#E8672A] text-white text-xs font-semibold shadow-2xl animate-in fade-in slide-in-from-top-4 flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4 shrink-0" />
+          <span>{toastMessage}</span>
         </div>
       )}
 
-      {/* Left Persistent Navigation Sidebar */}
+      {/* Left Navigation Sidebar */}
       <AdminSidebar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         onLogout={handleLogout}
       />
 
-      {/* Main CMS Editor Area */}
-      <main className="flex-1 p-4 sm:p-8 lg:p-10 overflow-y-auto mt-14 lg:mt-0 space-y-8">
-        {/* Top Header Bar & Global Admin Search (Task T) */}
+      {/* Main CMS Control Center Content Area */}
+      <main className="flex-1 p-4 sm:p-8 lg:p-10 overflow-y-auto mt-14 lg:mt-0 space-y-8 max-w-[1600px]">
+        {/* Top Header Bar & Global Admin Search */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
@@ -143,20 +220,20 @@ export default function AdminDashboardPage() {
               </h1>
             </div>
             <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] pl-9">
-              Managing Tab: <strong className="text-[#E8672A] uppercase">{activeTab}</strong> &bull; Changes update public website dynamically
+              Managing Section: <strong className="text-[#E8672A] uppercase">{activeTab}</strong> &bull; Updates propagate live across the website
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            {/* Global Admin Search Bar (Task T) */}
+            {/* Global Admin Search Bar */}
             <div className="relative">
               <Search className="w-4 h-4 text-[#7A6A5F] absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Search CMS settings..."
+                placeholder="Search CMS settings (e.g. phone, chatbot)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9 pr-3 py-2 rounded-xl text-xs bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] focus:border-[#E8672A] w-48 sm:w-60"
+                className="pl-9 pr-3 py-2 rounded-xl text-xs bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] focus:border-[#E8672A] w-48 sm:w-64"
               />
             </div>
 
@@ -166,7 +243,7 @@ export default function AdminDashboardPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] text-[#3A2E27] dark:text-[#FAF5EE] hover:border-[#E8672A]"
             >
-              <span>View Live Website</span>
+              <span>View Live Site</span>
               <ExternalLink className="w-3.5 h-3.5 text-[#E8672A]" />
             </a>
             <Button
@@ -175,7 +252,7 @@ export default function AdminDashboardPage() {
               onClick={() => {
                 resetConfig();
                 resetAllContent();
-                showToast("All content & settings reset to defaults");
+                showToast("All content & settings reset to factory defaults");
               }}
               className="rounded-xl border-[#EFE2D6] dark:border-[#2C241E]"
               leftIcon={<RotateCcw className="w-4 h-4" />}
@@ -185,10 +262,33 @@ export default function AdminDashboardPage() {
           </div>
         </div>
 
+        {/* Global Admin Search Results Bar */}
+        {searchMatches && searchMatches.length > 0 && (
+          <div className="p-4 rounded-2xl bg-[#FCE3D3]/50 dark:bg-[#261F1A] border border-[#E8672A]/30 space-y-2">
+            <span className="text-xs font-bold text-[#E8672A]">Search Matches:</span>
+            <div className="flex flex-wrap gap-2">
+              {searchMatches.map((m, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => {
+                    setActiveTab(m.tab);
+                    setSearchQuery("");
+                  }}
+                  className="px-3 py-1.5 rounded-xl bg-white dark:bg-[#1A1613] text-xs font-bold border border-[#E8672A]/40 text-[#E8672A] hover:bg-[#E8672A] hover:text-white transition-all cursor-pointer"
+                >
+                  {m.label} &rarr;
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================================= */}
         {/* TAB 1: DASHBOARD OVERVIEW */}
+        {/* ========================================================================= */}
         {activeTab === "dashboard" && (
           <div className="space-y-8">
-            {/* Quick Actions Shortcuts (Task S) */}
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-4">
               <h2 className="text-base font-bold font-display flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-[#E8672A]" />
@@ -196,11 +296,16 @@ export default function AdminDashboardPage() {
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
                 {[
-                  { label: "Edit Hero Text", tab: "hero" },
-                  { label: "Manage 7 Practices", tab: "services" },
-                  { label: "Manage Social URLs", tab: "socials" },
-                  { label: "Languages & RTL", tab: "languages" },
-                  { label: "Chatbot Settings", tab: "chatbot" },
+                  { label: "Homepage & Hero", tab: "hero" },
+                  { label: "7 Core Practices", tab: "services" },
+                  { label: "Industry Solutions", tab: "industries" },
+                  { label: "Case Studies", tab: "casestudies" },
+                  { label: "5-Step Methodology", tab: "methodology" },
+                  { label: "Client Testimonials", tab: "testimonials" },
+                  { label: "Footer & Regional CMS", tab: "footer" },
+                  { label: "Chatbot Commands", tab: "chatbot" },
+                  { label: "Social Media URLs", tab: "socials" },
+                  { label: "Global SEO", tab: "seo" },
                 ].map((act, i) => (
                   <button
                     key={i}
@@ -214,13 +319,13 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
-            {/* Live Status Indicators */}
+            {/* Live System Indicators */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
                 { label: "Website Status", value: "LIVE", active: true },
+                { label: "Chatbot Master Switch", value: config.chatbotEnabled && content.chatbotKB?.masterEnabled !== false ? "ON" : "OFF", active: config.chatbotEnabled },
                 { label: "Active Social Links", value: `${(content.socialLinks || []).filter((s) => s.enabled).length} ACTIVE`, active: true },
                 { label: "Languages Enabled", value: `${(content.languages || []).filter((l) => l.enabled).length} ACTIVE`, active: true },
-                { label: "Practices Active", value: `${Object.values(config.serviceStates || {}).filter(Boolean).length} / 8 ACTIVE`, active: true },
               ].map((stat, idx) => (
                 <div
                   key={idx}
@@ -233,7 +338,7 @@ export default function AdminDashboardPage() {
                     <span className="text-base font-extrabold font-display">
                       {stat.value}
                     </span>
-                    <span className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className={`w-3 h-3 rounded-full ${stat.active ? "bg-emerald-500 animate-pulse" : "bg-rose-500"}`} />
                   </div>
                 </div>
               ))}
@@ -241,7 +346,9 @@ export default function AdminDashboardPage() {
           </div>
         )}
 
-        {/* TAB 2: HERO & HOMEPAGE EDITOR */}
+        {/* ========================================================================= */}
+        {/* TAB 2: HOMEPAGE & HERO */}
+        {/* ========================================================================= */}
         {activeTab === "hero" && (
           <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-6">
             <h2 className="text-lg font-bold font-display flex items-center gap-2">
@@ -287,6 +394,28 @@ export default function AdminDashboardPage() {
                 />
               </div>
 
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold">Primary CTA Button Text</label>
+                  <input
+                    type="text"
+                    value={heroForm.primaryCtaText}
+                    onChange={(e) => setHeroForm({ ...heroForm, primaryCtaText: e.target.value })}
+                    className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold">Primary CTA URL Route</label>
+                  <input
+                    type="text"
+                    value={heroForm.primaryCtaUrl}
+                    onChange={(e) => setHeroForm({ ...heroForm, primaryCtaUrl: e.target.value })}
+                    className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                  />
+                </div>
+              </div>
+
               <Button type="submit" variant="primary" size="md" className="rounded-xl" leftIcon={<Save className="w-4 h-4" />}>
                 Save Hero Content
               </Button>
@@ -294,7 +423,547 @@ export default function AdminDashboardPage() {
           </div>
         )}
 
-        {/* TAB 3: SOCIAL MEDIA & DIGITAL PRESENCE MANAGER (Tasks C & D) */}
+        {/* ========================================================================= */}
+        {/* TAB 3: 7 CORE PRACTICES EDITOR */}
+        {/* ========================================================================= */}
+        {activeTab === "services" && (
+          <div className="space-y-6">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+              <h2 className="text-lg font-bold font-display flex items-center gap-2">
+                <Briefcase className="w-5 h-5 text-[#E8672A]" />
+                <span>7 Core Practices &amp; Services CMS</span>
+              </h2>
+              <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+                Edit titles, descriptions, capabilities, CTAs, and maintenance state for all 7 core practice lines
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {(content.services || []).map((srv) => {
+                const isUnderMaintenance = config.serviceStates[srv.slug] === false;
+                const isExpanded = editingServiceSlug === srv.slug;
+
+                return (
+                  <div
+                    key={srv.slug}
+                    className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4"
+                  >
+                    <div className="flex items-center justify-between pb-3 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                      <div>
+                        <span className="text-xs font-bold font-mono text-[#E8672A] uppercase">
+                          {srv.slug}
+                        </span>
+                        <h3 className="text-base font-bold font-display">{srv.title}</h3>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            toggleServiceState(srv.slug);
+                            showToast(`${srv.title} maintenance status toggled`);
+                          }}
+                          className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                            !isUnderMaintenance ? "bg-emerald-500 text-white" : "bg-amber-500 text-white"
+                          }`}
+                        >
+                          {!isUnderMaintenance ? "✓ Active" : "⚠️ Maintenance"}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setEditingServiceSlug(isExpanded ? null : srv.slug)}
+                          className="p-1.5 rounded-xl bg-[#FBF3EA] dark:bg-[#1A1613] text-[#E8672A] hover:bg-[#FCE3D3] cursor-pointer"
+                        >
+                          <Edit3 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+
+                    {!isExpanded && (
+                      <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] line-clamp-2">
+                        {srv.description}
+                      </p>
+                    )}
+
+                    {isExpanded && (
+                      <form
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          showToast(`${srv.title} updated successfully`);
+                          setEditingServiceSlug(null);
+                        }}
+                        className="space-y-3 pt-2"
+                      >
+                        <div className="space-y-1">
+                          <label className="text-[11px] font-bold">Service Title</label>
+                          <input
+                            type="text"
+                            value={srv.title}
+                            onChange={(e) => updateService(srv.slug, { title: e.target.value })}
+                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                          />
+                        </div>
+
+                        <div className="space-y-1">
+                          <label className="text-[11px] font-bold">Description</label>
+                          <textarea
+                            rows={3}
+                            value={srv.description}
+                            onChange={(e) => updateService(srv.slug, { description: e.target.value })}
+                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                          />
+                        </div>
+
+                        <div className="space-y-1">
+                          <label className="text-[11px] font-bold">Tagline</label>
+                          <input
+                            type="text"
+                            value={srv.tagline || ""}
+                            onChange={(e) => updateService(srv.slug, { tagline: e.target.value })}
+                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                          />
+                        </div>
+
+                        <Button type="submit" variant="primary" size="sm" className="rounded-xl mt-2 cursor-pointer" leftIcon={<Save className="w-3.5 h-3.5" />}>
+                          Done Editing
+                        </Button>
+                      </form>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================================= */}
+        {/* TAB 4: INDUSTRY SOLUTIONS EDITOR */}
+        {/* ========================================================================= */}
+        {activeTab === "industries" && (
+          <div className="space-y-6">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+              <h2 className="text-lg font-bold font-display flex items-center gap-2">
+                <Building2 className="w-5 h-5 text-[#E8672A]" />
+                <span>Industry Verticals &amp; Solutions Manager</span>
+              </h2>
+              <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+                Edit titles, descriptions, status notes, and key capability offerings per industry
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {(content.industries || []).map((ind) => (
+                <div
+                  key={ind.slug}
+                  className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-3"
+                >
+                  <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                    <h3 className="text-sm font-bold font-display text-[#E8672A]">{ind.name}</h3>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#FCE3D3]">
+                      {ind.statusNote || "[CONFIRMED]"}
+                    </span>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-bold">Industry Name</label>
+                    <input
+                      type="text"
+                      value={ind.name}
+                      onChange={(e) => updateIndustry(ind.slug, { name: e.target.value })}
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-bold">Description</label>
+                    <textarea
+                      rows={3}
+                      value={ind.description}
+                      onChange={(e) => updateIndustry(ind.slug, { description: e.target.value })}
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    />
+                  </div>
+
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => showToast(`${ind.name} saved`)}
+                    className="w-full justify-center rounded-xl cursor-pointer"
+                  >
+                    Save Changes
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================================= */}
+        {/* TAB 5: CASE STUDIES EDITOR */}
+        {/* ========================================================================= */}
+        {activeTab === "casestudies" && (
+          <div className="space-y-6">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+              <h2 className="text-lg font-bold font-display flex items-center gap-2">
+                <FileText className="w-5 h-5 text-[#E8672A]" />
+                <span>Enterprise Case Studies CMS</span>
+              </h2>
+              <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+                Edit titles, clients, industry tags, outcome metrics, and case study descriptions
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {(content.caseStudies || []).map((cs) => (
+                <div
+                  key={cs.slug}
+                  className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4"
+                >
+                  <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                    <span className="text-xs font-bold font-mono text-[#E8672A]">
+                      {cs.client} &bull; {cs.clientIndustry}
+                    </span>
+                    <span className="text-xs font-extrabold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-lg">
+                      {cs.results?.[0]?.metric || "Success"}
+                    </span>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-bold">Case Study Title</label>
+                    <input
+                      type="text"
+                      value={cs.title}
+                      onChange={(e) => updateCaseStudy(cs.slug, { title: e.target.value })}
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-bold">Outcome Summary</label>
+                    <textarea
+                      rows={2}
+                      value={cs.summary}
+                      onChange={(e) => updateCaseStudy(cs.slug, { summary: e.target.value })}
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    />
+                  </div>
+
+                  <Button
+                    type="button"
+                    variant="primary"
+                    size="sm"
+                    onClick={() => showToast(`${cs.title} saved`)}
+                    className="rounded-xl cursor-pointer"
+                  >
+                    Save Case Study
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================================= */}
+        {/* TAB 6: 5-STEP METHODOLOGY EDITOR */}
+        {/* ========================================================================= */}
+        {activeTab === "methodology" && (
+          <div className="space-y-6">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+              <h2 className="text-lg font-bold font-display flex items-center gap-2">
+                <Workflow className="w-5 h-5 text-[#E8672A]" />
+                <span>5-Step Execution Methodology Editor</span>
+              </h2>
+              <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+                Edit titles, step numbers, descriptions, and key deliverables for the 5-step lifecycle
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              {(content.processSteps || []).map((step, idx) => (
+                <div
+                  key={idx}
+                  className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4"
+                >
+                  <div className="w-12 h-12 rounded-2xl bg-[#E8672A] text-white flex items-center justify-center font-extrabold font-mono text-lg shrink-0">
+                    {step.step}
+                  </div>
+
+                  <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <input
+                      type="text"
+                      value={step.title}
+                      onChange={(e) => updateProcessStep(idx, { title: e.target.value })}
+                      className="text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613] font-bold"
+                    />
+                    <input
+                      type="text"
+                      value={step.description}
+                      onChange={(e) => updateProcessStep(idx, { description: e.target.value })}
+                      className="text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    />
+                    <input
+                      type="text"
+                      value={step.deliverable}
+                      onChange={(e) => updateProcessStep(idx, { deliverable: e.target.value })}
+                      className="text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    />
+                  </div>
+
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => showToast(`Step ${step.step} saved`)}
+                    className="rounded-xl shrink-0 cursor-pointer"
+                  >
+                    Save Step
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================================= */}
+        {/* TAB 7: CLIENT TESTIMONIALS EDITOR */}
+        {/* ========================================================================= */}
+        {activeTab === "testimonials" && (
+          <div className="space-y-6">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+              <h2 className="text-lg font-bold font-display flex items-center gap-2">
+                <Quote className="w-5 h-5 text-[#E8672A]" />
+                <span>Client Testimonials CMS</span>
+              </h2>
+              <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+                Edit quotes, author names, roles, company names, locations, and ratings
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {(content.testimonials || []).map((test, idx) => (
+                <div
+                  key={test.id || idx}
+                  className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-3"
+                >
+                  <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                    <span className="text-xs font-bold text-[#E8672A]">{test.company}</span>
+                    <span className="text-xs text-amber-500 font-bold">★ {test.rating || 5}.0</span>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-bold">Author Name</label>
+                    <input
+                      type="text"
+                      value={test.author}
+                      onChange={(e) => updateTestimonial(idx, { author: e.target.value })}
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-bold">Quote</label>
+                    <textarea
+                      rows={3}
+                      value={test.quote}
+                      onChange={(e) => updateTestimonial(idx, { quote: e.target.value })}
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    />
+                  </div>
+
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => showToast(`Testimonial by ${test.author} saved`)}
+                    className="w-full justify-center rounded-xl cursor-pointer"
+                  >
+                    Save Testimonial
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================================= */}
+        {/* TAB 8: FOOTER & REGIONAL CONTACT CMS (Image 2 Fix) */}
+        {/* ========================================================================= */}
+        {activeTab === "footer" && (
+          <div className="space-y-6">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+              <h2 className="text-lg font-bold font-display flex items-center gap-2">
+                <Share2 className="w-5 h-5 text-[#E8672A]" />
+                <span>Footer &amp; Regional Contact CMS</span>
+              </h2>
+              <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+                Edit India HQ, UAE Office, email, phone numbers, WhatsApp, footer text, and copyright details without modifying source code
+              </p>
+            </div>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                updateFooter(footerForm);
+                showToast("Footer & Regional details updated successfully");
+              }}
+              className="space-y-6"
+            >
+              {/* Main Footer Closing Headline */}
+              <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4">
+                <h3 className="text-sm font-bold font-display text-[#E8672A]">Footer Heading &amp; Copy</h3>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold">Main Footer Headline</label>
+                  <input
+                    type="text"
+                    value={footerForm.mainHeading || "WE 🤍 WORKING WITH AMBITIOUS BRANDS, ACROSS EVERY SECTOR"}
+                    onChange={(e) => setFooterForm({ ...footerForm, mainHeading: e.target.value })}
+                    className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                  />
+                </div>
+              </div>
+
+              {/* India HQ Regional Contact */}
+              <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4">
+                <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                  <h3 className="text-sm font-bold font-display text-[#E8672A]">India HQ Regional Details</h3>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const updated = { ...footerForm, indiaVisible: footerForm.indiaVisible === false ? true : false };
+                      setFooterForm(updated);
+                      updateFooter(updated);
+                      showToast(`India HQ ${updated.indiaVisible !== false ? "Visible" : "Hidden"}`);
+                    }}
+                    className={`px-3 py-1 rounded-xl text-xs font-bold cursor-pointer ${
+                      footerForm.indiaVisible !== false ? "bg-emerald-500 text-white" : "bg-rose-500 text-white"
+                    }`}
+                  >
+                    {footerForm.indiaVisible !== false ? "Visible" : "Hidden"}
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold">India Phone Number (tel: link)</label>
+                    <input
+                      type="text"
+                      value={footerForm.indiaPhone}
+                      onChange={(e) => setFooterForm({ ...footerForm, indiaPhone: e.target.value })}
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold">Display Label</label>
+                    <input
+                      type="text"
+                      value={footerForm.indiaDisplayLabel || `${footerForm.indiaPhone} - India HQ`}
+                      onChange={(e) => setFooterForm({ ...footerForm, indiaDisplayLabel: e.target.value })}
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-bold">India Address</label>
+                  <textarea
+                    rows={2}
+                    value={footerForm.indiaAddress || "Platinum Floor D 14/23\nArdee City Sec 52\nGurgaon 122002"}
+                    onChange={(e) => setFooterForm({ ...footerForm, indiaAddress: e.target.value })}
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                  />
+                </div>
+              </div>
+
+              {/* UAE Office Regional Contact */}
+              <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4">
+                <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                  <h3 className="text-sm font-bold font-display text-[#E8672A]">UAE Regional Office Details</h3>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const updated = { ...footerForm, uaeVisible: footerForm.uaeVisible === false ? true : false };
+                      setFooterForm(updated);
+                      updateFooter(updated);
+                      showToast(`UAE Office ${updated.uaeVisible !== false ? "Visible" : "Hidden"}`);
+                    }}
+                    className={`px-3 py-1 rounded-xl text-xs font-bold cursor-pointer ${
+                      footerForm.uaeVisible !== false ? "bg-emerald-500 text-white" : "bg-rose-500 text-white"
+                    }`}
+                  >
+                    {footerForm.uaeVisible !== false ? "Visible" : "Hidden"}
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold">UAE Phone Number (tel: link)</label>
+                    <input
+                      type="text"
+                      value={footerForm.uaePhone}
+                      onChange={(e) => setFooterForm({ ...footerForm, uaePhone: e.target.value })}
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold">Display Label</label>
+                    <input
+                      type="text"
+                      value={footerForm.uaeDisplayLabel || `${footerForm.uaePhone} - UAE Regional Office`}
+                      onChange={(e) => setFooterForm({ ...footerForm, uaeDisplayLabel: e.target.value })}
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-bold">UAE Address</label>
+                  <textarea
+                    rows={2}
+                    value={footerForm.uaeAddress || "55764-001 IFZA Business Park FZCO\nBuilding A1 Dubai Silicon Oasis Dubai, U.A.E"}
+                    onChange={(e) => setFooterForm({ ...footerForm, uaeAddress: e.target.value })}
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                  />
+                </div>
+              </div>
+
+              {/* Email & Support Contact */}
+              <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4">
+                <h3 className="text-sm font-bold font-display text-[#E8672A]">Emails &amp; Copyright</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold">Primary Support Email</label>
+                    <input
+                      type="email"
+                      value={footerForm.supportEmail}
+                      onChange={(e) => setFooterForm({ ...footerForm, supportEmail: e.target.value })}
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold">Copyright Statement</label>
+                    <input
+                      type="text"
+                      value={footerForm.copyrightText}
+                      onChange={(e) => setFooterForm({ ...footerForm, copyrightText: e.target.value })}
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <Button type="submit" variant="primary" size="md" className="rounded-xl cursor-pointer" leftIcon={<Save className="w-4 h-4" />}>
+                Save All Footer Settings
+              </Button>
+            </form>
+          </div>
+        )}
+
+        {/* ========================================================================= */}
+        {/* TAB 9: SOCIAL MEDIA & URLS */}
+        {/* ========================================================================= */}
         {activeTab === "socials" && (
           <div className="space-y-6">
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
@@ -307,7 +976,6 @@ export default function AdminDashboardPage() {
               </p>
             </div>
 
-            {/* Social Links List */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {(content.socialLinks || []).map((social) => (
                 <div
@@ -337,7 +1005,7 @@ export default function AdminDashboardPage() {
                           deleteSocialLink(social.id);
                           showToast(`${social.name} deleted`);
                         }}
-                        className="p-1 text-rose-500 hover:bg-rose-500/10 rounded-lg"
+                        className="p-1 text-rose-500 hover:bg-rose-500/10 rounded-lg cursor-pointer"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -357,7 +1025,7 @@ export default function AdminDashboardPage() {
               ))}
             </div>
 
-            {/* Add New Social Platform Form */}
+            {/* Add New Platform */}
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-4">
               <h3 className="text-sm font-bold font-display flex items-center gap-2">
                 <Plus className="w-4 h-4 text-[#E8672A]" />
@@ -397,7 +1065,7 @@ export default function AdminDashboardPage() {
                     setNewSocialForm({ name: "", icon: "Globe", url: "" });
                     showToast(`${newSocialForm.name} platform added`);
                   }}
-                  className="rounded-xl"
+                  className="rounded-xl cursor-pointer"
                   leftIcon={<Plus className="w-4 h-4" />}
                 >
                   Add Platform
@@ -407,7 +1075,336 @@ export default function AdminDashboardPage() {
           </div>
         )}
 
-        {/* TAB 4: LANGUAGES & MULTILINGUAL MANAGER (Tasks L, O, P) */}
+        {/* ========================================================================= */}
+        {/* TAB 10: CHATBOT COMMAND CONTROL & RESPONSE MANAGER */}
+        {/* ========================================================================= */}
+        {activeTab === "chatbot" && (
+          <div className="space-y-6">
+            {/* Header & Master ON/OFF Switch */}
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <h2 className="text-lg font-bold font-display flex items-center gap-2">
+                  <MessageSquare className="w-5 h-5 text-[#E8672A]" />
+                  <span>Chatbot Command &amp; Response Manager</span>
+                </h2>
+                <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+                  Master ON/OFF control, custom keyword phrase mapping, multi-CTA buttons, and conversation fallback
+                </p>
+              </div>
+
+              {/* Master Chatbot ON/OFF Toggle */}
+              <div className="flex items-center gap-3 bg-[#FBF3EA] dark:bg-[#1A1613] p-2.5 px-4 rounded-2xl border border-[#EFE2D6] dark:border-[#2C241E] shrink-0">
+                <span className="text-xs font-bold">Chatbot Master:</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const nextVal = !config.chatbotEnabled;
+                    updateConfig("chatbotEnabled", nextVal);
+                    updateChatbotKB({ masterEnabled: nextVal });
+                    showToast(`Chatbot Widget ${nextVal ? "ENABLED (ON)" : "DISABLED (OFF)"}`);
+                  }}
+                  className={`px-4 py-1.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer shadow-sm ${
+                    config.chatbotEnabled && content.chatbotKB?.masterEnabled !== false
+                      ? "bg-emerald-500 text-white"
+                      : "bg-rose-500 text-white"
+                  }`}
+                >
+                  {config.chatbotEnabled && content.chatbotKB?.masterEnabled !== false ? "ON" : "OFF"}
+                </button>
+              </div>
+            </div>
+
+            {/* Default Greeting & Fallback Response Editors */}
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4">
+              <h3 className="text-sm font-bold font-display text-[#E8672A]">Default Messaging &amp; Fallback</h3>
+
+              <div className="space-y-1">
+                <label className="text-xs font-bold">Default Welcome Greeting</label>
+                <input
+                  type="text"
+                  value={content.chatbotKB?.defaultGreeting || ""}
+                  onChange={(e) => updateChatbotKB({ defaultGreeting: e.target.value })}
+                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-bold">Unknown Query Fallback Response</label>
+                <textarea
+                  rows={2}
+                  value={content.chatbotKB?.fallbackResponse || ""}
+                  onChange={(e) => updateChatbotKB({ fallbackResponse: e.target.value })}
+                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                />
+              </div>
+            </div>
+
+            {/* Add Command Action Header */}
+            <div className="flex items-center justify-between">
+              <h3 className="text-base font-bold font-display">Configured Commands ({ (content.chatbotKB?.commands || []).length })</h3>
+              <Button
+                type="button"
+                variant="primary"
+                size="sm"
+                onClick={() => setShowAddCommandForm(!showAddCommandForm)}
+                className="rounded-xl cursor-pointer"
+                leftIcon={<Plus className="w-4 h-4" />}
+              >
+                + Add Command
+              </Button>
+            </div>
+
+            {/* + Add Command Creator Form */}
+            {showAddCommandForm && (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (!newCmdKeyword || !newCmdResponse) return;
+                  addChatbotCommand({
+                    id: `cmd-${Date.now()}`,
+                    keyword: newCmdKeyword.trim(),
+                    alternativeKeywords: newCmdAltKeywords.split(",").map((s) => s.trim()).filter(Boolean),
+                    userIntent: newCmdIntent || `Inquire about ${newCmdKeyword}`,
+                    response: newCmdResponse.trim(),
+                    followUpResponse: newCmdFollowUp.trim() || undefined,
+                    relatedService: newCmdRelatedService || undefined,
+                    relatedPage: newCmdRelatedPage || undefined,
+                    ctaButtons: [
+                      {
+                        label: newCmdCtaLabel,
+                        type: newCmdCtaType,
+                        value: newCmdCtaValue,
+                      },
+                    ],
+                    priority: newCmdPriority,
+                    enabled: true,
+                  });
+                  setNewCmdKeyword("");
+                  setNewCmdAltKeywords("");
+                  setNewCmdIntent("");
+                  setNewCmdResponse("");
+                  setNewCmdFollowUp("");
+                  setShowAddCommandForm(false);
+                  showToast("New Chatbot Command added successfully");
+                }}
+                className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border-2 border-[#E8672A]/50 shadow-2xl space-y-4 animate-in fade-in slide-in-from-top-3 duration-200"
+              >
+                <h4 className="text-sm font-bold font-display text-[#E8672A]">Create New Chatbot Command</h4>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold">Primary Command / Keyword *</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. digital marketing"
+                      required
+                      value={newCmdKeyword}
+                      onChange={(e) => setNewCmdKeyword(e.target.value)}
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold">Alternative Keywords (comma-separated)</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. online marketing, social media marketing, leads"
+                      value={newCmdAltKeywords}
+                      onChange={(e) => setNewCmdAltKeywords(e.target.value)}
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-bold">Chatbot Response Message *</label>
+                  <textarea
+                    rows={3}
+                    placeholder="Exact response to present to user..."
+                    required
+                    value={newCmdResponse}
+                    onChange={(e) => setNewCmdResponse(e.target.value)}
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-bold">Follow-Up Response (for contextual queries)</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Would you like to schedule a campaign strategy session?"
+                    value={newCmdFollowUp}
+                    onChange={(e) => setNewCmdFollowUp(e.target.value)}
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                  />
+                </div>
+
+                {/* Primary CTA Button Config */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold">CTA Button Label</label>
+                    <input
+                      type="text"
+                      value={newCmdCtaLabel}
+                      onChange={(e) => setNewCmdCtaLabel(e.target.value)}
+                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold">CTA Action Type</label>
+                    <select
+                      value={newCmdCtaType}
+                      onChange={(e) => setNewCmdCtaType(e.target.value as any)}
+                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    >
+                      <option value="page">Page Button</option>
+                      <option value="contact">Contact Button</option>
+                      <option value="whatsapp">WhatsApp Button</option>
+                      <option value="email">Email Button</option>
+                      <option value="project_form">Start Project Form</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold">CTA Route / Value</label>
+                    <input
+                      type="text"
+                      value={newCmdCtaValue}
+                      onChange={(e) => setNewCmdCtaValue(e.target.value)}
+                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 pt-2">
+                  <Button type="submit" variant="primary" size="md" className="rounded-xl cursor-pointer" leftIcon={<Save className="w-4 h-4" />}>
+                    Save New Command
+                  </Button>
+                  <Button type="button" variant="outline" size="md" onClick={() => setShowAddCommandForm(false)} className="rounded-xl cursor-pointer">
+                    Cancel
+                  </Button>
+                </div>
+              </form>
+            )}
+
+            {/* List of Existing Commands */}
+            <div className="space-y-4">
+              {(content.chatbotKB?.commands || []).map((cmd) => (
+                <div
+                  key={cmd.id}
+                  className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-3"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-sm font-extrabold font-display text-[#E8672A]">
+                        {cmd.keyword}
+                      </span>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#FCE3D3]">
+                        Priority: {cmd.priority || 10}
+                      </span>
+                    </div>
+
+                    {/* Per-Command ON/OFF Switch */}
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          toggleChatbotCommand(cmd.id);
+                          showToast(`Command "${cmd.keyword}" ${cmd.enabled ? "Disabled" : "Enabled"}`);
+                        }}
+                        className={`px-3 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                          cmd.enabled !== false ? "bg-emerald-500 text-white" : "bg-rose-500 text-white"
+                        }`}
+                      >
+                        {cmd.enabled !== false ? "ON" : "OFF"}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          deleteChatbotCommand(cmd.id);
+                          showToast(`Command "${cmd.keyword}" deleted`);
+                        }}
+                        className="p-1.5 text-rose-500 hover:bg-rose-500/10 rounded-xl cursor-pointer"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <div className="text-[11px] font-bold text-[#7A6A5F]">Alternative Match Keywords:</div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {(cmd.alternativeKeywords || []).map((alt, i) => (
+                        <span key={i} className="text-[10px] font-mono px-2 py-0.5 rounded-lg bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E]">
+                          {alt}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-bold">Response Message</label>
+                    <textarea
+                      rows={2}
+                      value={cmd.response}
+                      onChange={(e) => updateChatbotCommand(cmd.id, { response: e.target.value })}
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================================= */}
+        {/* TAB 11: CONTACT INFO & LEADS MANAGER */}
+        {/* ========================================================================= */}
+        {activeTab === "contact" && (
+          <div className="space-y-6">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+              <h2 className="text-lg font-bold font-display flex items-center gap-2">
+                <PhoneCall className="w-5 h-5 text-[#E8672A]" />
+                <span>Contact Info &amp; Lead Inquiries Manager</span>
+              </h2>
+              <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+                Configure public contact information and manage submitted project inquiries
+              </p>
+            </div>
+
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4">
+              <h3 className="text-sm font-bold font-display text-[#E8672A]">Public Contact Fields</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-xs font-bold">India HQ Phone</label>
+                  <input
+                    type="text"
+                    value={footerForm.indiaPhone}
+                    onChange={(e) => setFooterForm({ ...footerForm, indiaPhone: e.target.value })}
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-xs font-bold">UAE Office Phone</label>
+                  <input
+                    type="text"
+                    value={footerForm.uaePhone}
+                    onChange={(e) => setFooterForm({ ...footerForm, uaePhone: e.target.value })}
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                  />
+                </div>
+              </div>
+              <Button type="button" variant="primary" size="sm" onClick={() => { updateFooter(footerForm); showToast("Contact details saved"); }} className="rounded-xl cursor-pointer">
+                Save Contact Details
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================================= */}
+        {/* TAB 12: LANGUAGES & RTL */}
+        {/* ========================================================================= */}
         {activeTab === "languages" && (
           <div className="space-y-6">
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
@@ -459,68 +1456,116 @@ export default function AdminDashboardPage() {
           </div>
         )}
 
-        {/* TAB 5: CHATBOT KNOWLEDGE BASE (Tasks E, F, G, H, I) */}
-        {activeTab === "chatbot" && (
+        {/* ========================================================================= */}
+        {/* TAB 13: GLOBAL SEO */}
+        {/* ========================================================================= */}
+        {activeTab === "seo" && (
           <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-6">
             <h2 className="text-lg font-bold font-display flex items-center gap-2">
-              <MessageSquare className="w-5 h-5 text-[#E8672A]" />
-              <span>Arav Assistant Chatbot Knowledge Base</span>
+              <Search className="w-5 h-5 text-[#E8672A]" />
+              <span>Global SEO &amp; Metadata Manager</span>
             </h2>
 
-            <div className="space-y-4">
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold">Default Greeting Message</label>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                updateSEO(seoForm);
+                showToast("Global SEO settings saved");
+              }}
+              className="space-y-4"
+            >
+              <div className="space-y-1">
+                <label className="text-xs font-bold">Global Page Title</label>
                 <input
                   type="text"
-                  value={content.chatbotKB?.defaultGreeting || ""}
-                  onChange={(e) => updateChatbotKB({ defaultGreeting: e.target.value })}
+                  value={seoForm.globalTitle}
+                  onChange={(e) => setSeoForm({ ...seoForm, globalTitle: e.target.value })}
                   className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
                 />
               </div>
 
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold">Fallback Response</label>
+              <div className="space-y-1">
+                <label className="text-xs font-bold">Meta Description</label>
                 <textarea
-                  rows={2}
-                  value={content.chatbotKB?.fallbackResponse || ""}
-                  onChange={(e) => updateChatbotKB({ fallbackResponse: e.target.value })}
+                  rows={3}
+                  value={seoForm.metaDescription}
+                  onChange={(e) => setSeoForm({ ...seoForm, metaDescription: e.target.value })}
                   className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
                 />
               </div>
 
-              <Button
-                type="button"
-                variant="primary"
-                size="md"
-                onClick={() => showToast("Chatbot Knowledge Base saved")}
-                className="rounded-xl"
-                leftIcon={<Save className="w-4 h-4" />}
-              >
-                Save Knowledge Base
+              <Button type="submit" variant="primary" size="md" className="rounded-xl cursor-pointer" leftIcon={<Save className="w-4 h-4" />}>
+                Save SEO Settings
               </Button>
-            </div>
+            </form>
           </div>
         )}
 
-        {/* TAB 6: SYSTEM & ANIMATION CONTROLS (Task R) */}
+        {/* ========================================================================= */}
+        {/* TAB 14: LEGAL & DPDP CONTENT */}
+        {/* ========================================================================= */}
+        {activeTab === "legal" && (
+          <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-6">
+            <h2 className="text-lg font-bold font-display flex items-center gap-2">
+              <ShieldCheck className="w-5 h-5 text-[#E8672A]" />
+              <span>Legal &amp; DPDP Act Content CMS</span>
+            </h2>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                updateLegal(legalForm);
+                showToast("Legal & DPDP content updated");
+              }}
+              className="space-y-4"
+            >
+              <div className="space-y-1">
+                <label className="text-xs font-bold">Privacy Policy Text</label>
+                <textarea
+                  rows={3}
+                  value={legalForm.privacyPolicyText}
+                  onChange={(e) => setLegalForm({ ...legalForm, privacyPolicyText: e.target.value })}
+                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-bold">Security &amp; DPDP Compliance Policy Text</label>
+                <textarea
+                  rows={3}
+                  value={legalForm.securityDpdpText}
+                  onChange={(e) => setLegalForm({ ...legalForm, securityDpdpText: e.target.value })}
+                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                />
+              </div>
+
+              <Button type="submit" variant="primary" size="md" className="rounded-xl cursor-pointer" leftIcon={<Save className="w-4 h-4" />}>
+                Save Legal Content
+              </Button>
+            </form>
+          </div>
+        )}
+
+        {/* ========================================================================= */}
+        {/* TAB 15: MAINTENANCE CONTROLS */}
+        {/* ========================================================================= */}
         {activeTab === "system" && (
           <div className="space-y-6">
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-[#E8672A]" />
-                <span>Global Animation &amp; System Controls</span>
+                <SlidersHorizontal className="w-5 h-5 text-[#E8672A]" />
+                <span>Global Animation &amp; Maintenance Controls</span>
               </h2>
               <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
-                Control global page animations, scroll reveals, hover interactions, and service maintenance states
+                Control global page motion, hover feedback, scroll reveals, and per-service maintenance toggles
               </p>
             </div>
 
-            {/* Animation Controls Matrix */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
                 <div>
                   <span className="text-xs font-bold font-display block">Global Animations</span>
-                  <span className="text-[11px] text-[#7A6A5F]">Master switch for all website motion</span>
+                  <span className="text-[11px] text-[#7A6A5F]">Master switch for all motion</span>
                 </div>
                 <button
                   type="button"
@@ -554,47 +1599,8 @@ export default function AdminDashboardPage() {
                   {config.hoverEffectsEnabled !== false ? "ON" : "OFF"}
                 </button>
               </div>
-
-              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
-                <div>
-                  <span className="text-xs font-bold font-display block">Scroll Reveal Animations</span>
-                  <span className="text-[11px] text-[#7A6A5F]">Intersection Observer section entrances</span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    updateConfig("scrollAnimationsEnabled", !config.scrollAnimationsEnabled);
-                    showToast(`Scroll Animations ${!config.scrollAnimationsEnabled ? "ON" : "OFF"}`);
-                  }}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                    config.scrollAnimationsEnabled !== false ? "bg-emerald-500 text-white" : "bg-rose-500 text-white"
-                  }`}
-                >
-                  {config.scrollAnimationsEnabled !== false ? "ON" : "OFF"}
-                </button>
-              </div>
-
-              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
-                <div>
-                  <span className="text-xs font-bold font-display block">Page Entrance Sequence</span>
-                  <span className="text-[11px] text-[#7A6A5F]">Smooth top-level page loading</span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    updateConfig("entranceAnimationsEnabled", !config.entranceAnimationsEnabled);
-                    showToast(`Entrance Animations ${!config.entranceAnimationsEnabled ? "ON" : "OFF"}`);
-                  }}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                    config.entranceAnimationsEnabled !== false ? "bg-emerald-500 text-white" : "bg-rose-500 text-white"
-                  }`}
-                >
-                  {config.entranceAnimationsEnabled !== false ? "ON" : "OFF"}
-                </button>
-              </div>
             </div>
 
-            {/* Service Maintenance Controls */}
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-4">
               <h3 className="text-sm font-bold font-display">Per-Service Maintenance Toggles</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
@@ -604,7 +1610,7 @@ export default function AdminDashboardPage() {
                     type="button"
                     onClick={() => {
                       toggleServiceState(slug);
-                      showToast(`${slug} state updated`);
+                      showToast(`${slug} maintenance status updated`);
                     }}
                     className={`p-3 rounded-2xl border text-xs font-bold transition-all text-left cursor-pointer ${
                       state
