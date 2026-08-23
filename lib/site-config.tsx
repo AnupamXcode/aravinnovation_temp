@@ -14,6 +14,7 @@ export interface SectionThemes {
 export type CardStyleOption = "elevated" | "bordered" | "minimal" | "standard";
 
 export interface SiteConfig {
+  websiteEnabled: boolean;
   chatbotEnabled: boolean;
   chatbotDelaySeconds: number;
   animationsEnabled: boolean;
@@ -45,6 +46,7 @@ export interface SiteConfig {
 }
 
 const defaultConfig: SiteConfig = {
+  websiteEnabled: true,
   chatbotEnabled: true,
   chatbotDelaySeconds: 10,
   animationsEnabled: true,
@@ -97,6 +99,7 @@ interface SiteConfigContextType {
   updateSectionTheme: (section: keyof SectionThemes, theme: string) => void;
   updateCardStyle: (style: CardStyleOption) => void;
   toggleServiceState: (slug: string) => void;
+  toggleWebsitePower: (override?: boolean) => void;
   resetConfig: () => void;
   isAuthenticated: boolean;
   loginAdmin: (u: string, p: string) => boolean;
@@ -109,6 +112,7 @@ const SiteConfigContext = React.createContext<SiteConfigContextType>({
   updateSectionTheme: () => {},
   updateCardStyle: () => {},
   toggleServiceState: () => {},
+  toggleWebsitePower: () => {},
   resetConfig: () => {},
   isAuthenticated: false,
   loginAdmin: () => false,
@@ -183,6 +187,19 @@ export function SiteConfigProvider({ children }: { children: React.ReactNode }) 
     });
   };
 
+  const toggleWebsitePower = (override?: boolean) => {
+    setConfig((prev) => {
+      const nextPower = override !== undefined ? override : prev.websiteEnabled === false ? true : false;
+      const updated = { ...prev, websiteEnabled: nextPower };
+      try {
+        localStorage.setItem("arav_site_config", JSON.stringify(updated));
+      } catch {
+        // ignore
+      }
+      return updated;
+    });
+  };
+
   const resetConfig = () => {
     setConfig(defaultConfig);
     try {
@@ -222,6 +239,7 @@ export function SiteConfigProvider({ children }: { children: React.ReactNode }) 
         updateSectionTheme,
         updateCardStyle,
         toggleServiceState,
+        toggleWebsitePower,
         resetConfig,
         isAuthenticated,
         loginAdmin,

@@ -9,6 +9,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageLoader } from "@/components/layout/PageLoader";
 import { ChatbotWidget } from "@/components/chatbot/ChatbotWidget";
+import { WebsiteShutdownOverlay } from "@/components/layout/WebsiteShutdownOverlay";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -136,11 +137,13 @@ export default async function RootLayout({
           <SiteConfigProvider>
             <SiteContentProvider>
               <ThemeProvider>
-                <PageLoader />
-                <Navbar />
-                <main className="flex-1 w-full">{children}</main>
-                <Footer />
-                <ChatbotWidget />
+                <WebsiteShutdownOverlay>
+                  <PageLoader />
+                  <Navbar />
+                  <main className="flex-1 w-full">{children}</main>
+                  <Footer />
+                  <ChatbotWidget />
+                </WebsiteShutdownOverlay>
               </ThemeProvider>
             </SiteContentProvider>
           </SiteConfigProvider>

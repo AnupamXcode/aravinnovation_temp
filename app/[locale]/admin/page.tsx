@@ -47,6 +47,8 @@ import {
   ChevronDown,
   Edit3,
   Palette,
+  Power,
+  ShieldAlert,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -61,6 +63,7 @@ export default function AdminDashboardPage() {
     updateSectionTheme,
     updateCardStyle,
     toggleServiceState,
+    toggleWebsitePower,
     resetConfig,
     isAuthenticated,
     logoutAdmin,
@@ -292,6 +295,67 @@ export default function AdminDashboardPage() {
         {/* ========================================================================= */}
         {activeTab === "dashboard" && (
           <div className="space-y-8">
+            {/* MASTER WEBSITE ON/OFF CONTROL BANNER */}
+            <div className={`p-6 sm:p-8 rounded-3xl border shadow-2xl transition-all ${
+              config.websiteEnabled !== false
+                ? "bg-gradient-to-r from-[#FFFDF9] via-[#FFF5EC] to-[#FDF0E6] dark:from-[#181411] dark:to-[#241B16] border-[#E8672A]/30"
+                : "bg-gradient-to-r from-red-950 via-rose-950 to-amber-950 border-red-500 text-white shadow-red-950/50"
+            }`}>
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div className="space-y-2 flex-1">
+                  <div className="flex items-center gap-3">
+                    <div className={`p-3 rounded-2xl ${
+                      config.websiteEnabled !== false
+                        ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
+                        : "bg-red-500 text-white animate-pulse shadow-lg shadow-red-500/50"
+                    }`}>
+                      <Power className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <span className={`text-[11px] font-extrabold uppercase font-mono tracking-wider px-2.5 py-0.5 rounded-full border ${
+                        config.websiteEnabled !== false
+                          ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/30"
+                          : "bg-red-500 text-white border-red-400"
+                      }`}>
+                        {config.websiteEnabled !== false ? "🟢 SYSTEM ONLINE & ACCESSIBLE" : "🔴 EMERGENCY SHUTDOWN ACTIVE"}
+                      </span>
+                      <h2 className="text-xl sm:text-2xl font-black font-display mt-1">
+                        Master Website Power Switch
+                      </h2>
+                    </div>
+                  </div>
+                  <p className={`text-xs leading-relaxed max-w-2xl ${
+                    config.websiteEnabled !== false ? "text-[#7A6A5F] dark:text-[#B8ACA0]" : "text-red-100"
+                  }`}>
+                    {config.websiteEnabled !== false
+                      ? "The website is currently active and fully responding to all public visitors globally. Click below to instantly stop the entire website at once."
+                      : "⚠️ ENTIRE WEBSITE IS STOPPED! Public access is halted and visitors see the Emergency Maintenance screen. Click below to turn the website back ON."}
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    const nextState = config.websiteEnabled === false;
+                    toggleWebsitePower();
+                    showToast(nextState ? "⚡ WEBSITE RESTORED BACK ONLINE!" : "🛑 MASTER SHUTDOWN ACTIVE - WEBSITE STOPPED!");
+                  }}
+                  className={`px-6 py-4 rounded-2xl font-black text-sm shadow-2xl transition-all transform hover:scale-[1.02] active:scale-95 flex items-center gap-3 cursor-pointer shrink-0 border ${
+                    config.websiteEnabled !== false
+                      ? "bg-red-600 hover:bg-red-700 text-white border-red-500 shadow-red-600/30"
+                      : "bg-emerald-500 hover:bg-emerald-600 text-white border-emerald-400 shadow-emerald-500/40 animate-bounce"
+                  }`}
+                >
+                  <Power className="w-5 h-5" />
+                  <span>
+                    {config.websiteEnabled !== false
+                      ? "STOP ENTIRE WEBSITE AT ONCE"
+                      : "START WEBSITE & GO LIVE"}
+                  </span>
+                </button>
+              </div>
+            </div>
+
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-4">
               <h2 className="text-base font-bold font-display flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-[#E8672A]" />
@@ -325,7 +389,7 @@ export default function AdminDashboardPage() {
             {/* Live System Indicators */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
-                { label: "Website Status", value: "LIVE", active: true },
+                { label: "Website Status", value: config.websiteEnabled !== false ? "LIVE (ONLINE)" : "STOPPED (OFFLINE)", active: config.websiteEnabled !== false },
                 { label: "Chatbot Master Switch", value: config.chatbotEnabled && content.chatbotKB?.masterEnabled !== false ? "ON" : "OFF", active: config.chatbotEnabled },
                 { label: "Active Social Links", value: `${(content.socialLinks || []).filter((s) => s.enabled).length} ACTIVE`, active: true },
                 { label: "Languages Enabled", value: `${(content.languages || []).filter((l) => l.enabled).length} ACTIVE`, active: true },
@@ -1554,6 +1618,67 @@ export default function AdminDashboardPage() {
         {/* ========================================================================= */}
         {activeTab === "system" && (
           <div className="space-y-6">
+            {/* MASTER WEBSITE ON/OFF CONTROL CARD */}
+            <div className={`p-6 sm:p-8 rounded-3xl border shadow-2xl transition-all ${
+              config.websiteEnabled !== false
+                ? "bg-gradient-to-r from-[#FFFDF9] via-[#FFF5EC] to-[#FDF0E6] dark:from-[#181411] dark:to-[#241B16] border-[#E8672A]/30"
+                : "bg-gradient-to-r from-red-950 via-rose-950 to-amber-950 border-red-500 text-white shadow-red-950/50"
+            }`}>
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div className="space-y-2 flex-1">
+                  <div className="flex items-center gap-3">
+                    <div className={`p-3 rounded-2xl ${
+                      config.websiteEnabled !== false
+                        ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
+                        : "bg-red-500 text-white animate-pulse shadow-lg shadow-red-500/50"
+                    }`}>
+                      <Power className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <span className={`text-[11px] font-extrabold uppercase font-mono tracking-wider px-2.5 py-0.5 rounded-full border ${
+                        config.websiteEnabled !== false
+                          ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/30"
+                          : "bg-red-500 text-white border-red-400"
+                      }`}>
+                        {config.websiteEnabled !== false ? "🟢 SYSTEM ONLINE & ACCESSIBLE" : "🔴 EMERGENCY SHUTDOWN ACTIVE"}
+                      </span>
+                      <h2 className="text-xl sm:text-2xl font-black font-display mt-1">
+                        Master Website Power Switch
+                      </h2>
+                    </div>
+                  </div>
+                  <p className={`text-xs leading-relaxed max-w-2xl ${
+                    config.websiteEnabled !== false ? "text-[#7A6A5F] dark:text-[#B8ACA0]" : "text-red-100"
+                  }`}>
+                    {config.websiteEnabled !== false
+                      ? "The website is currently active and responding to public visitors globally. Click below to halt the entire website immediately."
+                      : "⚠️ ENTIRE WEBSITE IS STOPPED! Public access is halted and visitors see the Emergency Maintenance screen. Click below to bring the website back online."}
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    const nextState = config.websiteEnabled === false;
+                    toggleWebsitePower();
+                    showToast(nextState ? "⚡ WEBSITE RESTORED BACK ONLINE!" : "🛑 MASTER SHUTDOWN ACTIVE - WEBSITE STOPPED!");
+                  }}
+                  className={`px-6 py-4 rounded-2xl font-black text-sm shadow-2xl transition-all transform hover:scale-[1.02] active:scale-95 flex items-center gap-3 cursor-pointer shrink-0 border ${
+                    config.websiteEnabled !== false
+                      ? "bg-red-600 hover:bg-red-700 text-white border-red-500 shadow-red-600/30"
+                      : "bg-emerald-500 hover:bg-emerald-600 text-white border-emerald-400 shadow-emerald-500/40 animate-bounce"
+                  }`}
+                >
+                  <Power className="w-5 h-5" />
+                  <span>
+                    {config.websiteEnabled !== false
+                      ? "STOP ENTIRE WEBSITE AT ONCE"
+                      : "START WEBSITE & GO LIVE"}
+                  </span>
+                </button>
+              </div>
+            </div>
+
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
                 <SlidersHorizontal className="w-5 h-5 text-[#E8672A]" />
