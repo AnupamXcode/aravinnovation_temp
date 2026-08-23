@@ -96,4 +96,4 @@ npm run build
 
 ## 📄 License & Rights
 
-© 2026 Arav Innovations. All rights reserved.
+© 2024-26 Arav Innovations. All rights reserved.
