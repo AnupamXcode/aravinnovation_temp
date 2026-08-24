@@ -16,6 +16,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 const iconMap: Record<string, React.ReactNode> = {
   Compass: <Compass className="w-6 h-6" />,
@@ -38,6 +39,7 @@ const shortLabels = [
 ];
 
 export function InteractiveServiceSelector() {
+  const t = useTranslations("Services");
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
   const selectedService: Service = servicesData[selectedIndex] || servicesData[0];
 
@@ -100,7 +102,7 @@ export function InteractiveServiceSelector() {
                 className="rounded-xl px-5 py-2.5 text-xs shadow-md bg-[#f15e1c] hover:bg-[#d8480d] text-white"
                 rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
               >
-                Explore Practice
+                {t("explorePractice")}
               </Button>
             </Link>
           </div>
@@ -112,7 +114,7 @@ export function InteractiveServiceSelector() {
             </p>
             <div className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#1e2c27] border border-[#f7d7b0] dark:border-[#253630]">
               <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#f15e1c] block mb-1">
-                Challenge We Solve:
+                {t("challengeSolve")}
               </span>
               <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
                 {selectedService.businessProblem?.description}
@@ -123,7 +125,7 @@ export function InteractiveServiceSelector() {
           {/* Capabilities Grid */}
           <div className="space-y-3">
             <h4 className="text-xs font-mono font-extrabold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
-              Core Practice Capabilities:
+              {t("coreCapabilities")}
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {pillars.slice(0, 4).map((pillar: { title: string; description: string }, idx: number) => (
@@ -161,7 +163,7 @@ export function InteractiveServiceSelector() {
             </div>
 
             <Link href={`/services/${selectedService.slug}`} className="text-xs font-bold text-[#f15e1c] hover:underline flex items-center gap-1">
-              <span>View Full Service Scope</span>
+              <span>{t("fullScope")}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -204,7 +206,7 @@ export function InteractiveServiceSelector() {
 
                   <div className="space-y-2">
                     <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#f15e1c] block">
-                      Capabilities:
+                      {t("coreCapabilities")}
                     </span>
                     {mobilePillars.slice(0, 3).map((pillar: { title: string; description: string }, i: number) => (
                       <div key={i} className="text-xs font-medium flex items-center gap-2 text-[#1b2823] dark:text-[#ffffff]">
@@ -221,7 +223,7 @@ export function InteractiveServiceSelector() {
                       className="w-full rounded-xl py-2 text-xs bg-[#f15e1c] text-white"
                       rightIcon={<ArrowRight className="w-3.5 h-3.5 ml-1" />}
                     >
-                      Explore {svc.title}
+                      {t("explorePractice")}
                     </Button>
                   </Link>
                 </div>

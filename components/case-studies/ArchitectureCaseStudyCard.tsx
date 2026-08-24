@@ -5,6 +5,7 @@ import Link from "next/link";
 import { CaseStudy } from "@/data/case-studies";
 import { ArrowDown, ArrowUp, ArrowRight, Cpu } from "lucide-react";
 import { motion, useInView } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 interface ArchitectureCaseStudyCardProps {
   caseStudy: CaseStudy;
@@ -15,6 +16,7 @@ export function ArchitectureCaseStudyCard({
   caseStudy,
   locale = "en",
 }: ArchitectureCaseStudyCardProps) {
+  const t = useTranslations("CaseStudies");
   const cardRef = React.useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true, margin: "-50px" });
   const [isHovered, setIsHovered] = React.useState(false);
@@ -63,14 +65,14 @@ export function ArchitectureCaseStudyCard({
         <div className="mb-6">
           <span className="inline-flex items-center gap-1.5 text-[11px] font-mono italic text-[#4a5c55] dark:text-[#d3eee4] bg-[#fefaf5] dark:bg-[#1e2c27] px-2.5 py-1 rounded-md border border-[#f7d7b0] dark:border-[#253630]">
             <span>🔒</span>
-            <span>{caseStudy.client}</span>
+            <span>{caseStudy.client || t("confidentialClient")}</span>
           </span>
         </div>
 
         {/* TECHNICAL VERTICAL PIPELINE DIAGRAM */}
         <div className="my-6 p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] space-y-3 relative">
           <div className="text-[9px] font-mono font-bold uppercase tracking-wider text-[#4a5c55] dark:text-[#d3eee4] border-b border-[#f7d7b0] dark:border-[#253630] pb-2 flex items-center justify-between">
-            <span>Transformation Pipeline</span>
+            <span>{t("transformationPipeline")}</span>
             <Cpu className="w-3 h-3 text-[#f15e1c]" />
           </div>
 
@@ -141,7 +143,7 @@ export function ArchitectureCaseStudyCard({
           type="button"
           className="w-full py-3 px-4 rounded-xl text-xs font-bold bg-[#fefaf5] dark:bg-[#1e2c27] border border-[#f7d7b0] dark:border-[#253630] text-[#1b2823] dark:text-[#ffffff] group-hover:bg-[#f15e1c] group-hover:text-white group-hover:border-[#f15e1c] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-xs"
         >
-          <span>VIEW CASE STUDY</span>
+          <span>{t("viewCaseStudy")}</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </button>
       </Link>

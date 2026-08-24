@@ -3,8 +3,10 @@
 import * as React from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { GripVertical, CheckCircle2, ArrowRightLeft, AlertTriangle } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function BeforeAfterSlider() {
+  const t = useTranslations("BeforeAfter");
   const containerRef = React.useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
   const shouldReduceMotion = useReducedMotion();
@@ -55,7 +57,7 @@ export function BeforeAfterSlider() {
       <div className="flex items-center justify-center gap-2 text-center">
         <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff] bg-[#f7d7b0]/70 dark:bg-[#253630] px-3 py-1 rounded-full border border-[#f7d7b0] dark:border-[#31473f] flex items-center gap-1.5 shadow-xs">
           <ArrowRightLeft className="w-3.5 h-3.5 text-[#f15e1c]" />
-          Drag slider to compare transformation
+          {t("dragHelper")}
         </span>
       </div>
 
@@ -77,22 +79,22 @@ export function BeforeAfterSlider() {
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#f15e1c] text-white text-xs font-mono font-extrabold shadow-md">
               <CheckCircle2 className="w-4 h-4" />
-              <span>AFTER &bull; ARAV ENGINEERED SYSTEM</span>
+              <span>{t("afterBadge")}</span>
             </div>
             <h3 className="text-2xl sm:text-4xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-              Cloud-Native, Automated &amp; Scalable
+              {t("afterTitle")}
             </h3>
             <p className="text-xs sm:text-base text-[#4a5c55] dark:text-[#d3eee4] max-w-lg leading-relaxed font-medium">
-              Sub-second page speeds, zero-trust security governance, automated CI/CD deployment pipelines, and predictable infrastructure costs.
+              {t("afterDescription")}
             </p>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-[#f15e1c]/20">
             {[
-              { title: "Cloud-Native", desc: "Serverless & Microservices" },
-              { title: "Automated", desc: "Zero-Downtime CI/CD" },
-              { title: "Observable", desc: "Real-Time Telemetry" },
-              { title: "Scalable", desc: "Elastic High-Availability" },
+              { title: t("afterPillar1Title"), desc: t("afterPillar1Desc") },
+              { title: t("afterPillar2Title"), desc: t("afterPillar2Desc") },
+              { title: t("afterPillar3Title"), desc: t("afterPillar3Desc") },
+              { title: t("afterPillar4Title"), desc: t("afterPillar4Desc") },
             ].map((item, idx) => (
               <div key={idx} className="p-3 rounded-2xl bg-white/90 dark:bg-[#22312b] border border-[#f15e1c]/30 dark:border-[#31473f] text-left shadow-xs">
                 <span className="text-xs font-extrabold text-[#f15e1c] block">{item.title}</span>
@@ -102,7 +104,7 @@ export function BeforeAfterSlider() {
           </div>
         </div>
 
-        {/* BEFORE PANEL (Left Layer / Legacy State mapped to Peach-Gold) */}
+        {/* BEFORE PANEL (Left Layer / Legacy Friction State) */}
         <div
           style={{ width: `${sliderPos}%` }}
           className="absolute top-0 bottom-0 left-0 overflow-hidden bg-gradient-to-br from-[#fcf1e4] via-[#f7d7b0] to-[#f2bc7d] dark:from-[#253630] dark:via-[#1e2c27] dark:to-[#172420] p-8 sm:p-12 flex flex-col justify-between border-r-2 border-[#f15e1c] transition-colors duration-300"
@@ -110,21 +112,21 @@ export function BeforeAfterSlider() {
           <div className="w-[500px] sm:w-[850px] space-y-4">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fab60a]/20 dark:bg-[#fab60a]/15 text-[#1b2823] dark:text-[#f7d7b0] text-xs font-mono font-bold border border-[#fab60a]/50">
               <AlertTriangle className="w-4 h-4 text-[#fab60a]" />
-              <span>BEFORE &bull; LEGACY ARCHITECTURE</span>
+              <span>{t("beforeBadge")}</span>
             </div>
             <h3 className="text-2xl sm:text-4xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-              Slow, Fragmented &amp; Manual
+              {t("beforeTitle")}
             </h3>
             <p className="text-xs sm:text-base text-[#4a5c55] dark:text-[#d3eee4] max-w-lg leading-relaxed">
-              Frequent system timeouts during peak traffic, spiraling on-premise maintenance costs, manual deployment bottlenecks, and compliance vulnerabilities.
+              {t("beforeDescription")}
             </p>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-[#f2bc7d]/60 dark:border-[#31473f]">
               {[
-                { title: "Monolithic", desc: "Legacy Single-Point Bottlenecks" },
-                { title: "Fragmented", desc: "Disconnected Data Silos" },
-                { title: "Manual", desc: "Error-Prone Deployments" },
-                { title: "Expensive", desc: "Unpredictable On-Prem Costs" },
+                { title: t("beforePillar1Title"), desc: t("beforePillar1Desc") },
+                { title: t("beforePillar2Title"), desc: t("beforePillar2Desc") },
+                { title: t("beforePillar3Title"), desc: t("beforePillar3Desc") },
+                { title: t("beforePillar4Title"), desc: t("beforePillar4Desc") },
               ].map((item, idx) => (
                 <div key={idx} className="p-3 rounded-2xl bg-white/80 dark:bg-[#101b17]/80 border border-[#f7d7b0] dark:border-[#253630] text-left">
                   <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff] block">{item.title}</span>

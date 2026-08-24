@@ -5,6 +5,7 @@ import Link from "next/link";
 import { companyContactInfo, servicesNavigation } from "@/data/navigation";
 import { ArrowRight, Phone } from "lucide-react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { useTranslations } from "next-intl";
 
 function LinkedInIcon({ className }: { className?: string }) {
   return (
@@ -59,6 +60,7 @@ import { usePathname } from "next/navigation";
 
 export function Footer() {
   const pathname = usePathname();
+  const t = useTranslations("Footer");
   const { content } = useSiteContent();
   const footer = content.footer;
 
@@ -78,7 +80,7 @@ export function Footer() {
           {/* Left Column (6 Cols): Massive Dynamic Headline + Pill Buttons */}
           <div className="lg:col-span-6 space-y-8">
             <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.08] text-white uppercase drop-shadow-xs">
-              {footer?.mainHeading || "WE 🤍 WORKING WITH AMBITIOUS BRANDS, ACROSS EVERY SECTOR"}
+              {t("heading")}
             </h2>
 
             {/* Side-by-Side Pill Action Buttons */}
@@ -87,7 +89,7 @@ export function Footer() {
                 href={footer?.bookCallUrl || `tel:${footer?.indiaPhone?.replace(/\s+/g, "") || "+919650625777"}`}
                 className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#f15e1c] border border-white/40 backdrop-blur-md text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
-                <span>Book a call</span>
+                <span>{t("bookCall")}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
 
@@ -95,7 +97,7 @@ export function Footer() {
                 href={footer?.contactUsUrl || "/contact"}
                 className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#f15e1c] border border-white/40 backdrop-blur-md text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
-                <span>Contact us</span>
+                <span>{t("contactUs")}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
@@ -129,7 +131,7 @@ export function Footer() {
                     href={`tel:${footer?.indiaPhone?.replace(/\s+/g, "") || "+919650625777"}`}
                     className="font-bold text-sm text-white hover:underline block"
                   >
-                    {footer?.indiaDisplayLabel || `${footer?.indiaPhone} - India HQ`}
+                    {t("indiaHq")} (+91 9650625777)
                   </a>
                   <div className="w-full h-px bg-white/30 my-2" />
                   <p className="text-white/85 leading-relaxed whitespace-pre-line">
@@ -153,7 +155,7 @@ export function Footer() {
                     href={`tel:${footer?.uaePhone?.replace(/\s+/g, "") || "+971521555792"}`}
                     className="font-bold text-sm text-white hover:underline block"
                   >
-                    {footer?.uaeDisplayLabel || `${footer?.uaePhone} - UAE Regional Office`}
+                    {t("uaeOffice")} (+971 521555792)
                   </a>
                   <div className="w-full h-px bg-white/30 my-2" />
                   <p className="text-white/85 leading-relaxed whitespace-pre-line">
@@ -210,10 +212,10 @@ export function Footer() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/95 border-t border-white/20 pt-6">
             <div className="flex flex-wrap items-center gap-3 sm:gap-6 font-semibold">
               {[
-                { label: "Privacy Policy", href: "/privacy-policy" },
-                { label: "Refund Policy", href: "/refund-policy" },
-                { label: "Terms & Conditions", href: "/terms-and-conditions" },
-                { label: "Security & DPDP", href: "/security-dpdp" },
+                { label: t("privacyPolicy"), href: "/privacy-policy" },
+                { label: t("refundPolicy"), href: "/refund-policy" },
+                { label: t("termsConditions"), href: "/terms-and-conditions" },
+                { label: t("securityDpdp"), href: "/security-dpdp" },
               ].map((link, idx, arr) => (
                 <React.Fragment key={link.href}>
                   <Link
@@ -232,7 +234,7 @@ export function Footer() {
             </div>
 
             <div className="font-medium text-white/90">
-              {footer?.copyrightText || `© ${new Date().getFullYear()} Arav Innovations. All rights reserved.`}
+              {`© ${new Date().getFullYear()} Arav Innovations. ${t("rights")}`}
             </div>
           </div>
         </ScrollReveal>

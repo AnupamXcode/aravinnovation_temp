@@ -16,8 +16,10 @@ import {
 import { trackEvent } from "@/lib/analytics";
 
 import { useSiteContent } from "@/lib/site-content";
+import { useTranslations } from "next-intl";
 
 export function Hero() {
+  const t = useTranslations("Hero");
   const { content } = useSiteContent();
   const hero = content.hero;
 
@@ -42,8 +44,8 @@ export function Hero() {
                     {hero.eyebrow}
                   </span>
                 </div>
-                <div className="text-[11px] font-mono font-bold text-[#f15e1c] bg-[#f7d7b0]/50 dark:bg-[#253630] px-3.5 py-1 rounded-lg border border-[#f7d7b0]">
-                  Problem Solved: Disconnected IT strategy &amp; fragmented engineering squads
+                <div className="text-[11px] font-mono font-bold text-[#f15e1c] bg-[#f7d7b0]/50 dark:bg-[#253630] px-3.5 py-1 rounded-lg border border-[#f7d7b0] dark:border-[#253630]">
+                  {hero.problemSolved || t("problemSolved")}
                 </div>
               </div>
             </ScrollReveal>

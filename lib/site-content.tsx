@@ -12,6 +12,7 @@ export type { CaseStudy } from "@/data/case-studies";
 
 export interface HeroContent {
   eyebrow: string;
+  problemSolved?: string;
   title: string;
   description: string;
   primaryCtaText: string;

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { Hero } from "@/components/hero/Hero";
 import { ArchitectureCaseStudyCard } from "@/components/case-studies/ArchitectureCaseStudyCard";
@@ -14,7 +14,6 @@ import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { ProcessTimeline } from "@/components/motion/ProcessTimeline";
 import { MovingLogoStrip } from "@/components/motion/MovingLogoStrip";
 import { servicesData } from "@/data/services";
-import { industriesData } from "@/data/industries";
 import { caseStudiesData } from "@/data/case-studies";
 import {
   ArrowRight,
@@ -23,9 +22,6 @@ import {
   Users,
   Award,
   CheckCircle,
-  Sparkles,
-  ChevronRight,
-  Building2,
 } from "lucide-react";
 
 import { getSEOForPath, SITE_BASE_URL } from "@/lib/seo";
@@ -61,30 +57,35 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
+  const tBeforeAfter = await getTranslations("BeforeAfter");
+  const tServices = await getTranslations("Services");
+  const tCaseStudies = await getTranslations("CaseStudies");
+  const tWhyArav = await getTranslations("WhyArav");
+  const tMethodology = await getTranslations("Methodology");
+  const tTestimonials = await getTranslations("Testimonials");
+  const tFinalCta = await getTranslations("FinalCta");
+  const tMovingLogo = await getTranslations("MovingLogo");
+
   const differentiators = [
     {
       icon: <Zap className="w-6 h-6" />,
-      title: "Agile Production Engineering",
-      description:
-        "Senior full-stack pods operating with subsecond Next.js architecture, cloud-native microservices, and continuous CI/CD automated deployment pipelines.",
+      title: tWhyArav("diff1Title"),
+      description: tWhyArav("diff1Desc"),
     },
     {
       icon: <ShieldCheck className="w-6 h-6" />,
-      title: "Governance & Risk Audit Built-In",
-      description:
-        "Full DPDP Act (India), SOC-2, and ISO compliance rigor applied across every software layer, data storage strategy, and customer-facing portal.",
+      title: tWhyArav("diff2Title"),
+      description: tWhyArav("diff2Desc"),
     },
     {
       icon: <Award className="w-6 h-6" />,
-      title: "Data-Driven ROI & Demand Gen",
-      description:
-        "Replaces vanity metrics with closed-loop attribution, high-intent LinkedIn & Search campaigns, and multi-channel conversion funnel modeling.",
+      title: tWhyArav("diff3Title"),
+      description: tWhyArav("diff3Desc"),
     },
     {
       icon: <Users className="w-6 h-6" />,
-      title: "Dual Regional Engineering Hubs",
-      description:
-        "Regional delivery centers in Gurgaon (HQ) and Dubai (UAE), bridging GCC and South Asian enterprise technology standards seamlessly.",
+      title: tWhyArav("diff4Title"),
+      description: tWhyArav("diff4Desc"),
     },
   ];
 
@@ -98,7 +99,7 @@ export default async function HomePage({
         <ScrollReveal direction="up">
           <div className="text-center mb-4 px-4">
             <span className="text-[11px] font-bold font-mono uppercase tracking-widest text-[#4a5c55] dark:text-[#d3eee4]">
-              Trusted By Fast-Growing Enterprises &amp; Industry Leaders Globally
+              {tMovingLogo("heading")}
             </span>
           </div>
           <MovingLogoStrip />
@@ -111,13 +112,13 @@ export default async function HomePage({
           <ScrollReveal direction="up">
             <div className="max-w-3xl mx-auto space-y-3">
               <Badge variant="secondary" size="md">
-                Interactive Transformation
+                {tBeforeAfter("badge")}
               </Badge>
               <h2 className="text-3xl sm:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
-                From Legacy Friction to Modern Acceleration
+                {tBeforeAfter("title")}
               </h2>
               <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4]">
-                See how Arav Innovations replaces slow, manual architectures with cloud-native, automated, and observable enterprise systems.
+                {tBeforeAfter("description")}
               </p>
             </div>
           </ScrollReveal>
@@ -138,18 +139,18 @@ export default async function HomePage({
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
               <div className="max-w-3xl space-y-3">
                 <Badge variant="secondary" size="md">
-                  Our 7 Core Practices
+                  {tServices("badge")}
                 </Badge>
                 <h2 className="text-3xl sm:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight leading-[1.1]">
-                  Interactive Practice Browser
+                  {tServices("title")}
                 </h2>
                 <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4]">
-                  Select a practice below to inspect capabilities, delivery SLAs, and engineering frameworks.
+                  {tServices("description")}
                 </p>
               </div>
-              <Link href="/services">
+              <Link href={`/${locale}/services`}>
                 <Button variant="outline" size="md" className="rounded-full px-7 py-3 border-[#f7d7b0] dark:border-[#253630] bg-white dark:bg-[#172420] text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c]" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                  View All Practices
+                  {tServices("viewAll")}
                 </Button>
               </Link>
             </div>
@@ -168,18 +169,18 @@ export default async function HomePage({
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
               <div className="max-w-3xl space-y-3">
                 <Badge variant="secondary" size="md">
-                  Proven Track Record
+                  {tCaseStudies("badge")}
                 </Badge>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                  Featured Architecture Case Studies
+                  {tCaseStudies("title")}
                 </h2>
                 <p className="text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                  Examining how we solve critical architectural bottlenecks, build resilient digital platforms, and scale revenue.
+                  {tCaseStudies("description")}
                 </p>
               </div>
-              <Link href="/case-studies">
+              <Link href={`/${locale}/case-studies`}>
                 <Button variant="outline" size="md" className="rounded-full px-7 py-3 border-[#f7d7b0] dark:border-[#253630] bg-white dark:bg-[#172420] text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c]" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                  All Case Studies
+                  {tCaseStudies("viewAll")}
                 </Button>
               </Link>
             </div>
@@ -203,13 +204,13 @@ export default async function HomePage({
           <ScrollReveal direction="up">
             <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
               <Badge variant="secondary" size="md">
-                Client Endorsements
+                {tTestimonials("badge")}
               </Badge>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                Executive Endorsements
+                {tTestimonials("title")}
               </h2>
               <p className="text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                Verified testimonials from CTOs, Founders, and Product Heads partnering with Arav Innovations.
+                {tTestimonials("description")}
               </p>
             </div>
           </ScrollReveal>
@@ -226,13 +227,13 @@ export default async function HomePage({
           <ScrollReveal direction="up">
             <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
               <Badge variant="secondary" size="md">
-                Why Partner With Arav
+                {tWhyArav("badge")}
               </Badge>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                Engineered for Precision, Speed &amp; Integrity
+                {tWhyArav("title")}
               </h2>
               <p className="text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                We eliminate the traditional disconnect between high-level management consulting and hands-on technical execution.
+                {tWhyArav("description")}
               </p>
             </div>
           </ScrollReveal>
@@ -265,13 +266,13 @@ export default async function HomePage({
           <ScrollReveal direction="up">
             <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
               <Badge variant="secondary" size="md">
-                Engagement Lifecycle
+                {tMethodology("badge")}
               </Badge>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                Our 5-Step Execution Methodology
+                {tMethodology("title")}
               </h2>
               <p className="text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                A disciplined, transparent delivery framework that ensures zero surprises and rapid time-to-value.
+                {tMethodology("description")}
               </p>
             </div>
           </ScrollReveal>
@@ -288,31 +289,31 @@ export default async function HomePage({
             <div className="lg:col-span-5 space-y-6">
               <ScrollReveal direction="up">
                 <Badge variant="secondary" size="md">
-                  Get In Touch
+                  {tFinalCta("badge")}
                 </Badge>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight mt-3 leading-[1.1]">
-                  Ready to Transform Your Digital Capabilities?
+                  {tFinalCta("title")}
                 </h2>
                 <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed mt-3">
-                  Whether you are modernizing legacy infrastructure, launching an enterprise web application, accelerating B2B demand generation, or augmenting your engineering sprint with senior talent, we are ready to assist.
+                  {tFinalCta("description")}
                 </p>
 
                 <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#22312b] border border-[#f7d7b0] dark:border-[#31473f] space-y-3.5 mt-6 shadow-md">
                   <h4 className="text-base font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
-                    What Happens Next:
+                    {tFinalCta("nextTitle")}
                   </h4>
                   <ul className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] space-y-2.5">
                     <li className="flex items-center gap-2.5">
                       <CheckCircle className="w-4 h-4 text-[#2e936f] shrink-0" />
-                      <span>Discovery call with a senior practice director within 24 hours</span>
+                      <span>{tFinalCta("nextStep1")}</span>
                     </li>
                     <li className="flex items-center gap-2.5">
                       <CheckCircle className="w-4 h-4 text-[#2e936f] shrink-0" />
-                      <span>Technical scope definition &amp; preliminary milestone roadmap</span>
+                      <span>{tFinalCta("nextStep2")}</span>
                     </li>
                     <li className="flex items-center gap-2.5">
                       <CheckCircle className="w-4 h-4 text-[#2e936f] shrink-0" />
-                      <span>Transparent engagement model (Sprint, Retainer, or Pod)</span>
+                      <span>{tFinalCta("nextStep3")}</span>
                     </li>
                   </ul>
                 </div>

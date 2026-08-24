@@ -14,10 +14,12 @@
     "about": "About",
     "contact": "Contact & Inquiries",
     "contactUs": "Contact Us",
-    "talkToExpert": "Talk to an Expert"
+    "talkToExpert": "Talk to an Expert",
+    "companyEngagements": "Company & Engagements"
   },
   "Hero": {
     "eyebrow": "RESULT-DRIVEN DIGITAL EXCELLENCE • GLOBAL",
+    "problemSolved": "Problem Solved: Disconnected IT strategy & fragmented engineering squads",
     "headlinePrefix": "Shaping Online Futures & Scaling Enterprises",
     "headlineHighlight": "Globally",
     "supportingText": "Partner with Arav Innovations for IT strategy, full-stack software development, performance digital marketing, compliance, audits, and dedicated talent solutions engineered for business growth.",
@@ -27,32 +29,93 @@
     "badgeSla": "Strict SLA Protection",
     "badgeIp": "100% Client IP Ownership"
   },
+  "MovingLogo": {
+    "heading": "Trusted By Fast-Growing Enterprises & Industry Leaders Globally"
+  },
+  "BeforeAfter": {
+    "badge": "Interactive Transformation",
+    "title": "From Legacy Friction to Modern Acceleration",
+    "description": "See how Arav Innovations replaces slow, manual architectures with cloud-native, automated, and observable enterprise systems.",
+    "dragHelper": "Drag slider to compare transformation",
+    "beforeBadge": "BEFORE • LEGACY ARCHITECTURE",
+    "beforeTitle": "Slow, Fragmented & Manual",
+    "beforeDescription": "Frequent system timeouts during peak traffic, spiraling on-premise maintenance costs, manual deployment bottlenecks, and compliance vulnerabilities.",
+    "beforePillar1Title": "Monolithic",
+    "beforePillar1Desc": "Legacy Single-Point Bottlenecks",
+    "beforePillar2Title": "Fragmented",
+    "beforePillar2Desc": "Disconnected Data Silos",
+    "beforePillar3Title": "Manual",
+    "beforePillar3Desc": "Error-Prone Deployments",
+    "beforePillar4Title": "Expensive",
+    "beforePillar4Desc": "Unpredictable On-Prem Costs",
+    "afterBadge": "AFTER • ARAV ENGINEERED SYSTEM",
+    "afterTitle": "Cloud-Native, Automated & Scalable",
+    "afterDescription": "Sub-second page speeds, zero-trust security governance, automated CI/CD deployment pipelines, and predictable infrastructure costs.",
+    "afterPillar1Title": "Cloud-Native",
+    "afterPillar1Desc": "Serverless & Microservices",
+    "afterPillar2Title": "Automated",
+    "afterPillar2Desc": "Zero-Downtime CI/CD",
+    "afterPillar3Title": "Observable",
+    "afterPillar3Desc": "Real-Time Telemetry",
+    "afterPillar4Title": "Scalable",
+    "afterPillar4Desc": "Elastic High-Availability"
+  },
   "Services": {
-    "badge": "Enterprise Capabilities",
-    "title": "Multidisciplinary Technology & Strategy Practices",
-    "description": "Seven specialized business units working seamlessly under one unified technical leadership team.",
+    "badge": "Our 7 Core Practices",
+    "title": "Interactive Practice Browser",
+    "description": "Select a practice below to inspect capabilities, delivery SLAs, and engineering frameworks.",
+    "viewAll": "View All Practices",
+    "explorePractice": "Explore Practice",
+    "challengeSolve": "Challenge We Solve:",
+    "coreCapabilities": "Core Practice Capabilities:",
+    "fullScope": "View Full Service Scope",
     "inquire": "Inquire About",
-    "learnMore": "Learn More",
-    "viewAll": "View All Services"
+    "learnMore": "Learn More"
   },
   "CaseStudies": {
-    "badge": "Proven Enterprise Outcomes",
-    "title": "Featured Enterprise Case Studies",
-    "description": "Verified digital transformation, architecture modernization, and growth milestones delivered for global clients.",
+    "badge": "Proven Track Record",
+    "title": "Featured Architecture Case Studies",
+    "description": "Examining how we solve critical architectural bottlenecks, build resilient digital platforms, and scale revenue.",
+    "viewAll": "All Case Studies",
+    "viewCaseStudy": "VIEW CASE STUDY",
+    "transformationPipeline": "Transformation Pipeline",
+    "confidentialClient": "Confidential Enterprise Client",
     "challenge": "Challenge",
     "solution": "Solution & Execution",
-    "executionOutcome": "Execution & Outcome",
-    "fullCaseStudy": "Full Case Study →",
-    "clientConfidential": "CLIENT CONFIDENTIAL / LOGO PENDING APPROVAL",
-    "viewAll": "View All Case Studies"
+    "results": "Key Results",
+    "technologies": "Technologies Deployed"
   },
-  "WorkingWithUs": {
-    "processBadge": "Methodical Execution",
-    "processTitle": "Our 5-Step Value Creation Model",
-    "processDescription": "A transparent, milestone-driven framework designed to minimize risk and accelerate production readiness.",
-    "testimonialsBadge": "Client Proof",
-    "testimonialsTitle": "What Enterprise Leaders Say",
-    "testimonialsDescription": "Direct feedback and verified business outcomes from technology executives."
+  "WhyArav": {
+    "badge": "Why Partner With Arav",
+    "title": "Engineered for Precision, Speed & Integrity",
+    "description": "We eliminate the traditional disconnect between high-level management consulting and hands-on technical execution.",
+    "diff1Title": "Agile Production Engineering",
+    "diff1Desc": "Senior full-stack pods operating with subsecond Next.js architecture, cloud-native microservices, and continuous CI/CD automated deployment pipelines.",
+    "diff2Title": "Governance & Risk Audit Built-In",
+    "diff2Desc": "Full DPDP Act (India), SOC-2, and ISO compliance rigor applied across every software layer, data storage strategy, and customer-facing portal.",
+    "diff3Title": "Data-Driven ROI & Demand Gen",
+    "diff3Desc": "Replaces vanity metrics with closed-loop attribution, high-intent LinkedIn & Search campaigns, and multi-channel conversion funnel modeling.",
+    "diff4Title": "Dual Regional Engineering Hubs",
+    "diff4Desc": "Regional delivery centers in Gurgaon (HQ) and Dubai (UAE), bridging GCC and South Asian enterprise technology standards seamlessly."
+  },
+  "Methodology": {
+    "badge": "Engagement Lifecycle",
+    "title": "Our 5-Step Execution Methodology",
+    "description": "A disciplined, transparent delivery framework that ensures zero surprises and rapid time-to-value."
+  },
+  "Testimonials": {
+    "badge": "Client Endorsements",
+    "title": "Executive Endorsements",
+    "description": "Verified testimonials from CTOs, Founders, and Product Heads partnering with Arav Innovations."
+  },
+  "FinalCta": {
+    "badge": "Get In Touch",
+    "title": "Ready to Transform Your Digital Capabilities?",
+    "description": "Whether you are modernizing legacy infrastructure, launching an enterprise web application, accelerating B2B demand generation, or augmenting your engineering sprint with senior talent, we are ready to assist.",
+    "nextTitle": "What Happens Next:",
+    "nextStep1": "Discovery call with a senior practice director within 24 hours",
+    "nextStep2": "Technical scope definition & preliminary milestone roadmap",
+    "nextStep3": "Transparent engagement model (Sprint, Retainer, or Pod)"
   },
   "LeadForm": {
     "title": "Initiate a Project Discussion",
@@ -74,11 +137,15 @@
     "confidentiality": "Strict Confidentiality Guaranteed. Operating Globally."
   },
   "Footer": {
-    "tagline": "Arav Innovations is a multidisciplinary technology, strategy, digital growth, governance, and staff augmentation firm partnering with ambitious enterprises globally.",
-    "practicesHeading": "Our 7 Practices",
-    "companyHeading": "Company & Governance",
-    "presenceHeading": "Global Presence",
-    "operatingGlobally": "Operating Globally",
+    "heading": "WE 🤍 WORKING WITH AMBITIOUS BRANDS, ACROSS EVERY SECTOR",
+    "bookCall": "Book a call",
+    "contactUs": "Contact us",
+    "indiaHq": "India HQ",
+    "uaeOffice": "UAE Regional Office",
+    "privacyPolicy": "Privacy Policy",
+    "refundPolicy": "Refund Policy",
+    "termsConditions": "Terms & Conditions",
+    "securityDpdp": "Security & DPDP",
     "rights": "All rights reserved."
   },
   "Common": {
@@ -86,6 +153,8 @@
     "en": "EN",
     "hi": "हिं",
     "darkMode": "Dark Mode",
-    "lightMode": "Light Mode"
+    "lightMode": "Light Mode",
+    "startProject": "Start a Project",
+    "talkToExpert": "Talk to an Expert"
   }
 }
