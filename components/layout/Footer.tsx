@@ -67,10 +67,10 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-gradient-to-br from-[#FFA270] via-[#F87B42] to-[#E8672A] dark:from-[#2A1E16] dark:via-[#221811] dark:to-[#16120E] dark:border-t dark:border-[#3D2D23] text-white pt-16 pb-8 transition-colors duration-300 relative overflow-hidden">
+    <footer className="bg-gradient-to-br from-[#fab60a] via-[#f47d43] to-[#f15e1c] dark:from-[#1e2c27] dark:via-[#172420] dark:to-[#101b17] dark:border-t dark:border-[#253630] text-white pt-16 pb-8 transition-colors duration-300 relative overflow-hidden">
       {/* Background ambient radial highlights */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-white/10 dark:bg-[#E8672A]/10 rounded-full blur-3xl -z-0 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#3A2E27]/12 dark:bg-[#E8672A]/5 rounded-full blur-3xl -z-0 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-white/10 dark:bg-[#f15e1c]/10 rounded-full blur-3xl -z-0 pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#1b2823]/12 dark:bg-[#2e936f]/10 rounded-full blur-3xl -z-0 pointer-events-none" />
 
       <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10 space-y-12">
         {/* Main Grid: Left Closing Statement + Right Information Columns */}
@@ -85,7 +85,7 @@ export function Footer() {
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <a
                 href={footer?.bookCallUrl || `tel:${footer?.indiaPhone?.replace(/\s+/g, "") || "+919650625777"}`}
-                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] border border-white/40 backdrop-blur-md text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#f15e1c] border border-white/40 backdrop-blur-md text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
                 <span>Book a call</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -93,7 +93,7 @@ export function Footer() {
 
               <Link
                 href={footer?.contactUsUrl || "/contact"}
-                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] border border-white/40 backdrop-blur-md text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#f15e1c] border border-white/40 backdrop-blur-md text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
                 <span>Contact us</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -109,7 +109,7 @@ export function Footer() {
                 <React.Fragment key={service.href}>
                   <Link
                     href={service.href}
-                    className="group relative inline-flex items-center gap-1 py-1 px-2.5 rounded-lg bg-white/10 hover:bg-white text-white hover:text-[#E8672A] transition-all duration-300 font-medium hover:shadow-md"
+                    className="group relative inline-flex items-center gap-1 py-1 px-2.5 rounded-lg bg-white/10 hover:bg-white text-white hover:text-[#f15e1c] transition-all duration-300 font-medium hover:shadow-md"
                   >
                     <span className="transition-transform group-hover:translate-x-0.5">{service.label}</span>
                   </Link>
@@ -185,7 +185,7 @@ export function Footer() {
                       href={social.url}
                       target={social.openNewTab ? "_blank" : "_self"}
                       rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#E8672A] flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 shadow-md"
+                      className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#f15e1c] flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 shadow-md"
                       aria-label={social.name}
                       title={social.name}
                     >
