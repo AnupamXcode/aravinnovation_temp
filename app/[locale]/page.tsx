@@ -72,18 +72,22 @@ export default async function HomePage({
     {
       icon: <Zap className="w-6 h-6" />,
       title: tWhyArav("diff1Title"),
+      description: tWhyArav("diff1Desc"),
     },
     {
       icon: <ShieldCheck className="w-6 h-6" />,
       title: tWhyArav("diff2Title"),
+      description: tWhyArav("diff2Desc"),
     },
     {
       icon: <Award className="w-6 h-6" />,
       title: tWhyArav("diff3Title"),
+      description: tWhyArav("diff3Desc"),
     },
     {
       icon: <Users className="w-6 h-6" />,
       title: tWhyArav("diff4Title"),
+      description: tWhyArav("diff4Desc"),
     },
   ];
 
@@ -231,17 +235,20 @@ export default async function HomePage({
             </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {differentiators.map((diff, index) => (
               <Scroll3DContainer key={index} variant="card" delay={index * 0.08}>
                 <TiltCard maxTilt={5} scale={1.01} className="h-full group">
-                  <div className="h-full rounded-[2.2rem] bg-white dark:bg-[#22312b] p-8 border border-[#f7d7b0] dark:border-[#31473f] hover-lift-3d card-3d-glow hover:shadow-2xl hover:border-[#f15e1c]/40 transition-all duration-300 space-y-4 shadow-sm flex flex-col justify-between">
+                  <div className="h-full rounded-[2.2rem] bg-white dark:bg-[#22312b] p-8 sm:p-10 border border-[#f7d7b0] dark:border-[#31473f] hover-lift-3d card-3d-glow hover:shadow-2xl hover:border-[#f15e1c]/40 transition-all duration-300 space-y-4 shadow-sm flex flex-col justify-between">
                     <div className="p-4 rounded-2xl icon-box-hover w-fit shadow-xs text-[#f15e1c] bg-[#fefaf5] dark:bg-[#1a2622]">
                       {diff.icon}
                     </div>
-                    <h3 className="text-xl font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
+                    <h3 className="text-2xl font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
                       {diff.title}
                     </h3>
+                    <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                      {diff.description}
+                    </p>
                   </div>
                 </TiltCard>
               </Scroll3DContainer>
