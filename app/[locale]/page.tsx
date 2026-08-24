@@ -49,6 +49,8 @@ export async function generateMetadata() {
   };
 }
 
+import { Scroll3DContainer } from "@/components/motion/Scroll3DContainer";
+
 export default async function HomePage({
   params,
 }: {
@@ -70,29 +72,27 @@ export default async function HomePage({
     {
       icon: <Zap className="w-6 h-6" />,
       title: tWhyArav("diff1Title"),
-      description: tWhyArav("diff1Desc"),
     },
     {
       icon: <ShieldCheck className="w-6 h-6" />,
       title: tWhyArav("diff2Title"),
-      description: tWhyArav("diff2Desc"),
     },
     {
       icon: <Award className="w-6 h-6" />,
       title: tWhyArav("diff3Title"),
-      description: tWhyArav("diff3Desc"),
     },
     {
       icon: <Users className="w-6 h-6" />,
       title: tWhyArav("diff4Title"),
-      description: tWhyArav("diff4Desc"),
     },
   ];
 
   return (
     <div className="flex flex-col min-h-screen w-full bg-[#ffffff] dark:bg-[#101b17] text-[#1b2823] dark:text-[#ffffff] space-y-12 pb-16 transition-colors duration-300">
-      {/* STAGE 1 & 2: PROBLEM & TECHNOLOGY — HERO SECTION */}
-      <Hero />
+      {/* STAGE 1 & 2: HERO SECTION WITH 3D SCROLL SEQUENCE */}
+      <Scroll3DContainer variant="hero">
+        <Hero />
+      </Scroll3DContainer>
 
       {/* TRUSTED CLIENTS MOVING LOGO STRIP */}
       <section className="w-full py-9 bg-[#fefaf5] dark:bg-[#172420] border-y border-[#f7d7b0] dark:border-[#253630] shadow-sm transition-all duration-300 overflow-hidden">
@@ -106,7 +106,7 @@ export default async function HomePage({
         </ScrollReveal>
       </section>
 
-      {/* STAGE 3: INTERACTION ZONE — BEFORE/AFTER VALUE PROPOSITION SLIDER */}
+      {/* BEFORE/AFTER SLIDER */}
       <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full">
         <section className="py-16 md:py-20 px-6 sm:px-12 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-xl text-center space-y-8 transition-colors duration-300">
           <ScrollReveal direction="up">
@@ -129,99 +129,95 @@ export default async function HomePage({
         </section>
       </div>
 
-      {/* STAGE 3 (CONTINUED): INTERACTION ZONE — WHAT WE DO 7-SERVICE INTERACTIVE SELECTOR */}
+      {/* WHAT WE DO 7-SERVICE INTERACTIVE SELECTOR WITH 3D CARD REVEAL */}
       <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full" id="services">
-        <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#f7d7b0]/30 dark:bg-[#1e2c27]/90 border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
-          {/* Subtle Top Accent Line */}
-          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/60 to-transparent" />
+        <Scroll3DContainer variant="card">
+          <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#f7d7b0]/30 dark:bg-[#1e2c27]/90 border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
+            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/60 to-transparent" />
 
-          <ScrollReveal direction="up">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-              <div className="max-w-3xl space-y-3">
-                <Badge variant="secondary" size="md">
-                  {tServices("badge")}
-                </Badge>
-                <h2 className="text-3xl sm:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight leading-[1.1]">
-                  {tServices("title")}
-                </h2>
-                <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4]">
-                  {tServices("description")}
-                </p>
+            <ScrollReveal direction="up">
+              <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div className="max-w-3xl space-y-3">
+                  <Badge variant="secondary" size="md">
+                    {tServices("badge")}
+                  </Badge>
+                  <h2 className="text-3xl sm:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight leading-[1.1]">
+                    {tServices("title")}
+                  </h2>
+                </div>
+                <Link href={`/${locale}/services`}>
+                  <Button variant="outline" size="md" className="rounded-full px-7 py-3 border-[#f7d7b0] dark:border-[#253630] bg-white dark:bg-[#172420] text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c]" rightIcon={<ArrowRight className="w-4 h-4" />}>
+                    {tServices("viewAll")}
+                  </Button>
+                </Link>
               </div>
-              <Link href={`/${locale}/services`}>
-                <Button variant="outline" size="md" className="rounded-full px-7 py-3 border-[#f7d7b0] dark:border-[#253630] bg-white dark:bg-[#172420] text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c]" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                  {tServices("viewAll")}
-                </Button>
-              </Link>
-            </div>
-          </ScrollReveal>
+            </ScrollReveal>
 
-          <InteractiveServiceSelector />
-        </section>
+            <InteractiveServiceSelector />
+          </section>
+        </Scroll3DContainer>
       </div>
 
-      {/* STAGE 4: PROOF — TECHNICAL ARCHITECTURE CASE STUDIES */}
+      {/* TECHNICAL ARCHITECTURE CASE STUDIES */}
       <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full">
-        <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#f7d7b0]/30 dark:bg-[#1e2c27]/90 border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
-          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/50 to-transparent" />
+        <Scroll3DContainer variant="card">
+          <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#f7d7b0]/30 dark:bg-[#1e2c27]/90 border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
+            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/50 to-transparent" />
 
-          <ScrollReveal direction="up">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
-              <div className="max-w-3xl space-y-3">
+            <ScrollReveal direction="up">
+              <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+                <div className="max-w-3xl space-y-3">
+                  <Badge variant="secondary" size="md">
+                    {tCaseStudies("badge")}
+                  </Badge>
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                    {tCaseStudies("title")}
+                  </h2>
+                </div>
+                <Link href={`/${locale}/case-studies`}>
+                  <Button variant="outline" size="md" className="rounded-full px-7 py-3 border-[#f7d7b0] dark:border-[#253630] bg-white dark:bg-[#172420] text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c]" rightIcon={<ArrowRight className="w-4 h-4" />}>
+                    {tCaseStudies("viewAll")}
+                  </Button>
+                </Link>
+              </div>
+            </ScrollReveal>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {caseStudiesData.slice(0, 3).map((study, idx) => (
+                <Scroll3DContainer key={study.slug} variant="card" delay={idx * 0.1}>
+                  <ArchitectureCaseStudyCard caseStudy={study} locale={locale} />
+                </Scroll3DContainer>
+              ))}
+            </div>
+          </section>
+        </Scroll3DContainer>
+      </div>
+
+      {/* CLIENT TESTIMONIALS WITH 3D PARALLAX TILT */}
+      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full">
+        <Scroll3DContainer variant="testimonial">
+          <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
+            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent" />
+
+            <ScrollReveal direction="up">
+              <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
                 <Badge variant="secondary" size="md">
-                  {tCaseStudies("badge")}
+                  {tTestimonials("badge")}
                 </Badge>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                  {tCaseStudies("title")}
+                  {tTestimonials("title")}
                 </h2>
-                <p className="text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                  {tCaseStudies("description")}
-                </p>
               </div>
-              <Link href={`/${locale}/case-studies`}>
-                <Button variant="outline" size="md" className="rounded-full px-7 py-3 border-[#f7d7b0] dark:border-[#253630] bg-white dark:bg-[#172420] text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c]" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                  {tCaseStudies("viewAll")}
-                </Button>
-              </Link>
-            </div>
-          </ScrollReveal>
+            </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {caseStudiesData.slice(0, 3).map((study, idx) => (
-              <ScrollReveal key={study.slug} delay={idx * 0.1} direction="up">
-                <ArchitectureCaseStudyCard caseStudy={study} locale={locale} />
-              </ScrollReveal>
-            ))}
-          </div>
-        </section>
+            <ScrollReveal direction="up" delay={0.2}>
+              <TestimonialSlider />
+            </ScrollReveal>
+          </section>
+        </Scroll3DContainer>
       </div>
 
-      {/* STAGE 4 (CONTINUED): PROOF — CLIENT TESTIMONIALS */}
-      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full">
-        <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
-          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent" />
-
-          <ScrollReveal direction="up">
-            <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-              <Badge variant="secondary" size="md">
-                {tTestimonials("badge")}
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                {tTestimonials("title")}
-              </h2>
-              <p className="text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                {tTestimonials("description")}
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="up" delay={0.2}>
-            <TestimonialSlider />
-          </ScrollReveal>
-        </section>
-      </div>
-
-      {/* STAGE 5: TRANSFORMATION — WHY ARAV & METHODOLOGY */}
+      {/* WHY ARAV */}
       <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full">
         <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300">
           <ScrollReveal direction="up">
@@ -232,35 +228,29 @@ export default async function HomePage({
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                 {tWhyArav("title")}
               </h2>
-              <p className="text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                {tWhyArav("description")}
-              </p>
             </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {differentiators.map((diff, index) => (
-              <ScrollReveal key={index} delay={index * 0.1} direction="up">
+              <Scroll3DContainer key={index} variant="card" delay={index * 0.08}>
                 <TiltCard maxTilt={5} scale={1.01} className="h-full group">
-                  <div className="h-full rounded-[2.2rem] bg-white dark:bg-[#22312b] p-8 sm:p-10 border border-[#f7d7b0] dark:border-[#31473f] hover-lift-3d card-3d-glow hover:shadow-2xl hover:border-[#f15e1c]/40 transition-all duration-300 space-y-4 shadow-sm">
+                  <div className="h-full rounded-[2.2rem] bg-white dark:bg-[#22312b] p-8 border border-[#f7d7b0] dark:border-[#31473f] hover-lift-3d card-3d-glow hover:shadow-2xl hover:border-[#f15e1c]/40 transition-all duration-300 space-y-4 shadow-sm flex flex-col justify-between">
                     <div className="p-4 rounded-2xl icon-box-hover w-fit shadow-xs text-[#f15e1c] bg-[#fefaf5] dark:bg-[#1a2622]">
                       {diff.icon}
                     </div>
-                    <h3 className="text-2xl font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
+                    <h3 className="text-xl font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
                       {diff.title}
                     </h3>
-                    <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                      {diff.description}
-                    </p>
                   </div>
                 </TiltCard>
-              </ScrollReveal>
+              </Scroll3DContainer>
             ))}
           </div>
         </section>
       </div>
 
-      {/* STAGE 5 (CONTINUED): TRANSFORMATION — 5-STEP METHODOLOGY TIMELINE */}
+      {/* 5-STEP METHODOLOGY TIMELINE */}
       <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full" id="process">
         <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300">
           <ScrollReveal direction="up">
@@ -271,9 +261,6 @@ export default async function HomePage({
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                 {tMethodology("title")}
               </h2>
-              <p className="text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                {tMethodology("description")}
-              </p>
             </div>
           </ScrollReveal>
 
@@ -281,53 +268,50 @@ export default async function HomePage({
         </section>
       </div>
 
-      {/* STAGE 6: ACTION — FINAL LEAD FORM & CTA SECTION */}
+      {/* FINAL LEAD FORM & CTA SECTION WITH 3D SCALE REVEAL */}
       <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full" id="contact">
-        <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-gradient-to-br from-[#ffffff] via-[#fefaf5] to-[#f7d7b0]/50 dark:from-[#172420] dark:via-[#1e2c27] dark:to-[#253630] border-2 border-[#f15e1c]/40 shadow-2xl transition-all duration-300">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Col: Messaging */}
-            <div className="lg:col-span-5 space-y-6">
-              <ScrollReveal direction="up">
-                <Badge variant="secondary" size="md">
-                  {tFinalCta("badge")}
-                </Badge>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight mt-3 leading-[1.1]">
-                  {tFinalCta("title")}
-                </h2>
-                <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed mt-3">
-                  {tFinalCta("description")}
-                </p>
+        <Scroll3DContainer variant="cta">
+          <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-gradient-to-br from-[#ffffff] via-[#fefaf5] to-[#f7d7b0]/50 dark:from-[#172420] dark:via-[#1e2c27] dark:to-[#253630] border-2 border-[#f15e1c]/40 shadow-2xl transition-all duration-300">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              <div className="lg:col-span-5 space-y-6">
+                <ScrollReveal direction="up">
+                  <Badge variant="secondary" size="md">
+                    {tFinalCta("badge")}
+                  </Badge>
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight mt-3 leading-[1.1]">
+                    LET&apos;S BUILD WHAT&apos;S NEXT
+                  </h2>
 
-                <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#22312b] border border-[#f7d7b0] dark:border-[#31473f] space-y-3.5 mt-6 shadow-md">
-                  <h4 className="text-base font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
-                    {tFinalCta("nextTitle")}
-                  </h4>
-                  <ul className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] space-y-2.5">
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle className="w-4 h-4 text-[#2e936f] shrink-0" />
-                      <span>{tFinalCta("nextStep1")}</span>
-                    </li>
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle className="w-4 h-4 text-[#2e936f] shrink-0" />
-                      <span>{tFinalCta("nextStep2")}</span>
-                    </li>
-                    <li className="flex items-center gap-2.5">
-                      <CheckCircle className="w-4 h-4 text-[#2e936f] shrink-0" />
-                      <span>{tFinalCta("nextStep3")}</span>
-                    </li>
-                  </ul>
-                </div>
-              </ScrollReveal>
-            </div>
+                  <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#22312b] border border-[#f7d7b0] dark:border-[#31473f] space-y-3.5 mt-6 shadow-md">
+                    <h4 className="text-base font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
+                      {tFinalCta("nextTitle")}
+                    </h4>
+                    <ul className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] space-y-2.5">
+                      <li className="flex items-center gap-2.5">
+                        <CheckCircle className="w-4 h-4 text-[#2e936f] shrink-0" />
+                        <span>{tFinalCta("nextStep1")}</span>
+                      </li>
+                      <li className="flex items-center gap-2.5">
+                        <CheckCircle className="w-4 h-4 text-[#2e936f] shrink-0" />
+                        <span>{tFinalCta("nextStep2")}</span>
+                      </li>
+                      <li className="flex items-center gap-2.5">
+                        <CheckCircle className="w-4 h-4 text-[#2e936f] shrink-0" />
+                        <span>{tFinalCta("nextStep3")}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </ScrollReveal>
+              </div>
 
-            {/* Right Col: Interactive Lead Form */}
-            <div className="lg:col-span-7">
-              <ScrollReveal direction="left" delay={0.2}>
-                <LeadForm source="homepage_final_cta" />
-              </ScrollReveal>
+              <div className="lg:col-span-7">
+                <ScrollReveal direction="left" delay={0.2}>
+                  <LeadForm source="homepage_final_cta" />
+                </ScrollReveal>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </Scroll3DContainer>
       </div>
     </div>
   );

@@ -44,21 +44,17 @@ export function TestimonialSlider() {
             “{current.quote}”
           </blockquote>
 
-          {/* Author Attribution & Service */}
+          {/* Author Attribution */}
           <div className="mt-8 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div>
-              <div className="font-bold text-base text-[#3A2E27] dark:text-[#FAF5EE] font-display">
-                {current.author}
-              </div>
-              <div className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] mt-0.5">
-                {current.designation} &bull; <span className="font-medium text-[#3A2E27] dark:text-[#FAF5EE]">{current.company}</span>
-              </div>
-              <div className="flex items-center gap-2 mt-1.5 text-[11px] text-[#E8672A] font-semibold">
-                <span>{current.service}</span>
-                <span>&bull;</span>
-                <span className="flex items-center gap-0.5 text-[#7A6A5F] dark:text-[#B8ACA0]">
-                  <MapPin className="w-3 h-3 text-[#E8672A]" /> {current.location}
+            <div className="group/author cursor-pointer">
+              <div className="font-bold text-base text-[#3A2E27] dark:text-[#FAF5EE] font-display flex items-center gap-2">
+                <span>{current.author}</span>
+                <span className="text-xs font-normal text-[#E8672A] opacity-80 group-hover/author:opacity-100 transition-opacity">
+                  &mdash; {current.company}
                 </span>
+              </div>
+              <div className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] mt-0.5 hidden group-hover/author:block transition-all">
+                {current.designation} &bull; {current.location}
               </div>
             </div>
 

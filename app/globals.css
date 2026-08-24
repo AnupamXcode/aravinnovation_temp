@@ -346,3 +346,44 @@ body {
 .animate-knob-rotate {
   animation: knobRotate 12s linear infinite;
 }
+
+/* ============================================================================
+   MICRO-INTERACTIONS (< 200ms RESPONSIVE FEEDBACK)
+   ============================================================================ */
+input, select, textarea {
+  transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease !important;
+}
+input:focus, select:focus, textarea:focus {
+  transform: scale(1.015);
+  border-color: #f15e1c !important;
+  box-shadow: 0 0 0 3px rgba(241, 94, 28, 0.15) !important;
+}
+
+.nav-link-hover {
+  position: relative;
+  transition: color 200ms ease;
+}
+.nav-link-hover::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #f15e1c;
+  transition: width 200ms ease;
+  border-radius: 9999px;
+}
+.nav-link-hover:hover::after {
+  width: 100%;
+}
+
+.icon-micro-rotate {
+  transition: transform 150ms ease, color 150ms ease;
+}
+.group:hover .icon-micro-rotate,
+.icon-micro-rotate:hover {
+  transform: rotate(8deg) scale(1.1);
+  color: #f15e1c;
+}
+

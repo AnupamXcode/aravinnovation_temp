@@ -84,15 +84,8 @@ export function Hero3DScene() {
       onMouseLeave={handleMouseLeave}
       className="relative w-full max-w-lg mx-auto perspective-1200 py-6 select-none"
     >
-      {/* 3D Scroll Transform Outer Container */}
+      {/* Straight Unskewed Container */}
       <motion.div
-        style={{
-          rotateX: combinedRotateX,
-          rotateY: combinedRotateY,
-          scale: shouldReduceMotion ? 1 : scrollScale,
-          y: shouldReduceMotion ? 0 : scrollTranslateY,
-          transformStyle: "preserve-3d",
-        }}
         className="relative transition-shadow duration-300"
       >
         {/* Floating 3D Orbit Badge 1 (Parallax Scroll & Mouse) */}

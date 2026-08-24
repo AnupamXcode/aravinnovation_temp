@@ -136,13 +136,10 @@ export function LeadForm({
       onSubmit={handleSubmit(onSubmit)}
       className="rounded-3xl bg-white dark:bg-[#171411] p-7 sm:p-10 border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl space-y-6"
     >
-      <div className="border-b border-[#EFE2D6] dark:border-[#2C241E] pb-4">
+      <div className="border-b border-[#EFE2D6] dark:border-[#2C241E] pb-3">
         <h3 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-          Initiate a Project Discussion
+          Initiate Project Discussion
         </h3>
-        <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] mt-1">
-          Tell us about your organization and requirements. All inquiries are covered under NDA.
-        </p>
       </div>
 
       {errorMessage && (
