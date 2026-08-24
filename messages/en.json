@@ -148,10 +148,64 @@
     "securityDpdp": "Security & DPDP",
     "rights": "All rights reserved."
   },
+  "ServicesPage": {
+    "badge": "Full-Spectrum Capabilities",
+    "title": "Seven Core Practices Engineered for Enterprise Impact",
+    "description": "Arav Innovations delivers end-to-end capabilities spanning executive technology strategy, high-scale software engineering, commercial digital marketing, data governance, independent audits, and dedicated talent pods.",
+    "customEngagementTitle": "Need a Customized Multi-Practice Engagement?",
+    "customEngagementDesc": "Many of our enterprise engagements combine strategic advisory with full-stack execution and staff augmentation. Speak with our leadership team to configure a bespoke scope.",
+    "discussScope": "Discuss Your Enterprise Scope"
+  },
+  "CaseStudiesPage": {
+    "badge": "Enterprise Case Studies",
+    "title": "Architectural Success Stories & Proven Enterprise ROI",
+    "description": "Examine how Arav Innovations solves critical system bottlenecks, builds high-scale web platforms, and expands enterprise revenue pipelines globally.",
+    "filterAll": "All Case Studies"
+  },
+  "BlogPage": {
+    "badge": "Insights & Architecture",
+    "title": "Thought Leadership on Enterprise Engineering & Strategy",
+    "description": "In-depth research, architectural breakdowns, compliance checklists, and digital growth frameworks for tech leaders.",
+    "readArticle": "Read Full Article",
+    "keyTakeaways": "Key Executive Takeaways"
+  },
+  "ContactPage": {
+    "badge": "Global Advisory & Contact",
+    "title": "Let's Build & Scale Your Enterprise Technology Capabilities",
+    "description": "Reach out to our senior directors in Gurgaon (India HQ) or Dubai (UAE Regional Office). All inquiries are responded to within 1 business day.",
+    "indiaAddress": "Plot No. 44, Sector 44, Gurgaon, Haryana 122003, India",
+    "uaeAddress": "Level 14, Boulevard Plaza Tower 1, Sheikh Mohammed bin Rashid Blvd, Downtown Dubai, UAE",
+    "phoneLabel": "Phone Support",
+    "emailLabel": "Email Support"
+  },
+  "LegalPages": {
+    "tableOfContents": "Table of Contents",
+    "effectiveDate": "Effective Date: 27th Dec 2024",
+    "privacyTitle": "Privacy Policy",
+    "termsTitle": "Terms & Conditions",
+    "refundTitle": "Refund Policy",
+    "securityTitle": "Security & DPDP Compliance"
+  },
+  "Chatbot": {
+    "headerTitle": "Arav Strategy & AI Assistant",
+    "onlineStatus": "Online • 24/7 Strategic Support",
+    "greeting": "Hello! Welcome to Arav Innovations. How can we assist your technology or growth goals today?",
+    "inputPlaceholder": "Type your query or project goal...",
+    "leadTitle": "Start Your Project Discussion",
+    "leadSubtitle": "Provide your details so our senior director can review your scope.",
+    "nameLabel": "Full Name",
+    "emailLabel": "Work Email",
+    "phoneLabel": "Phone Number",
+    "requirementLabel": "Project Brief",
+    "submitLead": "Submit & Request Callback",
+    "leadSubmittedTitle": "Thank You!",
+    "leadSubmittedMsg": "We have received your requirement. Our team will contact you shortly."
+  },
   "Common": {
     "language": "Language",
     "en": "EN",
     "hi": "हिं",
+    "ar": "عرب",
     "darkMode": "Dark Mode",
     "lightMode": "Light Mode",
     "startProject": "Start a Project",

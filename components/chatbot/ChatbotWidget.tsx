@@ -7,16 +7,10 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
 import { useSiteConfig } from "@/lib/site-config";
-import { useSiteContent, ChatbotCommandItem, ChatbotCTAButton } from "@/lib/site-content";
+import { useSiteContent } from "@/lib/site-content";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  findMatchingService,
-  findCombinationIntent,
-  isGreeting,
-  isBuyingIntent,
-  servicesKnowledge,
-  ServiceKnowledge,
-} from "@/data/chatbot-knowledge";
+import { useLocale, useTranslations } from "next-intl";
+import { findIntent } from "@/data/chatbot-knowledge";
 
 interface ChatMessage {
   id: string;
@@ -28,6 +22,8 @@ interface ChatMessage {
 
 export function ChatbotWidget() {
   const pathname = usePathname();
+  const locale = useLocale();
+  const t = useTranslations("Chatbot");
   const { config } = useSiteConfig();
   const { content } = useSiteContent();
   const router = useRouter();
@@ -41,20 +37,15 @@ export function ChatbotWidget() {
 
   const [shouldShowLauncher, setShouldShowLauncher] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
-  const [lastMatchedService, setLastMatchedService] = React.useState<ServiceKnowledge | null>(null);
-  const [lastMatchedCommand, setLastMatchedCommand] = React.useState<ChatbotCommandItem | null>(null);
   const [messages, setMessages] = React.useState<ChatMessage[]>([
     {
       id: "welcome",
       sender: "bot",
-      text: chatbotKB?.defaultGreeting || "Hello! Welcome to Arav Innovations. How can we help you today?",
+      text: t("greeting"),
       options: [
-        { label: "Digital Marketing", action: "service_lookup", payload: "digital-marketing" },
-        { label: "Web & App Development", action: "service_lookup", payload: "web-app-development" },
-        { label: "Risk & Compliance", action: "service_lookup", payload: "risk-governance-compliance" },
-        { label: "What services do you offer?", action: "all_services" },
-        { label: "Where are your offices?", action: "locations" },
-        { label: "Start a project", action: "start_project" },
+        { label: locale === "hi" ? "सेवाएं देखें" : locale === "ar" ? "استكشف الخدمات" : "Explore Practices", action: "all_services" },
+        { label: locale === "hi" ? "प्रोजेक्ट शुरू करें" : locale === "ar" ? "بدء مشروع" : "Start a Project", action: "start_project" },
+        { label: locale === "hi" ? "कार्यालय स्थान" : locale === "ar" ? "الفروع والمكاتب" : "Office Locations", action: "locations" },
       ],
     },
   ]);
@@ -139,41 +130,7 @@ export function ChatbotWidget() {
     }
   };
 
-  const executeCTAAction = (type: string, value?: string) => {
-    if (type === "page" && value) {
-      router.push(value);
-    } else if (type === "contact") {
-      router.push(value || "/contact");
-    } else if (type === "whatsapp") {
-      window.open(value || content.footer?.whatsappUrl || "https://api.whatsapp.com/send?phone=919650625777", "_blank");
-    } else if (type === "email") {
-      window.location.href = value || `mailto:${content.footer?.supportEmail || "support@aravinnovations.com"}`;
-    }
-  };
-
   const handleOptionClick = (option: { label: string; action: string; payload?: string; route?: string; ctaType?: string }) => {
-    if (option.ctaType) {
-      if (option.ctaType === "project_form") {
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: `user-${Date.now()}`,
-            sender: "user",
-            text: option.label,
-          },
-          {
-            id: `bot-${Date.now()}`,
-            sender: "bot",
-            text: "Great! Please share your project requirements below:",
-            isLeadForm: true,
-          },
-        ]);
-        return;
-      }
-      executeCTAAction(option.ctaType, option.route || option.payload);
-      return;
-    }
-
     if (option.route) {
       router.push(option.route);
       return;
@@ -187,100 +144,62 @@ export function ChatbotWidget() {
 
     let botMsg: ChatMessage;
 
-    if (option.action === "service_lookup" && option.payload) {
-      const match = servicesKnowledge.find((s) => s.slug === option.payload);
-      if (match) {
-        const isEnabled = config.serviceStates[match.slug] !== false;
-        if (!isEnabled) {
-          botMsg = {
-            id: `bot-${Date.now()}`,
-            sender: "bot",
-            text: `${match.name} is currently under maintenance.\n\nOur team is working on it and it will be available again soon. Feel free to contact us for specific inquiries.`,
-            options: [
-              { label: "Start a Project", action: "start_project" },
-              { label: "Explore Other Services", action: "all_services" },
-            ],
-          };
-        } else {
-          botMsg = {
-            id: `bot-${Date.now()}`,
-            sender: "bot",
-            text: `**${match.name}**\n\n${match.description}`,
-            options: [
-              { label: `Explore ${match.name}`, action: "navigate", route: match.route },
-              { label: "Start a Project", action: "start_project" },
-              { label: "Contact Us", action: "talk_advisor" },
-            ],
-          };
-        }
-      } else {
-        botMsg = {
-          id: `bot-${Date.now()}`,
-          sender: "bot",
-          text: "Thank you for asking! How can our team help with your requirements?",
-          options: [{ label: "Start a Project", action: "start_project" }],
-        };
-      }
-    } else if (option.action === "all_services") {
+    if (option.action === "all_services") {
+      const text =
+        locale === "hi"
+          ? "अराव इनोवेशन 7 मुख्य सेवाएं प्रदान करता है:\n\n• आईटी रणनीति एवं कंसल्टिंग\n• वेब एवं ऐप इंजीनियरिंग\n• डिजिटल मार्केटिंग एवं SEO\n• जोखिम एवं DPDP अनुपालन\n• सिस्टम ऑडिट एवं परफॉरमेंस\n• समर्पित इंजीनियरिंग स्क्वॉड\n• एआई एवं ऑटोमेशन समाधान"
+          : locale === "ar"
+          ? "تقدم آراف إينوفيشينز 7 خدمات أساسية:\n\n• استراتيجية تكنولوجيا المعلومات\n• هندسة الويب والموبايل\n• التسويق الرقمي و SEO\n• الحوكمة والامتثال\n• تدقيق الأنظمة والأداء\n• الفرق الهندسية المخصصة\n• حلول الذكاء الاصطناعي"
+          : "Arav Innovations provides 7 core practices:\n\n• IT Strategy & Consulting\n• Web & App Development\n• Digital Marketing & SEO\n• Risk Governance & Compliance\n• Audit & FinOps Tuning\n• Dedicated Engineering Pods\n• AI & Automation Solutions";
+
       botMsg = {
         id: `bot-${Date.now()}`,
         sender: "bot",
-        text: "Arav Innovations provides 7 core practices:\n\n• IT Strategy & Consulting\n• Web & App Development\n• Digital Marketing (B2B)\n• Search Engine Optimization (SEO)\n• Risk Governance & Compliance\n• Audit & Improvement\n• Training & Staff Augmentation\n\nWhich area would you like to explore?",
+        text,
         options: [
-          { label: "Digital Marketing", action: "service_lookup", payload: "digital-marketing" },
-          { label: "Web & App Development", action: "service_lookup", payload: "web-app-development" },
-          { label: "IT Strategy", action: "service_lookup", payload: "it-strategy-consulting" },
-          { label: "SEO & Growth", action: "service_lookup", payload: "seo" },
-          { label: "Risk & Compliance", action: "service_lookup", payload: "risk-governance-compliance" },
-          { label: "View All Practices", action: "navigate", route: "/services" },
+          { label: locale === "hi" ? "वेब विकास" : locale === "ar" ? "هندسة الويب" : "Web & App Dev", action: "navigate", route: "/services/web-app-development" },
+          { label: locale === "hi" ? "आईटी रणनीति" : locale === "ar" ? "استراتيجية التقنية" : "IT Strategy", action: "navigate", route: "/services/it-strategy-consulting" },
+          { label: locale === "hi" ? "मार्केटिंग" : locale === "ar" ? "التسويق الرقمي" : "Digital Marketing", action: "navigate", route: "/services/digital-marketing" },
+          { label: locale === "hi" ? "सभी सेवाएं देखें" : locale === "ar" ? "جميع الخدمات" : "View All Practices", action: "navigate", route: "/services" },
         ],
       };
     } else if (option.action === "locations") {
+      const text =
+        locale === "hi"
+          ? "हमारे दो मुख्य कार्यालय हैं:\n\n• भारत मुख्यालय: सेक्टर 44, गुरुग्राम\n• यूएई कार्यालय: बुलेवार्ड प्लाजा, डाउनटाउन दुबई"
+          : locale === "ar"
+          ? "تمتلك آراف إينوفيشينز مركزين إقليميين:\n\n• المقر الرئيسي: قطاع 44، جورجاون (الهند)\n• المكتب الإقليمي: بوليفارد प्लाजा، دبي (الإمارات)"
+          : "We operate dual regional hubs:\n\n• India HQ: Sector 44, Gurgaon\n• UAE Office: Boulevard Plaza, Downtown Dubai";
+
       botMsg = {
         id: `bot-${Date.now()}`,
         sender: "bot",
-        text: `We operate dual regional headquarters:\n\n• **India HQ**: ${content.footer?.indiaPhone || "+91 9650625777"}\n• **UAE Regional Office**: ${content.footer?.uaePhone || "+971 521555792"}\n\nServing enterprise clients globally across India, UAE, US, EU, and Canada.`,
+        text,
         options: [
-          { label: "Contact Gurgaon Office", action: "start_project" },
-          { label: "Contact Dubai Office", action: "start_project" },
+          { label: locale === "hi" ? "संपर्क पेज" : locale === "ar" ? "صفحة التواصل" : "Contact Page", action: "navigate", route: "/contact" },
+          { label: locale === "hi" ? "प्रोजेक्ट शुरू करें" : locale === "ar" ? "بدء مشروع" : "Start a Project", action: "start_project" },
         ],
       };
-    } else if (option.action === "start_project" || option.action === "talk_advisor") {
+    } else if (option.action === "start_project") {
       botMsg = {
         id: `bot-${Date.now()}`,
         sender: "bot",
-        text: "Great! Let's get your project details so our senior advisory team can contact you within 24 hours.",
+        text: t("leadSubtitle"),
         isLeadForm: true,
       };
-      trackEvent({ type: "chatbot_lead", intent: option.action });
     } else {
       botMsg = {
         id: `bot-${Date.now()}`,
         sender: "bot",
-        text: "Hey there! 👋 How can I help you?",
+        text: t("greeting"),
         options: [
-          { label: "Digital Marketing", action: "service_lookup", payload: "digital-marketing" },
-          { label: "Web & App Development", action: "service_lookup", payload: "web-app-development" },
-          { label: "Start a Project", action: "start_project" },
+          { label: locale === "hi" ? "सेवाएं देखें" : locale === "ar" ? "استكشف الخدمات" : "Explore Practices", action: "all_services" },
+          { label: locale === "hi" ? "प्रोजेक्ट शुरू करें" : locale === "ar" ? "بدء مشروع" : "Start a Project", action: "start_project" },
         ],
       };
     }
 
     setMessages((prev) => [...prev, userMsg, botMsg]);
-  };
-
-  const findMatchingAdminCommand = (query: string): ChatbotCommandItem | null => {
-    const activeCmds = (chatbotKB?.commands || []).filter((c) => c.enabled !== false);
-    const qLower = query.toLowerCase();
-
-    const matches = activeCmds.filter((cmd) => {
-      const kwLower = cmd.keyword.toLowerCase();
-      if (qLower.includes(kwLower)) return true;
-      return (cmd.alternativeKeywords || []).some((alt) => qLower.includes(alt.toLowerCase()));
-    });
-
-    if (matches.length === 0) return null;
-    return matches.sort((a, b) => (b.priority || 0) - (a.priority || 0))[0];
   };
 
   const handleCustomSend = (e: React.FormEvent) => {
@@ -298,119 +217,35 @@ export function ChatbotWidget() {
 
     let botMsg: ChatMessage;
 
-    // Check configured Admin commands first
-    const matchedCmd = findMatchingAdminCommand(userText);
+    const matched = findIntent(userText, locale);
 
-    if (matchedCmd) {
-      setLastMatchedCommand(matchedCmd);
-      const opts = (matchedCmd.ctaButtons || []).map((btn) => ({
-        label: btn.label,
-        action: "command_cta",
-        payload: btn.value,
-        route: btn.value,
-        ctaType: btn.type,
-      }));
+    if (matched) {
+      const options = matched.intent.options
+        ? matched.intent.options[(locale === "hi" ? "hi" : locale === "ar" ? "ar" : "en") as "en" | "hi" | "ar"]
+        : undefined;
 
       botMsg = {
         id: `bot-${Date.now()}`,
         sender: "bot",
-        text: matchedCmd.response,
-        options: opts.length > 0 ? opts : undefined,
-      };
-    } else if (lastMatchedCommand && (userText.toLowerCase().includes("how can it help") || userText.toLowerCase().includes("tell me more") || userText.toLowerCase().includes("details") || userText.toLowerCase().includes("more"))) {
-      botMsg = {
-        id: `bot-${Date.now()}`,
-        sender: "bot",
-        text: lastMatchedCommand.followUpResponse || `Regarding **${lastMatchedCommand.keyword}**: We deliver end-to-end strategy, execution, and handover. Would you like to connect with an advisor?`,
-        options: [
-          { label: "Start a Project", action: "start_project" },
-          { label: "Contact Us", action: "talk_advisor" },
-        ],
-      };
-    } else if (isGreeting(userText)) {
-      botMsg = {
-        id: `bot-${Date.now()}`,
-        sender: "bot",
-        text: chatbotKB?.defaultGreeting || "Hey there! 👋 How can I help you today?",
-        options: [
-          { label: "Digital Marketing", action: "service_lookup", payload: "digital-marketing" },
-          { label: "Web Development", action: "service_lookup", payload: "web-app-development" },
-          { label: "Start a Project", action: "start_project" },
-        ],
+        text: matched.responseText,
+        options,
+        isLeadForm: matched.intent.triggerLeadForm,
       };
     } else {
-      const combo = findCombinationIntent(userText);
-      const matchedService = combo ? combo.service : findMatchingService(userText);
-
-      if (combo) {
-        setLastMatchedService(combo.service);
-        botMsg = {
-          id: `bot-${Date.now()}`,
-          sender: "bot",
-          text: `**${combo.service.name} for ${combo.industryOrContext}**\n\n${combo.response}`,
-          options: [
-            { label: `Explore ${combo.service.name}`, action: "navigate", route: combo.route },
-            { label: "Start a Project", action: "start_project" },
-            { label: "Contact Us", action: "talk_advisor" },
-          ],
-        };
-      } else if (matchedService) {
-        setLastMatchedService(matchedService);
-        const isEnabled = config.serviceStates[matchedService.slug] !== false;
-
-        if (!isEnabled) {
-          botMsg = {
-            id: `bot-${Date.now()}`,
-            sender: "bot",
-            text: `${matchedService.name} is currently under maintenance.\n\nOur team is working on it and it will be available again soon. Feel free to contact us for specific inquiries.`,
-            options: [
-              { label: "Start a Project", action: "start_project" },
-              { label: "Explore Other Services", action: "all_services" },
-            ],
-          };
-        } else {
-          botMsg = {
-            id: `bot-${Date.now()}`,
-            sender: "bot",
-            text: `**${matchedService.name}**\n\n${matchedService.description}`,
-            options: [
-              { label: `Explore ${matchedService.name}`, action: "navigate", route: matchedService.route },
-              { label: "Start a Project", action: "start_project" },
-              { label: "Contact Us", action: "talk_advisor" },
-            ],
-          };
-        }
-      } else if (isBuyingIntent(userText)) {
-        botMsg = {
-          id: `bot-${Date.now()}`,
-          sender: "bot",
-          text: "Absolutely! We'd be happy to discuss your requirements. Please share your project details below so our advisory team can contact you:",
-          isLeadForm: true,
-        };
-        trackEvent({ type: "chatbot_lead", intent: "high_intent_input" });
-      } else if (userText.toLowerCase().includes("office") || userText.toLowerCase().includes("location")) {
-        botMsg = {
-          id: `bot-${Date.now()}`,
-          sender: "bot",
-          text: `We operate dual regional delivery centers in Gurgaon (India HQ: ${content.footer?.indiaPhone}) and Dubai (UAE: ${content.footer?.uaePhone}), serving clients globally.`,
-          options: [
-            { label: "Start a Project", action: "start_project" },
-            { label: "Contact Us", action: "talk_advisor" },
-          ],
-        };
-      } else {
-        botMsg = {
-          id: `bot-${Date.now()}`,
-          sender: "bot",
-          text: chatbotKB?.fallbackResponse || "I'm here to help with Arav Innovations' services, projects, industries and contact options. Could you tell me what you're looking for?",
-          options: [
-            { label: "Digital Marketing", action: "service_lookup", payload: "digital-marketing" },
-            { label: "Web Development", action: "service_lookup", payload: "web-app-development" },
-            { label: "What services do you offer?", action: "all_services" },
-            { label: "Start a Project", action: "start_project" },
-          ],
-        };
-      }
+      botMsg = {
+        id: `bot-${Date.now()}`,
+        sender: "bot",
+        text:
+          locale === "hi"
+            ? "मैं अराव इनोवेशन की सेवाओं, तकनीकों, और परियोजनाओं से संबंधित प्रश्नों में मदद कर सकता हूँ। क्या आप अपनी आवश्यकता बताना चाहेंगे?"
+            : locale === "ar"
+            ? "أنا هنا لمساعدتك في استفسارات خدمات آراف إينوفيشينز ومشاريعها. هل ترغب في بدء مناقشة مشروعك؟"
+            : "I can help with questions about Arav Innovations' services, architecture, or scope. Would you like to discuss your project requirements?",
+        options: [
+          { label: locale === "hi" ? "सेवाएं देखें" : locale === "ar" ? "جميع الخدمات" : "Explore Practices", action: "all_services" },
+          { label: locale === "hi" ? "प्रोजेक्ट शुरू करें" : locale === "ar" ? "بدء مشروع" : "Start a Project", action: "start_project" },
+        ],
+      };
     }
 
     setMessages((prev) => [...prev, userMsg, botMsg]);
@@ -438,7 +273,7 @@ export function ChatbotWidget() {
         {
           id: `bot-${Date.now()}`,
           sender: "bot",
-          text: `Thank you, ${leadFormState.name}! We have received your inquiry. Our regional advisor will contact you at ${leadFormState.email} shortly.`,
+          text: t("leadSubmittedMsg"),
         },
       ]);
     } catch {
@@ -486,7 +321,10 @@ export function ChatbotWidget() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-4 sm:right-6 z-50 w-[92vw] sm:w-[380px] h-[520px] rounded-3xl bg-[#FFFDF9] dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200">
+        <div
+          dir={locale === "ar" ? "rtl" : "ltr"}
+          className="fixed bottom-6 right-4 sm:right-6 z-50 w-[92vw] sm:w-[380px] h-[520px] rounded-3xl bg-[#FFFDF9] dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200"
+        >
           {/* Header with Minimize Button */}
           <div className="bg-[#FBF3EA] dark:bg-[#1E1915] border-b border-[#EFE2D6] dark:border-[#2C241E] px-5 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -495,11 +333,11 @@ export function ChatbotWidget() {
               </div>
               <div>
                 <h4 className="text-sm font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-                  Arav Assistant
+                  {t("headerTitle")}
                 </h4>
                 <div className="flex items-center gap-1.5 text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">
                   <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                  <span>Online &bull; Operating Globally</span>
+                  <span>{t("onlineStatus")}</span>
                 </div>
               </div>
             </div>
@@ -565,11 +403,11 @@ export function ChatbotWidget() {
                     className="w-full mt-2 p-3.5 rounded-2xl bg-white dark:bg-[#1F1A16] border border-[#EFE2D6] dark:border-[#2C241E] space-y-2.5 shadow-xs"
                   >
                     <div className="text-[11px] font-bold text-[#3A2E27] dark:text-[#FAF5EE]">
-                      Quick Project Consultation Request
+                      {t("leadTitle")}
                     </div>
                     <input
                       type="text"
-                      placeholder="Your Name *"
+                      placeholder={`${t("nameLabel")} *`}
                       required
                       value={leadFormState.name}
                       onChange={(e) =>
@@ -579,7 +417,7 @@ export function ChatbotWidget() {
                     />
                     <input
                       type="email"
-                      placeholder="Work Email *"
+                      placeholder={`${t("emailLabel")} *`}
                       required
                       value={leadFormState.email}
                       onChange={(e) =>
@@ -589,7 +427,7 @@ export function ChatbotWidget() {
                     />
                     <input
                       type="tel"
-                      placeholder="Phone / WhatsApp *"
+                      placeholder={`${t("phoneLabel")} *`}
                       required
                       value={leadFormState.phone}
                       onChange={(e) =>
@@ -598,7 +436,7 @@ export function ChatbotWidget() {
                       className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FFFDF9] dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-1 focus:ring-[#E8672A]"
                     />
                     <textarea
-                      placeholder="Brief requirement..."
+                      placeholder={t("requirementLabel")}
                       rows={2}
                       value={leadFormState.requirement}
                       onChange={(e) =>
@@ -615,7 +453,7 @@ export function ChatbotWidget() {
                       size="sm"
                       className="w-full justify-center text-xs h-8"
                     >
-                      Connect with Advisor <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                      {t("submitLead")} <ArrowRight className="w-3.5 h-3.5 ml-1" />
                     </Button>
                   </form>
                 )}
@@ -631,7 +469,7 @@ export function ChatbotWidget() {
           >
             <input
               type="text"
-              placeholder="Ask anything about Arav..."
+              placeholder={t("inputPlaceholder")}
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               className="flex-1 text-xs px-3 py-2 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-white dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-1 focus:ring-[#E8672A]"
@@ -649,4 +487,3 @@ export function ChatbotWidget() {
     </>
   );
 }
-

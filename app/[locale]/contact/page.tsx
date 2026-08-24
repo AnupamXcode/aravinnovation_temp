@@ -6,6 +6,7 @@ import { TiltCard } from "@/components/motion/TiltCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { companyContactInfo } from "@/data/navigation";
 import { LocalBusinessSchema, BreadcrumbSchema } from "@/components/seo/StructuredData";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
   MapPin,
   Mail,
@@ -19,22 +20,17 @@ export const metadata = {
   alternates: {
     canonical: "https://aravinnovations.com/contact",
   },
-  openGraph: {
-    title: "Contact Us & Regional Offices | Arav Innovations",
-    description:
-      "Connect with our solutions architects globally for confidential discovery discussions and engagement scoping.",
-    url: "https://aravinnovations.com/contact",
-    siteName: "Arav Innovations",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Contact Us & Regional Offices | Arav Innovations",
-    description:
-      "Connect with our solutions architects globally for confidential discovery discussions and engagement scoping.",
-  },
 };
 
-export default function ContactPage() {
+export default async function ContactPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("ContactPage");
+
   return (
     <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
       <BreadcrumbSchema items={[{ name: "Contact Us", url: "/contact" }]} />
@@ -43,21 +39,21 @@ export default function ContactPage() {
         {/* Header */}
         <div className="max-w-3xl space-y-4">
           <ScrollReveal direction="up">
-            <Breadcrumb items={[{ label: "Contact Us" }]} />
+            <Breadcrumb items={[{ label: t("badge") }]} />
           </ScrollReveal>
           <ScrollReveal direction="up" delay={0.1}>
             <Badge variant="secondary" size="md">
-              Direct Consultation
+              {t("badge")}
             </Badge>
           </ScrollReveal>
           <ScrollReveal direction="up" delay={0.2}>
             <h1 className="text-4xl sm:text-5xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight">
-              Let’s Discuss Your Enterprise Technology & Growth Goals
+              {t("title")}
             </h1>
           </ScrollReveal>
           <ScrollReveal direction="up" delay={0.3}>
             <p className="text-lg text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
-              Global reach with active presence in India & UAE, plus operations across the US, EU, and Canada. Our practice leads and solutions architects are available for confidential discovery discussions, technical audits, and engagement scoping.
+              {t("description")}
             </p>
           </ScrollReveal>
         </div>

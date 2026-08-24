@@ -137,7 +137,7 @@
     "confidentiality": "Garantía de Estricta Confidencialidad. Operando a Nivel Global."
   },
   "Footer": {
-    "heading": "Nos encanta trabajar con marcas ambiciosas en todos los sectores",
+    "heading": "Nos 🤍 encanta trabajar con marcas ambiciosas en todos los sectores",
     "bookCall": "Reservar una llamada",
     "contactUs": "Contáctanos",
     "indiaHq": "Sede en India",
@@ -148,10 +148,64 @@
     "securityDpdp": "Seguridad y Protección de Datos",
     "rights": "Todos los derechos reservados."
   },
+  "ServicesPage": {
+    "badge": "Capacidades Globales",
+    "title": "Siete Prácticas Principales Diseñadas para Impacto Empresarial",
+    "description": "Arav Innovations ofrece capacidades integrales en estrategia tecnológica, ingeniería de software, marketing digital B2B y gobernanza de datos.",
+    "customEngagementTitle": "¿Necesita una Colaboración Personalizada?",
+    "customEngagementDesc": "Nuestras colaboraciones combinan asesoría estratégica, ejecución full-stack y talento dedicado. Hable con nuestros líderes.",
+    "discussScope": "Discutir su Alcance Empresarial"
+  },
+  "CaseStudiesPage": {
+    "badge": "Casos de Estudio Empresariales",
+    "title": "Historias de Éxito Arquitectónico y ROI Probado",
+    "description": "Descubra cómo Arav Innovations resuelve cuellos de botella críticos y despliega plataformas escalables a nivel global.",
+    "filterAll": "Todos los Casos de Estudio"
+  },
+  "BlogPage": {
+    "badge": "Análisis y Arquitectura",
+    "title": "Liderazgo de Opinión en Ingeniería y Estrategia Tecnológica",
+    "description": "Investigaciones detalladas, desgloses arquitectónicos y guías de cumplimiento para líderes tecnológicos.",
+    "readArticle": "Leer Artículo Completo",
+    "keyTakeaways": "Puntos Clave para Ejecutivos"
+  },
+  "ContactPage": {
+    "badge": "Asesoría Global y Contacto",
+    "title": "Desarrollemos Sus Capacidades Tecnológicas Empresariales",
+    "description": "Póngase en contacto con nuestros directores senior en Gurgaon (India) o Dubái (Emiratos Árabes). Respuesta en 1 día hábil.",
+    "indiaAddress": "Plot 44, Sector 44, Gurgaon, Haryana 122003, India",
+    "uaeAddress": "Nivel 14, Boulevard Plaza Tower 1, Downtown Dubái, Emiratos Árabes Unidos",
+    "phoneLabel": "Soporte Telefónico",
+    "emailLabel": "Soporte por Correo"
+  },
+  "LegalPages": {
+    "tableOfContents": "Tabla de Contenidos",
+    "effectiveDate": "Fecha de Entrada en Vigor: 27 de Diciembre de 2024",
+    "privacyTitle": "Política de Privacidad",
+    "termsTitle": "Términos y Condiciones",
+    "refundTitle": "Política de Reembolso",
+    "securityTitle": "Seguridad y Cumplimiento DPDP"
+  },
+  "Chatbot": {
+    "headerTitle": "Asistente Estratégico e IA Arav",
+    "onlineStatus": "En línea • Soporte Estratégico 24/7",
+    "greeting": "¡Hola! Bienvenido a Arav Innovations. ¿Cómo podemos ayudarle hoy con sus objetivos tecnológicos?",
+    "inputPlaceholder": "Escriba su consulta o meta de proyecto...",
+    "leadTitle": "Iniciar Discusión de Proyecto",
+    "leadSubtitle": "Comparta sus datos para que un director revise su alcance.",
+    "nameLabel": "Nombre Completo",
+    "emailLabel": "Correo de Trabajo",
+    "phoneLabel": "Número Telefónico",
+    "requirementLabel": "Resumen del Proyecto",
+    "submitLead": "Enviar y Solicitar Llamada",
+    "leadSubmittedTitle": "¡Gracias!",
+    "leadSubmittedMsg": "Hemos recibido sus requisitos. Nuestro equipo se pondrá en contacto pronto."
+  },
   "Common": {
     "language": "Idioma",
     "en": "EN",
     "hi": "हिं",
+    "ar": "عرب",
     "darkMode": "Modo Oscuro",
     "lightMode": "Modo Claro",
     "startProject": "Iniciar un Proyecto",

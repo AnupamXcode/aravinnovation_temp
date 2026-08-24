@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Inter } from "next/font/google";
+import { Plus_Jakarta_Sans, Inter, Noto_Sans_Arabic } from "next/font/google";
 import "../globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { SiteConfigProvider } from "@/lib/site-config";
@@ -25,6 +25,13 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 const inter = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+
+const notoSansArabic = Noto_Sans_Arabic({
+  variable: "--font-arabic",
+  subsets: ["arabic"],
   display: "swap",
   weight: ["400", "500", "600", "700"],
 });
@@ -62,6 +69,11 @@ export const metadata: Metadata = {
   creator: "Arav Innovations",
   alternates: {
     canonical: "https://aravinnovations.com",
+    languages: {
+      en: "https://aravinnovations.com",
+      hi: "https://aravinnovations.com/hi",
+      ar: "https://aravinnovations.com/ar",
+    },
   },
   openGraph: {
     type: "website",
@@ -123,7 +135,7 @@ export default async function RootLayout({
       lang={locale}
       dir={locale === "ar" ? "rtl" : "ltr"}
       suppressHydrationWarning
-      className={`${plusJakartaSans.variable} ${inter.variable} scroll-smooth`}
+      className={`${plusJakartaSans.variable} ${inter.variable} ${notoSansArabic.variable} scroll-smooth`}
     >
       <head>
         <OrganizationSchema />

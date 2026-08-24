@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { servicesData, Service } from "@/data/services";
+import { Service } from "@/data/services";
+import { getLocalizedServices } from "@/data/locale-data";
 import {
   Compass,
   Code2,
@@ -16,7 +17,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 const iconMap: Record<string, React.ReactNode> = {
   Compass: <Compass className="w-6 h-6" />,
@@ -40,6 +41,8 @@ const shortLabels = [
 
 export function InteractiveServiceSelector() {
   const t = useTranslations("Services");
+  const locale = useLocale();
+  const servicesData = getLocalizedServices(locale);
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
   const selectedService: Service = servicesData[selectedIndex] || servicesData[0];
 

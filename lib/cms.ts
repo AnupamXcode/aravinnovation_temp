@@ -17,6 +17,13 @@ import { productsData, getProductBySlug as getProductFromData, getAllProductSlug
 import { blogPostsData, getBlogPostBySlug as getBlogPostFromData, getAllBlogPostSlugs as getBlogSlugsFromData, getBlogCategories as getCategoriesFromData, BlogPost } from "@/data/insights";
 import { testimonialsData, Testimonial } from "@/data/testimonials";
 import { industriesData, IndustrySolution } from "@/data/industries";
+import {
+  getLocalizedServices,
+  getLocalizedCaseStudies,
+  getLocalizedBlogPosts,
+  getLocalizedTestimonials,
+  getLocalizedIndustries,
+} from "@/data/locale-data";
 
 // Re-export core types so consumers import from @/lib/cms
 export type { Service, CaseStudy, Product, BlogPost, Testimonial, IndustrySolution };
@@ -41,12 +48,13 @@ export function getCMSConfig(): CMSConfig {
    SERVICES
    ========================================================================= */
 
-export async function getServices(): Promise<Service[]> {
-  return servicesData;
+export async function getServices(locale = "en"): Promise<Service[]> {
+  return getLocalizedServices(locale);
 }
 
-export async function getServiceBySlug(slug: string): Promise<Service | undefined> {
-  return getServiceFromData(slug);
+export async function getServiceBySlug(slug: string, locale = "en"): Promise<Service | undefined> {
+  const services = getLocalizedServices(locale);
+  return services.find((s) => s.slug === slug);
 }
 
 export async function getAllServiceSlugs(): Promise<string[]> {
@@ -57,20 +65,22 @@ export async function getAllServiceSlugs(): Promise<string[]> {
    CASE STUDIES
    ========================================================================= */
 
-export async function getCaseStudies(): Promise<CaseStudy[]> {
-  return caseStudiesData;
+export async function getCaseStudies(locale = "en"): Promise<CaseStudy[]> {
+  return getLocalizedCaseStudies(locale);
 }
 
-export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy | undefined> {
-  return getCaseStudyFromData(slug);
+export async function getCaseStudyBySlug(slug: string, locale = "en"): Promise<CaseStudy | undefined> {
+  const caseStudies = getLocalizedCaseStudies(locale);
+  return caseStudies.find((c) => c.slug === slug);
 }
 
 export async function getAllCaseStudySlugs(): Promise<string[]> {
   return caseStudiesData.map((c) => c.slug);
 }
 
-export async function getCaseStudiesByService(serviceSlug: string): Promise<CaseStudy[]> {
-  return caseStudiesData.filter((c) => c.serviceSlug === serviceSlug);
+export async function getCaseStudiesByService(serviceSlug: string, locale = "en"): Promise<CaseStudy[]> {
+  const caseStudies = getLocalizedCaseStudies(locale);
+  return caseStudies.filter((c) => c.serviceSlug === serviceSlug);
 }
 
 /* =========================================================================
@@ -93,12 +103,13 @@ export async function getAllProductSlugs(): Promise<string[]> {
    BLOG / INSIGHTS
    ========================================================================= */
 
-export async function getBlogPosts(): Promise<BlogPost[]> {
-  return blogPostsData;
+export async function getBlogPosts(locale = "en"): Promise<BlogPost[]> {
+  return getLocalizedBlogPosts(locale);
 }
 
-export async function getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
-  return getBlogPostFromData(slug);
+export async function getBlogPostBySlug(slug: string, locale = "en"): Promise<BlogPost | undefined> {
+  const posts = getLocalizedBlogPosts(locale);
+  return posts.find((p) => p.slug === slug);
 }
 
 export async function getAllBlogPostSlugs(): Promise<string[]> {
@@ -109,15 +120,17 @@ export async function getBlogCategories(): Promise<string[]> {
   return getCategoriesFromData();
 }
 
-export async function getFeaturedBlogPost(): Promise<BlogPost> {
-  return blogPostsData[0];
+export async function getFeaturedBlogPost(locale = "en"): Promise<BlogPost> {
+  const posts = getLocalizedBlogPosts(locale);
+  return posts[0];
 }
 
-export async function getRelatedBlogPosts(currentSlug: string, limit = 3): Promise<BlogPost[]> {
-  const current = getBlogPostFromData(currentSlug);
-  if (!current) return blogPostsData.slice(0, limit);
+export async function getRelatedBlogPosts(currentSlug: string, locale = "en", limit = 3): Promise<BlogPost[]> {
+  const posts = getLocalizedBlogPosts(locale);
+  const current = posts.find((p) => p.slug === currentSlug);
+  if (!current) return posts.slice(0, limit);
 
-  return blogPostsData
+  return posts
     .filter((post) => post.slug !== currentSlug)
     .sort((a, b) => {
       if (a.category === current.category && b.category !== current.category) return -1;
@@ -131,12 +144,13 @@ export async function getRelatedBlogPosts(currentSlug: string, limit = 3): Promi
    TESTIMONIALS & CLIENT PROOF
    ========================================================================= */
 
-export async function getTestimonials(): Promise<Testimonial[]> {
-  return testimonialsData;
+export async function getTestimonials(locale = "en"): Promise<Testimonial[]> {
+  return getLocalizedTestimonials(locale);
 }
 
-export async function getTestimonialsByService(serviceName: string): Promise<Testimonial[]> {
-  return testimonialsData.filter(
+export async function getTestimonialsByService(serviceName: string, locale = "en"): Promise<Testimonial[]> {
+  const testimonials = getLocalizedTestimonials(locale);
+  return testimonials.filter(
     (t) => t.service.toLowerCase().includes(serviceName.toLowerCase())
   );
 }
@@ -145,10 +159,11 @@ export async function getTestimonialsByService(serviceName: string): Promise<Tes
    INDUSTRIES
    ========================================================================= */
 
-export async function getIndustries(): Promise<IndustrySolution[]> {
-  return industriesData;
+export async function getIndustries(locale = "en"): Promise<IndustrySolution[]> {
+  return getLocalizedIndustries(locale);
 }
 
-export async function getIndustryBySlug(slug: string): Promise<IndustrySolution | undefined> {
-  return industriesData.find((ind) => ind.slug === slug);
+export async function getIndustryBySlug(slug: string, locale = "en"): Promise<IndustrySolution | undefined> {
+  const industries = getLocalizedIndustries(locale);
+  return industries.find((ind) => ind.slug === slug);
 }

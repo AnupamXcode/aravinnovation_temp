@@ -84,7 +84,7 @@ export default async function InsightPostDetailPage({
     notFound();
   }
 
-  const relatedPosts = await getRelatedBlogPosts(slug, 2);
+  const relatedPosts = await getRelatedBlogPosts(slug, locale, 2);
   const canonicalUrl = `https://aravinnovations.com/insights/${post.slug}`;
 
   return (
