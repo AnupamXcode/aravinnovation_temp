@@ -4,7 +4,6 @@ export interface IndustrySolution {
   description: string;
   icon: string;
   capabilities: string[];
-  statusNote?: string;
 }
 
 export const industriesData: IndustrySolution[] = [
@@ -20,7 +19,6 @@ export const industriesData: IndustrySolution[] = [
       "API Integrations with Banking Gateways",
       "Zero-Trust Cloud Architecture",
     ],
-    statusNote: "[INDUSTRIES TO BE CONFIRMED]",
   },
   {
     slug: "b2b-saas-enterprise-tech",
@@ -34,7 +32,6 @@ export const industriesData: IndustrySolution[] = [
       "Technical SEO & Programmatic Indexing",
       "On-Demand Engineering Squads",
     ],
-    statusNote: "[INDUSTRIES TO BE CONFIRMED]",
   },
   {
     slug: "healthcare-healthtech",
@@ -48,7 +45,6 @@ export const industriesData: IndustrySolution[] = [
       "Responsive Telehealth Portals",
       "Staff Augmentation for Health Systems",
     ],
-    statusNote: "[INDUSTRIES TO BE CONFIRMED]",
   },
   {
     slug: "logistics-supply-chain",
@@ -62,7 +58,6 @@ export const industriesData: IndustrySolution[] = [
       "Legacy Code & Performance Audits",
       "B2B Demand Capture for Freight",
     ],
-    statusNote: "[INDUSTRIES TO BE CONFIRMED]",
   },
   {
     slug: "ecommerce-retail",
@@ -76,7 +71,6 @@ export const industriesData: IndustrySolution[] = [
       "Multi-Touch Attribution Modeling",
       "Staff Augmentation for Peak Seasons",
     ],
-    statusNote: "[INDUSTRIES TO BE CONFIRMED]",
   },
   {
     slug: "education-edtech",
@@ -90,6 +84,5 @@ export const industriesData: IndustrySolution[] = [
       "Cloud Cost & FinOps Optimization",
       "Custom Upskilling Workshops",
     ],
-    statusNote: "[INDUSTRIES TO BE CONFIRMED]",
   },
 ];

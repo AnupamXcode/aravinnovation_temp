@@ -153,7 +153,7 @@ export default function AdminDashboardPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen w-full bg-[#FAF5EE] dark:bg-[#0E0C0A] flex items-center justify-center">
+      <div className="min-h-screen w-full bg-[#FAF5EE] dark:bg-[#161310] flex items-center justify-center">
         <div className="text-center space-y-3">
           <div className="w-10 h-10 border-4 border-[#E8672A] border-t-transparent rounded-full animate-spin mx-auto" />
           <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
@@ -199,7 +199,7 @@ export default function AdminDashboardPage() {
   const searchMatches = filteredTabItems();
 
   return (
-    <div className="min-h-screen bg-[#FAF5EE] dark:bg-[#0E0C0A] text-[#3A2E27] dark:text-[#FAF5EE] flex flex-col lg:flex-row transition-colors duration-300">
+    <div className="min-h-screen bg-[#FAF5EE] dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] flex flex-col lg:flex-row transition-colors duration-300">
       {/* Toast Notification Banner */}
       {toastMessage && (
         <div className="fixed top-6 right-6 z-50 px-5 py-3 rounded-2xl bg-[#E8672A] text-white text-xs font-semibold shadow-2xl animate-in fade-in slide-in-from-top-4 flex items-center gap-2">
@@ -663,8 +663,8 @@ export default function AdminDashboardPage() {
                 >
                   <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
                     <h3 className="text-sm font-bold font-display text-[#E8672A]">{ind.name}</h3>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#FCE3D3]">
-                      {ind.statusNote || "[CONFIRMED]"}
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#FCE3D3] text-[#3A2E27] font-semibold">
+                      Enterprise Practice
                     </span>
                   </div>
 

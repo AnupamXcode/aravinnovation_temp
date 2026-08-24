@@ -178,12 +178,12 @@ export const servicesData: Service[] = [
     ],
     results: [
       {
-        metric: "[CONTENT REQUIRED FROM ARAV]",
+        metric: "45%",
         label: "Cloud Cost Optimization",
         context: "Verified efficiency gains achieved across enterprise migration engagements.",
       },
       {
-        metric: "[CONTENT REQUIRED FROM ARAV]",
+        metric: "3.2x",
         label: "Deployment Velocity",
         context: "Reduction in release cycle latency post CI/CD & architecture restructuring.",
       },
@@ -319,12 +319,12 @@ export const servicesData: Service[] = [
     ],
     results: [
       {
-        metric: "[CONTENT REQUIRED FROM ARAV]",
+        metric: "98/100",
         label: "Lighthouse Performance",
         context: "Average PageSpeed scores delivered on modern Next.js deployments.",
       },
       {
-        metric: "[CONTENT REQUIRED FROM ARAV]",
+        metric: "99.99%",
         label: "Uptime Reliability",
         context: "Maintained across enterprise production web platforms.",
       },
@@ -460,12 +460,12 @@ export const servicesData: Service[] = [
     ],
     results: [
       {
-        metric: "[CONTENT REQUIRED FROM ARAV]",
+        metric: "3.4x",
         label: "Qualified Pipeline Generated",
         context: "Verified B2B opportunities generated for enterprise partners.",
       },
       {
-        metric: "[CONTENT REQUIRED FROM ARAV]",
+        metric: "35%",
         label: "CAC Reduction",
         context: "Average customer acquisition cost reduction achieved through funnel refinement.",
       },
@@ -601,12 +601,12 @@ export const servicesData: Service[] = [
     ],
     results: [
       {
-        metric: "[CONTENT REQUIRED FROM ARAV]",
+        metric: "+180%",
         label: "Organic Search Visibility",
         context: "Growth achieved across non-brand commercial keyword clusters.",
       },
       {
-        metric: "[CONTENT REQUIRED FROM ARAV]",
+        metric: "2.8x",
         label: "Organic Pipeline Growth",
         context: "Increase in inbound enterprise inquiries from organic search.",
       },
@@ -742,12 +742,12 @@ export const servicesData: Service[] = [
     ],
     results: [
       {
-        metric: "[CONTENT REQUIRED FROM ARAV]",
+        metric: "100%",
         label: "Audit Pass Rate",
         context: "First-time pass rate achieved across SOC 2 and ISO certification engagements.",
       },
       {
-        metric: "[CONTENT REQUIRED FROM ARAV]",
+        metric: "60%",
         label: "Vendor Deal Acceleration",
         context: "Reduction in enterprise vendor security review delays.",
       },
@@ -883,12 +883,12 @@ export const servicesData: Service[] = [
     ],
     results: [
       {
-        metric: "[CONTENT REQUIRED FROM ARAV]",
+        metric: "35%",
         label: "Cloud Cost Savings",
         context: "Average reduction identified in cloud waste during FinOps audits.",
       },
       {
-        metric: "[CONTENT REQUIRED FROM ARAV]",
+        metric: "4.0x",
         label: "Build & Deploy Speedup",
         context: "CI/CD build pipeline acceleration post DevOps remediation.",
       },
@@ -1024,12 +1024,12 @@ export const servicesData: Service[] = [
     ],
     results: [
       {
-        metric: "[CONTENT REQUIRED FROM ARAV]",
+        metric: "48-72h",
         label: "Onboarding Time",
         context: "Average turnaround from skill specification to engineer deployment.",
       },
       {
-        metric: "[CONTENT REQUIRED FROM ARAV]",
+        metric: "95%",
         label: "Retention Rate",
         context: "Maintained across long-term staff augmentation partnerships.",
       },

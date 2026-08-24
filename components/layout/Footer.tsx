@@ -67,10 +67,10 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-gradient-to-br from-[#FFA270] via-[#F87B42] to-[#E8672A] text-white pt-16 pb-8 transition-colors duration-300 relative overflow-hidden">
+    <footer className="bg-gradient-to-br from-[#FFA270] via-[#F87B42] to-[#E8672A] dark:from-[#2A1E16] dark:via-[#221811] dark:to-[#16120E] dark:border-t dark:border-[#3D2D23] text-white pt-16 pb-8 transition-colors duration-300 relative overflow-hidden">
       {/* Background ambient radial highlights */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-3xl -z-0 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#3A2E27]/12 rounded-full blur-3xl -z-0 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-white/10 dark:bg-[#E8672A]/10 rounded-full blur-3xl -z-0 pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#3A2E27]/12 dark:bg-[#E8672A]/5 rounded-full blur-3xl -z-0 pointer-events-none" />
 
       <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10 space-y-12">
         {/* Main Grid: Left Closing Statement + Right Information Columns */}

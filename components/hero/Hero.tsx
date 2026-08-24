@@ -34,13 +34,16 @@ export function Hero() {
           {/* Left Column: Messaging & CTAs */}
           <div className="lg:col-span-7 space-y-7 text-center lg:text-left">
             <ScrollReveal direction="up" delay={0.05}>
-              {/* Eyebrow Pill Badge */}
-              <div className="inline-flex items-center gap-2">
+              {/* Eyebrow Pill Badge & Problem Tension Statement */}
+              <div className="flex flex-col items-center lg:items-start gap-2.5">
                 <div className="px-4 py-1.5 rounded-full bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-2 shadow-xs">
                   <span className="w-2 h-2 rounded-full bg-[#E8672A] animate-pulse" />
                   <span className="font-mono text-[11px] uppercase tracking-widest text-[#E8672A]">
                     {hero.eyebrow}
                   </span>
+                </div>
+                <div className="text-[11px] font-mono font-bold text-[#E8672A] bg-[#FCE3D3]/60 dark:bg-[#261F1A] px-3.5 py-1 rounded-lg border border-[#F4A97F]/30">
+                  Problem Solved: Disconnected IT strategy &amp; fragmented engineering squads
                 </div>
               </div>
             </ScrollReveal>

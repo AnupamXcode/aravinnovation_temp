@@ -71,8 +71,8 @@ export default function SolutionsPage() {
                       <div className="p-3 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] text-[#E8672A] border border-[#F4A97F]/30 dark:border-[#3D332B] group-hover:bg-[#E8672A] group-hover:text-white transition-all duration-300 shadow-xs [&>svg]:text-[#E8672A] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
                         <Building2 className="w-5 h-5 transition-colors duration-300" />
                       </div>
-                      <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-[#FBF3EA] dark:bg-[#1E1915] text-[#3A2E27] dark:text-[#FAF5EE] font-semibold border border-[#EFE2D6] dark:border-[#2C241E]">
-                        {ind.statusNote || "[CONFIRMED]"}
+                      <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-[#FBF3EA] dark:bg-[#1E1915] text-[#E8672A] font-semibold border border-[#EFE2D6] dark:border-[#2C241E]">
+                        Enterprise Sector
                       </span>
                     </div>
 

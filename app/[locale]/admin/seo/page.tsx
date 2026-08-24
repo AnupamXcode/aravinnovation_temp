@@ -24,7 +24,7 @@ export default function AdminSEOPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen w-full bg-[#FAF5EE] dark:bg-[#0E0C0A] flex items-center justify-center">
+      <div className="min-h-screen w-full bg-[#FAF5EE] dark:bg-[#161310] flex items-center justify-center">
         <div className="text-center space-y-3">
           <div className="w-10 h-10 border-4 border-[#E8672A] border-t-transparent rounded-full animate-spin mx-auto" />
           <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
@@ -48,7 +48,7 @@ export default function AdminSEOPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF5EE] dark:bg-[#0E0C0A] text-[#3A2E27] dark:text-[#FAF5EE] flex flex-col lg:flex-row transition-colors duration-300">
+    <div className="min-h-screen bg-[#FAF5EE] dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] flex flex-col lg:flex-row transition-colors duration-300">
       {/* Left Navigation Sidebar */}
       <AdminSidebar
         activeTab={activeTab}
