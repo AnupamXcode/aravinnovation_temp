@@ -50,6 +50,7 @@ import {
   Palette,
   Power,
   ShieldAlert,
+  AlertTriangle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -105,6 +106,7 @@ export default function AdminDashboardPage() {
   const [activeTab, setActiveTab] = React.useState("dashboard");
   const [searchQuery, setSearchQuery] = React.useState("");
   const [toastMessage, setToastMessage] = React.useState<string | null>(null);
+  const [showPowerConfirm, setShowPowerConfirm] = React.useState(false);
 
   // Local form states
   const [heroForm, setHeroForm] = React.useState(content.hero);
@@ -334,26 +336,61 @@ export default function AdminDashboardPage() {
                   </p>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => {
-                    const nextState = config.websiteEnabled === false;
-                    toggleWebsitePower();
-                    showToast(nextState ? "⚡ WEBSITE RESTORED BACK ONLINE!" : "🛑 MASTER SHUTDOWN ACTIVE - WEBSITE STOPPED!");
-                  }}
-                  className={`px-6 py-4 rounded-2xl font-black text-sm shadow-2xl transition-all transform hover:scale-[1.02] active:scale-95 flex items-center gap-3 cursor-pointer shrink-0 border ${
-                    config.websiteEnabled !== false
-                      ? "bg-red-600 hover:bg-red-700 text-white border-red-500 shadow-red-600/30"
-                      : "bg-emerald-500 hover:bg-emerald-600 text-white border-emerald-400 shadow-emerald-500/40 animate-bounce"
-                  }`}
-                >
-                  <Power className="w-5 h-5" />
-                  <span>
-                    {config.websiteEnabled !== false
-                      ? "STOP ENTIRE WEBSITE AT ONCE"
-                      : "START WEBSITE & GO LIVE"}
-                  </span>
-                </button>
+                {showPowerConfirm ? (
+                  <div className="p-4 rounded-2xl bg-white dark:bg-[#1E1915] border-2 border-amber-500 shadow-2xl space-y-3 shrink-0 max-w-sm animate-in fade-in">
+                    <div className="flex items-center gap-2 text-xs font-extrabold text-amber-600 dark:text-amber-400">
+                      <AlertTriangle className="w-4 h-4 shrink-0" />
+                      <span>CONFIRMATION REQUIRED</span>
+                    </div>
+                    <p className="text-xs text-[#3A2E27] dark:text-[#FAF5EE] font-semibold leading-snug">
+                      {config.websiteEnabled !== false
+                        ? "Are you sure you want to DISABLE the entire website for public visitors?"
+                        : "Are you sure you want to ENABLE and publish the website live?"}
+                    </p>
+                    <div className="flex items-center gap-2 pt-1 justify-end">
+                      <button
+                        type="button"
+                        onClick={() => setShowPowerConfirm(false)}
+                        className="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#EFE2D6] cursor-pointer"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const nextState = config.websiteEnabled === false;
+                          toggleWebsitePower();
+                          setShowPowerConfirm(false);
+                          showToast(nextState ? "⚡ WEBSITE RESTORED BACK ONLINE!" : "🛑 MASTER SHUTDOWN ACTIVE - WEBSITE STOPPED!");
+                        }}
+                        className={`px-4 py-2 rounded-xl text-xs font-extrabold text-white shadow-lg cursor-pointer ${
+                          config.websiteEnabled !== false
+                            ? "bg-red-600 hover:bg-red-700 shadow-red-600/30"
+                            : "bg-emerald-600 hover:bg-emerald-700 shadow-emerald-600/30"
+                        }`}
+                      >
+                        {config.websiteEnabled !== false ? "Yes, Disable Website" : "Yes, Enable Website"}
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setShowPowerConfirm(true)}
+                    className={`px-6 py-4 rounded-2xl font-black text-sm shadow-2xl transition-all transform hover:scale-[1.02] active:scale-95 flex items-center gap-3 cursor-pointer shrink-0 border ${
+                      config.websiteEnabled !== false
+                        ? "bg-red-600 hover:bg-red-700 text-white border-red-500 shadow-red-600/30"
+                        : "bg-emerald-500 hover:bg-emerald-600 text-white border-emerald-400 shadow-emerald-500/40 animate-bounce"
+                    }`}
+                  >
+                    <Power className="w-5 h-5" />
+                    <span>
+                      {config.websiteEnabled !== false
+                        ? "STOP ENTIRE WEBSITE AT ONCE"
+                        : "START WEBSITE & GO LIVE"}
+                    </span>
+                  </button>
+                )}
               </div>
             </div>
 
@@ -1617,26 +1654,61 @@ export default function AdminDashboardPage() {
                   </p>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => {
-                    const nextState = config.websiteEnabled === false;
-                    toggleWebsitePower();
-                    showToast(nextState ? "⚡ WEBSITE RESTORED BACK ONLINE!" : "🛑 MASTER SHUTDOWN ACTIVE - WEBSITE STOPPED!");
-                  }}
-                  className={`px-6 py-4 rounded-2xl font-black text-sm shadow-2xl transition-all transform hover:scale-[1.02] active:scale-95 flex items-center gap-3 cursor-pointer shrink-0 border ${
-                    config.websiteEnabled !== false
-                      ? "bg-red-600 hover:bg-red-700 text-white border-red-500 shadow-red-600/30"
-                      : "bg-emerald-500 hover:bg-emerald-600 text-white border-emerald-400 shadow-emerald-500/40 animate-bounce"
-                  }`}
-                >
-                  <Power className="w-5 h-5" />
-                  <span>
-                    {config.websiteEnabled !== false
-                      ? "STOP ENTIRE WEBSITE AT ONCE"
-                      : "START WEBSITE & GO LIVE"}
-                  </span>
-                </button>
+                {showPowerConfirm ? (
+                  <div className="p-4 rounded-2xl bg-white dark:bg-[#1E1915] border-2 border-amber-500 shadow-2xl space-y-3 shrink-0 max-w-sm animate-in fade-in">
+                    <div className="flex items-center gap-2 text-xs font-extrabold text-amber-600 dark:text-amber-400">
+                      <AlertTriangle className="w-4 h-4 shrink-0" />
+                      <span>CONFIRMATION REQUIRED</span>
+                    </div>
+                    <p className="text-xs text-[#3A2E27] dark:text-[#FAF5EE] font-semibold leading-snug">
+                      {config.websiteEnabled !== false
+                        ? "Are you sure you want to DISABLE the entire website for public visitors?"
+                        : "Are you sure you want to ENABLE and publish the website live?"}
+                    </p>
+                    <div className="flex items-center gap-2 pt-1 justify-end">
+                      <button
+                        type="button"
+                        onClick={() => setShowPowerConfirm(false)}
+                        className="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#EFE2D6] cursor-pointer"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const nextState = config.websiteEnabled === false;
+                          toggleWebsitePower();
+                          setShowPowerConfirm(false);
+                          showToast(nextState ? "⚡ WEBSITE RESTORED BACK ONLINE!" : "🛑 MASTER SHUTDOWN ACTIVE - WEBSITE STOPPED!");
+                        }}
+                        className={`px-4 py-2 rounded-xl text-xs font-extrabold text-white shadow-lg cursor-pointer ${
+                          config.websiteEnabled !== false
+                            ? "bg-red-600 hover:bg-red-700 shadow-red-600/30"
+                            : "bg-emerald-600 hover:bg-emerald-700 shadow-emerald-600/30"
+                        }`}
+                      >
+                        {config.websiteEnabled !== false ? "Yes, Disable Website" : "Yes, Enable Website"}
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setShowPowerConfirm(true)}
+                    className={`px-6 py-4 rounded-2xl font-black text-sm shadow-2xl transition-all transform hover:scale-[1.02] active:scale-95 flex items-center gap-3 cursor-pointer shrink-0 border ${
+                      config.websiteEnabled !== false
+                        ? "bg-red-600 hover:bg-red-700 text-white border-red-500 shadow-red-600/30"
+                        : "bg-emerald-500 hover:bg-emerald-600 text-white border-emerald-400 shadow-emerald-500/40 animate-bounce"
+                    }`}
+                  >
+                    <Power className="w-5 h-5" />
+                    <span>
+                      {config.websiteEnabled !== false
+                        ? "STOP ENTIRE WEBSITE AT ONCE"
+                        : "START WEBSITE & GO LIVE"}
+                    </span>
+                  </button>
+                )}
               </div>
             </div>
 
