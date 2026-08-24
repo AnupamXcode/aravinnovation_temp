@@ -30,17 +30,12 @@ export function Hero() {
           {/* Left Column: Messaging & CTAs */}
           <div className="lg:col-span-7 space-y-7 text-center lg:text-left">
             <ScrollReveal direction="up" delay={0.05}>
-              {/* Eyebrow Pill Badge & Problem Tension Statement */}
-              <div className="flex flex-col items-center lg:items-start gap-2.5">
-                <div className="px-4 py-1.5 rounded-full bg-[#f7d7b0]/40 dark:bg-[#1e2c27] border border-[#f7d7b0] dark:border-[#253630] text-xs font-semibold text-[#1b2823] dark:text-[#ffffff] flex items-center gap-2 shadow-xs">
-                  <span className="w-2 h-2 rounded-full bg-[#f15e1c] animate-pulse" />
-                  <span className="font-mono text-[11px] uppercase tracking-widest text-[#f15e1c]">
-                    ENTERPRISE TECHNOLOGY &bull; STRATEGY &bull; DIGITAL GROWTH
-                  </span>
-                </div>
-                <div className="text-[11px] font-mono font-bold text-[#f15e1c] bg-[#f7d7b0]/50 dark:bg-[#253630] px-3.5 py-1 rounded-lg border border-[#f7d7b0] dark:border-[#253630]">
-                  Problem Solved: Disconnected IT strategy &amp; fragmented engineering squads
-                </div>
+              {/* Single Eyebrow Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f7d7b0]/40 dark:bg-[#1e2c27] border border-[#f7d7b0] dark:border-[#253630] text-xs font-semibold shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-[#f15e1c] animate-pulse" />
+                <span className="font-mono text-[11px] uppercase tracking-widest text-[#f15e1c]">
+                  ENTERPRISE TECHNOLOGY &bull; STRATEGY &bull; DIGITAL GROWTH
+                </span>
               </div>
             </ScrollReveal>
 
@@ -54,9 +49,9 @@ export function Hero() {
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.25}>
-              {/* Supporting Copy */}
-              <p className="text-base sm:text-xl text-[#7A6A5F] dark:text-[#B8ACA0] max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-                Arav Innovations delivers enterprise IT strategy, full-stack web &amp; app engineering, data compliance (DPDP/SOC-2), and high-intent digital marketing across India, UAE, US, EU, and global markets.
+              {/* Punchy Supporting Copy */}
+              <p className="text-base sm:text-lg text-[#7A6A5F] dark:text-[#B8ACA0] max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                Enterprise IT strategy, full-stack software engineering, data compliance (DPDP/SOC-2), and high-intent digital marketing for global brands.
               </p>
             </ScrollReveal>
 
