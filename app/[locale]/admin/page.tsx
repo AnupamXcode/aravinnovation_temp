@@ -16,6 +16,7 @@ import {
   TestimonialItem,
 } from "@/lib/site-content";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
+import { SEOAdminPanel } from "@/components/admin/SEOAdminPanel";
 import {
   Shield,
   MessageSquare,
@@ -1526,47 +1527,7 @@ export default function AdminDashboardPage() {
         {/* ========================================================================= */}
         {/* TAB 13: GLOBAL SEO */}
         {/* ========================================================================= */}
-        {activeTab === "seo" && (
-          <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-6">
-            <h2 className="text-lg font-bold font-display flex items-center gap-2">
-              <Search className="w-5 h-5 text-[#E8672A]" />
-              <span>Global SEO &amp; Metadata Manager</span>
-            </h2>
-
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                updateSEO(seoForm);
-                showToast("Global SEO settings saved");
-              }}
-              className="space-y-4"
-            >
-              <div className="space-y-1">
-                <label className="text-xs font-bold">Global Page Title</label>
-                <input
-                  type="text"
-                  value={seoForm.globalTitle}
-                  onChange={(e) => setSeoForm({ ...seoForm, globalTitle: e.target.value })}
-                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                />
-              </div>
-
-              <div className="space-y-1">
-                <label className="text-xs font-bold">Meta Description</label>
-                <textarea
-                  rows={3}
-                  value={seoForm.metaDescription}
-                  onChange={(e) => setSeoForm({ ...seoForm, metaDescription: e.target.value })}
-                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                />
-              </div>
-
-              <Button type="submit" variant="primary" size="md" className="rounded-xl cursor-pointer" leftIcon={<Save className="w-4 h-4" />}>
-                Save SEO Settings
-              </Button>
-            </form>
-          </div>
-        )}
+        {activeTab === "seo" && <SEOAdminPanel />}
 
         {/* ========================================================================= */}
         {/* TAB 14: LEGAL & DPDP CONTENT */}

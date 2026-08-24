@@ -27,25 +27,30 @@ import {
   Building2,
 } from "lucide-react";
 
-export const metadata = {
-  title: "Arav Innovations | Enterprise IT Strategy, Software Engineering & Growth",
-  description:
-    "Arav Innovations is a multidisciplinary technology, strategy, digital growth, governance, and staff augmentation firm operating globally.",
-  alternates: {
-    canonical: "https://aravinnovations.com",
-  },
-  openGraph: {
-    title: "Arav Innovations | Enterprise IT Strategy, Software Engineering & Growth",
-    description:
-      "Enterprise IT Strategy, Full-Stack Software Engineering, Performance Marketing, Governance, and Staff Augmentation globally.",
-    url: "https://aravinnovations.com",
-    siteName: "Arav Innovations",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-  },
-};
+import { getSEOForPath, SITE_BASE_URL } from "@/lib/seo";
+
+export async function generateMetadata() {
+  const seo = getSEOForPath("/");
+  return {
+    title: seo.metaTitle,
+    description: seo.metaDescription,
+    alternates: {
+      canonical: seo.canonicalOverride || SITE_BASE_URL,
+    },
+    openGraph: {
+      title: seo.ogTitle || seo.metaTitle,
+      description: seo.ogDescription || seo.metaDescription,
+      url: SITE_BASE_URL,
+      siteName: "Arav Innovations",
+      type: "website",
+      images: seo.ogImage ? [{ url: seo.ogImage }] : undefined,
+    },
+    robots: {
+      index: !seo.robots.includes("NoIndex"),
+      follow: !seo.robots.includes("NoFollow"),
+    },
+  };
+}
 
 export default async function HomePage({
   params,
