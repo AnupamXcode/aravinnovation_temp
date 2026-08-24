@@ -137,12 +137,12 @@ export function BeforeAfterSlider() {
           </div>
         </div>
 
-        {/* DRAG HANDLE BAR */}
+        {/* 3D DRAG HANDLE KNOB */}
         <div
           style={{ left: `${sliderPos}%` }}
-          className="absolute top-0 bottom-0 -translate-x-1/2 flex items-center justify-center pointer-events-none z-30"
+          className="absolute top-0 bottom-0 -translate-x-1/2 flex items-center justify-center pointer-events-none z-30 perspective-1000"
         >
-          <div className="w-10 h-10 rounded-full bg-[#f15e1c] text-white shadow-2xl flex items-center justify-center border-2 border-white pointer-events-auto cursor-grab active:cursor-grabbing hover:scale-110 transition-transform">
+          <div className="w-12 h-12 rounded-full bg-[#f15e1c] text-white shadow-2xl shadow-[#f15e1c]/50 flex items-center justify-center border-2 border-white dark:border-[#101b17] pointer-events-auto cursor-grab active:cursor-grabbing hover:scale-115 transition-all duration-300 transform-style-3d animate-knob-rotate">
             <GripVertical className="w-5 h-5" />
           </div>
         </div>

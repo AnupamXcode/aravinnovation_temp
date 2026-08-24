@@ -46,17 +46,20 @@ export function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
             </p>
           </div>
 
-          {/* Teaser Outcome */}
-          <div className="space-y-3 text-xs bg-[#FBF3EA] dark:bg-[#1C1814] p-4 rounded-2xl border border-[#EFE2D6] dark:border-[#2C241E]">
-            <div>
-              <span className="font-bold text-[#3A2E27] dark:text-[#FAF5EE] uppercase tracking-wider block text-[10px] text-[#E8672A] mb-1">
-                Execution & Outcome
-              </span>
-              <p className="text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed line-clamp-2">
-                {caseStudy.solution}
-              </p>
+          {/* Visual Metric Highlight Callout */}
+          {caseStudy.results && caseStudy.results.length > 0 && (
+            <div className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#1C1814] border border-[#EFE2D6] dark:border-[#2C241E] flex items-center justify-between">
+              <div>
+                <span className="text-2xl font-black font-mono text-[#E8672A] block">
+                  {caseStudy.results[0].metric}
+                </span>
+                <span className="text-xs font-mono font-semibold text-[#7A6A5F] dark:text-[#B8ACA0] block">
+                  {caseStudy.results[0].label}
+                </span>
+              </div>
+              <CheckCircle2 className="w-5 h-5 text-[#2e936f] shrink-0" />
             </div>
-          </div>
+          )}
         </div>
 
         {/* Footer CTA */}

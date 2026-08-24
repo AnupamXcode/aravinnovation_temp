@@ -81,9 +81,9 @@ export function ArchitectureCaseStudyCard({
               const isLast = idx === stages.length - 1;
               return (
                 <React.Fragment key={idx}>
-                  <div className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-[#22312b] border border-[#f7d7b0] dark:border-[#31473f] shadow-xs relative z-10 transition-transform duration-200 group-hover:translate-x-0.5">
+                  <div className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-[#22312b] border border-[#f7d7b0] dark:border-[#31473f] shadow-xs relative z-10 transition-all duration-200 transform-style-3d hover-lift-3d group-hover:border-[#f15e1c]/40">
                     <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-[#f15e1c]" />
+                      <span className="w-2 h-2 rounded-full bg-[#f15e1c] animate-pulse" />
                       <span className="text-xs font-mono font-bold text-[#1b2823] dark:text-[#ffffff]">
                         {stg.stage}
                       </span>

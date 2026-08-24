@@ -148,7 +148,7 @@ const defaultHero: HeroContent = {
   eyebrow: "Enterprise Technology • Strategy • Digital Growth",
   title: "Building High-Impact Technology Platforms & Accelerated B2B Growth",
   description:
-    "Arav Innovations delivers enterprise IT strategy, full-stack web & app engineering, data compliance (DPDP/SOC-2), and high-intent digital marketing across India, UAE, US, EU, and global markets.",
+    "Enterprise IT strategy, full-stack software development, performance digital marketing, and dedicated engineering talent.",
   primaryCtaText: "Schedule Exploratory Call",
   primaryCtaUrl: "/contact",
   secondaryCtaText: "Explore Practices",

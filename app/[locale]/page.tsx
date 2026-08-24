@@ -242,8 +242,8 @@ export default async function HomePage({
             {differentiators.map((diff, index) => (
               <ScrollReveal key={index} delay={index * 0.1} direction="up">
                 <TiltCard maxTilt={5} scale={1.01} className="h-full group">
-                  <div className="h-full rounded-[2.2rem] bg-white dark:bg-[#22312b] p-8 sm:p-10 border border-[#f7d7b0] dark:border-[#31473f] hover:-translate-y-1.5 hover:shadow-2xl hover:border-[#f15e1c]/40 transition-all duration-300 space-y-4 shadow-sm">
-                    <div className="p-4 rounded-2xl icon-box-hover w-fit shadow-xs text-[#f15e1c]">
+                  <div className="h-full rounded-[2.2rem] bg-white dark:bg-[#22312b] p-8 sm:p-10 border border-[#f7d7b0] dark:border-[#31473f] hover-lift-3d card-3d-glow hover:shadow-2xl hover:border-[#f15e1c]/40 transition-all duration-300 space-y-4 shadow-sm">
+                    <div className="p-4 rounded-2xl icon-box-hover w-fit shadow-xs text-[#f15e1c] bg-[#fefaf5] dark:bg-[#1a2622]">
                       {diff.icon}
                     </div>
                     <h3 className="text-2xl font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
