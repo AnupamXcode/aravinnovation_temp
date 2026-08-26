@@ -10,7 +10,7 @@ import { useSiteConfig } from "@/lib/site-config";
 import { useSiteContent } from "@/lib/site-content";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
-import { findIntent } from "@/data/chatbot-knowledge";
+import { findIntent, WARM_OPENERS, CASUAL_FOLLOWUPS, ChatSessionContext } from "@/data/chatbot-knowledge";
 
 interface ChatMessage {
   id: string;
@@ -37,18 +37,40 @@ export function ChatbotWidget() {
 
   const [shouldShowLauncher, setShouldShowLauncher] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
-  const [messages, setMessages] = React.useState<ChatMessage[]>([
-    {
-      id: "welcome",
-      sender: "bot",
-      text: t("greeting"),
-      options: [
-        { label: locale === "hi" ? "सेवाएं देखें" : locale === "ar" ? "استكشف الخدمات" : "Explore Practices", action: "all_services" },
-        { label: locale === "hi" ? "प्रोजेक्ट शुरू करें" : locale === "ar" ? "بدء مشروع" : "Start a Project", action: "start_project" },
-        { label: locale === "hi" ? "कार्यालय स्थान" : locale === "ar" ? "الفروع والمكاتب" : "Office Locations", action: "locations" },
-      ],
-    },
-  ]);
+  
+  const [sessionContext, setSessionContext] = React.useState<ChatSessionContext>({
+    locale,
+    history: [],
+  });
+
+  const [messages, setMessages] = React.useState<ChatMessage[]>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const savedMessages = sessionStorage.getItem("arav_chat_messages");
+        if (savedMessages) {
+          const parsed = JSON.parse(savedMessages);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            return parsed;
+          }
+        }
+      } catch {
+        // ignore
+      }
+    }
+    return [
+      {
+        id: "welcome",
+        sender: "bot",
+        text: t("greeting"),
+        options: [
+          { label: locale === "hi" ? "सेवाएं देखें" : locale === "ar" ? "استكشف الخدمات" : "Explore Practices", action: "all_services" },
+          { label: locale === "hi" ? "प्रोजेक्ट शुरू करें" : locale === "ar" ? "بدء مشروع" : "Start a Project", action: "start_project" },
+          { label: locale === "hi" ? "कार्यालय स्थान" : locale === "ar" ? "الفروع والمكاتب" : "Office Locations", action: "locations" },
+        ],
+      },
+    ];
+  });
+
   const [inputText, setInputText] = React.useState("");
   const [leadFormState, setLeadFormState] = React.useState({
     name: "",
@@ -59,7 +81,31 @@ export function ChatbotWidget() {
   const [leadSubmitted, setLeadSubmitted] = React.useState(false);
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
 
-  // Delayed trigger behavior
+  // Restore session context across page navigations / reloads
+  React.useEffect(() => {
+    try {
+      const savedContext = sessionStorage.getItem("arav_chat_context");
+      if (savedContext) {
+        const parsed = JSON.parse(savedContext);
+        setSessionContext((prev) => ({ ...prev, ...parsed, locale }));
+      }
+    } catch {
+      // ignore
+    }
+  }, [locale]);
+
+  // Sync messages to sessionStorage whenever updated
+  React.useEffect(() => {
+    try {
+      if (messages.length > 0) {
+        sessionStorage.setItem("arav_chat_messages", JSON.stringify(messages));
+      }
+    } catch {
+      // ignore
+    }
+  }, [messages]);
+
+  // Delayed launcher trigger behavior
   React.useEffect(() => {
     if (!isMasterOn) return;
 
@@ -130,6 +176,18 @@ export function ChatbotWidget() {
     }
   };
 
+  const updateContext = (newCtx: Partial<ChatSessionContext>) => {
+    setSessionContext((prev) => {
+      const updated = { ...prev, ...newCtx };
+      try {
+        sessionStorage.setItem("arav_chat_context", JSON.stringify(updated));
+      } catch {
+        // ignore
+      }
+      return updated;
+    });
+  };
+
   const handleOptionClick = (option: { label: string; action: string; payload?: string; route?: string; ctaType?: string }) => {
     if (option.route) {
       router.push(option.route);
@@ -149,7 +207,7 @@ export function ChatbotWidget() {
         locale === "hi"
           ? "अराव इनोवेशन 7 मुख्य सेवाएं प्रदान करता है:\n\n• आईटी रणनीति एवं कंसल्टिंग\n• वेब एवं ऐप इंजीनियरिंग\n• डिजिटल मार्केटिंग एवं SEO\n• जोखिम एवं DPDP अनुपालन\n• सिस्टम ऑडिट एवं परफॉरमेंस\n• समर्पित इंजीनियरिंग स्क्वॉड\n• एआई एवं ऑटोमेशन समाधान"
           : locale === "ar"
-          ? "تقدم آراف إينوفيشينز 7 خدمات أساسية:\n\n• استراتيجية تكنولوجيا المعلومات\n• هندسة الويب والموبايل\n• التسويق الرقمي و SEO\n• الحوكمة والامتثال\n• تدقيق الأنظمة والأداء\n• الفرق الهندسية المخصصة\n• حلول الذكاء الاصطناعي"
+          ? "تقدم آراف إينوفيشينز 7 خدمات أساسية:\n\n• استراتيجية تكنولوجيا المعلومات\n• تطوير الويب والموبايل\n• التسويق الرقمي و SEO\n• الحوكمة والامتثال\n• تدقيق الأنظمة والأداء\n• الفرق الهندسية المخصصة\n• حلول الذكاء الاصطناعي"
           : "Arav Innovations provides 7 core practices:\n\n• IT Strategy & Consulting\n• Web & App Development\n• Digital Marketing & SEO\n• Risk Governance & Compliance\n• Audit & FinOps Tuning\n• Dedicated Engineering Pods\n• AI & Automation Solutions";
 
       botMsg = {
@@ -157,7 +215,7 @@ export function ChatbotWidget() {
         sender: "bot",
         text,
         options: [
-          { label: locale === "hi" ? "वेब विकास" : locale === "ar" ? "هندسة الويب" : "Web & App Dev", action: "navigate", route: "/services/web-app-development" },
+          { label: locale === "hi" ? "वेब विकास" : locale === "ar" ? "تطوير الويب" : "Web & App Dev", action: "navigate", route: "/services/web-app-development" },
           { label: locale === "hi" ? "आईटी रणनीति" : locale === "ar" ? "استراتيجية التقنية" : "IT Strategy", action: "navigate", route: "/services/it-strategy-consulting" },
           { label: locale === "hi" ? "मार्केटिंग" : locale === "ar" ? "التسويق الرقمي" : "Digital Marketing", action: "navigate", route: "/services/digital-marketing" },
           { label: locale === "hi" ? "सभी सेवाएं देखें" : locale === "ar" ? "جميع الخدمات" : "View All Practices", action: "navigate", route: "/services" },
@@ -181,6 +239,16 @@ export function ChatbotWidget() {
         ],
       };
     } else if (option.action === "start_project") {
+      const prefills = sessionContext.mentionedService
+        ? `Inquiry regarding ${sessionContext.mentionedService}`
+        : sessionContext.mentionedIndustry
+        ? `Inquiry for ${sessionContext.mentionedIndustry} sector`
+        : "";
+
+      if (prefills && !leadFormState.requirement) {
+        setLeadFormState((prev) => ({ ...prev, requirement: prefills }));
+      }
+
       botMsg = {
         id: `bot-${Date.now()}`,
         sender: "bot",
@@ -217,19 +285,46 @@ export function ChatbotWidget() {
 
     let botMsg: ChatMessage;
 
-    const matched = findIntent(userText, locale);
+    const matched = findIntent(userText, locale, sessionContext);
 
     if (matched) {
-      const options = matched.intent.options
-        ? matched.intent.options[(locale === "hi" ? "hi" : locale === "ar" ? "ar" : "en") as "en" | "hi" | "ar"]
-        : undefined;
+      if (matched.detectedService) updateContext({ mentionedService: matched.detectedService });
+      if (matched.detectedIndustry) updateContext({ mentionedIndustry: matched.detectedIndustry });
+
+      const langKey = (locale === "hi" ? "hi" : locale === "ar" ? "ar" : "en") as "en" | "hi" | "ar";
+      const options = matched.intent.options ? matched.intent.options[langKey] : undefined;
+
+      // Select dynamic warm opener & follow-up if not greeting
+      let finalResponseText = matched.responseText;
+      if (matched.intent.id !== "greeting") {
+        const openers = WARM_OPENERS[langKey] || WARM_OPENERS.en;
+        const followups = CASUAL_FOLLOWUPS[langKey] || CASUAL_FOLLOWUPS.en;
+        const opener = openers[Math.floor(Math.random() * openers.length)];
+        const followup = followups[Math.floor(Math.random() * followups.length)];
+
+        finalResponseText = `${opener}${matched.responseText}\n\n${followup}`;
+      }
+
+      if (matched.isLeadForm) {
+        const detectedSvc = matched.detectedService || sessionContext.mentionedService;
+        const detectedInd = matched.detectedIndustry || sessionContext.mentionedIndustry;
+        const prefills = detectedSvc
+          ? `Inquiry regarding ${detectedSvc}`
+          : detectedInd
+          ? `Inquiry for ${detectedInd} sector`
+          : userText;
+        setLeadFormState((prev) => ({
+          ...prev,
+          requirement: prev.requirement || prefills,
+        }));
+      }
 
       botMsg = {
         id: `bot-${Date.now()}`,
         sender: "bot",
-        text: matched.responseText,
+        text: finalResponseText,
         options,
-        isLeadForm: matched.intent.triggerLeadForm,
+        isLeadForm: matched.isLeadForm,
       };
     } else {
       botMsg = {
@@ -240,7 +335,7 @@ export function ChatbotWidget() {
             ? "मैं अराव इनोवेशन की सेवाओं, तकनीकों, और परियोजनाओं से संबंधित प्रश्नों में मदद कर सकता हूँ। क्या आप अपनी आवश्यकता बताना चाहेंगे?"
             : locale === "ar"
             ? "أنا هنا لمساعدتك في استفسارات خدمات آراف إينوفيشينز ومشاريعها. هل ترغب في بدء مناقشة مشروعك؟"
-            : "I can help with questions about Arav Innovations' services, architecture, or scope. Would you like to discuss your project requirements?",
+            : "I can help with questions about Arav Innovations' services, architecture, or project scope. Would you like to discuss your project requirements?",
         options: [
           { label: locale === "hi" ? "सेवाएं देखें" : locale === "ar" ? "جميع الخدمات" : "Explore Practices", action: "all_services" },
           { label: locale === "hi" ? "प्रोजेक्ट शुरू करें" : locale === "ar" ? "بدء مشروع" : "Start a Project", action: "start_project" },
@@ -262,7 +357,7 @@ export function ChatbotWidget() {
           company: "Direct Inquirer (Chatbot)",
           email: leadFormState.email,
           phone: leadFormState.phone,
-          service: "General Inquiry (Chatbot)",
+          service: sessionContext.mentionedService || "General Inquiry (Chatbot)",
           requirement: leadFormState.requirement || "Inquiry from chatbot assistant",
           timeline: "1 - 3 Months",
         }),
@@ -299,7 +394,7 @@ export function ChatbotWidget() {
               onClick={handleOpen}
               className="flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white dark:bg-[#1E1915] text-[#3A2E27] dark:text-[#FAF5EE] text-xs sm:text-sm font-semibold border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl hover:shadow-2xl hover:border-[#E8672A] dark:hover:border-[#E8672A] transition-all duration-200 cursor-pointer"
             >
-              <span>Chat with us</span>
+              <span>{locale === "hi" ? "हमसे चैट करें" : locale === "ar" ? "تحدث معنا" : "Chat with us"}</span>
               <span className="text-sm sm:text-base">👋</span>
             </button>
 
