@@ -205,7 +205,7 @@ export function ChatbotWidget() {
     if (option.action === "all_services") {
       const text =
         locale === "hi"
-          ? "अराव इनोवेशन 7 मुख्य सेवाएं प्रदान करता है:\n\n• आईटी रणनीति एवं कंसल्टिंग\n• वेब एवं ऐप इंजीनियरिंग\n• डिजिटल मार्केटिंग एवं SEO\n• जोखिम एवं DPDP अनुपालन\n• सिस्टम ऑडिट एवं परफॉरमेंस\n• समर्पित इंजीनियरिंग स्क्वॉड\n• एआई एवं ऑटोमेशन समाधान"
+          ? "आरव इनोवेशन 7 मुख्य सेवाएं प्रदान करता है:\n\n• आईटी रणनीति एवं कंसल्टिंग\n• वेब एवं ऐप इंजीनियरिंग\n• डिजिटल मार्केटिंग एवं SEO\n• जोखिम एवं DPDP अनुपालन\n• सिस्टम ऑडिट एवं परफॉरमेंस\n• समर्पित इंजीनियरिंग स्क्वॉड\n• एआई एवं ऑटोमेशन समाधान"
           : locale === "ar"
           ? "تقدم آراف إينوفيشينز 7 خدمات أساسية:\n\n• استراتيجية تكنولوجيا المعلومات\n• تطوير الويب والموبايل\n• التسويق الرقمي و SEO\n• الحوكمة والامتثال\n• تدقيق الأنظمة والأداء\n• الفرق الهندسية المخصصة\n• حلول الذكاء الاصطناعي"
           : "Arav Innovations provides 7 core practices:\n\n• IT Strategy & Consulting\n• Web & App Development\n• Digital Marketing & SEO\n• Risk Governance & Compliance\n• Audit & FinOps Tuning\n• Dedicated Engineering Pods\n• AI & Automation Solutions";
@@ -332,7 +332,7 @@ export function ChatbotWidget() {
         sender: "bot",
         text:
           locale === "hi"
-            ? "मैं अराव इनोवेशन की सेवाओं, तकनीकों, और परियोजनाओं से संबंधित प्रश्नों में मदद कर सकता हूँ। क्या आप अपनी आवश्यकता बताना चाहेंगे?"
+            ? "मैं आरव इनोवेशन की सेवाओं, तकनीकों, और परियोजनाओं से संबंधित प्रश्नों में मदद कर सकता हूँ। क्या आप अपनी आवश्यकता बताना चाहेंगे?"
             : locale === "ar"
             ? "أنا هنا لمساعدتك في استفسارات خدمات آراف إينوفيشينز ومشاريعها. هل ترغب في بدء مناقشة مشروعك؟"
             : "I can help with questions about Arav Innovations' services, architecture, or project scope. Would you like to discuss your project requirements?",

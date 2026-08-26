@@ -98,7 +98,7 @@ export const chatbotIntents: ChatbotIntent[] = [
     ],
     response: {
       en: "Hey! 👋 Welcome to Arav Innovations. I'm your AI strategy assistant. How can I help answer questions about our services, team, or project engagement today?",
-      hi: "नमस्ते! 👋 अराव इनोवेशन में आपका स्वागत है। मैं आपका एआई रणनीति सहायक हूँ। आज मैं आपकी सेवाओं, टीम या परियोजना के बारे में कैसे मदद कर सकता हूँ?",
+      hi: "नमस्ते! 👋 आरव इनोवेशन में आपका स्वागत है। मैं आपका एआई रणनीति सहायक हूँ। आज मैं आपकी सेवाओं, टीम या परियोजना के बारे में कैसे मदद कर सकता हूँ?",
       ar: "مرحباً بك! 👋 في آراف إينوفيشينز. أنا مساعدك الاستراتيجي. كيف يمكنني مساعدتك في الإجابة عن استفساراتك حول خدماتنا أو فريقنا اليوم؟",
     },
     options: {
@@ -295,7 +295,7 @@ export const chatbotIntents: ChatbotIntent[] = [
     ],
     response: {
       en: "Arav Innovations is a multidisciplinary technology & strategy firm based in India (Gurgaon HQ) & UAE (Dubai) with specialists across engineering, marketing, governance, and audit. We help enterprises scale globally.",
-      hi: "अराव इनोवेशन एक बहुविषयक प्रौद्योगिकी एवं रणनीति फर्म है जिसका मुख्यालय गुरुग्राम (भारत) और दुबई (यूएई) में है। हम विश्व स्तर पर उद्यमों को स्केल करने में मदद करते हैं।",
+      hi: "आरव इनोवेशन एक बहुविषयक प्रौद्योगिकी एवं रणनीति फर्म है जिसका मुख्यालय गुरुग्राम (भारत) और दुबई (यूएई) में है। हम विश्व स्तर पर उद्यमों को स्केल करने में मदद करते हैं।",
       ar: "آراف إينوفيشينز هي شركة تكنولوجيا واستراتيجية متكاملة تقع في الهند (المقر الرئيسي في جورجاون) والإمارات (دبي) وتساعد الشركات على التوسع عالمياً.",
     },
     options: {
@@ -602,7 +602,7 @@ export const chatbotIntents: ChatbotIntent[] = [
     ],
     response: {
       en: "Arav Innovations operates dual delivery hubs: Gurgaon HQ (Sector 44) serving India & South Asia, and Dubai Hub (Downtown Boulevard Plaza) serving the GCC and global enterprises.",
-      hi: "अराव इनोवेशन दो डिलीवरी हब संचालित करता है: गुरुग्राम (मुख्यालय - सेक्टर 44) और दुबई (यूएई - डाउनटाउन बुलेवार्ड प्लाजा)।",
+      hi: "आरव इनोवेशन दो डिलीवरी हब संचालित करता है: गुरुग्राम (मुख्यालय - सेक्टर 44) और दुबई (यूएई - डाउनटाउन बुलेवार्ड प्लाजा)।",
       ar: "تمتلك آراف إينوفيشينز مركزين إقليميين: المقر الرئيسي في الهند (جورجاون - قطاع 44)، والمكتب الإقليمي في الإمارات (دبي - بوليفارد بلازا).",
     },
     options: {
