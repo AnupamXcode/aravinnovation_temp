@@ -5,7 +5,7 @@ import { Hero } from "@/components/hero/Hero";
 import { ArchitectureCaseStudyCard } from "@/components/case-studies/ArchitectureCaseStudyCard";
 import { BeforeAfterSlider } from "@/components/motion/BeforeAfterSlider";
 import { InteractiveServiceSelector } from "@/components/services/InteractiveServiceSelector";
-import { TestimonialSlider } from "@/components/testimonials/TestimonialSlider";
+import { AnimatedTestimonialsCarousel } from "@/components/testimonials/AnimatedTestimonialsCarousel";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -215,7 +215,7 @@ export default async function HomePage({
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.2}>
-              <TestimonialSlider />
+              <AnimatedTestimonialsCarousel />
             </ScrollReveal>
           </section>
         </Scroll3DContainer>
