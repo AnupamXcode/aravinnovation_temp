@@ -177,48 +177,50 @@ export default async function HomePage({
 
       {/* 5. FEATURED ARCHITECTURE CASE STUDIES */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="case-studies">
-        <Scroll3DContainer variant="card">
-          <section className="py-10 md:py-14 px-6 sm:px-10 lg:px-12 rounded-[2.5rem] bg-[#f7d7b0]/30 dark:bg-[#1e2c27]/90 border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
-            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/50 to-transparent" />
+        <section className="py-12 md:py-16 px-6 sm:px-10 lg:px-12 rounded-[2.5rem] bg-[#fefaf5]/60 dark:bg-[#172420]/90 border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
+          {/* Top Brand Accent Line */}
+          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/60 to-transparent" />
 
-            {/* Subtle Architectural Network Pattern Background */}
-            <div className="absolute inset-0 pointer-events-none opacity-[0.12] dark:opacity-[0.08] z-0">
-              <svg className="w-full h-full" viewBox="0 0 1000 600" fill="none">
-                <line x1="100" y1="100" x2="350" y2="250" stroke="#f15e1c" strokeWidth="1" strokeDasharray="4 4" />
-                <line x1="350" y1="250" x2="650" y2="150" stroke="#2e936f" strokeWidth="1" strokeDasharray="4 4" />
-                <line x1="650" y1="150" x2="900" y2="350" stroke="#f15e1c" strokeWidth="1" strokeDasharray="4 4" />
-                <circle cx="350" cy="250" r="3" fill="#f15e1c" />
-                <circle cx="650" cy="150" r="3" fill="#2e936f" />
-              </svg>
-            </div>
+          {/* Architectural Network Connections Overlay */}
+          <div className="absolute inset-0 pointer-events-none opacity-[0.15] dark:opacity-[0.10] z-0">
+            <svg className="w-full h-full" viewBox="0 0 1200 600" fill="none">
+              <line x1="150" y1="120" x2="450" y2="280" stroke="#f15e1c" strokeWidth="1.5" strokeDasharray="6 6" />
+              <line x1="450" y1="280" x2="850" y2="180" stroke="#2e936f" strokeWidth="1.5" strokeDasharray="6 6" />
+              <line x1="850" y1="180" x2="1100" y2="400" stroke="#fab60a" strokeWidth="1.5" strokeDasharray="6 6" />
+              <circle cx="450" cy="280" r="4" fill="#f15e1c" className="animate-pulse" />
+              <circle cx="850" cy="180" r="4" fill="#2e936f" className="animate-pulse" />
+            </svg>
+          </div>
 
-            <ScrollReveal direction="up">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6 relative z-10">
-                <div className="max-w-3xl space-y-2">
-                  <Badge variant="secondary" size="md">
-                    {tCaseStudies("badge")}
-                  </Badge>
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                    {tCaseStudies("title")}
-                  </h2>
-                </div>
-                <Link href={`/${locale}/case-studies`}>
-                  <Button variant="outline" size="md" className="rounded-full px-7 py-3 border-[#f7d7b0] dark:border-[#253630] bg-white dark:bg-[#172420] text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c]" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                    {tCaseStudies("viewAll")}
-                  </Button>
-                </Link>
+          <ScrollReveal direction="up">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6 relative z-10">
+              <div className="max-w-3xl space-y-3">
+                <Badge variant="secondary" size="md">
+                  {tCaseStudies("badge")}
+                </Badge>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
+                  {tCaseStudies("title")}
+                </h2>
               </div>
-            </ScrollReveal>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
-              {caseStudiesData.slice(0, 3).map((study, idx) => (
-                <Scroll3DContainer key={study.slug} variant="card" delay={idx * 0.1}>
-                  <ArchitectureCaseStudyCard caseStudy={study} locale={locale} />
-                </Scroll3DContainer>
-              ))}
+              <Link href={`/${locale}/case-studies`}>
+                <Button
+                  variant="outline"
+                  size="md"
+                  className="rounded-full px-7 py-3 border-[#f7d7b0] dark:border-[#253630] bg-white dark:bg-[#172420] text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c] hover:bg-[#fce3d3]/30"
+                  rightIcon={<ArrowRight className="w-4 h-4 text-[#f15e1c]" />}
+                >
+                  {tCaseStudies("viewAll")}
+                </Button>
+              </Link>
             </div>
-          </section>
-        </Scroll3DContainer>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch relative z-10">
+            {caseStudiesData.slice(0, 3).map((study, idx) => (
+              <ArchitectureCaseStudyCard key={study.slug} caseStudy={study} locale={locale} index={idx} />
+            ))}
+          </div>
+        </section>
       </div>
 
       {/* 6. WHY ARAV (EQUAL SIZED 4 CARDS GRID) */}
