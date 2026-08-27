@@ -1214,5 +1214,7 @@ export function getServiceBySlug(slug: string): Service | undefined {
 }
 
 export function getAllServiceSlugs(): string[] {
-  return servicesData.map((s) => s.slug);
+  const primarySlugs = servicesData.map((s) => s.slug);
+  const aliasSlugs = Object.keys(slugAliasMap);
+  return Array.from(new Set([...primarySlugs, ...aliasSlugs]));
 }

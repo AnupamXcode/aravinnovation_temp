@@ -19,7 +19,7 @@ export const servicesNavigation: NavItem[] = [
   },
   {
     label: "Web and Application Development",
-    href: "/services/web-application-development",
+    href: "/services/web-app-development",
     description: "Scalable modern web applications, cloud native systems, enterprise SaaS portals & mobile apps.",
   },
   {
