@@ -40,15 +40,15 @@ export function Services3DConstellation() {
   const shouldReduceMotion = useReducedMotion();
   const [hoveredSlug, setHoveredSlug] = React.useState<string | null>(null);
 
-  // Position 7 practice nodes evenly around central engine
+  // Compact 7 practice nodes orbit around central engine
   const constellationNodes: ConstellationNode[] = React.useMemo(() => {
     const total = servicesData.length;
     return servicesData.map((s, idx) => {
       const angle = (idx / total) * 2 * Math.PI - Math.PI / 2;
-      const radiusX = 38; // X radius in %
-      const radiusY = 36; // Y radius in %
+      const radiusX = 36; // X radius in %
+      const radiusY = 32; // Y radius in % (Compact vertical fit)
       const xPct = 50 + radiusX * Math.cos(angle);
-      const yPct = 46 + radiusY * Math.sin(angle); // Center vertically
+      const yPct = 45 + radiusY * Math.sin(angle);
       return {
         service: s,
         xPct,
@@ -63,11 +63,11 @@ export function Services3DConstellation() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full py-6 select-none"
+      className="relative w-full py-2 select-none"
     >
-      <div className="relative w-full rounded-[3.5rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-8 sm:p-14 overflow-hidden flex flex-col justify-between space-y-10 min-h-[720px] sm:min-h-[780px]">
+      <div className="relative w-full rounded-[3rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-6 sm:p-10 overflow-hidden flex flex-col justify-between space-y-6 min-h-[520px] sm:min-h-[560px]">
         {/* Subtle Radial Ambient Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-radial from-[#f15e1c]/12 via-[#2e936f]/8 to-transparent rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-radial from-[#f15e1c]/12 via-[#2e936f]/8 to-transparent rounded-full blur-3xl pointer-events-none" />
 
         {/* Hover Background Blur Layer */}
         <div
@@ -78,25 +78,25 @@ export function Services3DConstellation() {
         />
 
         {/* Top Header Bar */}
-        <div className="relative z-20 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#253630] pb-6">
-          <div className="space-y-1.5">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] text-xs font-mono font-bold text-[#f15e1c]">
-              <Sparkles className="w-4 h-4" />
+        <div className="relative z-20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#f7d7b0] dark:border-[#253630] pb-4">
+          <div className="space-y-1">
+            <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] text-xs font-mono font-bold text-[#f15e1c]">
+              <Sparkles className="w-3.5 h-3.5" />
               <span>ARAV 7 CORE PRACTICES ECOSYSTEM</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
               Enterprise Technology Practices
             </h2>
           </div>
           <Link href="/services">
-            <Button3D variant="outline" size="lg" rightIcon={<ArrowRight className="w-5 h-5 ml-1" />}>
+            <Button3D variant="outline" size="md" rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}>
               Explore All 7 Practices
             </Button3D>
           </Link>
         </div>
 
-        {/* Constellation Orbit Canvas */}
-        <div className="relative w-full min-h-[440px] sm:min-h-[500px] flex-1 my-4">
+        {/* Compact Constellation Orbit Canvas */}
+        <div className="relative w-full min-h-[340px] sm:min-h-[380px] flex-1 my-2">
           {/* Connecting SVG Lines */}
           <svg
             className="absolute inset-0 w-full h-full pointer-events-none z-10"
@@ -109,18 +109,18 @@ export function Services3DConstellation() {
                 <g key={`line-${node.service.slug}`}>
                   <line
                     x1="50"
-                    y1="46"
+                    y1="45"
                     x2={node.xPct}
                     y2={node.yPct}
                     stroke={isHovered ? "#f15e1c" : "#f7d7b0"}
-                    strokeWidth={isHovered ? "3" : "1.2"}
+                    strokeWidth={isHovered ? "2.5" : "1"}
                     strokeDasharray={isHovered ? "none" : "2 2"}
                     className="transition-all duration-300"
                   />
                   <circle
                     cx={node.xPct}
                     cy={node.yPct}
-                    r={isHovered ? "4" : "2"}
+                    r={isHovered ? "3.5" : "1.8"}
                     fill={isHovered ? "#f15e1c" : "#2e936f"}
                     className="transition-all duration-300"
                   />
@@ -130,14 +130,14 @@ export function Services3DConstellation() {
           </svg>
 
           {/* Central Engine Node: ARAV DIGITAL ENGINE */}
-          <div className="absolute top-[46%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#101b17] border-2 border-[#f15e1c] shadow-2xl shadow-[#f15e1c]/25 text-center min-w-[180px] sm:min-w-[220px] cursor-pointer hover:scale-105 transition-transform">
-            <div className="w-14 h-14 rounded-2xl bg-[#f15e1c] text-white flex items-center justify-center shadow-lg mb-2.5">
-              <Sparkles className="w-7 h-7 animate-pulse" />
+          <div className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center p-4 sm:p-5 rounded-3xl bg-white dark:bg-[#101b17] border-2 border-[#f15e1c] shadow-2xl shadow-[#f15e1c]/25 text-center min-w-[160px] sm:min-w-[190px] cursor-pointer hover:scale-105 transition-transform">
+            <div className="w-12 h-12 rounded-2xl bg-[#f15e1c] text-white flex items-center justify-center shadow-lg mb-1.5">
+              <Sparkles className="w-6 h-6 animate-pulse" />
             </div>
-            <h3 className="text-sm sm:text-base font-extrabold font-display uppercase text-[#1b2823] dark:text-[#ffffff] tracking-wider">
+            <h3 className="text-xs sm:text-sm font-extrabold font-display uppercase text-[#1b2823] dark:text-[#ffffff] tracking-wider">
               ARAV DIGITAL ENGINE
             </h3>
-            <p className="text-xs text-[#2e936f] font-semibold mt-1">
+            <p className="text-[10px] text-[#2e936f] font-semibold mt-0.5">
               7 Integrated Practices
             </p>
           </div>
@@ -156,27 +156,27 @@ export function Services3DConstellation() {
                 }}
                 onMouseEnter={() => setHoveredSlug(node.service.slug)}
                 onMouseLeave={() => setHoveredSlug(null)}
-                className="absolute z-20 cursor-pointer"
+                className="absolute z-30 cursor-pointer"
               >
                 <Link href={`/services/${node.service.slug}`}>
                   <div
                     className={cn(
-                      "p-3.5 sm:p-4.5 rounded-2xl bg-white dark:bg-[#101b17] border shadow-md flex items-center gap-3 transition-all duration-300 group hover:shadow-2xl",
+                      "p-3 sm:p-3.5 rounded-2xl bg-white dark:bg-[#101b17] border shadow-md flex items-center gap-2.5 transition-all duration-300 group hover:shadow-2xl",
                       isHovered
                         ? "border-[#f15e1c] ring-4 ring-[#f15e1c]/30 scale-105 shadow-[#f15e1c]/30"
                         : "border-[#f7d7b0] dark:border-[#253630]"
                     )}
                   >
-                    <div className="p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#172420] shrink-0 border border-[#f7d7b0]/50 dark:border-[#253630]">
+                    <div className="p-2 rounded-xl bg-[#fefaf5] dark:bg-[#172420] shrink-0 border border-[#f7d7b0]/50 dark:border-[#253630]">
                       {serviceIconMap[node.service.slug] || (
                         <Layers className="w-5 h-5 text-[#f15e1c]" />
                       )}
                     </div>
-                    <div className="hidden sm:block text-left max-w-[160px]">
-                      <h4 className="text-xs sm:text-sm font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors line-clamp-1">
+                    <div className="hidden sm:block text-left max-w-[140px]">
+                      <h4 className="text-xs font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors line-clamp-1">
                         {node.service.title}
                       </h4>
-                      <span className="text-[11px] text-[#2e936f] font-mono font-semibold block mt-0.5">
+                      <span className="text-[10px] text-[#2e936f] font-mono font-semibold block mt-0.5">
                         Explore &rarr;
                       </span>
                     </div>
@@ -187,22 +187,22 @@ export function Services3DConstellation() {
           })}
         </div>
 
-        {/* Dedicated Bottom Detail Bar: Positioned at Bottom Below all Practice Nodes */}
-        <div className="relative z-30 pt-4 mt-6 border-t border-[#f7d7b0] dark:border-[#253630] bg-white dark:bg-[#101b17] p-6 sm:p-8 rounded-3xl border shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="space-y-1.5 text-center sm:text-left">
-            <div className="flex items-center justify-center sm:justify-start gap-2.5">
-              <span className="w-3 h-3 rounded-full bg-[#f15e1c] animate-pulse" />
-              <h3 className="text-lg sm:text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+        {/* Dedicated Bottom Detail Bar: Positioned Closely Below Constellation Canvas */}
+        <div className="relative z-30 pt-3 mt-2 border-t border-[#f7d7b0] dark:border-[#253630] bg-white dark:bg-[#101b17] p-4 sm:p-5 rounded-2xl border shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="space-y-1 text-center sm:text-left">
+            <div className="flex items-center justify-center sm:justify-start gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-pulse" />
+              <h3 className="text-sm sm:text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                 {activeService.title}
               </h3>
             </div>
-            <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] max-w-4xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] max-w-3xl leading-relaxed">
               {activeService.description}
             </p>
           </div>
 
           <Link href={`/services/${activeService.slug}`} className="shrink-0 w-full sm:w-auto">
-            <Button3D variant="primary" size="lg" className="w-full sm:w-auto" rightIcon={<ArrowRight className="w-5 h-5 ml-1" />}>
+            <Button3D variant="primary" size="md" className="w-full sm:w-auto" rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}>
               Explore {activeService.title}
             </Button3D>
           </Link>

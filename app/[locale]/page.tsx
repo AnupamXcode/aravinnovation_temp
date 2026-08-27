@@ -94,7 +94,7 @@ export default async function HomePage({
   ];
 
   return (
-    <div className="flex flex-col min-h-screen w-full bg-[#ffffff] dark:bg-[#101b17] text-[#1b2823] dark:text-[#ffffff] space-y-12 pb-16 transition-colors duration-300">
+    <div className="flex flex-col min-h-screen w-full bg-[#ffffff] dark:bg-[#101b17] text-[#1b2823] dark:text-[#ffffff] space-y-6 md:space-y-10 pb-12 transition-colors duration-300 overflow-x-hidden">
       {/* STAGE 1 & 2: HERO SECTION WITH 3D SCROLL SEQUENCE */}
       <Scroll3DContainer variant="hero">
         <Hero />
