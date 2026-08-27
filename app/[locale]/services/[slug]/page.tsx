@@ -18,6 +18,7 @@ import { ServiceMaintenanceBanner } from "@/components/services/ServiceMaintenan
 import { ITStrategyInteractivePage } from "@/components/services/ITStrategyInteractivePage";
 import { DigitalMarketingInteractivePage } from "@/components/services/DigitalMarketingInteractivePage";
 import { WebDevInteractivePage } from "@/components/services/WebDevInteractivePage";
+import { RiskGovInteractivePage } from "@/components/services/RiskGovInteractivePage";
 import {
   Compass,
   Code2,
@@ -113,6 +114,11 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
   // Render Immersive Web Development Interactive Page for Web Development Slugs
   if (service.slug === "web-app-development" || slug === "webdevelopment" || slug === "web-development") {
     return <WebDevInteractivePage service={service} />;
+  }
+
+  // Render Immersive Risk & Governance Interactive Page for Risk & Governance Slugs
+  if (service.slug === "risk-compliance-governance" || slug === "riskandgovernance" || slug === "risk-governance") {
+    return <RiskGovInteractivePage service={service} />;
   }
 
   // Find related case study
