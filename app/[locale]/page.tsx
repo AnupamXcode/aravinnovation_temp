@@ -136,6 +136,17 @@ export default async function HomePage({
         <Scroll3DContainer variant="card">
           <section className="py-10 md:py-14 px-6 sm:px-10 lg:px-12 rounded-[2.5rem] bg-[#f7d7b0]/30 dark:bg-[#1e2c27]/90 border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
             <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/50 to-transparent" />
+            
+            {/* Subtle Architectural Network Pattern Background (IMAGE 3 REFINEMENT) */}
+            <div className="absolute inset-0 pointer-events-none opacity-[0.12] dark:opacity-[0.08] z-0">
+              <svg className="w-full h-full" viewBox="0 0 1000 600" fill="none">
+                <line x1="100" y1="100" x2="350" y2="250" stroke="#f15e1c" strokeWidth="1" strokeDasharray="4 4" />
+                <line x1="350" y1="250" x2="650" y2="150" stroke="#2e936f" strokeWidth="1" strokeDasharray="4 4" />
+                <line x1="650" y1="150" x2="900" y2="350" stroke="#f15e1c" strokeWidth="1" strokeDasharray="4 4" />
+                <circle cx="350" cy="250" r="3" fill="#f15e1c" />
+                <circle cx="650" cy="150" r="3" fill="#2e936f" />
+              </svg>
+            </div>
 
             <ScrollReveal direction="up">
               <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">

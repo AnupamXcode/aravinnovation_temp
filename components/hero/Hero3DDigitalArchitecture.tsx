@@ -134,7 +134,7 @@ export function Hero3DDigitalArchitecture() {
             translateZ: shouldReduceMotion || !threeDEnabled ? 0 : scrollZ,
             transformStyle: "preserve-3d",
           }}
-          className="relative w-full rounded-[3rem] bg-white/95 dark:bg-[#172420]/95 backdrop-blur-md border border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-10 flex flex-col justify-between overflow-hidden transition-all duration-300 min-h-[660px]"
+          className="relative w-full rounded-[2.5rem] bg-white/95 dark:bg-[#172420]/95 backdrop-blur-md border border-[#f7d7b0] dark:border-[#253630] shadow-xl p-6 sm:p-8 flex flex-col justify-between overflow-hidden transition-all duration-300 min-h-[480px]"
         >
           {/* Ambient Radial Gradient Depth Plate */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-radial from-[#f15e1c]/12 via-[#2e936f]/8 to-transparent rounded-full blur-3xl pointer-events-none" />
@@ -148,7 +148,7 @@ export function Hero3DDigitalArchitecture() {
           />
 
           {/* Top Header Bar */}
-          <div className="relative z-20 flex items-center justify-between border-b border-[#f7d7b0]/60 dark:border-[#253630] pb-4 mb-4">
+          <div className="relative z-20 flex items-center justify-between border-b border-[#f7d7b0]/60 dark:border-[#253630] pb-3 mb-2">
             <div className="flex items-center gap-2.5">
               <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-ping" />
               <span className="text-sm font-mono font-bold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
@@ -162,7 +162,7 @@ export function Hero3DDigitalArchitecture() {
           </div>
 
           {/* Node Canvas Area with SVG Interconnections */}
-          <div className="relative flex-1 min-h-[460px] w-full my-2">
+          <div className="relative flex-1 min-h-[340px] w-full my-1">
             <svg
               className="absolute inset-0 w-full h-full pointer-events-none z-10"
               viewBox="0 0 100 100"

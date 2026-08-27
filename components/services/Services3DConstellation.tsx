@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useReducedMotion } from "framer-motion";
 import {
   Compass,
@@ -13,7 +14,6 @@ import {
   Users2,
   Cpu,
   ArrowRight,
-  ArrowLeft,
   Sparkles,
   Layers,
   ChevronLeft,
@@ -33,7 +33,7 @@ const serviceIconMap: Record<string, React.ReactNode> = {
   "training-staff-augmentation": <Users2 className="w-5 h-5 text-[#f15e1c]" />,
   "seo-services": <Search className="w-5 h-5 text-[#f15e1c]" />,
   "ai-portfolio": <Cpu className="w-5 h-5 text-[#f15e1c]" />,
-  // Legacy aliases fallback
+  // Legacy aliases
   "it-strategy-consulting": <Compass className="w-5 h-5 text-[#f15e1c]" />,
   "web-app-development": <Code2 className="w-5 h-5 text-[#f15e1c]" />,
   "digital-marketing": <TrendingUp className="w-5 h-5 text-[#f15e1c]" />,
@@ -47,21 +47,23 @@ interface ConstellationNode {
   yPct: number;
 }
 
-// 8 Node Orbit Coordinates for Desktop Constellation
+// 8 Node Radial Coordinates for Desktop Orbit Ecosystem
 const systematicPositions8 = [
-  { xPct: 50, yPct: 12 }, // 01: Top Center
-  { xPct: 76, yPct: 24 }, // 02: Top Right
-  { xPct: 86, yPct: 50 }, // 03: Mid Right
-  { xPct: 76, yPct: 76 }, // 04: Bottom Right
-  { xPct: 50, yPct: 88 }, // 05: Bottom Center
-  { xPct: 24, yPct: 76 }, // 06: Bottom Left
-  { xPct: 14, yPct: 50 }, // 07: Mid Left
-  { xPct: 24, yPct: 24 }, // 08: Top Left
+  { xPct: 50, yPct: 10 }, // 01: Top Center (IT Strategy)
+  { xPct: 76, yPct: 22 }, // 02: Top Right (Digital Marketing)
+  { xPct: 86, yPct: 50 }, // 03: Mid Right (Web & App Dev)
+  { xPct: 76, yPct: 78 }, // 04: Bottom Right (Risk & Compliance)
+  { xPct: 50, yPct: 90 }, // 05: Bottom Center (Audit & Improvement)
+  { xPct: 24, yPct: 78 }, // 06: Bottom Left (Staff Augmentation)
+  { xPct: 14, yPct: 50 }, // 07: Mid Left (SEO Services)
+  { xPct: 24, yPct: 22 }, // 08: Top Left (AI Portfolio)
 ];
 
 export function Services3DConstellation() {
+  const router = useRouter();
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = React.useState<number>(0);
+  const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
   const [dragStartX, setDragStartX] = React.useState<number | null>(null);
   const [isDragging, setIsDragging] = React.useState<boolean>(false);
 
@@ -78,7 +80,8 @@ export function Services3DConstellation() {
     });
   }, []);
 
-  const activeService = servicesData[activeIndex] || servicesData[0];
+  const currentHighlightIndex = hoveredIndex !== null ? hoveredIndex : activeIndex;
+  const activeService = servicesData[currentHighlightIndex] || servicesData[0];
 
   const handleNext = () => {
     setActiveIndex((prev) => (prev + 1) % totalPractices);
@@ -88,7 +91,7 @@ export function Services3DConstellation() {
     setActiveIndex((prev) => (prev - 1 + totalPractices) % totalPractices);
   };
 
-  // Touch Swipe Handlers for Mobile (Task C & E)
+  // Touch Swipe Handlers for Mobile
   const handlePointerDown = (clientX: number) => {
     setDragStartX(clientX);
     setIsDragging(true);
@@ -99,9 +102,9 @@ export function Services3DConstellation() {
     const deltaX = clientX - dragStartX;
     if (Math.abs(deltaX) > 35) {
       if (deltaX < 0) {
-        handleNext(); // Swipe left -> Next service
+        handleNext();
       } else {
-        handlePrev(); // Swipe right -> Previous service
+        handlePrev();
       }
     }
     setDragStartX(null);
@@ -111,20 +114,18 @@ export function Services3DConstellation() {
   return (
     <div className="relative w-full py-2 select-none">
       {/* ========================================================================
-          DESKTOP PRACTICE ECOSYSTEM EXPERIENCE (lg:block hidden)
+          DESKTOP PRACTICE ECOSYSTEM EXPERIENCE (lg:block hidden) (IMAGE 4)
           ======================================================================== */}
       <div
         ref={containerRef}
-        onMouseDown={(e) => handlePointerDown(e.clientX)}
-        onMouseUp={(e) => handlePointerUp(e.clientX)}
-        className="hidden lg:flex relative w-full rounded-[3rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-10 overflow-hidden flex-col justify-between space-y-6 min-h-[580px]"
+        className="hidden lg:flex relative w-full rounded-[3rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-10 overflow-hidden flex-col justify-between space-y-6 min-h-[600px]"
       >
-        {/* Subtle Radial Ambient Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-radial from-[#f15e1c]/12 via-[#2e936f]/8 to-transparent rounded-full blur-3xl pointer-events-none" />
+        {/* Ambient Radial Gradient Depth Plate */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] bg-radial from-[#f15e1c]/12 via-[#2e936f]/8 to-transparent rounded-full blur-3xl pointer-events-none" />
 
         {/* Integrated Header Bar */}
         <div className="relative z-20 flex items-center justify-between border-b border-[#f7d7b0] dark:border-[#253630] pb-4">
-          <div className="space-y-1">
+          <div className="space-y-1 text-left">
             <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] text-xs font-mono font-bold text-[#f15e1c]">
               <Sparkles className="w-3.5 h-3.5" />
               <span>OUR 8 CORE SERVICES ECOSYSTEM</span>
@@ -141,15 +142,15 @@ export function Services3DConstellation() {
           </Link>
         </div>
 
-        {/* Orbit Canvas with Central Engine & 8 Nodes */}
-        <div className="relative w-full min-h-[380px] flex-1 my-2">
+        {/* Orbit Canvas with Central Digital Core & 8 Clickable Nodes */}
+        <div className="relative w-full min-h-[400px] flex-1 my-2">
           <svg
             className="absolute inset-0 w-full h-full pointer-events-none z-10"
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
           >
             {constellationNodes.map((node, idx) => {
-              const isActive = activeIndex === idx;
+              const isActive = currentHighlightIndex === idx;
               return (
                 <g key={`line-${node.service.slug}`}>
                   <line
@@ -159,9 +160,19 @@ export function Services3DConstellation() {
                     y2={node.yPct}
                     stroke={isActive ? "#f15e1c" : "#f7d7b0"}
                     strokeWidth={isActive ? "3.5" : "1.2"}
-                    strokeDasharray={isActive ? "none" : "2 2"}
+                    strokeDasharray={isActive ? "none" : "3 3"}
                     className="transition-all duration-300"
                   />
+                  {/* Signal Pulse Traveling Toward Digital Core */}
+                  {isActive && (
+                    <circle
+                      cx={(50 + node.xPct) / 2}
+                      cy={(50 + node.yPct) / 2}
+                      r="3.5"
+                      fill="#f15e1c"
+                      className="animate-ping-slow"
+                    />
+                  )}
                   <circle
                     cx={node.xPct}
                     cy={node.yPct}
@@ -174,22 +185,29 @@ export function Services3DConstellation() {
             })}
           </svg>
 
-          {/* Central Engine Node */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center p-4 rounded-3xl bg-white dark:bg-[#101b17] border-2 border-[#f15e1c] shadow-2xl shadow-[#f15e1c]/25 text-center min-w-[170px] cursor-pointer hover:scale-105 transition-transform">
+          {/* Central Digital Core Response Node */}
+          <div
+            className={cn(
+              "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center p-5 rounded-3xl bg-white dark:bg-[#101b17] border-2 shadow-2xl text-center min-w-[180px] transition-all duration-300",
+              hoveredIndex !== null
+                ? "border-[#f15e1c] ring-4 ring-[#f15e1c]/30 scale-105 shadow-[#f15e1c]/40"
+                : "border-[#f15e1c] shadow-[#f15e1c]/25"
+            )}
+          >
             <div className="w-12 h-12 rounded-2xl bg-[#f15e1c] text-white flex items-center justify-center shadow-lg mb-1.5">
-              <Sparkles className="w-6 h-6 animate-pulse" />
+              <Sparkles className={cn("w-6 h-6", hoveredIndex !== null ? "animate-spin-slow text-white" : "animate-pulse")} />
             </div>
             <h3 className="text-xs font-extrabold font-display uppercase text-[#1b2823] dark:text-[#ffffff] tracking-wider">
               ARAV DIGITAL CORE
             </h3>
-            <p className="text-[10px] text-[#2e936f] font-semibold mt-0.5">
+            <p className="text-[10px] text-[#2e936f] font-mono font-bold mt-0.5">
               8 Integrated Services
             </p>
           </div>
 
-          {/* Orbiting 8 Service Nodes */}
+          {/* Orbiting 8 Service Nodes — ALL 8 ARE DIRECTLY CLICKABLE AND LINKED TO REAL ROUTES */}
           {constellationNodes.map((node, idx) => {
-            const isActive = activeIndex === idx;
+            const isActive = currentHighlightIndex === idx;
 
             return (
               <div
@@ -199,52 +217,57 @@ export function Services3DConstellation() {
                   left: `${node.xPct}%`,
                   transform: "translate(-50%, -50%)",
                 }}
-                onClick={() => setActiveIndex(idx)}
-                onMouseEnter={() => setActiveIndex(idx)}
+                onMouseEnter={() => {
+                  setHoveredIndex(idx);
+                  setActiveIndex(idx);
+                }}
+                onMouseLeave={() => setHoveredIndex(null)}
                 className="absolute z-30 cursor-pointer"
               >
-                <div
-                  className={cn(
-                    "p-3 rounded-2xl bg-white dark:bg-[#101b17] border shadow-md flex items-center gap-2.5 transition-all duration-300 group hover:shadow-2xl",
-                    isActive
-                      ? "border-[#f15e1c] ring-4 ring-[#f15e1c]/40 scale-108 shadow-[#f15e1c]/30 z-40"
-                      : "border-[#f7d7b0] dark:border-[#253630]"
-                  )}
-                >
+                <Link href={`/services/${node.service.slug}`} className="block">
                   <div
                     className={cn(
-                      "p-2 rounded-xl shrink-0 border transition-colors",
+                      "p-3 rounded-2xl bg-white dark:bg-[#101b17] border shadow-md flex items-center gap-2.5 transition-all duration-300 group hover:shadow-2xl",
                       isActive
-                        ? "bg-[#fce3d3] border-[#f15e1c]"
-                        : "bg-[#fefaf5] dark:bg-[#172420] border-[#f7d7b0]/50 dark:border-[#253630]"
+                        ? "border-[#f15e1c] ring-4 ring-[#f15e1c]/40 scale-108 shadow-[#f15e1c]/30 z-40"
+                        : "border-[#f7d7b0] dark:border-[#253630]"
                     )}
                   >
-                    {serviceIconMap[node.service.slug] || (
-                      <Layers className="w-5 h-5 text-[#f15e1c]" />
-                    )}
-                  </div>
-                  <div className="text-left max-w-[130px]">
-                    <h4
+                    <div
                       className={cn(
-                        "text-xs font-bold font-display transition-colors line-clamp-1",
+                        "p-2.5 rounded-xl shrink-0 border transition-colors",
                         isActive
-                          ? "text-[#f15e1c]"
-                          : "text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c]"
+                          ? "bg-[#fce3d3] border-[#f15e1c]"
+                          : "bg-[#fefaf5] dark:bg-[#172420] border-[#f7d7b0]/50 dark:border-[#253630]"
                       )}
                     >
-                      {node.service.shortTitle}
-                    </h4>
-                    <span className="text-[10px] text-[#2e936f] font-mono font-semibold block mt-0.5">
-                      0{idx + 1} / 08 &rarr;
-                    </span>
+                      {serviceIconMap[node.service.slug] || (
+                        <Layers className="w-5 h-5 text-[#f15e1c]" />
+                      )}
+                    </div>
+                    <div className="text-left max-w-[130px]">
+                      <h4
+                        className={cn(
+                          "text-xs font-bold font-display transition-colors line-clamp-1",
+                          isActive
+                            ? "text-[#f15e1c]"
+                            : "text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c]"
+                        )}
+                      >
+                        {node.service.shortTitle}
+                      </h4>
+                      <span className="text-[10px] text-[#2e936f] font-mono font-semibold block mt-0.5">
+                        0{idx + 1} / 08 &rarr;
+                      </span>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
             );
           })}
         </div>
 
-        {/* Bottom Detail Bar */}
+        {/* Bottom Detail Bar with Direct Navigation Action */}
         <div className="relative z-30 pt-3 border-t border-[#f7d7b0] dark:border-[#253630] bg-white dark:bg-[#101b17] p-5 rounded-2xl border shadow-lg space-y-4">
           <div className="flex items-center justify-between gap-4">
             <div className="space-y-1 text-left">
@@ -269,8 +292,8 @@ export function Services3DConstellation() {
       </div>
 
       {/* ========================================================================
-          DEDICATED MOBILE PRACTICE EXPERIENCE (lg:hidden block) (TASKS C & E)
-          Clean Swipeable Service Carousel & Compact Node Highlighter
+          DEDICATED MOBILE PRACTICE EXPERIENCE (lg:hidden block)
+          All 8 Nodes Touch-Swipeable & Directly Clickable
           ======================================================================== */}
       <div className="block lg:hidden w-full">
         <div
@@ -294,13 +317,12 @@ export function Services3DConstellation() {
               </div>
             </div>
 
-            {/* Counter */}
             <div className="px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] text-[#f15e1c] border border-[#f7d7b0] text-xs font-mono font-extrabold">
               0{activeIndex + 1} / 0{totalPractices}
             </div>
           </div>
 
-          {/* Dedicated Compact Node Interaction Card (TASK E) */}
+          {/* Active Card */}
           <div className="relative rounded-2xl bg-white dark:bg-[#101b17] border-2 border-[#f15e1c] p-5 shadow-md space-y-4">
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-center gap-3">
@@ -334,7 +356,26 @@ export function Services3DConstellation() {
             </Link>
           </div>
 
-          {/* Swipe Indicator & Controls (TASK C) */}
+          {/* Grid of All 8 Quick-Select Service Pills (Mobile) */}
+          <div className="grid grid-cols-2 gap-2 pt-2 border-t border-[#f7d7b0] dark:border-[#253630]">
+            {servicesData.map((svc, idx) => (
+              <Link
+                key={svc.slug}
+                href={`/services/${svc.slug}`}
+                className={cn(
+                  "p-2.5 rounded-xl text-xs font-bold border transition-all flex items-center gap-2",
+                  activeIndex === idx
+                    ? "bg-[#f15e1c] text-white border-[#f15e1c]"
+                    : "bg-white dark:bg-[#101b17] text-[#1b2823] dark:text-[#ffffff] border-[#f7d7b0] dark:border-[#253630]"
+                )}
+              >
+                <span className="font-mono text-[10px] opacity-80">0{idx + 1}</span>
+                <span className="truncate">{svc.shortTitle}</span>
+              </Link>
+            ))}
+          </div>
+
+          {/* Controls */}
           <div className="flex items-center justify-between pt-1">
             <button
               type="button"
