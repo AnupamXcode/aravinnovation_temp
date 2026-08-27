@@ -17,6 +17,7 @@ import { BreadcrumbSchema, ServiceSchema, FAQSchema } from "@/components/seo/Str
 import { ServiceMaintenanceBanner } from "@/components/services/ServiceMaintenanceBanner";
 import { ITStrategyInteractivePage } from "@/components/services/ITStrategyInteractivePage";
 import { DigitalMarketingInteractivePage } from "@/components/services/DigitalMarketingInteractivePage";
+import { WebDevInteractivePage } from "@/components/services/WebDevInteractivePage";
 import {
   Compass,
   Code2,
@@ -107,6 +108,11 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
   // Render Immersive Digital Marketing Interactive Page for Digital Marketing Slugs
   if (service.slug === "digital-marketing-brand-development" || slug === "digitalmarketing" || slug === "digital-marketing") {
     return <DigitalMarketingInteractivePage service={service} />;
+  }
+
+  // Render Immersive Web Development Interactive Page for Web Development Slugs
+  if (service.slug === "web-app-development" || slug === "webdevelopment" || slug === "web-development") {
+    return <WebDevInteractivePage service={service} />;
   }
 
   // Find related case study
