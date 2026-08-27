@@ -1,79 +1,11 @@
 import * as React from "react";
-import { cn } from "@/lib/utils";
-import { Loader2 } from "lucide-react";
+import { Button3D, Button3DProps } from "./button-3d";
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "link";
-  size?: "sm" | "md" | "lg";
-  isLoading?: boolean;
-  leftIcon?: React.ReactNode;
-  rightIcon?: React.ReactNode;
-}
+export interface ButtonProps extends Button3DProps {}
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      className,
-      children,
-      variant = "primary",
-      size = "md",
-      isLoading = false,
-      disabled,
-      leftIcon,
-      rightIcon,
-      type = "button",
-      ...props
-    },
-    ref
-  ) => {
-    const baseStyles =
-      "group inline-flex items-center justify-center font-medium rounded-full transition-all duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8672A] focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer select-none hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]";
-
-    const variantStyles = {
-      primary:
-        "bg-[#f15e1c] text-white hover:bg-[#d8480d] shadow-md hover:shadow-xl hover:shadow-[#f15e1c]/30 border border-transparent hover:border-[#f15e1c]",
-      secondary:
-        "bg-[#FCE3D3] dark:bg-[#2C221B] text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#fbd3bb] dark:hover:bg-[#382B22] border border-[#F4A97F]/40 shadow-sm hover:shadow-md",
-      outline:
-        "border-2 border-[#E8672A] text-[#E8672A] hover:bg-[#E8672A] hover:text-white bg-transparent shadow-xs hover:shadow-md",
-      ghost:
-        "text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FBF3EA] dark:hover:bg-[#201B17] hover:text-[#E8672A] bg-transparent",
-      link: "text-[#E8672A] underline-offset-4 hover:underline p-0 h-auto font-semibold bg-transparent hover:translate-y-0",
-    };
-
-    const sizeStyles = {
-      sm: "text-xs px-3.5 py-1.5 gap-1.5 h-8",
-      md: "text-sm px-5 py-2.5 gap-2 h-10",
-      lg: "text-base px-7 py-3.5 gap-2.5 h-12 font-semibold",
-    };
-
-    return (
-      <button
-        ref={ref}
-        type={type}
-        disabled={disabled || isLoading}
-        className={cn(
-          baseStyles,
-          variantStyles[variant],
-          variant !== "link" && sizeStyles[size],
-          className
-        )}
-        {...props}
-      >
-        {isLoading ? (
-          <Loader2 className="w-4 h-4 animate-spin text-current" />
-        ) : (
-          leftIcon
-        )}
-        {children}
-        {!isLoading && rightIcon && (
-          <span className="transition-transform duration-150 group-hover:translate-x-1 inline-flex shrink-0">
-            {rightIcon}
-          </span>
-        )}
-      </button>
-    );
+  (props, ref) => {
+    return <Button3D ref={ref} {...props} />;
   }
 );
 
