@@ -11,6 +11,8 @@ import { PageLoader } from "@/components/layout/PageLoader";
 import { ChatbotWidget } from "@/components/chatbot/ChatbotWidget";
 import { GlobalBackgroundMotion } from "@/components/motion/GlobalBackgroundMotion";
 import { WebsiteShutdownOverlay } from "@/components/layout/WebsiteShutdownOverlay";
+import { BackToTop } from "@/components/ui/BackToTop";
+import { SkipToContent } from "@/components/ui/SkipToContent";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -155,6 +157,7 @@ export default async function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col w-full bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans antialiased selection:bg-[#FCE3D3] dark:selection:bg-[#E8672A]/30 selection:text-[#E8672A]">
+        <SkipToContent />
         <NextIntlClientProvider messages={messages}>
           <SiteConfigProvider>
             <SiteContentProvider>
@@ -163,8 +166,9 @@ export default async function RootLayout({
                 <WebsiteShutdownOverlay>
                   <PageLoader />
                   <Navbar />
-                  <main className="flex-1 w-full">{children}</main>
+                  <main id="main-content" className="flex-1 w-full">{children}</main>
                   <Footer />
+                  <BackToTop />
                   <ChatbotWidget />
                 </WebsiteShutdownOverlay>
               </ThemeProvider>

@@ -18,7 +18,7 @@ export default function NotFound() {
             404
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight">
-            Lost in Space?
+            Looks like this page took a wrong turn.
           </h1>
           <p className="text-sm sm:text-base text-[#7A6A5F] dark:text-[#B8ACA0] max-w-md mx-auto leading-relaxed">
             The page you are looking for might have been moved, renamed, or is temporarily unavailable. Let&apos;s get you back on track.

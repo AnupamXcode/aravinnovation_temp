@@ -115,17 +115,17 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
   }
 
   // Render Immersive Web Development Interactive Page for Web Development Slugs
-  if (service.slug === "web-app-development" || slug === "webdevelopment" || slug === "web-development") {
+  if (service.slug === "web-app-development" || slug === "webdevelopment" || slug === "web-development" || slug === "web-application-development") {
     return <WebDevInteractivePage service={service} />;
   }
 
   // Render Immersive Risk & Governance Interactive Page for Risk & Governance Slugs
-  if (service.slug === "risk-compliance-governance" || slug === "riskandgovernance" || slug === "risk-governance") {
+  if (service.slug === "risk-compliance-governance" || slug === "riskandgovernance" || slug === "risk-governance" || slug === "risk-governance-compliance") {
     return <RiskGovInteractivePage service={service} />;
   }
 
   // Render Immersive Audit & Improvement Interactive Page for Audit Slugs
-  if (service.slug === "audit-and-improvement" || slug === "audit" || slug === "audit-improvement") {
+  if (service.slug === "audit-improvement" || service.slug === "audit-and-improvement" || slug === "audit" || slug === "audit-improvement" || slug === "audit-and-improvement") {
     return <AuditInteractivePage service={service} />;
   }
 

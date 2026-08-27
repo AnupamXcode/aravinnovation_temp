@@ -1191,13 +1191,20 @@ export const servicesData: Service[] = [
   },
 ];
 
-// Mapping for backward compatibility with old slugs
+// Mapping for backward compatibility with old & direct slugs
 const slugAliasMap: Record<string, string> = {
   "it-strategy-consulting": "it-strategy-implementation",
-  "web-app-development": "web-application-development",
+  "itstrategy": "it-strategy-implementation",
+  "web-application-development": "web-app-development",
+  "webdevelopment": "web-app-development",
   "digital-marketing": "digital-marketing-brand-development",
+  "digitalmarketing": "digital-marketing-brand-development",
   "seo": "seo-services",
   "risk-governance-compliance": "risk-compliance-governance",
+  "riskandgovernance": "risk-compliance-governance",
+  "audit": "audit-improvement",
+  "audit-and-improvement": "audit-improvement",
+  "trainingandstaff": "training-staff-augmentation",
   "ai-solutions": "ai-portfolio",
 };
 
