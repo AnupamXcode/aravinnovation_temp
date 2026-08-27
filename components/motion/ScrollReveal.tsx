@@ -20,12 +20,13 @@ export function ScrollReveal({
   className,
   delay = 0,
   direction = "up",
-  distance = 24,
-  duration = 0.5,
+  distance = 32,
+  duration = 0.55,
   once = true,
 }: ScrollRevealProps) {
   const ref = React.useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once, margin: "-40px" });
+  // Responsive margin so scrolling on mobile finger triggers animation smoothly
+  const isInView = useInView(ref, { once, margin: "0px -20px -20px 0px" });
   const { config } = useSiteConfig();
 
   const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
@@ -48,19 +49,17 @@ export function ScrollReveal({
   }
 
   const getInitialPosition = () => {
-    // Reduce distance on mobile viewports
-    const actualDistance = typeof window !== "undefined" && window.innerWidth < 640 ? Math.min(distance, 12) : distance;
     switch (direction) {
       case "up":
-        return { y: actualDistance, opacity: 0 };
+        return { y: distance, opacity: 0 };
       case "down":
-        return { y: -actualDistance, opacity: 0 };
+        return { y: -distance, opacity: 0 };
       case "left":
-        return { x: actualDistance, opacity: 0 };
+        return { x: distance, opacity: 0 };
       case "right":
-        return { x: -actualDistance, opacity: 0 };
+        return { x: -distance, opacity: 0 };
       default:
-        return { opacity: 0 };
+        return { opacity: 0, y: distance };
     }
   };
 

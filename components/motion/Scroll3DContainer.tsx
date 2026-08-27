@@ -16,17 +16,17 @@ export function Scroll3DContainer({
   className = "",
 }: Scroll3DContainerProps) {
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-60px" });
+  const isInView = useInView(containerRef, { once: true, margin: "0px -20px -20px 0px" });
 
   return (
     <div ref={containerRef} className={className}>
       <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 32, scale: 0.98 }}
+        animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 32, scale: 0.98 }}
         transition={{
-          duration: 0.5,
+          duration: 0.55,
           delay,
-          ease: [0.25, 0.1, 0.25, 1.0],
+          ease: [0.21, 0.47, 0.32, 0.98],
         }}
       >
         {children}

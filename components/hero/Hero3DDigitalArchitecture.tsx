@@ -116,11 +116,22 @@ export function Hero3DDigitalArchitecture() {
     mouseY.set(0);
   };
 
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (shouldReduceMotion || !containerRef.current || !threeDEnabled || e.touches.length === 0) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = (e.touches[0].clientX - rect.left) / rect.width - 0.5;
+    const y = (e.touches[0].clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+
   return (
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleMouseLeave}
       className="relative w-full py-4 select-none"
       style={{ perspective: "1200px" }}
     >
