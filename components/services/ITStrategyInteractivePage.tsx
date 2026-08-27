@@ -10,24 +10,17 @@ import {
   ArrowRight,
   Sparkles,
   CheckCircle2,
-  Cpu,
-  Zap,
-  Workflow,
-  Activity,
-  Layers,
   Lock,
   Server,
-  ChevronRight,
-  Globe2,
-  FileText,
-  AlertTriangle,
-  Building2,
-  Clock,
   TrendingUp,
-  RefreshCw,
+  Quote,
+  Star,
+  Check,
+  ChevronRight,
 } from "lucide-react";
 import { Service } from "@/data/services";
 import { caseStudiesData } from "@/data/case-studies";
+import { testimonialsData } from "@/data/testimonials";
 import { Button } from "@/components/ui/button";
 import { Button3D } from "@/components/ui/button-3d";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
@@ -38,7 +31,7 @@ interface ITStrategyPageProps {
   service: Service;
 }
 
-// 4 Interactive Service Ecosystem Items
+// 4 Interactive Service System Items
 interface InteractiveServiceItem {
   id: string;
   numStr: string;
@@ -169,7 +162,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
   const activeService = interactiveServices[activeServiceIdx];
   const totalServices = interactiveServices.length;
 
-  // Swipe / Drag controls for Service System
+  // Touch/Drag controls for Service Exploration System
   const handleDragStart = (clientX: number) => {
     setDragStartX(clientX);
     setIsDragging(true);
@@ -191,13 +184,16 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
     setIsDragging(false);
   };
 
-  // Find related case study
+  // Related Case Study
   const relatedCaseStudy = caseStudiesData.find(
     (c) =>
       service.relatedCaseStudySlugs.includes(c.slug) ||
       c.serviceSlug === service.slug ||
-      c.slug === "fintech-cloud-migration"
+      c.slug === "enterprise-cloud-transformation"
   );
+
+  // Relevant Testimonial
+  const testimonial = testimonialsData.find((t) => t.id === "test-3") || testimonialsData[0];
 
   return (
     <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#12100E] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden">
@@ -560,7 +556,41 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       </section>
 
       {/* =========================================================================
-          3. WORKFLOW SECTION (INTERACTIVE 4-STEP WORKFLOW)
+          3. CLIENT ENDORSEMENTS & TESTIMONIAL STORY
+          ========================================================================= */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
+        <div className="max-w-5xl mx-auto text-center space-y-8">
+          <Badge variant="secondary" size="md">
+            Executive Endorsement
+          </Badge>
+          <div className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-xl space-y-6 relative overflow-hidden">
+            <div className="p-3 rounded-2xl bg-[#f15e1c] text-white w-fit mx-auto shadow-md">
+              <Quote className="w-6 h-6" />
+            </div>
+
+            <p className="text-xl sm:text-2xl font-display font-medium text-[#1b2823] dark:text-[#ffffff] max-w-3xl mx-auto leading-relaxed italic">
+              &ldquo;{testimonial.quote}&rdquo;
+            </p>
+
+            <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#253630] space-y-1">
+              <div className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                {testimonial.author}
+              </div>
+              <div className="text-xs text-[#f15e1c] font-bold">
+                {testimonial.designation} &bull; {testimonial.company}
+              </div>
+              <div className="flex items-center justify-center gap-1 text-[#fab60a] pt-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-current" />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          4. WORKFLOW SECTION (INTERACTIVE 4-STEP WORKFLOW)
           ========================================================================= */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
         <div className="max-w-7xl mx-auto space-y-12">
@@ -589,7 +619,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
                     "rounded-3xl p-6 border-2 transition-all duration-300 cursor-pointer space-y-4 relative flex flex-col justify-between",
                     isActive
                       ? "bg-white dark:bg-[#101b17] border-[#f15e1c] shadow-2xl ring-4 ring-[#f15e1c]/30 scale-102 z-20"
-                      : "bg-[#fefaf5] dark:bg-[#172420] border-[#f7d7b0] dark:border-[#253630] opacity-85 hover:opacity-100"
+                      : "bg-[#fefaf5] dark:bg-[#172420] border-[#f7d7b0] dark:border-[#253630] opacity-60 hover:opacity-90"
                   )}
                 >
                   <div className="space-y-3">
@@ -609,9 +639,24 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
                       {wf.title}
                     </h3>
 
-                    <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                      {wf.description}
-                    </p>
+                    {/* Active stage description enters from below */}
+                    <AnimatePresence mode="wait">
+                      {isActive ? (
+                        <motion.p
+                          initial={{ opacity: 0, y: 15 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.25 }}
+                          className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium"
+                        >
+                          {wf.description}
+                        </motion.p>
+                      ) : (
+                        <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed line-clamp-2">
+                          {wf.description}
+                        </p>
+                      )}
+                    </AnimatePresence>
                   </div>
 
                   <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#253630]">
@@ -630,7 +675,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       </section>
 
       {/* =========================================================================
-          4. CASE STUDY PROOF OF EXECUTION
+          5. CASE STUDY PROOF OF EXECUTION
           ========================================================================= */}
       {relatedCaseStudy && (
         <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
@@ -703,7 +748,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       )}
 
       {/* =========================================================================
-          5. PRICING & ENGAGEMENT MODELS (UNIFIED DESIGN SYSTEM)
+          6. PRICING & ENGAGEMENT MODELS (UNIFIED DESIGN SYSTEM)
           ========================================================================= */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
         <div className="max-w-7xl mx-auto space-y-12">
@@ -766,7 +811,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       </section>
 
       {/* =========================================================================
-          6. FINAL TRANSFORMATION CTA (CONNECTED TO HERO NETWORK VISUAL)
+          7. FINAL TRANSFORMATION CTA (CONNECTED TO HERO NETWORK VISUAL)
           ========================================================================= */}
       <section id="inquire" className="relative py-24 px-4 sm:px-6 lg:px-12">
         <div className="max-w-5xl mx-auto rounded-[3rem] bg-gradient-to-br from-[#172420] via-[#101b17] to-[#1b2823] text-white p-10 sm:p-16 border-2 border-[#f15e1c] shadow-2xl space-y-8 text-center relative overflow-hidden">
