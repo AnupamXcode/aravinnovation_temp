@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Hero } from "@/components/hero/Hero";
 import { ArchitectureCaseStudyCard } from "@/components/case-studies/ArchitectureCaseStudyCard";
 import { BeforeAfterSlider } from "@/components/motion/BeforeAfterSlider";
-import { InteractiveServiceSelector } from "@/components/services/InteractiveServiceSelector";
 import { AnimatedTestimonialsCarousel } from "@/components/testimonials/AnimatedTestimonialsCarousel";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { Button } from "@/components/ui/button";
@@ -15,7 +14,6 @@ import { Services3DConstellation } from "@/components/services/Services3DConstel
 import { CaseStudy3DTransformation } from "@/components/case-studies/CaseStudy3DTransformation";
 import { Process3DPathway } from "@/components/motion/Process3DPathway";
 import { MovingLogoStrip } from "@/components/motion/MovingLogoStrip";
-import { servicesData } from "@/data/services";
 import { caseStudiesData } from "@/data/case-studies";
 import {
   ArrowRight,
@@ -61,12 +59,9 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const tBeforeAfter = await getTranslations("BeforeAfter");
-  const tServices = await getTranslations("Services");
   const tCaseStudies = await getTranslations("CaseStudies");
   const tWhyArav = await getTranslations("WhyArav");
   const tMethodology = await getTranslations("Methodology");
-  const tTestimonials = await getTranslations("Testimonials");
   const tFinalCta = await getTranslations("FinalCta");
   const tMovingLogo = await getTranslations("MovingLogo");
 
@@ -95,7 +90,7 @@ export default async function HomePage({
 
   return (
     <div className="flex flex-col min-h-screen w-full bg-[#ffffff] dark:bg-[#101b17] text-[#1b2823] dark:text-[#ffffff] space-y-6 md:space-y-10 pb-12 transition-colors duration-300 overflow-x-hidden">
-      {/* STAGE 1 & 2: HERO SECTION WITH 3D SCROLL SEQUENCE */}
+      {/* STAGE 1: HERO SECTION */}
       <Scroll3DContainer variant="hero">
         <Hero />
       </Scroll3DContainer>
@@ -112,7 +107,7 @@ export default async function HomePage({
         </ScrollReveal>
       </section>
 
-      {/* BEFORE/AFTER SLIDER */}
+      {/* BEFORE/AFTER TRANSFORMATIONAL SLIDER */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <section className="py-6 md:py-8 px-4 sm:px-6 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-xl text-center transition-colors duration-300">
           <ScrollReveal direction="up">
@@ -121,7 +116,7 @@ export default async function HomePage({
         </section>
       </div>
 
-      {/* WHAT WE DO 7-SERVICE INTERACTIVE SELECTOR WITH 3D CARD REVEAL */}
+      {/* 1. SERVICES / DIGITAL CORE ECOSYSTEM */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="services">
         <Scroll3DContainer variant="card">
           <Services3DConstellation />
@@ -131,13 +126,58 @@ export default async function HomePage({
       {/* FULL-WIDTH DIGITAL TRANSFORMATION PATHWAY */}
       <CaseStudy3DTransformation />
 
-      {/* TECHNICAL ARCHITECTURE CASE STUDIES */}
-      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
+      {/* 2. HOW ARAV WORKS / 5-STEP METHODOLOGY */}
+      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="process">
+        <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300">
+          <ScrollReveal direction="up">
+            <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+              <Badge variant="secondary" size="md">
+                {tMethodology("badge")}
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                {tMethodology("title")}
+              </h2>
+            </div>
+          </ScrollReveal>
+
+          <Process3DPathway />
+        </section>
+      </div>
+
+      {/* 3. CLIENT FEEDBACK & EXECUTIVE REVIEWS (EDITORIAL TESTIMONIAL LAYOUT) */}
+      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="testimonials">
+        <Scroll3DContainer variant="testimonial">
+          <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
+            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent" />
+
+            <ScrollReveal direction="up">
+              <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
+                <Badge variant="secondary" size="md">
+                  Executive Endorsements
+                </Badge>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                  CLIENT FEEDBACK &amp; EXECUTIVE REVIEWS
+                </h2>
+                <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                  Read feedback from engineering leaders, CTOs, and growth executives who have partnered with Arav Innovations across India and the United Arab Emirates.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal direction="up" delay={0.2}>
+              <AnimatedTestimonialsCarousel />
+            </ScrollReveal>
+          </section>
+        </Scroll3DContainer>
+      </div>
+
+      {/* 4. FEATURED ARCHITECTURE CASE STUDIES */}
+      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="case-studies">
         <Scroll3DContainer variant="card">
           <section className="py-10 md:py-14 px-6 sm:px-10 lg:px-12 rounded-[2.5rem] bg-[#f7d7b0]/30 dark:bg-[#1e2c27]/90 border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
             <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/50 to-transparent" />
-            
-            {/* Subtle Architectural Network Pattern Background (IMAGE 3 REFINEMENT) */}
+
+            {/* Subtle Architectural Network Pattern Background */}
             <div className="absolute inset-0 pointer-events-none opacity-[0.12] dark:opacity-[0.08] z-0">
               <svg className="w-full h-full" viewBox="0 0 1000 600" fill="none">
                 <line x1="100" y1="100" x2="350" y2="250" stroke="#f15e1c" strokeWidth="1" strokeDasharray="4 4" />
@@ -149,7 +189,7 @@ export default async function HomePage({
             </div>
 
             <ScrollReveal direction="up">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
+              <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6 relative z-10">
                 <div className="max-w-3xl space-y-2">
                   <Badge variant="secondary" size="md">
                     {tCaseStudies("badge")}
@@ -166,37 +206,13 @@ export default async function HomePage({
               </div>
             </ScrollReveal>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
               {caseStudiesData.slice(0, 3).map((study, idx) => (
                 <Scroll3DContainer key={study.slug} variant="card" delay={idx * 0.1}>
                   <ArchitectureCaseStudyCard caseStudy={study} locale={locale} />
                 </Scroll3DContainer>
               ))}
             </div>
-          </section>
-        </Scroll3DContainer>
-      </div>
-
-      {/* CLIENT TESTIMONIALS WITH 3D PARALLAX TILT */}
-      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
-        <Scroll3DContainer variant="testimonial">
-          <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
-            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent" />
-
-            <ScrollReveal direction="up">
-              <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-                <Badge variant="secondary" size="md">
-                  {tTestimonials("badge")}
-                </Badge>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                  {tTestimonials("title")}
-                </h2>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal direction="up" delay={0.2}>
-              <AnimatedTestimonialsCarousel />
-            </ScrollReveal>
           </section>
         </Scroll3DContainer>
       </div>
@@ -237,25 +253,7 @@ export default async function HomePage({
         </section>
       </div>
 
-      {/* 5-STEP METHODOLOGY TIMELINE */}
-      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="process">
-        <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300">
-          <ScrollReveal direction="up">
-            <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-              <Badge variant="secondary" size="md">
-                {tMethodology("badge")}
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                {tMethodology("title")}
-              </h2>
-            </div>
-          </ScrollReveal>
-
-          <Process3DPathway />
-        </section>
-      </div>
-
-      {/* FINAL LEAD FORM & CTA SECTION WITH 3D SCALE REVEAL */}
+      {/* 5. FINAL LEAD FORM & CTA SECTION */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="contact">
         <Scroll3DContainer variant="cta">
           <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-gradient-to-br from-[#ffffff] via-[#fefaf5] to-[#f7d7b0]/50 dark:from-[#172420] dark:via-[#1e2c27] dark:to-[#253630] border-2 border-[#f15e1c]/40 shadow-2xl transition-all duration-300">
