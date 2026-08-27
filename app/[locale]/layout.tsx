@@ -49,7 +49,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://aravinnovations.com"),
   title: {
-    default: "Arav Innovations | Technology, IT Strategy & Digital Growth",
+    default: "Arav Innovations | Enterprise IT and Growth",
     template: "%s | Arav Innovations",
   },
   description:
@@ -81,14 +81,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://aravinnovations.com",
     siteName: "Arav Innovations",
-    title: "Arav Innovations | Technology, IT Strategy & Digital Growth",
+    title: "Arav Innovations | Enterprise IT and Growth",
     description:
       "Enterprise IT Strategy, Full-Stack Software Engineering, Performance Marketing, Governance, and Staff Augmentation globally.",
   },
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
       { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
     ],
     apple: [
       { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },

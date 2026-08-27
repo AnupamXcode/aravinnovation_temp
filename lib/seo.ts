@@ -115,10 +115,10 @@ export function getRouteCatalog(): SEOPageSettings[] {
     {
       path: "/",
       label: "Homepage",
-      metaTitle: "Enterprise IT & Growth | Arav Innovations",
+      metaTitle: "Arav Innovations | Enterprise IT and Growth",
       metaDescription: "Arav Innovations delivers enterprise IT strategy, full-stack web & mobile engineering, performance marketing, DPDP compliance audit, and staff augmentation globally.",
       priority: 1.0,
-      ogTitle: "Enterprise IT & Growth | Arav Innovations",
+      ogTitle: "Arav Innovations | Enterprise IT and Growth",
       ogImage: `${SITE_BASE_URL}/og-default.jpg`,
       ogDescription: "Enterprise technology, digital growth marketing, risk governance & dedicated engineering squads.",
       robots: "Index, Follow",
