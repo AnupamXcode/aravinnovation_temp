@@ -21,6 +21,7 @@ import { WebDevInteractivePage } from "@/components/services/WebDevInteractivePa
 import { RiskGovInteractivePage } from "@/components/services/RiskGovInteractivePage";
 import { AuditInteractivePage } from "@/components/services/AuditInteractivePage";
 import { TrainingStaffInteractivePage } from "@/components/services/TrainingStaffInteractivePage";
+import { SEOInteractivePage } from "@/components/services/SEOInteractivePage";
 import {
   Compass,
   Code2,
@@ -131,6 +132,11 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
   // Render Immersive Training & Staff Augmentation Interactive Page for Training & Staff Slugs
   if (service.slug === "training-staff-augmentation" || slug === "trainingandstaff" || slug === "training-staff") {
     return <TrainingStaffInteractivePage service={service} />;
+  }
+
+  // Render Immersive SEO Interactive Page for SEO Slugs
+  if (service.slug === "seo-services" || slug === "seo" || slug === "seo-services") {
+    return <SEOInteractivePage service={service} />;
   }
 
   // Find related case study
