@@ -109,7 +109,7 @@ export function LeadForm({
   if (isSubmitted) {
     return (
       <div className="rounded-3xl bg-white dark:bg-[#171411] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl text-center space-y-5">
-        <div className="w-16 h-16 rounded-2xl bg-[#FCE3D3] dark:bg-[#261F1A] text-[#E8672A] mx-auto flex items-center justify-center border border-[#F4A97F]/40 dark:border-[#3D332B] shadow-xs">
+        <div className="w-16 h-16 rounded-2xl bg-[#FCE3D3] dark:bg-[#261F1A] text-[#f15e1c] mx-auto flex items-center justify-center border border-[#F4A97F]/40 dark:border-[#3D332B] shadow-xs">
           <CheckCircle2 className="w-8 h-8" />
         </div>
         <h3 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
@@ -215,10 +215,10 @@ export function LeadForm({
         helperText="Minimum 10 characters. Confidential."
       />
 
-      {/* Optional Budget Band */}
+      {/* Optional Engagement Scope */}
       <Input
-        label="Target Budget Band (Optional)"
-        placeholder="e.g. $10k - $25k, ₹5L - ₹15L, or AED 50k+"
+        label="Target Engagement Scope (Optional)"
+        placeholder="e.g. Enterprise Scoping, Cloud Architecture, Custom Pod"
         {...register("budget")}
         error={errors.budget?.message}
       />
@@ -229,7 +229,7 @@ export function LeadForm({
           type="submit"
           variant="primary"
           size="lg"
-          className="w-full justify-center shadow-md hover:shadow-xl hover:shadow-[#E8672A]/25"
+          className="w-full justify-center shadow-md hover:shadow-xl hover:shadow-[#f15e1c]/25 bg-[#f15e1c] text-white"
           isLoading={isSubmitting}
           rightIcon={<ArrowRight className="w-4 h-4" />}
         >
@@ -237,8 +237,8 @@ export function LeadForm({
         </Button>
       </div>
 
-      <div className="flex items-center justify-center gap-2 text-xs text-[#7A6A5F] dark:text-[#B8ACA0] text-center pt-1">
-        <ShieldCheck className="w-4 h-4 text-[#E8672A]" />
+      <div className="flex items-center justify-center gap-2 text-xs text-[#4a5c55] dark:text-[#d3eee4] text-center pt-1">
+        <ShieldCheck className="w-4 h-4 text-[#2e936f]" />
         <span>Strict Confidentiality Guaranteed. Operating Globally.</span>
       </div>
     </form>

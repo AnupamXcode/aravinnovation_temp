@@ -26,9 +26,9 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         {label && (
           <label
             htmlFor={selectId}
-            className="block text-xs font-semibold uppercase tracking-wider text-[#3A2E27]"
+            className="block text-xs font-semibold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]"
           >
-            {label} {required && <span className="text-[#E8672A]">*</span>}
+            {label} {required && <span className="text-[#f15e1c]">*</span>}
           </label>
         )}
         <select
@@ -36,10 +36,10 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           ref={ref}
           required={required}
           className={cn(
-            "w-full rounded-lg border bg-white px-3.5 py-2.5 text-sm text-[#3A2E27] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#E8672A] focus:border-transparent disabled:opacity-50 disabled:bg-[#FBF3EA] cursor-pointer",
+            "w-full rounded-lg border bg-white dark:bg-[#172420] px-3.5 py-2.5 text-sm text-[#1b2823] dark:text-[#ffffff] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#f15e1c] focus:border-transparent disabled:opacity-50 disabled:bg-[#f7d7b0]/20 cursor-pointer",
             error
-              ? "border-red-500 focus:ring-red-500"
-              : "border-[#EFE2D6] hover:border-[#E8672A]/50",
+              ? "border-[#f15e1c] focus:ring-[#f15e1c]"
+              : "border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c]/60",
             className
           )}
           {...props}
@@ -55,7 +55,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             </option>
           ))}
         </select>
-        {error && <p className="text-xs text-red-600 font-medium">{error}</p>}
+        {error && <p className="text-xs text-[#f15e1c] font-medium">{error}</p>}
       </div>
     );
   }

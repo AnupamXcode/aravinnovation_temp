@@ -42,7 +42,7 @@ export default function AdminLoginPage() {
           <div className="flex justify-center mb-4">
             <BrandLogo />
           </div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FCE3D3]/60 dark:bg-[#2C221B] text-[#E8672A] text-xs font-semibold border border-[#F4A97F]/40">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FCE3D3]/60 dark:bg-[#2C221B] text-[#f15e1c] text-xs font-semibold border border-[#F4A97F]/40">
             <Lock className="w-3.5 h-3.5" />
             <span>Administrator Access Control</span>
           </div>
@@ -72,7 +72,7 @@ export default function AdminLoginPage() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter admin username"
-              className="w-full text-sm px-4 py-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FFFDF9] dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-2 focus:ring-[#E8672A]"
+              className="w-full text-sm px-4 py-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FFFDF9] dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-2 focus:ring-[#f15e1c]"
             />
           </div>
 
@@ -86,7 +86,7 @@ export default function AdminLoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••••••"
-              className="w-full text-sm px-4 py-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FFFDF9] dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-2 focus:ring-[#E8672A]"
+              className="w-full text-sm px-4 py-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FFFDF9] dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-2 focus:ring-[#f15e1c]"
             />
           </div>
 
@@ -103,7 +103,7 @@ export default function AdminLoginPage() {
 
         <div className="pt-4 border-t border-[#EFE2D6] dark:border-[#2C241E] text-center">
           <span className="text-[11px] font-mono text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center justify-center gap-1">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#E8672A]" />
+            <ShieldCheck className="w-3.5 h-3.5 text-[#f15e1c]" />
             <span>Protected Route &bull; Session Persistence Enabled</span>
           </span>
         </div>

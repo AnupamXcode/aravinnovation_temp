@@ -14,13 +14,13 @@ export function Badge({
   ...props
 }: BadgeProps) {
   const variantStyles = {
-    primary: "bg-[#E8672A] text-white border-transparent shadow-xs",
+    primary: "bg-[#f15e1c] text-white border-transparent shadow-xs",
     secondary:
-      "bg-[#FCE3D3] text-[#3A2E27] border-[#F4A97F]/40 dark:bg-[#2A2019] dark:text-[#FAF5EE] dark:border-[#E8672A]/40",
+      "bg-[#f7d7b0] text-[#1b2823] border-[#f15e1c]/30 dark:bg-[#253630] dark:text-[#ffffff] dark:border-[#f15e1c]/40",
     outline:
-      "border border-[#E8672A]/40 text-[#E8672A] bg-transparent dark:border-[#E8672A]/60 dark:text-[#F4A97F]",
+      "border border-[#f15e1c]/40 text-[#f15e1c] bg-transparent dark:border-[#f15e1c]/60 dark:text-[#f15e1c]",
     subtle:
-      "bg-[#FBF3EA] text-[#7A6A5F] border-[#EFE2D6] dark:bg-[#1E1915] dark:text-[#B8ACA0] dark:border-[#3D332B]",
+      "bg-[#fefaf5] text-[#4a5c55] border-[#f7d7b0] dark:bg-[#172420] dark:text-[#d3eee4] dark:border-[#253630]",
   };
 
   const sizeStyles = {

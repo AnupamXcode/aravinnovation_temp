@@ -52,7 +52,7 @@ export default async function InsightsPage() {
           <ScrollReveal direction="up" delay={0.1}>
             <div className="inline-flex items-center gap-2">
               <Badge variant="secondary" size="md">
-                <Sparkles className="w-3.5 h-3.5 text-[#E8672A]" />
+                <Sparkles className="w-3.5 h-3.5 text-[#f15e1c]" />
                 <span>Executive Thought Leadership</span>
               </Badge>
             </div>
@@ -75,7 +75,7 @@ export default async function InsightsPage() {
             <span className="text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] mr-2">
               Practices:
             </span>
-            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#E8672A] text-white">
+            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#f15e1c] text-white">
               All Articles ({articles.length})
             </span>
             {categories.map((cat) => (
@@ -99,7 +99,7 @@ export default async function InsightsPage() {
                     Featured Insight
                   </Badge>
                   <span className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5 text-[#E8672A]" /> {featuredArticle.readTime}
+                    <Clock className="w-3.5 h-3.5 text-[#f15e1c]" /> {featuredArticle.readTime}
                   </span>
                   <span className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
                     &bull; {featuredArticle.dateFormatted}
@@ -108,7 +108,7 @@ export default async function InsightsPage() {
                 <h2 className="text-2xl sm:text-3xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
                   <Link
                     href={`/insights/${featuredArticle.slug}`}
-                    className="hover:text-[#E8672A] transition-colors"
+                    className="hover:text-[#f15e1c] transition-colors"
                   >
                     {featuredArticle.title}
                   </Link>
@@ -136,7 +136,7 @@ export default async function InsightsPage() {
                 <ul className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] space-y-2.5">
                   {featuredArticle.keyTakeaways.slice(0, 3).map((takeaway, tIdx) => (
                     <li key={tIdx} className="flex items-start gap-2">
-                      <span className="text-[#E8672A] font-bold">&bull;</span>
+                      <span className="text-[#f15e1c] font-bold">&bull;</span>
                       <span>{takeaway}</span>
                     </li>
                   ))}
@@ -151,18 +151,18 @@ export default async function InsightsPage() {
           {gridArticles.map((art, idx) => (
             <ScrollReveal key={art.slug} delay={idx * 0.1} direction="up" className="h-full">
               <TiltCard maxTilt={5} scale={1.01} className="h-full">
-                <div className="h-full p-7 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-2xl hover:border-[#E8672A]/40 transition-all flex flex-col justify-between group">
+                <div className="h-full p-7 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-2xl hover:border-[#f15e1c]/40 transition-all flex flex-col justify-between group">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <Badge variant="secondary" size="sm">
                         {art.category}
                       </Badge>
                       <span className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center gap-1">
-                        <Clock className="w-3 h-3 text-[#E8672A]" /> {art.readTime}
+                        <Clock className="w-3 h-3 text-[#f15e1c]" /> {art.readTime}
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] transition-colors line-clamp-3">
+                    <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors line-clamp-3">
                       <Link href={`/insights/${art.slug}`}>
                         {art.title}
                       </Link>
@@ -177,7 +177,7 @@ export default async function InsightsPage() {
                     <span className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">{art.dateFormatted}</span>
                     <Link
                       href={`/insights/${art.slug}`}
-                      className="text-xs font-bold text-[#E8672A] hover:underline inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+                      className="text-xs font-bold text-[#f15e1c] hover:underline inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
                     >
                       Read Article <ArrowRight className="w-3.5 h-3.5" />
                     </Link>

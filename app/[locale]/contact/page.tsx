@@ -79,7 +79,7 @@ export default async function ContactPage({
                   {/* India HQ */}
                   <div className="p-5 rounded-2xl bg-white dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] space-y-2">
                     <div className="flex items-center gap-2 font-bold text-sm text-[#3A2E27] dark:text-[#FAF5EE]">
-                      <MapPin className="w-4 h-4 text-[#E8672A]" />
+                      <MapPin className="w-4 h-4 text-[#f15e1c]" />
                       <span>India Headquarters</span>
                     </div>
                     <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
@@ -89,7 +89,7 @@ export default async function ContactPage({
                       Phone:{" "}
                       <a
                         href={`tel:${companyContactInfo.phoneIndiaRaw}`}
-                        className="text-[#E8672A] hover:underline"
+                        className="text-[#f15e1c] hover:underline"
                       >
                         {companyContactInfo.phoneIndia}
                       </a>
@@ -99,7 +99,7 @@ export default async function ContactPage({
                   {/* UAE Hub */}
                   <div className="p-5 rounded-2xl bg-white dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] space-y-2">
                     <div className="flex items-center gap-2 font-bold text-sm text-[#3A2E27] dark:text-[#FAF5EE]">
-                      <MapPin className="w-4 h-4 text-[#E8672A]" />
+                      <MapPin className="w-4 h-4 text-[#f15e1c]" />
                       <span>UAE & Middle East Hub</span>
                     </div>
                     <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
@@ -109,7 +109,7 @@ export default async function ContactPage({
                       Phone:{" "}
                       <a
                         href={`tel:${companyContactInfo.phoneUAERaw}`}
-                        className="text-[#E8672A] hover:underline"
+                        className="text-[#f15e1c] hover:underline"
                       >
                         {companyContactInfo.phoneUAE}
                       </a>
@@ -119,16 +119,16 @@ export default async function ContactPage({
                   {/* Direct Emails */}
                   <div className="pt-2 space-y-2.5 text-xs text-[#7A6A5F] dark:text-[#B8ACA0] border-t border-[#EFE2D6] dark:border-[#2C241E]">
                     <div className="flex items-center gap-2">
-                      <Mail className="w-4 h-4 text-[#E8672A]" />
+                      <Mail className="w-4 h-4 text-[#f15e1c]" />
                       <span className="font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">General Inquiries:</span>
-                      <a href={`mailto:${companyContactInfo.email}`} className="text-[#E8672A] hover:underline">
+                      <a href={`mailto:${companyContactInfo.email}`} className="text-[#f15e1c] hover:underline">
                         {companyContactInfo.email}
                       </a>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Mail className="w-4 h-4 text-[#E8672A]" />
+                      <Mail className="w-4 h-4 text-[#f15e1c]" />
                       <span className="font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">Sales & New Business:</span>
-                      <a href={`mailto:${companyContactInfo.salesEmail}`} className="text-[#E8672A] hover:underline">
+                      <a href={`mailto:${companyContactInfo.salesEmail}`} className="text-[#f15e1c] hover:underline">
                         {companyContactInfo.salesEmail}
                       </a>
                     </div>
@@ -140,7 +140,7 @@ export default async function ContactPage({
             {/* Response Guarantee Box */}
             <ScrollReveal direction="left" delay={0.3}>
               <div className="p-6 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm space-y-3">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#E8672A]">
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#f15e1c]">
                   <Clock className="w-4 h-4" />
                   <span>Response SLA</span>
                 </div>

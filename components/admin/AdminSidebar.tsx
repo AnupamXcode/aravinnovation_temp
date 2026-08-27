@@ -51,7 +51,7 @@ export function AdminSidebar({
       groupLabel: "WEBSITE",
       items: [
         { id: "hero", label: "Homepage & Hero", icon: Globe },
-        { id: "services", label: "8 Core Services", icon: Briefcase },
+        { id: "services", label: "Core Services", icon: Briefcase },
         { id: "industries", label: "Industry Solutions", icon: Building2 },
         { id: "casestudies", label: "Case Studies", icon: FileText },
         { id: "methodology", label: "5-Step Methodology", icon: Workflow },

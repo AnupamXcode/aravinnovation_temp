@@ -104,10 +104,10 @@ export function Footer() {
             </h2>
 
             {/* Side-by-Side Pill Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3.5 pt-2">
               <a
                 href={footer?.bookCallUrl || `tel:${footer?.indiaPhone?.replace(/\s+/g, "") || "+919650625777"}`}
-                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#f15e1c] border border-white/40 backdrop-blur-md text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group"
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#f15e1c] border border-white/40 backdrop-blur-md text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
                 <span>{t("bookCall")}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -115,7 +115,7 @@ export function Footer() {
 
               <Link
                 href={footer?.contactUsUrl || "/contact"}
-                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#f15e1c] border border-white/40 backdrop-blur-md text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group"
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#f15e1c] border border-white/40 backdrop-blur-md text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
                 <span>{t("contactUs")}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -170,12 +170,12 @@ export function Footer() {
 
               {/* UAE */}
               {footer?.uaeVisible !== false && (
-                <div className="space-y-1.5">
+                <div className="space-y-1.5 pb-4 sm:pb-0">
                   <a
-                    href={`tel:${footer?.uaePhone?.replace(/\s+/g, "") || "+971521555792"}`}
+                    href="tel:+971521555792"
                     className="font-bold text-sm text-white hover:underline block"
                   >
-                    {t("uaeOffice")} (+971 521555792)
+                    UAE Regional Office (+971 521555792)
                   </a>
                   <div className="w-full h-px bg-white/30 my-2" />
                   <p className="text-white/85 leading-relaxed whitespace-pre-line">
@@ -229,8 +229,8 @@ export function Footer() {
 
         {/* Bottom Bar: Legal Links on Left, Copyright on Right */}
         <ScrollReveal direction="up" delay={0.2}>
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/95 border-t border-white/20 pt-6">
-            <div className="flex flex-wrap items-center gap-3 sm:gap-6 font-semibold">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/95 border-t border-white/20 pt-6 pb-16 sm:pb-4">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-6 font-semibold">
               {[
                 { label: t("privacyPolicy"), href: "/privacy-policy" },
                 { label: t("refundPolicy"), href: "/refund-policy" },
@@ -253,8 +253,8 @@ export function Footer() {
               ))}
             </div>
 
-            <div className="font-medium text-white/90">
-              {`© ${new Date().getFullYear()} Arav Innovations. ${t("rights")}`}
+            <div className="font-medium text-white/90 text-center sm:text-right">
+              {`© 2024–2026 Arav Innovations. ${t("rights")}`}
             </div>
           </div>
         </ScrollReveal>

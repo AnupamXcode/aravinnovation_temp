@@ -32,7 +32,7 @@ export function WaitlistForm({ productName }: WaitlistFormProps) {
           You&apos;re on the early access waitlist!
         </h4>
         <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
-          We will notify you at <span className="font-semibold text-[#E8672A]">{email}</span> as soon as {productName} opens beta registration.
+          We will notify you at <span className="font-semibold text-[#f15e1c]">{email}</span> as soon as {productName} opens beta registration.
         </p>
       </div>
     );
@@ -46,7 +46,7 @@ export function WaitlistForm({ productName }: WaitlistFormProps) {
         placeholder="Enter your work email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="w-full rounded-full border-[#EFE2D6] dark:border-[#2C241E] focus:border-[#E8672A] bg-white dark:bg-[#171411] transition-transform duration-150 focus:scale-[1.02]"
+        className="w-full rounded-full border-[#EFE2D6] dark:border-[#2C241E] focus:border-[#f15e1c] bg-white dark:bg-[#171411] transition-transform duration-150 focus:scale-[1.02]"
       />
       <Button
         type="submit"

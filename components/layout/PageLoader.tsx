@@ -32,7 +32,7 @@ export function PageLoader() {
           className="fixed inset-0 z-50 flex items-center justify-center bg-[#FFFDF9]/95 dark:bg-[#0D0B0A]/95 backdrop-blur-md perspective-1000"
         >
           {/* Ambient Glowing Background */}
-          <div className="absolute w-96 h-96 rounded-full bg-[#E8672A]/15 dark:bg-[#E8672A]/20 blur-3xl -z-10 pointer-events-none" />
+          <div className="absolute w-96 h-96 rounded-full bg-[#f15e1c]/15 dark:bg-[#f15e1c]/20 blur-3xl -z-10 pointer-events-none" />
 
           {/* 3D Branded Centerpiece */}
           <motion.div

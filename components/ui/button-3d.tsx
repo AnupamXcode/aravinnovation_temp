@@ -90,7 +90,7 @@ export const Button3D = React.forwardRef<HTMLButtonElement, Button3DProps>(
       outline:
         "border-2 border-[#f15e1c] text-[#f15e1c] hover:bg-[#f15e1c] hover:text-white bg-transparent shadow-xs hover:shadow-md",
       ghost:
-        "text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A] hover:text-[#f15e1c] bg-transparent",
+        "text-[#1b2823] dark:text-[#ffffff] hover:bg-[#f7d7b0]/40 dark:hover:bg-[#253630] hover:text-[#f15e1c] bg-transparent",
       link:
         "text-[#f15e1c] underline-offset-4 hover:underline p-0 h-auto font-semibold bg-transparent shadow-none border-none",
     };

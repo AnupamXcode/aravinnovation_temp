@@ -12,6 +12,14 @@
     --brand-gold: #fab60a;
     --brand-peach: #f7d7b0;
 
+    /* Centralized Brand Variables */
+    --arav-orange: #f15e1c;
+    --arav-green: #2e936f;
+    --arav-white: #ffffff;
+    --arav-yellow: #ffec69;
+    --arav-gold: #fab60a;
+    --arav-light-orange: #f7d7b0;
+
     /* Tonal Ramps - Primary Orange (#f15e1c) */
     --color-orange-50: #fef4ee;
     --color-orange-100: #fde4d5;

@@ -139,56 +139,7 @@ const howWeWorkSteps = [
   },
 ];
 
-// Pricing Packages Data
-const pricingPlans = [
-  {
-    name: "Starter Pack",
-    price: "₹10,000",
-    period: "one-time diagnostic sprint",
-    description: "Ideal for growing organizations seeking a initial operational workflow audit & bottleneck scan.",
-    isPopular: false,
-    features: [
-      "Operational Workflow Diagnostic Audit",
-      "Process Bottleneck & Redundancy Scan",
-      "Basic Financial Resource Allocation Check",
-      "30-Minute Advisory Review Call",
-      "Prioritized Audit Findings Report",
-    ],
-    ctaText: "Choose Starter Pack",
-  },
-  {
-    name: "Optimal Pack",
-    price: "₹50,000",
-    period: "quarterly audit",
-    description: "Complete operational & financial audit, process redesign, compliance verification, and action blueprint.",
-    isPopular: true,
-    features: [
-      "Full Operational & Financial Process Audit",
-      "Workflow Redesign & Automation Blueprint",
-      "Regulatory Compliance Gap Analysis",
-      "Quarterly Performance Benchmarking",
-      "Bi-weekly Strategy Advisory Calls",
-      "Dedicated Senior Audit Director",
-    ],
-    ctaText: "Select Optimal Pack",
-  },
-  {
-    name: "Full Pack",
-    price: "₹1 Lakh",
-    period: "enterprise monthly retainer",
-    description: "Continuous performance monitoring pod, real-time telemetry analytics, and dedicated audit team.",
-    isPopular: false,
-    features: [
-      "Enterprise Continuous Audit Execution",
-      "Real-Time Telemetry Dashboard Setup",
-      "Dedicated Operations & Compliance Pod",
-      "Quarterly Executive Board Reporting",
-      "Continuous Optimization Feedback Loop",
-      "Unlimited Audit Consultations",
-    ],
-    ctaText: "Select Full Pack",
-  },
-];
+
 
 // Alternating CTA Words
 const ctaWords = ["engaging", "innovative", "strategic", "outstanding", "exceptional"];
@@ -662,79 +613,52 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
       </section>
 
       {/* =========================================================================
-          6. PLANS / PACKAGES — EQUAL SIZED COMPARISON CARDS
+          6. ENTERPRISE PROJECT CTA — DISCUSS YOUR PROJECT & EXECUTION PATH
           ========================================================================= */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-        <div className="max-w-7xl mx-auto space-y-12">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              We&apos;ve got a plan — One that&apos;s perfect for you
-            </Badge>
+      <section id="pricing" className="relative py-20 px-4 sm:px-6 lg:px-12 bg-[#fefaf5] dark:bg-[#172420] border-y border-[#f7d7b0] dark:border-[#253630]">
+        <div className="max-w-5xl mx-auto text-center space-y-8">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#f15e1c]/10 border border-[#f15e1c]/30 text-xs font-mono font-bold text-[#f15e1c]">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>CUSTOM ENTERPRISE ENGAGEMENT</span>
+          </div>
+
+          <div className="space-y-4 max-w-3xl mx-auto">
             <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Transparent Audit Packages
+              Let&apos;s Build What Comes Next
             </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              Select from fixed-scope operational audits, complete process redesigns, or enterprise telemetry retainers.
+            <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+              Tell us what you&apos;re trying to achieve and we&apos;ll help you identify the right technology, strategy, and execution path.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-            {pricingPlans.map((plan, idx) => (
-              <div
-                key={idx}
-                className={cn(
-                  "rounded-3xl p-8 border-2 transition-all duration-300 flex flex-col justify-between space-y-6 hover:shadow-2xl h-full",
-                  plan.isPopular
-                    ? "bg-white dark:bg-[#101b17] border-[#f15e1c] shadow-2xl ring-2 ring-[#f15e1c]/40"
-                    : "bg-[#fefaf5] dark:bg-[#172420] border-[#f7d7b0] dark:border-[#253630]"
-                )}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+            <Link href="/contact">
+              <Button3D
+                variant="primary"
+                size="lg"
+                rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
+                className="w-full sm:w-auto justify-center bg-[#f15e1c] hover:bg-[#fab60a] text-white"
               >
-                <div className="space-y-4 text-left">
-                  {plan.isPopular && (
-                    <span className="px-3 py-1 rounded-full bg-[#fce3d3] text-[#f15e1c] text-[10px] font-mono font-bold uppercase tracking-wider inline-block">
-                      Recommended For Operational Excellence
-                    </span>
-                  )}
-                  <div>
-                    <h3 className="text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                      {plan.name}
-                    </h3>
-                    <div className="mt-2 flex items-baseline gap-1">
-                      <span className="text-3xl font-black font-mono text-[#f15e1c]">{plan.price}</span>
-                      <span className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] font-mono">/ {plan.period}</span>
-                    </div>
-                  </div>
+                Discuss a Project &rarr;
+              </Button3D>
+            </Link>
+            <a href="https://api.whatsapp.com/send?phone=971521555792&text=Hello%20Arav%20Innovations%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer">
+              <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center text-[#f15e1c] border-[#f15e1c] hover:bg-[#f7d7b0]">
+                Instant WhatsApp Inquiry
+              </Button3D>
+            </a>
+          </div>
 
-                  <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                    {plan.description}
-                  </p>
-
-                  <div className="space-y-2 pt-2 border-t border-[#f7d7b0] dark:border-[#253630]">
-                    <span className="text-[10px] font-mono font-bold text-[#f15e1c] uppercase block">
-                      Package Features Included:
-                    </span>
-                    {plan.features.map((feat, i) => (
-                      <div key={i} className="flex items-center gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]">
-                        <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
-                        <span>{feat}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#253630]">
-                  <Link href="/contact" className="block w-full">
-                    <Button
-                      variant="primary"
-                      size="md"
-                      className="w-full justify-center bg-[#f15e1c] hover:bg-[#d44e14]"
-                    >
-                      {plan.ctaText}
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            ))}
+          <div className="pt-6 border-t border-[#f7d7b0] dark:border-[#253630] flex flex-wrap items-center justify-center gap-6 text-xs text-[#2e936f] font-medium">
+            <span className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-[#2e936f]" /> 100% Client Code &amp; IP Ownership
+            </span>
+            <span className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-[#2e936f]" /> Strict SLA Protection
+            </span>
+            <span className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-[#2e936f]" /> Regional Teams in Gurgaon &amp; Dubai
+            </span>
           </div>
         </div>
       </section>
@@ -791,12 +715,12 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
           8. FINAL CTA — ALTERNATING WORD TRANSFORMATIONAL SECTION
           ========================================================================= */}
       <section id="inquire" className="relative py-24 px-4 sm:px-6 lg:px-12">
-        <div className="max-w-5xl mx-auto rounded-[3rem] bg-gradient-to-br from-[#172420] via-[#101b17] to-[#1b2823] text-white p-10 sm:p-16 border-2 border-[#f15e1c] shadow-2xl space-y-8 text-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-radial from-[#f15e1c]/20 via-transparent to-transparent pointer-events-none" />
+        <div className="max-w-5xl mx-auto rounded-[3rem] bg-gradient-to-br from-[#f15e1c] via-[#e55215] to-[#d8480d] text-white p-10 sm:p-16 border-2 border-[#fab60a] shadow-2xl space-y-8 text-center relative overflow-hidden">
+          <div className="absolute inset-0 bg-radial from-white/20 via-transparent to-transparent pointer-events-none" />
 
           <div className="relative z-10 max-w-3xl mx-auto space-y-5">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f15e1c]/20 border border-[#f15e1c] text-xs font-mono font-bold text-[#f15e1c]">
-              <Sparkles className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 border border-white/40 text-xs font-mono font-bold text-white">
+              <Sparkles className="w-3.5 h-3.5 text-[#ffec69]" />
               <span>START YOUR AUDIT</span>
             </div>
 
@@ -813,14 +737,14 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.35 }}
-                  className="text-2xl sm:text-4xl font-extrabold font-display text-[#f15e1c] uppercase tracking-wider"
+                  className="text-2xl sm:text-4xl font-extrabold font-display text-[#ffec69] uppercase tracking-wider"
                 >
                   {ctaWords[currentWordIdx]}
                 </motion.div>
               </AnimatePresence>
             </div>
 
-            <p className="text-base sm:text-lg font-bold text-[#d3eee4]">
+            <p className="text-base sm:text-lg font-bold text-white/90">
               Kick start a project with us today
             </p>
           </div>
@@ -831,27 +755,27 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
                 variant="primary"
                 size="lg"
                 rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
-                className="w-full sm:w-auto justify-center bg-[#f15e1c]"
+                className="w-full sm:w-auto justify-center bg-white text-[#f15e1c] hover:bg-[#f7d7b0]"
               >
-                Discuss a project
+                Discuss a Project &rarr;
               </Button3D>
             </Link>
-            <a href="https://api.whatsapp.com/send?phone=919650625777" target="_blank" rel="noopener noreferrer">
-              <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center text-white border-white/40">
+            <a href="https://api.whatsapp.com/send?phone=971521555792&text=Hello%20Arav%20Innovations%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer">
+              <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center text-white border-white/60 hover:bg-white/10">
                 Instant WhatsApp Inquiry
               </Button3D>
             </a>
           </div>
 
-          <div className="relative z-10 pt-6 border-t border-[#253630] flex flex-wrap items-center justify-center gap-6 text-xs text-[#d3eee4]">
+          <div className="relative z-10 pt-6 border-t border-white/20 flex flex-wrap items-center justify-center gap-6 text-xs text-white/90 font-medium">
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#2e936f]" /> Strict Confidentiality Guarantee
+              <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Strict Confidentiality Guarantee
             </span>
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#2e936f]" /> Measurable Operational ROI
+              <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Measurable Operational ROI
             </span>
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#2e936f]" /> Regional Teams in Gurgaon &amp; Dubai
+              <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Regional Teams in Gurgaon &amp; Dubai
             </span>
           </div>
         </div>

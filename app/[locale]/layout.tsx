@@ -48,59 +48,59 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://aravinnovations.com"),
-  title: {
-    default: "Arav Innovations | Enterprise IT and Growth",
-    template: "%s | Arav Innovations",
-  },
-  description:
-    "Arav Innovations is a multidisciplinary B2B technology consulting, full-stack engineering, digital marketing, risk & governance, and staff augmentation firm operating globally.",
-  keywords: [
-    "IT Strategy Consulting",
-    "Web & App Development",
-    "Next.js Development",
-    "B2B Digital Marketing",
-    "Technical SEO",
-    "Risk Governance Compliance",
-    "DPDP Compliance India",
-    "IT Staff Augmentation",
-    "Dubai UAE Tech Agency",
-    "Bengaluru Tech Consulting",
-  ],
-  authors: [{ name: "Arav Innovations" }],
-  creator: "Arav Innovations",
-  alternates: {
-    canonical: "https://aravinnovations.com",
-    languages: {
-      en: "https://aravinnovations.com",
-      hi: "https://aravinnovations.com/hi",
-      ar: "https://aravinnovations.com/ar",
+import { SetupCall } from "@/components/layout/SetupCall";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    metadataBase: new URL("https://aravinnovations.com"),
+    title: {
+      default: "Arav Innovations | Enterprise IT and Growth",
+      template: "%s | Arav Innovations",
     },
-  },
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://aravinnovations.com",
-    siteName: "Arav Innovations",
-    title: "Arav Innovations | Enterprise IT and Growth",
     description:
-      "Enterprise IT Strategy, Full-Stack Software Engineering, Performance Marketing, Governance, and Staff Augmentation globally.",
-  },
-  icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "any" },
+      "Arav Innovations is a multidisciplinary B2B technology consulting, full-stack engineering, digital marketing, risk & governance, and staff augmentation firm operating globally.",
+    keywords: [
+      "IT Strategy Consulting",
+      "Web & App Development",
+      "Next.js Development",
+      "B2B Digital Marketing",
+      "Technical SEO",
+      "Risk Governance Compliance",
+      "DPDP Compliance India",
+      "IT Staff Augmentation",
+      "Dubai UAE Tech Agency",
+      "Bengaluru Tech Consulting",
     ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-    ],
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+    authors: [{ name: "Arav Innovations" }],
+    creator: "Arav Innovations",
+    alternates: {
+      canonical: "https://aravinnovations.com",
+      languages: {
+        en: "https://aravinnovations.com",
+        hi: "https://aravinnovations.com/hi",
+        ar: "https://aravinnovations.com/ar",
+      },
+    },
+    openGraph: {
+      type: "website",
+      locale: "en_US",
+      url: "https://aravinnovations.com",
+      siteName: "Arav Innovations",
+      title: "Arav Innovations | Enterprise IT and Growth",
+      description:
+        "Enterprise IT Strategy, Full-Stack Software Engineering, Performance Marketing, Governance, and Staff Augmentation globally.",
+    },
+    icons: {
+      icon: "/favicon.ico",
+      apple: "/apple-touch-icon.png",
+    },
+  };
+}
 
 const themeInitScript = `
 (function() {
@@ -153,10 +153,10 @@ export default async function RootLayout({
         <OrganizationSchema />
         <script
           dangerouslySetInnerHTML={{ __html: themeInitScript }}
-          id="theme-init-script"
+          id="theme-is-script"
         />
       </head>
-      <body className="min-h-screen flex flex-col w-full bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans antialiased selection:bg-[#FCE3D3] dark:selection:bg-[#E8672A]/30 selection:text-[#E8672A]">
+      <body className="min-h-screen flex flex-col w-full bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans antialiased selection:bg-[#FCE3D3] dark:selection:bg-[#f15e1c]/30 selection:text-[#f15e1c]">
         <SkipToContent />
         <NextIntlClientProvider messages={messages}>
           <SiteConfigProvider>
@@ -169,6 +169,7 @@ export default async function RootLayout({
                   <main id="main-content" className="flex-1 w-full">{children}</main>
                   <Footer />
                   <BackToTop />
+                  <SetupCall />
                   <ChatbotWidget />
                 </WebsiteShutdownOverlay>
               </ThemeProvider>

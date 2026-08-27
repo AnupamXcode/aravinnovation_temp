@@ -26,7 +26,7 @@ export default function CaseStudyError({
       <div className="flex gap-4 flex-wrap justify-center">
         <button
           onClick={() => reset()}
-          className="px-6 py-3 rounded-full bg-[#E8672A] text-white font-semibold hover:bg-[#D45A20] transition-colors"
+          className="px-6 py-3 rounded-full bg-[#f15e1c] text-white font-semibold hover:bg-[#D45A20] transition-colors"
         >
           Try Again
         </button>

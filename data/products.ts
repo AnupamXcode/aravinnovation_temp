@@ -28,6 +28,7 @@ export interface Product {
   category: string;
   tagline: string;
   description: string;
+  positioning?: string;
   status: "live" | "in-development";
   badge: string;
   badgeColor: string; // #2e936f for Live, #fab60a for In Development
@@ -37,6 +38,7 @@ export interface Product {
   externalUrl?: string;
   iconName: string;
   features: string[];
+  reports?: string[];
   useCase: string;
   pricingModel: "demo-only" | "starting-from" | "custom-quote" | "live-platform" | "waitlist";
   pricingStartingAt?: string;
@@ -60,93 +62,111 @@ export const productsData: Product[] = [
   {
     slug: "astrobeams",
     name: "AstroBeams",
-    category: "Astrology & Life Guidance",
+    category: "AI-Powered Astrology & Spiritual Guidance Platform",
     status: "live",
     badge: "Live",
     badgeColor: "#2e936f",
-    tagline: "Expert Astrologers Online for Predictions & Guidance",
+    tagline: "AI-Powered Astrology & Spiritual Guidance Platform",
     description:
-      "Connect with certified astrologers for accurate predictions on love, career, marriage, and life guidance. Chat or call for instant consultations.",
+      "An AI-powered astrology and spiritual guidance platform that combines personalized cosmic insights, interactive AI consultations, astrology tools, and downloadable reports.",
+    positioning:
+      "An AI spiritual advisor marketplace where users can receive personalized astrology, numerology, palmistry, and spiritual guidance through conversational AI and digital reports.",
     ctaText: "Explore AstroBeams →",
     ctaUrl: "https://astrobeams.in/",
     ctaEnabled: true,
     externalUrl: "https://astrobeams.in/",
     iconName: "Sparkles",
     features: [
-      "Expert astrologers available 24/7",
-      "Live chat and call consultations",
-      "Accurate predictions and remedies",
-      "Personalized kundli and birth chart analysis",
+      "Vedic Astrology",
+      "Western Astrology",
+      "Love & Relationship Guidance",
+      "Compatibility & Matchmaking",
+      "Career Guidance",
+      "Spiritual Guidance",
+      "Palmistry & Numerology",
+      "Oracle Readings",
+      "Personalized Astrology Reports",
     ],
-    useCase: "Individuals seeking astrological guidance and life predictions",
+    reports: [
+      "Mini / Basic / Professional Horoscope",
+      "Gemstone Report",
+      "Match-making Horoscope",
+      "Numerology Report",
+      "Varshaphal Annual Report",
+      "Natal Horoscope",
+      "Life Forecast",
+      "Solar Return",
+      "Synastry Report",
+    ],
+    useCase: "Consumers seeking personalized astrology, numerology, palmistry, and spiritual guidance via AI and digital reports",
     pricingModel: "live-platform",
-    pricingNote: "Instant pay-per-minute consultations & personalized birth reports.",
+    pricingNote: "Users can start with free questions and continue through a credit-based consultation experience.",
     targetAudience: [
       "Individuals seeking astrological guidance and life predictions",
-      "Users requiring instant 24/7 phone or live chat astrologer access",
+      "Users requiring instant 24/7 AI spiritual consultations",
       "People looking for accurate Kundli, Horoscope & birth chart analysis",
       "Couples evaluating marriage and relationship compatibility remedies",
     ],
     problemSolved: {
-      title: "Instant Access to Verified Astrological Guidance",
+      title: "Instant Access to AI Spiritual Guidance & Digital Reports",
       points: [
-        "Finding certified, authentic astrologers with immediate 24/7 availability.",
-        "Lack of confidential, transparent platforms for personal phone and chat guidance.",
-        "Complex birth chart data without actionable remedies or practical advice.",
+        "Instant 24/7 access to AI-powered Vedic & Western astrology guidance without wait times.",
+        "Lack of interactive, confidential platforms for personal guidance and relationship matchmaking.",
+        "Generating downloadable, comprehensive birth chart reports and gemstone remedies in seconds.",
       ],
     },
     howItWorks: [
       {
         step: 1,
-        title: "Select Certified Astrologer",
-        description: "Browse verified astrologer profiles, user ratings, and specialties.",
+        title: "Sign up & Claim Free Questions",
+        description: "Create an account and receive 3 free questions to test the platform.",
       },
       {
         step: 2,
-        title: "Instant Chat or Call",
-        description: "Initiate immediate 1-on-1 private phone call or chat session.",
+        title: "Choose an AI Guide & Ask Questions",
+        description: "Select your preferred AI spiritual advisor for instant chat and consultations.",
       },
       {
         step: 3,
-        title: "Personalized Insights",
-        description: "Receive birth chart analysis, accurate predictions, and effective remedies.",
+        title: "Download Reports & Use Credits",
+        description: "Access birth chart reports and continue using credit-based consultations.",
       },
     ],
     featureDetails: [
       {
-        title: "24/7 Live Consultations",
-        description: "Connect instantly with top astrologers via secure audio call or chat.",
+        title: "Vedic & Western Astrology",
+        description: "Comprehensive planetary analysis, Kundli generation, and zodiac insights.",
         iconName: "Sparkles",
       },
       {
-        title: "Kundli & Birth Chart",
-        description: "Comprehensive Vedic astrology Kundli generation and planetary analysis.",
+        title: "Interactive AI Consultations",
+        description: "Conversational AI guidance for career, relationships, and life timing.",
         iconName: "Sparkles",
       },
       {
-        title: "Love & Marriage Guidance",
-        description: "Detailed Guna Milan matching and relationship compatibility reports.",
+        title: "Palmistry & Numerology",
+        description: "Digital palmistry scanning and personalized numerological vibration charts.",
         iconName: "Sparkles",
       },
       {
-        title: "Career & Financial Remedies",
-        description: "Targeted solutions for professional growth, timing, and wealth alignment.",
+        title: "Downloadable Reports",
+        description: "Generate Varshaphal, Solar Return, Synastry, and Gemstone reports instantly.",
         iconName: "Sparkles",
       },
     ],
     proofPoint: {
       metric: "24/7",
-      label: "Instant Consultation Availability",
-      detail: "Thousands of satisfied users connecting daily for personalized life predictions.",
+      label: "Instant AI Consultation Availability",
+      detail: "Freemium credit-based spiritual advisor platform delivering sub-second cosmic insights.",
     },
     faqs: [
       {
-        question: "How do I consult an astrologer on AstroBeams?",
-        answer: "Visit astrobeams.in, choose a verified astrologer, and start an instant chat or phone call.",
+        question: "How do I start using AstroBeams?",
+        answer: "Visit astrobeams.in, sign up to receive 3 free questions, choose an AI spiritual advisor, and start your consultation.",
       },
       {
-        question: "Are the astrologers on AstroBeams verified?",
-        answer: "Yes, all astrologers undergo rigorous background checks and Vedic astrology knowledge assessments.",
+        question: "What types of reports can I download on AstroBeams?",
+        answer: "AstroBeams offers Mini/Basic/Professional Horoscopes, Gemstone Reports, Match-making, Numerology, Varshaphal Annual Reports, Natal Horoscopes, and Synastry Reports.",
       },
     ],
   },

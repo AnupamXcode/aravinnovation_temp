@@ -68,7 +68,7 @@ export function WebsiteShutdownOverlay({ children }: { children: React.ReactNode
           </div>
           <a
             href={`/${locale}/admin/login`}
-            className="text-[11px] font-mono text-[#A8988B] hover:text-[#E8672A] flex items-center gap-1 transition-colors"
+            className="text-[11px] font-mono text-[#A8988B] hover:text-[#f15e1c] flex items-center gap-1 transition-colors"
           >
             <Lock className="w-3.5 h-3.5" />
             <span>Admin Portal</span>
@@ -110,11 +110,11 @@ export function WebsiteShutdownOverlay({ children }: { children: React.ReactNode
 
             <div className="pt-3 border-t border-[#2C241E] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
               <div className="flex items-center gap-2 text-[#B8ACA0]">
-                <Mail className="w-4 h-4 text-[#E8672A]" />
+                <Mail className="w-4 h-4 text-[#f15e1c]" />
                 <span>support@aravinnovations.com</span>
               </div>
               <div className="flex items-center gap-2 text-[#B8ACA0]">
-                <Phone className="w-4 h-4 text-[#E8672A]" />
+                <Phone className="w-4 h-4 text-[#f15e1c]" />
                 <span>+91 9650625777</span>
               </div>
             </div>

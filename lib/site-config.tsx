@@ -101,7 +101,7 @@ const defaultConfig: SiteConfig = {
   linkedinUrl: "https://www.linkedin.com/company/aravinnovations/",
   instagramUrl: "https://www.instagram.com/aravinnovations",
   facebookUrl: "https://www.facebook.com/people/Arav-Innovations/61566419637071/",
-  whatsappUrl: "https://api.whatsapp.com/send?phone=919650625777",
+  whatsappUrl: "https://api.whatsapp.com/send?phone=971521555792&text=Hello%20Arav%20Innovations%2C%20I%27d%20like%20to%20discuss%20a%20project.",
   twitterUrl: "https://x.com/AravInnovations",
   youtubeUrl: "https://www.youtube.com/@AravInnovations",
   serviceStates: {

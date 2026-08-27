@@ -63,11 +63,11 @@ export default function TestimonialsPage() {
           {testimonialsData.map((test, idx) => (
             <ScrollReveal key={test.id} delay={idx * 0.1} direction="up">
               <TiltCard maxTilt={5} scale={1.01} className="h-full">
-                <div className="h-full p-8 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-2xl hover:border-[#E8672A]/40 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
-                  <Quote className="absolute top-6 right-6 w-16 h-16 text-[#FCE3D3]/40 dark:text-[#E8672A]/10 pointer-events-none" />
+                <div className="h-full p-8 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-2xl hover:border-[#f15e1c]/40 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
+                  <Quote className="absolute top-6 right-6 w-16 h-16 text-[#FCE3D3]/40 dark:text-[#f15e1c]/10 pointer-events-none" />
 
                   <div>
-                    <div className="flex items-center space-x-1 mb-4 text-[#E8672A]">
+                    <div className="flex items-center space-x-1 mb-4 text-[#f15e1c]">
                       {[...Array(test.rating)].map((_, i) => (
                         <Star key={i} className="w-4 h-4 fill-current" />
                       ))}
@@ -85,11 +85,11 @@ export default function TestimonialsPage() {
                     <div className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] mt-0.5">
                       {test.designation} &bull; <span className="font-medium text-[#3A2E27] dark:text-[#FAF5EE]">{test.company}</span>
                     </div>
-                    <div className="flex items-center gap-2 mt-2 text-xs font-semibold text-[#E8672A]">
+                    <div className="flex items-center gap-2 mt-2 text-xs font-semibold text-[#f15e1c]">
                       <span>{test.service}</span>
                       <span>&bull;</span>
                       <span className="flex items-center gap-1 text-[#7A6A5F] dark:text-[#B8ACA0]">
-                        <MapPin className="w-3.5 h-3.5 text-[#E8672A]" /> {test.location}
+                        <MapPin className="w-3.5 h-3.5 text-[#f15e1c]" /> {test.location}
                       </span>
                     </div>
                   </div>

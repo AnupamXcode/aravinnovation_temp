@@ -65,18 +65,18 @@ export default function SolutionsPage() {
           {industriesData.map((ind, idx) => (
             <ScrollReveal key={ind.slug} delay={idx * 0.08} direction="up">
               <TiltCard maxTilt={6} scale={1.02} className="h-full group">
-                <div className="h-full rounded-3xl bg-white dark:bg-[#171411] p-8 border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-2xl hover:border-[#E8672A]/40 transition-all duration-300 flex flex-col justify-between">
+                <div className="h-full rounded-3xl bg-white dark:bg-[#171411] p-8 border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-2xl hover:border-[#f15e1c]/40 transition-all duration-300 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <div className="p-3 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] text-[#E8672A] border border-[#F4A97F]/30 dark:border-[#3D332B] group-hover:bg-[#E8672A] group-hover:text-white transition-all duration-300 shadow-xs [&>svg]:text-[#E8672A] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
+                      <div className="p-3 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] text-[#f15e1c] border border-[#F4A97F]/30 dark:border-[#3D332B] group-hover:bg-[#f15e1c] group-hover:text-white transition-all duration-300 shadow-xs [&>svg]:text-[#f15e1c] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
                         <Building2 className="w-5 h-5 transition-colors duration-300" />
                       </div>
-                      <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-[#FBF3EA] dark:bg-[#1E1915] text-[#E8672A] font-semibold border border-[#EFE2D6] dark:border-[#2C241E]">
+                      <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-[#FBF3EA] dark:bg-[#1E1915] text-[#f15e1c] font-semibold border border-[#EFE2D6] dark:border-[#2C241E]">
                         Enterprise Sector
                       </span>
                     </div>
 
-                    <h3 className="text-xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] transition-colors mb-2">
+                    <h3 className="text-xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors mb-2">
                       {ind.name}
                     </h3>
                     <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed mb-6">
@@ -89,7 +89,7 @@ export default function SolutionsPage() {
                       </span>
                       {ind.capabilities.map((cap, i) => (
                         <div key={i} className="flex items-center gap-2.5 text-xs text-[#3A2E27] dark:text-[#FAF5EE]">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#E8672A] shrink-0" />
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#f15e1c] shrink-0" />
                           <span>{cap}</span>
                         </div>
                       ))}

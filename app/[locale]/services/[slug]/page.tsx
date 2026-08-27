@@ -188,7 +188,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
                   {service.title}
                 </h1>
 
-                <p className="text-xl font-medium text-[#E8672A] font-display mt-2">
+                <p className="text-xl font-medium text-[#f15e1c] font-display mt-2">
                   {service.tagline}
                 </p>
 
@@ -201,7 +201,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
                     <Button
                       variant="primary"
                       size="lg"
-                      className="w-full sm:w-auto shadow-md hover:shadow-xl hover:shadow-[#E8672A]/25"
+                      className="w-full sm:w-auto shadow-md hover:shadow-xl hover:shadow-[#f15e1c]/25"
                       rightIcon={<ArrowRight className="w-4 h-4" />}
                     >
                       Inquire About {service.shortTitle}
@@ -221,7 +221,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
               <ScrollReveal direction="left" delay={0.2}>
                 <TiltCard maxTilt={5} className="group">
                   <div className="rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] p-8 border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-6">
-                    <div className="p-4 rounded-2xl bg-white dark:bg-[#12100E] w-fit border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xs group-hover:bg-[#E8672A] group-hover:text-white transition-all duration-300 [&>svg]:text-[#E8672A] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
+                    <div className="p-4 rounded-2xl bg-white dark:bg-[#12100E] w-fit border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xs group-hover:bg-[#f15e1c] group-hover:text-white transition-all duration-300 [&>svg]:text-[#f15e1c] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
                       {iconMap[service.icon]}
                     </div>
                     <div>
@@ -235,15 +235,15 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
 
                     <div className="space-y-2.5 pt-2 border-t border-[#EFE2D6] dark:border-[#2C241E] text-xs">
                       <div className="flex items-center gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
-                        <CheckCircle2 className="w-4 h-4 text-[#E8672A]" />
+                        <CheckCircle2 className="w-4 h-4 text-[#f15e1c]" />
                         <span>Cross-Border Regulatory Compliance</span>
                       </div>
                       <div className="flex items-center gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
-                        <CheckCircle2 className="w-4 h-4 text-[#E8672A]" />
+                        <CheckCircle2 className="w-4 h-4 text-[#f15e1c]" />
                         <span>Dedicated Technical Lead & SLA</span>
                       </div>
                       <div className="flex items-center gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
-                        <CheckCircle2 className="w-4 h-4 text-[#E8672A]" />
+                        <CheckCircle2 className="w-4 h-4 text-[#f15e1c]" />
                         <span>100% Client IP & Codebase Ownership</span>
                       </div>
                     </div>
@@ -258,7 +258,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
         <ScrollReveal direction="up">
           <section className="rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm">
             <div className="max-w-3xl space-y-4 mb-10">
-              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#E8672A]">
+              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#f15e1c]">
                 <AlertTriangle className="w-4 h-4" />
                 <span>The Core Challenge</span>
               </div>
@@ -276,7 +276,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
                   key={idx}
                   className="flex items-start gap-3 p-4 rounded-2xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xs"
                 >
-                  <span className="w-2 h-2 rounded-full bg-[#E8672A] mt-2 shrink-0" />
+                  <span className="w-2 h-2 rounded-full bg-[#f15e1c] mt-2 shrink-0" />
                   <span className="text-sm text-[#3A2E27] dark:text-[#FAF5EE] font-medium leading-snug">
                     {point}
                   </span>
@@ -306,8 +306,8 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
             {service.ourSolution.keyPillars.map((pillar, idx) => (
               <ScrollReveal key={idx} delay={idx * 0.1} direction="up">
                 <TiltCard maxTilt={5} scale={1.01} className="h-full">
-                  <div className="h-full rounded-3xl bg-white dark:bg-[#171411] p-8 border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-xl hover:border-[#E8672A]/40 transition-all duration-300 space-y-3">
-                    <div className="w-10 h-10 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] text-[#E8672A] flex items-center justify-center font-mono font-bold border border-[#F4A97F]/30 dark:border-[#3D332B]">
+                  <div className="h-full rounded-3xl bg-white dark:bg-[#171411] p-8 border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-xl hover:border-[#f15e1c]/40 transition-all duration-300 space-y-3">
+                    <div className="w-10 h-10 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] text-[#f15e1c] flex items-center justify-center font-mono font-bold border border-[#F4A97F]/30 dark:border-[#3D332B]">
                       0{idx + 1}
                     </div>
                     <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
@@ -350,7 +350,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
                         key={itemIdx}
                         className="flex items-center gap-3 p-3 rounded-2xl bg-[#FBF3EA]/60 dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE]"
                       >
-                        <CheckCircle2 className="w-4 h-4 text-[#E8672A] shrink-0" />
+                        <CheckCircle2 className="w-4 h-4 text-[#f15e1c] shrink-0" />
                         <span>{item}</span>
                       </div>
                     ))}
@@ -383,7 +383,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
                 <TiltCard maxTilt={6} scale={1.02} className="h-full">
                   <div className="h-full rounded-3xl bg-white dark:bg-[#171411] p-6 border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm flex flex-col justify-between">
                     <div>
-                      <div className="text-xs font-mono font-bold text-[#E8672A] mb-3">
+                      <div className="text-xs font-mono font-bold text-[#f15e1c] mb-3">
                         STEP 0{step.step}
                       </div>
                       <h3 className="text-base font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] mb-2">
@@ -465,9 +465,9 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
             {service.engagementModels.map((model, idx) => (
               <ScrollReveal key={idx} delay={idx * 0.1} direction="up">
                 <TiltCard maxTilt={5} scale={1.01} className="h-full">
-                  <div className="h-full rounded-3xl bg-white dark:bg-[#171411] p-8 border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-xl hover:border-[#E8672A]/40 transition-all flex flex-col justify-between">
+                  <div className="h-full rounded-3xl bg-white dark:bg-[#171411] p-8 border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-xl hover:border-[#f15e1c]/40 transition-all flex flex-col justify-between">
                     <div className="space-y-4">
-                      <div className="p-3 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] w-fit text-[#E8672A] border border-[#F4A97F]/30 dark:border-[#3D332B]">
+                      <div className="p-3 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] w-fit text-[#f15e1c] border border-[#F4A97F]/30 dark:border-[#3D332B]">
                         <Briefcase className="w-5 h-5" />
                       </div>
                       <h3 className="text-xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
@@ -477,7 +477,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
                         {model.description}
                       </p>
                       <div className="p-3 rounded-xl bg-[#FBF3EA] dark:bg-[#1E1915] text-xs text-[#3A2E27] dark:text-[#FAF5EE] font-medium border border-[#EFE2D6] dark:border-[#2C241E]">
-                        <span className="font-bold text-[#E8672A]">Best for: </span>
+                        <span className="font-bold text-[#f15e1c]">Best for: </span>
                         {model.bestFor}
                       </div>
                     </div>

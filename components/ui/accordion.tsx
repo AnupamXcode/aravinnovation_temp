@@ -19,23 +19,23 @@ export function AccordionItem({
   const [isOpen, setIsOpen] = React.useState(defaultOpen);
 
   return (
-    <div className="border-b border-[#EFE2D6] py-4 last:border-b-0">
+    <div className="border-b border-[#f7d7b0] dark:border-[#253630] py-4 last:border-b-0">
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between text-left text-base font-semibold text-[#3A2E27] transition-colors hover:text-[#E8672A] focus-visible:outline-none focus-visible:text-[#E8672A] gap-4"
+        className="flex w-full items-center justify-between text-left text-base font-semibold text-[#1b2823] dark:text-[#ffffff] transition-colors hover:text-[#f15e1c] focus-visible:outline-none focus-visible:text-[#f15e1c] gap-4"
         aria-expanded={isOpen}
       >
         <span>{question}</span>
         <ChevronDown
           className={cn(
-            "w-5 h-5 text-[#7A6A5F] transition-transform duration-200 shrink-0",
-            isOpen && "rotate-180 text-[#E8672A]"
+            "w-5 h-5 text-[#4a5c55] dark:text-[#d3eee4] transition-transform duration-200 shrink-0",
+            isOpen && "rotate-180 text-[#f15e1c]"
           )}
         />
       </button>
       {isOpen && (
-        <div className="pt-3 text-sm text-[#7A6A5F] leading-relaxed transition-all duration-200">
+        <div className="pt-3 text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed transition-all duration-200">
           {typeof answer === "string" ? <p>{answer}</p> : answer}
         </div>
       )}
@@ -51,7 +51,7 @@ export function Accordion({
   className?: string;
 }) {
   return (
-    <div className={cn("divide-y divide-[#EFE2D6] rounded-2xl bg-white p-6 sm:p-8 border border-[#EFE2D6] shadow-sm", className)}>
+    <div className={cn("divide-y divide-[#f7d7b0] dark:divide-[#253630] rounded-2xl bg-white dark:bg-[#172420] p-6 sm:p-8 border border-[#f7d7b0] dark:border-[#253630] shadow-sm", className)}>
       {items.map((item, index) => (
         <AccordionItem
           key={index}

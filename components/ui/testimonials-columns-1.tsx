@@ -52,9 +52,9 @@ export function TestimonialsColumn({
         {duplicatedTestimonials.map((item, idx) => (
           <div
             key={`${item.name}-${idx}`}
-            className="p-8 sm:p-10 rounded-3xl border border-[#f7d7b0] dark:border-[#2C241E] shadow-xl shadow-[#f15e1c]/10 dark:shadow-none bg-white dark:bg-[#1A1613] hover:border-[#f15e1c]/50 dark:hover:border-[#E8672A]/50 transition-all duration-300 relative group overflow-hidden max-w-sm w-full shrink-0"
+            className="p-8 sm:p-10 rounded-3xl border border-[#f7d7b0] dark:border-[#253630] shadow-xl shadow-[#f15e1c]/10 dark:shadow-none bg-white dark:bg-[#172420] hover:border-[#f15e1c] dark:hover:border-[#f15e1c] transition-all duration-300 relative group overflow-hidden max-w-sm w-full shrink-0"
           >
-            <Quote className="absolute top-6 right-6 w-14 h-14 text-[#f7d7b0]/30 dark:text-[#E8672A]/10 pointer-events-none group-hover:scale-110 transition-transform" />
+            <Quote className="absolute top-6 right-6 w-14 h-14 text-[#f7d7b0]/30 dark:text-[#f15e1c]/10 pointer-events-none group-hover:scale-110 transition-transform" />
 
             {/* Rating */}
             <div className="flex items-center space-x-1 mb-4 text-[#f15e1c]">
@@ -64,12 +64,12 @@ export function TestimonialsColumn({
             </div>
 
             {/* Quote */}
-            <p className="text-sm sm:text-base font-medium text-[#1b2823] dark:text-[#FAF5EE] leading-relaxed relative z-10">
+            <p className="text-sm sm:text-base font-medium text-[#1b2823] dark:text-[#ffffff] leading-relaxed relative z-10">
               “{item.quote}”
             </p>
 
             {/* Author */}
-            <div className="mt-6 pt-4 border-t border-[#f7d7b0]/50 dark:border-[#2C241E] flex items-center gap-3.5">
+            <div className="mt-6 pt-4 border-t border-[#f7d7b0]/50 dark:border-[#253630] flex items-center gap-3.5">
               {item.image ? (
                 <img
                   src={item.image}
@@ -77,15 +77,15 @@ export function TestimonialsColumn({
                   className="w-11 h-11 rounded-full object-cover border border-[#f7d7b0] shrink-0"
                 />
               ) : (
-                <div className="w-11 h-11 rounded-full bg-[#fce3d3] dark:bg-[#261F1A] text-[#f15e1c] font-bold flex items-center justify-center text-sm border border-[#f7d7b0] shrink-0">
+                <div className="w-11 h-11 rounded-full bg-[#f7d7b0]/40 dark:bg-[#253630] text-[#f15e1c] font-bold flex items-center justify-center text-sm border border-[#f7d7b0] shrink-0">
                   {item.name.slice(0, 2).toUpperCase()}
                 </div>
               )}
               <div>
-                <h4 className="text-sm font-bold font-display text-[#1b2823] dark:text-[#FAF5EE]">
+                <h4 className="text-sm font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
                   {item.name}
                 </h4>
-                <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+                <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4]">
                   {item.role}
                 </p>
               </div>

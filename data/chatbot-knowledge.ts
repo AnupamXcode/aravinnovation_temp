@@ -171,9 +171,9 @@ export const chatbotIntents: ChatbotIntent[] = [
       "are you affordable", "how much for a project", "pricing model", "retainer cost", "hourly rate", "project cost"
     ],
     response: {
-      en: "Pricing varies by project scope. Our common models include: Project-based Fixed Sprints, Monthly Engineering Retainers, Strategic Advisory, and Custom Pods. Tell us about your project requirements and we can discuss exact options.",
-      hi: "कीमत परियोजना के दायरे के आधार पर अलग-अलग होती है। मुख्य मॉडल: प्रोजेक्ट-आधारित फिक्स्ड स्प्रिंट, मासिक इंजीनियरिंग रिटेनर, परामर्श, और कस्टम टीम। अपनी जरूरतें बताएं ताकि हम सटीक विकल्पों पर चर्चा कर सकें।",
-      ar: "تختلف الأسعار حسب نطاق المشروع. النماذج الشائعة: بالمشروع المحدد، اشتراك شهري للهندسة، استشارات استراتيجية، أو فرق مخصصة. شاركنا متطلباتك لنحدد الخيارات المناسبة.",
+      en: "Our engagements are custom-built around your specific enterprise objectives. Tell us what you're trying to achieve and we'll help you identify the right technology, strategy, and execution path.",
+      hi: "हमारी सेवाएं आपकी विशिष्ट व्यावसायिक प्राथमिकताओं के अनुसार तैयार की जाती हैं। हमें अपनी आवश्यकताएं बताएं और हम सही तकनीक व रणनीति तय करने में आपकी मदद करेंगे।",
+      ar: "يتم تخصيص مشاريعنا وفقاً لأهدافك الاستراتيجية والمؤسسية. شاركنا متطلباتك لنساعدك في تحديد التكنولوجيا والاستراتيجية المناسبة.",
     },
     options: {
       en: [

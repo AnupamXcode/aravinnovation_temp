@@ -58,10 +58,10 @@ export function LanguageSelector() {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FFFDF9] dark:bg-[#1E1915] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] hover:border-[#E8672A] transition-colors cursor-pointer shadow-xs"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FFFDF9] dark:bg-[#1E1915] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] hover:border-[#f15e1c] transition-colors cursor-pointer shadow-xs"
         aria-expanded={isOpen}
       >
-        <Globe className="w-3.5 h-3.5 text-[#E8672A]" />
+        <Globe className="w-3.5 h-3.5 text-[#f15e1c]" />
         <span className="uppercase font-bold font-mono">{currentLang.code}</span>
         <ChevronDown className={cn("w-3 h-3 text-[#7A6A5F] transition-transform duration-200", isOpen && "rotate-180")} />
       </button>
@@ -78,17 +78,17 @@ export function LanguageSelector() {
                 className={cn(
                   "w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-colors text-left cursor-pointer",
                   isSelected
-                    ? "bg-[#FCE3D3] dark:bg-[#2A211B] text-[#E8672A] font-bold"
+                    ? "bg-[#FCE3D3] dark:bg-[#2A211B] text-[#f15e1c] font-bold"
                     : "text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FBF3EA] dark:hover:bg-[#261F1A]"
                 )}
               >
                 <div className="flex items-center gap-2">
-                  <span className="font-mono font-bold text-[11px] uppercase w-5 text-[#E8672A]">
+                  <span className="font-mono font-bold text-[11px] uppercase w-5 text-[#f15e1c]">
                     {lang.code}
                   </span>
                   <span>{lang.nativeName}</span>
                 </div>
-                {isSelected && <Check className="w-3.5 h-3.5 text-[#E8672A]" />}
+                {isSelected && <Check className="w-3.5 h-3.5 text-[#f15e1c]" />}
               </button>
             );
           })}

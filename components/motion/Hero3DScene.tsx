@@ -97,14 +97,14 @@ export function Hero3DScene() {
           }}
           className="absolute -top-6 -left-6 z-30 p-3.5 rounded-2xl bg-white/95 dark:bg-[#1C1814]/95 backdrop-blur-md border border-[#EFE2D6] dark:border-[#3D332B] shadow-2xl flex items-center gap-2.5"
         >
-          <div className="p-2 rounded-xl bg-[#E8672A] text-white shadow-xs">
+          <div className="p-2 rounded-xl bg-[#f15e1c] text-white shadow-xs">
             <Sparkles className="w-4 h-4" />
           </div>
           <div>
             <div className="text-[11px] font-bold text-[#3A2E27] dark:text-[#FAF5EE]">
               Next.js 16 &amp; Microservices
             </div>
-            <div className="text-[9px] font-mono font-bold text-[#E8672A]">
+            <div className="text-[9px] font-mono font-bold text-[#f15e1c]">
               100/100 Core Web Vitals
             </div>
           </div>
@@ -119,7 +119,7 @@ export function Hero3DScene() {
           }}
           className="absolute -bottom-6 -right-6 z-30 p-3.5 rounded-2xl bg-white/95 dark:bg-[#1C1814]/95 backdrop-blur-md border border-[#EFE2D6] dark:border-[#3D332B] shadow-2xl flex items-center gap-2.5"
         >
-          <div className="p-2 rounded-xl bg-[#FCE3D3] dark:bg-[#261F1A] text-[#E8672A] border border-[#F4A97F]/40 dark:border-[#3D332B]">
+          <div className="p-2 rounded-xl bg-[#FCE3D3] dark:bg-[#261F1A] text-[#f15e1c] border border-[#F4A97F]/40 dark:border-[#3D332B]">
             <Globe2 className="w-4 h-4" />
           </div>
           <div>
@@ -143,12 +143,12 @@ export function Hero3DScene() {
           {/* Card Window Header Bar */}
           <div className="flex items-center justify-between border-b border-[#EFE2D6] dark:border-[#2C241E] pb-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-3 h-3 rounded-full bg-[#E8672A]" />
+              <div className="w-3 h-3 rounded-full bg-[#f15e1c]" />
               <div className="w-3 h-3 rounded-full bg-[#F4A97F]" />
               <div className="w-3 h-3 rounded-full bg-[#EFE2D6] dark:bg-[#3D332B]" />
             </div>
             <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0]">
-              <Terminal className="w-3.5 h-3.5 text-[#E8672A]" />
+              <Terminal className="w-3.5 h-3.5 text-[#f15e1c]" />
               <span>arav.core.architecture</span>
             </div>
           </div>
@@ -162,7 +162,7 @@ export function Hero3DScene() {
               }}
               className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] flex items-start gap-3.5 transition-shadow hover:shadow-md"
             >
-              <div className="p-2.5 rounded-xl bg-[#E8672A] text-white shrink-0 shadow-xs">
+              <div className="p-2.5 rounded-xl bg-[#f15e1c] text-white shrink-0 shadow-xs">
                 <Cpu className="w-4 h-4" />
               </div>
               <div>
@@ -182,7 +182,7 @@ export function Hero3DScene() {
               }}
               className="p-4 rounded-2xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] flex items-start gap-3.5 shadow-xs transition-shadow hover:shadow-md"
             >
-              <div className="p-2.5 rounded-xl bg-[#FCE3D3] dark:bg-[#261F1A] text-[#E8672A] shrink-0 border border-[#F4A97F]/40 dark:border-[#3D332B]">
+              <div className="p-2.5 rounded-xl bg-[#FCE3D3] dark:bg-[#261F1A] text-[#f15e1c] shrink-0 border border-[#F4A97F]/40 dark:border-[#3D332B]">
                 <TrendingUp className="w-4 h-4" />
               </div>
               <div>
@@ -202,7 +202,7 @@ export function Hero3DScene() {
               }}
               className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] flex items-start gap-3.5 transition-shadow hover:shadow-md"
             >
-              <div className="p-2.5 rounded-xl bg-[#E8672A] dark:bg-[#FF7D42] text-white shrink-0 border border-[#F4A97F]/50 dark:border-[#F4A97F]/40">
+              <div className="p-2.5 rounded-xl bg-[#f15e1c] dark:bg-[#FF7D42] text-white shrink-0 border border-[#F4A97F]/50 dark:border-[#F4A97F]/40">
                 <ShieldCheck className="w-4 h-4 text-white" />
               </div>
               <div>
@@ -219,7 +219,7 @@ export function Hero3DScene() {
           {/* Footer Status SLA Pill */}
           <div className="pt-2 flex items-center justify-between text-xs text-[#7A6A5F] dark:text-[#B8ACA0] border-t border-[#EFE2D6] dark:border-[#2C241E]">
             <span className="font-semibold text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#E8672A]" /> Enterprise Verified SLA
+              <CheckCircle2 className="w-4 h-4 text-[#f15e1c]" /> Enterprise Verified SLA
             </span>
             <span className="font-mono text-[11px] bg-[#FCE3D3]/70 dark:bg-[#2C221B] px-2.5 py-0.5 rounded-md font-semibold text-[#3A2E27] dark:text-[#FAF5EE] border border-[#F4A97F]/30 dark:border-[#3D332B]">
               Active Deliveries
@@ -228,7 +228,7 @@ export function Hero3DScene() {
         </div>
 
         {/* Ambient Warm Glow Plate */}
-        <div className="absolute -inset-4 bg-gradient-to-tr from-[#FCE3D3]/60 via-[#F4A97F]/20 to-[#E8672A]/30 dark:from-[#E8672A]/20 dark:via-[#F4A97F]/10 dark:to-transparent rounded-3xl -z-10 blur-xl pointer-events-none" />
+        <div className="absolute -inset-4 bg-gradient-to-tr from-[#FCE3D3]/60 via-[#F4A97F]/20 to-[#f15e1c]/30 dark:from-[#f15e1c]/20 dark:via-[#F4A97F]/10 dark:to-transparent rounded-3xl -z-10 blur-xl pointer-events-none" />
       </motion.div>
     </div>
   );

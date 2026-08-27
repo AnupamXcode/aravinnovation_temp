@@ -21,8 +21,8 @@ export function Hero() {
     <section className="relative pt-24 pb-10 md:pt-30 md:pb-12 overflow-hidden bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300 min-h-[75vh] md:min-h-[80vh] flex items-center">
       {/* Soft Ambient Background 3D Glows */}
       <ParallaxContainer speed={-15} className="absolute inset-0 pointer-events-none -z-10">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] md:w-[950px] md:h-[950px] bg-radial from-[#FCE3D3]/70 via-[#FBF3EA]/30 to-transparent dark:from-[#E8672A]/15 dark:via-[#1A1613]/40 dark:to-transparent rounded-full blur-3xl" />
-        <div className="absolute top-12 right-12 w-80 h-80 bg-[#F4A97F]/20 dark:bg-[#E8672A]/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] md:w-[950px] md:h-[950px] bg-radial from-[#FCE3D3]/70 via-[#FBF3EA]/30 to-transparent dark:from-[#f15e1c]/15 dark:via-[#1A1613]/40 dark:to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-12 right-12 w-80 h-80 bg-[#F4A97F]/20 dark:bg-[#f15e1c]/10 rounded-full blur-3xl" />
       </ParallaxContainer>
 
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
@@ -62,7 +62,7 @@ export function Hero() {
                   <Button
                     variant="primary"
                     size="lg"
-                    className="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm shadow-lg hover:shadow-xl hover:shadow-[#E8672A]/25"
+                    className="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm shadow-lg hover:shadow-xl hover:shadow-[#f15e1c]/25"
                     rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
                   >
                     Schedule Exploratory Call
@@ -73,7 +73,7 @@ export function Hero() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm border-[#EFE2D6] dark:border-[#2C241E] text-[#E8672A] hover:border-[#E8672A]"
+                    className="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm border-[#EFE2D6] dark:border-[#2C241E] text-[#f15e1c] hover:border-[#f15e1c]"
                   >
                     Explore Practices
                   </Button>
@@ -85,19 +85,19 @@ export function Hero() {
               {/* Trust Badges */}
               <div className="pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] flex flex-wrap items-center justify-center lg:justify-start gap-8 text-left">
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4.5 h-4.5 text-[#E8672A] shrink-0" />
+                  <ShieldCheck className="w-4.5 h-4.5 text-[#f15e1c] shrink-0" />
                   <span className="text-xs sm:text-sm font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
                     7 Dedicated Practices
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Globe2 className="w-4.5 h-4.5 text-[#E8672A] shrink-0" />
+                  <Globe2 className="w-4.5 h-4.5 text-[#f15e1c] shrink-0" />
                   <span className="text-xs sm:text-sm font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
                     India, UAE, US, EU &amp; Canada
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Zap className="w-4.5 h-4.5 text-[#E8672A] shrink-0" />
+                  <Zap className="w-4.5 h-4.5 text-[#f15e1c] shrink-0" />
                   <span className="text-xs sm:text-sm font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
                     100/100 Core Web Vitals
                   </span>

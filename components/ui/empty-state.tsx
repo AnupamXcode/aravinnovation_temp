@@ -14,7 +14,7 @@ interface EmptyStateProps {
 }
 
 export function EmptyState({
-  icon = <FolderOpen className="w-8 h-8 text-[#E8672A]" />,
+  icon = <FolderOpen className="w-8 h-8 text-[#f15e1c]" />,
   title,
   description,
   actionLabel,

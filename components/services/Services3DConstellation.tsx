@@ -128,7 +128,7 @@ export function Services3DConstellation() {
           <div className="space-y-1 text-left">
             <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] text-xs font-mono font-bold text-[#f15e1c]">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>OUR 8 CORE SERVICES ECOSYSTEM</span>
+              <span>OUR CORE SERVICES ECOSYSTEM</span>
             </div>
             <h2 className="text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
               Enterprise Technology Practices
@@ -137,12 +137,12 @@ export function Services3DConstellation() {
 
           <Link href="/services">
             <Button3D variant="outline" size="md" rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}>
-              Explore All 8 Services
+              Explore All Services
             </Button3D>
           </Link>
         </div>
 
-        {/* Orbit Canvas with Central Digital Core & 8 Clickable Nodes */}
+        {/* Orbit Canvas with Central Digital Core & Clickable Nodes */}
         <div className="relative w-full min-h-[400px] flex-1 my-2">
           <svg
             className="absolute inset-0 w-full h-full pointer-events-none z-10"
@@ -159,26 +159,16 @@ export function Services3DConstellation() {
                     x2={node.xPct}
                     y2={node.yPct}
                     stroke={isActive ? "#f15e1c" : "#f7d7b0"}
-                    strokeWidth={isActive ? "3.5" : "1.2"}
+                    strokeWidth={isActive ? "2.5" : "1.2"}
                     strokeDasharray={isActive ? "none" : "3 3"}
-                    className="transition-all duration-300"
+                    className="transition-colors duration-200"
                   />
-                  {/* Signal Pulse Traveling Toward Digital Core */}
-                  {isActive && (
-                    <circle
-                      cx={(50 + node.xPct) / 2}
-                      cy={(50 + node.yPct) / 2}
-                      r="3.5"
-                      fill="#f15e1c"
-                      className="animate-ping-slow"
-                    />
-                  )}
                   <circle
                     cx={node.xPct}
                     cy={node.yPct}
-                    r={isActive ? "4" : "2"}
+                    r={isActive ? "3.5" : "2"}
                     fill={isActive ? "#f15e1c" : "#2e936f"}
-                    className="transition-all duration-300"
+                    className="transition-all duration-200"
                   />
                 </g>
               );
@@ -188,24 +178,24 @@ export function Services3DConstellation() {
           {/* Central Digital Core Response Node */}
           <div
             className={cn(
-              "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center p-5 rounded-3xl bg-white dark:bg-[#101b17] border-2 shadow-2xl text-center min-w-[180px] transition-all duration-300",
+              "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center p-5 rounded-3xl bg-white dark:bg-[#101b17] border-2 shadow-2xl text-center min-w-[180px] transition-all duration-200",
               hoveredIndex !== null
-                ? "border-[#f15e1c] ring-4 ring-[#f15e1c]/30 scale-105 shadow-[#f15e1c]/40"
-                : "border-[#f15e1c] shadow-[#f15e1c]/25"
+                ? "border-[#f15e1c] ring-4 ring-[#f15e1c]/30 scale-105 shadow-[#f15e1c]/30"
+                : "border-[#f15e1c] shadow-[#f15e1c]/20"
             )}
           >
             <div className="w-12 h-12 rounded-2xl bg-[#f15e1c] text-white flex items-center justify-center shadow-lg mb-1.5">
-              <Sparkles className={cn("w-6 h-6", hoveredIndex !== null ? "animate-spin-slow text-white" : "animate-pulse")} />
+              <Sparkles className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-xs font-extrabold font-display uppercase text-[#1b2823] dark:text-[#ffffff] tracking-wider">
               ARAV DIGITAL CORE
             </h3>
             <p className="text-[10px] text-[#2e936f] font-mono font-bold mt-0.5">
-              8 Integrated Services
+              Integrated Services
             </p>
           </div>
 
-          {/* Orbiting 8 Service Nodes — ALL 8 ARE DIRECTLY CLICKABLE AND LINKED TO REAL ROUTES */}
+          {/* Orbiting Service Nodes */}
           {constellationNodes.map((node, idx) => {
             const isActive = currentHighlightIndex === idx;
 
@@ -227,9 +217,9 @@ export function Services3DConstellation() {
                 <Link href={`/services/${node.service.slug}`} className="block">
                   <div
                     className={cn(
-                      "p-3 rounded-2xl bg-white dark:bg-[#101b17] border shadow-md flex items-center gap-2.5 transition-all duration-300 group hover:shadow-2xl",
+                      "p-3 rounded-2xl bg-white dark:bg-[#101b17] border shadow-md flex items-center gap-2.5 transition-all duration-200 group hover:shadow-xl",
                       isActive
-                        ? "border-[#f15e1c] ring-4 ring-[#f15e1c]/40 scale-108 shadow-[#f15e1c]/30 z-40"
+                        ? "border-[#f15e1c] ring-4 ring-[#f15e1c]/30 scale-105 shadow-[#f15e1c]/25 z-40"
                         : "border-[#f7d7b0] dark:border-[#253630]"
                     )}
                   >
@@ -257,7 +247,7 @@ export function Services3DConstellation() {
                         {node.service.shortTitle}
                       </h4>
                       <span className="text-[10px] text-[#2e936f] font-mono font-semibold block mt-0.5">
-                        0{idx + 1} / 08 &rarr;
+                        Explore &rarr;
                       </span>
                     </div>
                   </div>
@@ -272,7 +262,7 @@ export function Services3DConstellation() {
           <div className="flex items-center justify-between gap-4">
             <div className="space-y-1 text-left">
               <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-pulse" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c]" />
                 <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                   {activeService.title}
                 </h3>
@@ -293,7 +283,6 @@ export function Services3DConstellation() {
 
       {/* ========================================================================
           DEDICATED MOBILE PRACTICE EXPERIENCE (lg:hidden block)
-          All 8 Nodes Touch-Swipeable & Directly Clickable
           ======================================================================== */}
       <div className="block lg:hidden w-full">
         <div
@@ -312,13 +301,13 @@ export function Services3DConstellation() {
                   ARAV DIGITAL CORE
                 </span>
                 <h3 className="text-sm font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                  Our 8 Services
+                  Our Core Services
                 </h3>
               </div>
             </div>
 
             <div className="px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] text-[#f15e1c] border border-[#f7d7b0] text-xs font-mono font-extrabold">
-              0{activeIndex + 1} / 0{totalPractices}
+              Practices
             </div>
           </div>
 
@@ -331,7 +320,7 @@ export function Services3DConstellation() {
                 </div>
                 <div>
                   <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase">
-                    ● Active Service 0{activeIndex + 1}
+                    ● Active Practice
                   </span>
                   <h4 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-tight mt-0.5">
                     {activeService.title}
@@ -356,7 +345,7 @@ export function Services3DConstellation() {
             </Link>
           </div>
 
-          {/* Grid of All 8 Quick-Select Service Pills (Mobile) */}
+          {/* Grid of Quick-Select Service Pills (Mobile) */}
           <div className="grid grid-cols-2 gap-2 pt-2 border-t border-[#f7d7b0] dark:border-[#253630]">
             {servicesData.map((svc, idx) => (
               <Link
@@ -369,7 +358,7 @@ export function Services3DConstellation() {
                     : "bg-white dark:bg-[#101b17] text-[#1b2823] dark:text-[#ffffff] border-[#f7d7b0] dark:border-[#253630]"
                 )}
               >
-                <span className="font-mono text-[10px] opacity-80">0{idx + 1}</span>
+                <ArrowRight className="w-3 h-3 text-[#f15e1c] shrink-0" />
                 <span className="truncate">{svc.shortTitle}</span>
               </Link>
             ))}

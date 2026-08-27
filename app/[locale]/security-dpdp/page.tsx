@@ -34,7 +34,7 @@ export default async function SecurityDPDPPage({
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight">
             Security &amp; DPDP Governance
           </h1>
-          <p className="text-sm font-mono font-semibold text-[#E8672A]">
+          <p className="text-sm font-mono font-semibold text-[#f15e1c]">
             Arav Innovations Enterprise Security Standards
           </p>
         </div>
@@ -44,7 +44,7 @@ export default async function SecurityDPDPPage({
           {/* Left Column: Sticky Table of Contents */}
           <aside className="lg:col-span-4 hidden lg:block sticky top-32 space-y-4 p-6 rounded-3xl bg-[#FBF3EA]/60 dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm">
             <div className="flex items-center gap-2 font-bold font-display text-sm text-[#3A2E27] dark:text-[#FAF5EE] border-b border-[#EFE2D6] dark:border-[#2C241E] pb-3">
-              <FileText className="w-4 h-4 text-[#E8672A]" />
+              <FileText className="w-4 h-4 text-[#f15e1c]" />
               <span>Table of Contents</span>
             </div>
             <nav className="space-y-1 text-xs">
@@ -52,10 +52,10 @@ export default async function SecurityDPDPPage({
                 <a
                   key={sec.id}
                   href={`#${sec.id}`}
-                  className="flex items-center justify-between p-2 rounded-xl text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:bg-white dark:hover:bg-[#221D18] transition-all font-medium group"
+                  className="flex items-center justify-between p-2 rounded-xl text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] dark:hover:text-[#f15e1c] hover:bg-white dark:hover:bg-[#221D18] transition-all font-medium group"
                 >
                   <span className="truncate">{sec.title}</span>
-                  <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#E8672A]" />
+                  <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#f15e1c]" />
                 </a>
               ))}
             </nav>
@@ -69,7 +69,7 @@ export default async function SecurityDPDPPage({
 
             <section id="security-framework" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
               <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-[#E8672A]" />
+                <ShieldCheck className="w-5 h-5 text-[#f15e1c]" />
                 <span>1. Security &amp; Compliance Framework</span>
               </h2>
               <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">
@@ -79,7 +79,7 @@ export default async function SecurityDPDPPage({
 
             <section id="dpdp-governance" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
               <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-2">
-                <Lock className="w-5 h-5 text-[#E8672A]" />
+                <Lock className="w-5 h-5 text-[#f15e1c]" />
                 <span>2. DPDP Act 2023 Compliance</span>
               </h2>
               <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">
@@ -89,7 +89,7 @@ export default async function SecurityDPDPPage({
 
             <section id="data-encryption" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
               <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-2">
-                <Key className="w-5 h-5 text-[#E8672A]" />
+                <Key className="w-5 h-5 text-[#f15e1c]" />
                 <span>3. Encryption &amp; Storage Security</span>
               </h2>
               <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">
@@ -99,7 +99,7 @@ export default async function SecurityDPDPPage({
 
             <section id="incident-response" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
               <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-2">
-                <Server className="w-5 h-5 text-[#E8672A]" />
+                <Server className="w-5 h-5 text-[#f15e1c]" />
                 <span>4. Incident Response &amp; SLA</span>
               </h2>
               <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">

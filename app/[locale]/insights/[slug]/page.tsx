@@ -118,7 +118,7 @@ export default async function InsightPostDetailPage({
               />
               <Link
                 href="/insights"
-                className="text-xs font-semibold text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#E8672A] dark:hover:text-[#E8672A] inline-flex items-center gap-1 transition-colors"
+                className="text-xs font-semibold text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] dark:hover:text-[#f15e1c] inline-flex items-center gap-1 transition-colors"
               >
                 <ArrowLeft className="w-3.5 h-3.5" /> All Insights
               </Link>
@@ -133,10 +133,10 @@ export default async function InsightPostDetailPage({
                   {post.category}
                 </Badge>
                 <span className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5 text-[#E8672A]" /> {post.readTime}
+                  <Clock className="w-3.5 h-3.5 text-[#f15e1c]" /> {post.readTime}
                 </span>
                 <span className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center gap-1">
-                  <Calendar className="w-3.5 h-3.5 text-[#E8672A]" /> {post.dateFormatted}
+                  <Calendar className="w-3.5 h-3.5 text-[#f15e1c]" /> {post.dateFormatted}
                 </span>
               </div>
 
@@ -147,7 +147,7 @@ export default async function InsightPostDetailPage({
               {/* Author Attribution */}
               <div className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#FCE3D3] dark:bg-[#261F1A] border border-[#F4A97F]/30 dark:border-[#3D332B] flex items-center justify-center text-[#E8672A]">
+                  <div className="w-10 h-10 rounded-xl bg-[#FCE3D3] dark:bg-[#261F1A] border border-[#F4A97F]/30 dark:border-[#3D332B] flex items-center justify-center text-[#f15e1c]">
                     <User2 className="w-5 h-5" />
                   </div>
                   <div>
@@ -172,8 +172,8 @@ export default async function InsightPostDetailPage({
 
         {/* Key Takeaways Callout Box */}
         <ScrollReveal direction="up" delay={0.15}>
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#171411] border-2 border-[#E8672A]/30 dark:border-[#E8672A]/40 shadow-md space-y-4">
-            <div className="flex items-center gap-2 text-[#E8672A]">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#171411] border-2 border-[#f15e1c]/30 dark:border-[#f15e1c]/40 shadow-md space-y-4">
+            <div className="flex items-center gap-2 text-[#f15e1c]">
               <Sparkles className="w-5 h-5" />
               <span className="text-xs font-bold uppercase tracking-wider">
                 Executive & Technical Takeaways
@@ -182,7 +182,7 @@ export default async function InsightPostDetailPage({
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
               {post.keyTakeaways.map((takeaway, idx) => (
                 <li key={idx} className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#E8672A] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#f15e1c] shrink-0 mt-0.5" />
                   <span className="leading-relaxed">{takeaway}</span>
                 </li>
               ))}
@@ -276,7 +276,7 @@ export default async function InsightPostDetailPage({
                       <Badge variant="secondary" size="sm">
                         {rel.category}
                       </Badge>
-                      <h4 className="text-base font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] transition-colors line-clamp-2">
+                      <h4 className="text-base font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors line-clamp-2">
                         <Link href={`/insights/${rel.slug}`}>
                           {rel.title}
                         </Link>
@@ -288,7 +288,7 @@ export default async function InsightPostDetailPage({
                     <div className="pt-3 border-t border-[#EFE2D6] dark:border-[#2C241E]">
                       <Link
                         href={`/insights/${rel.slug}`}
-                        className="text-xs font-bold text-[#E8672A] inline-flex items-center gap-1"
+                        className="text-xs font-bold text-[#f15e1c] inline-flex items-center gap-1"
                       >
                         Read Insight <ArrowRight className="w-3 h-3" />
                       </Link>

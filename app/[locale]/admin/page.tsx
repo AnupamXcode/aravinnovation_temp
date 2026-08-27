@@ -155,7 +155,7 @@ export default function AdminDashboardPage() {
     return (
       <div className="min-h-screen w-full bg-[#FAF5EE] dark:bg-[#161310] flex items-center justify-center">
         <div className="text-center space-y-3">
-          <div className="w-10 h-10 border-4 border-[#E8672A] border-t-transparent rounded-full animate-spin mx-auto" />
+          <div className="w-10 h-10 border-4 border-[#f15e1c] border-t-transparent rounded-full animate-spin mx-auto" />
           <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
             Verifying admin authentication...
           </p>
@@ -202,7 +202,7 @@ export default function AdminDashboardPage() {
     <div className="min-h-screen bg-[#FAF5EE] dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] flex flex-col lg:flex-row transition-colors duration-300">
       {/* Toast Notification Banner */}
       {toastMessage && (
-        <div className="fixed top-6 right-6 z-50 px-5 py-3 rounded-2xl bg-[#E8672A] text-white text-xs font-semibold shadow-2xl animate-in fade-in slide-in-from-top-4 flex items-center gap-2">
+        <div className="fixed top-6 right-6 z-50 px-5 py-3 rounded-2xl bg-[#f15e1c] text-white text-xs font-semibold shadow-2xl animate-in fade-in slide-in-from-top-4 flex items-center gap-2">
           <CheckCircle2 className="w-4 h-4 shrink-0" />
           <span>{toastMessage}</span>
         </div>
@@ -221,7 +221,7 @@ export default function AdminDashboardPage() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="p-2 rounded-xl bg-[#FCE3D3]/60 dark:bg-[#2C221B] text-[#E8672A]">
+              <span className="p-2 rounded-xl bg-[#FCE3D3]/60 dark:bg-[#2C221B] text-[#f15e1c]">
                 <Shield className="w-5 h-5" />
               </span>
               <h1 className="text-xl sm:text-2xl font-extrabold font-display">
@@ -229,7 +229,7 @@ export default function AdminDashboardPage() {
               </h1>
             </div>
             <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] pl-9">
-              Managing Section: <strong className="text-[#E8672A] uppercase">{activeTab}</strong> &bull; Updates propagate live across the website
+              Managing Section: <strong className="text-[#f15e1c] uppercase">{activeTab}</strong> &bull; Updates propagate live across the website
             </p>
           </div>
 
@@ -242,7 +242,7 @@ export default function AdminDashboardPage() {
                 placeholder="Search CMS settings (e.g. phone, chatbot)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9 pr-3 py-2 rounded-xl text-xs bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] focus:border-[#E8672A] w-48 sm:w-64"
+                className="pl-9 pr-3 py-2 rounded-xl text-xs bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] focus:border-[#f15e1c] w-48 sm:w-64"
               />
             </div>
 
@@ -250,10 +250,10 @@ export default function AdminDashboardPage() {
               href={`/${locale}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] text-[#3A2E27] dark:text-[#FAF5EE] hover:border-[#E8672A]"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] text-[#3A2E27] dark:text-[#FAF5EE] hover:border-[#f15e1c]"
             >
               <span>View Live Site</span>
-              <ExternalLink className="w-3.5 h-3.5 text-[#E8672A]" />
+              <ExternalLink className="w-3.5 h-3.5 text-[#f15e1c]" />
             </a>
             <Button
               variant="outline"
@@ -273,8 +273,8 @@ export default function AdminDashboardPage() {
 
         {/* Global Admin Search Results Bar */}
         {searchMatches && searchMatches.length > 0 && (
-          <div className="p-4 rounded-2xl bg-[#FCE3D3]/50 dark:bg-[#261F1A] border border-[#E8672A]/30 space-y-2">
-            <span className="text-xs font-bold text-[#E8672A]">Search Matches:</span>
+          <div className="p-4 rounded-2xl bg-[#FCE3D3]/50 dark:bg-[#261F1A] border border-[#f15e1c]/30 space-y-2">
+            <span className="text-xs font-bold text-[#f15e1c]">Search Matches:</span>
             <div className="flex flex-wrap gap-2">
               {searchMatches.map((m, idx) => (
                 <button
@@ -284,7 +284,7 @@ export default function AdminDashboardPage() {
                     setActiveTab(m.tab);
                     setSearchQuery("");
                   }}
-                  className="px-3 py-1.5 rounded-xl bg-white dark:bg-[#1A1613] text-xs font-bold border border-[#E8672A]/40 text-[#E8672A] hover:bg-[#E8672A] hover:text-white transition-all cursor-pointer"
+                  className="px-3 py-1.5 rounded-xl bg-white dark:bg-[#1A1613] text-xs font-bold border border-[#f15e1c]/40 text-[#f15e1c] hover:bg-[#f15e1c] hover:text-white transition-all cursor-pointer"
                 >
                   {m.label} &rarr;
                 </button>
@@ -301,7 +301,7 @@ export default function AdminDashboardPage() {
             {/* MASTER WEBSITE ON/OFF CONTROL BANNER */}
             <div className={`p-6 sm:p-8 rounded-3xl border shadow-2xl transition-all ${
               config.websiteEnabled !== false
-                ? "bg-gradient-to-r from-[#FFFDF9] via-[#FFF5EC] to-[#FDF0E6] dark:from-[#181411] dark:to-[#241B16] border-[#E8672A]/30"
+                ? "bg-gradient-to-r from-[#FFFDF9] via-[#FFF5EC] to-[#FDF0E6] dark:from-[#181411] dark:to-[#241B16] border-[#f15e1c]/30"
                 : "bg-gradient-to-r from-red-950 via-rose-950 to-amber-950 border-red-500 text-white shadow-red-950/50"
             }`}>
               <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
@@ -396,7 +396,7 @@ export default function AdminDashboardPage() {
 
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-4">
               <h2 className="text-base font-bold font-display flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-[#E8672A]" />
+                <Sparkles className="w-4 h-4 text-[#f15e1c]" />
                 <span>Quick Actions Shortcuts</span>
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
@@ -416,7 +416,7 @@ export default function AdminDashboardPage() {
                     key={i}
                     type="button"
                     onClick={() => setActiveTab(act.tab)}
-                    className="p-3.5 rounded-2xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] text-xs font-semibold text-left hover:border-[#E8672A] transition-all cursor-pointer hover:shadow-xs"
+                    className="p-3.5 rounded-2xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] text-xs font-semibold text-left hover:border-[#f15e1c] transition-all cursor-pointer hover:shadow-xs"
                   >
                     {act.label} &rarr;
                   </button>
@@ -457,7 +457,7 @@ export default function AdminDashboardPage() {
         {activeTab === "hero" && (
           <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-6">
             <h2 className="text-lg font-bold font-display flex items-center gap-2">
-              <Globe className="w-5 h-5 text-[#E8672A]" />
+              <Globe className="w-5 h-5 text-[#f15e1c]" />
               <span>Homepage Hero Content Editor</span>
             </h2>
 
@@ -535,7 +535,7 @@ export default function AdminDashboardPage() {
           <div className="space-y-6">
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
-                <Briefcase className="w-5 h-5 text-[#E8672A]" />
+                <Briefcase className="w-5 h-5 text-[#f15e1c]" />
                 <span>7 Core Practices &amp; Services CMS</span>
               </h2>
               <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
@@ -555,7 +555,7 @@ export default function AdminDashboardPage() {
                   >
                     <div className="flex items-center justify-between pb-3 border-b border-[#EFE2D6] dark:border-[#2C241E]">
                       <div>
-                        <span className="text-xs font-bold font-mono text-[#E8672A] uppercase">
+                        <span className="text-xs font-bold font-mono text-[#f15e1c] uppercase">
                           {srv.slug}
                         </span>
                         <h3 className="text-base font-bold font-display">{srv.title}</h3>
@@ -576,7 +576,7 @@ export default function AdminDashboardPage() {
                         <button
                           type="button"
                           onClick={() => setEditingServiceSlug(isExpanded ? null : srv.slug)}
-                          className="p-1.5 rounded-xl bg-[#FBF3EA] dark:bg-[#1A1613] text-[#E8672A] hover:bg-[#FCE3D3] cursor-pointer"
+                          className="p-1.5 rounded-xl bg-[#FBF3EA] dark:bg-[#1A1613] text-[#f15e1c] hover:bg-[#FCE3D3] cursor-pointer"
                         >
                           <Edit3 className="w-4 h-4" />
                         </button>
@@ -647,7 +647,7 @@ export default function AdminDashboardPage() {
           <div className="space-y-6">
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
-                <Building2 className="w-5 h-5 text-[#E8672A]" />
+                <Building2 className="w-5 h-5 text-[#f15e1c]" />
                 <span>Industry Verticals &amp; Solutions Manager</span>
               </h2>
               <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
@@ -662,7 +662,7 @@ export default function AdminDashboardPage() {
                   className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-3"
                 >
                   <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
-                    <h3 className="text-sm font-bold font-display text-[#E8672A]">{ind.name}</h3>
+                    <h3 className="text-sm font-bold font-display text-[#f15e1c]">{ind.name}</h3>
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#FCE3D3] text-[#3A2E27] font-semibold">
                       Enterprise Practice
                     </span>
@@ -710,7 +710,7 @@ export default function AdminDashboardPage() {
           <div className="space-y-6">
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
-                <FileText className="w-5 h-5 text-[#E8672A]" />
+                <FileText className="w-5 h-5 text-[#f15e1c]" />
                 <span>Enterprise Case Studies CMS</span>
               </h2>
               <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
@@ -725,7 +725,7 @@ export default function AdminDashboardPage() {
                   className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4"
                 >
                   <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
-                    <span className="text-xs font-bold font-mono text-[#E8672A]">
+                    <span className="text-xs font-bold font-mono text-[#f15e1c]">
                       {cs.client} &bull; {cs.clientIndustry}
                     </span>
                     <span className="text-xs font-extrabold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-lg">
@@ -775,7 +775,7 @@ export default function AdminDashboardPage() {
           <div className="space-y-6">
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
-                <Workflow className="w-5 h-5 text-[#E8672A]" />
+                <Workflow className="w-5 h-5 text-[#f15e1c]" />
                 <span>5-Step Execution Methodology Editor</span>
               </h2>
               <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
@@ -789,7 +789,7 @@ export default function AdminDashboardPage() {
                   key={idx}
                   className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4"
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-[#E8672A] text-white flex items-center justify-center font-extrabold font-mono text-lg shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-[#f15e1c] text-white flex items-center justify-center font-extrabold font-mono text-lg shrink-0">
                     {step.step}
                   </div>
 
@@ -836,7 +836,7 @@ export default function AdminDashboardPage() {
           <div className="space-y-6">
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
-                <Quote className="w-5 h-5 text-[#E8672A]" />
+                <Quote className="w-5 h-5 text-[#f15e1c]" />
                 <span>Client Testimonials CMS</span>
               </h2>
               <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
@@ -851,7 +851,7 @@ export default function AdminDashboardPage() {
                   className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-3"
                 >
                   <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
-                    <span className="text-xs font-bold text-[#E8672A]">{test.company}</span>
+                    <span className="text-xs font-bold text-[#f15e1c]">{test.company}</span>
                     <span className="text-xs text-amber-500 font-bold">★ {test.rating || 5}.0</span>
                   </div>
 
@@ -897,7 +897,7 @@ export default function AdminDashboardPage() {
           <div className="space-y-6">
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
-                <Share2 className="w-5 h-5 text-[#E8672A]" />
+                <Share2 className="w-5 h-5 text-[#f15e1c]" />
                 <span>Footer &amp; Regional Contact CMS</span>
               </h2>
               <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
@@ -915,7 +915,7 @@ export default function AdminDashboardPage() {
             >
               {/* Main Footer Closing Headline */}
               <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4">
-                <h3 className="text-sm font-bold font-display text-[#E8672A]">Footer Heading &amp; Copy</h3>
+                <h3 className="text-sm font-bold font-display text-[#f15e1c]">Footer Heading &amp; Copy</h3>
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold">Main Footer Headline</label>
                   <input
@@ -930,7 +930,7 @@ export default function AdminDashboardPage() {
               {/* India HQ Regional Contact */}
               <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4">
                 <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
-                  <h3 className="text-sm font-bold font-display text-[#E8672A]">India HQ Regional Details</h3>
+                  <h3 className="text-sm font-bold font-display text-[#f15e1c]">India HQ Regional Details</h3>
                   <button
                     type="button"
                     onClick={() => {
@@ -983,7 +983,7 @@ export default function AdminDashboardPage() {
               {/* UAE Office Regional Contact */}
               <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4">
                 <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
-                  <h3 className="text-sm font-bold font-display text-[#E8672A]">UAE Regional Office Details</h3>
+                  <h3 className="text-sm font-bold font-display text-[#f15e1c]">UAE Regional Office Details</h3>
                   <button
                     type="button"
                     onClick={() => {
@@ -1035,7 +1035,7 @@ export default function AdminDashboardPage() {
 
               {/* Email & Support Contact */}
               <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4">
-                <h3 className="text-sm font-bold font-display text-[#E8672A]">Emails &amp; Copyright</h3>
+                <h3 className="text-sm font-bold font-display text-[#f15e1c]">Emails &amp; Copyright</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-xs font-bold">Primary Support Email</label>
@@ -1073,7 +1073,7 @@ export default function AdminDashboardPage() {
           <div className="space-y-6">
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
-                <Share2 className="w-5 h-5 text-[#E8672A]" />
+                <Share2 className="w-5 h-5 text-[#f15e1c]" />
                 <span>Social Media &amp; Digital Presence Manager</span>
               </h2>
               <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
@@ -1088,7 +1088,7 @@ export default function AdminDashboardPage() {
                   className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-3"
                 >
                   <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
-                    <span className="text-xs font-bold font-display text-[#E8672A]">
+                    <span className="text-xs font-bold font-display text-[#f15e1c]">
                       {social.name}
                     </span>
                     <div className="flex items-center gap-2">
@@ -1133,7 +1133,7 @@ export default function AdminDashboardPage() {
             {/* Add New Platform */}
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-4">
               <h3 className="text-sm font-bold font-display flex items-center gap-2">
-                <Plus className="w-4 h-4 text-[#E8672A]" />
+                <Plus className="w-4 h-4 text-[#f15e1c]" />
                 <span>Add New Social / Digital Platform</span>
               </h3>
 
@@ -1189,7 +1189,7 @@ export default function AdminDashboardPage() {
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="space-y-1">
                 <h2 className="text-lg font-bold font-display flex items-center gap-2">
-                  <MessageSquare className="w-5 h-5 text-[#E8672A]" />
+                  <MessageSquare className="w-5 h-5 text-[#f15e1c]" />
                   <span>Chatbot Command &amp; Response Manager</span>
                 </h2>
                 <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
@@ -1221,7 +1221,7 @@ export default function AdminDashboardPage() {
 
             {/* Default Greeting & Fallback Response Editors */}
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4">
-              <h3 className="text-sm font-bold font-display text-[#E8672A]">Default Messaging &amp; Fallback</h3>
+              <h3 className="text-sm font-bold font-display text-[#f15e1c]">Default Messaging &amp; Fallback</h3>
 
               <div className="space-y-1">
                 <label className="text-xs font-bold">Default Welcome Greeting</label>
@@ -1292,9 +1292,9 @@ export default function AdminDashboardPage() {
                   setShowAddCommandForm(false);
                   showToast("New Chatbot Command added successfully");
                 }}
-                className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border-2 border-[#E8672A]/50 shadow-2xl space-y-4 animate-in fade-in slide-in-from-top-3 duration-200"
+                className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border-2 border-[#f15e1c]/50 shadow-2xl space-y-4 animate-in fade-in slide-in-from-top-3 duration-200"
               >
-                <h4 className="text-sm font-bold font-display text-[#E8672A]">Create New Chatbot Command</h4>
+                <h4 className="text-sm font-bold font-display text-[#f15e1c]">Create New Chatbot Command</h4>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
@@ -1402,7 +1402,7 @@ export default function AdminDashboardPage() {
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
                     <div className="flex items-center gap-2.5">
-                      <span className="text-sm font-extrabold font-display text-[#E8672A]">
+                      <span className="text-sm font-extrabold font-display text-[#f15e1c]">
                         {cmd.keyword}
                       </span>
                       <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#FCE3D3]">
@@ -1470,7 +1470,7 @@ export default function AdminDashboardPage() {
           <div className="space-y-6">
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
-                <PhoneCall className="w-5 h-5 text-[#E8672A]" />
+                <PhoneCall className="w-5 h-5 text-[#f15e1c]" />
                 <span>Contact Info &amp; Lead Inquiries Manager</span>
               </h2>
               <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
@@ -1479,7 +1479,7 @@ export default function AdminDashboardPage() {
             </div>
 
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4">
-              <h3 className="text-sm font-bold font-display text-[#E8672A]">Public Contact Fields</h3>
+              <h3 className="text-sm font-bold font-display text-[#f15e1c]">Public Contact Fields</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label className="text-xs font-bold">India HQ Phone</label>
@@ -1514,7 +1514,7 @@ export default function AdminDashboardPage() {
           <div className="space-y-6">
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
-                <Languages className="w-5 h-5 text-[#E8672A]" />
+                <Languages className="w-5 h-5 text-[#f15e1c]" />
                 <span>Languages &amp; Multilingual System Manager</span>
               </h2>
               <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
@@ -1530,7 +1530,7 @@ export default function AdminDashboardPage() {
                 >
                   <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold font-mono uppercase text-[#E8672A]">
+                      <span className="text-xs font-bold font-mono uppercase text-[#f15e1c]">
                         {lang.code}
                       </span>
                       <span className="text-sm font-bold font-display">
@@ -1572,7 +1572,7 @@ export default function AdminDashboardPage() {
         {activeTab === "legal" && (
           <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-6">
             <h2 className="text-lg font-bold font-display flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-[#E8672A]" />
+              <ShieldCheck className="w-5 h-5 text-[#f15e1c]" />
               <span>Legal &amp; DPDP Act Content CMS</span>
             </h2>
 
@@ -1619,7 +1619,7 @@ export default function AdminDashboardPage() {
             {/* MASTER WEBSITE ON/OFF CONTROL CARD */}
             <div className={`p-6 sm:p-8 rounded-3xl border shadow-2xl transition-all ${
               config.websiteEnabled !== false
-                ? "bg-gradient-to-r from-[#FFFDF9] via-[#FFF5EC] to-[#FDF0E6] dark:from-[#181411] dark:to-[#241B16] border-[#E8672A]/30"
+                ? "bg-gradient-to-r from-[#FFFDF9] via-[#FFF5EC] to-[#FDF0E6] dark:from-[#181411] dark:to-[#241B16] border-[#f15e1c]/30"
                 : "bg-gradient-to-r from-red-950 via-rose-950 to-amber-950 border-red-500 text-white shadow-red-950/50"
             }`}>
               <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
@@ -1714,7 +1714,7 @@ export default function AdminDashboardPage() {
 
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
-                <SlidersHorizontal className="w-5 h-5 text-[#E8672A]" />
+                <SlidersHorizontal className="w-5 h-5 text-[#f15e1c]" />
                 <span>Global System, Section Styling &amp; Maintenance Controls</span>
               </h2>
               <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
@@ -1725,7 +1725,7 @@ export default function AdminDashboardPage() {
             {/* APPEARANCE & SECTION STYLING CMS */}
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-lg space-y-5">
               <div className="flex items-center justify-between pb-3 border-b border-[#EFE2D6] dark:border-[#2C241E]">
-                <h3 className="text-sm font-bold font-display text-[#E8672A] flex items-center gap-2">
+                <h3 className="text-sm font-bold font-display text-[#f15e1c] flex items-center gap-2">
                   <Palette className="w-4 h-4" />
                   <span>Appearance &amp; Section Visual Hierarchy CMS</span>
                 </h3>
@@ -1811,7 +1811,7 @@ export default function AdminDashboardPage() {
                       updateCardStyle(e.target.value as any);
                       showToast(`Card style updated to ${e.target.value}`);
                     }}
-                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613] font-semibold text-[#E8672A] cursor-pointer"
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613] font-semibold text-[#f15e1c] cursor-pointer"
                   >
                     <option value="elevated">Elevated (White Card + Shadow + Lift) [Recommended]</option>
                     <option value="bordered">Bordered (Clean High-Contrast Outline)</option>
@@ -1875,7 +1875,7 @@ export default function AdminDashboardPage() {
                     }}
                     className={`p-3 rounded-2xl border text-xs font-bold transition-all text-left cursor-pointer ${
                       state
-                        ? "bg-[#FCE3D3]/50 border-[#E8672A]/40 text-[#E8672A]"
+                        ? "bg-[#FCE3D3]/50 border-[#f15e1c]/40 text-[#f15e1c]"
                         : "bg-rose-500/10 border-rose-500/30 text-rose-500"
                     }`}
                   >

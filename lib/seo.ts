@@ -49,7 +49,7 @@ export const siteOrganizationSchema = {
         "https://www.linkedin.com/company/aravinnovations/",
         "https://www.instagram.com/aravinnovations",
         "https://www.facebook.com/people/Arav-Innovations/61566419637071/",
-        "https://api.whatsapp.com/send?phone=919650625777",
+        "https://api.whatsapp.com/send?phone=971521555792",
         "https://x.com/AravInnovations",
         "https://www.youtube.com/@AravInnovations",
       ],
@@ -167,9 +167,9 @@ export function getRouteCatalog(): SEOPageSettings[] {
     },
     {
       path: "/services",
-      label: "8 Core Services",
+      label: "Core Services",
       metaTitle: "Enterprise Services & Technology Practices | Arav Innovations",
-      metaDescription: "Explore our 8 core services: IT Strategy, Digital Marketing & Branding, Web & App Development, Risk & Compliance, Audits, Staff Augmentation, Technical SEO, and AI Portfolio.",
+      metaDescription: "Explore our core services: IT Strategy, Digital Marketing & Branding, Web & App Development, Risk & Compliance, Audits, Staff Augmentation, Technical SEO, and AI Portfolio.",
       priority: 0.9,
       robots: "Index, Follow",
       jsonLdSchema: JSON.stringify(

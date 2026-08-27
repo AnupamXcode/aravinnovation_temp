@@ -43,7 +43,7 @@ export default async function PrivacyPolicyPage({
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight">
               Privacy Policy
             </h1>
-            <p className="text-sm font-mono font-semibold text-[#E8672A]">
+            <p className="text-sm font-mono font-semibold text-[#f15e1c]">
               Privacy Policy for Arav Innovations &bull; Effective Date: 27th Dec 2024
             </p>
           </div>
@@ -54,7 +54,7 @@ export default async function PrivacyPolicyPage({
           {/* Left Column: Sticky Table of Contents (Desktop) */}
           <aside className="lg:col-span-4 hidden lg:block sticky top-32 space-y-4 p-6 rounded-3xl bg-[#FBF3EA]/60 dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm">
             <div className="flex items-center gap-2 font-bold font-display text-sm text-[#3A2E27] dark:text-[#FAF5EE] border-b border-[#EFE2D6] dark:border-[#2C241E] pb-3">
-              <FileText className="w-4 h-4 text-[#E8672A]" />
+              <FileText className="w-4 h-4 text-[#f15e1c]" />
               <span>Table of Contents</span>
             </div>
             <nav className="space-y-1 text-xs">
@@ -62,10 +62,10 @@ export default async function PrivacyPolicyPage({
                 <a
                   key={sec.id}
                   href={`#${sec.id}`}
-                  className="flex items-center justify-between p-2.5 rounded-xl text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:bg-white dark:hover:bg-[#221D18] transition-all font-semibold group"
+                  className="flex items-center justify-between p-2.5 rounded-xl text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] dark:hover:text-[#f15e1c] hover:bg-white dark:hover:bg-[#221D18] transition-all font-semibold group"
                 >
                   <span className="truncate">{sec.title}</span>
-                  <ChevronRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all text-[#E8672A]" />
+                  <ChevronRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all text-[#f15e1c]" />
                 </a>
               ))}
             </nav>
@@ -80,11 +80,11 @@ export default async function PrivacyPolicyPage({
             {/* 1. Information We Collect */}
             <ScrollReveal direction="up" delay={0.1}>
               <section id="info-we-collect" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32 group">
-                <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] transition-colors">
+                <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors">
                   1. Information We Collect
                 </h2>
                 <div className="space-y-3 pl-2">
-                  <h3 className="font-semibold text-[#E8672A]">1.1 Information You Provide to Us</h3>
+                  <h3 className="font-semibold text-[#f15e1c]">1.1 Information You Provide to Us</h3>
                   <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">We may collect the following personal information directly from you:</p>
                   <ul className="list-disc pl-5 space-y-1.5 text-[#7A6A5F] dark:text-[#B8ACA0]">
                     <li>Name, email address, phone number, and mailing address</li>
@@ -99,7 +99,7 @@ export default async function PrivacyPolicyPage({
             {/* 2. How We Use Your Information */}
             <ScrollReveal direction="up" delay={0.15}>
               <section id="how-we-use" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32 group">
-                <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] transition-colors">
+                <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors">
                   2. How We Use Your Information
                 </h2>
                 <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">We use your information for the following purposes:</p>
@@ -116,7 +116,7 @@ export default async function PrivacyPolicyPage({
             {/* 3. Sharing Your Information */}
             <ScrollReveal direction="up" delay={0.2}>
               <section id="sharing-info" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32 group">
-                <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] transition-colors">
+                <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors">
                   3. Sharing Your Information
                 </h2>
                 <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">We may share your information under strict governance terms with verified infrastructure partners and legal authorities when required.</p>
@@ -125,21 +125,21 @@ export default async function PrivacyPolicyPage({
 
             {/* Contact Section */}
             <ScrollReveal direction="up" delay={0.25}>
-              <section id="contact-us" className="space-y-4 pt-6 border-t-2 border-[#E8672A]/30 scroll-mt-32">
+              <section id="contact-us" className="space-y-4 pt-6 border-t-2 border-[#f15e1c]/30 scroll-mt-32">
                 <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
                   11. Contact Us
                 </h2>
                 <div className="p-6 rounded-2xl bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] space-y-2.5">
                   <div className="flex items-center gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
-                    <Mail className="w-4 h-4 text-[#E8672A]" />
-                    <span>Email: <a href="mailto:support@aravinnovations.com" className="text-[#E8672A] hover:underline">support@aravinnovations.com</a></span>
+                    <Mail className="w-4 h-4 text-[#f15e1c]" />
+                    <span>Email: <a href="mailto:support@aravinnovations.com" className="text-[#f15e1c] hover:underline">support@aravinnovations.com</a></span>
                   </div>
                   <div className="flex items-center gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
-                    <Phone className="w-4 h-4 text-[#E8672A]" />
-                    <span>Phone: <a href="tel:+919650625777" className="text-[#E8672A] hover:underline">+91 9650625777</a></span>
+                    <Phone className="w-4 h-4 text-[#f15e1c]" />
+                    <span>Phone: <a href="tel:+919650625777" className="text-[#f15e1c] hover:underline">+91 9650625777</a></span>
                   </div>
                   <div className="flex items-start gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
-                    <MapPin className="w-4 h-4 text-[#E8672A] shrink-0 mt-1" />
+                    <MapPin className="w-4 h-4 text-[#f15e1c] shrink-0 mt-1" />
                     <span>Address: Platinum Floor D 14/23 Ardee City Sec 52 Gurgaon 122002</span>
                   </div>
                 </div>

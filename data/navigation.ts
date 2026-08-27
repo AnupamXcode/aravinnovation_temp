@@ -138,7 +138,7 @@ export const companyContactInfo = {
     instagram: "https://www.instagram.com/aravinnovations",
     facebook: "https://www.facebook.com/people/Arav-Innovations/61566419637071/",
     linkedin: "https://www.linkedin.com/company/aravinnovations/",
-    whatsapp: "https://api.whatsapp.com/send?phone=919650625777",
+    whatsapp: "https://api.whatsapp.com/send?phone=971521555792&text=Hello%20Arav%20Innovations%2C%20I%27d%20like%20to%20discuss%20a%20project.",
     twitter: "https://x.com/AravInnovations",
     youtube: "https://www.youtube.com/@AravInnovations",
   },

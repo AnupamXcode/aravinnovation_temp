@@ -95,16 +95,16 @@ export default async function CaseStudyDetailPage({
           <ScrollReveal direction="up" delay={0.1}>
             <div className="flex flex-wrap items-center gap-3">
               <Link href={`/services/${caseStudy.serviceSlug}`}>
-                <Badge variant="secondary" size="md" className="hover:border-[#E8672A] transition-colors">
+                <Badge variant="secondary" size="md" className="hover:border-[#f15e1c] transition-colors">
                   {caseStudy.serviceCategory} &rarr;
                 </Badge>
               </Link>
               <span className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center gap-1">
-                <Building className="w-3.5 h-3.5 text-[#E8672A]" />
+                <Building className="w-3.5 h-3.5 text-[#f15e1c]" />
                 {caseStudy.clientIndustry}
               </span>
               <span className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center gap-1">
-                <MapPin className="w-3.5 h-3.5 text-[#E8672A]" />
+                <MapPin className="w-3.5 h-3.5 text-[#f15e1c]" />
                 {caseStudy.location}
               </span>
             </div>
@@ -117,7 +117,7 @@ export default async function CaseStudyDetailPage({
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={0.3}>
-            <p className="text-lg text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed border-l-4 border-[#E8672A] pl-4 italic bg-[#FBF3EA] dark:bg-[#1A1613] py-3 rounded-r-2xl border border-[#EFE2D6] dark:border-[#2C241E]">
+            <p className="text-lg text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed border-l-4 border-[#f15e1c] pl-4 italic bg-[#FBF3EA] dark:bg-[#1A1613] py-3 rounded-r-2xl border border-[#EFE2D6] dark:border-[#2C241E]">
               {caseStudy.summary}
             </p>
           </ScrollReveal>
@@ -128,7 +128,7 @@ export default async function CaseStudyDetailPage({
           <ScrollReveal direction="up" delay={0.1}>
             <TiltCard maxTilt={5} scale={1.01} className="h-full">
               <div className="h-full p-6 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] space-y-3 shadow-xs">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#E8672A] block">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#f15e1c] block">
                   01. The Challenge
                 </span>
                 <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
@@ -144,7 +144,7 @@ export default async function CaseStudyDetailPage({
           <ScrollReveal direction="up" delay={0.2}>
             <TiltCard maxTilt={5} scale={1.01} className="h-full">
               <div className="h-full p-6 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm space-y-3">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#E8672A] block">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#f15e1c] block">
                   02. Project Objective
                 </span>
                 <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
@@ -162,7 +162,7 @@ export default async function CaseStudyDetailPage({
         <ScrollReveal direction="up">
           <div className="p-8 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm space-y-6">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#E8672A] block mb-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#f15e1c] block mb-2">
                 03. Strategic Approach
               </span>
               <h3 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] mb-3">
@@ -174,7 +174,7 @@ export default async function CaseStudyDetailPage({
             </div>
 
             <div className="pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E]">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#E8672A] block mb-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#f15e1c] block mb-2">
                 04. Deployed Solution
               </span>
               <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
@@ -219,7 +219,7 @@ export default async function CaseStudyDetailPage({
                   key={i}
                   className="p-5 rounded-2xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] text-center space-y-2 shadow-2xs"
                 >
-                  <div className="text-sm font-mono font-bold text-[#E8672A]">
+                  <div className="text-sm font-mono font-bold text-[#f15e1c]">
                     {res.metric}
                   </div>
                   <div className="text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
@@ -238,7 +238,7 @@ export default async function CaseStudyDetailPage({
         {caseStudy.testimonial && (
           <ScrollReveal direction="up">
             <div className="p-8 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm space-y-4">
-              <div className="text-xs font-bold uppercase tracking-wider text-[#E8672A]">
+              <div className="text-xs font-bold uppercase tracking-wider text-[#f15e1c]">
                 Client Executive Endorsement
               </div>
               <blockquote className="text-base italic text-[#3A2E27] dark:text-[#FAF5EE] font-medium leading-relaxed">

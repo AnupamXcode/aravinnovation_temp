@@ -34,7 +34,7 @@ export default async function RefundPolicyPage({
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight">
             Refund Policy
           </h1>
-          <p className="text-sm font-mono font-semibold text-[#E8672A]">
+          <p className="text-sm font-mono font-semibold text-[#f15e1c]">
             Arav Innovation &bull; Commercial Terms &amp; Refund Policy
           </p>
         </div>
@@ -44,7 +44,7 @@ export default async function RefundPolicyPage({
           {/* Left Column: Sticky Table of Contents */}
           <aside className="lg:col-span-4 hidden lg:block sticky top-32 space-y-4 p-6 rounded-3xl bg-[#FBF3EA]/60 dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm">
             <div className="flex items-center gap-2 font-bold font-display text-sm text-[#3A2E27] dark:text-[#FAF5EE] border-b border-[#EFE2D6] dark:border-[#2C241E] pb-3">
-              <FileText className="w-4 h-4 text-[#E8672A]" />
+              <FileText className="w-4 h-4 text-[#f15e1c]" />
               <span>Table of Contents</span>
             </div>
             <nav className="space-y-1 text-xs">
@@ -52,10 +52,10 @@ export default async function RefundPolicyPage({
                 <a
                   key={sec.id}
                   href={`#${sec.id}`}
-                  className="flex items-center justify-between p-2 rounded-xl text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#E8672A] dark:hover:text-[#E8672A] hover:bg-white dark:hover:bg-[#221D18] transition-all font-medium group"
+                  className="flex items-center justify-between p-2 rounded-xl text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] dark:hover:text-[#f15e1c] hover:bg-white dark:hover:bg-[#221D18] transition-all font-medium group"
                 >
                   <span className="truncate">{sec.title}</span>
-                  <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#E8672A]" />
+                  <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#f15e1c]" />
                 </a>
               ))}
             </nav>
@@ -89,7 +89,7 @@ export default async function RefundPolicyPage({
                     key={idx}
                     className="flex items-center gap-2.5 p-3.5 rounded-2xl bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE]"
                   >
-                    <CheckCircle2 className="w-4 h-4 text-[#E8672A] shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-[#f15e1c] shrink-0" />
                     <span>{service}</span>
                   </div>
                 ))}
@@ -110,7 +110,7 @@ export default async function RefundPolicyPage({
                 <li>Results depend on various external factors, such as market trends and platform algorithms, which are beyond our control.</li>
               </ul>
               <div className="p-5 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] border border-[#F4A97F]/40 dark:border-[#3D332B] flex items-start gap-3 mt-4">
-                <AlertCircle className="w-5 h-5 text-[#E8672A] shrink-0 mt-0.5" />
+                <AlertCircle className="w-5 h-5 text-[#f15e1c] shrink-0 mt-0.5" />
                 <p className="text-xs font-medium text-[#3A2E27] dark:text-[#FAF5EE]">
                   Due to these reasons, payments made for our services cannot be refunded under any circumstances.
                 </p>
@@ -128,21 +128,21 @@ export default async function RefundPolicyPage({
             </section>
 
             {/* Contact Us */}
-            <section id="contact-us" className="space-y-4 pt-6 border-t-2 border-[#E8672A]/30 scroll-mt-32">
+            <section id="contact-us" className="space-y-4 pt-6 border-t-2 border-[#f15e1c]/30 scroll-mt-32">
               <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
                 Contact Us
               </h2>
               <div className="p-6 rounded-2xl bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] space-y-2.5">
                 <div className="flex items-center gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
-                  <Mail className="w-4 h-4 text-[#E8672A]" />
-                  <span>Email: <a href="mailto:support@aravinnovations.com" className="text-[#E8672A] hover:underline">support@aravinnovations.com</a></span>
+                  <Mail className="w-4 h-4 text-[#f15e1c]" />
+                  <span>Email: <a href="mailto:support@aravinnovations.com" className="text-[#f15e1c] hover:underline">support@aravinnovations.com</a></span>
                 </div>
                 <div className="flex items-center gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
-                  <Phone className="w-4 h-4 text-[#E8672A]" />
-                  <span>Phone: <a href="tel:+919650625777" className="text-[#E8672A] hover:underline">+91 9650625777</a></span>
+                  <Phone className="w-4 h-4 text-[#f15e1c]" />
+                  <span>Phone: <a href="tel:+919650625777" className="text-[#f15e1c] hover:underline">+91 9650625777</a></span>
                 </div>
                 <div className="flex items-start gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
-                  <MapPin className="w-4 h-4 text-[#E8672A] shrink-0 mt-1" />
+                  <MapPin className="w-4 h-4 text-[#f15e1c] shrink-0 mt-1" />
                   <span>Address: Platinum Floor D 14/23 Ardee City Sec 52 Gurgaon 122002</span>
                 </div>
               </div>

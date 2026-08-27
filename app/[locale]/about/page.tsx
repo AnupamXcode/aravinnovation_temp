@@ -93,7 +93,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           <ScrollReveal direction="up" delay={0.1}>
             <div className="inline-flex items-center gap-2">
               <Badge variant="secondary" size="md">
-                <span className="w-2 h-2 rounded-full bg-[#E8672A] animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-[#f15e1c] animate-pulse" />
                 <span>Result-Driven Digital Excellence</span>
               </Badge>
             </div>
@@ -130,7 +130,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3">
                 {highlights.map((item, i) => (
                   <div key={i} className="flex items-center gap-2 text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
-                    <CheckCircle2 className="w-4 h-4 text-[#E8672A] shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-[#f15e1c] shrink-0" />
                     <span>{item}</span>
                   </div>
                 ))}
@@ -156,14 +156,14 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               <TiltCard maxTilt={5} className="group">
                 <div className="p-8 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] space-y-6 shadow-xl">
                   <div className="flex items-center gap-3">
-                    <div className="p-3 rounded-2xl bg-[#E8672A] text-white shadow-xs group-hover:scale-105 transition-transform duration-300">
+                    <div className="p-3 rounded-2xl bg-[#f15e1c] text-white shadow-xs group-hover:scale-105 transition-transform duration-300">
                       <Globe2 className="w-6 h-6 text-white" />
                     </div>
                     <div>
                       <h3 className="text-xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
                         Dual-Regional Presence
                       </h3>
-                      <span className="text-xs text-[#E8672A] font-semibold">Global Operations</span>
+                      <span className="text-xs text-[#f15e1c] font-semibold">Global Operations</span>
                     </div>
                   </div>
                   <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
@@ -173,7 +173,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                   <div className="space-y-3 pt-2">
                     <div className="p-4 rounded-2xl bg-white dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] space-y-1">
                       <span className="text-xs font-bold text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-1.5">
-                        <MapPin className="w-3.5 h-3.5 text-[#E8672A]" /> India Headquarters
+                        <MapPin className="w-3.5 h-3.5 text-[#f15e1c]" /> India Headquarters
                       </span>
                       <p className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">
                         {companyContactInfo.offices[0].status}
@@ -185,7 +185,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
                     <div className="p-4 rounded-2xl bg-white dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] space-y-1">
                       <span className="text-xs font-bold text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-1.5">
-                        <MapPin className="w-3.5 h-3.5 text-[#E8672A]" /> UAE & Middle East Hub
+                        <MapPin className="w-3.5 h-3.5 text-[#f15e1c]" /> UAE & Middle East Hub
                       </span>
                       <p className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">
                         {companyContactInfo.offices[1].status}
@@ -221,11 +221,11 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             {values.map((v, i) => (
               <ScrollReveal key={i} delay={i * 0.1} direction="up">
                 <TiltCard maxTilt={5} scale={1.01} className="h-full group">
-                  <div className="h-full p-8 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-xl hover:border-[#E8672A]/40 transition-all space-y-3">
+                  <div className="h-full p-8 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-xl hover:border-[#f15e1c]/40 transition-all space-y-3">
                     <div className="p-3.5 rounded-2xl icon-box-hover w-fit shadow-xs">
                       {v.icon}
                     </div>
-                    <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] transition-colors">
+                    <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors">
                       {v.title}
                     </h3>
                     <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">

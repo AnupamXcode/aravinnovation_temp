@@ -14,6 +14,7 @@ import {
   BarChart3,
   Users2,
   ArrowRight,
+  Phone,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -45,7 +46,7 @@ export function ServiceCard({
     >
       <div
         className={cn(
-          "relative h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-[#1F1A16] p-7 sm:p-8 border border-[#EFE2D6] dark:border-[#2C241E] shadow-md hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-[#E8672A]/15 hover:border-[#E8672A]/60 dark:hover:border-[#E8672A]/60 transition-all duration-300"
+          "relative h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-[#172420] p-7 sm:p-8 border border-[#f7d7b0] dark:border-[#253630] shadow-md hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-[#f15e1c]/15 hover:border-[#f15e1c] dark:hover:border-[#f15e1c] transition-all duration-300"
         )}
       >
         <div>
@@ -53,29 +54,29 @@ export function ServiceCard({
             <div className="p-3.5 rounded-2xl icon-box-hover shadow-xs">
               {iconMap[service.icon] || <Compass className="w-6 h-6" />}
             </div>
-            <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] group-hover:text-[#E8672A] transition-colors">
+            <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#4a5c55] dark:text-[#d3eee4] group-hover:text-[#f15e1c] transition-colors">
               Practice
             </span>
           </div>
 
-          <h3 className="text-xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] dark:group-hover:text-[#E8672A] transition-colors">
+          <h3 className="text-xl font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] dark:group-hover:text-[#f15e1c] transition-colors">
             {service.title}
           </h3>
 
-          <p className="mt-2.5 text-sm text-[#7A6A5F] dark:text-[#B8ACA0] line-clamp-3 leading-relaxed">
+          <p className="mt-2.5 text-sm text-[#4a5c55] dark:text-[#d3eee4] line-clamp-3 leading-relaxed">
             {service.description}
           </p>
 
           {/* Core Capabilities Snippet */}
-          <div className="mt-5 pt-4 border-t border-[#EFE2D6] dark:border-[#2C241E] space-y-1.5">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] block">
+          <div className="mt-5 pt-4 border-t border-[#f7d7b0] dark:border-[#253630] space-y-1.5">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#4a5c55] dark:text-[#d3eee4] block">
               Key Capabilities
             </span>
             <div className="flex flex-wrap gap-1.5">
               {service.capabilities[0]?.items.slice(0, 3).map((item, i) => (
                 <span
                   key={i}
-                  className="text-[11px] px-2.5 py-1 rounded-lg bg-[#FBF3EA] dark:bg-[#201B17] text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#2C241E]"
+                  className="text-[11px] px-2.5 py-1 rounded-lg bg-[#fefaf5] dark:bg-[#1e2c27] text-[#1b2823] dark:text-[#ffffff] border border-[#f7d7b0] dark:border-[#253630]"
                 >
                   {item}
                 </span>
@@ -84,14 +85,23 @@ export function ServiceCard({
           </div>
         </div>
 
-        <div className="mt-6 pt-4 border-t border-[#EFE2D6]/60 dark:border-[#2C241E] relative z-20">
+        <div className="mt-6 pt-4 border-t border-[#f7d7b0]/60 dark:border-[#253630] relative z-20 flex items-center justify-between gap-3">
           <Link
             href={`/services/${service.slug}`}
             onClick={(e) => e.stopPropagation()}
-            className="inline-flex items-center text-sm font-semibold text-[#E8672A] group-hover:text-[#FF7D42] transition-colors gap-1.5 cursor-pointer py-1"
+            className="inline-flex items-center text-xs sm:text-sm font-bold text-[#f15e1c] hover:text-[#d8480d] transition-colors gap-1 cursor-pointer py-1"
           >
             <span>Explore Practice</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+          </Link>
+
+          <Link
+            href={`/contact?intent=setup-call&service=${service.slug}`}
+            onClick={(e) => e.stopPropagation()}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#f15e1c]/10 dark:bg-[#f15e1c]/20 hover:bg-[#f15e1c] text-[#f15e1c] hover:text-white border border-[#f15e1c]/40 text-xs font-mono font-bold transition-all duration-200 cursor-pointer shadow-xs"
+          >
+            <Phone className="w-3 h-3" />
+            <span>Setup Call</span>
           </Link>
         </div>
       </div>

@@ -11,9 +11,9 @@ import { ArrowRight, Globe2 } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export const metadata = {
-  title: "Our 8 Core Services | Arav Innovations",
+  title: "Our Core Services | Arav Innovations",
   description:
-    "Explore Arav Innovations' 8 enterprise service areas: IT Strategy, Digital Marketing & Branding, Web & App Development, Risk & Compliance, Auditing, Staff Augmentation, Technical SEO, and AI Portfolio.",
+    "Explore Arav Innovations' enterprise service areas: IT Strategy, Digital Marketing & Branding, Web & App Development, Risk & Compliance, Auditing, Staff Augmentation, Technical SEO, and AI Portfolio.",
   alternates: {
     canonical: "https://aravinnovations.com/services",
   },
@@ -70,7 +70,7 @@ export default async function ServicesHubPage({
         {/* Bottom Regional Advisory Banner */}
         <ScrollReveal direction="up" delay={0.3}>
           <div className="mt-20 rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] p-8 sm:p-12 text-center max-w-4xl mx-auto space-y-6 shadow-xl">
-            <div className="w-12 h-12 rounded-2xl bg-[#E8672A] text-white mx-auto flex items-center justify-center shadow-xs">
+            <div className="w-12 h-12 rounded-2xl bg-[#f15e1c] text-white mx-auto flex items-center justify-center shadow-xs">
               <Globe2 className="w-6 h-6" />
             </div>
             <h3 className="text-2xl sm:text-3xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">

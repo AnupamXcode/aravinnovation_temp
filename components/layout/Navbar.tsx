@@ -33,6 +33,7 @@ import {
   Layers,
   GraduationCap,
   Building2,
+  Phone,
 } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 
@@ -171,7 +172,7 @@ export function Navbar() {
                     <div className="rounded-3xl bg-[#FFFDF9] dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] p-4 shadow-2xl grid grid-cols-1 gap-1">
                       <div className="px-3 py-1.5 border-b border-[#EFE2D6] dark:border-[#2C241E] mb-1 flex items-center justify-between">
                         <span className="text-[11px] font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0]">
-                          Our 8 Core Services
+                          Our Core Services
                         </span>
                         <Link
                           href="/services"
@@ -362,13 +363,13 @@ export function Navbar() {
         <>
           {/* Backdrop Blur Overlay: Subdues and blurs the underlying page, disables background interaction */}
           <div
-            className="lg:hidden fixed inset-0 top-[65px] z-40 bg-black/40 dark:bg-black/60 backdrop-blur-md transition-all duration-300 pointer-events-auto"
+            className="lg:hidden fixed inset-0 top-[65px] z-40 bg-[#101b17]/50 dark:bg-[#101b17]/80 backdrop-blur-md transition-all duration-300 pointer-events-auto"
             onClick={() => setMobileMenuOpen(false)}
             aria-hidden="true"
           />
 
           {/* Premium Mobile Navigation Drawer Panel */}
-          <div className="lg:hidden fixed inset-x-0 top-[65px] bottom-0 z-50 bg-[#FFFDF9]/95 dark:bg-[#12100E]/95 backdrop-blur-xl border-t border-[#EFE2D6] dark:border-[#2C241E] px-5 py-6 overflow-y-auto shadow-2xl animate-in fade-in slide-in-from-top-3 duration-250 pointer-events-auto">
+          <div className="lg:hidden fixed inset-x-0 top-[65px] bottom-0 z-50 bg-white/95 dark:bg-[#101b17]/95 backdrop-blur-xl border-t border-[#f7d7b0] dark:border-[#253630] px-5 py-6 overflow-y-auto shadow-2xl animate-in fade-in slide-in-from-top-3 duration-250 pointer-events-auto">
             <div className="space-y-6 max-w-lg mx-auto">
               {/* Mobile Utility Controls */}
               <div className="sm:hidden flex items-center justify-between pb-4 border-b border-[#EFE2D6] dark:border-[#2C241E]">
@@ -388,7 +389,7 @@ export function Navbar() {
                   }}
                 >
                   <span className="pointer-events-none font-display text-sm font-bold text-[#3A2E27] dark:text-[#FAF5EE]">
-                    What We Do (8 Core Services)
+                    What We Do
                   </span>
                   <ChevronDown
                     className={cn(
@@ -492,12 +493,30 @@ export function Navbar() {
               </div>
 
               {/* Mobile Bottom Conversion CTA */}
-              <div className="pt-4 border-t border-[#EFE2D6] dark:border-[#2C241E]">
-                <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="block w-full">
-                  <Button variant="primary" size="lg" className="w-full justify-center shadow-md bg-[#f15e1c] hover:bg-[#d44e14]">
-                    Talk to an Expert <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </Link>
+              <div className="pt-4 border-t border-[#EFE2D6] dark:border-[#2C241E] space-y-3">
+                <a
+                  href="tel:+971521555792"
+                  className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#f7d7b0]/40 dark:bg-[#253630] border border-[#f15e1c]/40 text-[#f15e1c] font-bold text-xs font-mono min-h-[44px]"
+                >
+                  <Phone className="w-4 h-4 text-[#f15e1c]" />
+                  <span>UAE Regional Office (+971 521555792)</span>
+                </a>
+
+                <div className="grid grid-cols-2 gap-2">
+                  <a
+                    href="https://api.whatsapp.com/send?phone=971521555792&text=Hello%20Arav%20Innovations%2C%20I%27d%20like%20to%20discuss%20a%20project."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-1.5 p-2.5 rounded-2xl bg-[#2e936f] text-white text-xs font-bold shadow-xs min-h-[44px]"
+                  >
+                    <span>Instant WhatsApp</span>
+                  </a>
+                  <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="block w-full">
+                    <Button variant="primary" size="md" className="w-full justify-center shadow-md bg-[#f15e1c] hover:bg-[#d44e14] min-h-[44px] text-xs">
+                      Discuss Project &rarr;
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
