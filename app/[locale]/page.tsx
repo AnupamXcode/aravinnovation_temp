@@ -114,22 +114,8 @@ export default async function HomePage({
 
       {/* BEFORE/AFTER SLIDER */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
-        <section className="py-16 md:py-20 px-6 sm:px-12 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-xl text-center space-y-8 transition-colors duration-300">
+        <section className="py-6 md:py-8 px-4 sm:px-6 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-xl text-center transition-colors duration-300">
           <ScrollReveal direction="up">
-            <div className="max-w-3xl mx-auto space-y-3">
-              <Badge variant="secondary" size="md">
-                {tBeforeAfter("badge")}
-              </Badge>
-              <h2 className="text-3xl sm:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
-                {tBeforeAfter("title")}
-              </h2>
-              <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4]">
-                {tBeforeAfter("description")}
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="up" delay={0.15}>
             <BeforeAfterSlider />
           </ScrollReveal>
         </section>
@@ -138,29 +124,7 @@ export default async function HomePage({
       {/* WHAT WE DO 7-SERVICE INTERACTIVE SELECTOR WITH 3D CARD REVEAL */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="services">
         <Scroll3DContainer variant="card">
-          <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#f7d7b0]/30 dark:bg-[#1e2c27]/90 border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
-            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/60 to-transparent" />
-
-            <ScrollReveal direction="up">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-                <div className="max-w-3xl space-y-3">
-                  <Badge variant="secondary" size="md">
-                    {tServices("badge")}
-                  </Badge>
-                  <h2 className="text-3xl sm:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight leading-[1.1]">
-                    {tServices("title")}
-                  </h2>
-                </div>
-                <Link href={`/${locale}/services`}>
-                  <Button variant="outline" size="md" className="rounded-full px-7 py-3 border-[#f7d7b0] dark:border-[#253630] bg-white dark:bg-[#172420] text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c]" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                    {tServices("viewAll")}
-                  </Button>
-                </Link>
-              </div>
-            </ScrollReveal>
-
-            <Services3DConstellation />
-          </section>
+          <Services3DConstellation />
         </Scroll3DContainer>
       </div>
 
@@ -170,12 +134,12 @@ export default async function HomePage({
       {/* TECHNICAL ARCHITECTURE CASE STUDIES */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <Scroll3DContainer variant="card">
-          <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#f7d7b0]/30 dark:bg-[#1e2c27]/90 border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
+          <section className="py-10 md:py-14 px-6 sm:px-10 lg:px-12 rounded-[2.5rem] bg-[#f7d7b0]/30 dark:bg-[#1e2c27]/90 border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
             <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/50 to-transparent" />
 
             <ScrollReveal direction="up">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
-                <div className="max-w-3xl space-y-3">
+              <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
+                <div className="max-w-3xl space-y-2">
                   <Badge variant="secondary" size="md">
                     {tCaseStudies("badge")}
                   </Badge>
@@ -191,7 +155,7 @@ export default async function HomePage({
               </div>
             </ScrollReveal>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {caseStudiesData.slice(0, 3).map((study, idx) => (
                 <Scroll3DContainer key={study.slug} variant="card" delay={idx * 0.1}>
                   <ArchitectureCaseStudyCard caseStudy={study} locale={locale} />
