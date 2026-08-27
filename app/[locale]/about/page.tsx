@@ -139,7 +139,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               <div className="pt-4 flex flex-wrap gap-4">
                 <Link href="/services">
                   <Button variant="primary" size="md" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                    Explore Our 7 Practices
+                    Explore Our 8 Practices
                   </Button>
                 </Link>
                 <Link href="/contact">
@@ -217,18 +217,18 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {values.map((v, i) => (
-              <ScrollReveal key={i} delay={i * 0.1} direction="up" className="h-full">
+              <ScrollReveal key={i} delay={i * 0.1} direction="up">
                 <TiltCard maxTilt={5} scale={1.01} className="h-full group">
-                  <div className="h-full p-8 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-xl hover:border-[#f15e1c]/40 transition-all flex flex-col justify-start space-y-5">
-                    <div className="w-14 h-14 rounded-2xl icon-box-hover flex items-center justify-center shrink-0 shadow-xs text-[#f15e1c] bg-[#fefaf5] dark:bg-[#1a2622]">
+                  <div className="h-full p-8 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-xl hover:border-[#E8672A]/40 transition-all space-y-3">
+                    <div className="p-3.5 rounded-2xl icon-box-hover w-fit shadow-xs">
                       {v.icon}
                     </div>
-                    <h3 className="text-xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors leading-snug shrink-0 min-h-[56px] flex items-center">
+                    <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#E8672A] transition-colors">
                       {v.title}
                     </h3>
-                    <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed flex-1">
+                    <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
                       {v.description}
                     </p>
                   </div>

@@ -5,6 +5,7 @@ import { Hero } from "@/components/hero/Hero";
 import { ArchitectureCaseStudyCard } from "@/components/case-studies/ArchitectureCaseStudyCard";
 import { BeforeAfterSlider } from "@/components/motion/BeforeAfterSlider";
 import { AnimatedTestimonialsCarousel } from "@/components/testimonials/AnimatedTestimonialsCarousel";
+import { ClientFeedbackEditorialSection } from "@/components/testimonials/ClientFeedbackEditorialSection";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -62,6 +63,7 @@ export default async function HomePage({
   const tCaseStudies = await getTranslations("CaseStudies");
   const tWhyArav = await getTranslations("WhyArav");
   const tMethodology = await getTranslations("Methodology");
+  const tTestimonials = await getTranslations("Testimonials");
   const tFinalCta = await getTranslations("FinalCta");
   const tMovingLogo = await getTranslations("MovingLogo");
 
@@ -107,7 +109,7 @@ export default async function HomePage({
         </ScrollReveal>
       </section>
 
-      {/* BEFORE/AFTER TRANSFORMATIONAL SLIDER */}
+      {/* BEFORE/AFTER TRANSFORMATION SLIDER */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <section className="py-6 md:py-8 px-4 sm:px-6 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-xl text-center transition-colors duration-300">
           <ScrollReveal direction="up">
@@ -144,23 +146,20 @@ export default async function HomePage({
         </section>
       </div>
 
-      {/* 3. CLIENT FEEDBACK & EXECUTIVE REVIEWS (EDITORIAL TESTIMONIAL LAYOUT) */}
-      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="testimonials">
+      {/* 3. SECTION ONE: EXISTING EXECUTIVE ENDORSEMENT (UNTOUCHED) */}
+      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="executive-endorsements">
         <Scroll3DContainer variant="testimonial">
           <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
             <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent" />
 
             <ScrollReveal direction="up">
-              <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
+              <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
                 <Badge variant="secondary" size="md">
-                  Executive Endorsements
+                  {tTestimonials("badge")}
                 </Badge>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                  CLIENT FEEDBACK &amp; EXECUTIVE REVIEWS
+                  {tTestimonials("title")}
                 </h2>
-                <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                  Read feedback from engineering leaders, CTOs, and growth executives who have partnered with Arav Innovations across India and the United Arab Emirates.
-                </p>
               </div>
             </ScrollReveal>
 
@@ -171,7 +170,12 @@ export default async function HomePage({
         </Scroll3DContainer>
       </div>
 
-      {/* 4. FEATURED ARCHITECTURE CASE STUDIES */}
+      {/* 4. SECTION TWO: NEW CLIENT FEEDBACK & EXECUTIVE REVIEWS (EDITORIAL SECTION) */}
+      <ScrollReveal direction="up" delay={0.1}>
+        <ClientFeedbackEditorialSection />
+      </ScrollReveal>
+
+      {/* 5. FEATURED ARCHITECTURE CASE STUDIES */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="case-studies">
         <Scroll3DContainer variant="card">
           <section className="py-10 md:py-14 px-6 sm:px-10 lg:px-12 rounded-[2.5rem] bg-[#f7d7b0]/30 dark:bg-[#1e2c27]/90 border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
@@ -217,7 +221,7 @@ export default async function HomePage({
         </Scroll3DContainer>
       </div>
 
-      {/* WHY ARAV */}
+      {/* 6. WHY ARAV (EQUAL SIZED 4 CARDS GRID) */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300">
           <ScrollReveal direction="up">
@@ -253,7 +257,7 @@ export default async function HomePage({
         </section>
       </div>
 
-      {/* 5. FINAL LEAD FORM & CTA SECTION */}
+      {/* 7. FINAL LEAD FORM & CTA SECTION */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="contact">
         <Scroll3DContainer variant="cta">
           <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-gradient-to-br from-[#ffffff] via-[#fefaf5] to-[#f7d7b0]/50 dark:from-[#172420] dark:via-[#1e2c27] dark:to-[#253630] border-2 border-[#f15e1c]/40 shadow-2xl transition-all duration-300">
