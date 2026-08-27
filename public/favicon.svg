@@ -1,39 +1,26 @@
 <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="arav-fav-orange" x1="0%" y1="0%" x2="100%" y2="0%">
+    <linearGradient id="fav-orange-grad" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#FFB800" />
       <stop offset="60%" stop-color="#f15e1c" />
       <stop offset="100%" stop-color="#E84A5F" />
     </linearGradient>
-    <linearGradient id="arav-fav-green" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00D287" />
-      <stop offset="50%" stop-color="#2e936f" />
-      <stop offset="100%" stop-color="#008055" />
-    </linearGradient>
-    <linearGradient id="arav-fav-purple" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#E6007A" />
-      <stop offset="50%" stop-color="#f15e1c" />
-      <stop offset="100%" stop-color="#FF2E93" />
-    </linearGradient>
-    <radialGradient id="arav-fav-dot-yellow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#FFE600" />
-      <stop offset="100%" stop-color="#fab60a" />
-    </radialGradient>
-    <radialGradient id="arav-fav-dot-orange" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#f15e1c" />
-      <stop offset="100%" stop-color="#E84000" />
-    </radialGradient>
   </defs>
 
-  {/* Clean Transparent Background - Original Official Brand Emblem */}
-  <g transform="translate(2, 4) scale(0.96)">
-    <rect x="5" y="22" width="62" height="15" rx="7.5" fill="url(#arav-fav-orange)" />
-    <path d="M48 12C48 6.477 52.477 2 58 2H76C87.046 2 96 10.954 96 22V56C96 61.523 91.523 66 86 66C80.477 66 76 61.523 76 56V24C76 20.686 73.314 18 70 18H58C52.477 18 48 15.314 48 12Z" fill="url(#arav-fav-green)" />
-    <path d="M48 22H64C72.837 22 80 29.163 80 38V80C80 85.523 75.523 90 70 90C64.477 90 60 85.523 60 80V44C60 40.686 57.314 38 54 38H48V22Z" fill="url(#arav-fav-purple)" />
-    <rect x="48" y="22" width="16" height="16" rx="4" fill="#f15e1c" fill-opacity="0.85" />
-    <rect x="48" y="38" width="16" height="16" rx="4" fill="#f15e1c" fill-opacity="0.95" />
-    <circle cx="34" cy="50" r="7" fill="#f15e1c" />
-    <circle cx="24" cy="68" r="8" fill="url(#arav-fav-dot-yellow)" />
-    <circle cx="45" cy="68" r="9" fill="url(#arav-fav-dot-orange)" />
+  {/* Clean Transparent Background - Original Official Brand Emblem Mark */}
+  <g transform="translate(-2, -2)">
+    {/* Top-Right Green Corner */}
+    <path d="M 42 16 H 78 C 84.6 16 90 21.4 90 28 V 62" stroke="#2e936f" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+    
+    {/* Middle Orange Arrow Bar */}
+    <path d="M 18 36 H 60 C 65.5 36 70 40.5 70 46 V 70" stroke="url(#fav-orange-grad)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+
+    {/* Magenta/Pink Corner */}
+    <path d="M 32 54 H 66 C 72.6 54 78 59.4 78 66 V 88" stroke="#e6007a" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+
+    {/* 3 Dots */}
+    <circle cx="32" cy="54" r="6" fill="#e6007a" />
+    <circle cx="28" cy="78" r="6" fill="#f15e1c" />
+    <circle cx="16" cy="64" r="6" fill="#fab60a" />
   </g>
 </svg>
