@@ -16,6 +16,7 @@ import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { BreadcrumbSchema, ServiceSchema, FAQSchema } from "@/components/seo/StructuredData";
 import { ServiceMaintenanceBanner } from "@/components/services/ServiceMaintenanceBanner";
 import { ITStrategyInteractivePage } from "@/components/services/ITStrategyInteractivePage";
+import { DigitalMarketingInteractivePage } from "@/components/services/DigitalMarketingInteractivePage";
 import {
   Compass,
   Code2,
@@ -101,6 +102,11 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
   // Render Immersive IT Strategy Interactive Page for IT Strategy Slugs
   if (service.slug === "it-strategy-implementation" || slug === "it-strategy-consulting" || slug === "itstrategy") {
     return <ITStrategyInteractivePage service={service} />;
+  }
+
+  // Render Immersive Digital Marketing Interactive Page for Digital Marketing Slugs
+  if (service.slug === "digital-marketing-brand-development" || slug === "digitalmarketing" || slug === "digital-marketing") {
+    return <DigitalMarketingInteractivePage service={service} />;
   }
 
   // Find related case study
