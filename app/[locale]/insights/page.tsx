@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { BreadcrumbSchema } from "@/components/seo/StructuredData";
+import { EmptyState } from "@/components/ui/empty-state";
 import { ArrowRight, Clock, BookOpen, Sparkles, User2, Tag } from "lucide-react";
 
 export const metadata: Metadata = {

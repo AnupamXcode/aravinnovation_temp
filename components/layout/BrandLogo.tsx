@@ -25,6 +25,7 @@ export function BrandLogo({ className, variant = "header" }: BrandLogoProps) {
           src="/logos/arav-logo.png"
           alt="Arav Innovations Logo"
           fill
+          sizes="(max-width: 640px) 208px, 240px"
           className="object-contain object-left"
           priority
         />

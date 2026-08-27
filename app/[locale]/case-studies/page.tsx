@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { BreadcrumbSchema } from "@/components/seo/StructuredData";
+import { EmptyState } from "@/components/ui/empty-state";
 import { ArrowRight } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
@@ -56,13 +57,22 @@ export default async function CaseStudiesPage({
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {caseStudies.map((study, idx) => (
-            <ScrollReveal key={study.slug} delay={idx * 0.1} direction="up">
-              <CaseStudyCard caseStudy={study} />
-            </ScrollReveal>
-          ))}
-        </div>
+        {caseStudies.length === 0 ? (
+          <EmptyState
+            title="No Case Studies Published Yet"
+            description="Our enterprise transformation case studies are currently being updated. Check back soon or contact us to receive custom benchmark reports."
+            actionLabel="Request Case Studies"
+            actionHref="/contact"
+          />
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {caseStudies.map((study, idx) => (
+              <ScrollReveal key={study.slug} delay={idx * 0.1} direction="up">
+                <CaseStudyCard caseStudy={study} />
+              </ScrollReveal>
+            ))}
+          </div>
+        )}
 
         {/* CTA */}
         <ScrollReveal direction="up" delay={0.4}>

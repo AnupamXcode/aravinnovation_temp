@@ -115,10 +115,10 @@ export function getRouteCatalog(): SEOPageSettings[] {
     {
       path: "/",
       label: "Homepage",
-      metaTitle: "Arav Innovations | Enterprise IT Strategy, Software Engineering & Growth",
+      metaTitle: "Enterprise IT & Growth | Arav Innovations",
       metaDescription: "Arav Innovations delivers enterprise IT strategy, full-stack web & mobile engineering, performance marketing, DPDP compliance audit, and staff augmentation globally.",
       priority: 1.0,
-      ogTitle: "Arav Innovations | Global Enterprise IT & Software Engineering",
+      ogTitle: "Enterprise IT & Growth | Arav Innovations",
       ogImage: `${SITE_BASE_URL}/og-default.jpg`,
       ogDescription: "Enterprise technology, digital growth marketing, risk governance & dedicated engineering squads.",
       robots: "Index, Follow",
@@ -146,7 +146,7 @@ export function getRouteCatalog(): SEOPageSettings[] {
     {
       path: "/about",
       label: "About Us",
-      metaTitle: "About Arav Innovations | Executive Leadership & Delivery Philosophy",
+      metaTitle: "About Us | Arav Innovations",
       metaDescription: "Learn about Arav Innovations' dual-hub engineering model across Gurgaon and Dubai, driving high-impact digital transformation for global enterprises.",
       priority: 0.8,
       robots: "Index, Follow",
@@ -168,7 +168,7 @@ export function getRouteCatalog(): SEOPageSettings[] {
     {
       path: "/services",
       label: "7 Core Practices",
-      metaTitle: "Enterprise IT Services & Solutions | Arav Innovations",
+      metaTitle: "IT Services & Consulting | Arav Innovations",
       metaDescription: "Explore our 7 core practices: Strategy Consulting, Custom Web Apps, Performance Marketing, Technical SEO, DPDP Governance, Audits, and Staff Augmentation.",
       priority: 0.9,
       robots: "Index, Follow",
@@ -192,7 +192,7 @@ export function getRouteCatalog(): SEOPageSettings[] {
     {
       path: "/products",
       label: "Product Ecosystem",
-      metaTitle: "Enterprise Software Products & SaaS Platforms | Arav Innovations",
+      metaTitle: "Software Products & SaaS | Arav Innovations",
       metaDescription: "Discover proprietary enterprise solutions built by Arav Innovations for DPDP compliance, AI lead scoring, cloud optimization, and security governance.",
       priority: 0.9,
       robots: "Index, Follow",
@@ -211,7 +211,7 @@ export function getRouteCatalog(): SEOPageSettings[] {
     {
       path: "/solutions",
       label: "Industry Solutions",
-      metaTitle: "Industry Vertical Tech Solutions | FinTech, E-Commerce & Healthcare",
+      metaTitle: "Industry Tech Solutions | Arav Innovations",
       metaDescription: "Tailored digital platforms and compliance frameworks for FinTech, E-Commerce, Healthcare, SaaS, Logistics, and Professional Services.",
       priority: 0.8,
       robots: "Index, Follow",
@@ -230,7 +230,7 @@ export function getRouteCatalog(): SEOPageSettings[] {
     {
       path: "/case-studies",
       label: "Case Studies Hub",
-      metaTitle: "Enterprise Client Case Studies & Measurable Impact | Arav Innovations",
+      metaTitle: "Case Studies & Results | Arav Innovations",
       metaDescription: "Read real client transformation case studies delivering 3.4x conversion uplift, 45% latency reduction, and 100% DPDP Act compliance.",
       priority: 0.8,
       robots: "Index, Follow",
@@ -249,8 +249,8 @@ export function getRouteCatalog(): SEOPageSettings[] {
     {
       path: "/testimonials",
       label: "Client Testimonials",
-      metaTitle: "Client Reviews & Executive Testimonials | Arav Innovations",
-      metaDescription: "Hear what CTOs, Founders, and VPs of Technology say about collaborating with Arav Innovations engineering pods.",
+      metaTitle: "Client Reviews & Feedback | Arav Innovations",
+      metaDescription: "Read verified client testimonials from CTOs and engineering leaders collaborating with Arav Innovations across India and Dubai.",
       priority: 0.7,
       robots: "Index, Follow",
       jsonLdSchema: JSON.stringify(
@@ -259,6 +259,7 @@ export function getRouteCatalog(): SEOPageSettings[] {
           "@type": "WebPage",
           name: "Client Testimonials & Endorsements",
           url: `${SITE_BASE_URL}/testimonials`,
+          description: "Read verified client testimonials from CTOs and engineering leaders collaborating with Arav Innovations across India and Dubai.",
         },
         null,
         2
@@ -268,7 +269,7 @@ export function getRouteCatalog(): SEOPageSettings[] {
     {
       path: "/insights",
       label: "Insights & Tech Blog",
-      metaTitle: "Engineering Insights, Technical SEO & Governance Blog | Arav Innovations",
+      metaTitle: "Tech Blog & Insights | Arav Innovations",
       metaDescription: "Actionable articles on Next.js App Router performance, DPDP Act compliance strategies, B2B demand generation, and AI workflow integration.",
       priority: 0.8,
       robots: "Index, Follow",
@@ -287,7 +288,7 @@ export function getRouteCatalog(): SEOPageSettings[] {
     {
       path: "/careers",
       label: "Careers & Squads",
-      metaTitle: "Join Our Senior Engineering Squads | Careers at Arav Innovations",
+      metaTitle: "Careers & Senior Squads | Arav Innovations",
       metaDescription: "We are hiring principal software engineers, technical SEO strategists, compliance consultants, and UI/UX designers in Gurgaon & Dubai.",
       priority: 0.7,
       robots: "Index, Follow",
@@ -306,7 +307,7 @@ export function getRouteCatalog(): SEOPageSettings[] {
     {
       path: "/contact",
       label: "Contact & Global Hubs",
-      metaTitle: "Contact Arav Innovations | Schedule IT & Software Consultation",
+      metaTitle: "Contact Us | Arav Innovations",
       metaDescription: "Get in touch with our strategy and engineering pods in Gurugram (India) or Dubai (UAE). Fast 24-hour response for enterprise inquiries.",
       priority: 0.8,
       robots: "Index, Follow",
@@ -325,7 +326,7 @@ export function getRouteCatalog(): SEOPageSettings[] {
     {
       path: "/privacy-policy",
       label: "Privacy Policy",
-      metaTitle: "Privacy Policy & Data Rights | Arav Innovations",
+      metaTitle: "Privacy Policy | Arav Innovations",
       metaDescription: "Read Arav Innovations' privacy policy detailing data processing, DPDP compliance, cookie disclosures, and global privacy standards.",
       priority: 0.3,
       robots: "Index, Follow",
@@ -344,7 +345,7 @@ export function getRouteCatalog(): SEOPageSettings[] {
     {
       path: "/terms-and-conditions",
       label: "Terms & Conditions",
-      metaTitle: "Terms & Conditions of Service | Arav Innovations",
+      metaTitle: "Terms & Conditions | Arav Innovations",
       metaDescription: "Master service agreement terms and conditions governing engineering services, IP rights, and SLA guarantees at Arav Innovations.",
       priority: 0.3,
       robots: "Index, Follow",
@@ -363,7 +364,7 @@ export function getRouteCatalog(): SEOPageSettings[] {
     {
       path: "/refund-policy",
       label: "Refund & Cancellation",
-      metaTitle: "Refund & Cancellation Policy | Arav Innovations",
+      metaTitle: "Refund Policy | Arav Innovations",
       metaDescription: "Clear terms and service level milestones regarding project retainer refunds, milestone cancellations, and support guarantees.",
       priority: 0.3,
       robots: "Index, Follow",
@@ -382,7 +383,7 @@ export function getRouteCatalog(): SEOPageSettings[] {
     {
       path: "/security-dpdp",
       label: "Security & DPDP Compliance",
-      metaTitle: "Security Framework & DPDP Act Compliance | Arav Innovations",
+      metaTitle: "Security & DPDP Compliance | Arav Innovations",
       metaDescription: "Overview of Arav Innovations' enterprise security standards, data protection officer roles, SOC-2 readiness, and DPDP compliance audits.",
       priority: 0.6,
       robots: "Index, Follow",

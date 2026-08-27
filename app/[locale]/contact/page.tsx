@@ -86,7 +86,13 @@ export default async function ContactPage({
                       {companyContactInfo.offices[0].address}
                     </p>
                     <div className="text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] pt-1">
-                      Phone: {companyContactInfo.phoneIndia}
+                      Phone:{" "}
+                      <a
+                        href={`tel:${companyContactInfo.phoneIndiaRaw}`}
+                        className="text-[#E8672A] hover:underline"
+                      >
+                        {companyContactInfo.phoneIndia}
+                      </a>
                     </div>
                   </div>
 
@@ -100,7 +106,13 @@ export default async function ContactPage({
                       {companyContactInfo.offices[1].address}
                     </p>
                     <div className="text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] pt-1">
-                      Phone: {companyContactInfo.phoneUAE}
+                      Phone:{" "}
+                      <a
+                        href={`tel:${companyContactInfo.phoneUAERaw}`}
+                        className="text-[#E8672A] hover:underline"
+                      >
+                        {companyContactInfo.phoneUAE}
+                      </a>
                     </div>
                   </div>
 
