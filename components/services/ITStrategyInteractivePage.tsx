@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion, useInView } from "framer-motion";
 import {
   Compass,
   ShieldCheck,
@@ -17,6 +17,9 @@ import {
   Star,
   Check,
   ChevronRight,
+  Globe2,
+  Zap,
+  Cpu,
 } from "lucide-react";
 import { Service } from "@/data/services";
 import { caseStudiesData } from "@/data/case-studies";
@@ -31,138 +34,188 @@ interface ITStrategyPageProps {
   service: Service;
 }
 
-// 4 Interactive Service System Items
-interface InteractiveServiceItem {
-  id: string;
-  numStr: string;
-  title: string;
-  shortTitle: string;
-  tagline: string;
-  description: string;
-  icon: React.ReactNode;
-  deliverables: string[];
-  metric: string;
-  metricLabel: string;
-}
-
-const interactiveServices: InteractiveServiceItem[] = [
+// 4 Core Solutions Items
+const solutionsData = [
   {
-    id: "assessment-roadmap",
     numStr: "01",
     title: "IT Assessment & Roadmap",
-    shortTitle: "Assessment & Roadmap",
-    tagline: "Diagnostic infrastructure analysis & 3-year digital blueprints",
+    subtitle: "Customized IT Roadmaps & Architecture Audits",
     description:
-      "We perform deep-dive technological audits across legacy systems, cloud environments, and security policies to engineer defensible roadmaps aligned with CFO financial targets.",
+      "We develop a customized roadmap aligning IT strategies with your business goals, auditing legacy friction and defining 1–3 year modern software blueprints.",
     icon: <Compass className="w-6 h-6 text-[#f15e1c]" />,
     deliverables: [
-      "Legacy Code & Technical Debt Audit",
-      "Cloud Infrastructure FinOps Breakdown",
+      "Legacy Infrastructure & Technical Debt Audit",
+      "Cloud FinOps Breakdown & Cost Tuning",
       "3-Year Digital Modernization Blueprint",
-      "Vendor Dependency & Risk Analysis",
+      "Vendor Dependency & Risk Mitigation",
     ],
     metric: "45%",
-    metricLabel: "Average Technical Debt Reduction",
+    metricLabel: "Technical Debt Reduction",
+    stageName: "ASSESSMENT",
   },
   {
-    id: "cybersecurity-cloud",
     numStr: "02",
-    title: "Cybersecurity & Cloud Solutions",
-    shortTitle: "Cybersecurity & Cloud",
-    tagline: "Zero-trust security posture & resilient cloud architecture",
+    title: "Cybersecurity and Cloud Solutions",
+    subtitle: "Zero-Trust Defenses & Policy Frameworks",
     description:
-      "Migrate legacy workloads to high-availability multi-cloud environments with built-in SOC 2, DPDP Act (India), and GDPR compliance frameworks.",
+      "We strengthen your digital defenses by conducting security audits, vulnerability assessments, and creating a tailored cybersecurity policy framework.",
     icon: <Lock className="w-6 h-6 text-[#f15e1c]" />,
     deliverables: [
-      "Zero-Trust Architecture Implementation",
-      "Multi-Cloud Migration (AWS / Azure / GCP)",
-      "DPDP & SOC-2 Compliance Certification",
-      "Automated Continuous Threat Detection",
+      "Zero-Trust Architecture & Identity Control",
+      "Multi-Cloud Containerization (AWS / Azure)",
+      "DPDP Act (India) & SOC-2 Audit Policy",
+      "Continuous Automated Threat Detection",
     ],
     metric: "99.99%",
     metricLabel: "Uptime & Compliance Assurance",
+    stageName: "SECURITY & CLOUD",
   },
   {
-    id: "infrastructure-support",
     numStr: "03",
-    title: "Infrastructure Support & Telemetry",
-    shortTitle: "Infrastructure Support",
-    tagline: "24/7 proactive monitoring & self-healing system pipelines",
+    title: "Infrastructure Support",
+    subtitle: "Proactive Telemetry & Self-Healing Pipelines",
     description:
-      "Eliminate expensive downtime through continuous telemetry monitoring, automated incident remediation, and SLA-backed engineering support pods.",
+      "Our proactive support services ensure your IT infrastructure remains robust, updated, and optimized for high-concurrency enterprise workloads.",
     icon: <Server className="w-6 h-6 text-[#f15e1c]" />,
     deliverables: [
-      "24/7 Real-Time Telemetry Monitoring",
+      "24/7 Real-Time Telemetry & Log Monitoring",
       "Self-Healing Infrastructure Automation",
       "15-Minute Guaranteed Critical SLA",
-      "Disaster Recovery & Redundant Backups",
+      "Disaster Recovery & Redundant Storage",
     ],
     metric: "15 min",
     metricLabel: "Critical Response SLA",
+    stageName: "INFRASTRUCTURE",
   },
   {
-    id: "key-benefits",
     numStr: "04",
-    title: "Strategic Business Benefits",
-    shortTitle: "Strategic Benefits",
-    tagline: "Quantifiable ROI, agility, and competitive market advantage",
+    title: "Key Benefits",
+    subtitle: "Quantifiable ROI & Scalable Growth",
     description:
-      "Transform IT from a cost center into a core revenue driver by consolidating platforms, accelerating feature deployment, and empowering engineering teams.",
+      "Maximizes uptime, enhances reliability, and offers peace of mind for your team while accelerating product delivery velocity.",
     icon: <TrendingUp className="w-6 h-6 text-[#f15e1c]" />,
     deliverables: [
-      "3.2x Faster Time-to-Market",
+      "3.2x Accelerated Feature Release Velocity",
       "30%+ Cloud Infrastructure Cost Savings",
-      "Full IP Ownership & Unlocked Vendor Lock-in",
-      "Enterprise Scalability Across Regional Markets",
+      "100% Client Source Code & IP Ownership",
+      "Elastic Pod Scalability Across Global Corridors",
     ],
     metric: "3.2x",
     metricLabel: "Faster Deployment Cycles",
+    stageName: "RELIABILITY & GROWTH",
   },
 ];
 
-// Workflow 4 Steps
-const workflowSteps = [
+// 4-Step Methodology Workflow Data
+const howWeWorkSteps = [
   {
     step: "01",
-    title: "Assess & Analyze",
+    title: "Assess and Analyze",
     description:
-      "Conduct thorough diagnostic audits of existing software architecture, server telemetry, security posture, and cloud cost allocation.",
+      "We start by analyzing your current IT environment to identify gaps, strengths, and areas for improvement, ensuring a clear understanding of your needs and goals.",
     output: "Technology Health Index & Gap Audit",
   },
   {
     step: "02",
-    title: "Strategize & Plan",
+    title: "Strategize and Plan",
     description:
-      "Formulate a milestone-driven 1–3 year modernization blueprint, defining clear milestones, budget caps, and team resource allocation.",
+      "Based on our analysis, we create a tailored IT roadmap that aligns with your business objectives, covering areas like cybersecurity, infrastructure updates, and cloud adoption.",
     output: "Executive Roadmap & FinOps Model",
   },
   {
     step: "03",
-    title: "Implement & Secure",
+    title: "Implement and Secure",
     description:
-      "Execute cloud migrations, refactor monoliths into microservices, enforce zero-trust security policies, and automate CI/CD pipelines.",
+      "From hardware and software upgrades to cybersecurity policy development, we implement solutions that enhance security, reliability, and scalability for your business.",
     output: "Production Migration & SOC-2 Readiness",
   },
   {
     step: "04",
-    title: "Support & Maintain",
+    title: "Support and Maintain",
     description:
-      "Provide 24/7 telemetry monitoring, automated vulnerability scanning, quarterly architectural reviews, and continuous cost tuning.",
+      "With ongoing support, updates, and performance monitoring, we ensure your IT infrastructure remains resilient, up-to-date, and optimized for future growth.",
     output: "Continuous Uptime & 15-min SLA",
   },
 ];
 
+// Pricing Packages Data
+const pricingPlans = [
+  {
+    name: "Starter Pack",
+    price: "₹10,000",
+    period: "one-time assessment",
+    description: "Ideal for growing businesses requiring an initial IT architecture diagnostic audit & gap analysis.",
+    isPopular: false,
+    features: [
+      "Initial Infrastructure Diagnostic Audit",
+      "Software Technical Debt Identification",
+      "Basic Cybersecurity Vulnerability Check",
+      "30-Minute Architecture Review Session",
+      "Prioritized Action Checklist Report",
+    ],
+    ctaText: "Choose Starter Pack",
+  },
+  {
+    name: "Optimal Pack",
+    price: "₹50,000",
+    period: "quarterly sprint",
+    description: "Comprehensive IT strategy, cloud cost tuning, and zero-trust security policy implementation.",
+    isPopular: true,
+    features: [
+      "Complete Multi-Cloud Architecture Review",
+      "DPDP Act & SOC-2 Compliance Audit",
+      "Cloud FinOps Cost Optimization Blueprint",
+      "Custom 1-Year Engineering Roadmap",
+      "Bi-weekly Strategy Advisory Calls",
+      "Dedicated Senior Architect Pod",
+    ],
+    ctaText: "Select Optimal Pack",
+  },
+  {
+    name: "Full Pack",
+    price: "₹1 Lakh",
+    period: "monthly enterprise retainer",
+    description: "End-to-end enterprise IT transformation, 24/7 telemetry monitoring, and dedicated virtual CTO pod.",
+    isPopular: false,
+    features: [
+      "Full Enterprise Modernization Execution",
+      "24/7 Real-Time Telemetry & Log Monitoring",
+      "Dedicated Virtual CTO & Lead Engineers",
+      "15-Minute Guaranteed Incident SLA",
+      "Full Codebase & IP Transfer Guarantee",
+      "Unlimited Architectural Consultations",
+    ],
+    ctaText: "Select Full Pack",
+  },
+];
+
+// Alternating CTA Words
+const ctaWords = ["engaging", "innovative", "strategic", "outstanding", "exceptional"];
+
 export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
   const shouldReduceMotion = useReducedMotion();
-  const [activeServiceIdx, setActiveServiceIdx] = React.useState<number>(0);
-  const [activeWorkflowIdx, setActiveWorkflowIdx] = React.useState<number>(0);
+  const [activeSolutionIdx, setActiveSolutionIdx] = React.useState<number>(0);
+  const [activeWorkIdx, setActiveWorkIdx] = React.useState<number>(0);
+  const [currentWordIdx, setCurrentWordIdx] = React.useState<number>(0);
   const [dragStartX, setDragStartX] = React.useState<number | null>(null);
   const [isDragging, setIsDragging] = React.useState<boolean>(false);
 
-  const activeService = interactiveServices[activeServiceIdx];
-  const totalServices = interactiveServices.length;
+  // Editorial Statement InView
+  const statementRef = React.useRef<HTMLDivElement>(null);
+  const isStatementInView = useInView(statementRef, { once: true, margin: "-100px" });
 
-  // Touch/Drag controls for Service Exploration System
+  // Rotating CTA Word Timer
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentWordIdx((prev) => (prev + 1) % ctaWords.length);
+    }, 2400);
+    return () => clearInterval(timer);
+  }, []);
+
+  const activeSolution = solutionsData[activeSolutionIdx];
+  const totalSolutions = solutionsData.length;
+
+  // Touch & Drag Handlers for Solutions
   const handleDragStart = (clientX: number) => {
     setDragStartX(clientX);
     setIsDragging(true);
@@ -173,11 +226,9 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
     const deltaX = clientX - dragStartX;
     if (Math.abs(deltaX) > 35) {
       if (deltaX < 0) {
-        // Swipe left -> Next service
-        setActiveServiceIdx((prev) => (prev + 1) % totalServices);
+        setActiveSolutionIdx((prev) => (prev + 1) % totalSolutions);
       } else {
-        // Swipe right -> Prev service
-        setActiveServiceIdx((prev) => (prev - 1 + totalServices) % totalServices);
+        setActiveSolutionIdx((prev) => (prev - 1 + totalSolutions) % totalSolutions);
       }
     }
     setDragStartX(null);
@@ -198,29 +249,24 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
   return (
     <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#12100E] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden">
       {/* =========================================================================
-          1. HERO SECTION (FULL SCREEN ACCENT BACKGROUND & TYPOGRAPHY)
+          1. HERO — IMMERSIVE SCROLL INTRODUCTION
           ========================================================================= */}
       <section className="relative min-h-[92vh] flex flex-col justify-between pt-28 pb-12 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-        {/* Animated Background Technology Grid & Pathways */}
+        {/* Subtle Background Technology/Infrastructure Animation */}
         <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-25 dark:opacity-20">
-          <svg
-            className="w-full h-full animate-pulse-slow"
-            viewBox="0 0 1200 800"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg className="w-full h-full animate-pulse-slow" viewBox="0 0 1200 800" fill="none">
             <defs>
-              <linearGradient id="hero-grid-line" x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient id="hero-net-line" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#f15e1c" stopOpacity="0.8" />
-                <stop offset="50%" stopColor="#2e936f" stopOpacity="0.4" />
+                <stop offset="50%" stopColor="#2e936f" strokeOpacity="0.4" />
                 <stop offset="100%" stopColor="#fab60a" stopOpacity="0.6" />
               </linearGradient>
             </defs>
-            <line x1="100" y1="150" x2="600" y2="300" stroke="url(#hero-grid-line)" strokeWidth="1.5" strokeDasharray="6 6" />
-            <line x1="600" y1="300" x2="1100" y2="200" stroke="url(#hero-grid-line)" strokeWidth="1.5" strokeDasharray="6 6" />
-            <line x1="600" y1="300" x2="600" y2="650" stroke="url(#hero-grid-line)" strokeWidth="2" />
-            <line x1="200" y1="500" x2="600" y2="650" stroke="url(#hero-grid-line)" strokeWidth="1.5" strokeDasharray="4 4" />
-            <line x1="1000" y1="550" x2="600" y2="650" stroke="url(#hero-grid-line)" strokeWidth="1.5" strokeDasharray="4 4" />
+            <line x1="100" y1="150" x2="600" y2="300" stroke="url(#hero-net-line)" strokeWidth="1.5" strokeDasharray="6 6" />
+            <line x1="600" y1="300" x2="1100" y2="200" stroke="url(#hero-net-line)" strokeWidth="1.5" strokeDasharray="6 6" />
+            <line x1="600" y1="300" x2="600" y2="650" stroke="url(#hero-net-line)" strokeWidth="2" />
+            <line x1="200" y1="500" x2="600" y2="650" stroke="url(#hero-net-line)" strokeWidth="1.5" strokeDasharray="4 4" />
+            <line x1="1000" y1="550" x2="600" y2="650" stroke="url(#hero-net-line)" strokeWidth="1.5" strokeDasharray="4 4" />
 
             <circle cx="100" cy="150" r="5" fill="#f15e1c" className="animate-ping-slow" />
             <circle cx="600" cy="300" r="8" fill="#f15e1c" />
@@ -241,23 +287,43 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
               { label: "IT Strategy & Implementation" },
             ]}
           />
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]"
+          >
             <Sparkles className="w-3.5 h-3.5" />
             <span>ENTERPRISE IT STRATEGY &amp; MODERNIZATION</span>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Dominant Headline & Supporting Statement */}
+        {/* Dominant Headline & Hero Copy */}
         <div className="relative z-10 max-w-5xl mx-auto w-full my-auto text-center space-y-6 pt-6 pb-10">
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-display tracking-tight leading-[1.08] text-[#1b2823] dark:text-[#ffffff]">
+          <motion.h1
+            initial={{ opacity: 0, y: 35 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-display tracking-tight leading-[1.08] text-[#1b2823] dark:text-[#ffffff]"
+          >
             Strategic IT solutions for modern <span className="text-[#f15e1c]">Business Transformation</span>
-          </h1>
+          </motion.h1>
 
-          <p className="text-lg sm:text-xl text-[#4a5c55] dark:text-[#d3eee4] max-w-3xl mx-auto font-medium leading-relaxed">
+          <motion.p
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="text-lg sm:text-xl text-[#4a5c55] dark:text-[#d3eee4] max-w-3xl mx-auto font-medium leading-relaxed"
+          >
             Modernizing legacy architecture, eliminating technical debt, and aligning cloud systems with CFO-backed financial predictability.
-          </p>
+          </motion.p>
 
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.35 }}
+            className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
             <a href="#inquire" className="w-full sm:w-auto">
               <Button3D
                 variant="primary"
@@ -273,12 +339,12 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
                 View Case Studies
               </Button3D>
             </Link>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Subtle Scroll Indicator */}
+        {/* Scroll Indicator */}
         <div className="relative z-10 text-center pb-2">
-          <a href="#service-experience" className="inline-flex flex-col items-center gap-2 group cursor-pointer">
+          <a href="#our-solutions" className="inline-flex flex-col items-center gap-2 group cursor-pointer">
             <span className="text-xs font-mono font-bold tracking-widest text-[#7A6A5F] dark:text-[#B8ACA0] group-hover:text-[#f15e1c] transition-colors">
               SCROLL TO EXPLORE SYSTEM
             </span>
@@ -290,24 +356,23 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       </section>
 
       {/* =========================================================================
-          2. SERVICE EXPLORATION SYSTEM (INTERACTIVE SERVICE SYSTEM)
+          2. OUR SOLUTIONS — INTERACTIVE SERVICE SYSTEM
           ========================================================================= */}
-      <section id="service-experience" className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
+      <section id="our-solutions" className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
         <div className="max-w-7xl mx-auto space-y-12 select-none">
-          {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
-              Interactive Service System
+              OUR SOLUTIONS
             </Badge>
             <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Our Core IT Strategy Solutions
+              Empowering business with innovative Technology
             </h2>
             <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              Drag or swipe below to interact with each solution framework and explore its execution diagram.
+              Drag or click below to explore each solution framework and its active execution architecture.
             </p>
           </div>
 
-          {/* Central Diagram & Interactive Active Display Card */}
+          {/* Interactive Active Display Card */}
           <div
             onMouseDown={(e) => handleDragStart(e.clientX)}
             onMouseUp={(e) => handleDragEnd(e.clientX)}
@@ -315,183 +380,82 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
             onTouchEnd={(e) => e.changedTouches.length > 0 && handleDragEnd(e.changedTouches[0].clientX)}
             className="rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-6 sm:p-10 space-y-8 relative overflow-hidden"
           >
-            {/* Ambient Background Tint */}
             <div className="absolute inset-0 bg-radial from-[#f15e1c]/8 via-transparent to-transparent pointer-events-none" />
 
-            {/* Active Service Top Bar */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-[#f7d7b0] dark:border-[#253630]">
               <div className="flex items-center gap-3">
                 <div className="p-3 rounded-2xl bg-[#f15e1c] text-white shadow-lg shadow-[#f15e1c]/25 shrink-0">
-                  {activeService.icon}
+                  {activeSolution.icon}
                 </div>
                 <div>
                   <span className="text-xs font-mono font-extrabold text-[#f15e1c] uppercase tracking-wider block">
-                    SOLUTION {activeService.numStr} / 0{totalServices}
+                    SOLUTION {activeSolution.numStr} / 0{totalSolutions} &bull; {activeSolution.stageName}
                   </span>
                   <h3 className="text-2xl sm:text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                    {activeService.title}
+                    {activeSolution.title}
                   </h3>
                 </div>
               </div>
 
               <div className="flex items-center gap-4 bg-white dark:bg-[#101b17] px-4 py-2 rounded-2xl border border-[#f7d7b0] dark:border-[#253630] shadow-xs">
-                <span className="text-2xl font-black font-mono text-[#f15e1c]">{activeService.metric}</span>
-                <span className="text-xs font-mono font-bold text-[#4a5c55] dark:text-[#d3eee4] max-w-[120px] leading-tight">
-                  {activeService.metricLabel}
+                <span className="text-2xl font-black font-mono text-[#f15e1c]">{activeSolution.metric}</span>
+                <span className="text-xs font-mono font-bold text-[#4a5c55] dark:text-[#d3eee4] max-w-[130px] leading-tight">
+                  {activeSolution.metricLabel}
                 </span>
               </div>
             </div>
 
-            {/* Central Service Diagram Canvas */}
-            <div className="relative min-h-[300px] sm:min-h-[360px] bg-white dark:bg-[#101b17] rounded-3xl border border-[#f7d7b0] dark:border-[#253630] p-6 sm:p-8 flex flex-col justify-center items-center shadow-inner">
+            {/* Dynamic Architecture Flow Visual for Active Solution */}
+            <div className="relative py-6 px-4 bg-white dark:bg-[#101b17] rounded-3xl border border-[#f7d7b0] dark:border-[#253630] flex items-center justify-center overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={activeService.id}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15 }}
+                  key={activeSolution.numStr}
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.04 }}
                   transition={{ duration: 0.35 }}
-                  className="w-full flex flex-col items-center"
+                  className="w-full flex items-center justify-center"
                 >
-                  {/* DIAGRAM 01: IT ASSESSMENT & ROADMAP */}
-                  {activeServiceIdx === 0 && (
-                    <div className="w-full max-w-4xl space-y-6">
-                      <div className="text-xs font-mono font-bold text-[#f15e1c] text-center uppercase tracking-widest">
-                        DIAGRAM 01: ASSESSMENT TO ALIGNMENT PATHWAY
-                      </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 items-center">
-                        {[
-                          { label: "CURRENT IT ENVIRONMENT", sub: "Legacy Silos" },
-                          { label: "ASSESSMENT", sub: "FinOps Audit" },
-                          { label: "GAPS & RISKS", sub: "Technical Debt" },
-                          { label: "STRATEGIC ROADMAP", sub: "3-Year Plan" },
-                          { label: "BUSINESS ALIGNMENT", sub: "CFO Approved" },
-                        ].map((node, i) => (
-                          <React.Fragment key={i}>
-                            <div className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f15e1c] text-center shadow-md space-y-1 hover:scale-105 transition-transform">
-                              <span className="text-[10px] font-mono font-extrabold text-[#f15e1c] block">0{i + 1}</span>
-                              <div className="text-xs font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-tight">
-                                {node.label}
-                              </div>
-                              <span className="text-[10px] text-[#2e936f] font-semibold block">{node.sub}</span>
-                            </div>
-                            {i < 4 && (
-                              <div className="hidden sm:flex items-center justify-center text-[#f15e1c]">
-                                <ArrowRight className="w-5 h-5 animate-pulse" />
-                              </div>
-                            )}
-                          </React.Fragment>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* DIAGRAM 02: CYBERSECURITY & CLOUD */}
-                  {activeServiceIdx === 1 && (
-                    <div className="w-full max-w-4xl space-y-6">
-                      <div className="text-xs font-mono font-bold text-[#f15e1c] text-center uppercase tracking-widest">
-                        DIAGRAM 02: ZERO-TRUST CLOUD PIPELINE
-                      </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 items-center">
-                        {[
-                          { label: "INFRASTRUCTURE", sub: "On-Prem / Hybrid" },
-                          { label: "SECURITY LAYER", sub: "Zero-Trust Mesh" },
-                          { label: "THREAT DETECTION", sub: "24/7 AI Telemetry" },
-                          { label: "CLOUD", sub: "Multi-Region AWS" },
-                          { label: "MONITORING", sub: "SOC-2 Audited" },
-                        ].map((node, i) => (
-                          <React.Fragment key={i}>
-                            <div className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#2e936f] text-center shadow-md space-y-1 hover:scale-105 transition-transform">
-                              <span className="text-[10px] font-mono font-extrabold text-[#2e936f] block">0{i + 1}</span>
-                              <div className="text-xs font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-tight">
-                                {node.label}
-                              </div>
-                              <span className="text-[10px] text-[#f15e1c] font-semibold block">{node.sub}</span>
-                            </div>
-                            {i < 4 && (
-                              <div className="hidden sm:flex items-center justify-center text-[#2e936f]">
-                                <ArrowRight className="w-5 h-5 animate-pulse" />
-                              </div>
-                            )}
-                          </React.Fragment>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* DIAGRAM 03: INFRASTRUCTURE SUPPORT */}
-                  {activeServiceIdx === 2 && (
-                    <div className="w-full max-w-4xl space-y-6">
-                      <div className="text-xs font-mono font-bold text-[#f15e1c] text-center uppercase tracking-widest">
-                        DIAGRAM 03: CONTINUOUS TELEMETRY CYCLE
-                      </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 items-center">
-                        {[
-                          { label: "SYSTEMS", sub: "Live Production" },
-                          { label: "MONITORING", sub: "Real-Time Telemetry" },
-                          { label: "MAINTENANCE", sub: "Auto-Failover" },
-                          { label: "OPTIMIZATION", sub: "FinOps Cost Audit" },
-                          { label: "RELIABILITY", sub: "99.99% Uptime" },
-                        ].map((node, i) => (
-                          <React.Fragment key={i}>
-                            <div className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#fab60a] text-center shadow-md space-y-1 hover:scale-105 transition-transform">
-                              <span className="text-[10px] font-mono font-extrabold text-[#fab60a] block">0{i + 1}</span>
-                              <div className="text-xs font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-tight">
-                                {node.label}
-                              </div>
-                              <span className="text-[10px] text-[#2e936f] font-semibold block">{node.sub}</span>
-                            </div>
-                            {i < 4 && (
-                              <div className="hidden sm:flex items-center justify-center text-[#fab60a]">
-                                <ArrowRight className="w-5 h-5 animate-pulse" />
-                              </div>
-                            )}
-                          </React.Fragment>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* DIAGRAM 04: KEY BENEFITS */}
-                  {activeServiceIdx === 3 && (
-                    <div className="w-full max-w-4xl space-y-6">
-                      <div className="text-xs font-mono font-bold text-[#f15e1c] text-center uppercase tracking-widest">
-                        DIAGRAM 04: STRATEGIC OUTCOMES CONVERGENCE
-                      </div>
-                      <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 text-center">
-                        {[
-                          { label: "UPTIME", val: "99.99%", color: "#f15e1c" },
-                          { label: "SECURITY", val: "Zero-Trust", color: "#2e936f" },
-                          { label: "RELIABILITY", val: "SLA Guarded", color: "#fab60a" },
-                          { label: "SCALABILITY", val: "Elastic Pods", color: "#f15e1c" },
-                          { label: "GROWTH", val: "3.2x Sprint Speed", color: "#2e936f" },
-                        ].map((b, i) => (
-                          <div
-                            key={i}
-                            className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border-2 shadow-lg space-y-1"
-                            style={{ borderColor: b.color }}
-                          >
-                            <span className="text-[10px] font-mono font-bold text-[#7A6A5F] block">{b.label}</span>
-                            <div className="text-base font-black font-display text-[#1b2823] dark:text-[#ffffff]">
-                              {b.val}
-                            </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 text-center w-full max-w-4xl">
+                    {[
+                      { label: "BUSINESS", sub: "Core Drivers" },
+                      { label: "IT ASSESSMENT", sub: "Gap Diagnostic" },
+                      { label: "ROADMAP", sub: "3-Yr Blueprint" },
+                      { label: "SECURITY + CLOUD", sub: "Zero-Trust" },
+                      { label: "RELIABILITY", sub: "99.99% Uptime" },
+                    ].map((node, i) => {
+                      const isNodeActive = i <= activeSolutionIdx + 1;
+                      return (
+                        <div
+                          key={i}
+                          className={cn(
+                            "p-3.5 rounded-2xl border transition-all duration-300 text-center space-y-1",
+                            isNodeActive
+                              ? "bg-[#fefaf5] dark:bg-[#172420] border-[#f15e1c] shadow-md scale-102"
+                              : "bg-white dark:bg-[#101b17] border-[#f7d7b0] dark:border-[#253630] opacity-60"
+                          )}
+                        >
+                          <span className="text-[10px] font-mono font-extrabold text-[#f15e1c] block">0{i + 1}</span>
+                          <div className="text-xs font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-tight">
+                            {node.label}
                           </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                          <span className="text-[10px] text-[#2e936f] font-semibold block">{node.sub}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </motion.div>
               </AnimatePresence>
             </div>
 
-            {/* Active Service Description & Core Deliverables */}
+            {/* Description & Deliverables */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center pt-2">
               <div className="md:col-span-6 space-y-3 text-left">
                 <h4 className="text-lg font-bold font-display text-[#f15e1c]">
-                  {activeService.tagline}
+                  {activeSolution.subtitle}
                 </h4>
                 <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                  {activeService.description}
+                  {activeSolution.description}
                 </p>
               </div>
 
@@ -499,12 +463,9 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
                 <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#f15e1c] block">
                   Key Scope Deliverables
                 </span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {activeService.deliverables.map((del, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center gap-2 p-2.5 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]"
-                    >
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]">
+                  {activeSolution.deliverables.map((del, i) => (
+                    <div key={i} className="flex items-center gap-2 p-2 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630]">
                       <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
                       <span className="truncate">{del}</span>
                     </div>
@@ -513,40 +474,22 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
               </div>
             </div>
 
-            {/* Horizontal Swipe/Drag Progress Control Bar (Task Requirement) */}
+            {/* Service Selection Buttons */}
             <div className="pt-6 border-t border-[#f7d7b0] dark:border-[#253630] space-y-3">
-              <div className="flex items-center justify-between text-xs font-mono font-bold">
-                <span className="text-[#f15e1c]">
-                  0{activeServiceIdx + 1} {activeService.title.toUpperCase()}
-                </span>
-                <span className="text-[#7A6A5F] dark:text-[#B8ACA0]">
-                  SWIPE OR DRAG TO EXPLORE SERVICES &rarr;
-                </span>
-              </div>
-
-              {/* Interactive Track & Drag Indicator */}
-              <div className="relative w-full h-3 rounded-full bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] overflow-hidden cursor-pointer">
-                <div
-                  style={{ width: `${((activeServiceIdx + 1) / totalServices) * 100}%` }}
-                  className="h-full bg-gradient-to-r from-[#f15e1c] to-[#2e936f] transition-all duration-300 rounded-full"
-                />
-              </div>
-
-              {/* Direct Service Selector Nodes */}
-              <div className="grid grid-cols-4 gap-2 pt-1">
-                {interactiveServices.map((svc, idx) => (
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                {solutionsData.map((sol, idx) => (
                   <button
-                    key={svc.id}
+                    key={sol.numStr}
                     type="button"
-                    onClick={() => setActiveServiceIdx(idx)}
+                    onClick={() => setActiveSolutionIdx(idx)}
                     className={cn(
-                      "py-2 px-3 rounded-xl text-xs font-bold text-center transition-all cursor-pointer truncate",
-                      activeServiceIdx === idx
+                      "py-2.5 px-3 rounded-xl text-xs font-bold text-center transition-all cursor-pointer truncate",
+                      activeSolutionIdx === idx
                         ? "bg-[#f15e1c] text-white shadow-md"
                         : "bg-white dark:bg-[#101b17] text-[#4a5c55] dark:text-[#d3eee4] border border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c]"
                     )}
                   >
-                    0{idx + 1} {svc.shortTitle}
+                    0{idx + 1} {sol.title}
                   </button>
                 ))}
               </div>
@@ -556,33 +499,31 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       </section>
 
       {/* =========================================================================
-          3. CLIENT ENDORSEMENTS & TESTIMONIAL STORY
+          3. CLIENT SECTION — KIND WORDS FROM OUR CLIENTS
           ========================================================================= */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
         <div className="max-w-5xl mx-auto text-center space-y-8">
           <Badge variant="secondary" size="md">
-            Executive Endorsement
+            KIND WORDS FROM OUR CLIENTS
           </Badge>
-          <div className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-xl space-y-6 relative overflow-hidden">
+          <div className="p-8 sm:p-14 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-xl space-y-6 relative overflow-hidden">
             <div className="p-3 rounded-2xl bg-[#f15e1c] text-white w-fit mx-auto shadow-md">
               <Quote className="w-6 h-6" />
             </div>
 
-            <p className="text-xl sm:text-2xl font-display font-medium text-[#1b2823] dark:text-[#ffffff] max-w-3xl mx-auto leading-relaxed italic">
+            <p className="text-xl sm:text-3xl font-display font-medium text-[#1b2823] dark:text-[#ffffff] max-w-3xl mx-auto leading-relaxed italic">
               &ldquo;{testimonial.quote}&rdquo;
             </p>
 
             <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#253630] space-y-1">
-              <div className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+              <div className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                 {testimonial.author}
               </div>
               <div className="text-xs text-[#f15e1c] font-bold">
                 {testimonial.designation} &bull; {testimonial.company}
               </div>
-              <div className="flex items-center justify-center gap-1 text-[#fab60a] pt-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-current" />
-                ))}
+              <div className="text-xs font-mono font-bold text-[#2e936f] pt-1">
+                IT Strategy &amp; Modernization Partner
               </div>
             </div>
           </div>
@@ -590,39 +531,94 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       </section>
 
       {/* =========================================================================
-          4. WORKFLOW SECTION (INTERACTIVE 4-STEP WORKFLOW)
+          4. LARGE EDITORIAL STATEMENT & SUPPORTING ABSTRACT ARCHITECTURE VISUAL
+          ========================================================================= */}
+      <section ref={statementRef} className="relative py-24 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#ffffff] dark:bg-[#101b17] overflow-hidden">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          {/* Left Column: Large Staggered Editorial Typography Statement */}
+          <div className="lg:col-span-7 space-y-6 text-left">
+            <Badge variant="secondary" size="md">
+              STRATEGIC MISSION
+            </Badge>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              animate={isStatementInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.75, ease: "easeOut" }}
+              className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-[1.12] tracking-tight"
+            >
+              Helping businesses grow through <span className="text-[#f15e1c]">tailored IT strategies</span>, secure cloud adoption, and ongoing support.
+            </motion.h2>
+
+            <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-normal">
+              We bridge the gap between CFO financial targets and engineering execution, delivering zero-downtime migrations, SOC-2 readiness, and measurable digital growth.
+            </p>
+          </div>
+
+          {/* Right Column: Original Abstract Digital Architecture Visual */}
+          <div className="lg:col-span-5 flex items-center justify-center">
+            <div className="relative w-72 h-72 sm:w-80 sm:h-80 rounded-3xl bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-6 flex flex-col justify-between items-center text-center overflow-hidden">
+              <div className="absolute inset-0 bg-radial from-[#f15e1c]/15 via-[#2e936f]/10 to-transparent pointer-events-none" />
+              
+              <div className="relative z-10 flex items-center gap-2 pt-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-ping" />
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
+                  SYSTEM ARCHITECTURE
+                </span>
+              </div>
+
+              {/* Connected Abstract SVG Nodes */}
+              <svg className="w-48 h-48 relative z-10 my-auto" viewBox="0 0 100 100" fill="none">
+                <line x1="50" y1="20" x2="20" y2="70" stroke="#f15e1c" strokeWidth="2" strokeDasharray="3 3" />
+                <line x1="50" y1="20" x2="80" y2="70" stroke="#2e936f" strokeWidth="2" strokeDasharray="3 3" />
+                <line x1="20" y1="70" x2="80" y2="70" stroke="#fab60a" strokeWidth="2" />
+                <circle cx="50" cy="20" r="8" fill="#f15e1c" />
+                <circle cx="20" cy="70" r="7" fill="#2e936f" />
+                <circle cx="80" cy="70" r="7" fill="#fab60a" />
+                <circle cx="50" cy="53" r="5" fill="#f15e1c" className="animate-pulse" />
+              </svg>
+
+              <span className="relative z-10 text-[11px] font-mono font-bold text-[#2e936f] pb-1">
+                CONNECTED DIGITAL CORE
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          5. HOW WE WORK — STICKY CONNECTED 4-STEP PROCESS SYSTEM
           ========================================================================= */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
         <div className="max-w-7xl mx-auto space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
-              4-Step Execution Framework
+              HOW WE WORK?
             </Badge>
             <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              How We Deliver IT Strategy
+              4-Step Execution Framework
             </h2>
             <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              A disciplined, milestone-backed methodology moving from initial assessment to 24/7 continuous optimization.
+              A disciplined methodology moving seamlessly from initial diagnosis to 24/7 continuous optimization.
             </p>
           </div>
 
-          {/* Interactive 4-Step Connected Pathway */}
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            {workflowSteps.map((wf, idx) => {
-              const isActive = activeWorkflowIdx === idx;
+            {howWeWorkSteps.map((wf, idx) => {
+              const isActive = activeWorkIdx === idx;
               return (
                 <div
                   key={wf.step}
-                  onClick={() => setActiveWorkflowIdx(idx)}
-                  onMouseEnter={() => setActiveWorkflowIdx(idx)}
+                  onClick={() => setActiveWorkIdx(idx)}
+                  onMouseEnter={() => setActiveWorkIdx(idx)}
                   className={cn(
-                    "rounded-3xl p-6 border-2 transition-all duration-300 cursor-pointer space-y-4 relative flex flex-col justify-between",
+                    "rounded-3xl p-7 border-2 transition-all duration-300 cursor-pointer space-y-4 relative flex flex-col justify-between min-h-[300px]",
                     isActive
                       ? "bg-white dark:bg-[#101b17] border-[#f15e1c] shadow-2xl ring-4 ring-[#f15e1c]/30 scale-102 z-20"
-                      : "bg-[#fefaf5] dark:bg-[#172420] border-[#f7d7b0] dark:border-[#253630] opacity-60 hover:opacity-90"
+                      : "bg-[#fefaf5] dark:bg-[#172420] border-[#f7d7b0] dark:border-[#253630] opacity-70 hover:opacity-100"
                   )}
                 >
-                  <div className="space-y-3">
+                  <div className="space-y-3 text-left">
                     <div className="flex items-center justify-between">
                       <span
                         className={cn(
@@ -639,27 +635,12 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
                       {wf.title}
                     </h3>
 
-                    {/* Active stage description enters from below */}
-                    <AnimatePresence mode="wait">
-                      {isActive ? (
-                        <motion.p
-                          initial={{ opacity: 0, y: 15 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          transition={{ duration: 0.25 }}
-                          className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium"
-                        >
-                          {wf.description}
-                        </motion.p>
-                      ) : (
-                        <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed line-clamp-2">
-                          {wf.description}
-                        </p>
-                      )}
-                    </AnimatePresence>
+                    <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
+                      {wf.description}
+                    </p>
                   </div>
 
-                  <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#253630]">
+                  <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#253630] text-left">
                     <span className="text-[10px] font-mono font-bold uppercase text-[#7A6A5F] block">
                       Deliverable Outcome:
                     </span>
@@ -675,134 +656,76 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       </section>
 
       {/* =========================================================================
-          5. CASE STUDY PROOF OF EXECUTION
-          ========================================================================= */}
-      {relatedCaseStudy && (
-        <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-          <div className="max-w-7xl mx-auto space-y-10">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div>
-                <Badge variant="secondary" size="md">
-                  Verified Outcome
-                </Badge>
-                <h2 className="text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] mt-2">
-                  Featured Case Study
-                </h2>
-              </div>
-              <Link href="/case-studies">
-                <Button3D variant="outline" size="md" rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}>
-                  Explore All Case Studies
-                </Button3D>
-              </Link>
-            </div>
-
-            <div className="rounded-[2.5rem] bg-white dark:bg-[#101b17] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              <div className="lg:col-span-7 space-y-5">
-                <span className="text-xs font-mono font-extrabold text-[#f15e1c] uppercase tracking-wider block">
-                  {relatedCaseStudy.client} &bull; {relatedCaseStudy.clientIndustry}
-                </span>
-
-                <h3 className="text-2xl sm:text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                  {relatedCaseStudy.title}
-                </h3>
-
-                <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                  {relatedCaseStudy.summary}
-                </p>
-
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2">
-                  {relatedCaseStudy.results.map((m: { metric: string; label: string }, idx: number) => (
-                    <div key={idx} className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0]">
-                      <span className="text-xl font-black font-mono text-[#f15e1c] block">{m.metric}</span>
-                      <span className="text-[11px] font-semibold text-[#4a5c55] dark:text-[#d3eee4]">{m.label}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="lg:col-span-5 flex flex-col justify-center p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] space-y-4">
-                <div className="text-xs font-mono font-bold text-[#2e936f] uppercase">
-                  DEPLOYED TECHNOLOGIES
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {relatedCaseStudy.technologiesUsed.map((t: string, idx: number) => (
-                    <span
-                      key={idx}
-                      className="px-3 py-1.5 rounded-xl bg-white dark:bg-[#101b17] text-xs font-bold text-[#1b2823] dark:text-[#ffffff] border border-[#f7d7b0]"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                <div className="pt-2">
-                  <Link href={`/case-studies/${relatedCaseStudy.slug}`}>
-                    <Button variant="primary" size="md" className="w-full justify-center bg-[#f15e1c]">
-                      Read Full Architecture Study <ArrowRight className="w-4 h-4 ml-1" />
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* =========================================================================
-          6. PRICING & ENGAGEMENT MODELS (UNIFIED DESIGN SYSTEM)
+          6. PLANS / PACKAGES — EQUAL SIZED COMPARISON CARDS
           ========================================================================= */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
         <div className="max-w-7xl mx-auto space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
-              Engagement Models
+              We&apos;ve got a plan — One that&apos;s perfect for you
             </Badge>
             <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Transparent Collaboration Models
+              Transparent Engagement Packages
             </h2>
             <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              Choose from fixed-scope diagnostic sprints, dedicated virtual CTO pods, or full project-based transformations.
+              Select from fixed-scope diagnostic sprints, dedicated virtual CTO pods, or full enterprise transformations.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {service.engagementModels.map((model, idx) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+            {pricingPlans.map((plan, idx) => (
               <div
                 key={idx}
                 className={cn(
-                  "rounded-3xl p-8 border-2 transition-all duration-300 flex flex-col justify-between space-y-6 hover:shadow-2xl",
-                  idx === 1
-                    ? "bg-white dark:bg-[#101b17] border-[#f15e1c] shadow-xl ring-2 ring-[#f15e1c]/40"
+                  "rounded-3xl p-8 border-2 transition-all duration-300 flex flex-col justify-between space-y-6 hover:shadow-2xl h-full",
+                  plan.isPopular
+                    ? "bg-white dark:bg-[#101b17] border-[#f15e1c] shadow-2xl ring-2 ring-[#f15e1c]/40"
                     : "bg-[#fefaf5] dark:bg-[#172420] border-[#f7d7b0] dark:border-[#253630]"
                 )}
               >
-                <div className="space-y-4">
-                  {idx === 1 && (
-                    <span className="px-3 py-1 rounded-full bg-[#fce3d3] text-[#f15e1c] text-[10px] font-mono font-bold uppercase tracking-wider">
-                      Most Popular For Scaling Enterprises
+                <div className="space-y-4 text-left">
+                  {plan.isPopular && (
+                    <span className="px-3 py-1 rounded-full bg-[#fce3d3] text-[#f15e1c] text-[10px] font-mono font-bold uppercase tracking-wider inline-block">
+                      Recommended For Enterprise Scaling
                     </span>
                   )}
-                  <h3 className="text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                    {model.title}
-                  </h3>
+                  <div>
+                    <h3 className="text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                      {plan.name}
+                    </h3>
+                    <div className="mt-2 flex items-baseline gap-1">
+                      <span className="text-3xl font-black font-mono text-[#f15e1c]">{plan.price}</span>
+                      <span className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] font-mono">/ {plan.period}</span>
+                    </div>
+                  </div>
+
                   <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                    {model.description}
+                    {plan.description}
                   </p>
-                  <div className="p-3 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]">
-                    <span className="text-[#f15e1c] font-bold">Best For: </span>
-                    {model.bestFor}
+
+                  <div className="space-y-2 pt-2 border-t border-[#f7d7b0] dark:border-[#253630]">
+                    <span className="text-[10px] font-mono font-bold text-[#f15e1c] uppercase block">
+                      Package Features Included:
+                    </span>
+                    {plan.features.map((feat, i) => (
+                      <div key={i} className="flex items-center gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]">
+                        <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
+                        <span>{feat}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
                 <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#253630]">
-                  <a href="#inquire" className="block w-full">
+                  <Link href="/contact" className="block w-full">
                     <Button
                       variant="primary"
                       size="md"
                       className="w-full justify-center bg-[#f15e1c] hover:bg-[#d44e14]"
                     >
-                      {model.ctaText || "Inquire About Model"}
+                      {plan.ctaText}
                     </Button>
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -811,29 +734,92 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       </section>
 
       {/* =========================================================================
-          7. FINAL TRANSFORMATION CTA (CONNECTED TO HERO NETWORK VISUAL)
+          7. ABOUT OUR CEO — EDITORIAL LEADERSHIP PROFILE
+          ========================================================================= */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
+        <div className="max-w-5xl mx-auto rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-8 sm:p-14 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center text-left">
+          <div className="lg:col-span-5 flex justify-center">
+            <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-3xl overflow-hidden border-2 border-[#f15e1c] shadow-xl bg-[#fce3d3] dark:bg-[#261f1a] flex items-center justify-center text-center p-6 space-y-2 flex-col">
+              <div className="w-20 h-20 rounded-full bg-[#f15e1c] text-white flex items-center justify-center text-2xl font-black font-display shadow-md">
+                AS
+              </div>
+              <div className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                Aryan Sayal
+              </div>
+              <div className="text-xs font-mono font-bold text-[#f15e1c]">
+                CEO &amp; Managing Director
+              </div>
+              <span className="text-[10px] text-[#2e936f] font-mono">Arav Innovations</span>
+            </div>
+          </div>
+
+          <div className="lg:col-span-7 space-y-4">
+            <Badge variant="secondary" size="md">
+              About Our CEO
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+              Aryan Sayal
+            </h2>
+            <p className="text-xs font-mono font-extrabold text-[#f15e1c] uppercase tracking-wider">
+              CEO, Arav Innovations
+            </p>
+            <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+              Leading Arav Innovations with a vision for strategic excellence, Aryan Sayal orchestrates multidisciplinary technology squads across India and the UAE to help enterprises achieve measurable digital transformation and zero-trust cloud resilience.
+            </p>
+            <div className="pt-2">
+              <a
+                href="https://www.linkedin.com/company/aravinnovations/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#f15e1c] text-white text-xs font-bold shadow-md hover:bg-[#d44e14] transition-colors"
+              >
+                <Globe2 className="w-4 h-4" />
+                <span>Connect on LinkedIn</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          8. FINAL CTA — ALTERNATING WORD TRANSFORMATIONAL SECTION
           ========================================================================= */}
       <section id="inquire" className="relative py-24 px-4 sm:px-6 lg:px-12">
         <div className="max-w-5xl mx-auto rounded-[3rem] bg-gradient-to-br from-[#172420] via-[#101b17] to-[#1b2823] text-white p-10 sm:p-16 border-2 border-[#f15e1c] shadow-2xl space-y-8 text-center relative overflow-hidden">
-          {/* Visual Ambient Connection back to Hero */}
           <div className="absolute inset-0 bg-radial from-[#f15e1c]/20 via-transparent to-transparent pointer-events-none" />
 
-          <div className="relative z-10 max-w-3xl mx-auto space-y-4">
+          <div className="relative z-10 max-w-3xl mx-auto space-y-5">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f15e1c]/20 border border-[#f15e1c] text-xs font-mono font-bold text-[#f15e1c]">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>START YOUR DIGITAL TRANSFORMATION</span>
+              <span>START YOUR PROJECT</span>
             </div>
 
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-white">
-              Ready to Modernize Your Enterprise Architecture?
+            <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-white leading-tight">
+              Can&apos;t wait to start your project!
             </h2>
 
-            <p className="text-sm sm:text-base text-[#d3eee4] leading-relaxed">
-              Connect with our practice leads for an NDA-protected technology assessment, cloud cost audit, and strategic roadmap session.
+            {/* Alternating Animated Word Display */}
+            <div className="h-12 flex items-center justify-center overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={ctaWords[currentWordIdx]}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.35 }}
+                  className="text-2xl sm:text-4xl font-extrabold font-display text-[#f15e1c] uppercase tracking-wider"
+                >
+                  {ctaWords[currentWordIdx]}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            <p className="text-base sm:text-lg font-bold text-[#d3eee4]">
+              Kick start a project with us today
             </p>
           </div>
 
-          <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
             <Link href="/contact">
               <Button3D
                 variant="primary"
@@ -841,7 +827,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
                 rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
                 className="w-full sm:w-auto justify-center bg-[#f15e1c]"
               >
-                Schedule Executive NDA Consultation
+                Discuss a project
               </Button3D>
             </Link>
             <a href="https://api.whatsapp.com/send?phone=919650625777" target="_blank" rel="noopener noreferrer">
