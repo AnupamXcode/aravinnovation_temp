@@ -20,6 +20,7 @@ import { DigitalMarketingInteractivePage } from "@/components/services/DigitalMa
 import { WebDevInteractivePage } from "@/components/services/WebDevInteractivePage";
 import { RiskGovInteractivePage } from "@/components/services/RiskGovInteractivePage";
 import { AuditInteractivePage } from "@/components/services/AuditInteractivePage";
+import { TrainingStaffInteractivePage } from "@/components/services/TrainingStaffInteractivePage";
 import {
   Compass,
   Code2,
@@ -125,6 +126,11 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
   // Render Immersive Audit & Improvement Interactive Page for Audit Slugs
   if (service.slug === "audit-and-improvement" || slug === "audit" || slug === "audit-improvement") {
     return <AuditInteractivePage service={service} />;
+  }
+
+  // Render Immersive Training & Staff Augmentation Interactive Page for Training & Staff Slugs
+  if (service.slug === "training-staff-augmentation" || slug === "trainingandstaff" || slug === "training-staff") {
+    return <TrainingStaffInteractivePage service={service} />;
   }
 
   // Find related case study
