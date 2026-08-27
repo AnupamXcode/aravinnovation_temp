@@ -1,5 +1,10 @@
-import { redirect } from "next/navigation";
+import { redirect } from "@/i18n/routing";
 
-export default function PrivacyPage() {
-  redirect("/privacy-policy");
+export default async function PrivacyPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  redirect({ href: "/privacy-policy", locale });
 }

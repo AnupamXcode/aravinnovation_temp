@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { redirect } from "@/i18n/routing";
 
 export default async function BlogPage({
   params,
@@ -6,5 +6,5 @@ export default async function BlogPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  redirect(`/${locale}/insights`);
+  redirect({ href: "/insights", locale });
 }

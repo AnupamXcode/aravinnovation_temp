@@ -1,5 +1,10 @@
-import { redirect } from "next/navigation";
+import { redirect } from "@/i18n/routing";
 
-export default function TermsPage() {
-  redirect("/terms-and-conditions");
+export default async function TermsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  redirect({ href: "/terms-and-conditions", locale });
 }

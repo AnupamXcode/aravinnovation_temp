@@ -1,5 +1,10 @@
-import { redirect } from "next/navigation";
+import { redirect } from "@/i18n/routing";
 
-export default function RefundPage() {
-  redirect("/refund-policy");
+export default async function RefundPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  redirect({ href: "/refund-policy", locale });
 }
