@@ -15,6 +15,7 @@ import { TiltCard } from "@/components/motion/TiltCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { BreadcrumbSchema, ServiceSchema, FAQSchema } from "@/components/seo/StructuredData";
 import { ServiceMaintenanceBanner } from "@/components/services/ServiceMaintenanceBanner";
+import { ITStrategyInteractivePage } from "@/components/services/ITStrategyInteractivePage";
 import {
   Compass,
   Code2,
@@ -95,6 +96,11 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
 
   if (!service) {
     notFound();
+  }
+
+  // Render Immersive IT Strategy Interactive Page for IT Strategy Slugs
+  if (service.slug === "it-strategy-implementation" || slug === "it-strategy-consulting" || slug === "itstrategy") {
+    return <ITStrategyInteractivePage service={service} />;
   }
 
   // Find related case study
