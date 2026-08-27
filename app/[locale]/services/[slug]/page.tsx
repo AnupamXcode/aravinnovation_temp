@@ -27,6 +27,8 @@ import {
   ArrowRight,
   AlertTriangle,
   Briefcase,
+  Cpu,
+  Sparkles,
 } from "lucide-react";
 
 interface ServicePageProps {
@@ -82,6 +84,8 @@ const iconMap: Record<string, React.ReactNode> = {
   ShieldCheck: <ShieldCheck className="w-8 h-8 transition-colors duration-300" />,
   BarChart3: <BarChart3 className="w-8 h-8 transition-colors duration-300" />,
   Users2: <Users2 className="w-8 h-8 transition-colors duration-300" />,
+  Cpu: <Cpu className="w-8 h-8 transition-colors duration-300" />,
+  Sparkles: <Sparkles className="w-8 h-8 transition-colors duration-300" />,
 };
 
 export default async function DynamicServicePage({ params }: ServicePageProps) {

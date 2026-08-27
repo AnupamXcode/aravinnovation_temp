@@ -1887,6 +1887,207 @@ export default function AdminDashboardPage() {
             </div>
           </div>
         )}
+
+        {/* ========================================================================= */}
+        {/* TAB: MOTION & EXPERIENCE CONTROLS (TASK M) */}
+        {/* ========================================================================= */}
+        {activeTab === "motion" && (
+          <div className="space-y-8">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+              <h2 className="text-xl font-bold font-display flex items-center gap-2 text-[#f15e1c]">
+                <Sparkles className="w-6 h-6" />
+                <span>Motion &amp; Experience Controls</span>
+              </h2>
+              <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+                Configure global animation behavior, background motion, 3D experiences, parallax effects, and animation intensity across desktop and mobile.
+              </p>
+            </div>
+
+            {/* Main Toggle Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {/* 1. Global Animations */}
+              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
+                <div>
+                  <span className="text-sm font-bold font-display block text-[#3A2E27] dark:text-[#FAF5EE]">Global Animations</span>
+                  <span className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">Master switch for all website motion</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    updateConfig("animationsEnabled", !config.animationsEnabled);
+                    showToast(`Global Animations ${!config.animationsEnabled ? "ON" : "OFF"}`);
+                  }}
+                  className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
+                    config.animationsEnabled !== false ? "bg-emerald-500 text-white shadow-md" : "bg-rose-500 text-white"
+                  }`}
+                >
+                  {config.animationsEnabled !== false ? "ON" : "OFF"}
+                </button>
+              </div>
+
+              {/* 2. Background Motion */}
+              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
+                <div>
+                  <span className="text-sm font-bold font-display block text-[#3A2E27] dark:text-[#FAF5EE]">Background Motion</span>
+                  <span className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">Subtle continuous floating background</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    updateConfig("backgroundMotionEnabled", !(config as any).backgroundMotionEnabled);
+                    showToast(`Background Motion ${!(config as any).backgroundMotionEnabled ? "ON" : "OFF"}`);
+                  }}
+                  className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
+                    (config as any).backgroundMotionEnabled !== false ? "bg-emerald-500 text-white shadow-md" : "bg-rose-500 text-white"
+                  }`}
+                >
+                  {(config as any).backgroundMotionEnabled !== false ? "ON" : "OFF"}
+                </button>
+              </div>
+
+              {/* 3. 3D Experience */}
+              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
+                <div>
+                  <span className="text-sm font-bold font-display block text-[#3A2E27] dark:text-[#FAF5EE]">3D Experience</span>
+                  <span className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">Hero &amp; Services 3D constellation</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const updated = {
+                      ...(config.threeDConfig || {}),
+                      enable3D: !(config.threeDConfig?.enable3D !== false),
+                    };
+                    updateConfig("threeDConfig", updated);
+                    showToast(`3D Experience ${updated.enable3D ? "ON" : "OFF"}`);
+                  }}
+                  className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
+                    config.threeDConfig?.enable3D !== false ? "bg-emerald-500 text-white shadow-md" : "bg-rose-500 text-white"
+                  }`}
+                >
+                  {config.threeDConfig?.enable3D !== false ? "ON" : "OFF"}
+                </button>
+              </div>
+
+              {/* 4. Parallax */}
+              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
+                <div>
+                  <span className="text-sm font-bold font-display block text-[#3A2E27] dark:text-[#FAF5EE]">Parallax</span>
+                  <span className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">Mouse movement &amp; scroll depth</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    updateConfig("parallaxEnabled", !(config as any).parallaxEnabled);
+                    showToast(`Parallax ${!(config as any).parallaxEnabled ? "ON" : "OFF"}`);
+                  }}
+                  className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
+                    (config as any).parallaxEnabled !== false ? "bg-emerald-500 text-white shadow-md" : "bg-rose-500 text-white"
+                  }`}
+                >
+                  {(config as any).parallaxEnabled !== false ? "ON" : "OFF"}
+                </button>
+              </div>
+
+              {/* 5. Hover Effects */}
+              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
+                <div>
+                  <span className="text-sm font-bold font-display block text-[#3A2E27] dark:text-[#FAF5EE]">Hover Effects</span>
+                  <span className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">Interactive card &amp; button hover scaling</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    updateConfig("hoverEffectsEnabled", !config.hoverEffectsEnabled);
+                    showToast(`Hover Effects ${!config.hoverEffectsEnabled ? "ON" : "OFF"}`);
+                  }}
+                  className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
+                    config.hoverEffectsEnabled !== false ? "bg-emerald-500 text-white shadow-md" : "bg-rose-500 text-white"
+                  }`}
+                >
+                  {config.hoverEffectsEnabled !== false ? "ON" : "OFF"}
+                </button>
+              </div>
+
+              {/* 6. Scroll Animations */}
+              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
+                <div>
+                  <span className="text-sm font-bold font-display block text-[#3A2E27] dark:text-[#FAF5EE]">Scroll Animations</span>
+                  <span className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">On-scroll section reveal animations</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    updateConfig("scrollAnimationsEnabled", !config.scrollAnimationsEnabled);
+                    showToast(`Scroll Animations ${!config.scrollAnimationsEnabled ? "ON" : "OFF"}`);
+                  }}
+                  className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
+                    config.scrollAnimationsEnabled !== false ? "bg-emerald-500 text-white shadow-md" : "bg-rose-500 text-white"
+                  }`}
+                >
+                  {config.scrollAnimationsEnabled !== false ? "ON" : "OFF"}
+                </button>
+              </div>
+
+              {/* 7. Mobile Animations */}
+              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
+                <div>
+                  <span className="text-sm font-bold font-display block text-[#3A2E27] dark:text-[#FAF5EE]">Mobile Animations</span>
+                  <span className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">Swipeable carousels &amp; mobile motion</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    updateConfig("mobileAnimationsEnabled", !(config as any).mobileAnimationsEnabled);
+                    showToast(`Mobile Animations ${!(config as any).mobileAnimationsEnabled ? "ON" : "OFF"}`);
+                  }}
+                  className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
+                    (config as any).mobileAnimationsEnabled !== false ? "bg-emerald-500 text-white shadow-md" : "bg-rose-500 text-white"
+                  }`}
+                >
+                  {(config as any).mobileAnimationsEnabled !== false ? "ON" : "OFF"}
+                </button>
+              </div>
+            </div>
+
+            {/* Animation Intensity Control */}
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-lg space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
+                  Animation Intensity Level
+                </span>
+                <span className="text-xs font-mono font-extrabold text-[#f15e1c] uppercase px-3 py-1 rounded-full bg-[#fce3d3] border border-[#f7d7b0]">
+                  {(config as any).animationIntensityLevel || "medium"} Intensity
+                </span>
+              </div>
+
+              <div className="flex items-center gap-4 pt-2">
+                <span className="text-xs font-bold text-[#7A6A5F] dark:text-[#B8ACA0]">Low</span>
+                <input
+                  type="range"
+                  min="1"
+                  max="3"
+                  step="1"
+                  value={
+                    ((config as any).animationIntensityLevel || "medium") === "low"
+                      ? 1
+                      : ((config as any).animationIntensityLevel || "medium") === "high"
+                      ? 3
+                      : 2
+                  }
+                  onChange={(e) => {
+                    const val = parseInt(e.target.value);
+                    const level = val === 1 ? "low" : val === 3 ? "high" : "medium";
+                    updateConfig("animationIntensityLevel", level);
+                    showToast(`Animation Intensity set to ${level}`);
+                  }}
+                  className="flex-1 accent-[#f15e1c] cursor-pointer"
+                />
+                <span className="text-xs font-bold text-[#7A6A5F] dark:text-[#B8ACA0]">High</span>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );

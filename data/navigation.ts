@@ -8,39 +8,44 @@ export interface NavItem {
 
 export const servicesNavigation: NavItem[] = [
   {
-    label: "IT Strategy & Consulting",
-    href: "/services/it-strategy-consulting",
-    description: "Enterprise tech roadmaps, digital transformation, cloud architecture & IT governance.",
+    label: "IT Strategy and Implementation",
+    href: "/services/it-strategy-implementation",
+    description: "Enterprise tech roadmaps, digital transformation blueprints, cloud architecture & IT governance.",
   },
   {
-    label: "Web & App Development",
-    href: "/services/web-app-development",
-    description: "Scalable modern web applications, cloud native systems, enterprise portals & mobile apps.",
+    label: "Digital Marketing and Brand Development",
+    href: "/services/digital-marketing-brand-development",
+    description: "B2B demand generation, brand positioning, multi-channel performance marketing & closed-loop attribution.",
   },
   {
-    label: "Digital Marketing",
-    href: "/services/digital-marketing",
-    description: "Data-driven B2B demand generation, multi-channel performance marketing & conversion optimization.",
+    label: "Web and Application Development",
+    href: "/services/web-application-development",
+    description: "Scalable modern web applications, cloud native systems, enterprise SaaS portals & mobile apps.",
   },
   {
-    label: "Search Engine Optimization (SEO)",
-    href: "/services/seo",
-    description: "Technical SEO audits, programmatic indexing, enterprise authority building & organic revenue growth.",
-  },
-  {
-    label: "Risk Governance & Compliance",
-    href: "/services/risk-governance-compliance",
+    label: "Risk, Compliance, and Governance",
+    href: "/services/risk-compliance-governance",
     description: "Regulatory compliance frameworks, data privacy (GDPR/DPDP), cybersecurity posture & risk mitigation.",
   },
   {
-    label: "Audit & Improvement",
+    label: "Audit and Improvement",
     href: "/services/audit-improvement",
-    description: "System efficiency reviews, process bottlenecks remediation, code audits & cost optimization.",
+    description: "System efficiency reviews, process bottleneck remediation, codebase audits & cloud cost optimization.",
   },
   {
-    label: "Training & Staff Augmentation",
+    label: "Training and Staff Augmentation",
     href: "/services/training-staff-augmentation",
-    description: "Vetted on-demand technical talent, enterprise upskilling programs & dedicated delivery squads.",
+    description: "Vetted on-demand technical talent, enterprise upskilling programs & dedicated engineering squads.",
+  },
+  {
+    label: "SEO Services",
+    href: "/services/seo-services",
+    description: "Technical SEO audits, programmatic indexing, enterprise topical authority & organic revenue growth.",
+  },
+  {
+    label: "AI Portfolio",
+    href: "/services/ai-portfolio",
+    description: "Enterprise AI solutions, Intelligent Automation pipelines, RAG systems & seamless LLM integrations.",
   },
 ];
 

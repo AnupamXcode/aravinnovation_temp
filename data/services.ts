@@ -40,7 +40,7 @@ export interface Service {
   eyebrow: string;
   tagline: string;
   description: string;
-  icon: "Compass" | "Code2" | "TrendingUp" | "Search" | "ShieldCheck" | "BarChart3" | "Users2";
+  icon: "Compass" | "Code2" | "TrendingUp" | "Search" | "ShieldCheck" | "BarChart3" | "Users2" | "Cpu" | "Sparkles";
   businessProblem: {
     title: string;
     description: string;
@@ -62,13 +62,13 @@ export interface Service {
 
 export const servicesData: Service[] = [
   {
-    slug: "it-strategy-consulting",
-    title: "IT Strategy & Consulting",
+    slug: "it-strategy-implementation",
+    title: "IT Strategy and Implementation",
     shortTitle: "IT Strategy",
-    eyebrow: "Enterprise Architecture • Digital Roadmaps • Cloud Transformation",
+    eyebrow: "Enterprise Architecture • Digital Roadmaps • Infrastructure Modernization",
     tagline: "Aligning technology investments with bottom-line business profitability.",
     description:
-      "We help forward-thinking enterprises across India and the UAE modernize legacy infrastructure, formulate defensible multi-year technology roadmaps, and implement agile governance models that reduce operational friction and cloud costs.",
+      "We help forward-thinking enterprises modernize legacy infrastructure, formulate defensible multi-year technology roadmaps, and implement agile governance models that reduce operational friction and cloud costs.",
     icon: "Compass",
     businessProblem: {
       title: "The Enterprise Technology Bottleneck",
@@ -203,13 +203,154 @@ export const servicesData: Service[] = [
     relatedCaseStudySlugs: ["enterprise-cloud-transformation"],
   },
   {
-    slug: "web-app-development",
-    title: "Web & App Development",
-    shortTitle: "Web & App Dev",
-    eyebrow: "Full-Stack Engineering • Cloud-Native Portals • Mobile Apps",
-    tagline: "High-performance digital products engineered for reliability, security, and velocity.",
+    slug: "digital-marketing-brand-development",
+    title: "Digital Marketing and Brand Development",
+    shortTitle: "Digital Marketing & Branding",
+    eyebrow: "B2B Demand Gen • Brand Strategy • Performance Marketing",
+    tagline: "Performance-focused campaigns built to generate qualified B2B pipeline and elevate brand authority.",
     description:
-      "From high-conversion customer-facing portals to complex internal SaaS platforms and native mobile applications, we build clean, maintainable software engineered to support millions of transactions.",
+      "We replace generic ad spend with rigorous funnel modeling, high-intent LinkedIn & Google Search campaigns, brand positioning, and multi-touch attribution that turns marketing into verified revenue.",
+    icon: "TrendingUp",
+    businessProblem: {
+      title: "The B2B Ad Spend & Brand Ambiguity Black Hole",
+      description:
+        "High cost-per-click, low lead quality, and disconnected brand identity make traditional marketing retainers inefficient for B2B enterprises.",
+      painPoints: [
+        "Leads coming in with low purchasing intent or budget mismatches",
+        "Inability to track closed-won pipeline back to specific marketing campaigns",
+        "Brand messaging that reads generic and fails to convey core technical value",
+        "Wasted ad spend on non-converting audience segments",
+      ],
+    },
+    ourSolution: {
+      title: "Revenue-Driven Growth & Brand Positioning Systems",
+      description:
+        "We build closed-loop marketing systems tightly integrated with your CRM, targeting decision-makers with personalized messaging and high-converting brand experiences.",
+      keyPillars: [
+        {
+          title: "Account-Based Marketing (ABM)",
+          description: "Precision targeting of key enterprise accounts across LinkedIn and programmatic channels.",
+        },
+        {
+          title: "Brand Identity & Value Positioning",
+          description: "Crafting clear value propositions, visual brand guidelines, and high-impact pitch decks.",
+        },
+        {
+          title: "Full-Funnel CRM Attribution",
+          description: "Tracking lead stages from initial ad click through pipeline discovery call to signed contract.",
+        },
+      ],
+    },
+    capabilities: [
+      {
+        category: "Paid Acquisition & Growth",
+        items: [
+          "LinkedIn B2B Advertising & InMail",
+          "Google Search & High-Intent Display",
+          "Retargeting & Audience Expansion",
+          "Programmatic Account-Based Marketing",
+        ],
+      },
+      {
+        category: "Brand & Content Strategy",
+        items: [
+          "Brand Architecture & Messaging Matrix",
+          "Landing Page CRO & A/B Testing",
+          "HubSpot / Salesforce CRM Integration",
+          "Multi-Touch Attribution Modeling",
+        ],
+      },
+    ],
+    process: [
+      {
+        step: 1,
+        title: "Audience & Brand Positioning Audit",
+        description: "ICP profiling, competitor teardowns, and buyer journey mapping.",
+        deliverable: "ICP Matrix & Brand Strategy Blueprint",
+      },
+      {
+        step: 2,
+        title: "Conversion Infrastructure Setup",
+        description: "Building dedicated high-converting landing pages and CRM server-side tracking.",
+        deliverable: "Conversion Pages & Server-Side Pixel Setup",
+      },
+      {
+        step: 3,
+        title: "Campaign Launch & Audience Testing",
+        description: "Launching multi-variant creative, ad copy, and high-intent keyword groups.",
+        deliverable: "Live Cross-Channel Campaigns",
+      },
+      {
+        step: 4,
+        title: "Rapid CRO & Optimization",
+        description: "Weekly multivariate testing to drive down Customer Acquisition Cost (CAC).",
+        deliverable: "Weekly Performance Sprints & Heatmap Audits",
+      },
+      {
+        step: 5,
+        title: "Pipeline & Revenue Reporting",
+        description: "Transparent dashboards showing cost-per-qualified-opportunity and ROI.",
+        deliverable: "Executive Monthly Revenue Attribution Report",
+      },
+    ],
+    technologies: [
+      {
+        category: "Marketing Platforms",
+        stack: ["LinkedIn Campaign Manager", "Google Ads", "Meta Ads Manager", "RollWorks ABM"],
+      },
+      {
+        category: "Attribution & CRM",
+        stack: ["HubSpot", "Salesforce", "Google Tag Manager Server-Side", "GA4", "Hotjar"],
+      },
+    ],
+    engagementModels: [
+      {
+        title: "Growth & Brand Retainer",
+        description: "End-to-end management of paid media, brand identity, landing pages, and weekly optimization.",
+        bestFor: "Enterprises seeking predictable customer acquisition and elevated brand authority.",
+        ctaText: "Discuss Growth Retainer",
+      },
+      {
+        title: "Marketing Audit & Strategy Sprint",
+        description: "Comprehensive 30-day teardown of existing campaigns, brand messaging, and CRM leaks.",
+        bestFor: "Companies experiencing plateaus or rising CAC with their existing agency.",
+        ctaText: "Request Marketing Audit",
+      },
+    ],
+    results: [
+      {
+        metric: "3.4x",
+        label: "Qualified Pipeline Generated",
+        context: "Verified B2B opportunities generated for enterprise partners.",
+      },
+      {
+        metric: "35%",
+        label: "CAC Reduction",
+        context: "Average customer acquisition cost reduction achieved through funnel refinement.",
+      },
+    ],
+    faqs: [
+      {
+        question: "How do you ensure lead quality for complex B2B offerings?",
+        answer:
+          "We qualify traffic upfront using specific industry targeting, job seniority filters, and qualifying questions on dedicated landing page forms, integrated directly into your CRM scorecards.",
+      },
+      {
+        question: "What is your typical onboarding timeline?",
+        answer:
+          "Standard ramp-up takes 10 to 14 days, including pixel validation, landing page setup, tracking calibration, and brand asset alignment before ad launch.",
+      },
+    ],
+    relatedCaseStudySlugs: ["b2b-demand-generation"],
+  },
+  {
+    slug: "web-application-development",
+    title: "Web and Application Development",
+    shortTitle: "Web & App Dev",
+    eyebrow: "Full-Stack Engineering • Cloud-Native Portals • Mobile Applications",
+    tagline: "High-performance digital products engineered for reliability, security, and speed.",
+    description:
+      "From high-conversion web portals to complex internal SaaS platforms and native mobile applications, we build clean, maintainable software engineered to support enterprise workflows.",
     icon: "Code2",
     businessProblem: {
       title: "The High Cost of Fragile Software",
@@ -344,290 +485,8 @@ export const servicesData: Service[] = [
     relatedCaseStudySlugs: ["saas-portal-engineering"],
   },
   {
-    slug: "digital-marketing",
-    title: "Digital Marketing",
-    shortTitle: "Digital Marketing",
-    eyebrow: "B2B Demand Gen • Performance Marketing • Paid Media",
-    tagline: "Performance-focused campaigns built to generate qualified B2B pipeline, not vanity impressions.",
-    description:
-      "We replace generic ad spend with rigorous funnel modeling, high-intent LinkedIn & Google Search campaigns, account-based marketing (ABM), and multi-touch attribution that turns ad spend into verified revenue.",
-    icon: "TrendingUp",
-    businessProblem: {
-      title: "The B2B Ad Spend Black Hole",
-      description:
-        "High cost-per-click, low lead quality, and disconnected CRM tracking make traditional agency retainers a money pit for B2B enterprises.",
-      painPoints: [
-        "Leads coming in with low purchasing intent or budget mismatches",
-        "Inability to track closed-won pipeline back to specific ad campaigns",
-        "Creative and ad copy that reads generic and fails to convey technical value",
-        "Wasted ad spend on non-converting audience segments",
-      ],
-    },
-    ourSolution: {
-      title: "Revenue-Driven Growth & Paid Acquisition",
-      description:
-        "We build closed-loop marketing systems tightly integrated with your CRM, targeting decision-makers with personalized messaging and conversion-optimized landing experiences.",
-      keyPillars: [
-        {
-          title: "Account-Based Marketing (ABM)",
-          description: "Precision targeting of key enterprise accounts across LinkedIn and programmatic channels.",
-        },
-        {
-          title: "High-Intent Search Capture",
-          description: "Targeting bottom-of-the-funnel buyer keywords with high commercial intent.",
-        },
-        {
-          title: "Full-Funnel CRM Attribution",
-          description: "Tracking lead stages from initial ad click through pipeline discovery call to signed contract.",
-        },
-      ],
-    },
-    capabilities: [
-      {
-        category: "Paid Acquisition",
-        items: [
-          "LinkedIn B2B Advertising & InMail",
-          "Google Search & High-Intent Display",
-          "Retargeting & Audience Expansion",
-          "Programmatic Account-Based Marketing",
-        ],
-      },
-      {
-        category: "Conversion & Analytics",
-        items: [
-          "Landing Page CRO & A/B Testing",
-          "HubSpot / Salesforce Integration",
-          "Multi-Touch Attribution Modeling",
-          "Email Lead Nurture Automations",
-        ],
-      },
-    ],
-    process: [
-      {
-        step: 1,
-        title: "Audience & Competitor Intelligence",
-        description: "ICP profiling, competitor ad teardown, and buyer journey mapping.",
-        deliverable: "ICP Matrix & Ad Strategy Blueprint",
-      },
-      {
-        step: 2,
-        title: "Conversion Infrastructure Setup",
-        description: "Building dedicated high-converting landing pages and CRM server-side tracking.",
-        deliverable: "Conversion Pages & Server-Side Pixel Setup",
-      },
-      {
-        step: 3,
-        title: "Campaign Launch & Audience Testing",
-        description: "Launching multi-variant creative, ad copy, and high-intent keyword groups.",
-        deliverable: "Live Cross-Channel Ad Campaigns",
-      },
-      {
-        step: 4,
-        title: "Rapid CRO & Budget Reallocation",
-        description: "Weekly multivariate testing to drive down Customer Acquisition Cost (CAC).",
-        deliverable: "Weekly Performance Sprints & Heatmap Audits",
-      },
-      {
-        step: 5,
-        title: "Pipeline & Revenue Reporting",
-        description: "Transparent dashboards showing cost-per-qualified-opportunity and ROI.",
-        deliverable: "Executive Monthly Revenue Attribution Report",
-      },
-    ],
-    technologies: [
-      {
-        category: "Ad Platforms",
-        stack: ["LinkedIn Campaign Manager", "Google Ads (Search & Performance Max)", "Meta Ads Manager", "RollWorks ABM"],
-      },
-      {
-        category: "Attribution & CRM",
-        stack: ["HubSpot", "Salesforce", "Google Tag Manager Server-Side", "GA4", "Hotjar"],
-      },
-    ],
-    engagementModels: [
-      {
-        title: "Growth Retainer (Media + CRO)",
-        description: "End-to-end management of paid media, creative assets, landing pages, and weekly optimization.",
-        bestFor: "Enterprises with dedicated monthly ad budgets seeking scalable customer acquisition.",
-        ctaText: "Discuss Growth Retainer",
-      },
-      {
-        title: "Paid Media Audit & Turnaround Sprint",
-        description: "Comprehensive 30-day teardown of existing ad accounts, wasted spend, and CRM leaks.",
-        bestFor: "Companies experiencing plateaus or rising CAC with their existing agency.",
-        ctaText: "Request Paid Media Audit",
-      },
-    ],
-    results: [
-      {
-        metric: "3.4x",
-        label: "Qualified Pipeline Generated",
-        context: "Verified B2B opportunities generated for enterprise partners.",
-      },
-      {
-        metric: "35%",
-        label: "CAC Reduction",
-        context: "Average customer acquisition cost reduction achieved through funnel refinement.",
-      },
-    ],
-    faqs: [
-      {
-        question: "How do you ensure lead quality for complex B2B products?",
-        answer:
-          "We qualify traffic upfront using specific industry targeting, job seniority filters, and qualifying questions on dedicated landing page forms, integrated directly into your CRM scorecards.",
-      },
-      {
-        question: "What is your typical onboarding timeline for digital marketing?",
-        answer:
-          "Standard ramp-up takes 10 to 14 days, including pixel validation, landing page setup, tracking calibration, and creative production before ad launch.",
-      },
-    ],
-    relatedCaseStudySlugs: ["b2b-demand-generation"],
-  },
-  {
-    slug: "seo",
-    title: "Search Engine Optimization (SEO)",
-    shortTitle: "SEO",
-    eyebrow: "Technical SEO • Programmatic Indexing • Enterprise Authority",
-    tagline: "Sustainable organic growth built on technical perfection and high-authority search footprint.",
-    description:
-      "We treat SEO as an engineering discipline. From resolving complex JavaScript rendering roadblocks and Core Web Vitals to building semantic topical authority hubs, we capture sustainable, non-brand organic search revenue.",
-    icon: "Search",
-    businessProblem: {
-      title: "Why Traditional SEO Fails Modern Websites",
-      description:
-        "Shallow keyword stuffing and low-quality blog posts no longer rank. Modern search engines demand clean crawlability, high user experience signals, and topical depth.",
-      painPoints: [
-        "JavaScript frameworks not getting indexed properly by Google and Bing",
-        "Slow Core Web Vitals (LCP, CLS, INP) dragging down site rankings",
-        "Competitors dominating high-value commercial keywords in India and GCC",
-        "Unclear organic ROI and traffic that fails to convert into sales conversations",
-      ],
-    },
-    ourSolution: {
-      title: "Engineering-Led Technical SEO & Topical Dominance",
-      description:
-        "We combine site architecture optimization with programmatic content hubs and authoritative digital PR to build organic search moats.",
-      keyPillars: [
-        {
-          title: "Deep Technical Audits & Architecture",
-          description: "Solving crawl budgets, rendering issues, canonical hierarchy, and structured schema markup.",
-        },
-        {
-          title: "Topical Authority & Content Clusters",
-          description: "Building comprehensive content silos that signal undeniable subject-matter expertise.",
-        },
-        {
-          title: "High-Authority B2B Digital PR",
-          description: "Earning verified citations, backlinks, and brand mentions from top-tier industry publications.",
-        },
-      ],
-    },
-    capabilities: [
-      {
-        category: "Technical & Architectural SEO",
-        items: [
-          "Next.js / React Server-Side Rendering SEO",
-          "Core Web Vitals Remediation (INP, LCP)",
-          "Structured Data (Schema.org JSON-LD)",
-          "International Hreflang (India / UAE Multi-Region)",
-        ],
-      },
-      {
-        category: "Content & Authority Strategy",
-        items: [
-          "High-Intent Keyword Mapping",
-          "Topical Authority Content Hubs",
-          "Competitive Gap Analysis",
-          "Enterprise B2B Backlink Acquisition",
-        ],
-      },
-    ],
-    process: [
-      {
-        step: 1,
-        title: "Comprehensive Technical Crawl Audit",
-        description: "Simulating search engine bots to uncover indexation blockers, redirect chains, and schema gaps.",
-        deliverable: "100-Point Technical SEO Audit & Dev Action Plan",
-      },
-      {
-        step: 2,
-        title: "Keyword & Commercial Intent Matrix",
-        description: "Mapping search queries by buyer readiness and prioritizing high-intent target pages.",
-        deliverable: "Keyword Opportunity & Content Gap Matrix",
-      },
-      {
-        step: 3,
-        title: "On-Page & Architecture Refactoring",
-        description: "Implementing optimized titles, internal linking models, schema markup, and speed fixes.",
-        deliverable: "Direct Git PRs / CMS On-Page Optimization",
-      },
-      {
-        step: 4,
-        title: "Topical Content Hub Deployment",
-        description: "Publishing in-depth, authoritative guides answering exact industry problem statements.",
-        deliverable: "Monthly High-Authority Content Deliverables",
-      },
-      {
-        step: 5,
-        title: "Rank & Conversion Tracking",
-        description: "Monitoring keyword movements, organic demo requests, and search impressions.",
-        deliverable: "Monthly Search Console & Revenue Impact Report",
-      },
-    ],
-    technologies: [
-      {
-        category: "SEO & Audit Tooling",
-        stack: ["Screaming Frog SEO Spider", "Ahrefs", "Semrush", "Google Search Console"],
-      },
-      {
-        category: "Testing & Schema",
-        stack: ["Schema.org JSON-LD", "PageSpeed Insights", "Lighthouse CLI", "Chrome UX Report (CrUX)"],
-      },
-    ],
-    engagementModels: [
-      {
-        title: "Organic Growth Retainer",
-        description: "Comprehensive monthly technical audits, content publishing, authority building, and reporting.",
-        bestFor: "Brands targeting aggressive multi-region organic search dominance across global target markets.",
-        ctaText: "Start SEO Retainer",
-      },
-      {
-        title: "Technical Migration & Rescue Sprint",
-        description: "Protecting rankings and traffic during major CMS re-platforms or site redesigns.",
-        bestFor: "Companies launching new websites or recovering from algorithm penalties.",
-        ctaText: "Book Migration Audit",
-      },
-    ],
-    results: [
-      {
-        metric: "+180%",
-        label: "Organic Search Visibility",
-        context: "Growth achieved across non-brand commercial keyword clusters.",
-      },
-      {
-        metric: "2.8x",
-        label: "Organic Pipeline Growth",
-        context: "Increase in inbound enterprise inquiries from organic search.",
-      },
-    ],
-    faqs: [
-      {
-        question: "How long does it take to see organic rankings and traffic improvements?",
-        answer:
-          "Technical fixes and indexing improvements typically yield noticeable indexation gains in 4 to 8 weeks, with substantial compound organic traffic growth realized between months 3 and 6.",
-      },
-      {
-        question: "Can you help rank our website across multiple regional and international search results?",
-        answer:
-          "Yes. We implement precise geo-targeting, hreflang tag configurations, localized content hubs, and international entity citations for multi-market search visibility.",
-      },
-    ],
-    relatedCaseStudySlugs: ["organic-traffic-expansion"],
-  },
-  {
-    slug: "risk-governance-compliance",
-    title: "Risk Governance & Compliance",
+    slug: "risk-compliance-governance",
+    title: "Risk, Compliance, and Governance",
     shortTitle: "Risk & Compliance",
     eyebrow: "Data Privacy • Cybersecurity Governance • Regulatory Frameworks",
     tagline: "Protecting enterprise resilience through rigorous compliance and proactive risk governance.",
@@ -754,26 +613,26 @@ export const servicesData: Service[] = [
     ],
     faqs: [
       {
-        question: "How does Arav Innovations prepare us for the new India DPDP Act?",
+        question: "How does Arav Innovations prepare us for the India DPDP Act?",
         answer:
           "We perform data mapping to identify all personal data touchpoints, create compliant consent mechanisms, draft data protection agreements, and establish Data Principal grievance redressal mechanisms.",
       },
       {
         question: "Do you act as the actual certification auditor?",
         answer:
-          "We act as your advisory and implementation partner to make you 100% audit-ready, and work directly alongside accredited third-party certification bodies to guarantee a seamless audit process.",
+          "We act as your advisory and implementation partner to make you 100% audit-ready, working directly alongside accredited third-party certification bodies.",
       },
     ],
     relatedCaseStudySlugs: ["iso-compliance-certification"],
   },
   {
     slug: "audit-improvement",
-    title: "Audit & Improvement",
+    title: "Audit and Improvement",
     shortTitle: "Audit & Improvement",
     eyebrow: "Process Optimization • Code Health • Operational Efficiency",
     tagline: "Uncovering hidden bottlenecks and unlocking measurable operational efficiency.",
     description:
-      "We provide independent technical, operational, and process audits for established enterprises. We analyze code health, cloud efficiency, workflow friction, and software delivery pipelines to recommend high-impact remediation strategies.",
+      "We provide independent technical, operational, and process audits for established enterprises. We analyze code health, cloud efficiency, workflow friction, and delivery pipelines to recommend high-impact remediation strategies.",
     icon: "BarChart3",
     businessProblem: {
       title: "The Creep of Inefficiency & Technical Debt",
@@ -789,7 +648,7 @@ export const servicesData: Service[] = [
     ourSolution: {
       title: "Objective Diagnostics & Actionable Engineering Fixes",
       description:
-        "We don't deliver 200-page shelfware reports. We provide clear, prioritized diagnostic scorecards backed by code-level recommendations and direct implementation support.",
+        "We deliver clear, prioritized diagnostic scorecards backed by code-level recommendations and direct implementation support.",
       keyPillars: [
         {
           title: "Comprehensive Codebase & Architecture Audits",
@@ -871,7 +730,7 @@ export const servicesData: Service[] = [
       {
         title: "2-Week Deep Diagnostic Audit",
         description: "Fixed-scope intensive review of a specific platform, codebase, or cloud infrastructure setup.",
-        bestFor: "Companies preparing for due diligence, scaling milestones, or resolving urgent performance regressions.",
+        bestFor: "Companies preparing for due diligence, scaling milestones, or resolving performance regressions.",
         ctaText: "Book Diagnostic Audit",
       },
       {
@@ -895,23 +754,23 @@ export const servicesData: Service[] = [
     ],
     faqs: [
       {
-        question: "Does your audit require production downtime or sensitive data access?",
+        question: "Does your audit require production downtime?",
         answer:
-          "No. All audits are executed in read-only mode using sanitized development/staging environments or telemetry data, ensuring zero risk to live production systems.",
+          "No. All audits are executed in read-only mode using staging environments or telemetry data, ensuring zero risk to live production systems.",
       },
       {
         question: "Can your team help us implement the audit recommendations?",
         answer:
-          "Yes. While we deliver standalone reports for your internal team to execute, we also provide hands-on engineering squads to execute the remediation sprints directly.",
+          "Yes. We deliver standalone reports and can also provide hands-on engineering squads to execute remediation sprints directly.",
       },
     ],
     relatedCaseStudySlugs: ["infrastructure-optimization"],
   },
   {
     slug: "training-staff-augmentation",
-    title: "Training & Staff Augmentation",
+    title: "Training and Staff Augmentation",
     shortTitle: "Staff Augmentation",
-    eyebrow: "Vetted Tech Talent • Specialized Squads • Enterprise Upskilling",
+    eyebrow: "Vetted Tech Talent • Dedicated Squads • Corporate Upskilling",
     tagline: "High-caliber engineering talent and tailored training programs to accelerate your delivery roadmap.",
     description:
       "We provide pre-vetted senior software engineers, cloud architects, QA automation specialists, and digital strategists who seamlessly integrate into your development sprints within days, alongside customized corporate training programs.",
@@ -1010,7 +869,7 @@ export const servicesData: Service[] = [
     ],
     engagementModels: [
       {
-        title: "Dedicated Monthly Dedicated Engineers",
+        title: "Dedicated Monthly Engineers",
         description: "Full-time dedicated engineers working 100% on your product with flexible monthly commitments.",
         bestFor: "Teams needing immediate velocity without long-term local employment liabilities.",
         ctaText: "Request Talent Profiles",
@@ -1038,20 +897,313 @@ export const servicesData: Service[] = [
       {
         question: "How fast can an augmented engineer join our team?",
         answer:
-          "For standard tech stacks (Next.js, React, Node, Python, AWS), we typically present qualified candidates within 48 to 72 hours, with engineers starting within 5 to 7 business days.",
+          "For standard tech stacks (Next.js, React, Node, Python, AWS), we present qualified candidates within 48 to 72 hours, with engineers starting within 5 to 7 business days.",
       },
       {
         question: "What happens if an engineer is not the right fit?",
         answer:
-          "We offer a 2-week replacement guarantee. If you feel a candidate is not the perfect fit during the first 14 days, we will replace them promptly with zero additional placement fees.",
+          "We offer a 2-week replacement guarantee with zero additional placement fees.",
       },
     ],
     relatedCaseStudySlugs: ["engineering-team-augmentation"],
   },
+  {
+    slug: "seo-services",
+    title: "SEO Services",
+    shortTitle: "SEO Services",
+    eyebrow: "Technical SEO • Programmatic Indexing • Enterprise Authority",
+    tagline: "Sustainable organic growth built on technical perfection and high-authority search footprint.",
+    description:
+      "We treat SEO as an engineering discipline. From resolving complex JavaScript rendering roadblocks and Core Web Vitals to building semantic topical authority hubs, we capture sustainable organic search discoverability.",
+    icon: "Search",
+    businessProblem: {
+      title: "Why Traditional SEO Fails Modern Websites",
+      description:
+        "Shallow keyword stuffing no longer ranks. Modern search engines demand clean crawlability, high user experience signals, and deep topical authority.",
+      painPoints: [
+        "JavaScript frameworks not getting indexed properly by search engines",
+        "Slow Core Web Vitals (LCP, CLS, INP) dragging down site rankings",
+        "Competitors dominating high-value commercial keywords in target regions",
+        "Unclear organic ROI and traffic that fails to convert into sales conversations",
+      ],
+    },
+    ourSolution: {
+      title: "Engineering-Led Technical SEO & Topical Dominance",
+      description:
+        "We combine site architecture optimization with programmatic content hubs and authoritative digital PR to build organic search moats.",
+      keyPillars: [
+        {
+          title: "Deep Technical Audits & Architecture",
+          description: "Solving crawl budgets, rendering issues, canonical hierarchy, and structured schema markup.",
+        },
+        {
+          title: "Topical Authority & Content Clusters",
+          description: "Building comprehensive content silos that signal undeniable subject-matter expertise.",
+        },
+        {
+          title: "High-Authority B2B Digital PR",
+          description: "Earning verified citations, backlinks, and brand mentions from top-tier industry publications.",
+        },
+      ],
+    },
+    capabilities: [
+      {
+        category: "Technical & Architectural SEO",
+        items: [
+          "Next.js / React Server-Side Rendering SEO",
+          "Core Web Vitals Remediation (INP, LCP)",
+          "Structured Data (Schema.org JSON-LD)",
+          "International Hreflang Configuration",
+        ],
+      },
+      {
+        category: "Content & Authority Strategy",
+        items: [
+          "High-Intent Keyword Mapping",
+          "Topical Authority Content Hubs",
+          "Competitive Gap Analysis",
+          "Enterprise B2B Backlink Acquisition",
+        ],
+      },
+    ],
+    process: [
+      {
+        step: 1,
+        title: "Comprehensive Technical Crawl Audit",
+        description: "Simulating search engine bots to uncover indexation blockers and schema gaps.",
+        deliverable: "100-Point Technical SEO Audit & Dev Action Plan",
+      },
+      {
+        step: 2,
+        title: "Keyword & Commercial Intent Matrix",
+        description: "Mapping search queries by buyer readiness and prioritizing high-intent target pages.",
+        deliverable: "Keyword Opportunity & Content Gap Matrix",
+      },
+      {
+        step: 3,
+        title: "On-Page & Architecture Refactoring",
+        description: "Implementing optimized titles, internal linking models, schema markup, and speed fixes.",
+        deliverable: "Direct Git PRs / CMS On-Page Optimization",
+      },
+      {
+        step: 4,
+        title: "Topical Content Hub Deployment",
+        description: "Publishing in-depth, authoritative guides answering exact industry problem statements.",
+        deliverable: "Monthly High-Authority Content Deliverables",
+      },
+      {
+        step: 5,
+        title: "Rank & Conversion Tracking",
+        description: "Monitoring keyword movements, organic demo requests, and search impressions.",
+        deliverable: "Monthly Search Console & Revenue Impact Report",
+      },
+    ],
+    technologies: [
+      {
+        category: "SEO & Audit Tooling",
+        stack: ["Screaming Frog SEO Spider", "Ahrefs", "Semrush", "Google Search Console"],
+      },
+      {
+        category: "Testing & Schema",
+        stack: ["Schema.org JSON-LD", "PageSpeed Insights", "Lighthouse CLI", "Chrome UX Report (CrUX)"],
+      },
+    ],
+    engagementModels: [
+      {
+        title: "Organic Growth Retainer",
+        description: "Comprehensive monthly technical audits, content publishing, authority building, and reporting.",
+        bestFor: "Brands targeting aggressive multi-region organic search dominance.",
+        ctaText: "Start SEO Retainer",
+      },
+      {
+        title: "Technical Migration & Rescue Sprint",
+        description: "Protecting rankings and traffic during major CMS re-platforms or site redesigns.",
+        bestFor: "Companies launching new websites or recovering from algorithm penalties.",
+        ctaText: "Book Migration Audit",
+      },
+    ],
+    results: [
+      {
+        metric: "+180%",
+        label: "Organic Search Visibility",
+        context: "Growth achieved across non-brand commercial keyword clusters.",
+      },
+      {
+        metric: "2.8x",
+        label: "Organic Pipeline Growth",
+        context: "Increase in inbound enterprise inquiries from organic search.",
+      },
+    ],
+    faqs: [
+      {
+        question: "How long does it take to see organic ranking improvements?",
+        answer:
+          "Technical fixes and indexing improvements typically yield noticeable indexation gains in 4 to 8 weeks, with substantial compound organic traffic growth realized between months 3 and 6.",
+      },
+      {
+        question: "Can you help rank our website across multiple regional search results?",
+        answer:
+          "Yes. We implement geo-targeting, hreflang tag configurations, localized content hubs, and international entity citations.",
+      },
+    ],
+    relatedCaseStudySlugs: ["organic-traffic-expansion"],
+  },
+  {
+    slug: "ai-portfolio",
+    title: "AI Portfolio",
+    shortTitle: "AI Portfolio",
+    eyebrow: "AI Solutions • Intelligent Automation • Enterprise AI Integration",
+    tagline: "Empowering modern enterprises with scalable AI implementation and intelligent workflow automation.",
+    description:
+      "We design, build, and deploy production-ready AI solutions, custom LLM integrations, intelligent automation pipelines, and enterprise-grade data workflows tailored to operational efficiency.",
+    icon: "Cpu",
+    businessProblem: {
+      title: "Bridging the Gap Between AI Hype and Enterprise Execution",
+      description:
+        "Many organizations struggle to convert artificial intelligence potential into secure, high-ROI business applications and automated workflows.",
+      painPoints: [
+        "Unclear pathways to integrate LLMs and AI agents into legacy enterprise software",
+        "Data privacy concerns surrounding customer data usage in cloud AI models",
+        "Manual, repetitive operational workflows consuming valuable engineering hours",
+        "Lack of custom AI tools tailored to specific domain data and business logic",
+      ],
+    },
+    ourSolution: {
+      title: "Pragmatic, High-Impact Enterprise AI Engineering",
+      description:
+        "We implement secure, scalable AI capabilities—ranging from intelligent workflow automation and retrieval-augmented generation (RAG) to custom AI integrations that deliver immediate business value.",
+      keyPillars: [
+        {
+          title: "Intelligent Workflow Automation",
+          description: "Automating complex document processing, lead qualification, and customer operations with custom AI agents.",
+        },
+        {
+          title: "AI Solutions & Enterprise Integration",
+          description: "Connecting OpenAI, Anthropic, and open-source models (Llama) directly into internal APIs, databases, and CRMs.",
+        },
+        {
+          title: "Private Data & Retrieval Architecture (RAG)",
+          description: "Building secure vector search and knowledge base engines that query internal enterprise data with strict access controls.",
+        },
+      ],
+    },
+    capabilities: [
+      {
+        category: "AI Implementation & Solutions",
+        items: [
+          "Custom Enterprise AI Solutions & Agent Pipelines",
+          "Retrieval-Augmented Generation (RAG) Systems",
+          "Intelligent Document Processing & Extraction",
+          "AI-Powered B2B Workflow Automation",
+        ],
+      },
+      {
+        category: "Integration & Governance",
+        items: [
+          "API Integration (OpenAI, Claude, Mistral, HuggingFace)",
+          "Vector Database Architecture (Pinecone, Qdrant, Pgvector)",
+          "AI Data Privacy & DPDP Compliance Guardrails",
+          "LLM Latency, Caching & Cost Optimization",
+        ],
+      },
+    ],
+    process: [
+      {
+        step: 1,
+        title: "AI Feasibility & Scoping",
+        description: "Evaluating high-value AI use cases, data readiness, and security requirements.",
+        deliverable: "AI Feasibility Assessment & Integration Architecture",
+      },
+      {
+        step: 2,
+        title: "Proof of Concept (PoC) Prototype",
+        description: "Building a functional 2-week prototype to validate accuracy and operational impact.",
+        deliverable: "Working Interactive AI Prototype",
+      },
+      {
+        step: 3,
+        title: "Enterprise Systems Integration",
+        description: "Engineering secure APIs, vector databases, and middleware connecting to internal platforms.",
+        deliverable: "Production-Ready AI Microservices",
+      },
+      {
+        step: 4,
+        title: "Safety & Privacy Tuning",
+        description: "Implementing guardrails, fallbacks, role-based permissions, and response benchmarking.",
+        deliverable: "AI Compliance & Security Assessment",
+      },
+      {
+        step: 5,
+        title: "Deployment & Continuous Monitoring",
+        description: "Deploying model endpoints with monitoring for cost, latency, and drift.",
+        deliverable: "Live AI Deployment & Operations Dashboard",
+      },
+    ],
+    technologies: [
+      {
+        category: "AI Frameworks & Models",
+        stack: ["LangChain", "LlamaIndex", "OpenAI GPT-4o", "Claude 3.5 Sonnet", "HuggingFace"],
+      },
+      {
+        category: "Vector DBs & Infrastructure",
+        stack: ["Pgvector (PostgreSQL)", "Pinecone", "Qdrant", "Python / FastAPI", "Docker"],
+      },
+    ],
+    engagementModels: [
+      {
+        title: "AI Implementation Sprint",
+        description: "Fixed-scope 4-8 week engineering sprint to build and deploy a dedicated AI solution or RAG system.",
+        bestFor: "Enterprises needing rapid deployment of AI-powered workflows.",
+        ctaText: "Book AI Implementation Sprint",
+      },
+      {
+        title: "Dedicated AI Engineering Squad",
+        description: "On-demand pod of AI engineers, full-stack developers, and data architects.",
+        bestFor: "Companies building core AI products or continuous automation pipelines.",
+        ctaText: "Assemble AI Squad",
+      },
+    ],
+    results: [
+      {
+        metric: "70%",
+        label: "Operational Process Speedup",
+        context: "Time saved across automated document extraction and lead qualification workflows.",
+      },
+      {
+        metric: "100%",
+        label: "Data Privacy Compliance",
+        context: "Zero customer data leakage through local embedding and zero-retention cloud APIs.",
+      },
+    ],
+    faqs: [
+      {
+        question: "How do you ensure our corporate data remains secure when using AI?",
+        answer:
+          "We implement enterprise zero-data-retention APIs, private vector storage, and role-based access controls. Your proprietary business data is never used to train public models.",
+      },
+      {
+        question: "Can AI solutions be integrated into our existing CRM and ERP tools?",
+        answer:
+          "Yes. We build custom API connectors for Salesforce, HubSpot, SAP, and custom database backends so AI agents interact directly with your existing software stack.",
+      },
+    ],
+    relatedCaseStudySlugs: ["saas-portal-engineering"],
+  },
 ];
 
+// Mapping for backward compatibility with old slugs
+const slugAliasMap: Record<string, string> = {
+  "it-strategy-consulting": "it-strategy-implementation",
+  "web-app-development": "web-application-development",
+  "digital-marketing": "digital-marketing-brand-development",
+  "seo": "seo-services",
+  "risk-governance-compliance": "risk-compliance-governance",
+  "ai-solutions": "ai-portfolio",
+};
+
 export function getServiceBySlug(slug: string): Service | undefined {
-  return servicesData.find((s) => s.slug === slug);
+  const normalizedSlug = slugAliasMap[slug] || slug;
+  return servicesData.find((s) => s.slug === normalizedSlug);
 }
 
 export function getAllServiceSlugs(): string[] {

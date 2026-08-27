@@ -167,16 +167,16 @@ export function getRouteCatalog(): SEOPageSettings[] {
     },
     {
       path: "/services",
-      label: "7 Core Practices",
-      metaTitle: "IT Services & Consulting | Arav Innovations",
-      metaDescription: "Explore our 7 core practices: Strategy Consulting, Custom Web Apps, Performance Marketing, Technical SEO, DPDP Governance, Audits, and Staff Augmentation.",
+      label: "8 Core Services",
+      metaTitle: "Enterprise Services & Technology Practices | Arav Innovations",
+      metaDescription: "Explore our 8 core services: IT Strategy, Digital Marketing & Branding, Web & App Development, Risk & Compliance, Audits, Staff Augmentation, Technical SEO, and AI Portfolio.",
       priority: 0.9,
       robots: "Index, Follow",
       jsonLdSchema: JSON.stringify(
         {
           "@context": "https://schema.org",
           "@type": "ItemList",
-          name: "Arav Innovations Core Practices",
+          name: "Arav Innovations Core Services",
           itemListElement: servicesData.map((s, idx) => ({
             "@type": "ListItem",
             position: idx + 1,

@@ -30,10 +30,14 @@ export interface SiteConfig {
   chatbotEnabled: boolean;
   chatbotDelaySeconds: number;
   animationsEnabled: boolean;
+  backgroundMotionEnabled: boolean;
+  parallaxEnabled: boolean;
   hoverEffectsEnabled: boolean;
   scrollAnimationsEnabled: boolean;
   entranceAnimationsEnabled: boolean;
+  mobileAnimationsEnabled: boolean;
   animationIntensity: "subtle" | "standard" | "enhanced";
+  animationIntensityLevel: "low" | "medium" | "high";
   threeDConfig: ThreeDExperienceConfig;
   trustedClientsVisible: boolean;
   servicesVisible: boolean;
@@ -63,10 +67,14 @@ const defaultConfig: SiteConfig = {
   chatbotEnabled: true,
   chatbotDelaySeconds: 10,
   animationsEnabled: true,
+  backgroundMotionEnabled: true,
+  parallaxEnabled: true,
   hoverEffectsEnabled: true,
   scrollAnimationsEnabled: true,
   entranceAnimationsEnabled: true,
+  mobileAnimationsEnabled: true,
   animationIntensity: "standard",
+  animationIntensityLevel: "medium",
   threeDConfig: {
     enable3D: true,
     hero3D: true,

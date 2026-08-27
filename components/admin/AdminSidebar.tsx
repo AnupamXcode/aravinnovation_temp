@@ -21,6 +21,8 @@ import {
   X,
   Languages,
   Zap,
+  Activity,
+  Sparkles,
 } from "lucide-react";
 import { BrandLogo } from "@/components/layout/BrandLogo";
 import { cn } from "@/lib/utils";
@@ -46,10 +48,10 @@ export function AdminSidebar({
       ],
     },
     {
-      groupLabel: "WEBSITE PAGES",
+      groupLabel: "WEBSITE",
       items: [
         { id: "hero", label: "Homepage & Hero", icon: Globe },
-        { id: "services", label: "7 Core Practices", icon: Briefcase },
+        { id: "services", label: "8 Core Services", icon: Briefcase },
         { id: "industries", label: "Industry Solutions", icon: Building2 },
         { id: "casestudies", label: "Case Studies", icon: FileText },
         { id: "methodology", label: "5-Step Methodology", icon: Workflow },
@@ -58,30 +60,41 @@ export function AdminSidebar({
       ],
     },
     {
-      groupLabel: "DIGITAL PRESENCE & SOCIAL",
+      groupLabel: "COMMUNICATION",
+      items: [
+        { id: "chatbot", label: "Chatbot & KB", icon: MessageSquare },
+        { id: "contact", label: "Contact & Leads", icon: PhoneCall },
+      ],
+    },
+    {
+      groupLabel: "DIGITAL PRESENCE",
       items: [
         { id: "socials", label: "Social Media & URLs", icon: Share2 },
       ],
     },
     {
-      groupLabel: "COMMUNICATION",
+      groupLabel: "SEO",
       items: [
-        { id: "chatbot", label: "Chatbot & Knowledge Base", icon: MessageSquare },
-        { id: "contact", label: "Contact Info & Leads", icon: PhoneCall },
+        { id: "seo", label: "SEO Management", icon: Search },
       ],
     },
     {
-      groupLabel: "LOCALIZATION & SEO",
+      groupLabel: "LOCALIZATION",
       items: [
         { id: "languages", label: "Languages & RTL", icon: Languages },
-        { id: "seo", label: "Global SEO & Metadata", icon: Search },
-        { id: "legal", label: "Legal & DPDP Content", icon: ShieldCheck },
+      ],
+    },
+    {
+      groupLabel: "MOTION & EXPERIENCE",
+      items: [
+        { id: "motion", label: "Animation Controls", icon: Sparkles },
       ],
     },
     {
       groupLabel: "SYSTEM",
       items: [
-        { id: "system", label: "Maintenance Controls", icon: SlidersHorizontal },
+        { id: "system", label: "Website Status & Maintenance", icon: SlidersHorizontal },
+        { id: "legal", label: "Legal & DPDP Content", icon: ShieldCheck },
       ],
     },
   ];
@@ -122,7 +135,7 @@ export function AdminSidebar({
                     className={cn(
                       "w-full flex items-center justify-between px-3 py-2.5 rounded-2xl text-xs font-semibold transition-all cursor-pointer",
                       isActive
-                        ? "bg-[#E8672A] text-white shadow-md shadow-[#E8672A]/25"
+                        ? "bg-[#f15e1c] text-white shadow-md shadow-[#f15e1c]/25"
                         : "text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FBF3EA] dark:hover:bg-[#1A1613]"
                     )}
                   >

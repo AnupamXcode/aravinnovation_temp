@@ -11,9 +11,9 @@ import { ArrowRight, Globe2 } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export const metadata = {
-  title: "Our 7 Core Practices | Arav Innovations",
+  title: "Our 8 Core Services | Arav Innovations",
   description:
-    "Explore Arav Innovations' 7 enterprise practice areas: IT Strategy, Web & App Development, Digital Marketing, SEO, Risk Governance & Compliance, Auditing, and Staff Augmentation.",
+    "Explore Arav Innovations' 8 enterprise service areas: IT Strategy, Digital Marketing & Branding, Web & App Development, Risk & Compliance, Auditing, Staff Augmentation, Technical SEO, and AI Portfolio.",
   alternates: {
     canonical: "https://aravinnovations.com/services",
   },

@@ -1,7 +1,7 @@
 {
   "Navigation": {
     "whatWeDo": "What We Do",
-    "sevenServices": "Our 7 Core Service Lines",
+    "sevenServices": "Our 8 Core Services",
     "viewAllServices": "View All Services",
     "products": "Products",
     "workingWithUs": "Working With Us",
@@ -61,7 +61,7 @@
     "afterPillar4Desc": "Elastic High-Availability"
   },
   "Services": {
-    "badge": "Our 7 Core Practices",
+    "badge": "Our 8 Core Services",
     "title": "Interactive Practice Browser",
     "description": "Select a practice below to inspect capabilities, delivery SLAs, and engineering frameworks.",
     "viewAll": "View All Practices",
