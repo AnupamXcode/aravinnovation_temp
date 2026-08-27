@@ -5,14 +5,23 @@ import { WebDevInteractivePage } from "@/components/services/WebDevInteractivePa
 import { notFound } from "next/navigation";
 
 export async function generateMetadata() {
-  const service = getServiceBySlug("web-application-development");
+  const service = getServiceBySlug("web-application-development") || getServiceBySlug("web-app-development");
   return {
     title: `${service?.title || "Web and Application Development"} | Arav Innovations`,
     description:
       service?.description ||
       "High-performance web applications engineered for modern businesses, scalable workflows, and seamless digital experiences.",
     alternates: {
-      canonical: "https://aravinnovations.com/services/web-application-development",
+      canonical: "https://aravinnovations.com/services/web-app-development",
+    },
+    openGraph: {
+      title: `${service?.title || "Web and Application Development"} | Arav Innovations`,
+      description:
+        service?.description ||
+        "High-performance web applications engineered for modern businesses, scalable workflows, and seamless digital experiences.",
+      url: "https://aravinnovations.com/services/web-app-development",
+      siteName: "Arav Innovations",
+      type: "website",
     },
   };
 }
@@ -24,7 +33,7 @@ export default async function WebAppDevAliasPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const service = getServiceBySlug("web-application-development");
+  const service = getServiceBySlug("web-application-development") || getServiceBySlug("web-app-development");
 
   if (!service) {
     notFound();

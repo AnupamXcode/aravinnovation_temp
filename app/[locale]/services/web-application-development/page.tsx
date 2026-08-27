@@ -5,7 +5,7 @@ import { WebDevInteractivePage } from "@/components/services/WebDevInteractivePa
 import { notFound } from "next/navigation";
 
 export async function generateMetadata() {
-  const service = getServiceBySlug("web-application-development");
+  const service = getServiceBySlug("web-application-development") || getServiceBySlug("web-app-development");
   return {
     title: `${service?.title || "Web and Application Development"} | Arav Innovations`,
     description:
@@ -33,7 +33,7 @@ export default async function WebAppDevelopmentPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const service = getServiceBySlug("web-application-development");
+  const service = getServiceBySlug("web-application-development") || getServiceBySlug("web-app-development");
 
   if (!service) {
     notFound();
