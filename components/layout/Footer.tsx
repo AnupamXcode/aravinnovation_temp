@@ -70,9 +70,29 @@ export function Footer() {
 
   return (
     <footer className="bg-gradient-to-br from-[#fab60a] via-[#f47d43] to-[#f15e1c] dark:from-[#1e2c27] dark:via-[#172420] dark:to-[#101b17] dark:border-t dark:border-[#253630] text-white pt-16 pb-8 transition-colors duration-300 relative overflow-hidden">
-      {/* Background ambient radial highlights */}
+      {/* Background ambient radial highlights & 3D Network Layer */}
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-white/10 dark:bg-[#f15e1c]/10 rounded-full blur-3xl -z-0 pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#1b2823]/12 dark:bg-[#2e936f]/10 rounded-full blur-3xl -z-0 pointer-events-none" />
+
+      {/* Subtle Rotating 3D Network Overlay */}
+      <div className="absolute top-12 left-8 w-96 h-96 opacity-15 pointer-events-none z-0 animate-[spin_60s_linear_infinite]">
+        <svg viewBox="0 0 200 200" className="w-full h-full stroke-white fill-none" strokeWidth="1">
+          <polygon points="100,20 170,60 170,140 100,180 30,140 30,60" />
+          <polygon points="100,50 140,75 140,125 100,150 60,125 60,75" />
+          <line x1="100" y1="20" x2="100" y2="50" />
+          <line x1="170" y1="60" x2="140" y2="75" />
+          <line x1="170" y1="140" x2="140" y2="125" />
+          <line x1="100" y1="180" x2="100" y2="150" />
+          <line x1="30" y1="140" x2="60" y2="125" />
+          <line x1="30" y1="60" x2="60" y2="75" />
+          <circle cx="100" cy="20" r="4" fill="#ffffff" />
+          <circle cx="170" cy="60" r="4" fill="#ffffff" />
+          <circle cx="170" cy="140" r="4" fill="#ffffff" />
+          <circle cx="100" cy="180" r="4" fill="#ffffff" />
+          <circle cx="30" cy="140" r="4" fill="#ffffff" />
+          <circle cx="30" cy="60" r="4" fill="#ffffff" />
+        </svg>
+      </div>
 
       <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10 space-y-12">
         {/* Main Grid: Left Closing Statement + Right Information Columns */}

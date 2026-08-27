@@ -11,7 +11,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
-import { ProcessTimeline } from "@/components/motion/ProcessTimeline";
+import { Services3DConstellation } from "@/components/services/Services3DConstellation";
+import { CaseStudy3DTransformation } from "@/components/case-studies/CaseStudy3DTransformation";
+import { Process3DPathway } from "@/components/motion/Process3DPathway";
 import { MovingLogoStrip } from "@/components/motion/MovingLogoStrip";
 import { servicesData } from "@/data/services";
 import { caseStudiesData } from "@/data/case-studies";
@@ -111,7 +113,7 @@ export default async function HomePage({
       </section>
 
       {/* BEFORE/AFTER SLIDER */}
-      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full">
+      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <section className="py-16 md:py-20 px-6 sm:px-12 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-xl text-center space-y-8 transition-colors duration-300">
           <ScrollReveal direction="up">
             <div className="max-w-3xl mx-auto space-y-3">
@@ -134,7 +136,7 @@ export default async function HomePage({
       </div>
 
       {/* WHAT WE DO 7-SERVICE INTERACTIVE SELECTOR WITH 3D CARD REVEAL */}
-      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full" id="services">
+      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="services">
         <Scroll3DContainer variant="card">
           <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#f7d7b0]/30 dark:bg-[#1e2c27]/90 border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
             <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/60 to-transparent" />
@@ -157,13 +159,16 @@ export default async function HomePage({
               </div>
             </ScrollReveal>
 
-            <InteractiveServiceSelector />
+            <Services3DConstellation />
           </section>
         </Scroll3DContainer>
       </div>
 
+      {/* FULL-WIDTH DIGITAL TRANSFORMATION PATHWAY */}
+      <CaseStudy3DTransformation />
+
       {/* TECHNICAL ARCHITECTURE CASE STUDIES */}
-      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full">
+      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <Scroll3DContainer variant="card">
           <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#f7d7b0]/30 dark:bg-[#1e2c27]/90 border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
             <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/50 to-transparent" />
@@ -198,7 +203,7 @@ export default async function HomePage({
       </div>
 
       {/* CLIENT TESTIMONIALS WITH 3D PARALLAX TILT */}
-      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full">
+      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <Scroll3DContainer variant="testimonial">
           <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
             <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent" />
@@ -222,7 +227,7 @@ export default async function HomePage({
       </div>
 
       {/* WHY ARAV */}
-      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full">
+      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300">
           <ScrollReveal direction="up">
             <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
@@ -258,7 +263,7 @@ export default async function HomePage({
       </div>
 
       {/* 5-STEP METHODOLOGY TIMELINE */}
-      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full" id="process">
+      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="process">
         <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300">
           <ScrollReveal direction="up">
             <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
@@ -271,12 +276,12 @@ export default async function HomePage({
             </div>
           </ScrollReveal>
 
-          <ProcessTimeline />
+          <Process3DPathway />
         </section>
       </div>
 
       {/* FINAL LEAD FORM & CTA SECTION WITH 3D SCALE REVEAL */}
-      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full" id="contact">
+      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="contact">
         <Scroll3DContainer variant="cta">
           <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-gradient-to-br from-[#ffffff] via-[#fefaf5] to-[#f7d7b0]/50 dark:from-[#172420] dark:via-[#1e2c27] dark:to-[#253630] border-2 border-[#f15e1c]/40 shadow-2xl transition-all duration-300">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">

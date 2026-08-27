@@ -13,6 +13,18 @@ export interface SectionThemes {
 
 export type CardStyleOption = "elevated" | "bordered" | "minimal" | "standard";
 
+export interface ThreeDExperienceConfig {
+  enable3D: boolean;
+  hero3D: boolean;
+  services3D: boolean;
+  caseStudies3D: boolean;
+  methodology3D: boolean;
+  footer3D: boolean;
+  threeDIntensity: "low" | "medium" | "high";
+  mobile3D: boolean;
+  performanceMode: "auto" | "performance" | "high_quality";
+}
+
 export interface SiteConfig {
   websiteEnabled: boolean;
   chatbotEnabled: boolean;
@@ -22,6 +34,7 @@ export interface SiteConfig {
   scrollAnimationsEnabled: boolean;
   entranceAnimationsEnabled: boolean;
   animationIntensity: "subtle" | "standard" | "enhanced";
+  threeDConfig: ThreeDExperienceConfig;
   trustedClientsVisible: boolean;
   servicesVisible: boolean;
   industriesVisible: boolean;
@@ -54,6 +67,17 @@ const defaultConfig: SiteConfig = {
   scrollAnimationsEnabled: true,
   entranceAnimationsEnabled: true,
   animationIntensity: "standard",
+  threeDConfig: {
+    enable3D: true,
+    hero3D: true,
+    services3D: true,
+    caseStudies3D: true,
+    methodology3D: true,
+    footer3D: true,
+    threeDIntensity: "medium",
+    mobile3D: true,
+    performanceMode: "auto",
+  },
   trustedClientsVisible: true,
   servicesVisible: true,
   industriesVisible: true,

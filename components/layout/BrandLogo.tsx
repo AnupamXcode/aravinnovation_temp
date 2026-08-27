@@ -20,12 +20,19 @@ export function BrandLogo({ className, variant = "header" }: BrandLogoProps) {
       )}
       aria-label="Arav Innovations - Elevating Brands, One Click at a Time"
     >
-      <div className="relative w-52 sm:w-60 h-13 sm:h-15 flex items-center">
+      <div
+        className={cn(
+          "relative flex items-center",
+          variant === "footer"
+            ? "w-56 sm:w-64 h-14 sm:h-16"
+            : "w-48 sm:w-56 h-12 sm:h-14"
+        )}
+      >
         <Image
           src="/logos/arav-logo.png"
-          alt="Arav Innovations Logo"
+          alt="Arav Innovations Logo - Elevating Brands, One Click at a Time"
           fill
-          sizes="(max-width: 640px) 208px, 240px"
+          sizes="(max-width: 640px) 200px, 256px"
           className="object-contain object-left"
           priority
         />

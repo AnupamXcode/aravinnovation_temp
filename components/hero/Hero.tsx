@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Hero3DScene } from "@/components/motion/Hero3DScene";
+import { Hero3DDigitalArchitecture } from "@/components/hero/Hero3DDigitalArchitecture";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { TextReveal } from "@/components/motion/TextReveal";
 import { ParallaxContainer } from "@/components/motion/ParallaxContainer";
@@ -25,10 +25,10 @@ export function Hero() {
         <div className="absolute top-12 right-12 w-80 h-80 bg-[#F4A97F]/20 dark:bg-[#E8672A]/10 rounded-full blur-3xl" />
       </ParallaxContainer>
 
-      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 w-full">
+      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Messaging & CTAs */}
-          <div className="lg:col-span-7 space-y-7 text-center lg:text-left">
+          <div className="lg:col-span-6 space-y-7 text-center lg:text-left">
             <ScrollReveal direction="up" delay={0.05}>
               {/* Single Eyebrow Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f7d7b0]/40 dark:bg-[#1e2c27] border border-[#f7d7b0] dark:border-[#253630] text-xs font-semibold shadow-xs">
@@ -43,7 +43,7 @@ export function Hero() {
               {/* Word-by-Word Masked Text Reveal Headline */}
               <TextReveal
                 text="Building High-Impact Technology Platforms & Accelerated B2B Growth"
-                className="font-display font-extrabold text-4xl sm:text-6xl lg:text-[62px] text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight leading-[1.08]"
+                className="font-display font-extrabold text-4xl sm:text-6xl lg:text-[58px] text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight leading-[1.08]"
                 stagger={0.05}
               />
             </ScrollReveal>
@@ -99,17 +99,17 @@ export function Hero() {
                 <div className="flex items-center gap-2">
                   <Zap className="w-4.5 h-4.5 text-[#E8672A] shrink-0" />
                   <span className="text-xs sm:text-sm font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
-                    Engineering &amp; ROI Led
+                    100/100 Core Web Vitals
                   </span>
                 </div>
               </div>
             </ScrollReveal>
           </div>
 
-          {/* Right Column: Clean Interactive Centerpiece */}
-          <div className="lg:col-span-5 relative">
+          {/* Right Column: Signature 3D Digital Architecture Ecosystem */}
+          <div className="lg:col-span-6 relative w-full">
             <ScrollReveal direction="left" delay={0.3}>
-              <Hero3DScene />
+              <Hero3DDigitalArchitecture />
             </ScrollReveal>
           </div>
         </div>

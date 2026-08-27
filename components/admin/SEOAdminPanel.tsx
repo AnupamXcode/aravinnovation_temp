@@ -27,8 +27,10 @@ import {
   Sliders,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useSiteConfig } from "@/lib/site-config";
 
 export function SEOAdminPanel() {
+  const { config, updateConfig } = useSiteConfig();
   const catalog = React.useMemo(() => getRouteCatalog(), []);
   const [selectedPath, setSelectedPath] = React.useState<string>("/");
   const [searchQuery, setSearchQuery] = React.useState<string>("");
@@ -204,6 +206,50 @@ export function SEOAdminPanel() {
                 </button>
               );
             })}
+          </div>
+
+          {/* 3D EXPERIENCE ADMIN CONTROL CARD */}
+          <div className="p-4 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] space-y-3 shadow-xs">
+            <div className="flex items-center justify-between border-b border-[#EFE2D6] dark:border-[#2C241E] pb-2">
+              <span className="text-xs font-bold font-mono text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-[#E8672A]" />
+                3D Experience Controls
+              </span>
+              <span className="text-[10px] font-mono font-bold text-[#2e936f]">
+                Active
+              </span>
+            </div>
+
+            <div className="space-y-2 text-xs">
+              {[
+                { label: "Enable Global 3D System", key: "enable3D" },
+                { label: "Hero 3D Architecture", key: "hero3D" },
+                { label: "Services 3D Constellation", key: "services3D" },
+                { label: "Case Study 3D Transformation", key: "caseStudies3D" },
+                { label: "Methodology 3D Path", key: "methodology3D" },
+                { label: "Footer 3D Network", key: "footer3D" },
+                { label: "Mobile 3D System", key: "mobile3D" },
+              ].map((item) => {
+                const currentVal = (config.threeDConfig as any)?.[item.key] !== false;
+                return (
+                  <label key={item.key} className="flex items-center justify-between cursor-pointer hover:bg-white dark:hover:bg-[#201B17] p-1.5 rounded-lg transition-colors">
+                    <span className="text-[#3A2E27] dark:text-[#FAF5EE]">{item.label}</span>
+                    <input
+                      type="checkbox"
+                      checked={currentVal}
+                      onChange={(e) => {
+                        const updated = {
+                          ...(config.threeDConfig || {}),
+                          [item.key]: e.target.checked,
+                        };
+                        updateConfig("threeDConfig", updated);
+                      }}
+                      className="accent-[#E8672A] w-4 h-4 rounded cursor-pointer"
+                    />
+                  </label>
+                );
+              })}
+            </div>
           </div>
         </div>
 
