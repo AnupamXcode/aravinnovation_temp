@@ -39,7 +39,7 @@ import { trackEvent } from "@/lib/analytics";
 const serviceIcons: Record<string, React.ReactNode> = {
   "/services/it-strategy-implementation": <Compass className="w-4 h-4 text-[#f15e1c]" />,
   "/services/digital-marketing-brand-development": <TrendingUp className="w-4 h-4 text-[#f15e1c]" />,
-  "/services/web-application-development": <Code2 className="w-4 h-4 text-[#f15e1c]" />,
+  "/services/web-app-development": <Code2 className="w-4 h-4 text-[#f15e1c]" />,
   "/services/risk-compliance-governance": <ShieldCheck className="w-4 h-4 text-[#f15e1c]" />,
   "/services/audit-improvement": <BarChart3 className="w-4 h-4 text-[#f15e1c]" />,
   "/services/training-staff-augmentation": <Users2 className="w-4 h-4 text-[#f15e1c]" />,
@@ -47,7 +47,7 @@ const serviceIcons: Record<string, React.ReactNode> = {
   "/services/ai-portfolio": <Cpu className="w-4 h-4 text-[#f15e1c]" />,
   // Legacy slug mappings
   "/services/it-strategy-consulting": <Compass className="w-4 h-4 text-[#f15e1c]" />,
-  "/services/web-app-development": <Code2 className="w-4 h-4 text-[#f15e1c]" />,
+  "/services/web-application-development": <Code2 className="w-4 h-4 text-[#f15e1c]" />,
   "/services/digital-marketing": <TrendingUp className="w-4 h-4 text-[#f15e1c]" />,
   "/services/seo": <Search className="w-4 h-4 text-[#f15e1c]" />,
   "/services/risk-governance-compliance": <ShieldCheck className="w-4 h-4 text-[#f15e1c]" />,

@@ -344,7 +344,7 @@ export const servicesData: Service[] = [
     relatedCaseStudySlugs: ["b2b-demand-generation"],
   },
   {
-    slug: "web-application-development",
+    slug: "web-app-development",
     title: "Web and Application Development",
     shortTitle: "Web & App Dev",
     eyebrow: "Full-Stack Engineering • Cloud-Native Portals • Mobile Applications",

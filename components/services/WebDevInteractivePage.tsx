@@ -308,7 +308,7 @@ export function WebDevInteractivePage({ service }: WebDevPageProps) {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-display tracking-tight leading-[1.08] text-[#1b2823] dark:text-[#ffffff]"
           >
-            WEB APPLICATION DEVELOPMENT
+            WEB &amp; APPLICATION DEVELOPMENT
           </motion.h1>
 
           <motion.p
@@ -317,7 +317,7 @@ export function WebDevInteractivePage({ service }: WebDevPageProps) {
             transition={{ duration: 0.5, delay: 0.25 }}
             className="text-lg sm:text-xl text-[#4a5c55] dark:text-[#d3eee4] max-w-3xl mx-auto font-medium leading-relaxed"
           >
-            High-performance web applications engineered for modern businesses, scalable workflows, and seamless digital experiences.
+            From high-conversion web experiences to complex enterprise applications, we build scalable digital products engineered around real business workflows.
           </motion.p>
 
           <motion.div
@@ -338,7 +338,7 @@ export function WebDevInteractivePage({ service }: WebDevPageProps) {
             </Link>
             <Link href="/services" className="w-full sm:w-auto">
               <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center">
-                Explore Our Services
+                Explore Services
               </Button3D>
             </Link>
           </motion.div>
