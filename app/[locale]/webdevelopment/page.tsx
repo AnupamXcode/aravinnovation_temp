@@ -29,9 +29,9 @@ export default async function WebDevelopmentDirectPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const service = getServiceBySlug("web-app-development") || {
-    id: "web-app-development",
-    slug: "web-app-development",
+  const service = getServiceBySlug("web-application-development") || {
+    id: "web-application-development",
+    slug: "web-application-development",
     title: "Web and Application Development",
     shortTitle: "Web Development",
     eyebrow: "FULL-STACK ENGINEERING",

@@ -308,7 +308,7 @@ export function WebDevInteractivePage({ service }: WebDevPageProps) {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-display tracking-tight leading-[1.08] text-[#1b2823] dark:text-[#ffffff]"
           >
-            Innovative Web and App Solutions <span className="text-[#f15e1c]">Tailored for Success</span>
+            WEB APPLICATION DEVELOPMENT
           </motion.h1>
 
           <motion.p
@@ -317,7 +317,7 @@ export function WebDevInteractivePage({ service }: WebDevPageProps) {
             transition={{ duration: 0.5, delay: 0.25 }}
             className="text-lg sm:text-xl text-[#4a5c55] dark:text-[#d3eee4] max-w-3xl mx-auto font-medium leading-relaxed"
           >
-            Engineering responsive websites, enterprise e-commerce platforms, and scalable mobile apps designed to turn user interactions into measurable business growth.
+            High-performance web applications engineered for modern businesses, scalable workflows, and seamless digital experiences.
           </motion.p>
 
           <motion.div
@@ -326,19 +326,19 @@ export function WebDevInteractivePage({ service }: WebDevPageProps) {
             transition={{ duration: 0.5, delay: 0.35 }}
             className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <a href="#inquire" className="w-full sm:w-auto">
+            <Link href="/contact" className="w-full sm:w-auto">
               <Button3D
                 variant="primary"
                 size="lg"
                 rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
                 className="w-full sm:w-auto justify-center shadow-xl shadow-[#f15e1c]/25"
               >
-                Inquire About Web Development
+                Discuss a Project
               </Button3D>
-            </a>
-            <Link href="/case-studies" className="w-full sm:w-auto">
+            </Link>
+            <Link href="/services" className="w-full sm:w-auto">
               <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center">
-                View Architecture Case Studies
+                Explore Our Services
               </Button3D>
             </Link>
           </motion.div>
