@@ -18,6 +18,7 @@ import {
   Layers,
   ChevronLeft,
   ChevronRight,
+  Phone,
 } from "lucide-react";
 import { servicesData, Service } from "@/data/services";
 import { Button3D } from "@/components/ui/button-3d";
@@ -272,11 +273,30 @@ export function Services3DConstellation() {
               </p>
             </div>
 
-            <Link href={`/services/${activeService.slug}`} className="shrink-0">
-              <Button3D variant="primary" size="md" rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}>
-                Explore {activeService.shortTitle}
-              </Button3D>
-            </Link>
+            <div className="flex items-center gap-2.5 shrink-0">
+              <Link href={`/services/${activeService.slug}`}>
+                <Button3D variant="primary" size="md" rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}>
+                  Explore {activeService.shortTitle}
+                </Button3D>
+              </Link>
+
+              <button
+                type="button"
+                onClick={() => {
+                  if (typeof window !== "undefined") {
+                    window.dispatchEvent(
+                      new CustomEvent("arav:open-setup-call", {
+                        detail: { service: activeService.slug },
+                      })
+                    );
+                  }
+                }}
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-[#f15e1c]/10 dark:bg-[#f15e1c]/20 hover:bg-[#f15e1c] text-[#f15e1c] hover:text-white border border-[#f15e1c]/40 text-xs font-mono font-bold transition-all duration-200 cursor-pointer shadow-xs min-h-[40px]"
+              >
+                <Phone className="w-3.5 h-3.5" />
+                <span>Setup Call</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -333,16 +353,35 @@ export function Services3DConstellation() {
               {activeService.description}
             </p>
 
-            <Link href={`/services/${activeService.slug}`} className="block pt-1">
-              <Button
-                variant="primary"
-                size="sm"
-                className="w-full justify-center bg-[#f15e1c] hover:bg-[#d44e14] text-xs py-2.5 shadow-sm"
-                rightIcon={<ArrowRight className="w-3.5 h-3.5 ml-1" />}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+              <Link href={`/services/${activeService.slug}`} className="block">
+                <Button
+                  variant="primary"
+                  size="sm"
+                  className="w-full justify-center bg-[#f15e1c] hover:bg-[#d44e14] text-xs py-2.5 shadow-sm"
+                  rightIcon={<ArrowRight className="w-3.5 h-3.5 ml-1" />}
+                >
+                  Explore {activeService.shortTitle}
+                </Button>
+              </Link>
+
+              <button
+                type="button"
+                onClick={() => {
+                  if (typeof window !== "undefined") {
+                    window.dispatchEvent(
+                      new CustomEvent("arav:open-setup-call", {
+                        detail: { service: activeService.slug },
+                      })
+                    );
+                  }
+                }}
+                className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-[#f15e1c]/10 dark:bg-[#f15e1c]/20 hover:bg-[#f15e1c] text-[#f15e1c] hover:text-white border border-[#f15e1c]/40 text-xs font-mono font-bold transition-all duration-200 cursor-pointer shadow-xs min-h-[36px]"
               >
-                Explore {activeService.shortTitle}
-              </Button>
-            </Link>
+                <Phone className="w-3.5 h-3.5" />
+                <span>Setup Call</span>
+              </button>
+            </div>
           </div>
 
           {/* Grid of Quick-Select Service Pills (Mobile) */}

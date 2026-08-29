@@ -125,21 +125,39 @@ export function Footer() {
 
           {/* Right Column (6 Cols): Services Strip, Dual Office Cards, Email & Socials */}
           <div className="lg:col-span-6 space-y-8 lg:pl-4">
-            {/* Reorganized Practice Links Strip */}
-            <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-xs font-semibold text-white/90 border-b border-white/20 pb-5">
-              {servicesNavigation.map((service, idx) => (
-                <React.Fragment key={service.href}>
+            {/* Reorganized Practice Links Strip (TASK J) */}
+            <div className="border-b border-white/20 pb-5 space-y-2">
+              <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-white/70">
+                Enterprise Practices
+              </div>
+
+              {/* Mobile Layout: Clean 2-column grid */}
+              <div className="grid grid-cols-1 xs:grid-cols-2 gap-2 sm:hidden">
+                {servicesNavigation.map((service) => (
                   <Link
+                    key={service.href}
                     href={service.href}
-                    className="group relative inline-flex items-center gap-1 py-1 px-2.5 rounded-lg bg-white/10 hover:bg-white text-white hover:text-[#f15e1c] transition-all duration-300 font-medium hover:shadow-md"
+                    className="flex items-center gap-2 py-2 px-3 rounded-xl bg-white/10 hover:bg-white text-white hover:text-[#f15e1c] transition-all duration-200 text-xs font-semibold"
                   >
-                    <span className="transition-transform group-hover:translate-x-0.5">{service.label}</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#ffec69] shrink-0" />
+                    <span className="truncate">{service.label}</span>
                   </Link>
-                  {idx < servicesNavigation.length - 1 && (
-                    <span className="text-white/40 hidden sm:inline">&bull;</span>
-                  )}
-                </React.Fragment>
-              ))}
+                ))}
+              </div>
+
+              {/* Tablet & Desktop Layout: Clean structured grid */}
+              <div className="hidden sm:grid grid-cols-2 xl:grid-cols-4 gap-2">
+                {servicesNavigation.map((service) => (
+                  <Link
+                    key={service.href}
+                    href={service.href}
+                    className="group flex items-center justify-between py-2 px-3 rounded-xl bg-white/10 hover:bg-white text-white hover:text-[#f15e1c] transition-all duration-200 text-xs font-semibold shadow-xs"
+                  >
+                    <span className="truncate">{service.label}</span>
+                    <ArrowRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all shrink-0 ml-1" />
+                  </Link>
+                ))}
+              </div>
             </div>
 
             {/* Dual Regional Operations Details */}

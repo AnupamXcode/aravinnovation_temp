@@ -85,24 +85,33 @@ export function ServiceCard({
           </div>
         </div>
 
-        <div className="mt-6 pt-4 border-t border-[#f7d7b0]/60 dark:border-[#253630] relative z-20 flex items-center justify-between gap-3">
+        <div className="mt-6 pt-4 border-t border-[#f7d7b0]/60 dark:border-[#253630] relative z-20 flex flex-wrap xs:flex-nowrap items-center justify-between gap-3">
           <Link
             href={`/services/${service.slug}`}
             onClick={(e) => e.stopPropagation()}
-            className="inline-flex items-center text-xs sm:text-sm font-bold text-[#f15e1c] hover:text-[#d8480d] transition-colors gap-1 cursor-pointer py-1"
+            className="inline-flex items-center text-xs sm:text-sm font-bold text-[#f15e1c] hover:text-[#d8480d] transition-colors gap-1.5 cursor-pointer py-1.5 shrink-0"
           >
             <span>Explore Practice</span>
-            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
 
-          <Link
-            href={`/contact?intent=setup-call&service=${service.slug}`}
-            onClick={(e) => e.stopPropagation()}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#f15e1c]/10 dark:bg-[#f15e1c]/20 hover:bg-[#f15e1c] text-[#f15e1c] hover:text-white border border-[#f15e1c]/40 text-xs font-mono font-bold transition-all duration-200 cursor-pointer shadow-xs"
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              if (typeof window !== "undefined") {
+                window.dispatchEvent(
+                  new CustomEvent("arav:open-setup-call", {
+                    detail: { service: service.slug },
+                  })
+                );
+              }
+            }}
+            className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-full bg-[#f15e1c]/10 dark:bg-[#f15e1c]/20 hover:bg-[#f15e1c] text-[#f15e1c] hover:text-white border border-[#f15e1c]/40 text-xs font-mono font-bold transition-all duration-200 cursor-pointer shadow-xs shrink-0 min-h-[36px]"
           >
-            <Phone className="w-3 h-3" />
+            <Phone className="w-3.5 h-3.5" />
             <span>Setup Call</span>
-          </Link>
+          </button>
         </div>
       </div>
     </TiltCard>

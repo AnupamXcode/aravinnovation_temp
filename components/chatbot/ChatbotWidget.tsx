@@ -386,7 +386,8 @@ export function ChatbotWidget() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 20 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 sm:gap-3 motion-reduce:transition-none"
+            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center gap-2.5 sm:gap-3 motion-reduce:transition-none"
+            style={{ bottom: "calc(1rem + env(safe-area-inset-bottom, 0px))" }}
           >
             {/* Rounded Pill Prompt */}
             <button
@@ -418,7 +419,8 @@ export function ChatbotWidget() {
       {isOpen && (
         <div
           dir={locale === "ar" ? "rtl" : "ltr"}
-          className="fixed bottom-6 right-4 sm:right-6 z-50 w-[92vw] sm:w-[380px] h-[520px] rounded-3xl bg-[#FFFDF9] dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200"
+          style={{ bottom: "calc(1rem + env(safe-area-inset-bottom, 0px))" }}
+          className="fixed bottom-4 right-3 sm:bottom-6 sm:right-6 z-50 w-[calc(100vw-1.5rem)] sm:w-[380px] h-[520px] max-h-[calc(100vh-5rem)] rounded-3xl bg-[#FFFDF9] dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200"
         >
           {/* Header with Minimize Button */}
           <div className="bg-[#FBF3EA] dark:bg-[#1E1915] border-b border-[#EFE2D6] dark:border-[#2C241E] px-5 py-4 flex items-center justify-between">

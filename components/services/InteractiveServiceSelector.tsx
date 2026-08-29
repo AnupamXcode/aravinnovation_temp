@@ -15,6 +15,7 @@ import {
   ArrowRight,
   CheckCircle2,
   ChevronDown,
+  Phone,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslations, useLocale } from "next-intl";
@@ -102,16 +103,35 @@ export function InteractiveServiceSelector() {
                 </div>
               </div>
 
-              <Link href={`/services/${selectedService.slug}`}>
-                <Button
-                  variant="primary"
-                  size="md"
-                  className="rounded-xl px-5 py-2.5 text-xs shadow-md bg-[#f15e1c] hover:bg-[#d8480d] text-white"
-                  rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
+              <div className="flex items-center gap-2 shrink-0">
+                <Link href={`/services/${selectedService.slug}`}>
+                  <Button
+                    variant="primary"
+                    size="md"
+                    className="rounded-xl px-4 py-2.5 text-xs shadow-md bg-[#f15e1c] hover:bg-[#d8480d] text-white"
+                    rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
+                  >
+                    {t("explorePractice")}
+                  </Button>
+                </Link>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (typeof window !== "undefined") {
+                      window.dispatchEvent(
+                        new CustomEvent("arav:open-setup-call", {
+                          detail: { service: selectedService.slug },
+                        })
+                      );
+                    }
+                  }}
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#f15e1c]/10 dark:bg-[#f15e1c]/20 hover:bg-[#f15e1c] text-[#f15e1c] hover:text-white border border-[#f15e1c]/40 text-xs font-mono font-bold transition-all duration-200 cursor-pointer shadow-xs"
                 >
-                  {t("explorePractice")}
-                </Button>
-              </Link>
+                  <Phone className="w-3.5 h-3.5" />
+                  <span>Setup Call</span>
+                </button>
+              </div>
             </div>
 
             {/* 1-2 Line Concise Description */}
@@ -209,16 +229,35 @@ export function InteractiveServiceSelector() {
                     ))}
                   </div>
 
-                  <Link href={`/services/${svc.slug}`}>
-                    <Button
-                      variant="primary"
-                      size="sm"
-                      className="w-full rounded-xl py-2 text-xs bg-[#f15e1c] text-white"
-                      rightIcon={<ArrowRight className="w-3.5 h-3.5 ml-1" />}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                    <Link href={`/services/${svc.slug}`} className="block">
+                      <Button
+                        variant="primary"
+                        size="sm"
+                        className="w-full rounded-xl py-2 text-xs bg-[#f15e1c] text-white"
+                        rightIcon={<ArrowRight className="w-3.5 h-3.5 ml-1" />}
+                      >
+                        {t("explorePractice")}
+                      </Button>
+                    </Link>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (typeof window !== "undefined") {
+                          window.dispatchEvent(
+                            new CustomEvent("arav:open-setup-call", {
+                              detail: { service: svc.slug },
+                            })
+                          );
+                        }
+                      }}
+                      className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-[#f15e1c]/10 dark:bg-[#f15e1c]/20 hover:bg-[#f15e1c] text-[#f15e1c] hover:text-white border border-[#f15e1c]/40 text-xs font-mono font-bold transition-all duration-200 cursor-pointer shadow-xs min-h-[36px]"
                     >
-                      {t("explorePractice")}
-                    </Button>
-                  </Link>
+                      <Phone className="w-3.5 h-3.5" />
+                      <span>Setup Call</span>
+                    </button>
+                  </div>
                 </div>
               )}
             </div>

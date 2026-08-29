@@ -20,6 +20,7 @@ import {
   Terminal,
   Smartphone,
   ShieldCheck,
+  Phone,
 } from "lucide-react";
 import { Service } from "@/data/services";
 import { caseStudiesData } from "@/data/case-studies";
@@ -630,24 +631,6 @@ export function WebDevInteractivePage({ service }: WebDevPageProps) {
             <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
               Tell us what you&apos;re trying to achieve and we&apos;ll help you identify the right technology, strategy, and execution path.
             </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-            <Link href="/contact">
-              <Button3D
-                variant="primary"
-                size="lg"
-                rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
-                className="w-full sm:w-auto justify-center bg-[#f15e1c] hover:bg-[#fab60a] text-white"
-              >
-                Discuss a Project &rarr;
-              </Button3D>
-            </Link>
-            <a href="https://api.whatsapp.com/send?phone=971521555792&text=Hello%20Arav%20Innovations%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer">
-              <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center text-[#f15e1c] border-[#f15e1c] hover:bg-[#f7d7b0]">
-                Instant WhatsApp Inquiry
-              </Button3D>
-            </a>
           </div>
 
           <div className="pt-6 border-t border-[#f7d7b0] dark:border-[#253630] flex flex-wrap items-center justify-center gap-6 text-xs text-[#2e936f] font-medium">

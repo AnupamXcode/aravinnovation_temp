@@ -15,6 +15,22 @@ export function SetupCall() {
   const pathname = usePathname();
   const router = useRouter();
   const [isOpen, setIsOpen] = React.useState(false);
+  const [selectedService, setSelectedService] = React.useState<string>("");
+
+  React.useEffect(() => {
+    const handleOpenModal = (event: Event) => {
+      const customEvent = event as CustomEvent<{ service?: string }>;
+      if (customEvent.detail?.service) {
+        setSelectedService(customEvent.detail.service);
+      }
+      setIsOpen(true);
+    };
+
+    window.addEventListener("arav:open-setup-call", handleOpenModal);
+    return () => {
+      window.removeEventListener("arav:open-setup-call", handleOpenModal);
+    };
+  }, []);
 
   // Hide on admin routes
   if (pathname?.includes("/admin")) {
@@ -23,50 +39,13 @@ export function SetupCall() {
 
   const handleScheduleClick = () => {
     setIsOpen(false);
-    const serviceName = pathname?.split("/services/")[1] || "";
+    const serviceName = selectedService || pathname?.split("/services/")[1] || "";
     const intentQuery = serviceName ? `?intent=setup-call&service=${serviceName}` : "?intent=setup-call";
     router.push(`/contact${intentQuery}`);
   };
 
   return (
     <>
-      {/* Floating Setup Call CTA Button */}
-      <div className="fixed bottom-6 left-6 sm:bottom-6 sm:left-6 z-40 motion-reduce:transition-none">
-        <motion.button
-          type="button"
-          onClick={() => setIsOpen(true)}
-          aria-label="Schedule a setup call"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          whileHover={{ y: -2, scale: 1.03 }}
-          whileTap={{ scale: 0.96 }}
-          className={cn(
-            "group relative inline-flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-full",
-            "bg-[#f15e1c] text-white font-display text-xs sm:text-sm font-extrabold tracking-wide",
-            "border border-[#fab60a]/50 shadow-xl shadow-[#f15e1c]/30 hover:shadow-2xl hover:shadow-[#f15e1c]/40",
-            "transition-colors duration-250 cursor-pointer select-none min-h-[44px] min-w-[44px]"
-          )}
-        >
-          <span className="relative flex h-2.5 w-2.5 shrink-0">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ffec69] opacity-75" />
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#ffec69]" />
-          </span>
-
-          <Phone className="w-4 h-4 text-white shrink-0 group-hover:rotate-12 transition-transform duration-200" />
-          
-          <span className="hidden xs:inline sm:inline uppercase tracking-wider">
-            Setup Call
-          </span>
-          <span className="xs:hidden sm:hidden uppercase tracking-wider text-[11px]">
-            Call
-          </span>
-
-          {/* Hover Subtle Glow Ring */}
-          <span className="absolute -inset-0.5 rounded-full bg-[#f7d7b0] opacity-0 group-hover:opacity-30 blur-md transition-opacity duration-300 pointer-events-none" />
-        </motion.button>
-      </div>
-
       {/* Setup Call Interactive Modal */}
       <AnimatePresence>
         {isOpen && (
