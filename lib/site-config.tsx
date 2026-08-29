@@ -25,6 +25,28 @@ export interface ThreeDExperienceConfig {
   performanceMode: "auto" | "performance" | "high_quality";
 }
 
+export interface EnterpriseServiceLayerConfig {
+  id: number;
+  slug: string;
+  name: string;
+  shortName: string;
+  description: string;
+  tone: string; // Brand palette color
+  icon: string;
+  href: string;
+  visible: boolean;
+}
+
+export interface EnterprisePracticesConfig {
+  enabled: boolean;
+  scrollAnimationEnabled: boolean;
+  threeDEnabled: boolean;
+  backgroundMotionEnabled: boolean;
+  hoverEffectsEnabled: boolean;
+  intensity: "low" | "medium" | "high";
+  serviceLayers: EnterpriseServiceLayerConfig[];
+}
+
 export interface SiteConfig {
   websiteEnabled: boolean;
   chatbotEnabled: boolean;
@@ -39,6 +61,7 @@ export interface SiteConfig {
   animationIntensity: "subtle" | "standard" | "enhanced";
   animationIntensityLevel: "low" | "medium" | "high";
   threeDConfig: ThreeDExperienceConfig;
+  enterprisePracticesConfig: EnterprisePracticesConfig;
   trustedClientsVisible: boolean;
   servicesVisible: boolean;
   industriesVisible: boolean;
@@ -85,6 +108,104 @@ const defaultConfig: SiteConfig = {
     threeDIntensity: "medium",
     mobile3D: true,
     performanceMode: "auto",
+  },
+  enterprisePracticesConfig: {
+    enabled: true,
+    scrollAnimationEnabled: true,
+    threeDEnabled: true,
+    backgroundMotionEnabled: true,
+    hoverEffectsEnabled: true,
+    intensity: "medium",
+    serviceLayers: [
+      {
+        id: 0,
+        slug: "it-strategy-implementation",
+        name: "IT Strategy & Implementation",
+        shortName: "IT Strategy & Implementation",
+        description: "Enterprise roadmaps, cloud strategy, digital transformation & tech modernization.",
+        tone: "#f15e1c", // Primary Orange
+        icon: "Compass",
+        href: "/services/it-strategy-implementation",
+        visible: true,
+      },
+      {
+        id: 1,
+        slug: "digital-marketing-brand-development",
+        name: "Digital Marketing & Brand Development",
+        shortName: "Digital Marketing & Brand Development",
+        description: "Brand strategy, performance marketing & growth campaigns that drive measurable impact.",
+        tone: "#2e936f", // Green
+        icon: "TrendingUp",
+        href: "/services/digital-marketing-brand-development",
+        visible: true,
+      },
+      {
+        id: 2,
+        slug: "web-application-development",
+        name: "Web & Application Development",
+        shortName: "Web & Application Development",
+        description: "Scalable web & mobile apps built with modern frameworks and cloud-native architecture.",
+        tone: "#fab60a", // Gold
+        icon: "Code2",
+        href: "/services/web-application-development",
+        visible: true,
+      },
+      {
+        id: 3,
+        slug: "risk-compliance-governance",
+        name: "Risk, Compliance & Governance",
+        shortName: "Risk, Compliance & Governance",
+        description: "Risk frameworks, compliance automation & governance models for secure and compliant operations.",
+        tone: "#f7d7b0", // Peach
+        icon: "ShieldCheck",
+        href: "/services/risk-compliance-governance",
+        visible: true,
+      },
+      {
+        id: 4,
+        slug: "audit-improvement",
+        name: "Audit & Improvement",
+        shortName: "Audit & Improvement",
+        description: "Technical, operational & process audits with actionable performance improvements.",
+        tone: "#2e936f", // Green
+        icon: "BarChart3",
+        href: "/services/audit-improvement",
+        visible: true,
+      },
+      {
+        id: 5,
+        slug: "training-staff-augmentation",
+        name: "Training & Staff Augmentation",
+        shortName: "Training & Staff Augmentation",
+        description: "Pre-vetted tech talent & training programs to scale your team and capabilities.",
+        tone: "#ffec69", // Yellow
+        icon: "Users2",
+        href: "/services/training-staff-augmentation",
+        visible: true,
+      },
+      {
+        id: 6,
+        slug: "seo-services",
+        name: "SEO Services",
+        shortName: "SEO Services",
+        description: "Technical SEO, content strategy & authority building for long-term organic growth.",
+        tone: "#2e936f", // Green
+        icon: "Search",
+        href: "/services/seo-services",
+        visible: true,
+      },
+      {
+        id: 7,
+        slug: "ai-portfolio",
+        name: "AI Portfolio",
+        shortName: "AI Portfolio",
+        description: "AI-powered solutions, automation & intelligent systems built for the future of your business.",
+        tone: "#f15e1c", // Primary Orange
+        icon: "Cpu",
+        href: "/products",
+        visible: true,
+      },
+    ],
   },
   trustedClientsVisible: true,
   servicesVisible: true,

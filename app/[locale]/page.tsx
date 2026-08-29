@@ -13,6 +13,7 @@ import { TiltCard } from "@/components/motion/TiltCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { ScrollTextFlip } from "@/components/motion/ScrollTextFlip";
 import { Services3DConstellation } from "@/components/services/Services3DConstellation";
+import { InteractiveServiceStack3D } from "@/components/services/InteractiveServiceStack3D";
 import { CaseStudy3DTransformation } from "@/components/case-studies/CaseStudy3DTransformation";
 import { Process3DPathway } from "@/components/motion/Process3DPathway";
 import { MovingLogoStrip } from "@/components/motion/MovingLogoStrip";
@@ -125,6 +126,9 @@ export default async function HomePage({
           <Services3DConstellation />
         </Scroll3DContainer>
       </div>
+
+      {/* 3D INTERACTIVE SERVICE STACK WITH SCROLL-LINKED SERVICE MAPPING */}
+      <InteractiveServiceStack3D />
 
       {/* FULL-WIDTH DIGITAL TRANSFORMATION PATHWAY */}
       <CaseStudy3DTransformation />

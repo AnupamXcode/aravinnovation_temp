@@ -1,0 +1,519 @@
+"use client";
+
+import * as React from "react";
+import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
+import {
+  Compass,
+  TrendingUp,
+  Code2,
+  ShieldCheck,
+  BarChart3,
+  Users2,
+  Search,
+  Cpu,
+  Sparkles,
+  ArrowRight,
+  ChevronDown,
+} from "lucide-react";
+import { useSiteConfig } from "@/lib/site-config";
+import { cn } from "@/lib/utils";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+const iconMap: Record<string, React.ReactNode> = {
+  Compass: <Compass className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />,
+  TrendingUp: <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />,
+  Code2: <Code2 className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />,
+  ShieldCheck: <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />,
+  BarChart3: <BarChart3 className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />,
+  Users2: <Users2 className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />,
+  Search: <Search className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />,
+  Cpu: <Cpu className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />,
+};
+
+export function InteractiveServiceStack3D() {
+  const { config } = useSiteConfig();
+  const rootRef = React.useRef<HTMLDivElement>(null);
+  const [activeServiceIdx, setActiveServiceIdx] = React.useState<number>(0);
+  const [revealedCount, setRevealedCount] = React.useState<number>(1);
+  const [hoveredIdx, setHoveredIdx] = React.useState<number | null>(null);
+
+  const practicesConfig = config.enterprisePracticesConfig;
+  const isEnabled =
+    config.websiteEnabled !== false &&
+    config.servicesVisible !== false &&
+    practicesConfig?.enabled !== false;
+
+  const serviceLayers = (practicesConfig?.serviceLayers || []).filter(
+    (l) => l.visible !== false
+  );
+
+  React.useEffect(() => {
+    if (!rootRef.current || !isEnabled) return;
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let cancelled = false;
+    let lenis: Lenis | null = null;
+    let raf: ((time: number) => void) | null = null;
+    let observer: ResizeObserver | null = null;
+
+    const ctx = gsap.context(() => {
+      const layers = gsap.utils.toArray<HTMLElement>(".service-disc-layer", rootRef.current!);
+      const cards = gsap.utils.toArray<HTMLElement>(".service-side-card", rootRef.current!);
+      const stack = rootRef.current!.querySelector<HTMLElement>(".service-stack-container");
+      const track = rootRef.current!.querySelector<HTMLElement>(".service-stack-track");
+      const bar = rootRef.current!.querySelector<HTMLElement>(".service-progress-bar");
+      const leadersContainer = rootRef.current!.querySelector<SVGSVGElement>(".service-leaders-svg");
+      const stage = rootRef.current!.querySelector<HTMLElement>(".service-pinned-stage");
+
+      if (!stack || !track || layers.length === 0) return;
+
+      const n = layers.length;
+
+      // Draw SVG hairline connector paths & moving data particles between 3D stack & side labels
+      const place = (currentRevealedCount: number, currentActiveIdx: number) => {
+        if (!stack || !rootRef.current || !leadersContainer) return;
+        const rootBox = rootRef.current.getBoundingClientRect();
+        const stackBox = stack.getBoundingClientRect();
+
+        leadersContainer.innerHTML = "";
+
+        cards.forEach((card) => {
+          const targetId = card.getAttribute("data-for");
+          const idx = parseInt(targetId || "0", 10);
+          const isRevealed = idx < currentRevealedCount;
+          const isActive = idx === currentActiveIdx;
+
+          if (!isRevealed) return;
+
+          const layerEl = layers.find((l) => l.getAttribute("data-i") === targetId);
+          if (!layerEl) return;
+
+          const layerBox = layerEl.getBoundingClientRect();
+          const cardBox = card.getBoundingClientRect();
+          const isLeft = card.parentElement?.classList.contains("left");
+
+          const cardPinX = isLeft
+            ? cardBox.right - rootBox.left
+            : cardBox.left - rootBox.left;
+          const cardPinY = cardBox.top + cardBox.height / 2 - rootBox.top;
+
+          const stackAnchorX = isLeft
+            ? layerBox.left - rootBox.left + 15
+            : layerBox.right - rootBox.left - 15;
+          const layerAnchorY = layerBox.top + layerBox.height / 2 - rootBox.top;
+
+          // Hairline connector path from 3D Layer -> Label Pin
+          const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          const midX = isLeft ? cardPinX + 35 : cardPinX - 35;
+          const d = `M ${stackAnchorX} ${layerAnchorY} Q ${midX} ${layerAnchorY}, ${cardPinX} ${cardPinY}`;
+          path.setAttribute("d", d);
+          path.setAttribute("stroke", card.getAttribute("data-tone") || "#f15e1c");
+          path.setAttribute("stroke-width", isActive ? "2.5" : "1.5");
+          path.setAttribute("stroke-dasharray", isActive ? "none" : "4 4");
+          path.setAttribute("fill", "none");
+          path.setAttribute("opacity", isActive ? "0.95" : "0.45");
+          leadersContainer.appendChild(path);
+
+          // Moving data particle on active connector line
+          const particle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+          particle.setAttribute("cx", `${stackAnchorX}`);
+          particle.setAttribute("cy", `${layerAnchorY}`);
+          particle.setAttribute("r", isActive ? "4" : "2.5");
+          particle.setAttribute("fill", card.getAttribute("data-tone") || "#f15e1c");
+          if (isActive) {
+            particle.setAttribute("class", "animate-ping");
+          }
+          leadersContainer.appendChild(particle);
+        });
+      };
+
+      // Vertical 3D Exploded-Stack Transformation Logic
+      const explode = (p: number) => {
+        if (!stack) return;
+        const clampedP = Math.max(0, Math.min(1, p));
+
+        // Determine revealed count (1 to n) and active index
+        const currentCount = Math.min(n, Math.max(1, Math.floor(clampedP * n) + 1));
+        const activeIdx = Math.min(n - 1, Math.floor(clampedP * n));
+
+        setRevealedCount(currentCount);
+        setActiveServiceIdx(activeIdx);
+
+        const stepY = 56; // Vertical distance between architectural modules
+        const stepZ = 22; // Perspective depth Z offset
+
+        // Transform 3D Stack Architectural Modules vertically along Y & Z
+        layers.forEach((layer, i) => {
+          const isRevealed = i < currentCount;
+          const isActive = i === activeIdx;
+
+          const layerP = Math.max(0, Math.min(1, (clampedP - i / n) * n));
+          const eased = 1 - Math.pow(1 - layerP, 3);
+          const factor = isRevealed ? 0.28 + 0.72 * eased : 0.1;
+
+          // Vertical Y separation (Layer 0 at top, Layer 7 at bottom)
+          const y = (i - (n - 1) / 2) * stepY * factor;
+          // Perspective Z depth
+          const baseZ = ((n - 1) / 2 - i) * stepZ * factor;
+          const z = isActive ? baseZ + 38 : baseZ;
+          const scale = isActive ? 1.05 : isRevealed ? 1 : 0.92;
+          const opacity = isRevealed ? (isActive ? 1 : 0.86) : 0.25;
+
+          layer.style.transform = `translate3d(0px, ${y}px, ${z}px) scale(${scale})`;
+          layer.style.opacity = `${opacity}`;
+          layer.style.zIndex = `${25 - i}`;
+        });
+
+        // Side Label Cards progressive reveal
+        cards.forEach((card) => {
+          const targetId = card.getAttribute("data-for");
+          const i = parseInt(targetId || "0", 10);
+          const isRevealed = i < currentCount;
+          const isActive = i === activeIdx;
+
+          if (isRevealed) {
+            card.style.opacity = "1";
+            card.style.transform = isActive
+              ? "scale(1.04) translateZ(15px)"
+              : "scale(1) translateZ(0px)";
+            card.style.pointerEvents = "auto";
+          } else {
+            card.style.opacity = "0";
+            card.style.transform = "scale(0.88) translateY(15px)";
+            card.style.pointerEvents = "none";
+          }
+        });
+
+        const lift = (clampedP - 0.5) * -25;
+        stack.style.transform = `translateY(${lift}px) rotateX(42deg)`;
+
+        if (bar) {
+          bar.style.width = `${clampedP * 100}%`;
+        }
+
+        place(currentCount, activeIdx);
+      };
+
+      if (reduce) {
+        explode(1);
+        return;
+      }
+
+      // Lenis smooth scroll ticker initialization
+      if (practicesConfig?.scrollAnimationEnabled !== false) {
+        lenis = new Lenis();
+        lenis.on("scroll", ScrollTrigger.update);
+        raf = (t: number) => lenis?.raf(t * 1000);
+        gsap.ticker.add(raf);
+        gsap.ticker.lagSmoothing(0);
+      }
+
+      explode(0);
+
+      // Pinned GSAP ScrollTrigger Stage scrub
+      const triggerInstance = ScrollTrigger.create({
+        trigger: track,
+        pin: stage,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.3,
+        pinSpacing: true,
+        onUpdate: (self) => explode(self.progress),
+        onRefresh: (self) => explode(self.progress),
+        invalidateOnRefresh: true,
+      });
+
+      // Passive window scroll listener fallback
+      const handleWindowScroll = () => {
+        const trackRect = track.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const totalDistance = trackRect.height - windowHeight;
+        if (totalDistance <= 0) return;
+
+        const current = -trackRect.top;
+        const progress = Math.max(0, Math.min(1, current / totalDistance));
+        explode(progress);
+      };
+
+      window.addEventListener("scroll", handleWindowScroll, { passive: true });
+
+      if (window.ResizeObserver) {
+        observer = new ResizeObserver(() => place(revealedCount, activeServiceIdx));
+        observer.observe(stack);
+      }
+
+      document.fonts?.ready.then(() => {
+        if (!cancelled) ScrollTrigger.refresh();
+      });
+
+      return () => {
+        window.removeEventListener("scroll", handleWindowScroll);
+        triggerInstance.kill();
+      };
+    }, rootRef);
+
+    return () => {
+      cancelled = true;
+      observer?.disconnect();
+      if (raf) gsap.ticker.remove(raf);
+      lenis?.off("scroll", ScrollTrigger.update);
+      lenis?.destroy();
+      ctx.revert();
+    };
+  }, [isEnabled, practicesConfig, activeServiceIdx, revealedCount, serviceLayers]);
+
+  if (!isEnabled || serviceLayers.length === 0) {
+    return null;
+  }
+
+  // Left column (Even i: 0, 2, 4, 6) & Right column (Odd i: 1, 3, 5, 7)
+  const leftServices = serviceLayers.filter((_, idx) => idx % 2 === 0);
+  const rightServices = serviceLayers.filter((_, idx) => idx % 2 !== 0);
+
+  return (
+    <div ref={rootRef} className="relative w-full select-none overflow-hidden my-12" id="services">
+      {/* Pinned Scroll Track Container (260vh for smooth 8-stage vertical explosion) */}
+      <div className="service-stack-track relative w-full h-[260vh]">
+        {/* Pinned Viewport Stage */}
+        <div className="service-pinned-stage w-full h-screen flex flex-col justify-between py-6 px-4 sm:px-8 lg:px-12 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+          {/* Top Header Section */}
+          <div className="relative z-20 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#253630] pb-4 max-w-7xl mx-auto w-full">
+            <div className="space-y-1">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>VERTICAL 3D ENTERPRISE ARCHITECTURE</span>
+              </div>
+              <h2 className="text-2xl sm:text-4xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
+                Enterprise Technology Practices
+              </h2>
+              <p className="text-xs sm:text-sm text-[#7A6A5F] dark:text-[#B8ACA0]">
+                Scroll down to explode the 3D architecture stack into integrated enterprise practices.
+              </p>
+            </div>
+            <Link href="/services">
+              <span className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#f15e1c] text-white font-semibold text-xs shadow-md hover:bg-[#d94e10] transition-all hover:shadow-lg hover:shadow-[#f15e1c]/25">
+                Explore All Services <ArrowRight className="w-3.5 h-3.5" />
+              </span>
+            </Link>
+          </div>
+
+          {/* SVG Leaders & Moving Data Particles Overlay */}
+          <svg className="service-leaders-svg absolute inset-0 w-full h-full pointer-events-none z-20" />
+
+          {/* Main Desktop Vertical 3D Stage (Hidden on mobile portrait) */}
+          <div
+            className="hidden md:flex service-stage relative flex-1 w-full max-w-7xl mx-auto items-center justify-between my-2 px-4"
+            style={{ perspective: "1400px", perspectiveOrigin: "50% 42%" }}
+          >
+            {/* LEFT COLUMN SERVICE CARDS (0: IT Strategy, 2: Web & App, 4: Audit, 6: SEO) */}
+            <ul className="exploded-notes left relative z-40 space-y-6 w-[260px] lg:w-[320px] pointer-events-auto">
+              {leftServices.map((layer) => {
+                const isActive = layer.id === activeServiceIdx;
+                return (
+                  <li
+                    key={layer.id}
+                    data-for={layer.id}
+                    data-tone={layer.tone}
+                    className="service-side-card transition-all duration-300"
+                  >
+                    <Link href={layer.href}>
+                      <div
+                        className={cn(
+                          "p-4 rounded-2xl backdrop-blur-md transition-all duration-300 border shadow-xl cursor-pointer hover:border-[#f15e1c]",
+                          isActive
+                            ? "bg-white dark:bg-[#1a2924] border-[#f15e1c] ring-4 ring-[#f15e1c]/30 shadow-2xl scale-105"
+                            : "bg-white/90 dark:bg-[#172420]/90 border-[#f7d7b0] dark:border-[#253630]"
+                        )}
+                      >
+                        <div className="flex items-center gap-3 mb-1.5">
+                          <div
+                            className="w-8 h-8 rounded-xl flex items-center justify-center shadow-md shrink-0"
+                            style={{ backgroundColor: layer.tone }}
+                          >
+                            {iconMap[layer.icon] || <Sparkles className="w-4.5 h-4.5 text-white" />}
+                          </div>
+                          <b
+                            className="text-xs sm:text-sm font-bold font-display uppercase tracking-wider line-clamp-1"
+                            style={{ color: isActive ? "#f15e1c" : layer.tone }}
+                          >
+                            {layer.name}
+                          </b>
+                        </div>
+                        <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] leading-snug line-clamp-2">
+                          {layer.description}
+                        </p>
+                      </div>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+
+            {/* CENTRAL VERTICAL 3D STACK WITH DIGITAL CORE */}
+            <div className="relative flex flex-col items-center justify-center z-30 mx-auto">
+              {/* Central Vertical 3D Ellipse Disc Module Stack */}
+              <div
+                className="service-stack-container relative w-64 h-44 sm:w-80 sm:h-56 md:w-[400px] md:h-64 cursor-pointer"
+                style={{
+                  transformStyle: "preserve-3d",
+                  transform: "translateY(var(--lift, 0px)) rotateX(42deg)",
+                }}
+              >
+                {serviceLayers.map((layer) => {
+                  const isActive = layer.id === activeServiceIdx;
+                  const isHovered = layer.id === hoveredIdx;
+
+                  return (
+                    <Link key={layer.id} href={layer.href}>
+                      <i
+                        data-i={layer.id}
+                        onMouseEnter={() => setHoveredIdx(layer.id)}
+                        onMouseLeave={() => setHoveredIdx(null)}
+                        className={cn(
+                          "service-disc-layer absolute inset-0 rounded-[50%] border-2 flex items-center justify-center px-6 text-center select-none shadow-2xl group",
+                          isActive
+                            ? "border-white ring-4 ring-[#f15e1c]/50"
+                            : "border-white/50 hover:border-white"
+                        )}
+                        style={{
+                          transformStyle: "preserve-3d",
+                          background: `linear-gradient(145deg, color-mix(in srgb, ${layer.tone} 88%, white) 0%, ${layer.tone} 52%, color-mix(in srgb, ${layer.tone} 75%, black) 100%)`,
+                          boxShadow: isActive
+                            ? `0 25px 50px -5px ${layer.tone}80, 0 0 30px ${layer.tone}60, inset 0 2px 10px rgba(255,255,255,0.8)`
+                            : isHovered
+                            ? `0 20px 40px -5px ${layer.tone}60, inset 0 2px 8px rgba(255,255,255,0.7)`
+                            : `0 15px 30px -8px ${layer.tone}40, inset 0 2px 6px rgba(255,255,255,0.5)`,
+                        }}
+                      >
+                        {/* Service Icon & Title Printed Directly ON the 3D Layer Surface */}
+                        <div className="relative z-10 flex items-center justify-center gap-2.5 text-white pointer-events-none drop-shadow-md">
+                          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0 border border-white/40 group-hover:scale-110 transition-transform">
+                            {iconMap[layer.icon] || <Sparkles className="w-4 h-4 text-white" />}
+                          </div>
+                          <span className="text-xs sm:text-sm font-extrabold font-display tracking-tight text-white drop-shadow-lg">
+                            {layer.name}
+                          </span>
+                        </div>
+                      </i>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              {/* CENTRAL ARAV DIGITAL CORE BADGE */}
+              <div className="mt-6 px-4 py-2 rounded-2xl bg-white dark:bg-[#101b17] border-2 border-[#f15e1c] shadow-xl text-center z-30">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#f15e1c]">
+                  ARAV DIGITAL CORE
+                </span>
+              </div>
+            </div>
+
+            {/* RIGHT COLUMN SERVICE CARDS (1: Digital Marketing, 3: Risk & Compliance, 5: Training, 7: AI Portfolio) */}
+            <ul className="exploded-notes right relative z-40 space-y-6 w-[260px] lg:w-[320px] pointer-events-auto">
+              {rightServices.map((layer) => {
+                const isActive = layer.id === activeServiceIdx;
+                return (
+                  <li
+                    key={layer.id}
+                    data-for={layer.id}
+                    data-tone={layer.tone}
+                    className="service-side-card transition-all duration-300"
+                  >
+                    <Link href={layer.href}>
+                      <div
+                        className={cn(
+                          "p-4 rounded-2xl backdrop-blur-md transition-all duration-300 border shadow-xl cursor-pointer hover:border-[#f15e1c]",
+                          isActive
+                            ? "bg-white dark:bg-[#1a2924] border-[#f15e1c] ring-4 ring-[#f15e1c]/30 shadow-2xl scale-105"
+                            : "bg-white/90 dark:bg-[#172420]/90 border-[#f7d7b0] dark:border-[#253630]"
+                        )}
+                      >
+                        <div className="flex items-center gap-3 mb-1.5">
+                          <div
+                            className="w-8 h-8 rounded-xl flex items-center justify-center shadow-md shrink-0"
+                            style={{ backgroundColor: layer.tone }}
+                          >
+                            {iconMap[layer.icon] || <Sparkles className="w-4.5 h-4.5 text-white" />}
+                          </div>
+                          <b
+                            className="text-xs sm:text-sm font-bold font-display uppercase tracking-wider line-clamp-1"
+                            style={{ color: isActive ? "#f15e1c" : layer.tone }}
+                          >
+                            {layer.name}
+                          </b>
+                        </div>
+                        <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] leading-snug line-clamp-2">
+                          {layer.description}
+                        </p>
+                      </div>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          {/* DEDICATED RESPONSIVE MOBILE STACK (Visible on mobile viewports) */}
+          <div className="flex md:hidden flex-col gap-3 my-4 overflow-y-auto max-h-[60vh] px-1">
+            {serviceLayers.map((layer, idx) => {
+              const isActive = layer.id === activeServiceIdx;
+              const isRevealed = idx < revealedCount;
+              if (!isRevealed) return null;
+
+              return (
+                <Link key={layer.id} href={layer.href} className="w-full">
+                  <div
+                    className={cn(
+                      "p-4 rounded-2xl transition-all duration-200 border flex items-center justify-between gap-3 shadow-md",
+                      isActive
+                        ? "bg-white dark:bg-[#1a2924] border-[#f15e1c] ring-2 ring-[#f15e1c]/40 shadow-xl"
+                        : "bg-white/90 dark:bg-[#172420]/90 border-[#f7d7b0] dark:border-[#253630]"
+                    )}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div
+                        className="w-9 h-9 rounded-xl flex items-center justify-center text-white shrink-0 shadow-sm"
+                        style={{ backgroundColor: layer.tone }}
+                      >
+                        {iconMap[layer.icon] || <Sparkles className="w-5 h-5 text-white" />}
+                      </div>
+                      <div>
+                        <h4
+                          className="text-xs font-bold font-display uppercase tracking-wider"
+                          style={{ color: isActive ? "#f15e1c" : layer.tone }}
+                        >
+                          {layer.name}
+                        </h4>
+                        <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] line-clamp-1">
+                          {layer.description}
+                        </p>
+                      </div>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-[#f15e1c] shrink-0" />
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Bottom Navigation Indicator Bar */}
+          <div className="relative z-20 flex items-center justify-between max-w-7xl mx-auto w-full border-t border-[#f7d7b0] dark:border-[#253630] pt-3 text-xs font-mono text-[#7A6A5F] dark:text-[#B8ACA0]">
+            <span className="inline-flex items-center gap-1.5">
+              <span>Scroll Down to Explode 3D Stack</span>
+              <ChevronDown className="w-3.5 h-3.5 text-[#f15e1c] animate-bounce" />
+            </span>
+            <div className="w-44 h-1.5 rounded-full bg-[#f7d7b0]/50 dark:bg-[#253630] overflow-hidden">
+              <div className="service-progress-bar h-full bg-[#f15e1c] transition-all duration-100 w-0" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
