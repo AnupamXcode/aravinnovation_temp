@@ -266,10 +266,9 @@ export default async function HomePage({
           <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-gradient-to-br from-[#ffffff] via-[#fefaf5] to-[#f7d7b0]/50 dark:from-[#172420] dark:via-[#1e2c27] dark:to-[#253630] border-2 border-[#f15e1c]/40 shadow-2xl transition-all duration-300">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               <div className="lg:col-span-5 space-y-6">
-                <div>
-                  <Badge variant="secondary" size="md">
-                    {tFinalCta("badge")}
-                  </Badge>
+                <Badge variant="secondary" size="md">
+                  {tFinalCta("badge")}
+                </Badge>
                   <ScrollTextFlip>
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight mt-3 leading-[1.1]">
                       LET&apos;S BUILD WHAT&apos;S NEXT
@@ -296,9 +295,8 @@ export default async function HomePage({
                     </ul>
                   </div>
                 </div>
-              </div>
 
-              <div className="lg:col-span-7">
+                <div className="lg:col-span-7">
                 <ScrollReveal direction="left" delay={0.2}>
                   <LeadForm source="homepage_final_cta" />
                 </ScrollReveal>

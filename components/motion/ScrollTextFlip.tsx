@@ -21,14 +21,15 @@ export function ScrollTextFlip({
     offset: ["start 95%", "center 60%"],
   });
 
-  // Upward sliding popping effect: y shifts from +60px up to 0px, scale pops 0.88 -> 1
-  const rawY = useTransform(scrollYProgress, [0, 1], [60, 0]);
-  const rawOpacity = useTransform(scrollYProgress, [0, 0.4, 1], [0, 0.6, 1]);
-  const rawScale = useTransform(scrollYProgress, [0, 1], [0.88, 1]);
+  // Upward sliding popping effect: y shifts from +70px up to 0px, scale pops 0.86 -> 1
+  const rawY = useTransform(scrollYProgress, [0, 1], [70, 0]);
+  const rawOpacity = useTransform(scrollYProgress, [0, 0.4, 1], [0, 0.5, 1]);
+  const rawScale = useTransform(scrollYProgress, [0, 1], [0.86, 1]);
 
-  const smoothY = useSpring(rawY, { damping: 20, stiffness: 140, mass: 0.5 });
-  const smoothOpacity = useSpring(rawOpacity, { damping: 25, stiffness: 130 });
-  const smoothScale = useSpring(rawScale, { damping: 20, stiffness: 140 });
+  // Slower, smooth fluid spring lerp (increased mass & lower stiffness)
+  const smoothY = useSpring(rawY, { damping: 28, stiffness: 85, mass: 0.8 });
+  const smoothOpacity = useSpring(rawOpacity, { damping: 30, stiffness: 90 });
+  const smoothScale = useSpring(rawScale, { damping: 28, stiffness: 85, mass: 0.8 });
 
   if (shouldReduceMotion) {
     return <div className={cn(className)}>{children}</div>;

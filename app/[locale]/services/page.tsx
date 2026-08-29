@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { ScrollTextFlip } from "@/components/motion/ScrollTextFlip";
 import { BreadcrumbSchema } from "@/components/seo/StructuredData";
 import { ArrowRight, Globe2 } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -46,9 +47,11 @@ export default async function ServicesHubPage({
             <Badge variant="secondary" size="md">
               {t("badge")}
             </Badge>
-            <h1 className="text-4xl sm:text-5xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight">
-              {t("title")}
-            </h1>
+            <ScrollTextFlip>
+              <h1 className="text-4xl sm:text-5xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight">
+                {t("title")}
+              </h1>
+            </ScrollTextFlip>
             <p className="text-lg text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
               {t("description")}
             </p>
