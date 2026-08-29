@@ -4,6 +4,12 @@ export interface IndustrySolution {
   description: string;
   icon: string;
   capabilities: string[];
+  challenges?: string[];
+  aravApproach?: string;
+  recommendedTech?: string[];
+  expectedOutcome?: string;
+  ctaText?: string;
+  relatedCaseStudySlug?: string;
 }
 
 export const industriesData: IndustrySolution[] = [

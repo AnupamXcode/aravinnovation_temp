@@ -75,10 +75,14 @@ export function InteractiveServiceStack3D() {
 
       const n = serviceLayers.length;
 
-      // Draw SVG connector paths, disc rim node dots & arrowheads locked frame-by-frame to live bounding rects
-      const place = (currentRevealedCount: number, currentActiveIdx: number) => {
-        if (!stack || !rootRef.current || !leadersContainer) return;
-        const rootBox = rootRef.current.getBoundingClientRect();
+      // Draw SVG connector paths, disc rim node dots & arrowheads locked frame-by-frame to live stage bounding rect
+      const place = (
+        currentRevealedCount: number,
+        currentActiveIdx: number,
+        currentHoveredIdx: number | null = null
+      ) => {
+        if (!stack || !stage || !leadersContainer) return;
+        const stageBox = stage.getBoundingClientRect();
 
         leadersContainer.innerHTML = "";
 
@@ -87,6 +91,8 @@ export function InteractiveServiceStack3D() {
           const idx = parseInt(targetId || "0", 10);
           const isRevealed = idx < currentRevealedCount;
           const isActive = idx === currentActiveIdx;
+          const isHovered = idx === currentHoveredIdx;
+          const isHighlighted = isActive || isHovered;
 
           if (!isRevealed) return;
 
@@ -98,59 +104,60 @@ export function InteractiveServiceStack3D() {
           const isLeft = card.parentElement?.classList.contains("left");
           const color = card.getAttribute("data-tone") || "#f15e1c";
 
-          // Card target pin coordinate
+          // Card target pin coordinate relative to pinned stage
           const cardPinX = isLeft
-            ? cardBox.right - rootBox.left - 2
-            : cardBox.left - rootBox.left + 2;
-          const cardPinY = cardBox.top + cardBox.height / 2 - rootBox.top;
+            ? cardBox.right - stageBox.left - 2
+            : cardBox.left - stageBox.left + 2;
+          const cardPinY = cardBox.top + cardBox.height / 2 - stageBox.top;
 
-          // Disc outer rim node coordinate
+          // Disc outer rim node coordinate relative to pinned stage
           const stackAnchorX = isLeft
-            ? layerBox.left - rootBox.left + 14
-            : layerBox.right - rootBox.left - 14;
-          const layerAnchorY = layerBox.top + layerBox.height / 2 - rootBox.top;
+            ? layerBox.left - stageBox.left + 16
+            : layerBox.right - stageBox.left - 16;
+          const layerAnchorY = layerBox.top + layerBox.height / 2 - stageBox.top;
 
-          // Disc rim node dot
+          // Disc rim node dot with hover pulse scale
           const discNode = document.createElementNS("http://www.w3.org/2000/svg", "circle");
           discNode.setAttribute("cx", `${stackAnchorX}`);
           discNode.setAttribute("cy", `${layerAnchorY}`);
-          discNode.setAttribute("r", isActive ? "5.5" : "3.5");
+          discNode.setAttribute("r", isHighlighted ? "6.5" : "4");
           discNode.setAttribute("fill", color);
           discNode.setAttribute("stroke", "#ffffff");
           discNode.setAttribute("stroke-width", "2");
           leadersContainer.appendChild(discNode);
 
-          // Curved S-connector path from Disc rim -> Card pin
-          const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          // Curved S-connector path with hover glow transition
           const deltaX = Math.abs(cardPinX - stackAnchorX);
           const midX1 = isLeft ? stackAnchorX - deltaX * 0.4 : stackAnchorX + deltaX * 0.4;
           const midX2 = isLeft ? cardPinX + deltaX * 0.4 : cardPinX - deltaX * 0.4;
           const d = `M ${stackAnchorX} ${layerAnchorY} C ${midX1} ${layerAnchorY}, ${midX2} ${cardPinY}, ${cardPinX} ${cardPinY}`;
+          const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
           path.setAttribute("d", d);
           path.setAttribute("stroke", color);
-          path.setAttribute("stroke-width", isActive ? "2.5" : "1.5");
-          path.setAttribute("stroke-dasharray", isActive ? "none" : "4 4");
+          path.setAttribute("stroke-width", isHighlighted ? "3" : "1.75");
+          path.setAttribute("stroke-dasharray", isHighlighted ? "none" : "4 4");
           path.setAttribute("fill", "none");
-          path.setAttribute("opacity", isActive ? "1" : "0.55");
+          path.setAttribute("opacity", isHighlighted ? "1" : "0.7");
           leadersContainer.appendChild(path);
 
           // Terminating Arrowhead pointing directly at card border
           const arrow = document.createElementNS("http://www.w3.org/2000/svg", "path");
-          const arrowSize = isActive ? 7 : 5.5;
+          const arrowSize = isHighlighted ? "8" : "6";
+          const arrowSizeNum = isHighlighted ? 8 : 6;
           const arrowD = isLeft
-            ? `M ${cardPinX + arrowSize * 1.4} ${cardPinY - arrowSize} L ${cardPinX} ${cardPinY} L ${cardPinX + arrowSize * 1.4} ${cardPinY + arrowSize} Z`
-            : `M ${cardPinX - arrowSize * 1.4} ${cardPinY - arrowSize} L ${cardPinX} ${cardPinY} L ${cardPinX - arrowSize * 1.4} ${cardPinY + arrowSize} Z`;
+            ? `M ${cardPinX + arrowSizeNum * 1.4} ${cardPinY - arrowSizeNum} L ${cardPinX} ${cardPinY} L ${cardPinX + arrowSizeNum * 1.4} ${cardPinY + arrowSizeNum} Z`
+            : `M ${cardPinX - arrowSizeNum * 1.4} ${cardPinY - arrowSizeNum} L ${cardPinX} ${cardPinY} L ${cardPinX - arrowSizeNum * 1.4} ${cardPinY + arrowSizeNum} Z`;
           arrow.setAttribute("d", arrowD);
           arrow.setAttribute("fill", color);
-          arrow.setAttribute("opacity", isActive ? "1" : "0.75");
+          arrow.setAttribute("opacity", isHighlighted ? "1" : "0.85");
           leadersContainer.appendChild(arrow);
 
-          // Flowing data-pulse dot on active connector line
-          if (isActive) {
+          // Flowing data-pulse dot on highlighted connector line
+          if (isHighlighted) {
             const pulseDot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
             pulseDot.setAttribute("cx", `${(stackAnchorX + cardPinX) / 2}`);
             pulseDot.setAttribute("cy", `${(layerAnchorY + cardPinY) / 2}`);
-            pulseDot.setAttribute("r", "4");
+            pulseDot.setAttribute("r", "4.5");
             pulseDot.setAttribute("fill", color);
             pulseDot.setAttribute("class", "animate-ping");
             leadersContainer.appendChild(pulseDot);
@@ -158,8 +165,8 @@ export function InteractiveServiceStack3D() {
         });
       };
 
-      // Synchronized Motion Unit: Disc Layer i, Arrow i, and Side Card i move together along Y_i
-      const explode = (p: number) => {
+      // 60 FPS explode transform calculation with hover state reaction
+      const explode = (p: number, currentHovered: number | null = hoveredIdx) => {
         if (!stack) return;
         const clampedP = Math.max(0, Math.min(1, p));
 
@@ -170,7 +177,7 @@ export function InteractiveServiceStack3D() {
         setRevealedCount(currentCount);
         setActiveServiceIdx(activeIdx);
 
-        const stepY = 56; // Vertical distance between floating 3D modules
+        const stepY = 38; // Vertical separation of 3D stack discs (grand stack size)
         const stepZ = 22; // Perspective depth Z offset
 
         // Transform 3D Stack Architectural Discs vertically along Y & Z
@@ -180,18 +187,20 @@ export function InteractiveServiceStack3D() {
           const i = isCore ? 3.5 : parseInt(targetId || "0", 10);
           const isRevealed = isCore || i < currentCount;
           const isActive = !isCore && i === activeIdx;
+          const isHovered = !isCore && i === currentHovered;
+          const isHighlighted = isActive || isHovered;
 
           const layerP = Math.max(0, Math.min(1, (clampedP - (isCore ? 0.4 : i / n)) * n));
           const eased = 1 - Math.pow(1 - layerP, 3);
-          const factor = isRevealed ? 0.25 + 0.75 * eased : 0.08;
+          const factor = isRevealed ? 0.22 + 0.78 * eased : 0.08;
 
           // Vertical Y separation (Layer 0 at top, Layer 7 at bottom)
           const y = (i - (n - 1) / 2) * stepY * factor;
           // Perspective Z depth
           const baseZ = ((n - 1) / 2 - i) * stepZ * factor;
-          const z = isActive ? baseZ + 38 : baseZ;
-          const scale = isActive ? 1.05 : isRevealed ? 1 : 0.92;
-          const opacity = isRevealed ? (isActive ? 1 : 0.88) : 0.3;
+          const z = isHighlighted ? baseZ + 42 : baseZ;
+          const scale = isHighlighted ? 1.08 : isRevealed ? 1 : 0.94;
+          const opacity = isRevealed ? (isHighlighted ? 1 : 0.88) : 0.35;
 
           layer.style.transform = `translate3d(0px, ${y}px, ${z}px) scale(${scale})`;
           layer.style.opacity = `${opacity}`;
@@ -204,30 +213,32 @@ export function InteractiveServiceStack3D() {
           const i = parseInt(targetId || "0", 10);
           const isRevealed = i < currentCount;
           const isActive = i === activeIdx;
+          const isHovered = i === currentHovered;
+          const isHighlighted = isActive || isHovered;
           const isLeft = card.parentElement?.classList.contains("left");
 
           // Calculate vertical position Y_i matching disc layer i
           const layerP = Math.max(0, Math.min(1, (clampedP - i / n) * n));
           const eased = 1 - Math.pow(1 - layerP, 3);
-          const factor = isRevealed ? 0.25 + 0.75 * eased : 0.08;
+          const factor = isRevealed ? 0.22 + 0.78 * eased : 0.08;
           const y_i = (i - (n - 1) / 2) * stepY * factor;
 
           if (isRevealed) {
             const emergeProgress = Math.max(0, Math.min(1, (clampedP - i / n) * n * 2));
             const cardX = isLeft ? 0 : 0;
             card.style.opacity = `${emergeProgress}`;
-            card.style.transform = isActive
-              ? `translate3d(${cardX}px, ${y_i}px, 15px) scale(1.04)`
+            card.style.transform = isHighlighted
+              ? `translate3d(${cardX}px, ${y_i}px, 20px) scale(1.05)`
               : `translate3d(${cardX}px, ${y_i}px, 0px) scale(1)`;
             card.style.pointerEvents = "auto";
           } else {
             card.style.opacity = "0";
-            card.style.transform = `translate3d(${isLeft ? "-35px" : "35px"}, ${y_i}px, 0px) scale(0.92)`;
+            card.style.transform = `translate3d(${isLeft ? "-25px" : "25px"}, ${y_i}px, 0px) scale(0.92)`;
             card.style.pointerEvents = "none";
           }
         });
 
-        const lift = (clampedP - 0.5) * -25;
+        const lift = (clampedP - 0.5) * -20;
         stack.style.transform = `translateY(${lift}px) rotateX(42deg)`;
 
         if (bar) {
@@ -235,7 +246,7 @@ export function InteractiveServiceStack3D() {
         }
 
         // Synchronously calculate connector placement on current frame
-        place(currentCount, activeIdx);
+        place(currentCount, activeIdx, currentHovered);
       };
 
       if (reduce) {
@@ -350,13 +361,16 @@ export function InteractiveServiceStack3D() {
 
           {/* Main Desktop Vertical 3D Stage (Hidden on mobile portrait) */}
           <div
-            className="hidden md:flex service-stage relative flex-1 w-full max-w-7xl mx-auto items-center justify-between my-2 px-4"
+            className="hidden md:flex service-stage relative flex-1 w-full max-w-6xl mx-auto items-center justify-between my-2 px-3"
             style={{ perspective: "1400px", perspectiveOrigin: "50% 42%" }}
           >
             {/* LEFT COLUMN SERVICE CARDS (0: IT Strategy, 2: Web & App, 4: Audit, 6: SEO) */}
-            <ul className="exploded-notes left relative z-40 space-y-6 w-[260px] lg:w-[320px] pointer-events-auto">
+            <ul className="exploded-notes left relative z-40 space-y-3 w-[220px] lg:w-[255px] pointer-events-auto">
               {leftServices.map((layer) => {
                 const isActive = layer.id === activeServiceIdx;
+                const isHovered = layer.id === hoveredIdx;
+                const isHighlit = isActive || isHovered;
+
                 return (
                   <li
                     key={layer.id}
@@ -364,30 +378,44 @@ export function InteractiveServiceStack3D() {
                     data-tone={layer.tone}
                     className="service-side-card"
                   >
-                    <Link href={layer.href}>
+                    <Link
+                      href={layer.href}
+                      onMouseEnter={() => setHoveredIdx(layer.id)}
+                      onMouseLeave={() => setHoveredIdx(null)}
+                      className="block group"
+                    >
                       <div
                         className={cn(
-                          "p-4 rounded-2xl backdrop-blur-md border shadow-xl cursor-pointer hover:border-[#f15e1c]",
-                          isActive
-                            ? "bg-white dark:bg-[#1a2924] border-[#f15e1c] ring-4 ring-[#f15e1c]/30 shadow-2xl scale-105"
-                            : "bg-white/90 dark:bg-[#172420]/90 border-[#f7d7b0] dark:border-[#253630]"
+                          "p-3.5 rounded-2xl backdrop-blur-md border shadow-lg cursor-pointer transition-all duration-300 transform group-hover:scale-[1.05] group-hover:-translate-y-1",
+                          isHighlit
+                            ? "bg-white dark:bg-[#1a2924] shadow-2xl"
+                            : "bg-white/95 dark:bg-[#172420]/95 border-[#f7d7b0] dark:border-[#253630]"
                         )}
+                        style={{
+                          borderColor: isHighlit ? layer.tone : undefined,
+                          boxShadow: isHighlit
+                            ? `0 20px 40px -10px ${layer.tone}45, 0 0 0 3px ${layer.tone}35`
+                            : undefined,
+                          background: isHighlit
+                            ? `linear-gradient(135deg, color-mix(in srgb, ${layer.tone} 14%, white) 0%, white 100%)`
+                            : undefined,
+                        }}
                       >
-                        <div className="flex items-center gap-3 mb-1.5">
+                        <div className="flex items-center gap-2 mb-1">
                           <div
-                            className="w-8 h-8 rounded-xl flex items-center justify-center shadow-md shrink-0 text-white font-bold"
+                            className="w-7 h-7 rounded-lg flex items-center justify-center shadow-xs shrink-0 text-white font-bold transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
                             style={{ backgroundColor: layer.tone }}
                           >
-                            {iconMap[layer.icon] || <Sparkles className="w-4.5 h-4.5 text-white" />}
+                            {iconMap[layer.icon] || <Sparkles className="w-4 h-4 text-white" />}
                           </div>
                           <b
-                            className="text-xs sm:text-sm font-bold font-display uppercase tracking-wider line-clamp-1"
-                            style={{ color: isActive ? "#f15e1c" : layer.tone }}
+                            className="text-xs font-bold font-display uppercase tracking-wider line-clamp-1 transition-colors duration-300"
+                            style={{ color: isHighlit ? layer.tone : undefined }}
                           >
                             {layer.name}
                           </b>
                         </div>
-                        <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] leading-snug line-clamp-2">
+                        <p className="text-[10px] text-[#4a5c55] dark:text-[#d3eee4] leading-snug line-clamp-2">
                           {layer.description}
                         </p>
                       </div>
@@ -400,7 +428,7 @@ export function InteractiveServiceStack3D() {
             {/* CENTRAL VERTICAL 3D DISC STACK WITH ARAV DIGITAL CORE AT CENTER */}
             <div className="relative flex flex-col items-center justify-center z-30 mx-auto">
               <div
-                className="service-stack-container relative w-64 h-48 sm:w-80 sm:h-60 md:w-[420px] md:h-72 cursor-pointer"
+                className="service-stack-container relative w-64 h-44 sm:w-80 sm:h-56 md:w-[440px] md:h-72 cursor-pointer"
                 style={{
                   transformStyle: "preserve-3d",
                   transform: "translateY(var(--lift, 0px)) rotateX(42deg)",
@@ -410,6 +438,7 @@ export function InteractiveServiceStack3D() {
                 {topStackLayers.map((layer) => {
                   const isActive = layer.id === activeServiceIdx;
                   const isHovered = layer.id === hoveredIdx;
+                  const isHighlit = isActive || isHovered;
 
                   return (
                     <Link key={layer.id} href={layer.href}>
@@ -418,18 +447,16 @@ export function InteractiveServiceStack3D() {
                         onMouseEnter={() => setHoveredIdx(layer.id)}
                         onMouseLeave={() => setHoveredIdx(null)}
                         className={cn(
-                          "service-disc-layer absolute inset-0 rounded-[50%] border-b-4 border-t border-white/70 flex items-center justify-center px-6 text-center select-none shadow-2xl group",
-                          isActive
-                            ? "ring-4 ring-[#f15e1c]/50 border-b-[#f15e1c]"
+                          "service-disc-layer absolute inset-0 rounded-[50%] border-b-4 border-t border-white/70 flex items-center justify-center px-6 text-center select-none shadow-2xl group transition-all duration-300",
+                          isHighlit
+                            ? "ring-4 border-b-white scale-105"
                             : "border-b-black/30 hover:border-b-white"
                         )}
                         style={{
                           transformStyle: "preserve-3d",
                           background: `linear-gradient(145deg, color-mix(in srgb, ${layer.tone} 88%, white) 0%, ${layer.tone} 52%, color-mix(in srgb, ${layer.tone} 75%, black) 100%)`,
-                          boxShadow: isActive
-                            ? `0 25px 50px -5px ${layer.tone}80, 0 0 30px ${layer.tone}60, inset 0 2px 10px rgba(255,255,255,0.8)`
-                            : isHovered
-                            ? `0 20px 40px -5px ${layer.tone}60, inset 0 2px 8px rgba(255,255,255,0.7)`
+                          boxShadow: isHighlit
+                            ? `0 30px 60px -5px ${layer.tone}90, 0 0 35px ${layer.tone}70, inset 0 2px 12px rgba(255,255,255,0.9)`
                             : `0 15px 30px -8px ${layer.tone}40, inset 0 2px 6px rgba(255,255,255,0.5)`,
                         }}
                       >
@@ -474,6 +501,7 @@ export function InteractiveServiceStack3D() {
                 {bottomStackLayers.map((layer) => {
                   const isActive = layer.id === activeServiceIdx;
                   const isHovered = layer.id === hoveredIdx;
+                  const isHighlit = isActive || isHovered;
 
                   return (
                     <Link key={layer.id} href={layer.href}>
@@ -482,18 +510,16 @@ export function InteractiveServiceStack3D() {
                         onMouseEnter={() => setHoveredIdx(layer.id)}
                         onMouseLeave={() => setHoveredIdx(null)}
                         className={cn(
-                          "service-disc-layer absolute inset-0 rounded-[50%] border-b-4 border-t border-white/70 flex items-center justify-center px-6 text-center select-none shadow-2xl group",
-                          isActive
-                            ? "ring-4 ring-[#f15e1c]/50 border-b-[#f15e1c]"
+                          "service-disc-layer absolute inset-0 rounded-[50%] border-b-4 border-t border-white/70 flex items-center justify-center px-6 text-center select-none shadow-2xl group transition-all duration-300",
+                          isHighlit
+                            ? "ring-4 border-b-white scale-105"
                             : "border-b-black/30 hover:border-b-white"
                         )}
                         style={{
                           transformStyle: "preserve-3d",
                           background: `linear-gradient(145deg, color-mix(in srgb, ${layer.tone} 88%, white) 0%, ${layer.tone} 52%, color-mix(in srgb, ${layer.tone} 75%, black) 100%)`,
-                          boxShadow: isActive
-                            ? `0 25px 50px -5px ${layer.tone}80, 0 0 30px ${layer.tone}60, inset 0 2px 10px rgba(255,255,255,0.8)`
-                            : isHovered
-                            ? `0 20px 40px -5px ${layer.tone}60, inset 0 2px 8px rgba(255,255,255,0.7)`
+                          boxShadow: isHighlit
+                            ? `0 30px 60px -5px ${layer.tone}90, 0 0 35px ${layer.tone}70, inset 0 2px 12px rgba(255,255,255,0.9)`
                             : `0 15px 30px -8px ${layer.tone}40, inset 0 2px 6px rgba(255,255,255,0.5)`,
                         }}
                       >
@@ -513,9 +539,12 @@ export function InteractiveServiceStack3D() {
             </div>
 
             {/* RIGHT COLUMN SERVICE CARDS (1: Digital Marketing, 3: Risk & Compliance, 5: Training, 7: AI Portfolio) */}
-            <ul className="exploded-notes right relative z-40 space-y-6 w-[260px] lg:w-[320px] pointer-events-auto">
+            <ul className="exploded-notes right relative z-40 space-y-2 w-[220px] lg:w-[250px] pointer-events-auto">
               {rightServices.map((layer) => {
                 const isActive = layer.id === activeServiceIdx;
+                const isHovered = layer.id === hoveredIdx;
+                const isHighlit = isActive || isHovered;
+
                 return (
                   <li
                     key={layer.id}
@@ -523,30 +552,44 @@ export function InteractiveServiceStack3D() {
                     data-tone={layer.tone}
                     className="service-side-card"
                   >
-                    <Link href={layer.href}>
+                    <Link
+                      href={layer.href}
+                      onMouseEnter={() => setHoveredIdx(layer.id)}
+                      onMouseLeave={() => setHoveredIdx(null)}
+                      className="block group"
+                    >
                       <div
                         className={cn(
-                          "p-4 rounded-2xl backdrop-blur-md border shadow-xl cursor-pointer hover:border-[#f15e1c]",
-                          isActive
-                            ? "bg-white dark:bg-[#1a2924] border-[#f15e1c] ring-4 ring-[#f15e1c]/30 shadow-2xl scale-105"
-                            : "bg-white/90 dark:bg-[#172420]/90 border-[#f7d7b0] dark:border-[#253630]"
+                          "p-3 rounded-2xl backdrop-blur-md border shadow-lg cursor-pointer transition-all duration-300 transform group-hover:scale-[1.05] group-hover:-translate-y-1",
+                          isHighlit
+                            ? "bg-white dark:bg-[#1a2924] shadow-2xl"
+                            : "bg-white/95 dark:bg-[#172420]/95 border-[#f7d7b0] dark:border-[#253630]"
                         )}
+                        style={{
+                          borderColor: isHighlit ? layer.tone : undefined,
+                          boxShadow: isHighlit
+                            ? `0 20px 40px -10px ${layer.tone}45, 0 0 0 3px ${layer.tone}35`
+                            : undefined,
+                          background: isHighlit
+                            ? `linear-gradient(135deg, color-mix(in srgb, ${layer.tone} 14%, white) 0%, white 100%)`
+                            : undefined,
+                        }}
                       >
-                        <div className="flex items-center gap-3 mb-1.5">
+                        <div className="flex items-center gap-2 mb-1">
                           <div
-                            className="w-8 h-8 rounded-xl flex items-center justify-center shadow-md shrink-0 text-white font-bold"
+                            className="w-7 h-7 rounded-lg flex items-center justify-center shadow-xs shrink-0 text-white font-bold transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
                             style={{ backgroundColor: layer.tone }}
                           >
-                            {iconMap[layer.icon] || <Sparkles className="w-4.5 h-4.5 text-white" />}
+                            {iconMap[layer.icon] || <Sparkles className="w-4 h-4 text-white" />}
                           </div>
                           <b
-                            className="text-xs sm:text-sm font-bold font-display uppercase tracking-wider line-clamp-1"
-                            style={{ color: isActive ? "#f15e1c" : layer.tone }}
+                            className="text-xs font-bold font-display uppercase tracking-wider line-clamp-1 transition-colors duration-300"
+                            style={{ color: isHighlit ? layer.tone : undefined }}
                           >
                             {layer.name}
                           </b>
                         </div>
-                        <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] leading-snug line-clamp-2">
+                        <p className="text-[10px] text-[#4a5c55] dark:text-[#d3eee4] leading-snug line-clamp-2">
                           {layer.description}
                         </p>
                       </div>

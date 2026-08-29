@@ -23,6 +23,7 @@ export interface CaseStudy {
     metric: string;
     label: string;
     description: string;
+    isVerified?: boolean;
   }[];
   testimonial?: {
     quote: string;
@@ -31,6 +32,19 @@ export interface CaseStudy {
     company: string;
   };
   technologiesUsed: string[];
+  storytellingStages?: {
+    stageNumber?: number;
+    title?: string;
+    headline?: string;
+    description?: string;
+    badge?: string;
+    stage?: string;
+    subtext?: string;
+  }[];
+  implementationApproach?: string;
+  whatAravChanged?: string;
+  businessImpact?: string;
+  finalOutcome?: string;
 }
 
 export const caseStudiesData: CaseStudy[] = [
