@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Hero3DDigitalArchitecture } from "@/components/hero/Hero3DDigitalArchitecture";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { ScrollTextFlip } from "@/components/motion/ScrollTextFlip";
 import { TextReveal } from "@/components/motion/TextReveal";
 import { ParallaxContainer } from "@/components/motion/ParallaxContainer";
 import {
@@ -29,7 +30,7 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Messaging & CTAs */}
           <div className="lg:col-span-6 space-y-7 text-center lg:text-left">
-            <ScrollReveal direction="up" delay={0.05}>
+            <ScrollTextFlip>
               {/* Single Eyebrow Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f7d7b0]/40 dark:bg-[#1e2c27] border border-[#f7d7b0] dark:border-[#253630] text-xs font-semibold shadow-xs">
                 <span className="w-2 h-2 rounded-full bg-[#f15e1c] animate-pulse" />
@@ -37,7 +38,7 @@ export function Hero() {
                   ENTERPRISE TECHNOLOGY &bull; STRATEGY &bull; DIGITAL GROWTH
                 </span>
               </div>
-            </ScrollReveal>
+            </ScrollTextFlip>
 
             <ScrollReveal direction="up" delay={0.15}>
               {/* Word-by-Word Masked Text Reveal Headline */}
@@ -109,7 +110,9 @@ export function Hero() {
           {/* Right Column: Signature 3D Digital Architecture Ecosystem */}
           <div className="lg:col-span-6 relative w-full">
             <ScrollReveal direction="left" delay={0.3}>
-              <Hero3DDigitalArchitecture />
+              <ParallaxContainer depth="midground" speed={30}>
+                <Hero3DDigitalArchitecture />
+              </ParallaxContainer>
             </ScrollReveal>
           </div>
         </div>

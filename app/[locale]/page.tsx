@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { ScrollTextFlip } from "@/components/motion/ScrollTextFlip";
 import { Services3DConstellation } from "@/components/services/Services3DConstellation";
 import { CaseStudy3DTransformation } from "@/components/case-studies/CaseStudy3DTransformation";
 import { Process3DPathway } from "@/components/motion/Process3DPathway";
@@ -131,16 +132,16 @@ export default async function HomePage({
       {/* 2. HOW ARAV WORKS / 5-STEP METHODOLOGY */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="process">
         <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300">
-          <ScrollReveal direction="up">
-            <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-              <Badge variant="secondary" size="md">
-                {tMethodology("badge")}
-              </Badge>
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+            <Badge variant="secondary" size="md">
+              {tMethodology("badge")}
+            </Badge>
+            <ScrollTextFlip>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                 {tMethodology("title")}
               </h2>
-            </div>
-          </ScrollReveal>
+            </ScrollTextFlip>
+          </div>
 
           <Process3DPathway />
         </section>
@@ -152,16 +153,16 @@ export default async function HomePage({
           <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
             <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent" />
 
-            <ScrollReveal direction="up">
-              <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-                <Badge variant="secondary" size="md">
-                  {tTestimonials("badge")}
-                </Badge>
+            <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+              <Badge variant="secondary" size="md">
+                {tTestimonials("badge")}
+              </Badge>
+              <ScrollTextFlip>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                   {tTestimonials("title")}
                 </h2>
-              </div>
-            </ScrollReveal>
+              </ScrollTextFlip>
+            </div>
 
             <ScrollReveal direction="up" delay={0.2}>
               <AnimatedTestimonialsCarousel />
@@ -192,28 +193,28 @@ export default async function HomePage({
             </svg>
           </div>
 
-          <ScrollReveal direction="up">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6 relative z-10">
-              <div className="max-w-3xl space-y-3">
-                <Badge variant="secondary" size="md">
-                  {tCaseStudies("badge")}
-                </Badge>
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6 relative z-10">
+            <div className="max-w-3xl space-y-3">
+              <Badge variant="secondary" size="md">
+                {tCaseStudies("badge")}
+              </Badge>
+              <ScrollTextFlip>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
                   {tCaseStudies("title")}
                 </h2>
-              </div>
-              <Link href={`/${locale}/case-studies`}>
-                <Button
-                  variant="outline"
-                  size="md"
-                  className="rounded-full px-7 py-3 border-[#f7d7b0] dark:border-[#253630] bg-white dark:bg-[#172420] text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c] hover:bg-[#fce3d3]/30"
-                  rightIcon={<ArrowRight className="w-4 h-4 text-[#f15e1c]" />}
-                >
-                  {tCaseStudies("viewAll")}
-                </Button>
-              </Link>
+              </ScrollTextFlip>
             </div>
-          </ScrollReveal>
+            <Link href={`/${locale}/case-studies`}>
+              <Button
+                variant="outline"
+                size="md"
+                className="rounded-full px-7 py-3 border-[#f7d7b0] dark:border-[#253630] bg-white dark:bg-[#172420] text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c] hover:bg-[#fce3d3]/30"
+                rightIcon={<ArrowRight className="w-4 h-4 text-[#f15e1c]" />}
+              >
+                {tCaseStudies("viewAll")}
+              </Button>
+            </Link>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch relative z-10">
             {caseStudiesData.slice(0, 3).map((study, idx) => (
@@ -226,16 +227,16 @@ export default async function HomePage({
       {/* 6. WHY ARAV (EQUAL SIZED 4 CARDS GRID) */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300">
-          <ScrollReveal direction="up">
-            <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-              <Badge variant="secondary" size="md">
-                {tWhyArav("badge")}
-              </Badge>
+          <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+            <Badge variant="secondary" size="md">
+              {tWhyArav("badge")}
+            </Badge>
+            <ScrollTextFlip>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                 {tWhyArav("title")}
               </h2>
-            </div>
-          </ScrollReveal>
+            </ScrollTextFlip>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
             {differentiators.map((diff, index) => (
@@ -265,13 +266,15 @@ export default async function HomePage({
           <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-gradient-to-br from-[#ffffff] via-[#fefaf5] to-[#f7d7b0]/50 dark:from-[#172420] dark:via-[#1e2c27] dark:to-[#253630] border-2 border-[#f15e1c]/40 shadow-2xl transition-all duration-300">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               <div className="lg:col-span-5 space-y-6">
-                <ScrollReveal direction="up">
+                <div>
                   <Badge variant="secondary" size="md">
                     {tFinalCta("badge")}
                   </Badge>
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight mt-3 leading-[1.1]">
-                    LET&apos;S BUILD WHAT&apos;S NEXT
-                  </h2>
+                  <ScrollTextFlip>
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight mt-3 leading-[1.1]">
+                      LET&apos;S BUILD WHAT&apos;S NEXT
+                    </h2>
+                  </ScrollTextFlip>
 
                   <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#22312b] border border-[#f7d7b0] dark:border-[#31473f] space-y-3.5 mt-6 shadow-md">
                     <h4 className="text-base font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
@@ -292,7 +295,7 @@ export default async function HomePage({
                       </li>
                     </ul>
                   </div>
-                </ScrollReveal>
+                </div>
               </div>
 
               <div className="lg:col-span-7">

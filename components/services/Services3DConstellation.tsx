@@ -23,6 +23,8 @@ import {
 import { servicesData, Service } from "@/data/services";
 import { Button3D } from "@/components/ui/button-3d";
 import { Button } from "@/components/ui/button";
+import { ParallaxContainer } from "@/components/motion/ParallaxContainer";
+import { ScrollParallaxLayer } from "@/components/motion/ScrollParallaxLayer";
 import { cn } from "@/lib/utils";
 
 const serviceIconMap: Record<string, React.ReactNode> = {
@@ -122,7 +124,9 @@ export function Services3DConstellation() {
         className="hidden lg:flex relative w-full rounded-[3rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-10 overflow-hidden flex-col justify-between space-y-6 min-h-[600px]"
       >
         {/* Ambient Radial Gradient Depth Plate */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] bg-radial from-[#f15e1c]/12 via-[#2e936f]/8 to-transparent rounded-full blur-3xl pointer-events-none" />
+        <ScrollParallaxLayer depth="background" speed={-25} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] pointer-events-none">
+          <div className="w-full h-full bg-radial from-[#f15e1c]/12 via-[#2e936f]/8 to-transparent rounded-full blur-3xl" />
+        </ScrollParallaxLayer>
 
         {/* Integrated Header Bar */}
         <div className="relative z-20 flex items-center justify-between border-b border-[#f7d7b0] dark:border-[#253630] pb-4">

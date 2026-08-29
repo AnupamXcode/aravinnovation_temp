@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
 import {
   Layers,
   ArrowRight,
@@ -75,7 +75,9 @@ export function CaseStudy3DTransformation() {
     offset: ["start end", "end start"],
   });
 
-  const progressLine = useTransform(scrollYProgress, [0.2, 0.8], ["0%", "100%"]);
+  const rawProgressLine = useTransform(scrollYProgress, [0.2, 0.8], [0, 100]);
+  const smoothProgressVal = useSpring(rawProgressLine, { damping: 30, stiffness: 100, mass: 0.6 });
+  const progressLineWidth = useTransform(smoothProgressVal, (v) => `${v}%`);
 
   return (
     <div
@@ -112,7 +114,7 @@ export function CaseStudy3DTransformation() {
           {/* Progress Connecting Line */}
           <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1.5 bg-[#f7d7b0] dark:bg-[#253630] -translate-y-1/2 z-0">
             <motion.div
-              style={{ width: shouldReduceMotion ? "100%" : progressLine }}
+              style={{ width: shouldReduceMotion ? "100%" : progressLineWidth }}
               className="h-full bg-gradient-to-r from-[#f15e1c] via-[#2e936f] to-[#fab60a]"
             />
           </div>

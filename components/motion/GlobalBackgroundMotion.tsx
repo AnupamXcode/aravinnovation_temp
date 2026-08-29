@@ -2,14 +2,11 @@
 
 import * as React from "react";
 import { useSiteConfig } from "@/lib/site-config";
-import { useReducedMotion } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
 
 export function GlobalBackgroundMotion() {
   const { config } = useSiteConfig();
   const shouldReduceMotion = useReducedMotion();
-
-  const [mousePos, setMousePos] = React.useState({ x: 0, y: 0 });
-  const [scrollY, setScrollY] = React.useState(0);
 
   const isEnabled =
     config.websiteEnabled !== false &&
@@ -18,28 +15,14 @@ export function GlobalBackgroundMotion() {
 
   const parallaxEnabled = config.parallaxEnabled !== false && !shouldReduceMotion;
 
-  React.useEffect(() => {
-    if (!isEnabled || shouldReduceMotion) return;
+  const { scrollY } = useScroll();
+  const rawY1 = useTransform(scrollY, [0, 3000], [0, -320]);
+  const rawY2 = useTransform(scrollY, [0, 3000], [0, 240]);
+  const rawYGrid = useTransform(scrollY, [0, 3000], [0, -140]);
 
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!parallaxEnabled) return;
-      const x = (e.clientX / window.innerWidth - 0.5) * 30;
-      const y = (e.clientY / window.innerHeight - 0.5) * 30;
-      setMousePos({ x, y });
-    };
-
-    const handleScroll = () => {
-      setScrollY(window.scrollY * 0.05);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [isEnabled, parallaxEnabled, shouldReduceMotion]);
+  const smoothY1 = useSpring(rawY1, { damping: 35, stiffness: 100, mass: 0.8 });
+  const smoothY2 = useSpring(rawY2, { damping: 35, stiffness: 100, mass: 0.8 });
+  const smoothYGrid = useSpring(rawYGrid, { damping: 40, stiffness: 90, mass: 1 });
 
   if (!isEnabled) {
     return null;
@@ -55,29 +38,21 @@ export function GlobalBackgroundMotion() {
     );
   }
 
-  const transformStyle = {
-    transform: `translate3d(${mousePos.x}px, ${mousePos.y - scrollY}px, 0)`,
-    transition: "transform 0.4s ease-out",
-  };
-
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
       {/* Soft Ambient Floating Glow Orbs (Brand colors: #f15e1c and #2e936f) */}
-      <div
-        style={transformStyle}
-        className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-radial from-[#f15e1c]/12 via-[#f7d7b0]/8 to-transparent rounded-full blur-3xl animate-float-slow"
+      <motion.div
+        style={{ y: parallaxEnabled ? smoothY1 : 0, willChange: "transform" }}
+        className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-radial from-[#f15e1c]/12 via-[#f7d7b0]/8 to-transparent rounded-full blur-3xl"
       />
-      <div
-        style={{
-          transform: `translate3d(${-mousePos.x * 0.8}px, ${-mousePos.y * 0.8 + scrollY * 0.5}px, 0)`,
-          transition: "transform 0.5s ease-out",
-        }}
-        className="absolute top-2/3 -right-20 w-[550px] h-[550px] bg-radial from-[#2e936f]/10 via-[#fab60a]/6 to-transparent rounded-full blur-3xl animate-float-delayed"
+      <motion.div
+        style={{ y: parallaxEnabled ? smoothY2 : 0, willChange: "transform" }}
+        className="absolute top-2/3 -right-20 w-[550px] h-[550px] bg-radial from-[#2e936f]/10 via-[#fab60a]/6 to-transparent rounded-full blur-3xl"
       />
 
-      {/* Continuously Moving Subtle SVG Digital Constellation Grid (Task F) */}
-      <div
-        style={transformStyle}
+      {/* Continuously Moving Subtle SVG Digital Constellation Grid */}
+      <motion.div
+        style={{ y: parallaxEnabled ? smoothYGrid : 0, willChange: "transform" }}
         className="absolute inset-0 opacity-[0.18] dark:opacity-[0.12] flex items-center justify-center"
       >
         <svg
@@ -101,7 +76,7 @@ export function GlobalBackgroundMotion() {
           <circle cx="420" cy="450" r="5.5" fill="#fab60a" />
           <circle cx="150" cy="380" r="4" fill="#2e936f" />
         </svg>
-      </div>
+      </motion.div>
     </div>
   );
 }
