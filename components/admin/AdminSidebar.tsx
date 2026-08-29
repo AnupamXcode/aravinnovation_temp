@@ -52,6 +52,7 @@ export function AdminSidebar({
       items: [
         { id: "hero", label: "Homepage & Hero", icon: Globe },
         { id: "services", label: "Core Services", icon: Briefcase },
+        { id: "products", label: "Products (AstroBeams)", icon: Sparkles },
         { id: "industries", label: "Industry Solutions", icon: Building2 },
         { id: "casestudies", label: "Case Studies", icon: FileText },
         { id: "methodology", label: "5-Step Methodology", icon: Workflow },

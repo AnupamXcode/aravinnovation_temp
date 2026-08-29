@@ -73,13 +73,12 @@ export function InteractiveServiceStack3D() {
 
       if (!stack || !track || layers.length === 0) return;
 
-      const n = layers.length;
+      const n = serviceLayers.length;
 
-      // Draw SVG hairline connector paths & moving data particles between 3D stack & side labels
+      // Draw SVG connector paths, disc rim node dots & arrowheads locked frame-by-frame to live bounding rects
       const place = (currentRevealedCount: number, currentActiveIdx: number) => {
         if (!stack || !rootRef.current || !leadersContainer) return;
         const rootBox = rootRef.current.getBoundingClientRect();
-        const stackBox = stack.getBoundingClientRect();
 
         leadersContainer.innerHTML = "";
 
@@ -97,43 +96,69 @@ export function InteractiveServiceStack3D() {
           const layerBox = layerEl.getBoundingClientRect();
           const cardBox = card.getBoundingClientRect();
           const isLeft = card.parentElement?.classList.contains("left");
+          const color = card.getAttribute("data-tone") || "#f15e1c";
 
+          // Card target pin coordinate
           const cardPinX = isLeft
-            ? cardBox.right - rootBox.left
-            : cardBox.left - rootBox.left;
+            ? cardBox.right - rootBox.left - 2
+            : cardBox.left - rootBox.left + 2;
           const cardPinY = cardBox.top + cardBox.height / 2 - rootBox.top;
 
+          // Disc outer rim node coordinate
           const stackAnchorX = isLeft
-            ? layerBox.left - rootBox.left + 15
-            : layerBox.right - rootBox.left - 15;
+            ? layerBox.left - rootBox.left + 14
+            : layerBox.right - rootBox.left - 14;
           const layerAnchorY = layerBox.top + layerBox.height / 2 - rootBox.top;
 
-          // Hairline connector path from 3D Layer -> Label Pin
+          // Disc rim node dot
+          const discNode = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+          discNode.setAttribute("cx", `${stackAnchorX}`);
+          discNode.setAttribute("cy", `${layerAnchorY}`);
+          discNode.setAttribute("r", isActive ? "5.5" : "3.5");
+          discNode.setAttribute("fill", color);
+          discNode.setAttribute("stroke", "#ffffff");
+          discNode.setAttribute("stroke-width", "2");
+          leadersContainer.appendChild(discNode);
+
+          // Curved S-connector path from Disc rim -> Card pin
           const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-          const midX = isLeft ? cardPinX + 35 : cardPinX - 35;
-          const d = `M ${stackAnchorX} ${layerAnchorY} Q ${midX} ${layerAnchorY}, ${cardPinX} ${cardPinY}`;
+          const deltaX = Math.abs(cardPinX - stackAnchorX);
+          const midX1 = isLeft ? stackAnchorX - deltaX * 0.4 : stackAnchorX + deltaX * 0.4;
+          const midX2 = isLeft ? cardPinX + deltaX * 0.4 : cardPinX - deltaX * 0.4;
+          const d = `M ${stackAnchorX} ${layerAnchorY} C ${midX1} ${layerAnchorY}, ${midX2} ${cardPinY}, ${cardPinX} ${cardPinY}`;
           path.setAttribute("d", d);
-          path.setAttribute("stroke", card.getAttribute("data-tone") || "#f15e1c");
+          path.setAttribute("stroke", color);
           path.setAttribute("stroke-width", isActive ? "2.5" : "1.5");
           path.setAttribute("stroke-dasharray", isActive ? "none" : "4 4");
           path.setAttribute("fill", "none");
-          path.setAttribute("opacity", isActive ? "0.95" : "0.45");
+          path.setAttribute("opacity", isActive ? "1" : "0.55");
           leadersContainer.appendChild(path);
 
-          // Moving data particle on active connector line
-          const particle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-          particle.setAttribute("cx", `${stackAnchorX}`);
-          particle.setAttribute("cy", `${layerAnchorY}`);
-          particle.setAttribute("r", isActive ? "4" : "2.5");
-          particle.setAttribute("fill", card.getAttribute("data-tone") || "#f15e1c");
+          // Terminating Arrowhead pointing directly at card border
+          const arrow = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          const arrowSize = isActive ? 7 : 5.5;
+          const arrowD = isLeft
+            ? `M ${cardPinX + arrowSize * 1.4} ${cardPinY - arrowSize} L ${cardPinX} ${cardPinY} L ${cardPinX + arrowSize * 1.4} ${cardPinY + arrowSize} Z`
+            : `M ${cardPinX - arrowSize * 1.4} ${cardPinY - arrowSize} L ${cardPinX} ${cardPinY} L ${cardPinX - arrowSize * 1.4} ${cardPinY + arrowSize} Z`;
+          arrow.setAttribute("d", arrowD);
+          arrow.setAttribute("fill", color);
+          arrow.setAttribute("opacity", isActive ? "1" : "0.75");
+          leadersContainer.appendChild(arrow);
+
+          // Flowing data-pulse dot on active connector line
           if (isActive) {
-            particle.setAttribute("class", "animate-ping");
+            const pulseDot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            pulseDot.setAttribute("cx", `${(stackAnchorX + cardPinX) / 2}`);
+            pulseDot.setAttribute("cy", `${(layerAnchorY + cardPinY) / 2}`);
+            pulseDot.setAttribute("r", "4");
+            pulseDot.setAttribute("fill", color);
+            pulseDot.setAttribute("class", "animate-ping");
+            leadersContainer.appendChild(pulseDot);
           }
-          leadersContainer.appendChild(particle);
         });
       };
 
-      // Vertical 3D Exploded-Stack Transformation Logic
+      // Synchronized Motion Unit: Disc Layer i, Arrow i, and Side Card i move together along Y_i
       const explode = (p: number) => {
         if (!stack) return;
         const clampedP = Math.max(0, Math.min(1, p));
@@ -145,17 +170,20 @@ export function InteractiveServiceStack3D() {
         setRevealedCount(currentCount);
         setActiveServiceIdx(activeIdx);
 
-        const stepY = 56; // Vertical distance between architectural modules
+        const stepY = 56; // Vertical distance between floating 3D modules
         const stepZ = 22; // Perspective depth Z offset
 
-        // Transform 3D Stack Architectural Modules vertically along Y & Z
-        layers.forEach((layer, i) => {
-          const isRevealed = i < currentCount;
-          const isActive = i === activeIdx;
+        // Transform 3D Stack Architectural Discs vertically along Y & Z
+        layers.forEach((layer) => {
+          const targetId = layer.getAttribute("data-i");
+          const isCore = targetId === "core";
+          const i = isCore ? 3.5 : parseInt(targetId || "0", 10);
+          const isRevealed = isCore || i < currentCount;
+          const isActive = !isCore && i === activeIdx;
 
-          const layerP = Math.max(0, Math.min(1, (clampedP - i / n) * n));
+          const layerP = Math.max(0, Math.min(1, (clampedP - (isCore ? 0.4 : i / n)) * n));
           const eased = 1 - Math.pow(1 - layerP, 3);
-          const factor = isRevealed ? 0.28 + 0.72 * eased : 0.1;
+          const factor = isRevealed ? 0.25 + 0.75 * eased : 0.08;
 
           // Vertical Y separation (Layer 0 at top, Layer 7 at bottom)
           const y = (i - (n - 1) / 2) * stepY * factor;
@@ -163,29 +191,38 @@ export function InteractiveServiceStack3D() {
           const baseZ = ((n - 1) / 2 - i) * stepZ * factor;
           const z = isActive ? baseZ + 38 : baseZ;
           const scale = isActive ? 1.05 : isRevealed ? 1 : 0.92;
-          const opacity = isRevealed ? (isActive ? 1 : 0.86) : 0.25;
+          const opacity = isRevealed ? (isActive ? 1 : 0.88) : 0.3;
 
           layer.style.transform = `translate3d(0px, ${y}px, ${z}px) scale(${scale})`;
           layer.style.opacity = `${opacity}`;
-          layer.style.zIndex = `${25 - i}`;
+          layer.style.zIndex = `${25 - (isCore ? 4 : Math.floor(i))}`;
         });
 
-        // Side Label Cards progressive reveal
+        // Synchronize Side Cards vertically with their corresponding disc layer (Y_i)
         cards.forEach((card) => {
           const targetId = card.getAttribute("data-for");
           const i = parseInt(targetId || "0", 10);
           const isRevealed = i < currentCount;
           const isActive = i === activeIdx;
+          const isLeft = card.parentElement?.classList.contains("left");
+
+          // Calculate vertical position Y_i matching disc layer i
+          const layerP = Math.max(0, Math.min(1, (clampedP - i / n) * n));
+          const eased = 1 - Math.pow(1 - layerP, 3);
+          const factor = isRevealed ? 0.25 + 0.75 * eased : 0.08;
+          const y_i = (i - (n - 1) / 2) * stepY * factor;
 
           if (isRevealed) {
-            card.style.opacity = "1";
+            const emergeProgress = Math.max(0, Math.min(1, (clampedP - i / n) * n * 2));
+            const cardX = isLeft ? 0 : 0;
+            card.style.opacity = `${emergeProgress}`;
             card.style.transform = isActive
-              ? "scale(1.04) translateZ(15px)"
-              : "scale(1) translateZ(0px)";
+              ? `translate3d(${cardX}px, ${y_i}px, 15px) scale(1.04)`
+              : `translate3d(${cardX}px, ${y_i}px, 0px) scale(1)`;
             card.style.pointerEvents = "auto";
           } else {
             card.style.opacity = "0";
-            card.style.transform = "scale(0.88) translateY(15px)";
+            card.style.transform = `translate3d(${isLeft ? "-35px" : "35px"}, ${y_i}px, 0px) scale(0.92)`;
             card.style.pointerEvents = "none";
           }
         });
@@ -197,6 +234,7 @@ export function InteractiveServiceStack3D() {
           bar.style.width = `${clampedP * 100}%`;
         }
 
+        // Synchronously calculate connector placement on current frame
         place(currentCount, activeIdx);
       };
 
@@ -272,13 +310,17 @@ export function InteractiveServiceStack3D() {
     return null;
   }
 
-  // Left column (Even i: 0, 2, 4, 6) & Right column (Odd i: 1, 3, 5, 7)
+  // Left column (Even i: 0 IT Strategy, 2 Web & App, 4 Audit, 6 SEO)
+  // Right column (Odd i: 1 Digital Marketing, 3 Risk & Compliance, 5 Training, 7 AI Portfolio)
   const leftServices = serviceLayers.filter((_, idx) => idx % 2 === 0);
   const rightServices = serviceLayers.filter((_, idx) => idx % 2 !== 0);
 
+  const topStackLayers = serviceLayers.slice(0, 4);
+  const bottomStackLayers = serviceLayers.slice(4);
+
   return (
     <div ref={rootRef} className="relative w-full select-none overflow-hidden my-12" id="services">
-      {/* Pinned Scroll Track Container (260vh for smooth 8-stage vertical explosion) */}
+      {/* Pinned Scroll Track Container (260vh for smooth 8-step synchronized reveal) */}
       <div className="service-stack-track relative w-full h-[260vh]">
         {/* Pinned Viewport Stage */}
         <div className="service-pinned-stage w-full h-screen flex flex-col justify-between py-6 px-4 sm:px-8 lg:px-12 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
@@ -287,13 +329,13 @@ export function InteractiveServiceStack3D() {
             <div className="space-y-1">
               <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>VERTICAL 3D ENTERPRISE ARCHITECTURE</span>
+                <span>OUR CORE SERVICES ECOSYSTEM</span>
               </div>
               <h2 className="text-2xl sm:text-4xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
                 Enterprise Technology Practices
               </h2>
               <p className="text-xs sm:text-sm text-[#7A6A5F] dark:text-[#B8ACA0]">
-                Scroll down to explode the 3D architecture stack into integrated enterprise practices.
+                Scroll to explore how our integrated practices work together to drive enterprise growth.
               </p>
             </div>
             <Link href="/services">
@@ -303,7 +345,7 @@ export function InteractiveServiceStack3D() {
             </Link>
           </div>
 
-          {/* SVG Leaders & Moving Data Particles Overlay */}
+          {/* SVG Leaders & Arrowhead Connectors Overlay */}
           <svg className="service-leaders-svg absolute inset-0 w-full h-full pointer-events-none z-20" />
 
           {/* Main Desktop Vertical 3D Stage (Hidden on mobile portrait) */}
@@ -320,12 +362,12 @@ export function InteractiveServiceStack3D() {
                     key={layer.id}
                     data-for={layer.id}
                     data-tone={layer.tone}
-                    className="service-side-card transition-all duration-300"
+                    className="service-side-card"
                   >
                     <Link href={layer.href}>
                       <div
                         className={cn(
-                          "p-4 rounded-2xl backdrop-blur-md transition-all duration-300 border shadow-xl cursor-pointer hover:border-[#f15e1c]",
+                          "p-4 rounded-2xl backdrop-blur-md border shadow-xl cursor-pointer hover:border-[#f15e1c]",
                           isActive
                             ? "bg-white dark:bg-[#1a2924] border-[#f15e1c] ring-4 ring-[#f15e1c]/30 shadow-2xl scale-105"
                             : "bg-white/90 dark:bg-[#172420]/90 border-[#f7d7b0] dark:border-[#253630]"
@@ -333,7 +375,7 @@ export function InteractiveServiceStack3D() {
                       >
                         <div className="flex items-center gap-3 mb-1.5">
                           <div
-                            className="w-8 h-8 rounded-xl flex items-center justify-center shadow-md shrink-0"
+                            className="w-8 h-8 rounded-xl flex items-center justify-center shadow-md shrink-0 text-white font-bold"
                             style={{ backgroundColor: layer.tone }}
                           >
                             {iconMap[layer.icon] || <Sparkles className="w-4.5 h-4.5 text-white" />}
@@ -355,17 +397,17 @@ export function InteractiveServiceStack3D() {
               })}
             </ul>
 
-            {/* CENTRAL VERTICAL 3D STACK WITH DIGITAL CORE */}
+            {/* CENTRAL VERTICAL 3D DISC STACK WITH ARAV DIGITAL CORE AT CENTER */}
             <div className="relative flex flex-col items-center justify-center z-30 mx-auto">
-              {/* Central Vertical 3D Ellipse Disc Module Stack */}
               <div
-                className="service-stack-container relative w-64 h-44 sm:w-80 sm:h-56 md:w-[400px] md:h-64 cursor-pointer"
+                className="service-stack-container relative w-64 h-48 sm:w-80 sm:h-60 md:w-[420px] md:h-72 cursor-pointer"
                 style={{
                   transformStyle: "preserve-3d",
                   transform: "translateY(var(--lift, 0px)) rotateX(42deg)",
                 }}
               >
-                {serviceLayers.map((layer) => {
+                {/* Top 4 Discs */}
+                {topStackLayers.map((layer) => {
                   const isActive = layer.id === activeServiceIdx;
                   const isHovered = layer.id === hoveredIdx;
 
@@ -376,10 +418,10 @@ export function InteractiveServiceStack3D() {
                         onMouseEnter={() => setHoveredIdx(layer.id)}
                         onMouseLeave={() => setHoveredIdx(null)}
                         className={cn(
-                          "service-disc-layer absolute inset-0 rounded-[50%] border-2 flex items-center justify-center px-6 text-center select-none shadow-2xl group",
+                          "service-disc-layer absolute inset-0 rounded-[50%] border-b-4 border-t border-white/70 flex items-center justify-center px-6 text-center select-none shadow-2xl group",
                           isActive
-                            ? "border-white ring-4 ring-[#f15e1c]/50"
-                            : "border-white/50 hover:border-white"
+                            ? "ring-4 ring-[#f15e1c]/50 border-b-[#f15e1c]"
+                            : "border-b-black/30 hover:border-b-white"
                         )}
                         style={{
                           transformStyle: "preserve-3d",
@@ -391,9 +433,8 @@ export function InteractiveServiceStack3D() {
                             : `0 15px 30px -8px ${layer.tone}40, inset 0 2px 6px rgba(255,255,255,0.5)`,
                         }}
                       >
-                        {/* Service Icon & Title Printed Directly ON the 3D Layer Surface */}
                         <div className="relative z-10 flex items-center justify-center gap-2.5 text-white pointer-events-none drop-shadow-md">
-                          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0 border border-white/40 group-hover:scale-110 transition-transform">
+                          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0 border border-white/40 group-hover:scale-110">
                             {iconMap[layer.icon] || <Sparkles className="w-4 h-4 text-white" />}
                           </div>
                           <span className="text-xs sm:text-sm font-extrabold font-display tracking-tight text-white drop-shadow-lg">
@@ -404,13 +445,70 @@ export function InteractiveServiceStack3D() {
                     </Link>
                   );
                 })}
-              </div>
 
-              {/* CENTRAL ARAV DIGITAL CORE BADGE */}
-              <div className="mt-6 px-4 py-2 rounded-2xl bg-white dark:bg-[#101b17] border-2 border-[#f15e1c] shadow-xl text-center z-30">
-                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#f15e1c]">
-                  ARAV DIGITAL CORE
-                </span>
+                {/* Center Core Layer: ARAV DIGITAL CORE */}
+                <i
+                  data-i="core"
+                  className="service-disc-layer absolute inset-0 rounded-[50%] border-b-4 border-t border-white flex items-center justify-center px-6 text-center select-none shadow-2xl bg-white dark:bg-[#1c2a25] border-b-[#f15e1c] ring-4 ring-[#f15e1c]/40"
+                  style={{
+                    transformStyle: "preserve-3d",
+                    boxShadow: "0 25px 50px -5px rgba(241,94,28,0.5), inset 0 2px 10px rgba(255,255,255,0.9)",
+                  }}
+                >
+                  <div className="relative z-10 flex items-center justify-center gap-3 text-[#1b2823] dark:text-white drop-shadow-md">
+                    <div className="w-8 h-8 rounded-full bg-[#f15e1c] flex items-center justify-center shrink-0 shadow-md">
+                      <Sparkles className="w-4.5 h-4.5 text-white" />
+                    </div>
+                    <div className="text-left">
+                      <span className="block text-xs sm:text-sm font-extrabold font-display tracking-tight text-[#f15e1c] dark:text-[#f15e1c]">
+                        ARAV DIGITAL CORE
+                      </span>
+                      <span className="block text-[9px] font-mono font-medium text-[#4a5c55] dark:text-[#d3eee4]">
+                        Integrated Enterprise Capabilities
+                      </span>
+                    </div>
+                  </div>
+                </i>
+
+                {/* Bottom 4 Discs */}
+                {bottomStackLayers.map((layer) => {
+                  const isActive = layer.id === activeServiceIdx;
+                  const isHovered = layer.id === hoveredIdx;
+
+                  return (
+                    <Link key={layer.id} href={layer.href}>
+                      <i
+                        data-i={layer.id}
+                        onMouseEnter={() => setHoveredIdx(layer.id)}
+                        onMouseLeave={() => setHoveredIdx(null)}
+                        className={cn(
+                          "service-disc-layer absolute inset-0 rounded-[50%] border-b-4 border-t border-white/70 flex items-center justify-center px-6 text-center select-none shadow-2xl group",
+                          isActive
+                            ? "ring-4 ring-[#f15e1c]/50 border-b-[#f15e1c]"
+                            : "border-b-black/30 hover:border-b-white"
+                        )}
+                        style={{
+                          transformStyle: "preserve-3d",
+                          background: `linear-gradient(145deg, color-mix(in srgb, ${layer.tone} 88%, white) 0%, ${layer.tone} 52%, color-mix(in srgb, ${layer.tone} 75%, black) 100%)`,
+                          boxShadow: isActive
+                            ? `0 25px 50px -5px ${layer.tone}80, 0 0 30px ${layer.tone}60, inset 0 2px 10px rgba(255,255,255,0.8)`
+                            : isHovered
+                            ? `0 20px 40px -5px ${layer.tone}60, inset 0 2px 8px rgba(255,255,255,0.7)`
+                            : `0 15px 30px -8px ${layer.tone}40, inset 0 2px 6px rgba(255,255,255,0.5)`,
+                        }}
+                      >
+                        <div className="relative z-10 flex items-center justify-center gap-2.5 text-white pointer-events-none drop-shadow-md">
+                          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0 border border-white/40 group-hover:scale-110">
+                            {iconMap[layer.icon] || <Sparkles className="w-4 h-4 text-white" />}
+                          </div>
+                          <span className="text-xs sm:text-sm font-extrabold font-display tracking-tight text-white drop-shadow-lg">
+                            {layer.name}
+                          </span>
+                        </div>
+                      </i>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
 
@@ -423,12 +521,12 @@ export function InteractiveServiceStack3D() {
                     key={layer.id}
                     data-for={layer.id}
                     data-tone={layer.tone}
-                    className="service-side-card transition-all duration-300"
+                    className="service-side-card"
                   >
                     <Link href={layer.href}>
                       <div
                         className={cn(
-                          "p-4 rounded-2xl backdrop-blur-md transition-all duration-300 border shadow-xl cursor-pointer hover:border-[#f15e1c]",
+                          "p-4 rounded-2xl backdrop-blur-md border shadow-xl cursor-pointer hover:border-[#f15e1c]",
                           isActive
                             ? "bg-white dark:bg-[#1a2924] border-[#f15e1c] ring-4 ring-[#f15e1c]/30 shadow-2xl scale-105"
                             : "bg-white/90 dark:bg-[#172420]/90 border-[#f7d7b0] dark:border-[#253630]"
@@ -436,7 +534,7 @@ export function InteractiveServiceStack3D() {
                       >
                         <div className="flex items-center gap-3 mb-1.5">
                           <div
-                            className="w-8 h-8 rounded-xl flex items-center justify-center shadow-md shrink-0"
+                            className="w-8 h-8 rounded-xl flex items-center justify-center shadow-md shrink-0 text-white font-bold"
                             style={{ backgroundColor: layer.tone }}
                           >
                             {iconMap[layer.icon] || <Sparkles className="w-4.5 h-4.5 text-white" />}
@@ -470,7 +568,7 @@ export function InteractiveServiceStack3D() {
                 <Link key={layer.id} href={layer.href} className="w-full">
                   <div
                     className={cn(
-                      "p-4 rounded-2xl transition-all duration-200 border flex items-center justify-between gap-3 shadow-md",
+                      "p-4 rounded-2xl border flex items-center justify-between gap-3 shadow-md",
                       isActive
                         ? "bg-white dark:bg-[#1a2924] border-[#f15e1c] ring-2 ring-[#f15e1c]/40 shadow-xl"
                         : "bg-white/90 dark:bg-[#172420]/90 border-[#f7d7b0] dark:border-[#253630]"
@@ -505,7 +603,7 @@ export function InteractiveServiceStack3D() {
           {/* Bottom Navigation Indicator Bar */}
           <div className="relative z-20 flex items-center justify-between max-w-7xl mx-auto w-full border-t border-[#f7d7b0] dark:border-[#253630] pt-3 text-xs font-mono text-[#7A6A5F] dark:text-[#B8ACA0]">
             <span className="inline-flex items-center gap-1.5">
-              <span>Scroll Down to Explode 3D Stack</span>
+              <span>Scroll Down to Explore Each Practice</span>
               <ChevronDown className="w-3.5 h-3.5 text-[#f15e1c] animate-bounce" />
             </span>
             <div className="w-44 h-1.5 rounded-full bg-[#f7d7b0]/50 dark:bg-[#253630] overflow-hidden">

@@ -15,6 +15,7 @@ import {
   ProcessStepItem,
   TestimonialItem,
 } from "@/lib/site-content";
+import { productsData, Product } from "@/data/products";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { SEOAdminPanel } from "@/components/admin/SEOAdminPanel";
 import {
@@ -137,6 +138,8 @@ export default function AdminDashboardPage() {
 
   // Inline editing states
   const [editingServiceSlug, setEditingServiceSlug] = React.useState<string | null>(null);
+  const [productsList, setProductsList] = React.useState<Product[]>(productsData);
+  const [editingProductSlug, setEditingProductSlug] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     if (!isAuthenticated) {
@@ -631,6 +634,241 @@ export default function AdminDashboardPage() {
                         <Button type="submit" variant="primary" size="sm" className="rounded-xl mt-2 cursor-pointer" leftIcon={<Save className="w-3.5 h-3.5" />}>
                           Done Editing
                         </Button>
+                      </form>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================================= */}
+        {/* TAB: PRODUCTS & PLATFORMS CMS EDITOR (ASTROBEAMS & OMNIGRC) */}
+        {/* ========================================================================= */}
+        {activeTab === "products" && (
+          <div className="space-y-6">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+              <h2 className="text-lg font-bold font-display flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-[#f15e1c]" />
+                <span>Products &amp; Platforms CMS (AstroBeams.ai, AstroBeams.store &amp; OMNiGRC)</span>
+              </h2>
+              <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+                Manage product details, categories, descriptions, URLs, tags/capabilities, CTAs, visibility, and display ordering.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {productsList.map((product, pIdx) => {
+                const isExpanded = editingProductSlug === product.slug;
+                const isLive = product.status === "live";
+
+                return (
+                  <div
+                    key={product.slug}
+                    className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4"
+                  >
+                    <div className="flex items-center justify-between pb-3 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                      <div>
+                        <span className="text-xs font-bold font-mono text-[#f15e1c] uppercase">
+                          {product.category}
+                        </span>
+                        <h3 className="text-lg font-bold font-display">{product.name}</h3>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const updated = productsList.map((p, i) =>
+                              i === pIdx
+                                ? { ...p, status: isLive ? ("in-development" as const) : ("live" as const), badge: isLive ? "In Dev" : "Live", badgeColor: isLive ? "#fab60a" : "#2e936f" }
+                                : p
+                            );
+                            setProductsList(updated);
+                            showToast(`${product.name} visibility status updated`);
+                          }}
+                          className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                            isLive ? "bg-emerald-500 text-white" : "bg-amber-500 text-white"
+                          }`}
+                        >
+                          {isLive ? "✓ Live" : "⚠️ In Dev"}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setEditingProductSlug(isExpanded ? null : product.slug)}
+                          className="p-1.5 rounded-xl bg-[#FBF3EA] dark:bg-[#1A1613] text-[#f15e1c] hover:bg-[#FCE3D3] cursor-pointer"
+                        >
+                          <Edit3 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+
+                    {!isExpanded && (
+                      <div className="space-y-2">
+                        <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] line-clamp-3">
+                          {product.description}
+                        </p>
+                        <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                          {product.features.slice(0, 5).map((tag, tIdx) => (
+                            <span
+                              key={tIdx}
+                              className="px-2 py-0.5 rounded-md bg-[#FCE3D3]/60 text-[#f15e1c] text-[10px] font-mono font-bold"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        {product.externalUrl && (
+                          <a
+                            href={product.externalUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-xs font-bold text-[#f15e1c] hover:underline pt-1"
+                          >
+                            <span>{product.ctaText}</span>
+                            <ExternalLink className="w-3 h-3" />
+                          </a>
+                        )}
+                      </div>
+                    )}
+
+                    {isExpanded && (
+                      <form
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          showToast(`${product.name} updated successfully`);
+                          setEditingProductSlug(null);
+                        }}
+                        className="space-y-3 pt-2"
+                      >
+                        <div className="space-y-1">
+                          <label className="text-[11px] font-bold">Product Name</label>
+                          <input
+                            type="text"
+                            value={product.name}
+                            onChange={(e) => {
+                              const updated = productsList.map((p, i) =>
+                                i === pIdx ? { ...p, name: e.target.value } : p
+                              );
+                              setProductsList(updated);
+                            }}
+                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                          />
+                        </div>
+
+                        <div className="space-y-1">
+                          <label className="text-[11px] font-bold">Product Category</label>
+                          <input
+                            type="text"
+                            value={product.category}
+                            onChange={(e) => {
+                              const updated = productsList.map((p, i) =>
+                                i === pIdx ? { ...p, category: e.target.value } : p
+                              );
+                              setProductsList(updated);
+                            }}
+                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                          />
+                        </div>
+
+                        <div className="space-y-1">
+                          <label className="text-[11px] font-bold">Short Description</label>
+                          <textarea
+                            rows={4}
+                            value={product.description}
+                            onChange={(e) => {
+                              const updated = productsList.map((p, i) =>
+                                i === pIdx ? { ...p, description: e.target.value } : p
+                              );
+                              setProductsList(updated);
+                            }}
+                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                          />
+                        </div>
+
+                        <div className="space-y-1">
+                          <label className="text-[11px] font-bold">External Product URL</label>
+                          <input
+                            type="text"
+                            value={product.externalUrl || ""}
+                            onChange={(e) => {
+                              const updated = productsList.map((p, i) =>
+                                i === pIdx ? { ...p, externalUrl: e.target.value, ctaUrl: e.target.value } : p
+                              );
+                              setProductsList(updated);
+                            }}
+                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                          />
+                        </div>
+
+                        <div className="space-y-1">
+                          <label className="text-[11px] font-bold">CTA Button Text</label>
+                          <input
+                            type="text"
+                            value={product.ctaText}
+                            onChange={(e) => {
+                              const updated = productsList.map((p, i) =>
+                                i === pIdx ? { ...p, ctaText: e.target.value } : p
+                              );
+                              setProductsList(updated);
+                            }}
+                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                          />
+                        </div>
+
+                        <div className="space-y-1">
+                          <label className="text-[11px] font-bold">Relevant Tags / Features (comma separated)</label>
+                          <input
+                            type="text"
+                            value={product.features.join(", ")}
+                            onChange={(e) => {
+                              const tags = e.target.value.split(",").map((t) => t.trim()).filter(Boolean);
+                              const updated = productsList.map((p, i) =>
+                                i === pIdx ? { ...p, features: tags } : p
+                              );
+                              setProductsList(updated);
+                            }}
+                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                          />
+                        </div>
+
+                        <div className="flex items-center gap-2 pt-2">
+                          {pIdx > 0 && (
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const copy = [...productsList];
+                                const temp = copy[pIdx];
+                                copy[pIdx] = copy[pIdx - 1];
+                                copy[pIdx - 1] = temp;
+                                setProductsList(copy);
+                                showToast(`Moved ${product.name} up in display order`);
+                              }}
+                              className="px-3 py-1.5 rounded-xl bg-[#FBF3EA] dark:bg-[#1A1613] text-xs font-bold text-[#f15e1c] cursor-pointer"
+                            >
+                              ↑ Move Up
+                            </button>
+                          )}
+                          {pIdx < productsList.length - 1 && (
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const copy = [...productsList];
+                                const temp = copy[pIdx];
+                                copy[pIdx] = copy[pIdx + 1];
+                                copy[pIdx + 1] = temp;
+                                setProductsList(copy);
+                                showToast(`Moved ${product.name} down in display order`);
+                              }}
+                              className="px-3 py-1.5 rounded-xl bg-[#FBF3EA] dark:bg-[#1A1613] text-xs font-bold text-[#f15e1c] cursor-pointer"
+                            >
+                              ↓ Move Down
+                            </button>
+                          )}
+                          <Button type="submit" variant="primary" size="sm" className="rounded-xl ml-auto cursor-pointer" leftIcon={<Save className="w-3.5 h-3.5" />}>
+                            Save Product
+                          </Button>
+                        </div>
                       </form>
                     )}
                   </div>
