@@ -147,6 +147,7 @@ export default async function RootLayout({
       lang={locale}
       dir={locale === "ar" ? "rtl" : "ltr"}
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
       className={`${plusJakartaSans.variable} ${inter.variable} ${notoSansArabic.variable} scroll-smooth`}
     >
       <head>
