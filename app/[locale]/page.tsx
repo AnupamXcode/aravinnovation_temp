@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Hero } from "@/components/hero/Hero";
 import { ArchitectureCaseStudyCard } from "@/components/case-studies/ArchitectureCaseStudyCard";
 import { BeforeAfterSlider } from "@/components/motion/BeforeAfterSlider";
+import { ProblemToSolutionSection } from "@/components/home/ProblemToSolutionSection";
 import { AnimatedTestimonialsCarousel } from "@/components/testimonials/AnimatedTestimonialsCarousel";
 import { ClientFeedbackEditorialSection } from "@/components/testimonials/ClientFeedbackEditorialSection";
 import { LeadForm } from "@/components/forms/LeadForm";
@@ -120,15 +121,13 @@ export default async function HomePage({
         </section>
       </div>
 
-      {/* 1. SERVICES / DIGITAL CORE ECOSYSTEM */}
-      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="services">
-        <Scroll3DContainer variant="card">
-          <Services3DConstellation />
-        </Scroll3DContainer>
-      </div>
+      {/* TECHNOLOGY IS ONLY VALUABLE WHEN IT SOLVES A REAL PROBLEM SECTION */}
+      <ProblemToSolutionSection />
 
       {/* 3D INTERACTIVE SERVICE STACK WITH SCROLL-LINKED SERVICE MAPPING */}
-      <InteractiveServiceStack3D />
+      <div id="services">
+        <InteractiveServiceStack3D />
+      </div>
 
       {/* FULL-WIDTH DIGITAL TRANSFORMATION PATHWAY */}
       <CaseStudy3DTransformation />

@@ -395,3 +395,21 @@ input:focus, select:focus, textarea:focus {
   color: #f15e1c;
 }
 
+/* Mobile Responsiveness & Hardware Acceleration Optimizations */
+html, body {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  overscroll-behavior-y: none;
+}
+
+@media (max-width: 768px) {
+  * {
+    /* Disable heavy filter blurs on low-power mobile devices for 60fps scrolling */
+    backdrop-filter: none !important;
+  }
+}
+
+.transform-gpu {
+  will-change: transform;
+  transform: translateZ(0);
+}

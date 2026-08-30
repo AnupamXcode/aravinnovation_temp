@@ -245,9 +245,16 @@ export function InteractiveServiceStack3D() {
           bar.style.width = `${clampedP * 100}%`;
         }
 
-        // Synchronously calculate connector placement on current frame
-        place(currentCount, activeIdx, currentHovered);
+        // Throttle SVG connector placement to next animation frame to prevent scroll-blocking reflows
+        if (scheduledPlace === null) {
+          scheduledPlace = requestAnimationFrame(() => {
+            scheduledPlace = null;
+            place(currentCount, activeIdx, currentHovered);
+          });
+        }
       };
+
+      let scheduledPlace: number | null = null;
 
       if (reduce) {
         explode(1);
