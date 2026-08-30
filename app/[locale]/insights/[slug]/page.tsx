@@ -105,7 +105,7 @@ export default async function InsightPostDetailPage({
         category={post.category}
       />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div className="w-full max-w-5xl lg:max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 space-y-12">
         {/* Navigation & Breadcrumb */}
         <div className="space-y-6">
           <ScrollReveal direction="up">
@@ -118,7 +118,7 @@ export default async function InsightPostDetailPage({
               />
               <Link
                 href="/insights"
-                className="text-xs font-semibold text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] dark:hover:text-[#f15e1c] inline-flex items-center gap-1 transition-colors"
+                className="text-xs font-semibold text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] dark:hover:text-[#f15e1c] inline-flex items-center gap-1 transition-colors min-h-[44px] px-2"
               >
                 <ArrowLeft className="w-3.5 h-3.5" /> All Insights
               </Link>
@@ -140,7 +140,7 @@ export default async function InsightPostDetailPage({
                 </span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight leading-tight">
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight leading-tight">
                 {post.title}
               </h1>
 
@@ -171,7 +171,7 @@ export default async function InsightPostDetailPage({
 
           {post.featuredImageUrl && (
             <ScrollReveal direction="up" delay={0.12}>
-              <div className="relative w-full h-64 sm:h-96 rounded-3xl overflow-hidden border border-[#EFE2D6] dark:border-[#2C241E] shadow-md my-6">
+              <div className="relative w-full h-64 sm:h-[480px] lg:h-[540px] rounded-3xl overflow-hidden border border-[#EFE2D6] dark:border-[#2C241E] shadow-md my-6">
                 <img
                   src={post.featuredImageUrl}
                   alt={post.title}
