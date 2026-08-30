@@ -1,30 +1,30 @@
-  "use client";
+"use client";
 
 import * as React from "react";
 import { motion } from "framer-motion";
 import { useMagneticHover } from "@/lib/motion-system";
-import { Button, ButtonProps } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
-interface MagneticButtonProps extends ButtonProps {
+interface MagneticButtonProps {
   children: React.ReactNode;
   threshold?: number;
   strength?: number;
+  className?: string;
 }
 
 export function MagneticButton({
   children,
   threshold = 90,
   strength = 0.3,
-  className,
-  ...props
+  className = "",
 }: MagneticButtonProps) {
   const { ref, x, y } = useMagneticHover(threshold, strength);
 
   return (
-    <motion.div ref={ref} style={{ x, y }} className="inline-block">
-      <Button className={className} {...props}>
-        {children}
-      </Button>
+    <motion.div ref={ref} style={{ x, y }} className={cn("inline-block", className)}>
+      {children}
     </motion.div>
   );
 }
+
+export default MagneticButton;

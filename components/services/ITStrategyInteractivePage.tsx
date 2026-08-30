@@ -2,158 +2,659 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { motion, AnimatePresence, useReducedMotion, useInView } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useReducedMotion,
+  useInView,
+  useScroll,
+  useTransform,
+  useSpring,
+} from "framer-motion";
 import {
   Compass,
-  ShieldCheck,
   BarChart3,
   ArrowRight,
   Sparkles,
   CheckCircle2,
   Lock,
-  Server,
   TrendingUp,
   Quote,
-  Star,
-  Check,
-  ChevronRight,
   Globe2,
   Zap,
   Cpu,
+  Check,
+  ChevronRight,
 } from "lucide-react";
 import { Service } from "@/data/services";
-import { caseStudiesData } from "@/data/case-studies";
 import { testimonialsData } from "@/data/testimonials";
-import { Button } from "@/components/ui/button";
 import { Button3D } from "@/components/ui/button-3d";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { ScrollTextFlip } from "@/components/motion/ScrollTextFlip";
+import { TiltCard } from "@/components/motion/TiltCard";
+import { MagneticButton } from "@/components/motion/MagneticButton";
 import { cn } from "@/lib/utils";
 
 interface ITStrategyPageProps {
   service: Service;
 }
 
-// 4 Core Solutions Items
-const solutionsData = [
+/* =========================================================================
+   1. HERO BACKGROUND: ANIMATED DOT GRID & CURSOR SPOTLIGHT
+   ========================================================================= */
+function AnimatedDotGrid() {
+  return (
+    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-15 dark:opacity-20 select-none">
+      <svg className="w-full h-full" width="100%" height="100%">
+        <pattern
+          id="it-dot-matrix"
+          width="28"
+          height="28"
+          patternUnits="userSpaceOnUse"
+        >
+          <circle cx="2" cy="2" r="1.2" fill="#f15e1c" opacity="0.6" />
+        </pattern>
+        <rect width="100%" height="100%" fill="url(#it-dot-matrix)" />
+      </svg>
+    </div>
+  );
+}
+
+function CursorSpotlight() {
+  const [mousePos, setMousePos] = React.useState({ x: 0, y: 0 });
+  const [isTouch, setIsTouch] = React.useState(false);
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      const touch = window.matchMedia("(pointer: coarse)").matches;
+      setIsTouch(touch);
+      if (touch) return;
+
+      const handleMove = (e: MouseEvent) => {
+        setMousePos({ x: e.clientX, y: e.clientY });
+      };
+      window.addEventListener("mousemove", handleMove);
+      return () => window.removeEventListener("mousemove", handleMove);
+    }
+  }, []);
+
+  if (isTouch) return null;
+
+  return (
+    <div
+      className="pointer-events-none fixed inset-0 z-10 transition-opacity duration-500 hidden lg:block"
+      style={{
+        background: `radial-gradient(500px circle at ${mousePos.x}px ${mousePos.y}px, rgba(241, 94, 28, 0.05), transparent 80%)`,
+      }}
+    />
+  );
+}
+
+/* =========================================================================
+   2. ANIMATED METRIC COUNTER
+   ========================================================================= */
+function CounterNumber({
+  value,
+  prefix = "",
+  suffix = "",
+  decimals = 0,
+}: {
+  value: number;
+  prefix?: string;
+  suffix?: string;
+  decimals?: number;
+}) {
+  const ref = React.useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-20px" });
+  const shouldReduceMotion = useReducedMotion();
+  const [displayValue, setDisplayValue] = React.useState<string>(
+    shouldReduceMotion ? value.toFixed(decimals) : (0).toFixed(decimals)
+  );
+
+  React.useEffect(() => {
+    if (!isInView || shouldReduceMotion) {
+      setDisplayValue(value.toFixed(decimals));
+      return;
+    }
+
+    let startTimestamp: number | null = null;
+    const duration = 1400;
+
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const easeProgress = 1 - Math.pow(1 - progress, 3);
+      const current = easeProgress * value;
+
+      setDisplayValue(current.toFixed(decimals));
+
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+
+    const animFrame = window.requestAnimationFrame(step);
+    return () => window.cancelAnimationFrame(animFrame);
+  }, [isInView, value, decimals, shouldReduceMotion]);
+
+  return (
+    <span ref={ref} className="tabular-nums">
+      {prefix}
+      {displayValue}
+      {suffix}
+    </span>
+  );
+}
+
+/* =========================================================================
+   3. STICKY STORYTELLING SOLUTION FRAMEWORK (01 ASSESS -> 05 SECURE/OPTIMIZE)
+   ========================================================================= */
+const storytellingStages = [
   {
-    numStr: "01",
-    title: "IT Assessment & Roadmap",
-    subtitle: "Customized IT Roadmaps & Architecture Audits",
-    description:
-      "We develop a customized roadmap aligning IT strategies with your business goals, auditing legacy friction and defining 1–3 year modern software blueprints.",
-    icon: <Compass className="w-6 h-6 text-[#f15e1c]" />,
+    num: "01",
+    title: "ASSESS",
+    subtitle: "Legacy Technical Debt & Risk Diagnostic",
+    tagline: "Uncover hidden architecture bottlenecks, shadow databases, and cloud overprovisioning.",
     deliverables: [
-      "Legacy Infrastructure & Technical Debt Audit",
-      "Cloud FinOps Breakdown & Cost Tuning",
-      "3-Year Digital Modernization Blueprint",
-      "Vendor Dependency & Risk Mitigation",
+      "Legacy Monolith & Code Debt Audit",
+      "Cloud FinOps Expense & Pod Allocation Scan",
+      "DPDP / PII Exposure Discovery",
+      "Vendor Dependence & Single Point of Failure Analysis",
     ],
     metric: "45%",
     metricLabel: "Technical Debt Reduction",
-    stageName: "ASSESSMENT",
+    color: "#f15e1c",
   },
   {
-    numStr: "02",
-    title: "Cybersecurity and Cloud Solutions",
-    subtitle: "Zero-Trust Defenses & Policy Frameworks",
-    description:
-      "We strengthen your digital defenses by conducting security audits, vulnerability assessments, and creating a tailored cybersecurity policy framework.",
-    icon: <Lock className="w-6 h-6 text-[#f15e1c]" />,
+    num: "02",
+    title: "STRATEGIZE",
+    subtitle: "3-Year Executive Digital Roadmap",
+    tagline: "Translate CFO margin goals into actionable, phased engineering blueprints.",
     deliverables: [
-      "Zero-Trust Architecture & Identity Control",
-      "Multi-Cloud Containerization (AWS / Azure)",
-      "DPDP Act (India) & SOC-2 Audit Policy",
-      "Continuous Automated Threat Detection",
+      "3-Year Phased Digital Modernization Blueprint",
+      "Target Microservices & Next.js Architecture",
+      "Executive FinOps Unit Cost Economics",
+      "SOC-2 & DPDP Compliance Roadmap",
+    ],
+    metric: "30%",
+    metricLabel: "Cloud Spend Cost Savings",
+    color: "#2e936f",
+  },
+  {
+    num: "03",
+    title: "ARCHITECT",
+    subtitle: "Zero-Trust & Scalable Cloud Topology",
+    tagline: "Design resilient Kubernetes container topologies, event-driven pipelines, and security controls.",
+    deliverables: [
+      "Zero-Trust Identity & Access Architecture",
+      "Active-Active Multi-Cloud Container Layout",
+      "Event-Driven Kafka Data Erasure Orchestrator",
+      "Field-Level AES-256 PII Encryption Spec",
     ],
     metric: "99.99%",
-    metricLabel: "Uptime & Compliance Assurance",
-    stageName: "SECURITY & CLOUD",
+    metricLabel: "Target Uptime SLA",
+    color: "#fab60a",
   },
   {
-    numStr: "03",
-    title: "Infrastructure Support",
-    subtitle: "Proactive Telemetry & Self-Healing Pipelines",
-    description:
-      "Our proactive support services ensure your IT infrastructure remains robust, updated, and optimized for high-concurrency enterprise workloads.",
-    icon: <Server className="w-6 h-6 text-[#f15e1c]" />,
+    num: "04",
+    title: "IMPLEMENT",
+    subtitle: "Zero-Downtime Production Cutover",
+    tagline: "Dedicated engineering squads refactor code, deploy CI/CD pipelines, and migrate workloads.",
     deliverables: [
-      "24/7 Real-Time Telemetry & Log Monitoring",
-      "Self-Healing Infrastructure Automation",
-      "15-Minute Guaranteed Critical SLA",
-      "Disaster Recovery & Redundant Storage",
-    ],
-    metric: "15 min",
-    metricLabel: "Critical Response SLA",
-    stageName: "INFRASTRUCTURE",
-  },
-  {
-    numStr: "04",
-    title: "Key Benefits",
-    subtitle: "Quantifiable ROI & Scalable Growth",
-    description:
-      "Maximizes uptime, enhances reliability, and offers peace of mind for your team while accelerating product delivery velocity.",
-    icon: <TrendingUp className="w-6 h-6 text-[#f15e1c]" />,
-    deliverables: [
-      "3.2x Accelerated Feature Release Velocity",
-      "30%+ Cloud Infrastructure Cost Savings",
-      "100% Client Source Code & IP Ownership",
-      "Elastic Pod Scalability Across Global Corridors",
+      "Next.js App Router & Server Component Refactoring",
+      "Automated Containerized CI/CD Deployment",
+      "Zero-Downtime Live Database Cutover",
+      "100/100 Core Web Vitals Optimization",
     ],
     metric: "3.2x",
     metricLabel: "Faster Deployment Cycles",
-    stageName: "RELIABILITY & GROWTH",
+    color: "#f15e1c",
+  },
+  {
+    num: "05",
+    title: "SECURE / OPTIMIZE",
+    subtitle: "24/7 Telemetry & Continuous FinOps",
+    tagline: "Maintain high availability with proactive log monitoring and 15-minute response SLA.",
+    deliverables: [
+      "24/7 Log Telemetry & Automated Threat Detection",
+      "Self-Healing Kubernetes Autoscaling Pods",
+      "Guaranteed 15-Minute Critical Incident Response",
+      "Continuous Monthly FinOps Cost Right-Sizing",
+    ],
+    metric: "15 min",
+    metricLabel: "Guaranteed SLA",
+    color: "#2e936f",
   },
 ];
 
-// 4-Step Methodology Workflow Data
-const howWeWorkSteps = [
+function StickyStorytellingFramework() {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [activeIdx, setActiveIdx] = React.useState<number>(0);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 65%", "end 35%"],
+  });
+
+  React.useEffect(() => {
+    const unsub = scrollYProgress.on("change", (v) => {
+      const count = storytellingStages.length;
+      const normalized = Math.min(Math.max(0, v), 0.999);
+      const calculatedIdx = Math.floor(normalized * count);
+      setActiveIdx(calculatedIdx);
+    });
+    return () => unsub();
+  }, [scrollYProgress]);
+
+  const activeStage = storytellingStages[activeIdx];
+
+  return (
+    <div ref={containerRef} className="relative w-full select-none">
+      <div className="rounded-2xl sm:rounded-[2rem] lg:rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-xl p-5 sm:p-8 lg:p-12 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-radial from-[#f15e1c]/10 via-transparent to-transparent pointer-events-none rounded-full blur-3xl" />
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10">
+          {/* Left Column: Stage Navigation */}
+          <div className="lg:col-span-5 space-y-4 lg:space-y-6 lg:sticky lg:top-28 lg:h-fit">
+            <div className="space-y-2">
+              <Badge variant="secondary" size="md">
+                SOLUTION FRAMEWORK
+              </Badge>
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
+                IT Transformation Journey
+              </h3>
+              <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                As you scroll, follow how our methodology moves seamlessly from diagnostic to continuous optimization.
+              </p>
+            </div>
+
+            <div className="flex lg:flex-col overflow-x-auto lg:overflow-visible gap-2 pb-2 lg:pb-0 scrollbar-none snap-x">
+              {storytellingStages.map((stage, idx) => {
+                const isActive = activeIdx === idx;
+                const isPast = idx < activeIdx;
+
+                return (
+                  <button
+                    key={stage.num}
+                    type="button"
+                    onClick={() => setActiveIdx(idx)}
+                    className={cn(
+                      "p-3 sm:p-3.5 rounded-xl sm:rounded-2xl border transition-all duration-300 flex items-center justify-between text-left cursor-pointer shrink-0 snap-start min-w-[160px] sm:min-w-[200px] lg:min-w-0 lg:w-full",
+                      isActive
+                        ? "bg-white dark:bg-[#101b17] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/30 lg:translate-x-1"
+                        : isPast
+                        ? "bg-[#fefaf5] dark:bg-[#14201b] border-[#2e936f]/60 opacity-90"
+                        : "bg-white/40 dark:bg-[#14201b] border-[#f7d7b0] dark:border-[#253630] opacity-60 hover:opacity-100"
+                    )}
+                  >
+                    <div className="flex items-center gap-2.5 sm:gap-3">
+                      <span
+                        className={cn(
+                          "w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl font-mono text-xs font-black flex items-center justify-center transition-colors shrink-0",
+                          isActive
+                            ? "bg-[#f15e1c] text-white shadow-md shadow-[#f15e1c]/30"
+                            : isPast
+                            ? "bg-[#2e936f] text-white"
+                            : "bg-[#fce3d3] dark:bg-[#261f1a] text-[#f15e1c]"
+                        )}
+                      >
+                        {isPast ? <Check className="w-3.5 h-3.5 text-white" /> : stage.num}
+                      </span>
+
+                      <div>
+                        <div className="text-[10px] font-mono font-extrabold text-[#7A6A5F] dark:text-[#B8ACA0] uppercase">
+                          STAGE {stage.num}
+                        </div>
+                        <div
+                          className={cn(
+                            "text-xs sm:text-sm font-extrabold font-display transition-colors truncate max-w-[110px] sm:max-w-none",
+                            isActive ? "text-[#f15e1c]" : "text-[#1b2823] dark:text-[#ffffff]"
+                          )}
+                        >
+                          {stage.title}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="hidden sm:flex items-center gap-2">
+                      {isActive && <span className="w-2 h-2 rounded-full bg-[#f15e1c] animate-ping" />}
+                      <ChevronRight
+                        className={cn(
+                          "w-4 h-4 transition-transform duration-200",
+                          isActive ? "text-[#f15e1c] translate-x-1" : "text-[#7A6A5F]"
+                        )}
+                      />
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Right Column: Active Stage Detail Card */}
+          <div className="lg:col-span-7 flex flex-col justify-center">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeStage.num}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="p-5 sm:p-8 lg:p-9 rounded-2xl sm:rounded-3xl bg-white dark:bg-[#101b17] border-2 border-[#f15e1c]/40 shadow-xl space-y-5 relative overflow-hidden"
+              >
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-[#f7d7b0] dark:border-[#253630] pb-4">
+                  <div>
+                    <span className="text-[11px] font-mono font-black text-[#f15e1c] uppercase tracking-wider block">
+                      STAGE {activeStage.num} / 05 &bull; {activeStage.title}
+                    </span>
+                    <h4 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] mt-0.5">
+                      {activeStage.subtitle}
+                    </h4>
+                  </div>
+
+                  <div className="px-3.5 py-2 rounded-xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] text-left sm:text-right shrink-0">
+                    <span className="text-xl font-black font-mono text-[#f15e1c] block leading-none">
+                      {activeStage.metric}
+                    </span>
+                    <span className="text-[10px] font-mono font-bold text-[#4a5c55] dark:text-[#d3eee4]">
+                      {activeStage.metricLabel}
+                    </span>
+                  </div>
+                </div>
+
+                <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                  {activeStage.tagline}
+                </p>
+
+                <div className="space-y-2.5 pt-1">
+                  <span className="text-[11px] font-mono font-extrabold uppercase tracking-wider text-[#f15e1c] block">
+                    Execution Deliverables &amp; Artifacts
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    {activeStage.deliverables.map((item, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-center gap-2 p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0]/70 dark:border-[#253630] text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]"
+                      >
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
+                        <span className="line-clamp-2">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================================
+   4. SYSTEM ARCHITECTURE VISUAL (BUSINESS -> RELIABILITY)
+   ========================================================================= */
+const archNodes = [
+  { id: "bus", label: "BUSINESS", sub: "ROI & Drivers", icon: <Compass className="w-4 h-4 text-[#f15e1c]" /> },
+  { id: "audit", label: "ASSESSMENT", sub: "Technical Audit", icon: <Cpu className="w-4 h-4 text-[#2e936f]" /> },
+  { id: "road", label: "ROADMAP", sub: "3-Yr Strategy", icon: <BarChart3 className="w-4 h-4 text-[#fab60a]" /> },
+  { id: "impl", label: "IMPLEMENTATION", sub: "Next.js & Containers", icon: <Zap className="w-4 h-4 text-[#f15e1c]" /> },
+  { id: "sec", label: "SECURITY / CLOUD", sub: "Zero-Trust & DPDP", icon: <Lock className="w-4 h-4 text-[#2e936f]" /> },
+  { id: "rel", label: "RELIABILITY", sub: "Continuous Telemetry", icon: <TrendingUp className="w-4 h-4 text-[#fab60a]" /> },
+];
+
+function SystemArchitectureDiagram() {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 75%", "end 35%"],
+  });
+
+  const pathLength = useSpring(scrollYProgress, { stiffness: 100, damping: 20 });
+  const pulseX = useTransform(pathLength, [0, 1], [40, 960]);
+
+  return (
+    <div ref={containerRef} className="relative w-full select-none">
+      <div className="rounded-2xl sm:rounded-[2rem] lg:rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-xl p-5 sm:p-8 lg:p-12 space-y-6 relative overflow-hidden">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 border-b border-[#f7d7b0] dark:border-[#253630] pb-5">
+          <div className="space-y-1.5 max-w-2xl">
+            <Badge variant="secondary" size="md">
+              SYSTEM ARCHITECTURE VISUAL
+            </Badge>
+            <h3 className="text-xl sm:text-3xl lg:text-4xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+              End-to-End Infrastructure Flow
+            </h3>
+            <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4]">
+              Connected digital topology illustrating the progressive flow from business requirements to cloud telemetry.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2 text-[11px] font-mono font-bold text-[#2e936f] bg-white dark:bg-[#101b17] px-3 py-1.5 rounded-xl border border-[#f7d7b0] dark:border-[#253630]">
+            <span className="w-2 h-2 rounded-full bg-[#2e936f] animate-pulse" />
+            <span>CONNECTED NODE MATRIX</span>
+          </div>
+        </div>
+
+        {/* Connected SVG Pipeline */}
+        <div className="relative py-2">
+          <div className="hidden lg:block absolute top-[44px] left-8 right-8 h-10 pointer-events-none z-0">
+            <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 40" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="arch-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#f15e1c" />
+                  <stop offset="50%" stopColor="#2e936f" />
+                  <stop offset="100%" stopColor="#fab60a" />
+                </linearGradient>
+              </defs>
+
+              <path
+                d="M 20 20 L 980 20"
+                stroke="#f7d7b0"
+                strokeWidth="3"
+                strokeDasharray="6 6"
+                className="dark:stroke-[#253630]"
+              />
+
+              <motion.path
+                d="M 20 20 L 980 20"
+                stroke="url(#arch-grad)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                style={{
+                  pathLength: shouldReduceMotion ? 1 : pathLength,
+                }}
+              />
+
+              {!shouldReduceMotion && (
+                <motion.circle
+                  cy="20"
+                  r="6"
+                  fill="#f15e1c"
+                  style={{ cx: pulseX }}
+                  className="shadow-lg"
+                />
+              )}
+            </svg>
+          </div>
+
+          {/* 6 Nodes */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 relative z-10">
+            {archNodes.map((node, idx) => (
+              <div
+                key={node.id}
+                className="p-3.5 rounded-xl sm:rounded-2xl bg-white dark:bg-[#101b17] border-2 border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c] shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between space-y-2 min-h-[110px] sm:min-h-[130px] group"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="w-6 h-6 rounded-lg bg-[#fce3d3] dark:bg-[#261f1a] text-[#f15e1c] text-[11px] font-mono font-black flex items-center justify-center group-hover:bg-[#f15e1c] group-hover:text-white transition-colors">
+                    0{idx + 1}
+                  </span>
+                  <div className="p-1 rounded-md bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0]/50">
+                    {node.icon}
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="text-xs font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-tight">
+                    {node.label}
+                  </h4>
+                  <span className="text-[10px] font-mono text-[#2e936f] font-semibold block mt-0.5 truncate">
+                    {node.sub}
+                  </span>
+                </div>
+
+                <div className="w-full h-1 rounded-full bg-[#f7d7b0]/40 dark:bg-[#253630] overflow-hidden">
+                  <div className="w-full h-full bg-[#f15e1c] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================================
+   5. 3D CARD STACK ON SCROLL EXECUTION FRAMEWORK (STEP 01 -> STEP 04)
+   ========================================================================= */
+const executionSteps = [
   {
     step: "01",
     title: "Assess and Analyze",
-    description:
-      "We start by analyzing your current IT environment to identify gaps, strengths, and areas for improvement, ensuring a clear understanding of your needs and goals.",
-    output: "Technology Health Index & Gap Audit",
+    tagline: "Technology Health Index & Technical Debt Audit",
+    desc: "Exhaustive audit across PostgreSQL/MongoDB schemas, CloudWatch logs, and microservice dependencies to map legacy friction points.",
   },
   {
     step: "02",
     title: "Strategize and Plan",
-    description:
-      "Based on our analysis, we create a tailored IT roadmap that aligns with your business objectives, covering areas like cybersecurity, infrastructure updates, and cloud adoption.",
-    output: "Executive Roadmap & FinOps Model",
+    tagline: "Executive Roadmap & FinOps Model",
+    desc: "Draft a 3-year digital modernization blueprint establishing clear architectural milestones, SOC-2 readiness, and unit cost targets.",
   },
   {
     step: "03",
     title: "Implement and Secure",
-    description:
-      "From hardware and software upgrades to cybersecurity policy development, we implement solutions that enhance security, reliability, and scalability for your business.",
-    output: "Production Migration & SOC-2 Readiness",
+    tagline: "Production Migration & DPDP Compliance",
+    desc: "Hands-on engineering squads refactor frontends to Next.js App Router, deploy containerized pipelines, and enforce zero-trust identity.",
   },
   {
     step: "04",
     title: "Support and Maintain",
-    description:
-      "With ongoing support, updates, and performance monitoring, we ensure your IT infrastructure remains resilient, up-to-date, and optimized for future growth.",
-    output: "Continuous Uptime & 15-min SLA",
+    tagline: "Continuous Uptime & 15-Min SLA",
+    desc: "24/7 telemetry monitoring, automated Kubernetes pod right-sizing, continuous monthly FinOps audits, and guaranteed critical SLAs.",
   },
 ];
 
+function CardStackOnScroll() {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [activeStep, setActiveStep] = React.useState<number>(0);
 
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 70%", "end 30%"],
+  });
 
-// Alternating CTA Words
-const ctaWords = ["engaging", "innovative", "strategic", "outstanding", "exceptional"];
+  React.useEffect(() => {
+    const unsub = scrollYProgress.on("change", (v) => {
+      const idx = Math.min(Math.floor(v * 4), 3);
+      setActiveStep(Math.max(0, idx));
+    });
+    return () => unsub();
+  }, [scrollYProgress]);
+
+  return (
+    <div ref={containerRef} className="relative w-full select-none">
+      <div className="space-y-8">
+        <div className="text-center max-w-3xl mx-auto space-y-2">
+          <Badge variant="secondary" size="md">
+            EXECUTION FRAMEWORK
+          </Badge>
+          <h2 className="text-2xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+            4-Step Disciplined Execution
+          </h2>
+          <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4]">
+            Scroll to see each execution phase separate into focus from the 3D architecture stack.
+          </p>
+        </div>
+
+        {/* 4 Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {executionSteps.map((step, idx) => {
+            const isActive = activeStep === idx;
+            const isPast = idx < activeStep;
+
+            return (
+              <TiltCard key={step.step} maxTilt={5} scale={1.01}>
+                <div
+                  onClick={() => setActiveStep(idx)}
+                  className={cn(
+                    "h-full p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all duration-300 cursor-pointer flex flex-col justify-between space-y-4 min-h-[220px] sm:min-h-[280px] relative overflow-hidden group",
+                    isActive
+                      ? "bg-white dark:bg-[#101b17] border-[#f15e1c] shadow-xl ring-2 ring-[#f15e1c]/30"
+                      : isPast
+                      ? "bg-[#fefaf5] dark:bg-[#14201b] border-[#2e936f] opacity-85"
+                      : "bg-[#fefaf5]/60 dark:bg-[#172420]/80 border-[#f7d7b0] dark:border-[#253630] opacity-70 hover:opacity-100"
+                  )}
+                >
+                  <div className="space-y-3 relative z-10 text-left">
+                    <div className="flex items-center justify-between">
+                      <span
+                        className={cn(
+                          "px-3 py-0.5 rounded-full text-[11px] font-mono font-black",
+                          isActive
+                            ? "bg-[#f15e1c] text-white shadow-sm"
+                            : isPast
+                            ? "bg-[#2e936f] text-white"
+                            : "bg-[#fce3d3] text-[#f15e1c]"
+                        )}
+                      >
+                        STEP {step.step}
+                      </span>
+                      {isActive && <span className="w-2 h-2 rounded-full bg-[#f15e1c] animate-ping" />}
+                    </div>
+
+                    <h3 className="text-base sm:text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug">
+                      {step.title}
+                    </h3>
+
+                    <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
+                      {step.desc}
+                    </p>
+                  </div>
+
+                  <div className="pt-3 border-t border-[#f7d7b0] dark:border-[#253630] text-left relative z-10">
+                    <span className="text-[10px] font-mono font-extrabold uppercase text-[#7A6A5F] block">
+                      Target Outcome:
+                    </span>
+                    <span className="text-xs font-bold text-[#f15e1c] mt-0.5 block truncate">
+                      {step.tagline}
+                    </span>
+                  </div>
+                </div>
+              </TiltCard>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================================
+   6. MAIN IT STRATEGY INTERACTIVE PAGE COMPONENT
+   ========================================================================= */
+const ctaWords = ["STRATEGIC", "SECURE", "OPTIMIZED", "RESILIENT", "FUTURE-PROOF"];
 
 export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
-  const shouldReduceMotion = useReducedMotion();
-  const [activeSolutionIdx, setActiveSolutionIdx] = React.useState<number>(0);
-  const [activeWorkIdx, setActiveWorkIdx] = React.useState<number>(0);
   const [currentWordIdx, setCurrentWordIdx] = React.useState<number>(0);
-  const [dragStartX, setDragStartX] = React.useState<number | null>(null);
-  const [isDragging, setIsDragging] = React.useState<boolean>(false);
 
   // Editorial Statement InView
   const statementRef = React.useRef<HTMLDivElement>(null);
-  const isStatementInView = useInView(statementRef, { once: true, margin: "-100px" });
+  const isStatementInView = useInView(statementRef, { once: true, margin: "-80px" });
 
   // Rotating CTA Word Timer
   React.useEffect(() => {
@@ -163,374 +664,324 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
     return () => clearInterval(timer);
   }, []);
 
-  const activeSolution = solutionsData[activeSolutionIdx];
-  const totalSolutions = solutionsData.length;
-
-  // Touch & Drag Handlers for Solutions
-  const handleDragStart = (clientX: number) => {
-    setDragStartX(clientX);
-    setIsDragging(true);
-  };
-
-  const handleDragEnd = (clientX: number) => {
-    if (dragStartX === null || !isDragging) return;
-    const deltaX = clientX - dragStartX;
-    if (Math.abs(deltaX) > 35) {
-      if (deltaX < 0) {
-        setActiveSolutionIdx((prev) => (prev + 1) % totalSolutions);
-      } else {
-        setActiveSolutionIdx((prev) => (prev - 1 + totalSolutions) % totalSolutions);
-      }
-    }
-    setDragStartX(null);
-    setIsDragging(false);
-  };
-
-  // Related Case Study
-  const relatedCaseStudy = caseStudiesData.find(
-    (c) =>
-      service.relatedCaseStudySlugs.includes(c.slug) ||
-      c.serviceSlug === service.slug ||
-      c.slug === "enterprise-cloud-transformation"
-  );
-
-  // Relevant Testimonial
   const testimonial = testimonialsData.find((t) => t.id === "test-3") || testimonialsData[0];
 
   return (
     <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#12100E] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden">
+      <CursorSpotlight />
+
       {/* =========================================================================
           1. HERO — IMMERSIVE SCROLL INTRODUCTION
           ========================================================================= */}
-      <section className="relative min-h-[92vh] flex flex-col justify-between pt-28 pb-12 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-        {/* Subtle Background Technology/Infrastructure Animation */}
-        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-25 dark:opacity-20">
-          <svg className="w-full h-full animate-pulse-slow" viewBox="0 0 1200 800" fill="none">
-            <defs>
-              <linearGradient id="hero-net-line" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#f15e1c" stopOpacity="0.8" />
-                <stop offset="50%" stopColor="#2e936f" strokeOpacity="0.4" />
-                <stop offset="100%" stopColor="#fab60a" stopOpacity="0.6" />
-              </linearGradient>
-            </defs>
-            <line x1="100" y1="150" x2="600" y2="300" stroke="url(#hero-net-line)" strokeWidth="1.5" strokeDasharray="6 6" />
-            <line x1="600" y1="300" x2="1100" y2="200" stroke="url(#hero-net-line)" strokeWidth="1.5" strokeDasharray="6 6" />
-            <line x1="600" y1="300" x2="600" y2="650" stroke="url(#hero-net-line)" strokeWidth="2" />
-            <line x1="200" y1="500" x2="600" y2="650" stroke="url(#hero-net-line)" strokeWidth="1.5" strokeDasharray="4 4" />
-            <line x1="1000" y1="550" x2="600" y2="650" stroke="url(#hero-net-line)" strokeWidth="1.5" strokeDasharray="4 4" />
+      <section className="relative pt-20 pb-10 sm:pt-28 sm:pb-14 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] overflow-hidden">
+        <AnimatedDotGrid />
 
-            <circle cx="100" cy="150" r="5" fill="#f15e1c" className="animate-ping-slow" />
-            <circle cx="600" cy="300" r="8" fill="#f15e1c" />
-            <circle cx="1100" cy="200" r="6" fill="#2e936f" />
-            <circle cx="600" cy="650" r="9" fill="#fab60a" />
-            <circle cx="200" cy="500" r="5" fill="#2e936f" />
-            <circle cx="1000" cy="550" r="5" fill="#f15e1c" />
-          </svg>
-          <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-radial from-[#f15e1c]/12 via-transparent to-transparent blur-3xl rounded-full" />
-          <div className="absolute bottom-1/4 right-1/4 w-[550px] h-[550px] bg-radial from-[#2e936f]/10 via-transparent to-transparent blur-3xl rounded-full" />
-        </div>
+        {/* Ambient Glows */}
+        <div className="absolute top-1/4 left-1/3 w-[450px] h-[450px] bg-radial from-[#f15e1c]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
+        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-radial from-[#2e936f]/8 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
 
-        {/* Top Breadcrumb & Tag */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full space-y-4">
-          <Breadcrumb
-            items={[
-              { label: "Services", href: "/services" },
-              { label: "IT Strategy & Implementation" },
-            ]}
-          />
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]"
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>ENTERPRISE IT STRATEGY &amp; MODERNIZATION</span>
-          </motion.div>
-        </div>
+        <div className="max-w-7xl mx-auto w-full space-y-6 relative z-10">
+          {/* Top Breadcrumb & Tag */}
+          <div className="space-y-3">
+            <Breadcrumb
+              items={[
+                { label: "Services", href: "/services" },
+                { label: "IT Strategy & Implementation" },
+              ]}
+            />
+            <ScrollReveal direction="up">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] border border-[#f7d7b0] text-[11px] font-mono font-bold text-[#f15e1c]">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>ENTERPRISE IT STRATEGY &amp; MODERNIZATION</span>
+              </div>
+            </ScrollReveal>
+          </div>
 
-        {/* Dominant Headline & Hero Copy */}
-        <div className="relative z-10 max-w-5xl mx-auto w-full my-auto text-center space-y-6 pt-6 pb-10">
-          <motion.h1
-            initial={{ opacity: 0, y: 35 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-display tracking-tight leading-[1.08] text-[#1b2823] dark:text-[#ffffff]"
-          >
-            Strategic IT solutions for modern <span className="text-[#f15e1c]">Business Transformation</span>
-          </motion.h1>
+          {/* Dominant Headline & Hero Copy */}
+          <div className="max-w-4xl mx-auto w-full text-center space-y-4 pt-4 pb-4">
+            <ScrollTextFlip>
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-display tracking-tight leading-[1.1] text-[#1b2823] dark:text-[#ffffff]">
+                Strategic IT solutions for modern <span className="text-[#f15e1c]">Business Transformation</span>
+              </h1>
+            </ScrollTextFlip>
 
-          <motion.p
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.25 }}
-            className="text-lg sm:text-xl text-[#4a5c55] dark:text-[#d3eee4] max-w-3xl mx-auto font-medium leading-relaxed"
-          >
-            Modernizing legacy architecture, eliminating technical debt, and aligning cloud systems with CFO-backed financial predictability.
-          </motion.p>
+            <ScrollReveal direction="up" delay={0.15}>
+              <p className="text-sm sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] max-w-2xl mx-auto font-medium leading-relaxed">
+                Modernizing legacy architecture, eliminating technical debt, and aligning cloud systems with CFO-backed financial predictability.
+              </p>
+            </ScrollReveal>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.35 }}
-            className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <a href="#inquire" className="w-full sm:w-auto">
-              <Button3D
-                variant="primary"
-                size="lg"
-                rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
-                className="w-full sm:w-auto justify-center shadow-xl shadow-[#f15e1c]/25"
-              >
-                Inquire About IT Strategy
-              </Button3D>
-            </a>
-            <Link href="/case-studies" className="w-full sm:w-auto">
-              <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center">
-                View Case Studies
-              </Button3D>
-            </Link>
-          </motion.div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="relative z-10 text-center pb-2">
-          <a href="#our-solutions" className="inline-flex flex-col items-center gap-2 group cursor-pointer">
-            <span className="text-xs font-mono font-bold tracking-widest text-[#7A6A5F] dark:text-[#B8ACA0] group-hover:text-[#f15e1c] transition-colors">
-              SCROLL TO EXPLORE SYSTEM
-            </span>
-            <div className="w-6 h-10 rounded-full border-2 border-[#f7d7b0] dark:border-[#253630] flex items-start justify-center p-1.5">
-              <div className="w-1.5 h-3 rounded-full bg-[#f15e1c] animate-bounce" />
-            </div>
-          </a>
+            <ScrollReveal direction="up" delay={0.25}>
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a href="#inquire" className="w-full sm:w-auto">
+                  <MagneticButton className="w-full sm:w-auto">
+                    <Button3D
+                      variant="primary"
+                      size="lg"
+                      rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
+                      className="w-full sm:w-auto justify-center shadow-lg shadow-[#f15e1c]/25"
+                    >
+                      Inquire About IT Strategy
+                    </Button3D>
+                  </MagneticButton>
+                </a>
+                <Link href="/case-studies" className="w-full sm:w-auto">
+                  <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center">
+                    View Case Studies
+                  </Button3D>
+                </Link>
+              </div>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
       {/* =========================================================================
-          2. OUR SOLUTIONS — INTERACTIVE SERVICE SYSTEM
+          2. SIGNATURE SOLUTION FRAMEWORK — STICKY STORYTELLING
           ========================================================================= */}
-      <section id="our-solutions" className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-        <div className="max-w-7xl mx-auto space-y-12 select-none">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              OUR SOLUTIONS
-            </Badge>
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Empowering business with innovative Technology
-            </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              Drag or click below to explore each solution framework and its active execution architecture.
-            </p>
-          </div>
+      <section id="solution-framework" className="relative py-10 sm:py-14 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal direction="up">
+            <StickyStorytellingFramework />
+          </ScrollReveal>
+        </div>
+      </section>
 
-          {/* Interactive Active Display Card */}
-          <div
-            onMouseDown={(e) => handleDragStart(e.clientX)}
-            onMouseUp={(e) => handleDragEnd(e.clientX)}
-            onTouchStart={(e) => e.touches.length === 1 && handleDragStart(e.touches[0].clientX)}
-            onTouchEnd={(e) => e.changedTouches.length > 0 && handleDragEnd(e.changedTouches[0].clientX)}
-            className="rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-6 sm:p-10 space-y-8 relative overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-radial from-[#f15e1c]/8 via-transparent to-transparent pointer-events-none" />
+      {/* =========================================================================
+          3. SYSTEM ARCHITECTURE VISUAL (CONNECTED DIAGRAM)
+          ========================================================================= */}
+      <section className="relative py-10 sm:py-14 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal direction="up">
+            <SystemArchitectureDiagram />
+          </ScrollReveal>
+        </div>
+      </section>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-[#f7d7b0] dark:border-[#253630]">
-              <div className="flex items-center gap-3">
-                <div className="p-3 rounded-2xl bg-[#f15e1c] text-white shadow-lg shadow-[#f15e1c]/25 shrink-0">
-                  {activeSolution.icon}
-                </div>
-                <div>
-                  <span className="text-xs font-mono font-extrabold text-[#f15e1c] uppercase tracking-wider block">
-                    SOLUTION {activeSolution.numStr} / 0{totalSolutions} &bull; {activeSolution.stageName}
-                  </span>
-                  <h3 className="text-2xl sm:text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                    {activeSolution.title}
-                  </h3>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4 bg-white dark:bg-[#101b17] px-4 py-2 rounded-2xl border border-[#f7d7b0] dark:border-[#253630] shadow-xs">
-                <span className="text-2xl font-black font-mono text-[#f15e1c]">{activeSolution.metric}</span>
-                <span className="text-xs font-mono font-bold text-[#4a5c55] dark:text-[#d3eee4] max-w-[130px] leading-tight">
-                  {activeSolution.metricLabel}
-                </span>
-              </div>
-            </div>
-
-            {/* Dynamic Architecture Flow Visual for Active Solution */}
-            <div className="relative py-6 px-4 bg-white dark:bg-[#101b17] rounded-3xl border border-[#f7d7b0] dark:border-[#253630] flex items-center justify-center overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeSolution.numStr}
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 1.04 }}
-                  transition={{ duration: 0.35 }}
-                  className="w-full flex items-center justify-center"
-                >
-                  <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 text-center w-full max-w-4xl">
-                    {[
-                      { label: "BUSINESS", sub: "Core Drivers" },
-                      { label: "IT ASSESSMENT", sub: "Gap Diagnostic" },
-                      { label: "ROADMAP", sub: "3-Yr Blueprint" },
-                      { label: "SECURITY + CLOUD", sub: "Zero-Trust" },
-                      { label: "RELIABILITY", sub: "99.99% Uptime" },
-                    ].map((node, i) => {
-                      const isNodeActive = i <= activeSolutionIdx + 1;
-                      return (
-                        <div
-                          key={i}
-                          className={cn(
-                            "p-3.5 rounded-2xl border transition-all duration-300 text-center space-y-1",
-                            isNodeActive
-                              ? "bg-[#fefaf5] dark:bg-[#172420] border-[#f15e1c] shadow-md scale-102"
-                              : "bg-white dark:bg-[#101b17] border-[#f7d7b0] dark:border-[#253630] opacity-60"
-                          )}
-                        >
-                          <span className="text-[10px] font-mono font-extrabold text-[#f15e1c] block">0{i + 1}</span>
-                          <div className="text-xs font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-tight">
-                            {node.label}
-                          </div>
-                          <span className="text-[10px] text-[#2e936f] font-semibold block">{node.sub}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Description & Deliverables */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center pt-2">
-              <div className="md:col-span-6 space-y-3 text-left">
-                <h4 className="text-lg font-bold font-display text-[#f15e1c]">
-                  {activeSolution.subtitle}
-                </h4>
-                <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                  {activeSolution.description}
-                </p>
-              </div>
-
-              <div className="md:col-span-6 space-y-2">
-                <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#f15e1c] block">
-                  Key Scope Deliverables
-                </span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]">
-                  {activeSolution.deliverables.map((del, i) => (
-                    <div key={i} className="flex items-center gap-2 p-2 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630]">
-                      <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
-                      <span className="truncate">{del}</span>
+      {/* =========================================================================
+          4. KEY METRICS HIGHLIGHT — COUNT-UP STATS
+          ========================================================================= */}
+      <section className="relative py-10 sm:py-14 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420]">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+            {[
+              {
+                value: 45,
+                suffix: "%",
+                label: "Technical Debt Reduction",
+                desc: "Legacy friction scrubbed in 90 days",
+              },
+              {
+                value: 99.99,
+                suffix: "%",
+                decimals: 2,
+                label: "System Uptime SLA",
+                desc: "Multi-region failover pods",
+              },
+              {
+                value: 15,
+                suffix: " min",
+                label: "Critical SLA Response",
+                desc: "Guaranteed 24/7 telemetry SLA",
+              },
+              {
+                value: 3.2,
+                suffix: "x",
+                decimals: 1,
+                label: "Release Velocity",
+                desc: "Accelerated deployment pipelines",
+              },
+            ].map((stat, idx) => (
+              <ScrollReveal key={idx} delay={idx * 0.08} direction="up">
+                <TiltCard maxTilt={5} scale={1.01}>
+                  <div className="h-full p-4 sm:p-7 rounded-2xl sm:rounded-3xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] shadow-sm hover:shadow-md space-y-1.5 text-center flex flex-col justify-center relative overflow-hidden group">
+                    <div className="text-2xl sm:text-4xl font-black font-mono text-[#f15e1c]">
+                      <CounterNumber
+                        value={stat.value}
+                        suffix={stat.suffix}
+                        decimals={stat.decimals || 0}
+                      />
                     </div>
-                  ))}
+                    <div className="text-xs sm:text-sm font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                      {stat.label}
+                    </div>
+                    <div className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4]">
+                      {stat.desc}
+                    </div>
+                  </div>
+                </TiltCard>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          5. EXECUTION FRAMEWORK — 3D CARD STACK ON SCROLL
+          ========================================================================= */}
+      <section className="relative py-10 sm:py-14 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal direction="up">
+            <CardStackOnScroll />
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          6. CLIENT TESTIMONIAL & EXECUTIVE PROOF
+          ========================================================================= */}
+      <section className="relative py-12 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
+        <div className="max-w-7xl mx-auto">
+          <div className="max-w-4xl mx-auto text-center space-y-6">
+            <ScrollReveal direction="up">
+              <Badge variant="secondary" size="md">
+                EXECUTIVE ENDORSEMENT
+              </Badge>
+            </ScrollReveal>
+
+            <ScrollReveal direction="up" delay={0.1}>
+              <TiltCard maxTilt={4} scale={1.01}>
+                <div className="p-6 sm:p-10 lg:p-12 rounded-2xl sm:rounded-[2rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-lg space-y-5 text-center">
+                  <div className="p-2.5 rounded-xl bg-[#f15e1c] text-white w-fit mx-auto shadow-sm">
+                    <Quote className="w-5 h-5" />
+                  </div>
+
+                  <p className="text-base sm:text-2xl font-display font-medium text-[#1b2823] dark:text-[#ffffff] max-w-2xl mx-auto leading-relaxed italic">
+                    &ldquo;{testimonial.quote}&rdquo;
+                  </p>
+
+                  <div className="pt-3 border-t border-[#f7d7b0] dark:border-[#253630] space-y-0.5">
+                    <div className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                      {testimonial.author}
+                    </div>
+                    <div className="text-xs text-[#f15e1c] font-bold">
+                      {testimonial.designation} &bull; {testimonial.company}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Service Selection Buttons */}
-            <div className="pt-6 border-t border-[#f7d7b0] dark:border-[#253630] space-y-3">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                {solutionsData.map((sol, idx) => (
-                  <button
-                    key={sol.numStr}
-                    type="button"
-                    onClick={() => setActiveSolutionIdx(idx)}
-                    className={cn(
-                      "py-2.5 px-3 rounded-xl text-xs font-bold text-center transition-all cursor-pointer truncate",
-                      activeSolutionIdx === idx
-                        ? "bg-[#f15e1c] text-white shadow-md"
-                        : "bg-white dark:bg-[#101b17] text-[#4a5c55] dark:text-[#d3eee4] border border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c]"
-                    )}
-                  >
-                    0{idx + 1} {sol.title}
-                  </button>
-                ))}
-              </div>
-            </div>
+              </TiltCard>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          3. CLIENT SECTION — KIND WORDS FROM OUR CLIENTS
+          7. EDITORIAL MISSION STATEMENT
           ========================================================================= */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-        <div className="max-w-5xl mx-auto text-center space-y-8">
-          <Badge variant="secondary" size="md">
-            KIND WORDS FROM OUR CLIENTS
-          </Badge>
-          <div className="p-8 sm:p-14 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-xl space-y-6 relative overflow-hidden">
-            <div className="p-3 rounded-2xl bg-[#f15e1c] text-white w-fit mx-auto shadow-md">
-              <Quote className="w-6 h-6" />
-            </div>
-
-            <p className="text-xl sm:text-3xl font-display font-medium text-[#1b2823] dark:text-[#ffffff] max-w-3xl mx-auto leading-relaxed italic">
-              &ldquo;{testimonial.quote}&rdquo;
-            </p>
-
-            <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#253630] space-y-1">
-              <div className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                {testimonial.author}
-              </div>
-              <div className="text-xs text-[#f15e1c] font-bold">
-                {testimonial.designation} &bull; {testimonial.company}
-              </div>
-              <div className="text-xs font-mono font-bold text-[#2e936f] pt-1">
-                IT Strategy &amp; Modernization Partner
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          4. LARGE EDITORIAL STATEMENT & SUPPORTING ABSTRACT ARCHITECTURE VISUAL
-          ========================================================================= */}
-      <section ref={statementRef} className="relative py-24 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#ffffff] dark:bg-[#101b17] overflow-hidden">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: Large Staggered Editorial Typography Statement */}
-          <div className="lg:col-span-7 space-y-6 text-left">
-            <Badge variant="secondary" size="md">
-              STRATEGIC MISSION
-            </Badge>
+      <section ref={statementRef} className="relative py-14 sm:py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#ffffff] dark:bg-[#101b17] overflow-hidden">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-7 space-y-4 text-left">
+            <ScrollReveal direction="up">
+              <Badge variant="secondary" size="md">
+                STRATEGIC MISSION
+              </Badge>
+            </ScrollReveal>
 
             <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={isStatementInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.75, ease: "easeOut" }}
-              className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-[1.12] tracking-tight"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isStatementInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-tight tracking-tight"
             >
               Helping businesses grow through <span className="text-[#f15e1c]">tailored IT strategies</span>, secure cloud adoption, and ongoing support.
             </motion.h2>
 
-            <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-normal">
-              We bridge the gap between CFO financial targets and engineering execution, delivering zero-downtime migrations, SOC-2 readiness, and measurable digital growth.
-            </p>
+            <ScrollReveal direction="up" delay={0.15}>
+              <p className="text-xs sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                We bridge the gap between CFO financial targets and engineering execution, delivering zero-downtime migrations, SOC-2 readiness, and measurable digital growth.
+              </p>
+            </ScrollReveal>
           </div>
 
-          {/* Right Column: Original Abstract Digital Architecture Visual */}
           <div className="lg:col-span-5 flex items-center justify-center">
-            <div className="relative w-72 h-72 sm:w-80 sm:h-80 rounded-3xl bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-6 flex flex-col justify-between items-center text-center overflow-hidden">
-              <div className="absolute inset-0 bg-radial from-[#f15e1c]/15 via-[#2e936f]/10 to-transparent pointer-events-none" />
-              
-              <div className="relative z-10 flex items-center gap-2 pt-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-ping" />
-                <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
-                  SYSTEM ARCHITECTURE
+            <TiltCard maxTilt={6} scale={1.02}>
+              <div className="relative w-60 h-60 sm:w-72 sm:h-72 rounded-2xl sm:rounded-3xl bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-xl p-5 flex flex-col justify-between items-center text-center overflow-hidden">
+                <div className="relative z-10 flex items-center gap-2 pt-1">
+                  <span className="w-2 h-2 rounded-full bg-[#f15e1c] animate-ping" />
+                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
+                    SYSTEM ARCHITECTURE
+                  </span>
+                </div>
+
+                <svg className="w-40 h-40 relative z-10 my-auto" viewBox="0 0 100 100" fill="none">
+                  <line x1="50" y1="20" x2="20" y2="70" stroke="#f15e1c" strokeWidth="2" strokeDasharray="3 3" />
+                  <line x1="50" y1="20" x2="80" y2="70" stroke="#2e936f" strokeWidth="2" strokeDasharray="3 3" />
+                  <line x1="20" y1="70" x2="80" y2="70" stroke="#fab60a" strokeWidth="2" />
+                  <circle cx="50" cy="20" r="7" fill="#f15e1c" />
+                  <circle cx="20" cy="70" r="6" fill="#2e936f" />
+                  <circle cx="80" cy="70" r="6" fill="#fab60a" />
+                  <circle cx="50" cy="53" r="4" fill="#f15e1c" className="animate-pulse" />
+                </svg>
+
+                <span className="relative z-10 text-[10px] font-mono font-bold text-[#2e936f]">
+                  CONNECTED DIGITAL CORE
                 </span>
               </div>
+            </TiltCard>
+          </div>
+        </div>
+      </section>
 
-              {/* Connected Abstract SVG Nodes */}
-              <svg className="w-48 h-48 relative z-10 my-auto" viewBox="0 0 100 100" fill="none">
-                <line x1="50" y1="20" x2="20" y2="70" stroke="#f15e1c" strokeWidth="2" strokeDasharray="3 3" />
-                <line x1="50" y1="20" x2="80" y2="70" stroke="#2e936f" strokeWidth="2" strokeDasharray="3 3" />
-                <line x1="20" y1="70" x2="80" y2="70" stroke="#fab60a" strokeWidth="2" />
-                <circle cx="50" cy="20" r="8" fill="#f15e1c" />
-                <circle cx="20" cy="70" r="7" fill="#2e936f" />
-                <circle cx="80" cy="70" r="7" fill="#fab60a" />
-                <circle cx="50" cy="53" r="5" fill="#f15e1c" className="animate-pulse" />
-              </svg>
+      {/* =========================================================================
+          8. ENTERPRISE PROJECT CTA
+          ========================================================================= */}
+      <section id="pricing" className="relative py-12 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 bg-[#fefaf5] dark:bg-[#172420] border-y border-[#f7d7b0] dark:border-[#253630]">
+        <div className="max-w-7xl mx-auto">
+          <div className="max-w-4xl mx-auto text-center space-y-6">
+            <ScrollReveal direction="up">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f15e1c]/10 border border-[#f15e1c]/30 text-[11px] font-mono font-bold text-[#f15e1c]">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>CUSTOM ENTERPRISE ENGAGEMENT</span>
+              </div>
+            </ScrollReveal>
 
-              <span className="relative z-10 text-[11px] font-mono font-bold text-[#2e936f] pb-1">
-                CONNECTED DIGITAL CORE
+            <ScrollReveal direction="up" delay={0.1}>
+              <div className="space-y-2 max-w-2xl mx-auto">
+                <h2 className="text-2xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                  Let&apos;s Build What Comes Next
+                </h2>
+                <p className="text-xs sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                  Tell us what you&apos;re trying to achieve and we&apos;ll help you identify the right technology, strategy, and execution path.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal direction="up" delay={0.2}>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-1">
+                <Link href="/contact" className="w-full sm:w-auto">
+                  <MagneticButton className="w-full sm:w-auto">
+                    <Button3D
+                      variant="primary"
+                      size="lg"
+                      rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
+                      className="w-full sm:w-auto justify-center bg-[#f15e1c] text-white"
+                    >
+                      Discuss a Project
+                    </Button3D>
+                  </MagneticButton>
+                </Link>
+                <a
+                  href="https://api.whatsapp.com/send?phone=971521555792&text=Hello%20Arav%20Innovations%2C%20I%27d%20like%20to%20discuss%20a%20project."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto"
+                >
+                  <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center text-[#f15e1c] border-[#f15e1c]">
+                    Instant WhatsApp Inquiry
+                  </Button3D>
+                </a>
+              </div>
+            </ScrollReveal>
+
+            <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#253630] flex flex-wrap items-center justify-center gap-4 text-xs text-[#2e936f] font-medium">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f]" /> 100% Code &amp; IP Ownership
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f]" /> Strict SLA Protection
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f]" /> Regional Teams in Gurgaon &amp; Dubai
               </span>
             </div>
           </div>
@@ -538,242 +989,133 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       </section>
 
       {/* =========================================================================
-          5. HOW WE WORK — STICKY CONNECTED 4-STEP PROCESS SYSTEM
+          9. ABOUT OUR CEO — EDITORIAL LEADERSHIP PROFILE
           ========================================================================= */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-        <div className="max-w-7xl mx-auto space-y-12">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              HOW WE WORK?
-            </Badge>
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              4-Step Execution Framework
-            </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              A disciplined methodology moving seamlessly from initial diagnosis to 24/7 continuous optimization.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            {howWeWorkSteps.map((wf, idx) => {
-              const isActive = activeWorkIdx === idx;
-              return (
-                <div
-                  key={wf.step}
-                  onClick={() => setActiveWorkIdx(idx)}
-                  onMouseEnter={() => setActiveWorkIdx(idx)}
-                  className={cn(
-                    "rounded-3xl p-7 border-2 transition-all duration-300 cursor-pointer space-y-4 relative flex flex-col justify-between min-h-[300px]",
-                    isActive
-                      ? "bg-white dark:bg-[#101b17] border-[#f15e1c] shadow-2xl ring-4 ring-[#f15e1c]/30 scale-102 z-20"
-                      : "bg-[#fefaf5] dark:bg-[#172420] border-[#f7d7b0] dark:border-[#253630] opacity-70 hover:opacity-100"
-                  )}
-                >
-                  <div className="space-y-3 text-left">
-                    <div className="flex items-center justify-between">
-                      <span
-                        className={cn(
-                          "px-3 py-1 rounded-full text-xs font-mono font-black",
-                          isActive ? "bg-[#f15e1c] text-white" : "bg-[#fce3d3] text-[#f15e1c]"
-                        )}
-                      >
-                        STAGE {wf.step}
-                      </span>
-                      {isActive && <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-ping" />}
-                    </div>
-
-                    <h3 className="text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                      {wf.title}
-                    </h3>
-
-                    <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
-                      {wf.description}
-                    </p>
+      <section className="relative py-12 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
+        <div className="max-w-7xl mx-auto">
+          <TiltCard maxTilt={4} scale={1.01}>
+            <div className="rounded-2xl sm:rounded-[2rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-xl p-6 sm:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center text-left">
+              <div className="lg:col-span-5 flex justify-center">
+                <div className="relative w-48 h-48 sm:w-60 sm:h-60 rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-[#f15e1c] shadow-lg bg-[#fce3d3] dark:bg-[#261f1a] flex items-center justify-center text-center p-4 space-y-1.5 flex-col">
+                  <div className="w-16 h-16 rounded-full bg-[#f15e1c] text-white flex items-center justify-center text-xl font-black font-display shadow-md">
+                    AS
                   </div>
-
-                  <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#253630] text-left">
-                    <span className="text-[10px] font-mono font-bold uppercase text-[#7A6A5F] block">
-                      Deliverable Outcome:
-                    </span>
-                    <span className="text-xs font-bold text-[#f15e1c] mt-0.5 block">
-                      {wf.output}
-                    </span>
+                  <div className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                    Aryan Sayal
                   </div>
+                  <div className="text-[11px] font-mono font-bold text-[#f15e1c]">
+                    CEO &amp; Managing Director
+                  </div>
+                  <span className="text-[10px] text-[#2e936f] font-mono">Arav Innovations</span>
                 </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          6. ENTERPRISE PROJECT CTA — DISCUSS YOUR PROJECT & EXECUTION PATH
-          ========================================================================= */}
-      <section id="pricing" className="relative py-20 px-4 sm:px-6 lg:px-12 bg-[#fefaf5] dark:bg-[#172420] border-y border-[#f7d7b0] dark:border-[#253630]">
-        <div className="max-w-5xl mx-auto text-center space-y-8">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#f15e1c]/10 border border-[#f15e1c]/30 text-xs font-mono font-bold text-[#f15e1c]">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>CUSTOM ENTERPRISE ENGAGEMENT</span>
-          </div>
-
-          <div className="space-y-4 max-w-3xl mx-auto">
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Let&apos;s Build What Comes Next
-            </h2>
-            <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-              Tell us what you&apos;re trying to achieve and we&apos;ll help you identify the right technology, strategy, and execution path.
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-            <Link href="/contact">
-              <Button3D
-                variant="primary"
-                size="lg"
-                rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
-                className="w-full sm:w-auto justify-center bg-[#f15e1c] hover:bg-[#fab60a] text-white"
-              >
-                Discuss a Project &rarr;
-              </Button3D>
-            </Link>
-            <a href="https://api.whatsapp.com/send?phone=971521555792&text=Hello%20Arav%20Innovations%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer">
-              <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center text-[#f15e1c] border-[#f15e1c] hover:bg-[#f7d7b0]">
-                Instant WhatsApp Inquiry
-              </Button3D>
-            </a>
-          </div>
-
-          <div className="pt-6 border-t border-[#f7d7b0] dark:border-[#253630] flex flex-wrap items-center justify-center gap-6 text-xs text-[#2e936f] font-medium">
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#2e936f]" /> 100% Client Code &amp; IP Ownership
-            </span>
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#2e936f]" /> Strict SLA Protection
-            </span>
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#2e936f]" /> Regional Teams in Gurgaon &amp; Dubai
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          7. ABOUT OUR CEO — EDITORIAL LEADERSHIP PROFILE
-          ========================================================================= */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-        <div className="max-w-5xl mx-auto rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-8 sm:p-14 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center text-left">
-          <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-3xl overflow-hidden border-2 border-[#f15e1c] shadow-xl bg-[#fce3d3] dark:bg-[#261f1a] flex items-center justify-center text-center p-6 space-y-2 flex-col">
-              <div className="w-20 h-20 rounded-full bg-[#f15e1c] text-white flex items-center justify-center text-2xl font-black font-display shadow-md">
-                AS
               </div>
-              <div className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                Aryan Sayal
+
+              <div className="lg:col-span-7 space-y-3">
+                <Badge variant="secondary" size="md">
+                  About Our CEO
+                </Badge>
+                <h2 className="text-2xl sm:text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                  Aryan Sayal
+                </h2>
+                <p className="text-[11px] font-mono font-extrabold text-[#f15e1c] uppercase tracking-wider">
+                  CEO, Arav Innovations
+                </p>
+                <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                  Leading Arav Innovations with a vision for strategic excellence, Aryan Sayal orchestrates multidisciplinary technology squads across India and the UAE to help enterprises achieve measurable digital transformation and zero-trust cloud resilience.
+                </p>
+                <div className="pt-1">
+                  <a
+                    href="https://www.linkedin.com/company/aravinnovations/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#f15e1c] text-white text-xs font-bold shadow-md hover:bg-[#d44e14] transition-colors"
+                  >
+                    <Globe2 className="w-3.5 h-3.5" />
+                    <span>Connect on LinkedIn</span>
+                  </a>
+                </div>
               </div>
-              <div className="text-xs font-mono font-bold text-[#f15e1c]">
-                CEO &amp; Managing Director
-              </div>
-              <span className="text-[10px] text-[#2e936f] font-mono">Arav Innovations</span>
             </div>
-          </div>
+          </TiltCard>
+        </div>
+      </section>
 
-          <div className="lg:col-span-7 space-y-4">
-            <Badge variant="secondary" size="md">
-              About Our CEO
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-              Aryan Sayal
-            </h2>
-            <p className="text-xs font-mono font-extrabold text-[#f15e1c] uppercase tracking-wider">
-              CEO, Arav Innovations
-            </p>
-            <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-              Leading Arav Innovations with a vision for strategic excellence, Aryan Sayal orchestrates multidisciplinary technology squads across India and the UAE to help enterprises achieve measurable digital transformation and zero-trust cloud resilience.
-            </p>
-            <div className="pt-2">
+      {/* =========================================================================
+          10. FINAL CTA — ALTERNATING WORD TRANSFORMATIONAL SECTION
+          ========================================================================= */}
+      <section id="inquire" className="relative py-14 sm:py-20 px-4 sm:px-6 md:px-8 lg:px-12">
+        <div className="max-w-7xl mx-auto">
+          <div className="rounded-2xl sm:rounded-[2.5rem] bg-gradient-to-br from-[#f15e1c] via-[#e55215] to-[#d8480d] text-white p-6 sm:p-12 lg:p-14 border-2 border-[#fab60a] shadow-2xl space-y-6 text-center relative overflow-hidden">
+            <div className="relative z-10 max-w-2xl mx-auto space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 border border-white/40 text-[11px] font-mono font-bold text-white">
+                <Sparkles className="w-3.5 h-3.5 text-[#ffec69]" />
+                <span>START YOUR PROJECT</span>
+              </div>
+
+              <h2 className="text-2xl sm:text-4xl font-extrabold font-display tracking-tight text-white leading-tight">
+                Can&apos;t wait to start your project?
+              </h2>
+
+              {/* Alternating Animated Word Display */}
+              <div className="h-10 flex items-center justify-center overflow-hidden">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={ctaWords[currentWordIdx]}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -16 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-xl sm:text-3xl font-extrabold font-display text-[#ffec69] uppercase tracking-wider"
+                  >
+                    {ctaWords[currentWordIdx]}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              <p className="text-xs sm:text-base font-bold text-white/90">
+                Kick start a project with us today
+              </p>
+            </div>
+
+            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-3 pt-1">
+              <Link href="/contact" className="w-full sm:w-auto">
+                <Button3D
+                  variant="primary"
+                  size="lg"
+                  rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
+                  className="w-full sm:w-auto justify-center bg-white text-[#f15e1c] hover:bg-[#f7d7b0]"
+                >
+                  Discuss a Project
+                </Button3D>
+              </Link>
               <a
-                href="https://www.linkedin.com/company/aravinnovations/"
+                href="https://api.whatsapp.com/send?phone=971521555792&text=Hello%20Arav%20Innovations%2C%20I%27d%20like%20to%20discuss%20a%20project."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#f15e1c] text-white text-xs font-bold shadow-md hover:bg-[#d44e14] transition-colors"
+                className="w-full sm:w-auto"
               >
-                <Globe2 className="w-4 h-4" />
-                <span>Connect on LinkedIn</span>
+                <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center text-white border-white/60 hover:bg-white/10">
+                  Instant WhatsApp Inquiry
+                </Button3D>
               </a>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* =========================================================================
-          8. FINAL CTA — ALTERNATING WORD TRANSFORMATIONAL SECTION
-          ========================================================================= */}
-      <section id="inquire" className="relative py-24 px-4 sm:px-6 lg:px-12">
-        <div className="max-w-5xl mx-auto rounded-[3rem] bg-gradient-to-br from-[#f15e1c] via-[#e55215] to-[#d8480d] text-white p-10 sm:p-16 border-2 border-[#fab60a] shadow-2xl space-y-8 text-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-radial from-white/20 via-transparent to-transparent pointer-events-none" />
-
-          <div className="relative z-10 max-w-3xl mx-auto space-y-5">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 border border-white/40 text-xs font-mono font-bold text-white">
-              <Sparkles className="w-3.5 h-3.5 text-[#ffec69]" />
-              <span>START YOUR PROJECT</span>
+            <div className="relative z-10 pt-4 border-t border-white/20 flex flex-wrap items-center justify-center gap-4 text-xs text-white/90 font-medium">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#ffec69]" /> Strict SLA Protection
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#ffec69]" /> 100% Code &amp; IP Ownership
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#ffec69]" /> Regional Teams in Gurgaon &amp; Dubai
+              </span>
             </div>
-
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-white leading-tight">
-              Can&apos;t wait to start your project?
-            </h2>
-
-            {/* Alternating Animated Word Display */}
-            <div className="h-12 flex items-center justify-center overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={ctaWords[currentWordIdx]}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.35 }}
-                  className="text-2xl sm:text-4xl font-extrabold font-display text-[#ffec69] uppercase tracking-wider"
-                >
-                  {ctaWords[currentWordIdx]}
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            <p className="text-base sm:text-lg font-bold text-white/90">
-              Kick start a project with us today
-            </p>
-          </div>
-
-          <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-            <Link href="/contact">
-              <Button3D
-                variant="primary"
-                size="lg"
-                rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
-                className="w-full sm:w-auto justify-center bg-white text-[#f15e1c] hover:bg-[#f7d7b0]"
-              >
-                Discuss a Project &rarr;
-              </Button3D>
-            </Link>
-            <a href="https://api.whatsapp.com/send?phone=971521555792&text=Hello%20Arav%20Innovations%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer">
-              <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center text-white border-white/60 hover:bg-white/10">
-                Instant WhatsApp Inquiry
-              </Button3D>
-            </a>
-          </div>
-
-          <div className="relative z-10 pt-6 border-t border-white/20 flex flex-wrap items-center justify-center gap-6 text-xs text-white/90 font-medium">
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Strict SLA Protection
-            </span>
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> 100% Client Code &amp; IP Ownership
-            </span>
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Regional Teams in Gurgaon &amp; Dubai
-            </span>
           </div>
         </div>
       </section>
     </div>
   );
 }
+
+export default ITStrategyInteractivePage;

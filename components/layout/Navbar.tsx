@@ -157,7 +157,10 @@ export function Navbar() {
                   )}
                   aria-expanded={activeDropdown === "services"}
                 >
-                  <span>What We Do</span>
+                  <span className="relative py-0.5">
+                    What We Do
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 group-hover:w-full h-0.5 bg-[#f15e1c] transition-all duration-300 ease-out rounded-full" />
+                  </span>
                   <ChevronDown
                     className={cn(
                       "w-4 h-4 transition-transform duration-200 text-[#7A6A5F] dark:text-[#B8ACA0]",
@@ -225,13 +228,16 @@ export function Navbar() {
               <Link
                 href="/products"
                 className={cn(
-                  "px-3.5 py-2 rounded-xl text-sm font-medium transition-colors",
+                  "relative px-3.5 py-2 rounded-xl text-sm font-medium transition-colors group",
                   isActive("/products")
                     ? "text-[#f15e1c] font-semibold"
                     : "text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#f15e1c] dark:hover:text-[#f15e1c] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A]"
                 )}
               >
-                Products
+                <span className="relative py-0.5">
+                  Products
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 group-hover:w-full h-0.5 bg-[#f15e1c] transition-all duration-300 ease-out rounded-full" />
+                </span>
               </Link>
 
               {/* 3. Working With Us Dropdown */}
@@ -243,14 +249,17 @@ export function Navbar() {
                 <button
                   type="button"
                   className={cn(
-                    "inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-medium transition-colors cursor-pointer",
+                    "inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-medium transition-colors cursor-pointer group",
                     isWorkingWithUsActive()
                       ? "text-[#f15e1c] font-semibold"
                       : "text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#f15e1c] dark:hover:text-[#f15e1c] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A]"
                   )}
                   aria-expanded={activeDropdown === "working-with-us"}
                 >
-                  <span>Working With Us</span>
+                  <span className="relative py-0.5">
+                    Working With Us
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 group-hover:w-full h-0.5 bg-[#f15e1c] transition-all duration-300 ease-out rounded-full" />
+                  </span>
                   <ChevronDown
                     className={cn(
                       "w-4 h-4 transition-transform duration-200 text-[#7A6A5F] dark:text-[#B8ACA0]",
@@ -329,7 +338,10 @@ export function Navbar() {
                     : "text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#f15e1c] dark:hover:text-[#f15e1c] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A]"
                 )}
               >
-                Blogs
+                <span className="relative py-0.5">
+                  Blogs
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 group-hover:w-full h-0.5 bg-[#f15e1c] transition-all duration-300 ease-out rounded-full" />
+                </span>
               </Link>
             </nav>
 
