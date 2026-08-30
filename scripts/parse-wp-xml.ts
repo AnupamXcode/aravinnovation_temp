@@ -116,7 +116,7 @@ function formatDate(dateStr: string): { publishedAt: string; dateFormatted: stri
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
-  const formatted = `${months[date.getMonth()]} ${date.getFullYear()}`;
+  const formatted = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
   return { publishedAt: isoDate, dateFormatted: formatted };
 }
 

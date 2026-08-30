@@ -42,7 +42,7 @@ export const blogPostsData: BlogPost[] = [
     category: "Risk Governance",
     readTime: "7 min read",
     publishedAt: "2026-08-10",
-    dateFormatted: "August 2026",
+    dateFormatted: "August 10, 2026",
     author: {
       name: "Strategy & Governance Practice Lead",
       role: "Director of Enterprise Risk & Compliance, Arav Innovations",
@@ -103,7 +103,7 @@ export const blogPostsData: BlogPost[] = [
     category: "Web & App Dev",
     readTime: "6 min read",
     publishedAt: "2026-08-04",
-    dateFormatted: "August 2026",
+    dateFormatted: "August 4, 2026",
     author: {
       name: "Full-Stack Engineering Director",
       role: "Head of Web & App Practice, Arav Innovations",
@@ -156,7 +156,7 @@ export const blogPostsData: BlogPost[] = [
     category: "Digital Marketing",
     readTime: "5 min read",
     publishedAt: "2026-07-22",
-    dateFormatted: "July 2026",
+    dateFormatted: "July 22, 2026",
     author: {
       name: "Digital Growth & Demand Practice Lead",
       role: "Director of Performance Marketing, Arav Innovations",
@@ -202,7 +202,7 @@ export const blogPostsData: BlogPost[] = [
     category: "IT Strategy",
     readTime: "8 min read",
     publishedAt: "2026-06-18",
-    dateFormatted: "June 2026",
+    dateFormatted: "June 18, 2026",
     author: {
       name: "Cloud Architecture Practice Director",
       role: "Lead Enterprise Architect, Arav Innovations",

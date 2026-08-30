@@ -10,7 +10,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "6 min read",
     "publishedAt": "2024-12-03",
-    "dateFormatted": "December 2024",
+    "dateFormatted": "December 3, 2024",
     "author": {
       "name": "nextgenph.usa@gmail.com",
       "role": "Author"
@@ -133,7 +133,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "AI",
     "readTime": "5 min read",
     "publishedAt": "2024-12-13",
-    "dateFormatted": "December 2024",
+    "dateFormatted": "December 13, 2024",
     "author": {
       "name": "nextgenph.usa@gmail.com",
       "role": "Author"
@@ -284,7 +284,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "AI",
     "readTime": "6 min read",
     "publishedAt": "2025-01-14",
-    "dateFormatted": "January 2025",
+    "dateFormatted": "January 14, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -470,7 +470,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "5 min read",
     "publishedAt": "2025-01-17",
-    "dateFormatted": "January 2025",
+    "dateFormatted": "January 17, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -620,7 +620,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "6 min read",
     "publishedAt": "2025-01-22",
-    "dateFormatted": "January 2025",
+    "dateFormatted": "January 22, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -735,7 +735,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Complaince",
     "readTime": "7 min read",
     "publishedAt": "2025-02-12",
-    "dateFormatted": "February 2025",
+    "dateFormatted": "February 12, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -863,7 +863,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Complaince",
     "readTime": "7 min read",
     "publishedAt": "2025-02-14",
-    "dateFormatted": "February 2025",
+    "dateFormatted": "February 14, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -1041,7 +1041,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "AI",
     "readTime": "4 min read",
     "publishedAt": "2025-02-21",
-    "dateFormatted": "February 2025",
+    "dateFormatted": "February 21, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -1127,7 +1127,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "6 min read",
     "publishedAt": "2025-03-14",
-    "dateFormatted": "March 2025",
+    "dateFormatted": "March 14, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -1246,7 +1246,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Energy",
     "readTime": "6 min read",
     "publishedAt": "2025-04-02",
-    "dateFormatted": "April 2025",
+    "dateFormatted": "April 2, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -1384,7 +1384,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Cybersecurity",
     "readTime": "6 min read",
     "publishedAt": "2025-04-03",
-    "dateFormatted": "April 2025",
+    "dateFormatted": "April 3, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -1521,7 +1521,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "9 min read",
     "publishedAt": "2025-06-05",
-    "dateFormatted": "June 2025",
+    "dateFormatted": "June 5, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -1796,7 +1796,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "10 min read",
     "publishedAt": "2025-06-11",
-    "dateFormatted": "June 2025",
+    "dateFormatted": "June 11, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -2143,7 +2143,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "6 min read",
     "publishedAt": "2025-06-24",
-    "dateFormatted": "June 2025",
+    "dateFormatted": "June 24, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -2320,7 +2320,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "20 min read",
     "publishedAt": "2025-06-28",
-    "dateFormatted": "June 2025",
+    "dateFormatted": "June 28, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -2610,7 +2610,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "AI",
     "readTime": "6 min read",
     "publishedAt": "2025-07-02",
-    "dateFormatted": "July 2025",
+    "dateFormatted": "July 2, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -2802,7 +2802,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "7 min read",
     "publishedAt": "2025-07-19",
-    "dateFormatted": "July 2025",
+    "dateFormatted": "July 19, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -3006,7 +3006,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "13 min read",
     "publishedAt": "2025-07-22",
-    "dateFormatted": "July 2025",
+    "dateFormatted": "July 22, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -3209,7 +3209,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "18 min read",
     "publishedAt": "2025-08-25",
-    "dateFormatted": "August 2025",
+    "dateFormatted": "August 25, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -3499,7 +3499,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "14 min read",
     "publishedAt": "2025-08-26",
-    "dateFormatted": "August 2025",
+    "dateFormatted": "August 26, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -3726,7 +3726,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "15 min read",
     "publishedAt": "2025-08-27",
-    "dateFormatted": "August 2025",
+    "dateFormatted": "August 27, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -3962,7 +3962,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "14 min read",
     "publishedAt": "2025-08-28",
-    "dateFormatted": "August 2025",
+    "dateFormatted": "August 28, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -4220,7 +4220,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "14 min read",
     "publishedAt": "2025-09-11",
-    "dateFormatted": "September 2025",
+    "dateFormatted": "September 11, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -4419,7 +4419,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "13 min read",
     "publishedAt": "2025-09-16",
-    "dateFormatted": "September 2025",
+    "dateFormatted": "September 16, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -4638,7 +4638,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "15 min read",
     "publishedAt": "2025-09-20",
-    "dateFormatted": "September 2025",
+    "dateFormatted": "September 20, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -4908,7 +4908,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "18 min read",
     "publishedAt": "2025-09-24",
-    "dateFormatted": "September 2025",
+    "dateFormatted": "September 24, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -5112,7 +5112,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "17 min read",
     "publishedAt": "2025-10-06",
-    "dateFormatted": "October 2025",
+    "dateFormatted": "October 6, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -5397,7 +5397,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "15 min read",
     "publishedAt": "2025-10-07",
-    "dateFormatted": "October 2025",
+    "dateFormatted": "October 7, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -5651,7 +5651,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "19 min read",
     "publishedAt": "2025-10-10",
-    "dateFormatted": "October 2025",
+    "dateFormatted": "October 10, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -5821,7 +5821,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "15 min read",
     "publishedAt": "2025-10-15",
-    "dateFormatted": "October 2025",
+    "dateFormatted": "October 15, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -6041,7 +6041,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "14 min read",
     "publishedAt": "2025-10-23",
-    "dateFormatted": "October 2025",
+    "dateFormatted": "October 23, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -6273,7 +6273,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "14 min read",
     "publishedAt": "2025-10-29",
-    "dateFormatted": "October 2025",
+    "dateFormatted": "October 29, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -6451,7 +6451,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "14 min read",
     "publishedAt": "2025-11-01",
-    "dateFormatted": "November 2025",
+    "dateFormatted": "November 1, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -6634,7 +6634,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "15 min read",
     "publishedAt": "2025-11-17",
-    "dateFormatted": "November 2025",
+    "dateFormatted": "November 17, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -6911,7 +6911,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "11 min read",
     "publishedAt": "2025-11-19",
-    "dateFormatted": "November 2025",
+    "dateFormatted": "November 19, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -7071,7 +7071,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "AI",
     "readTime": "13 min read",
     "publishedAt": "2025-11-25",
-    "dateFormatted": "November 2025",
+    "dateFormatted": "November 25, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -7240,7 +7240,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "AI",
     "readTime": "38 min read",
     "publishedAt": "2025-11-27",
-    "dateFormatted": "November 2025",
+    "dateFormatted": "November 27, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -7604,7 +7604,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "15 min read",
     "publishedAt": "2025-12-01",
-    "dateFormatted": "December 2025",
+    "dateFormatted": "December 1, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -7759,7 +7759,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "AI",
     "readTime": "14 min read",
     "publishedAt": "2025-12-10",
-    "dateFormatted": "December 2025",
+    "dateFormatted": "December 10, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -7955,7 +7955,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "AI",
     "readTime": "15 min read",
     "publishedAt": "2025-12-16",
-    "dateFormatted": "December 2025",
+    "dateFormatted": "December 16, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -8109,7 +8109,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Insights",
     "readTime": "15 min read",
     "publishedAt": "2026-02-09",
-    "dateFormatted": "February 2026",
+    "dateFormatted": "February 9, 2026",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -8264,7 +8264,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Insights",
     "readTime": "5 min read",
     "publishedAt": "2026-02-11",
-    "dateFormatted": "February 2026",
+    "dateFormatted": "February 11, 2026",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -8455,7 +8455,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Insights",
     "readTime": "4 min read",
     "publishedAt": "2026-02-17",
-    "dateFormatted": "February 2026",
+    "dateFormatted": "February 17, 2026",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -8655,7 +8655,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Insights",
     "readTime": "4 min read",
     "publishedAt": "2026-03-03",
-    "dateFormatted": "March 2026",
+    "dateFormatted": "March 3, 2026",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -8802,7 +8802,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Insights",
     "readTime": "6 min read",
     "publishedAt": "2026-03-09",
-    "dateFormatted": "March 2026",
+    "dateFormatted": "March 9, 2026",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"
@@ -9032,7 +9032,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Insights",
     "readTime": "6 min read",
     "publishedAt": "2026-08-07",
-    "dateFormatted": "August 2026",
+    "dateFormatted": "August 7, 2026",
     "author": {
       "name": "abrar",
       "role": "Author"
@@ -9135,7 +9135,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Insights",
     "readTime": "14 min read",
     "publishedAt": "2026-08-13",
-    "dateFormatted": "August 2026",
+    "dateFormatted": "August 13, 2026",
     "author": {
       "name": "abrar",
       "role": "Author"
@@ -9705,7 +9705,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Insights",
     "readTime": "9 min read",
     "publishedAt": "2026-08-14",
-    "dateFormatted": "August 2026",
+    "dateFormatted": "August 14, 2026",
     "author": {
       "name": "abrar",
       "role": "Author"
@@ -9974,7 +9974,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Insights",
     "readTime": "7 min read",
     "publishedAt": "2026-08-14",
-    "dateFormatted": "August 2026",
+    "dateFormatted": "August 14, 2026",
     "author": {
       "name": "abrar",
       "role": "Author"
@@ -10164,7 +10164,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Insights",
     "readTime": "7 min read",
     "publishedAt": "2026-08-17",
-    "dateFormatted": "August 2026",
+    "dateFormatted": "August 17, 2026",
     "author": {
       "name": "abrar",
       "role": "Author"
@@ -10321,7 +10321,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Insights",
     "readTime": "7 min read",
     "publishedAt": "2026-08-18",
-    "dateFormatted": "August 2026",
+    "dateFormatted": "August 18, 2026",
     "author": {
       "name": "abrar",
       "role": "Author"
@@ -10593,7 +10593,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Insights",
     "readTime": "10 min read",
     "publishedAt": "2026-08-19",
-    "dateFormatted": "August 2026",
+    "dateFormatted": "August 19, 2026",
     "author": {
       "name": "abrar",
       "role": "Author"
@@ -10948,7 +10948,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Insights",
     "readTime": "6 min read",
     "publishedAt": "2026-08-29",
-    "dateFormatted": "August 2026",
+    "dateFormatted": "August 29, 2026",
     "author": {
       "name": "shifa",
       "role": "Author"
@@ -11114,7 +11114,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Insights",
     "readTime": "13 min read",
     "publishedAt": "2026-08-28",
-    "dateFormatted": "August 2026",
+    "dateFormatted": "August 28, 2026",
     "author": {
       "name": "abrar",
       "role": "Author"
@@ -11422,7 +11422,7 @@ export const wordpressPostsData: BlogPost[] = [
     "category": "Insights",
     "readTime": "10 min read",
     "publishedAt": "2026-08-29",
-    "dateFormatted": "August 2026",
+    "dateFormatted": "August 29, 2026",
     "author": {
       "name": "abrar",
       "role": "Author"

@@ -10,7 +10,7 @@ export const wordpressMigrationPreviewData: BlogPost[] = [
     "category": "Digital Marketing",
     "readTime": "6 min read",
     "publishedAt": "2024-12-03",
-    "dateFormatted": "December 2024",
+    "dateFormatted": "December 3, 2024",
     "author": {
       "name": "nextgenph.usa@gmail.com",
       "role": "Author"
@@ -133,7 +133,7 @@ export const wordpressMigrationPreviewData: BlogPost[] = [
     "category": "AI",
     "readTime": "5 min read",
     "publishedAt": "2024-12-13",
-    "dateFormatted": "December 2024",
+    "dateFormatted": "December 13, 2024",
     "author": {
       "name": "nextgenph.usa@gmail.com",
       "role": "Author"
@@ -284,7 +284,7 @@ export const wordpressMigrationPreviewData: BlogPost[] = [
     "category": "AI",
     "readTime": "6 min read",
     "publishedAt": "2025-01-14",
-    "dateFormatted": "January 2025",
+    "dateFormatted": "January 14, 2025",
     "author": {
       "name": "Arav Innovations",
       "role": "Author"

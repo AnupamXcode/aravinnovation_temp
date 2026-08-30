@@ -104,17 +104,35 @@ export async function getAllProductSlugs(): Promise<string[]> {
    BLOG / INSIGHTS
    ========================================================================= */
 
+export function ensureExactDate(post: BlogPost): BlogPost {
+  if (post.publishedAt && (!post.dateFormatted || !/\d{1,2}/.test(post.dateFormatted))) {
+    const d = new Date(post.publishedAt);
+    if (!isNaN(d.getTime())) {
+      const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+      return {
+        ...post,
+        dateFormatted: `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`,
+      };
+    }
+  }
+  return post;
+}
+
 export async function getBlogPosts(locale = "en"): Promise<BlogPost[]> {
   const baseLocalPosts = getLocalizedBlogPosts(locale);
   const localPosts = [...wordpressPostsData, ...baseLocalPosts];
+  let allPosts = localPosts;
   if (isVercelBlobConfigured()) {
     const vercelPosts = await fetchBlogsFromVercel();
     if (vercelPosts.length > 0) {
       const vercelSlugs = new Set(vercelPosts.map((p) => p.slug));
-      return [...vercelPosts, ...localPosts.filter((p) => !vercelSlugs.has(p.slug))];
+      allPosts = [...vercelPosts, ...localPosts.filter((p) => !vercelSlugs.has(p.slug))];
     }
   }
-  return localPosts;
+  return allPosts.map(ensureExactDate);
 }
 
 export async function getBlogPostBySlug(slug: string, locale = "en"): Promise<BlogPost | undefined> {
