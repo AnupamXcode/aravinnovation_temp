@@ -314,7 +314,7 @@ export function SEOInteractivePage({ service }: SEOPageProps) {
           2. OUR SOLUTIONS — CONNECTED SEARCH INTELLIGENCE SYSTEM
           ========================================================================= */}
       <section id="our-solutions" className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-        <div className="max-w-7xl mx-auto space-y-12 select-none">
+        <div className="max-w-[1536px] mx-auto space-y-12 select-none">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
               SPECIALIZED SEO SERVICES
@@ -546,7 +546,7 @@ export function SEOInteractivePage({ service }: SEOPageProps) {
           5. HOW WE WORK — STICKY CONNECTED 5-STAGE SEO PIPELINE
           ========================================================================= */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-        <div className="max-w-7xl mx-auto space-y-12">
+        <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
               HOW WE WORK?

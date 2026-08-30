@@ -498,7 +498,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
         </motion.div>
 
         {/* Top Breadcrumb & Badge */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full space-y-4">
+        <div className="relative z-10 max-w-[1536px] mx-auto w-full space-y-4">
           <Breadcrumb
             items={[
               { label: "Services", href: "/services" },
@@ -605,7 +605,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
           3. OUR SOLUTIONS & SIGNATURE MARKETING FUNNEL (AUDIENCE JOURNEY)
           ========================================================================= */}
       <section id="our-solutions" className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-        <div className="max-w-7xl mx-auto space-y-12 select-none">
+        <div className="max-w-[1536px] mx-auto space-y-12 select-none">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
               OUR SOLUTIONS
@@ -749,7 +749,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
           4. CONTENT CREATION MOSAIC TILE REVEAL
           ========================================================================= */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#ffffff] dark:bg-[#101b17]">
-        <div className="max-w-7xl mx-auto space-y-10">
+        <div className="max-w-[1536px] mx-auto space-y-10">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
               CONTENT &amp; BRAND CAPABILITIES
@@ -911,7 +911,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
           6. 4-STAGE GROWTH FRAMEWORK (HORIZONTAL PROGRESS TIMELINE & FEEDBACK LOOP)
           ========================================================================= */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-        <div className="max-w-7xl mx-auto space-y-12">
+        <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
               HOW WE WORK?

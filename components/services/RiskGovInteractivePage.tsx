@@ -472,7 +472,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
         <div className="absolute top-1/4 left-1/3 w-[450px] h-[450px] bg-radial from-[#2e936f]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
         <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-radial from-[#f15e1c]/8 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
 
-        <div className="max-w-[1400px] mx-auto w-full space-y-6 relative z-10">
+        <div className="max-w-[1536px] mx-auto w-full space-y-6 relative z-10">
           {/* Top Breadcrumb & Badge */}
           <div className="space-y-3">
             <Breadcrumb
@@ -566,7 +566,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
         ref={pipelineContainerRef}
         className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none"
       >
-        <div className="max-w-[1400px] mx-auto space-y-12">
+        <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
               RISK CONTROL PIPELINE
@@ -716,7 +716,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
           3. RISK MATRIX — ENTERPRISE VULNERABILITY REGISTER
           ========================================================================= */}
       <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
-        <div className="max-w-[1400px] mx-auto space-y-12">
+        <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
               QUANTITATIVE RISK MATRIX
@@ -779,7 +779,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
           4. PERFORMANCE METRIC — 100% ORGANIZATIONAL RISK VISIBILITY
           ========================================================================= */}
       <section className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none">
-        <div className="max-w-[1400px] mx-auto space-y-10">
+        <div className="max-w-[1536px] mx-auto space-y-10">
           <div className="text-center max-w-4xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
               PERFORMANCE BENCHMARK
@@ -859,7 +859,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
           5. GOVERNANCE GRID & COMPLIANCE VERIFICATION PIPELINE
           ========================================================================= */}
       <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
-        <div className="max-w-[1400px] mx-auto space-y-12">
+        <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
               GOVERNANCE &amp; VERIFICATION
@@ -919,7 +919,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
         ref={timelineContainerRef}
         className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none"
       >
-        <div className="max-w-[1400px] mx-auto space-y-12">
+        <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
               RESILIENCE TIMELINE
@@ -1037,7 +1037,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
         ref={loopContainerRef}
         className="relative py-28 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none"
       >
-        <div className="max-w-[1400px] mx-auto space-y-12">
+        <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
               CONTINUOUS COMPLIANCE MONITORING
@@ -1109,7 +1109,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
           </motion.div>
         </div>
 
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+        <div className="max-w-[1536px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
           <div ref={statementRef} className="lg:col-span-7 space-y-6 text-left">
             <Badge variant="secondary" size="md">
               GOVERNANCE PRINCIPLE
@@ -1159,7 +1159,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
           9. CLIENT TESTIMONIAL — ENTERPRISE PROOF
           ========================================================================= */}
       <section ref={testimonialRef} className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-        <div className="max-w-[1400px] mx-auto text-center space-y-8">
+        <div className="max-w-[1536px] mx-auto text-center space-y-8">
           <Badge variant="secondary" size="md">
             KIND WORDS FROM OUR CLIENTS
           </Badge>
@@ -1202,7 +1202,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
           10. ABOUT OUR CEO — EDITORIAL LEADERSHIP PROFILE
           ========================================================================= */}
       <section className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-        <div className="max-w-[1400px] mx-auto rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-8 sm:p-14 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center text-left">
+        <div className="max-w-[1536px] mx-auto rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-8 sm:p-14 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center text-left">
           <div className="lg:col-span-5 flex justify-center">
             <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-3xl overflow-hidden border-2 border-[#2e936f] shadow-xl bg-[#e8f5f1] dark:bg-[#192a24] flex items-center justify-center text-center p-6 space-y-2 flex-col">
               <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#2e936f] text-white flex items-center justify-center text-2xl sm:text-3xl font-black font-display shadow-md">
@@ -1250,7 +1250,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
           11. FINAL CTA — PRODUCT CULMINATION SECTION
           ========================================================================= */}
       <section id="inquire" className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 select-none">
-        <div className="max-w-[1400px] mx-auto space-y-8">
+        <div className="max-w-[1536px] mx-auto space-y-8">
           {/* Connector Flow Header: RISK -> CONTROL -> COMPLIANCE -> RESILIENCE */}
           <div className="text-center space-y-2">
             <span className="text-xs font-mono font-extrabold text-[#2e936f] uppercase tracking-widest block">

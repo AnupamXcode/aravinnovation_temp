@@ -412,7 +412,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
           </svg>
         </div>
 
-        <div className="max-w-[1400px] mx-auto w-full space-y-6 relative z-10">
+        <div className="max-w-[1536px] mx-auto w-full space-y-6 relative z-10">
           {/* Top Breadcrumb & Badge */}
           <div className="space-y-3">
             <Breadcrumb
@@ -492,7 +492,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
         ref={railContainerRef}
         className="relative py-24 sm:py-32 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]"
       >
-        <div className="max-w-[1400px] mx-auto space-y-10 select-none">
+        <div className="max-w-[1536px] mx-auto space-y-10 select-none">
           <div className="text-center max-w-4xl mx-auto space-y-2">
             <Badge variant="secondary" size="md">
               SOLUTION FRAMEWORK
@@ -628,7 +628,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
         ref={coreContainerRef}
         className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none"
       >
-        <div className="max-w-[1400px] mx-auto space-y-12">
+        <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
               SYSTEM ARCHITECTURE CENTERPIECE
@@ -701,7 +701,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
           4. METRICS — TECHNICAL DEBT & UPTIME SLA WITH PROGRESS RINGS
           ========================================================================= */}
       <section className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none">
-        <div className="max-w-[1400px] mx-auto space-y-10">
+        <div className="max-w-[1536px] mx-auto space-y-10">
           <div className="text-center max-w-4xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
               MEASURABLE OUTCOMES
@@ -785,7 +785,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
         ref={execContainerRef}
         className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none"
       >
-        <div className="max-w-[1400px] mx-auto space-y-12">
+        <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
               EXECUTION FRAMEWORK
@@ -865,7 +865,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
           6. CLIENT TESTIMONIAL — ENTERPRISE PROOF
           ========================================================================= */}
       <section ref={testimonialRef} className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-        <div className="max-w-[1400px] mx-auto text-center space-y-8">
+        <div className="max-w-[1536px] mx-auto text-center space-y-8">
           <Badge variant="secondary" size="md">
             EXECUTIVE ENDORSEMENT
           </Badge>
@@ -921,7 +921,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
           </motion.div>
         </div>
 
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+        <div className="max-w-[1536px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
           <div ref={statementRef} className="lg:col-span-7 space-y-6 text-left">
             <Badge variant="secondary" size="md">
               STRATEGIC MISSION
@@ -974,7 +974,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
           8. CTA — TRANSFORMATION JOURNEY CULMINATION
           ========================================================================= */}
       <section id="inquire" className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 select-none">
-        <div className="max-w-[1400px] mx-auto space-y-8">
+        <div className="max-w-[1536px] mx-auto space-y-8">
           {/* Connector Flow Header: ASSESS -> STRATEGIZE -> IMPLEMENT -> OPTIMIZE */}
           <div className="text-center space-y-2">
             <span className="text-xs font-mono font-extrabold text-[#f15e1c] uppercase tracking-widest block">
@@ -1071,7 +1071,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
           9. ABOUT OUR CEO — EDITORIAL LEADERSHIP PROFILE
           ========================================================================= */}
       <section className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-        <div className="max-w-[1400px] mx-auto rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-8 sm:p-14 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center text-left">
+        <div className="max-w-[1536px] mx-auto rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-8 sm:p-14 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center text-left">
           <div className="lg:col-span-5 flex justify-center">
             <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-3xl overflow-hidden border-2 border-[#f15e1c] shadow-xl bg-[#fce3d3] dark:bg-[#261f1a] flex items-center justify-center text-center p-6 space-y-2 flex-col">
               <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#f15e1c] text-white flex items-center justify-center text-2xl sm:text-3xl font-black font-display shadow-md">
