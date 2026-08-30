@@ -156,6 +156,19 @@ export const Button3D = React.forwardRef<HTMLButtonElement, Button3DProps>(
           />
         )}
 
+        {/* Border Trace animation layer on hover using clip-path */}
+        {variant !== "link" && isInteractive && (
+          <motion.span
+            className={cn(
+              "absolute inset-0 rounded-[inherit] border-2 pointer-events-none z-20",
+              variant === "primary" ? "border-white/90" : "border-[#f15e1c]"
+            )}
+            initial={{ clipPath: "inset(0 100% 0 0)" }}
+            animate={{ clipPath: isHovering ? "inset(0 0 0 0)" : "inset(0 100% 0 0)" }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+          />
+        )}
+
         {/* 3D shadow layer for depth */}
         {variant !== "link" && isInteractive && (
           <div
