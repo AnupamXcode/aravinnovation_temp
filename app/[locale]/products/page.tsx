@@ -34,7 +34,7 @@ export default async function ProductsListingPage() {
   const products = await getProducts();
 
   return (
-    <div className="pt-28 pb-20 bg-[#fefaf5] dark:bg-[#172420] transition-colors duration-300 min-h-screen">
+    <div className="pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#fefaf5] dark:bg-[#172420] transition-colors duration-300 min-h-screen">
       <BreadcrumbSchema items={[{ name: "Products", url: "/products" }]} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Header */}

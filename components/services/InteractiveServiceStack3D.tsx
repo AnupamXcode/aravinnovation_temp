@@ -337,11 +337,11 @@ export function InteractiveServiceStack3D() {
   const bottomStackLayers = serviceLayers.slice(4);
 
   return (
-    <div ref={rootRef} className="relative w-full select-none overflow-hidden my-12" id="services">
+    <div ref={rootRef} className="relative w-full select-none overflow-hidden my-6 md:my-12" id="services">
       {/* Pinned Scroll Track Container (260vh for smooth 8-step synchronized reveal) */}
-      <div className="service-stack-track relative w-full h-[260vh]">
+      <div className="service-stack-track relative w-full h-auto md:h-[260vh]">
         {/* Pinned Viewport Stage */}
-        <div className="service-pinned-stage w-full h-screen flex flex-col justify-between py-6 px-4 sm:px-8 lg:px-12 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+        <div className="service-pinned-stage w-full h-auto md:h-screen flex flex-col justify-between py-4 md:py-6 px-4 sm:px-8 lg:px-12 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
           {/* Top Header Section */}
           <div className="relative z-20 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#253630] pb-4 max-w-7xl mx-auto w-full">
             <div className="space-y-1">
@@ -608,11 +608,9 @@ export function InteractiveServiceStack3D() {
           </div>
 
           {/* DEDICATED RESPONSIVE MOBILE STACK (Visible on mobile viewports) */}
-          <div className="flex md:hidden flex-col gap-3 my-4 overflow-y-auto max-h-[60vh] px-1">
+          <div className="flex md:hidden flex-col gap-3 my-4 px-1">
             {serviceLayers.map((layer, idx) => {
               const isActive = layer.id === activeServiceIdx;
-              const isRevealed = idx < revealedCount;
-              if (!isRevealed) return null;
 
               return (
                 <Link key={layer.id} href={layer.href} className="w-full">

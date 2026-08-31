@@ -12,6 +12,7 @@ import { ChatbotWidget } from "@/components/chatbot/ChatbotWidget";
 import { GlobalBackgroundMotion } from "@/components/motion/GlobalBackgroundMotion";
 import { WebsiteShutdownOverlay } from "@/components/layout/WebsiteShutdownOverlay";
 import { BackToTop } from "@/components/ui/BackToTop";
+import { MobilePreviewToggle } from "@/components/layout/MobilePreviewToggle";
 import { SkipToContent } from "@/components/ui/SkipToContent";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
@@ -167,11 +168,14 @@ export default async function RootLayout({
                 <WebsiteShutdownOverlay>
                   <PageLoader />
                   <Navbar />
-                  <main id="main-content" className="flex-1 w-full">{children}</main>
+                  <main id="main-content" className="flex-1 w-full pt-16 sm:pt-20">{children}</main>
                   <Footer />
                   <BackToTop />
                   <SetupCall />
                   <ChatbotWidget />
+                  {(process.env.NODE_ENV === "development" || process.env.VERCEL_ENVIRONMENT === "development") && (
+                    <MobilePreviewToggle />
+                  )}
                 </WebsiteShutdownOverlay>
               </ThemeProvider>
             </SiteContentProvider>

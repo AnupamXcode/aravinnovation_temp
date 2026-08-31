@@ -19,7 +19,7 @@ import {
 
 export function Hero() {
   return (
-    <section className="relative pt-24 pb-10 md:pt-30 md:pb-12 overflow-hidden bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300 min-h-[75vh] md:min-h-[80vh] flex items-center">
+    <section className="relative pt-4 sm:pt-10 md:pt-16 pb-8 md:pb-12 overflow-hidden bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300 md:min-h-[75vh] flex items-center">
       {/* Soft Ambient Background 3D Glows */}
       <ParallaxContainer speed={-15} className="absolute inset-0 pointer-events-none -z-10">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] md:w-[950px] md:h-[950px] bg-radial from-[#FCE3D3]/70 via-[#FBF3EA]/30 to-transparent dark:from-[#f15e1c]/15 dark:via-[#1A1613]/40 dark:to-transparent rounded-full blur-3xl" />

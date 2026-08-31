@@ -126,10 +126,8 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          "sticky top-0 z-50 w-full transition-all duration-300 border-b",
-          isScrolled
-            ? "bg-[#FFFDF9] dark:bg-[#12100E] backdrop-blur-md border-[#EFE2D6] dark:border-[#2C241E] shadow-sm py-3"
-            : "bg-[#FFFDF9]/95 dark:bg-[#12100E]/95 backdrop-blur-md border-[#EFE2D6]/80 dark:border-[#2C241E]/80 shadow-xs py-3.5"
+          "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 border-b bg-[#FFFDF9] dark:bg-[#12100E] border-[#EFE2D6] dark:border-[#2C241E] shadow-sm",
+          isScrolled ? "py-2.5" : "py-3"
         )}
       >
         <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12">

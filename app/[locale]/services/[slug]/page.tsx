@@ -153,7 +153,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
   );
 
   return (
-    <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+    <div className="pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
       <BreadcrumbSchema
         items={[
           { name: "Services", url: "/services" },
