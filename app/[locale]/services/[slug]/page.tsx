@@ -22,6 +22,7 @@ import { RiskGovInteractivePage } from "@/components/services/RiskGovInteractive
 import { AuditInteractivePage } from "@/components/services/AuditInteractivePage";
 import { TrainingStaffInteractivePage } from "@/components/services/TrainingStaffInteractivePage";
 import { SEOInteractivePage } from "@/components/services/SEOInteractivePage";
+import { AIPortfolioInteractivePage } from "@/components/services/AIPortfolioInteractivePage";
 import {
   Compass,
   Code2,
@@ -137,6 +138,11 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
   // Render Immersive SEO Interactive Page for SEO Slugs
   if (service.slug === "seo-services" || slug === "seo" || slug === "seo-services") {
     return <SEOInteractivePage service={service} />;
+  }
+
+  // Render Immersive AI Portfolio Interactive Page for AI Slugs
+  if (service.slug === "ai-portfolio" || slug === "ai-solutions" || slug === "ai-portfolio") {
+    return <AIPortfolioInteractivePage service={service} />;
   }
 
   // Find related case study

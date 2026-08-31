@@ -90,13 +90,13 @@ export default async function ProductsListingPage() {
             {/* Functional Device Link Pills */}
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <a
-                href="https://astrobeams.ai"
+                href="https://astrobeams.in"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] text-[#f15e1c] text-xs font-bold font-mono hover:bg-[#fefaf5] hover:border-[#f15e1c] hover:-translate-y-0.5 transition-all shadow-xs cursor-pointer"
               >
                 <Sparkles className="w-4 h-4 text-[#f15e1c]" />
-                <span>AI Platform (AstroBeams.ai)</span>
+                <span>Live Platform (AstroBeams.in)</span>
                 <ExternalLink className="w-3 h-3 text-[#f15e1c]" />
               </a>
 

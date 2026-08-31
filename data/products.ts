@@ -60,61 +60,99 @@ export interface Product {
 
 export const productsData: Product[] = [
   {
-    slug: "astrobeams-ai",
-    name: "AstroBeams.ai",
-    category: "AI / Intelligent Digital Platform",
+    slug: "astrobeams",
+    name: "AstroBeams",
+    category: "Astrology & Wellness",
     status: "live",
     badge: "Live Platform",
-    badgeColor: "#f15e1c",
-    tagline: "Intelligent Artificial Intelligence & Conversational Automation Platform",
+    badgeColor: "#2e936f",
+    tagline: "Talk to Expert Astrologers Online for Free Predictions & Life Guidance",
     description:
-      "An intelligent AI platform engineered by Arav Innovations for automated conversational intelligence, enterprise workflow AI, and digital assistant capabilities.",
+      "Experience accurate astrology services with AstroBeams. Chat or call certified expert astrologers for love, career, marriage, and life guidance. Available 24/7 for chat and voice consultations.",
     positioning:
-      "A next-generation AI digital platform engineered for conversational intelligence, autonomous agents, and workflow automation.",
-    ctaText: "Visit AstroBeams.ai →",
-    ctaUrl: "https://astrobeams.ai",
+      "A next-generation astrology & life guidance platform offering live chat, voice call consultations, birth chart/Kundli analysis, and personalized remedies.",
+    ctaText: "Explore AstroBeams →",
+    ctaUrl: "https://astrobeams.in",
     ctaEnabled: true,
-    externalUrl: "https://astrobeams.ai",
+    externalUrl: "https://astrobeams.in",
     iconName: "Sparkles",
     features: [
-      "AI",
-      "Automation",
-      "Conversational AI",
-      "Intelligent Systems",
-      "Digital Assistant",
-      "Workflow Automation",
+      "Certified expert astrologers available 24/7",
+      "Live chat and voice call consultations",
+      "Accurate predictions and personalized remedies",
+      "Kundli analysis and birth chart readings",
+      "Love, career, and life guidance",
+      "Free initial consultation available",
     ],
-    useCase: "Enterprises and digital teams deploying automated AI assistants and conversational intelligence",
+    useCase: "Individuals seeking astrological guidance, life predictions, and personal development.",
     pricingModel: "live-platform",
-    pricingNote: "Enterprise API integration and platform subscription models.",
+    pricingNote: "Freemium initial consultation with transparent pay-per-minute advisory models.",
     targetAudience: [
-      "Enterprises looking for custom AI assistant integration",
-      "Digital teams requiring automated conversational intelligence",
-      "Organizations deploying autonomous AI workflows",
+      "Individuals seeking astrological guidance and life predictions",
+      "Users requiring instant 24/7 certified astrologer consultations",
+      "People looking for accurate Kundli, Horoscope & birth chart analysis",
+      "Couples evaluating marriage and relationship compatibility remedies",
     ],
     problemSolved: {
-      title: "Automated Conversational Intelligence & Enterprise AI Workflows",
+      title: "Instant Access to Certified Astrologers & Kundli Predictions",
       points: [
-        "Deploying responsive, high-precision AI assistants across digital channels.",
-        "Automating complex customer interactions and intent recognition.",
-        "Seamless integration with cloud infrastructure and enterprise databases.",
+        "Instant 24/7 access to expert astrologers via chat and call.",
+        "Accurate, confidential guidance for love, career, marriage, and life decisions.",
+        "Instant Kundli analysis, matching, and remedial solutions.",
       ],
     },
     howItWorks: [
       {
         step: 1,
-        title: "Platform Onboarding",
-        description: "Connect digital channels and configure domain knowledge models.",
+        title: "Sign up & Claim Free Consultation",
+        description: "Create an account to access initial free credits and choose from certified astrologers.",
       },
       {
         step: 2,
-        title: "Deploy AI Assistants",
-        description: "Activate conversational workflows and real-time automation.",
+        title: "Enter Birth Details & Choose Advisor",
+        description: "Provide birth date, time, and location to generate planetary charts and Kundli.",
       },
       {
         step: 3,
-        title: "Analytics & Optimization",
-        description: "Monitor interaction metrics and refine model accuracy continuously.",
+        title: "Live Chat or Call Consultation",
+        description: "Connect instantly for real-time predictions, career advice, and remedies.",
+      },
+    ],
+    featureDetails: [
+      {
+        title: "Vedic & Western Astrology",
+        description: "Comprehensive planetary analysis, Kundli generation, and zodiac insights.",
+        iconName: "Sparkles",
+      },
+      {
+        title: "Live Chat & Call Advisory",
+        description: "Real-time 24/7 consultations with verified astrologers for love, career, and life.",
+        iconName: "Sparkles",
+      },
+      {
+        title: "Kundli & Birth Chart Analysis",
+        description: "Detailed birth chart mapping, synastry matchmaking, and gemstone recommendations.",
+        iconName: "Sparkles",
+      },
+      {
+        title: "Personalized Remedies",
+        description: "Custom astrological remedies, mantras, and annual Varshaphal predictions.",
+        iconName: "Sparkles",
+      },
+    ],
+    proofPoint: {
+      metric: "24/7",
+      label: "Live Consultation Availability",
+      detail: "Certified expert astrologers ready for instant phone & chat consultations.",
+    },
+    faqs: [
+      {
+        question: "How do I consult an astrologer on AstroBeams?",
+        answer: "Visit astrobeams.in, sign up to receive your free initial consultation, select an astrologer, and start live chat or call instantly.",
+      },
+      {
+        question: "What services are available on AstroBeams?",
+        answer: "AstroBeams provides Kundli matching, horoscopes, gemstone recommendations, career advice, relationship guidance, and annual predictions.",
       },
     ],
   },
@@ -319,11 +357,21 @@ export const productsData: Product[] = [
   },
 ];
 
+const productAliasMap: Record<string, string> = {
+  "astrobeams-ai": "astrobeams",
+  "astrobeams.ai": "astrobeams",
+  "astrobeams-store": "astrobeams",
+};
+
 export function getProductBySlug(slug: string): Product | undefined {
-  return productsData.find((p) => p.slug === slug);
+  const normalized = productAliasMap[slug] || slug;
+  return productsData.find((p) => p.slug === normalized);
 }
 
 export function getAllProductSlugs(): string[] {
-  return productsData.map((p) => p.slug);
+  const primarySlugs = productsData.map((p) => p.slug);
+  const aliasSlugs = Object.keys(productAliasMap);
+  return Array.from(new Set([...primarySlugs, ...aliasSlugs]));
 }
+
 

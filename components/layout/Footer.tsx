@@ -161,24 +161,24 @@ export function Footer() {
             </div>
 
             {/* Dual Regional Operations Details */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs text-white/90">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 text-sm sm:text-base text-white/90">
               {/* India */}
               {footer?.indiaVisible !== false && (
-                <div className="space-y-1.5">
+                <div className="space-y-2">
                   <a
                     href={`tel:${footer?.indiaPhone?.replace(/\s+/g, "") || "+919650625777"}`}
-                    className="font-bold text-sm text-white hover:underline block"
+                    className="font-bold text-base sm:text-lg text-white hover:underline block"
                   >
                     {t("indiaHq")} (+91 9650625777)
                   </a>
                   <div className="w-full h-px bg-white/30 my-2" />
-                  <p className="text-white/85 leading-relaxed whitespace-pre-line">
+                  <p className="text-sm sm:text-base text-white/90 leading-relaxed whitespace-pre-line">
                     {footer?.indiaAddress || "Platinum Floor D 14/23\nArdee City Sec 52\nGurgaon 122002"}
                   </p>
                   <div className="pt-2">
                     <a
                       href={`mailto:${footer?.supportEmail || "support@aravinnovations.com"}`}
-                      className="font-medium text-white hover:underline block"
+                      className="font-semibold text-sm sm:text-base text-white hover:underline block"
                     >
                       {footer?.supportEmail || "support@aravinnovations.com"}
                     </a>
@@ -188,15 +188,15 @@ export function Footer() {
 
               {/* UAE */}
               {footer?.uaeVisible !== false && (
-                <div className="space-y-1.5 pb-4 sm:pb-0">
+                <div className="space-y-2 pb-4 sm:pb-0">
                   <a
                     href="tel:+971521555792"
-                    className="font-bold text-sm text-white hover:underline block"
+                    className="font-bold text-base sm:text-lg text-white hover:underline block"
                   >
                     UAE Regional Office (+971 521555792)
                   </a>
                   <div className="w-full h-px bg-white/30 my-2" />
-                  <p className="text-white/85 leading-relaxed whitespace-pre-line">
+                  <p className="text-sm sm:text-base text-white/90 leading-relaxed whitespace-pre-line">
                     {footer?.uaeCompanyName ? `${footer.uaeCompanyName}\n` : ""}
                     {footer?.uaeAddress || "55764-001 IFZA Business Park FZCO\nBuilding A1 Dubai Silicon Oasis Dubai, U.A.E"}
                   </p>
@@ -204,7 +204,7 @@ export function Footer() {
                     <div className="pt-2">
                       <a
                         href={`mailto:${footer.secondaryEmail}`}
-                        className="font-medium text-white hover:underline block"
+                        className="font-semibold text-sm sm:text-base text-white hover:underline block"
                       >
                         {footer.secondaryEmail}
                       </a>

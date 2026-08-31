@@ -57,36 +57,36 @@ export function ProductCard({ product }: ProductCardProps) {
           <h3 className="text-2xl sm:text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
             {product.name}
           </h3>
-          <p className="text-xs font-bold font-mono text-[#f15e1c] uppercase tracking-wider">
+          <p className="text-xs sm:text-sm font-bold font-mono text-[#f15e1c] uppercase tracking-wider">
             {product.category}
           </p>
-          <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+          <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
             {product.description}
           </p>
         </div>
 
         {/* Capabilities List with Compact View Details toggle */}
-        <div className="space-y-2.5 pt-4 border-t border-[#f7d7b0] dark:border-[#253630] text-left">
+        <div className="space-y-3 pt-4 border-t border-[#f7d7b0] dark:border-[#253630] text-left">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold font-mono uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
+            <span className="text-xs sm:text-sm font-bold font-mono uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
               Key Capabilities
             </span>
             {product.features.length > 4 && (
               <button
                 type="button"
                 onClick={() => setShowAllCapabilities(!showAllCapabilities)}
-                className="text-xs font-bold text-[#f15e1c] hover:underline inline-flex items-center gap-0.5 cursor-pointer"
+                className="text-xs sm:text-sm font-bold text-[#f15e1c] hover:underline inline-flex items-center gap-0.5 cursor-pointer"
               >
                 <span>{showAllCapabilities ? "Show Less" : "View All"}</span>
-                {showAllCapabilities ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                {showAllCapabilities ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
               </button>
             )}
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-2.5">
             {visibleFeatures.map((feature, fIdx) => (
-              <div key={fIdx} className="flex items-start gap-2 text-xs text-[#4a5c55] dark:text-[#d3eee4]">
-                <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0 mt-0.5" />
+              <div key={fIdx} className="flex items-start gap-2.5 text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
+                <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#2e936f] shrink-0 mt-0.5" />
                 <span className="leading-snug font-medium">{feature}</span>
               </div>
             ))}

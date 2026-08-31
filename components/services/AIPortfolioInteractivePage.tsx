@@ -52,6 +52,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { MagneticButton } from "@/components/motion/MagneticButton";
+import { FAQAccordion } from "@/components/FAQAccordion";
 import { cn } from "@/lib/utils";
 
 interface AIPortfolioPageProps {
@@ -835,9 +836,12 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
 
           {/* Active Roadmap Step Card */}
           <div className="max-w-5xl mx-auto">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeRoadmap.step}
+            {(() => {
+              const activeRoadmap = deploymentRoadmap[activeRoadmapStep] || deploymentRoadmap[0];
+              return (
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeRoadmap.step}
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -16 }}
@@ -869,6 +873,8 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
                 </div>
               </motion.div>
             </AnimatePresence>
+              );
+            })()}
           </div>
         </div>
       </section>
@@ -920,6 +926,11 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
           </div>
         </div>
       </section>
+
+      {/* =========================================================================
+          7.5 FREQUENTLY ASKED QUESTIONS (AI PORTFOLIO)
+          ========================================================================= */}
+      <FAQAccordion />
 
       {/* =========================================================================
           8. FINAL CTA — FLAGSHIP INTELLIGENCE CORE CULMINATION
