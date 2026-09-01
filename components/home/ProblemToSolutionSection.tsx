@@ -39,12 +39,12 @@ export function ProblemToSolutionSection() {
   ];
 
   return (
-    <section className="py-16 md:py-24 px-4 sm:px-8 lg:px-12 xl:px-16 w-full">
-      <div className="max-w-7xl mx-auto rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] p-8 sm:p-14 lg:p-16 shadow-2xl transition-colors duration-300 relative overflow-hidden">
+    <section className="py-6 md:py-12 px-4 sm:px-8 lg:px-12 xl:px-16 w-full">
+      <div className="max-w-7xl mx-auto rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] p-6 sm:p-10 lg:p-12 shadow-2xl transition-colors duration-300 relative overflow-hidden">
         {/* Subtle Brand Accent Gradient */}
         <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#f15e1c] via-[#2e936f] to-[#fab60a]" />
 
-        <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
+        <div className="max-w-3xl mx-auto text-center space-y-4 mb-10">
           <Badge variant="secondary" size="md">
             PURPOSE-DRIVEN TECHNOLOGY
           </Badge>

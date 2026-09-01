@@ -5,6 +5,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   Compass,
   TrendingUp,
@@ -38,6 +39,7 @@ const iconMap: Record<string, React.ReactNode> = {
 
 export function InteractiveServiceStack3D() {
   const { config } = useSiteConfig();
+  const shouldReduceMotion = useReducedMotion();
   const rootRef = React.useRef<HTMLDivElement>(null);
   const [activeServiceIdx, setActiveServiceIdx] = React.useState<number>(0);
   const [revealedCount, setRevealedCount] = React.useState<number>(1);
@@ -55,6 +57,9 @@ export function InteractiveServiceStack3D() {
 
   React.useEffect(() => {
     if (!rootRef.current || !isEnabled) return;
+
+    // Mobile check: Bypass GSAP pinning, ScrollTrigger scrub, and Lenis scroll-jacking on mobile viewports (< 768px)
+    if (window.innerWidth < 768) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let cancelled = false;
@@ -337,11 +342,11 @@ export function InteractiveServiceStack3D() {
   const bottomStackLayers = serviceLayers.slice(4);
 
   return (
-    <div ref={rootRef} className="relative w-full select-none overflow-hidden my-6 md:my-12" id="services">
-      {/* Pinned Scroll Track Container (260vh for smooth 8-step synchronized reveal) */}
-      <div className="service-stack-track relative w-full h-auto md:h-[260vh]">
+    <div ref={rootRef} className="relative w-full select-none overflow-hidden my-1 md:my-4" id="services">
+      {/* Pinned Scroll Track Container (180vh for compact 8-step synchronized reveal) */}
+      <div className="service-stack-track relative w-full h-auto md:h-[180vh]">
         {/* Pinned Viewport Stage */}
-        <div className="service-pinned-stage w-full h-auto md:h-screen flex flex-col justify-between py-4 md:py-6 px-4 sm:px-8 lg:px-12 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+        <div className="service-pinned-stage w-full h-auto md:h-screen flex flex-col justify-between py-3 md:py-4 px-4 sm:px-8 lg:px-12 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
           {/* Top Header Section */}
           <div className="relative z-20 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#253630] pb-4 max-w-7xl mx-auto w-full">
             <div className="space-y-1">
@@ -353,7 +358,8 @@ export function InteractiveServiceStack3D() {
                 Enterprise Technology Practices
               </h2>
               <p className="text-xs sm:text-sm text-[#7A6A5F] dark:text-[#B8ACA0]">
-                Scroll to explore how our integrated practices work together to drive enterprise growth.
+                <span className="hidden md:inline">Scroll to explore how our integrated practices work together to drive enterprise growth.</span>
+                <span className="inline md:hidden">Explore how our integrated practices work together to drive enterprise growth.</span>
               </p>
             </div>
             <Link href="/services">
@@ -607,49 +613,71 @@ export function InteractiveServiceStack3D() {
             </ul>
           </div>
 
-          {/* DEDICATED RESPONSIVE MOBILE STACK (Visible on mobile viewports) */}
-          <div className="flex md:hidden flex-col gap-3 my-4 px-1">
+          {/* DEDICATED RESPONSIVE MOBILE STACK (Clean, unpinned vertical list with smooth viewport entrance animations) */}
+          <div className="flex md:hidden flex-col gap-3.5 my-4 w-full overflow-x-clip px-0.5">
             {serviceLayers.map((layer, idx) => {
               const isActive = layer.id === activeServiceIdx;
 
+              // Directional variation: Primary Left -> Center (-60px), Right -> Center (50px), Up -> Center (35px)
+              const initialTransform = shouldReduceMotion
+                ? { opacity: 1, x: 0, y: 0, scale: 1 }
+                : idx % 3 === 0
+                ? { opacity: 0, x: -60, y: 0, scale: 0.98 }
+                : idx % 3 === 1
+                ? { opacity: 0, x: 50, y: 0, scale: 0.98 }
+                : { opacity: 0, x: 0, y: 35, scale: 0.98 };
+
               return (
-                <Link key={layer.id} href={layer.href} className="w-full">
-                  <div
-                    className={cn(
-                      "p-4 rounded-2xl border flex items-center justify-between gap-3 shadow-md",
-                      isActive
-                        ? "bg-white dark:bg-[#1a2924] border-[#f15e1c] ring-2 ring-[#f15e1c]/40 shadow-xl"
-                        : "bg-white/90 dark:bg-[#172420]/90 border-[#f7d7b0] dark:border-[#253630]"
-                    )}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div
-                        className="w-9 h-9 rounded-xl flex items-center justify-center text-white shrink-0 shadow-sm"
-                        style={{ backgroundColor: layer.tone }}
-                      >
-                        {iconMap[layer.icon] || <Sparkles className="w-5 h-5 text-white" />}
-                      </div>
-                      <div>
-                        <h4
-                          className="text-xs font-bold font-display uppercase tracking-wider"
-                          style={{ color: isActive ? "#f15e1c" : layer.tone }}
+                <motion.div
+                  key={layer.id}
+                  initial={initialTransform}
+                  whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{
+                    duration: 0.9,
+                    delay: (idx % 2) * 0.1,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="w-full"
+                >
+                  <Link href={layer.href} className="w-full block">
+                    <div
+                      className={cn(
+                        "p-4 rounded-2xl border flex items-center justify-between gap-3 shadow-xs active:scale-[0.99] transition-all duration-150",
+                        isActive
+                          ? "bg-white dark:bg-[#1a2924] border-[#f15e1c] ring-2 ring-[#f15e1c]/40 shadow-md"
+                          : "bg-white/95 dark:bg-[#172420]/95 border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c]/40"
+                      )}
+                    >
+                      <div className="flex items-center gap-3 min-w-0 flex-1">
+                        <div
+                          className="w-9 h-9 rounded-xl flex items-center justify-center text-white shrink-0 shadow-xs"
+                          style={{ backgroundColor: layer.tone }}
                         >
-                          {layer.name}
-                        </h4>
-                        <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] line-clamp-1">
-                          {layer.description}
-                        </p>
+                          {iconMap[layer.icon] || <Sparkles className="w-5 h-5 text-white" />}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <h4
+                            className="text-xs font-bold font-display uppercase tracking-wider truncate"
+                            style={{ color: isActive ? "#f15e1c" : layer.tone }}
+                          >
+                            {layer.name}
+                          </h4>
+                          <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] line-clamp-1 mt-0.5">
+                            {layer.description}
+                          </p>
+                        </div>
                       </div>
+                      <ArrowRight className="w-4 h-4 text-[#f15e1c] shrink-0 ml-1" />
                     </div>
-                    <ArrowRight className="w-4 h-4 text-[#f15e1c] shrink-0" />
-                  </div>
-                </Link>
+                  </Link>
+                </motion.div>
               );
             })}
           </div>
 
-          {/* Bottom Navigation Indicator Bar */}
-          <div className="relative z-20 flex items-center justify-between max-w-7xl mx-auto w-full border-t border-[#f7d7b0] dark:border-[#253630] pt-3 text-xs font-mono text-[#7A6A5F] dark:text-[#B8ACA0]">
+          {/* Bottom Navigation Indicator Bar (Desktop only) */}
+          <div className="hidden md:flex relative z-20 items-center justify-between max-w-7xl mx-auto w-full border-t border-[#f7d7b0] dark:border-[#253630] pt-3 text-xs font-mono text-[#7A6A5F] dark:text-[#B8ACA0]">
             <span className="inline-flex items-center gap-1.5">
               <span>Scroll Down to Explore Each Practice</span>
               <ChevronDown className="w-3.5 h-3.5 text-[#f15e1c] animate-bounce" />

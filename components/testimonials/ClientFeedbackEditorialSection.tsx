@@ -136,12 +136,12 @@ export function ClientFeedbackEditorialSection() {
 
   return (
     <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="client-feedback">
-      <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#101b17] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
+      <section className="py-8 md:py-14 px-6 sm:px-12 lg:px-14 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#101b17] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
         {/* Subtle Brand Accent Header Line */}
         <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c] to-transparent" />
 
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 space-y-3 relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-8 space-y-3 relative z-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] border border-[#f7d7b0] text-xs font-mono font-extrabold text-[#f15e1c]">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Executive Feedback</span>

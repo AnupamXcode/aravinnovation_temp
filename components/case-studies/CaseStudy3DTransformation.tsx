@@ -82,14 +82,14 @@ export function CaseStudy3DTransformation() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-12 select-none"
+      className="relative w-full max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-4 md:py-6 select-none"
     >
-      <div className="w-full rounded-[3rem] bg-[#ffffff] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-8 sm:p-14 md:p-16 space-y-12 relative overflow-hidden transition-all duration-300">
+      <div className="w-full rounded-[3rem] bg-[#ffffff] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-6 sm:p-10 md:p-12 space-y-8 relative overflow-hidden transition-all duration-300">
         {/* Background Ambient Glow */}
         <div className="absolute top-0 right-0 w-full h-96 bg-radial from-[#f15e1c]/10 via-[#2e936f]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
 
         {/* Full-Width Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#f7d7b0] dark:border-[#253630] pb-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#f7d7b0] dark:border-[#253630] pb-6">
           <div className="space-y-3 max-w-4xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
               <span className="w-2 h-2 rounded-full bg-[#f15e1c] animate-pulse" />

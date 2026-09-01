@@ -88,16 +88,16 @@ export default async function HomePage({
   ];
 
   return (
-    <div className="flex flex-col min-h-screen w-full bg-[#ffffff] dark:bg-[#101b17] text-[#1b2823] dark:text-[#ffffff] space-y-6 md:space-y-10 pb-12 transition-colors duration-300 overflow-x-hidden">
+    <div className="flex flex-col min-h-screen w-full bg-[#ffffff] dark:bg-[#101b17] text-[#1b2823] dark:text-[#ffffff] space-y-4 md:space-y-8 pb-8 transition-colors duration-300 overflow-x-hidden">
       {/* STAGE 1: HERO SECTION */}
       <Scroll3DContainer variant="hero">
         <Hero />
       </Scroll3DContainer>
 
       {/* TRUSTED CLIENTS MOVING LOGO STRIP */}
-      <section className="w-full py-9 bg-[#fefaf5] dark:bg-[#172420] border-y border-[#f7d7b0] dark:border-[#253630] shadow-sm transition-all duration-300 overflow-hidden">
+      <section className="w-full py-5 md:py-7 bg-[#fefaf5] dark:bg-[#172420] border-y border-[#f7d7b0] dark:border-[#253630] shadow-sm transition-all duration-300 overflow-hidden">
         <ScrollReveal direction="up">
-          <div className="text-center mb-4 px-4">
+          <div className="text-center mb-3 px-4">
             <span className="text-[11px] font-bold font-mono uppercase tracking-widest text-[#4a5c55] dark:text-[#d3eee4]">
               {tMovingLogo("heading")}
             </span>
@@ -108,7 +108,7 @@ export default async function HomePage({
 
       {/* BEFORE/AFTER TRANSFORMATION SLIDER */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
-        <section className="py-6 md:py-8 px-4 sm:px-6 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-xl text-center transition-colors duration-300">
+        <section className="py-5 md:py-7 px-4 sm:px-6 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-xl text-center transition-colors duration-300">
           <ScrollReveal direction="up">
             <BeforeAfterSlider />
           </ScrollReveal>
@@ -128,8 +128,8 @@ export default async function HomePage({
 
       {/* 2. HOW ARAV WORKS / 5-STEP METHODOLOGY */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="process">
-        <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <section className="py-8 md:py-14 px-6 sm:px-12 lg:px-14 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300">
+          <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
             <Badge variant="secondary" size="md">
               {tMethodology("badge")}
             </Badge>
@@ -147,10 +147,10 @@ export default async function HomePage({
       {/* 3. SECTION ONE: EXISTING EXECUTIVE ENDORSEMENT (UNTOUCHED) */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="executive-endorsements">
         <Scroll3DContainer variant="testimonial">
-          <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
+          <section className="py-8 md:py-14 px-6 sm:px-12 lg:px-14 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
             <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent" />
 
-            <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+            <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
               <Badge variant="secondary" size="md">
                 {tTestimonials("badge")}
               </Badge>
@@ -173,11 +173,10 @@ export default async function HomePage({
         <ClientFeedbackEditorialSection />
       </ScrollReveal>
 
-
       {/* 6. WHY ARAV (EQUAL SIZED 4 CARDS GRID) */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
-        <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300">
-          <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+        <section className="py-8 md:py-14 px-6 sm:px-12 lg:px-14 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300">
+          <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
             <Badge variant="secondary" size="md">
               {tWhyArav("badge")}
             </Badge>
@@ -213,7 +212,7 @@ export default async function HomePage({
       {/* 7. FINAL LEAD FORM & CTA SECTION */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="contact">
         <Scroll3DContainer variant="cta">
-          <section className="py-16 md:py-24 px-6 sm:px-14 lg:px-16 rounded-[2.5rem] bg-gradient-to-br from-[#ffffff] via-[#fefaf5] to-[#f7d7b0]/50 dark:from-[#172420] dark:via-[#1e2c27] dark:to-[#253630] border-2 border-[#f15e1c]/40 shadow-2xl transition-all duration-300">
+          <section className="py-8 md:py-14 px-6 sm:px-12 lg:px-14 rounded-[2.5rem] bg-gradient-to-br from-[#ffffff] via-[#fefaf5] to-[#f7d7b0]/50 dark:from-[#172420] dark:via-[#1e2c27] dark:to-[#253630] border-2 border-[#f15e1c]/40 shadow-2xl transition-all duration-300">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               <div className="lg:col-span-5 space-y-6">
                 <Badge variant="secondary" size="md">
