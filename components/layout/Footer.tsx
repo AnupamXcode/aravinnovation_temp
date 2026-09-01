@@ -2,10 +2,24 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { companyContactInfo, servicesNavigation } from "@/data/navigation";
-import { ArrowRight, Phone } from "lucide-react";
-import { ScrollReveal } from "@/components/motion/ScrollReveal";
-import { useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
+import { motion, useReducedMotion, useInView } from "framer-motion";
+import {
+  ArrowRight,
+  Mail,
+  MapPin,
+  Sparkles,
+  Compass,
+  TrendingUp,
+  Code2,
+  ShieldCheck,
+  BarChart3,
+  Users2,
+  Search,
+  Cpu,
+} from "lucide-react";
+import { BrandLogo } from "./BrandLogo";
+import { cn } from "@/lib/utils";
 
 function LinkedInIcon({ className }: { className?: string }) {
   return (
@@ -55,228 +69,425 @@ function YoutubeIcon({ className }: { className?: string }) {
   );
 }
 
-import { useSiteContent } from "@/lib/site-content";
-import { usePathname } from "next/navigation";
+function AnimatedFooterSection({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-20px" });
+  const shouldReduceMotion = useReducedMotion();
+
+  if (shouldReduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 16 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+      transition={{ duration: 0.4, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+// Official Ecosystem Service Practice Cards Data
+const enterprisePractices = [
+  {
+    num: "01",
+    title: "IT Strategy & Implementation",
+    href: "/services/it-strategy-implementation",
+    accent: "#f15e1c",
+    category: "TECHNOLOGY",
+    icon: <Compass className="w-4 h-4 text-[#f15e1c]" />,
+  },
+  {
+    num: "02",
+    title: "Digital Marketing & Brand Development",
+    href: "/services/digital-marketing-brand-development",
+    accent: "#fab60a",
+    category: "GROWTH",
+    icon: <TrendingUp className="w-4 h-4 text-[#fab60a]" />,
+  },
+  {
+    num: "03",
+    title: "Web & Application Development",
+    href: "/services/web-app-development",
+    accent: "#2e936f",
+    category: "ENGINEERING",
+    icon: <Code2 className="w-4 h-4 text-[#2e936f]" />,
+  },
+  {
+    num: "04",
+    title: "Risk, Compliance & Governance",
+    href: "/services/risk-compliance-governance",
+    accent: "#2e936f",
+    category: "COMPLIANCE",
+    icon: <ShieldCheck className="w-4 h-4 text-[#2e936f]" />,
+  },
+  {
+    num: "05",
+    title: "Audit & Improvement",
+    href: "/services/audit-improvement",
+    accent: "#f15e1c",
+    category: "DIAGNOSTIC",
+    icon: <BarChart3 className="w-4 h-4 text-[#f15e1c]" />,
+  },
+  {
+    num: "06",
+    title: "Training & Staff Augmentation",
+    href: "/services/training-staff-augmentation",
+    accent: "#fab60a",
+    category: "TALENT",
+    icon: <Users2 className="w-4 h-4 text-[#fab60a]" />,
+  },
+  {
+    num: "07",
+    title: "SEO Services",
+    href: "/services/seo-services",
+    accent: "#2e936f",
+    category: "SEARCH",
+    icon: <Search className="w-4 h-4 text-[#2e936f]" />,
+  },
+  {
+    num: "08",
+    title: "AI Portfolio",
+    href: "/products",
+    accent: "#f15e1c",
+    category: "AI INNOVATION",
+    icon: <Cpu className="w-4 h-4 text-[#f15e1c]" />,
+  },
+];
+
+const companyLinks = [
+  { label: "About Us", href: "/about" },
+  { label: "Working With Us", href: "/careers" },
+  { label: "Careers", href: "/careers" },
+  { label: "Blogs", href: "/blogs" },
+  { label: "Contact", href: "/contact" },
+];
+
+const exploreLinks = [
+  { label: "Our Practices", href: "/services" },
+  { label: "Our Approach", href: "/about" },
+  { label: "Technology", href: "/solutions" },
+  { label: "Case Studies", href: "/case-studies" },
+  { label: "Insights", href: "/insights" },
+];
+
+const legalLinks = [
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Refund Policy", href: "/refund-policy" },
+  { label: "Terms & Conditions", href: "/terms-and-conditions" },
+  { label: "Security & DPDP", href: "/security-dpdp" },
+];
 
 export function Footer() {
   const pathname = usePathname();
-  const t = useTranslations("Footer");
-  const { content } = useSiteContent();
-  const footer = content.footer;
 
+  // Do not render footer on admin routes
   if (pathname?.includes("/admin")) {
     return null;
   }
 
   return (
-    <footer className="bg-gradient-to-br from-[#fab60a] via-[#f47d43] to-[#f15e1c] dark:from-[#1e2c27] dark:via-[#172420] dark:to-[#101b17] dark:border-t dark:border-[#253630] text-white pt-16 pb-8 transition-colors duration-300 relative overflow-hidden">
-      {/* Background ambient radial highlights & 3D Network Layer */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-white/10 dark:bg-[#f15e1c]/10 rounded-full blur-3xl -z-0 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#1b2823]/12 dark:bg-[#2e936f]/10 rounded-full blur-3xl -z-0 pointer-events-none" />
-
-      {/* Subtle Rotating 3D Network Overlay */}
-      <div className="absolute top-12 left-8 w-96 h-96 opacity-15 pointer-events-none z-0 animate-[spin_60s_linear_infinite]">
-        <svg viewBox="0 0 200 200" className="w-full h-full stroke-white fill-none" strokeWidth="1">
-          <polygon points="100,20 170,60 170,140 100,180 30,140 30,60" />
-          <polygon points="100,50 140,75 140,125 100,150 60,125 60,75" />
-          <line x1="100" y1="20" x2="100" y2="50" />
-          <line x1="170" y1="60" x2="140" y2="75" />
-          <line x1="170" y1="140" x2="140" y2="125" />
-          <line x1="100" y1="180" x2="100" y2="150" />
-          <line x1="30" y1="140" x2="60" y2="125" />
-          <line x1="30" y1="60" x2="60" y2="75" />
-          <circle cx="100" cy="20" r="4" fill="#ffffff" />
-          <circle cx="170" cy="60" r="4" fill="#ffffff" />
-          <circle cx="170" cy="140" r="4" fill="#ffffff" />
-          <circle cx="100" cy="180" r="4" fill="#ffffff" />
-          <circle cx="30" cy="140" r="4" fill="#ffffff" />
-          <circle cx="30" cy="60" r="4" fill="#ffffff" />
+    <footer className="w-full relative bg-gradient-to-br from-[#f7d7b0] via-[#f15e1c] to-[#fab60a] dark:from-[#172420] dark:via-[#101b17] dark:to-[#1e2d27] text-white pt-10 pb-8 overflow-hidden select-none transition-colors duration-300 border-t border-[#f7d7b0]/40 dark:border-[#253630]">
+      
+      {/* Background Abstract Technology Connected SVG Line Pattern */}
+      <div className="absolute inset-0 pointer-events-none z-0 opacity-15 dark:opacity-20 overflow-hidden">
+        <svg className="w-full h-full" viewBox="0 0 1440 500" fill="none">
+          <path d="M -100 100 C 300 30, 700 250, 1540 60" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="5 5" />
+          <path d="M -100 350 C 400 220, 900 420, 1540 260" stroke="#F7D7B0" strokeWidth="1" strokeDasharray="4 4" />
+          <circle cx="350" cy="90" r="4" fill="#FAB60A" />
+          <circle cx="850" cy="320" r="4" fill="#FFFFFF" />
         </svg>
       </div>
 
-      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10 space-y-12">
-        {/* Main Grid: Left Closing Statement + Right Information Columns */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pb-12 border-b border-white/25">
-          {/* Left Column (6 Cols): Massive Dynamic Headline + Pill Buttons */}
-          <div className="lg:col-span-6 space-y-8">
-            <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.08] text-white uppercase drop-shadow-xs">
-              {t("heading")}
-            </h2>
+      {/* Main Centered Max-Width Container */}
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10 space-y-10">
+        
+        {/* =========================================================================
+            ZONE 1: COMPACT TOP BRAND / CTA BAR
+            ========================================================================= */}
+        <AnimatedFooterSection delay={0.03}>
+          <div className="p-5 sm:p-7 rounded-2xl bg-white/15 dark:bg-white/10 border border-white/30 backdrop-blur-md shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="space-y-1 text-left max-w-2xl">
+              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/20 border border-white/30 text-[11px] font-mono font-bold text-white">
+                <Sparkles className="w-3.5 h-3.5 text-[#ffec69]" />
+                <span>START YOUR TRANSFORMATION</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold font-display tracking-tight text-white leading-snug">
+                READY TO BUILD WHAT COMES NEXT?
+              </h2>
+              <p className="text-xs sm:text-sm text-white/90 font-medium leading-relaxed">
+                From technology strategy to digital growth, Arav Innovations helps organizations build stronger foundations for what&apos;s next.
+              </p>
+            </div>
 
-            {/* Side-by-Side Pill Action Buttons */}
-            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3.5 pt-2">
-              <a
-                href={footer?.bookCallUrl || `tel:${footer?.indiaPhone?.replace(/\s+/g, "") || "+919650625777"}`}
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#f15e1c] border border-white/40 backdrop-blur-md text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group"
+            <div className="flex flex-wrap items-center gap-3 w-full md:w-auto shrink-0">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#f15e1c] hover:bg-[#d8480d] text-white text-xs font-extrabold font-display shadow-md hover:shadow-lg transition-all duration-300 group ring-1 ring-white/30"
               >
-                <span>{t("bookCall")}</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
+                <span>TALK TO AN EXPERT</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              </Link>
 
               <Link
-                href={footer?.contactUsUrl || "/contact"}
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#f15e1c] border border-white/40 backdrop-blur-md text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group"
+                href="/services"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-white/15 hover:bg-white text-white hover:text-[#f15e1c] border border-white/40 backdrop-blur-md text-xs font-extrabold font-display shadow-sm transition-all duration-300 group"
               >
-                <span>{t("contactUs")}</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <span>EXPLORE SERVICES</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
+        </AnimatedFooterSection>
 
-          {/* Right Column (6 Cols): Services Strip, Dual Office Cards, Email & Socials */}
-          <div className="lg:col-span-6 space-y-8 lg:pl-4">
-            {/* Reorganized Practice Links Strip (TASK J) */}
-            <div className="border-b border-white/20 pb-5 space-y-2">
-              <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-white/70">
-                Enterprise Practices
-              </div>
-
-              {/* Mobile Layout: Clean 2-column grid */}
-              <div className="grid grid-cols-1 xs:grid-cols-2 gap-2 sm:hidden">
-                {servicesNavigation.map((service) => (
-                  <Link
-                    key={service.href}
-                    href={service.href}
-                    className="flex items-center gap-2 py-2 px-3 rounded-xl bg-white/10 hover:bg-white text-white hover:text-[#f15e1c] transition-all duration-200 text-xs font-semibold"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#ffec69] shrink-0" />
-                    <span className="truncate">{service.label}</span>
-                  </Link>
-                ))}
-              </div>
-
-              {/* Tablet & Desktop Layout: Clean structured grid */}
-              <div className="hidden sm:grid grid-cols-2 xl:grid-cols-4 gap-2">
-                {servicesNavigation.map((service) => (
-                  <Link
-                    key={service.href}
-                    href={service.href}
-                    className="group flex items-center justify-between py-2 px-3 rounded-xl bg-white/10 hover:bg-white text-white hover:text-[#f15e1c] transition-all duration-200 text-xs font-semibold shadow-xs"
-                  >
-                    <span className="truncate">{service.label}</span>
-                    <ArrowRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all shrink-0 ml-1" />
-                  </Link>
-                ))}
-              </div>
+        {/* =========================================================================
+            ZONE 2: COMPACT SLEEK ENTERPRISE PRACTICES GRID
+            ========================================================================= */}
+        <AnimatedFooterSection delay={0.08} className="space-y-4 text-left">
+          <div className="flex items-center justify-between border-b border-white/20 pb-2">
+            <div>
+              <span className="text-[10px] font-mono font-black text-[#ffec69] uppercase tracking-widest block">
+                PRACTICE ECOSYSTEM
+              </span>
+              <h3 className="text-base sm:text-lg font-extrabold font-display text-white tracking-tight">
+                ARAV ENTERPRISE PRACTICES
+              </h3>
             </div>
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-1.5 text-[11px] font-mono font-extrabold text-white hover:text-[#ffec69] transition-colors group focus:outline-hidden focus:ring-1 focus:ring-[#ffec69] rounded-xs"
+            >
+              <span>VIEW ALL</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-[#ffec69]" />
+            </Link>
+          </div>
 
-            {/* Dual Regional Operations Details */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 text-sm sm:text-base text-white/90">
-              {/* India */}
-              {footer?.indiaVisible !== false && (
-                <div className="space-y-2">
-                  <a
-                    href={`tel:${footer?.indiaPhone?.replace(/\s+/g, "") || "+919650625777"}`}
-                    className="font-bold text-base sm:text-lg text-white hover:underline block"
-                  >
-                    {t("indiaHq")} (+91 9650625777)
-                  </a>
-                  <div className="w-full h-px bg-white/30 my-2" />
-                  <p className="text-sm sm:text-base text-white/90 leading-relaxed whitespace-pre-line">
-                    {footer?.indiaAddress || "Platinum Floor D 14/23\nArdee City Sec 52\nGurgaon 122002"}
-                  </p>
-                  <div className="pt-2">
-                    <a
-                      href={`mailto:${footer?.supportEmail || "support@aravinnovations.com"}`}
-                      className="font-semibold text-sm sm:text-base text-white hover:underline block"
-                    >
-                      {footer?.supportEmail || "support@aravinnovations.com"}
-                    </a>
+          {/* Sleek 8-Card Responsive Grid (4-Col Desktop, 2-Col Tablet, 1-2 Mobile) */}
+          <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3">
+            {enterprisePractices.map((practice) => (
+              <Link
+                key={practice.num}
+                href={practice.href}
+                className="p-3.5 rounded-xl border border-white/25 bg-white/10 dark:bg-white/5 hover:bg-white/20 hover:border-white/50 backdrop-blur-md transition-all duration-200 group text-left flex flex-col justify-between space-y-2 cursor-pointer focus:outline-hidden focus:ring-1 focus:ring-[#ffec69]"
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-[10px] font-mono font-black text-[#ffec69] tracking-wider uppercase">
+                    {practice.num} &bull; {practice.category}
+                  </span>
+                  <div className="p-1 rounded-lg bg-white/15 border border-white/20 group-hover:scale-105 transition-transform shrink-0">
+                    {practice.icon}
                   </div>
                 </div>
-              )}
 
-              {/* UAE */}
-              {footer?.uaeVisible !== false && (
-                <div className="space-y-2 pb-4 sm:pb-0">
-                  <a
-                    href="tel:+971521555792"
-                    className="font-bold text-base sm:text-lg text-white hover:underline block"
-                  >
-                    UAE Regional Office (+971 521555792)
-                  </a>
-                  <div className="w-full h-px bg-white/30 my-2" />
-                  <p className="text-sm sm:text-base text-white/90 leading-relaxed whitespace-pre-line">
-                    {footer?.uaeCompanyName ? `${footer.uaeCompanyName}\n` : ""}
-                    {footer?.uaeAddress || "55764-001 IFZA Business Park FZCO\nBuilding A1 Dubai Silicon Oasis Dubai, U.A.E"}
-                  </p>
-                  {footer?.secondaryEmail && (
-                    <div className="pt-2">
-                      <a
-                        href={`mailto:${footer.secondaryEmail}`}
-                        className="font-semibold text-sm sm:text-base text-white hover:underline block"
-                      >
-                        {footer.secondaryEmail}
-                      </a>
-                    </div>
-                  )}
+                <div>
+                  <h4 className="text-xs sm:text-sm font-extrabold font-display text-white group-hover:text-[#ffec69] transition-colors leading-snug">
+                    {practice.title}
+                  </h4>
                 </div>
-              )}
+
+                <div className="pt-1.5 border-t border-white/15 flex items-center justify-between text-[10px] font-mono font-bold text-white/80">
+                  <span>Explore</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform text-[#ffec69]" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </AnimatedFooterSection>
+
+        {/* =========================================================================
+            ZONE 3 & 4: COMPACT LOWER INFORMATION AREA (BRAND, NAV & CONTACT)
+            ========================================================================= */}
+        <AnimatedFooterSection delay={0.12} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 text-left">
+          
+          {/* BRAND BLOCK (4 Cols) */}
+          <div className="lg:col-span-4 space-y-3">
+            <BrandLogo variant="footer" />
+            
+            <div className="space-y-0.5">
+              <h3 className="text-base font-extrabold font-display text-white tracking-wide">
+                ARAV INNOVATIONS
+              </h3>
+              <p className="text-[11px] font-mono font-bold text-[#ffec69] italic">
+                &ldquo;Elevating Brands, One Click at a Time.&rdquo;
+              </p>
             </div>
 
-            {/* Dynamic Social Icons Row */}
-            <div className="pt-2 flex flex-wrap items-center gap-3">
-              {(content.socialLinks || [])
-                .filter((s) => s.enabled)
-                .map((social) => {
-                  return (
-                    <a
-                      key={social.id}
-                      href={social.url}
-                      target={social.openNewTab ? "_blank" : "_self"}
-                      rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#f15e1c] flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-110 shadow-md"
-                      aria-label={social.name}
-                      title={social.name}
+            <p className="text-xs text-white/90 leading-relaxed max-w-sm font-medium">
+              Technology strategy, engineering, compliance and digital growth for organizations ready to move forward.
+            </p>
+          </div>
+
+          {/* COMPANY & EXPLORE LINKS (3 Cols) */}
+          <div className="lg:col-span-3 grid grid-cols-2 gap-4">
+            {/* COMPANY */}
+            <div className="space-y-2">
+              <h4 className="text-[11px] font-mono font-black text-[#ffec69] uppercase tracking-wider">
+                COMPANY
+              </h4>
+              <ul className="space-y-1.5 text-xs font-semibold text-white/90">
+                {companyLinks.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="hover:text-[#ffec69] transition-colors inline-block focus:outline-hidden focus:ring-1 focus:ring-[#f15e1c] rounded-xs"
                     >
-                      {social.id === "instagram" && <InstagramIcon className="w-4 h-4" />}
-                      {social.id === "facebook" && <FacebookIcon className="w-4 h-4" />}
-                      {social.id === "linkedin" && <LinkedInIcon className="w-4 h-4" />}
-                      {social.id === "whatsapp" && <WhatsAppIcon className="w-4 h-4" />}
-                      {social.id === "twitter" && <TwitterIcon className="w-4 h-4" />}
-                      {social.id === "youtube" && <YoutubeIcon className="w-4 h-4" />}
-                      {!["instagram", "facebook", "linkedin", "whatsapp", "twitter", "youtube"].includes(social.id) && (
-                        <span className="text-xs font-bold font-mono">{social.name.slice(0, 2)}</span>
-                      )}
-                    </a>
-                  );
-                })}
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
+
+            {/* EXPLORE */}
+            <div className="space-y-2">
+              <h4 className="text-[11px] font-mono font-black text-[#ffec69] uppercase tracking-wider">
+                EXPLORE
+              </h4>
+              <ul className="space-y-1.5 text-xs font-semibold text-white/90">
+                {exploreLinks.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="hover:text-[#ffec69] transition-colors inline-block focus:outline-hidden focus:ring-1 focus:ring-[#f15e1c] rounded-xs"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* CONTACT & REGIONAL OFFICES (5 Cols) */}
+          <div className="lg:col-span-5 space-y-3">
+            <h4 className="text-[11px] font-mono font-black text-[#ffec69] uppercase tracking-wider">
+              CONTACT &amp; REGIONAL OFFICES
+            </h4>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-medium text-white/90">
+              
+              {/* INDIA HQ GLASS CARD */}
+              <div className="p-3 rounded-xl bg-white/10 border border-white/20 space-y-1 backdrop-blur-md">
+                <div className="font-extrabold font-display text-white text-[11px] flex items-center gap-1.5">
+                  <MapPin className="w-3 h-3 text-[#ffec69]" />
+                  <span>INDIA HQ</span>
+                </div>
+                <p className="text-[10px] text-white/80 leading-relaxed">
+                  Platinum Floor D 14/23, Ardee City Sec 52, Gurgaon 122002
+                </p>
+                <a
+                  href="tel:+919650625777"
+                  className="font-bold text-[#ffec69] hover:underline inline-block text-[11px]"
+                >
+                  +91 9650625777
+                </a>
+              </div>
+
+              {/* UAE REGIONAL OFFICE GLASS CARD */}
+              <div className="p-3 rounded-xl bg-white/10 border border-white/20 space-y-1 backdrop-blur-md">
+                <div className="font-extrabold font-display text-white text-[11px] flex items-center gap-1.5">
+                  <MapPin className="w-3 h-3 text-[#ffec69]" />
+                  <span>UAE REGIONAL OFFICE</span>
+                </div>
+                <p className="text-[10px] text-white/80 leading-relaxed">
+                  55764-001 IFZA Business Park FZCO, Building A1 Dubai Silicon Oasis, Dubai, U.A.E
+                </p>
+                <a
+                  href="tel:+971521555792"
+                  className="font-bold text-[#ffec69] hover:underline inline-block text-[11px]"
+                >
+                  +971 521555792
+                </a>
+              </div>
+            </div>
+
+            {/* EMAIL ROW */}
+            <div>
+              <a
+                href="mailto:support@aravinnovations.com"
+                className="inline-flex items-center gap-1.5 text-xs font-extrabold text-white hover:text-[#ffec69] transition-colors"
+              >
+                <Mail className="w-3.5 h-3.5 text-[#ffec69]" />
+                <span>support@aravinnovations.com</span>
+              </a>
+            </div>
+          </div>
+        </AnimatedFooterSection>
+
+        {/* =========================================================================
+            ZONE 5: SOCIAL MEDIA ("FOLLOW US")
+            ========================================================================= */}
+        <AnimatedFooterSection delay={0.15} className="pt-4 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <span className="text-[11px] font-mono font-bold text-white/90 uppercase tracking-widest">
+            FOLLOW US
+          </span>
+
+          <div className="flex flex-wrap items-center justify-center gap-2.5">
+            {[
+              { name: "LinkedIn", href: "https://www.linkedin.com/company/aravinnovations/", icon: <LinkedInIcon className="w-3.5 h-3.5" /> },
+              { name: "Instagram", href: "https://www.instagram.com/aravinnovations/", icon: <InstagramIcon className="w-3.5 h-3.5" /> },
+              { name: "Facebook", href: "https://www.facebook.com/aravinnovations", icon: <FacebookIcon className="w-3.5 h-3.5" /> },
+              { name: "WhatsApp", href: "https://api.whatsapp.com/send?phone=971521555792", icon: <WhatsAppIcon className="w-3.5 h-3.5" /> },
+              { name: "Twitter", href: "https://twitter.com/aravinnovations", icon: <TwitterIcon className="w-3.5 h-3.5" /> },
+              { name: "YouTube", href: "https://youtube.com/@aravinnovations", icon: <YoutubeIcon className="w-3.5 h-3.5" /> },
+            ].map((soc) => (
+              <a
+                key={soc.name}
+                href={soc.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={soc.name}
+                className="w-8 h-8 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#f15e1c] flex items-center justify-center transition-all duration-300 hover:scale-105 shadow-xs focus:outline-hidden focus:ring-1 focus:ring-[#ffec69]"
+              >
+                {soc.icon}
+              </a>
+            ))}
+          </div>
+        </AnimatedFooterSection>
+
+        {/* =========================================================================
+            ZONE 6: LEGAL BAR & COPYRIGHT
+            ========================================================================= */}
+        <div className="pt-4 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-semibold text-white/90">
+          
+          {/* Legal Links */}
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-5">
+            {legalLinks.map((link, idx) => (
+              <React.Fragment key={link.href}>
+                <Link
+                  href={link.href}
+                  className="hover:text-[#ffec69] transition-colors focus:outline-hidden focus:ring-1 focus:ring-[#f15e1c] rounded-xs text-[11px]"
+                >
+                  {link.label}
+                </Link>
+                {idx < legalLinks.length - 1 && (
+                  <span className="text-white/40 text-[9px]">&bull;</span>
+                )}
+              </React.Fragment>
+            ))}
+          </div>
+
+          {/* Copyright */}
+          <div className="font-mono text-center sm:text-right text-white/80 text-[10px]">
+            &copy; 2024–2026 Arav Innovations. All rights reserved.
           </div>
         </div>
 
-        {/* Bottom Bar: Legal Links on Left, Copyright on Right */}
-        <ScrollReveal direction="up" delay={0.2}>
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/95 border-t border-white/20 pt-6 pb-16 sm:pb-4">
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-6 font-semibold">
-              {[
-                { label: t("privacyPolicy"), href: "/privacy-policy" },
-                { label: t("refundPolicy"), href: "/refund-policy" },
-                { label: t("termsConditions"), href: "/terms-and-conditions" },
-                { label: t("securityDpdp"), href: "/security-dpdp" },
-              ].map((link, idx, arr) => (
-                <React.Fragment key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="group relative inline-flex items-center gap-1.5 py-1 text-white/90 hover:text-white font-bold transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
-                  >
-                    <span>{link.label}</span>
-                    <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-white" />
-                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-white group-hover:w-full transition-all duration-300 rounded-full" />
-                  </Link>
-                  {idx < arr.length - 1 && (
-                    <span className="text-white/40 font-normal">&bull;</span>
-                  )}
-                </React.Fragment>
-              ))}
-            </div>
-
-            <div className="font-medium text-white/90 text-center sm:text-right">
-              {`© 2024–2026 Arav Innovations. ${t("rights")}`}
-            </div>
-          </div>
-        </ScrollReveal>
       </div>
     </footer>
   );
 }
+
+export default Footer;
