@@ -1,14 +1,11 @@
 import * as React from "react";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import Link from "next/link";
 import { Hero } from "@/components/hero/Hero";
-import { ArchitectureCaseStudyCard } from "@/components/case-studies/ArchitectureCaseStudyCard";
 import { BeforeAfterSlider } from "@/components/motion/BeforeAfterSlider";
 import { ProblemToSolutionSection } from "@/components/home/ProblemToSolutionSection";
 import { AnimatedTestimonialsCarousel } from "@/components/testimonials/AnimatedTestimonialsCarousel";
 import { ClientFeedbackEditorialSection } from "@/components/testimonials/ClientFeedbackEditorialSection";
 import { LeadForm } from "@/components/forms/LeadForm";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
@@ -18,9 +15,7 @@ import { InteractiveServiceStack3D } from "@/components/services/InteractiveServ
 import { CaseStudy3DTransformation } from "@/components/case-studies/CaseStudy3DTransformation";
 import { Process3DPathway } from "@/components/motion/Process3DPathway";
 import { MovingLogoStrip } from "@/components/motion/MovingLogoStrip";
-import { caseStudiesData } from "@/data/case-studies";
 import {
-  ArrowRight,
   ShieldCheck,
   Zap,
   Users,
@@ -63,7 +58,6 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const tCaseStudies = await getTranslations("CaseStudies");
   const tWhyArav = await getTranslations("WhyArav");
   const tMethodology = await getTranslations("Methodology");
   const tTestimonials = await getTranslations("Testimonials");
@@ -179,53 +173,6 @@ export default async function HomePage({
         <ClientFeedbackEditorialSection />
       </ScrollReveal>
 
-      {/* 5. FEATURED ARCHITECTURE CASE STUDIES */}
-      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="case-studies">
-        <section className="py-12 md:py-16 px-6 sm:px-10 lg:px-12 rounded-[2.5rem] bg-[#fefaf5]/60 dark:bg-[#172420]/90 border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden">
-          {/* Top Brand Accent Line */}
-          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/60 to-transparent" />
-
-          {/* Architectural Network Connections Overlay */}
-          <div className="absolute inset-0 pointer-events-none opacity-[0.15] dark:opacity-[0.10] z-0">
-            <svg className="w-full h-full" viewBox="0 0 1200 600" fill="none">
-              <line x1="150" y1="120" x2="450" y2="280" stroke="#f15e1c" strokeWidth="1.5" strokeDasharray="6 6" />
-              <line x1="450" y1="280" x2="850" y2="180" stroke="#2e936f" strokeWidth="1.5" strokeDasharray="6 6" />
-              <line x1="850" y1="180" x2="1100" y2="400" stroke="#fab60a" strokeWidth="1.5" strokeDasharray="6 6" />
-              <circle cx="450" cy="280" r="4" fill="#f15e1c" className="animate-pulse" />
-              <circle cx="850" cy="180" r="4" fill="#2e936f" className="animate-pulse" />
-            </svg>
-          </div>
-
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6 relative z-10">
-            <div className="max-w-3xl space-y-3">
-              <Badge variant="secondary" size="md">
-                {tCaseStudies("badge")}
-              </Badge>
-              <ScrollTextFlip>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
-                  {tCaseStudies("title")}
-                </h2>
-              </ScrollTextFlip>
-            </div>
-            <Link href={`/${locale}/case-studies`}>
-              <Button
-                variant="outline"
-                size="md"
-                className="rounded-full px-7 py-3 border-[#f7d7b0] dark:border-[#253630] bg-white dark:bg-[#172420] text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c] hover:bg-[#fce3d3]/30"
-                rightIcon={<ArrowRight className="w-4 h-4 text-[#f15e1c]" />}
-              >
-                {tCaseStudies("viewAll")}
-              </Button>
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch relative z-10">
-            {caseStudiesData.slice(0, 3).map((study, idx) => (
-              <ArchitectureCaseStudyCard key={study.slug} caseStudy={study} locale={locale} index={idx} />
-            ))}
-          </div>
-        </section>
-      </div>
 
       {/* 6. WHY ARAV (EQUAL SIZED 4 CARDS GRID) */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">

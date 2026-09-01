@@ -72,19 +72,6 @@
     "inquire": "Consultar Sobre",
     "learnMore": "Saber Más"
   },
-  "CaseStudies": {
-    "badge": "Historial Comprobado",
-    "title": "Casos de Estudio de Arquitectura",
-    "description": "Examinando cómo resolvemos cuellos de botella arquitectónicos críticos y construimos plataformas digitales resilientes.",
-    "viewAll": "Ver Todos los Casos",
-    "viewCaseStudy": "VER CASO DE ESTUDIO",
-    "transformationPipeline": "Flujo de Transformación",
-    "confidentialClient": "Cliente Empresarial Confidencial",
-    "challenge": "Desafío",
-    "solution": "Solución y Ejecución",
-    "results": "Resultados Clave",
-    "technologies": "Tecnologías Utilizadas"
-  },
   "WhyArav": {
     "badge": "Por Qué Asociarse Con Arav",
     "title": "Diseñado para la Precisión, Velocidad e Integridad",

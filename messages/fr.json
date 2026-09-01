@@ -72,19 +72,6 @@
     "inquire": "Se Renseigner",
     "learnMore": "En Savoir Plus"
   },
-  "CaseStudies": {
-    "badge": "Résultats Éprouvés",
-    "title": "Études de Cas d'Architecture",
-    "description": "Comment nous résolvons les défis d'architecture critiques et construisons des plateformes digitales résilientes.",
-    "viewAll": "Toutes les Études de Cas",
-    "viewCaseStudy": "VOIR L'ÉTUDE DE CAS",
-    "transformationPipeline": "Pipeline de Transformation",
-    "confidentialClient": "Client Entreprise Confidentiel",
-    "challenge": "Défi",
-    "solution": "Solution et Exécution",
-    "results": "Résultats Clés",
-    "technologies": "Technologies Déployées"
-  },
   "WhyArav": {
     "badge": "Pourquoi S'associer à Arav",
     "title": "Conçu pour la Précision, la Rapidité et l'Intégrité",

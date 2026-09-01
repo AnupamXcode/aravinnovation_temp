@@ -72,19 +72,6 @@
     "inquire": "Inquire About",
     "learnMore": "Learn More"
   },
-  "CaseStudies": {
-    "badge": "Proven Track Record",
-    "title": "Featured Architecture Case Studies",
-    "description": "Examining how we solve critical architectural bottlenecks, build resilient digital platforms, and scale revenue.",
-    "viewAll": "All Case Studies",
-    "viewCaseStudy": "VIEW CASE STUDY",
-    "transformationPipeline": "Transformation Pipeline",
-    "confidentialClient": "Confidential Enterprise Client",
-    "challenge": "Challenge",
-    "solution": "Solution & Execution",
-    "results": "Key Results",
-    "technologies": "Technologies Deployed"
-  },
   "WhyArav": {
     "badge": "Why Partner With Arav",
     "title": "Engineered for Precision, Speed & Integrity",
