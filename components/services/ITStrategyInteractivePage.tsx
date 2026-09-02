@@ -36,8 +36,12 @@ import {
   Target,
   FileCheck,
   Award,
+  BookOpen,
+  Clock,
+  Calendar,
 } from "lucide-react";
 import { Service } from "@/data/services";
+import { BlogPost } from "@/data/insights";
 import { Button3D } from "@/components/ui/button-3d";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
@@ -47,10 +51,11 @@ import { cn } from "@/lib/utils";
 
 interface ITStrategyPageProps {
   service: Service;
+  relatedPosts?: BlogPost[];
 }
 
 // -----------------------------------------------------------------------------
-// 1. Scroll-Triggered Section Wrapper Component (Compact Spacing)
+// 1. Scroll-Triggered Section Wrapper Component (Compact Spacing & Wide Layout)
 // -----------------------------------------------------------------------------
 function AnimatedSection({
   children,
@@ -424,7 +429,7 @@ const internalServices = [
   { name: "Training & Staff Augmentation", href: "/services/training-staff-augmentation" },
 ];
 
-export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
+export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStrategyPageProps) {
   const [activeHeroNode, setActiveHeroNode] = React.useState<number>(0);
   const [activeJourneyIdx, setActiveJourneyIdx] = React.useState<number>(0);
   const [activeFaqIdx, setActiveFaqIdx] = React.useState<number | null>(0);
@@ -470,14 +475,14 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
     <main className="min-h-screen bg-[#FFFFFF] dark:bg-[#101b17] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c]">
       
       {/* =========================================================================
-          SECTION 01 — HERO SECTION
+          SECTION 01 — HERO SECTION (WIDE SCREEN RESPONSIVE CONTAINER)
           ========================================================================= */}
-      <section className="relative pt-20 pb-12 sm:pt-28 sm:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] overflow-hidden select-none">
+      <section className="relative pt-20 pb-12 sm:pt-28 sm:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] overflow-hidden select-none">
         <AnimatedDotGrid />
 
         {/* Ambient Subtle Glows */}
-        <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-radial from-[#f15e1c]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-radial from-[#2e936f]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
+        <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-radial from-[#f15e1c]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-radial from-[#2e936f]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
 
         <div className="max-w-[1536px] mx-auto w-full space-y-6 relative z-10">
           
@@ -496,12 +501,12 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
           </AnimatedSection>
 
           {/* Hero Main Copy */}
-          <AnimatedSection delay={0.12} className="max-w-4xl space-y-4 text-left">
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-display tracking-tight leading-[1.12] text-[#1b2823] dark:text-[#ffffff]">
+          <AnimatedSection delay={0.12} className="max-w-5xl lg:max-w-6xl space-y-4 text-left">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold font-display tracking-tight leading-[1.1] text-[#1b2823] dark:text-[#ffffff]">
               Turn Technology Complexity Into a <span className="text-[#f15e1c]">Clear Path Forward</span>
             </h1>
 
-            <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-3xl">
+            <p className="text-base sm:text-xl text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-4xl">
               We help businesses modernize legacy systems, build practical technology roadmaps, adopt cloud with confidence, and turn complex IT decisions into measurable business outcomes.
             </p>
 
@@ -545,7 +550,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
 
           {/* SECTION 02 — HERO VISUAL / SYSTEM ARCHITECTURE FLOW */}
           <AnimatedSection delay={0.2} className="pt-4">
-            <div className="p-5 sm:p-8 rounded-[2rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-lg space-y-4 relative overflow-hidden">
+            <div className="p-5 sm:p-8 rounded-[2rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-lg space-y-4 relative overflow-hidden w-full">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-[#f7d7b0] dark:border-[#253630] pb-3">
                 <div>
                   <span className="text-[10px] font-mono font-black text-[#f15e1c] uppercase tracking-wider block">
@@ -571,9 +576,9 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
                       whileHover={{ y: -2 }}
                       onClick={() => setActiveHeroNode(idx)}
                       className={cn(
-                        "p-3.5 rounded-xl border-2 transition-all duration-200 text-left cursor-pointer space-y-1 relative group",
+                        "p-4 rounded-xl border-2 transition-all duration-200 text-left cursor-pointer space-y-1.5 relative group",
                         isActive
-                          ? "bg-white dark:bg-[#101b17] border-[#f15e1c] shadow-sm"
+                          ? "bg-white dark:bg-[#101b17] border-[#f15e1c] shadow-sm ring-2 ring-[#f15e1c]/10"
                           : "bg-white/70 dark:bg-[#101b17]/70 border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c]/50"
                       )}
                     >
@@ -585,10 +590,10 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
                           <ChevronRight className="w-3.5 h-3.5 text-[#7A6A5F] hidden lg:block" />
                         )}
                       </div>
-                      <div className="text-xs font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                      <div className="text-xs sm:text-sm font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                         {flow.label}
                       </div>
-                      <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] leading-snug line-clamp-2">
+                      <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-snug line-clamp-2">
                         {flow.desc}
                       </p>
                     </motion.button>
@@ -605,9 +610,9 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       {/* =========================================================================
           SECTION 03 — INTRODUCTION / VALUE PROPOSITION
           ========================================================================= */}
-      <section className="relative py-12 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
+      <section className="relative py-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
         <div className="max-w-[1536px] mx-auto select-none">
-          <AnimatedSection className="max-w-4xl mx-auto p-6 sm:p-8 rounded-[2rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] space-y-4 text-left shadow-xs">
+          <AnimatedSection className="max-w-5xl lg:max-w-6xl mx-auto p-6 sm:p-8 rounded-[2rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] space-y-4 text-left shadow-xs">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#101b17] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
               <Target className="w-3.5 h-3.5" />
               <span>VALUE PROPOSITION</span>
@@ -634,10 +639,10 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       {/* =========================================================================
           SECTION 04 — CORE SOLUTIONS (WHAT WE HELP YOU SOLVE)
           ========================================================================= */}
-      <section id="capabilities" className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
+      <section id="capabilities" className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
         <div className="max-w-[1536px] mx-auto space-y-8">
           
-          <AnimatedSection className="text-center max-w-3xl mx-auto space-y-2">
+          <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
             <Badge variant="secondary" size="sm">
               CORE CAPABILITIES
             </Badge>
@@ -649,17 +654,17 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
             </p>
           </AnimatedSection>
 
-          {/* 6 Capability Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
+          {/* 6 Capability Cards (3-Column Grid on Widescreen) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1440px] mx-auto">
             {coreSolutions.map((card, idx) => (
               <AnimatedSection key={card.id} delay={0.05 * idx}>
                 <TiltCard maxTilt={3} scale={1.01}>
                   <a
                     href={card.href}
-                    className="block h-full p-6 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c] shadow-xs hover:shadow-md transition-all duration-200 space-y-3 text-left group"
+                    className="block h-full p-6 sm:p-7 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c] shadow-xs hover:shadow-md transition-all duration-200 space-y-3.5 text-left group"
                   >
                     <div className="flex items-center justify-between">
-                      <div className="p-2.5 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] group-hover:scale-105 transition-transform">
+                      <div className="p-3 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] group-hover:scale-105 transition-transform">
                         {card.icon}
                       </div>
                       <span className="text-xs font-mono font-black text-[#f15e1c] px-2.5 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#101b17]">
@@ -667,7 +672,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                    <h3 className="text-lg sm:text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                       {card.title}
                     </h3>
 
@@ -695,11 +700,11 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       <section
         id="transformation-journey"
         ref={journeyContainerRef}
-        className="relative py-16 sm:py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none"
+        className="relative py-16 sm:py-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none"
       >
         <div className="max-w-[1536px] mx-auto space-y-10">
           
-          <AnimatedSection className="text-center max-w-3xl mx-auto space-y-2">
+          <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
             <Badge variant="secondary" size="sm">
               TRANSFORMATION JOURNEY
             </Badge>
@@ -712,7 +717,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
           </AnimatedSection>
 
           {/* Continuous Scroll Progress Track */}
-          <AnimatedSection delay={0.1} className="max-w-4xl mx-auto relative py-2">
+          <AnimatedSection delay={0.1} className="max-w-5xl mx-auto relative py-2">
             <div className="w-full bg-[#f7d7b0] dark:bg-[#253630] h-2 rounded-full overflow-hidden">
               <motion.div
                 style={{ width: journeyLineWidth }}
@@ -748,7 +753,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
           </AnimatedSection>
 
           {/* Active Stage Detail Card */}
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeJourneyIdx}
@@ -781,7 +786,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
                       type="button"
                       onClick={() => setActiveJourneyIdx(idx)}
                       className={cn(
-                        "px-3 py-1 rounded-lg text-xs font-bold font-mono transition-all cursor-pointer",
+                        "px-3.5 py-1.5 rounded-lg text-xs font-bold font-mono transition-all cursor-pointer",
                         activeJourneyIdx === idx
                           ? "bg-[#f15e1c] text-white"
                           : "bg-[#fefaf5] dark:bg-[#172420] text-[#7A6A5F] border border-[#f7d7b0]"
@@ -795,8 +800,8 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
             </AnimatePresence>
           </div>
 
-          {/* CONNECTED ENTERPRISE ARCHITECTURE LAYERS (3D SCROLL VISUAL) */}
-          <div ref={layersContainerRef} className="max-w-4xl mx-auto space-y-3 pt-6">
+          {/* CONNECTED ENTERPRISE ARCHITECTURE LAYERS (3D SCROLL VISUAL - WIDE) */}
+          <div ref={layersContainerRef} className="max-w-5xl mx-auto space-y-3 pt-6">
             <span className="text-xs font-mono font-extrabold text-[#f15e1c] uppercase tracking-wider block text-center">
               CONNECTED ARCHITECTURE LAYERS (PROGRESSIVE ASSEMBLY)
             </span>
@@ -827,11 +832,11 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
                     onClick={() => setCurrentActiveLayer(idx)}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="w-7 h-7 rounded-lg bg-[#fce3d3] dark:bg-[#172420] text-[#f15e1c] text-xs font-mono font-black flex items-center justify-center shrink-0">
+                      <span className="w-8 h-8 rounded-lg bg-[#fce3d3] dark:bg-[#172420] text-[#f15e1c] text-xs font-mono font-black flex items-center justify-center shrink-0">
                         {layer.layer}
                       </span>
                       <div>
-                        <span className="text-xs font-mono font-extrabold text-[#1b2823] dark:text-[#ffffff] block">
+                        <span className="text-xs sm:text-sm font-mono font-extrabold text-[#1b2823] dark:text-[#ffffff] block">
                           {layer.title}
                         </span>
                         <span className="text-xs text-[#4a5c55] dark:text-[#d3eee4]">
@@ -858,12 +863,12 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       <SystemScanTransition />
 
       {/* =========================================================================
-          SECTION 06 — BUSINESS OUTCOMES
+          SECTION 06 — BUSINESS OUTCOMES (4 COLUMNS ON WIDESCREEN)
           ========================================================================= */}
-      <section className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
+      <section className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
         <div className="max-w-[1536px] mx-auto space-y-8">
           
-          <AnimatedSection className="text-center max-w-3xl mx-auto space-y-2">
+          <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
             <Badge variant="secondary" size="sm">
               BUSINESS OUTCOMES
             </Badge>
@@ -875,14 +880,14 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
             </p>
           </AnimatedSection>
 
-          {/* 4 Outcome Blocks */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+          {/* 4 Outcome Blocks (4 Columns on Widescreen) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1440px] mx-auto">
             {businessOutcomes.map((out, idx) => (
               <AnimatedSection key={idx} delay={0.05 * idx}>
                 <TiltCard maxTilt={3} scale={1.01}>
-                  <div className="h-full p-6 rounded-2xl bg-white dark:bg-[#101b17] border-2 border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c] shadow-xs hover:shadow-md transition-all duration-200 space-y-3 text-left flex flex-col justify-between group">
+                  <div className="h-full p-6 rounded-2xl bg-white dark:bg-[#101b17] border-2 border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c] shadow-xs hover:shadow-md transition-all duration-200 space-y-3.5 text-left flex flex-col justify-between group">
                     <div className="space-y-3">
-                      <div className="p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] w-fit group-hover:scale-105 transition-transform">
+                      <div className="p-3 rounded-xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] w-fit group-hover:scale-105 transition-transform">
                         {out.icon}
                       </div>
 
@@ -910,12 +915,12 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       <SystemScanTransition />
 
       {/* =========================================================================
-          SECTION 07 — OUR APPROACH (METHODOLOGY)
+          SECTION 07 — OUR APPROACH (METHODOLOGY - WIDE CARDS GRID)
           ========================================================================= */}
-      <section id="our-approach" className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none">
+      <section id="our-approach" className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none">
         <div className="max-w-[1536px] mx-auto space-y-8">
           
-          <AnimatedSection className="text-center max-w-3xl mx-auto space-y-2">
+          <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
             <Badge variant="secondary" size="sm">
               METHODOLOGY
             </Badge>
@@ -927,21 +932,21 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
             </p>
           </AnimatedSection>
 
-          {/* 5 Approach Cards (WHAT WE DO + WHAT THE CLIENT GETS) */}
-          <div className="max-w-5xl mx-auto space-y-4">
+          {/* 5 Approach Cards */}
+          <div className="max-w-[1440px] mx-auto space-y-4">
             {approachSteps.map((step, idx) => (
               <AnimatedSection key={step.num} delay={0.05 * idx}>
-                <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] shadow-xs space-y-3 text-left">
-                  <div className="flex items-center justify-between border-b border-[#f7d7b0]/60 dark:border-[#253630] pb-2">
-                    <div className="flex items-center gap-2.5">
-                      <span className="text-xs font-mono font-black px-2.5 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#172420] text-[#f15e1c]">
+                <div className="p-6 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] shadow-xs space-y-3 text-left">
+                  <div className="flex items-center justify-between border-b border-[#f7d7b0]/60 dark:border-[#253630] pb-2.5">
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs font-mono font-black px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#172420] text-[#f15e1c]">
                         {step.num}
                       </span>
-                      <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                      <h3 className="text-lg sm:text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                         {step.name}
                       </h3>
                     </div>
-                    <span className="text-[11px] font-mono font-bold text-[#2e936f]">
+                    <span className="text-xs font-mono font-bold text-[#2e936f]">
                       PHASE 0{idx + 1}
                     </span>
                   </div>
@@ -977,10 +982,10 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       {/* =========================================================================
           SECTION 08 — TECHNOLOGY ARCHITECTURE
           ========================================================================= */}
-      <section className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
+      <section className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
         <div className="max-w-[1536px] mx-auto space-y-8">
           
-          <AnimatedSection className="text-center max-w-3xl mx-auto space-y-2">
+          <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
             <Badge variant="secondary" size="sm">
               TECHNOLOGY CAPABILITIES
             </Badge>
@@ -993,17 +998,17 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
           </AnimatedSection>
 
           {/* Category Tabs & Display */}
-          <div className="max-w-5xl mx-auto space-y-4">
-            <div className="flex flex-wrap justify-center gap-2">
+          <div className="max-w-[1440px] mx-auto space-y-4">
+            <div className="flex flex-wrap justify-center gap-2.5">
               {techArchitectureCategories.map((cat, idx) => (
                 <button
                   key={cat.category}
                   type="button"
                   onClick={() => setActiveTechCat(idx)}
                   className={cn(
-                    "px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer flex items-center gap-2 border",
+                    "px-4 py-2.5 rounded-xl text-xs sm:text-sm font-mono font-bold transition-all cursor-pointer flex items-center gap-2 border",
                     activeTechCat === idx
-                      ? "bg-white dark:bg-[#101b17] border-[#f15e1c] text-[#f15e1c] shadow-xs"
+                      ? "bg-white dark:bg-[#101b17] border-[#f15e1c] text-[#f15e1c] shadow-xs ring-2 ring-[#f15e1c]/10"
                       : "bg-[#fefaf5] dark:bg-[#172420] border-[#f7d7b0] text-[#7A6A5F]"
                   )}
                 >
@@ -1023,32 +1028,32 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
                 className="p-6 sm:p-8 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] space-y-4 text-left"
               >
                 <div className="flex items-center gap-3 border-b border-[#f7d7b0] dark:border-[#253630] pb-3">
-                  <div className="p-2.5 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0]">
+                  <div className="p-3 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0]">
                     {techArchitectureCategories[activeTechCat].icon}
                   </div>
                   <div>
                     <span className="text-xs font-mono font-black text-[#f15e1c] block">
                       DOMAIN 0{activeTechCat + 1}
                     </span>
-                    <h3 className="text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                    <h3 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                       {techArchitectureCategories[activeTechCat].category}
                     </h3>
                   </div>
                 </div>
 
-                <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
                   {techArchitectureCategories[activeTechCat].desc}
                 </p>
 
                 <div className="space-y-2 pt-2">
-                  <span className="text-[11px] font-mono font-extrabold text-[#7A6A5F] uppercase block">
+                  <span className="text-xs font-mono font-extrabold text-[#7A6A5F] uppercase block">
                     Supported Systems &amp; Stack Metadata:
                   </span>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2.5">
                     {techArchitectureCategories[activeTechCat].meta.map((item, idx) => (
                       <span
                         key={idx}
-                        className="px-3 py-1 rounded-lg bg-white dark:bg-[#101b17] border border-[#f7d7b0] text-xs font-mono font-semibold text-[#1b2823] dark:text-[#ffffff]"
+                        className="px-3.5 py-1.5 rounded-lg bg-white dark:bg-[#101b17] border border-[#f7d7b0] text-xs sm:text-sm font-mono font-semibold text-[#1b2823] dark:text-[#ffffff]"
                       >
                         {item}
                       </span>
@@ -1064,12 +1069,12 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       <SystemScanTransition />
 
       {/* =========================================================================
-          SECTION 09 — WHO THIS IS FOR
+          SECTION 09 — WHO THIS IS FOR (4 COLUMNS ON WIDESCREEN)
           ========================================================================= */}
-      <section className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none">
+      <section className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none">
         <div className="max-w-[1536px] mx-auto space-y-8">
           
-          <AnimatedSection className="text-center max-w-3xl mx-auto space-y-2">
+          <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
             <Badge variant="secondary" size="sm">
               TARGET AUDIENCE
             </Badge>
@@ -1081,23 +1086,28 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
             </p>
           </AnimatedSection>
 
-          {/* 4 Scenarios */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-5xl mx-auto">
+          {/* 4 Scenarios (4 Columns on Widescreen) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1440px] mx-auto">
             {targetScenarios.map((scen, idx) => (
               <AnimatedSection key={idx} delay={0.05 * idx}>
-                <div className="p-6 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c] shadow-xs hover:shadow-md transition-all duration-200 space-y-3 text-left">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                      {scen.title}
-                    </h3>
-                    <span className="text-[10px] font-mono font-bold text-[#f15e1c] px-2.5 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#172420]">
+                <div className="h-full p-6 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c] shadow-xs hover:shadow-md transition-all duration-200 space-y-3 text-left flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                        {scen.title}
+                      </h3>
+                    </div>
+
+                    <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                      {scen.desc}
+                    </p>
+                  </div>
+
+                  <div className="pt-2">
+                    <span className="text-[10px] font-mono font-bold text-[#f15e1c] px-2.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#172420] inline-block">
                       {scen.badge}
                     </span>
                   </div>
-
-                  <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                    {scen.desc}
-                  </p>
                 </div>
               </AnimatedSection>
             ))}
@@ -1108,12 +1118,12 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       <SystemScanTransition />
 
       {/* =========================================================================
-          SECTION 10 — WHY ARAV INNOVATIONS
+          SECTION 10 — WHY ARAV INNOVATIONS (4 COLUMNS ON WIDESCREEN)
           ========================================================================= */}
-      <section className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
+      <section className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
         <div className="max-w-[1536px] mx-auto space-y-8">
           
-          <AnimatedSection className="text-center max-w-3xl mx-auto space-y-2">
+          <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
             <Badge variant="secondary" size="sm">
               WHY ARAV
             </Badge>
@@ -1125,21 +1135,23 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
             </p>
           </AnimatedSection>
 
-          {/* 4 Differentiator Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-5xl mx-auto">
+          {/* 4 Differentiator Cards (4 Columns on Widescreen) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1440px] mx-auto">
             {whyChooseArav.map((diff, idx) => (
               <AnimatedSection key={idx} delay={0.05 * idx}>
-                <div className="p-6 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c] shadow-xs transition-all duration-200 space-y-2 text-left">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
-                    <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                      {diff.title}
-                    </h3>
-                  </div>
+                <div className="h-full p-6 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c] shadow-xs transition-all duration-200 space-y-2.5 text-left flex flex-col justify-between">
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
+                      <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                        {diff.title}
+                      </h3>
+                    </div>
 
-                  <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed pl-6">
-                    {diff.desc}
-                  </p>
+                    <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed pl-6">
+                      {diff.desc}
+                    </p>
+                  </div>
                 </div>
               </AnimatedSection>
             ))}
@@ -1152,10 +1164,10 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       {/* =========================================================================
           SECTION 11 — CEO / LEADERSHIP SECTION & TRUST PROOF
           ========================================================================= */}
-      <section className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none">
+      <section className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none">
         <div className="max-w-[1536px] mx-auto space-y-8">
           
-          <AnimatedSection className="text-center max-w-3xl mx-auto space-y-2">
+          <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
             <Badge variant="secondary" size="sm">
               LEADERSHIP PERSPECTIVE
             </Badge>
@@ -1164,7 +1176,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
             </h2>
           </AnimatedSection>
 
-          <AnimatedSection delay={0.1} className="max-w-4xl mx-auto">
+          <AnimatedSection delay={0.1} className="max-w-5xl lg:max-w-6xl mx-auto">
             <div className="p-6 sm:p-10 rounded-2xl bg-white dark:bg-[#101b17] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-md space-y-4 text-left relative overflow-hidden">
               <div className="p-2.5 rounded-xl bg-[#f15e1c] text-white w-fit shadow-xs">
                 <Quote className="w-5 h-5" />
@@ -1197,10 +1209,10 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       {/* =========================================================================
           SECTION 12 — FAQ SECTION
           ========================================================================= */}
-      <section className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
+      <section className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
         <div className="max-w-[1536px] mx-auto space-y-8">
           
-          <AnimatedSection className="text-center max-w-3xl mx-auto space-y-2">
+          <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
             <Badge variant="secondary" size="sm">
               CLEAR ANSWERS
             </Badge>
@@ -1213,7 +1225,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
           </AnimatedSection>
 
           {/* 5 FAQs Accordion */}
-          <div className="max-w-3xl mx-auto space-y-3 text-left">
+          <div className="max-w-4xl mx-auto space-y-3 text-left">
             {faqList.map((faq, idx) => {
               const isOpen = activeFaqIdx === idx;
               return (
@@ -1261,17 +1273,17 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       {/* =========================================================================
           SECTION 13 — RELATED SERVICES / INTERNAL LINKS
           ========================================================================= */}
-      <section className="relative py-12 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none">
+      <section className="relative py-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none">
         <div className="max-w-[1536px] mx-auto space-y-4 text-center">
           <span className="text-xs font-mono font-extrabold text-[#7A6A5F] uppercase tracking-wider block">
             EXPLORE RELATED ARAV SERVICES
           </span>
-          <div className="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
+          <div className="flex flex-wrap justify-center gap-2.5 max-w-5xl mx-auto">
             {internalServices.map((serv) => (
               <Link
                 key={serv.name}
                 href={serv.href}
-                className="px-3.5 py-1.5 rounded-full bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] text-xs font-mono font-bold text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c] hover:text-[#f15e1c] transition-all"
+                className="px-4 py-2 rounded-full bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] text-xs font-mono font-bold text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c] hover:text-[#f15e1c] transition-all"
               >
                 {serv.name} &rarr;
               </Link>
@@ -1281,15 +1293,15 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
       </section>
 
       {/* =========================================================================
-          SECTION 14 — CTA SECTION
+          SECTION 14 — FINAL CTA SECTION
           ========================================================================= */}
-      <section id="inquire" className="relative py-16 sm:py-20 px-4 sm:px-6 md:px-8 lg:px-12 select-none">
+      <section id="inquire" className="relative py-16 sm:py-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 select-none">
         <div className="max-w-[1536px] mx-auto">
           
           <AnimatedSection>
-            <div className="rounded-[2.5rem] bg-gradient-to-br from-[#f15e1c] via-[#e55215] to-[#d8480d] text-white p-8 sm:p-12 border-2 border-[#fab60a] shadow-xl space-y-6 text-center relative overflow-hidden">
+            <div className="rounded-[2.5rem] bg-gradient-to-br from-[#f15e1c] via-[#e55215] to-[#d8480d] text-white p-8 sm:p-12 xl:p-16 border-2 border-[#fab60a] shadow-xl space-y-6 text-center relative overflow-hidden">
               
-              <div className="relative z-10 max-w-3xl mx-auto space-y-4">
+              <div className="relative z-10 max-w-4xl mx-auto space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 border border-white/40 text-xs font-mono font-bold text-white">
                   <Sparkles className="w-3.5 h-3.5 text-[#ffec69]" />
                   <span>START YOUR TECHNOLOGY ROADMAP</span>
@@ -1299,7 +1311,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
                   Have a Technology Challenge?<br />Let&apos;s Turn It Into a Clear Roadmap.
                 </h2>
 
-                <p className="text-xs sm:text-base text-white/90 leading-relaxed font-medium">
+                <p className="text-xs sm:text-base text-white/90 leading-relaxed font-medium max-w-2xl mx-auto">
                   Tell us where your technology stands today, where you want to go, and what is getting in the way. We&apos;ll help you identify the right next step.
                 </p>
               </div>
@@ -1334,7 +1346,7 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
               </div>
 
               {/* Trust Badges */}
-              <div className="relative z-10 pt-4 border-t border-white/20 flex flex-wrap items-center justify-center gap-5 text-xs text-white/90 font-medium">
+              <div className="relative z-10 pt-4 border-t border-white/20 flex flex-wrap items-center justify-center gap-6 text-xs text-white/90 font-medium">
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#ffec69]" /> Confidential Discussions
                 </span>
@@ -1349,6 +1361,103 @@ export function ITStrategyInteractivePage({ service }: ITStrategyPageProps) {
           </AnimatedSection>
         </div>
       </section>
+
+      <SystemScanTransition />
+
+      {/* =========================================================================
+          SECTION 15 — RELATED BLOG / INSIGHTS SECTION (REUSED CMS DATA)
+          ========================================================================= */}
+      {relatedPosts && relatedPosts.length > 0 && (
+        <section className="relative py-16 sm:py-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none">
+          <div className="max-w-[1536px] mx-auto space-y-10">
+            
+            <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#101b17] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>EXECUTIVE THOUGHT LEADERSHIP</span>
+              </div>
+              <h2 className="text-2xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Insights for Smarter Technology Decisions
+              </h2>
+              <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] max-w-2xl mx-auto">
+                Explore practical perspectives on IT strategy, digital transformation, technology modernization and building scalable technology foundations.
+              </p>
+            </AnimatedSection>
+
+            {/* 3-Column Blog Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1440px] mx-auto">
+              {relatedPosts.map((post, idx) => (
+                <AnimatedSection key={post.slug} delay={0.08 * idx}>
+                  <TiltCard maxTilt={3} scale={1.01}>
+                    <div className="h-full p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#101b17] border-2 border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c] shadow-xs hover:shadow-md transition-all duration-200 text-left flex flex-col justify-between group">
+                      <div className="space-y-3">
+                        
+                        {post.featuredImageUrl && (
+                          <div className="relative w-full h-44 rounded-xl overflow-hidden mb-3 border border-[#f7d7b0]/60">
+                            <img
+                              src={post.featuredImageUrl}
+                              alt={post.title}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                          </div>
+                        )}
+
+                        <div className="flex items-center justify-between">
+                          <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#172420] text-[#f15e1c] border border-[#f7d7b0]/50">
+                            {post.category}
+                          </span>
+                          {post.readTime && (
+                            <span className="text-[11px] font-mono text-[#7A6A5F] flex items-center gap-1">
+                              <Clock className="w-3 h-3 text-[#f15e1c]" /> {post.readTime}
+                            </span>
+                          )}
+                        </div>
+
+                        <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug line-clamp-2">
+                          <Link href={`/insights/${post.slug}`}>
+                            {post.title}
+                          </Link>
+                        </h3>
+
+                        <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed line-clamp-3">
+                          {post.summary}
+                        </p>
+                      </div>
+
+                      <div className="pt-4 mt-4 border-t border-[#f7d7b0]/60 dark:border-[#253630] flex items-center justify-between">
+                        <span className="text-[11px] font-mono text-[#7A6A5F] flex items-center gap-1">
+                          <Calendar className="w-3 h-3 text-[#f15e1c]" /> {post.dateFormatted || post.publishedAt}
+                        </span>
+                        <Link
+                          href={`/insights/${post.slug}`}
+                          className="text-xs font-mono font-bold text-[#f15e1c] group-hover:translate-x-1 transition-transform inline-flex items-center gap-1"
+                        >
+                          Read Article <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
+                    </div>
+                  </TiltCard>
+                </AnimatedSection>
+              ))}
+            </div>
+
+            {/* View More Blogs CTA */}
+            <AnimatedSection delay={0.25} className="text-center pt-2">
+              <Link href="/insights" className="inline-block">
+                <MagneticButton>
+                  <Button3D
+                    variant="outline"
+                    size="md"
+                    rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />}
+                  >
+                    Explore All Insights
+                  </Button3D>
+                </MagneticButton>
+              </Link>
+            </AnimatedSection>
+          </div>
+        </section>
+      )}
 
       {/* Footer Pathway */}
       <footer className="py-4 border-t border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] overflow-hidden select-none">

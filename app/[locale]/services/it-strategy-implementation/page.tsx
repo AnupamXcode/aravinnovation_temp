@@ -70,6 +70,8 @@ const faqSchema = {
   ],
 };
 
+import { getBlogPosts } from "@/lib/cms";
+
 export default async function ITStrategyPage({
   params,
 }: {
@@ -83,13 +85,19 @@ export default async function ITStrategyPage({
     notFound();
   }
 
+  const allPosts = await getBlogPosts(locale);
+  // Select 3 relevant posts for IT Strategy, Cloud FinOps, Security Governance, etc.
+  const relevantCategories = new Set(["IT Strategy", "Risk Governance", "Web & App Dev", "Cloud"]);
+  const filtered = allPosts.filter((p) => relevantCategories.has(p.category));
+  const relatedPosts = (filtered.length >= 3 ? filtered : allPosts).slice(0, 3);
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <ITStrategyInteractivePage service={service} />
+      <ITStrategyInteractivePage service={service} relatedPosts={relatedPosts} />
     </>
   );
 }
