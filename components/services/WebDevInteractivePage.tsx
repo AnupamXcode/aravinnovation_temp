@@ -740,9 +740,9 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
             <div className="lg:col-span-7 w-full flex items-center justify-center order-1 lg:order-2">
               <AnimatedSection delay={0.12} className="w-full">
                 <motion.div
-                  whileHover={{ scale: 1.015, y: -2 }}
+                  whileHover={{ scale: 1.02, y: -2 }}
                   transition={{ duration: 0.4 }}
-                  className="relative w-full rounded-2xl sm:rounded-3xl border-2 border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] overflow-hidden bg-[#fefaf5] dark:bg-[#0a0a0a] shadow-lg hover:shadow-[0_0_35px_rgba(241,94,28,0.45)] dark:hover:shadow-[0_0_45px_rgba(241,94,28,0.55)] transition-all duration-500 group"
+                  className="relative w-full rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-[#fefaf5] dark:bg-[#0a0a0a] shadow-lg hover:shadow-2xl hover:border-[#f15e1c]/50 transition-all duration-300 group"
                 >
                   <Image
                     src="/images/web-app-main-1.png"
@@ -750,20 +750,8 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
                     width={1200}
                     height={800}
                     priority
-                    className="w-full h-auto max-w-full object-contain block transition-transform duration-500 group-hover:scale-[1.015]"
+                    className="w-full h-auto max-w-full object-contain block transition-transform duration-500 group-hover:scale-[1.02]"
                   />
-
-                  {/* Radiant Outer Glowing Rectangle Border on Hover */}
-                  <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#f15e1c] rounded-2xl sm:rounded-3xl pointer-events-none transition-colors duration-300 shadow-[inset_0_0_20px_rgba(241,94,28,0.25)]" />
-
-                  {/* Laser Beam Line Covering the Entire Rectangle on Hover */}
-                  <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <motion.div
-                      animate={{ x: ["-100%", "200%"] }}
-                      transition={{ repeat: Infinity, duration: 1.8, ease: "linear" }}
-                      className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-[#f15e1c] to-transparent opacity-90 blur-[1px] shadow-[0_0_25px_#f15e1c]"
-                    />
-                  </div>
                 </motion.div>
               </AnimatedSection>
             </div>
@@ -963,29 +951,17 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
             <div className="lg:col-span-7 w-full flex items-center justify-center order-1">
               <AnimatedSection delay={0.12} className="w-full">
                 <motion.div
-                  whileHover={{ scale: 1.015, y: -2 }}
+                  whileHover={{ scale: 1.02, y: -2 }}
                   transition={{ duration: 0.4 }}
-                  className="relative w-full rounded-2xl sm:rounded-3xl border-2 border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] overflow-hidden bg-[#fefaf5] dark:bg-[#0a0a0a] shadow-lg hover:shadow-[0_0_35px_rgba(241,94,28,0.45)] dark:hover:shadow-[0_0_45px_rgba(241,94,28,0.55)] transition-all duration-500 group"
+                  className="relative w-full rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-[#fefaf5] dark:bg-[#0a0a0a] shadow-lg hover:shadow-2xl hover:border-[#f15e1c]/50 transition-all duration-300 group"
                 >
                   <Image
                     src="/images/web-app-main-2.png"
                     alt="Arav Innovations Full-Stack Web Application Architecture & System Integration"
                     width={1200}
                     height={800}
-                    className="w-full h-auto max-w-full object-contain block transition-transform duration-500 group-hover:scale-[1.015]"
+                    className="w-full h-auto max-w-full object-contain block transition-transform duration-500 group-hover:scale-[1.02]"
                   />
-
-                  {/* Radiant Outer Glowing Rectangle Border on Hover */}
-                  <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#f15e1c] rounded-2xl sm:rounded-3xl pointer-events-none transition-colors duration-300 shadow-[inset_0_0_20px_rgba(241,94,28,0.25)]" />
-
-                  {/* Laser Beam Line Covering the Entire Rectangle on Hover */}
-                  <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <motion.div
-                      animate={{ x: ["-100%", "200%"] }}
-                      transition={{ repeat: Infinity, duration: 1.8, ease: "linear" }}
-                      className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-[#f15e1c] to-transparent opacity-90 blur-[1px] shadow-[0_0_25px_#f15e1c]"
-                    />
-                  </div>
                 </motion.div>
               </AnimatedSection>
             </div>
