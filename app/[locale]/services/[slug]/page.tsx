@@ -121,7 +121,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
 
   // Render Immersive Web Development Interactive Page for Web Development Slugs
   if (service.slug === "web-app-development" || slug === "webdevelopment" || slug === "web-development" || slug === "web-application-development") {
-    return <WebDevInteractivePage service={service} />;
+    return <WebDevInteractivePage service={service} relatedPosts={relatedPosts} />;
   }
 
   // Render Immersive Risk & Governance Interactive Page for Risk & Governance Slugs
