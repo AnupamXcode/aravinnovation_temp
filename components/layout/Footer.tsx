@@ -160,7 +160,7 @@ const enterprisePractices = [
   {
     num: "08",
     title: "AI Portfolio",
-    href: "/products",
+    href: "/services/ai-portfolio",
     accent: "#f15e1c",
     category: "AI INNOVATION",
     icon: <Cpu className="w-4 h-4 text-[#f15e1c]" />,
@@ -253,55 +253,61 @@ export function Footer() {
         </AnimatedFooterSection>
 
         {/* =========================================================================
-            ZONE 2: COMPACT SLEEK ENTERPRISE PRACTICES GRID
+            ZONE 2: CLEAN EDITORIAL ENTERPRISE SERVICES NAVIGATION LIST
             ========================================================================= */}
         <AnimatedFooterSection delay={0.08} className="space-y-4 text-left">
-          <div className="flex items-center justify-between border-b border-white/20 pb-2">
-            <div>
+          <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-white/20 pb-3 gap-2">
+            <div className="space-y-1">
               <span className="text-[10px] font-mono font-black text-[#ffec69] uppercase tracking-widest block">
-                PRACTICE ECOSYSTEM
+                OUR CORE SERVICES
               </span>
-              <h3 className="text-base sm:text-lg font-extrabold font-display text-white tracking-tight">
-                ARAV ENTERPRISE PRACTICES
+              <h3 className="text-lg sm:text-xl font-extrabold font-display text-white tracking-tight">
+                Enterprise Technology &amp; Growth Services
               </h3>
+              <p className="text-xs text-white/80 max-w-2xl font-medium leading-relaxed">
+                Combining strategy, engineering, digital growth, governance, diagnostic audits, talent, and AI capabilities.
+              </p>
             </div>
             <Link
               href="/services"
-              className="inline-flex items-center gap-1.5 text-[11px] font-mono font-extrabold text-white hover:text-[#ffec69] transition-colors group focus:outline-hidden focus:ring-1 focus:ring-[#ffec69] rounded-xs"
+              className="inline-flex items-center gap-1.5 text-[11px] font-mono font-extrabold text-[#ffec69] hover:text-white transition-colors group shrink-0"
             >
-              <span>VIEW ALL</span>
+              <span>VIEW ALL SERVICES</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-[#ffec69]" />
             </Link>
           </div>
 
-          {/* Sleek 8-Card Responsive Grid (4-Col Desktop, 2-Col Tablet, 1-2 Mobile) */}
-          <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3">
-            {enterprisePractices.map((practice) => (
-              <Link
+          {/* Clean Multi-Column Editorial Service List (No Boxed Cards, Premium Navigation) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-3 pt-1">
+            {enterprisePractices.map((practice, index) => (
+              <motion.div
                 key={practice.num}
-                href={practice.href}
-                className="p-3.5 rounded-xl border border-white/25 bg-white/10 dark:bg-white/5 hover:bg-white/20 hover:border-white/50 backdrop-blur-md transition-all duration-200 group text-left flex flex-col justify-between space-y-2 cursor-pointer focus:outline-hidden focus:ring-1 focus:ring-[#ffec69]"
+                initial={{ opacity: 0, x: 12 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-10px" }}
+                transition={{ duration: 0.35, delay: index * 0.03 }}
               >
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-[10px] font-mono font-black text-[#ffec69] tracking-wider uppercase">
-                    {practice.num} &bull; {practice.category}
-                  </span>
-                  <div className="p-1 rounded-lg bg-white/15 border border-white/20 group-hover:scale-105 transition-transform shrink-0">
-                    {practice.icon}
+                <Link
+                  href={practice.href}
+                  className="group flex items-center justify-between py-2.5 border-b border-white/15 hover:border-[#ffec69]/70 transition-colors duration-200 text-left cursor-pointer"
+                >
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-xs font-mono font-bold text-[#ffec69] group-hover:text-white transition-colors shrink-0 pt-0.5">
+                      {practice.num}
+                    </span>
+                    <div className="space-y-0.5">
+                      <h4 className="text-xs sm:text-sm font-extrabold font-display text-white group-hover:text-[#ffec69] group-hover:translate-x-1 transition-all duration-200 leading-snug">
+                        {practice.title}
+                      </h4>
+                      <span className="text-[10px] font-mono text-white/70 block group-hover:text-white transition-colors">
+                        {practice.category}
+                      </span>
+                    </div>
                   </div>
-                </div>
 
-                <div>
-                  <h4 className="text-xs sm:text-sm font-extrabold font-display text-white group-hover:text-[#ffec69] transition-colors leading-snug">
-                    {practice.title}
-                  </h4>
-                </div>
-
-                <div className="pt-1.5 border-t border-white/15 flex items-center justify-between text-[10px] font-mono font-bold text-white/80">
-                  <span>Explore</span>
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform text-[#ffec69]" />
-                </div>
-              </Link>
+                  <ArrowRight className="w-3.5 h-3.5 text-white/60 group-hover:text-[#ffec69] group-hover:translate-x-1.5 transition-transform duration-200 shrink-0 ml-2" />
+                </Link>
+              </motion.div>
             ))}
           </div>
         </AnimatedFooterSection>
