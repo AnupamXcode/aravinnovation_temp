@@ -79,7 +79,7 @@ export function CaseStudyStorytelling({
 
   return (
     <section
-      className="py-16 md:py-24 px-4 sm:px-8 lg:px-12 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl transition-all duration-300 relative overflow-hidden"
+      className="py-16 md:py-24 px-4 sm:px-8 lg:px-12 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300 relative overflow-hidden"
       id="case-studies-transformation"
     >
       {/* Section Header */}
@@ -200,7 +200,7 @@ export function CaseStudyStorytelling({
                   type="button"
                   disabled={activeStageNumber === 1}
                   onClick={() => setActiveStageNumber((prev) => Math.max(1, prev - 1))}
-                  className="px-4 py-2 rounded-xl text-xs font-bold bg-white dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#2c3d36] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-bold bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#2c3d36] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
                 >
                   &larr; Previous Stage
                 </button>
@@ -236,7 +236,7 @@ export function CaseStudyStorytelling({
             {activeStudy.results.map((res, rIdx) => (
               <div
                 key={rIdx}
-                className="p-6 rounded-3xl bg-white dark:bg-[#22312b] border border-[#f7d7b0] dark:border-[#2c3d36] shadow-lg space-y-2 hover-lift-3d transition-all duration-300 relative overflow-hidden group"
+                className="p-6 rounded-3xl bg-white dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#2c3d36] shadow-lg space-y-2 hover-lift-3d transition-all duration-300 relative overflow-hidden group"
               >
                 <div className="absolute top-0 right-0 w-16 h-16 bg-[#f15e1c]/5 dark:bg-[#f15e1c]/10 rounded-bl-full pointer-events-none" />
                 <span className="text-3xl sm:text-4xl font-black font-mono text-[#f15e1c] group-hover:scale-105 transition-transform inline-block">
@@ -277,7 +277,7 @@ export function CaseStudyStorytelling({
             </div>
           )}
 
-          <div className="lg:col-span-4 p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#22312b] border border-[#f7d7b0] dark:border-[#2c3d36] shadow-md flex flex-col justify-between space-y-4">
+          <div className="lg:col-span-4 p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#2c3d36] shadow-md flex flex-col justify-between space-y-4">
             <div>
               <span className="text-[10px] font-mono uppercase text-[#f15e1c] font-black tracking-wider">
                 SERVICES UTILIZED
@@ -289,7 +289,7 @@ export function CaseStudyStorytelling({
                 {activeStudy.technologiesUsed.map((tech, tIdx) => (
                   <span
                     key={tIdx}
-                    className="px-2.5 py-1 rounded-lg bg-[#fefaf5] dark:bg-[#172420] text-[#f15e1c] text-[11px] font-mono font-bold border border-[#f7d7b0] dark:border-[#2a3c35]"
+                    className="px-2.5 py-1 rounded-lg bg-[#fefaf5] dark:bg-[#0a0a0a] text-[#f15e1c] text-[11px] font-mono font-bold border border-[#f7d7b0] dark:border-[#2a3c35]"
                   >
                     {tech}
                   </span>

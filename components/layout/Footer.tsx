@@ -199,7 +199,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="w-full relative bg-gradient-to-br from-[#f7d7b0] via-[#f15e1c] to-[#fab60a] dark:from-[#172420] dark:via-[#101b17] dark:to-[#1e2d27] text-white pt-10 pb-8 overflow-hidden select-none transition-colors duration-300 border-t border-[#f7d7b0]/40 dark:border-[#253630]">
+    <footer className="w-full relative bg-gradient-to-br from-[#f7d7b0] via-[#f15e1c] to-[#fab60a] dark:from-[#0a0a0a] dark:via-[#000000] dark:to-[#1e2d27] text-white pt-10 pb-8 overflow-hidden select-none transition-colors duration-300 border-t border-[#f7d7b0]/40 dark:border-[#1a1a1a]">
       
       {/* Background Abstract Technology Connected SVG Line Pattern */}
       <div className="absolute inset-0 pointer-events-none z-0 opacity-15 dark:opacity-20 overflow-hidden">

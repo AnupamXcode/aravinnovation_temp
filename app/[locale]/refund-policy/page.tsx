@@ -24,7 +24,7 @@ export default async function RefundPolicyPage({
   setRequestLocale(locale);
 
   return (
-    <div className="py-24 md:py-32 bg-[#FFFDF9] dark:bg-[#12100E] min-h-screen">
+    <div className="py-24 md:py-32 bg-[#FFFDF9] dark:bg-[#000000] min-h-screen">
       <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Header */}
         <div className="space-y-4 max-w-3xl">
@@ -40,10 +40,10 @@ export default async function RefundPolicyPage({
         </div>
 
         {/* 2-Column Desktop Architecture with Sticky Table of Contents */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
           {/* Left Column: Sticky Table of Contents */}
-          <aside className="lg:col-span-4 hidden lg:block sticky top-32 space-y-4 p-6 rounded-3xl bg-[#FBF3EA]/60 dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm">
-            <div className="flex items-center gap-2 font-bold font-display text-sm text-[#3A2E27] dark:text-[#FAF5EE] border-b border-[#EFE2D6] dark:border-[#2C241E] pb-3">
+          <aside className="lg:col-span-4 hidden lg:block sticky top-32 space-y-4 p-6 rounded-3xl bg-[#FBF3EA]/60 dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm">
+            <div className="flex items-center gap-2 font-bold font-display text-sm text-[#3A2E27] dark:text-[#FAF5EE] border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-3">
               <FileText className="w-4 h-4 text-[#f15e1c]" />
               <span>Table of Contents</span>
             </div>
@@ -62,13 +62,13 @@ export default async function RefundPolicyPage({
           </aside>
 
           {/* Right Column: Policy Document Body */}
-          <div className="lg:col-span-8 p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-10 text-sm text-[#3A2E27] dark:text-[#FAF5EE] leading-relaxed">
+          <div className="lg:col-span-8 p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-10 text-sm text-[#3A2E27] dark:text-[#FAF5EE] leading-relaxed">
             <p className="text-base text-[#7A6A5F] dark:text-[#B8ACA0]">
               At Arav Innovation, we strive to deliver high-quality digital marketing services tailored to your specific needs. Due to the nature of our services, which involve customized strategies, non-tangible deliverables, and substantial resource allocation, we have a strict no refund policy.
             </p>
 
             {/* Non-Refundable Services */}
-            <section id="non-refundable" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
+            <section id="non-refundable" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f] scroll-mt-32">
               <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
                 Non-Refundable Services
               </h2>
@@ -87,7 +87,7 @@ export default async function RefundPolicyPage({
                 ].map((service, idx) => (
                   <div
                     key={idx}
-                    className="flex items-center gap-2.5 p-3.5 rounded-2xl bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE]"
+                    className="flex items-center gap-2.5 p-3.5 rounded-2xl bg-[#FBF3EA] dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE]"
                   >
                     <CheckCircle2 className="w-4 h-4 text-[#f15e1c] shrink-0" />
                     <span>{service}</span>
@@ -97,7 +97,7 @@ export default async function RefundPolicyPage({
             </section>
 
             {/* Reason for No Refund */}
-            <section id="reason-no-refund" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
+            <section id="reason-no-refund" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f] scroll-mt-32">
               <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
                 Reason for No Refund
               </h2>
@@ -109,7 +109,7 @@ export default async function RefundPolicyPage({
                 <li>Custom strategies are developed and executed based on your requirements.</li>
                 <li>Results depend on various external factors, such as market trends and platform algorithms, which are beyond our control.</li>
               </ul>
-              <div className="p-5 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] border border-[#F4A97F]/40 dark:border-[#3D332B] flex items-start gap-3 mt-4">
+              <div className="p-5 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#161616] border border-[#F4A97F]/40 dark:border-[#262626] flex items-start gap-3 mt-4">
                 <AlertCircle className="w-5 h-5 text-[#f15e1c] shrink-0 mt-0.5" />
                 <p className="text-xs font-medium text-[#3A2E27] dark:text-[#FAF5EE]">
                   Due to these reasons, payments made for our services cannot be refunded under any circumstances.
@@ -118,7 +118,7 @@ export default async function RefundPolicyPage({
             </section>
 
             {/* Dispute Resolution */}
-            <section id="dispute-resolution" className="space-y-3 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
+            <section id="dispute-resolution" className="space-y-3 pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f] scroll-mt-32">
               <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
                 Dispute Resolution
               </h2>
@@ -132,7 +132,7 @@ export default async function RefundPolicyPage({
               <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
                 Contact Us
               </h2>
-              <div className="p-6 rounded-2xl bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] space-y-2.5">
+              <div className="p-6 rounded-2xl bg-[#FBF3EA] dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-2.5">
                 <div className="flex items-center gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
                   <Mail className="w-4 h-4 text-[#f15e1c]" />
                   <span>Email: <a href="mailto:support@aravinnovations.com" className="text-[#f15e1c] hover:underline">support@aravinnovations.com</a></span>
@@ -148,7 +148,7 @@ export default async function RefundPolicyPage({
               </div>
             </section>
 
-            <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] pt-4 italic border-t border-[#EFE2D6] dark:border-[#2C241E]">
+            <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] pt-4 italic border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
               By engaging our services, you acknowledge and agree to this Refund Policy.
             </p>
           </div>

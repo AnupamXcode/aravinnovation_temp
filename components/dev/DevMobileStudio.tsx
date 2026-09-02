@@ -290,7 +290,7 @@ export function DevMobileStudio() {
                   height: `${currentHeight}px`,
                   maxHeight: "78vh",
                 }}
-                className="relative bg-white dark:bg-[#12100E] overflow-hidden pt-4"
+                className="relative bg-white dark:bg-[#000000] overflow-hidden pt-4"
               >
                 <iframe
                   key={`mobile-frame-${selectedDevice.id}-${iframeKey}-${activePath}-${isLandscape}`}
@@ -299,7 +299,7 @@ export function DevMobileStudio() {
                     width: `${currentWidth}px`,
                     height: "100%",
                   }}
-                  className="border-0 w-full h-full bg-white dark:bg-[#12100E]"
+                  className="border-0 w-full h-full bg-white dark:bg-[#000000]"
                   title={`Mobile Frame ${selectedDevice.name}`}
                 />
               </div>

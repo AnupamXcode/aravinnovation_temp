@@ -37,7 +37,7 @@ export default function AdminLoginPage() {
 
   return (
     <div className="min-h-screen w-full bg-[#FAF5EE] dark:bg-[#161310] flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] rounded-3xl p-8 shadow-2xl space-y-6">
+      <div className="w-full max-w-md bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] rounded-3xl p-8 shadow-2xl space-y-6">
         <div className="text-center space-y-2">
           <div className="flex justify-center mb-4">
             <BrandLogo />
@@ -72,7 +72,7 @@ export default function AdminLoginPage() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter admin username"
-              className="w-full text-sm px-4 py-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FFFDF9] dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-2 focus:ring-[#f15e1c]"
+              className="w-full text-sm px-4 py-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FFFDF9] dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-2 focus:ring-[#f15e1c]"
             />
           </div>
 
@@ -86,7 +86,7 @@ export default function AdminLoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••••••"
-              className="w-full text-sm px-4 py-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FFFDF9] dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-2 focus:ring-[#f15e1c]"
+              className="w-full text-sm px-4 py-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FFFDF9] dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-2 focus:ring-[#f15e1c]"
             />
           </div>
 
@@ -101,7 +101,7 @@ export default function AdminLoginPage() {
           </Button>
         </form>
 
-        <div className="pt-4 border-t border-[#EFE2D6] dark:border-[#2C241E] text-center">
+        <div className="pt-4 border-t border-[#EFE2D6] dark:border-[#1f1f1f] text-center">
           <span className="text-[11px] font-mono text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center justify-center gap-1">
             <ShieldCheck className="w-3.5 h-3.5 text-[#f15e1c]" />
             <span>Protected Route &bull; Session Persistence Enabled</span>

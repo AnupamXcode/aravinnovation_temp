@@ -108,10 +108,10 @@ export function CapabilitiesMatrix() {
 
   return (
     <div className="relative w-full max-w-6xl mx-auto py-12 px-4 select-none">
-      <div className="rounded-[3rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-8 sm:p-12 space-y-10">
+      <div className="rounded-[3rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-8 sm:p-12 space-y-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white dark:bg-[#101b17] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white dark:bg-[#000000] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
             <Sparkles className="w-3.5 h-3.5" />
             <span>ENTERPRISE CAPABILITIES MATRIX</span>
           </div>
@@ -129,20 +129,20 @@ export function CapabilitiesMatrix() {
             <motion.div
               key={cap.id}
               whileHover={shouldReduceMotion ? {} : { y: -6, scale: 1.02 }}
-              className="p-6 rounded-3xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] shadow-md hover:shadow-2xl hover:border-[#f15e1c]/50 transition-all duration-300 flex flex-col justify-between space-y-6 group"
+              className="p-6 rounded-3xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md hover:shadow-2xl hover:border-[#f15e1c]/50 transition-all duration-300 flex flex-col justify-between space-y-6 group"
             >
               {/* Card Header */}
               <div className="flex items-center justify-between">
-                <div className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0]/60">
+                <div className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0]/60">
                   {cap.icon}
                 </div>
-                <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] text-[#f15e1c] border border-[#f7d7b0]/50">
+                <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#161616] text-[#f15e1c] border border-[#f7d7b0]/50">
                   {cap.badge}
                 </span>
               </div>
 
               {/* 3D Abstract Representation Box */}
-              <div className="w-full h-28 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0]/50 relative overflow-hidden flex items-center justify-center p-4">
+              <div className="w-full h-28 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0]/50 relative overflow-hidden flex items-center justify-center p-4">
                 {cap.diagramType === "browser" && (
                   <div className="w-full space-y-2">
                     <div className="h-3 rounded-md bg-[#f15e1c]/20 flex items-center px-2 gap-1">
@@ -225,7 +225,7 @@ export function CapabilitiesMatrix() {
                 {cap.techStack.map((tech) => (
                   <span
                     key={tech}
-                    className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-[#fefaf5] dark:bg-[#172420] text-[#1b2823] dark:text-[#ffffff] border border-[#f7d7b0]"
+                    className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-[#fefaf5] dark:bg-[#0a0a0a] text-[#1b2823] dark:text-[#ffffff] border border-[#f7d7b0]"
                   >
                     {tech}
                   </span>

@@ -110,7 +110,7 @@ export function ProcessTimeline() {
   return (
     <div className="relative space-y-8">
       {/* Connecting Progress Line (Desktop) */}
-      <div className="hidden lg:block absolute top-14 left-12 right-12 h-1 bg-[#EFE2D6] dark:bg-[#2C241E] z-0 pointer-events-none rounded-full overflow-hidden">
+      <div className="hidden lg:block absolute top-14 left-12 right-12 h-1 bg-[#EFE2D6] dark:bg-[#1f1f1f] z-0 pointer-events-none rounded-full overflow-hidden">
         <motion.div
           initial={{ width: "0%" }}
           whileInView={{ width: "100%" }}
@@ -142,7 +142,7 @@ export function ProcessTimeline() {
                 "group relative h-full flex flex-col justify-between rounded-3xl p-6 border transition-all duration-300 cursor-pointer",
                 isActive
                   ? "bg-white dark:bg-[#1C1814] border-[#f15e1c] shadow-2xl shadow-[#f15e1c]/15 ring-2 ring-[#f15e1c]/30 scale-[1.02]"
-                  : "bg-white/80 dark:bg-[#171411] border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:border-[#f15e1c]/50 opacity-90 hover:opacity-100"
+                  : "bg-white/80 dark:bg-[#000000] border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:border-[#f15e1c]/50 opacity-90 hover:opacity-100"
               )}
             >
               <div>
@@ -161,7 +161,7 @@ export function ProcessTimeline() {
                       "p-3 rounded-2xl transition-all shadow-xs",
                       isActive
                         ? "bg-[#FCE3D3] dark:bg-[#2A211B] border border-[#f15e1c]/40 scale-110"
-                        : "bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E]"
+                        : "bg-[#FBF3EA] dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f]"
                     )}
                   >
                     {icon}
@@ -180,7 +180,7 @@ export function ProcessTimeline() {
               </div>
 
               {/* Deliverable Badge */}
-              <div className="mt-5 pt-4 border-t border-[#EFE2D6] dark:border-[#2C241E]">
+              <div className="mt-5 pt-4 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center gap-1">
                   <Sparkles className="w-3 h-3 text-[#f15e1c]" />
                   <span>Deliverable</span>
@@ -193,7 +193,7 @@ export function ProcessTimeline() {
               {/* Connector Arrow (Desktop) */}
               {idx < 4 && (
                 <div className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 z-20 pointer-events-none">
-                  <div className="w-6 h-6 rounded-full bg-white dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm flex items-center justify-center text-[#f15e1c]">
+                  <div className="w-6 h-6 rounded-full bg-white dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm flex items-center justify-center text-[#f15e1c]">
                     <ChevronRight className="w-3.5 h-3.5" />
                   </div>
                 </div>

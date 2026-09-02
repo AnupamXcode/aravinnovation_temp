@@ -60,7 +60,7 @@ function SystemScanTransition() {
 
   return (
     <div ref={ref} className="relative w-full h-px my-4 overflow-hidden pointer-events-none select-none">
-      <div className="w-full h-full bg-[#f7d7b0]/30 dark:bg-[#253630]" />
+      <div className="w-full h-full bg-[#f7d7b0]/30 dark:bg-[#1a1a1a]" />
       {!shouldReduceMotion && (
         <motion.div
           initial={{ x: "-100%" }}
@@ -426,12 +426,12 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
   const testimonial = testimonialsData.find((t) => t.id === "test-1") || testimonialsData[0];
 
   return (
-    <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#12100E] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c]">
+    <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#000000] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c]">
       
       {/* =========================================================================
           1. HERO — ORGANIZATIONAL DIAGNOSTIC ENGINE & SYSTEM SCAN
           ========================================================================= */}
-      <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] overflow-hidden select-none">
+      <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none">
         <DiagnosticEngineBackground />
 
         {/* Ambient Glows */}
@@ -451,7 +451,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]"
             >
               <Sparkles className="w-4 h-4" />
               <span>ORGANIZATIONAL DIAGNOSTICS &amp; PERFORMANCE ENGINE</span>
@@ -508,7 +508,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
 
           {/* Diagnostic System Status Bar */}
           <div className="pt-4 text-center">
-            <div className="inline-flex flex-wrap items-center justify-center gap-4 px-4 py-2 rounded-2xl bg-white/80 dark:bg-[#101b17]/80 border border-[#f7d7b0] dark:border-[#253630] backdrop-blur-md shadow-lg text-xs font-mono font-bold text-[#f15e1c]">
+            <div className="inline-flex flex-wrap items-center justify-center gap-4 px-4 py-2 rounded-2xl bg-white/80 dark:bg-[#000000]/80 border border-[#f7d7b0] dark:border-[#1a1a1a] backdrop-blur-md shadow-lg text-xs font-mono font-bold text-[#f15e1c]">
               <span className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-ping" />
                 STATUS: DIAGNOSTIC ACTIVE
@@ -530,7 +530,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
       <section
         id="diagnostic-scan"
         ref={scanContainerRef}
-        className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none"
+        className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none"
       >
         <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
@@ -546,7 +546,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
           </div>
 
           {/* 5-Stage Diagnostic Scan Progress Strip */}
-          <div className="p-4 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] shadow-sm max-w-5xl mx-auto flex items-center justify-between overflow-x-auto gap-2">
+          <div className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-sm max-w-5xl mx-auto flex items-center justify-between overflow-x-auto gap-2">
             {diagnosticTimelineStages.map((st, i) => (
               <div
                 key={st.stage}
@@ -554,7 +554,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
                   "flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-mono font-bold shrink-0 transition-all",
                   i <= activeScanStage
                     ? "bg-[#f15e1c] text-white shadow-xs"
-                    : "bg-[#fefaf5] dark:bg-[#172420] text-[#7A6A5F] border border-[#f7d7b0]"
+                    : "bg-[#fefaf5] dark:bg-[#0a0a0a] text-[#7A6A5F] border border-[#f7d7b0]"
                 )}
               >
                 <span>{st.stage}</span>
@@ -573,9 +573,9 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.35 }}
-                className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f15e1c]/40 shadow-2xl space-y-6 text-left relative overflow-hidden"
+                className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/40 shadow-2xl space-y-6 text-left relative overflow-hidden"
               >
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#253630] pb-5">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-5">
                   <div>
                     <span className="text-xs font-mono font-black text-[#f15e1c] uppercase tracking-wider block">
                       STAGE {diagnosticTimelineStages[activeScanStage].stage} / 05 &bull; {diagnosticTimelineStages[activeScanStage].name}
@@ -585,21 +585,21 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
                     </h3>
                   </div>
 
-                  <div className="px-4 py-2 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] text-xs font-mono font-bold text-[#2e936f] shadow-xs">
+                  <div className="px-4 py-2 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#2e936f] shadow-xs">
                     ORGANIZATIONAL DIAGNOSTIC CORE
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                  <div className="p-4 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0]/60 space-y-1">
+                  <div className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 space-y-1">
                     <span className="text-[10px] font-mono font-bold text-[#7A6A5F] block uppercase">DIAGNOSTIC STATUS</span>
                     <span className="text-sm font-mono font-extrabold text-[#f15e1c]">SCAN ACTIVE</span>
                   </div>
-                  <div className="p-4 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0]/60 space-y-1">
+                  <div className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 space-y-1">
                     <span className="text-[10px] font-mono font-bold text-[#7A6A5F] block uppercase">COST REDUCTION</span>
                     <span className="text-sm font-mono font-extrabold text-[#2e936f]">35% AVG SAVINGS</span>
                   </div>
-                  <div className="p-4 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0]/60 space-y-1">
+                  <div className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 space-y-1">
                     <span className="text-[10px] font-mono font-bold text-[#7A6A5F] block uppercase">EXECUTION GAIN</span>
                     <span className="text-sm font-mono font-extrabold text-[#fab60a]">2.8x VELOCITY</span>
                   </div>
@@ -621,14 +621,14 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
                     className={cn(
                       "p-8 rounded-[2.5rem] border-2 transition-all duration-300 cursor-pointer space-y-6 text-left flex flex-col justify-between min-h-[340px] relative overflow-hidden group",
                       isActive
-                        ? "bg-white dark:bg-[#101b17] border-[#f15e1c] shadow-2xl ring-2 ring-[#f15e1c]/20"
-                        : "bg-[#fefaf5] dark:bg-[#172420] border-[#f7d7b0] dark:border-[#253630] opacity-80 hover:opacity-100"
+                        ? "bg-white dark:bg-[#000000] border-[#f15e1c] shadow-2xl ring-2 ring-[#f15e1c]/20"
+                        : "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] opacity-80 hover:opacity-100"
                     )}
                   >
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <div className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] group-hover:scale-110 transition-transform">
+                          <div className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] group-hover:scale-110 transition-transform">
                             {sol.icon}
                           </div>
                           <span className="text-xs font-mono font-black text-[#f15e1c]">
@@ -636,7 +636,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
                           </span>
                         </div>
 
-                        <div className="px-3 py-1 rounded-xl bg-[#fce3d3] dark:bg-[#261f1a] text-xs font-mono font-bold text-[#f15e1c]">
+                        <div className="px-3 py-1 rounded-xl bg-[#fce3d3] dark:bg-[#161616] text-xs font-mono font-bold text-[#f15e1c]">
                           {sol.metric}
                         </div>
                       </div>
@@ -655,13 +655,13 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
                       </p>
                     </div>
 
-                    <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#253630] space-y-2">
+                    <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] space-y-2">
                       <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#7A6A5F]">
                         Key Deliverables &amp; Artifacts
                       </span>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]">
                         {sol.deliverables.map((del, i) => (
-                          <div key={i} className="flex items-center gap-2 p-2 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0]/60 dark:border-[#253630]">
+                          <div key={i} className="flex items-center gap-2 p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
                             <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
                             <span className="truncate">{del}</span>
                           </div>
@@ -681,7 +681,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
       {/* =========================================================================
           3. OPERATIONAL BOTTLENECK TRANSFORMATION (BEFORE vs AFTER)
           ========================================================================= */}
-      <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
+      <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none">
         <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
@@ -695,7 +695,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
             </p>
           </div>
 
-          <div className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl space-y-8">
+          <div className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl space-y-8">
             <div className="flex items-center justify-between border-b border-[#f7d7b0] pb-4">
               <div className="flex items-center gap-3">
                 <span className="text-xs font-mono font-black text-[#f15e1c] uppercase tracking-wider">
@@ -712,7 +712,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
             </div>
 
             {/* Before vs After Visual Diagram */}
-            <div className="p-6 rounded-3xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] overflow-x-auto">
+            <div className="p-6 rounded-3xl bg-white dark:bg-[#000000] border border-[#f7d7b0] overflow-x-auto">
               <AnimatePresence mode="wait">
                 {!isProcessOptimized ? (
                   <motion.div
@@ -723,11 +723,11 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
                     transition={{ duration: 0.3 }}
                     className="flex items-center justify-between min-w-[650px] gap-3 text-center"
                   >
-                    <div className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] text-xs font-mono font-bold">
+                    <div className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold">
                       INPUT &bull; DATA
                     </div>
                     <span>&rarr;</span>
-                    <div className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] text-xs font-mono font-bold">
+                    <div className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold">
                       PROCESS A
                     </div>
                     <span>&rarr;</span>
@@ -735,11 +735,11 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
                       ██ BOTTLENECK (IDLE TIME) ██
                     </div>
                     <span>&rarr;</span>
-                    <div className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] text-xs font-mono font-bold">
+                    <div className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold">
                       PROCESS B
                     </div>
                     <span>&rarr;</span>
-                    <div className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] text-xs font-mono font-bold text-[#7A6A5F]">
+                    <div className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#7A6A5F]">
                       DELAYED OUTPUT
                     </div>
                   </motion.div>
@@ -784,7 +784,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
       {/* =========================================================================
           4. PERFORMANCE METRIC — 35% AVERAGE COST SAVINGS
           ========================================================================= */}
-      <section className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none">
+      <section className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] select-none">
         <div className="max-w-[1536px] mx-auto space-y-10">
           <div className="text-center max-w-4xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
@@ -831,9 +831,9 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
               },
             ].map((stat, idx) => (
               <TiltCard key={idx} maxTilt={5} scale={1.01}>
-                <div className="h-full p-6 sm:p-8 rounded-[2rem] bg-white dark:bg-[#101b17] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-md hover:border-[#f15e1c] transition-all duration-300 space-y-4 text-left flex flex-col justify-between relative overflow-hidden group">
+                <div className="h-full p-6 sm:p-8 rounded-[2rem] bg-white dark:bg-[#000000] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md hover:border-[#f15e1c] transition-all duration-300 space-y-4 text-left flex flex-col justify-between relative overflow-hidden group">
                   <div className="flex items-center justify-between">
-                    <div className="p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0]/60">
+                    <div className="p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0]/60">
                       {stat.icon}
                     </div>
                     <span className="text-[#2e936f] text-sm font-bold">↗</span>
@@ -864,7 +864,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
       {/* =========================================================================
           5. OPPORTUNITY MATRIX & DIAGNOSTIC FINDINGS
           ========================================================================= */}
-      <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
+      <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none">
         <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
@@ -880,7 +880,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left 3x3 Impact vs Effort Matrix */}
-            <div className="lg:col-span-7 p-6 sm:p-8 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-xl space-y-4">
+            <div className="lg:col-span-7 p-6 sm:p-8 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl space-y-4">
               <div className="flex items-center justify-between text-xs font-mono font-bold text-[#7A6A5F] border-b border-[#f7d7b0] pb-3">
                 <span>EFFORT &darr; vs IMPACT &rarr;</span>
                 <span className="text-[#2e936f]">QUICK WINS &bull; HIGH ROI &bull; OPTIMIZED</span>
@@ -909,7 +909,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
               </span>
               <div className="space-y-3">
                 {auditSolutionsData[0].deliverables.map((del, i) => (
-                  <div key={i} className="p-4 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] flex items-center gap-3 shadow-xs">
+                  <div key={i} className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] flex items-center gap-3 shadow-xs">
                     <span className="w-7 h-7 rounded-full bg-[#f15e1c] text-white flex items-center justify-center text-xs font-mono font-bold shrink-0">
                       0{i + 1}
                     </span>
@@ -929,7 +929,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
           ========================================================================= */}
       <section
         ref={timelineContainerRef}
-        className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none"
+        className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none"
       >
         <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
@@ -946,7 +946,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
 
           {/* Framework Progress Line */}
           <div className="relative py-4 max-w-5xl mx-auto">
-            <div className="relative w-full bg-[#f7d7b0] dark:bg-[#253630] h-2.5 rounded-full overflow-hidden">
+            <div className="relative w-full bg-[#f7d7b0] dark:bg-[#1a1a1a] h-2.5 rounded-full overflow-hidden">
               <motion.div
                 style={{ width: timelineLineWidth }}
                 className="h-full bg-gradient-to-r from-[#f15e1c] via-[#2e936f] to-[#fab60a]"
@@ -969,7 +969,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
                         ? "bg-[#f15e1c] border-white text-white scale-125 shadow-lg shadow-[#f15e1c]/40 ring-4 ring-[#f15e1c]/20 z-10"
                         : isPassed
                         ? "bg-[#2e936f] border-white text-white"
-                        : "bg-white dark:bg-[#101b17] border-[#f7d7b0] dark:border-[#253630] text-[#7A6A5F]"
+                        : "bg-white dark:bg-[#000000] border-[#f7d7b0] dark:border-[#1a1a1a] text-[#7A6A5F]"
                     )}
                   >
                     {isPassed && !isActive ? <Check className="w-4 h-4 text-white" /> : wf.step}
@@ -988,9 +988,9 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.35 }}
-                className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f15e1c]/40 shadow-2xl space-y-6 text-left relative overflow-hidden"
+                className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/40 shadow-2xl space-y-6 text-left relative overflow-hidden"
               >
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#253630] pb-5">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-5">
                   <div>
                     <span className="text-xs font-mono font-black text-[#f15e1c] uppercase tracking-wider block">
                       STAGE {activeWorkStep.step} / 04 &bull; {activeWorkStep.subtitle}
@@ -1000,7 +1000,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
                     </h3>
                   </div>
 
-                  <div className="px-4 py-2 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] text-xs font-mono font-bold text-[#2e936f] shadow-xs">
+                  <div className="px-4 py-2 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#2e936f] shadow-xs">
                     {activeWorkStep.output}
                   </div>
                 </div>
@@ -1009,7 +1009,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
                   {activeWorkStep.description}
                 </p>
 
-                <div className="pt-3 border-t border-[#f7d7b0] dark:border-[#253630] flex items-center justify-between text-xs font-mono font-bold text-[#f15e1c]">
+                <div className="pt-3 border-t border-[#f7d7b0] dark:border-[#1a1a1a] flex items-center justify-between text-xs font-mono font-bold text-[#f15e1c]">
                   <span>CONTINUOUS PERFORMANCE LOOP</span>
                   <span>STAGE 04 LOOPS BACK TO STAGE 01 &rarr;</span>
                 </div>
@@ -1026,7 +1026,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
           ========================================================================= */}
       <section
         ref={loopContainerRef}
-        className="relative py-28 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none"
+        className="relative py-28 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none"
       >
         <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
@@ -1042,7 +1042,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
           </div>
 
           {/* Circular Iteration Loop Display */}
-          <div className="relative rounded-[3rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-8 sm:p-16 text-center overflow-hidden">
+          <div className="relative rounded-[3rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-8 sm:p-16 text-center overflow-hidden">
             <div className="absolute inset-0 bg-radial from-[#f15e1c]/10 via-transparent to-transparent pointer-events-none" />
 
             <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-3 relative z-10">
@@ -1056,8 +1056,8 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
                     className={cn(
                       "p-5 rounded-2xl border-2 transition-all duration-300 space-y-2 cursor-pointer text-center relative overflow-hidden",
                       isActive
-                        ? "bg-white dark:bg-[#101b17] border-[#f15e1c] shadow-xl scale-105 ring-2 ring-[#f15e1c]/20"
-                        : "bg-white/60 dark:bg-[#101b17]/60 border-[#f7d7b0] opacity-75 hover:opacity-100"
+                        ? "bg-white dark:bg-[#000000] border-[#f15e1c] shadow-xl scale-105 ring-2 ring-[#f15e1c]/20"
+                        : "bg-white/60 dark:bg-[#000000]/60 border-[#f7d7b0] opacity-75 hover:opacity-100"
                     )}
                   >
                     <span className="text-[10px] font-mono font-black text-[#f15e1c] block">
@@ -1088,7 +1088,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
           ========================================================================= */}
       <section
         ref={missionRef}
-        className="relative py-28 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#ffffff] dark:bg-[#101b17] overflow-hidden select-none"
+        className="relative py-28 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000] overflow-hidden select-none"
       >
         {/* Subtle Background Parallax Typography */}
         <div className="absolute inset-0 pointer-events-none z-0 flex flex-col justify-between py-8 opacity-5 dark:opacity-10 font-display font-black text-7xl sm:text-9xl text-[#1b2823] dark:text-[#ffffff] tracking-tighter">
@@ -1121,7 +1121,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
           </div>
 
           <div className="lg:col-span-5 flex items-center justify-center">
-            <div className="relative w-80 h-80 sm:w-96 sm:h-96 rounded-3xl bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-6 flex flex-col justify-between items-center text-center overflow-hidden">
+            <div className="relative w-80 h-80 sm:w-96 sm:h-96 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-6 flex flex-col justify-between items-center text-center overflow-hidden">
               <div className="absolute inset-0 bg-radial from-[#f15e1c]/15 via-[#2e936f]/10 to-transparent pointer-events-none" />
 
               <div className="relative z-10 flex items-center gap-2 pt-2">
@@ -1149,13 +1149,13 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
       {/* =========================================================================
           9. CLIENT TESTIMONIAL — ENTERPRISE PROOF
           ========================================================================= */}
-      <section ref={testimonialRef} className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
+      <section ref={testimonialRef} className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
         <div className="max-w-[1536px] mx-auto text-center space-y-8">
           <Badge variant="secondary" size="md">
             KIND WORDS FROM OUR CLIENTS
           </Badge>
 
-          <div className="p-8 sm:p-14 lg:p-16 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-xl space-y-6 relative overflow-hidden max-w-5xl mx-auto">
+          <div className="p-8 sm:p-14 lg:p-16 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl space-y-6 relative overflow-hidden max-w-5xl mx-auto">
             <div className="p-3 rounded-2xl bg-[#f15e1c] text-white w-fit mx-auto shadow-md">
               <Quote className="w-6 h-6" />
             </div>
@@ -1173,7 +1173,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
               initial={{ opacity: 0, y: 15 }}
               animate={isTestimonialInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
               transition={{ duration: 0.5, delay: 0.35 }}
-              className="pt-4 border-t border-[#f7d7b0] dark:border-[#253630] space-y-1"
+              className="pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] space-y-1"
             >
               <div className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                 {testimonial.author}
@@ -1192,10 +1192,10 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
       {/* =========================================================================
           10. ABOUT OUR CEO — EDITORIAL LEADERSHIP PROFILE
           ========================================================================= */}
-      <section className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-        <div className="max-w-[1536px] mx-auto rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-8 sm:p-14 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center text-left">
+      <section className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-[1536px] mx-auto rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-8 sm:p-14 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center text-left">
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-3xl overflow-hidden border-2 border-[#f15e1c] shadow-xl bg-[#fce3d3] dark:bg-[#261f1a] flex items-center justify-center text-center p-6 space-y-2 flex-col">
+            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-3xl overflow-hidden border-2 border-[#f15e1c] shadow-xl bg-[#fce3d3] dark:bg-[#161616] flex items-center justify-center text-center p-6 space-y-2 flex-col">
               <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#f15e1c] text-white flex items-center justify-center text-2xl sm:text-3xl font-black font-display shadow-md">
                 AS
               </div>
@@ -1339,7 +1339,7 @@ export function AuditInteractivePage({ service }: AuditPageProps) {
       {/* =========================================================================
           12. FOOTER BRAND MOMENT
           ========================================================================= */}
-      <footer className="py-6 border-t border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] overflow-hidden select-none">
+      <footer className="py-6 border-t border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] overflow-hidden select-none">
         <div className="flex items-center justify-center gap-6 text-xs sm:text-sm font-mono font-extrabold text-[#7A6A5F] dark:text-[#B8ACA0] tracking-widest">
           <span>OBSERVE</span>
           <span className="text-[#f15e1c]">&bull;</span>

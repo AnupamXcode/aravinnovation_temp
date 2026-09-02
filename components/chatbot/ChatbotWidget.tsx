@@ -393,7 +393,7 @@ export function ChatbotWidget() {
             <button
               type="button"
               onClick={handleOpen}
-              className="flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white dark:bg-[#1E1915] text-[#3A2E27] dark:text-[#FAF5EE] text-xs sm:text-sm font-semibold border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl hover:shadow-2xl hover:border-[#f15e1c] dark:hover:border-[#f15e1c] transition-all duration-200 cursor-pointer"
+              className="flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white dark:bg-[#0a0a0a] text-[#3A2E27] dark:text-[#FAF5EE] text-xs sm:text-sm font-semibold border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl hover:shadow-2xl hover:border-[#f15e1c] dark:hover:border-[#f15e1c] transition-all duration-200 cursor-pointer"
             >
               <span>{locale === "hi" ? "हमसे चैट करें" : locale === "ar" ? "تحدث معنا" : "Chat with us"}</span>
               <span className="text-sm sm:text-base">👋</span>
@@ -407,7 +407,7 @@ export function ChatbotWidget() {
               aria-label="Open Arav Assistant Chat"
             >
               <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6 fill-current" />
-              <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#E53E3E] text-white text-[11px] font-bold flex items-center justify-center border-2 border-white dark:border-[#12100E] shadow-xs">
+              <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#E53E3E] text-white text-[11px] font-bold flex items-center justify-center border-2 border-white dark:border-[#000000] shadow-xs">
                 1
               </span>
             </button>
@@ -420,10 +420,10 @@ export function ChatbotWidget() {
         <div
           dir={locale === "ar" ? "rtl" : "ltr"}
           style={{ bottom: "calc(1rem + env(safe-area-inset-bottom, 0px))" }}
-          className="fixed bottom-4 right-3 sm:bottom-6 sm:right-6 z-50 w-[calc(100vw-1.5rem)] sm:w-[380px] h-[520px] max-h-[calc(100vh-5rem)] rounded-3xl bg-[#FFFDF9] dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200"
+          className="fixed bottom-4 right-3 sm:bottom-6 sm:right-6 z-50 w-[calc(100vw-1.5rem)] sm:w-[380px] h-[520px] max-h-[calc(100vh-5rem)] rounded-3xl bg-[#FFFDF9] dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200"
         >
           {/* Header with Minimize Button */}
-          <div className="bg-[#FBF3EA] dark:bg-[#1E1915] border-b border-[#EFE2D6] dark:border-[#2C241E] px-5 py-4 flex items-center justify-between">
+          <div className="bg-[#FBF3EA] dark:bg-[#0a0a0a] border-b border-[#EFE2D6] dark:border-[#1f1f1f] px-5 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-xl bg-[#f15e1c] text-white flex items-center justify-center shadow-xs">
                 <Bot className="w-4 h-4" />
@@ -442,7 +442,7 @@ export function ChatbotWidget() {
             <button
               type="button"
               onClick={handleMinimize}
-              className="text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#3A2E27] dark:hover:text-[#FAF5EE] p-1.5 rounded-xl hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A] cursor-pointer"
+              className="text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#3A2E27] dark:hover:text-[#FAF5EE] p-1.5 rounded-xl hover:bg-[#FCE3D3]/40 dark:hover:bg-[#161616] cursor-pointer"
               aria-label="Minimize Chat Window"
               title="Minimize Chat Window"
             >
@@ -465,7 +465,7 @@ export function ChatbotWidget() {
                     "max-w-[85%] rounded-2xl p-3.5 leading-relaxed",
                     msg.sender === "user"
                       ? "bg-[#f15e1c] text-white rounded-br-xs"
-                      : "bg-[#FBF3EA] dark:bg-[#1E1915] text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#2C241E] rounded-bl-xs whitespace-pre-line"
+                      : "bg-[#FBF3EA] dark:bg-[#0a0a0a] text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#1f1f1f] rounded-bl-xs whitespace-pre-line"
                   )}
                 >
                   {msg.text}
@@ -483,7 +483,7 @@ export function ChatbotWidget() {
                           "text-[11px] px-3 py-1.5 rounded-xl border font-medium transition-colors text-left cursor-pointer flex items-center gap-1",
                           opt.route || opt.ctaType === "page"
                             ? "bg-[#f15e1c] text-white border-[#f15e1c] hover:bg-[#d4581f]"
-                            : "bg-white dark:bg-[#1F1A16] border-[#EFE2D6] dark:border-[#2C241E] hover:border-[#f15e1c] text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FCE3D3]/30 dark:hover:bg-[#261F1A]"
+                            : "bg-white dark:bg-[#0a0a0a] border-[#EFE2D6] dark:border-[#1f1f1f] hover:border-[#f15e1c] text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FCE3D3]/30 dark:hover:bg-[#161616]"
                         )}
                       >
                         <span>{opt.label}</span>
@@ -497,7 +497,7 @@ export function ChatbotWidget() {
                 {msg.isLeadForm && !leadSubmitted && (
                   <form
                     onSubmit={handleLeadSubmit}
-                    className="w-full mt-2 p-3.5 rounded-2xl bg-white dark:bg-[#1F1A16] border border-[#EFE2D6] dark:border-[#2C241E] space-y-2.5 shadow-xs"
+                    className="w-full mt-2 p-3.5 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-2.5 shadow-xs"
                   >
                     <div className="text-[11px] font-bold text-[#3A2E27] dark:text-[#FAF5EE]">
                       {t("leadTitle")}
@@ -510,7 +510,7 @@ export function ChatbotWidget() {
                       onChange={(e) =>
                         setLeadFormState({ ...leadFormState, name: e.target.value })
                       }
-                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FFFDF9] dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-1 focus:ring-[#f15e1c]"
+                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FFFDF9] dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-1 focus:ring-[#f15e1c]"
                     />
                     <input
                       type="email"
@@ -520,7 +520,7 @@ export function ChatbotWidget() {
                       onChange={(e) =>
                         setLeadFormState({ ...leadFormState, email: e.target.value })
                       }
-                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FFFDF9] dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-1 focus:ring-[#f15e1c]"
+                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FFFDF9] dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-1 focus:ring-[#f15e1c]"
                     />
                     <input
                       type="tel"
@@ -530,7 +530,7 @@ export function ChatbotWidget() {
                       onChange={(e) =>
                         setLeadFormState({ ...leadFormState, phone: e.target.value })
                       }
-                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FFFDF9] dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-1 focus:ring-[#f15e1c]"
+                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FFFDF9] dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-1 focus:ring-[#f15e1c]"
                     />
                     <textarea
                       placeholder={t("requirementLabel")}
@@ -542,7 +542,7 @@ export function ChatbotWidget() {
                           requirement: e.target.value,
                         })
                       }
-                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FFFDF9] dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-1 focus:ring-[#f15e1c] resize-none"
+                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FFFDF9] dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-1 focus:ring-[#f15e1c] resize-none"
                     />
                     <Button
                       type="submit"
@@ -562,14 +562,14 @@ export function ChatbotWidget() {
           {/* Bottom Chat Input Bar */}
           <form
             onSubmit={handleCustomSend}
-            className="p-3 border-t border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1E1915] flex items-center gap-2"
+            className="p-3 border-t border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#0a0a0a] flex items-center gap-2"
           >
             <input
               type="text"
               placeholder={t("inputPlaceholder")}
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              className="flex-1 text-xs px-3 py-2 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-white dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-1 focus:ring-[#f15e1c]"
+              className="flex-1 text-xs px-3 py-2 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-white dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-1 focus:ring-[#f15e1c]"
             />
             <button
               type="submit"

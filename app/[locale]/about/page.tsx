@@ -81,7 +81,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   ];
 
   return (
-    <div className="pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+    <div className="pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
       <BreadcrumbSchema items={[{ name: "About Us", url: "/about" }]} />
       <LocalBusinessSchema location="both" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 md:space-y-32">
@@ -154,7 +154,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           <div className="lg:col-span-5">
             <ScrollReveal direction="left" delay={0.2}>
               <TiltCard maxTilt={5} className="group">
-                <div className="p-8 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] space-y-6 shadow-xl">
+                <div className="p-8 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-6 shadow-xl">
                   <div className="flex items-center gap-3">
                     <div className="p-3 rounded-2xl bg-[#f15e1c] text-white shadow-xs group-hover:scale-105 transition-transform duration-300">
                       <Globe2 className="w-6 h-6 text-white" />
@@ -171,7 +171,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                   </p>
 
                   <div className="space-y-3 pt-2">
-                    <div className="p-4 rounded-2xl bg-white dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] space-y-1">
+                    <div className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-1">
                       <span className="text-xs font-bold text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-1.5">
                         <MapPin className="w-3.5 h-3.5 text-[#f15e1c]" /> India Headquarters
                       </span>
@@ -183,7 +183,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                       </p>
                     </div>
 
-                    <div className="p-4 rounded-2xl bg-white dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] space-y-1">
+                    <div className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-1">
                       <span className="text-xs font-bold text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-1.5">
                         <MapPin className="w-3.5 h-3.5 text-[#f15e1c]" /> UAE & Middle East Hub
                       </span>
@@ -221,7 +221,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             {values.map((v, i) => (
               <ScrollReveal key={i} delay={i * 0.1} direction="up">
                 <TiltCard maxTilt={5} scale={1.01} className="h-full group">
-                  <div className="h-full p-8 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-xl hover:border-[#f15e1c]/40 transition-all space-y-3">
+                  <div className="h-full p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:shadow-xl hover:border-[#f15e1c]/40 transition-all space-y-3">
                     <div className="p-3.5 rounded-2xl icon-box-hover w-fit shadow-xs">
                       {v.icon}
                     </div>
@@ -240,7 +240,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
         {/* 4. Bottom CTA */}
         <ScrollReveal direction="up">
-          <section className="rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#2C241E] text-center max-w-3xl mx-auto space-y-5 shadow-xl">
+          <section className="rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#1f1f1f] text-center max-w-3xl mx-auto space-y-5 shadow-xl">
             <h3 className="text-2xl sm:text-3xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
               Connect With Our Practice Leadership
             </h3>

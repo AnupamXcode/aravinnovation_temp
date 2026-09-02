@@ -49,16 +49,16 @@ export function SetupCall() {
       {/* Setup Call Interactive Modal */}
       <AnimatePresence>
         {isOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#101b17]/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#000000]/60 backdrop-blur-sm animate-in fade-in duration-200">
             <motion.div
               initial={{ opacity: 0, scale: 0.92, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.92, y: 15 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="relative w-full max-w-lg rounded-3xl bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-6 sm:p-8 space-y-6 text-left"
+              className="relative w-full max-w-lg rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-6 sm:p-8 space-y-6 text-left"
             >
               {/* Modal Header */}
-              <div className="flex items-start justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#253630] pb-4">
+              <div className="flex items-start justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-4">
                 <div className="space-y-1">
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f15e1c]/10 text-[#f15e1c] text-[11px] font-mono font-bold uppercase tracking-wider">
                     <Sparkles className="w-3.5 h-3.5" />
@@ -75,7 +75,7 @@ export function SetupCall() {
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="p-2 rounded-full text-[#4a5c55] dark:text-[#d3eee4] hover:bg-[#f7d7b0]/50 dark:hover:bg-[#253630] transition-colors cursor-pointer"
+                  className="p-2 rounded-full text-[#4a5c55] dark:text-[#d3eee4] hover:bg-[#f7d7b0]/50 dark:hover:bg-[#1a1a1a] transition-colors cursor-pointer"
                   aria-label="Close setup call window"
                 >
                   <X className="w-5 h-5" />
@@ -87,7 +87,7 @@ export function SetupCall() {
                 {/* 1. Direct Telephone Call */}
                 <a
                   href={UAE_PHONE_TEL}
-                  className="flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-[#1e2c27] border border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c] dark:hover:border-[#f15e1c] transition-all group cursor-pointer shadow-xs hover:shadow-md"
+                  className="flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-[#121212] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] dark:hover:border-[#f15e1c] transition-all group cursor-pointer shadow-xs hover:shadow-md"
                 >
                   <div className="flex items-center gap-3.5">
                     <div className="p-3 rounded-xl bg-[#f15e1c] text-white shrink-0 shadow-xs">
@@ -110,7 +110,7 @@ export function SetupCall() {
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-[#1e2c27] border border-[#f7d7b0] dark:border-[#253630] hover:border-[#2e936f] dark:hover:border-[#2e936f] transition-all group cursor-pointer shadow-xs hover:shadow-md"
+                  className="flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-[#121212] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#2e936f] dark:hover:border-[#2e936f] transition-all group cursor-pointer shadow-xs hover:shadow-md"
                 >
                   <div className="flex items-center gap-3.5">
                     <div className="p-3 rounded-xl bg-[#2e936f] text-white shrink-0 shadow-xs">
@@ -132,7 +132,7 @@ export function SetupCall() {
                 <button
                   type="button"
                   onClick={handleScheduleClick}
-                  className="w-full flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-[#1e2c27] border border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c] dark:hover:border-[#f15e1c] transition-all group cursor-pointer shadow-xs hover:shadow-md text-left"
+                  className="w-full flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-[#121212] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] dark:hover:border-[#f15e1c] transition-all group cursor-pointer shadow-xs hover:shadow-md text-left"
                 >
                   <div className="flex items-center gap-3.5">
                     <div className="p-3 rounded-xl bg-[#fab60a] text-white shrink-0 shadow-xs">
@@ -152,7 +152,7 @@ export function SetupCall() {
               </div>
 
               {/* Modal Footer SLA Trust Badge */}
-              <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#253630] flex items-center justify-between text-xs text-[#2e936f] font-medium">
+              <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] flex items-center justify-between text-xs text-[#2e936f] font-medium">
                 <span className="flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-[#2e936f]" /> Strict NDA &amp; Confidentiality
                 </span>

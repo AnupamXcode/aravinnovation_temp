@@ -153,7 +153,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
   );
 
   return (
-    <div className="pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+    <div className="pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
       <BreadcrumbSchema
         items={[
           { name: "Services", url: "/services" },
@@ -226,8 +226,8 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
             <div className="lg:col-span-4">
               <ScrollReveal direction="left" delay={0.2}>
                 <TiltCard maxTilt={5} className="group">
-                  <div className="rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] p-8 border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-6">
-                    <div className="p-4 rounded-2xl bg-white dark:bg-[#12100E] w-fit border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xs group-hover:bg-[#f15e1c] group-hover:text-white transition-all duration-300 [&>svg]:text-[#f15e1c] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
+                  <div className="rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] p-8 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-6">
+                    <div className="p-4 rounded-2xl bg-white dark:bg-[#000000] w-fit border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-2xs group-hover:bg-[#f15e1c] group-hover:text-white transition-all duration-300 [&>svg]:text-[#f15e1c] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
                       {iconMap[service.icon]}
                     </div>
                     <div>
@@ -239,7 +239,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
                       </p>
                     </div>
 
-                    <div className="space-y-2.5 pt-2 border-t border-[#EFE2D6] dark:border-[#2C241E] text-xs">
+                    <div className="space-y-2.5 pt-2 border-t border-[#EFE2D6] dark:border-[#1f1f1f] text-xs">
                       <div className="flex items-center gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
                         <CheckCircle2 className="w-4 h-4 text-[#f15e1c]" />
                         <span>Cross-Border Regulatory Compliance</span>
@@ -262,7 +262,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
 
         {/* 2. BUSINESS PROBLEM & PAIN POINTS */}
         <ScrollReveal direction="up">
-          <section className="rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm">
+          <section className="rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm">
             <div className="max-w-3xl space-y-4 mb-10">
               <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#f15e1c]">
                 <AlertTriangle className="w-4 h-4" />
@@ -280,7 +280,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
               {service.businessProblem.painPoints.map((point, idx) => (
                 <div
                   key={idx}
-                  className="flex items-start gap-3 p-4 rounded-2xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xs"
+                  className="flex items-start gap-3 p-4 rounded-2xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-2xs"
                 >
                   <span className="w-2 h-2 rounded-full bg-[#f15e1c] mt-2 shrink-0" />
                   <span className="text-sm text-[#3A2E27] dark:text-[#FAF5EE] font-medium leading-snug">
@@ -312,8 +312,8 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
             {service.ourSolution.keyPillars.map((pillar, idx) => (
               <ScrollReveal key={idx} delay={idx * 0.1} direction="up">
                 <TiltCard maxTilt={5} scale={1.01} className="h-full">
-                  <div className="h-full rounded-3xl bg-white dark:bg-[#171411] p-8 border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-xl hover:border-[#f15e1c]/40 transition-all duration-300 space-y-3">
-                    <div className="w-10 h-10 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] text-[#f15e1c] flex items-center justify-center font-mono font-bold border border-[#F4A97F]/30 dark:border-[#3D332B]">
+                  <div className="h-full rounded-3xl bg-white dark:bg-[#000000] p-8 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:shadow-xl hover:border-[#f15e1c]/40 transition-all duration-300 space-y-3">
+                    <div className="w-10 h-10 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#161616] text-[#f15e1c] flex items-center justify-center font-mono font-bold border border-[#F4A97F]/30 dark:border-[#262626]">
                       0{idx + 1}
                     </div>
                     <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
@@ -331,7 +331,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
 
         {/* 4. CAPABILITIES BREAKDOWN */}
         <ScrollReveal direction="up">
-          <section className="rounded-3xl bg-[#FFFDF9] dark:bg-[#171411] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm">
+          <section className="rounded-3xl bg-[#FFFDF9] dark:bg-[#000000] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm">
             <div className="max-w-2xl space-y-3 mb-10">
               <Badge variant="secondary" size="md">
                 Full Scope
@@ -347,14 +347,14 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {service.capabilities.map((cap, idx) => (
                 <div key={idx} className="space-y-4">
-                  <h3 className="text-base font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                  <h3 className="text-base font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] pb-2 border-b border-[#EFE2D6] dark:border-[#1f1f1f]">
                     {cap.category}
                   </h3>
                   <div className="grid grid-cols-1 gap-2.5">
                     {cap.items.map((item, itemIdx) => (
                       <div
                         key={itemIdx}
-                        className="flex items-center gap-3 p-3 rounded-2xl bg-[#FBF3EA]/60 dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE]"
+                        className="flex items-center gap-3 p-3 rounded-2xl bg-[#FBF3EA]/60 dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE]"
                       >
                         <CheckCircle2 className="w-4 h-4 text-[#f15e1c] shrink-0" />
                         <span>{item}</span>
@@ -387,7 +387,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
             {service.process.map((step, idx) => (
               <ScrollReveal key={step.step} delay={idx * 0.08} direction="up">
                 <TiltCard maxTilt={6} scale={1.02} className="h-full">
-                  <div className="h-full rounded-3xl bg-white dark:bg-[#171411] p-6 border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm flex flex-col justify-between">
+                  <div className="h-full rounded-3xl bg-white dark:bg-[#000000] p-6 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm flex flex-col justify-between">
                     <div>
                       <div className="text-xs font-mono font-bold text-[#f15e1c] mb-3">
                         STEP 0{step.step}
@@ -399,7 +399,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
                         {step.description}
                       </p>
                     </div>
-                    <div className="pt-3 border-t border-[#EFE2D6] dark:border-[#2C241E]">
+                    <div className="pt-3 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
                       <span className="text-[10px] uppercase font-bold text-[#7A6A5F] dark:text-[#B8ACA0] block">
                         Deliverable:
                       </span>
@@ -416,7 +416,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
 
         {/* 6. TECHNOLOGY STACK & EXPERTISE */}
         <ScrollReveal direction="up">
-          <section className="rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#2C241E]">
+          <section className="rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#1f1f1f]">
             <div className="max-w-2xl space-y-3 mb-10">
               <Badge variant="secondary" size="md">
                 Technology Ecosystem
@@ -439,7 +439,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
                     {tech.stack.map((item, itemIdx) => (
                       <span
                         key={itemIdx}
-                        className="px-3.5 py-2 rounded-xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] shadow-2xs"
+                        className="px-3.5 py-2 rounded-xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] shadow-2xs"
                       >
                         {item}
                       </span>
@@ -471,9 +471,9 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
             {service.engagementModels.map((model, idx) => (
               <ScrollReveal key={idx} delay={idx * 0.1} direction="up">
                 <TiltCard maxTilt={5} scale={1.01} className="h-full">
-                  <div className="h-full rounded-3xl bg-white dark:bg-[#171411] p-8 border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-xl hover:border-[#f15e1c]/40 transition-all flex flex-col justify-between">
+                  <div className="h-full rounded-3xl bg-white dark:bg-[#000000] p-8 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:shadow-xl hover:border-[#f15e1c]/40 transition-all flex flex-col justify-between">
                     <div className="space-y-4">
-                      <div className="p-3 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] w-fit text-[#f15e1c] border border-[#F4A97F]/30 dark:border-[#3D332B]">
+                      <div className="p-3 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#161616] w-fit text-[#f15e1c] border border-[#F4A97F]/30 dark:border-[#262626]">
                         <Briefcase className="w-5 h-5" />
                       </div>
                       <h3 className="text-xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
@@ -482,13 +482,13 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
                       <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
                         {model.description}
                       </p>
-                      <div className="p-3 rounded-xl bg-[#FBF3EA] dark:bg-[#1E1915] text-xs text-[#3A2E27] dark:text-[#FAF5EE] font-medium border border-[#EFE2D6] dark:border-[#2C241E]">
+                      <div className="p-3 rounded-xl bg-[#FBF3EA] dark:bg-[#0a0a0a] text-xs text-[#3A2E27] dark:text-[#FAF5EE] font-medium border border-[#EFE2D6] dark:border-[#1f1f1f]">
                         <span className="font-bold text-[#f15e1c]">Best for: </span>
                         {model.bestFor}
                       </div>
                     </div>
 
-                    <div className="mt-6 pt-4 border-t border-[#EFE2D6] dark:border-[#2C241E]">
+                    <div className="mt-6 pt-4 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
                       <a href="#inquire">
                         <Button variant="primary" size="md" className="w-full justify-center">
                           {model.ctaText || "Inquire About Model"}
@@ -559,7 +559,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
                 <p className="text-base text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed mt-3">
                   Connect with our dedicated practice lead. We will review your current technical environment, define key milestones, and propose an actionable engagement plan.
                 </p>
-                <div className="p-5 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] text-xs text-[#7A6A5F] dark:text-[#B8ACA0] space-y-2 mt-6">
+                <div className="p-5 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] text-xs text-[#7A6A5F] dark:text-[#B8ACA0] space-y-2 mt-6">
                   <div className="font-bold text-[#3A2E27] dark:text-[#FAF5EE]">What to Expect:</div>
                   <p>&bull; 30-minute scoping discussion with a senior technical consultant</p>
                   <p>&bull; Preliminary capability fit & milestone estimation within 48h</p>

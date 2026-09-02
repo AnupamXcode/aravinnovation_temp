@@ -33,7 +33,7 @@ export const metadata = {
 
 export default function SolutionsPage() {
   return (
-    <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+    <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
       <BreadcrumbSchema items={[{ name: "Industry Solutions", url: "/solutions" }]} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Header */}
@@ -65,13 +65,13 @@ export default function SolutionsPage() {
           {industriesData.map((ind, idx) => (
             <ScrollReveal key={ind.slug} delay={idx * 0.08} direction="up">
               <TiltCard maxTilt={6} scale={1.02} className="h-full group">
-                <div className="h-full rounded-3xl bg-white dark:bg-[#171411] p-8 border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-2xl hover:border-[#f15e1c]/40 transition-all duration-300 flex flex-col justify-between">
+                <div className="h-full rounded-3xl bg-white dark:bg-[#000000] p-8 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:shadow-2xl hover:border-[#f15e1c]/40 transition-all duration-300 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <div className="p-3 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] text-[#f15e1c] border border-[#F4A97F]/30 dark:border-[#3D332B] group-hover:bg-[#f15e1c] group-hover:text-white transition-all duration-300 shadow-xs [&>svg]:text-[#f15e1c] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
+                      <div className="p-3 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#161616] text-[#f15e1c] border border-[#F4A97F]/30 dark:border-[#262626] group-hover:bg-[#f15e1c] group-hover:text-white transition-all duration-300 shadow-xs [&>svg]:text-[#f15e1c] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
                         <Building2 className="w-5 h-5 transition-colors duration-300" />
                       </div>
-                      <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-[#FBF3EA] dark:bg-[#1E1915] text-[#f15e1c] font-semibold border border-[#EFE2D6] dark:border-[#2C241E]">
+                      <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-[#FBF3EA] dark:bg-[#0a0a0a] text-[#f15e1c] font-semibold border border-[#EFE2D6] dark:border-[#1f1f1f]">
                         Enterprise Sector
                       </span>
                     </div>
@@ -83,7 +83,7 @@ export default function SolutionsPage() {
                       {ind.description}
                     </p>
 
-                    <div className="space-y-2 pt-4 border-t border-[#EFE2D6] dark:border-[#2C241E]">
+                    <div className="space-y-2 pt-4 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
                       <span className="text-[11px] font-bold uppercase tracking-wider text-[#3A2E27] dark:text-[#FAF5EE] block mb-2">
                         Core Capabilities:
                       </span>
@@ -96,7 +96,7 @@ export default function SolutionsPage() {
                     </div>
                   </div>
 
-                  <div className="mt-8 pt-4 border-t border-[#EFE2D6] dark:border-[#2C241E]">
+                  <div className="mt-8 pt-4 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
                     <Link href="/contact">
                       <Button variant="outline" size="sm" className="w-full" rightIcon={<ArrowRight className="w-3.5 h-3.5" />}>
                         Request Industry Scope

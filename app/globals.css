@@ -43,7 +43,7 @@
     --color-green-700: #1c5e48;
     --color-green-800: #184b3b;
     --color-green-900: #1b2823; /* Derived Primary Dark Text (Light Mode) */
-    --color-green-950: #101b17; /* Derived Base Dark Background (Dark Mode) */
+    --color-green-950: #000000; /* Derived Base Dark Background (Dark Mode) */
 
     /* Tonal Ramps - Light Peach (#f7d7b0) */
     --color-peach-50: #fefaf5;
@@ -97,14 +97,14 @@
   }
 
   .dark {
-    /* Dark Mode Tokens Derived from Palette Green-950 (#101b17) Scale */
-    --bg-primary: #101b17;
-    --bg-secondary: #172420;
-    --bg-cream: #1e2c27;
-    --bg-peach: #253630;
-    --bg-card: #172420;
-    --bg-card-hover: #1e2c27;
-    --bg-elevated: #22312b;
+    /* Dark Mode Tokens Derived from Palette Green-950 (#000000) Scale */
+    --bg-primary: #000000;
+    --bg-secondary: #0a0a0a;
+    --bg-cream: #121212;
+    --bg-peach: #1a1a1a;
+    --bg-card: #0a0a0a;
+    --bg-card-hover: #121212;
+    --bg-elevated: #161616;
 
     --accent-primary: #f15e1c;
     --accent-primary-hover: #f57b44;
@@ -117,11 +117,11 @@
     --text-primary: #ffffff;
     --text-secondary: #d3eee4;
     --text-muted: #95baad;
-    --text-inverted: #101b17;
+    --text-inverted: #000000;
 
-    --border-primary: #253630;
-    --border-secondary: #31473f;
-    --border-subtle: #1e2c27;
+    --border-primary: #1a1a1a;
+    --border-secondary: #262626;
+    --border-subtle: #121212;
 
     --shadow-warm-xs: 0 2px 10px rgba(16, 27, 23, 0.4);
     --shadow-warm-md: 0 12px 30px -4px rgba(16, 27, 23, 0.58);
@@ -183,9 +183,9 @@ body {
 }
 
 .dark .icon-box-hover {
-  background-color: #22312b;
+  background-color: #161616;
   color: #f15e1c;
-  border-color: #31473f;
+  border-color: #262626;
 }
 
 .dark .icon-box-hover svg {
@@ -210,7 +210,7 @@ body {
 /* Badges in Dark Mode - clean, sleek, high contrast */
 .dark .badge-secondary,
 .dark [data-badge="secondary"] {
-  background-color: #22312b !important;
+  background-color: #161616 !important;
   color: #ffffff !important;
   border-color: rgba(241, 94, 28, 0.4) !important;
 }

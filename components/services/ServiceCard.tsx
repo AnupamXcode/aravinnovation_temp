@@ -46,7 +46,7 @@ export function ServiceCard({
     >
       <div
         className={cn(
-          "relative h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-[#172420] p-7 sm:p-8 border border-[#f7d7b0] dark:border-[#253630] shadow-md hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-[#f15e1c]/15 hover:border-[#f15e1c] dark:hover:border-[#f15e1c] transition-all duration-300"
+          "relative h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-[#0a0a0a] p-7 sm:p-8 border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-[#f15e1c]/15 hover:border-[#f15e1c] dark:hover:border-[#f15e1c] transition-all duration-300"
         )}
       >
         <div>
@@ -68,7 +68,7 @@ export function ServiceCard({
           </p>
 
           {/* Core Capabilities Snippet */}
-          <div className="mt-5 pt-4 border-t border-[#f7d7b0] dark:border-[#253630] space-y-1.5">
+          <div className="mt-5 pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] space-y-1.5">
             <span className="text-[11px] font-bold uppercase tracking-wider text-[#4a5c55] dark:text-[#d3eee4] block">
               Key Capabilities
             </span>
@@ -76,7 +76,7 @@ export function ServiceCard({
               {service.capabilities[0]?.items.slice(0, 3).map((item, i) => (
                 <span
                   key={i}
-                  className="text-[11px] px-2.5 py-1 rounded-lg bg-[#fefaf5] dark:bg-[#1e2c27] text-[#1b2823] dark:text-[#ffffff] border border-[#f7d7b0] dark:border-[#253630]"
+                  className="text-[11px] px-2.5 py-1 rounded-lg bg-[#fefaf5] dark:bg-[#121212] text-[#1b2823] dark:text-[#ffffff] border border-[#f7d7b0] dark:border-[#1a1a1a]"
                 >
                   {item}
                 </span>
@@ -85,7 +85,7 @@ export function ServiceCard({
           </div>
         </div>
 
-        <div className="mt-6 pt-4 border-t border-[#f7d7b0]/60 dark:border-[#253630] relative z-20 flex flex-wrap xs:flex-nowrap items-center justify-between gap-3">
+        <div className="mt-6 pt-4 border-t border-[#f7d7b0]/60 dark:border-[#1a1a1a] relative z-20 flex flex-wrap xs:flex-nowrap items-center justify-between gap-3">
           <Link
             href={`/services/${service.slug}`}
             onClick={(e) => e.stopPropagation()}

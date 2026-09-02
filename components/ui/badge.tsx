@@ -16,11 +16,11 @@ export function Badge({
   const variantStyles = {
     primary: "bg-[#f15e1c] text-white border-transparent shadow-xs",
     secondary:
-      "bg-[#f7d7b0] text-[#1b2823] border-[#f15e1c]/30 dark:bg-[#253630] dark:text-[#ffffff] dark:border-[#f15e1c]/40",
+      "bg-[#f7d7b0] text-[#1b2823] border-[#f15e1c]/30 dark:bg-[#1a1a1a] dark:text-[#ffffff] dark:border-[#f15e1c]/40",
     outline:
       "border border-[#f15e1c]/40 text-[#f15e1c] bg-transparent dark:border-[#f15e1c]/60 dark:text-[#f15e1c]",
     subtle:
-      "bg-[#fefaf5] text-[#4a5c55] border-[#f7d7b0] dark:bg-[#172420] dark:text-[#d3eee4] dark:border-[#253630]",
+      "bg-[#fefaf5] text-[#4a5c55] border-[#f7d7b0] dark:bg-[#0a0a0a] dark:text-[#d3eee4] dark:border-[#1a1a1a]",
   };
 
   const sizeStyles = {

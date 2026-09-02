@@ -88,7 +88,7 @@ export default async function InsightPostDetailPage({
   const canonicalUrl = `https://aravinnovations.com/insights/${post.slug}`;
 
   return (
-    <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+    <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
       <BreadcrumbSchema
         items={[
           { name: "Insights", url: "/insights" },
@@ -145,9 +145,9 @@ export default async function InsightPostDetailPage({
               </h1>
 
               {/* Author Attribution */}
-              <div className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] flex items-center justify-between">
+              <div className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#FCE3D3] dark:bg-[#261F1A] border border-[#F4A97F]/30 dark:border-[#3D332B] flex items-center justify-center text-[#f15e1c]">
+                  <div className="w-10 h-10 rounded-xl bg-[#FCE3D3] dark:bg-[#161616] border border-[#F4A97F]/30 dark:border-[#262626] flex items-center justify-center text-[#f15e1c]">
                     <User2 className="w-5 h-5" />
                   </div>
                   <div>
@@ -161,7 +161,7 @@ export default async function InsightPostDetailPage({
                 </div>
 
                 <div className="hidden sm:flex items-center gap-2">
-                  <span className="text-[10px] font-mono uppercase text-[#7A6A5F] dark:text-[#B8ACA0] bg-white dark:bg-[#12100E] px-2.5 py-1 rounded-full border border-[#EFE2D6] dark:border-[#2C241E]">
+                  <span className="text-[10px] font-mono uppercase text-[#7A6A5F] dark:text-[#B8ACA0] bg-white dark:bg-[#000000] px-2.5 py-1 rounded-full border border-[#EFE2D6] dark:border-[#1f1f1f]">
                     Verified Technical Guide
                   </span>
                 </div>
@@ -171,7 +171,7 @@ export default async function InsightPostDetailPage({
 
           {post.featuredImageUrl && (
             <ScrollReveal direction="up" delay={0.12}>
-              <div className="relative w-full h-64 sm:h-[480px] lg:h-[540px] rounded-3xl overflow-hidden border border-[#EFE2D6] dark:border-[#2C241E] shadow-md my-6">
+              <div className="relative w-full h-64 sm:h-[480px] lg:h-[540px] rounded-3xl overflow-hidden border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md my-6">
                 <img
                   src={post.featuredImageUrl}
                   alt={post.title}
@@ -184,7 +184,7 @@ export default async function InsightPostDetailPage({
 
         {/* Key Takeaways Callout Box */}
         <ScrollReveal direction="up" delay={0.15}>
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#171411] border-2 border-[#f15e1c]/30 dark:border-[#f15e1c]/40 shadow-md space-y-4">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border-2 border-[#f15e1c]/30 dark:border-[#f15e1c]/40 shadow-md space-y-4">
             <div className="flex items-center gap-2 text-[#f15e1c]">
               <Sparkles className="w-5 h-5" />
               <span className="text-xs font-bold uppercase tracking-wider">
@@ -220,7 +220,7 @@ export default async function InsightPostDetailPage({
                 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:space-y-2 [&_ol]:my-4
                 [&_li]:pl-1
                 [&_blockquote]:border-l-4 [&_blockquote]:border-[#f15e1c] [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:bg-[#FBF3EA] [&_blockquote]:dark:bg-[#1A1613] [&_blockquote]:p-4 [&_blockquote]:rounded-r-2xl [&_blockquote]:my-6
-                [&_img]:max-w-full [&_img]:h-auto [&_img]:rounded-2xl [&_img]:my-6 [&_img]:border [&_img]:border-[#EFE2D6] [&_img]:dark:border-[#2C241E] [&_img]:shadow-sm
+                [&_img]:max-w-full [&_img]:h-auto [&_img]:rounded-2xl [&_img]:my-6 [&_img]:border [&_img]:border-[#EFE2D6] [&_img]:dark:border-[#1f1f1f] [&_img]:shadow-sm
                 [&_figure]:my-6 [&_figure]:space-y-2
                 [&_figcaption]:text-xs [&_figcaption]:text-center [&_figcaption]:text-[#7A6A5F] [&_figcaption]:dark:text-[#B8ACA0] [&_figcaption]:italic"
               dangerouslySetInnerHTML={{ __html: post.contentHtml }}
@@ -246,14 +246,14 @@ export default async function InsightPostDetailPage({
         )}
 
         {/* Tags */}
-        <div className="pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] flex flex-wrap items-center gap-2">
+        <div className="pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f] flex flex-wrap items-center gap-2">
           <span className="text-xs font-bold text-[#7A6A5F] dark:text-[#B8ACA0] mr-2">
             Related Topics:
           </span>
           {post.tags.map((tag) => (
             <span
               key={tag}
-              className="text-xs px-3 py-1 rounded-full bg-[#FBF3EA] dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#2C241E]"
+              className="text-xs px-3 py-1 rounded-full bg-[#FBF3EA] dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#1f1f1f]"
             >
               #{tag}
             </span>
@@ -262,7 +262,7 @@ export default async function InsightPostDetailPage({
 
         {/* Topic-Relevant Contextual CTA */}
         <ScrollReveal direction="up">
-          <div className="p-8 sm:p-10 rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] space-y-4 shadow-xl">
+          <div className="p-8 sm:p-10 rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-4 shadow-xl">
             {post.cta.badge && (
               <Badge variant="primary" size="sm">
                 {post.cta.badge}
@@ -301,14 +301,14 @@ export default async function InsightPostDetailPage({
 
         {/* Related Posts Grid */}
         {relatedPosts.length > 0 && (
-          <div className="pt-10 border-t border-[#EFE2D6] dark:border-[#2C241E] space-y-6">
+          <div className="pt-10 border-t border-[#EFE2D6] dark:border-[#1f1f1f] space-y-6">
             <h3 className="text-xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
               Recommended Perspectives
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {relatedPosts.map((rel) => (
                 <TiltCard key={rel.slug} maxTilt={4} scale={1.01}>
-                  <div className="p-6 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm space-y-3 flex flex-col justify-between h-full group">
+                  <div className="p-6 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm space-y-3 flex flex-col justify-between h-full group">
                     <div className="space-y-2">
                       <Badge variant="secondary" size="sm">
                         {rel.category}
@@ -322,7 +322,7 @@ export default async function InsightPostDetailPage({
                         {rel.summary}
                       </p>
                     </div>
-                    <div className="pt-3 border-t border-[#EFE2D6] dark:border-[#2C241E]">
+                    <div className="pt-3 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
                       <Link
                         href={`/insights/${rel.slug}`}
                         className="text-xs font-bold text-[#f15e1c] inline-flex items-center gap-1"

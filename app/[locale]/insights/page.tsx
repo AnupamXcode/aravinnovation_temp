@@ -40,7 +40,7 @@ export default async function InsightsPage() {
   const categories = await getBlogCategories();
 
   return (
-    <div className="w-full pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+    <div className="w-full pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
       <BreadcrumbSchema items={[{ name: "Insights", url: "/insights" }]} />
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 space-y-12">
         {/* Header */}
@@ -73,7 +73,7 @@ export default async function InsightsPage() {
 
         {/* Topic Discussion CTA */}
         <ScrollReveal direction="up">
-          <div className="rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] p-8 sm:p-12 text-center max-w-3xl mx-auto space-y-4 shadow-xl">
+          <div className="rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] p-8 sm:p-12 text-center max-w-3xl mx-auto space-y-4 shadow-xl">
             <h3 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
               Need Architectural Guidance on Any of These Topics?
             </h3>

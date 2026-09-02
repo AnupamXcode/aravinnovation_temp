@@ -101,9 +101,9 @@ export function AdminSidebar({
   ];
 
   const sidebarContent = (
-    <div className="flex flex-col h-full bg-[#FFFDF9] dark:bg-[#161310] border-r border-[#EFE2D6] dark:border-[#2C241E] p-4 sm:p-6 w-64 lg:w-72 shrink-0">
+    <div className="flex flex-col h-full bg-[#FFFDF9] dark:bg-[#161310] border-r border-[#EFE2D6] dark:border-[#1f1f1f] p-4 sm:p-6 w-64 lg:w-72 shrink-0">
       {/* Brand Header */}
-      <div className="flex items-center justify-between pb-6 border-b border-[#EFE2D6] dark:border-[#2C241E] mb-6">
+      <div className="flex items-center justify-between pb-6 border-b border-[#EFE2D6] dark:border-[#1f1f1f] mb-6">
         <BrandLogo />
         <button
           type="button"
@@ -154,7 +154,7 @@ export function AdminSidebar({
       </div>
 
       {/* Bottom Logout Action */}
-      <div className="pt-4 border-t border-[#EFE2D6] dark:border-[#2C241E] mt-4">
+      <div className="pt-4 border-t border-[#EFE2D6] dark:border-[#1f1f1f] mt-4">
         <button
           type="button"
           onClick={onLogout}
@@ -175,12 +175,12 @@ export function AdminSidebar({
       </aside>
 
       {/* Mobile Bar & Drawer Overlay */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-[#FFFDF9] dark:bg-[#161310] border-b border-[#EFE2D6] dark:border-[#2C241E] px-4 py-3 flex items-center justify-between">
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-[#FFFDF9] dark:bg-[#161310] border-b border-[#EFE2D6] dark:border-[#1f1f1f] px-4 py-3 flex items-center justify-between">
         <BrandLogo />
         <button
           type="button"
           onClick={() => setMobileDrawerOpen(!mobileDrawerOpen)}
-          className="p-2 rounded-xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] text-[#3A2E27] dark:text-[#FAF5EE]"
+          className="p-2 rounded-xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] text-[#3A2E27] dark:text-[#FAF5EE]"
         >
           <Menu className="w-5 h-5" />
         </button>

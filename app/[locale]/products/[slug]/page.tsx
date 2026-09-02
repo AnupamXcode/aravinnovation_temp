@@ -79,7 +79,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const isLive = product.status === "live";
 
   return (
-    <div className="pt-28 pb-20 bg-[#fefaf5] dark:bg-[#172420] transition-colors duration-300 min-h-screen">
+    <div className="pt-28 pb-20 bg-[#fefaf5] dark:bg-[#0a0a0a] transition-colors duration-300 min-h-screen">
       <BreadcrumbSchema
         items={[
           { name: "Products", url: "/products" },
@@ -130,7 +130,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         </section>
 
         {/* SECTION 1: OVERVIEW & POSITIONING */}
-        <section className="space-y-4 border-t border-[#f7d7b0] dark:border-[#253630] pt-10">
+        <section className="space-y-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] pt-10">
           <ScrollReveal direction="up">
             <h2 className="text-xs font-bold font-mono uppercase tracking-wider text-[#f15e1c]">
               Product Overview &amp; Positioning
@@ -140,7 +140,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             </p>
 
             {product.positioning && (
-              <div className="p-5 rounded-2xl bg-white dark:bg-[#1e2c27] border border-[#f7d7b0] dark:border-[#253630] text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed mt-4">
+              <div className="p-5 rounded-2xl bg-white dark:bg-[#121212] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed mt-4">
                 <span className="font-bold text-[#f15e1c] block mb-1 font-mono uppercase tracking-wide">
                   Strategic Positioning:
                 </span>
@@ -154,7 +154,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               {product.problemSolved.points.map((point, idx) => (
                 <div
                   key={idx}
-                  className="p-4 rounded-2xl bg-white dark:bg-[#1e2c27] border border-[#f7d7b0] dark:border-[#253630] text-xs text-[#4a5c55] dark:text-[#d3eee4] space-y-1"
+                  className="p-4 rounded-2xl bg-white dark:bg-[#121212] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs text-[#4a5c55] dark:text-[#d3eee4] space-y-1"
                 >
                   <span className="font-mono font-bold text-[#f15e1c]">0{idx + 1}.</span>
                   <p className="leading-snug">{point}</p>
@@ -165,7 +165,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         </section>
 
         {/* SECTION 2: HOW IT WORKS / FREEMIUM FLOW */}
-        <section className="space-y-6 border-t border-[#f7d7b0] dark:border-[#253630] pt-10">
+        <section className="space-y-6 border-t border-[#f7d7b0] dark:border-[#1a1a1a] pt-10">
           <ScrollReveal direction="up">
             <h2 className="text-xs font-bold font-mono uppercase tracking-wider text-[#f15e1c]">
               User Consultation Flow &amp; Model
@@ -180,7 +180,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {product.howItWorks.map((stepItem, idx) => (
               <ScrollReveal key={idx} delay={idx * 0.1} direction="up">
-                <div className="p-5 rounded-2xl bg-white dark:bg-[#1e2c27] border border-[#f7d7b0] dark:border-[#253630] space-y-2 h-full">
+                <div className="p-5 rounded-2xl bg-white dark:bg-[#121212] border border-[#f7d7b0] dark:border-[#1a1a1a] space-y-2 h-full">
                   <div className="w-8 h-8 rounded-full bg-[#f15e1c]/10 text-[#f15e1c] font-mono font-bold text-xs flex items-center justify-center border border-[#f15e1c]/30">
                     Step 0{stepItem.step}
                   </div>
@@ -197,7 +197,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         </section>
 
         {/* SECTION 3: KEY CAPABILITIES */}
-        <section className="space-y-6 border-t border-[#f7d7b0] dark:border-[#253630] pt-10">
+        <section className="space-y-6 border-t border-[#f7d7b0] dark:border-[#1a1a1a] pt-10">
           <ScrollReveal direction="up">
             <h2 className="text-xs font-bold font-mono uppercase tracking-wider text-[#f15e1c]">
               Key Capabilities
@@ -207,7 +207,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
             {product.features.map((feature, idx) => (
               <ScrollReveal key={idx} delay={idx * 0.04} direction="up">
-                <div className="p-4 rounded-2xl bg-white dark:bg-[#1e2c27] border border-[#f7d7b0] dark:border-[#253630] flex items-center gap-2.5 hover:border-[#f15e1c]/50 transition-colors">
+                <div className="p-4 rounded-2xl bg-white dark:bg-[#121212] border border-[#f7d7b0] dark:border-[#1a1a1a] flex items-center gap-2.5 hover:border-[#f15e1c]/50 transition-colors">
                   <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
                   <span className="text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]">
                     {feature}
@@ -220,7 +220,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
         {/* SECTION 4: DOWNLOADABLE REPORTS (ASTROBEAMS) */}
         {product.reports && product.reports.length > 0 && (
-          <section className="space-y-4 border-t border-[#f7d7b0] dark:border-[#253630] pt-10">
+          <section className="space-y-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] pt-10">
             <ScrollReveal direction="up">
               <h2 className="text-xs font-bold font-mono uppercase tracking-wider text-[#f15e1c]">
                 Downloadable Astrology &amp; Horoscope Reports
@@ -234,7 +234,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               {product.reports.map((reportItem, idx) => (
                 <div
                   key={idx}
-                  className="px-3.5 py-2 rounded-xl bg-white dark:bg-[#1e2c27] border border-[#f7d7b0] dark:border-[#253630] text-xs font-mono font-bold text-[#1b2823] dark:text-[#ffffff] shadow-xs flex items-center gap-2"
+                  className="px-3.5 py-2 rounded-xl bg-white dark:bg-[#121212] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#1b2823] dark:text-[#ffffff] shadow-xs flex items-center gap-2"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-[#f15e1c]" />
                   <span>{reportItem}</span>
@@ -245,9 +245,9 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         )}
 
         {/* SECTION 5: GET STARTED CTA */}
-        <section className="border-t border-[#f7d7b0] dark:border-[#253630] pt-10">
+        <section className="border-t border-[#f7d7b0] dark:border-[#1a1a1a] pt-10">
           <ScrollReveal direction="up">
-            <div className="p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#1e2c27] border border-[#f7d7b0] dark:border-[#253630] text-center space-y-6 shadow-lg">
+            <div className="p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#121212] border border-[#f7d7b0] dark:border-[#1a1a1a] text-center space-y-6 shadow-lg">
               <div className="space-y-2">
                 <h3 className="text-2xl sm:text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                   {isLive ? `Explore ${product.name}` : `Get Early Access to ${product.name}`}

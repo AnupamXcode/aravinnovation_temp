@@ -17,10 +17,10 @@ export function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
       className="h-full cursor-pointer"
       onClick={() => router.push(`/case-studies/${caseStudy.slug}`)}
     >
-      <div className="h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-[#171411] p-7 sm:p-8 border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-2xl hover:shadow-[#f15e1c]/10 hover:border-[#f15e1c]/40 dark:hover:border-[#f15e1c]/40 transition-all duration-300 group">
+      <div className="h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-[#000000] p-7 sm:p-8 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:shadow-2xl hover:shadow-[#f15e1c]/10 hover:border-[#f15e1c]/40 dark:hover:border-[#f15e1c]/40 transition-all duration-300 group">
         <div className="space-y-5">
           {/* Header Tags */}
-          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#EFE2D6] dark:border-[#2C241E] pb-4">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-4">
             <Badge variant="secondary" size="sm">
               {caseStudy.serviceCategory}
             </Badge>
@@ -48,7 +48,7 @@ export function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
 
           {/* Visual Metric Highlight Callout */}
           {caseStudy.results && caseStudy.results.length > 0 && (
-            <div className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#1C1814] border border-[#EFE2D6] dark:border-[#2C241E] flex items-center justify-between">
+            <div className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#1C1814] border border-[#EFE2D6] dark:border-[#1f1f1f] flex items-center justify-between">
               <div>
                 <span className="text-2xl font-black font-mono text-[#f15e1c] block">
                   {caseStudy.results[0].metric}
@@ -63,7 +63,7 @@ export function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
         </div>
 
         {/* Footer CTA */}
-        <div className="mt-6 pt-5 border-t border-[#EFE2D6] dark:border-[#2C241E] flex items-center justify-between relative z-20">
+        <div className="mt-6 pt-5 border-t border-[#EFE2D6] dark:border-[#1f1f1f] flex items-center justify-between relative z-20">
           <span className="text-xs font-mono text-[#7A6A5F] dark:text-[#B8ACA0]">
             {caseStudy.client}
           </span>

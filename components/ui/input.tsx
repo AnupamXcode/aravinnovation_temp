@@ -28,10 +28,10 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           required={required}
           className={cn(
-            "w-full rounded-lg border bg-white dark:bg-[#172420] px-3.5 py-2.5 text-sm text-[#1b2823] dark:text-[#ffffff] placeholder:text-[#4a5c55]/60 transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#f15e1c] focus:border-transparent disabled:opacity-50 disabled:bg-[#f7d7b0]/20",
+            "w-full rounded-lg border bg-white dark:bg-[#0a0a0a] px-3.5 py-2.5 text-sm text-[#1b2823] dark:text-[#ffffff] placeholder:text-[#4a5c55]/60 transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#f15e1c] focus:border-transparent disabled:opacity-50 disabled:bg-[#f7d7b0]/20",
             error
               ? "border-[#f15e1c] focus:ring-[#f15e1c]"
-              : "border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c]/60",
+              : "border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/60",
             className
           )}
           {...props}

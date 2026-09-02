@@ -19,7 +19,7 @@ import {
 
 export function Hero() {
   return (
-    <section className="relative pt-4 sm:pt-10 md:pt-16 pb-8 md:pb-12 overflow-hidden bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300 md:min-h-[75vh] flex items-center">
+    <section className="relative pt-4 sm:pt-10 md:pt-16 pb-8 md:pb-12 overflow-hidden bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300 md:min-h-[75vh] flex items-center">
       {/* Soft Ambient Background 3D Glows */}
       <ParallaxContainer speed={-15} className="absolute inset-0 pointer-events-none -z-10">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] md:w-[950px] md:h-[950px] bg-radial from-[#FCE3D3]/70 via-[#FBF3EA]/30 to-transparent dark:from-[#f15e1c]/15 dark:via-[#1A1613]/40 dark:to-transparent rounded-full blur-3xl" />
@@ -32,7 +32,7 @@ export function Hero() {
           <div className="lg:col-span-6 space-y-7 text-center lg:text-left">
             <ScrollTextFlip>
               {/* Single Eyebrow Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f7d7b0]/40 dark:bg-[#1e2c27] border border-[#f7d7b0] dark:border-[#253630] text-xs font-semibold shadow-xs">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f7d7b0]/40 dark:bg-[#121212] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-semibold shadow-xs">
                 <span className="w-2 h-2 rounded-full bg-[#f15e1c] animate-pulse" />
                 <span className="font-mono text-[11px] uppercase tracking-widest text-[#f15e1c]">
                   ENTERPRISE TECHNOLOGY &bull; STRATEGY &bull; DIGITAL GROWTH
@@ -74,7 +74,7 @@ export function Hero() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm border-[#EFE2D6] dark:border-[#2C241E] text-[#f15e1c] hover:border-[#f15e1c]"
+                    className="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm border-[#EFE2D6] dark:border-[#1f1f1f] text-[#f15e1c] hover:border-[#f15e1c]"
                   >
                     Explore Practices
                   </Button>
@@ -84,7 +84,7 @@ export function Hero() {
 
             <ScrollReveal direction="up" delay={0.45}>
               {/* Trust Badges */}
-              <div className="pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] flex flex-wrap items-center justify-center lg:justify-start gap-8 text-left">
+              <div className="pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f] flex flex-wrap items-center justify-center lg:justify-start gap-8 text-left">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4.5 h-4.5 text-[#f15e1c] shrink-0" />
                   <span className="text-xs sm:text-sm font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">

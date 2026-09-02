@@ -27,7 +27,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const visibleFeatures = showAllCapabilities ? product.features : product.features.slice(0, 4);
 
   return (
-    <div className="group relative h-full rounded-3xl bg-white dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] p-7 sm:p-9 shadow-md hover:shadow-2xl hover:shadow-[#f15e1c]/15 hover:border-[#f15e1c] dark:hover:border-[#f15e1c] hover:bg-[#fefaf5] dark:hover:bg-[#1e2c27] transition-all duration-300 sm:hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden">
+    <div className="group relative h-full rounded-3xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] p-7 sm:p-9 shadow-md hover:shadow-2xl hover:shadow-[#f15e1c]/15 hover:border-[#f15e1c] dark:hover:border-[#f15e1c] hover:bg-[#fefaf5] dark:hover:bg-[#121212] transition-all duration-300 sm:hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden">
       {/* Top Accent Line */}
       <div
         className="absolute top-0 inset-x-0 h-1.5 transition-opacity opacity-80 group-hover:opacity-100"
@@ -37,7 +37,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <div className="space-y-6">
         {/* Top Row: Icon & Status Badge */}
         <div className="flex items-center justify-between">
-          <div className="p-3.5 rounded-2xl bg-[#f7d7b0]/30 dark:bg-[#253630] border border-[#f7d7b0] dark:border-[#253630] transition-transform duration-300 group-hover:scale-105">
+          <div className="p-3.5 rounded-2xl bg-[#f7d7b0]/30 dark:bg-[#1a1a1a] border border-[#f7d7b0] dark:border-[#1a1a1a] transition-transform duration-300 group-hover:scale-105">
             {icon}
           </div>
 
@@ -66,7 +66,7 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
 
         {/* Capabilities List with Compact View Details toggle */}
-        <div className="space-y-3 pt-4 border-t border-[#f7d7b0] dark:border-[#253630] text-left">
+        <div className="space-y-3 pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] text-left">
           <div className="flex items-center justify-between">
             <span className="text-xs sm:text-sm font-bold font-mono uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
               Key Capabilities
@@ -95,7 +95,7 @@ export function ProductCard({ product }: ProductCardProps) {
       </div>
 
       {/* Footer & Actions */}
-      <div className="mt-8 pt-5 border-t border-[#f7d7b0] dark:border-[#253630] flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="mt-8 pt-5 border-t border-[#f7d7b0] dark:border-[#1a1a1a] flex flex-col sm:flex-row items-center justify-between gap-4">
         <Link
           href={`/products/${product.slug}`}
           className="text-xs font-bold text-[#4a5c55] dark:text-[#d3eee4] hover:text-[#f15e1c] transition-colors"

@@ -90,7 +90,7 @@ export const Button3D = React.forwardRef<HTMLButtonElement, Button3DProps>(
       outline:
         "border-2 border-[#f15e1c] text-[#f15e1c] hover:bg-[#f15e1c] hover:text-white bg-transparent shadow-xs hover:shadow-md",
       ghost:
-        "text-[#1b2823] dark:text-[#ffffff] hover:bg-[#f7d7b0]/40 dark:hover:bg-[#253630] hover:text-[#f15e1c] bg-transparent",
+        "text-[#1b2823] dark:text-[#ffffff] hover:bg-[#f7d7b0]/40 dark:hover:bg-[#1a1a1a] hover:text-[#f15e1c] bg-transparent",
       link:
         "text-[#f15e1c] underline-offset-4 hover:underline p-0 h-auto font-semibold bg-transparent shadow-none border-none",
     };
@@ -134,7 +134,7 @@ export const Button3D = React.forwardRef<HTMLButtonElement, Button3DProps>(
         className={cn(
           "relative inline-flex items-center justify-center font-medium rounded-full select-none tracking-tight",
           "transition-colors duration-200 ease-out group",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f15e1c] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[#101b17]",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f15e1c] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[#000000]",
           variant !== "link" && sizeMap[size],
           variantMap[variant],
           !isInteractive ? "opacity-50 cursor-not-allowed" : "cursor-pointer",

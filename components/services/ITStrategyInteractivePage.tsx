@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   motion,
   AnimatePresence,
@@ -30,12 +31,9 @@ import {
   Server,
   Activity,
   ChevronDown,
-  Layers,
   Building2,
   TrendingUp,
   Target,
-  FileCheck,
-  Award,
   BookOpen,
   Clock,
   Calendar,
@@ -55,7 +53,7 @@ interface ITStrategyPageProps {
 }
 
 // -----------------------------------------------------------------------------
-// 1. Scroll-Triggered Section Wrapper Component (Compact Spacing & Wide Layout)
+// 1. Scroll-Triggered Section Wrapper Component (Optimized Mobile Viewport Entry)
 // -----------------------------------------------------------------------------
 function AnimatedSection({
   children,
@@ -67,7 +65,7 @@ function AnimatedSection({
   delay?: number;
 }) {
   const ref = React.useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-40px" });
+  const isInView = useInView(ref, { once: true, margin: "-30px" });
   const shouldReduceMotion = useReducedMotion();
 
   if (shouldReduceMotion) {
@@ -77,9 +75,9 @@ function AnimatedSection({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 24 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ opacity: 0, y: 16 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+      transition={{ duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
       {children}
@@ -96,13 +94,13 @@ function SystemScanTransition() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <div ref={ref} className="relative w-full h-px my-2 overflow-hidden pointer-events-none select-none">
-      <div className="w-full h-full bg-[#f7d7b0]/30 dark:bg-[#253630]" />
+    <div ref={ref} className="relative w-full h-px my-1 overflow-hidden pointer-events-none select-none">
+      <div className="w-full h-full bg-[#f7d7b0]/30 dark:bg-[#1a1a1a]" />
       {!shouldReduceMotion && (
         <motion.div
           initial={{ x: "-100%" }}
           animate={isInView ? { x: "100%" } : {}}
-          transition={{ duration: 1.5, ease: "easeInOut" }}
+          transition={{ duration: 1.4, ease: "easeInOut" }}
           className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-transparent via-[#f15e1c] to-transparent shadow-[0_0_10px_#f15e1c]"
         />
       )}
@@ -132,40 +130,35 @@ function AnimatedDotGrid() {
 }
 
 // -----------------------------------------------------------------------------
-// Data Collections for Revamped IT Strategy Page
+// Data Collections for IT Strategy Page
 // -----------------------------------------------------------------------------
 
-// Hero Architecture Flow (Visualizing BUSINESS GOALS -> IT STRATEGY -> DIGITAL ARCHITECTURE -> IMPLEMENTATION -> OPTIMIZATION)
+// Hero Architecture Flow
 const heroArchitectureFlow = [
   {
     stage: "01",
     label: "BUSINESS GOALS",
     desc: "Commercial priorities, budget guardrails & growth targets.",
-    accent: "#f15e1c",
   },
   {
     stage: "02",
     label: "IT STRATEGY",
     desc: "12–36 month technology roadmap & investment priorities.",
-    accent: "#fab60a",
   },
   {
     stage: "03",
     label: "DIGITAL ARCHITECTURE",
     desc: "Scalable cloud, data pipelines & zero-trust security.",
-    accent: "#2e936f",
   },
   {
     stage: "04",
     label: "IMPLEMENTATION",
     desc: "Controlled migration & zero-downtime engineering.",
-    accent: "#f15e1c",
   },
   {
     stage: "05",
     label: "OPTIMIZATION",
     desc: "Continuous FinOps, performance tuning & governance.",
-    accent: "#2e936f",
   },
 ];
 
@@ -249,18 +242,18 @@ const transformationJourneyStages = [
   },
 ];
 
-// Connected Enterprise Architecture Layers (3D Scroll Visual)
+// Connected Enterprise Architecture Layers
 const architectureLayers = [
-  { layer: "01", title: "STRATEGY LAYER", subtitle: "Business Alignment & Roadmapping", color: "#f15e1c" },
-  { layer: "02", title: "ARCHITECTURE LAYER", subtitle: "Target System Blueprints", color: "#fab60a" },
-  { layer: "03", title: "CLOUD LAYER", subtitle: "AWS / Azure / Multi-Cloud", color: "#2e936f" },
-  { layer: "04", title: "SECURITY LAYER", subtitle: "Zero-Trust & Compliance Governance", color: "#f15e1c" },
-  { layer: "05", title: "APPLICATION LAYER", subtitle: "Microservices & Modern Web", color: "#fab60a" },
-  { layer: "06", title: "DATA LAYER", subtitle: "Connected Data & Pipelines", color: "#2e936f" },
-  { layer: "07", title: "OPTIMIZATION LAYER", subtitle: "24/7 Telemetry & FinOps", color: "#f15e1c" },
+  { layer: "01", title: "STRATEGY LAYER", subtitle: "Business Alignment & Roadmapping" },
+  { layer: "02", title: "ARCHITECTURE LAYER", subtitle: "Target System Blueprints" },
+  { layer: "03", title: "CLOUD LAYER", subtitle: "AWS / Azure / Multi-Cloud" },
+  { layer: "04", title: "SECURITY LAYER", subtitle: "Zero-Trust & Compliance Governance" },
+  { layer: "05", title: "APPLICATION LAYER", subtitle: "Microservices & Modern Web" },
+  { layer: "06", title: "DATA LAYER", subtitle: "Connected Data & Pipelines" },
+  { layer: "07", title: "OPTIMIZATION LAYER", subtitle: "24/7 Telemetry & FinOps" },
 ];
 
-// Business Outcomes (Qualitative, Credible)
+// Business Outcomes
 const businessOutcomes = [
   {
     headline: "CLEARER DECISIONS",
@@ -284,7 +277,7 @@ const businessOutcomes = [
   },
 ];
 
-// Our Approach (5-Step Methodology with WHAT WE DO + WHAT CLIENT GETS)
+// Our Approach (5 Stacked Phase Cards)
 const approachSteps = [
   {
     num: "01",
@@ -318,7 +311,7 @@ const approachSteps = [
   },
 ];
 
-// Technology Architecture (5 Categories showing tech names as metadata)
+// Technology Architecture (5 Categories)
 const techArchitectureCategories = [
   {
     category: "CLOUD",
@@ -352,7 +345,7 @@ const techArchitectureCategories = [
   },
 ];
 
-// Who This Is For (4 Scenarios)
+// Target Audience
 const targetScenarios = [
   {
     title: "LEGACY SYSTEMS",
@@ -376,7 +369,7 @@ const targetScenarios = [
   },
 ];
 
-// Why Arav Innovations (4 Differentiators)
+// Differentiators
 const whyChooseArav = [
   {
     title: "BUSINESS-ALIGNED TECHNOLOGY",
@@ -396,7 +389,7 @@ const whyChooseArav = [
   },
 ];
 
-// FAQ Data (5 Concise FAQs)
+// FAQ Data
 const faqList = [
   {
     q: "What does IT strategy and implementation include?",
@@ -420,7 +413,7 @@ const faqList = [
   },
 ];
 
-// Internal Service Links for Cross-Navigation
+// Internal Service Links
 const internalServices = [
   { name: "Web & Application Development", href: "/services/web-app-development" },
   { name: "Risk, Compliance & Governance", href: "/services/risk-compliance-governance" },
@@ -435,13 +428,13 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
   const [activeFaqIdx, setActiveFaqIdx] = React.useState<number | null>(0);
   const [activeTechCat, setActiveTechCat] = React.useState<number>(0);
 
-  // Transformation Journey Scroll Handling (Continuous & Lightweight)
+  // Unpinned Natural Scroll Progress for Transformation Journey
   const journeyContainerRef = React.useRef<HTMLDivElement>(null);
   const { scrollYProgress: journeyScrollProgress } = useScroll({
     target: journeyContainerRef,
     offset: ["start 80%", "end 20%"],
   });
-  const smoothJourneyProgress = useSpring(journeyScrollProgress, { stiffness: 60, damping: 30 });
+  const smoothJourneyProgress = useSpring(journeyScrollProgress, { stiffness: 80, damping: 35 });
   const journeyLineWidth = useTransform(smoothJourneyProgress, [0, 1], ["0%", "100%"]);
 
   React.useEffect(() => {
@@ -454,13 +447,13 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
     return () => unsub();
   }, [smoothJourneyProgress]);
 
-  // Architecture Layers Scroll Handling (3D Layered System Assembly)
+  // Connected Architecture Layer Scroll Highlights
   const layersContainerRef = React.useRef<HTMLDivElement>(null);
   const { scrollYProgress: layersScrollProgress } = useScroll({
     target: layersContainerRef,
     offset: ["start 75%", "end 25%"],
   });
-  const smoothLayersProgress = useSpring(layersScrollProgress, { stiffness: 50, damping: 25 });
+  const smoothLayersProgress = useSpring(layersScrollProgress, { stiffness: 70, damping: 30 });
   const activeLayerIndex = useTransform(smoothLayersProgress, [0, 1], [0, architectureLayers.length - 1]);
   const [currentActiveLayer, setCurrentActiveLayer] = React.useState<number>(0);
 
@@ -472,114 +465,148 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
   }, [activeLayerIndex]);
 
   return (
-    <main className="min-h-screen bg-[#FFFFFF] dark:bg-[#101b17] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c]">
+    <main className="min-h-screen bg-[#FFFFFF] dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c]">
       
       {/* =========================================================================
-          SECTION 01 — HERO SECTION (WIDE SCREEN RESPONSIVE CONTAINER)
+          SECTION 01 — HERO SECTION
           ========================================================================= */}
-      <section className="relative pt-20 pb-12 sm:pt-28 sm:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] overflow-hidden select-none">
+      <section className="relative pt-3 sm:pt-5 lg:pt-6 pb-8 sm:pb-10 lg:pb-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none">
         <AnimatedDotGrid />
 
-        {/* Ambient Subtle Glows */}
-        <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-radial from-[#f15e1c]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-radial from-[#2e936f]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
+        {/* Ambient Glows */}
+        <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-radial from-[#f15e1c]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-radial from-[#2e936f]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
 
-        <div className="max-w-[1536px] mx-auto w-full space-y-6 relative z-10">
+        <div className="max-w-[1536px] mx-auto w-full space-y-6 sm:space-y-8 relative z-10">
           
-          {/* Breadcrumb & Eyebrow Badge */}
-          <AnimatedSection delay={0.05} className="space-y-2">
-            <Breadcrumb
-              items={[
-                { label: "Services", href: "/services" },
-                { label: "IT Strategy & Implementation" },
-              ]}
-            />
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#172420] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>ENTERPRISE IT STRATEGY &amp; MODERNIZATION</span>
+          {/* 2-Column Hero Composition */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* LEFT COLUMN: HERO COPY */}
+            <div className="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-left">
+              
+              {/* Breadcrumb & Eyebrow Badge */}
+              <AnimatedSection delay={0.05} className="space-y-2">
+                <Breadcrumb
+                  items={[
+                    { label: "Services", href: "/services" },
+                    { label: "IT Strategy & Implementation" },
+                  ]}
+                />
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>ENTERPRISE IT STRATEGY &amp; MODERNIZATION</span>
+                </div>
+              </AnimatedSection>
+
+              {/* Headline */}
+              <AnimatedSection delay={0.1} className="space-y-3">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold font-display tracking-tight leading-[1.12] text-[#1b2823] dark:text-[#ffffff]">
+                  Turn Technology Complexity Into a <span className="text-[#f15e1c]">Clear Path Forward</span>
+                </h1>
+
+                <p className="text-sm sm:text-base lg:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-2xl">
+                  We help businesses modernize legacy systems, build practical technology roadmaps, adopt cloud with confidence, and turn complex IT decisions into measurable business outcomes.
+                </p>
+              </AnimatedSection>
+
+              {/* CTAs */}
+              <AnimatedSection delay={0.15} className="pt-1 flex flex-wrap items-center gap-3">
+                <a href="#inquire">
+                  <MagneticButton>
+                    <Button3D
+                      variant="primary"
+                      size="md"
+                      rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />}
+                      className="shadow-md shadow-[#f15e1c]/20"
+                    >
+                      Build My Technology Roadmap
+                    </Button3D>
+                  </MagneticButton>
+                </a>
+
+                <a href="#our-approach">
+                  <MagneticButton>
+                    <Button3D variant="outline" size="md">
+                      Explore Our Approach
+                    </Button3D>
+                  </MagneticButton>
+                </a>
+              </AnimatedSection>
+
+              {/* Supporting Statement */}
+              <AnimatedSection delay={0.2} className="text-xs font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center gap-2 flex-wrap pt-1">
+                <span>Strategy</span>
+                <span className="text-[#f15e1c]">•</span>
+                <span>Architecture</span>
+                <span className="text-[#f15e1c]">•</span>
+                <span>Modernization</span>
+                <span className="text-[#f15e1c]">•</span>
+                <span>Cloud</span>
+                <span className="text-[#f15e1c]">•</span>
+                <span>Governance</span>
+              </AnimatedSection>
             </div>
-          </AnimatedSection>
 
-          {/* Hero Main Copy */}
-          <AnimatedSection delay={0.12} className="max-w-5xl lg:max-w-6xl space-y-4 text-left">
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold font-display tracking-tight leading-[1.1] text-[#1b2823] dark:text-[#ffffff]">
-              Turn Technology Complexity Into a <span className="text-[#f15e1c]">Clear Path Forward</span>
-            </h1>
-
-            <p className="text-base sm:text-xl text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-4xl">
-              We help businesses modernize legacy systems, build practical technology roadmaps, adopt cloud with confidence, and turn complex IT decisions into measurable business outcomes.
-            </p>
-
-            {/* CTAs */}
-            <div className="pt-2 flex flex-wrap items-center gap-3">
-              <a href="#inquire">
-                <MagneticButton>
-                  <Button3D
-                    variant="primary"
-                    size="md"
-                    rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />}
-                    className="shadow-md shadow-[#f15e1c]/20"
-                  >
-                    Build My Technology Roadmap
-                  </Button3D>
-                </MagneticButton>
-              </a>
-
-              <a href="#our-approach">
-                <MagneticButton>
-                  <Button3D variant="outline" size="md">
-                    Explore Our Approach
-                  </Button3D>
-                </MagneticButton>
-              </a>
+            {/* RIGHT COLUMN: DUAL-THEME HERO INFOGRAPHIC */}
+            <div className="lg:col-span-6 xl:col-span-7 w-full flex items-center justify-center">
+              <AnimatedSection delay={0.15} className="w-full">
+                <div className="relative w-full flex items-center justify-center">
+                  {/* Light Mode Image */}
+                  <Image
+                    src="/images/it-strategy-light-v3.png"
+                    alt="Arav Innovation IT Strategy &amp; Ecosystem (Light Mode)"
+                    width={1200}
+                    height={800}
+                    priority
+                    className="w-full h-auto max-w-full object-contain dark:hidden transition-transform duration-300 hover:scale-[1.01]"
+                  />
+                  {/* Dark Mode Image */}
+                  <Image
+                    src="/images/it-strategy-dark-v3.png"
+                    alt="Arav Innovation IT Strategy &amp; Ecosystem (Dark Mode)"
+                    width={1200}
+                    height={800}
+                    priority
+                    className="w-full h-auto max-w-full object-contain hidden dark:block transition-transform duration-300 hover:scale-[1.01]"
+                  />
+                </div>
+              </AnimatedSection>
             </div>
+          </div>
 
-            {/* Supporting Statement */}
-            <div className="pt-2 text-xs font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center gap-2 flex-wrap">
-              <span>Strategy</span>
-              <span className="text-[#f15e1c]">•</span>
-              <span>Architecture</span>
-              <span className="text-[#f15e1c]">•</span>
-              <span>Modernization</span>
-              <span className="text-[#f15e1c]">•</span>
-              <span>Cloud</span>
-              <span className="text-[#f15e1c]">•</span>
-              <span>Governance</span>
-            </div>
-          </AnimatedSection>
-
-          {/* SECTION 02 — HERO VISUAL / SYSTEM ARCHITECTURE FLOW */}
-          <AnimatedSection delay={0.2} className="pt-4">
-            <div className="p-5 sm:p-8 rounded-[2rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-lg space-y-4 relative overflow-hidden w-full">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-[#f7d7b0] dark:border-[#253630] pb-3">
+          {/* SECTION 02 — HERO VISUAL / SYSTEM ARCHITECTURE FLOW BAR */}
+          <AnimatedSection delay={0.25} className="pt-2">
+            <div className="p-4 sm:p-6 rounded-2xl sm:rounded-[2rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md space-y-3 relative overflow-hidden w-full">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-2.5">
                 <div>
                   <span className="text-[10px] font-mono font-black text-[#f15e1c] uppercase tracking-wider block">
                     TRANSFORMATION BLUEPRINT
                   </span>
-                  <h3 className="text-lg sm:text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                  <h3 className="text-base sm:text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                     End-to-End Enterprise Architecture Flow
                   </h3>
                 </div>
-                <span className="text-xs font-mono font-bold text-[#2e936f] bg-white dark:bg-[#101b17] px-3 py-1 rounded-full border border-[#f7d7b0] dark:border-[#253630]">
+                <span className="text-xs font-mono font-bold text-[#2e936f] bg-white dark:bg-[#000000] px-3 py-1 rounded-full border border-[#f7d7b0] dark:border-[#1a1a1a]">
                   STRATEGY &rarr; EXECUTION
                 </span>
               </div>
 
-              {/* 5 Sequence Blocks */}
+              {/* 5 Sequence Blocks with Refined Desktop & Mobile Hover */}
               <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-3">
                 {heroArchitectureFlow.map((flow, idx) => {
                   const isActive = activeHeroNode === idx;
                   return (
-                    <motion.button
+                    <button
                       key={flow.stage}
                       type="button"
-                      whileHover={{ y: -2 }}
                       onClick={() => setActiveHeroNode(idx)}
+                      onMouseEnter={() => setActiveHeroNode(idx)}
                       className={cn(
-                        "p-4 rounded-xl border-2 transition-all duration-200 text-left cursor-pointer space-y-1.5 relative group",
+                        "p-3.5 rounded-xl border-2 transition-all duration-200 text-left cursor-pointer space-y-1 relative group hover:-translate-y-0.5",
                         isActive
-                          ? "bg-white dark:bg-[#101b17] border-[#f15e1c] shadow-sm ring-2 ring-[#f15e1c]/10"
-                          : "bg-white/70 dark:bg-[#101b17]/70 border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c]/50"
+                          ? "bg-white dark:bg-[#000000] border-[#f15e1c] shadow-xs ring-1 ring-[#f15e1c]/20"
+                          : "bg-white/70 dark:bg-[#000000]/70 border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/60"
                       )}
                     >
                       <div className="flex items-center justify-between">
@@ -587,16 +614,16 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                           {flow.stage}
                         </span>
                         {idx < heroArchitectureFlow.length - 1 && (
-                          <ChevronRight className="w-3.5 h-3.5 text-[#7A6A5F] hidden lg:block" />
+                          <ChevronRight className="w-3.5 h-3.5 text-[#7A6A5F] hidden lg:block group-hover:translate-x-0.5 transition-transform" />
                         )}
                       </div>
-                      <div className="text-xs sm:text-sm font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                      <div className="text-xs font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                         {flow.label}
                       </div>
-                      <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-snug line-clamp-2">
+                      <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] leading-snug line-clamp-2">
                         {flow.desc}
                       </p>
-                    </motion.button>
+                    </button>
                   );
                 })}
               </div>
@@ -608,21 +635,21 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
       <SystemScanTransition />
 
       {/* =========================================================================
-          SECTION 03 — INTRODUCTION / VALUE PROPOSITION
+          SECTION 03 — VALUE PROPOSITION / CONTENT SECTION
           ========================================================================= */}
-      <section className="relative py-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-        <div className="max-w-[1536px] mx-auto select-none">
-          <AnimatedSection className="max-w-5xl lg:max-w-6xl mx-auto p-6 sm:p-8 rounded-[2rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] space-y-4 text-left shadow-xs">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#101b17] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
+      <section className="relative py-10 sm:py-14 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-[1440px] mx-auto select-none">
+          <AnimatedSection className="max-w-4xl lg:max-w-5xl mx-auto p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-[2rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] space-y-4 text-left shadow-xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#000000] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
               <Target className="w-3.5 h-3.5" />
               <span>VALUE PROPOSITION</span>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-tight">
               Technology Strategy That Connects Business Goals to Engineering Execution
             </h2>
 
-            <div className="space-y-3 text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+            <div className="space-y-3 text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed max-w-4xl">
               <p>
                 Technology decisions should not exist in isolation. We work with leadership and engineering teams to translate business priorities into practical technology strategies — from modernizing legacy infrastructure and planning cloud adoption to improving security, governance, performance and operational efficiency.
               </p>
@@ -637,10 +664,63 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
       <SystemScanTransition />
 
       {/* =========================================================================
-          SECTION 04 — CORE SOLUTIONS (WHAT WE HELP YOU SOLVE)
+          SECTION 04 — DEDICATED IMAGE + TEXT CONTENT BLOCK (IT Strategy Main)
           ========================================================================= */}
-      <section id="capabilities" className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
-        <div className="max-w-[1536px] mx-auto space-y-8">
+      <section className="relative py-12 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none">
+        <div className="max-w-[1440px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* LEFT (Desktop) / TOP (Mobile): Configurable Image Container */}
+            <AnimatedSection className="lg:col-span-6 w-full order-1">
+              <div className="relative w-full rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] shadow-md overflow-hidden p-3 sm:p-5 group">
+                <Image
+                  src="/images/it-strategy-main.png"
+                  alt="Arav Innovation Enterprise Technology Strategy Architecture"
+                  width={1200}
+                  height={800}
+                  priority
+                  className="w-full h-auto max-w-full object-contain rounded-xl sm:rounded-2xl transition-transform duration-300 group-hover:scale-[1.01]"
+                />
+              </div>
+            </AnimatedSection>
+
+            {/* RIGHT (Desktop) / BELOW (Mobile): Content Block */}
+            <AnimatedSection delay={0.1} className="lg:col-span-6 space-y-4 text-left order-2">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#000000] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
+                <Cpu className="w-3.5 h-3.5" />
+                <span>ARCHITECTURAL FOUNDATION</span>
+              </div>
+
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-tight">
+                Architecting Resilient IT Infrastructure for Long-Term Growth
+              </h2>
+
+              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed max-w-2xl">
+                Modern enterprise technology requires continuous alignment between strategic business goals and core engineering execution. We help organizations design, build, and optimize scalable digital foundations.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                <div className="p-3.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a]">
+                  <span className="text-xs font-mono font-extrabold text-[#f15e1c] block uppercase">MODERNIZED STACK</span>
+                  <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] mt-1">Eliminate technical debt &amp; legacy bottlenecks.</p>
+                </div>
+                <div className="p-3.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a]">
+                  <span className="text-xs font-mono font-extrabold text-[#2e936f] block uppercase">GOVERNED CLOUD</span>
+                  <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] mt-1">Zero-trust security &amp; FinOps cost controls.</p>
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* =========================================================================
+          SECTION 05 — CORE CAPABILITIES (WHAT WE HELP YOU SOLVE)
+          ========================================================================= */}
+      <section id="capabilities" className="relative py-12 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none">
+        <div className="max-w-[1440px] mx-auto space-y-8">
           
           <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
             <Badge variant="secondary" size="sm">
@@ -654,25 +734,25 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
             </p>
           </AnimatedSection>
 
-          {/* 6 Capability Cards (3-Column Grid on Widescreen) */}
+          {/* 6 Capability Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1440px] mx-auto">
             {coreSolutions.map((card, idx) => (
-              <AnimatedSection key={card.id} delay={0.05 * idx}>
-                <TiltCard maxTilt={3} scale={1.01}>
+              <AnimatedSection key={card.id} delay={0.04 * idx}>
+                <TiltCard maxTilt={2} scale={1.01}>
                   <a
                     href={card.href}
-                    className="block h-full p-6 sm:p-7 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c] shadow-xs hover:shadow-md transition-all duration-200 space-y-3.5 text-left group"
+                    className="block h-full p-6 sm:p-7 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 space-y-3.5 text-left group"
                   >
                     <div className="flex items-center justify-between">
-                      <div className="p-3 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] group-hover:scale-105 transition-transform">
+                      <div className="p-3 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] group-hover:scale-105 transition-transform">
                         {card.icon}
                       </div>
-                      <span className="text-xs font-mono font-black text-[#f15e1c] px-2.5 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#101b17]">
+                      <span className="text-xs font-mono font-black text-[#f15e1c] px-2.5 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#000000]">
                         {card.id}
                       </span>
                     </div>
 
-                    <h3 className="text-lg sm:text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                    <h3 className="text-lg sm:text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
                       {card.title}
                     </h3>
 
@@ -695,14 +775,14 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
       <SystemScanTransition />
 
       {/* =========================================================================
-          SECTION 05 — INTERACTIVE TRANSFORMATION VISUAL (SCROLL EXPERIENCE)
+          SECTION 06 — INTERACTIVE TRANSFORMATION JOURNEY (UNPINNED NATURAL SCROLL)
           ========================================================================= */}
       <section
         id="transformation-journey"
         ref={journeyContainerRef}
-        className="relative py-16 sm:py-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none"
+        className="relative py-12 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] select-none"
       >
-        <div className="max-w-[1536px] mx-auto space-y-10">
+        <div className="max-w-[1440px] mx-auto space-y-8">
           
           <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
             <Badge variant="secondary" size="sm">
@@ -712,20 +792,20 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
               From Discovery to Sustained Optimization
             </h2>
             <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4]">
-              Scroll through the five stages of a structured technology transformation.
+              Five structured stages of an enterprise technology transformation.
             </p>
           </AnimatedSection>
 
-          {/* Continuous Scroll Progress Track */}
-          <AnimatedSection delay={0.1} className="max-w-5xl mx-auto relative py-2">
-            <div className="w-full bg-[#f7d7b0] dark:bg-[#253630] h-2 rounded-full overflow-hidden">
+          {/* Progress Indicator Bar */}
+          <AnimatedSection delay={0.08} className="max-w-4xl mx-auto relative py-2">
+            <div className="w-full bg-[#f7d7b0] dark:bg-[#1a1a1a] h-2 rounded-full overflow-hidden">
               <motion.div
                 style={{ width: journeyLineWidth }}
                 className="h-full bg-gradient-to-r from-[#f15e1c] via-[#2e936f] to-[#fab60a]"
               />
             </div>
 
-            {/* 5 Stage Node Buttons */}
+            {/* 5 Stage Nodes */}
             <div className="flex justify-between items-center absolute inset-x-0 -top-2">
               {transformationJourneyStages.map((st, idx) => {
                 const isActive = activeJourneyIdx === idx;
@@ -736,13 +816,14 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                     key={st.num}
                     type="button"
                     onClick={() => setActiveJourneyIdx(idx)}
+                    onMouseEnter={() => setActiveJourneyIdx(idx)}
                     className={cn(
-                      "w-8 h-8 rounded-full border-2 transition-all duration-200 flex items-center justify-center text-xs font-mono font-black cursor-pointer shrink-0",
+                      "w-8 h-8 rounded-full border-2 transition-all duration-200 flex items-center justify-center text-xs font-mono font-black cursor-pointer shrink-0 hover:scale-105",
                       isActive
                         ? "bg-[#f15e1c] border-white text-white scale-110 shadow-md ring-2 ring-[#f15e1c]/30 z-10"
                         : isPassed
                         ? "bg-[#2e936f] border-white text-white"
-                        : "bg-white dark:bg-[#101b17] border-[#f7d7b0] dark:border-[#253630] text-[#7A6A5F]"
+                        : "bg-white dark:bg-[#000000] border-[#f7d7b0] dark:border-[#1a1a1a] text-[#7A6A5F]"
                     )}
                   >
                     {isPassed && !isActive ? <Check className="w-3.5 h-3.5 text-white" /> : st.num}
@@ -753,17 +834,17 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
           </AnimatedSection>
 
           {/* Active Stage Detail Card */}
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeJourneyIdx}
-                initial={{ opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.25 }}
-                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#101b17] border-2 border-[#f15e1c] shadow-lg space-y-4 text-left"
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#000000] border-2 border-[#f15e1c] shadow-md space-y-4 text-left"
               >
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-[#f7d7b0] dark:border-[#253630] pb-3">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-3">
                   <div>
                     <span className="text-xs font-mono font-black text-[#f15e1c] uppercase tracking-wider block">
                       STAGE {transformationJourneyStages[activeJourneyIdx].num} / 05 &bull; {transformationJourneyStages[activeJourneyIdx].title}
@@ -778,18 +859,19 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                   {transformationJourneyStages[activeJourneyIdx].desc}
                 </p>
 
-                {/* Stage Tabs */}
+                {/* Stage Nav Tabs (Responsive Flex Wrap for Mobile) */}
                 <div className="pt-2 flex flex-wrap gap-2">
                   {transformationJourneyStages.map((st, idx) => (
                     <button
                       key={st.num}
                       type="button"
                       onClick={() => setActiveJourneyIdx(idx)}
+                      onMouseEnter={() => setActiveJourneyIdx(idx)}
                       className={cn(
                         "px-3.5 py-1.5 rounded-lg text-xs font-bold font-mono transition-all cursor-pointer",
                         activeJourneyIdx === idx
-                          ? "bg-[#f15e1c] text-white"
-                          : "bg-[#fefaf5] dark:bg-[#172420] text-[#7A6A5F] border border-[#f7d7b0]"
+                          ? "bg-[#f15e1c] text-white shadow-xs"
+                          : "bg-[#fefaf5] dark:bg-[#0a0a0a] text-[#7A6A5F] border border-[#f7d7b0] hover:border-[#f15e1c]/60"
                       )}
                     >
                       {st.num} {st.title}
@@ -800,8 +882,8 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
             </AnimatePresence>
           </div>
 
-          {/* CONNECTED ENTERPRISE ARCHITECTURE LAYERS (3D SCROLL VISUAL - WIDE) */}
-          <div ref={layersContainerRef} className="max-w-5xl mx-auto space-y-3 pt-6">
+          {/* CONNECTED ARCHITECTURE LAYERS */}
+          <div ref={layersContainerRef} className="max-w-4xl mx-auto space-y-3 pt-4">
             <span className="text-xs font-mono font-extrabold text-[#f15e1c] uppercase tracking-wider block text-center">
               CONNECTED ARCHITECTURE LAYERS (PROGRESSIVE ASSEMBLY)
             </span>
@@ -814,25 +896,24 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                 return (
                   <motion.div
                     key={layer.layer}
-                    initial={{ opacity: 0.4, scale: 0.98 }}
+                    initial={{ opacity: 0.5 }}
                     animate={{
-                      opacity: isAssembled ? 1 : 0.4,
-                      scale: isActive ? 1.01 : 1,
-                      x: isActive ? 4 : 0,
+                      opacity: isAssembled ? 1 : 0.5,
+                      scale: isActive ? 1.005 : 1,
                     }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.2 }}
                     className={cn(
-                      "p-4 rounded-xl border-2 transition-all duration-300 flex items-center justify-between gap-4 cursor-pointer",
+                      "p-3.5 sm:p-4 rounded-xl border-2 transition-all duration-200 flex items-center justify-between gap-4 cursor-pointer hover:border-[#f15e1c]/60",
                       isActive
-                        ? "bg-white dark:bg-[#101b17] border-[#f15e1c] shadow-md ring-2 ring-[#f15e1c]/20"
+                        ? "bg-white dark:bg-[#000000] border-[#f15e1c] shadow-xs"
                         : isAssembled
-                        ? "bg-white/80 dark:bg-[#101b17]/80 border-[#f7d7b0] dark:border-[#253630]"
-                        : "bg-white/40 dark:bg-[#101b17]/40 border-[#f7d7b0]/50 dark:border-[#253630]/50 opacity-50"
+                        ? "bg-white/80 dark:bg-[#000000]/80 border-[#f7d7b0] dark:border-[#1a1a1a]"
+                        : "bg-white/40 dark:bg-[#000000]/40 border-[#f7d7b0]/50 dark:border-[#1a1a1a]/50 opacity-50"
                     )}
                     onClick={() => setCurrentActiveLayer(idx)}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="w-8 h-8 rounded-lg bg-[#fce3d3] dark:bg-[#172420] text-[#f15e1c] text-xs font-mono font-black flex items-center justify-center shrink-0">
+                      <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#fce3d3] dark:bg-[#0a0a0a] text-[#f15e1c] text-xs font-mono font-black flex items-center justify-center shrink-0">
                         {layer.layer}
                       </span>
                       <div>
@@ -847,7 +928,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
 
                     <div className="flex items-center gap-2 shrink-0">
                       {isAssembled && (
-                        <span className="text-[10px] font-mono font-bold text-[#2e936f] bg-[#fefaf5] dark:bg-[#172420] px-2.5 py-0.5 rounded-full border border-[#f7d7b0]">
+                        <span className="text-[10px] font-mono font-bold text-[#2e936f] bg-[#fefaf5] dark:bg-[#0a0a0a] px-2.5 py-0.5 rounded-full border border-[#f7d7b0]">
                           CONNECTED
                         </span>
                       )}
@@ -863,62 +944,10 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
       <SystemScanTransition />
 
       {/* =========================================================================
-          SECTION 06 — BUSINESS OUTCOMES (4 COLUMNS ON WIDESCREEN)
+          SECTION 07 — OUR APPROACH (5 STACKED PHASE CARDS)
           ========================================================================= */}
-      <section className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
-        <div className="max-w-[1536px] mx-auto space-y-8">
-          
-          <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
-            <Badge variant="secondary" size="sm">
-              BUSINESS OUTCOMES
-            </Badge>
-            <h2 className="text-2xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              What Better IT Strategy Delivers
-            </h2>
-            <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4]">
-              Clear operational and commercial outcomes achieved through structured technology modernization.
-            </p>
-          </AnimatedSection>
-
-          {/* 4 Outcome Blocks (4 Columns on Widescreen) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1440px] mx-auto">
-            {businessOutcomes.map((out, idx) => (
-              <AnimatedSection key={idx} delay={0.05 * idx}>
-                <TiltCard maxTilt={3} scale={1.01}>
-                  <div className="h-full p-6 rounded-2xl bg-white dark:bg-[#101b17] border-2 border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c] shadow-xs hover:shadow-md transition-all duration-200 space-y-3.5 text-left flex flex-col justify-between group">
-                    <div className="space-y-3">
-                      <div className="p-3 rounded-xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] w-fit group-hover:scale-105 transition-transform">
-                        {out.icon}
-                      </div>
-
-                      <h3 className="text-xs font-mono font-extrabold text-[#f15e1c] uppercase tracking-wider">
-                        {out.headline}
-                      </h3>
-
-                      <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                        {out.desc}
-                      </p>
-                    </div>
-
-                    <div className="pt-2 border-t border-[#f7d7b0]/60 dark:border-[#253630] flex items-center gap-1.5 text-xs font-mono font-bold text-[#2e936f]">
-                      <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
-                      <span>Commercial Value</span>
-                    </div>
-                  </div>
-                </TiltCard>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <SystemScanTransition />
-
-      {/* =========================================================================
-          SECTION 07 — OUR APPROACH (METHODOLOGY - WIDE CARDS GRID)
-          ========================================================================= */}
-      <section id="our-approach" className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none">
-        <div className="max-w-[1536px] mx-auto space-y-8">
+      <section id="our-approach" className="relative py-12 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] select-none">
+        <div className="max-w-[1440px] mx-auto space-y-8">
           
           <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
             <Badge variant="secondary" size="sm">
@@ -932,17 +961,18 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
             </p>
           </AnimatedSection>
 
-          {/* 5 Approach Cards */}
-          <div className="max-w-[1440px] mx-auto space-y-4">
+          {/* 5 Compact Phase Cards */}
+          <div className="max-w-5xl mx-auto space-y-3.5">
             {approachSteps.map((step, idx) => (
-              <AnimatedSection key={step.num} delay={0.05 * idx}>
-                <div className="p-6 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] shadow-xs space-y-3 text-left">
-                  <div className="flex items-center justify-between border-b border-[#f7d7b0]/60 dark:border-[#253630] pb-2.5">
+              <AnimatedSection key={step.num} delay={0.04 * idx}>
+                <div className="p-5 sm:p-6 rounded-xl sm:rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-3 text-left group">
+                  {/* Phase Header */}
+                  <div className="flex items-center justify-between border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] pb-2.5">
                     <div className="flex items-center gap-3">
-                      <span className="text-xs font-mono font-black px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#172420] text-[#f15e1c]">
+                      <span className="text-xs font-mono font-black px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] text-[#f15e1c]">
                         {step.num}
                       </span>
-                      <h3 className="text-lg sm:text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                      <h3 className="text-lg sm:text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
                         {step.name}
                       </h3>
                     </div>
@@ -951,9 +981,10 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
-                    <div className="space-y-1">
-                      <span className="text-[11px] font-mono font-extrabold text-[#f15e1c] uppercase block">
+                  {/* 2-Column Internal Layout (Desktop) / Vertical Stack (Mobile) */}
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-6 pt-0.5">
+                    <div className="md:col-span-6 space-y-1">
+                      <span className="text-[11px] font-mono font-extrabold text-[#f15e1c] uppercase block tracking-wider">
                         WHAT WE DO:
                       </span>
                       <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
@@ -961,8 +992,8 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                       </p>
                     </div>
 
-                    <div className="space-y-1">
-                      <span className="text-[11px] font-mono font-extrabold text-[#2e936f] uppercase block">
+                    <div className="md:col-span-6 space-y-1">
+                      <span className="text-[11px] font-mono font-extrabold text-[#2e936f] uppercase block tracking-wider">
                         WHAT THE CLIENT GETS:
                       </span>
                       <p className="text-xs sm:text-sm text-[#1b2823] dark:text-[#ffffff] font-semibold leading-relaxed">
@@ -980,10 +1011,10 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
       <SystemScanTransition />
 
       {/* =========================================================================
-          SECTION 08 — TECHNOLOGY ARCHITECTURE
+          SECTION 08 — TECHNOLOGY CAPABILITIES
           ========================================================================= */}
-      <section className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
-        <div className="max-w-[1536px] mx-auto space-y-8">
+      <section className="relative py-12 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none">
+        <div className="max-w-[1440px] mx-auto space-y-8">
           
           <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
             <Badge variant="secondary" size="sm">
@@ -997,19 +1028,21 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
             </p>
           </AnimatedSection>
 
-          {/* Category Tabs & Display */}
-          <div className="max-w-[1440px] mx-auto space-y-4">
-            <div className="flex flex-wrap justify-center gap-2.5">
+          {/* Interactive Domain Selector & Card */}
+          <div className="max-w-4xl mx-auto space-y-4">
+            {/* Category Selector Tabs */}
+            <div className="flex flex-wrap justify-center gap-2">
               {techArchitectureCategories.map((cat, idx) => (
                 <button
                   key={cat.category}
                   type="button"
                   onClick={() => setActiveTechCat(idx)}
+                  onMouseEnter={() => setActiveTechCat(idx)}
                   className={cn(
-                    "px-4 py-2.5 rounded-xl text-xs sm:text-sm font-mono font-bold transition-all cursor-pointer flex items-center gap-2 border",
+                    "px-4 py-2 rounded-xl text-xs sm:text-sm font-mono font-bold transition-all cursor-pointer flex items-center gap-2 border hover:border-[#f15e1c]/60",
                     activeTechCat === idx
-                      ? "bg-white dark:bg-[#101b17] border-[#f15e1c] text-[#f15e1c] shadow-xs ring-2 ring-[#f15e1c]/10"
-                      : "bg-[#fefaf5] dark:bg-[#172420] border-[#f7d7b0] text-[#7A6A5F]"
+                      ? "bg-white dark:bg-[#000000] border-[#f15e1c] text-[#f15e1c] shadow-xs ring-2 ring-[#f15e1c]/10 scale-105 z-10"
+                      : "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f7d7b0] text-[#7A6A5F]"
                   )}
                 >
                   {cat.icon}
@@ -1018,17 +1051,18 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
               ))}
             </div>
 
+            {/* Selected Domain Card */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTechCat}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
+                initial={{ opacity: 0, y: 6, scale: 0.99.valueOf() }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -6, scale: 0.99 }}
                 transition={{ duration: 0.2 }}
-                className="p-6 sm:p-8 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] space-y-4 text-left"
+                className="p-6 sm:p-8 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] space-y-4 text-left shadow-xs"
               >
-                <div className="flex items-center gap-3 border-b border-[#f7d7b0] dark:border-[#253630] pb-3">
-                  <div className="p-3 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0]">
+                <div className="flex items-center gap-3 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-3">
+                  <div className="p-3 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]">
                     {techArchitectureCategories[activeTechCat].icon}
                   </div>
                   <div>
@@ -1045,15 +1079,15 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                   {techArchitectureCategories[activeTechCat].desc}
                 </p>
 
-                <div className="space-y-2 pt-2">
-                  <span className="text-xs font-mono font-extrabold text-[#7A6A5F] uppercase block">
-                    Supported Systems &amp; Stack Metadata:
+                <div className="space-y-2 pt-1">
+                  <span className="text-xs font-mono font-extrabold text-[#7A6A5F] uppercase block tracking-wider">
+                    SUPPORTED SYSTEMS &amp; STACK METADATA:
                   </span>
-                  <div className="flex flex-wrap gap-2.5">
+                  <div className="flex flex-wrap gap-2">
                     {techArchitectureCategories[activeTechCat].meta.map((item, idx) => (
                       <span
                         key={idx}
-                        className="px-3.5 py-1.5 rounded-lg bg-white dark:bg-[#101b17] border border-[#f7d7b0] text-xs sm:text-sm font-mono font-semibold text-[#1b2823] dark:text-[#ffffff]"
+                        className="px-3.5 py-1.5 rounded-lg bg-white dark:bg-[#000000] border border-[#f7d7b0] text-xs sm:text-sm font-mono font-semibold text-[#1b2823] dark:text-[#ffffff]"
                       >
                         {item}
                       </span>
@@ -1069,10 +1103,62 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
       <SystemScanTransition />
 
       {/* =========================================================================
-          SECTION 09 — WHO THIS IS FOR (4 COLUMNS ON WIDESCREEN)
+          SECTION 09 — BUSINESS OUTCOMES
           ========================================================================= */}
-      <section className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none">
-        <div className="max-w-[1536px] mx-auto space-y-8">
+      <section className="relative py-12 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none">
+        <div className="max-w-[1440px] mx-auto space-y-8">
+          
+          <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
+            <Badge variant="secondary" size="sm">
+              BUSINESS OUTCOMES
+            </Badge>
+            <h2 className="text-2xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              What Better IT Strategy Delivers
+            </h2>
+            <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4]">
+              Clear operational and commercial outcomes achieved through structured technology modernization.
+            </p>
+          </AnimatedSection>
+
+          {/* 4 Outcome Blocks */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1440px] mx-auto">
+            {businessOutcomes.map((out, idx) => (
+              <AnimatedSection key={idx} delay={0.04 * idx}>
+                <TiltCard maxTilt={2} scale={1.01}>
+                  <div className="h-full p-6 rounded-2xl bg-white dark:bg-[#000000] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 space-y-3.5 text-left flex flex-col justify-between group">
+                    <div className="space-y-3">
+                      <div className="p-3 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] w-fit group-hover:scale-105 transition-transform">
+                        {out.icon}
+                      </div>
+
+                      <h3 className="text-xs font-mono font-extrabold text-[#f15e1c] uppercase tracking-wider">
+                        {out.headline}
+                      </h3>
+
+                      <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                        {out.desc}
+                      </p>
+                    </div>
+
+                    <div className="pt-2 border-t border-[#f7d7b0]/60 dark:border-[#1a1a1a] flex items-center gap-1.5 text-xs font-mono font-bold text-[#2e936f]">
+                      <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+                      <span>Commercial Value</span>
+                    </div>
+                  </div>
+                </TiltCard>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* =========================================================================
+          SECTION 10 — WHO THIS IS FOR
+          ========================================================================= */}
+      <section className="relative py-12 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] select-none">
+        <div className="max-w-[1440px] mx-auto space-y-8">
           
           <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
             <Badge variant="secondary" size="sm">
@@ -1086,11 +1172,11 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
             </p>
           </AnimatedSection>
 
-          {/* 4 Scenarios (4 Columns on Widescreen) */}
+          {/* 4 Scenarios */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1440px] mx-auto">
             {targetScenarios.map((scen, idx) => (
-              <AnimatedSection key={idx} delay={0.05 * idx}>
-                <div className="h-full p-6 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c] shadow-xs hover:shadow-md transition-all duration-200 space-y-3 text-left flex flex-col justify-between">
+              <AnimatedSection key={idx} delay={0.04 * idx}>
+                <div className="h-full p-6 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 space-y-3 text-left flex flex-col justify-between">
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
@@ -1104,7 +1190,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                   </div>
 
                   <div className="pt-2">
-                    <span className="text-[10px] font-mono font-bold text-[#f15e1c] px-2.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#172420] inline-block">
+                    <span className="text-[10px] font-mono font-bold text-[#f15e1c] px-2.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] inline-block">
                       {scen.badge}
                     </span>
                   </div>
@@ -1118,10 +1204,10 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
       <SystemScanTransition />
 
       {/* =========================================================================
-          SECTION 10 — WHY ARAV INNOVATIONS (4 COLUMNS ON WIDESCREEN)
+          SECTION 11 — WHY ARAV INNOVATIONS
           ========================================================================= */}
-      <section className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
-        <div className="max-w-[1536px] mx-auto space-y-8">
+      <section className="relative py-12 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none">
+        <div className="max-w-[1440px] mx-auto space-y-8">
           
           <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
             <Badge variant="secondary" size="sm">
@@ -1135,11 +1221,11 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
             </p>
           </AnimatedSection>
 
-          {/* 4 Differentiator Cards (4 Columns on Widescreen) */}
+          {/* 4 Differentiator Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1440px] mx-auto">
             {whyChooseArav.map((diff, idx) => (
-              <AnimatedSection key={idx} delay={0.05 * idx}>
-                <div className="h-full p-6 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c] shadow-xs transition-all duration-200 space-y-2.5 text-left flex flex-col justify-between">
+              <AnimatedSection key={idx} delay={0.04 * idx}>
+                <div className="h-full p-6 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] shadow-xs hover:-translate-y-1 transition-all duration-300 space-y-2.5 text-left flex flex-col justify-between">
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
@@ -1162,10 +1248,10 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
       <SystemScanTransition />
 
       {/* =========================================================================
-          SECTION 11 — CEO / LEADERSHIP SECTION & TRUST PROOF
+          SECTION 12 — CEO / LEADERSHIP PERSPECTIVE
           ========================================================================= */}
-      <section className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none">
-        <div className="max-w-[1536px] mx-auto space-y-8">
+      <section className="relative py-12 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] select-none">
+        <div className="max-w-[1440px] mx-auto space-y-8">
           
           <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
             <Badge variant="secondary" size="sm">
@@ -1176,8 +1262,8 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
             </h2>
           </AnimatedSection>
 
-          <AnimatedSection delay={0.1} className="max-w-5xl lg:max-w-6xl mx-auto">
-            <div className="p-6 sm:p-10 rounded-2xl bg-white dark:bg-[#101b17] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-md space-y-4 text-left relative overflow-hidden">
+          <AnimatedSection delay={0.08} className="max-w-4xl mx-auto">
+            <div className="p-6 sm:p-10 rounded-2xl bg-white dark:bg-[#000000] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md space-y-4 text-left relative overflow-hidden">
               <div className="p-2.5 rounded-xl bg-[#f15e1c] text-white w-fit shadow-xs">
                 <Quote className="w-5 h-5" />
               </div>
@@ -1186,7 +1272,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                 &ldquo;Our focus is helping businesses make technology decisions that are commercially sensible, technically sound, secure, scalable and executable. We don&apos;t build unnecessary complexity — we build clear pathways for sustainable growth.&rdquo;
               </p>
 
-              <div className="pt-3 border-t border-[#f7d7b0] dark:border-[#253630] flex items-center justify-between">
+              <div className="pt-3 border-t border-[#f7d7b0] dark:border-[#1a1a1a] flex items-center justify-between">
                 <div>
                   <div className="text-sm font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                     Aryan Sayal
@@ -1207,10 +1293,10 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
       <SystemScanTransition />
 
       {/* =========================================================================
-          SECTION 12 — FAQ SECTION
+          SECTION 13 — FAQ SECTION
           ========================================================================= */}
-      <section className="relative py-14 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
-        <div className="max-w-[1536px] mx-auto space-y-8">
+      <section className="relative py-12 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none">
+        <div className="max-w-[1440px] mx-auto space-y-8">
           
           <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
             <Badge variant="secondary" size="sm">
@@ -1230,7 +1316,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
               const isOpen = activeFaqIdx === idx;
               return (
                 <AnimatedSection key={idx} delay={0.04 * idx}>
-                  <div className="rounded-xl border border-[#f7d7b0] dark:border-[#253630] transition-all duration-200 overflow-hidden bg-[#fefaf5] dark:bg-[#172420]">
+                  <div className="rounded-xl border border-[#f7d7b0] dark:border-[#1a1a1a] transition-all duration-200 overflow-hidden bg-[#fefaf5] dark:bg-[#0a0a0a]">
                     <button
                       type="button"
                       onClick={() => setActiveFaqIdx(isOpen ? null : idx)}
@@ -1254,7 +1340,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.2 }}
-                          className="px-4 pb-5 sm:px-5 text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed border-t border-[#f7d7b0]/50 dark:border-[#253630]"
+                          className="px-4 pb-5 sm:px-5 text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a]"
                         >
                           <div className="pt-3">{faq.a}</div>
                         </motion.div>
@@ -1271,19 +1357,19 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
       <SystemScanTransition />
 
       {/* =========================================================================
-          SECTION 13 — RELATED SERVICES / INTERNAL LINKS
+          SECTION 14 — RELATED SERVICES
           ========================================================================= */}
-      <section className="relative py-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none">
-        <div className="max-w-[1536px] mx-auto space-y-4 text-center">
+      <section className="relative py-10 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] select-none">
+        <div className="max-w-[1440px] mx-auto space-y-4 text-center">
           <span className="text-xs font-mono font-extrabold text-[#7A6A5F] uppercase tracking-wider block">
             EXPLORE RELATED ARAV SERVICES
           </span>
-          <div className="flex flex-wrap justify-center gap-2.5 max-w-5xl mx-auto">
+          <div className="flex flex-wrap justify-center gap-2.5 max-w-4xl mx-auto">
             {internalServices.map((serv) => (
               <Link
                 key={serv.name}
                 href={serv.href}
-                className="px-4 py-2 rounded-full bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] text-xs font-mono font-bold text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c] hover:text-[#f15e1c] transition-all"
+                className="px-4 py-2 rounded-full bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c] hover:text-[#f15e1c] transition-all"
               >
                 {serv.name} &rarr;
               </Link>
@@ -1293,15 +1379,15 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
       </section>
 
       {/* =========================================================================
-          SECTION 14 — FINAL CTA SECTION
+          SECTION 15 — FINAL CTA SECTION
           ========================================================================= */}
-      <section id="inquire" className="relative py-16 sm:py-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 select-none">
-        <div className="max-w-[1536px] mx-auto">
+      <section id="inquire" className="relative py-14 sm:py-18 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 select-none">
+        <div className="max-w-[1440px] mx-auto">
           
           <AnimatedSection>
-            <div className="rounded-[2.5rem] bg-gradient-to-br from-[#f15e1c] via-[#e55215] to-[#d8480d] text-white p-8 sm:p-12 xl:p-16 border-2 border-[#fab60a] shadow-xl space-y-6 text-center relative overflow-hidden">
+            <div className="rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br from-[#f15e1c] via-[#e55215] to-[#d8480d] text-white p-8 sm:p-12 xl:p-16 border-2 border-[#fab60a] shadow-xl space-y-6 text-center relative overflow-hidden">
               
-              <div className="relative z-10 max-w-4xl mx-auto space-y-4">
+              <div className="relative z-10 max-w-3xl mx-auto space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 border border-white/40 text-xs font-mono font-bold text-white">
                   <Sparkles className="w-3.5 h-3.5 text-[#ffec69]" />
                   <span>START YOUR TECHNOLOGY ROADMAP</span>
@@ -1365,14 +1451,14 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
       <SystemScanTransition />
 
       {/* =========================================================================
-          SECTION 15 — RELATED BLOG / INSIGHTS SECTION (REUSED CMS DATA)
+          SECTION 16 — RELATED INSIGHTS SECTION
           ========================================================================= */}
       {relatedPosts && relatedPosts.length > 0 && (
-        <section className="relative py-16 sm:py-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none">
-          <div className="max-w-[1536px] mx-auto space-y-10">
+        <section className="relative py-12 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] select-none">
+          <div className="max-w-[1440px] mx-auto space-y-8">
             
             <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#101b17] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#000000] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
                 <BookOpen className="w-3.5 h-3.5" />
                 <span>EXECUTIVE THOUGHT LEADERSHIP</span>
               </div>
@@ -1387,9 +1473,9 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
             {/* 3-Column Blog Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1440px] mx-auto">
               {relatedPosts.map((post, idx) => (
-                <AnimatedSection key={post.slug} delay={0.08 * idx}>
-                  <TiltCard maxTilt={3} scale={1.01}>
-                    <div className="h-full p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#101b17] border-2 border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c] shadow-xs hover:shadow-md transition-all duration-200 text-left flex flex-col justify-between group">
+                <AnimatedSection key={post.slug} delay={0.04 * idx}>
+                  <TiltCard maxTilt={2} scale={1.01}>
+                    <div className="h-full p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#000000] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 text-left flex flex-col justify-between group">
                       <div className="space-y-3">
                         
                         {post.featuredImageUrl && (
@@ -1403,7 +1489,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                         )}
 
                         <div className="flex items-center justify-between">
-                          <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#172420] text-[#f15e1c] border border-[#f7d7b0]/50">
+                          <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] text-[#f15e1c] border border-[#f7d7b0]/50">
                             {post.category}
                           </span>
                           {post.readTime && (
@@ -1424,7 +1510,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                         </p>
                       </div>
 
-                      <div className="pt-4 mt-4 border-t border-[#f7d7b0]/60 dark:border-[#253630] flex items-center justify-between">
+                      <div className="pt-4 mt-4 border-t border-[#f7d7b0]/60 dark:border-[#1a1a1a] flex items-center justify-between">
                         <span className="text-[11px] font-mono text-[#7A6A5F] flex items-center gap-1">
                           <Calendar className="w-3 h-3 text-[#f15e1c]" /> {post.dateFormatted || post.publishedAt}
                         </span>
@@ -1442,7 +1528,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
             </div>
 
             {/* View More Blogs CTA */}
-            <AnimatedSection delay={0.25} className="text-center pt-2">
+            <AnimatedSection delay={0.15} className="text-center pt-2">
               <Link href="/insights" className="inline-block">
                 <MagneticButton>
                   <Button3D
@@ -1460,7 +1546,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
       )}
 
       {/* Footer Pathway */}
-      <footer className="py-4 border-t border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] overflow-hidden select-none">
+      <footer className="py-4 border-t border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] overflow-hidden select-none">
         <div className="flex flex-wrap items-center justify-center gap-3 text-[11px] font-mono font-extrabold text-[#7A6A5F] dark:text-[#B8ACA0] tracking-wider px-4">
           <span>01 ASSESS</span>
           <span className="text-[#f15e1c]">&bull;</span>

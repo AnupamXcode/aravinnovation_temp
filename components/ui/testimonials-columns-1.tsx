@@ -52,7 +52,7 @@ export function TestimonialsColumn({
         {duplicatedTestimonials.map((item, idx) => (
           <div
             key={`${item.name}-${idx}`}
-            className="p-8 sm:p-10 rounded-3xl border border-[#f7d7b0] dark:border-[#253630] shadow-xl shadow-[#f15e1c]/10 dark:shadow-none bg-white dark:bg-[#172420] hover:border-[#f15e1c] dark:hover:border-[#f15e1c] transition-all duration-300 relative group overflow-hidden max-w-sm w-full shrink-0"
+            className="p-8 sm:p-10 rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl shadow-[#f15e1c]/10 dark:shadow-none bg-white dark:bg-[#0a0a0a] hover:border-[#f15e1c] dark:hover:border-[#f15e1c] transition-all duration-300 relative group overflow-hidden max-w-sm w-full shrink-0"
           >
             <Quote className="absolute top-6 right-6 w-14 h-14 text-[#f7d7b0]/30 dark:text-[#f15e1c]/10 pointer-events-none group-hover:scale-110 transition-transform" />
 
@@ -69,7 +69,7 @@ export function TestimonialsColumn({
             </p>
 
             {/* Author */}
-            <div className="mt-6 pt-4 border-t border-[#f7d7b0]/50 dark:border-[#253630] flex items-center gap-3.5">
+            <div className="mt-6 pt-4 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center gap-3.5">
               {item.image ? (
                 <img
                   src={item.image}
@@ -77,7 +77,7 @@ export function TestimonialsColumn({
                   className="w-11 h-11 rounded-full object-cover border border-[#f7d7b0] shrink-0"
                 />
               ) : (
-                <div className="w-11 h-11 rounded-full bg-[#f7d7b0]/40 dark:bg-[#253630] text-[#f15e1c] font-bold flex items-center justify-center text-sm border border-[#f7d7b0] shrink-0">
+                <div className="w-11 h-11 rounded-full bg-[#f7d7b0]/40 dark:bg-[#1a1a1a] text-[#f15e1c] font-bold flex items-center justify-center text-sm border border-[#f7d7b0] shrink-0">
                   {item.name.slice(0, 2).toUpperCase()}
                 </div>
               )}

@@ -73,7 +73,7 @@ export default async function CaseStudyDetailPage({
   }
 
   return (
-    <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+    <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
       <BreadcrumbSchema
         items={[
           { name: "Case Studies", url: "/case-studies" },
@@ -117,7 +117,7 @@ export default async function CaseStudyDetailPage({
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={0.3}>
-            <p className="text-lg text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed border-l-4 border-[#f15e1c] pl-4 italic bg-[#FBF3EA] dark:bg-[#1A1613] py-3 rounded-r-2xl border border-[#EFE2D6] dark:border-[#2C241E]">
+            <p className="text-lg text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed border-l-4 border-[#f15e1c] pl-4 italic bg-[#FBF3EA] dark:bg-[#1A1613] py-3 rounded-r-2xl border border-[#EFE2D6] dark:border-[#1f1f1f]">
               {caseStudy.summary}
             </p>
           </ScrollReveal>
@@ -127,7 +127,7 @@ export default async function CaseStudyDetailPage({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <ScrollReveal direction="up" delay={0.1}>
             <TiltCard maxTilt={5} scale={1.01} className="h-full">
-              <div className="h-full p-6 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] space-y-3 shadow-xs">
+              <div className="h-full p-6 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-3 shadow-xs">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#f15e1c] block">
                   01. The Challenge
                 </span>
@@ -143,7 +143,7 @@ export default async function CaseStudyDetailPage({
 
           <ScrollReveal direction="up" delay={0.2}>
             <TiltCard maxTilt={5} scale={1.01} className="h-full">
-              <div className="h-full p-6 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm space-y-3">
+              <div className="h-full p-6 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm space-y-3">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#f15e1c] block">
                   02. Project Objective
                 </span>
@@ -160,7 +160,7 @@ export default async function CaseStudyDetailPage({
 
         {/* Section 2: Approach & Technical Solution */}
         <ScrollReveal direction="up">
-          <div className="p-8 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm space-y-6">
+          <div className="p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm space-y-6">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-[#f15e1c] block mb-2">
                 03. Strategic Approach
@@ -173,7 +173,7 @@ export default async function CaseStudyDetailPage({
               </p>
             </div>
 
-            <div className="pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E]">
+            <div className="pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
               <span className="text-xs font-bold uppercase tracking-wider text-[#f15e1c] block mb-2">
                 04. Deployed Solution
               </span>
@@ -191,7 +191,7 @@ export default async function CaseStudyDetailPage({
                 {caseStudy.technologiesUsed.map((tech, i) => (
                   <span
                     key={i}
-                    className="px-3 py-1 rounded-xl bg-[#FBF3EA] dark:bg-[#1F1A16] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#2C241E]"
+                    className="px-3 py-1 rounded-xl bg-[#FBF3EA] dark:bg-[#0a0a0a] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#1f1f1f]"
                   >
                     {tech}
                   </span>
@@ -203,7 +203,7 @@ export default async function CaseStudyDetailPage({
 
         {/* Section 3: Documented Results */}
         <ScrollReveal direction="up">
-          <div className="p-8 rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] space-y-6">
+          <div className="p-8 rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-6">
             <div className="text-center max-w-xl mx-auto space-y-2">
               <Badge variant="secondary" size="md">
                 Verified Metrics
@@ -217,7 +217,7 @@ export default async function CaseStudyDetailPage({
               {caseStudy.results.map((res, i) => (
                 <div
                   key={i}
-                  className="p-5 rounded-2xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] text-center space-y-2 shadow-2xs"
+                  className="p-5 rounded-2xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] text-center space-y-2 shadow-2xs"
                 >
                   <div className="text-sm font-mono font-bold text-[#f15e1c]">
                     {res.metric}
@@ -237,14 +237,14 @@ export default async function CaseStudyDetailPage({
         {/* Testimonial Quote */}
         {caseStudy.testimonial && (
           <ScrollReveal direction="up">
-            <div className="p-8 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm space-y-4">
+            <div className="p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm space-y-4">
               <div className="text-xs font-bold uppercase tracking-wider text-[#f15e1c]">
                 Client Executive Endorsement
               </div>
               <blockquote className="text-base italic text-[#3A2E27] dark:text-[#FAF5EE] font-medium leading-relaxed">
                 “{caseStudy.testimonial.quote}”
               </blockquote>
-              <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#2C241E] text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+              <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#1f1f1f] text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
                 <span className="font-bold text-[#3A2E27] dark:text-[#FAF5EE]">{caseStudy.testimonial.author}</span> &bull; {caseStudy.testimonial.designation}, {caseStudy.testimonial.company}
               </div>
             </div>

@@ -16,7 +16,7 @@ export default function CaseStudyError({
   }, [error]);
 
   return (
-    <div className="min-h-[60vh] flex flex-col items-center justify-center bg-[#FFFDF9] dark:bg-[#12100E] px-4 text-center">
+    <div className="min-h-[60vh] flex flex-col items-center justify-center bg-[#FFFDF9] dark:bg-[#000000] px-4 text-center">
       <h2 className="text-2xl sm:text-3xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] mb-4">
         Case Study Not Found
       </h2>
@@ -32,7 +32,7 @@ export default function CaseStudyError({
         </button>
         <Link
           href="/case-studies"
-          className="px-6 py-3 rounded-full bg-[#FBF3EA] dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE] font-semibold border border-[#EFE2D6] dark:border-[#2C241E] hover:bg-[#F2E5D5] dark:hover:bg-[#2A231F] transition-colors"
+          className="px-6 py-3 rounded-full bg-[#FBF3EA] dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE] font-semibold border border-[#EFE2D6] dark:border-[#1f1f1f] hover:bg-[#F2E5D5] dark:hover:bg-[#2A231F] transition-colors"
         >
           View All Case Studies
         </Link>

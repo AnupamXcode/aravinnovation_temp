@@ -61,7 +61,7 @@ function SystemScanTransition() {
 
   return (
     <div ref={ref} className="relative w-full h-px my-4 overflow-hidden pointer-events-none select-none">
-      <div className="w-full h-full bg-[#f7d7b0]/30 dark:bg-[#253630]" />
+      <div className="w-full h-full bg-[#f7d7b0]/30 dark:bg-[#1a1a1a]" />
       {!shouldReduceMotion && (
         <motion.div
           initial={{ x: "-100%" }}
@@ -108,7 +108,7 @@ function ProtectedOperatingBackground() {
           animate={{ rotate: 0 }}
           transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
         />
-        <circle cx="600" cy="300" r="320" stroke="#f7d7b0" strokeWidth="0.75" strokeDasharray="2 4" className="dark:stroke-[#253630]" />
+        <circle cx="600" cy="300" r="320" stroke="#f7d7b0" strokeWidth="0.75" strokeDasharray="2 4" className="dark:stroke-[#1a1a1a]" />
 
         {/* Axis Perimeter Connection Vectors */}
         <line x1="600" y1="160" x2="600" y2="60" stroke="#2e936f" strokeWidth="1.5" strokeDasharray="3 3" />
@@ -460,12 +460,12 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
   const testimonial = testimonialsData.find((t) => t.id === "test-4") || testimonialsData[3];
 
   return (
-    <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#12100E] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden selection:bg-[#2e936f]/20 selection:text-[#2e936f]">
+    <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#000000] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden selection:bg-[#2e936f]/20 selection:text-[#2e936f]">
       
       {/* =========================================================================
           1. HERO — PROTECTED OPERATING ENVIRONMENT
           ========================================================================= */}
-      <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] overflow-hidden select-none">
+      <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none">
         <ProtectedOperatingBackground />
 
         {/* Ambient Glows */}
@@ -542,7 +542,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
 
           {/* Protected Perimeter Status Bar */}
           <div className="pt-4 text-center">
-            <div className="inline-flex flex-wrap items-center justify-center gap-4 px-4 py-2 rounded-2xl bg-white/80 dark:bg-[#101b17]/80 border border-[#2e936f]/40 backdrop-blur-md shadow-lg text-xs font-mono font-bold text-[#2e936f]">
+            <div className="inline-flex flex-wrap items-center justify-center gap-4 px-4 py-2 rounded-2xl bg-white/80 dark:bg-[#000000]/80 border border-[#2e936f]/40 backdrop-blur-md shadow-lg text-xs font-mono font-bold text-[#2e936f]">
               <span className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#2e936f] animate-ping" />
                 PERIMETER: ACTIVE
@@ -564,7 +564,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
       <section
         id="risk-pipeline"
         ref={pipelineContainerRef}
-        className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none"
+        className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none"
       >
         <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
@@ -580,7 +580,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
           </div>
 
           {/* Pipeline 5-Stage Navigation Strip */}
-          <div className="p-4 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] shadow-sm max-w-5xl mx-auto flex items-center justify-between overflow-x-auto gap-2">
+          <div className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-sm max-w-5xl mx-auto flex items-center justify-between overflow-x-auto gap-2">
             {riskControlPipelineStages.map((st, i) => (
               <div
                 key={st.stage}
@@ -588,7 +588,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
                   "flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-mono font-bold shrink-0 transition-all",
                   i <= activePipelineStage
                     ? "bg-[#2e936f] text-white shadow-xs"
-                    : "bg-[#fefaf5] dark:bg-[#172420] text-[#7A6A5F] border border-[#f7d7b0]"
+                    : "bg-[#fefaf5] dark:bg-[#0a0a0a] text-[#7A6A5F] border border-[#f7d7b0]"
                 )}
               >
                 <span>{st.stage}</span>
@@ -607,9 +607,9 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.35 }}
-                className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#2e936f]/40 shadow-2xl space-y-6 text-left relative overflow-hidden"
+                className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#2e936f]/40 shadow-2xl space-y-6 text-left relative overflow-hidden"
               >
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#253630] pb-5">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-5">
                   <div>
                     <span className="text-xs font-mono font-black text-[#2e936f] uppercase tracking-wider block">
                       STAGE {riskControlPipelineStages[activePipelineStage].stage} / 05 &bull; {riskControlPipelineStages[activePipelineStage].name}
@@ -619,21 +619,21 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
                     </h3>
                   </div>
 
-                  <div className="px-4 py-2 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] text-xs font-mono font-bold text-[#2e936f] shadow-xs">
+                  <div className="px-4 py-2 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#2e936f] shadow-xs">
                     PROTECTED OPERATING SYSTEM
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                  <div className="p-4 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0]/60 space-y-1">
+                  <div className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 space-y-1">
                     <span className="text-[10px] font-mono font-bold text-[#7A6A5F] block uppercase">RISK LEVEL</span>
                     <span className="text-sm font-mono font-extrabold text-[#f15e1c]">MODERATE TO MITIGATED</span>
                   </div>
-                  <div className="p-4 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0]/60 space-y-1">
+                  <div className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 space-y-1">
                     <span className="text-[10px] font-mono font-bold text-[#7A6A5F] block uppercase">CONTROL STATUS</span>
                     <span className="text-sm font-mono font-extrabold text-[#2e936f]">CONTAINED &amp; AUDITED</span>
                   </div>
-                  <div className="p-4 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0]/60 space-y-1">
+                  <div className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 space-y-1">
                     <span className="text-[10px] font-mono font-bold text-[#7A6A5F] block uppercase">COMPLIANCE STATE</span>
                     <span className="text-sm font-mono font-extrabold text-[#fab60a]">ISO 27001 &bull; DPDP ACT</span>
                   </div>
@@ -655,14 +655,14 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
                     className={cn(
                       "p-8 rounded-[2.5rem] border-2 transition-all duration-300 cursor-pointer space-y-6 text-left flex flex-col justify-between min-h-[340px] relative overflow-hidden group",
                       isActive
-                        ? "bg-white dark:bg-[#101b17] border-[#2e936f] shadow-2xl ring-2 ring-[#2e936f]/20"
-                        : "bg-[#fefaf5] dark:bg-[#172420] border-[#f7d7b0] dark:border-[#253630] opacity-80 hover:opacity-100"
+                        ? "bg-white dark:bg-[#000000] border-[#2e936f] shadow-2xl ring-2 ring-[#2e936f]/20"
+                        : "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] opacity-80 hover:opacity-100"
                     )}
                   >
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <div className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] group-hover:scale-110 transition-transform">
+                          <div className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] group-hover:scale-110 transition-transform">
                             {sol.icon}
                           </div>
                           <span className="text-xs font-mono font-black text-[#2e936f]">
@@ -689,13 +689,13 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
                       </p>
                     </div>
 
-                    <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#253630] space-y-2">
+                    <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] space-y-2">
                       <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#7A6A5F]">
                         Key Scope Deliverables
                       </span>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]">
                         {sol.deliverables.map((del, i) => (
-                          <div key={i} className="flex items-center gap-2 p-2 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0]/60 dark:border-[#253630]">
+                          <div key={i} className="flex items-center gap-2 p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
                             <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
                             <span className="truncate">{del}</span>
                           </div>
@@ -715,7 +715,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
       {/* =========================================================================
           3. RISK MATRIX — ENTERPRISE VULNERABILITY REGISTER
           ========================================================================= */}
-      <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
+      <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none">
         <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
@@ -731,7 +731,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left 3x3 Impact vs Likelihood Grid */}
-            <div className="lg:col-span-7 p-6 sm:p-8 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-xl space-y-4">
+            <div className="lg:col-span-7 p-6 sm:p-8 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl space-y-4">
               <div className="flex items-center justify-between text-xs font-mono font-bold text-[#7A6A5F] border-b border-[#f7d7b0] pb-3">
                 <span>LIKELIHOOD &darr; vs IMPACT &rarr;</span>
                 <span className="text-[#2e936f]">IDENTIFY &bull; PRIORITIZE &bull; MITIGATE</span>
@@ -760,7 +760,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
               </span>
               <div className="space-y-3">
                 {riskGovSolutionsData[0].deliverables.map((del, i) => (
-                  <div key={i} className="p-4 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] flex items-center gap-3 shadow-xs">
+                  <div key={i} className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] flex items-center gap-3 shadow-xs">
                     <span className="w-7 h-7 rounded-full bg-[#2e936f] text-white flex items-center justify-center text-xs font-mono font-bold shrink-0">
                       0{i + 1}
                     </span>
@@ -778,7 +778,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
       {/* =========================================================================
           4. PERFORMANCE METRIC — 100% ORGANIZATIONAL RISK VISIBILITY
           ========================================================================= */}
-      <section className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none">
+      <section className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] select-none">
         <div className="max-w-[1536px] mx-auto space-y-10">
           <div className="text-center max-w-4xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
@@ -825,9 +825,9 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
               },
             ].map((stat, idx) => (
               <TiltCard key={idx} maxTilt={5} scale={1.01}>
-                <div className="h-full p-6 sm:p-8 rounded-[2rem] bg-white dark:bg-[#101b17] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-md hover:border-[#2e936f] transition-all duration-300 space-y-4 text-left flex flex-col justify-between relative overflow-hidden group">
+                <div className="h-full p-6 sm:p-8 rounded-[2rem] bg-white dark:bg-[#000000] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md hover:border-[#2e936f] transition-all duration-300 space-y-4 text-left flex flex-col justify-between relative overflow-hidden group">
                   <div className="flex items-center justify-between">
-                    <div className="p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0]/60">
+                    <div className="p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0]/60">
                       {stat.icon}
                     </div>
                     <span className="text-[#2e936f] text-sm font-bold">↗</span>
@@ -858,7 +858,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
       {/* =========================================================================
           5. GOVERNANCE GRID & COMPLIANCE VERIFICATION PIPELINE
           ========================================================================= */}
-      <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
+      <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none">
         <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
@@ -873,14 +873,14 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
           </div>
 
           {/* Governance Control Grid */}
-          <div className="p-8 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-xl space-y-6">
+          <div className="p-8 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl space-y-6">
             <span className="text-xs font-mono font-extrabold uppercase tracking-wider text-[#2e936f] block">
               GOVERNANCE CONTROL GRID
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-5 gap-4">
               {governanceControlGridNodes.map((node, i) => (
-                <div key={i} className="p-4 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] text-center space-y-2">
-                  <div className="p-2 rounded-xl bg-[#fefaf5] dark:bg-[#172420] w-fit mx-auto">
+                <div key={i} className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] text-center space-y-2">
+                  <div className="p-2 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] w-fit mx-auto">
                     {node.icon}
                   </div>
                   <div className="text-xs font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
@@ -893,13 +893,13 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
           </div>
 
           {/* Incident Response Protocol Strip */}
-          <div className="p-8 rounded-[2.5rem] bg-white dark:bg-[#101b17] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-xl space-y-6">
+          <div className="p-8 rounded-[2.5rem] bg-white dark:bg-[#000000] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl space-y-6">
             <span className="text-xs font-mono font-extrabold uppercase tracking-wider text-[#f15e1c] block">
               INCIDENT RESPONSE PROTOCOL (CALM RESPONSE UNDER PRESSURE)
             </span>
             <div className="grid grid-cols-2 sm:grid-cols-6 gap-3 text-center">
               {incidentResponseSteps.map((st, i) => (
-                <div key={st.step} className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] space-y-1">
+                <div key={st.step} className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] space-y-1">
                   <span className="text-[10px] font-mono font-black text-[#f15e1c] block">STEP {st.step}</span>
                   <div className="text-xs font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">{st.name}</div>
                   <span className="text-[10px] text-[#7A6A5F] block leading-tight">{st.desc}</span>
@@ -917,7 +917,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
           ========================================================================= */}
       <section
         ref={timelineContainerRef}
-        className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none"
+        className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none"
       >
         <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
@@ -934,7 +934,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
 
           {/* Software Resilience Timeline Progress Bar */}
           <div className="relative py-4 max-w-5xl mx-auto">
-            <div className="relative w-full bg-[#f7d7b0] dark:bg-[#253630] h-2.5 rounded-full overflow-hidden">
+            <div className="relative w-full bg-[#f7d7b0] dark:bg-[#1a1a1a] h-2.5 rounded-full overflow-hidden">
               <motion.div
                 style={{ width: timelineLineWidth }}
                 className="h-full bg-gradient-to-r from-[#2e936f] via-[#f15e1c] to-[#fab60a]"
@@ -957,7 +957,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
                         ? "bg-[#2e936f] border-white text-white scale-125 shadow-lg shadow-[#2e936f]/40 ring-4 ring-[#2e936f]/20 z-10"
                         : isPassed
                         ? "bg-[#f15e1c] border-white text-white"
-                        : "bg-white dark:bg-[#101b17] border-[#f7d7b0] dark:border-[#253630] text-[#7A6A5F]"
+                        : "bg-white dark:bg-[#000000] border-[#f7d7b0] dark:border-[#1a1a1a] text-[#7A6A5F]"
                     )}
                   >
                     {isPassed && !isActive ? <Check className="w-4 h-4 text-white" /> : wf.step}
@@ -976,9 +976,9 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.35 }}
-                className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#2e936f]/40 shadow-2xl space-y-6 text-left relative overflow-hidden"
+                className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#2e936f]/40 shadow-2xl space-y-6 text-left relative overflow-hidden"
               >
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#253630] pb-5">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-5">
                   <div>
                     <span className="text-xs font-mono font-black text-[#2e936f] uppercase tracking-wider block">
                       STAGE {activeWorkStep.step} / 04 &bull; {activeWorkStep.subtitle}
@@ -988,7 +988,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
                     </h3>
                   </div>
 
-                  <div className="px-4 py-2 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] text-xs font-mono font-bold text-[#2e936f] shadow-xs">
+                  <div className="px-4 py-2 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#2e936f] shadow-xs">
                     {activeWorkStep.output}
                   </div>
                 </div>
@@ -999,7 +999,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
 
                 {/* SPECIAL IMPLEMENT AND TRAIN CONTROL ROLLOUT (STAGE 03) */}
                 {activeWorkStep.rolloutNodes && (
-                  <div className="pt-3 border-t border-[#f7d7b0] dark:border-[#253630] space-y-3">
+                  <div className="pt-3 border-t border-[#f7d7b0] dark:border-[#1a1a1a] space-y-3">
                     <span className="text-xs font-mono font-extrabold uppercase tracking-wider text-[#2e936f] block">
                       CONTROL ROLLOUT (STAGE 03 ORGANIZATIONAL IMPLEMENTATION)
                     </span>
@@ -1011,7 +1011,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
                             "px-4 py-2 rounded-xl text-xs font-mono font-extrabold flex items-center gap-2 border",
                             rn.isActive
                               ? "bg-[#2e936f] text-white border-[#2e936f] shadow-lg shadow-[#2e936f]/30"
-                              : "bg-white dark:bg-[#101b17] text-[#1b2823] dark:text-[#ffffff] border-[#f7d7b0]"
+                              : "bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] border-[#f7d7b0]"
                           )}
                         >
                           {rn.check && <Check className="w-4 h-4 text-[#2e936f]" />}
@@ -1035,7 +1035,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
           ========================================================================= */}
       <section
         ref={loopContainerRef}
-        className="relative py-28 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none"
+        className="relative py-28 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none"
       >
         <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
@@ -1051,7 +1051,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
           </div>
 
           {/* Circular Iteration Loop Display */}
-          <div className="relative rounded-[3rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-8 sm:p-16 text-center overflow-hidden">
+          <div className="relative rounded-[3rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-8 sm:p-16 text-center overflow-hidden">
             <div className="absolute inset-0 bg-radial from-[#2e936f]/10 via-transparent to-transparent pointer-events-none" />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 relative z-10">
@@ -1065,8 +1065,8 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
                     className={cn(
                       "p-6 rounded-2xl border-2 transition-all duration-300 space-y-2 cursor-pointer text-center relative overflow-hidden",
                       isActive
-                        ? "bg-white dark:bg-[#101b17] border-[#2e936f] shadow-xl scale-105 ring-2 ring-[#2e936f]/20"
-                        : "bg-white/60 dark:bg-[#101b17]/60 border-[#f7d7b0] opacity-75 hover:opacity-100"
+                        ? "bg-white dark:bg-[#000000] border-[#2e936f] shadow-xl scale-105 ring-2 ring-[#2e936f]/20"
+                        : "bg-white/60 dark:bg-[#000000]/60 border-[#f7d7b0] opacity-75 hover:opacity-100"
                     )}
                   >
                     <span className="text-[10px] font-mono font-black text-[#2e936f] block">
@@ -1097,7 +1097,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
           ========================================================================= */}
       <section
         ref={missionRef}
-        className="relative py-28 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#ffffff] dark:bg-[#101b17] overflow-hidden select-none"
+        className="relative py-28 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000] overflow-hidden select-none"
       >
         {/* Subtle Background Parallax Typography */}
         <div className="absolute inset-0 pointer-events-none z-0 flex flex-col justify-between py-8 opacity-5 dark:opacity-10 font-display font-black text-7xl sm:text-9xl text-[#1b2823] dark:text-[#ffffff] tracking-tighter">
@@ -1130,7 +1130,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
           </div>
 
           <div className="lg:col-span-5 flex items-center justify-center">
-            <div className="relative w-80 h-80 sm:w-96 sm:h-96 rounded-3xl bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-6 flex flex-col justify-between items-center text-center overflow-hidden">
+            <div className="relative w-80 h-80 sm:w-96 sm:h-96 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-6 flex flex-col justify-between items-center text-center overflow-hidden">
               <div className="absolute inset-0 bg-radial from-[#2e936f]/15 via-[#f15e1c]/10 to-transparent pointer-events-none" />
 
               <div className="relative z-10 flex items-center gap-2 pt-2">
@@ -1158,13 +1158,13 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
       {/* =========================================================================
           9. CLIENT TESTIMONIAL — ENTERPRISE PROOF
           ========================================================================= */}
-      <section ref={testimonialRef} className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
+      <section ref={testimonialRef} className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
         <div className="max-w-[1536px] mx-auto text-center space-y-8">
           <Badge variant="secondary" size="md">
             KIND WORDS FROM OUR CLIENTS
           </Badge>
 
-          <div className="p-8 sm:p-14 lg:p-16 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-xl space-y-6 relative overflow-hidden max-w-5xl mx-auto">
+          <div className="p-8 sm:p-14 lg:p-16 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl space-y-6 relative overflow-hidden max-w-5xl mx-auto">
             <div className="p-3 rounded-2xl bg-[#2e936f] text-white w-fit mx-auto shadow-md">
               <Quote className="w-6 h-6" />
             </div>
@@ -1182,7 +1182,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
               initial={{ opacity: 0, y: 15 }}
               animate={isTestimonialInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
               transition={{ duration: 0.5, delay: 0.35 }}
-              className="pt-4 border-t border-[#f7d7b0] dark:border-[#253630] space-y-1"
+              className="pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] space-y-1"
             >
               <div className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                 {testimonial.author}
@@ -1201,8 +1201,8 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
       {/* =========================================================================
           10. ABOUT OUR CEO — EDITORIAL LEADERSHIP PROFILE
           ========================================================================= */}
-      <section className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-        <div className="max-w-[1536px] mx-auto rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-8 sm:p-14 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center text-left">
+      <section className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-[1536px] mx-auto rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-8 sm:p-14 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center text-left">
           <div className="lg:col-span-5 flex justify-center">
             <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-3xl overflow-hidden border-2 border-[#2e936f] shadow-xl bg-[#e8f5f1] dark:bg-[#192a24] flex items-center justify-center text-center p-6 space-y-2 flex-col">
               <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#2e936f] text-white flex items-center justify-center text-2xl sm:text-3xl font-black font-display shadow-md">
@@ -1346,7 +1346,7 @@ export function RiskGovInteractivePage({ service }: RiskGovPageProps) {
       {/* =========================================================================
           12. FOOTER BRAND MOMENT
           ========================================================================= */}
-      <footer className="py-6 border-t border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] overflow-hidden select-none">
+      <footer className="py-6 border-t border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] overflow-hidden select-none">
         <div className="flex items-center justify-center gap-6 text-xs sm:text-sm font-mono font-extrabold text-[#7A6A5F] dark:text-[#B8ACA0] tracking-widest">
           <span>ASSESS</span>
           <span className="text-[#2e936f]">&bull;</span>

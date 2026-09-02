@@ -65,7 +65,7 @@ export function InteractiveServiceSelector() {
                 className={`w-full text-left p-4 rounded-2xl transition-all duration-300 cursor-pointer flex items-center justify-between border ${
                   isSelected
                     ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-xl shadow-[#f15e1c]/20 scale-[1.02]"
-                    : "bg-[#ffffff] dark:bg-[#172420] text-[#1b2823] dark:text-[#ffffff] border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c]/50 hover:bg-[#fefaf5] dark:hover:bg-[#1e2c27]"
+                    : "bg-[#ffffff] dark:bg-[#0a0a0a] text-[#1b2823] dark:text-[#ffffff] border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/50 hover:bg-[#fefaf5] dark:hover:bg-[#121212]"
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -85,10 +85,10 @@ export function InteractiveServiceSelector() {
         <div className="col-span-8 perspective-1000">
           <div
             key={selectedService.slug}
-            className="rounded-3xl bg-[#ffffff] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] p-8 shadow-2xl space-y-6 relative overflow-hidden transition-all duration-300 transform-style-3d hover-lift-3d animate-in fade-in zoom-in-95 duration-200"
+            className="rounded-3xl bg-[#ffffff] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] p-8 shadow-2xl space-y-6 relative overflow-hidden transition-all duration-300 transform-style-3d hover-lift-3d animate-in fade-in zoom-in-95 duration-200"
           >
             {/* Accent Header */}
-            <div className="flex items-start justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#253630] pb-5">
+            <div className="flex items-start justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-5">
               <div className="flex items-center gap-4">
                 <div className="p-3.5 rounded-2xl bg-[#f15e1c] text-white shadow-lg shadow-[#f15e1c]/25 shrink-0 transform-style-3d hover:rotate-6 transition-transform">
                   {iconMap[selectedService.icon] || <Compass className="w-6 h-6" />}
@@ -148,7 +148,7 @@ export function InteractiveServiceSelector() {
                 {pillars.slice(0, 4).map((pillar: { title: string; description: string }, idx: number) => (
                   <div
                     key={idx}
-                    className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#22312b] border border-[#f7d7b0] dark:border-[#31473f] flex items-center gap-2.5 shadow-2xs hover:border-[#f15e1c]/50 transition-colors"
+                    className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center gap-2.5 shadow-2xs hover:border-[#f15e1c]/50 transition-colors"
                   >
                     <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
                     <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff] truncate">
@@ -160,7 +160,7 @@ export function InteractiveServiceSelector() {
             </div>
 
             {/* Delivery Metric Highlights Bar */}
-            <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#253630] flex items-center justify-between gap-4">
+            <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] flex items-center justify-between gap-4">
               <div className="flex items-center gap-6">
                 {(selectedService.results || []).slice(0, 2).map((res, idx) => (
                   <div key={idx} className="flex items-center gap-2">
@@ -191,7 +191,7 @@ export function InteractiveServiceSelector() {
           return (
             <div
               key={svc.slug}
-              className="rounded-2xl bg-[#ffffff] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] overflow-hidden shadow-sm"
+              className="rounded-2xl bg-[#ffffff] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden shadow-sm"
             >
               <button
                 type="button"
@@ -212,7 +212,7 @@ export function InteractiveServiceSelector() {
               </button>
 
               {isSelected && (
-                <div className="p-5 space-y-5 border-t border-[#f7d7b0] dark:border-[#253630]">
+                <div className="p-5 space-y-5 border-t border-[#f7d7b0] dark:border-[#1a1a1a]">
                   <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
                     {svc.description}
                   </p>

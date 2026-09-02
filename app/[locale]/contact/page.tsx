@@ -32,7 +32,7 @@ export default async function ContactPage({
   const t = await getTranslations("ContactPage");
 
   return (
-    <div className="pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+    <div className="pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
       <BreadcrumbSchema items={[{ name: "Contact Us", url: "/contact" }]} />
       <LocalBusinessSchema location="both" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
@@ -71,13 +71,13 @@ export default async function ContactPage({
           <div className="lg:col-span-5 space-y-8">
             <ScrollReveal direction="left" delay={0.2}>
               <TiltCard maxTilt={4}>
-                <div className="p-8 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] space-y-6 shadow-xl">
+                <div className="p-8 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-6 shadow-xl">
                   <h3 className="text-xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
                     Regional Hubs & Addresses
                   </h3>
 
                   {/* India HQ */}
-                  <div className="p-5 rounded-2xl bg-white dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] space-y-2">
+                  <div className="p-5 rounded-2xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-2">
                     <div className="flex items-center gap-2 font-bold text-sm text-[#3A2E27] dark:text-[#FAF5EE]">
                       <MapPin className="w-4 h-4 text-[#f15e1c]" />
                       <span>India Headquarters</span>
@@ -97,7 +97,7 @@ export default async function ContactPage({
                   </div>
 
                   {/* UAE Hub */}
-                  <div className="p-5 rounded-2xl bg-white dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] space-y-2">
+                  <div className="p-5 rounded-2xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-2">
                     <div className="flex items-center gap-2 font-bold text-sm text-[#3A2E27] dark:text-[#FAF5EE]">
                       <MapPin className="w-4 h-4 text-[#f15e1c]" />
                       <span>UAE & Middle East Hub</span>
@@ -117,7 +117,7 @@ export default async function ContactPage({
                   </div>
 
                   {/* Direct Emails */}
-                  <div className="pt-2 space-y-2.5 text-xs text-[#7A6A5F] dark:text-[#B8ACA0] border-t border-[#EFE2D6] dark:border-[#2C241E]">
+                  <div className="pt-2 space-y-2.5 text-xs text-[#7A6A5F] dark:text-[#B8ACA0] border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
                     <div className="flex items-center gap-2">
                       <Mail className="w-4 h-4 text-[#f15e1c]" />
                       <span className="font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">General Inquiries:</span>
@@ -139,7 +139,7 @@ export default async function ContactPage({
 
             {/* Response Guarantee Box */}
             <ScrollReveal direction="left" delay={0.3}>
-              <div className="p-6 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm space-y-3">
+              <div className="p-6 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm space-y-3">
                 <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#f15e1c]">
                   <Clock className="w-4 h-4" />
                   <span>Response SLA</span>

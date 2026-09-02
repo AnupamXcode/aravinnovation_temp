@@ -28,7 +28,7 @@ export function FAQAccordion({
   };
 
   return (
-    <section className={cn("py-12 sm:py-16 lg:py-20 bg-[#FFFDF9] dark:bg-[#12100E]", className)}>
+    <section className={cn("py-12 sm:py-16 lg:py-20 bg-[#FFFDF9] dark:bg-[#000000]", className)}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-10 sm:mb-12">
@@ -54,7 +54,7 @@ export function FAQAccordion({
             return (
               <div
                 key={index}
-                className="bg-white dark:bg-[#191512] border border-[#EFE2D6] dark:border-[#2C241E] rounded-2xl overflow-hidden transition-shadow hover:shadow-md"
+                className="bg-white dark:bg-[#191512] border border-[#EFE2D6] dark:border-[#1f1f1f] rounded-2xl overflow-hidden transition-shadow hover:shadow-md"
               >
                 <button
                   type="button"
@@ -83,7 +83,7 @@ export function FAQAccordion({
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
-                      <div className="px-6 sm:px-8 pb-6 pt-2 bg-[#FBF3EA]/30 dark:bg-[#1A1613]/50 border-t border-[#EFE2D6]/60 dark:border-[#2C241E]/60 space-y-3">
+                      <div className="px-6 sm:px-8 pb-6 pt-2 bg-[#FBF3EA]/30 dark:bg-[#1A1613]/50 border-t border-[#EFE2D6]/60 dark:border-[#1f1f1f]/60 space-y-3">
                         <p className="text-base sm:text-lg text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed pt-2">
                           {item.answer}
                         </p>

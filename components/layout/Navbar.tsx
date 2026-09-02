@@ -126,7 +126,7 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 border-b bg-[#FFFDF9] dark:bg-[#12100E] border-[#EFE2D6] dark:border-[#2C241E] shadow-sm",
+          "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 border-b bg-[#FFFDF9] dark:bg-[#000000] border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm",
           isScrolled ? "py-2.5" : "py-3"
         )}
       >
@@ -150,8 +150,8 @@ export function Navbar() {
                   className={cn(
                     "relative inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer group",
                     isActive("/services")
-                      ? "text-[#f15e1c] font-semibold bg-[#FCE3D3]/30 dark:bg-[#261F1A]"
-                      : "text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#f15e1c] dark:hover:text-[#f15e1c] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A]"
+                      ? "text-[#f15e1c] font-semibold bg-[#FCE3D3]/30 dark:bg-[#161616]"
+                      : "text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#f15e1c] dark:hover:text-[#f15e1c] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#161616]"
                   )}
                   aria-expanded={activeDropdown === "services"}
                 >
@@ -170,8 +170,8 @@ export function Navbar() {
                 {/* Mega Dropdown Menu */}
                 {activeDropdown === "services" && (
                   <div className="absolute top-full left-0 w-[580px] pt-2 z-50">
-                    <div className="rounded-3xl bg-[#FFFDF9] dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] p-4 shadow-2xl grid grid-cols-1 gap-1">
-                      <div className="px-3 py-1.5 border-b border-[#EFE2D6] dark:border-[#2C241E] mb-1 flex items-center justify-between">
+                    <div className="rounded-3xl bg-[#FFFDF9] dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] p-4 shadow-2xl grid grid-cols-1 gap-1">
+                      <div className="px-3 py-1.5 border-b border-[#EFE2D6] dark:border-[#1f1f1f] mb-1 flex items-center justify-between">
                         <span className="text-[11px] font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0]">
                           Our Core Services
                         </span>
@@ -203,7 +203,7 @@ export function Navbar() {
                               pathname === service.href && "bg-[#FCE3D3]/40 dark:bg-[#2C221B]"
                             )}
                           >
-                            <div className="p-2 rounded-xl bg-[#FCE3D3]/50 dark:bg-[#261F1A] group-hover:bg-[#f15e1c]/10 transition-colors shrink-0 mt-0.5 border border-[#F4A97F]/30 dark:border-[#3D332B]">
+                            <div className="p-2 rounded-xl bg-[#FCE3D3]/50 dark:bg-[#161616] group-hover:bg-[#f15e1c]/10 transition-colors shrink-0 mt-0.5 border border-[#F4A97F]/30 dark:border-[#262626]">
                               {serviceIcons[service.href] || <Sparkles className="w-4 h-4 text-[#f15e1c]" />}
                             </div>
                             <div>
@@ -229,7 +229,7 @@ export function Navbar() {
                   "relative px-3.5 py-2 rounded-xl text-sm font-medium transition-colors group",
                   isActive("/products")
                     ? "text-[#f15e1c] font-semibold"
-                    : "text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#f15e1c] dark:hover:text-[#f15e1c] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A]"
+                    : "text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#f15e1c] dark:hover:text-[#f15e1c] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#161616]"
                 )}
               >
                 <span className="relative py-0.5">
@@ -250,7 +250,7 @@ export function Navbar() {
                     "inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-medium transition-colors cursor-pointer group",
                     isWorkingWithUsActive()
                       ? "text-[#f15e1c] font-semibold"
-                      : "text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#f15e1c] dark:hover:text-[#f15e1c] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A]"
+                      : "text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#f15e1c] dark:hover:text-[#f15e1c] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#161616]"
                   )}
                   aria-expanded={activeDropdown === "working-with-us"}
                 >
@@ -268,7 +268,7 @@ export function Navbar() {
 
                 {activeDropdown === "working-with-us" && (
                   <div className="absolute top-full left-0 w-[420px] pt-2 z-50">
-                    <div className="rounded-3xl bg-[#FFFDF9] dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] p-3 shadow-2xl space-y-1">
+                    <div className="rounded-3xl bg-[#FFFDF9] dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] p-3 shadow-2xl space-y-1">
                       <Link
                         href="/contact"
                         onClick={() => setActiveDropdown(null)}
@@ -290,7 +290,7 @@ export function Navbar() {
                         <ArrowRight className="w-4 h-4 text-[#f15e1c] group-hover:translate-x-0.5 transition-transform" />
                       </Link>
 
-                      <div className="pt-1.5 pb-1 px-3 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                      <div className="pt-1.5 pb-1 px-3 border-b border-[#EFE2D6] dark:border-[#1f1f1f]">
                         <span className="text-[10px] font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0]">
                           Company & Engagements
                         </span>
@@ -307,7 +307,7 @@ export function Navbar() {
                               pathname === item.href && "bg-[#FCE3D3]/40 dark:bg-[#2C221B]"
                             )}
                           >
-                            <div className="p-1.5 rounded-lg bg-[#FCE3D3]/50 dark:bg-[#261F1A] text-[#f15e1c] shrink-0 mt-0.5">
+                            <div className="p-1.5 rounded-lg bg-[#FCE3D3]/50 dark:bg-[#161616] text-[#f15e1c] shrink-0 mt-0.5">
                               {workingWithUsIcons[item.href] || <Sparkles className="w-3.5 h-3.5" />}
                             </div>
                             <div>
@@ -332,8 +332,8 @@ export function Navbar() {
                 className={cn(
                   "relative px-3.5 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer group",
                   isActive("/insights") || isActive("/blog") || isActive("/blogs")
-                    ? "text-[#f15e1c] font-semibold bg-[#FCE3D3]/30 dark:bg-[#261F1A]"
-                    : "text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#f15e1c] dark:hover:text-[#f15e1c] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#261F1A]"
+                    ? "text-[#f15e1c] font-semibold bg-[#FCE3D3]/30 dark:bg-[#161616]"
+                    : "text-[#3A2E27] dark:text-[#FAF5EE] hover:text-[#f15e1c] dark:hover:text-[#f15e1c] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#161616]"
                 )}
               >
                 <span className="relative py-0.5">
@@ -373,16 +373,16 @@ export function Navbar() {
         <>
           {/* Backdrop Blur Overlay: Subdues and blurs the underlying page, disables background interaction */}
           <div
-            className="lg:hidden fixed inset-0 top-[65px] z-40 bg-[#101b17]/50 dark:bg-[#101b17]/80 backdrop-blur-md transition-all duration-300 pointer-events-auto"
+            className="lg:hidden fixed inset-0 top-[65px] z-40 bg-[#000000]/50 dark:bg-[#000000]/80 backdrop-blur-md transition-all duration-300 pointer-events-auto"
             onClick={() => setMobileMenuOpen(false)}
             aria-hidden="true"
           />
 
           {/* Premium Mobile Navigation Drawer Panel */}
-          <div className="lg:hidden fixed inset-x-0 top-[65px] bottom-0 z-50 bg-white/95 dark:bg-[#101b17]/95 backdrop-blur-xl border-t border-[#f7d7b0] dark:border-[#253630] px-5 py-6 overflow-y-auto shadow-2xl animate-in fade-in slide-in-from-top-3 duration-250 pointer-events-auto">
+          <div className="lg:hidden fixed inset-x-0 top-[65px] bottom-0 z-50 bg-white/95 dark:bg-[#000000]/95 backdrop-blur-xl border-t border-[#f7d7b0] dark:border-[#1a1a1a] px-5 py-6 overflow-y-auto shadow-2xl animate-in fade-in slide-in-from-top-3 duration-250 pointer-events-auto">
             <div className="space-y-6 max-w-lg mx-auto">
               {/* Mobile Utility Controls */}
-              <div className="sm:hidden flex items-center justify-between pb-4 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+              <div className="sm:hidden flex items-center justify-between pb-4 border-b border-[#EFE2D6] dark:border-[#1f1f1f]">
                 <span className="text-xs font-bold text-[#7A6A5F] dark:text-[#B8ACA0]">Preferences</span>
                 <LanguageSelector />
               </div>
@@ -421,7 +421,7 @@ export function Navbar() {
                         key={s.href}
                         href={s.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-center gap-3 p-3 rounded-xl bg-[#FBF3EA]/80 dark:bg-[#1A1613] hover:bg-[#FCE3D3] dark:hover:bg-[#261F1A] text-sm font-semibold text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#2C241E] min-h-[44px]"
+                        className="flex items-center gap-3 p-3 rounded-xl bg-[#FBF3EA]/80 dark:bg-[#1A1613] hover:bg-[#FCE3D3] dark:hover:bg-[#161616] text-sm font-semibold text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#1f1f1f] min-h-[44px]"
                       >
                         <div className="shrink-0">{serviceIcons[s.href]}</div>
                         <span className="truncate">{s.label}</span>
@@ -432,7 +432,7 @@ export function Navbar() {
               </div>
 
               {/* Group 2: Products */}
-              <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#2C241E]">
+              <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
                 <Link
                   href="/products"
                   onClick={() => setMobileMenuOpen(false)}
@@ -443,7 +443,7 @@ export function Navbar() {
               </div>
 
               {/* Group 3: Working With Us */}
-              <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#2C241E]">
+              <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
                 <button
                   type="button"
                   className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] mb-3 py-2 border-b border-transparent focus:outline-none cursor-pointer"
@@ -477,7 +477,7 @@ export function Navbar() {
                         href={item.href}
                         onClick={() => setMobileMenuOpen(false)}
                         className={cn(
-                          "flex items-center gap-3 p-3 rounded-xl text-sm font-medium border border-[#EFE2D6] dark:border-[#2C241E] min-h-[44px]",
+                          "flex items-center gap-3 p-3 rounded-xl text-sm font-medium border border-[#EFE2D6] dark:border-[#1f1f1f] min-h-[44px]",
                           item.href === "/contact"
                             ? "bg-[#FCE3D3]/90 dark:bg-[#2C221B] font-bold text-[#f15e1c]"
                             : "bg-[#FBF3EA]/80 dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE]"
@@ -492,7 +492,7 @@ export function Navbar() {
               </div>
 
               {/* Group 4: Blogs & Insights */}
-              <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#2C241E]">
+              <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
                 <Link
                   href="/insights"
                   onClick={() => setMobileMenuOpen(false)}
@@ -503,10 +503,10 @@ export function Navbar() {
               </div>
 
               {/* Mobile Bottom Conversion CTA */}
-              <div className="pt-4 border-t border-[#EFE2D6] dark:border-[#2C241E] space-y-3">
+              <div className="pt-4 border-t border-[#EFE2D6] dark:border-[#1f1f1f] space-y-3">
                 <a
                   href="tel:+971521555792"
-                  className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#f7d7b0]/40 dark:bg-[#253630] border border-[#f15e1c]/40 text-[#f15e1c] font-bold text-xs font-mono min-h-[44px]"
+                  className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#f7d7b0]/40 dark:bg-[#1a1a1a] border border-[#f15e1c]/40 text-[#f15e1c] font-bold text-xs font-mono min-h-[44px]"
                 >
                   <Phone className="w-4 h-4 text-[#f15e1c]" />
                   <span>UAE Regional Office (+971 521555792)</span>

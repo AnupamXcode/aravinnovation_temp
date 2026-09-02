@@ -28,7 +28,7 @@ export function TestimonialSlider() {
   return (
     <div className="relative max-w-4xl mx-auto">
       <TiltCard maxTilt={5} scale={1.01}>
-        <div className="rounded-3xl bg-white dark:bg-[#1F1A16] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl relative overflow-hidden transition-colors duration-300">
+        <div className="rounded-3xl bg-white dark:bg-[#0a0a0a] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-2xl relative overflow-hidden transition-colors duration-300">
           {/* Large Decorative Quote Icon */}
           <Quote className="absolute top-6 right-8 w-20 h-20 text-[#FCE3D3]/60 dark:text-[#f15e1c]/10 -z-0 pointer-events-none" />
 
@@ -45,7 +45,7 @@ export function TestimonialSlider() {
           </blockquote>
 
           {/* Author Attribution */}
-          <div className="mt-8 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="mt-8 pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="group/author cursor-pointer">
               <div className="font-bold text-base text-[#3A2E27] dark:text-[#FAF5EE] font-display flex items-center gap-2">
                 <span>{current.author}</span>
@@ -63,7 +63,7 @@ export function TestimonialSlider() {
               <button
                 type="button"
                 onClick={prev}
-                className="w-10 h-10 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FFFDF9] dark:bg-[#1E1915] hover:bg-[#FBF3EA] dark:hover:bg-[#261F1A] hover:border-[#f15e1c] dark:hover:border-[#f15e1c] flex items-center justify-center text-[#3A2E27] dark:text-[#FAF5EE] transition-colors cursor-pointer shadow-xs"
+                className="w-10 h-10 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FFFDF9] dark:bg-[#0a0a0a] hover:bg-[#FBF3EA] dark:hover:bg-[#161616] hover:border-[#f15e1c] dark:hover:border-[#f15e1c] flex items-center justify-center text-[#3A2E27] dark:text-[#FAF5EE] transition-colors cursor-pointer shadow-xs"
                 aria-label="Previous testimonial"
               >
                 <ChevronLeft className="w-5 h-5" />
@@ -71,7 +71,7 @@ export function TestimonialSlider() {
               <button
                 type="button"
                 onClick={next}
-                className="w-10 h-10 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FFFDF9] dark:bg-[#1E1915] hover:bg-[#FBF3EA] dark:hover:bg-[#261F1A] hover:border-[#f15e1c] dark:hover:border-[#f15e1c] flex items-center justify-center text-[#3A2E27] dark:text-[#FAF5EE] transition-colors cursor-pointer shadow-xs"
+                className="w-10 h-10 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FFFDF9] dark:bg-[#0a0a0a] hover:bg-[#FBF3EA] dark:hover:bg-[#161616] hover:border-[#f15e1c] dark:hover:border-[#f15e1c] flex items-center justify-center text-[#3A2E27] dark:text-[#FAF5EE] transition-colors cursor-pointer shadow-xs"
                 aria-label="Next testimonial"
               >
                 <ChevronRight className="w-5 h-5" />
@@ -92,7 +92,7 @@ export function TestimonialSlider() {
               "w-2.5 h-2.5 rounded-full transition-all duration-200 cursor-pointer",
               currentIndex === idx
                 ? "w-8 bg-[#f15e1c]"
-                : "bg-[#EFE2D6] dark:bg-[#2C241E] hover:bg-[#F4A97F]"
+                : "bg-[#EFE2D6] dark:bg-[#1f1f1f] hover:bg-[#F4A97F]"
             )}
             aria-label={`Go to slide ${idx + 1}`}
           />

@@ -121,7 +121,7 @@ export function Services3DConstellation() {
           ======================================================================== */}
       <div
         ref={containerRef}
-        className="hidden lg:flex relative w-full rounded-[3rem] bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-10 overflow-hidden flex-col justify-between space-y-6 min-h-[600px]"
+        className="hidden lg:flex relative w-full rounded-[3rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-10 overflow-hidden flex-col justify-between space-y-6 min-h-[600px]"
       >
         {/* Ambient Radial Gradient Depth Plate */}
         <ScrollParallaxLayer depth="background" speed={-25} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] pointer-events-none">
@@ -129,9 +129,9 @@ export function Services3DConstellation() {
         </ScrollParallaxLayer>
 
         {/* Integrated Header Bar */}
-        <div className="relative z-20 flex items-center justify-between border-b border-[#f7d7b0] dark:border-[#253630] pb-4">
+        <div className="relative z-20 flex items-center justify-between border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-4">
           <div className="space-y-1 text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] text-xs font-mono font-bold text-[#f15e1c]">
+            <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#161616] text-xs font-mono font-bold text-[#f15e1c]">
               <Sparkles className="w-3.5 h-3.5" />
               <span>OUR CORE SERVICES ECOSYSTEM</span>
             </div>
@@ -183,7 +183,7 @@ export function Services3DConstellation() {
           {/* Central Digital Core Response Node */}
           <div
             className={cn(
-              "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center p-5 rounded-3xl bg-white dark:bg-[#101b17] border-2 shadow-2xl text-center min-w-[180px] transition-all duration-200",
+              "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center p-5 rounded-3xl bg-white dark:bg-[#000000] border-2 shadow-2xl text-center min-w-[180px] transition-all duration-200",
               hoveredIndex !== null
                 ? "border-[#f15e1c] ring-4 ring-[#f15e1c]/30 scale-105 shadow-[#f15e1c]/30"
                 : "border-[#f15e1c] shadow-[#f15e1c]/20"
@@ -222,10 +222,10 @@ export function Services3DConstellation() {
                 <Link href={`/services/${node.service.slug}`} className="block">
                   <div
                     className={cn(
-                      "p-3 rounded-2xl bg-white dark:bg-[#101b17] border shadow-md flex items-center gap-2.5 transition-all duration-200 group hover:shadow-xl",
+                      "p-3 rounded-2xl bg-white dark:bg-[#000000] border shadow-md flex items-center gap-2.5 transition-all duration-200 group hover:shadow-xl",
                       isActive
                         ? "border-[#f15e1c] ring-4 ring-[#f15e1c]/30 scale-105 shadow-[#f15e1c]/25 z-40"
-                        : "border-[#f7d7b0] dark:border-[#253630]"
+                        : "border-[#f7d7b0] dark:border-[#1a1a1a]"
                     )}
                   >
                     <div
@@ -233,7 +233,7 @@ export function Services3DConstellation() {
                         "p-2.5 rounded-xl shrink-0 border transition-colors",
                         isActive
                           ? "bg-[#fce3d3] border-[#f15e1c]"
-                          : "bg-[#fefaf5] dark:bg-[#172420] border-[#f7d7b0]/50 dark:border-[#253630]"
+                          : "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f7d7b0]/50 dark:border-[#1a1a1a]"
                       )}
                     >
                       {serviceIconMap[node.service.slug] || (
@@ -263,7 +263,7 @@ export function Services3DConstellation() {
         </div>
 
         {/* Bottom Detail Bar with Direct Navigation Action */}
-        <div className="relative z-30 pt-3 border-t border-[#f7d7b0] dark:border-[#253630] bg-white dark:bg-[#101b17] p-5 rounded-2xl border shadow-lg space-y-4">
+        <div className="relative z-30 pt-3 border-t border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#000000] p-5 rounded-2xl border shadow-lg space-y-4">
           <div className="flex items-center justify-between gap-4">
             <div className="space-y-1 text-left">
               <div className="flex items-center gap-2">
@@ -312,10 +312,10 @@ export function Services3DConstellation() {
         <div
           onTouchStart={(e) => e.touches.length === 1 && handlePointerDown(e.touches[0].clientX)}
           onTouchEnd={(e) => e.changedTouches.length > 0 && handlePointerUp(e.changedTouches[0].clientX)}
-          className="relative w-full rounded-3xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-xl p-5 space-y-5"
+          className="relative w-full rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl p-5 space-y-5"
         >
           {/* Header Bar */}
-          <div className="flex items-center justify-between pb-3 border-b border-[#f7d7b0] dark:border-[#253630]">
+          <div className="flex items-center justify-between pb-3 border-b border-[#f7d7b0] dark:border-[#1a1a1a]">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-xl bg-[#f15e1c] text-white flex items-center justify-center shrink-0">
                 <Sparkles className="w-4.5 h-4.5" />
@@ -330,13 +330,13 @@ export function Services3DConstellation() {
               </div>
             </div>
 
-            <div className="px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] text-[#f15e1c] border border-[#f7d7b0] text-xs font-mono font-extrabold">
+            <div className="px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#161616] text-[#f15e1c] border border-[#f7d7b0] text-xs font-mono font-extrabold">
               Practices
             </div>
           </div>
 
           {/* Active Card */}
-          <div className="relative rounded-2xl bg-white dark:bg-[#101b17] border-2 border-[#f15e1c] p-5 shadow-md space-y-4">
+          <div className="relative rounded-2xl bg-white dark:bg-[#000000] border-2 border-[#f15e1c] p-5 shadow-md space-y-4">
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-center gap-3">
                 <div className="p-2.5 rounded-xl bg-[#fce3d3] text-[#f15e1c] border border-[#f7d7b0]">
@@ -389,7 +389,7 @@ export function Services3DConstellation() {
           </div>
 
           {/* Grid of Quick-Select Service Pills (Mobile) */}
-          <div className="grid grid-cols-2 gap-2 pt-2 border-t border-[#f7d7b0] dark:border-[#253630]">
+          <div className="grid grid-cols-2 gap-2 pt-2 border-t border-[#f7d7b0] dark:border-[#1a1a1a]">
             {servicesData.map((svc, idx) => (
               <Link
                 key={svc.slug}
@@ -398,7 +398,7 @@ export function Services3DConstellation() {
                   "p-2.5 rounded-xl text-xs font-bold border transition-all flex items-center gap-2",
                   activeIndex === idx
                     ? "bg-[#f15e1c] text-white border-[#f15e1c]"
-                    : "bg-white dark:bg-[#101b17] text-[#1b2823] dark:text-[#ffffff] border-[#f7d7b0] dark:border-[#253630]"
+                    : "bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] border-[#f7d7b0] dark:border-[#1a1a1a]"
                 )}
               >
                 <ArrowRight className="w-3 h-3 text-[#f15e1c] shrink-0" />
@@ -412,7 +412,7 @@ export function Services3DConstellation() {
             <button
               type="button"
               onClick={handlePrev}
-              className="flex items-center gap-1 px-3 py-2 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] text-xs font-bold text-[#1b2823] dark:text-[#ffffff] active:scale-95 transition-transform cursor-pointer"
+              className="flex items-center gap-1 px-3 py-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-bold text-[#1b2823] dark:text-[#ffffff] active:scale-95 transition-transform cursor-pointer"
             >
               <ChevronLeft className="w-4 h-4 text-[#f15e1c]" />
               <span>Prev</span>
@@ -425,7 +425,7 @@ export function Services3DConstellation() {
             <button
               type="button"
               onClick={handleNext}
-              className="flex items-center gap-1 px-3 py-2 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] text-xs font-bold text-[#1b2823] dark:text-[#ffffff] active:scale-95 transition-transform cursor-pointer"
+              className="flex items-center gap-1 px-3 py-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-bold text-[#1b2823] dark:text-[#ffffff] active:scale-95 transition-transform cursor-pointer"
             >
               <span>Next</span>
               <ChevronRight className="w-4 h-4 text-[#f15e1c]" />

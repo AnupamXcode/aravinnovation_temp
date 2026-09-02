@@ -31,7 +31,7 @@ export default async function ServicesHubPage({
   const services = await getServices(locale);
 
   return (
-    <div className="pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+    <div className="pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
       <BreadcrumbSchema items={[{ name: "Services & Practices", url: "/services" }]} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
@@ -72,7 +72,7 @@ export default async function ServicesHubPage({
 
         {/* Bottom Regional Advisory Banner */}
         <ScrollReveal direction="up" delay={0.3}>
-          <div className="mt-20 rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] p-8 sm:p-12 text-center max-w-4xl mx-auto space-y-6 shadow-xl">
+          <div className="mt-20 rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] p-8 sm:p-12 text-center max-w-4xl mx-auto space-y-6 shadow-xl">
             <div className="w-12 h-12 rounded-2xl bg-[#f15e1c] text-white mx-auto flex items-center justify-center shadow-xs">
               <Globe2 className="w-6 h-6" />
             </div>

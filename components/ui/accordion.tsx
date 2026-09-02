@@ -19,7 +19,7 @@ export function AccordionItem({
   const [isOpen, setIsOpen] = React.useState(defaultOpen);
 
   return (
-    <div className="border-b border-[#f7d7b0] dark:border-[#253630] py-4 last:border-b-0">
+    <div className="border-b border-[#f7d7b0] dark:border-[#1a1a1a] py-4 last:border-b-0">
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
@@ -51,7 +51,7 @@ export function Accordion({
   className?: string;
 }) {
   return (
-    <div className={cn("divide-y divide-[#f7d7b0] dark:divide-[#253630] rounded-2xl bg-white dark:bg-[#172420] p-6 sm:p-8 border border-[#f7d7b0] dark:border-[#253630] shadow-sm", className)}>
+    <div className={cn("divide-y divide-[#f7d7b0] dark:divide-[#1a1a1a] rounded-2xl bg-white dark:bg-[#0a0a0a] p-6 sm:p-8 border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-sm", className)}>
       {items.map((item, index) => (
         <AccordionItem
           key={index}

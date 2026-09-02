@@ -338,12 +338,12 @@ export function ExplodedServicesStack3D() {
         {/* Pinned Stage Container */}
         <div
           ref={stageRef}
-          className="exploded-pinned-stage relative w-full h-screen flex flex-col justify-between py-6 px-4 sm:px-8 lg:px-12 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300 overflow-hidden"
+          className="exploded-pinned-stage relative w-full h-screen flex flex-col justify-between py-6 px-4 sm:px-8 lg:px-12 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300 overflow-hidden"
         >
           {/* Header Title Bar */}
-          <div className="relative z-20 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#253630] pb-4 max-w-7xl mx-auto w-full">
+          <div className="relative z-20 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-4 max-w-7xl mx-auto w-full">
             <div className="space-y-1">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>3D EXPLODED ARCHITECTURE SYSTEM</span>
               </div>
@@ -379,7 +379,7 @@ export function ExplodedServicesStack3D() {
                     className="exploded-card-item absolute -translate-y-1/2 left-0 w-full transition-all duration-200"
                   >
                     <Link href={`/services/${layer.slug}`}>
-                      <div className="p-3 rounded-2xl bg-white/95 dark:bg-[#172420]/95 backdrop-blur-md border border-[#f7d7b0] dark:border-[#253630] shadow-lg hover:border-[#f15e1c] transition-all hover:scale-[1.03] space-y-0.5">
+                      <div className="p-3 rounded-2xl bg-white/95 dark:bg-[#0a0a0a]/95 backdrop-blur-md border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg hover:border-[#f15e1c] transition-all hover:scale-[1.03] space-y-0.5">
                         <div className="flex items-center gap-2">
                           <div className="p-1 rounded-md bg-[#f7d7b0]/30">{layer.icon}</div>
                           <b className="block text-xs font-bold font-display uppercase tracking-wider text-[#1b2823] dark:text-white">
@@ -430,7 +430,7 @@ export function ExplodedServicesStack3D() {
                     className="exploded-card-item absolute -translate-y-1/2 right-0 w-full transition-all duration-200"
                   >
                     <Link href={`/services/${layer.slug}`}>
-                      <div className="p-3 rounded-2xl bg-white/95 dark:bg-[#172420]/95 backdrop-blur-md border border-[#f7d7b0] dark:border-[#253630] shadow-lg hover:border-[#f15e1c] transition-all hover:scale-[1.03] space-y-0.5">
+                      <div className="p-3 rounded-2xl bg-white/95 dark:bg-[#0a0a0a]/95 backdrop-blur-md border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg hover:border-[#f15e1c] transition-all hover:scale-[1.03] space-y-0.5">
                         <div className="flex items-center gap-2">
                           <div className="p-1 rounded-md bg-[#f7d7b0]/30">{layer.icon}</div>
                           <b className="block text-xs font-bold font-display uppercase tracking-wider text-[#1b2823] dark:text-white">
@@ -450,7 +450,7 @@ export function ExplodedServicesStack3D() {
             <div className="md:hidden w-full max-w-sm space-y-2 mt-4 px-2 overflow-y-auto max-h-[50vh] z-30">
               {serviceLayers.map((layer) => (
                 <Link key={layer.id} href={`/services/${layer.slug}`} className="block">
-                  <div className="p-2.5 rounded-xl bg-white/95 dark:bg-[#172420]/95 border border-[#f7d7b0] dark:border-[#253630] shadow-xs flex items-center justify-between gap-3">
+                  <div className="p-2.5 rounded-xl bg-white/95 dark:bg-[#0a0a0a]/95 border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2">
                       <div className="p-1 rounded-md bg-[#f7d7b0]/30">{layer.icon}</div>
                       <div>
@@ -470,9 +470,9 @@ export function ExplodedServicesStack3D() {
           </div>
 
           {/* Bottom Progress Bar & Instruction Indicator */}
-          <div className="relative z-20 flex items-center justify-between max-w-7xl mx-auto w-full border-t border-[#f7d7b0] dark:border-[#253630] pt-3 text-xs font-mono text-[#7A6A5F] dark:text-[#B8ACA0]">
+          <div className="relative z-20 flex items-center justify-between max-w-7xl mx-auto w-full border-t border-[#f7d7b0] dark:border-[#1a1a1a] pt-3 text-xs font-mono text-[#7A6A5F] dark:text-[#B8ACA0]">
             <span>SCROLL TO EXPLODE STACK</span>
-            <div className="w-48 h-1.5 rounded-full bg-[#f7d7b0]/50 dark:bg-[#253630] overflow-hidden">
+            <div className="w-48 h-1.5 rounded-full bg-[#f7d7b0]/50 dark:bg-[#1a1a1a] overflow-hidden">
               <div className="exploded-progress-bar h-full bg-[#f15e1c] transition-all duration-75 w-0" />
             </div>
           </div>

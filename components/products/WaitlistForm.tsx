@@ -46,7 +46,7 @@ export function WaitlistForm({ productName }: WaitlistFormProps) {
         placeholder="Enter your work email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="w-full rounded-full border-[#EFE2D6] dark:border-[#2C241E] focus:border-[#f15e1c] bg-white dark:bg-[#171411] transition-transform duration-150 focus:scale-[1.02]"
+        className="w-full rounded-full border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] bg-white dark:bg-[#000000] transition-transform duration-150 focus:scale-[1.02]"
       />
       <Button
         type="submit"

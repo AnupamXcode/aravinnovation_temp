@@ -139,8 +139,8 @@ export function SEOAdminPanel() {
       {/* Main Dual-Panel Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* LEFT PANEL: Sitemap Page Browser */}
-        <div className="lg:col-span-4 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] p-5 space-y-4 shadow-lg">
-          <div className="flex items-center justify-between border-b border-[#EFE2D6] dark:border-[#2C241E] pb-3">
+        <div className="lg:col-span-4 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] p-5 space-y-4 shadow-lg">
+          <div className="flex items-center justify-between border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-3">
             <div>
               <h2 className="text-base font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-2">
                 <Globe className="w-4 h-4 text-[#f15e1c]" />
@@ -163,7 +163,7 @@ export function SEOAdminPanel() {
               placeholder="Search route path (e.g. /services)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-xs rounded-xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
+              className="w-full pl-9 pr-3 py-2 text-xs rounded-xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
             />
           </div>
 
@@ -186,7 +186,7 @@ export function SEOAdminPanel() {
                   className={`w-full text-left p-3 rounded-2xl transition-all cursor-pointer border ${
                     isSelected
                       ? "bg-[#FCE3D3]/60 dark:bg-[#2A201A] border-[#f15e1c] shadow-xs"
-                      : "bg-white/60 dark:bg-[#1A1613]/60 border-[#EFE2D6]/70 dark:border-[#2C241E] hover:border-[#f15e1c]/50 hover:bg-[#FBF3EA] dark:hover:bg-[#1F1A16]"
+                      : "bg-white/60 dark:bg-[#1A1613]/60 border-[#EFE2D6]/70 dark:border-[#1f1f1f] hover:border-[#f15e1c]/50 hover:bg-[#FBF3EA] dark:hover:bg-[#0a0a0a]"
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2">
@@ -209,8 +209,8 @@ export function SEOAdminPanel() {
           </div>
 
           {/* 3D EXPERIENCE ADMIN CONTROL CARD */}
-          <div className="p-4 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] space-y-3 shadow-xs">
-            <div className="flex items-center justify-between border-b border-[#EFE2D6] dark:border-[#2C241E] pb-2">
+          <div className="p-4 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-3 shadow-xs">
+            <div className="flex items-center justify-between border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-2">
               <span className="text-xs font-bold font-mono text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-[#f15e1c]" />
                 3D Experience Controls
@@ -254,9 +254,9 @@ export function SEOAdminPanel() {
         </div>
 
         {/* RIGHT PANEL: Per-Page SEO Editor */}
-        <div className="lg:col-span-8 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] p-6 space-y-6 shadow-xl">
+        <div className="lg:col-span-8 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] p-6 space-y-6 shadow-xl">
           {/* Header Bar for Selected Page */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#EFE2D6] dark:border-[#2C241E] pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-4">
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-xs font-mono font-semibold px-2.5 py-0.5 rounded-md bg-[#FCE3D3] dark:bg-[#2A201A] text-[#f15e1c]">
@@ -276,7 +276,7 @@ export function SEOAdminPanel() {
                 href={`${SITE_BASE_URL}${form.path}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] text-[#3A2E27] dark:text-[#FAF5EE] hover:border-[#f15e1c]"
+                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] text-[#3A2E27] dark:text-[#FAF5EE] hover:border-[#f15e1c]"
               >
                 <span>Live Page</span>
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -293,7 +293,7 @@ export function SEOAdminPanel() {
           </div>
 
           {/* DYNAMIC SEO AUDIT LOG CALLOUT BOX */}
-          <div className="rounded-2xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] p-4 space-y-3">
+          <div className="rounded-2xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] p-4 space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-[#f15e1c]" />
@@ -363,7 +363,7 @@ export function SEOAdminPanel() {
                 type="text"
                 value={form.metaTitle}
                 onChange={(e) => updateFormField("metaTitle", e.target.value)}
-                className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-white dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
+                className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
               />
             </div>
 
@@ -387,7 +387,7 @@ export function SEOAdminPanel() {
                 rows={3}
                 value={form.metaDescription}
                 onChange={(e) => updateFormField("metaDescription", e.target.value)}
-                className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-white dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
+                className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
               />
             </div>
 
@@ -401,7 +401,7 @@ export function SEOAdminPanel() {
                 <select
                   value={form.priority}
                   onChange={(e) => updateFormField("priority", parseFloat(e.target.value))}
-                  className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
                 >
                   <option value={1.0}>1.0 (Highest - Homepage)</option>
                   <option value={0.9}>0.9 (High - Core Practices / Products)</option>
@@ -420,7 +420,7 @@ export function SEOAdminPanel() {
                 <select
                   value={form.robots}
                   onChange={(e) => updateFormField("robots", e.target.value as any)}
-                  className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
                 >
                   <option value="Index, Follow">Index, Follow (Recommended)</option>
                   <option value="Index, NoFollow">Index, NoFollow</option>
@@ -431,7 +431,7 @@ export function SEOAdminPanel() {
             </div>
 
             {/* OG Metadata Section */}
-            <div className="rounded-2xl border border-[#EFE2D6] dark:border-[#2C241E] p-4 space-y-4 bg-white/40 dark:bg-[#12100E]/40">
+            <div className="rounded-2xl border border-[#EFE2D6] dark:border-[#1f1f1f] p-4 space-y-4 bg-white/40 dark:bg-[#000000]/40">
               <h4 className="text-xs font-extrabold uppercase tracking-wider text-[#f15e1c] flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5" /> Social Share Card (Open Graph Overrides)
               </h4>
@@ -446,7 +446,7 @@ export function SEOAdminPanel() {
                     placeholder="Same as meta title if empty..."
                     value={form.ogTitle || ""}
                     onChange={(e) => updateFormField("ogTitle", e.target.value)}
-                    className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
+                    className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
                   />
                 </div>
 
@@ -459,7 +459,7 @@ export function SEOAdminPanel() {
                     placeholder="https://aravinnovations.com/og-default.jpg"
                     value={form.ogImage || ""}
                     onChange={(e) => updateFormField("ogImage", e.target.value)}
-                    className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
+                    className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
                   />
                 </div>
               </div>
@@ -473,7 +473,7 @@ export function SEOAdminPanel() {
                   placeholder="Same as meta description if empty..."
                   value={form.ogDescription || ""}
                   onChange={(e) => updateFormField("ogDescription", e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
                 />
               </div>
 
@@ -486,7 +486,7 @@ export function SEOAdminPanel() {
                   placeholder={`Autogenerated defaults to ${SITE_BASE_URL}${form.path}`}
                   value={form.canonicalOverride || ""}
                   onChange={(e) => updateFormField("canonicalOverride", e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#12100E] border border-[#EFE2D6] dark:border-[#2C241E] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
                 />
               </div>
             </div>
@@ -512,7 +512,7 @@ export function SEOAdminPanel() {
                 rows={6}
                 value={form.jsonLdSchema}
                 onChange={(e) => handleJsonSchemaChange(e.target.value)}
-                className="w-full p-3 font-mono text-[11px] rounded-xl bg-[#14110E] text-[#FAF5EE] border border-[#2C241E] focus:border-[#f15e1c] outline-none"
+                className="w-full p-3 font-mono text-[11px] rounded-xl bg-[#14110E] text-[#FAF5EE] border border-[#1f1f1f] focus:border-[#f15e1c] outline-none"
               />
             </div>
 
@@ -537,7 +537,7 @@ export function SEOAdminPanel() {
                 rows={3}
                 value={JSON.stringify(form.imageAltMappings || {}, null, 2)}
                 onChange={(e) => handleAltMappingsChange(e.target.value)}
-                className="w-full p-3 font-mono text-[11px] rounded-xl bg-[#14110E] text-[#FAF5EE] border border-[#2C241E] focus:border-[#f15e1c] outline-none"
+                className="w-full p-3 font-mono text-[11px] rounded-xl bg-[#14110E] text-[#FAF5EE] border border-[#1f1f1f] focus:border-[#f15e1c] outline-none"
               />
               <p className="text-[10px] text-[#7A6A5F] dark:text-[#B8ACA0]">
                 Enter a JSON dictionary mapping image URL paths to descriptive accessibility alt labels.
@@ -546,7 +546,7 @@ export function SEOAdminPanel() {
           </div>
 
           {/* Bottom Action Footer */}
-          <div className="pt-4 border-t border-[#EFE2D6] dark:border-[#2C241E] flex items-center justify-end gap-3">
+          <div className="pt-4 border-t border-[#EFE2D6] dark:border-[#1f1f1f] flex items-center justify-end gap-3">
             <Button
               variant="primary"
               onClick={handleSave}

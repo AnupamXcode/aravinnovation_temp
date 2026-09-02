@@ -69,7 +69,7 @@ function SystemScanTransition() {
 
   return (
     <div ref={ref} className="relative w-full h-px my-4 overflow-hidden pointer-events-none select-none">
-      <div className="w-full h-full bg-[#f7d7b0]/30 dark:bg-[#253630]" />
+      <div className="w-full h-full bg-[#f7d7b0]/30 dark:bg-[#1a1a1a]" />
       {!shouldReduceMotion && (
         <motion.div
           initial={{ x: "-100%" }}
@@ -383,12 +383,12 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
   const testimonial = testimonialsData.find((t) => t.id === "test-1") || testimonialsData[0];
 
   return (
-    <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#12100E] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c]">
+    <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#000000] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c]">
       
       {/* =========================================================================
           1. HERO — ARAV INTELLIGENCE CORE AWAKENING & DEPTH SYSTEM
           ========================================================================= */}
-      <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] overflow-hidden select-none">
+      <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none">
         <HeroAICoreVisual />
 
         {/* Ambient Glows */}
@@ -408,7 +408,7 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]"
             >
               <Sparkles className="w-4 h-4" />
               <span>THE INTELLIGENCE LAYER OF AN ENTERPRISE</span>
@@ -465,7 +465,7 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
 
           {/* AI Core System Status Bar */}
           <div className="pt-4 text-center">
-            <div className="inline-flex flex-wrap items-center justify-center gap-4 px-4 py-2 rounded-2xl bg-white/80 dark:bg-[#101b17]/80 border border-[#f7d7b0] dark:border-[#253630] backdrop-blur-md shadow-lg text-xs font-mono font-bold text-[#f15e1c]">
+            <div className="inline-flex flex-wrap items-center justify-center gap-4 px-4 py-2 rounded-2xl bg-white/80 dark:bg-[#000000]/80 border border-[#f7d7b0] dark:border-[#1a1a1a] backdrop-blur-md shadow-lg text-xs font-mono font-bold text-[#f15e1c]">
               <span className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-ping" />
                 STATUS: AI CORE ONLINE
@@ -487,7 +487,7 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
       <section
         id="system"
         ref={pipelineContainerRef}
-        className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none"
+        className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none"
       >
         <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
@@ -503,7 +503,7 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
           </div>
 
           {/* 5-Phase Pipeline Progress Strip */}
-          <div className="p-4 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] shadow-sm max-w-5xl mx-auto flex items-center justify-between overflow-x-auto gap-2">
+          <div className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-sm max-w-5xl mx-auto flex items-center justify-between overflow-x-auto gap-2">
             {aiPipelinePhases.map((ph, i) => (
               <div
                 key={ph.phase}
@@ -511,7 +511,7 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
                   "flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-mono font-bold shrink-0 transition-all",
                   i <= activePipelinePhase
                     ? "bg-[#f15e1c] text-white shadow-xs"
-                    : "bg-[#fefaf5] dark:bg-[#172420] text-[#7A6A5F] border border-[#f7d7b0]"
+                    : "bg-[#fefaf5] dark:bg-[#0a0a0a] text-[#7A6A5F] border border-[#f7d7b0]"
                 )}
               >
                 <span>{ph.phase}</span>
@@ -530,9 +530,9 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.35 }}
-                className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f15e1c]/40 shadow-2xl space-y-6 text-left relative overflow-hidden"
+                className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/40 shadow-2xl space-y-6 text-left relative overflow-hidden"
               >
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#253630] pb-5">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-5">
                   <div>
                     <span className="text-xs font-mono font-black text-[#f15e1c] uppercase tracking-wider block">
                       PHASE {aiPipelinePhases[activePipelinePhase].phase} / 05 &bull; {aiPipelinePhases[activePipelinePhase].name}
@@ -542,21 +542,21 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
                     </h3>
                   </div>
 
-                  <div className="px-4 py-2 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] text-xs font-mono font-bold text-[#2e936f] shadow-xs">
+                  <div className="px-4 py-2 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#2e936f] shadow-xs">
                     ACTIVE INTELLIGENCE PHASE
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                  <div className="p-4 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0]/60 space-y-1">
+                  <div className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 space-y-1">
                     <span className="text-[10px] font-mono font-bold text-[#7A6A5F] block uppercase">FACTUAL RETRIEVAL</span>
                     <span className="text-sm font-mono font-extrabold text-[#f15e1c]">99.4% ACCURACY</span>
                   </div>
-                  <div className="p-4 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0]/60 space-y-1">
+                  <div className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 space-y-1">
                     <span className="text-[10px] font-mono font-bold text-[#7A6A5F] block uppercase">MANUAL TASK REDUCTION</span>
                     <span className="text-sm font-mono font-extrabold text-[#2e936f]">68% REDUCTION</span>
                   </div>
-                  <div className="p-4 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0]/60 space-y-1">
+                  <div className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 space-y-1">
                     <span className="text-[10px] font-mono font-bold text-[#7A6A5F] block uppercase">PROCESSING SPEED</span>
                     <span className="text-sm font-mono font-extrabold text-[#fab60a]">10x FASTER</span>
                   </div>
@@ -578,14 +578,14 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
                     className={cn(
                       "p-8 rounded-[2.5rem] border-2 transition-all duration-300 cursor-pointer space-y-6 text-left flex flex-col justify-between min-h-[340px] relative overflow-hidden group",
                       isActive
-                        ? "bg-white dark:bg-[#101b17] border-[#f15e1c] shadow-2xl ring-2 ring-[#f15e1c]/20"
-                        : "bg-[#fefaf5] dark:bg-[#172420] border-[#f7d7b0] dark:border-[#253630] opacity-80 hover:opacity-100"
+                        ? "bg-white dark:bg-[#000000] border-[#f15e1c] shadow-2xl ring-2 ring-[#f15e1c]/20"
+                        : "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] opacity-80 hover:opacity-100"
                     )}
                   >
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <div className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0] group-hover:scale-110 transition-transform">
+                          <div className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] group-hover:scale-110 transition-transform">
                             {sol.icon}
                           </div>
                           <span className="text-xs font-mono font-black text-[#f15e1c]">
@@ -593,7 +593,7 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
                           </span>
                         </div>
 
-                        <div className="px-3 py-1 rounded-xl bg-[#fce3d3] dark:bg-[#261f1a] text-xs font-mono font-bold text-[#f15e1c]">
+                        <div className="px-3 py-1 rounded-xl bg-[#fce3d3] dark:bg-[#161616] text-xs font-mono font-bold text-[#f15e1c]">
                           {sol.metric}
                         </div>
                       </div>
@@ -612,13 +612,13 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
                       </p>
                     </div>
 
-                    <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#253630] space-y-2">
+                    <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] space-y-2">
                       <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#7A6A5F]">
                         Key Scope Deliverables
                       </span>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]">
                         {sol.deliverables.map((del, i) => (
-                          <div key={i} className="flex items-center gap-2 p-2 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0]/60 dark:border-[#253630]">
+                          <div key={i} className="flex items-center gap-2 p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
                             <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
                             <span className="truncate">{del}</span>
                           </div>
@@ -638,7 +638,7 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
       {/* =========================================================================
           3. PROBLEM TO SOLUTION TRANSFORMATION (SIGNATURE CARDS)
           ========================================================================= */}
-      <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
+      <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none">
         <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
@@ -656,10 +656,10 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
             {problemSolutionPairs.map((pair, i) => (
               <div
                 key={i}
-                className="p-8 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-xl space-y-6 text-left flex flex-col justify-between"
+                className="p-8 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl space-y-6 text-left flex flex-col justify-between"
               >
                 {/* Problem Side */}
-                <div className="p-4 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] space-y-2 opacity-80">
+                <div className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] space-y-2 opacity-80">
                   <span className="text-[10px] font-mono font-black text-[#f15e1c] block uppercase">
                     FRICTION {pair.prob}
                   </span>
@@ -692,7 +692,7 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
       {/* =========================================================================
           4. WOW MOMENT 03 — RAG KNOWLEDGE RETRIEVAL EXPERIENCE
           ========================================================================= */}
-      <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] select-none">
+      <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] select-none">
         <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
@@ -706,7 +706,7 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
             </p>
           </div>
 
-          <div className="p-8 sm:p-14 rounded-[3rem] bg-white dark:bg-[#101b17] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl space-y-8 text-center relative overflow-hidden">
+          <div className="p-8 sm:p-14 rounded-[3rem] bg-white dark:bg-[#000000] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl space-y-8 text-center relative overflow-hidden">
             <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 relative z-10">
               {[
                 { step: "01", name: "DOCUMENTS", desc: "PDFs, CRMs & Databases" },
@@ -717,7 +717,7 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
               ].map((rg, idx) => (
                 <div
                   key={rg.step}
-                  className="p-5 rounded-2xl bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] space-y-2 text-center"
+                  className="p-5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] space-y-2 text-center"
                 >
                   <span className="text-[10px] font-mono font-black text-[#f15e1c] block">
                     STEP {rg.step}
@@ -743,7 +743,7 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
       {/* =========================================================================
           5. AI TECHNOLOGY CONSTELLATION
           ========================================================================= */}
-      <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none">
+      <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none">
         <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
@@ -760,7 +760,7 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {techConstellation.map((tech, i) => (
               <TiltCard key={i} maxTilt={4} scale={1.01}>
-                <div className="p-6 rounded-[2rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-md hover:border-[#f15e1c] transition-all space-y-3 text-left">
+                <div className="p-6 rounded-[2rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md hover:border-[#f15e1c] transition-all space-y-3 text-left">
                   <span className="text-[10px] font-mono font-black text-[#f15e1c] uppercase tracking-wider block">
                     {tech.category}
                   </span>
@@ -784,7 +784,7 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
           ========================================================================= */}
       <section
         ref={roadmapContainerRef}
-        className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] select-none"
+        className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none"
       >
         <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-4xl mx-auto space-y-3">
@@ -801,7 +801,7 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
 
           {/* Roadmap Progress Bar */}
           <div className="relative py-4 max-w-5xl mx-auto">
-            <div className="relative w-full bg-[#f7d7b0] dark:bg-[#253630] h-2.5 rounded-full overflow-hidden">
+            <div className="relative w-full bg-[#f7d7b0] dark:bg-[#1a1a1a] h-2.5 rounded-full overflow-hidden">
               <motion.div
                 style={{ width: roadmapLineWidth }}
                 className="h-full bg-gradient-to-r from-[#f15e1c] via-[#2e936f] to-[#fab60a]"
@@ -824,7 +824,7 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
                         ? "bg-[#f15e1c] border-white text-white scale-125 shadow-lg shadow-[#f15e1c]/40 ring-4 ring-[#f15e1c]/20 z-10"
                         : isPassed
                         ? "bg-[#2e936f] border-white text-white"
-                        : "bg-white dark:bg-[#101b17] border-[#f7d7b0] dark:border-[#253630] text-[#7A6A5F]"
+                        : "bg-white dark:bg-[#000000] border-[#f7d7b0] dark:border-[#1a1a1a] text-[#7A6A5F]"
                     )}
                   >
                     {isPassed && !isActive ? <Check className="w-4 h-4 text-white" /> : rm.step}
@@ -846,9 +846,9 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.35 }}
-                className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f15e1c]/40 shadow-2xl space-y-6 text-left relative overflow-hidden"
+                className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/40 shadow-2xl space-y-6 text-left relative overflow-hidden"
               >
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#253630] pb-5">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-5">
                   <div>
                     <span className="text-xs font-mono font-black text-[#f15e1c] uppercase tracking-wider block">
                       STAGE {activeRoadmap.step} / 05 &bull; ENTERPRISE DEPLOYMENT
@@ -858,7 +858,7 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
                     </h3>
                   </div>
 
-                  <div className="px-4 py-2 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] text-xs font-mono font-bold text-[#2e936f] shadow-xs">
+                  <div className="px-4 py-2 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#2e936f] shadow-xs">
                     {activeRoadmap.deliverable || activeRoadmap.status}
                   </div>
                 </div>
@@ -867,7 +867,7 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
                   {activeRoadmap.desc}
                 </p>
 
-                <div className="pt-3 border-t border-[#f7d7b0] dark:border-[#253630] flex items-center justify-between text-xs font-mono font-bold text-[#f15e1c]">
+                <div className="pt-3 border-t border-[#f7d7b0] dark:border-[#1a1a1a] flex items-center justify-between text-xs font-mono font-bold text-[#f15e1c]">
                   <span>CONTINUOUS TOKEN &amp; LATENCY TELEMETRY</span>
                   <span>STAGE 05 GOES LIVE WITH REAL-TIME MONITORING &rarr;</span>
                 </div>
@@ -882,10 +882,10 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
       {/* =========================================================================
           7. ABOUT OUR CEO — EDITORIAL LEADERSHIP PROFILE
           ========================================================================= */}
-      <section className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-        <div className="max-w-[1536px] mx-auto rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-8 sm:p-14 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center text-left">
+      <section className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-[1536px] mx-auto rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-8 sm:p-14 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center text-left">
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-3xl overflow-hidden border-2 border-[#f15e1c] shadow-xl bg-[#fce3d3] dark:bg-[#261f1a] flex items-center justify-center text-center p-6 space-y-2 flex-col">
+            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-3xl overflow-hidden border-2 border-[#f15e1c] shadow-xl bg-[#fce3d3] dark:bg-[#161616] flex items-center justify-center text-center p-6 space-y-2 flex-col">
               <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#f15e1c] text-white flex items-center justify-center text-2xl sm:text-3xl font-black font-display shadow-md">
                 AS
               </div>
@@ -1036,7 +1036,7 @@ export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
       {/* =========================================================================
           9. FOOTER BRAND MOMENT
           ========================================================================= */}
-      <footer className="py-6 border-t border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] overflow-hidden select-none">
+      <footer className="py-6 border-t border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] overflow-hidden select-none">
         <div className="flex items-center justify-center gap-4 text-xs sm:text-sm font-mono font-extrabold text-[#7A6A5F] dark:text-[#B8ACA0] tracking-widest flex-wrap px-4">
           <span>DATA</span>
           <span className="text-[#f15e1c]">&bull;</span>

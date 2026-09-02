@@ -32,7 +32,7 @@ export default async function PrivacyPolicyPage({
   setRequestLocale(locale);
 
   return (
-    <div className="py-24 md:py-32 bg-[#FFFDF9] dark:bg-[#12100E] min-h-screen">
+    <div className="py-24 md:py-32 bg-[#FFFDF9] dark:bg-[#000000] min-h-screen">
       <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 space-y-12">
         {/* Policy Header */}
         <ScrollReveal direction="up" delay={0.05}>
@@ -50,10 +50,10 @@ export default async function PrivacyPolicyPage({
         </ScrollReveal>
 
         {/* 2-Column Desktop Architecture with Sticky Table of Contents */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
           {/* Left Column: Sticky Table of Contents (Desktop) */}
-          <aside className="lg:col-span-4 hidden lg:block sticky top-32 space-y-4 p-6 rounded-3xl bg-[#FBF3EA]/60 dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm">
-            <div className="flex items-center gap-2 font-bold font-display text-sm text-[#3A2E27] dark:text-[#FAF5EE] border-b border-[#EFE2D6] dark:border-[#2C241E] pb-3">
+          <aside className="lg:col-span-4 hidden lg:block sticky top-32 space-y-4 p-6 rounded-3xl bg-[#FBF3EA]/60 dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm">
+            <div className="flex items-center gap-2 font-bold font-display text-sm text-[#3A2E27] dark:text-[#FAF5EE] border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-3">
               <FileText className="w-4 h-4 text-[#f15e1c]" />
               <span>Table of Contents</span>
             </div>
@@ -72,14 +72,14 @@ export default async function PrivacyPolicyPage({
           </aside>
 
           {/* Right Column: Policy Document Body */}
-          <div className="lg:col-span-8 p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-10 text-sm text-[#3A2E27] dark:text-[#FAF5EE] leading-relaxed">
+          <div className="lg:col-span-8 p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-10 text-sm text-[#3A2E27] dark:text-[#FAF5EE] leading-relaxed">
             <p className="text-base text-[#7A6A5F] dark:text-[#B8ACA0]">
               At Arav Innovations, your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your personal information when you use our website, services, or engage with us in any capacity. By using our services, you agree to the terms outlined in this Privacy Policy.
             </p>
 
             {/* 1. Information We Collect */}
             <ScrollReveal direction="up" delay={0.1}>
-              <section id="info-we-collect" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32 group">
+              <section id="info-we-collect" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f] scroll-mt-32 group">
                 <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors">
                   1. Information We Collect
                 </h2>
@@ -98,7 +98,7 @@ export default async function PrivacyPolicyPage({
 
             {/* 2. How We Use Your Information */}
             <ScrollReveal direction="up" delay={0.15}>
-              <section id="how-we-use" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32 group">
+              <section id="how-we-use" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f] scroll-mt-32 group">
                 <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors">
                   2. How We Use Your Information
                 </h2>
@@ -115,7 +115,7 @@ export default async function PrivacyPolicyPage({
 
             {/* 3. Sharing Your Information */}
             <ScrollReveal direction="up" delay={0.2}>
-              <section id="sharing-info" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32 group">
+              <section id="sharing-info" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f] scroll-mt-32 group">
                 <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors">
                   3. Sharing Your Information
                 </h2>
@@ -129,7 +129,7 @@ export default async function PrivacyPolicyPage({
                 <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
                   11. Contact Us
                 </h2>
-                <div className="p-6 rounded-2xl bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] space-y-2.5">
+                <div className="p-6 rounded-2xl bg-[#FBF3EA] dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-2.5">
                   <div className="flex items-center gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
                     <Mail className="w-4 h-4 text-[#f15e1c]" />
                     <span>Email: <a href="mailto:support@aravinnovations.com" className="text-[#f15e1c] hover:underline">support@aravinnovations.com</a></span>

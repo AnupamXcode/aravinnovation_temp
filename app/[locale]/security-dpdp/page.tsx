@@ -24,7 +24,7 @@ export default async function SecurityDPDPPage({
   setRequestLocale(locale);
 
   return (
-    <div className="py-24 md:py-32 bg-[#FFFDF9] dark:bg-[#12100E] min-h-screen">
+    <div className="py-24 md:py-32 bg-[#FFFDF9] dark:bg-[#000000] min-h-screen">
       <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Header */}
         <div className="space-y-4 max-w-3xl">
@@ -40,10 +40,10 @@ export default async function SecurityDPDPPage({
         </div>
 
         {/* 2-Column Desktop Architecture with Sticky Table of Contents */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
           {/* Left Column: Sticky Table of Contents */}
-          <aside className="lg:col-span-4 hidden lg:block sticky top-32 space-y-4 p-6 rounded-3xl bg-[#FBF3EA]/60 dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm">
-            <div className="flex items-center gap-2 font-bold font-display text-sm text-[#3A2E27] dark:text-[#FAF5EE] border-b border-[#EFE2D6] dark:border-[#2C241E] pb-3">
+          <aside className="lg:col-span-4 hidden lg:block sticky top-32 space-y-4 p-6 rounded-3xl bg-[#FBF3EA]/60 dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm">
+            <div className="flex items-center gap-2 font-bold font-display text-sm text-[#3A2E27] dark:text-[#FAF5EE] border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-3">
               <FileText className="w-4 h-4 text-[#f15e1c]" />
               <span>Table of Contents</span>
             </div>
@@ -62,12 +62,12 @@ export default async function SecurityDPDPPage({
           </aside>
 
           {/* Right Column: Policy Body */}
-          <div className="lg:col-span-8 p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-10 text-sm text-[#3A2E27] dark:text-[#FAF5EE] leading-relaxed">
+          <div className="lg:col-span-8 p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-10 text-sm text-[#3A2E27] dark:text-[#FAF5EE] leading-relaxed">
             <p className="text-base text-[#7A6A5F] dark:text-[#B8ACA0]">
               Arav Innovations implements strict organizational and technical security controls (SOC-2, ISO 27001, and DPDP Act 2023) to protect data confidentiality, integrity, and availability across all client operations globally.
             </p>
 
-            <section id="security-framework" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
+            <section id="security-framework" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f] scroll-mt-32">
               <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-2">
                 <ShieldCheck className="w-5 h-5 text-[#f15e1c]" />
                 <span>1. Security &amp; Compliance Framework</span>
@@ -77,7 +77,7 @@ export default async function SecurityDPDPPage({
               </p>
             </section>
 
-            <section id="dpdp-governance" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
+            <section id="dpdp-governance" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f] scroll-mt-32">
               <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-2">
                 <Lock className="w-5 h-5 text-[#f15e1c]" />
                 <span>2. DPDP Act 2023 Compliance</span>
@@ -87,7 +87,7 @@ export default async function SecurityDPDPPage({
               </p>
             </section>
 
-            <section id="data-encryption" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
+            <section id="data-encryption" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f] scroll-mt-32">
               <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-2">
                 <Key className="w-5 h-5 text-[#f15e1c]" />
                 <span>3. Encryption &amp; Storage Security</span>
@@ -97,7 +97,7 @@ export default async function SecurityDPDPPage({
               </p>
             </section>
 
-            <section id="incident-response" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
+            <section id="incident-response" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f] scroll-mt-32">
               <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-2">
                 <Server className="w-5 h-5 text-[#f15e1c]" />
                 <span>4. Incident Response &amp; SLA</span>

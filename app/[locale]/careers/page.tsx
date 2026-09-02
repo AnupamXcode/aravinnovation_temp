@@ -68,7 +68,7 @@ export default function CareersPage() {
   ];
 
   return (
-    <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+    <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
       <BreadcrumbSchema items={[{ name: "Careers & Culture", url: "/careers" }]} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
         {/* Header */}
@@ -97,8 +97,8 @@ export default function CareersPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <ScrollReveal direction="up" delay={0.1}>
             <TiltCard maxTilt={6} scale={1.02} className="h-full group">
-              <div className="h-full p-8 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] space-y-3 shadow-xs hover:border-[#f15e1c]/40 transition-all duration-300">
-                <div className="p-3 rounded-2xl bg-white dark:bg-[#261F1A] w-fit text-[#f15e1c] shadow-2xs group-hover:bg-[#f15e1c] group-hover:text-white transition-all duration-300 [&>svg]:text-[#f15e1c] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
+              <div className="h-full p-8 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-3 shadow-xs hover:border-[#f15e1c]/40 transition-all duration-300">
+                <div className="p-3 rounded-2xl bg-white dark:bg-[#161616] w-fit text-[#f15e1c] shadow-2xs group-hover:bg-[#f15e1c] group-hover:text-white transition-all duration-300 [&>svg]:text-[#f15e1c] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
                   <Zap className="w-5 h-5 transition-colors duration-300" />
                 </div>
                 <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors">
@@ -113,8 +113,8 @@ export default function CareersPage() {
 
           <ScrollReveal direction="up" delay={0.2}>
             <TiltCard maxTilt={6} scale={1.02} className="h-full group">
-              <div className="h-full p-8 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm space-y-3 hover:border-[#f15e1c]/40 transition-all duration-300">
-                <div className="p-3 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#261F1A] w-fit text-[#f15e1c] group-hover:bg-[#f15e1c] group-hover:text-white transition-all duration-300 shadow-xs [&>svg]:text-[#f15e1c] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
+              <div className="h-full p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm space-y-3 hover:border-[#f15e1c]/40 transition-all duration-300">
+                <div className="p-3 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#161616] w-fit text-[#f15e1c] group-hover:bg-[#f15e1c] group-hover:text-white transition-all duration-300 shadow-xs [&>svg]:text-[#f15e1c] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
                   <Globe2 className="w-5 h-5 transition-colors duration-300" />
                 </div>
                 <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors">
@@ -129,8 +129,8 @@ export default function CareersPage() {
 
           <ScrollReveal direction="up" delay={0.3}>
             <TiltCard maxTilt={6} scale={1.02} className="h-full group">
-              <div className="h-full p-8 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] space-y-3 shadow-xs hover:border-[#f15e1c]/40 transition-all duration-300">
-                <div className="p-3 rounded-2xl bg-white dark:bg-[#261F1A] w-fit text-[#f15e1c] shadow-2xs group-hover:bg-[#f15e1c] group-hover:text-white transition-all duration-300 [&>svg]:text-[#f15e1c] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
+              <div className="h-full p-8 rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-3 shadow-xs hover:border-[#f15e1c]/40 transition-all duration-300">
+                <div className="p-3 rounded-2xl bg-white dark:bg-[#161616] w-fit text-[#f15e1c] shadow-2xs group-hover:bg-[#f15e1c] group-hover:text-white transition-all duration-300 [&>svg]:text-[#f15e1c] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
                   <Sparkles className="w-5 h-5 transition-colors duration-300" />
                 </div>
                 <h3 className="text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors">
@@ -168,7 +168,7 @@ export default function CareersPage() {
           <div className="grid grid-cols-1 gap-4">
             {openings.map((job, idx) => (
               <ScrollReveal key={idx} delay={idx * 0.08} direction="up">
-                <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm hover:shadow-xl hover:border-[#f15e1c]/40 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:shadow-xl hover:border-[#f15e1c]/40 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                   <div className="space-y-2">
                     <div className="flex flex-wrap items-center gap-2">
                       <Badge variant="secondary" size="sm">

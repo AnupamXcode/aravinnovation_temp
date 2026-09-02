@@ -84,14 +84,14 @@ export function CaseStudy3DTransformation() {
       ref={containerRef}
       className="relative w-full max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-4 md:py-6 select-none"
     >
-      <div className="w-full rounded-[3rem] bg-[#ffffff] dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-6 sm:p-10 md:p-12 space-y-8 relative overflow-hidden transition-all duration-300">
+      <div className="w-full rounded-[3rem] bg-[#ffffff] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-6 sm:p-10 md:p-12 space-y-8 relative overflow-hidden transition-all duration-300">
         {/* Background Ambient Glow */}
         <div className="absolute top-0 right-0 w-full h-96 bg-radial from-[#f15e1c]/10 via-[#2e936f]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
 
         {/* Full-Width Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#f7d7b0] dark:border-[#253630] pb-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-6">
           <div className="space-y-3 max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
               <span className="w-2 h-2 rounded-full bg-[#f15e1c] animate-pulse" />
               <span>DIGITAL TRANSFORMATION PATHWAY</span>
             </div>
@@ -112,7 +112,7 @@ export function CaseStudy3DTransformation() {
         {/* Full Width 4-Step Transformation Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 relative">
           {/* Progress Connecting Line */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1.5 bg-[#f7d7b0] dark:bg-[#253630] -translate-y-1/2 z-0">
+          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1.5 bg-[#f7d7b0] dark:bg-[#1a1a1a] -translate-y-1/2 z-0">
             <motion.div
               style={{ width: shouldReduceMotion ? "100%" : progressLineWidth }}
               className="h-full bg-gradient-to-r from-[#f15e1c] via-[#2e936f] to-[#fab60a]"
@@ -129,16 +129,16 @@ export function CaseStudy3DTransformation() {
                 className={cn(
                   "relative z-10 p-7 sm:p-8 rounded-3xl border shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between space-y-6 min-h-[260px]",
                   isActive
-                    ? "bg-[#fefaf5] dark:bg-[#101b17] border-[#f15e1c] ring-2 ring-[#f15e1c]/30 shadow-[#f15e1c]/20"
-                    : "bg-white dark:bg-[#1a2622] border-[#f7d7b0] dark:border-[#253630]"
+                    ? "bg-[#fefaf5] dark:bg-[#000000] border-[#f15e1c] ring-2 ring-[#f15e1c]/30 shadow-[#f15e1c]/20"
+                    : "bg-white dark:bg-[#1a2622] border-[#f7d7b0] dark:border-[#1a1a1a]"
                 )}
               >
                 {/* Step Header */}
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono font-extrabold text-[#f15e1c] px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#261f1a]">
+                  <span className="text-xs font-mono font-extrabold text-[#f15e1c] px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#161616]">
                     STEP {step.step}
                   </span>
-                  <div className="p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#172420] border border-[#f7d7b0]/60">
+                  <div className="p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0]/60">
                     {step.icon}
                   </div>
                 </div>
@@ -154,7 +154,7 @@ export function CaseStudy3DTransformation() {
                 </div>
 
                 {/* Step Metric Highlight */}
-                <div className="pt-4 border-t border-[#f7d7b0]/50 dark:border-[#253630] flex items-center justify-between">
+                <div className="pt-4 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between">
                   <div>
                     <div className="text-2xl font-extrabold font-display text-[#f15e1c]">
                       {step.metric}
@@ -171,7 +171,7 @@ export function CaseStudy3DTransformation() {
         </div>
 
         {/* Bottom Full-Width Impact Banner */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-[#fefaf5] dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="p-6 sm:p-8 rounded-3xl bg-[#fefaf5] dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4 text-sm sm:text-base text-[#1b2823] dark:text-[#ffffff]">
             <BarChart3 className="w-6 h-6 text-[#f15e1c] shrink-0" />
             <span className="font-semibold">

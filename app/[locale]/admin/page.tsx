@@ -221,7 +221,7 @@ export default function AdminDashboardPage() {
       {/* Main CMS Control Center Content Area */}
       <main className="flex-1 p-4 sm:p-8 lg:p-10 overflow-y-auto mt-14 lg:mt-0 space-y-8 max-w-[1600px]">
         {/* Top Header Bar & Global Admin Search */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <span className="p-2 rounded-xl bg-[#FCE3D3]/60 dark:bg-[#2C221B] text-[#f15e1c]">
@@ -245,7 +245,7 @@ export default function AdminDashboardPage() {
                 placeholder="Search CMS settings (e.g. phone, chatbot)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9 pr-3 py-2 rounded-xl text-xs bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] focus:border-[#f15e1c] w-48 sm:w-64"
+                className="pl-9 pr-3 py-2 rounded-xl text-xs bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] w-48 sm:w-64"
               />
             </div>
 
@@ -253,7 +253,7 @@ export default function AdminDashboardPage() {
               href={`/${locale}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] text-[#3A2E27] dark:text-[#FAF5EE] hover:border-[#f15e1c]"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] text-[#3A2E27] dark:text-[#FAF5EE] hover:border-[#f15e1c]"
             >
               <span>View Live Site</span>
               <ExternalLink className="w-3.5 h-3.5 text-[#f15e1c]" />
@@ -266,7 +266,7 @@ export default function AdminDashboardPage() {
                 resetAllContent();
                 showToast("All content & settings reset to factory defaults");
               }}
-              className="rounded-xl border-[#EFE2D6] dark:border-[#2C241E]"
+              className="rounded-xl border-[#EFE2D6] dark:border-[#1f1f1f]"
               leftIcon={<RotateCcw className="w-4 h-4" />}
             >
               Reset Defaults
@@ -276,7 +276,7 @@ export default function AdminDashboardPage() {
 
         {/* Global Admin Search Results Bar */}
         {searchMatches && searchMatches.length > 0 && (
-          <div className="p-4 rounded-2xl bg-[#FCE3D3]/50 dark:bg-[#261F1A] border border-[#f15e1c]/30 space-y-2">
+          <div className="p-4 rounded-2xl bg-[#FCE3D3]/50 dark:bg-[#161616] border border-[#f15e1c]/30 space-y-2">
             <span className="text-xs font-bold text-[#f15e1c]">Search Matches:</span>
             <div className="flex flex-wrap gap-2">
               {searchMatches.map((m, idx) => (
@@ -340,7 +340,7 @@ export default function AdminDashboardPage() {
                 </div>
 
                 {showPowerConfirm ? (
-                  <div className="p-4 rounded-2xl bg-white dark:bg-[#1E1915] border-2 border-amber-500 shadow-2xl space-y-3 shrink-0 max-w-sm animate-in fade-in">
+                  <div className="p-4 rounded-2xl bg-white dark:bg-[#0a0a0a] border-2 border-amber-500 shadow-2xl space-y-3 shrink-0 max-w-sm animate-in fade-in">
                     <div className="flex items-center gap-2 text-xs font-extrabold text-amber-600 dark:text-amber-400">
                       <AlertTriangle className="w-4 h-4 shrink-0" />
                       <span>CONFIRMATION REQUIRED</span>
@@ -354,7 +354,7 @@ export default function AdminDashboardPage() {
                       <button
                         type="button"
                         onClick={() => setShowPowerConfirm(false)}
-                        className="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#EFE2D6] cursor-pointer"
+                        className="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#EFE2D6] cursor-pointer"
                       >
                         Cancel
                       </button>
@@ -397,7 +397,7 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-4">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-4">
               <h2 className="text-base font-bold font-display flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-[#f15e1c]" />
                 <span>Quick Actions Shortcuts</span>
@@ -419,7 +419,7 @@ export default function AdminDashboardPage() {
                     key={i}
                     type="button"
                     onClick={() => setActiveTab(act.tab)}
-                    className="p-3.5 rounded-2xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] text-xs font-semibold text-left hover:border-[#f15e1c] transition-all cursor-pointer hover:shadow-xs"
+                    className="p-3.5 rounded-2xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] text-xs font-semibold text-left hover:border-[#f15e1c] transition-all cursor-pointer hover:shadow-xs"
                   >
                     {act.label} &rarr;
                   </button>
@@ -437,7 +437,7 @@ export default function AdminDashboardPage() {
               ].map((stat, idx) => (
                 <div
                   key={idx}
-                  className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm flex flex-col justify-between space-y-2"
+                  className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm flex flex-col justify-between space-y-2"
                 >
                   <span className="text-xs font-mono text-[#7A6A5F] dark:text-[#B8ACA0] uppercase">
                     {stat.label}
@@ -458,7 +458,7 @@ export default function AdminDashboardPage() {
         {/* TAB 2: HOMEPAGE & HERO */}
         {/* ========================================================================= */}
         {activeTab === "hero" && (
-          <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-6">
+          <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-6">
             <h2 className="text-lg font-bold font-display flex items-center gap-2">
               <Globe className="w-5 h-5 text-[#f15e1c]" />
               <span>Homepage Hero Content Editor</span>
@@ -478,7 +478,7 @@ export default function AdminDashboardPage() {
                   type="text"
                   value={heroForm.eyebrow}
                   onChange={(e) => setHeroForm({ ...heroForm, eyebrow: e.target.value })}
-                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                 />
               </div>
 
@@ -488,7 +488,7 @@ export default function AdminDashboardPage() {
                   rows={2}
                   value={heroForm.title}
                   onChange={(e) => setHeroForm({ ...heroForm, title: e.target.value })}
-                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                 />
               </div>
 
@@ -498,7 +498,7 @@ export default function AdminDashboardPage() {
                   rows={3}
                   value={heroForm.description}
                   onChange={(e) => setHeroForm({ ...heroForm, description: e.target.value })}
-                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                 />
               </div>
 
@@ -509,7 +509,7 @@ export default function AdminDashboardPage() {
                     type="text"
                     value={heroForm.primaryCtaText}
                     onChange={(e) => setHeroForm({ ...heroForm, primaryCtaText: e.target.value })}
-                    className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                   />
                 </div>
 
@@ -519,7 +519,7 @@ export default function AdminDashboardPage() {
                     type="text"
                     value={heroForm.primaryCtaUrl}
                     onChange={(e) => setHeroForm({ ...heroForm, primaryCtaUrl: e.target.value })}
-                    className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                   />
                 </div>
               </div>
@@ -536,7 +536,7 @@ export default function AdminDashboardPage() {
         {/* ========================================================================= */}
         {activeTab === "services" && (
           <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
                 <Briefcase className="w-5 h-5 text-[#f15e1c]" />
                 <span>7 Core Practices &amp; Services CMS</span>
@@ -554,9 +554,9 @@ export default function AdminDashboardPage() {
                 return (
                   <div
                     key={srv.slug}
-                    className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4"
+                    className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md space-y-4"
                   >
-                    <div className="flex items-center justify-between pb-3 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                    <div className="flex items-center justify-between pb-3 border-b border-[#EFE2D6] dark:border-[#1f1f1f]">
                       <div>
                         <span className="text-xs font-bold font-mono text-[#f15e1c] uppercase">
                           {srv.slug}
@@ -607,7 +607,7 @@ export default function AdminDashboardPage() {
                             type="text"
                             value={srv.title}
                             onChange={(e) => updateService(srv.slug, { title: e.target.value })}
-                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                           />
                         </div>
 
@@ -617,7 +617,7 @@ export default function AdminDashboardPage() {
                             rows={3}
                             value={srv.description}
                             onChange={(e) => updateService(srv.slug, { description: e.target.value })}
-                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                           />
                         </div>
 
@@ -627,7 +627,7 @@ export default function AdminDashboardPage() {
                             type="text"
                             value={srv.tagline || ""}
                             onChange={(e) => updateService(srv.slug, { tagline: e.target.value })}
-                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                           />
                         </div>
 
@@ -648,7 +648,7 @@ export default function AdminDashboardPage() {
         {/* ========================================================================= */}
         {activeTab === "products" && (
           <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-[#f15e1c]" />
                 <span>Products &amp; Platforms CMS (AstroBeams.ai, AstroBeams.store &amp; OMNiGRC)</span>
@@ -666,9 +666,9 @@ export default function AdminDashboardPage() {
                 return (
                   <div
                     key={product.slug}
-                    className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4"
+                    className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md space-y-4"
                   >
-                    <div className="flex items-center justify-between pb-3 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                    <div className="flex items-center justify-between pb-3 border-b border-[#EFE2D6] dark:border-[#1f1f1f]">
                       <div>
                         <span className="text-xs font-bold font-mono text-[#f15e1c] uppercase">
                           {product.category}
@@ -752,7 +752,7 @@ export default function AdminDashboardPage() {
                               );
                               setProductsList(updated);
                             }}
-                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                           />
                         </div>
 
@@ -767,7 +767,7 @@ export default function AdminDashboardPage() {
                               );
                               setProductsList(updated);
                             }}
-                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                           />
                         </div>
 
@@ -782,7 +782,7 @@ export default function AdminDashboardPage() {
                               );
                               setProductsList(updated);
                             }}
-                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                           />
                         </div>
 
@@ -797,7 +797,7 @@ export default function AdminDashboardPage() {
                               );
                               setProductsList(updated);
                             }}
-                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                           />
                         </div>
 
@@ -812,7 +812,7 @@ export default function AdminDashboardPage() {
                               );
                               setProductsList(updated);
                             }}
-                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                           />
                         </div>
 
@@ -828,7 +828,7 @@ export default function AdminDashboardPage() {
                               );
                               setProductsList(updated);
                             }}
-                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                           />
                         </div>
 
@@ -883,7 +883,7 @@ export default function AdminDashboardPage() {
         {/* ========================================================================= */}
         {activeTab === "industries" && (
           <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
                 <Building2 className="w-5 h-5 text-[#f15e1c]" />
                 <span>Industry Verticals &amp; Solutions Manager</span>
@@ -897,9 +897,9 @@ export default function AdminDashboardPage() {
               {(content.industries || []).map((ind) => (
                 <div
                   key={ind.slug}
-                  className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-3"
+                  className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md space-y-3"
                 >
-                  <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                  <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#1f1f1f]">
                     <h3 className="text-sm font-bold font-display text-[#f15e1c]">{ind.name}</h3>
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#FCE3D3] text-[#3A2E27] font-semibold">
                       Enterprise Practice
@@ -912,7 +912,7 @@ export default function AdminDashboardPage() {
                       type="text"
                       value={ind.name}
                       onChange={(e) => updateIndustry(ind.slug, { name: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                   </div>
 
@@ -922,7 +922,7 @@ export default function AdminDashboardPage() {
                       rows={3}
                       value={ind.description}
                       onChange={(e) => updateIndustry(ind.slug, { description: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                   </div>
 
@@ -946,7 +946,7 @@ export default function AdminDashboardPage() {
         {/* ========================================================================= */}
         {activeTab === "casestudies" && (
           <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
                 <FileText className="w-5 h-5 text-[#f15e1c]" />
                 <span>Enterprise Case Studies CMS</span>
@@ -960,9 +960,9 @@ export default function AdminDashboardPage() {
               {(content.caseStudies || []).map((cs) => (
                 <div
                   key={cs.slug}
-                  className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4"
+                  className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md space-y-4"
                 >
-                  <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                  <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#1f1f1f]">
                     <span className="text-xs font-bold font-mono text-[#f15e1c]">
                       {cs.client} &bull; {cs.clientIndustry}
                     </span>
@@ -977,7 +977,7 @@ export default function AdminDashboardPage() {
                       type="text"
                       value={cs.title}
                       onChange={(e) => updateCaseStudy(cs.slug, { title: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                   </div>
 
@@ -987,7 +987,7 @@ export default function AdminDashboardPage() {
                       rows={2}
                       value={cs.summary}
                       onChange={(e) => updateCaseStudy(cs.slug, { summary: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                   </div>
 
@@ -1011,7 +1011,7 @@ export default function AdminDashboardPage() {
         {/* ========================================================================= */}
         {activeTab === "methodology" && (
           <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
                 <Workflow className="w-5 h-5 text-[#f15e1c]" />
                 <span>5-Step Execution Methodology Editor</span>
@@ -1025,7 +1025,7 @@ export default function AdminDashboardPage() {
               {(content.processSteps || []).map((step, idx) => (
                 <div
                   key={idx}
-                  className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4"
+                  className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4"
                 >
                   <div className="w-12 h-12 rounded-2xl bg-[#f15e1c] text-white flex items-center justify-center font-extrabold font-mono text-lg shrink-0">
                     {step.step}
@@ -1036,19 +1036,19 @@ export default function AdminDashboardPage() {
                       type="text"
                       value={step.title}
                       onChange={(e) => updateProcessStep(idx, { title: e.target.value })}
-                      className="text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613] font-bold"
+                      className="text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613] font-bold"
                     />
                     <input
                       type="text"
                       value={step.description}
                       onChange={(e) => updateProcessStep(idx, { description: e.target.value })}
-                      className="text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                     <input
                       type="text"
                       value={step.deliverable}
                       onChange={(e) => updateProcessStep(idx, { deliverable: e.target.value })}
-                      className="text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                   </div>
 
@@ -1072,7 +1072,7 @@ export default function AdminDashboardPage() {
         {/* ========================================================================= */}
         {activeTab === "testimonials" && (
           <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
                 <Quote className="w-5 h-5 text-[#f15e1c]" />
                 <span>Client Testimonials CMS</span>
@@ -1086,9 +1086,9 @@ export default function AdminDashboardPage() {
               {(content.testimonials || []).map((test, idx) => (
                 <div
                   key={test.id || idx}
-                  className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-3"
+                  className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md space-y-3"
                 >
-                  <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                  <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#1f1f1f]">
                     <span className="text-xs font-bold text-[#f15e1c]">{test.company}</span>
                     <span className="text-xs text-amber-500 font-bold">★ {test.rating || 5}.0</span>
                   </div>
@@ -1099,7 +1099,7 @@ export default function AdminDashboardPage() {
                       type="text"
                       value={test.author}
                       onChange={(e) => updateTestimonial(idx, { author: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                   </div>
 
@@ -1109,7 +1109,7 @@ export default function AdminDashboardPage() {
                       rows={3}
                       value={test.quote}
                       onChange={(e) => updateTestimonial(idx, { quote: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                   </div>
 
@@ -1133,7 +1133,7 @@ export default function AdminDashboardPage() {
         {/* ========================================================================= */}
         {activeTab === "footer" && (
           <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
                 <Share2 className="w-5 h-5 text-[#f15e1c]" />
                 <span>Footer &amp; Regional Contact CMS</span>
@@ -1152,7 +1152,7 @@ export default function AdminDashboardPage() {
               className="space-y-6"
             >
               {/* Main Footer Closing Headline */}
-              <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4">
+              <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md space-y-4">
                 <h3 className="text-sm font-bold font-display text-[#f15e1c]">Footer Heading &amp; Copy</h3>
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold">Main Footer Headline</label>
@@ -1160,14 +1160,14 @@ export default function AdminDashboardPage() {
                     type="text"
                     value={footerForm.mainHeading || "WE 🤍 WORKING WITH AMBITIOUS BRANDS, ACROSS EVERY SECTOR"}
                     onChange={(e) => setFooterForm({ ...footerForm, mainHeading: e.target.value })}
-                    className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                   />
                 </div>
               </div>
 
               {/* India HQ Regional Contact */}
-              <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4">
-                <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+              <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md space-y-4">
+                <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#1f1f1f]">
                   <h3 className="text-sm font-bold font-display text-[#f15e1c]">India HQ Regional Details</h3>
                   <button
                     type="button"
@@ -1192,7 +1192,7 @@ export default function AdminDashboardPage() {
                       type="text"
                       value={footerForm.indiaPhone}
                       onChange={(e) => setFooterForm({ ...footerForm, indiaPhone: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                   </div>
 
@@ -1202,7 +1202,7 @@ export default function AdminDashboardPage() {
                       type="text"
                       value={footerForm.indiaDisplayLabel || `${footerForm.indiaPhone} - India HQ`}
                       onChange={(e) => setFooterForm({ ...footerForm, indiaDisplayLabel: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                   </div>
                 </div>
@@ -1213,14 +1213,14 @@ export default function AdminDashboardPage() {
                     rows={2}
                     value={footerForm.indiaAddress || "Platinum Floor D 14/23\nArdee City Sec 52\nGurgaon 122002"}
                     onChange={(e) => setFooterForm({ ...footerForm, indiaAddress: e.target.value })}
-                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                   />
                 </div>
               </div>
 
               {/* UAE Office Regional Contact */}
-              <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4">
-                <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+              <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md space-y-4">
+                <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#1f1f1f]">
                   <h3 className="text-sm font-bold font-display text-[#f15e1c]">UAE Regional Office Details</h3>
                   <button
                     type="button"
@@ -1245,7 +1245,7 @@ export default function AdminDashboardPage() {
                       type="text"
                       value={footerForm.uaePhone}
                       onChange={(e) => setFooterForm({ ...footerForm, uaePhone: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                   </div>
 
@@ -1255,7 +1255,7 @@ export default function AdminDashboardPage() {
                       type="text"
                       value={footerForm.uaeDisplayLabel || `${footerForm.uaePhone} - UAE Regional Office`}
                       onChange={(e) => setFooterForm({ ...footerForm, uaeDisplayLabel: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                   </div>
                 </div>
@@ -1266,13 +1266,13 @@ export default function AdminDashboardPage() {
                     rows={2}
                     value={footerForm.uaeAddress || "55764-001 IFZA Business Park FZCO\nBuilding A1 Dubai Silicon Oasis Dubai, U.A.E"}
                     onChange={(e) => setFooterForm({ ...footerForm, uaeAddress: e.target.value })}
-                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                   />
                 </div>
               </div>
 
               {/* Email & Support Contact */}
-              <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4">
+              <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md space-y-4">
                 <h3 className="text-sm font-bold font-display text-[#f15e1c]">Emails &amp; Copyright</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
@@ -1281,7 +1281,7 @@ export default function AdminDashboardPage() {
                       type="email"
                       value={footerForm.supportEmail}
                       onChange={(e) => setFooterForm({ ...footerForm, supportEmail: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                   </div>
 
@@ -1291,7 +1291,7 @@ export default function AdminDashboardPage() {
                       type="text"
                       value={footerForm.copyrightText}
                       onChange={(e) => setFooterForm({ ...footerForm, copyrightText: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                   </div>
                 </div>
@@ -1309,7 +1309,7 @@ export default function AdminDashboardPage() {
         {/* ========================================================================= */}
         {activeTab === "socials" && (
           <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
                 <Share2 className="w-5 h-5 text-[#f15e1c]" />
                 <span>Social Media &amp; Digital Presence Manager</span>
@@ -1323,9 +1323,9 @@ export default function AdminDashboardPage() {
               {(content.socialLinks || []).map((social) => (
                 <div
                   key={social.id}
-                  className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-3"
+                  className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md space-y-3"
                 >
-                  <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                  <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#1f1f1f]">
                     <span className="text-xs font-bold font-display text-[#f15e1c]">
                       {social.name}
                     </span>
@@ -1361,7 +1361,7 @@ export default function AdminDashboardPage() {
                       type="url"
                       value={social.url}
                       onChange={(e) => updateSocialLink(social.id, { url: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                   </div>
                 </div>
@@ -1369,7 +1369,7 @@ export default function AdminDashboardPage() {
             </div>
 
             {/* Add New Platform */}
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-4">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-4">
               <h3 className="text-sm font-bold font-display flex items-center gap-2">
                 <Plus className="w-4 h-4 text-[#f15e1c]" />
                 <span>Add New Social / Digital Platform</span>
@@ -1381,14 +1381,14 @@ export default function AdminDashboardPage() {
                   placeholder="Platform Name (e.g. GitHub)"
                   value={newSocialForm.name}
                   onChange={(e) => setNewSocialForm({ ...newSocialForm, name: e.target.value })}
-                  className="text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                  className="text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                 />
                 <input
                   type="url"
                   placeholder="Platform URL (https://...)"
                   value={newSocialForm.url}
                   onChange={(e) => setNewSocialForm({ ...newSocialForm, url: e.target.value })}
-                  className="text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                  className="text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                 />
                 <Button
                   type="button"
@@ -1424,7 +1424,7 @@ export default function AdminDashboardPage() {
         {activeTab === "chatbot" && (
           <div className="space-y-6">
             {/* Header & Master ON/OFF Switch */}
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="space-y-1">
                 <h2 className="text-lg font-bold font-display flex items-center gap-2">
                   <MessageSquare className="w-5 h-5 text-[#f15e1c]" />
@@ -1436,7 +1436,7 @@ export default function AdminDashboardPage() {
               </div>
 
               {/* Master Chatbot ON/OFF Toggle */}
-              <div className="flex items-center gap-3 bg-[#FBF3EA] dark:bg-[#1A1613] p-2.5 px-4 rounded-2xl border border-[#EFE2D6] dark:border-[#2C241E] shrink-0">
+              <div className="flex items-center gap-3 bg-[#FBF3EA] dark:bg-[#1A1613] p-2.5 px-4 rounded-2xl border border-[#EFE2D6] dark:border-[#1f1f1f] shrink-0">
                 <span className="text-xs font-bold">Chatbot Master:</span>
                 <button
                   type="button"
@@ -1458,7 +1458,7 @@ export default function AdminDashboardPage() {
             </div>
 
             {/* Default Greeting & Fallback Response Editors */}
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md space-y-4">
               <h3 className="text-sm font-bold font-display text-[#f15e1c]">Default Messaging &amp; Fallback</h3>
 
               <div className="space-y-1">
@@ -1467,7 +1467,7 @@ export default function AdminDashboardPage() {
                   type="text"
                   value={content.chatbotKB?.defaultGreeting || ""}
                   onChange={(e) => updateChatbotKB({ defaultGreeting: e.target.value })}
-                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                 />
               </div>
 
@@ -1477,7 +1477,7 @@ export default function AdminDashboardPage() {
                   rows={2}
                   value={content.chatbotKB?.fallbackResponse || ""}
                   onChange={(e) => updateChatbotKB({ fallbackResponse: e.target.value })}
-                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                 />
               </div>
             </div>
@@ -1543,7 +1543,7 @@ export default function AdminDashboardPage() {
                       required
                       value={newCmdKeyword}
                       onChange={(e) => setNewCmdKeyword(e.target.value)}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                   </div>
 
@@ -1554,7 +1554,7 @@ export default function AdminDashboardPage() {
                       placeholder="e.g. online marketing, social media marketing, leads"
                       value={newCmdAltKeywords}
                       onChange={(e) => setNewCmdAltKeywords(e.target.value)}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                   </div>
                 </div>
@@ -1567,7 +1567,7 @@ export default function AdminDashboardPage() {
                     required
                     value={newCmdResponse}
                     onChange={(e) => setNewCmdResponse(e.target.value)}
-                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                   />
                 </div>
 
@@ -1578,7 +1578,7 @@ export default function AdminDashboardPage() {
                     placeholder="e.g. Would you like to schedule a campaign strategy session?"
                     value={newCmdFollowUp}
                     onChange={(e) => setNewCmdFollowUp(e.target.value)}
-                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                   />
                 </div>
 
@@ -1590,7 +1590,7 @@ export default function AdminDashboardPage() {
                       type="text"
                       value={newCmdCtaLabel}
                       onChange={(e) => setNewCmdCtaLabel(e.target.value)}
-                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                   </div>
 
@@ -1599,7 +1599,7 @@ export default function AdminDashboardPage() {
                     <select
                       value={newCmdCtaType}
                       onChange={(e) => setNewCmdCtaType(e.target.value as any)}
-                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     >
                       <option value="page">Page Button</option>
                       <option value="contact">Contact Button</option>
@@ -1615,7 +1615,7 @@ export default function AdminDashboardPage() {
                       type="text"
                       value={newCmdCtaValue}
                       onChange={(e) => setNewCmdCtaValue(e.target.value)}
-                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="w-full text-xs p-2 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                   </div>
                 </div>
@@ -1636,9 +1636,9 @@ export default function AdminDashboardPage() {
               {(content.chatbotKB?.commands || []).map((cmd) => (
                 <div
                   key={cmd.id}
-                  className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-3"
+                  className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md space-y-3"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-[#EFE2D6] dark:border-[#1f1f1f]">
                     <div className="flex items-center gap-2.5">
                       <span className="text-sm font-extrabold font-display text-[#f15e1c]">
                         {cmd.keyword}
@@ -1679,7 +1679,7 @@ export default function AdminDashboardPage() {
                     <div className="text-[11px] font-bold text-[#7A6A5F]">Alternative Match Keywords:</div>
                     <div className="flex flex-wrap gap-1.5">
                       {(cmd.alternativeKeywords || []).map((alt, i) => (
-                        <span key={i} className="text-[10px] font-mono px-2 py-0.5 rounded-lg bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E]">
+                        <span key={i} className="text-[10px] font-mono px-2 py-0.5 rounded-lg bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f]">
                           {alt}
                         </span>
                       ))}
@@ -1692,7 +1692,7 @@ export default function AdminDashboardPage() {
                       rows={2}
                       value={cmd.response}
                       onChange={(e) => updateChatbotCommand(cmd.id, { response: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                      className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                     />
                   </div>
                 </div>
@@ -1706,7 +1706,7 @@ export default function AdminDashboardPage() {
         {/* ========================================================================= */}
         {activeTab === "contact" && (
           <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
                 <PhoneCall className="w-5 h-5 text-[#f15e1c]" />
                 <span>Contact Info &amp; Lead Inquiries Manager</span>
@@ -1716,7 +1716,7 @@ export default function AdminDashboardPage() {
               </p>
             </div>
 
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-4">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md space-y-4">
               <h3 className="text-sm font-bold font-display text-[#f15e1c]">Public Contact Fields</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
@@ -1725,7 +1725,7 @@ export default function AdminDashboardPage() {
                     type="text"
                     value={footerForm.indiaPhone}
                     onChange={(e) => setFooterForm({ ...footerForm, indiaPhone: e.target.value })}
-                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                   />
                 </div>
                 <div className="space-y-1">
@@ -1734,7 +1734,7 @@ export default function AdminDashboardPage() {
                     type="text"
                     value={footerForm.uaePhone}
                     onChange={(e) => setFooterForm({ ...footerForm, uaePhone: e.target.value })}
-                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                   />
                 </div>
               </div>
@@ -1750,7 +1750,7 @@ export default function AdminDashboardPage() {
         {/* ========================================================================= */}
         {activeTab === "languages" && (
           <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
                 <Languages className="w-5 h-5 text-[#f15e1c]" />
                 <span>Languages &amp; Multilingual System Manager</span>
@@ -1764,9 +1764,9 @@ export default function AdminDashboardPage() {
               {(content.languages || []).map((lang) => (
                 <div
                   key={lang.code}
-                  className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md space-y-3"
+                  className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md space-y-3"
                 >
-                  <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+                  <div className="flex items-center justify-between pb-2 border-b border-[#EFE2D6] dark:border-[#1f1f1f]">
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-bold font-mono uppercase text-[#f15e1c]">
                         {lang.code}
@@ -1808,7 +1808,7 @@ export default function AdminDashboardPage() {
         {/* TAB 14: LEGAL & DPDP CONTENT */}
         {/* ========================================================================= */}
         {activeTab === "legal" && (
-          <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-6">
+          <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-6">
             <h2 className="text-lg font-bold font-display flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-[#f15e1c]" />
               <span>Legal &amp; DPDP Act Content CMS</span>
@@ -1828,7 +1828,7 @@ export default function AdminDashboardPage() {
                   rows={3}
                   value={legalForm.privacyPolicyText}
                   onChange={(e) => setLegalForm({ ...legalForm, privacyPolicyText: e.target.value })}
-                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                 />
               </div>
 
@@ -1838,7 +1838,7 @@ export default function AdminDashboardPage() {
                   rows={3}
                   value={legalForm.securityDpdpText}
                   onChange={(e) => setLegalForm({ ...legalForm, securityDpdpText: e.target.value })}
-                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                 />
               </div>
 
@@ -1893,7 +1893,7 @@ export default function AdminDashboardPage() {
                 </div>
 
                 {showPowerConfirm ? (
-                  <div className="p-4 rounded-2xl bg-white dark:bg-[#1E1915] border-2 border-amber-500 shadow-2xl space-y-3 shrink-0 max-w-sm animate-in fade-in">
+                  <div className="p-4 rounded-2xl bg-white dark:bg-[#0a0a0a] border-2 border-amber-500 shadow-2xl space-y-3 shrink-0 max-w-sm animate-in fade-in">
                     <div className="flex items-center gap-2 text-xs font-extrabold text-amber-600 dark:text-amber-400">
                       <AlertTriangle className="w-4 h-4 shrink-0" />
                       <span>CONFIRMATION REQUIRED</span>
@@ -1907,7 +1907,7 @@ export default function AdminDashboardPage() {
                       <button
                         type="button"
                         onClick={() => setShowPowerConfirm(false)}
-                        className="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#EFE2D6] cursor-pointer"
+                        className="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#EFE2D6] cursor-pointer"
                       >
                         Cancel
                       </button>
@@ -1950,7 +1950,7 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
                 <SlidersHorizontal className="w-5 h-5 text-[#f15e1c]" />
                 <span>Global System, Section Styling &amp; Maintenance Controls</span>
@@ -1961,8 +1961,8 @@ export default function AdminDashboardPage() {
             </div>
 
             {/* APPEARANCE & SECTION STYLING CMS */}
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-lg space-y-5">
-              <div className="flex items-center justify-between pb-3 border-b border-[#EFE2D6] dark:border-[#2C241E]">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-lg space-y-5">
+              <div className="flex items-center justify-between pb-3 border-b border-[#EFE2D6] dark:border-[#1f1f1f]">
                 <h3 className="text-sm font-bold font-display text-[#f15e1c] flex items-center gap-2">
                   <Palette className="w-4 h-4" />
                   <span>Appearance &amp; Section Visual Hierarchy CMS</span>
@@ -1981,7 +1981,7 @@ export default function AdminDashboardPage() {
                       updateSectionTheme("services", e.target.value);
                       showToast(`Services section base set to ${e.target.value}`);
                     }}
-                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613] font-medium cursor-pointer"
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613] font-medium cursor-pointer"
                   >
                     <option value="soft_orange">Soft Warm Orange (Recommended)</option>
                     <option value="warm_beige">Warm Beige Base</option>
@@ -1998,7 +1998,7 @@ export default function AdminDashboardPage() {
                       updateSectionTheme("industries", e.target.value);
                       showToast(`Industries section base set to ${e.target.value}`);
                     }}
-                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613] font-medium cursor-pointer"
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613] font-medium cursor-pointer"
                   >
                     <option value="warm_beige">Warm Beige (Recommended)</option>
                     <option value="soft_orange">Soft Warm Orange Base</option>
@@ -2015,7 +2015,7 @@ export default function AdminDashboardPage() {
                       updateSectionTheme("caseStudies", e.target.value);
                       showToast(`Case Studies section base set to ${e.target.value}`);
                     }}
-                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613] font-medium cursor-pointer"
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613] font-medium cursor-pointer"
                   >
                     <option value="soft_orange">Soft Warm Orange (Recommended)</option>
                     <option value="warm_beige">Warm Beige Base</option>
@@ -2032,7 +2032,7 @@ export default function AdminDashboardPage() {
                       updateSectionTheme("testimonials", e.target.value);
                       showToast(`Testimonials section base set to ${e.target.value}`);
                     }}
-                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613] font-medium cursor-pointer"
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613] font-medium cursor-pointer"
                   >
                     <option value="warm_beige">Warm Beige (Recommended)</option>
                     <option value="soft_orange">Soft Warm Orange Base</option>
@@ -2049,7 +2049,7 @@ export default function AdminDashboardPage() {
                       updateCardStyle(e.target.value as any);
                       showToast(`Card style updated to ${e.target.value}`);
                     }}
-                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FBF3EA] dark:bg-[#1A1613] font-semibold text-[#f15e1c] cursor-pointer"
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613] font-semibold text-[#f15e1c] cursor-pointer"
                   >
                     <option value="elevated">Elevated (White Card + Shadow + Lift) [Recommended]</option>
                     <option value="bordered">Bordered (Clean High-Contrast Outline)</option>
@@ -2061,7 +2061,7 @@ export default function AdminDashboardPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
+              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md flex items-center justify-between">
                 <div>
                   <span className="text-xs font-bold font-display block">Global Animations</span>
                   <span className="text-[11px] text-[#7A6A5F]">Master switch for all motion</span>
@@ -2080,7 +2080,7 @@ export default function AdminDashboardPage() {
                 </button>
               </div>
 
-              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
+              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md flex items-center justify-between">
                 <div>
                   <span className="text-xs font-bold font-display block">Hover Effects</span>
                   <span className="text-[11px] text-[#7A6A5F]">Button &amp; card hover feedback</span>
@@ -2100,7 +2100,7 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-4">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-4">
               <h3 className="text-sm font-bold font-display">Per-Service Maintenance Toggles</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                 {Object.entries(config.serviceStates || {}).map(([slug, state]) => (
@@ -2131,7 +2131,7 @@ export default function AdminDashboardPage() {
         {/* ========================================================================= */}
         {activeTab === "motion" && (
           <div className="space-y-8">
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-2">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-2">
               <h2 className="text-xl font-bold font-display flex items-center gap-2 text-[#f15e1c]">
                 <Sparkles className="w-6 h-6" />
                 <span>Motion &amp; Experience Controls</span>
@@ -2144,7 +2144,7 @@ export default function AdminDashboardPage() {
             {/* Main Toggle Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {/* 1. Global Animations */}
-              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
+              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md flex items-center justify-between">
                 <div>
                   <span className="text-sm font-bold font-display block text-[#3A2E27] dark:text-[#FAF5EE]">Global Animations</span>
                   <span className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">Master switch for all website motion</span>
@@ -2164,7 +2164,7 @@ export default function AdminDashboardPage() {
               </div>
 
               {/* 2. Background Motion */}
-              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
+              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md flex items-center justify-between">
                 <div>
                   <span className="text-sm font-bold font-display block text-[#3A2E27] dark:text-[#FAF5EE]">Background Motion</span>
                   <span className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">Subtle continuous floating background</span>
@@ -2184,7 +2184,7 @@ export default function AdminDashboardPage() {
               </div>
 
               {/* 3. 3D Experience */}
-              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
+              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md flex items-center justify-between">
                 <div>
                   <span className="text-sm font-bold font-display block text-[#3A2E27] dark:text-[#FAF5EE]">3D Experience</span>
                   <span className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">Hero &amp; Services 3D constellation</span>
@@ -2208,7 +2208,7 @@ export default function AdminDashboardPage() {
               </div>
 
               {/* 4. Parallax */}
-              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
+              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md flex items-center justify-between">
                 <div>
                   <span className="text-sm font-bold font-display block text-[#3A2E27] dark:text-[#FAF5EE]">Parallax</span>
                   <span className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">Mouse movement &amp; scroll depth</span>
@@ -2228,7 +2228,7 @@ export default function AdminDashboardPage() {
               </div>
 
               {/* 5. Hover Effects */}
-              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
+              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md flex items-center justify-between">
                 <div>
                   <span className="text-sm font-bold font-display block text-[#3A2E27] dark:text-[#FAF5EE]">Hover Effects</span>
                   <span className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">Interactive card &amp; button hover scaling</span>
@@ -2248,7 +2248,7 @@ export default function AdminDashboardPage() {
               </div>
 
               {/* 6. Scroll Animations */}
-              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
+              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md flex items-center justify-between">
                 <div>
                   <span className="text-sm font-bold font-display block text-[#3A2E27] dark:text-[#FAF5EE]">Scroll Animations</span>
                   <span className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">On-scroll section reveal animations</span>
@@ -2268,7 +2268,7 @@ export default function AdminDashboardPage() {
               </div>
 
               {/* 7. Mobile Animations */}
-              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md flex items-center justify-between">
+              <div className="p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md flex items-center justify-between">
                 <div>
                   <span className="text-sm font-bold font-display block text-[#3A2E27] dark:text-[#FAF5EE]">Mobile Animations</span>
                   <span className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">Swipeable carousels &amp; mobile motion</span>
@@ -2289,7 +2289,7 @@ export default function AdminDashboardPage() {
             </div>
 
             {/* Animation Intensity Control */}
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2C241E] shadow-lg space-y-4">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-lg space-y-4">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
                   Animation Intensity Level

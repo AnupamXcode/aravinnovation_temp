@@ -36,7 +36,7 @@ export function BorderTraceButton({
       onClick={onClick}
       className={cn(
         "relative inline-flex items-center justify-center px-6 py-3 font-semibold text-sm rounded-full overflow-hidden transition-colors cursor-pointer select-none",
-        "bg-white dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#2C241E] shadow-md",
+        "bg-white dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f15e1c]",
         className
       )}

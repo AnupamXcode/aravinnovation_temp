@@ -34,7 +34,7 @@ export default async function ProductsListingPage() {
   const products = await getProducts();
 
   return (
-    <div className="pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#fefaf5] dark:bg-[#172420] transition-colors duration-300 min-h-screen">
+    <div className="pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#fefaf5] dark:bg-[#0a0a0a] transition-colors duration-300 min-h-screen">
       <BreadcrumbSchema items={[{ name: "Products", url: "/products" }]} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Header */}
@@ -71,7 +71,7 @@ export default async function ProductsListingPage() {
 
         {/* Device & Platform Access Section */}
         <ScrollReveal direction="up" delay={0.3}>
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1e2c27] border border-[#f7d7b0] dark:border-[#253630] space-y-6 text-left shadow-md">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#121212] border border-[#f7d7b0] dark:border-[#1a1a1a] space-y-6 text-left shadow-md">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <h3 className="text-lg font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
@@ -93,7 +93,7 @@ export default async function ProductsListingPage() {
                 href="https://astrobeams.in"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] text-[#f15e1c] text-xs font-bold font-mono hover:bg-[#fefaf5] hover:border-[#f15e1c] hover:-translate-y-0.5 transition-all shadow-xs cursor-pointer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#f15e1c] text-xs font-bold font-mono hover:bg-[#fefaf5] hover:border-[#f15e1c] hover:-translate-y-0.5 transition-all shadow-xs cursor-pointer"
               >
                 <Sparkles className="w-4 h-4 text-[#f15e1c]" />
                 <span>Live Platform (AstroBeams.in)</span>
@@ -104,7 +104,7 @@ export default async function ProductsListingPage() {
                 href="https://www.astrobeams.store/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] text-[#2e936f] text-xs font-bold font-mono hover:bg-[#fefaf5] hover:border-[#2e936f] hover:-translate-y-0.5 transition-all shadow-xs cursor-pointer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#2e936f] text-xs font-bold font-mono hover:bg-[#fefaf5] hover:border-[#2e936f] hover:-translate-y-0.5 transition-all shadow-xs cursor-pointer"
               >
                 <Globe className="w-4 h-4 text-[#2e936f]" />
                 <span>Spiritual Guidance Platform (AstroBeams.store)</span>
@@ -113,7 +113,7 @@ export default async function ProductsListingPage() {
 
               <Link
                 href="/products/omnigrc"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] text-[#f15e1c] text-xs font-bold font-mono hover:bg-[#fefaf5] hover:border-[#f15e1c] hover:-translate-y-0.5 transition-all shadow-xs cursor-pointer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#f15e1c] text-xs font-bold font-mono hover:bg-[#fefaf5] hover:border-[#f15e1c] hover:-translate-y-0.5 transition-all shadow-xs cursor-pointer"
               >
                 <ShieldCheck className="w-4 h-4 text-[#f15e1c]" />
                 <span>Enterprise GRC Console (OMNiGRC)</span>
@@ -122,7 +122,7 @@ export default async function ProductsListingPage() {
 
               <Link
                 href="/contact?intent=setup-call"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] text-[#f15e1c] text-xs font-bold font-mono hover:bg-[#fefaf5] hover:border-[#f15e1c] hover:-translate-y-0.5 transition-all shadow-xs cursor-pointer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#f15e1c] text-xs font-bold font-mono hover:bg-[#fefaf5] hover:border-[#f15e1c] hover:-translate-y-0.5 transition-all shadow-xs cursor-pointer"
               >
                 <Smartphone className="w-4 h-4 text-[#f15e1c]" />
                 <span>Mobile App &amp; API Integration</span>

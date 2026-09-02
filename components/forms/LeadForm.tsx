@@ -108,8 +108,8 @@ export function LeadForm({
 
   if (isSubmitted) {
     return (
-      <div className="rounded-3xl bg-white dark:bg-[#171411] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl text-center space-y-5">
-        <div className="w-16 h-16 rounded-2xl bg-[#FCE3D3] dark:bg-[#261F1A] text-[#f15e1c] mx-auto flex items-center justify-center border border-[#F4A97F]/40 dark:border-[#3D332B] shadow-xs">
+      <div className="rounded-3xl bg-white dark:bg-[#000000] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-2xl text-center space-y-5">
+        <div className="w-16 h-16 rounded-2xl bg-[#FCE3D3] dark:bg-[#161616] text-[#f15e1c] mx-auto flex items-center justify-center border border-[#F4A97F]/40 dark:border-[#262626] shadow-xs">
           <CheckCircle2 className="w-8 h-8" />
         </div>
         <h3 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
@@ -134,9 +134,9 @@ export function LeadForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="rounded-3xl bg-white dark:bg-[#171411] p-7 sm:p-10 border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl space-y-6"
+      className="rounded-3xl bg-white dark:bg-[#000000] p-7 sm:p-10 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-2xl space-y-6"
     >
-      <div className="border-b border-[#EFE2D6] dark:border-[#2C241E] pb-3">
+      <div className="border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-3">
         <h3 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
           Initiate Project Discussion
         </h3>

@@ -108,7 +108,7 @@ export function WebsiteShutdownOverlay({ children }: { children: React.ReactNode
               </div>
             </div>
 
-            <div className="pt-3 border-t border-[#2C241E] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            <div className="pt-3 border-t border-[#1f1f1f] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
               <div className="flex items-center gap-2 text-[#B8ACA0]">
                 <Mail className="w-4 h-4 text-[#f15e1c]" />
                 <span>support@aravinnovations.com</span>
@@ -126,7 +126,7 @@ export function WebsiteShutdownOverlay({ children }: { children: React.ReactNode
               variant="outline"
               size="md"
               onClick={() => window.location.reload()}
-              className="rounded-2xl border-[#2C241E] text-white hover:bg-[#1F1A17] font-bold text-xs"
+              className="rounded-2xl border-[#1f1f1f] text-white hover:bg-[#1F1A17] font-bold text-xs"
               leftIcon={<RefreshCw className="w-4 h-4" />}
             >
               Check System Status (Refresh)

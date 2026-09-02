@@ -346,11 +346,11 @@ export function InteractiveServiceStack3D() {
       {/* Pinned Scroll Track Container (180vh for compact 8-step synchronized reveal) */}
       <div className="service-stack-track relative w-full h-auto md:h-[180vh]">
         {/* Pinned Viewport Stage */}
-        <div className="service-pinned-stage w-full h-auto md:h-screen flex flex-col justify-between py-3 md:py-4 px-4 sm:px-8 lg:px-12 bg-[#FFFDF9] dark:bg-[#12100E] transition-colors duration-300">
+        <div className="service-pinned-stage w-full h-auto md:h-screen flex flex-col justify-between py-3 md:py-4 px-4 sm:px-8 lg:px-12 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
           {/* Top Header Section */}
-          <div className="relative z-20 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#253630] pb-4 max-w-7xl mx-auto w-full">
+          <div className="relative z-20 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-4 max-w-7xl mx-auto w-full">
             <div className="space-y-1">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>OUR CORE SERVICES ECOSYSTEM</span>
               </div>
@@ -402,7 +402,7 @@ export function InteractiveServiceStack3D() {
                           "p-3.5 rounded-2xl backdrop-blur-md border shadow-lg cursor-pointer transition-all duration-300 transform group-hover:scale-[1.05] group-hover:-translate-y-1",
                           isHighlit
                             ? "bg-white dark:bg-[#1a2924] shadow-2xl"
-                            : "bg-white/95 dark:bg-[#172420]/95 border-[#f7d7b0] dark:border-[#253630]"
+                            : "bg-white/95 dark:bg-[#0a0a0a]/95 border-[#f7d7b0] dark:border-[#1a1a1a]"
                         )}
                         style={{
                           borderColor: isHighlit ? layer.tone : undefined,
@@ -576,7 +576,7 @@ export function InteractiveServiceStack3D() {
                           "p-3 rounded-2xl backdrop-blur-md border shadow-lg cursor-pointer transition-all duration-300 transform group-hover:scale-[1.05] group-hover:-translate-y-1",
                           isHighlit
                             ? "bg-white dark:bg-[#1a2924] shadow-2xl"
-                            : "bg-white/95 dark:bg-[#172420]/95 border-[#f7d7b0] dark:border-[#253630]"
+                            : "bg-white/95 dark:bg-[#0a0a0a]/95 border-[#f7d7b0] dark:border-[#1a1a1a]"
                         )}
                         style={{
                           borderColor: isHighlit ? layer.tone : undefined,
@@ -646,7 +646,7 @@ export function InteractiveServiceStack3D() {
                         "p-4 rounded-2xl border flex items-center justify-between gap-3 shadow-xs active:scale-[0.99] transition-all duration-150",
                         isActive
                           ? "bg-white dark:bg-[#1a2924] border-[#f15e1c] ring-2 ring-[#f15e1c]/40 shadow-md"
-                          : "bg-white/95 dark:bg-[#172420]/95 border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c]/40"
+                          : "bg-white/95 dark:bg-[#0a0a0a]/95 border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/40"
                       )}
                     >
                       <div className="flex items-center gap-3 min-w-0 flex-1">
@@ -677,12 +677,12 @@ export function InteractiveServiceStack3D() {
           </div>
 
           {/* Bottom Navigation Indicator Bar (Desktop only) */}
-          <div className="hidden md:flex relative z-20 items-center justify-between max-w-7xl mx-auto w-full border-t border-[#f7d7b0] dark:border-[#253630] pt-3 text-xs font-mono text-[#7A6A5F] dark:text-[#B8ACA0]">
+          <div className="hidden md:flex relative z-20 items-center justify-between max-w-7xl mx-auto w-full border-t border-[#f7d7b0] dark:border-[#1a1a1a] pt-3 text-xs font-mono text-[#7A6A5F] dark:text-[#B8ACA0]">
             <span className="inline-flex items-center gap-1.5">
               <span>Scroll Down to Explore Each Practice</span>
               <ChevronDown className="w-3.5 h-3.5 text-[#f15e1c] animate-bounce" />
             </span>
-            <div className="w-44 h-1.5 rounded-full bg-[#f7d7b0]/50 dark:bg-[#253630] overflow-hidden">
+            <div className="w-44 h-1.5 rounded-full bg-[#f7d7b0]/50 dark:bg-[#1a1a1a] overflow-hidden">
               <div className="service-progress-bar h-full bg-[#f15e1c] transition-all duration-100 w-0" />
             </div>
           </div>

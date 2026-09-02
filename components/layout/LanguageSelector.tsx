@@ -58,7 +58,7 @@ export function LanguageSelector() {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#EFE2D6] dark:border-[#2C241E] bg-[#FFFDF9] dark:bg-[#1E1915] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] hover:border-[#f15e1c] transition-colors cursor-pointer shadow-xs"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FFFDF9] dark:bg-[#0a0a0a] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] hover:border-[#f15e1c] transition-colors cursor-pointer shadow-xs"
         aria-expanded={isOpen}
       >
         <Globe className="w-3.5 h-3.5 text-[#f15e1c]" />
@@ -67,7 +67,7 @@ export function LanguageSelector() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-44 rounded-2xl bg-[#FFFDF9] dark:bg-[#1C1814] border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl z-50 p-1.5 space-y-1 animate-in fade-in slide-in-from-top-2">
+        <div className="absolute right-0 mt-2 w-44 rounded-2xl bg-[#FFFDF9] dark:bg-[#1C1814] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-2xl z-50 p-1.5 space-y-1 animate-in fade-in slide-in-from-top-2">
           {languages.map((lang) => {
             const isSelected = lang.code === currentLocale;
             return (
@@ -79,7 +79,7 @@ export function LanguageSelector() {
                   "w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-colors text-left cursor-pointer",
                   isSelected
                     ? "bg-[#FCE3D3] dark:bg-[#2A211B] text-[#f15e1c] font-bold"
-                    : "text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FBF3EA] dark:hover:bg-[#261F1A]"
+                    : "text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FBF3EA] dark:hover:bg-[#161616]"
                 )}
               >
                 <div className="flex items-center gap-2">

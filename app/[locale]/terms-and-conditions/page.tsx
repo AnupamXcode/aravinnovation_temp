@@ -27,7 +27,7 @@ export default async function TermsAndConditionsPage({
   setRequestLocale(locale);
 
   return (
-    <div className="py-24 md:py-32 bg-[#FFFDF9] dark:bg-[#12100E] min-h-screen">
+    <div className="py-24 md:py-32 bg-[#FFFDF9] dark:bg-[#000000] min-h-screen">
       <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Header */}
         <div className="space-y-4 max-w-3xl">
@@ -43,10 +43,10 @@ export default async function TermsAndConditionsPage({
         </div>
 
         {/* 2-Column Desktop Architecture with Sticky Table of Contents */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
           {/* Left Column: Sticky Table of Contents */}
-          <aside className="lg:col-span-4 hidden lg:block sticky top-32 space-y-4 p-6 rounded-3xl bg-[#FBF3EA]/60 dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#2C241E] shadow-sm">
-            <div className="flex items-center gap-2 font-bold font-display text-sm text-[#3A2E27] dark:text-[#FAF5EE] border-b border-[#EFE2D6] dark:border-[#2C241E] pb-3">
+          <aside className="lg:col-span-4 hidden lg:block sticky top-32 space-y-4 p-6 rounded-3xl bg-[#FBF3EA]/60 dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm">
+            <div className="flex items-center gap-2 font-bold font-display text-sm text-[#3A2E27] dark:text-[#FAF5EE] border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-3">
               <FileText className="w-4 h-4 text-[#f15e1c]" />
               <span>Table of Contents</span>
             </div>
@@ -65,7 +65,7 @@ export default async function TermsAndConditionsPage({
           </aside>
 
           {/* Right Column: Policy Document Body */}
-          <div className="lg:col-span-8 p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] shadow-xl space-y-10 text-sm text-[#3A2E27] dark:text-[#FAF5EE] leading-relaxed">
+          <div className="lg:col-span-8 p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-10 text-sm text-[#3A2E27] dark:text-[#FAF5EE] leading-relaxed">
             {/* Welcome Intro */}
             <div className="space-y-3">
               <p className="text-base text-[#7A6A5F] dark:text-[#B8ACA0]">
@@ -74,25 +74,25 @@ export default async function TermsAndConditionsPage({
             </div>
 
             {/* Why Choose Arav Innovations */}
-            <section id="why-choose" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
+            <section id="why-choose" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f] scroll-mt-32">
               <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-[#f15e1c]" />
                 <span>Why Choose Arav Innovations?</span>
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
-                <div className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] space-y-1">
+                <div className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-1">
                   <div className="font-bold text-[#f15e1c]">Expert IT Services</div>
                   <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">Tailored solutions to optimize your business operations with the latest technological advancements.</p>
                 </div>
-                <div className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] space-y-1">
+                <div className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-1">
                   <div className="font-bold text-[#f15e1c]">Strategic Digital Marketing</div>
                   <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">Result-driven campaigns to enhance your brand visibility and online presence.</p>
                 </div>
-                <div className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] space-y-1">
+                <div className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-1">
                   <div className="font-bold text-[#f15e1c]">Web Development Excellence</div>
                   <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">Custom websites and platforms designed to engage your audience and drive conversions.</p>
                 </div>
-                <div className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] space-y-1">
+                <div className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-1">
                   <div className="font-bold text-[#f15e1c]">Audit &amp; Compliance Services</div>
                   <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">Ensure your business adheres to industry standards with our meticulous compliance solutions.</p>
                 </div>
@@ -100,7 +100,7 @@ export default async function TermsAndConditionsPage({
             </section>
 
             {/* Your Privacy, Our Priority */}
-            <section id="your-privacy" className="space-y-3 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
+            <section id="your-privacy" className="space-y-3 pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f] scroll-mt-32">
               <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-2">
                 <ShieldCheck className="w-5 h-5 text-[#f15e1c]" />
                 <span>Your Privacy, Our Priority</span>
@@ -111,7 +111,7 @@ export default async function TermsAndConditionsPage({
             </section>
 
             {/* Terms Overview */}
-            <section id="terms-overview" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
+            <section id="terms-overview" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f] scroll-mt-32">
               <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
                 Terms Overview
               </h2>
@@ -121,7 +121,7 @@ export default async function TermsAndConditionsPage({
             </section>
 
             {/* Scope of Services */}
-            <section id="scope-of-services" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
+            <section id="scope-of-services" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f] scroll-mt-32">
               <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
                 Scope of Services
               </h2>
@@ -137,7 +137,7 @@ export default async function TermsAndConditionsPage({
                 ].map((service, idx) => (
                   <div
                     key={idx}
-                    className="flex items-center gap-2 p-2.5 rounded-xl bg-[#FBF3EA] dark:bg-[#1E1915] text-xs font-medium text-[#3A2E27] dark:text-[#FAF5EE]"
+                    className="flex items-center gap-2 p-2.5 rounded-xl bg-[#FBF3EA] dark:bg-[#0a0a0a] text-xs font-medium text-[#3A2E27] dark:text-[#FAF5EE]"
                   >
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#f15e1c] shrink-0" />
                     <span>{service}</span>
@@ -147,7 +147,7 @@ export default async function TermsAndConditionsPage({
             </section>
 
             {/* Client Obligations */}
-            <section id="client-obligations" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
+            <section id="client-obligations" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f] scroll-mt-32">
               <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
                 Client Obligations
               </h2>
@@ -165,7 +165,7 @@ export default async function TermsAndConditionsPage({
             </section>
 
             {/* Payment Terms */}
-            <section id="payment-terms" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#2C241E] scroll-mt-32">
+            <section id="payment-terms" className="space-y-4 pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f] scroll-mt-32">
               <h2 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
                 Payment Terms
               </h2>

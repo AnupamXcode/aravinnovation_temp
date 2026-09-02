@@ -59,7 +59,7 @@ export function PageLoader() {
             </motion.div>
 
             {/* Glowing 3D Progress Indicator */}
-            <div className="w-48 h-1.5 rounded-full bg-[#EFE2D6] dark:bg-[#2C241E] overflow-hidden relative shadow-inner">
+            <div className="w-48 h-1.5 rounded-full bg-[#EFE2D6] dark:bg-[#1f1f1f] overflow-hidden relative shadow-inner">
               <motion.div
                 initial={{ x: "-100%" }}
                 animate={{ x: "100%" }}

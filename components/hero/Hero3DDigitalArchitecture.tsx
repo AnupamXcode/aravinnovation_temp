@@ -134,7 +134,7 @@ export function Hero3DDigitalArchitecture() {
             translateZ: shouldReduceMotion || !threeDEnabled ? 0 : scrollZ,
             transformStyle: "preserve-3d",
           }}
-          className="relative w-full rounded-[2.5rem] bg-white/95 dark:bg-[#172420]/95 backdrop-blur-md border border-[#f7d7b0] dark:border-[#253630] shadow-xl p-6 sm:p-8 flex flex-col justify-between overflow-hidden transition-all duration-300 min-h-[480px]"
+          className="relative w-full rounded-[2.5rem] bg-white/95 dark:bg-[#0a0a0a]/95 backdrop-blur-md border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl p-6 sm:p-8 flex flex-col justify-between overflow-hidden transition-all duration-300 min-h-[480px]"
         >
           {/* Ambient Radial Gradient Depth Plate */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-radial from-[#f15e1c]/12 via-[#2e936f]/8 to-transparent rounded-full blur-3xl pointer-events-none" />
@@ -143,19 +143,19 @@ export function Hero3DDigitalArchitecture() {
           <div
             className={cn(
               "absolute inset-0 z-15 pointer-events-none transition-all duration-300",
-              activeNode ? "backdrop-blur-[3px] bg-white/30 dark:bg-[#101b17]/30" : "backdrop-blur-none bg-transparent"
+              activeNode ? "backdrop-blur-[3px] bg-white/30 dark:bg-[#000000]/30" : "backdrop-blur-none bg-transparent"
             )}
           />
 
           {/* Top Header Bar */}
-          <div className="relative z-20 flex items-center justify-between border-b border-[#f7d7b0]/60 dark:border-[#253630] pb-3 mb-2">
+          <div className="relative z-20 flex items-center justify-between border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] pb-3 mb-2">
             <div className="flex items-center gap-2.5">
               <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-ping" />
               <span className="text-sm font-mono font-bold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
                 ARAV DIGITAL ARCHITECTURE
               </span>
             </div>
-            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fce3d3]/60 dark:bg-[#1e2c27] text-xs font-mono font-bold text-[#f15e1c] border border-[#f7d7b0]">
+            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fce3d3]/60 dark:bg-[#121212] text-xs font-mono font-bold text-[#f15e1c] border border-[#f7d7b0]">
               <Sparkles className="w-3.5 h-3.5 text-[#f15e1c]" />
               <span>ENTERPRISE SYSTEM</span>
             </div>
@@ -204,7 +204,7 @@ export function Hero3DDigitalArchitecture() {
             {/* Central Engine Node */}
             <div
               style={{ transform: "translate3d(-50%, -50%, 30px)" }}
-              className="absolute top-1/2 left-1/2 z-20 flex flex-col items-center justify-center p-5 rounded-3xl bg-white dark:bg-[#101b17] border-2 border-[#f15e1c] shadow-2xl shadow-[#f15e1c]/25 text-center min-w-[170px] cursor-pointer hover:scale-105 transition-transform"
+              className="absolute top-1/2 left-1/2 z-20 flex flex-col items-center justify-center p-5 rounded-3xl bg-white dark:bg-[#000000] border-2 border-[#f15e1c] shadow-2xl shadow-[#f15e1c]/25 text-center min-w-[170px] cursor-pointer hover:scale-105 transition-transform"
             >
               <div className="w-12 h-12 rounded-2xl bg-[#f15e1c] text-white flex items-center justify-center shadow-lg mb-1.5">
                 <Layers className="w-6 h-6 animate-pulse" />
@@ -236,10 +236,10 @@ export function Hero3DDigitalArchitecture() {
                   <Link href={node.href} className="block">
                     <div
                       className={cn(
-                        "p-4 rounded-2xl bg-white dark:bg-[#101b17] border shadow-lg flex items-center gap-3 transition-all duration-300 group hover:shadow-2xl",
+                        "p-4 rounded-2xl bg-white dark:bg-[#000000] border shadow-lg flex items-center gap-3 transition-all duration-300 group hover:shadow-2xl",
                         isActive
                           ? "border-[#f15e1c] ring-4 ring-[#f15e1c]/40 scale-105 shadow-[#f15e1c]/30 z-40"
-                          : "border-[#f7d7b0] dark:border-[#253630]"
+                          : "border-[#f7d7b0] dark:border-[#1a1a1a]"
                       )}
                     >
                       <div
@@ -268,9 +268,9 @@ export function Hero3DDigitalArchitecture() {
           </div>
 
           {/* Bottom Banner */}
-          <div className="relative z-30 pt-4 mt-4 border-t border-[#f7d7b0] dark:border-[#253630] flex items-center justify-between text-sm min-h-[48px]">
+          <div className="relative z-30 pt-4 mt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] flex items-center justify-between text-sm min-h-[48px]">
             {activeNode ? (
-              <div className="flex items-center justify-between w-full animate-in fade-in duration-200 bg-[#fce3d3]/50 dark:bg-[#101b17] p-3 rounded-2xl border border-[#f7d7b0]">
+              <div className="flex items-center justify-between w-full animate-in fade-in duration-200 bg-[#fce3d3]/50 dark:bg-[#000000] p-3 rounded-2xl border border-[#f7d7b0]">
                 <div className="truncate pr-3">
                   <span className="font-bold text-[#1b2823] dark:text-[#ffffff]">
                     {activeNode.label}:{" "}
@@ -304,15 +304,15 @@ export function Hero3DDigitalArchitecture() {
 
       {/* DEDICATED MOBILE ARCHITECTURE CARD (lg:hidden block) (TASK B & E) */}
       <div className="block lg:hidden w-full">
-        <div className="rounded-3xl bg-white dark:bg-[#172420] border border-[#f7d7b0] dark:border-[#253630] shadow-xl p-5 space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-[#f7d7b0] dark:border-[#253630]">
+        <div className="rounded-3xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl p-5 space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-[#f7d7b0] dark:border-[#1a1a1a]">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-pulse" />
               <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
                 ARAV DIGITAL ARCHITECTURE
               </span>
             </div>
-            <span className="px-2.5 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] text-[10px] font-mono font-bold text-[#f15e1c]">
+            <span className="px-2.5 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#161616] text-[10px] font-mono font-bold text-[#f15e1c]">
               Enterprise System
             </span>
           </div>
@@ -323,7 +323,7 @@ export function Hero3DDigitalArchitecture() {
               <Link
                 key={node.id}
                 href={node.href}
-                className="flex items-center justify-between p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] active:scale-98 transition-all group"
+                className="flex items-center justify-between p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] active:scale-98 transition-all group"
               >
                 <div className="flex items-center gap-3">
                   <div

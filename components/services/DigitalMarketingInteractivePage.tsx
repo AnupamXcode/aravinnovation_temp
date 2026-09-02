@@ -411,7 +411,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
   const testimonial = testimonialsData.find((t) => t.id === "test-1") || testimonialsData[0];
 
   return (
-    <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#12100E] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c]">
+    <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#000000] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c]">
       {/* =========================================================================
           1. HERO — LIVING GROWTH ENGINE (KINETIC TYPOGRAPHY + FLOATING METRICS + PARALLAX)
           ========================================================================= */}
@@ -419,7 +419,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
         ref={heroRef}
         onMouseMove={handleHeroMouseMove}
         onMouseLeave={handleHeroMouseLeave}
-        className="relative min-h-[94vh] flex flex-col justify-between pt-28 pb-12 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] overflow-hidden"
+        className="relative min-h-[94vh] flex flex-col justify-between pt-28 pb-12 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden"
       >
         {/* Layer 0: Background Parallax (Very Slow: factor 8) */}
         <motion.div
@@ -451,7 +451,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
           className="absolute inset-0 pointer-events-none z-0 hidden lg:block overflow-hidden"
         >
           {/* Badge 1: Top-Left ROAS Widget */}
-          <div className="absolute top-28 left-8 sm:left-16 p-3 rounded-2xl bg-white/80 dark:bg-[#172420]/80 backdrop-blur-md border border-[#f7d7b0] dark:border-[#253630] shadow-lg flex items-center gap-3">
+          <div className="absolute top-28 left-8 sm:left-16 p-3 rounded-2xl bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-md border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg flex items-center gap-3">
             <div className="p-2 rounded-xl bg-[#f15e1c]/10 text-[#f15e1c]">
               <TrendingUp className="w-4 h-4" />
             </div>
@@ -462,7 +462,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
           </div>
 
           {/* Badge 2: Top-Right Audience Signal */}
-          <div className="absolute top-32 right-10 sm:right-20 p-3 rounded-2xl bg-white/80 dark:bg-[#172420]/80 backdrop-blur-md border border-[#f7d7b0] dark:border-[#253630] shadow-lg flex items-center gap-3">
+          <div className="absolute top-32 right-10 sm:right-20 p-3 rounded-2xl bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-md border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg flex items-center gap-3">
             <span className="w-2.5 h-2.5 rounded-full bg-[#2e936f] animate-ping" />
             <div>
               <div className="text-xs font-mono font-extrabold text-[#1b2823] dark:text-[#ffffff]">14.2k Signals</div>
@@ -471,7 +471,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
           </div>
 
           {/* Badge 3: Bottom-Left CAC Pill */}
-          <div className="absolute bottom-36 left-12 p-3 rounded-2xl bg-white/80 dark:bg-[#172420]/80 backdrop-blur-md border border-[#f7d7b0] dark:border-[#253630] shadow-lg flex items-center gap-3">
+          <div className="absolute bottom-36 left-12 p-3 rounded-2xl bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-md border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg flex items-center gap-3">
             <div className="p-2 rounded-xl bg-[#2e936f]/10 text-[#2e936f]">
               <Target className="w-4 h-4" />
             </div>
@@ -482,7 +482,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
           </div>
 
           {/* Badge 4: Bottom-Right LTV Multiple */}
-          <div className="absolute bottom-32 right-16 p-3 rounded-2xl bg-white/80 dark:bg-[#172420]/80 backdrop-blur-md border border-[#f7d7b0] dark:border-[#253630] shadow-lg flex items-center gap-3">
+          <div className="absolute bottom-32 right-16 p-3 rounded-2xl bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-md border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg flex items-center gap-3">
             <div className="p-2 rounded-xl bg-[#fab60a]/10 text-[#fab60a]">
               <PieChart className="w-4 h-4" />
             </div>
@@ -509,7 +509,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#261f1a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]"
           >
             <Sparkles className="w-3.5 h-3.5" />
             <span>ARAV DIGITAL GROWTH ENGINE</span>
@@ -580,7 +580,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
             <span className="text-xs font-mono font-bold tracking-widest text-[#7A6A5F] dark:text-[#B8ACA0] group-hover:text-[#f15e1c] transition-colors">
               SCROLL TO EXPLORE GROWTH SYSTEM
             </span>
-            <div className="w-6 h-10 rounded-full border-2 border-[#f7d7b0] dark:border-[#253630] flex items-start justify-center p-1.5">
+            <div className="w-6 h-10 rounded-full border-2 border-[#f7d7b0] dark:border-[#1a1a1a] flex items-start justify-center p-1.5">
               <div className="w-1.5 h-3 rounded-full bg-[#f15e1c] animate-bounce" />
             </div>
           </a>
@@ -590,7 +590,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
       {/* =========================================================================
           2. HORIZONTAL BRAND MARQUEE (SLOW CONTINUOUS TICKER)
           ========================================================================= */}
-      <section className="relative py-4 bg-[#fefaf5] dark:bg-[#172420] border-b border-[#f7d7b0]/60 dark:border-[#253630] overflow-hidden select-none">
+      <section className="relative py-4 bg-[#fefaf5] dark:bg-[#0a0a0a] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none">
         <div className="flex items-center gap-8 whitespace-nowrap animate-marquee">
           {[...marqueeKeywords, ...marqueeKeywords].map((word, idx) => (
             <div key={idx} className="flex items-center gap-8 text-xs font-mono font-extrabold text-[#7A6A5F] dark:text-[#B8ACA0]">
@@ -604,7 +604,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
       {/* =========================================================================
           3. OUR SOLUTIONS & SIGNATURE MARKETING FUNNEL (AUDIENCE JOURNEY)
           ========================================================================= */}
-      <section id="our-solutions" className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
+      <section id="our-solutions" className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
         <div className="max-w-[1536px] mx-auto space-y-12 select-none">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
@@ -619,10 +619,10 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
           </div>
 
           {/* Signature Interactive Marketing Funnel Container */}
-          <div className="rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-6 sm:p-10 space-y-8 relative overflow-hidden">
+          <div className="rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-6 sm:p-10 space-y-8 relative overflow-hidden">
             <div className="absolute inset-0 bg-radial from-[#f15e1c]/8 via-transparent to-transparent pointer-events-none" />
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-[#f7d7b0] dark:border-[#253630]">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-[#f7d7b0] dark:border-[#1a1a1a]">
               <div className="flex items-center gap-3">
                 <div className="p-3 rounded-2xl bg-[#f15e1c] text-white shadow-lg shadow-[#f15e1c]/25 shrink-0">
                   {activeSolution.icon}
@@ -638,13 +638,13 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
               </div>
 
               {/* Viewport Metric Count-Up Badge */}
-              <div className="bg-white dark:bg-[#101b17] px-5 py-3 rounded-2xl border border-[#f7d7b0] dark:border-[#253630] shadow-xs">
+              <div className="bg-white dark:bg-[#000000] px-5 py-3 rounded-2xl border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs">
                 <MetricCountUp value={activeSolution.metric} label={activeSolution.metricLabel} sublabel="Verified Outcome" />
               </div>
             </div>
 
             {/* Signature Interaction 1: 4-Stage Marketing Funnel Journey */}
-            <div className="relative py-6 px-4 bg-white dark:bg-[#101b17] rounded-3xl border border-[#f7d7b0] dark:border-[#253630] overflow-hidden">
+            <div className="relative py-6 px-4 bg-white dark:bg-[#000000] rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden">
               <div className="text-center pb-4">
                 <span className="text-[11px] font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] uppercase tracking-widest block">
                   AUDIENCE CONVERSION PATHWAY
@@ -668,10 +668,10 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
                       className={cn(
                         "p-4 rounded-2xl border transition-all duration-300 cursor-pointer space-y-1 relative text-center",
                         isCurrentActive
-                          ? "bg-[#fefaf5] dark:bg-[#172420] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/30"
+                          ? "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/30"
                           : isPassed
-                          ? "bg-white dark:bg-[#101b17] border-[#2e936f] opacity-90"
-                          : "bg-white dark:bg-[#101b17] border-[#f7d7b0] dark:border-[#253630] opacity-50"
+                          ? "bg-white dark:bg-[#000000] border-[#2e936f] opacity-90"
+                          : "bg-white dark:bg-[#000000] border-[#f7d7b0] dark:border-[#1a1a1a] opacity-50"
                       )}
                     >
                       <div className="flex items-center justify-between">
@@ -711,7 +711,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
                       key={i}
                       whileHover={{ x: 4 }}
                       transition={{ duration: 0.2 }}
-                      className="flex items-center gap-2 p-2.5 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] shadow-2xs group"
+                      className="flex items-center gap-2 p-2.5 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xs group"
                     >
                       <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0 group-hover:scale-110 transition-transform" />
                       <span className="truncate">{del}</span>
@@ -722,7 +722,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
             </div>
 
             {/* Service Selection Tabs (Fast 250-350ms transition) */}
-            <div className="pt-6 border-t border-[#f7d7b0] dark:border-[#253630] space-y-3">
+            <div className="pt-6 border-t border-[#f7d7b0] dark:border-[#1a1a1a] space-y-3">
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {marketingSolutionsData.map((sol, idx) => (
                   <button
@@ -733,7 +733,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
                       "py-3 px-3 rounded-xl text-xs font-bold text-center transition-all duration-300 cursor-pointer truncate",
                       activeSolutionIdx === idx
                         ? "bg-[#f15e1c] text-white shadow-md shadow-[#f15e1c]/20"
-                        : "bg-white dark:bg-[#101b17] text-[#4a5c55] dark:text-[#d3eee4] border border-[#f7d7b0] dark:border-[#253630] hover:border-[#f15e1c] hover:translate-y-[-2px]"
+                        : "bg-white dark:bg-[#000000] text-[#4a5c55] dark:text-[#d3eee4] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:translate-y-[-2px]"
                     )}
                   >
                     0{idx + 1} {sol.title}
@@ -748,7 +748,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
       {/* =========================================================================
           4. CONTENT CREATION MOSAIC TILE REVEAL
           ========================================================================= */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] bg-[#ffffff] dark:bg-[#101b17]">
+      <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
         <div className="max-w-[1536px] mx-auto space-y-10">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
@@ -773,7 +773,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
                 transition={{ duration: 0.5, delay: idx * 0.12 }}
                 whileHover={{ y: -6 }}
                 className={cn(
-                  "p-8 rounded-[2rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-md hover:border-[#f15e1c] transition-all duration-300 space-y-4 group relative overflow-hidden",
+                  "p-8 rounded-[2rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md hover:border-[#f15e1c] transition-all duration-300 space-y-4 group relative overflow-hidden",
                   item.span
                 )}
               >
@@ -784,7 +784,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
                   <span className="text-[10px] font-mono font-extrabold text-[#f15e1c] uppercase tracking-wider">
                     {item.category}
                   </span>
-                  <div className="p-2.5 rounded-xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] group-hover:scale-110 transition-transform">
+                  <div className="p-2.5 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-110 transition-transform">
                     {item.icon}
                   </div>
                 </div>
@@ -793,7 +793,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
                   {item.title}
                 </h3>
 
-                <div className="pt-2 flex items-center justify-between border-t border-[#f7d7b0] dark:border-[#253630] relative z-10">
+                <div className="pt-2 flex items-center justify-between border-t border-[#f7d7b0] dark:border-[#1a1a1a] relative z-10">
                   <span className="text-xs font-mono font-extrabold text-[#2e936f]">
                     {item.metric}
                   </span>
@@ -810,7 +810,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
           ========================================================================= */}
       <section
         ref={philosophyRef}
-        className="relative py-28 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630] overflow-hidden"
+        className="relative py-28 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden"
       >
         {/* Low-Opacity Scroll Parallax Typography Words Behind Content */}
         <div className="absolute inset-0 pointer-events-none z-0 flex flex-col justify-between py-8 opacity-5 dark:opacity-10 select-none overflow-hidden font-display font-black text-7xl sm:text-9xl text-[#1b2823] dark:text-[#ffffff] tracking-tighter">
@@ -845,7 +845,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
 
           {/* Right Column: Signature Interaction 2: "DIGITAL GROWTH ENGINE" Circular Loop */}
           <div className="lg:col-span-5 flex items-center justify-center">
-            <div className="relative w-80 h-80 sm:w-96 sm:h-96 rounded-3xl bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-6 flex flex-col justify-between items-center text-center overflow-hidden">
+            <div className="relative w-80 h-80 sm:w-96 sm:h-96 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-6 flex flex-col justify-between items-center text-center overflow-hidden">
               <div className="absolute inset-0 bg-radial from-[#f15e1c]/15 via-[#2e936f]/10 to-transparent pointer-events-none" />
 
               <div className="relative z-10 flex items-center gap-2 pt-2">
@@ -858,7 +858,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
               {/* Circular SVG Loop with Moving Data Signal Particle */}
               <div className="relative w-56 h-56 my-auto flex items-center justify-center">
                 <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" r="38" stroke="#f7d7b0" strokeWidth="2.5" fill="none" className="dark:stroke-[#253630]" />
+                  <circle cx="50" cy="50" r="38" stroke="#f7d7b0" strokeWidth="2.5" fill="none" className="dark:stroke-[#1a1a1a]" />
                   <motion.circle
                     cx="50"
                     cy="50"
@@ -884,7 +884,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
                     <div
                       key={i}
                       style={{ transform: `translate(${x}px, ${y}px)` }}
-                      className="absolute p-2 rounded-full bg-white dark:bg-[#101b17] border border-[#f15e1c] text-[#f15e1c] shadow-md flex items-center justify-center group cursor-pointer hover:scale-110 transition-transform"
+                      className="absolute p-2 rounded-full bg-white dark:bg-[#000000] border border-[#f15e1c] text-[#f15e1c] shadow-md flex items-center justify-center group cursor-pointer hover:scale-110 transition-transform"
                       title={node.name}
                     >
                       {node.icon}
@@ -893,7 +893,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
                 })}
 
                 {/* Center Core Badge */}
-                <div className="absolute text-center p-3 rounded-2xl bg-white dark:bg-[#101b17] border border-[#f7d7b0] dark:border-[#253630] shadow-sm">
+                <div className="absolute text-center p-3 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-sm">
                   <span className="text-[10px] font-mono font-extrabold text-[#2e936f] block">CLOSED-LOOP</span>
                   <span className="text-xs font-black font-display text-[#1b2823] dark:text-[#ffffff]">ENGINE</span>
                 </div>
@@ -910,7 +910,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
       {/* =========================================================================
           6. 4-STAGE GROWTH FRAMEWORK (HORIZONTAL PROGRESS TIMELINE & FEEDBACK LOOP)
           ========================================================================= */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
+      <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
         <div className="max-w-[1536px] mx-auto space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <Badge variant="secondary" size="md">
@@ -926,7 +926,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
 
           {/* Horizontal Campaign Performance Timeline Progress Bar */}
           <div className="relative max-w-4xl mx-auto hidden sm:block py-4">
-            <div className="relative w-full bg-[#f7d7b0] dark:bg-[#253630] h-2 rounded-full overflow-hidden">
+            <div className="relative w-full bg-[#f7d7b0] dark:bg-[#1a1a1a] h-2 rounded-full overflow-hidden">
               <motion.div
                 animate={{ width: `${((activeWorkIdx + 1) / 4) * 100}%` }}
                 transition={{ duration: 0.4 }}
@@ -947,7 +947,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
                         ? "bg-[#f15e1c] border-white text-white scale-125 shadow-md shadow-[#f15e1c]/40 ring-4 ring-[#f15e1c]/20"
                         : isPassed
                         ? "bg-[#2e936f] border-white text-white"
-                        : "bg-white dark:bg-[#101b17] border-[#f7d7b0] dark:border-[#253630] text-[#7A6A5F]"
+                        : "bg-white dark:bg-[#000000] border-[#f7d7b0] dark:border-[#1a1a1a] text-[#7A6A5F]"
                     )}
                   >
                     {idx + 1}
@@ -970,8 +970,8 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
                   className={cn(
                     "rounded-3xl p-7 border-2 transition-all duration-300 cursor-pointer space-y-4 relative flex flex-col justify-between min-h-[310px]",
                     isActive
-                      ? "bg-white dark:bg-[#101b17] border-[#f15e1c] shadow-2xl ring-4 ring-[#f15e1c]/20 scale-102 z-20"
-                      : "bg-[#fefaf5] dark:bg-[#172420] border-[#f7d7b0] dark:border-[#253630] opacity-70 hover:opacity-100"
+                      ? "bg-white dark:bg-[#000000] border-[#f15e1c] shadow-2xl ring-4 ring-[#f15e1c]/20 scale-102 z-20"
+                      : "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] opacity-70 hover:opacity-100"
                   )}
                 >
                   <div className="space-y-3 text-left">
@@ -998,7 +998,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#253630] text-left">
+                  <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] text-left">
                     <span className="text-[10px] font-mono font-bold uppercase text-[#7A6A5F] block">
                       Deliverable Outcome:
                     </span>
@@ -1014,7 +1014,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
           {/* Continuous Optimization Feedback Loop Visualizer Banner */}
           <motion.div
             whileHover={{ scale: 1.01 }}
-            className="p-5 rounded-2xl bg-[#fce3d3] dark:bg-[#261f1a] border border-[#f7d7b0] text-center max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-3 shadow-sm"
+            className="p-5 rounded-2xl bg-[#fce3d3] dark:bg-[#161616] border border-[#f7d7b0] text-center max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-3 shadow-sm"
           >
             <div className="p-2 rounded-xl bg-[#f15e1c] text-white">
               <RefreshCw className="w-4 h-4 animate-spin-slow" />
@@ -1029,12 +1029,12 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
       {/* =========================================================================
           7. TESTIMONIAL — QUOTE REVEAL & TRUSTWORTHY BADGES
           ========================================================================= */}
-      <section ref={testimonialRef} className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
+      <section ref={testimonialRef} className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
         <div className="max-w-5xl mx-auto text-center space-y-8">
           <Badge variant="secondary" size="md">
             KIND WORDS FROM OUR CLIENTS
           </Badge>
-          <div className="p-8 sm:p-14 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-xl space-y-6 relative overflow-hidden">
+          <div className="p-8 sm:p-14 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl space-y-6 relative overflow-hidden">
             <div className="p-3 rounded-2xl bg-[#f15e1c] text-white w-fit mx-auto shadow-md">
               <Quote className="w-6 h-6" />
             </div>
@@ -1052,7 +1052,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
               initial={{ opacity: 0, y: 15 }}
               animate={isTestimonialInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
               transition={{ duration: 0.5, delay: 0.35 }}
-              className="pt-4 border-t border-[#f7d7b0] dark:border-[#253630] space-y-1"
+              className="pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] space-y-1"
             >
               <div className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                 {testimonial.author}
@@ -1071,10 +1071,10 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
       {/* =========================================================================
           8. ABOUT OUR CEO — EDITORIAL LEADERSHIP PROFILE
           ========================================================================= */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#253630]">
-        <div className="max-w-5xl mx-auto rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#172420] border-2 border-[#f7d7b0] dark:border-[#253630] shadow-2xl p-8 sm:p-14 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center text-left">
+      <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-5xl mx-auto rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-8 sm:p-14 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center text-left">
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-3xl overflow-hidden border-2 border-[#f15e1c] shadow-xl bg-[#fce3d3] dark:bg-[#261f1a] flex items-center justify-center text-center p-6 space-y-2 flex-col">
+            <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-3xl overflow-hidden border-2 border-[#f15e1c] shadow-xl bg-[#fce3d3] dark:bg-[#161616] flex items-center justify-center text-center p-6 space-y-2 flex-col">
               <div className="w-20 h-20 rounded-full bg-[#f15e1c] text-white flex items-center justify-center text-2xl font-black font-display shadow-md">
                 AS
               </div>
@@ -1190,7 +1190,7 @@ export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPag
       {/* =========================================================================
           10. FOOTER FINAL BRAND MOMENT — SUBTLE CLOSING MARQUEE
           ========================================================================= */}
-      <footer className="py-6 border-t border-[#f7d7b0]/60 dark:border-[#253630] bg-[#fefaf5] dark:bg-[#172420] overflow-hidden select-none">
+      <footer className="py-6 border-t border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] overflow-hidden select-none">
         <div className="flex items-center justify-center gap-6 text-xs font-mono font-extrabold text-[#7A6A5F] dark:text-[#B8ACA0] tracking-widest">
           <span>BUILD</span>
           <span className="text-[#f15e1c]">&bull;</span>

@@ -95,7 +95,7 @@ export function Hero3DScene() {
             y: shouldReduceMotion ? 0 : badge1Y,
             translateZ: 85,
           }}
-          className="absolute -top-6 -left-6 z-30 p-3.5 rounded-2xl bg-white/95 dark:bg-[#1C1814]/95 backdrop-blur-md border border-[#EFE2D6] dark:border-[#3D332B] shadow-2xl flex items-center gap-2.5"
+          className="absolute -top-6 -left-6 z-30 p-3.5 rounded-2xl bg-white/95 dark:bg-[#1C1814]/95 backdrop-blur-md border border-[#EFE2D6] dark:border-[#262626] shadow-2xl flex items-center gap-2.5"
         >
           <div className="p-2 rounded-xl bg-[#f15e1c] text-white shadow-xs">
             <Sparkles className="w-4 h-4" />
@@ -117,9 +117,9 @@ export function Hero3DScene() {
             y: shouldReduceMotion ? 0 : badge2Y,
             translateZ: 75,
           }}
-          className="absolute -bottom-6 -right-6 z-30 p-3.5 rounded-2xl bg-white/95 dark:bg-[#1C1814]/95 backdrop-blur-md border border-[#EFE2D6] dark:border-[#3D332B] shadow-2xl flex items-center gap-2.5"
+          className="absolute -bottom-6 -right-6 z-30 p-3.5 rounded-2xl bg-white/95 dark:bg-[#1C1814]/95 backdrop-blur-md border border-[#EFE2D6] dark:border-[#262626] shadow-2xl flex items-center gap-2.5"
         >
-          <div className="p-2 rounded-xl bg-[#FCE3D3] dark:bg-[#261F1A] text-[#f15e1c] border border-[#F4A97F]/40 dark:border-[#3D332B]">
+          <div className="p-2 rounded-xl bg-[#FCE3D3] dark:bg-[#161616] text-[#f15e1c] border border-[#F4A97F]/40 dark:border-[#262626]">
             <Globe2 className="w-4 h-4" />
           </div>
           <div>
@@ -138,14 +138,14 @@ export function Hero3DScene() {
             transform: "translateZ(30px)",
             transformStyle: "preserve-3d",
           }}
-          className="rounded-3xl bg-white/95 dark:bg-[#171411]/95 backdrop-blur-md p-6 sm:p-8 border border-[#EFE2D6] dark:border-[#2C241E] shadow-2xl space-y-6 relative overflow-hidden"
+          className="rounded-3xl bg-white/95 dark:bg-[#000000]/95 backdrop-blur-md p-6 sm:p-8 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-2xl space-y-6 relative overflow-hidden"
         >
           {/* Card Window Header Bar */}
-          <div className="flex items-center justify-between border-b border-[#EFE2D6] dark:border-[#2C241E] pb-4">
+          <div className="flex items-center justify-between border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-4">
             <div className="flex items-center gap-2.5">
               <div className="w-3 h-3 rounded-full bg-[#f15e1c]" />
               <div className="w-3 h-3 rounded-full bg-[#F4A97F]" />
-              <div className="w-3 h-3 rounded-full bg-[#EFE2D6] dark:bg-[#3D332B]" />
+              <div className="w-3 h-3 rounded-full bg-[#EFE2D6] dark:bg-[#262626]" />
             </div>
             <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0]">
               <Terminal className="w-3.5 h-3.5 text-[#f15e1c]" />
@@ -160,7 +160,7 @@ export function Hero3DScene() {
               style={{
                 translateZ: shouldReduceMotion ? 0 : layer1TranslateZ,
               }}
-              className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] flex items-start gap-3.5 transition-shadow hover:shadow-md"
+              className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] flex items-start gap-3.5 transition-shadow hover:shadow-md"
             >
               <div className="p-2.5 rounded-xl bg-[#f15e1c] text-white shrink-0 shadow-xs">
                 <Cpu className="w-4 h-4" />
@@ -180,9 +180,9 @@ export function Hero3DScene() {
               style={{
                 translateZ: shouldReduceMotion ? 0 : layer2TranslateZ,
               }}
-              className="p-4 rounded-2xl bg-white dark:bg-[#171411] border border-[#EFE2D6] dark:border-[#2C241E] flex items-start gap-3.5 shadow-xs transition-shadow hover:shadow-md"
+              className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] flex items-start gap-3.5 shadow-xs transition-shadow hover:shadow-md"
             >
-              <div className="p-2.5 rounded-xl bg-[#FCE3D3] dark:bg-[#261F1A] text-[#f15e1c] shrink-0 border border-[#F4A97F]/40 dark:border-[#3D332B]">
+              <div className="p-2.5 rounded-xl bg-[#FCE3D3] dark:bg-[#161616] text-[#f15e1c] shrink-0 border border-[#F4A97F]/40 dark:border-[#262626]">
                 <TrendingUp className="w-4 h-4" />
               </div>
               <div>
@@ -200,7 +200,7 @@ export function Hero3DScene() {
               style={{
                 translateZ: shouldReduceMotion ? 0 : layer3TranslateZ,
               }}
-              className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#1E1915] border border-[#EFE2D6] dark:border-[#2C241E] flex items-start gap-3.5 transition-shadow hover:shadow-md"
+              className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] flex items-start gap-3.5 transition-shadow hover:shadow-md"
             >
               <div className="p-2.5 rounded-xl bg-[#f15e1c] dark:bg-[#FF7D42] text-white shrink-0 border border-[#F4A97F]/50 dark:border-[#F4A97F]/40">
                 <ShieldCheck className="w-4 h-4 text-white" />
@@ -217,11 +217,11 @@ export function Hero3DScene() {
           </div>
 
           {/* Footer Status SLA Pill */}
-          <div className="pt-2 flex items-center justify-between text-xs text-[#7A6A5F] dark:text-[#B8ACA0] border-t border-[#EFE2D6] dark:border-[#2C241E]">
+          <div className="pt-2 flex items-center justify-between text-xs text-[#7A6A5F] dark:text-[#B8ACA0] border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
             <span className="font-semibold text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-[#f15e1c]" /> Enterprise Verified SLA
             </span>
-            <span className="font-mono text-[11px] bg-[#FCE3D3]/70 dark:bg-[#2C221B] px-2.5 py-0.5 rounded-md font-semibold text-[#3A2E27] dark:text-[#FAF5EE] border border-[#F4A97F]/30 dark:border-[#3D332B]">
+            <span className="font-mono text-[11px] bg-[#FCE3D3]/70 dark:bg-[#2C221B] px-2.5 py-0.5 rounded-md font-semibold text-[#3A2E27] dark:text-[#FAF5EE] border border-[#F4A97F]/30 dark:border-[#262626]">
               Active Deliveries
             </span>
           </div>
