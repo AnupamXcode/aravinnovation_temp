@@ -126,7 +126,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
 
   // Render Immersive Risk & Governance Interactive Page for Risk & Governance Slugs
   if (service.slug === "risk-compliance-governance" || slug === "riskandgovernance" || slug === "risk-governance" || slug === "risk-governance-compliance") {
-    return <RiskGovInteractivePage service={service} />;
+    return <RiskGovInteractivePage service={service} relatedPosts={relatedPosts} />;
   }
 
   // Render Immersive Audit & Improvement Interactive Page for Audit Slugs
