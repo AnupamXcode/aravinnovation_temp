@@ -65,10 +65,10 @@ export const servicesData: Service[] = [
     slug: "it-strategy-implementation",
     title: "IT Strategy and Implementation",
     shortTitle: "IT Strategy",
-    eyebrow: "Enterprise Architecture • Digital Roadmaps • Infrastructure Modernization",
-    tagline: "Aligning technology investments with bottom-line business profitability.",
+    eyebrow: "ENTERPRISE IT STRATEGY & MODERNIZATION",
+    tagline: "Turn Technology Complexity Into a Clear Path Forward",
     description:
-      "We help forward-thinking enterprises modernize legacy infrastructure, formulate defensible multi-year technology roadmaps, and implement agile governance models that reduce operational friction and cloud costs.",
+      "We help businesses modernize legacy systems, build practical technology roadmaps, adopt cloud with confidence, and turn complex IT decisions into measurable business outcomes.",
     icon: "Compass",
     businessProblem: {
       title: "The Enterprise Technology Bottleneck",
