@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Metadata } from "next";
 import { getServiceBySlug, getAllServiceSlugs } from "@/data/services";
+import { getBlogPosts } from "@/lib/cms";
 import { caseStudiesData } from "@/data/case-studies";
 import { setRequestLocale } from "next-intl/server";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
@@ -105,14 +106,17 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
     notFound();
   }
 
+  const allPosts = await getBlogPosts(locale);
+  const relatedPosts = allPosts.slice(0, 3);
+
   // Render Immersive IT Strategy Interactive Page for IT Strategy Slugs
   if (service.slug === "it-strategy-implementation" || slug === "it-strategy-consulting" || slug === "itstrategy") {
-    return <ITStrategyInteractivePage service={service} />;
+    return <ITStrategyInteractivePage service={service} relatedPosts={relatedPosts} />;
   }
 
   // Render Immersive Digital Marketing Interactive Page for Digital Marketing Slugs
   if (service.slug === "digital-marketing-brand-development" || slug === "digitalmarketing" || slug === "digital-marketing") {
-    return <DigitalMarketingInteractivePage service={service} />;
+    return <DigitalMarketingInteractivePage service={service} relatedPosts={relatedPosts} />;
   }
 
   // Render Immersive Web Development Interactive Page for Web Development Slugs

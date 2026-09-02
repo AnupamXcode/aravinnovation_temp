@@ -1,16 +1,35 @@
 import * as React from "react";
 import { setRequestLocale } from "next-intl/server";
 import { getServiceBySlug } from "@/data/services";
+import { getBlogPosts } from "@/lib/cms";
 import { DigitalMarketingInteractivePage } from "@/components/services/DigitalMarketingInteractivePage";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
   const service = getServiceBySlug("digital-marketing-brand-development");
+  const title = "Digital Marketing & Brand Development | Arav Innovations";
+  const description =
+    "B2B digital marketing, brand strategy, SEO, AI-search visibility, paid acquisition and conversion optimization from Arav Innovations.";
+  const url = "https://aravinnovations.com/services/digital-marketing-brand-development";
+
   return {
-    title: `${service?.title || "Digital Marketing & Brand Development"} | Arav Innovations`,
-    description: service?.description || "B2B demand generation, brand positioning, multi-channel performance marketing & closed-loop attribution.",
+    title,
+    description,
     alternates: {
-      canonical: "https://aravinnovations.com/services/digital-marketing-brand-development",
+      canonical: url,
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: "Arav Innovations",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
     },
   };
 }
@@ -28,5 +47,10 @@ export default async function DigitalMarketingPage({
     notFound();
   }
 
-  return <DigitalMarketingInteractivePage service={service} />;
+  const allPosts = await getBlogPosts(locale);
+  const relevantCategories = new Set(["Digital Growth", "SEO", "Strategy", "Web & App Dev", "General"]);
+  const filtered = allPosts.filter((p) => relevantCategories.has(p.category));
+  const relatedPosts = (filtered.length >= 3 ? filtered : allPosts).slice(0, 3);
+
+  return <DigitalMarketingInteractivePage service={service} relatedPosts={relatedPosts} />;
 }

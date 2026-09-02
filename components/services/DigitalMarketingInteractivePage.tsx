@@ -2,7 +2,13 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { motion, AnimatePresence, useReducedMotion, useInView, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
+import {
+  motion,
+  AnimatePresence,
+  useReducedMotion,
+  useInView,
+} from "framer-motion";
 import {
   TrendingUp,
   Search,
@@ -11,1197 +17,1352 @@ import {
   ArrowRight,
   Sparkles,
   CheckCircle2,
-  Quote,
-  Star,
   Globe2,
-  Zap,
   Target,
   Megaphone,
-  Share2,
-  ArrowUpRight,
-  Play,
   RefreshCw,
-  Eye,
-  MousePointerClick,
-  PieChart,
   Layers,
-  Activity,
-  Filter,
+  ShieldCheck,
+  Code2,
+  Cpu,
+  ChevronDown,
+  ArrowUpRight,
+  Compass,
+  FileText,
   Check,
 } from "lucide-react";
 import { Service } from "@/data/services";
-import { caseStudiesData } from "@/data/case-studies";
-import { testimonialsData } from "@/data/testimonials";
+import { BlogPost, blogPostsData } from "@/data/insights";
 import { Button3D } from "@/components/ui/button-3d";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
+import { TiltCard } from "@/components/motion/TiltCard";
+import { MagneticButton } from "@/components/motion/MagneticButton";
 import { cn } from "@/lib/utils";
 
 interface DigitalMarketingPageProps {
   service: Service;
+  relatedPosts?: BlogPost[];
 }
 
 // -----------------------------------------------------------------------------
-// 1. Metric Count-Up Component (Viewport triggered, easeOut, upward arrow micro-motion)
+// 1. Scroll-Triggered Section Wrapper Component (Optimized Mobile Viewport Entry)
 // -----------------------------------------------------------------------------
-function MetricCountUp({
-  value,
-  label,
-  sublabel,
-  className,
+function AnimatedSection({
+  children,
+  className = "",
+  delay = 0,
 }: {
-  value: string;
-  label: string;
-  sublabel?: string;
+  children: React.ReactNode;
   className?: string;
+  delay?: number;
 }) {
   const ref = React.useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-40px" });
-  const [displayValue, setDisplayValue] = React.useState<string>("0");
+  const isInView = useInView(ref, { once: true, margin: "-30px" });
   const shouldReduceMotion = useReducedMotion();
 
-  React.useEffect(() => {
-    if (!isInView) return;
-    if (shouldReduceMotion) {
-      setDisplayValue(value);
-      return;
-    }
-
-    const match = value.match(/^([\d.]+)(.*)$/);
-    if (!match) {
-      setDisplayValue(value);
-      return;
-    }
-
-    const targetNum = parseFloat(match[1]);
-    const suffix = match[2] || "";
-    const isFloat = match[1].includes(".");
-    const decimals = isFloat ? match[1].split(".")[1]?.length || 1 : 0;
-
-    let animationFrameId: number;
-    const duration = 1500;
-    const startTime = performance.now();
-
-    const updateCount = (now: number) => {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const current = targetNum * eased;
-
-      setDisplayValue(current.toFixed(decimals) + suffix);
-
-      if (progress < 1) {
-        animationFrameId = requestAnimationFrame(updateCount);
-      } else {
-        setDisplayValue(targetNum.toFixed(decimals) + suffix);
-      }
-    };
-
-    animationFrameId = requestAnimationFrame(updateCount);
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [isInView, value, shouldReduceMotion]);
+  if (shouldReduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
-    <div ref={ref} className={cn("flex flex-col text-left", className)}>
-      <div className="flex items-center gap-1.5">
-        <span className="text-3xl sm:text-4xl font-black font-mono text-[#f15e1c] tracking-tight">
-          {displayValue}
-        </span>
-        <motion.span
-          initial={{ opacity: 0, y: 4, scale: 0.8 }}
-          animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-          transition={{ duration: 0.4, delay: 1.3 }}
-          className="text-[#2e936f] text-base font-extrabold"
-        >
-          ↗
-        </motion.span>
-      </div>
-      <span className="text-xs font-mono font-bold text-[#4a5c55] dark:text-[#d3eee4] leading-tight mt-0.5">
-        {label}
-      </span>
-      {sublabel && (
-        <span className="text-[10px] font-mono text-[#7A6A5F] dark:text-[#B8ACA0] mt-0.5">
-          {sublabel}
-        </span>
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 16 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+      transition={{ duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+// -----------------------------------------------------------------------------
+// 2. System Scan Transition Line (Laser Beam Sweep Effect)
+// -----------------------------------------------------------------------------
+function SystemScanTransition() {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-20px" });
+  const shouldReduceMotion = useReducedMotion();
+
+  return (
+    <div ref={ref} className="relative w-full h-px my-1 overflow-hidden pointer-events-none select-none">
+      <div className="w-full h-full bg-[#f7d7b0]/30 dark:bg-[#1a1a1a]" />
+      {!shouldReduceMotion && (
+        <motion.div
+          initial={{ x: "-100%" }}
+          animate={isInView ? { x: "100%" } : {}}
+          transition={{ duration: 1.4, ease: "easeInOut" }}
+          className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-transparent via-[#f15e1c] to-transparent shadow-[0_0_10px_#f15e1c]"
+        />
       )}
     </div>
   );
 }
 
 // -----------------------------------------------------------------------------
-// 2. Magnetic Button Component (Smooth spring tracking & background wipe)
+// 3. Dot Grid Pattern Background
 // -----------------------------------------------------------------------------
-function MagneticButton({
-  children,
-  className,
-  onClick,
-  href,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  onClick?: () => void;
-  href?: string;
-}) {
-  const buttonRef = React.useRef<HTMLDivElement>(null);
-  const [position, setPosition] = React.useState({ x: 0, y: 0 });
-  const shouldReduceMotion = useReducedMotion();
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (shouldReduceMotion || typeof window === "undefined" || window.innerWidth < 768) return;
-    if (!buttonRef.current) return;
-    const { left, top, width, height } = buttonRef.current.getBoundingClientRect();
-    const x = (e.clientX - (left + width / 2)) * 0.25;
-    const y = (e.clientY - (top + height / 2)) * 0.25;
-    setPosition({ x, y });
-  };
-
-  const handleMouseLeave = () => {
-    setPosition({ x: 0, y: 0 });
-  };
-
-  const content = (
-    <motion.div
-      ref={buttonRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      animate={{ x: position.x, y: position.y }}
-      transition={{ type: "spring", stiffness: 220, damping: 16, mass: 0.4 }}
-      className={cn("inline-block relative group cursor-pointer", className)}
-      onClick={onClick}
-    >
-      {children}
-    </motion.div>
+function AnimatedDotGrid() {
+  return (
+    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-10 dark:opacity-15 select-none">
+      <svg className="w-full h-full" width="100%" height="100%">
+        <pattern
+          id="digital-dot-matrix-pattern"
+          width="24"
+          height="24"
+          patternUnits="userSpaceOnUse"
+        >
+          <circle cx="2" cy="2" r="1" fill="#f15e1c" opacity="0.6" />
+        </pattern>
+        <rect width="100%" height="100%" fill="url(#digital-dot-matrix-pattern)" />
+      </svg>
+    </div>
   );
-
-  if (href) {
-    if (href.startsWith("#") || href.startsWith("http")) {
-      return <a href={href}>{content}</a>;
-    }
-    return <Link href={href}>{content}</Link>;
-  }
-
-  return content;
 }
 
 // -----------------------------------------------------------------------------
-// Data Collections
+// Data Collections for Digital Marketing Page
 // -----------------------------------------------------------------------------
-const marketingSolutionsData = [
+
+// Section 01: 4 Concise Capability Areas
+const positioningCapabilities = [
   {
-    numStr: "01",
-    title: "SEO & Content Strategy",
-    subtitle: "Organic Search Dominance & Topical Authority",
+    num: "01",
+    title: "Brand Positioning",
     description:
-      "We optimize your website’s content and structure to improve search engine visibility, build topical authority, and engage high-intent B2B decision-makers.",
-    icon: <Search className="w-6 h-6 text-[#f15e1c]" />,
-    deliverables: [
-      "Technical SEO & Core Web Vitals Optimization",
-      "Topical Authority Content Hubs & Keyword Clusters",
-      "On-Page & Programmatic Indexing Strategy",
-      "High-Authority Backlink & Digital PR Outreach",
-    ],
-    metric: "3.4x",
-    metricLabel: "Organic Traffic & Lead Uplift",
-    stageName: "SEARCH VISIBILITY",
-    route: "/services/seo-services",
+      "Build a clear market position, messaging system and digital identity that makes the business easier to understand and remember.",
+    icon: <Target className="w-5 h-5 text-[#f15e1c]" />,
   },
   {
-    numStr: "02",
-    title: "Social Media & Email Marketing",
-    subtitle: "Audience Nurturing & Brand Engagement",
+    num: "02",
+    title: "Search & AI Visibility",
     description:
-      "We help you build a strong presence on social media, engaging with your audience and creating meaningful connections through targeted nurture sequences.",
-    icon: <Users2 className="w-6 h-6 text-[#f15e1c]" />,
-    deliverables: [
-      "Executive LinkedIn Thought Leadership Campaigns",
-      "Automated Lifecycle Email Nurture Workflows",
-      "Multi-Channel Community Management",
-      "High-Converting Lead Magnet Assets",
-    ],
-    metric: "450%",
-    metricLabel: "Audience Engagement Growth",
-    stageName: "COMMUNITY & ENGAGEMENT",
-    route: "/services/digital-marketing-brand-development",
+      "Improve technical SEO, content structure, topical authority and discoverability across traditional search and emerging AI-driven search experiences.",
+    icon: <Search className="w-5 h-5 text-[#2e936f]" />,
   },
   {
-    numStr: "03",
-    title: "PPC & Campaign Management",
-    subtitle: "High-Intent Customer Acquisition",
+    num: "03",
+    title: "Demand Generation",
     description:
-      "From Google Ads to social media campaigns, we create and manage targeted PPC campaigns that reach potential customers at the right time and place.",
-    icon: <Megaphone className="w-6 h-6 text-[#f15e1c]" />,
-    deliverables: [
-      "Google Search & Display Performance Max Ads",
-      "LinkedIn ABM Target Account Campaigns",
-      "Retargeting & Dynamic Audience Funnels",
-      "Continuous Conversion Rate Optimization (CRO)",
-    ],
-    metric: "42%",
-    metricLabel: "Reduction in Cost Per Acquisition",
-    stageName: "PAID CAMPAIGNS",
-    route: "/services/digital-marketing-brand-development",
+      "Reach high-intent B2B audiences through Google Search, LinkedIn and carefully selected paid channels aligned with commercial objectives.",
+    icon: <Megaphone className="w-5 h-5 text-[#fab60a]" />,
   },
   {
-    numStr: "04",
-    title: "Key Benefits",
-    subtitle: "Closed-Loop Revenue Attribution",
+    num: "04",
+    title: "Conversion & Measurement",
     description:
-      "Targeted outreach, improved lead quality, and a measurable boost in sales with 100% transparent ROI tracking.",
-    icon: <TrendingUp className="w-6 h-6 text-[#f15e1c]" />,
-    deliverables: [
-      "Full Pipeline & Closed-Loop CRM Attribution",
-      "Predictable Monthly Lead Velocity",
-      "Enhanced Brand Market Recognition",
-      "Maximum Return on Ad Spend (ROAS)",
-    ],
-    metric: "100%",
-    metricLabel: "Closed-Loop Attribution",
-    stageName: "MEASURABLE GROWTH",
-    route: "/services/digital-marketing-brand-development",
+      "Turn visits into meaningful actions through landing-page optimization, conversion journeys, analytics and continuous performance analysis.",
+    icon: <BarChart3 className="w-5 h-5 text-[#f15e1c]" />,
   },
 ];
 
-const howWeWorkSteps = [
+// Section 02: Digital Growth Engine (5 Stages)
+const growthEngineStages = [
+  {
+    id: "POSITION",
+    stageNum: "01",
+    title: "POSITION",
+    subtitle: "Brand & Audience Foundations",
+    description:
+      "Clarify brand, audience, proposition and messaging. We establish your unique market positioning, key messaging pillars, and target B2B buyer profiles.",
+    icon: <Target className="w-5 h-5 text-[#f15e1c]" />,
+    deliverables: ["Brand Positioning Blueprint", "Ideal Customer Profile (ICP) Matrix", "Value Proposition Architecture"],
+  },
+  {
+    id: "DISCOVER",
+    stageNum: "02",
+    title: "DISCOVER",
+    subtitle: "Multi-Channel Search & AI Presence",
+    description:
+      "Build organic and paid visibility across search, AI discovery and relevant digital channels. We establish technical SEO foundations and high-intent acquisition campaigns.",
+    icon: <Search className="w-5 h-5 text-[#2e936f]" />,
+    deliverables: ["Technical SEO & Crawl Audit", "AI Search & Topic Authority Hubs", "Google & LinkedIn Paid Search Campaigns"],
+  },
+  {
+    id: "ENGAGE",
+    stageNum: "03",
+    title: "ENGAGE",
+    subtitle: "Trust-Building Content Systems",
+    description:
+      "Use useful content, thought leadership, landing pages and campaigns to build trust. We equip decision-makers with insight-led articles, case studies, and executive commentary.",
+    icon: <Users2 className="w-5 h-5 text-[#fab60a]" />,
+    deliverables: ["Executive Thought Leadership", "B2B Insight Articles & Case Studies", "High-Converting Landing Pages"],
+  },
+  {
+    id: "CONVERT",
+    stageNum: "04",
+    title: "CONVERT",
+    subtitle: "Journey & Lead Optimization",
+    description:
+      "Optimize journeys, forms, CTAs, landing pages and lead qualification. We remove user friction to ensure high-intent traffic turns into qualified sales inquiries.",
+    icon: <TrendingUp className="w-5 h-5 text-[#f15e1c]" />,
+    deliverables: ["Conversion Rate Optimization (CRO)", "Form & CTA Friction Reduction", "Lead Qualification Workflows"],
+  },
+  {
+    id: "LEARN",
+    stageNum: "05",
+    title: "LEARN",
+    subtitle: "Continuous Analysis & Iteration",
+    description:
+      "Measure performance, identify friction and continuously improve the system. We connect marketing activity to commercial outcomes and continually refine growth tactics.",
+    icon: <RefreshCw className="w-5 h-5 text-[#2e936f]" />,
+    deliverables: ["First-Party Attribution Analytics", "Monthly Growth Audits", "Continuous Strategy Iteration"],
+  },
+];
+
+// Section 03: What We Actually Do (8 Service Items)
+const whatWeDoServices = [
+  {
+    num: "01",
+    title: "B2B Digital Strategy",
+    description:
+      "Audience research, positioning, channel strategy, campaign planning and measurable growth roadmaps.",
+    icon: <Compass className="w-5 h-5 text-[#f15e1c]" />,
+  },
+  {
+    num: "02",
+    title: "Brand Development",
+    description:
+      "Brand positioning, messaging, visual direction, executive presence and digital brand consistency.",
+    icon: <Target className="w-5 h-5 text-[#fab60a]" />,
+  },
+  {
+    num: "03",
+    title: "Technical SEO",
+    description:
+      "Technical audits, crawlability, indexing, JavaScript SEO, Core Web Vitals, structured data and site architecture.",
+    icon: <Code2 className="w-5 h-5 text-[#2e936f]" />,
+  },
+  {
+    num: "04",
+    title: "AI Search & Content Visibility",
+    description:
+      "Create structured, authoritative content designed to be useful for people and understandable to modern search and AI discovery systems.",
+    icon: <Cpu className="w-5 h-5 text-[#f15e1c]" />,
+  },
+  {
+    num: "05",
+    title: "Content & Thought Leadership",
+    description:
+      "Executive content, insight-led articles, industry pages, case studies, LinkedIn content and topic authority systems.",
+    icon: <FileText className="w-5 h-5 text-[#2e936f]" />,
+  },
+  {
+    num: "06",
+    title: "Paid Acquisition",
+    description:
+      "High-intent Google Search, LinkedIn B2B campaigns, retargeting and audience expansion based on business objectives.",
+    icon: <Megaphone className="w-5 h-5 text-[#fab60a]" />,
+  },
+  {
+    num: "07",
+    title: "Landing Pages & CRO",
+    description:
+      "Improve messaging, page structure, CTAs, forms and user journeys to reduce friction and increase qualified actions.",
+    icon: <TrendingUp className="w-5 h-5 text-[#f15e1c]" />,
+  },
+  {
+    num: "08",
+    title: "Analytics & Attribution",
+    description:
+      "Connect marketing activity to meaningful business signals instead of reporting vanity metrics alone.",
+    icon: <BarChart3 className="w-5 h-5 text-[#2e936f]" />,
+  },
+];
+
+// Section 04: 2026 Digital Growth Focus Areas
+const modernGrowthPillars = [
+  {
+    title: "AI Search Visibility",
+    description:
+      "Optimize content for discoverability across AI-powered search experiences while retaining strong traditional SEO foundations.",
+    icon: <Cpu className="w-5 h-5 text-[#f15e1c]" />,
+  },
+  {
+    title: "Entity & Topical Authority",
+    description:
+      "Build connected content around important business topics instead of publishing disconnected keyword-focused articles.",
+    icon: <Layers className="w-5 h-5 text-[#2e936f]" />,
+  },
+  {
+    title: "Technical Performance",
+    description:
+      "Fast, crawlable, accessible websites with strong information architecture, structured data and sound technical foundations.",
+    icon: <Code2 className="w-5 h-5 text-[#fab60a]" />,
+  },
+  {
+    title: "B2B Thought Leadership",
+    description:
+      "Develop distinctive expert-led content that gives decision-makers useful reasons to trust the brand.",
+    icon: <Users2 className="w-5 h-5 text-[#2e936f]" />,
+  },
+  {
+    title: "First-Party Measurement",
+    description:
+      "Use owned website, CRM and campaign data wherever available to understand meaningful user journeys and commercial performance.",
+    icon: <BarChart3 className="w-5 h-5 text-[#f15e1c]" />,
+  },
+  {
+    title: "Full-Funnel Measurement",
+    description:
+      "Connect awareness, engagement, lead quality and conversion instead of judging campaigns only by clicks or impressions.",
+    icon: <TrendingUp className="w-5 h-5 text-[#fab60a]" />,
+  },
+];
+
+// Section 05: Applicable Industry Markets
+const applicableMarkets = [
+  "Technology & SaaS",
+  "Professional Services",
+  "Real Estate",
+  "Healthcare",
+  "Education",
+  "Financial & Business Services",
+  "Enterprise & B2B Companies",
+];
+
+// Section 06: How We Work (5 Stages)
+const howWeWorkProcess = [
   {
     step: "01",
-    title: "Research and Strategize",
+    title: "DISCOVER",
     description:
-      "We start with a deep dive into your brand, competitors, and target audience, laying a strong foundation for a data-driven, customized digital marketing strategy.",
-    output: "Audience Blueprint & Competitor Matrix",
-    tag: "AWARENESS",
+      "Understand business objectives, audience, market, competitors and existing digital performance.",
   },
   {
     step: "02",
-    title: "Content Creation and Optimization",
+    title: "DEFINE",
     description:
-      "Our team creates engaging, SEO-optimized content and designs social media campaigns that resonate with your audience and reflect your brand voice.",
-    output: "Topical Content Hubs & Ad Creatives",
-    tag: "INTEREST",
+      "Establish positioning, priorities, channels, content themes and measurable objectives.",
   },
   {
     step: "03",
-    title: "Launch and Manage Campaigns",
+    title: "BUILD",
     description:
-      "We execute targeted PPC campaigns and manage social media channels, ensuring seamless, consistent brand messaging across platforms.",
-    output: "Omnichannel Campaign Execution",
-    tag: "ENGAGEMENT",
+      "Create campaigns, content, landing pages, SEO foundations and brand assets.",
   },
   {
     step: "04",
-    title: "Analyze and Refine",
+    title: "ACTIVATE",
     description:
-      "Through comprehensive analytics, we monitor performance, refine strategies, and continuously optimize for better engagement and results.",
-    output: "Feedback Loop & Closed-Loop ROAS Tuning",
-    tag: "CONVERSION",
+      "Launch and manage organic, paid and content-led growth initiatives.",
+  },
+  {
+    step: "05",
+    title: "OPTIMIZE",
+    description:
+      "Analyze performance, identify opportunities and continuously improve the growth system.",
   },
 ];
 
-const contentCapabilitiesMosaic = [
+// Section 07: What We Measure (Credible Proof System)
+const whatWeMeasureItems = [
   {
-    title: "SEO & Topical Authority Hubs",
-    category: "SEARCH ENGINE OPTIMIZATION",
-    metric: "+248% Organic Reach",
+    title: "Organic Visibility",
+    desc: "Search engine indexation, keyword footprints, and brand search impressions.",
     icon: <Search className="w-5 h-5 text-[#f15e1c]" />,
-    span: "col-span-1 md:col-span-2 lg:col-span-2",
   },
   {
-    title: "Executive LinkedIn Thought Leadership",
-    category: "BRAND POSITIONING",
-    metric: "14.2k B2B Decision Makers",
+    title: "Qualified Traffic",
+    desc: "High-intent decision-maker visits from target organic and paid channels.",
     icon: <Users2 className="w-5 h-5 text-[#2e936f]" />,
-    span: "col-span-1 md:col-span-1 lg:col-span-1",
   },
   {
-    title: "Performance PPC & ABM Ad Campaigns",
-    category: "PAID ACQUISITION",
-    metric: "4.8x Return On Ad Spend",
-    icon: <Megaphone className="w-5 h-5 text-[#fab60a]" />,
-    span: "col-span-1 md:col-span-1 lg:col-span-1",
+    title: "Engagement Quality",
+    desc: "Time on page, key interaction events, and content consumption depth.",
+    icon: <Globe2 className="w-5 h-5 text-[#fab60a]" />,
   },
   {
-    title: "Automated Email & Lifecycle Nurture",
-    category: "RETENTION & CONVERSION",
-    metric: "42% Conversion Rate",
+    title: "Lead Conversion",
+    desc: "Form submissions, meeting requests, and inbound consultation inquiries.",
     icon: <Target className="w-5 h-5 text-[#f15e1c]" />,
-    span: "col-span-1 md:col-span-2 lg:col-span-2",
+  },
+  {
+    title: "Cost Efficiency",
+    desc: "Effective cost per acquisition (CAC) and media spend efficiency across campaigns.",
+    icon: <TrendingUp className="w-5 h-5 text-[#2e936f]" />,
+  },
+  {
+    title: "Content Performance",
+    desc: "Article read-through rates, resource downloads, and topic engagement.",
+    icon: <FileText className="w-5 h-5 text-[#fab60a]" />,
+  },
+  {
+    title: "Search Visibility",
+    desc: "Multi-platform presence across traditional search and AI discovery engines.",
+    icon: <Cpu className="w-5 h-5 text-[#f15e1c]" />,
+  },
+  {
+    title: "Campaign Performance",
+    desc: "Click-through velocity, landing page conversion rates, and funnel health.",
+    icon: <BarChart3 className="w-5 h-5 text-[#2e936f]" />,
   },
 ];
 
-const circularLoopNodes = [
-  { step: "01", name: "RESEARCH", icon: <Search className="w-4 h-4" />, angle: 0 },
-  { step: "02", name: "CONTENT", icon: <Layers className="w-4 h-4" />, angle: 72 },
-  { step: "03", name: "CAMPAIGN", icon: <Megaphone className="w-4 h-4" />, angle: 144 },
-  { step: "04", name: "DATA", icon: <BarChart3 className="w-4 h-4" />, angle: 216 },
-  { step: "05", name: "OPTIMIZE", icon: <RefreshCw className="w-4 h-4" />, angle: 288 },
+// Section 09: 5 FAQ Items
+const faqItems = [
+  {
+    question: "What does Arav Innovations include in digital marketing?",
+    answer:
+      "Our digital marketing practice combines B2B strategy, brand positioning, technical SEO, AI-search visibility, executive content creation, high-intent paid campaigns (Google & LinkedIn), landing page CRO, and closed-loop measurement.",
+  },
+  {
+    question: "How do you approach B2B lead generation?",
+    answer:
+      "We focus on high-intent buyer journeys rather than volume-only tactics. By targeting decision-makers on Google Search and LinkedIn with authoritative content and frictionless landing pages, we build qualified pipeline aligned with your commercial goals.",
+  },
+  {
+    question: "Do you provide SEO and AI-search optimization?",
+    answer:
+      "Yes. We optimize your web assets for traditional search engines (Google, Bing) while structuring entity data and authoritative topic hubs so your brand is correctly understood and cited by modern AI search systems.",
+  },
+  {
+    question: "How do you measure digital marketing performance?",
+    answer:
+      "We measure meaningful business indicators—including qualified inquiries, buyer engagement quality, acquisition cost efficiency, organic search coverage, and content consumption—rather than reporting vanity impressions alone.",
+  },
+  {
+    question: "Can you manage both strategy and campaign execution?",
+    answer:
+      "Yes. We operate as an end-to-end growth team—from initial positioning and technical setup to campaign management, content creation, landing page design, and ongoing performance optimization.",
+  },
 ];
 
-const marqueeKeywords = [
-  "SEO",
-  "CONTENT",
-  "SOCIAL",
-  "PPC",
-  "BRAND",
-  "ANALYTICS",
-  "CONVERSION",
-  "GROWTH",
-  "RETARGETING",
-  "ATTRIBUTION",
-  "OPTIMIZATION",
-  "DEMAND GEN",
+// Service Ecosystem Links
+const otherServices = [
+  { title: "IT Strategy & Implementation", href: "/services/it-strategy-implementation", icon: <Compass className="w-4 h-4 text-[#f15e1c]" /> },
+  { title: "Web & Application Development", href: "/services/web-app-development", icon: <Code2 className="w-4 h-4 text-[#2e936f]" /> },
+  { title: "Risk, Compliance & Governance", href: "/services/risk-compliance-governance", icon: <ShieldCheck className="w-4 h-4 text-[#2e936f]" /> },
+  { title: "Audit & Improvement", href: "/services/audit-improvement", icon: <BarChart3 className="w-4 h-4 text-[#f15e1c]" /> },
+  { title: "Training & Staff Augmentation", href: "/services/training-staff-augmentation", icon: <Users2 className="w-4 h-4 text-[#fab60a]" /> },
+  { title: "SEO Services", href: "/services/seo-services", icon: <Search className="w-4 h-4 text-[#2e936f]" /> },
+  { title: "AI Portfolio", href: "/services/ai-portfolio", icon: <Cpu className="w-4 h-4 text-[#f15e1c]" /> },
 ];
 
-const ctaWords = ["engaging", "innovative", "strategic", "outstanding", "exceptional"];
-
-export function DigitalMarketingInteractivePage({ service }: DigitalMarketingPageProps) {
+export function DigitalMarketingInteractivePage({ service, relatedPosts }: DigitalMarketingPageProps) {
   const shouldReduceMotion = useReducedMotion();
-  const [activeSolutionIdx, setActiveSolutionIdx] = React.useState<number>(0);
-  const [activeWorkIdx, setActiveWorkIdx] = React.useState<number>(0);
-  const [currentWordIdx, setCurrentWordIdx] = React.useState<number>(0);
+  const [activeStageIdx, setActiveStageIdx] = React.useState<number>(0);
+  const [activeProcessIdx, setActiveProcessIdx] = React.useState<number>(0);
+  const [openFaqIdx, setOpenFaqIdx] = React.useState<number | null>(0);
 
-  // ---------------------------------------------------------------------------
-  // Hero Mouse Parallax State (Disabled on mobile)
-  // ---------------------------------------------------------------------------
-  const heroRef = React.useRef<HTMLDivElement>(null);
-  const [mousePos, setMousePos] = React.useState({ x: 0, y: 0 });
+  // Dynamic Blog Selection
+  const displayPosts = React.useMemo(() => {
+    if (relatedPosts && relatedPosts.length > 0) {
+      return relatedPosts.slice(0, 3);
+    }
+    return blogPostsData.slice(0, 3);
+  }, [relatedPosts]);
 
-  const handleHeroMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (shouldReduceMotion || typeof window === "undefined" || window.innerWidth < 768) return;
-    if (!heroRef.current) return;
-    const rect = heroRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const x = (e.clientX - centerX) / (rect.width / 2);
-    const y = (e.clientY - centerY) / (rect.height / 2);
-    setMousePos({ x, y });
-  };
-
-  const handleHeroMouseLeave = () => {
-    setMousePos({ x: 0, y: 0 });
-  };
-
-  // ---------------------------------------------------------------------------
-  // Scroll Parallax for Growth Philosophy Section
-  // ---------------------------------------------------------------------------
-  const philosophyRef = React.useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: philosophyRef,
-    offset: ["start end", "end start"],
-  });
-  const backgroundTextX1 = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
-  const backgroundTextX2 = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
-
-  // InView hooks
-  const statementRef = React.useRef<HTMLDivElement>(null);
-  const isStatementInView = useInView(statementRef, { once: true, margin: "-100px" });
-
-  const testimonialRef = React.useRef<HTMLDivElement>(null);
-  const isTestimonialInView = useInView(testimonialRef, { once: true, margin: "-80px" });
-
-  // Rotating CTA Word Timer
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentWordIdx((prev) => (prev + 1) % ctaWords.length);
-    }, 2400);
-    return () => clearInterval(timer);
-  }, []);
-
-  const activeSolution = marketingSolutionsData[activeSolutionIdx];
-  const totalSolutions = marketingSolutionsData.length;
-
-  const testimonial = testimonialsData.find((t) => t.id === "test-1") || testimonialsData[0];
+  const activeStage = growthEngineStages[activeStageIdx];
 
   return (
-    <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#000000] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c]">
+    <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#000000] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c] relative">
+      
+      {/* Background Dot Grid Matrix Pattern */}
+      <AnimatedDotGrid />
+
       {/* =========================================================================
-          1. HERO — LIVING GROWTH ENGINE (KINETIC TYPOGRAPHY + FLOATING METRICS + PARALLAX)
+          1. HERO — DIGITAL GROWTH & BRAND STRATEGY (2-COLUMN WITH DUAL THEME INFOGRAPHIC)
           ========================================================================= */}
-      <section
-        ref={heroRef}
-        onMouseMove={handleHeroMouseMove}
-        onMouseLeave={handleHeroMouseLeave}
-        className="relative min-h-[94vh] flex flex-col justify-between pt-28 pb-12 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden"
-      >
-        {/* Layer 0: Background Parallax (Very Slow: factor 8) */}
+      <section className="relative pt-3 sm:pt-5 lg:pt-6 pb-8 sm:pb-10 lg:pb-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none">
+        {/* Ambient Subtle Pulsing Glow */}
         <motion.div
-          animate={shouldReduceMotion ? {} : { x: mousePos.x * 8, y: mousePos.y * 8 }}
-          transition={{ type: "spring", stiffness: 80, damping: 20 }}
-          className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-30 dark:opacity-20"
+          animate={shouldReduceMotion ? {} : { y: [0, -12, 0], opacity: [0.25, 0.35, 0.25] }}
+          transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
+          className="absolute inset-0 pointer-events-none z-0 overflow-hidden"
         >
-          <svg className="w-full h-full" viewBox="0 0 1200 800" fill="none">
-            <defs>
-              <linearGradient id="hero-marketing-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#f15e1c" stopOpacity="0.8" />
-                <stop offset="50%" stopColor="#fab60a" stopOpacity="0.5" />
-                <stop offset="100%" stopColor="#2e936f" stopOpacity="0.7" />
-              </linearGradient>
-            </defs>
-            <line x1="600" y1="380" x2="180" y2="190" stroke="url(#hero-marketing-grad)" strokeWidth="1.5" strokeDasharray="6 6" />
-            <line x1="600" y1="380" x2="1020" y2="190" stroke="url(#hero-marketing-grad)" strokeWidth="1.5" strokeDasharray="6 6" />
-            <line x1="600" y1="380" x2="220" y2="580" stroke="url(#hero-marketing-grad)" strokeWidth="1.5" strokeDasharray="6 6" />
-            <line x1="600" y1="380" x2="980" y2="580" stroke="url(#hero-marketing-grad)" strokeWidth="1.5" strokeDasharray="6 6" />
-          </svg>
-          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-radial from-[#f15e1c]/15 via-transparent to-transparent blur-3xl rounded-full" />
+          <div className="absolute top-1/4 left-1/3 w-[500px] h-[500px] bg-radial from-[#f15e1c]/15 via-transparent to-transparent blur-3xl rounded-full" />
           <div className="absolute bottom-1/3 right-1/4 w-[550px] h-[550px] bg-radial from-[#2e936f]/12 via-transparent to-transparent blur-3xl rounded-full" />
         </motion.div>
 
-        {/* Layer 1: Floating Marketing Data Elements (Medium: factor 20) */}
-        <motion.div
-          animate={shouldReduceMotion ? {} : { x: mousePos.x * 20, y: mousePos.y * 20 }}
-          transition={{ type: "spring", stiffness: 90, damping: 22 }}
-          className="absolute inset-0 pointer-events-none z-0 hidden lg:block overflow-hidden"
-        >
-          {/* Badge 1: Top-Left ROAS Widget */}
-          <div className="absolute top-28 left-8 sm:left-16 p-3 rounded-2xl bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-md border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-[#f15e1c]/10 text-[#f15e1c]">
-              <TrendingUp className="w-4 h-4" />
-            </div>
-            <div>
-              <div className="text-xs font-mono font-extrabold text-[#f15e1c]">+248% ROAS</div>
-              <div className="text-[10px] font-mono text-[#7A6A5F] dark:text-[#B8ACA0]">Paid Acquisition</div>
-            </div>
-          </div>
-
-          {/* Badge 2: Top-Right Audience Signal */}
-          <div className="absolute top-32 right-10 sm:right-20 p-3 rounded-2xl bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-md border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg flex items-center gap-3">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#2e936f] animate-ping" />
-            <div>
-              <div className="text-xs font-mono font-extrabold text-[#1b2823] dark:text-[#ffffff]">14.2k Signals</div>
-              <div className="text-[10px] font-mono text-[#2e936f]">High-Intent B2B Reach</div>
-            </div>
-          </div>
-
-          {/* Badge 3: Bottom-Left CAC Pill */}
-          <div className="absolute bottom-36 left-12 p-3 rounded-2xl bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-md border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-[#2e936f]/10 text-[#2e936f]">
-              <Target className="w-4 h-4" />
-            </div>
-            <div>
-              <div className="text-xs font-mono font-extrabold text-[#2e936f]">CAC -35%</div>
-              <div className="text-[10px] font-mono text-[#7A6A5F] dark:text-[#B8ACA0]">Cost Efficiency</div>
-            </div>
-          </div>
-
-          {/* Badge 4: Bottom-Right LTV Multiple */}
-          <div className="absolute bottom-32 right-16 p-3 rounded-2xl bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-md border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-[#fab60a]/10 text-[#fab60a]">
-              <PieChart className="w-4 h-4" />
-            </div>
-            <div>
-              <div className="text-xs font-mono font-extrabold text-[#1b2823] dark:text-[#ffffff]">LTV / CAC 4.2x</div>
-              <div className="text-[10px] font-mono text-[#f15e1c]">Closed-Loop Velocity</div>
-            </div>
-          </div>
-
-          {/* Floating Subtle Indicators */}
-          <span className="absolute top-1/2 left-24 text-xs font-mono font-bold text-[#f15e1c]/40 animate-pulse">CTR 4.8% ↗</span>
-          <span className="absolute top-2/3 right-32 text-xs font-mono font-bold text-[#2e936f]/40 animate-pulse">Conversion +89%</span>
-        </motion.div>
-
-        {/* Top Breadcrumb & Badge */}
-        <div className="relative z-10 max-w-[1536px] mx-auto w-full space-y-4">
-          <Breadcrumb
-            items={[
-              { label: "Services", href: "/services" },
-              { label: "Digital Marketing & Brand Development" },
-            ]}
-          />
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]"
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>ARAV DIGITAL GROWTH ENGINE</span>
-          </motion.div>
-        </div>
-
-        {/* Main Kinetic Typography Headline (Subtle Word-Group Stagger Reveal) */}
-        <motion.div
-          animate={shouldReduceMotion ? {} : { x: mousePos.x * 4, y: mousePos.y * 4 }}
-          transition={{ type: "spring", stiffness: 100, damping: 25 }}
-          className="relative z-10 max-w-5xl mx-auto w-full my-auto text-center space-y-6 pt-6 pb-10"
-        >
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-display tracking-tight leading-[1.08] text-[#1b2823] dark:text-[#ffffff]">
-            <motion.span
-              initial={{ opacity: 0, y: 35 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-block"
-            >
-              Building Brands,
-            </motion.span>{" "}
-            <motion.span
-              initial={{ opacity: 0, y: 35 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-block text-[#f15e1c]"
-            >
-              Driving Growth
-            </motion.span>
-          </h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-lg sm:text-xl text-[#4a5c55] dark:text-[#d3eee4] max-w-3xl mx-auto font-medium leading-relaxed"
-          >
-            Omnichannel performance marketing, technical SEO, high-intent campaign management, and closed-loop ROI optimization.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.55 }}
-            className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <MagneticButton href="#inquire">
-              <Button3D
-                variant="primary"
-                size="lg"
-                rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />}
-                className="w-full sm:w-auto justify-center shadow-xl shadow-[#f15e1c]/25"
-              >
-                Inquire About Growth Strategy
-              </Button3D>
-            </MagneticButton>
-            <MagneticButton href="/case-studies">
-              <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center">
-                View Growth Case Studies
-              </Button3D>
-            </MagneticButton>
-          </motion.div>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <div className="relative z-10 text-center pb-2">
-          <a href="#our-solutions" className="inline-flex flex-col items-center gap-2 group cursor-pointer">
-            <span className="text-xs font-mono font-bold tracking-widest text-[#7A6A5F] dark:text-[#B8ACA0] group-hover:text-[#f15e1c] transition-colors">
-              SCROLL TO EXPLORE GROWTH SYSTEM
-            </span>
-            <div className="w-6 h-10 rounded-full border-2 border-[#f7d7b0] dark:border-[#1a1a1a] flex items-start justify-center p-1.5">
-              <div className="w-1.5 h-3 rounded-full bg-[#f15e1c] animate-bounce" />
-            </div>
-          </a>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          2. HORIZONTAL BRAND MARQUEE (SLOW CONTINUOUS TICKER)
-          ========================================================================= */}
-      <section className="relative py-4 bg-[#fefaf5] dark:bg-[#0a0a0a] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none">
-        <div className="flex items-center gap-8 whitespace-nowrap animate-marquee">
-          {[...marqueeKeywords, ...marqueeKeywords].map((word, idx) => (
-            <div key={idx} className="flex items-center gap-8 text-xs font-mono font-extrabold text-[#7A6A5F] dark:text-[#B8ACA0]">
-              <span className="tracking-widest hover:text-[#f15e1c] transition-colors">{word}</span>
-              <span className="text-[#f15e1c] text-xs">&bull;</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* =========================================================================
-          3. OUR SOLUTIONS & SIGNATURE MARKETING FUNNEL (AUDIENCE JOURNEY)
-          ========================================================================= */}
-      <section id="our-solutions" className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1536px] mx-auto space-y-12 select-none">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              OUR SOLUTIONS
-            </Badge>
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Elevate your brand and expand your Reach
-            </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              Select or click below to explore each marketing workstream and its connected audience pathway.
-            </p>
-          </div>
-
-          {/* Signature Interactive Marketing Funnel Container */}
-          <div className="rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-6 sm:p-10 space-y-8 relative overflow-hidden">
-            <div className="absolute inset-0 bg-radial from-[#f15e1c]/8 via-transparent to-transparent pointer-events-none" />
-
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-[#f7d7b0] dark:border-[#1a1a1a]">
-              <div className="flex items-center gap-3">
-                <div className="p-3 rounded-2xl bg-[#f15e1c] text-white shadow-lg shadow-[#f15e1c]/25 shrink-0">
-                  {activeSolution.icon}
+        <div className="max-w-[1536px] mx-auto w-full space-y-6 sm:space-y-8 relative z-10">
+          
+          {/* 2-Column Hero Composition */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* LEFT COLUMN: HERO COPY */}
+            <div className="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-left">
+              
+              {/* Breadcrumb & Eyebrow Badge */}
+              <AnimatedSection delay={0.05} className="space-y-2">
+                <Breadcrumb
+                  items={[
+                    { label: "Services", href: "/services" },
+                    { label: "Digital Marketing & Brand Development" },
+                  ]}
+                />
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>DIGITAL GROWTH &amp; BRAND STRATEGY</span>
                 </div>
-                <div>
-                  <span className="text-xs font-mono font-extrabold text-[#f15e1c] uppercase tracking-wider block">
-                    SOLUTION {activeSolution.numStr} / 0{totalSolutions} &bull; {activeSolution.stageName}
-                  </span>
-                  <h3 className="text-2xl sm:text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                    {activeSolution.title}
-                  </h3>
-                </div>
-              </div>
+              </AnimatedSection>
 
-              {/* Viewport Metric Count-Up Badge */}
-              <div className="bg-white dark:bg-[#000000] px-5 py-3 rounded-2xl border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs">
-                <MetricCountUp value={activeSolution.metric} label={activeSolution.metricLabel} sublabel="Verified Outcome" />
-              </div>
-            </div>
+              {/* Main Headline & Supporting Text */}
+              <AnimatedSection delay={0.1} className="space-y-3">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold font-display tracking-tight leading-[1.12] text-[#1b2823] dark:text-[#ffffff]">
+                  Turn Digital Presence Into{" "}
+                  <span className="text-[#f15e1c]">Measurable Business Growth</span>
+                </h1>
 
-            {/* Signature Interaction 1: 4-Stage Marketing Funnel Journey */}
-            <div className="relative py-6 px-4 bg-white dark:bg-[#000000] rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden">
-              <div className="text-center pb-4">
-                <span className="text-[11px] font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] uppercase tracking-widest block">
-                  AUDIENCE CONVERSION PATHWAY
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 relative z-10">
-                {[
-                  { stage: "01", label: "CONTENT / AD", sub: "Brand Message" },
-                  { stage: "02", label: "TARGET AUDIENCE", sub: "High-Intent Reach" },
-                  { stage: "03", label: "ENGAGEMENT", sub: "Click & Nurture" },
-                  { stage: "04", label: "CONVERSION", sub: "Pipeline Lead / Sale" },
-                ].map((node, i) => {
-                  const isCurrentActive = i === activeSolutionIdx;
-                  const isPassed = i <= activeSolutionIdx;
-                  return (
-                    <motion.div
-                      key={i}
-                      onClick={() => setActiveSolutionIdx(i)}
-                      whileHover={{ scale: 1.02 }}
-                      className={cn(
-                        "p-4 rounded-2xl border transition-all duration-300 cursor-pointer space-y-1 relative text-center",
-                        isCurrentActive
-                          ? "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/30"
-                          : isPassed
-                          ? "bg-white dark:bg-[#000000] border-[#2e936f] opacity-90"
-                          : "bg-white dark:bg-[#000000] border-[#f7d7b0] dark:border-[#1a1a1a] opacity-50"
-                      )}
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className={cn("text-[10px] font-mono font-black", isPassed ? "text-[#f15e1c]" : "text-[#7A6A5F]")}>
-                          STAGE {node.stage}
-                        </span>
-                        {isCurrentActive && <span className="w-2 h-2 rounded-full bg-[#f15e1c] animate-ping" />}
-                      </div>
-                      <div className="text-xs font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-tight pt-1">
-                        {node.label}
-                      </div>
-                      <span className="text-[10px] text-[#2e936f] font-semibold block">{node.sub}</span>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Description & Deliverables */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center pt-2">
-              <div className="md:col-span-6 space-y-3 text-left">
-                <h4 className="text-lg font-bold font-display text-[#f15e1c]">
-                  {activeSolution.subtitle}
-                </h4>
-                <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                  {activeSolution.description}
+                <p className="text-sm sm:text-base lg:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-2xl">
+                  We help businesses build stronger digital brands, become easier to discover, reach high-intent audiences and turn digital activity into qualified opportunities through strategy, content, SEO, paid media and continuous optimization.
                 </p>
-              </div>
+              </AnimatedSection>
 
-              <div className="md:col-span-6 space-y-2">
-                <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#f15e1c] block">
-                  Key Deliverable Scope
-                </span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]">
-                  {activeSolution.deliverables.map((del, i) => (
-                    <motion.div
-                      key={i}
-                      whileHover={{ x: 4 }}
-                      transition={{ duration: 0.2 }}
-                      className="flex items-center gap-2 p-2.5 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xs group"
+              {/* CTA Buttons */}
+              <AnimatedSection delay={0.15} className="pt-1 flex flex-wrap items-center gap-3">
+                <Link href="/contact">
+                  <MagneticButton>
+                    <Button3D
+                      variant="primary"
+                      size="md"
+                      rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />}
+                      className="shadow-md shadow-[#f15e1c]/20 hover:-translate-y-0.5 transition-all duration-300"
                     >
-                      <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0 group-hover:scale-110 transition-transform" />
-                      <span className="truncate">{del}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+                      Build My Growth Strategy
+                    </Button3D>
+                  </MagneticButton>
+                </Link>
+
+                <Link href="#positioning">
+                  <MagneticButton>
+                    <Button3D variant="outline" size="md" className="hover:-translate-y-0.5 transition-all duration-300">
+                      Explore Our Approach
+                    </Button3D>
+                  </MagneticButton>
+                </Link>
+              </AnimatedSection>
+
+              {/* Small Keywords Bar */}
+              <AnimatedSection delay={0.2} className="text-xs font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center gap-2 flex-wrap pt-1">
+                <span>Brand Strategy</span>
+                <span className="text-[#f15e1c]">&bull;</span>
+                <span>B2B Growth</span>
+                <span className="text-[#f15e1c]">&bull;</span>
+                <span>SEO</span>
+                <span className="text-[#f15e1c]">&bull;</span>
+                <span>Paid Media</span>
+                <span className="text-[#f15e1c]">&bull;</span>
+                <span>Content</span>
+                <span className="text-[#f15e1c]">&bull;</span>
+                <span>Conversion</span>
+              </AnimatedSection>
             </div>
 
-            {/* Service Selection Tabs (Fast 250-350ms transition) */}
-            <div className="pt-6 border-t border-[#f7d7b0] dark:border-[#1a1a1a] space-y-3">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                {marketingSolutionsData.map((sol, idx) => (
-                  <button
-                    key={sol.numStr}
-                    type="button"
-                    onClick={() => setActiveSolutionIdx(idx)}
-                    className={cn(
-                      "py-3 px-3 rounded-xl text-xs font-bold text-center transition-all duration-300 cursor-pointer truncate",
-                      activeSolutionIdx === idx
-                        ? "bg-[#f15e1c] text-white shadow-md shadow-[#f15e1c]/20"
-                        : "bg-white dark:bg-[#000000] text-[#4a5c55] dark:text-[#d3eee4] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:translate-y-[-2px]"
-                    )}
-                  >
-                    0{idx + 1} {sol.title}
-                  </button>
-                ))}
-              </div>
+            {/* RIGHT COLUMN: DUAL-THEME HERO INFOGRAPHIC */}
+            <div className="lg:col-span-6 xl:col-span-7 w-full flex items-center justify-center">
+              <AnimatedSection delay={0.15} className="w-full">
+                <div className="relative w-full flex items-center justify-center">
+                  {/* Light Mode Image */}
+                  <Image
+                    src="/images/digital-marketing-light.png"
+                    alt="Arav Innovations Digital Marketing &amp; Growth System (Light Mode)"
+                    width={1200}
+                    height={800}
+                    priority
+                    className="w-full h-auto max-w-full object-contain dark:hidden transition-transform duration-300 hover:scale-[1.01]"
+                  />
+                  {/* Dark Mode Image */}
+                  <Image
+                    src="/images/digital-marketing-dark.png"
+                    alt="Arav Innovations Digital Marketing &amp; Growth System (Dark Mode)"
+                    width={1200}
+                    height={800}
+                    priority
+                    className="w-full h-auto max-w-full object-contain hidden dark:block transition-transform duration-300 hover:scale-[1.01]"
+                  />
+                </div>
+              </AnimatedSection>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Laser Scan Beam Section Separator */}
+      <SystemScanTransition />
+
       {/* =========================================================================
-          4. CONTENT CREATION MOSAIC TILE REVEAL
+          EDITORIAL VISUAL BREAK 1: IMAGE 1 + SUPPORTING CONTENT (IMAGE LEFT, TEXT RIGHT)
           ========================================================================= */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
-        <div className="max-w-[1536px] mx-auto space-y-10">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              CONTENT &amp; BRAND CAPABILITIES
-            </Badge>
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              High-Converting Brand Assets
-            </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              Data-backed content creation tailored for maximum B2B engagement and search engine dominance.
-            </p>
-          </div>
+      <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* LEFT COLUMN: IMAGE 1 (~45% width) */}
+            <div className="lg:col-span-5 w-full flex items-center justify-center">
+              <AnimatedSection delay={0.08} className="w-full">
+                <div className="relative w-full rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-[#fefaf5] dark:bg-[#0a0a0a] shadow-lg transition-transform duration-300 hover:scale-[1.015]">
+                  <Image
+                    src="/images/digital-marketing-main-1.png"
+                    alt="Arav Innovations Digital Marketing Strategy & Ecosystem Overview"
+                    width={1000}
+                    height={667}
+                    className="w-full h-auto max-w-full object-contain block transition-transform duration-300"
+                  />
+                </div>
+              </AnimatedSection>
+            </div>
 
-          {/* Mosaic Tile Grid Stagger Reveal */}
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6">
-            {contentCapabilitiesMosaic.map((item, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: idx * 0.12 }}
-                whileHover={{ y: -6 }}
-                className={cn(
-                  "p-8 rounded-[2rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md hover:border-[#f15e1c] transition-all duration-300 space-y-4 group relative overflow-hidden",
-                  item.span
-                )}
-              >
-                {/* Background Hover Wipe */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#f15e1c]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            {/* RIGHT COLUMN: SUPPORTING CONTENT (~55% width) */}
+            <div className="lg:col-span-7 space-y-4 sm:space-y-5 text-left">
+              <AnimatedSection delay={0.12} className="space-y-3">
+                <Badge variant="secondary" size="md">
+                  BRAND AUTHORITY &amp; VISIBILITY
+                </Badge>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-tight">
+                  Connecting Brand Authority With Intent-Driven Discovery
+                </h2>
+                <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed">
+                  In today’s multi-platform B2B landscape, decision-makers evaluate your brand long before filling out a contact form. We structure your digital presence to build immediate credibility across search engines, professional networks, and executive touchpoints.
+                </p>
+              </AnimatedSection>
 
-                <div className="flex items-center justify-between relative z-10">
-                  <span className="text-[10px] font-mono font-extrabold text-[#f15e1c] uppercase tracking-wider">
-                    {item.category}
-                  </span>
-                  <div className="p-2.5 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-110 transition-transform">
-                    {item.icon}
+              <AnimatedSection delay={0.16}>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                  <div className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] space-y-1">
+                    <div className="flex items-center gap-1.5 text-xs font-bold font-mono text-[#f15e1c]">
+                      <Search className="w-4 h-4" />
+                      <span>SEARCH &amp; AI</span>
+                    </div>
+                    <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-normal">
+                      Structured entity &amp; topical authority hubs.
+                    </p>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] space-y-1">
+                    <div className="flex items-center gap-1.5 text-xs font-bold font-mono text-[#2e936f]">
+                      <Target className="w-4 h-4" />
+                      <span>POSITIONING</span>
+                    </div>
+                    <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-normal">
+                      Clear ICP messaging &amp; brand positioning.
+                    </p>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] space-y-1">
+                    <div className="flex items-center gap-1.5 text-xs font-bold font-mono text-[#fab60a]">
+                      <Megaphone className="w-4 h-4" />
+                      <span>ACQUISITION</span>
+                    </div>
+                    <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-normal">
+                      High-intent B2B paid &amp; organic search.
+                    </p>
                   </div>
                 </div>
+              </AnimatedSection>
+            </div>
 
-                <h3 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:translate-x-1.5 transition-transform duration-300 relative z-10">
-                  {item.title}
-                </h3>
+          </div>
+        </div>
+      </section>
 
-                <div className="pt-2 flex items-center justify-between border-t border-[#f7d7b0] dark:border-[#1a1a1a] relative z-10">
-                  <span className="text-xs font-mono font-extrabold text-[#2e936f]">
-                    {item.metric}
-                  </span>
-                  <ArrowRight className="w-4 h-4 text-[#f15e1c] group-hover:translate-x-1.5 transition-transform duration-300" />
-                </div>
-              </motion.div>
+      {/* Laser Scan Beam Section Separator */}
+      <SystemScanTransition />
+
+      {/* =========================================================================
+          SECTION 01 — POSITIONING (TILT CARDS & SCROLL REVEALS)
+          ========================================================================= */}
+      <section id="positioning" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-[1536px] mx-auto space-y-12">
+          
+          <AnimatedSection>
+            <div className="max-w-3xl space-y-4 text-left">
+              <Badge variant="secondary" size="md">
+                POSITIONING
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Growth Starts With Being Found, Trusted and Chosen
+              </h2>
+              <p className="text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-normal">
+                Digital growth is no longer just about traffic or impressions. Buyers research across search engines, professional networks, websites and increasingly AI-powered discovery experiences before they speak with a business.
+              </p>
+              <p className="text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-normal">
+                Arav Innovations connects these touchpoints into one growth system — combining positioning, technical foundations, authoritative content, targeted acquisition and conversion optimization around clear business objectives.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          {/* 4 Concise Capability Areas (with 3D TiltCard Effect) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {positioningCapabilities.map((cap, idx) => (
+              <AnimatedSection key={cap.num} delay={idx * 0.08}>
+                <TiltCard maxTilt={6} scale={1.01} glare={true} className="h-full">
+                  <div className="h-full p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#f15e1c] transition-all duration-300 space-y-3 flex flex-col justify-between group relative overflow-hidden">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-mono font-black text-[#f15e1c] group-hover:scale-105 transition-transform">
+                          {cap.num}
+                        </span>
+                        <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-105 group-hover:border-[#f15e1c]/40 transition-all duration-300">
+                          {cap.icon}
+                        </div>
+                      </div>
+                      <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] group-hover:translate-x-0.5 transition-all duration-300">
+                        {cap.title}
+                      </h3>
+                      <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
+                        {cap.description}
+                      </p>
+                    </div>
+
+                    {/* Subtle Accent Bottom Indicator Line */}
+                    <div className="h-0.5 w-0 group-hover:w-full bg-gradient-to-r from-[#f15e1c] to-[#2e936f] transition-all duration-300 rounded-full" />
+                  </div>
+                </TiltCard>
+              </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
+      {/* Laser Scan Beam Section Separator */}
+      <SystemScanTransition />
+
       {/* =========================================================================
-          5. GROWTH PHILOSOPHY — EDITORIAL STATEMENT WITH SCROLL PARALLAX TYPOGRAPHY
+          SECTION 02 — DIGITAL GROWTH ENGINE
           ========================================================================= */}
-      <section
-        ref={philosophyRef}
-        className="relative py-28 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden"
-      >
-        {/* Low-Opacity Scroll Parallax Typography Words Behind Content */}
-        <div className="absolute inset-0 pointer-events-none z-0 flex flex-col justify-between py-8 opacity-5 dark:opacity-10 select-none overflow-hidden font-display font-black text-7xl sm:text-9xl text-[#1b2823] dark:text-[#ffffff] tracking-tighter">
-          <motion.div style={{ x: backgroundTextX1 }} className="whitespace-nowrap">
-            GROW &bull; OPTIMIZE &bull; CONVERT
-          </motion.div>
-          <motion.div style={{ x: backgroundTextX2 }} className="whitespace-nowrap text-right">
-            SCALE &bull; ATTRIBUTE &bull; REPEAT
-          </motion.div>
-        </div>
+      <section id="growth-system" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto space-y-10">
+          
+          <AnimatedSection>
+            <div className="text-center max-w-3xl mx-auto space-y-3">
+              <Badge variant="secondary" size="md">
+                CONNECTED ENGINE
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                One Growth System. Connected From Discovery to Conversion.
+              </h2>
+              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
+                Select any stage below to explore how positioning, search, content, conversion and measurement fit together.
+              </p>
+            </div>
+          </AnimatedSection>
 
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-          {/* Left Column: Large Editorial Statement */}
-          <div ref={statementRef} className="lg:col-span-7 space-y-6 text-left">
-            <Badge variant="secondary" size="md">
-              GROWTH PHILOSOPHY
-            </Badge>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={isStatementInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.75, ease: "easeOut" }}
-              className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-[1.12] tracking-tight"
-            >
-              Helping businesses grow through <span className="text-[#f15e1c]">strategic digital marketing</span>, meaningful content, targeted campaigns, and continuous optimization.
-            </motion.h2>
-
-            <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-normal">
-              We replace superficial ad impressions with closed-loop pipeline metrics, turning campaign traffic into predictable B2B sales revenue.
-            </p>
-          </div>
-
-          {/* Right Column: Signature Interaction 2: "DIGITAL GROWTH ENGINE" Circular Loop */}
-          <div className="lg:col-span-5 flex items-center justify-center">
-            <div className="relative w-80 h-80 sm:w-96 sm:h-96 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-6 flex flex-col justify-between items-center text-center overflow-hidden">
-              <div className="absolute inset-0 bg-radial from-[#f15e1c]/15 via-[#2e936f]/10 to-transparent pointer-events-none" />
-
-              <div className="relative z-10 flex items-center gap-2 pt-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-ping" />
-                <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
-                  DIGITAL GROWTH ENGINE
-                </span>
+          {/* System Interactive Container */}
+          <AnimatedSection delay={0.1}>
+            <div className="rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl p-6 sm:p-10 space-y-8">
+              
+              {/* Stage Selector Bar */}
+              <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+                {growthEngineStages.map((stg, idx) => (
+                  <button
+                    key={stg.id}
+                    type="button"
+                    onClick={() => setActiveStageIdx(idx)}
+                    className={cn(
+                      "py-3 px-3 rounded-2xl text-xs font-extrabold font-display transition-all duration-250 cursor-pointer flex items-center justify-center gap-2",
+                      activeStageIdx === idx
+                        ? "bg-[#f15e1c] text-white shadow-md shadow-[#f15e1c]/20 scale-102"
+                        : "bg-white dark:bg-[#000000] text-[#4a5c55] dark:text-[#d3eee4] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]"
+                    )}
+                  >
+                    <span className="font-mono text-[10px] opacity-80">{stg.stageNum}.</span>
+                    <span>{stg.title}</span>
+                  </button>
+                ))}
               </div>
 
-              {/* Circular SVG Loop with Moving Data Signal Particle */}
-              <div className="relative w-56 h-56 my-auto flex items-center justify-center">
-                <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" r="38" stroke="#f7d7b0" strokeWidth="2.5" fill="none" className="dark:stroke-[#1a1a1a]" />
-                  <motion.circle
-                    cx="50"
-                    cy="50"
-                    r="38"
-                    stroke="#f15e1c"
-                    strokeWidth="3"
-                    fill="none"
-                    strokeDasharray="60 180"
-                    animate={shouldReduceMotion ? {} : { rotate: 360 }}
-                    transition={{ repeat: Infinity, duration: 8, ease: "linear" }}
-                    style={{ transformOrigin: "50px 50px" }}
-                  />
-                </svg>
-
-                {/* Node Icons positioned on circular perimeter */}
-                {circularLoopNodes.map((node, i) => {
-                  const rad = (node.angle * Math.PI) / 180;
-                  const radius = 68; // px
-                  const x = Math.cos(rad) * radius;
-                  const y = Math.sin(rad) * radius;
-
-                  return (
-                    <div
-                      key={i}
-                      style={{ transform: `translate(${x}px, ${y}px)` }}
-                      className="absolute p-2 rounded-full bg-white dark:bg-[#000000] border border-[#f15e1c] text-[#f15e1c] shadow-md flex items-center justify-center group cursor-pointer hover:scale-110 transition-transform"
-                      title={node.name}
-                    >
-                      {node.icon}
+              {/* Active Stage Display Panel */}
+              <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div className="lg:col-span-7 space-y-3 text-left">
+                  <div className="flex items-center gap-2">
+                    <div className="p-2 rounded-xl bg-[#f15e1c]/10 text-[#f15e1c]">
+                      {activeStage.icon}
                     </div>
-                  );
-                })}
+                    <span className="text-xs font-mono font-bold text-[#f15e1c] uppercase tracking-wider">
+                      STAGE {activeStage.stageNum} &bull; {activeStage.title}
+                    </span>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                    {activeStage.subtitle}
+                  </h3>
+                  <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                    {activeStage.description}
+                  </p>
+                </div>
 
-                {/* Center Core Badge */}
-                <div className="absolute text-center p-3 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-sm">
-                  <span className="text-[10px] font-mono font-extrabold text-[#2e936f] block">CLOSED-LOOP</span>
-                  <span className="text-xs font-black font-display text-[#1b2823] dark:text-[#ffffff]">ENGINE</span>
+                <div className="lg:col-span-5 space-y-3 text-left">
+                  <span className="text-xs font-mono font-bold uppercase text-[#2e936f] block">
+                    Core Stage Deliverables:
+                  </span>
+                  <div className="space-y-2">
+                    {activeStage.deliverables.map((item, i) => (
+                      <div key={i} className="flex items-center gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff] p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a]">
+                        <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-
-              <span className="relative z-10 text-[11px] font-mono font-bold text-[#2e936f] pb-1">
-                CONTINUOUS FEEDBACK LOOP
-              </span>
             </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Laser Scan Beam Section Separator */}
+      <SystemScanTransition />
+
+      {/* =========================================================================
+          EDITORIAL VISUAL BREAK 2: SUPPORTING CONTENT + IMAGE 2 (TEXT LEFT, IMAGE RIGHT)
+          ========================================================================= */}
+      <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#FFFDF9] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* LEFT COLUMN: SUPPORTING CONTENT (~55% width) */}
+            <div className="lg:col-span-7 space-y-4 sm:space-y-5 text-left order-2 lg:order-1">
+              <AnimatedSection delay={0.08} className="space-y-3">
+                <Badge variant="secondary" size="md">
+                  CLOSED-LOOP PERFORMANCE
+                </Badge>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-tight">
+                  Turning Engagement Into Qualified Pipeline
+                </h2>
+                <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed">
+                  Driving digital activity is only meaningful when it translates into qualified sales opportunities. Our growth methodology connects every touchpoint—from discovery to conversion—ensuring your marketing efforts generate verifiable ROI.
+                </p>
+              </AnimatedSection>
+
+              <AnimatedSection delay={0.12} className="space-y-2">
+                <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a]">
+                  <CheckCircle2 className="w-5 h-5 text-[#2e936f] shrink-0" />
+                  <span className="text-xs sm:text-sm font-semibold text-[#1b2823] dark:text-[#ffffff]">
+                    Frictionless Landing Page Optimization &amp; Lead Journeys
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a]">
+                  <CheckCircle2 className="w-5 h-5 text-[#2e936f] shrink-0" />
+                  <span className="text-xs sm:text-sm font-semibold text-[#1b2823] dark:text-[#ffffff]">
+                    First-Party Attribution &amp; Closed-Loop Analytics
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a]">
+                  <CheckCircle2 className="w-5 h-5 text-[#2e936f] shrink-0" />
+                  <span className="text-xs sm:text-sm font-semibold text-[#1b2823] dark:text-[#ffffff]">
+                    Continuous Iteration Based on Commercial Business Signals
+                  </span>
+                </div>
+              </AnimatedSection>
+            </div>
+
+            {/* RIGHT COLUMN: IMAGE 2 (~45% width) */}
+            <div className="lg:col-span-5 w-full flex items-center justify-center order-1 lg:order-2">
+              <AnimatedSection delay={0.12} className="w-full">
+                <div className="relative w-full rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-[#fefaf5] dark:bg-[#0a0a0a] shadow-lg transition-transform duration-300 hover:scale-[1.015]">
+                  <Image
+                    src="/images/digital-marketing-main-2.png"
+                    alt="Arav Innovations Digital Marketing Growth System & Pipeline Optimization"
+                    width={1000}
+                    height={667}
+                    className="w-full h-auto max-w-full object-contain block transition-transform duration-300"
+                  />
+                </div>
+              </AnimatedSection>
+            </div>
+
           </div>
         </div>
       </section>
 
+      {/* Laser Scan Beam Section Separator */}
+      <SystemScanTransition />
+
       {/* =========================================================================
-          6. 4-STAGE GROWTH FRAMEWORK (HORIZONTAL PROGRESS TIMELINE & FEEDBACK LOOP)
+          SECTION 03 — WHAT WE ACTUALLY DO (TILT CARDS & HOVER SHIFTS)
           ========================================================================= */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1536px] mx-auto space-y-12">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              HOW WE WORK?
-            </Badge>
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              4-Stage Growth Framework
-            </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              A disciplined marketing methodology creating a continuous feedback loop from audience research to ad optimization.
-            </p>
-          </div>
-
-          {/* Horizontal Campaign Performance Timeline Progress Bar */}
-          <div className="relative max-w-4xl mx-auto hidden sm:block py-4">
-            <div className="relative w-full bg-[#f7d7b0] dark:bg-[#1a1a1a] h-2 rounded-full overflow-hidden">
-              <motion.div
-                animate={{ width: `${((activeWorkIdx + 1) / 4) * 100}%` }}
-                transition={{ duration: 0.4 }}
-                className="h-full bg-gradient-to-r from-[#f15e1c] via-[#fab60a] to-[#2e936f]"
-              />
+      <section id="what-we-do" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-[1536px] mx-auto space-y-10">
+          
+          <AnimatedSection>
+            <div className="text-center max-w-3xl mx-auto space-y-3">
+              <Badge variant="secondary" size="md">
+                CAPABILITIES
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Digital Marketing Built Around Business Outcomes
+              </h2>
+              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
+                Structured growth workstreams focused on positioning, visibility, acquisition, conversion and transparent attribution.
+              </p>
             </div>
-            <div className="flex justify-between items-center absolute inset-x-0 -top-2">
-              {howWeWorkSteps.map((step, idx) => {
-                const isActive = activeWorkIdx === idx;
-                const isPassed = idx <= activeWorkIdx;
-                return (
-                  <button
-                    key={idx}
-                    onClick={() => setActiveWorkIdx(idx)}
-                    className={cn(
-                      "w-6 h-6 rounded-full border-2 transition-all flex items-center justify-center text-[10px] font-bold cursor-pointer",
-                      isActive
-                        ? "bg-[#f15e1c] border-white text-white scale-125 shadow-md shadow-[#f15e1c]/40 ring-4 ring-[#f15e1c]/20"
-                        : isPassed
-                        ? "bg-[#2e936f] border-white text-white"
-                        : "bg-white dark:bg-[#000000] border-[#f7d7b0] dark:border-[#1a1a1a] text-[#7A6A5F]"
-                    )}
-                  >
-                    {idx + 1}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+          </AnimatedSection>
 
-          {/* 4 Cards Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            {howWeWorkSteps.map((wf, idx) => {
-              const isActive = activeWorkIdx === idx;
-              return (
-                <motion.div
-                  key={wf.step}
-                  onClick={() => setActiveWorkIdx(idx)}
-                  onMouseEnter={() => setActiveWorkIdx(idx)}
-                  whileHover={{ y: -4 }}
-                  className={cn(
-                    "rounded-3xl p-7 border-2 transition-all duration-300 cursor-pointer space-y-4 relative flex flex-col justify-between min-h-[310px]",
-                    isActive
-                      ? "bg-white dark:bg-[#000000] border-[#f15e1c] shadow-2xl ring-4 ring-[#f15e1c]/20 scale-102 z-20"
-                      : "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] opacity-70 hover:opacity-100"
-                  )}
-                >
-                  <div className="space-y-3 text-left">
-                    <div className="flex items-center justify-between">
-                      <span
-                        className={cn(
-                          "px-3 py-1 rounded-full text-xs font-mono font-black",
-                          isActive ? "bg-[#f15e1c] text-white" : "bg-[#fce3d3] text-[#f15e1c]"
-                        )}
-                      >
-                        STAGE {wf.step}
-                      </span>
-                      <span className="text-[10px] font-mono font-extrabold text-[#2e936f] uppercase">
-                        {wf.tag}
-                      </span>
+          {/* 8 Clean Service Items Grid (with 3D TiltCard Effect) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {whatWeDoServices.map((svc, idx) => (
+              <AnimatedSection key={svc.num} delay={idx * 0.05}>
+                <TiltCard maxTilt={5} scale={1.01} glare={true} className="h-full">
+                  <div className="h-full p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#f15e1c] transition-all duration-300 space-y-3 flex flex-col justify-between group relative overflow-hidden">
+                    <div className="space-y-2 text-left">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-mono font-black text-[#f15e1c]">
+                          {svc.num}
+                        </span>
+                        <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-105 group-hover:border-[#f15e1c]/40 transition-all duration-300">
+                          {svc.icon}
+                        </div>
+                      </div>
+                      <h3 className="text-base sm:text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] group-hover:translate-x-1 transition-all duration-300">
+                        {svc.title}
+                      </h3>
+                      <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
+                        {svc.description}
+                      </p>
                     </div>
 
-                    <h3 className="text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                      {wf.title}
-                    </h3>
+                    <div className="pt-2 flex items-center justify-between border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] text-[11px] font-mono font-bold text-[#f15e1c] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span>Learn More</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-300" />
+                    </div>
+                  </div>
+                </TiltCard>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
 
+      {/* Laser Scan Beam Section Separator */}
+      <SystemScanTransition />
+
+      {/* =========================================================================
+          SECTION 04 — 2026 DIGITAL GROWTH
+          ========================================================================= */}
+      <section id="2026-growth" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto space-y-10">
+          
+          <AnimatedSection>
+            <div className="text-center max-w-3xl mx-auto space-y-3">
+              <Badge variant="secondary" size="md">
+                MODERN ARCHITECTURE
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Built for How Buyers Discover Businesses Now
+              </h2>
+              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
+                No buzzword promises. Just modern discovery, authority engineering, and transparent measurement.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {modernGrowthPillars.map((plr, idx) => (
+              <AnimatedSection key={idx} delay={idx * 0.06}>
+                <TiltCard maxTilt={5} scale={1.01} className="h-full">
+                  <div className="h-full p-6 sm:p-7 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#2e936f] transition-all duration-300 space-y-3 text-left group">
+                    <div className="p-2.5 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] w-fit group-hover:scale-105 group-hover:border-[#2e936f]/40 transition-all duration-300">
+                      {plr.icon}
+                    </div>
+                    <h3 className="text-base sm:text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2e936f] group-hover:translate-x-1 transition-all duration-300">
+                      {plr.title}
+                    </h3>
                     <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
-                      {wf.description}
+                      {plr.description}
                     </p>
                   </div>
+                </TiltCard>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                  <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] text-left">
-                    <span className="text-[10px] font-mono font-bold uppercase text-[#7A6A5F] block">
-                      Deliverable Outcome:
-                    </span>
-                    <span className="text-xs font-bold text-[#f15e1c] mt-0.5 block">
-                      {wf.output}
-                    </span>
-                  </div>
+      {/* Laser Scan Beam Section Separator */}
+      <SystemScanTransition />
+
+      {/* =========================================================================
+          SECTION 05 — INDUSTRY / BUSINESS FIT
+          ========================================================================= */}
+      <section id="industries" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-[1536px] mx-auto space-y-8">
+          
+          <AnimatedSection>
+            <div className="max-w-3xl space-y-3 text-left">
+              <Badge variant="secondary" size="md">
+                APPLICABLE MARKETS
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Built Around Your Market, Not a Generic Marketing Template
+              </h2>
+              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                Every market has unique buyer behaviors and discovery channels. Our digital growth strategies are tailored around your specific commercial environment:
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.1}>
+            <div className="flex flex-wrap gap-3">
+              {applicableMarkets.map((mkt, idx) => (
+                <motion.div
+                  key={idx}
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  className="px-5 py-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] text-xs font-bold font-display text-[#1b2823] dark:text-[#ffffff] shadow-2xs flex items-center gap-2 transition-all duration-200 cursor-default"
+                >
+                  <Check className="w-3.5 h-3.5 text-[#2e936f]" />
+                  <span>{mkt}</span>
                 </motion.div>
+              ))}
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Laser Scan Beam Section Separator */}
+      <SystemScanTransition />
+
+      {/* =========================================================================
+          SECTION 06 — HOW WE WORK
+          ========================================================================= */}
+      <section id="how-we-work" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto space-y-12">
+          
+          <AnimatedSection>
+            <div className="text-center max-w-3xl mx-auto space-y-3">
+              <Badge variant="secondary" size="md">
+                METHODOLOGY
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                From Strategy to Continuous Growth
+              </h2>
+              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
+                A 5-stage disciplined approach to building and refining your digital growth system.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          {/* Progress Step Selector */}
+          <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 relative">
+            {howWeWorkProcess.map((proc, idx) => {
+              const isActive = activeProcessIdx === idx;
+              return (
+                <AnimatedSection key={proc.step} delay={idx * 0.08}>
+                  <motion.div
+                    onClick={() => setActiveProcessIdx(idx)}
+                    whileHover={{ y: -3 }}
+                    className={cn(
+                      "p-5 rounded-3xl border-2 transition-all duration-300 cursor-pointer space-y-2 text-left flex flex-col justify-between min-h-[180px]",
+                      isActive
+                        ? "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/20"
+                        : "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] opacity-80 hover:opacity-100 hover:border-[#f15e1c]/40"
+                    )}
+                  >
+                    <div className="space-y-1">
+                      <span
+                        className={cn(
+                          "text-xs font-mono font-black block transition-colors",
+                          isActive ? "text-[#f15e1c]" : "text-[#7A6A5F]"
+                        )}
+                      >
+                        {proc.step}
+                      </span>
+                      <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                        {proc.title}
+                      </h3>
+                      <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium pt-1">
+                        {proc.description}
+                      </p>
+                    </div>
+
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeProcessDot"
+                        className="h-1 w-full bg-[#f15e1c] rounded-full mt-2"
+                      />
+                    )}
+                  </motion.div>
+                </AnimatedSection>
               );
             })}
           </div>
-
-          {/* Continuous Optimization Feedback Loop Visualizer Banner */}
-          <motion.div
-            whileHover={{ scale: 1.01 }}
-            className="p-5 rounded-2xl bg-[#fce3d3] dark:bg-[#161616] border border-[#f7d7b0] text-center max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-3 shadow-sm"
-          >
-            <div className="p-2 rounded-xl bg-[#f15e1c] text-white">
-              <RefreshCw className="w-4 h-4 animate-spin-slow" />
-            </div>
-            <span className="text-xs font-mono font-extrabold text-[#f15e1c] tracking-wide">
-              CONTINUOUS FEEDBACK LOOP: 04 ANALYZE &amp; REFINE &rarr; RE-INJECTS INTO 01 RESEARCH
-            </span>
-          </motion.div>
         </div>
       </section>
 
+      {/* Laser Scan Beam Section Separator */}
+      <SystemScanTransition />
+
       {/* =========================================================================
-          7. TESTIMONIAL — QUOTE REVEAL & TRUSTWORTHY BADGES
+          SECTION 07 — PROOF / WHAT WE MEASURE
           ========================================================================= */}
-      <section ref={testimonialRef} className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-5xl mx-auto text-center space-y-8">
-          <Badge variant="secondary" size="md">
-            KIND WORDS FROM OUR CLIENTS
-          </Badge>
-          <div className="p-8 sm:p-14 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl space-y-6 relative overflow-hidden">
-            <div className="p-3 rounded-2xl bg-[#f15e1c] text-white w-fit mx-auto shadow-md">
-              <Quote className="w-6 h-6" />
+      <section id="what-we-measure" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-[1536px] mx-auto space-y-10">
+          
+          <AnimatedSection>
+            <div className="text-center max-w-3xl mx-auto space-y-3">
+              <Badge variant="secondary" size="md">
+                TRANSPARENT METRICS
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Strategy Is Better When You Can See the Work
+              </h2>
+              <p className="text-base font-mono font-bold text-[#f15e1c] uppercase tracking-wider">
+                What We Measure
+              </p>
+              <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4]">
+                We evaluate digital marketing success against commercial indicators that matter to your business.
+              </p>
             </div>
+          </AnimatedSection>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isTestimonialInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="text-xl sm:text-3xl font-display font-medium text-[#1b2823] dark:text-[#ffffff] max-w-3xl mx-auto leading-relaxed italic"
-            >
-              &ldquo;{testimonial.quote}&rdquo;
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={isTestimonialInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-              transition={{ duration: 0.5, delay: 0.35 }}
-              className="pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] space-y-1"
-            >
-              <div className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                {testimonial.author}
-              </div>
-              <div className="text-xs text-[#f15e1c] font-bold">
-                {testimonial.designation} &bull; {testimonial.company}
-              </div>
-              <div className="text-xs font-mono font-bold text-[#2e936f] pt-1">
-                Digital Marketing &amp; Brand Strategy Partner
-              </div>
-            </motion.div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {whatWeMeasureItems.map((item, idx) => (
+              <AnimatedSection key={idx} delay={idx * 0.05}>
+                <TiltCard maxTilt={5} scale={1.01} className="h-full">
+                  <div className="h-full p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#2e936f] transition-all duration-300 space-y-3 text-left group">
+                    <div className="p-2.5 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] w-fit group-hover:scale-105 group-hover:border-[#2e936f]/40 transition-all duration-300">
+                      {item.icon}
+                    </div>
+                    <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2e936f] group-hover:translate-x-0.5 transition-all duration-300">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
+                      {item.desc}
+                    </p>
+                  </div>
+                </TiltCard>
+              </AnimatedSection>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* =========================================================================
-          8. ABOUT OUR CEO — EDITORIAL LEADERSHIP PROFILE
-          ========================================================================= */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-5xl mx-auto rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-8 sm:p-14 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center text-left">
-          <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-3xl overflow-hidden border-2 border-[#f15e1c] shadow-xl bg-[#fce3d3] dark:bg-[#161616] flex items-center justify-center text-center p-6 space-y-2 flex-col">
-              <div className="w-20 h-20 rounded-full bg-[#f15e1c] text-white flex items-center justify-center text-2xl font-black font-display shadow-md">
-                AS
-              </div>
-              <div className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                Aryan Sayal
-              </div>
-              <div className="text-xs font-mono font-bold text-[#f15e1c]">
-                CEO &amp; Managing Director
-              </div>
-              <span className="text-[10px] text-[#2e936f] font-mono">Arav Innovations</span>
-            </div>
-          </div>
+      {/* Laser Scan Beam Section Separator */}
+      <SystemScanTransition />
 
-          <div className="lg:col-span-7 space-y-4">
-            <Badge variant="secondary" size="md">
-              About Our CEO
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-              Aryan Sayal
-            </h2>
-            <p className="text-xs font-mono font-extrabold text-[#f15e1c] uppercase tracking-wider">
-              CEO, Arav Innovations
-            </p>
-            <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-              Leading Arav Innovations with a vision for strategic growth, Aryan Sayal orchestrates multidisciplinary digital marketing and performance engineering squads across India and the UAE to build market-dominating brands.
-            </p>
-            <div className="pt-2">
-              <a
-                href="https://www.linkedin.com/company/aravinnovations/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#f15e1c] text-white text-xs font-bold shadow-md hover:bg-[#d44e14] transition-colors"
+      {/* =========================================================================
+          SECTION 08 — BLOGS / INSIGHTS
+          ========================================================================= */}
+      <section id="insights" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto space-y-10">
+          
+          <AnimatedSection>
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-4">
+              <div className="space-y-2 text-left">
+                <Badge variant="secondary" size="md">
+                  KNOWLEDGE &amp; STRATEGY
+                </Badge>
+                <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                  Digital Growth Insights
+                </h2>
+              </div>
+              <Link
+                href="/insights"
+                className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#f15e1c] hover:underline shrink-0 group"
               >
-                <Globe2 className="w-4 h-4" />
-                <span>Connect on LinkedIn</span>
-              </a>
+                <span>Explore All Insights</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </div>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {displayPosts.map((post, idx) => (
+              <AnimatedSection key={post.slug} delay={idx * 0.08}>
+                <TiltCard maxTilt={5} scale={1.01} className="h-full">
+                  <div className="h-full p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#f15e1c] transition-all duration-300 flex flex-col justify-between text-left space-y-4 group">
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between text-[10px] font-mono font-bold text-[#2e936f]">
+                        <span className="uppercase tracking-wider">{post.category}</span>
+                        <span>{post.publishedAt || post.dateFormatted}</span>
+                      </div>
+                      <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors line-clamp-2">
+                        {post.title}
+                      </h3>
+                      <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed line-clamp-3 font-medium">
+                        {post.summary}
+                      </p>
+                    </div>
+
+                    <div className="pt-3 border-t border-[#f7d7b0] dark:border-[#1a1a1a]">
+                      <Link
+                        href={`/insights/${post.slug}`}
+                        className="inline-flex items-center gap-1 text-xs font-mono font-bold text-[#f15e1c] group-hover:underline"
+                      >
+                        <span>Read Article</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      </Link>
+                    </div>
+                  </div>
+                </TiltCard>
+              </AnimatedSection>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* Laser Scan Beam Section Separator */}
+      <SystemScanTransition />
+
       {/* =========================================================================
-          9. FINAL CTA — MAGNETIC CTA & LIGHT SWEEP TRANSFORMATIONAL SECTION
+          SECTION 09 — FREQUENTLY ASKED QUESTIONS
           ========================================================================= */}
-      <section id="inquire" className="relative py-24 px-4 sm:px-6 lg:px-12">
-        <div className="max-w-5xl mx-auto rounded-[3rem] bg-gradient-to-br from-[#f15e1c] via-[#e55215] to-[#d8480d] text-white p-10 sm:p-16 border-2 border-[#fab60a] shadow-2xl space-y-8 text-center relative overflow-hidden">
-          {/* Light Sweep Glow Overlay */}
-          <div className="absolute inset-0 bg-radial from-white/25 via-transparent to-transparent pointer-events-none" />
-
-          <div className="relative z-10 max-w-3xl mx-auto space-y-5">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 border border-white/40 text-xs font-mono font-bold text-white">
-              <Sparkles className="w-3.5 h-3.5 text-[#ffec69]" />
-              <span>START YOUR CAMPAIGN</span>
+      <section id="faq" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-4xl mx-auto space-y-10 text-left">
+          
+          <AnimatedSection>
+            <div className="text-center space-y-3">
+              <Badge variant="secondary" size="md">
+                QUESTIONS &amp; ANSWERS
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Frequently Asked Questions
+              </h2>
             </div>
+          </AnimatedSection>
 
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-white leading-tight">
-              Let&apos;s Build What Comes Next
-            </h2>
+          <div className="space-y-4">
+            {faqItems.map((faq, idx) => {
+              const isOpen = openFaqIdx === idx;
+              return (
+                <AnimatedSection key={idx} delay={idx * 0.05}>
+                  <div className="rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/40 overflow-hidden transition-colors">
+                    <button
+                      type="button"
+                      onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
+                      className="w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer group"
+                    >
+                      <span className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
+                        {faq.question}
+                      </span>
+                      <ChevronDown
+                        className={cn(
+                          "w-5 h-5 text-[#f15e1c] transition-transform duration-300 shrink-0",
+                          isOpen && "rotate-180"
+                        )}
+                      />
+                    </button>
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="px-6 pb-6 text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium border-t border-[#f7d7b0]/40 dark:border-[#1a1a1a] pt-4"
+                        >
+                          {faq.answer}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </AnimatedSection>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
-            {/* Alternating Animated Word Display */}
-            <div className="h-12 flex items-center justify-center overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={ctaWords[currentWordIdx]}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.35 }}
-                  className="text-2xl sm:text-4xl font-extrabold font-display text-[#ffec69] uppercase tracking-wider"
-                >
-                  {ctaWords[currentWordIdx]}
+      {/* Laser Scan Beam Section Separator */}
+      <SystemScanTransition />
+
+      {/* =========================================================================
+          SECTION 10 — CONNECTED SERVICES ECOSYSTEM
+          ========================================================================= */}
+      <section className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto space-y-8 text-left">
+          
+          <AnimatedSection>
+            <div className="space-y-2">
+              <span className="text-xs font-mono font-bold text-[#f15e1c] uppercase tracking-wider block">
+                ARAV SERVICE ECOSYSTEM
+              </span>
+              <h3 className="text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                Connected Enterprise Capabilities
+              </h3>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {otherServices.map((item, idx) => (
+              <AnimatedSection key={idx} delay={idx * 0.04}>
+                <motion.div whileHover={{ y: -3 }} transition={{ duration: 0.2 }}>
+                  <Link
+                    href={item.href}
+                    className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] transition-all flex items-center justify-between group cursor-pointer"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-105 transition-transform">
+                        {item.icon}
+                      </div>
+                      <span className="text-xs font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
+                        {item.title}
+                      </span>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-[#f15e1c] group-hover:translate-x-1 transition-transform shrink-0" />
+                  </Link>
                 </motion.div>
-              </AnimatePresence>
-            </div>
-
-            <p className="text-base sm:text-lg font-bold text-white/90">
-              Kick start a project with us today
-            </p>
-          </div>
-
-          <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-            <MagneticButton href="/contact">
-              <Button3D
-                variant="primary"
-                size="lg"
-                rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />}
-                className="w-full sm:w-auto justify-center bg-white text-[#f15e1c] hover:bg-[#f7d7b0]"
-              >
-                Discuss a Project &rarr;
-              </Button3D>
-            </MagneticButton>
-            <MagneticButton href="https://api.whatsapp.com/send?phone=971521555792&text=Hello%20Arav%20Innovations%2C%20I%27d%20like%20to%20discuss%20a%20project.">
-              <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center text-white border-white/60 hover:bg-white/10">
-                Instant WhatsApp Inquiry
-              </Button3D>
-            </MagneticButton>
-          </div>
-
-          <div className="relative z-10 pt-6 border-t border-white/20 flex flex-wrap items-center justify-center gap-6 text-xs text-white/90 font-medium">
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Guaranteed ROAS Tracking
-            </span>
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> 100% Client Ad Account &amp; IP Ownership
-            </span>
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Dedicated Pods in Gurgaon &amp; Dubai
-            </span>
+              </AnimatedSection>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* Laser Scan Beam Section Separator */}
+      <SystemScanTransition />
+
       {/* =========================================================================
-          10. FOOTER FINAL BRAND MOMENT — SUBTLE CLOSING MARQUEE
+          FINAL CTA
           ========================================================================= */}
-      <footer className="py-6 border-t border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] overflow-hidden select-none">
-        <div className="flex items-center justify-center gap-6 text-xs font-mono font-extrabold text-[#7A6A5F] dark:text-[#B8ACA0] tracking-widest">
-          <span>BUILD</span>
-          <span className="text-[#f15e1c]">&bull;</span>
-          <span>GROW</span>
-          <span className="text-[#f15e1c]">&bull;</span>
-          <span>OPTIMIZE</span>
-          <span className="text-[#f15e1c]">&bull;</span>
-          <span>SCALE</span>
-        </div>
-      </footer>
+      <section id="contact" className="relative py-20 px-4 sm:px-6 lg:px-12">
+        <AnimatedSection>
+          <div className="max-w-5xl mx-auto rounded-[3rem] bg-gradient-to-br from-[#f15e1c] via-[#e55215] to-[#d8480d] text-white p-10 sm:p-16 border-2 border-[#fab60a] shadow-2xl space-y-8 text-center relative overflow-hidden">
+            <div className="relative z-10 max-w-3xl mx-auto space-y-5">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 border border-white/40 text-xs font-mono font-bold text-white">
+                <Sparkles className="w-3.5 h-3.5 text-[#ffec69]" />
+                <span>READY TO BUILD A STRONGER DIGITAL GROWTH ENGINE?</span>
+              </div>
+
+              <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-white leading-tight">
+                Turn Your Digital Presence Into a Growth System
+              </h2>
+
+              <p className="text-sm sm:text-base font-medium text-white/90 leading-relaxed">
+                Tell us where your business is today, where you want to go, and what is getting in the way. We can help turn those challenges into a practical digital growth roadmap.
+              </p>
+            </div>
+
+            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+              <Link href="/contact">
+                <MagneticButton>
+                  <Button3D
+                    variant="primary"
+                    size="lg"
+                    rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />}
+                    className="w-full sm:w-auto justify-center bg-white text-[#f15e1c] hover:bg-[#f7d7b0] hover:-translate-y-0.5 transition-all duration-300"
+                  >
+                    Build My Growth Strategy
+                  </Button3D>
+                </MagneticButton>
+              </Link>
+
+              <Link href="/services">
+                <MagneticButton>
+                  <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center text-white border-white/60 hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-300">
+                    Explore Our Services
+                  </Button3D>
+                </MagneticButton>
+              </Link>
+            </div>
+
+            <div className="relative z-10 pt-6 border-t border-white/20 flex flex-wrap items-center justify-center gap-6 text-xs text-white/90 font-medium">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> 100% Client Ownership of Brand &amp; Ad Assets
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Transparent Reporting &amp; Attribution
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Dedicated Strategy Team in Gurgaon &amp; Dubai
+              </span>
+            </div>
+          </div>
+        </AnimatedSection>
+      </section>
+
     </div>
   );
 }
 
+export default DigitalMarketingInteractivePage;
