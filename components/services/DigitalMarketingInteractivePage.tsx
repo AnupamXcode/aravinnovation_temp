@@ -441,6 +441,15 @@ const otherServices = [
   { title: "AI Portfolio", href: "/services/ai-portfolio", icon: <Cpu className="w-4 h-4 text-[#f15e1c]" /> },
 ];
 
+const keywordTags = [
+  "Brand Strategy",
+  "B2B Growth",
+  "SEO & AI Search",
+  "Paid Media",
+  "Content Engine",
+  "CRO & Lead Conversion",
+];
+
 export function DigitalMarketingInteractivePage({ service, relatedPosts }: DigitalMarketingPageProps) {
   const shouldReduceMotion = useReducedMotion();
   const [activeStageIdx, setActiveStageIdx] = React.useState<number>(0);
@@ -493,17 +502,20 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                     { label: "Digital Marketing & Brand Development" },
                   ]}
                 />
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
-                  <Sparkles className="w-3.5 h-3.5" />
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c] shadow-2xs cursor-default transition-all duration-300"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-[#f15e1c] animate-pulse" />
                   <span>DIGITAL GROWTH &amp; BRAND STRATEGY</span>
-                </div>
+                </motion.div>
               </AnimatedSection>
 
               {/* Main Headline & Supporting Text */}
               <AnimatedSection delay={0.1} className="space-y-3">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold font-display tracking-tight leading-[1.12] text-[#1b2823] dark:text-[#ffffff]">
                   Turn Digital Presence Into{" "}
-                  <span className="text-[#f15e1c]">Measurable Business Growth</span>
+                  <span className="text-[#f15e1c] bg-clip-text hover:opacity-90 transition-opacity">Measurable Business Growth</span>
                 </h1>
 
                 <p className="text-sm sm:text-base lg:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-2xl">
@@ -518,7 +530,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                     <Button3D
                       variant="primary"
                       size="md"
-                      rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />}
+                      rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1.5" />}
                       className="shadow-md shadow-[#f15e1c]/20 hover:-translate-y-0.5 transition-all duration-300"
                     >
                       Build My Growth Strategy
@@ -535,26 +547,31 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                 </Link>
               </AnimatedSection>
 
-              {/* Small Keywords Bar */}
-              <AnimatedSection delay={0.2} className="text-xs font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center gap-2 flex-wrap pt-1">
-                <span>Brand Strategy</span>
-                <span className="text-[#f15e1c]">&bull;</span>
-                <span>B2B Growth</span>
-                <span className="text-[#f15e1c]">&bull;</span>
-                <span>SEO</span>
-                <span className="text-[#f15e1c]">&bull;</span>
-                <span>Paid Media</span>
-                <span className="text-[#f15e1c]">&bull;</span>
-                <span>Content</span>
-                <span className="text-[#f15e1c]">&bull;</span>
-                <span>Conversion</span>
+              {/* Interactive Keywords Bar */}
+              <AnimatedSection delay={0.2} className="pt-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  {keywordTags.map((tag, i) => (
+                    <motion.span
+                      key={i}
+                      whileHover={{ scale: 1.06, y: -2 }}
+                      transition={{ duration: 0.2 }}
+                      className="px-2.5 py-1 rounded-lg bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[11px] font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] hover:border-[#f15e1c]/40 transition-all duration-200 cursor-default"
+                    >
+                      {tag}
+                    </motion.span>
+                  ))}
+                </div>
               </AnimatedSection>
             </div>
 
-            {/* RIGHT COLUMN: DUAL-THEME HERO INFOGRAPHIC */}
+            {/* RIGHT COLUMN: DUAL-THEME HERO INFOGRAPHIC WITH HOVER TILT */}
             <div className="lg:col-span-6 xl:col-span-7 w-full flex items-center justify-center">
               <AnimatedSection delay={0.15} className="w-full">
-                <div className="relative w-full flex items-center justify-center">
+                <motion.div
+                  whileHover={{ scale: 1.015 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  className="relative w-full flex items-center justify-center rounded-2xl overflow-hidden border border-[#f7d7b0]/60 dark:border-[#1a1a1a] shadow-lg group"
+                >
                   {/* Light Mode Image */}
                   <Image
                     src="/images/digital-marketing-light.png"
@@ -562,7 +579,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                     width={1200}
                     height={800}
                     priority
-                    className="w-full h-auto max-w-full object-contain dark:hidden transition-transform duration-300 hover:scale-[1.01]"
+                    className="w-full h-auto max-w-full object-contain dark:hidden transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                   {/* Dark Mode Image */}
                   <Image
@@ -571,9 +588,9 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                     width={1200}
                     height={800}
                     priority
-                    className="w-full h-auto max-w-full object-contain hidden dark:block transition-transform duration-300 hover:scale-[1.01]"
+                    className="w-full h-auto max-w-full object-contain hidden dark:block transition-transform duration-500 group-hover:scale-[1.02]"
                   />
-                </div>
+                </motion.div>
               </AnimatedSection>
             </div>
           </div>
@@ -593,15 +610,19 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
             {/* LEFT COLUMN: IMAGE 1 (~45% width) */}
             <div className="lg:col-span-5 w-full flex items-center justify-center">
               <AnimatedSection delay={0.08} className="w-full">
-                <div className="relative w-full rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-[#fefaf5] dark:bg-[#0a0a0a] shadow-lg transition-transform duration-300 hover:scale-[1.015]">
+                <motion.div
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  transition={{ duration: 0.4 }}
+                  className="relative w-full rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-[#fefaf5] dark:bg-[#0a0a0a] shadow-lg hover:shadow-2xl hover:border-[#f15e1c]/50 transition-all duration-300 group"
+                >
                   <Image
                     src="/images/digital-marketing-main-1.png"
                     alt="Arav Innovations Digital Marketing Strategy & Ecosystem Overview"
                     width={1000}
                     height={667}
-                    className="w-full h-auto max-w-full object-contain block transition-transform duration-300"
+                    className="w-full h-auto max-w-full object-contain block transition-transform duration-500 group-hover:scale-[1.02]"
                   />
-                </div>
+                </motion.div>
               </AnimatedSection>
             </div>
 
@@ -621,35 +642,44 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
 
               <AnimatedSection delay={0.16}>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-                  <div className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] space-y-1">
-                    <div className="flex items-center gap-1.5 text-xs font-bold font-mono text-[#f15e1c]">
+                  <motion.div
+                    whileHover={{ y: -3, scale: 1.02 }}
+                    className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/40 space-y-1 transition-all duration-200 cursor-default group"
+                  >
+                    <div className="flex items-center gap-1.5 text-xs font-bold font-mono text-[#f15e1c] group-hover:translate-x-0.5 transition-transform">
                       <Search className="w-4 h-4" />
                       <span>SEARCH &amp; AI</span>
                     </div>
                     <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-normal">
                       Structured entity &amp; topical authority hubs.
                     </p>
-                  </div>
+                  </motion.div>
 
-                  <div className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] space-y-1">
-                    <div className="flex items-center gap-1.5 text-xs font-bold font-mono text-[#2e936f]">
+                  <motion.div
+                    whileHover={{ y: -3, scale: 1.02 }}
+                    className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#2e936f]/40 space-y-1 transition-all duration-200 cursor-default group"
+                  >
+                    <div className="flex items-center gap-1.5 text-xs font-bold font-mono text-[#2e936f] group-hover:translate-x-0.5 transition-transform">
                       <Target className="w-4 h-4" />
                       <span>POSITIONING</span>
                     </div>
                     <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-normal">
                       Clear ICP messaging &amp; brand positioning.
                     </p>
-                  </div>
+                  </motion.div>
 
-                  <div className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] space-y-1">
-                    <div className="flex items-center gap-1.5 text-xs font-bold font-mono text-[#fab60a]">
+                  <motion.div
+                    whileHover={{ y: -3, scale: 1.02 }}
+                    className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#fab60a]/40 space-y-1 transition-all duration-200 cursor-default group"
+                  >
+                    <div className="flex items-center gap-1.5 text-xs font-bold font-mono text-[#fab60a] group-hover:translate-x-0.5 transition-transform">
                       <Megaphone className="w-4 h-4" />
                       <span>ACQUISITION</span>
                     </div>
                     <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-normal">
                       High-intent B2B paid &amp; organic search.
                     </p>
-                  </div>
+                  </motion.div>
                 </div>
               </AnimatedSection>
             </div>
@@ -690,16 +720,16 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
               <AnimatedSection key={cap.num} delay={idx * 0.08}>
                 <TiltCard maxTilt={6} scale={1.01} glare={true} className="h-full">
                   <div className="h-full p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#f15e1c] transition-all duration-300 space-y-3 flex flex-col justify-between group relative overflow-hidden">
-                    <div className="space-y-2">
+                    <div className="space-y-2 text-left">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-mono font-black text-[#f15e1c] group-hover:scale-105 transition-transform">
+                        <span className="text-xs font-mono font-black text-[#f15e1c] group-hover:scale-110 transition-transform">
                           {cap.num}
                         </span>
-                        <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-105 group-hover:border-[#f15e1c]/40 transition-all duration-300">
+                        <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-110 group-hover:rotate-6 group-hover:border-[#f15e1c]/40 transition-all duration-300">
                           {cap.icon}
                         </div>
                       </div>
-                      <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] group-hover:translate-x-0.5 transition-all duration-300">
+                      <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] group-hover:translate-x-1 transition-all duration-300">
                         {cap.title}
                       </h3>
                       <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
@@ -721,7 +751,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
       <SystemScanTransition />
 
       {/* =========================================================================
-          SECTION 02 — DIGITAL GROWTH ENGINE
+          SECTION 02 — DIGITAL GROWTH ENGINE (SMOOTH SLIDING TAB INTERACTION)
           ========================================================================= */}
       <section id="growth-system" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
         <div className="max-w-[1536px] mx-auto space-y-10">
@@ -744,59 +774,85 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
           <AnimatedSection delay={0.1}>
             <div className="rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl p-6 sm:p-10 space-y-8">
               
-              {/* Stage Selector Bar */}
-              <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
-                {growthEngineStages.map((stg, idx) => (
-                  <button
-                    key={stg.id}
-                    type="button"
-                    onClick={() => setActiveStageIdx(idx)}
-                    className={cn(
-                      "py-3 px-3 rounded-2xl text-xs font-extrabold font-display transition-all duration-250 cursor-pointer flex items-center justify-center gap-2",
-                      activeStageIdx === idx
-                        ? "bg-[#f15e1c] text-white shadow-md shadow-[#f15e1c]/20 scale-102"
-                        : "bg-white dark:bg-[#000000] text-[#4a5c55] dark:text-[#d3eee4] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]"
-                    )}
-                  >
-                    <span className="font-mono text-[10px] opacity-80">{stg.stageNum}.</span>
-                    <span>{stg.title}</span>
-                  </button>
-                ))}
+              {/* Stage Selector Bar with Animated Background Pill */}
+              <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 relative">
+                {growthEngineStages.map((stg, idx) => {
+                  const isSelected = activeStageIdx === idx;
+                  return (
+                    <button
+                      key={stg.id}
+                      type="button"
+                      onClick={() => setActiveStageIdx(idx)}
+                      onMouseEnter={() => setActiveStageIdx(idx)}
+                      className={cn(
+                        "relative py-3 px-3 rounded-2xl text-xs font-extrabold font-display transition-all duration-250 cursor-pointer flex items-center justify-center gap-2 select-none z-10",
+                        isSelected
+                          ? "text-white shadow-md"
+                          : "bg-white dark:bg-[#000000] text-[#4a5c55] dark:text-[#d3eee4] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:bg-[#f15e1c]/5"
+                      )}
+                    >
+                      {isSelected && (
+                        <motion.div
+                          layoutId="activeEngineTab"
+                          className="absolute inset-0 bg-[#f15e1c] rounded-2xl shadow-md shadow-[#f15e1c]/20 z-[-1]"
+                          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                        />
+                      )}
+                      <span className="font-mono text-[10px] opacity-80">{stg.stageNum}.</span>
+                      <span>{stg.title}</span>
+                    </button>
+                  );
+                })}
               </div>
 
-              {/* Active Stage Display Panel */}
-              <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div className="lg:col-span-7 space-y-3 text-left">
-                  <div className="flex items-center gap-2">
-                    <div className="p-2 rounded-xl bg-[#f15e1c]/10 text-[#f15e1c]">
-                      {activeStage.icon}
-                    </div>
-                    <span className="text-xs font-mono font-bold text-[#f15e1c] uppercase tracking-wider">
-                      STAGE {activeStage.stageNum} &bull; {activeStage.title}
-                    </span>
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                    {activeStage.subtitle}
-                  </h3>
-                  <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                    {activeStage.description}
-                  </p>
-                </div>
-
-                <div className="lg:col-span-5 space-y-3 text-left">
-                  <span className="text-xs font-mono font-bold uppercase text-[#2e936f] block">
-                    Core Stage Deliverables:
-                  </span>
-                  <div className="space-y-2">
-                    {activeStage.deliverables.map((item, i) => (
-                      <div key={i} className="flex items-center gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff] p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a]">
-                        <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
-                        <span>{item}</span>
+              {/* Active Stage Display Panel with Animated Stage Transition */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeStage.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+                >
+                  <div className="lg:col-span-7 space-y-3 text-left">
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 rounded-xl bg-[#f15e1c]/10 text-[#f15e1c]">
+                        {activeStage.icon}
                       </div>
-                    ))}
+                      <span className="text-xs font-mono font-bold text-[#f15e1c] uppercase tracking-wider">
+                        STAGE {activeStage.stageNum} &bull; {activeStage.title}
+                      </span>
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                      {activeStage.subtitle}
+                    </h3>
+                    <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                      {activeStage.description}
+                    </p>
                   </div>
-                </div>
-              </div>
+
+                  <div className="lg:col-span-5 space-y-3 text-left">
+                    <span className="text-xs font-mono font-bold uppercase text-[#2e936f] block">
+                      Core Stage Deliverables:
+                    </span>
+                    <div className="space-y-2">
+                      {activeStage.deliverables.map((item, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, x: -8 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: i * 0.06 }}
+                          className="flex items-center gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff] p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#2e936f]/40 transition-colors"
+                        >
+                          <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
+                          <span>{item}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </AnimatedSection>
         </div>
@@ -827,39 +883,60 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
               </AnimatedSection>
 
               <AnimatedSection delay={0.12} className="space-y-2">
-                <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a]">
+                <motion.div whileHover={{ x: 4 }} className="flex items-center gap-3 p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#2e936f]/40 transition-all">
                   <CheckCircle2 className="w-5 h-5 text-[#2e936f] shrink-0" />
                   <span className="text-xs sm:text-sm font-semibold text-[#1b2823] dark:text-[#ffffff]">
                     Frictionless Landing Page Optimization &amp; Lead Journeys
                   </span>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a]">
+                </motion.div>
+                <motion.div whileHover={{ x: 4 }} className="flex items-center gap-3 p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#2e936f]/40 transition-all">
                   <CheckCircle2 className="w-5 h-5 text-[#2e936f] shrink-0" />
                   <span className="text-xs sm:text-sm font-semibold text-[#1b2823] dark:text-[#ffffff]">
                     First-Party Attribution &amp; Closed-Loop Analytics
                   </span>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a]">
+                </motion.div>
+                <motion.div whileHover={{ x: 4 }} className="flex items-center gap-3 p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#2e936f]/40 transition-all">
                   <CheckCircle2 className="w-5 h-5 text-[#2e936f] shrink-0" />
                   <span className="text-xs sm:text-sm font-semibold text-[#1b2823] dark:text-[#ffffff]">
                     Continuous Iteration Based on Commercial Business Signals
                   </span>
-                </div>
+                </motion.div>
               </AnimatedSection>
             </div>
 
             {/* RIGHT COLUMN: IMAGE 2 (~45% width) */}
             <div className="lg:col-span-5 w-full flex items-center justify-center order-1 lg:order-2">
               <AnimatedSection delay={0.12} className="w-full">
-                <div className="relative w-full rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-[#fefaf5] dark:bg-[#0a0a0a] shadow-lg transition-transform duration-300 hover:scale-[1.015]">
+                <motion.div
+                  whileHover={{ scale: 1.025, y: -3 }}
+                  transition={{ duration: 0.4 }}
+                  className="relative w-full rounded-2xl sm:rounded-3xl border-2 border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] overflow-hidden bg-[#fefaf5] dark:bg-[#0a0a0a] shadow-lg hover:shadow-[0_0_35px_rgba(241,94,28,0.45)] dark:hover:shadow-[0_0_45px_rgba(241,94,28,0.55)] transition-all duration-500 group"
+                >
                   <Image
                     src="/images/digital-marketing-main-2.png"
                     alt="Arav Innovations Digital Marketing Growth System & Pipeline Optimization"
                     width={1000}
                     height={667}
-                    className="w-full h-auto max-w-full object-contain block transition-transform duration-300"
+                    className="w-full h-auto max-w-full object-contain block transition-transform duration-500 group-hover:scale-[1.03]"
                   />
-                </div>
+
+                  {/* Radiant Outer Glowing Rectangle Border on Hover */}
+                  <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#f15e1c] rounded-2xl sm:rounded-3xl pointer-events-none transition-colors duration-300 shadow-[inset_0_0_20px_rgba(241,94,28,0.25)]" />
+
+                  {/* Laser Beam Line Covering the Entire Rectangle on Hover */}
+                  <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <motion.div
+                      animate={{ x: ["-100%", "200%"] }}
+                      transition={{ repeat: Infinity, duration: 1.6, ease: "linear" }}
+                      className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-[#f15e1c] to-transparent opacity-90 blur-[1px] shadow-[0_0_25px_#f15e1c]"
+                    />
+                    <motion.div
+                      animate={{ y: ["-100%", "200%"] }}
+                      transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
+                      className="absolute inset-x-0 h-1/2 bg-gradient-to-b from-transparent via-[#f15e1c]/40 to-transparent blur-[2px] shadow-[0_0_20px_#f15e1c]"
+                    />
+                  </div>
+                </motion.div>
               </AnimatedSection>
             </div>
 
@@ -895,13 +972,13 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
             {whatWeDoServices.map((svc, idx) => (
               <AnimatedSection key={svc.num} delay={idx * 0.05}>
                 <TiltCard maxTilt={5} scale={1.01} glare={true} className="h-full">
-                  <div className="h-full p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#f15e1c] transition-all duration-300 space-y-3 flex flex-col justify-between group relative overflow-hidden">
+                  <div className="h-full p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#f15e1c] hover:shadow-lg transition-all duration-300 space-y-3 flex flex-col justify-between group relative overflow-hidden">
                     <div className="space-y-2 text-left">
                       <div className="flex items-center justify-between">
                         <span className="text-xs font-mono font-black text-[#f15e1c]">
                           {svc.num}
                         </span>
-                        <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-105 group-hover:border-[#f15e1c]/40 transition-all duration-300">
+                        <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-110 group-hover:rotate-3 group-hover:border-[#f15e1c]/40 transition-all duration-300">
                           {svc.icon}
                         </div>
                       </div>
@@ -915,7 +992,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
 
                     <div className="pt-2 flex items-center justify-between border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] text-[11px] font-mono font-bold text-[#f15e1c] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <span>Learn More</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-300" />
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-2 transition-transform duration-300" />
                     </div>
                   </div>
                 </TiltCard>
@@ -952,8 +1029,8 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
             {modernGrowthPillars.map((plr, idx) => (
               <AnimatedSection key={idx} delay={idx * 0.06}>
                 <TiltCard maxTilt={5} scale={1.01} className="h-full">
-                  <div className="h-full p-6 sm:p-7 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#2e936f] transition-all duration-300 space-y-3 text-left group">
-                    <div className="p-2.5 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] w-fit group-hover:scale-105 group-hover:border-[#2e936f]/40 transition-all duration-300">
+                  <div className="h-full p-6 sm:p-7 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#2e936f] hover:shadow-lg transition-all duration-300 space-y-3 text-left group">
+                    <div className="p-2.5 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] w-fit group-hover:scale-110 group-hover:-rotate-3 group-hover:border-[#2e936f]/40 transition-all duration-300">
                       {plr.icon}
                     </div>
                     <h3 className="text-base sm:text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2e936f] group-hover:translate-x-1 transition-all duration-300">
@@ -998,10 +1075,10 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
               {applicableMarkets.map((mkt, idx) => (
                 <motion.div
                   key={idx}
-                  whileHover={{ scale: 1.03, y: -2 }}
-                  className="px-5 py-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] text-xs font-bold font-display text-[#1b2823] dark:text-[#ffffff] shadow-2xs flex items-center gap-2 transition-all duration-200 cursor-default"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  className="px-5 py-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:bg-[#f15e1c]/5 text-xs font-bold font-display text-[#1b2823] dark:text-[#ffffff] hover:text-[#f15e1c] shadow-2xs flex items-center gap-2 transition-all duration-200 cursor-default group"
                 >
-                  <Check className="w-3.5 h-3.5 text-[#2e936f]" />
+                  <Check className="w-3.5 h-3.5 text-[#2e936f] group-hover:scale-110 transition-transform" />
                   <span>{mkt}</span>
                 </motion.div>
               ))}
@@ -1014,7 +1091,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
       <SystemScanTransition />
 
       {/* =========================================================================
-          SECTION 06 — HOW WE WORK
+          SECTION 06 — HOW WE WORK (PROGRESSIVE PROCESS PIPELINE)
           ========================================================================= */}
       <section id="how-we-work" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
         <div className="max-w-[1536px] mx-auto space-y-12">
@@ -1041,12 +1118,13 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                 <AnimatedSection key={proc.step} delay={idx * 0.08}>
                   <motion.div
                     onClick={() => setActiveProcessIdx(idx)}
-                    whileHover={{ y: -3 }}
+                    onMouseEnter={() => setActiveProcessIdx(idx)}
+                    whileHover={{ y: -4, scale: 1.02 }}
                     className={cn(
-                      "p-5 rounded-3xl border-2 transition-all duration-300 cursor-pointer space-y-2 text-left flex flex-col justify-between min-h-[180px]",
+                      "p-5 rounded-3xl border-2 transition-all duration-300 cursor-pointer space-y-2 text-left flex flex-col justify-between min-h-[180px] select-none",
                       isActive
                         ? "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/20"
-                        : "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] opacity-80 hover:opacity-100 hover:border-[#f15e1c]/40"
+                        : "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] opacity-80 hover:opacity-100 hover:border-[#f15e1c]"
                     )}
                   >
                     <div className="space-y-1">
@@ -1070,6 +1148,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                       <motion.div
                         layoutId="activeProcessDot"
                         className="h-1 w-full bg-[#f15e1c] rounded-full mt-2"
+                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
                       />
                     )}
                   </motion.div>
@@ -1110,11 +1189,11 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
             {whatWeMeasureItems.map((item, idx) => (
               <AnimatedSection key={idx} delay={idx * 0.05}>
                 <TiltCard maxTilt={5} scale={1.01} className="h-full">
-                  <div className="h-full p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#2e936f] transition-all duration-300 space-y-3 text-left group">
-                    <div className="p-2.5 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] w-fit group-hover:scale-105 group-hover:border-[#2e936f]/40 transition-all duration-300">
+                  <div className="h-full p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#2e936f] hover:shadow-lg transition-all duration-300 space-y-3 text-left group">
+                    <div className="p-2.5 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] w-fit group-hover:scale-110 group-hover:border-[#2e936f]/40 transition-all duration-300">
                       {item.icon}
                     </div>
-                    <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2e936f] group-hover:translate-x-0.5 transition-all duration-300">
+                    <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2e936f] group-hover:translate-x-1 transition-all duration-300">
                       {item.title}
                     </h3>
                     <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
@@ -1152,7 +1231,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                 className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#f15e1c] hover:underline shrink-0 group"
               >
                 <span>Explore All Insights</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
               </Link>
             </div>
           </AnimatedSection>
@@ -1161,7 +1240,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
             {displayPosts.map((post, idx) => (
               <AnimatedSection key={post.slug} delay={idx * 0.08}>
                 <TiltCard maxTilt={5} scale={1.01} className="h-full">
-                  <div className="h-full p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#f15e1c] transition-all duration-300 flex flex-col justify-between text-left space-y-4 group">
+                  <div className="h-full p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#f15e1c] hover:shadow-xl transition-all duration-300 flex flex-col justify-between text-left space-y-4 group">
                     <div className="space-y-3">
                       <div className="flex items-center justify-between text-[10px] font-mono font-bold text-[#2e936f]">
                         <span className="uppercase tracking-wider">{post.category}</span>
@@ -1181,7 +1260,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                         className="inline-flex items-center gap-1 text-xs font-mono font-bold text-[#f15e1c] group-hover:underline"
                       >
                         <span>Read Article</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                       </Link>
                     </div>
                   </div>
@@ -1196,7 +1275,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
       <SystemScanTransition />
 
       {/* =========================================================================
-          SECTION 09 — FREQUENTLY ASKED QUESTIONS
+          SECTION 09 — FREQUENTLY ASKED QUESTIONS (SMOOTH ACCORDION)
           ========================================================================= */}
       <section id="faq" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
         <div className="max-w-4xl mx-auto space-y-10 text-left">
@@ -1217,11 +1296,14 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
               const isOpen = openFaqIdx === idx;
               return (
                 <AnimatedSection key={idx} delay={idx * 0.05}>
-                  <div className="rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/40 overflow-hidden transition-colors">
+                  <motion.div
+                    whileHover={{ scale: 1.005 }}
+                    className="rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/60 overflow-hidden transition-all shadow-xs"
+                  >
                     <button
                       type="button"
                       onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
-                      className="w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer group"
+                      className="w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer group select-none"
                     >
                       <span className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
                         {faq.question}
@@ -1246,7 +1328,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                         </motion.div>
                       )}
                     </AnimatePresence>
-                  </div>
+                  </motion.div>
                 </AnimatedSection>
               );
             })}
@@ -1277,20 +1359,20 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {otherServices.map((item, idx) => (
               <AnimatedSection key={idx} delay={idx * 0.04}>
-                <motion.div whileHover={{ y: -3 }} transition={{ duration: 0.2 }}>
+                <motion.div whileHover={{ y: -4, scale: 1.01 }} transition={{ duration: 0.2 }}>
                   <Link
                     href={item.href}
-                    className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] transition-all flex items-center justify-between group cursor-pointer"
+                    className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-105 transition-transform">
+                      <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-110 group-hover:border-[#f15e1c]/40 transition-all">
                         {item.icon}
                       </div>
                       <span className="text-xs font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
                         {item.title}
                       </span>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-[#f15e1c] group-hover:translate-x-1 transition-transform shrink-0" />
+                    <ArrowRight className="w-4 h-4 text-[#f15e1c] group-hover:translate-x-1.5 transition-transform shrink-0" />
                   </Link>
                 </motion.div>
               </AnimatedSection>
@@ -1310,7 +1392,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
           <div className="max-w-5xl mx-auto rounded-[3rem] bg-gradient-to-br from-[#f15e1c] via-[#e55215] to-[#d8480d] text-white p-10 sm:p-16 border-2 border-[#fab60a] shadow-2xl space-y-8 text-center relative overflow-hidden">
             <div className="relative z-10 max-w-3xl mx-auto space-y-5">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 border border-white/40 text-xs font-mono font-bold text-white">
-                <Sparkles className="w-3.5 h-3.5 text-[#ffec69]" />
+                <Sparkles className="w-3.5 h-3.5 text-[#ffec69] animate-spin" style={{ animationDuration: "6s" }} />
                 <span>READY TO BUILD A STRONGER DIGITAL GROWTH ENGINE?</span>
               </div>
 
@@ -1329,7 +1411,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                   <Button3D
                     variant="primary"
                     size="lg"
-                    rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />}
+                    rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1.5" />}
                     className="w-full sm:w-auto justify-center bg-white text-[#f15e1c] hover:bg-[#f7d7b0] hover:-translate-y-0.5 transition-all duration-300"
                   >
                     Build My Growth Strategy
