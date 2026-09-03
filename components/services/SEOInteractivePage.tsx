@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   motion,
   AnimatePresence,
@@ -50,6 +51,12 @@ interface SEOPageProps {
 }
 
 // -----------------------------------------------------------------------------
+// IMAGE CONSTANTS
+// -----------------------------------------------------------------------------
+const SEO_HERO_IMAGE = "/images/seo-hero.png";
+const SEO_SECOND_IMAGE = "/images/seo-secondary.png";
+
+// -----------------------------------------------------------------------------
 // System Scan Transition Line
 // -----------------------------------------------------------------------------
 function SystemScanTransition() {
@@ -58,7 +65,7 @@ function SystemScanTransition() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <div ref={ref} className="relative w-full h-px my-6 overflow-hidden pointer-events-none select-none">
+    <div ref={ref} className="relative w-full h-px my-4 overflow-hidden pointer-events-none select-none">
       <div className="w-full h-full bg-[#F7D7B0]" />
       {!shouldReduceMotion && (
         <motion.div
@@ -141,7 +148,7 @@ const seoSystemNodes = [
 ];
 
 // -----------------------------------------------------------------------------
-// 6 SEO Dimensions (Section 4)
+// 6 SEO Dimensions (Section 5)
 // -----------------------------------------------------------------------------
 const seoDimensions = [
   { num: "01", title: "TECHNICAL ACCESS", desc: "Crawlability, indexing, site architecture, rendering, and technical health.", icon: <Code className="w-5 h-5 text-[#F15E1C]" /> },
@@ -153,7 +160,7 @@ const seoDimensions = [
 ];
 
 // -----------------------------------------------------------------------------
-// Technical SEO Architecture Layers (Section 5)
+// Technical SEO Architecture Layers (Section 6)
 // -----------------------------------------------------------------------------
 const techSeoLayers = [
   { layer: "01", stage: "DISCOVER", title: "Sitemap & URL Discovery", desc: "XML sitemaps, robots.txt directives, and clean URL structure allowing search bots to discover new content.", tags: ["Robots.txt", "XML Sitemaps", "URL Structure"] },
@@ -165,7 +172,7 @@ const techSeoLayers = [
 ];
 
 // -----------------------------------------------------------------------------
-// Search Intent Categories (Section 6)
+// Search Intent Categories (Section 7)
 // -----------------------------------------------------------------------------
 const searchIntentCategories = [
   {
@@ -199,7 +206,7 @@ const searchIntentCategories = [
 ];
 
 // -----------------------------------------------------------------------------
-// Entity Graph Nodes (Section 7)
+// Entity Graph Nodes (Section 8)
 // -----------------------------------------------------------------------------
 const entityGraphNodes = [
   { id: "center", label: "ARAV / BRAND ENTITY", type: "core", desc: "The central business entity, core authority, and verified organizational identity." },
@@ -212,7 +219,7 @@ const entityGraphNodes = [
 ];
 
 // -----------------------------------------------------------------------------
-// Search Context Selector Data (Section 9)
+// Search Context Selector Data (Section 10)
 // -----------------------------------------------------------------------------
 const searchContexts = [
   {
@@ -253,7 +260,7 @@ const searchContexts = [
 ];
 
 // -----------------------------------------------------------------------------
-// Continuous SEO Loop Stages (Section 12)
+// Continuous SEO Loop Stages (Section 13)
 // -----------------------------------------------------------------------------
 const continuousSeoLoop = [
   { step: "01", name: "OBSERVE", desc: "Monitor search crawl patterns, ranking movements, and algorithm shifts." },
@@ -266,7 +273,7 @@ const continuousSeoLoop = [
 ];
 
 // -----------------------------------------------------------------------------
-// SEO Engagement Models (Section 13)
+// SEO Engagement Models (Section 14)
 // -----------------------------------------------------------------------------
 const seoEngagementModels = [
   {
@@ -323,9 +330,6 @@ const seoFaqData = [
 export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
   const [activeDiscoveryPath, setActiveDiscoveryPath] = React.useState<number>(0);
   const [activeSystemNode, setActiveSystemNode] = React.useState<number>(0);
-  const [activeDimension, setActiveDimension] = React.useState<number>(0);
-  const [activeTechLayer, setActiveTechLayer] = React.useState<number>(0);
-  const [activeIntentIdx, setActiveIntentIdx] = React.useState<number>(0);
   const [activeEntityId, setActiveEntityId] = React.useState<string>("center");
   const [activeContextId, setActiveContextId] = React.useState<string>("enterprise");
   const [openFaqIdx, setOpenFaqIdx] = React.useState<number | null>(0);
@@ -355,7 +359,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
     <div className="min-h-screen bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300 overflow-x-hidden selection:bg-[#F15E1C]/20 selection:text-[#F15E1C]">
       
       {/* Breadcrumb Navigation */}
-      <div className="relative z-10 w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-3 sm:pt-4 pb-1 sm:pb-2">
+      <div className="relative z-10 w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 pb-1">
         <Breadcrumb
           items={[
             { label: "Services", href: "/services" },
@@ -365,30 +369,30 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       </div>
 
       {/* =====================================================================
-          1. HERO — MAKE SEARCH THE VISUAL STORY
+          1. HERO — MAIN HERO VISUAL (IMAGE 1: SEO_HERO_IMAGE)
           ===================================================================== */}
       <section className="relative z-10 w-full border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-2 sm:pt-4 pb-8 sm:pb-12 md:pb-16 lg:pb-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 pt-2 sm:pt-4 pb-8 sm:pb-12 md:pb-14">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
-            {/* Hero Copy */}
-            <div className="lg:col-span-6 space-y-6">
+            {/* Hero Copy (Left Column - 50%) */}
+            <div className="lg:col-span-6 space-y-5">
               <div className="inline-flex items-center gap-2">
                 <Badge variant="outline" className="border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3.5 py-1.5 font-semibold tracking-wider text-xs rounded-full shadow-xs">
                   SEARCH INTELLIGENCE • ORGANIC VISIBILITY
                 </Badge>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-[1.12]">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-[1.12]">
                 Be Found When Your Customers Are Searching.
               </h1>
 
-              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl leading-relaxed">
+              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl leading-relaxed font-normal">
                 We build search strategies that connect technical foundations, search intent, content, authority and measurement — helping businesses become easier to discover, understand and choose across modern search experiences.
               </p>
 
               {/* CTAs */}
-              <div className="flex flex-wrap items-center gap-4 pt-2">
+              <div className="flex flex-wrap items-center gap-4 pt-1">
                 <Link href="/contact">
                   <Button3D variant="primary" size="lg" className="flex items-center gap-2 font-semibold bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] hover:opacity-95 transition-all">
                     Build My Search Strategy
@@ -403,8 +407,8 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
               </div>
 
               {/* Supporting Keywords Bar */}
-              <div className="pt-4 border-t border-[#F7D7B0]">
-                <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 font-semibold mb-2.5">
+              <div className="pt-3 border-t border-[#F7D7B0]">
+                <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 font-semibold mb-2">
                   Core SEO Disciplines
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -416,72 +420,35 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
                     "AI Search",
                     "Analytics",
                   ].map((tag, idx) => (
-                    <motion.span
+                    <span
                       key={idx}
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      className="text-xs px-3.5 py-1.5 rounded-lg bg-gray-100 dark:bg-[#1b2823] text-gray-700 dark:text-gray-300 border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F15E1C] hover:text-[#FFFFFF] transition-all duration-200 cursor-pointer shadow-xs font-medium"
+                      className="text-xs px-3 py-1 rounded-lg bg-gray-100 dark:bg-[#1b2823] text-gray-700 dark:text-gray-300 border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F15E1C] hover:text-[#FFFFFF] transition-all duration-200 cursor-pointer shadow-xs font-medium"
                     >
                       {tag}
-                    </motion.span>
+                    </span>
                   ))}
                 </div>
               </div>
             </div>
 
-            {/* HERO VISUAL — REAL SEARCH ECOSYSTEM DIAGRAM */}
-            <div className="lg:col-span-6 w-full">
+            {/* HERO VISUAL — IMAGE 1 (Right Column - 50%) */}
+            <div className="lg:col-span-6 w-full flex items-center justify-center">
               <TiltCard className="w-full">
-                <div className="relative rounded-2xl p-6 bg-white dark:bg-[#1b2823] border border-[#F7D7B0] shadow-xl overflow-hidden group hover:border-[#F15E1C] transition-all duration-300">
-                  
-                  <div className="flex items-center justify-between pb-4 border-b border-[#F7D7B0]">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#F15E1C] animate-pulse" />
-                      <span className="text-xs font-bold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
-                        Search Ecosystem Pipeline
-                      </span>
-                    </div>
-                    <Badge variant="subtle" className="text-[10px] bg-[#2E936F]/10 text-[#2E936F] font-semibold">
-                      Search Architecture
-                    </Badge>
-                  </div>
-
-                  {/* Connected Search Pipeline Visual */}
-                  <div className="my-6 space-y-3">
-                    {[
-                      { step: "01", label: "USER QUERY", detail: "High-intent search term entered", icon: <Search className="w-4 h-4 text-[#F15E1C]" /> },
-                      { step: "02", label: "SEARCH INTENT", detail: "Query classification & intent mapping", icon: <Target className="w-4 h-4 text-[#2E936F]" /> },
-                      { step: "03", label: "CRAWL & RENDER", detail: "Technical indexing & schema parsing", icon: <Code className="w-4 h-4 text-[#FAB60A]" /> },
-                      { step: "04", label: "ENTITY & CONTENT", detail: "Topical depth & brand authority match", icon: <Network className="w-4 h-4 text-[#F15E1C]" /> },
-                      { step: "05", label: "DISCOVERY & ACTION", detail: "Qualified organic visit & business conversion", icon: <Zap className="w-4 h-4 text-[#2E936F]" /> },
-                    ].map((pipe, idx) => (
-                      <motion.div
-                        key={idx}
-                        whileHover={{ x: 4, borderColor: "#F15E1C" }}
-                        className="p-3 rounded-xl bg-[#F7D7B0]/20 border border-[#F7D7B0] flex items-center justify-between transition-all"
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="text-[10px] font-mono font-bold text-[#F15E1C] px-2 py-0.5 rounded bg-white dark:bg-[#1b2823] border border-[#F7D7B0]">
-                            {pipe.step}
-                          </span>
-                          <div>
-                            <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff] block">{pipe.label}</span>
-                            <span className="text-[11px] text-gray-500 dark:text-gray-400">{pipe.detail}</span>
-                          </div>
-                        </div>
-                        <div className="p-1.5 rounded-lg bg-white dark:bg-[#1b2823]">
-                          {pipe.icon}
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  <div className="pt-3 border-t border-[#F7D7B0] text-center">
-                    <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 italic">
-                      “Making your business discoverable, understandable, and trusted across search engines.”
-                    </p>
-                  </div>
-
-                </div>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  className="relative w-full overflow-hidden group flex items-center justify-center"
+                >
+                  <Image
+                    priority
+                    src={SEO_HERO_IMAGE}
+                    alt="Search intelligence and team organic discovery workflow"
+                    width={800}
+                    height={600}
+                    className="w-full h-auto object-contain max-h-[480px] rounded-2xl group-hover:scale-[1.02] transition-transform duration-300 drop-shadow-lg"
+                  />
+                </motion.div>
               </TiltCard>
             </div>
 
@@ -494,23 +461,23 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       {/* =====================================================================
           2. UNIQUE SIGNATURE SECTION — SEARCH HAS CHANGED
           ===================================================================== */}
-      <section id="search-discovery-map" className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      <section id="search-discovery-map" className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
               SEARCH DISCOVERY MAP
             </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
               Search Has Changed. Your SEO Should Too.
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
               People no longer discover businesses through one search behaviour alone. Search now spans traditional results, local discovery, images, video, AI-assisted experiences and branded research journeys.
             </p>
           </div>
 
           {/* Interactive Discovery Ecosystem Grid */}
-          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg space-y-8">
+          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-2xl p-6 sm:p-8 shadow-lg space-y-6">
             
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 border-b border-[#F7D7B0] pb-6">
               {searchDiscoveryPaths.map((path, idx) => {
@@ -522,17 +489,17 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
                     onMouseEnter={() => setHoverDiscoveryIdx(idx)}
                     onMouseLeave={() => setHoverDiscoveryIdx(null)}
                     className={cn(
-                      "p-4 rounded-xl text-left transition-all duration-200 border cursor-pointer flex flex-col justify-between h-32 transform",
+                      "p-3.5 rounded-xl text-left transition-all duration-200 border cursor-pointer flex flex-col justify-between h-28 transform",
                       isActive
-                        ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-1 scale-102"
-                        : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 hover:-translate-y-0.5"
+                        ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-0.5"
+                        : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
                     )}
                   >
                     <div className="flex items-center justify-between w-full">
                       <span className={cn("text-[10px] font-mono font-bold", isActive ? "text-[#FFEC69]" : "text-[#F15E1C]")}>
                         PATH 0{idx + 1}
                       </span>
-                      <div className={cn("p-1.5 rounded-lg transition-colors", isActive ? "bg-[#FFFFFF] text-[#F15E1C]" : "bg-[#F7D7B0]/30 text-[#F15E1C]")}>
+                      <div className={cn("p-1 rounded-lg transition-colors", isActive ? "bg-[#FFFFFF] text-[#F15E1C]" : "bg-[#F7D7B0]/30 text-[#F15E1C]")}>
                         {path.icon}
                       </div>
                     </div>
@@ -550,27 +517,27 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentDiscoveryPath.id}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
+                exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
-                className="p-6 sm:p-8 rounded-xl border-2 border-[#F15E1C] bg-[#F7D7B0]/20 shadow-sm space-y-4"
+                className="p-6 sm:p-7 rounded-xl border-2 border-[#F15E1C] bg-[#F7D7B0]/20 shadow-xs space-y-3"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="p-3 rounded-xl bg-[#F15E1C] text-[#FFFFFF] shadow-xs">
+                    <div className="p-2.5 rounded-xl bg-[#F15E1C] text-[#FFFFFF] shadow-xs">
                       {currentDiscoveryPath.icon}
                     </div>
                     <div>
                       <span className="text-xs font-mono font-bold text-[#F15E1C]">DISCOVERY SURFACE &bull; {currentDiscoveryPath.name}</span>
-                      <h3 className="text-xl sm:text-2xl font-bold text-[#1b2823] dark:text-[#ffffff]">{currentDiscoveryPath.title}</h3>
+                      <h3 className="text-xl font-bold text-[#1b2823] dark:text-[#ffffff]">{currentDiscoveryPath.title}</h3>
                     </div>
                   </div>
                   <Badge variant="subtle" className="text-xs bg-[#F15E1C]/10 text-[#F15E1C] font-semibold">
                     {currentDiscoveryPath.focus}
                   </Badge>
                 </div>
-                <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
+                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
                   {currentDiscoveryPath.desc}
                 </p>
               </motion.div>
@@ -585,22 +552,22 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       {/* =====================================================================
           3. THE SEO SYSTEM — CONNECTED NETWORK
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
               THE SEARCH ARCHITECTURE
             </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
               SEO Is a System, Not a Single Task.
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
               Hover over any stage in the search engine pipeline to explore how technical foundations, intent mapping, content depth, and measurement form a continuous organic growth engine.
             </p>
           </div>
 
-          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-2xl p-6 sm:p-8 shadow-lg space-y-8">
+          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-2xl p-6 sm:p-8 shadow-lg space-y-6">
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 border-b border-[#F7D7B0] pb-6">
               {seoSystemNodes.map((node, idx) => {
                 const isActive = displayedSystemIdx === idx;
@@ -611,9 +578,9 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
                     onMouseEnter={() => setHoverSystemIdx(idx)}
                     onMouseLeave={() => setHoverSystemIdx(null)}
                     className={cn(
-                      "p-3 rounded-xl text-left transition-all duration-200 border cursor-pointer flex flex-col justify-between h-28 transform",
+                      "p-3 rounded-xl text-left transition-all duration-200 border cursor-pointer flex flex-col justify-between h-26 transform",
                       isActive
-                        ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-1"
+                        ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-0.5"
                         : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
                     )}
                   >
@@ -631,15 +598,13 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentSystemNode.step}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
+                exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
-                className="p-6 rounded-xl border-2 border-[#2E936F] bg-[#F7D7B0]/20 space-y-2"
+                className="p-5 rounded-xl border-2 border-[#2E936F] bg-[#F7D7B0]/20 space-y-1.5"
               >
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono font-bold text-[#2E936F]">STAGE {currentSystemNode.step} &bull; {currentSystemNode.label}</span>
-                </div>
+                <span className="text-xs font-mono font-bold text-[#2E936F]">STAGE {currentSystemNode.step} &bull; {currentSystemNode.label}</span>
                 <h3 className="text-xl font-bold text-[#1b2823] dark:text-[#ffffff]">{currentSystemNode.title}</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed font-medium">{currentSystemNode.desc}</p>
               </motion.div>
@@ -652,43 +617,110 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       <SystemScanTransition />
 
       {/* =====================================================================
-          4. WHAT WE ACTUALLY OPTIMIZE — 6 DIMENSIONS
+          4. SECONDARY SEO STRATEGY SECTION — IMAGE 2 (SEO_SECOND_IMAGE)
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* Left Column: IMAGE 2 (Desktop Left, Mobile Top) */}
+            <div className="lg:col-span-6 w-full flex items-center justify-center">
+              <TiltCard className="w-full">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="relative w-full overflow-hidden group flex items-center justify-center"
+                >
+                  <Image
+                    loading="lazy"
+                    src={SEO_SECOND_IMAGE}
+                    alt="SEO search performance and optimization strategy visual"
+                    width={800}
+                    height={600}
+                    className="w-full h-auto object-contain max-h-[440px] rounded-2xl group-hover:scale-[1.02] transition-transform duration-300 drop-shadow-md"
+                  />
+                </motion.div>
+              </TiltCard>
+            </div>
+
+            {/* Right Column: Strategic Narrative */}
+            <div className="lg:col-span-6 space-y-5">
+              <Badge variant="outline" className="border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+                SEARCH ENGINE ENGINE &bull; STRATEGY
+              </Badge>
+
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-tight">
+                From Search Visibility to Business Visibility.
+              </h2>
+
+              <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                Organic discovery is not about targeting disconnected keyphrases. Arav Innovations builds a connected search engine strategy that links technical access directly to user search intent, topical depth, entity signals, and downstream business outcomes.
+              </p>
+
+              <div className="space-y-3 pt-2">
+                {[
+                  { title: "Technical Access & Crawlability", detail: "Clean indexing directives and server response optimization." },
+                  { title: "Intent Category Alignment", detail: "Matching content to informational, commercial, and transactional queries." },
+                  { title: "Topical & Entity Authority", detail: "Structured data schemas and entity signals for search systems." },
+                  { title: "Measurement & Refinement", detail: "Attributing organic traffic to real landing page conversion events." },
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-3 p-3 rounded-xl bg-[#F7D7B0]/20 border border-[#F7D7B0]">
+                    <CheckCircle2 className="w-4 h-4 text-[#F15E1C] shrink-0 mt-0.5" />
+                    <div>
+                      <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff] block">{item.title}</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400">{item.detail}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          5. WHAT WE ACTUALLY OPTIMIZE — 6 DIMENSIONS
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
               SEARCH READINESS
             </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
               What Makes a Business Search-Ready?
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
               Six core dimensions that determine whether search engines can crawl, index, understand, and value your website.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {seoDimensions.map((dim, idx) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {seoDimensions.map((dim) => (
               <motion.div
                 key={dim.num}
-                whileHover={{ scale: 1.02, y: -4 }}
+                whileHover={{ scale: 1.01, y: -3 }}
                 className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 hover:shadow-lg transition-all duration-300 shadow-xs flex flex-col justify-between group cursor-pointer"
               >
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-bold text-[#F15E1C] px-2.5 py-1 rounded bg-[#F7D7B0]/40 group-hover:bg-[#F15E1C] group-hover:text-[#FFFFFF] transition-colors">
+                    <span className="text-xs font-mono font-bold text-[#F15E1C] px-2.5 py-0.5 rounded bg-[#F7D7B0]/40 group-hover:bg-[#F15E1C] group-hover:text-[#FFFFFF] transition-colors">
                       DIMENSION {dim.num}
                     </span>
-                    <div className="p-2 rounded-lg bg-[#F7D7B0]/30 group-hover:bg-[#F15E1C]/10 transition-colors">
+                    <div className="p-1.5 rounded-lg bg-[#F7D7B0]/30 group-hover:bg-[#F15E1C]/10 transition-colors">
                       {dim.icon}
                     </div>
                   </div>
                   <h3 className="text-lg font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">
                     {dim.title}
                   </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                  <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">
                     {dim.desc}
                   </p>
                 </div>
@@ -702,45 +734,45 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       <SystemScanTransition />
 
       {/* =====================================================================
-          5. TECHNICAL SEO — LAYERED ARCHITECTURE
+          6. TECHNICAL SEO — LAYERED ARCHITECTURE
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
               TECHNICAL ARCHITECTURE
             </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
               Before Search Can Understand You, It Has to Reach You.
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
               Technical SEO ensures search bots can crawl your URLs, render dynamic content, parse structured schemas, and index key pages without technical friction.
             </p>
           </div>
 
           {/* Layered Technical Stack */}
-          <div className="space-y-4 max-w-4xl mx-auto">
-            {techSeoLayers.map((layer, idx) => (
+          <div className="space-y-3 max-w-4xl mx-auto">
+            {techSeoLayers.map((layer) => (
               <motion.div
                 key={layer.layer}
-                whileHover={{ scale: 1.01, x: 4 }}
-                className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 transition-all duration-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group cursor-pointer"
+                whileHover={{ scale: 1.01, x: 3 }}
+                className="p-5 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 transition-all duration-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group cursor-pointer"
               >
                 <div className="flex items-center gap-4">
-                  <div className="p-3 rounded-xl bg-[#F15E1C] text-[#FFFFFF] font-mono font-bold text-xs shrink-0">
+                  <div className="p-2.5 rounded-xl bg-[#F15E1C] text-[#FFFFFF] font-mono font-bold text-xs shrink-0">
                     LAYER {layer.layer}
                   </div>
                   <div>
                     <span className="text-xs font-mono font-bold text-[#F15E1C] block">{layer.stage} PIPELINE</span>
-                    <h3 className="text-lg font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">{layer.title}</h3>
-                    <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">{layer.desc}</p>
+                    <h3 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">{layer.title}</h3>
+                    <p className="text-xs text-gray-600 dark:text-gray-300 mt-0.5">{layer.desc}</p>
                   </div>
                 </div>
 
                 <div className="flex flex-wrap gap-1.5 shrink-0">
                   {layer.tags.map((tag, tIdx) => (
-                    <span key={tIdx} className="text-[10px] font-mono font-semibold px-2 py-1 rounded bg-[#F7D7B0]/40 text-[#1b2823] dark:text-[#ffffff]">
+                    <span key={tIdx} className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-[#F7D7B0]/40 text-[#1b2823] dark:text-[#ffffff]">
                       {tag}
                     </span>
                   ))}
@@ -755,40 +787,40 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       <SystemScanTransition />
 
       {/* =====================================================================
-          6. SEARCH INTENT + CONTENT
+          7. SEARCH INTENT + CONTENT
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
               SEARCH INTENT ALIGNMENT
             </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
               Don't Start With Keywords. Start With the Question.
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
               Search engines reward pages that fulfill specific search intent categories with the correct content structure and user value.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {searchIntentCategories.map((cat, idx) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {searchIntentCategories.map((cat) => (
               <motion.div
                 key={cat.type}
-                whileHover={{ y: -4 }}
-                className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#2E936F] hover:bg-[#F7D7B0]/20 transition-all duration-300 shadow-xs space-y-4 flex flex-col justify-between group cursor-pointer"
+                whileHover={{ y: -3 }}
+                className="p-5 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#2E936F] hover:bg-[#F7D7B0]/20 transition-all duration-300 shadow-xs space-y-3 flex flex-col justify-between group cursor-pointer"
               >
-                <div className="space-y-3">
+                <div className="space-y-2.5">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-mono font-bold text-[#2E936F] uppercase">{cat.type} INTENT</span>
-                    <div className="p-2 rounded-lg bg-[#F7D7B0]/30">{cat.icon}</div>
+                    <div className="p-1.5 rounded-lg bg-[#F7D7B0]/30">{cat.icon}</div>
                   </div>
                   <h3 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2E936F] transition-colors">{cat.query}</h3>
                   <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{cat.desc}</p>
                 </div>
 
-                <div className="pt-3 border-t border-[#F7D7B0]">
+                <div className="pt-2.5 border-t border-[#F7D7B0]">
                   <span className="text-[10px] font-mono font-bold text-[#F15E1C] uppercase block">Content Response:</span>
                   <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{cat.response}</p>
                 </div>
@@ -802,25 +834,25 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       <SystemScanTransition />
 
       {/* =====================================================================
-          7. TOPICAL AUTHORITY / ENTITY GRAPH
+          8. TOPICAL AUTHORITY / ENTITY GRAPH
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
               ENTITY GRAPH ARCHITECTURE
             </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
               Build a Web of Meaning Around Your Expertise.
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
               Select or hover over any node in the entity graph to examine how topics, expertise, services, and citations establish brand credibility in modern search algorithms.
             </p>
           </div>
 
-          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-3xl p-8 sm:p-12 shadow-lg space-y-8 max-w-5xl mx-auto">
-            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-3xl p-6 sm:p-10 shadow-lg space-y-6 max-w-4xl mx-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5">
               {entityGraphNodes.map((node) => {
                 const isActive = activeEntityId === node.id;
                 return (
@@ -828,9 +860,9 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
                     key={node.id}
                     onClick={() => setActiveEntityId(node.id)}
                     className={cn(
-                      "p-3 rounded-xl text-center transition-all duration-200 border cursor-pointer flex flex-col justify-center h-24 transform",
+                      "p-2.5 rounded-xl text-center transition-all duration-200 border cursor-pointer flex flex-col justify-center h-22 transform",
                       isActive
-                        ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-1"
+                        ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-0.5"
                         : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
                     )}
                   >
@@ -845,14 +877,14 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentEntity.id}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
+                exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
-                className="p-6 rounded-2xl border-2 border-[#FAB60A] bg-[#F7D7B0]/20 text-center space-y-2"
+                className="p-5 rounded-2xl border-2 border-[#FAB60A] bg-[#F7D7B0]/20 text-center space-y-1.5"
               >
                 <span className="text-xs font-mono font-bold text-[#FAB60A] uppercase">{currentEntity.label} ENTITY NODE</span>
-                <p className="text-base text-gray-600 dark:text-gray-300 font-medium leading-relaxed max-w-2xl mx-auto">{currentEntity.desc}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300 font-medium leading-relaxed max-w-xl mx-auto">{currentEntity.desc}</p>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -863,51 +895,51 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       <SystemScanTransition />
 
       {/* =====================================================================
-          8. AI SEARCH VISIBILITY
+          9. AI SEARCH VISIBILITY
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
               GENERATIVE &amp; AI SEARCH
             </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
               Search Is Becoming More Conversational.
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
               Modern search experiences increasingly feature AI-generated answers and conversational discovery. We optimize entity signals and structured information so search models synthesize your brand accurately.
             </p>
           </div>
 
-          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-3xl p-8 sm:p-12 shadow-lg space-y-8 max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 text-center">
+          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-3xl p-6 sm:p-10 shadow-lg space-y-6 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-5 gap-2.5 text-center">
               {[
                 { title: "USER QUESTION", desc: "Natural Language Query" },
                 { title: "AI SEARCH ENGINE", desc: "LLM Parsing & Retrieval" },
-                { title: "ENTITY & SOURCE", desc: "JSON-LD & Citation Verification" },
+                { title: "ENTITY & SOURCE", desc: "JSON-LD Citation" },
                 { title: "AI SUMMARY", desc: "Synthesized Answer" },
-                { title: "SITE VISIT", desc: "Direct Business Engagement" },
+                { title: "SITE VISIT", desc: "Business Engagement" },
               ].map((item, idx) => (
-                <div key={idx} className="p-4 rounded-xl bg-[#F7D7B0]/20 border border-[#F7D7B0] space-y-1">
+                <div key={idx} className="p-3.5 rounded-xl bg-[#F7D7B0]/20 border border-[#F7D7B0] space-y-1">
                   <span className="text-xs font-mono font-bold text-[#F15E1C] block">{item.title}</span>
                   <span className="text-[10px] text-gray-500 dark:text-gray-400 block">{item.desc}</span>
                 </div>
               ))}
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-[#F7D7B0]">
-              <div className="p-4 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] text-left space-y-1">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-[#F7D7B0]">
+              <div className="p-3.5 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] text-left space-y-0.5">
                 <span className="text-xs font-bold text-[#F15E1C] uppercase block">Structured Data</span>
                 <p className="text-xs text-gray-600 dark:text-gray-300">Explicit schemas allowing models to parse entity facts.</p>
               </div>
 
-              <div className="p-4 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] text-left space-y-1">
+              <div className="p-3.5 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] text-left space-y-0.5">
                 <span className="text-xs font-bold text-[#2E936F] uppercase block">Entity Authority</span>
                 <p className="text-xs text-gray-600 dark:text-gray-300">Consistent brand signals across editorial sources.</p>
               </div>
 
-              <div className="p-4 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] text-left space-y-1">
+              <div className="p-3.5 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] text-left space-y-0.5">
                 <span className="text-xs font-bold text-[#FAB60A] uppercase block">Topic Coverage</span>
                 <p className="text-xs text-gray-600 dark:text-gray-300">Comprehensive answers matching natural queries.</p>
               </div>
@@ -920,25 +952,25 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       <SystemScanTransition />
 
       {/* =====================================================================
-          9. SEARCH CONTEXT SELECTOR
+          10. SEARCH CONTEXT SELECTOR
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
               SEARCH CONTEXT SELECTOR
             </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
               Tailored Strategy for Your Environment.
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
               Select your business model to examine how search priorities change across enterprise, local, e-commerce, B2B, and content-led architectures.
             </p>
           </div>
 
-          <div className="max-w-5xl mx-auto space-y-8">
-            <div className="flex overflow-x-auto gap-3 justify-center pb-2 scrollbar-none">
+          <div className="max-w-4xl mx-auto space-y-6">
+            <div className="flex overflow-x-auto gap-2.5 justify-center pb-1 scrollbar-none">
               {searchContexts.map((ctx) => {
                 const isActive = activeContextId === ctx.id;
                 return (
@@ -946,7 +978,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
                     key={ctx.id}
                     onClick={() => setActiveContextId(ctx.id)}
                     className={cn(
-                      "px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all duration-200 cursor-pointer shrink-0 border transform",
+                      "px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all duration-200 cursor-pointer shrink-0 border transform",
                       isActive
                         ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-0.5"
                         : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
@@ -961,26 +993,26 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentContext.id}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
+                exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
-                className="p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] shadow-xl space-y-6"
+                className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] shadow-lg space-y-5"
               >
                 <div>
                   <span className="text-xs font-mono font-bold text-[#F15E1C]">{currentContext.name} ARCHITECTURE</span>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-[#1b2823] dark:text-[#ffffff]">{currentContext.title}</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#1b2823] dark:text-[#ffffff]">{currentContext.title}</h3>
                 </div>
 
-                <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
+                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
                   {currentContext.desc}
                 </p>
 
-                <div className="pt-4 border-t border-[#F7D7B0]">
+                <div className="pt-3 border-t border-[#F7D7B0]">
                   <span className="text-xs font-bold uppercase tracking-wider text-[#2E936F] block mb-2">Key Focus Areas</span>
                   <div className="flex flex-wrap gap-2">
                     {currentContext.focus.map((f, idx) => (
-                      <span key={idx} className="text-xs px-3.5 py-1.5 rounded-lg bg-[#F7D7B0]/30 border border-[#F7D7B0] text-[#1b2823] dark:text-[#ffffff] font-semibold">
+                      <span key={idx} className="text-xs px-3 py-1 rounded-lg bg-[#F7D7B0]/30 border border-[#F7D7B0] text-[#1b2823] dark:text-[#ffffff] font-semibold">
                         {f}
                       </span>
                     ))}
@@ -996,24 +1028,24 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       <SystemScanTransition />
 
       {/* =====================================================================
-          10. AUTHORITY WITHOUT SPAM
+          11. SUSTAINABLE AUTHORITY WITHOUT SPAM
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
               SUSTAINABLE GROWTH
             </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
               Authority Is Earned, Not Manufactured.
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
               We focus on building genuine domain authority through valuable content, digital PR, industry citations, and brand mentions rather than manipulative link schemes.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
             {[
               { title: "Useful Content", desc: "Publishing original, expert insights that industry peers naturally reference.", icon: <BookOpen className="w-5 h-5 text-[#F15E1C]" /> },
               { title: "Digital PR & Mentions", desc: "Earning brand mentions in reputable industry publications and trade press.", icon: <Share2 className="w-5 h-5 text-[#2E936F]" /> },
@@ -1022,10 +1054,10 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
             ].map((item, idx) => (
               <motion.div
                 key={idx}
-                whileHover={{ scale: 1.03, y: -4 }}
-                className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 transition-all duration-300 shadow-xs space-y-3 group cursor-pointer"
+                whileHover={{ scale: 1.02, y: -3 }}
+                className="p-5 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 transition-all duration-300 shadow-xs space-y-2.5 group cursor-pointer"
               >
-                <div className="p-2.5 rounded-xl bg-[#F7D7B0]/30 w-fit">{item.icon}</div>
+                <div className="p-2 rounded-xl bg-[#F7D7B0]/30 w-fit">{item.icon}</div>
                 <h3 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">{item.title}</h3>
                 <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{item.desc}</p>
               </motion.div>
@@ -1038,25 +1070,25 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       <SystemScanTransition />
 
       {/* =====================================================================
-          11. MEASUREMENT SYSTEM
+          12. WHAT WE MEASURE
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
-              PERFORMANCE ATTRIBUTION
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              WHAT WE MEASURE
             </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
               Measure What Search Is Doing For the Business.
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
               We connect technical search console metrics directly to landing page performance, organic conversion events, and downstream business outcomes.
             </p>
           </div>
 
-          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-3xl p-8 sm:p-12 shadow-lg max-w-5xl mx-auto text-center space-y-8">
-            <div className="grid grid-cols-1 sm:grid-cols-6 gap-3 items-center">
+          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-3xl p-6 sm:p-10 shadow-lg max-w-4xl mx-auto text-center space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-6 gap-2.5 items-center">
               {[
                 { title: "VISIBILITY", desc: "Search Console Impressions" },
                 { title: "ENGAGEMENT", desc: "Query Clicks & CTR" },
@@ -1065,7 +1097,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
                 { title: "CONVERSION", desc: "Form & Goal Events" },
                 { title: "BUSINESS OUTCOME", desc: "Qualified Inquiries" },
               ].map((item, idx) => (
-                <div key={idx} className="p-3.5 rounded-xl bg-[#F7D7B0]/20 border border-[#F7D7B0] space-y-1">
+                <div key={idx} className="p-3 rounded-xl bg-[#F7D7B0]/20 border border-[#F7D7B0] space-y-1">
                   <span className="text-xs font-mono font-bold text-[#2E936F] block">{item.title}</span>
                   <span className="text-[10px] text-gray-500 dark:text-gray-400 block font-medium">{item.desc}</span>
                 </div>
@@ -1079,36 +1111,36 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       <SystemScanTransition />
 
       {/* =====================================================================
-          12. CONTINUOUS SEO LOOP — UNIQUE VERTICAL SCROLL-DRIVEN TIMELINE
+          13. CONTINUOUS SEO LOOP — UNIQUE VERTICAL SCROLL-DRIVEN TIMELINE
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+            <Badge variant="outline" className="mb-2.5 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
               CONTINUOUS SEO LOOP
             </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
               Continuous Search Engineering Loop.
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
               Search optimization is an iterative cycle of observation, technical diagnosis, strategic prioritization, execution, and continuous refinement.
             </p>
           </div>
 
           {/* UNIQUE VERTICAL SCROLL-DRIVEN TIMELINE */}
-          <div className="relative max-w-5xl mx-auto py-4">
+          <div className="relative max-w-4xl mx-auto py-2">
             
             {/* Central Vertical Line for Desktop / Left-aligned for Mobile */}
-            <div className="absolute left-4 md:left-1/2 top-4 bottom-16 w-0.5 -translate-x-1/2 bg-[#F7D7B0]" />
+            <div className="absolute left-4 md:left-1/2 top-4 bottom-14 w-0.5 -translate-x-1/2 bg-[#F7D7B0]" />
 
-            <div className="space-y-12 md:space-y-16">
+            <div className="space-y-10 md:space-y-12">
               {continuousSeoLoop.map((stage, idx) => {
                 const isEven = idx % 2 === 0;
                 return (
                   <motion.div
                     key={stage.step}
-                    initial={{ opacity: 0.4, y: 20 }}
+                    initial={{ opacity: 0.4, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: false, amount: 0.4 }}
                     transition={{ duration: 0.3, ease: "easeOut" }}
@@ -1118,24 +1150,24 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
                     )}
                   >
                     {/* Content Card (Alternating on Desktop: Left / Right, Single Column Left-Aligned on Mobile) */}
-                    <div className={cn("w-full md:w-1/2 pl-12 md:pl-0", isEven ? "md:pr-12 md:text-right" : "md:pl-12 md:text-left")}>
-                      <div className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] group-hover:border-[#F15E1C] group-hover:bg-[#F7D7B0]/20 group-hover:shadow-lg group-hover:-translate-y-1 transition-all duration-300 shadow-xs space-y-2">
+                    <div className={cn("w-full md:w-1/2 pl-12 md:pl-0", isEven ? "md:pr-10 md:text-right" : "md:pl-10 md:text-left")}>
+                      <div className="p-5 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] group-hover:border-[#F15E1C] group-hover:bg-[#F7D7B0]/20 group-hover:shadow-md group-hover:-translate-y-0.5 transition-all duration-300 shadow-xs space-y-1.5">
                         <div className={cn("flex items-center gap-2", isEven ? "md:justify-end" : "md:justify-start")}>
                           <span className="text-xs font-mono font-bold text-[#F15E1C] px-2.5 py-0.5 rounded bg-[#F7D7B0]/40 group-hover:bg-[#F15E1C] group-hover:text-[#FFFFFF] transition-colors">
                             STAGE {stage.step}
                           </span>
                         </div>
-                        <h3 className="text-xl font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">
+                        <h3 className="text-lg font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">
                           {stage.name}
                         </h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                        <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">
                           {stage.desc}
                         </p>
                       </div>
                     </div>
 
                     {/* Numbered Node Indicator in Center (Desktop) or Left (Mobile) */}
-                    <div className="absolute left-4 md:left-1/2 top-6 -translate-x-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#1b2823] border-2 border-[#F7D7B0] group-hover:border-[#F15E1C] group-hover:bg-[#F15E1C] flex items-center justify-center transition-all duration-300 shadow-sm z-10">
+                    <div className="absolute left-4 md:left-1/2 top-5 -translate-x-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#1b2823] border-2 border-[#F7D7B0] group-hover:border-[#F15E1C] group-hover:bg-[#F15E1C] flex items-center justify-center transition-all duration-300 shadow-xs z-10">
                       <span className="text-[11px] font-mono font-bold text-[#F15E1C] group-hover:text-[#FFFFFF]">
                         {stage.step}
                       </span>
@@ -1148,10 +1180,10 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
               })}
             </div>
 
-            {/* Subtle Return Loop Connector Path back to Stage 01 OBSERVE */}
-            <div className="relative pt-10 flex flex-col items-center text-center">
-              <div className="w-0.5 h-10 bg-gradient-to-b from-[#F7D7B0] to-[#F15E1C]" />
-              <div className="px-4 py-2 rounded-full border border-[#F15E1C] bg-[#F7D7B0]/30 text-[#F15E1C] font-mono font-bold text-xs flex items-center gap-2 shadow-xs mt-2">
+            {/* Return Loop Connector Path back to Stage 01 OBSERVE */}
+            <div className="relative pt-8 flex flex-col items-center text-center">
+              <div className="w-0.5 h-8 bg-gradient-to-b from-[#F7D7B0] to-[#F15E1C]" />
+              <div className="px-4 py-1.5 rounded-full border border-[#F15E1C] bg-[#F7D7B0]/30 text-[#F15E1C] font-mono font-bold text-xs flex items-center gap-2 shadow-xs mt-1.5">
                 <RefreshCw className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: "6s" }} />
                 <span>CYCLE RETURNS TO 01 OBSERVE</span>
               </div>
@@ -1165,36 +1197,36 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       <SystemScanTransition />
 
       {/* =====================================================================
-          13. SEO ENGAGEMENT MODELS
+          14. SEO ENGAGEMENT MODELS
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
               ENGAGEMENT STRUCTURES
             </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
               Different Search Problems Need Different SEO Engagements.
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
               We structure SEO partnerships around your current technical health, scale, and organic discovery goals.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {seoEngagementModels.map((model, idx) => (
               <motion.div
                 key={idx}
-                whileHover={{ y: -4 }}
-                className="p-8 rounded-3xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-xl transition-all duration-300 space-y-6 flex flex-col justify-between group cursor-pointer"
+                whileHover={{ y: -3 }}
+                className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-xl transition-all duration-300 space-y-5 flex flex-col justify-between group cursor-pointer"
               >
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <span className="text-xs font-mono font-bold text-[#F15E1C] uppercase block">{model.name}</span>
-                  <h3 className="text-2xl font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">{model.title}</h3>
+                  <h3 className="text-xl font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">{model.title}</h3>
                   <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{model.desc}</p>
 
-                  <div className="pt-4 border-t border-[#F7D7B0] space-y-2">
+                  <div className="pt-3 border-t border-[#F7D7B0] space-y-1.5">
                     <span className="text-[10px] font-mono font-bold text-[#2E936F] uppercase block">Core Deliverables</span>
                     {model.deliverables.map((del, dIdx) => (
                       <div key={dIdx} className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-300">
@@ -1205,7 +1237,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
                   </div>
                 </div>
 
-                <div className="pt-4">
+                <div className="pt-2">
                   <Link href="/contact">
                     <Button3D variant="secondary" size="md" className="w-full bg-[#2E936F] text-[#FFFFFF] border-[#2E936F]">
                       Discuss {model.name}
@@ -1222,21 +1254,21 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       <SystemScanTransition />
 
       {/* =====================================================================
-          14. SEO DIAGNOSTIC ASSESSMENT CTA
+          15. SEO DIAGNOSTIC ASSESSMENT CTA
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-          <div className="bg-[#F7D7B0]/20 border border-[#F7D7B0] rounded-3xl p-8 sm:p-12 text-center max-w-4xl mx-auto space-y-6">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-[#F7D7B0]/20 border border-[#F7D7B0] rounded-3xl p-8 sm:p-10 text-center max-w-3xl mx-auto space-y-5">
             <Badge variant="outline" className="border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
               SEO ASSESSMENT
             </Badge>
             <h2 className="text-3xl sm:text-4xl font-bold text-[#1b2823] dark:text-[#ffffff]">
               Not Sure Where Search Is Breaking?
             </h2>
-            <p className="text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed font-normal">
               Start with a structured view of your technical health, search intent, content architecture, visibility and conversion path.
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-1">
               <Link href="/contact">
                 <Button3D variant="primary" size="lg" className="bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C]">
                   Request an SEO Assessment
@@ -1255,32 +1287,32 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       <SystemScanTransition />
 
       {/* =====================================================================
-          15. WHAT WE LOOK FOR — DIAGNOSTIC FRAMEWORK
+          16. WHAT WE LOOK FOR — DIAGNOSTIC FRAMEWORK
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
               DIAGNOSTIC CRITERIA
             </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
               What We Look For in Every Audit.
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
               Our evaluation isolates specific technical, structural, and content gaps across four critical diagnostic areas.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
             {[
               { title: "Technical Friction", desc: "Indexing errors, canonical loops, rendering delays, and Core Web Vitals issues." },
               { title: "Intent Gaps", desc: "Pages ranking for commercial terms without proper conversion or value response." },
               { title: "Content Thinness", desc: "Orphaned topics, shallow articles, and missing internal linking loops." },
               { title: "Schema Deficits", desc: "Missing JSON-LD structured data and unverified brand entity signals." },
             ].map((diag, idx) => (
-              <div key={idx} className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] space-y-2">
-                <CheckCircle2 className="w-5 h-5 text-[#F15E1C]" />
+              <div key={idx} className="p-5 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] space-y-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#F15E1C]" />
                 <h4 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff]">{diag.title}</h4>
                 <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{diag.desc}</p>
               </div>
@@ -1293,39 +1325,39 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       <SystemScanTransition />
 
       {/* =====================================================================
-          16. INSIGHTS & BLOGS
+          17. INSIGHTS & BLOGS
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
               KNOWLEDGE BASE
             </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
               Search Intelligence &amp; Insights.
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
               Read published analysis on technical SEO, search intent, entity visibility, and organic growth strategies.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {articles.map((post) => (
               <Link key={post.slug} href={`/insights/${post.slug}`} className="group block">
-                <motion.div whileHover={{ y: -4 }} className="h-full p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-lg transition-all duration-300 shadow-xs flex flex-col justify-between">
+                <motion.div whileHover={{ y: -3 }} className="h-full p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-md transition-all duration-300 shadow-xs flex flex-col justify-between">
                   <div>
-                    <Badge variant="subtle" className="mb-3 text-[10px] bg-[#F7D7B0]/40 text-[#F15E1C] font-semibold">
+                    <Badge variant="subtle" className="mb-2.5 text-[10px] bg-[#F7D7B0]/40 text-[#F15E1C] font-semibold">
                       {post.category}
                     </Badge>
-                    <h3 className="text-base sm:text-lg font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors line-clamp-2">
+                    <h3 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors line-clamp-2">
                       {post.title}
                     </h3>
-                    <p className="mt-2 text-xs sm:text-sm text-gray-600 dark:text-gray-300 line-clamp-3 leading-relaxed">
+                    <p className="mt-1.5 text-xs text-gray-600 dark:text-gray-300 line-clamp-3 leading-relaxed">
                       {post.summary}
                     </p>
                   </div>
-                  <div className="pt-4 mt-4 border-t border-[#F7D7B0] flex items-center justify-between text-xs font-semibold text-[#F15E1C]">
+                  <div className="pt-3 mt-3 border-t border-[#F7D7B0] flex items-center justify-between text-xs font-semibold text-[#F15E1C]">
                     <span>Read Article</span>
                     <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </div>
@@ -1334,7 +1366,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
             ))}
           </div>
 
-          <div className="text-center mt-10">
+          <div className="text-center mt-8">
             <Link href="/insights">
               <Button3D variant="secondary" size="md" className="bg-[#2E936F] text-[#FFFFFF] border-[#2E936F]">
                 Explore All Insights
@@ -1348,37 +1380,37 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       <SystemScanTransition />
 
       {/* =====================================================================
-          17. FAQ SECTION
+          18. FAQ SECTION
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-            <Badge variant="outline" className="mb-3 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
               QUESTIONS &amp; ANSWERS
             </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
               Frequently Asked Questions.
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
               Concise answers regarding technical SEO, search intent, AI search experiences, and measurement.
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-4">
+          <div className="max-w-3xl mx-auto space-y-3">
             {seoFaqData.map((faq, index) => {
               const isOpen = openFaqIdx === index;
               return (
                 <div
                   key={index}
-                  className="rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#1b2823] overflow-hidden transition-all hover:border-[#F15E1C] hover:shadow-md"
+                  className="rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#1b2823] overflow-hidden transition-all hover:border-[#F15E1C] hover:shadow-sm"
                 >
                   <button
                     onClick={() => setOpenFaqIdx(isOpen ? null : index)}
-                    className="w-full text-left p-5 flex items-center justify-between font-bold text-sm sm:text-base text-[#1b2823] dark:text-[#ffffff] hover:text-[#F15E1C] transition-colors cursor-pointer"
+                    className="w-full text-left p-4.5 flex items-center justify-between font-bold text-sm sm:text-base text-[#1b2823] dark:text-[#ffffff] hover:text-[#F15E1C] transition-colors cursor-pointer"
                   >
                     <span>{faq.question}</span>
-                    <ChevronDown className={cn("w-5 h-5 transition-transform duration-200 text-[#F15E1C]", isOpen && "rotate-180")} />
+                    <ChevronDown className={cn("w-4 h-4 transition-transform duration-200 text-[#F15E1C]", isOpen && "rotate-180")} />
                   </button>
 
                   <AnimatePresence>
@@ -1389,7 +1421,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <div className="p-5 pt-0 text-sm text-gray-600 dark:text-gray-300 border-t border-[#F7D7B0] leading-relaxed">
+                        <div className="p-4.5 pt-0 text-sm text-gray-600 dark:text-gray-300 border-t border-[#F7D7B0] leading-relaxed">
                           {faq.answer}
                         </div>
                       </motion.div>
@@ -1406,15 +1438,15 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       <SystemScanTransition />
 
       {/* =====================================================================
-          18. FINAL CTA
+          19. FINAL CTA
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-          <div className="relative rounded-3xl p-8 sm:p-12 lg:p-16 bg-[#2E936F] text-[#FFFFFF] border border-[#2E936F] shadow-2xl overflow-hidden text-center space-y-6">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative rounded-3xl p-8 sm:p-12 bg-[#2E936F] text-[#FFFFFF] border border-[#2E936F] shadow-2xl overflow-hidden text-center space-y-5">
             
             {/* Ambient Palette Glows */}
-            <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#F15E1C]/30 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-[#FAB60A]/25 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -top-24 -left-24 w-80 h-80 bg-[#F15E1C]/30 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -right-24 w-80 h-80 bg-[#FAB60A]/25 rounded-full blur-3xl pointer-events-none" />
 
             <Badge variant="outline" className="border-[#FFFFFF] text-[#FFFFFF] bg-[#FFFFFF]/10 px-3 py-1 font-semibold tracking-wider text-xs">
               TAKE THE NEXT STEP
@@ -1428,7 +1460,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
               Build a search strategy that connects technical health, useful content, authority and measurement into one continuous system.
             </p>
 
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-3">
               <Link href="/contact">
                 <Button3D variant="primary" size="lg" className="flex items-center gap-2 font-semibold bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] hover:opacity-95 transition-all">
                   Start Your SEO Assessment
