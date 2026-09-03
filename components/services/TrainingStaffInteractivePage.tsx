@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   motion,
   AnimatePresence,
@@ -369,7 +370,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
       </div>
 
       {/* =====================================================================
-          2. HERO SECTION — DUAL PATHWAY: BUILD + EXTEND CAPABILITY
+          2. HERO SECTION — DUAL PATHWAY WITH IMAGE 1 MAIN VISUAL
           ===================================================================== */}
       <section className="relative z-10 w-full border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-2 sm:pt-4 pb-8 sm:pb-12 md:pb-16 lg:pb-20">
@@ -460,79 +461,25 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
               </div>
             </div>
 
-            {/* Hero Visual Card — Unique Identity: People + Skills + Delivery */}
+            {/* IMAGE 1 — HERO VISUAL */}
             <div className="lg:col-span-6 w-full">
               <TiltCard className="w-full">
-                <div className="relative rounded-2xl p-6 bg-white dark:bg-[#1b2823] border border-[#F7D7B0] shadow-xl overflow-hidden group hover:border-[#F15E1C] transition-all duration-300">
-                  
-                  <div className="flex items-center justify-between pb-4 border-b border-[#F7D7B0]">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#F15E1C] animate-pulse" />
-                      <span className="text-xs font-bold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
-                        People + Skills + Delivery Engine
-                      </span>
-                    </div>
-                    <Badge variant="subtle" className="text-[10px] bg-[#2E936F]/10 text-[#2E936F] font-semibold">
-                      Capability Network
-                    </Badge>
+                <div className="relative rounded-2xl p-3 sm:p-4 bg-white dark:bg-[#1b2823] border border-[#F7D7B0] shadow-xl overflow-hidden group hover:border-[#F15E1C] transition-all duration-300">
+                  <div className="relative w-full overflow-hidden rounded-xl">
+                    <Image
+                      src="/images/training-staff-main.png"
+                      alt="Training and staff augmentation team collaboration"
+                      width={800}
+                      height={600}
+                      priority
+                      className="w-full h-auto max-h-[500px] object-contain rounded-xl group-hover:scale-102 transition-transform duration-500"
+                    />
                   </div>
-
-                  {/* Connected Node Network Diagram */}
-                  <div className="my-6 space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      {/* Node 1: Core Team */}
-                      <motion.div whileHover={{ y: -2, borderColor: "#F15E1C" }} className="p-4 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] transition-all">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Users className="w-4 h-4 text-[#F15E1C]" />
-                          <span className="text-xs font-bold font-mono text-[#F15E1C]">YOUR CORE TEAM</span>
-                        </div>
-                        <p className="text-xs text-gray-600 dark:text-gray-300">Domain context, internal ownership &amp; business goals.</p>
-                      </motion.div>
-
-                      {/* Node 2: Specialist Expertise */}
-                      <motion.div whileHover={{ y: -2, borderColor: "#2E936F" }} className="p-4 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] transition-all">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Cpu className="w-4 h-4 text-[#2E936F]" />
-                          <span className="text-xs font-bold font-mono text-[#2E936F]">SPECIALIST EXPERTISE</span>
-                        </div>
-                        <p className="text-xs text-gray-600 dark:text-gray-300">Technical depth, training &amp; extended capacity.</p>
-                      </motion.div>
-                    </div>
-
-                    {/* Flow Arrow */}
-                    <div className="flex items-center justify-center gap-2 text-xs font-mono text-gray-400">
-                      <span className="w-8 h-px bg-[#F7D7B0]" />
-                      <span className="font-bold text-[#F15E1C]">INTEGRATED WORKFLOW</span>
-                      <span className="w-8 h-px bg-[#F7D7B0]" />
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      {/* Node 3: Shared Delivery */}
-                      <motion.div whileHover={{ y: -2, borderColor: "#FAB60A" }} className="p-4 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] transition-all">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Workflow className="w-4 h-4 text-[#FAB60A]" />
-                          <span className="text-xs font-bold font-mono text-[#FAB60A]">SHARED DELIVERY</span>
-                        </div>
-                        <p className="text-xs text-gray-600 dark:text-gray-300">Joint sprint execution, code standards &amp; quality.</p>
-                      </motion.div>
-
-                      {/* Node 4: Capability Growth */}
-                      <motion.div whileHover={{ y: -2, borderColor: "#2E936F" }} className="p-4 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] transition-all">
-                        <div className="flex items-center gap-2 mb-2">
-                          <GraduationCap className="w-4 h-4 text-[#2E936F]" />
-                          <span className="text-xs font-bold font-mono text-[#2E936F]">CAPABILITY GROWTH</span>
-                        </div>
-                        <p className="text-xs text-gray-600 dark:text-gray-300">Permanent internal skills &amp; knowledge retention.</p>
-                      </motion.div>
-                    </div>
-                  </div>
-
                   <div className="pt-3 border-t border-[#F7D7B0] text-center">
                     <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 italic">
                       “Integrating skills, people, and practices into your existing ways of working.”
                     </p>
                   </div>
-
                 </div>
               </TiltCard>
             </div>
@@ -544,7 +491,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
       <CapabilityScanTransition />
 
       {/* =====================================================================
-          4. CORE POSITIONING — THE CAPABILITY GAP
+          4. CORE POSITIONING — WITH IMAGE 2 SUPPORTING VISUAL
           ===================================================================== */}
       <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
@@ -561,88 +508,105 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
             </p>
           </div>
 
-          {/* Two Distinct Paths Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
-            {/* PATH 1: BUILD CAPABILITY */}
-            <motion.div whileHover={{ y: -4 }} className="p-8 rounded-2xl bg-[#F7D7B0]/20 border border-[#F15E1C]/40 shadow-sm hover:shadow-md hover:border-[#F15E1C] transition-all duration-300 space-y-6">
-              <div className="flex items-center justify-between pb-4 border-b border-[#F15E1C]/20">
-                <div className="flex items-center gap-3">
-                  <div className="p-3 rounded-xl bg-[#F15E1C] text-[#FFFFFF]">
-                    <GraduationCap className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <span className="text-xs font-mono font-bold text-[#F15E1C]">PATHWAY 01</span>
-                    <h3 className="text-2xl font-bold text-[#1b2823] dark:text-[#ffffff]">BUILD CAPABILITY</h3>
-                  </div>
+            {/* IMAGE 2 — SUPPORTING SECTION VISUAL */}
+            <div className="lg:col-span-5 w-full">
+              <motion.div
+                whileHover={{ y: -4 }}
+                className="p-4 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] shadow-lg transition-all duration-300 group"
+              >
+                <Image
+                  src="/images/training-staff-secondary.png"
+                  alt="Team capability building and knowledge transfer"
+                  width={700}
+                  height={500}
+                  loading="lazy"
+                  className="w-full h-auto max-h-[440px] object-contain rounded-xl group-hover:scale-102 transition-transform duration-500"
+                />
+                <div className="mt-3 text-center">
+                  <span className="text-xs font-mono font-bold text-[#F15E1C]">CAPABILITY GROWTH MODEL</span>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Connecting skills, roles, delivery, and permanent knowledge transfer.</p>
                 </div>
-                <Badge variant="subtle" className="text-xs bg-[#F15E1C]/10 text-[#F15E1C] font-semibold">
-                  For Internal Teams
-                </Badge>
-              </div>
+              </motion.div>
+            </div>
 
-              <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
-                Empower your existing staff with modern technical skills, framework proficiency, and operational best practices tailored to your architecture.
-              </p>
-
-              <div className="space-y-3 pt-2">
-                {[
-                  { title: "Upskilling", desc: "Modernize technical skills in cloud, AI, data, and development frameworks." },
-                  { title: "Reskilling", desc: "Transition engineers into new engineering roles or modern technologies." },
-                  { title: "Technical Training", desc: "Hands-on labs and practical workshops aligned with your code environment." },
-                  { title: "Role-Based Learning", desc: "Structured learning paths customized to specific team responsibilities." },
-                  { title: "Knowledge Transfer", desc: "Ensure technical practices and documentation stay within your team permanently." },
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-3 text-sm p-3 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0]">
-                    <CheckCircle2 className="w-4 h-4 text-[#F15E1C] shrink-0 mt-0.5" />
+            {/* Two Distinct Paths Grid */}
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+              
+              {/* PATH 1: BUILD CAPABILITY */}
+              <motion.div whileHover={{ y: -4 }} className="p-6 rounded-2xl bg-[#F7D7B0]/20 border border-[#F15E1C]/40 shadow-sm hover:shadow-md hover:border-[#F15E1C] transition-all duration-300 space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-[#F15E1C]/20">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2.5 rounded-xl bg-[#F15E1C] text-[#FFFFFF]">
+                      <GraduationCap className="w-5 h-5" />
+                    </div>
                     <div>
-                      <span className="font-bold text-[#1b2823] dark:text-[#ffffff] block">{item.title}</span>
-                      <span className="text-xs text-gray-500 dark:text-gray-400">{item.desc}</span>
+                      <span className="text-xs font-mono font-bold text-[#F15E1C]">PATHWAY 01</span>
+                      <h3 className="text-xl font-bold text-[#1b2823] dark:text-[#ffffff]">BUILD CAPABILITY</h3>
                     </div>
                   </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* PATH 2: EXTEND CAPABILITY */}
-            <motion.div whileHover={{ y: -4 }} className="p-8 rounded-2xl bg-[#F7D7B0]/20 border border-[#2E936F]/40 shadow-sm hover:shadow-md hover:border-[#2E936F] transition-all duration-300 space-y-6">
-              <div className="flex items-center justify-between pb-4 border-b border-[#2E936F]/20">
-                <div className="flex items-center gap-3">
-                  <div className="p-3 rounded-xl bg-[#2E936F] text-[#FFFFFF]">
-                    <UserPlus className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <span className="text-xs font-mono font-bold text-[#2E936F]">PATHWAY 02</span>
-                    <h3 className="text-2xl font-bold text-[#1b2823] dark:text-[#ffffff]">EXTEND CAPABILITY</h3>
-                  </div>
                 </div>
-                <Badge variant="subtle" className="text-xs bg-[#2E936F]/10 text-[#2E936F] font-semibold">
-                  For Delivery Squads
-                </Badge>
-              </div>
 
-              <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
-                Add experienced technical professionals directly into your engineering squads to expand project capacity and provide niche role expertise.
-              </p>
+                <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
+                  Empower your existing staff with modern technical skills, framework proficiency, and operational best practices tailored to your architecture.
+                </p>
 
-              <div className="space-y-3 pt-2">
-                {[
-                  { title: "Specialist Expertise", desc: "Access targeted technical depth for specific architectural challenges." },
-                  { title: "Project Capacity", desc: "Expand delivery throughput when deadlines require additional engineering hands." },
-                  { title: "Technical Roles", desc: "Fill critical engineering disciplines without recruitment friction." },
-                  { title: "Delivery Support", desc: "Complement existing team leads with seasoned technical contributors." },
-                  { title: "Team Extension", desc: "Seamlessly integrate professionals into your agile tools and standups." },
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-3 text-sm p-3 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0]">
-                    <CheckCircle2 className="w-4 h-4 text-[#2E936F] shrink-0 mt-0.5" />
+                <div className="space-y-2.5 pt-1">
+                  {[
+                    { title: "Upskilling", desc: "Modernize technical skills in cloud, AI & data." },
+                    { title: "Reskilling", desc: "Transition engineers into new modern roles." },
+                    { title: "Technical Training", desc: "Hands-on labs aligned with your stack." },
+                    { title: "Knowledge Transfer", desc: "Ensure documentation stays permanently." },
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-2.5 text-xs p-2.5 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0]">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#F15E1C] shrink-0 mt-0.5" />
+                      <div>
+                        <span className="font-bold text-[#1b2823] dark:text-[#ffffff] block">{item.title}</span>
+                        <span className="text-[11px] text-gray-500 dark:text-gray-400">{item.desc}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* PATH 2: EXTEND CAPABILITY */}
+              <motion.div whileHover={{ y: -4 }} className="p-6 rounded-2xl bg-[#F7D7B0]/20 border border-[#2E936F]/40 shadow-sm hover:shadow-md hover:border-[#2E936F] transition-all duration-300 space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-[#2E936F]/20">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2.5 rounded-xl bg-[#2E936F] text-[#FFFFFF]">
+                      <UserPlus className="w-5 h-5" />
+                    </div>
                     <div>
-                      <span className="font-bold text-[#1b2823] dark:text-[#ffffff] block">{item.title}</span>
-                      <span className="text-xs text-gray-500 dark:text-gray-400">{item.desc}</span>
+                      <span className="text-xs font-mono font-bold text-[#2E936F]">PATHWAY 02</span>
+                      <h3 className="text-xl font-bold text-[#1b2823] dark:text-[#ffffff]">EXTEND CAPABILITY</h3>
                     </div>
                   </div>
-                ))}
-              </div>
-            </motion.div>
+                </div>
+
+                <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
+                  Add experienced technical professionals directly into your engineering squads to expand project capacity and provide niche role expertise.
+                </p>
+
+                <div className="space-y-2.5 pt-1">
+                  {[
+                    { title: "Specialist Expertise", desc: "Access targeted depth for niche challenges." },
+                    { title: "Project Capacity", desc: "Expand delivery throughput on demand." },
+                    { title: "Technical Roles", desc: "Fill critical disciplines without friction." },
+                    { title: "Team Extension", desc: "Integrate seamlessly into your standups." },
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-2.5 text-xs p-2.5 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0]">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#2E936F] shrink-0 mt-0.5" />
+                      <div>
+                        <span className="font-bold text-[#1b2823] dark:text-[#ffffff] block">{item.title}</span>
+                        <span className="text-[11px] text-gray-500 dark:text-gray-400">{item.desc}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+            </div>
 
           </div>
         </div>
