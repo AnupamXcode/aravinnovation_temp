@@ -470,7 +470,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
       {/* =========================================================================
           SECTION 01 — HERO SECTION
           ========================================================================= */}
-      <section className="relative pt-3 sm:pt-5 lg:pt-6 pb-8 sm:pb-10 lg:pb-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none">
+      <section className="relative pt-3 sm:pt-5 lg:pt-6 pb-8 sm:pb-10 lg:pb-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#E3E5E7] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none">
         <AnimatedDotGrid />
 
         {/* Ambient Glows */}
@@ -483,7 +483,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
             {/* LEFT COLUMN: HERO COPY */}
-            <div className="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-left">
+            <div className="lg:col-span-6 xl:col-span-6 space-y-4 sm:space-y-5 text-left">
               
               {/* Breadcrumb & Eyebrow Badge */}
               <AnimatedSection delay={0.05} className="space-y-2">
@@ -548,27 +548,25 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
               </AnimatedSection>
             </div>
 
-            {/* RIGHT COLUMN: DUAL-THEME HERO INFOGRAPHIC */}
-            <div className="lg:col-span-6 xl:col-span-7 w-full flex items-center justify-center">
-              <AnimatedSection delay={0.15} className="w-full">
-                <div className="relative w-full flex items-center justify-center">
-                  {/* Light Mode Image */}
-                  <Image
-                    src="/images/it-strategy-light-v3.png"
-                    alt="Arav Innovation IT Strategy &amp; Ecosystem (Light Mode)"
-                    width={1200}
-                    height={800}
-                    priority
-                    className="w-full h-auto max-w-full object-contain dark:hidden transition-transform duration-300 hover:scale-[1.01]"
-                  />
-                  {/* Dark Mode Image */}
-                  <Image
-                    src="/images/it-strategy-dark-v3.png"
-                    alt="Arav Innovation IT Strategy &amp; Ecosystem (Dark Mode)"
-                    width={1200}
-                    height={800}
-                    priority
-                    className="w-full h-auto max-w-full object-contain hidden dark:block transition-transform duration-300 hover:scale-[1.01]"
+            {/* RIGHT COLUMN: ENTERPRISE IT STRATEGY HERO VIDEO WITH SEAMLESS EDGE BLENDING */}
+            <div className="lg:col-span-6 xl:col-span-6 w-full flex items-center justify-center">
+              <AnimatedSection delay={0.15} className="w-full flex justify-center">
+                <div
+                  className="relative w-full max-w-[840px] aspect-[16/9] bg-[#E3E5E7] dark:bg-[#0a0a0a] dark:border dark:border-[#1a1a1a] overflow-hidden transition-transform duration-300 hover:scale-[1.01] group flex items-center justify-center p-0"
+                  style={{
+                    maskImage: "radial-gradient(ellipse at center, black 82%, transparent 99%)",
+                    WebkitMaskImage: "radial-gradient(ellipse at center, black 82%, transparent 99%)",
+                  }}
+                >
+                  <video
+                    src="/videos/it-strategy.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    className="w-full h-full object-contain pointer-events-none"
+                    aria-hidden="true"
                   />
                 </div>
               </AnimatedSection>

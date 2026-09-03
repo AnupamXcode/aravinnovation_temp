@@ -2,42 +2,42 @@
 
 import * as React from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Quote, Sparkles } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote, Sparkles, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
-
 import { testimonialsData } from "@/data/testimonials";
 
 export interface EditorialTestimonial {
   id: string;
-  numStr: string;
   quote: string;
   author: string;
   role: string;
   company: string;
   category: string;
   location: string;
+  rating: number;
 }
 
-export const editorialTestimonials: EditorialTestimonial[] = testimonialsData.map((t, idx) => ({
+export const editorialTestimonials: EditorialTestimonial[] = testimonialsData.slice(0, 12).map((t) => ({
   id: t.id,
-  numStr: (idx + 1).toString().padStart(2, "0"),
   quote: t.quote,
   author: t.author,
   role: t.designation,
   company: t.company,
   category: t.service,
   location: t.location,
+  rating: t.rating || 5,
 }));
 
 export function ClientFeedbackEditorialSection() {
   const shouldReduceMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = React.useState<number>(0);
   const [direction, setDirection] = React.useState<number>(1);
+  const [isPaused, setIsPaused] = React.useState<boolean>(false);
   const [dragStartX, setDragStartX] = React.useState<number | null>(null);
   const [isDragging, setIsDragging] = React.useState<boolean>(false);
 
   const total = editorialTestimonials.length;
-  const current = editorialTestimonials[activeIndex];
+  const current = editorialTestimonials[activeIndex] || editorialTestimonials[0];
 
   const handleNext = React.useCallback(() => {
     setDirection(1);
@@ -53,6 +53,18 @@ export function ClientFeedbackEditorialSection() {
     setDirection(index > activeIndex ? 1 : -1);
     setActiveIndex(index);
   };
+
+  // Auto-swipe timer: 6.5s (6500ms), pauses on hover, resets on navigation
+  React.useEffect(() => {
+    if (isPaused) return;
+
+    const timer = setInterval(() => {
+      setDirection(1);
+      setActiveIndex((prev) => (prev + 1) % total);
+    }, 6500);
+
+    return () => clearInterval(timer);
+  }, [isPaused, activeIndex, total]);
 
   // Keyboard Navigation Support
   React.useEffect(() => {
@@ -87,7 +99,7 @@ export function ClientFeedbackEditorialSection() {
   // Motion variants with reduced motion fallback
   const variants = {
     enter: (dir: number) => ({
-      x: shouldReduceMotion ? 0 : dir > 0 ? 50 : -50,
+      x: shouldReduceMotion ? 0 : dir > 0 ? 40 : -40,
       opacity: 0,
     }),
     center: {
@@ -95,14 +107,14 @@ export function ClientFeedbackEditorialSection() {
       opacity: 1,
     },
     exit: (dir: number) => ({
-      x: shouldReduceMotion ? 0 : dir < 0 ? 50 : -50,
+      x: shouldReduceMotion ? 0 : dir < 0 ? 40 : -40,
       opacity: 0,
     }),
   };
 
   return (
     <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="client-feedback">
-      <section className="py-8 md:py-14 px-6 sm:px-12 lg:px-14 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#000000] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300 relative overflow-hidden">
+      <section className="py-8 md:py-12 px-6 sm:px-12 lg:px-14 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#000000] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300 relative overflow-hidden">
         {/* Subtle Brand Accent Header Line */}
         <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c] to-transparent" />
 
@@ -120,38 +132,41 @@ export function ClientFeedbackEditorialSection() {
           </p>
         </div>
 
-        {/* Interactive Editorial Layout */}
+        {/* Interactive Editorial Card with Pause-on-Hover */}
         <div
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
           onMouseDown={(e) => handlePointerDown(e.clientX)}
           onMouseUp={(e) => handlePointerUp(e.clientX)}
           onTouchStart={(e) => e.touches.length === 1 && handlePointerDown(e.touches[0].clientX)}
           onTouchEnd={(e) => e.changedTouches.length > 0 && handlePointerUp(e.changedTouches[0].clientX)}
-          className="relative z-10 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] p-8 sm:p-14 lg:p-16 select-none shadow-md flex flex-col justify-between min-h-[420px] space-y-8"
+          className="relative z-10 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] p-6 sm:p-12 lg:p-14 select-none shadow-md flex flex-col justify-between min-h-[380px] space-y-8"
         >
-          {/* Top Control Bar */}
-          <div className="flex items-center justify-between pb-6 border-b border-[#f7d7b0] dark:border-[#1a1a1a]">
+          {/* Top Category Context & Rating Header */}
+          <div className="flex items-center justify-between pb-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a]">
             <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#2e936f]">
               {current.category} &bull; {current.location}
             </span>
 
-            <div className="flex items-center gap-1 font-mono text-sm font-black">
-              <span className="text-[#f15e1c]">{current.numStr}</span>
-              <span className="text-[#7A6A5F] dark:text-[#B8ACA0] font-normal">/</span>
-              <span className="text-[#2e936f]">{total.toString().padStart(2, "0")}</span>
+            {/* 5-Star Rating */}
+            <div className="flex items-center space-x-1 text-[#f15e1c]">
+              {[...Array(current.rating)].map((_, i) => (
+                <Star key={i} className="w-4 h-4 fill-current" />
+              ))}
             </div>
           </div>
 
           {/* Active Quotation Body */}
-          <div className="relative my-auto min-h-[180px] flex flex-col justify-center">
-            {/* Subtle Decorative Quote Icon */}
+          <div className="relative my-auto min-h-[160px] flex flex-col justify-center">
+            {/* Decorative Quote Icon */}
             <motion.div
               key={`quote-icon-${activeIndex}`}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 0.12, scale: 1 }}
               transition={{ duration: 0.35 }}
-              className="absolute -top-8 -left-4 text-[#f15e1c] pointer-events-none"
+              className="absolute -top-6 -left-2 text-[#f15e1c] pointer-events-none"
             >
-              <Quote className="w-20 h-20 stroke-1" />
+              <Quote className="w-16 h-16 sm:w-20 sm:h-20 stroke-1" />
             </motion.div>
 
             <AnimatePresence mode="wait" custom={direction}>
@@ -162,84 +177,66 @@ export function ClientFeedbackEditorialSection() {
                 initial="enter"
                 animate="center"
                 exit="exit"
-                transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
+                transition={{ duration: 0.55, ease: [0.25, 1, 0.5, 1] }}
                 className="space-y-6 relative z-10"
               >
-                <p className="text-xl sm:text-3xl lg:text-4xl font-display font-medium text-[#1b2823] dark:text-[#ffffff] leading-[1.35] tracking-tight">
+                <p className="text-lg sm:text-2xl lg:text-3xl font-display font-medium text-[#1b2823] dark:text-[#ffffff] leading-[1.4] tracking-tight">
                   &ldquo;{current.quote}&rdquo;
                 </p>
 
-                <div className="space-y-1 pt-2">
+                <div className="space-y-0.5 pt-2">
                   <div className="text-lg sm:text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                     {current.author}
                   </div>
-                  <div className="text-sm font-semibold text-[#f15e1c]">
-                    {current.role} &bull; {current.company}
-                  </div>
-                  <div className="text-xs font-mono font-bold text-[#2e936f]">
-                    {current.category} &bull; {current.location}
+                  <div className="text-xs sm:text-sm font-semibold text-[#f15e1c]">
+                    {current.role} &bull; <span className="font-semibold text-[#1b2823] dark:text-[#ffffff]">{current.company}</span>
                   </div>
                 </div>
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* Bottom Progress & Navigation Control */}
-          <div className="pt-6 border-t border-[#f7d7b0] dark:border-[#1a1a1a] flex flex-col sm:flex-row items-center justify-between gap-6">
-            {/* Progress Bar */}
-            <div className="flex items-center gap-3 w-full sm:w-auto flex-1 max-w-md">
-              <span className="text-xs font-mono font-bold text-[#f15e1c]">01</span>
-              <div className="relative flex-1 h-2 rounded-full bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden">
-                <motion.div
-                  className="h-full bg-[#f15e1c] rounded-full"
-                  animate={{ width: `${((activeIndex + 1) / total) * 100}%` }}
-                  transition={{ duration: 0.35, ease: "easeOut" }}
+          {/* Bottom Navigation Control Bar */}
+          <div className="pt-6 border-t border-[#f7d7b0] dark:border-[#1a1a1a] flex items-center justify-between gap-4">
+            {/* Previous Button */}
+            <button
+              type="button"
+              onClick={handlePrev}
+              className="p-2.5 sm:px-4 sm:py-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#1b2823] dark:text-[#ffffff] hover:bg-[#f15e1c] hover:text-white hover:border-[#f15e1c] transition-all cursor-pointer active:scale-95 flex items-center gap-1.5 text-xs font-semibold shrink-0 shadow-xs"
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft className="w-4 h-4" />
+              <span className="hidden sm:inline">Previous</span>
+            </button>
+
+            {/* Centered Dot Pagination (12 Dots) */}
+            <div className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap max-w-full">
+              {editorialTestimonials.map((item, idx) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => handleSelect(idx)}
+                  className={cn(
+                    "w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 cursor-pointer p-0 border-0 shrink-0",
+                    activeIndex === idx
+                      ? "bg-[#f15e1c] scale-125 shadow-xs"
+                      : "bg-[#f7d7b0] dark:bg-[#262626] hover:bg-[#f15e1c]/60"
+                  )}
+                  aria-label={`Go to testimonial ${idx + 1}`}
                 />
-              </div>
-              <span className="text-xs font-mono font-bold text-[#2e936f]">{total.toString().padStart(2, "0")}</span>
+              ))}
             </div>
 
-            {/* Pagination Controls */}
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                {editorialTestimonials.map((item, idx) => (
-                  <button
-                    key={item.id}
-                    type="button"
-                    onClick={() => handleSelect(idx)}
-                    className={cn(
-                      "w-8 h-8 rounded-full text-xs font-mono font-bold transition-all cursor-pointer flex items-center justify-center border",
-                      activeIndex === idx
-                        ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-md scale-105"
-                        : "bg-white dark:bg-[#000000] text-[#7A6A5F] dark:text-[#B8ACA0] border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]"
-                    )}
-                    aria-label={`Go to testimonial ${idx + 1}`}
-                  >
-                    {item.numStr}
-                  </button>
-                ))}
-              </div>
-
-              <div className="flex items-center gap-2 pl-2 border-l border-[#f7d7b0] dark:border-[#1a1a1a]">
-                <button
-                  type="button"
-                  onClick={handlePrev}
-                  className="p-2.5 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#1b2823] dark:text-[#ffffff] hover:bg-[#f15e1c] hover:text-white hover:border-[#f15e1c] transition-all cursor-pointer active:scale-95"
-                  aria-label="Previous testimonial"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-
-                <button
-                  type="button"
-                  onClick={handleNext}
-                  className="p-2.5 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#1b2823] dark:text-[#ffffff] hover:bg-[#f15e1c] hover:text-white hover:border-[#f15e1c] transition-all cursor-pointer active:scale-95"
-                  aria-label="Next testimonial"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
+            {/* Next Button */}
+            <button
+              type="button"
+              onClick={handleNext}
+              className="p-2.5 sm:px-4 sm:py-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#1b2823] dark:text-[#ffffff] hover:bg-[#f15e1c] hover:text-white hover:border-[#f15e1c] transition-all cursor-pointer active:scale-95 flex items-center gap-1.5 text-xs font-semibold shrink-0 shadow-xs"
+              aria-label="Next testimonial"
+            >
+              <span className="hidden sm:inline">Next</span>
+              <ChevronRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </section>
