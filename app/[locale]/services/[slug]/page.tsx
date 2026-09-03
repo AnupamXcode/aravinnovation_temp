@@ -146,7 +146,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
 
   // Render Immersive AI Portfolio Interactive Page for AI Slugs
   if (service.slug === "ai-portfolio" || slug === "ai-solutions" || slug === "ai-portfolio") {
-    return <AIPortfolioInteractivePage service={service} />;
+    return <AIPortfolioInteractivePage service={service} relatedPosts={relatedPosts} />;
   }
 
   // Find related case study

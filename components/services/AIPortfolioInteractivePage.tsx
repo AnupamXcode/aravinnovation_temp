@@ -2,65 +2,60 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   motion,
   AnimatePresence,
   useReducedMotion,
   useInView,
-  useScroll,
-  useTransform,
-  useSpring,
 } from "framer-motion";
 import {
   Cpu,
   ArrowRight,
-  Sparkles,
   CheckCircle2,
-  ChevronRight,
   ChevronDown,
-  Check,
-  Send,
-  X,
-  BrainCircuit,
   Database,
   Workflow,
   ShieldCheck,
-  Globe2,
-  Star,
-  Quote,
   Zap,
   Layers,
-  Lock,
-  Shield,
-  Server,
   Activity,
-  Terminal,
-  RefreshCw,
-  Eye,
-  ArrowUpRight,
-  Gauge,
-  Sliders,
-  Play,
   Code2,
   Bot,
+  FileText,
+  HelpCircle,
+  Users,
+  Eye,
+  RefreshCw,
+  ArrowUpRight,
+  Sparkles,
+  Search,
+  MessageSquare,
+  Shield,
+  Compass,
+  GitBranch,
 } from "lucide-react";
 import { Service } from "@/data/services";
-import { caseStudiesData } from "@/data/case-studies";
-import { testimonialsData } from "@/data/testimonials";
+import { BlogPost, blogPostsData } from "@/data/insights";
 import { Button3D } from "@/components/ui/button-3d";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
 import { TiltCard } from "@/components/motion/TiltCard";
-import { MagneticButton } from "@/components/motion/MagneticButton";
-import { FAQAccordion } from "@/components/FAQAccordion";
 import { cn } from "@/lib/utils";
 
 interface AIPortfolioPageProps {
   service: Service;
+  relatedPosts?: BlogPost[];
 }
 
 // -----------------------------------------------------------------------------
-// 1. System Scan Transition Line (Subtle sweeping scan line between sections)
+// IMAGE PATH CONFIGURATION
+// -----------------------------------------------------------------------------
+export const AI_PORTFOLIO_HERO_IMAGE = "/images/ai-portfolio-main.png";
+export const AI_PORTFOLIO_SECONDARY_IMAGE = "/images/ai-portfolio-secondary.png";
+
+// -----------------------------------------------------------------------------
+// System Scan Transition Line
 // -----------------------------------------------------------------------------
 function SystemScanTransition() {
   const ref = React.useRef<HTMLDivElement>(null);
@@ -69,13 +64,13 @@ function SystemScanTransition() {
 
   return (
     <div ref={ref} className="relative w-full h-px my-4 overflow-hidden pointer-events-none select-none">
-      <div className="w-full h-full bg-[#f7d7b0]/30 dark:bg-[#1a1a1a]" />
+      <div className="w-full h-full bg-[#F7D7B0]" />
       {!shouldReduceMotion && (
         <motion.div
           initial={{ x: "-100%" }}
           animate={isInView ? { x: "100%" } : {}}
           transition={{ duration: 1.4, ease: "easeInOut" }}
-          className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-transparent via-[#f15e1c] to-transparent shadow-[0_0_8px_#f15e1c]"
+          className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-transparent via-[#F15E1C] to-transparent shadow-[0_0_8px_#F15E1C]"
         />
       )}
     </div>
@@ -83,974 +78,1355 @@ function SystemScanTransition() {
 }
 
 // -----------------------------------------------------------------------------
-// 2. Hero — Arav Intelligence Core Awakening Visual
+// 1. SECTION — AI THAT SOLVES REAL WORK (Section 6 in prompt)
 // -----------------------------------------------------------------------------
-function HeroAICoreVisual() {
-  const shouldReduceMotion = useReducedMotion();
-
-  if (shouldReduceMotion) return null;
-
-  return (
-    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-30 dark:opacity-25 select-none flex items-center justify-center">
-      <svg className="w-full h-full max-w-5xl" viewBox="0 0 1000 600" fill="none">
-        <defs>
-          <linearGradient id="ai-core-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#f15e1c" stopOpacity="0.9" />
-            <stop offset="50%" stopColor="#2e936f" stopOpacity="0.7" />
-            <stop offset="100%" stopColor="#fab60a" stopOpacity="0.8" />
-          </linearGradient>
-        </defs>
-
-        {/* Outer Orbit Rings */}
-        <circle cx="500" cy="300" r="220" stroke="url(#ai-core-grad)" strokeWidth="1.5" strokeDasharray="6 6" />
-        <circle cx="500" cy="300" r="140" stroke="#2e936f" strokeWidth="1.5" />
-        <circle cx="500" cy="300" r="70" stroke="#f15e1c" strokeWidth="2.5" className="animate-pulse" />
-        <circle cx="500" cy="300" r="25" fill="#fab60a" />
-
-        {/* Data Input & Output Signal Rays */}
-        <line x1="160" y1="180" x2="500" y2="300" stroke="#f15e1c" strokeWidth="1.5" strokeDasharray="4 4" />
-        <line x1="160" y1="420" x2="500" y2="300" stroke="#2e936f" strokeWidth="1.5" strokeDasharray="4 4" />
-        <line x1="840" y1="180" x2="500" y2="300" stroke="#fab60a" strokeWidth="1.5" strokeDasharray="4 4" />
-        <line x1="840" y1="420" x2="500" y2="300" stroke="#2e936f" strokeWidth="1.5" strokeDasharray="4 4" />
-
-        {/* Surrounding Nodes */}
-        <g transform="translate(130, 160)">
-          <rect width="120" height="40" rx="8" stroke="#f15e1c" strokeWidth="1" fill="#FFFDF9" fillOpacity="0.8" />
-          <text x="60" y="24" fill="#f15e1c" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">DATA INGESTION</text>
-        </g>
-        <g transform="translate(130, 400)">
-          <rect width="120" height="40" rx="8" stroke="#2e936f" strokeWidth="1" fill="#FFFDF9" fillOpacity="0.8" />
-          <text x="60" y="24" fill="#2e936f" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">VECTOR SEARCH</text>
-        </g>
-        <g transform="translate(750, 160)">
-          <rect width="120" height="40" rx="8" stroke="#fab60a" strokeWidth="1" fill="#FFFDF9" fillOpacity="0.8" />
-          <text x="60" y="24" fill="#fab60a" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">AI REASONING</text>
-        </g>
-        <g transform="translate(750, 400)">
-          <rect width="120" height="40" rx="8" stroke="#2e936f" strokeWidth="1" fill="#FFFDF9" fillOpacity="0.8" />
-          <text x="60" y="24" fill="#2e936f" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">ACTION &amp; OUTPUT</text>
-        </g>
-      </svg>
-    </div>
-  );
-}
+const realWorkCapabilities = [
+  {
+    num: "01",
+    title: "AI Applications",
+    desc: "Intelligent experiences built around real business needs.",
+    icon: <Bot className="w-5 h-5 text-[#F15E1C]" />,
+  },
+  {
+    num: "02",
+    title: "RAG & Knowledge",
+    desc: "Connect AI to trusted internal information and context.",
+    icon: <Database className="w-5 h-5 text-[#2E936F]" />,
+  },
+  {
+    num: "03",
+    title: "AI Agents",
+    desc: "Task-oriented systems that can reason, act and escalate when needed.",
+    icon: <Cpu className="w-5 h-5 text-[#FAB60A]" />,
+  },
+  {
+    num: "04",
+    title: "Intelligent Automation",
+    desc: "AI-assisted workflows that reduce repetitive operational effort.",
+    icon: <Workflow className="w-5 h-5 text-[#F15E1C]" />,
+  },
+];
 
 // -----------------------------------------------------------------------------
-// 3. Metric Counter Number Component (Viewport Ease-Out Count-Up)
+// 2. UNIQUE AI VISUAL — INTELLIGENCE FLOW (Section 7 in prompt)
 // -----------------------------------------------------------------------------
-function CounterNumber({
-  value,
-  prefix = "",
-  suffix = "",
-  decimals = 0,
-}: {
-  value: number;
-  prefix?: string;
-  suffix?: string;
-  decimals?: number;
-}) {
-  const ref = React.useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-20px" });
-  const shouldReduceMotion = useReducedMotion();
-  const [displayValue, setDisplayValue] = React.useState<string>(
-    shouldReduceMotion ? value.toFixed(decimals) : (0).toFixed(decimals)
-  );
+const intelligenceFlowNodes = [
+  {
+    num: "01",
+    title: "DATA",
+    desc: "Business information and signals.",
+    icon: <Database className="w-4 h-4 text-[#F15E1C]" />,
+  },
+  {
+    num: "02",
+    title: "CONTEXT",
+    desc: "Knowledge that gives AI meaning.",
+    icon: <Layers className="w-4 h-4 text-[#2E936F]" />,
+  },
+  {
+    num: "03",
+    title: "INTELLIGENCE",
+    desc: "AI interprets and reasons.",
+    icon: <Cpu className="w-4 h-4 text-[#FAB60A]" />,
+  },
+  {
+    num: "04",
+    title: "ACTION",
+    desc: "Systems assist or execute tasks.",
+    icon: <Zap className="w-4 h-4 text-[#F15E1C]" />,
+  },
+  {
+    num: "05",
+    title: "OVERSIGHT",
+    desc: "Humans remain in control.",
+    icon: <Users className="w-4 h-4 text-[#2E936F]" />,
+  },
+  {
+    num: "06",
+    title: "LEARNING",
+    desc: "The system improves through feedback.",
+    icon: <RefreshCw className="w-4 h-4 text-[#FAB60A]" />,
+  },
+];
 
-  React.useEffect(() => {
-    if (!isInView || shouldReduceMotion) {
-      setDisplayValue(value.toFixed(decimals));
-      return;
+// -----------------------------------------------------------------------------
+// 3. CAPABILITIES FOR SECONDARY SECTION AROUND IMAGE 2 (Section 9 in prompt)
+// -----------------------------------------------------------------------------
+const secondaryCapabilities = [
+  {
+    name: "AI Assistants",
+    desc: "Role-specific copilots designed for everyday employee tasks.",
+    icon: <MessageSquare className="w-4 h-4 text-[#F15E1C]" />,
+  },
+  {
+    name: "Knowledge Systems",
+    desc: "Semantic retrieval across internal documents, wikis and databases.",
+    icon: <Database className="w-4 h-4 text-[#2E936F]" />,
+  },
+  {
+    name: "Document Intelligence",
+    desc: "Automated extraction from contracts, invoices and unstructured files.",
+    icon: <FileText className="w-4 h-4 text-[#FAB60A]" />,
+  },
+  {
+    name: "Workflow Automation",
+    desc: "End-to-end task automation connected to CRM, ERP and webhooks.",
+    icon: <Workflow className="w-4 h-4 text-[#F15E1C]" />,
+  },
+  {
+    name: "AI Agents",
+    desc: "Goal-driven multi-step execution with human approval thresholds.",
+    icon: <Cpu className="w-4 h-4 text-[#2E936F]" />,
+  },
+  {
+    name: "Decision Support",
+    desc: "Contextual data synthesis helping leadership make informed calls.",
+    icon: <Activity className="w-4 h-4 text-[#FAB60A]" />,
+  },
+];
+
+// -----------------------------------------------------------------------------
+// 4. AI SYSTEM ARCHITECTURE (Section 10 in prompt)
+// -----------------------------------------------------------------------------
+const systemArchitectureLayers = [
+  {
+    layer: "01",
+    name: "USER",
+    title: "Enterprise Teams & Customers",
+    desc: "The people who interact with the system everyday.",
+  },
+  {
+    layer: "02",
+    name: "AI EXPERIENCE",
+    title: "Interfaces & Copilots",
+    desc: "Where people interact with intelligence without needing complex prompts.",
+  },
+  {
+    layer: "03",
+    name: "AI / AGENT LAYER",
+    title: "Reasoning & Orchestration",
+    desc: "Where models interpret instructions, select tools, and plan actions.",
+  },
+  {
+    layer: "04",
+    name: "KNOWLEDGE + CONTEXT",
+    title: "RAG & Vector Grounding",
+    desc: "Where the AI gets trusted, factual organizational information.",
+  },
+  {
+    layer: "05",
+    name: "DATA + BUSINESS SYSTEMS",
+    title: "Enterprise Systems",
+    desc: "Where business information lives — CRMs, ERPs, APIs and databases.",
+  },
+  {
+    layer: "06",
+    name: "GOVERNANCE + MONITORING",
+    title: "Controls & Oversight",
+    desc: "Where access, oversight, telemetry and safety boundaries are managed.",
+  },
+];
+
+// -----------------------------------------------------------------------------
+// 5. AI AGENTS SECTION (Section 11 in prompt)
+// -----------------------------------------------------------------------------
+const agentProgressionNodes = [
+  {
+    step: "01",
+    title: "UNDERSTAND",
+    desc: "Interprets instructions, documents, and system status.",
+    example: "Reads ticket or invoice context",
+    connection: "API Data Ingestion",
+    oversight: "Input Validation",
+  },
+  {
+    step: "02",
+    title: "DECIDE",
+    desc: "Formulates a structured execution plan against business rules.",
+    example: "Determines required ERP updates",
+    connection: "Policy Rules Engine",
+    oversight: "Confidence Scoring",
+  },
+  {
+    step: "03",
+    title: "ACT",
+    desc: "Executes verified multi-step tasks across integrated software.",
+    example: "Drafts response & stages records",
+    connection: "CRM & Database Webhooks",
+    oversight: "Action Staging",
+  },
+  {
+    step: "04",
+    title: "ESCALATE",
+    desc: "Routes ambiguous scenarios directly to human specialists.",
+    example: "Requests human sign-off on anomalies",
+    connection: "Team Notification Bridge",
+    oversight: "Mandatory Expert Review",
+  },
+];
+
+// -----------------------------------------------------------------------------
+// 6. RESPONSIBLE AI (Section 12 in prompt)
+// -----------------------------------------------------------------------------
+const responsibleAiLoop = [
+  {
+    point: "DATA",
+    title: "Clean Context",
+    desc: "Only approved, verified company information grounds the system.",
+  },
+  {
+    point: "ACCESS",
+    title: "Role Controls",
+    desc: "Strict permission boundaries protect internal organizational data.",
+  },
+  {
+    point: "GUARDRAILS",
+    title: "Defined Boundaries",
+    desc: "Automated filters block hallucinations and enforce business policies.",
+  },
+  {
+    point: "OVERSIGHT",
+    title: "Human in Control",
+    desc: "High-impact actions require clear approval from human experts.",
+  },
+];
+
+// -----------------------------------------------------------------------------
+// 7. AI DELIVERY TIMELINE (Section 13 in prompt)
+// -----------------------------------------------------------------------------
+const deliveryTimelineStages = [
+  {
+    num: "01",
+    title: "DISCOVER",
+    desc: "Find the business problem and AI opportunity.",
+  },
+  {
+    num: "02",
+    title: "DEFINE",
+    desc: "Select the use case, data and success criteria.",
+  },
+  {
+    num: "03",
+    title: "PROTOTYPE",
+    desc: "Validate the experience and AI behavior.",
+  },
+  {
+    num: "04",
+    title: "INTEGRATE",
+    desc: "Connect AI with knowledge, applications and workflows.",
+  },
+  {
+    num: "05",
+    title: "GOVERN",
+    desc: "Add controls, evaluation and human oversight.",
+  },
+  {
+    num: "06",
+    title: "EVOLVE",
+    desc: "Measure usage and continuously improve.",
+  },
+];
+
+// -----------------------------------------------------------------------------
+// 8. AI LEARNING LOOP (Section 14 in prompt)
+// -----------------------------------------------------------------------------
+const learningLoopSteps = [
+  { stage: "OBSERVE", desc: "Monitor real system telemetry and queries." },
+  { stage: "EVALUATE", desc: "Audit answers against factual standards." },
+  { stage: "IMPROVE", desc: "Refine context grounding and prompt instructions." },
+  { stage: "DEPLOY", desc: "Safely update models and workflow logic." },
+  { stage: "MEASURE", desc: "Track latency, cost and completion metrics." },
+  { stage: "LEARN", desc: "Extract insights from new edge cases." },
+];
+
+// -----------------------------------------------------------------------------
+// 9. ENGAGEMENT MODELS (Section 15 in prompt)
+// -----------------------------------------------------------------------------
+const engagementOptions = [
+  {
+    title: "AI DISCOVERY",
+    tag: "SCOPING & ROADMAP",
+    desc: "Identify valuable AI opportunities and define where AI can create leverage.",
+    deliverables: [
+      "Use-case feasibility assessment",
+      "Data readiness and context review",
+      "Governance and security boundaries",
+      "Technology implementation plan",
+    ],
+  },
+  {
+    title: "AI BUILD",
+    tag: "DESIGN & IMPLEMENTATION",
+    desc: "Design and implement a focused AI capability around a real business workflow.",
+    deliverables: [
+      "Production RAG or agent pipeline",
+      "API integrations to core systems",
+      "Human oversight review gates",
+      "Deployment and operations handoff",
+    ],
+  },
+  {
+    title: "AI EVOLUTION",
+    tag: "OPTIMIZATION & REFINEMENT",
+    desc: "Improve an existing AI system through integration, monitoring and refinement.",
+    deliverables: [
+      "Token telemetry and cost reduction",
+      "Continuous accuracy benchmarking",
+      "Expanding to additional workflows",
+      "Ongoing model performance tuning",
+    ],
+  },
+];
+
+// -----------------------------------------------------------------------------
+// 10. PROOF / WHERE AI CREATES LEVERAGE (Section 16 in prompt)
+// -----------------------------------------------------------------------------
+const leverageAreas = [
+  {
+    title: "AUTOMATION",
+    tag: "OPERATIONAL SPEED",
+    desc: "Turn repetitive work into intelligent workflows.",
+    icon: <Workflow className="w-5 h-5 text-[#F15E1C]" />,
+  },
+  {
+    title: "KNOWLEDGE",
+    tag: "FACTUAL GROUNDING",
+    desc: "Make organizational information easier to use.",
+    icon: <Database className="w-5 h-5 text-[#2E936F]" />,
+  },
+  {
+    title: "DECISIONS",
+    tag: "ACTIONABLE CONTEXT",
+    desc: "Give teams better information at the right moment.",
+    icon: <Zap className="w-5 h-5 text-[#FAB60A]" />,
+  },
+];
+
+// -----------------------------------------------------------------------------
+// 11. FAQ (Section 18 in prompt)
+// -----------------------------------------------------------------------------
+const aiFaqs = [
+  {
+    question: "What types of AI solutions can Arav Innovations build?",
+    answer:
+      "We design practical AI systems including enterprise knowledge bases (RAG), role-specific AI copilots, intelligent document processing pipelines, task-oriented AI agents, and custom applications with embedded intelligence.",
+  },
+  {
+    question: "Can AI connect with our existing business systems?",
+    answer:
+      "Yes. We build secure API integrations connecting AI models directly to your existing databases, CRM platforms, ERP systems, internal portals, and communication tools.",
+  },
+  {
+    question: "Can AI work with our internal documents and knowledge?",
+    answer:
+      "Yes. Using private retrieval-augmented generation (RAG), we index your proprietary PDFs, policies, SOPs, and spreadsheets so models answer strictly based on approved internal context.",
+  },
+  {
+    question: "How do you evaluate AI reliability?",
+    answer:
+      "We build automated evaluation benchmarks to test factual grounding, response accuracy, and latency. Telemetry tracks performance continuously to spot edge cases and improve quality.",
+  },
+  {
+    question: "How do you approach AI governance and human oversight?",
+    answer:
+      "We enforce role-based access control, automated safety boundaries, and clear human-in-the-loop review thresholds for sensitive actions, ensuring operations remain compliant and fully auditable.",
+  },
+];
+
+export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfolioPageProps) {
+  const [activeFlowNode, setActiveFlowNode] = React.useState<number>(0);
+  const [activeSecondaryCap, setActiveSecondaryCap] = React.useState<number>(0);
+  const [activeArchLayer, setActiveArchLayer] = React.useState<number>(0);
+  const [activeAgentNode, setActiveAgentNode] = React.useState<number>(0);
+  const [activeLoopStep, setActiveLoopStep] = React.useState<number>(0);
+  const [openFaqIdx, setOpenFaqIdx] = React.useState<number | null>(0);
+
+  // Form State
+  const [formData, setFormData] = React.useState({
+    name: "",
+    company: "",
+    email: "",
+    useCase: "AI Automation",
+    challenge: "",
+    timeline: "1-3 months",
+  });
+  const [formSubmitted, setFormSubmitted] = React.useState(false);
+
+  // CMS Blog Data
+  const articles = React.useMemo(() => {
+    if (relatedPosts && relatedPosts.length > 0) {
+      return relatedPosts.slice(0, 3);
     }
+    return blogPostsData.slice(0, 3);
+  }, [relatedPosts]);
 
-    let startTimestamp: number | null = null;
-    const duration = 1600;
-
-    const step = (timestamp: number) => {
-      if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-      const easeProgress = 1 - Math.pow(1 - progress, 3);
-      const current = easeProgress * value;
-
-      setDisplayValue(current.toFixed(decimals));
-
-      if (progress < 1) {
-        window.requestAnimationFrame(step);
-      }
-    };
-
-    const animFrame = window.requestAnimationFrame(step);
-    return () => window.cancelAnimationFrame(animFrame);
-  }, [isInView, value, decimals, shouldReduceMotion]);
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+  };
 
   return (
-    <span ref={ref} className="tabular-nums font-mono font-black">
-      {prefix}
-      {displayValue}
-      {suffix}
-    </span>
-  );
-}
-
-// -----------------------------------------------------------------------------
-// Data Collections
-// -----------------------------------------------------------------------------
-const aiSolutionsData = [
-  {
-    numStr: "01",
-    title: "Enterprise RAG & Knowledge Systems",
-    subtitle: "Grounding LLMs in Proprietary Data with Exact Citations",
-    description:
-      "We connect your internal documents, PDFs, databases, and CRMs to secure vector search pipelines, enabling AI models to answer questions accurately without hallucinations.",
-    icon: <Database className="w-6 h-6 text-[#f15e1c]" />,
-    deliverables: [
-      "Vector Database Architecture (Pgvector / Pinecone)",
-      "Hybrid Semantic & Keyword Search Indexing",
-      "Exact Page & Document Citation Engine",
-      "Zero-Data-Retention Privacy Guardrails",
-    ],
-    metric: "99.4%",
-    metricLabel: "Factual Retrieval Accuracy",
-    stageName: "KNOWLEDGE PIPELINE",
-  },
-  {
-    numStr: "02",
-    title: "Task-Oriented AI Agents",
-    subtitle: "Autonomous Workflows with Human-in-the-Loop Safeguards",
-    description:
-      "We build specialized AI agents that execute complex multi-step tasks across enterprise software—extracting document data, writing CRM records, and triggering ERP workflows.",
-    icon: <BrainCircuit className="w-6 h-6 text-[#f15e1c]" />,
-    deliverables: [
-      "Multi-Agent Orchestration (LangChain / LlamaIndex)",
-      "CRM & ERP API Integration Connectors",
-      "Human Oversight & Approval Thresholds",
-      "Role-Based Access Control (RBAC) Enforcement",
-    ],
-    metric: "68%",
-    metricLabel: "Manual Task Reduction",
-    stageName: "WORKFLOW AUTOMATION",
-  },
-  {
-    numStr: "03",
-    title: "Intelligent Document Processing (IDP)",
-    subtitle: "Automating Unstructured Invoices, Contracts & Records",
-    description:
-      "Extract structured JSON data from complex unstructured documents, legal contracts, and financial receipts with sub-second latency and zero human error.",
-    icon: <Workflow className="w-6 h-6 text-[#f15e1c]" />,
-    deliverables: [
-      "OCR & Layout-Aware Document Parsing",
-      "Custom Schema JSON Extraction Rules",
-      "Automated Audit Trail & Data Validation",
-      "High-Throughput Batch Processing Pipelines",
-    ],
-    metric: "10x",
-    metricLabel: "Document Processing Speed",
-    stageName: "DOCUMENT INTELLIGENCE",
-  },
-  {
-    numStr: "04",
-    title: "AI Privacy, Governance & Cost Tuning",
-    subtitle: "Enterprise Safety & LLM Token Telemetry",
-    description:
-      "Deploy custom LLM microservices with strict DPDP Act / GDPR data privacy compliance, semantic caching, and token usage optimization to lower API costs.",
-    icon: <ShieldCheck className="w-6 h-6 text-[#f15e1c]" />,
-    deliverables: [
-      "Semantic Response Caching for 40%+ Cost Reduction",
-      "Zero-Retention API Model Deployment",
-      "Real-Time Token & Latency Telemetry Dashboard",
-      "Safety Guardrails & Prompt Injection Defense",
-    ],
-    metric: "40%",
-    metricLabel: "LLM API Cost Savings",
-    stageName: "GOVERNANCE & COST",
-  },
-];
-
-const aiPipelinePhases = [
-  { phase: "01", name: "DATA", desc: "Enterprise Data Ingestion & Indexing" },
-  { phase: "02", name: "CONTEXT", desc: "Vector Search & Semantic Chunking" },
-  { phase: "03", name: "REASONING", desc: "LLM Model Reasoning & Guardrails" },
-  { phase: "04", name: "ACTION", desc: "Autonomous API Execution & Workflows" },
-  { phase: "05", name: "FEEDBACK", desc: "Operational Feedback & Cost Telemetry" },
-];
-
-const problemSolutionPairs = [
-  {
-    prob: "01 LEGACY INTEGRATION",
-    probDesc: "AI models disconnected from core ERP & CRM systems.",
-    sol: "AI CORE CONNECTORS",
-    solDesc: "Seamless REST/GraphQL API bridge connecting LLMs to enterprise databases.",
-  },
-  {
-    prob: "02 DATA PRIVACY",
-    probDesc: "Risk of training public models on internal company IP.",
-    sol: "ZERO-RETENTION BOUNDARY",
-    solDesc: "Private model deployment with zero data retention and DPDP compliance.",
-  },
-  {
-    prob: "03 MANUAL WORKFLOWS",
-    probDesc: "Repetitive manual document reviews slowing down teams.",
-    sol: "AUTONOMOUS AI AGENTS",
-    solDesc: "Task-oriented agents processing documents with human-in-the-loop oversight.",
-  },
-];
-
-const techConstellation = [
-  { category: "MODELS", name: "OpenAI GPT-4o", desc: "Multimodal Reasoner" },
-  { category: "MODELS", name: "Claude 3.5 Sonnet", desc: "Complex Code & Logic" },
-  { category: "FRAMEWORKS", name: "LangChain", desc: "Agent Orchestration" },
-  { category: "FRAMEWORKS", name: "LlamaIndex", desc: "Data Indexing" },
-  { category: "VECTOR DB", name: "Pgvector", desc: "Postgres Vector Extension" },
-  { category: "VECTOR DB", name: "Pinecone / Qdrant", desc: "High-Scale Vector Search" },
-  { category: "INFRASTRUCTURE", name: "Python / FastAPI", desc: "High-Performance Backend" },
-  { category: "INFRASTRUCTURE", name: "Docker", desc: "Containerized Deployment" },
-];
-
-const deploymentRoadmap = [
-  { step: "01", title: "AI Feasibility & Scoping", desc: "Audit workflow bottlenecks and identify high-ROI enterprise AI use cases.", deliverable: "Scoping Architecture Document" },
-  { step: "02", title: "Proof of Concept (PoC)", desc: "Build working RAG pipeline or agent prototype using proprietary sample data.", deliverable: "2-Week Functional Prototype" },
-  { step: "03", title: "Enterprise Systems Integration", desc: "Connect AI Core to CRM, ERP, databases, and authentication systems.", deliverable: "Production API Connectors" },
-  { step: "04", title: "Safety & Privacy Tuning", desc: "Enforce zero data retention, role-based access, and token cost caching.", deliverable: "Governance & Safety Audit" },
-  { step: "05", title: "Deployment & Monitoring", desc: "Go live with continuous latency, token cost, and drift telemetry dashboards.", status: "LIVE ● ACTIVE" },
-];
-
-const ctaWords = ["RELIABLE", "SECURE", "ENTERPRISE-READY", "MEASURABLE", "SCALABLE"];
-
-export function AIPortfolioInteractivePage({ service }: AIPortfolioPageProps) {
-  const shouldReduceMotion = useReducedMotion();
-  const [activeSolutionIdx, setActiveSolutionIdx] = React.useState<number>(0);
-  const [activePipelinePhase, setActivePipelinePhase] = React.useState<number>(0);
-  const [activeRoadmapStep, setActiveRoadmapStep] = React.useState<number>(0);
-  const [currentWordIdx, setCurrentWordIdx] = React.useState<number>(0);
-
-  // ---------------------------------------------------------------------------
-  // 1. AI Pipeline Scroll Progression
-  // ---------------------------------------------------------------------------
-  const pipelineContainerRef = React.useRef<HTMLDivElement>(null);
-  const { scrollYProgress: pipelineProgress } = useScroll({
-    target: pipelineContainerRef,
-    offset: ["start 80%", "end 20%"],
-  });
-  const smoothPipelineProgress = useSpring(pipelineProgress, { stiffness: 45, damping: 25 });
-
-  React.useEffect(() => {
-    const unsub = smoothPipelineProgress.on("change", (v) => {
-      const count = aiPipelinePhases.length;
-      const normalized = Math.min(Math.max(0, v), 0.999);
-      const calculatedPhase = Math.floor(normalized * count);
-      setActivePipelinePhase(calculatedPhase);
-    });
-    return () => unsub();
-  }, [smoothPipelineProgress]);
-
-  // ---------------------------------------------------------------------------
-  // 2. Roadmap Scroll Timeline
-  // ---------------------------------------------------------------------------
-  const roadmapContainerRef = React.useRef<HTMLDivElement>(null);
-  const { scrollYProgress: roadmapProgress } = useScroll({
-    target: roadmapContainerRef,
-    offset: ["start 80%", "end 20%"],
-  });
-  const smoothRoadmapProgress = useSpring(roadmapProgress, { stiffness: 45, damping: 25 });
-  const roadmapLineWidth = useTransform(smoothRoadmapProgress, [0, 1], ["0%", "100%"]);
-
-  React.useEffect(() => {
-    const unsub = smoothRoadmapProgress.on("change", (v) => {
-      const count = deploymentRoadmap.length;
-      const normalized = Math.min(Math.max(0, v), 0.999);
-      const calculatedStep = Math.floor(normalized * count);
-      setActiveRoadmapStep(calculatedStep);
-    });
-    return () => unsub();
-  }, [smoothRoadmapProgress]);
-
-  // InView references
-  const statementRef = React.useRef<HTMLDivElement>(null);
-  const isStatementInView = useInView(statementRef, { once: true, margin: "-80px" });
-
-  const testimonialRef = React.useRef<HTMLDivElement>(null);
-  const isTestimonialInView = useInView(testimonialRef, { once: true, margin: "-60px" });
-
-  // Rotating CTA Word Timer
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentWordIdx((prev) => (prev + 1) % ctaWords.length);
-    }, 2400);
-    return () => clearInterval(timer);
-  }, []);
-
-  const activeSolution = aiSolutionsData[activeSolutionIdx];
-  const activeRoadmap = deploymentRoadmap[activeRoadmapStep];
-  const testimonial = testimonialsData.find((t) => t.id === "test-1") || testimonialsData[0];
-
-  return (
-    <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#000000] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c]">
+    <div className="min-h-screen bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300 overflow-x-hidden selection:bg-[#F15E1C]/20 selection:text-[#F15E1C]">
       
-      {/* =========================================================================
-          1. HERO — ARAV INTELLIGENCE CORE AWAKENING & DEPTH SYSTEM
-          ========================================================================= */}
-      <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none">
-        <HeroAICoreVisual />
+      {/* Breadcrumb Navigation */}
+      <div className="relative z-10 w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 pb-1">
+        <Breadcrumb
+          items={[
+            { label: "Services", href: "/services" },
+            { label: "AI Portfolio", href: "/services/ai-portfolio" },
+          ]}
+        />
+      </div>
 
-        {/* Ambient Glows */}
-        <div className="absolute top-1/4 left-1/3 w-[450px] h-[450px] bg-radial from-[#f15e1c]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
-        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-radial from-[#2e936f]/8 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
+      {/* =====================================================================
+          1. HERO SECTION (IMAGE 1)
+          ===================================================================== */}
+      <section className="relative z-10 w-full border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 pt-2 sm:pt-4 pb-8 sm:pb-12 md:pb-14">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* Hero Text (Desktop 45% / lg:col-span-5) */}
+            <div className="lg:col-span-5 space-y-5">
+              <div className="inline-flex items-center gap-2">
+                <Badge variant="outline" className="border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3.5 py-1.5 font-semibold tracking-wider text-xs rounded-full shadow-xs">
+                  AI ENGINEERING • AUTOMATION • INTELLIGENT SYSTEMS
+                </Badge>
+              </div>
 
-        <div className="max-w-[1536px] mx-auto w-full space-y-6 relative z-10">
-          {/* Top Breadcrumb & Badge */}
-          <div className="space-y-3">
-            <Breadcrumb
-              items={[
-                { label: "Services", href: "/services" },
-                { label: "AI Portfolio" },
-              ]}
-            />
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]"
-            >
-              <Sparkles className="w-4 h-4" />
-              <span>THE INTELLIGENCE LAYER OF AN ENTERPRISE</span>
-            </motion.div>
-          </div>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-[1.14]">
+                Turn AI Potential Into Business Intelligence.
+              </h1>
 
-          {/* Headline & Hero Copy */}
-          <div className="max-w-5xl mx-auto w-full text-center space-y-5 pt-4 pb-4">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-              className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold font-display tracking-tight leading-[1.08] text-[#1b2823] dark:text-[#ffffff]"
-            >
-              Turn AI Potential Into <span className="text-[#f15e1c]">Working Business Systems.</span>
-            </motion.h1>
+              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed font-normal">
+                We design practical AI systems that connect data, knowledge and automation to real business workflows — helping organizations make better decisions and get more from their technology.
+              </p>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.25 }}
-              className="text-base sm:text-xl lg:text-2xl text-[#4a5c55] dark:text-[#d3eee4] max-w-3xl mx-auto font-medium leading-relaxed"
-            >
-              Design, integrate and deploy practical AI solutions that automate workflows, connect enterprise data and help teams make better decisions.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-4"
-            >
-              <Link href="/contact" className="w-full sm:w-auto">
-                <MagneticButton className="w-full sm:w-auto">
-                  <Button3D
-                    variant="primary"
-                    size="lg"
-                    rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />}
-                    className="w-full sm:w-auto justify-center shadow-lg shadow-[#f15e1c]/25"
-                  >
+              {/* CTAs */}
+              <div className="flex flex-wrap items-center gap-4 pt-1">
+                <a href="#inquire">
+                  <Button3D variant="primary" size="lg" className="flex items-center gap-2 font-semibold bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] hover:opacity-95 transition-all">
                     Discuss an AI Use Case
+                    <ArrowRight className="w-4 h-4" />
                   </Button3D>
-                </MagneticButton>
-              </Link>
-              <a href="#system" className="w-full sm:w-auto">
-                <MagneticButton className="w-full sm:w-auto">
-                  <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center">
-                    Explore AI Architecture
+                </a>
+                <a href="#capabilities">
+                  <Button3D variant="secondary" size="lg" className="flex items-center gap-2 font-semibold bg-[#2E936F] text-[#FFFFFF] border-[#2E936F] hover:opacity-95 transition-all">
+                    Explore AI Capabilities
                   </Button3D>
-                </MagneticButton>
-              </a>
-            </motion.div>
-          </div>
+                </a>
+              </div>
 
-          {/* AI Core System Status Bar */}
-          <div className="pt-4 text-center">
-            <div className="inline-flex flex-wrap items-center justify-center gap-4 px-4 py-2 rounded-2xl bg-white/80 dark:bg-[#000000]/80 border border-[#f7d7b0] dark:border-[#1a1a1a] backdrop-blur-md shadow-lg text-xs font-mono font-bold text-[#f15e1c]">
-              <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-ping" />
-                STATUS: AI CORE ONLINE
-              </span>
-              <span className="text-[#7A6A5F]">&bull;</span>
-              <span>PRIVACY: 100% ZERO-RETENTION</span>
-              <span className="text-[#7A6A5F]">&bull;</span>
-              <span>LATENCY: SUB-SECOND</span>
+              {/* Compact Capability Line */}
+              <div className="pt-3 border-t border-[#F7D7B0]">
+                <div className="flex flex-wrap items-center gap-2 text-xs font-mono font-bold text-gray-600 dark:text-gray-300">
+                  <span className="px-2 py-0.5 rounded bg-[#F7D7B0]/40 text-[#F15E1C]">AI APPLICATIONS</span>
+                  <span className="text-[#F7D7B0]">•</span>
+                  <span className="px-2 py-0.5 rounded bg-[#F7D7B0]/40 text-[#2E936F]">RAG &amp; KNOWLEDGE</span>
+                  <span className="text-[#F7D7B0]">•</span>
+                  <span className="px-2 py-0.5 rounded bg-[#F7D7B0]/40 text-[#FAB60A]">AI AGENTS</span>
+                  <span className="text-[#F7D7B0]">•</span>
+                  <span className="px-2 py-0.5 rounded bg-[#F7D7B0]/40 text-[#F15E1C]">AUTOMATION</span>
+                  <span className="text-[#F7D7B0]">•</span>
+                  <span className="px-2 py-0.5 rounded bg-[#F7D7B0]/40 text-[#2E936F]">AI INTEGRATION</span>
+                </div>
+              </div>
             </div>
+
+            {/* Hero Image 1 (Desktop 55% / lg:col-span-7) */}
+            <div className="lg:col-span-7 w-full flex items-center justify-center">
+              <TiltCard className="w-full">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  className="relative w-full flex items-center justify-center group"
+                >
+                  <Image
+                    priority
+                    src={AI_PORTFOLIO_HERO_IMAGE}
+                    alt="AI intelligence system connecting data, knowledge, automation and business insights."
+                    width={900}
+                    height={650}
+                    className="w-full h-auto object-contain max-h-[500px] rounded-2xl group-hover:scale-[1.01] transition-transform duration-300 drop-shadow-md"
+                  />
+                </motion.div>
+              </TiltCard>
+            </div>
+
           </div>
         </div>
       </section>
 
       <SystemScanTransition />
 
-      {/* =========================================================================
-          2. SCROLL EXPERIENCE — "ENTER THE AI" (SIGNATURE INTELLIGENCE PIPELINE)
-          ========================================================================= */}
-      <section
-        id="system"
-        ref={pipelineContainerRef}
-        className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none"
-      >
-        <div className="max-w-[1536px] mx-auto space-y-12">
-          <div className="text-center max-w-4xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              ARAV INTELLIGENCE CORE
+      {/* =====================================================================
+          2. AI CAPABILITIES — AI THAT SOLVES REAL WORK
+          ===================================================================== */}
+      <section id="capabilities" className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              PRACTICAL CAPABILITIES
             </Badge>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Data &bull; Context &bull; Reasoning &bull; Action
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              AI That Solves Real Work.
             </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              Scroll down to examine how enterprise data transforms into contextual reasoning, autonomous action, and operational feedback.
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+              We focus on practical AI — systems that understand information, assist decisions and automate meaningful parts of everyday work.
             </p>
           </div>
 
-          {/* 5-Phase Pipeline Progress Strip */}
-          <div className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-sm max-w-5xl mx-auto flex items-center justify-between overflow-x-auto gap-2">
-            {aiPipelinePhases.map((ph, i) => (
-              <div
-                key={ph.phase}
-                className={cn(
-                  "flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-mono font-bold shrink-0 transition-all",
-                  i <= activePipelinePhase
-                    ? "bg-[#f15e1c] text-white shadow-xs"
-                    : "bg-[#fefaf5] dark:bg-[#0a0a0a] text-[#7A6A5F] border border-[#f7d7b0]"
-                )}
+          {/* 4 Concise Capability Areas */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {realWorkCapabilities.map((cap) => (
+              <motion.div
+                key={cap.num}
+                whileHover={{ y: -3 }}
+                className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 hover:shadow-lg transition-all duration-200 shadow-xs space-y-3 flex flex-col justify-between group cursor-pointer"
               >
-                <span>{ph.phase}</span>
-                <span>{ph.name}</span>
-                {i < 4 && <span className="opacity-60 ml-1">&rarr;</span>}
-              </div>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono font-bold text-[#F15E1C] px-2 py-0.5 rounded bg-[#F7D7B0]/40 group-hover:bg-[#F15E1C] group-hover:text-[#FFFFFF] transition-colors">
+                      {cap.num}
+                    </span>
+                    <div className="p-1.5 rounded-lg bg-[#F7D7B0]/30">{cap.icon}</div>
+                  </div>
+                  <h3 className="text-lg font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">
+                    {cap.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                    {cap.desc}
+                  </p>
+                </div>
+
+                <div className="pt-2.5 border-t border-[#F7D7B0]">
+                  <div className="w-full h-0.5 bg-[#F7D7B0] group-hover:bg-[#F15E1C] transition-colors" />
+                </div>
+              </motion.div>
             ))}
           </div>
 
-          {/* Active Phase Detail Card */}
-          <div className="max-w-5xl mx-auto">
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          3. UNIQUE AI VISUAL — INTELLIGENCE FLOW (From Data to Action)
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              INTELLIGENCE FLOW
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              From Data to Action.
+            </h2>
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+              Every production AI system follows a connected pipeline from raw organizational signals to measured business outcomes.
+            </p>
+          </div>
+
+          {/* Connected AI-System Visualization */}
+          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-3xl p-6 sm:p-8 shadow-lg space-y-6 max-w-5xl mx-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+              {intelligenceFlowNodes.map((node, idx) => {
+                const isActive = activeFlowNode === idx;
+                return (
+                  <button
+                    key={node.num}
+                    onClick={() => setActiveFlowNode(idx)}
+                    onMouseEnter={() => setActiveFlowNode(idx)}
+                    className={cn(
+                      "p-4 rounded-xl text-left transition-all duration-200 border cursor-pointer flex flex-col justify-between h-28 transform",
+                      isActive
+                        ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-0.5"
+                        : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
+                    )}
+                  >
+                    <div className="flex items-center justify-between w-full">
+                      <span className={cn("text-[10px] font-mono font-bold", isActive ? "text-[#FFEC69]" : "text-[#F15E1C]")}>
+                        {node.num}
+                      </span>
+                      <div className={cn("p-1 rounded-lg transition-colors", isActive ? "bg-[#FFFFFF] text-[#F15E1C]" : "bg-[#F7D7B0]/30 text-[#F15E1C]")}>
+                        {node.icon}
+                      </div>
+                    </div>
+                    <span className={cn("text-xs font-bold block leading-tight", isActive ? "text-[#FFFFFF]" : "text-[#1b2823] dark:text-[#ffffff]")}>
+                      {node.title}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Active Node Detail */}
             <AnimatePresence mode="wait">
               <motion.div
-                key={aiPipelinePhases[activePipelinePhase].phase}
-                initial={{ opacity: 0, y: 16 }}
+                key={intelligenceFlowNodes[activeFlowNode].num}
+                initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.35 }}
-                className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/40 shadow-2xl space-y-6 text-left relative overflow-hidden"
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.2 }}
+                className="p-5 sm:p-6 rounded-2xl border-2 border-[#F15E1C] bg-[#F7D7B0]/20 text-center space-y-1.5"
               >
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-5">
-                  <div>
-                    <span className="text-xs font-mono font-black text-[#f15e1c] uppercase tracking-wider block">
-                      PHASE {aiPipelinePhases[activePipelinePhase].phase} / 05 &bull; {aiPipelinePhases[activePipelinePhase].name}
-                    </span>
-                    <h3 className="text-2xl sm:text-4xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] mt-1">
-                      {aiPipelinePhases[activePipelinePhase].desc}
-                    </h3>
-                  </div>
-
-                  <div className="px-4 py-2 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#2e936f] shadow-xs">
-                    ACTIVE INTELLIGENCE PHASE
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                  <div className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 space-y-1">
-                    <span className="text-[10px] font-mono font-bold text-[#7A6A5F] block uppercase">FACTUAL RETRIEVAL</span>
-                    <span className="text-sm font-mono font-extrabold text-[#f15e1c]">99.4% ACCURACY</span>
-                  </div>
-                  <div className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 space-y-1">
-                    <span className="text-[10px] font-mono font-bold text-[#7A6A5F] block uppercase">MANUAL TASK REDUCTION</span>
-                    <span className="text-sm font-mono font-extrabold text-[#2e936f]">68% REDUCTION</span>
-                  </div>
-                  <div className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 space-y-1">
-                    <span className="text-[10px] font-mono font-bold text-[#7A6A5F] block uppercase">PROCESSING SPEED</span>
-                    <span className="text-sm font-mono font-extrabold text-[#fab60a]">10x FASTER</span>
-                  </div>
-                </div>
+                <span className="text-xs font-mono font-bold text-[#F15E1C] uppercase">
+                  NODE {intelligenceFlowNodes[activeFlowNode].num} &bull; {intelligenceFlowNodes[activeFlowNode].title}
+                </span>
+                <p className="text-base text-gray-600 dark:text-gray-300 font-medium leading-relaxed max-w-2xl mx-auto">
+                  {intelligenceFlowNodes[activeFlowNode].desc}
+                </p>
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* 4 Solution Workstream Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {aiSolutionsData.map((sol, idx) => {
-              const isActive = activeSolutionIdx === idx;
+        </div>
+      </section>
 
-              return (
-                <TiltCard key={sol.numStr} maxTilt={4} scale={1.01}>
-                  <div
-                    onClick={() => setActiveSolutionIdx(idx)}
-                    onMouseEnter={() => setActiveSolutionIdx(idx)}
-                    className={cn(
-                      "p-8 rounded-[2.5rem] border-2 transition-all duration-300 cursor-pointer space-y-6 text-left flex flex-col justify-between min-h-[340px] relative overflow-hidden group",
-                      isActive
-                        ? "bg-white dark:bg-[#000000] border-[#f15e1c] shadow-2xl ring-2 ring-[#f15e1c]/20"
-                        : "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] opacity-80 hover:opacity-100"
-                    )}
-                  >
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] group-hover:scale-110 transition-transform">
-                            {sol.icon}
-                          </div>
-                          <span className="text-xs font-mono font-black text-[#f15e1c]">
-                            MODULE {sol.numStr}
-                          </span>
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          4. AI SYSTEM VISUAL (IMAGE 2) — ONE AI SYSTEM. MULTIPLE POSSIBILITIES.
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* Left: Text & Capability List (Desktop 40% / lg:col-span-5) */}
+            <div className="lg:col-span-5 space-y-5">
+              <Badge variant="outline" className="border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+                INTELLIGENT INTEGRATION
+              </Badge>
+
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                One AI System. Multiple Possibilities.
+              </h2>
+
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                AI becomes valuable when it connects intelligence with the systems and workflows your organization already uses.
+              </p>
+
+              {/* Capability List */}
+              <div className="space-y-2.5 pt-2">
+                {secondaryCapabilities.map((cap, idx) => {
+                  const isActive = activeSecondaryCap === idx;
+                  return (
+                    <div
+                      key={cap.name}
+                      onMouseEnter={() => setActiveSecondaryCap(idx)}
+                      onClick={() => setActiveSecondaryCap(idx)}
+                      className={cn(
+                        "p-3 rounded-xl border transition-all duration-200 cursor-pointer flex items-center justify-between gap-3",
+                        isActive
+                          ? "bg-[#F7D7B0]/30 border-[#F15E1C] shadow-xs translate-x-1"
+                          : "bg-white dark:bg-[#1b2823] border-[#F7D7B0] hover:border-[#F15E1C]"
+                      )}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={cn("p-1.5 rounded-lg", isActive ? "bg-[#F15E1C] text-[#FFFFFF]" : "bg-[#F7D7B0]/30")}>
+                          {cap.icon}
                         </div>
-
-                        <div className="px-3 py-1 rounded-xl bg-[#fce3d3] dark:bg-[#161616] text-xs font-mono font-bold text-[#f15e1c]">
-                          {sol.metric}
+                        <div>
+                          <h4 className="text-xs sm:text-sm font-bold text-[#1b2823] dark:text-[#ffffff]">{cap.name}</h4>
+                          <p className="text-[11px] text-gray-600 dark:text-gray-300">{cap.desc}</p>
                         </div>
                       </div>
-
-                      <div>
-                        <h3 className="text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
-                          {sol.title}
-                        </h3>
-                        <p className="text-xs font-mono font-semibold text-[#2e936f] mt-1">
-                          {sol.subtitle}
-                        </p>
-                      </div>
-
-                      <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                        {sol.description}
-                      </p>
+                      <ChevronDown className={cn("w-4 h-4 text-[#F15E1C] -rotate-90 transition-transform", isActive ? "opacity-100" : "opacity-30")} />
                     </div>
+                  );
+                })}
+              </div>
+            </div>
 
-                    <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] space-y-2">
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#7A6A5F]">
-                        Key Scope Deliverables
-                      </span>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]">
-                        {sol.deliverables.map((del, i) => (
-                          <div key={i} className="flex items-center gap-2 p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
-                            <span className="truncate">{del}</span>
-                          </div>
-                        ))}
-                      </div>
+            {/* Right: Secondary Visual (Desktop 60% / lg:col-span-7) */}
+            <div className="lg:col-span-7 w-full flex items-center justify-center">
+              <TiltCard className="w-full">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="relative w-full flex items-center justify-center group"
+                >
+                  <Image
+                    loading="lazy"
+                    src={AI_PORTFOLIO_SECONDARY_IMAGE}
+                    alt="AI portfolio visualization showing intelligent applications, AI agents, data and automation."
+                    width={900}
+                    height={650}
+                    className="w-full h-auto object-contain max-h-[480px] rounded-2xl group-hover:scale-[1.01] transition-transform duration-300 drop-shadow-md"
+                  />
+                </motion.div>
+              </TiltCard>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          5. AI SYSTEM ARCHITECTURE
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              SYSTEM ARCHITECTURE
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Intelligence Needs a System Behind It.
+            </h2>
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+              Every layer of the AI system connects naturally to ensure stability, relevance, and operational governance.
+            </p>
+          </div>
+
+          {/* Architecture Layers */}
+          <div className="max-w-4xl mx-auto space-y-3">
+            {systemArchitectureLayers.map((layer, idx) => {
+              const isActive = activeArchLayer === idx;
+              return (
+                <div
+                  key={layer.layer}
+                  onMouseEnter={() => setActiveArchLayer(idx)}
+                  className={cn(
+                    "p-4 sm:p-4.5 rounded-2xl border transition-all duration-200 cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-3",
+                    isActive
+                      ? "bg-[#F7D7B0]/30 border-[#F15E1C] shadow-xs -translate-y-0.5"
+                      : "bg-white dark:bg-[#1b2823] border-[#F7D7B0] hover:border-[#F15E1C]"
+                  )}
+                >
+                  <div className="flex items-center gap-3.5">
+                    <span className="p-2 rounded-xl bg-[#F15E1C] text-[#FFFFFF] font-mono font-bold text-xs shrink-0">
+                      LAYER {layer.layer}
+                    </span>
+                    <div>
+                      <span className="text-[10px] font-mono font-bold text-[#F15E1C] uppercase block">{layer.name}</span>
+                      <h3 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff]">{layer.title}</h3>
                     </div>
                   </div>
-                </TiltCard>
+
+                  <p className="text-xs text-gray-600 dark:text-gray-300 max-w-md sm:text-right">
+                    {layer.desc}
+                  </p>
+                </div>
               );
             })}
           </div>
+
         </div>
       </section>
 
       <SystemScanTransition />
 
-      {/* =========================================================================
-          3. PROBLEM TO SOLUTION TRANSFORMATION (SIGNATURE CARDS)
-          ========================================================================= */}
-      <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none">
-        <div className="max-w-[1536px] mx-auto space-y-12">
-          <div className="text-center max-w-4xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              AI FRICTION POINTS &bull; RESOLVED
+      {/* =====================================================================
+          6. AI AGENTS SECTION
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              TASK-ORIENTED AGENTS
             </Badge>
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Bridging the Gap Between Hype &amp; Enterprise Execution
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              When AI Can Do More Than Answer.
             </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              Transforming legacy integration barriers and data privacy concerns into production-ready engineering.
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+              AI agents can move beyond responses to perform defined tasks, work across systems and involve people when decisions require human judgment.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {problemSolutionPairs.map((pair, i) => (
-              <div
-                key={i}
-                className="p-8 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl space-y-6 text-left flex flex-col justify-between"
-              >
-                {/* Problem Side */}
-                <div className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] space-y-2 opacity-80">
-                  <span className="text-[10px] font-mono font-black text-[#f15e1c] block uppercase">
-                    FRICTION {pair.prob}
-                  </span>
-                  <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-tight">
-                    {pair.probDesc}
-                  </p>
-                </div>
-
-                <div className="text-center text-xs font-mono font-bold text-[#f15e1c]">
-                  &darr; RESOLVED THROUGH ENGINEERING &darr;
-                </div>
-
-                {/* Solution Side */}
-                <div className="p-4 rounded-2xl bg-[#e8f5f1] dark:bg-[#192a24] border-2 border-[#2e936f] space-y-2 shadow-md">
-                  <span className="text-[10px] font-mono font-black text-[#2e936f] block uppercase">
-                    {pair.sol}
-                  </span>
-                  <p className="text-xs font-semibold text-[#1b2823] dark:text-[#ffffff] leading-tight">
-                    {pair.solDesc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <SystemScanTransition />
-
-      {/* =========================================================================
-          4. WOW MOMENT 03 — RAG KNOWLEDGE RETRIEVAL EXPERIENCE
-          ========================================================================= */}
-      <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] select-none">
-        <div className="max-w-[1536px] mx-auto space-y-12">
-          <div className="text-center max-w-4xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              PRIVATE DATA &amp; RETRIEVAL ARCHITECTURE
-            </Badge>
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              RAG Knowledge Retrieval Pipeline
-            </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              Physically chunking, embedding, retrieving, and grounding LLM answers in company data.
-            </p>
-          </div>
-
-          <div className="p-8 sm:p-14 rounded-[3rem] bg-white dark:bg-[#000000] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl space-y-8 text-center relative overflow-hidden">
-            <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 relative z-10">
-              {[
-                { step: "01", name: "DOCUMENTS", desc: "PDFs, CRMs & Databases" },
-                { step: "02", name: "VECTOR SEARCH", desc: "Pgvector Semantic Search" },
-                { step: "03", name: "RELEVANT CHUNKS", desc: "Context Window Assembly" },
-                { step: "04", name: "LLM REASONER", desc: "Prompt + Context Model" },
-                { step: "05", name: "GROUNDED RESPONSE", desc: "Exact Citation Answer" },
-              ].map((rg, idx) => (
+          {/* Visual Progression: UNDERSTAND → DECIDE → ACT → ESCALATE */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
+            {agentProgressionNodes.map((agent, idx) => {
+              const isActive = activeAgentNode === idx;
+              return (
                 <div
-                  key={rg.step}
-                  className="p-5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] space-y-2 text-center"
+                  key={agent.step}
+                  onMouseEnter={() => setActiveAgentNode(idx)}
+                  className={cn(
+                    "p-5 rounded-2xl border transition-all duration-200 cursor-pointer space-y-3 flex flex-col justify-between shadow-xs",
+                    isActive
+                      ? "bg-[#F7D7B0]/20 border-[#F15E1C] shadow-md -translate-y-0.5"
+                      : "bg-white dark:bg-[#1b2823] border-[#F7D7B0] hover:border-[#F15E1C]"
+                  )}
                 >
-                  <span className="text-[10px] font-mono font-black text-[#f15e1c] block">
-                    STEP {rg.step}
-                  </span>
-                  <h4 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                    {rg.name}
-                  </h4>
-                  <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] leading-tight">
-                    {rg.desc}
-                  </p>
+                  <div className="space-y-2">
+                    <span className="text-[10px] font-mono font-bold text-[#F15E1C] px-2 py-0.5 rounded bg-[#F7D7B0]/40 inline-block">
+                      PHASE {agent.step}
+                    </span>
+                    <h3 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff]">{agent.title}</h3>
+                    <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{agent.desc}</p>
+                  </div>
+
+                  <div className="pt-2.5 border-t border-[#F7D7B0] text-[11px] text-gray-600 dark:text-gray-300 space-y-1">
+                    <p><span className="font-semibold text-[#1b2823] dark:text-[#ffffff]">Task:</span> {agent.example}</p>
+                    <p><span className="font-semibold text-[#2E936F]">Control:</span> {agent.oversight}</p>
+                  </div>
                 </div>
-              ))}
-            </div>
-
-            <div className="pt-4 flex items-center justify-center gap-3 text-xs font-mono font-bold text-[#2e936f]">
-              <ShieldCheck className="w-4 h-4" />
-              <span>ZERO DATA RETENTION &bull; 100% PROPRIETARY IP PROTECTION &bull; DPDP ACT COMPLIANT</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          5. AI TECHNOLOGY CONSTELLATION
-          ========================================================================= */}
-      <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none">
-        <div className="max-w-[1536px] mx-auto space-y-12">
-          <div className="text-center max-w-4xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              AI TECHNOLOGY CONSTELLATION
-            </Badge>
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Production AI Stack &amp; Frameworks
-            </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              Built with industry-leading LLMs, vector storage, agent orchestration tools, and containerized backends.
-            </p>
+              );
+            })}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {techConstellation.map((tech, i) => (
-              <TiltCard key={i} maxTilt={4} scale={1.01}>
-                <div className="p-6 rounded-[2rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md hover:border-[#f15e1c] transition-all space-y-3 text-left">
-                  <span className="text-[10px] font-mono font-black text-[#f15e1c] uppercase tracking-wider block">
-                    {tech.category}
-                  </span>
-                  <h3 className="text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                    {tech.name}
-                  </h3>
-                  <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4]">
-                    {tech.desc}
-                  </p>
-                </div>
-              </TiltCard>
-            ))}
-          </div>
         </div>
       </section>
 
       <SystemScanTransition />
 
-      {/* =========================================================================
-          6. AI DEPLOYMENT ROADMAP (5-STAGE TIMELINE WITH LIVE STATUS)
-          ========================================================================= */}
-      <section
-        ref={roadmapContainerRef}
-        className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none"
-      >
-        <div className="max-w-[1536px] mx-auto space-y-12">
-          <div className="text-center max-w-4xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              AI DEPLOYMENT JOURNEY
+      {/* =====================================================================
+          7. RESPONSIBLE AI
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              RESPONSIBLE GOVERNANCE
             </Badge>
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              5-Stage AI Implementation Roadmap
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Intelligence Needs Control.
             </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              From initial feasibility audit to live deployment with continuous token telemetry.
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+              Reliable AI requires the right data, clear access, defined boundaries and human oversight.
             </p>
           </div>
 
-          {/* Roadmap Progress Bar */}
-          <div className="relative py-4 max-w-5xl mx-auto">
-            <div className="relative w-full bg-[#f7d7b0] dark:bg-[#1a1a1a] h-2.5 rounded-full overflow-hidden">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
+            {responsibleAiLoop.map((pt, idx) => (
               <motion.div
-                style={{ width: roadmapLineWidth }}
-                className="h-full bg-gradient-to-r from-[#f15e1c] via-[#2e936f] to-[#fab60a]"
-              />
-            </div>
+                key={pt.point}
+                whileHover={{ y: -3 }}
+                className="p-5 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#2E936F] hover:bg-[#F7D7B0]/20 transition-all duration-300 shadow-xs space-y-2 group cursor-pointer text-center"
+              >
+                <span className="text-xs font-mono font-bold text-[#2E936F] px-2.5 py-0.5 rounded-full bg-[#2E936F]/10 inline-block">
+                  CONTROL 0{idx + 1} &bull; {pt.point}
+                </span>
+                <h3 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2E936F] transition-colors">
+                  {pt.title}
+                </h3>
+                <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">
+                  {pt.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
 
-            <div className="flex justify-between items-center absolute inset-x-0 -top-2.5">
-              {deploymentRoadmap.map((rm, idx) => {
-                const isActive = activeRoadmapStep === idx;
-                const isPassed = idx <= activeRoadmapStep;
+          {/* Connected Loop Badge */}
+          <div className="mt-8 text-center">
+            <span className="inline-flex items-center gap-2 text-xs font-mono font-bold text-gray-600 dark:text-gray-300 px-4 py-1.5 rounded-full border border-[#F7D7B0] bg-[#F7D7B0]/20">
+              DATA &rarr; ACCESS &rarr; GUARDRAILS &rarr; OVERSIGHT &rarr; IMPROVEMENT
+            </span>
+          </div>
 
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          8. AI DELIVERY TIMELINE (VERTICAL SCROLL-CONTROLLED)
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+            <Badge variant="outline" className="mb-2.5 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              DELIVERY LIFECYCLE
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              From AI Idea to Working System.
+            </h2>
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+              Our engineering lifecycle moves deliberately from problem discovery to continuous system evolution.
+            </p>
+          </div>
+
+          {/* Central Vertical Timeline */}
+          <div className="relative max-w-4xl mx-auto py-2">
+            <div className="absolute left-4 md:left-1/2 top-4 bottom-10 w-0.5 -translate-x-1/2 bg-[#F7D7B0]" />
+
+            <div className="space-y-8 md:space-y-10">
+              {deliveryTimelineStages.map((stage, idx) => {
+                const isEven = idx % 2 === 0;
                 return (
-                  <button
-                    key={rm.step}
-                    type="button"
-                    onClick={() => setActiveRoadmapStep(idx)}
+                  <motion.div
+                    key={stage.num}
+                    initial={{ opacity: 0.4, y: 14 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false, amount: 0.4 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
                     className={cn(
-                      "w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 transition-all duration-300 flex items-center justify-center text-xs sm:text-sm font-mono font-black cursor-pointer shrink-0",
-                      isActive
-                        ? "bg-[#f15e1c] border-white text-white scale-125 shadow-lg shadow-[#f15e1c]/40 ring-4 ring-[#f15e1c]/20 z-10"
-                        : isPassed
-                        ? "bg-[#2e936f] border-white text-white"
-                        : "bg-white dark:bg-[#000000] border-[#f7d7b0] dark:border-[#1a1a1a] text-[#7A6A5F]"
+                      "relative flex flex-col md:flex-row items-start md:items-center group cursor-pointer",
+                      isEven ? "md:flex-row-reverse" : ""
                     )}
                   >
-                    {isPassed && !isActive ? <Check className="w-4 h-4 text-white" /> : rm.step}
-                  </button>
+                    <div className={cn("w-full md:w-1/2 pl-12 md:pl-0", isEven ? "md:pr-10 md:text-right" : "md:pl-10 md:text-left")}>
+                      <div className="p-5 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] group-hover:border-[#F15E1C] group-hover:bg-[#F7D7B0]/20 group-hover:shadow-md group-hover:-translate-y-0.5 transition-all duration-300 shadow-xs space-y-1.5">
+                        <span className="text-xs font-mono font-bold text-[#F15E1C] px-2 py-0.5 rounded bg-[#F7D7B0]/40 group-hover:bg-[#F15E1C] group-hover:text-[#FFFFFF] transition-colors inline-block">
+                          STAGE {stage.num}
+                        </span>
+                        <h3 className="text-lg font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">
+                          {stage.title}
+                        </h3>
+                        <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">
+                          {stage.desc}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="absolute left-4 md:left-1/2 top-5 -translate-x-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#1b2823] border-2 border-[#F7D7B0] group-hover:border-[#F15E1C] group-hover:bg-[#F15E1C] flex items-center justify-center transition-all duration-300 shadow-xs z-10">
+                      <span className="text-[11px] font-mono font-bold text-[#F15E1C] group-hover:text-[#FFFFFF]">
+                        {stage.num}
+                      </span>
+                    </div>
+
+                    <div className="hidden md:block w-1/2" />
+                  </motion.div>
                 );
               })}
             </div>
           </div>
 
-          {/* Active Roadmap Step Card */}
-          <div className="max-w-5xl mx-auto">
-            {(() => {
-              const activeRoadmap = deploymentRoadmap[activeRoadmapStep] || deploymentRoadmap[0];
-              return (
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeRoadmap.step}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.35 }}
-                className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/40 shadow-2xl space-y-6 text-left relative overflow-hidden"
-              >
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-5">
-                  <div>
-                    <span className="text-xs font-mono font-black text-[#f15e1c] uppercase tracking-wider block">
-                      STAGE {activeRoadmap.step} / 05 &bull; ENTERPRISE DEPLOYMENT
-                    </span>
-                    <h3 className="text-2xl sm:text-4xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] mt-1">
-                      {activeRoadmap.title}
-                    </h3>
-                  </div>
+        </div>
+      </section>
 
-                  <div className="px-4 py-2 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#2e936f] shadow-xs">
-                    {activeRoadmap.deliverable || activeRoadmap.status}
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          9. AI LEARNING LOOP
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              AI LEARNING LOOP
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              AI Gets Better When the System Learns.
+            </h2>
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+              Hover over each phase of the continuous learning loop that transforms telemetry into ongoing system improvements.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 max-w-5xl mx-auto">
+            {learningLoopSteps.map((item, idx) => {
+              const isActive = activeLoopStep === idx;
+              return (
+                <button
+                  key={item.stage}
+                  onClick={() => setActiveLoopStep(idx)}
+                  onMouseEnter={() => setActiveLoopStep(idx)}
+                  className={cn(
+                    "p-4 rounded-2xl text-left transition-all duration-200 border cursor-pointer flex flex-col justify-between h-32 transform",
+                    isActive
+                      ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-0.5"
+                      : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
+                  )}
+                >
+                  <span className={cn("text-[10px] font-mono font-bold", isActive ? "text-[#FFEC69]" : "text-[#F15E1C]")}>
+                    0{idx + 1}
+                  </span>
+                  <span className={cn("text-xs font-bold block", isActive ? "text-[#FFFFFF]" : "text-[#1b2823] dark:text-[#ffffff]")}>
+                    {item.stage}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="mt-5 max-w-md mx-auto text-center">
+            <p className="text-xs text-gray-600 dark:text-gray-300 font-medium">
+              Phase: <span className="font-bold text-[#1b2823] dark:text-[#ffffff]">{learningLoopSteps[activeLoopStep].stage}</span> &mdash; {learningLoopSteps[activeLoopStep].desc}
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          10. ENGAGEMENT MODELS
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              STARTING FORMATS
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Start Where Your Business Needs It.
+            </h2>
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+              Choose an engagement format tailored to your current stage of AI exploration and adoption.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {engagementOptions.map((model) => (
+              <motion.div
+                key={model.title}
+                whileHover={{ y: -3 }}
+                className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-xl transition-all duration-300 space-y-5 flex flex-col justify-between group cursor-pointer"
+              >
+                <div className="space-y-3">
+                  <span className="text-[10px] font-mono font-bold text-[#F15E1C] uppercase block">{model.tag}</span>
+                  <h3 className="text-xl font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">{model.title}</h3>
+                  <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{model.desc}</p>
+
+                  <div className="pt-3 border-t border-[#F7D7B0] space-y-1.5">
+                    <span className="text-[10px] font-mono font-bold text-[#2E936F] uppercase block">Deliverables</span>
+                    {model.deliverables.map((del, dIdx) => (
+                      <div key={dIdx} className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-300">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#F15E1C] shrink-0" />
+                        <span>{del}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
-                <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                  {activeRoadmap.desc}
-                </p>
-
-                <div className="pt-3 border-t border-[#f7d7b0] dark:border-[#1a1a1a] flex items-center justify-between text-xs font-mono font-bold text-[#f15e1c]">
-                  <span>CONTINUOUS TOKEN &amp; LATENCY TELEMETRY</span>
-                  <span>STAGE 05 GOES LIVE WITH REAL-TIME MONITORING &rarr;</span>
+                <div className="pt-2">
+                  <a href="#inquire">
+                    <Button3D variant="secondary" size="md" className="w-full bg-[#2E936F] text-[#FFFFFF] border-[#2E936F]">
+                      Inquire About {model.title}
+                    </Button3D>
+                  </a>
                 </div>
               </motion.div>
-            </AnimatePresence>
-              );
-            })()}
+            ))}
           </div>
+
         </div>
       </section>
 
-      {/* =========================================================================
-          7. ABOUT OUR CEO — EDITORIAL LEADERSHIP PROFILE
-          ========================================================================= */}
-      <section className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1536px] mx-auto rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-8 sm:p-14 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center text-left">
-          <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-3xl overflow-hidden border-2 border-[#f15e1c] shadow-xl bg-[#fce3d3] dark:bg-[#161616] flex items-center justify-center text-center p-6 space-y-2 flex-col">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#f15e1c] text-white flex items-center justify-center text-2xl sm:text-3xl font-black font-display shadow-md">
-                AS
-              </div>
-              <div className="text-lg sm:text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                Aryan Sayal
-              </div>
-              <div className="text-xs sm:text-sm font-mono font-bold text-[#f15e1c]">
-                CEO &amp; Managing Director
-              </div>
-              <span className="text-xs text-[#2e936f] font-mono">Arav Innovations</span>
-            </div>
-          </div>
+      <SystemScanTransition />
 
-          <div className="lg:col-span-7 space-y-4">
-            <Badge variant="secondary" size="md">
-              About Our CEO
+      {/* =====================================================================
+          11. PROOF — WHERE AI CAN CREATE LEVERAGE
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              PROVEN OPPORTUNITIES
             </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-              Aryan Sayal
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Where AI Can Create Leverage.
             </h2>
-            <p className="text-xs sm:text-sm font-mono font-extrabold text-[#f15e1c] uppercase tracking-wider">
-              CEO, Arav Innovations
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+              We focus on areas where AI can generate real operational leverage rather than speculative experiments.
             </p>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-              &quot;AI should solve actual business bottlenecks, not create hype. We engineer systems grounded in company data, with human oversight and zero retention guarantees.&quot;
-            </p>
-            <div className="pt-2">
-              <a
-                href="https://www.linkedin.com/company/aravinnovations/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#f15e1c] text-white text-xs sm:text-sm font-bold shadow-md hover:bg-[#d44e14] transition-colors"
-              >
-                <Globe2 className="w-4 h-4" />
-                <span>Connect on LinkedIn</span>
-              </a>
-            </div>
           </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+            {leverageAreas.map((item) => (
+              <div key={item.title} className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] space-y-2">
+                <div className="flex items-center gap-2">
+                  <div className="p-1.5 rounded-lg bg-[#F7D7B0]/30">{item.icon}</div>
+                  <span className="text-[10px] font-mono font-bold text-[#2E936F]">{item.tag}</span>
+                </div>
+                <h3 className="text-lg font-bold text-[#1b2823] dark:text-[#ffffff]">{item.title}</h3>
+                <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
 
-      {/* =========================================================================
-          7.5 FREQUENTLY ASKED QUESTIONS (AI PORTFOLIO)
-          ========================================================================= */}
-      <FAQAccordion />
+      <SystemScanTransition />
 
-      {/* =========================================================================
-          8. FINAL CTA — FLAGSHIP INTELLIGENCE CORE CULMINATION
-          ========================================================================= */}
-      <section id="inquire" className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 select-none">
-        <div className="max-w-[1536px] mx-auto space-y-8">
-          {/* Connector Flow Header */}
-          <div className="text-center space-y-2">
-            <span className="text-xs font-mono font-extrabold text-[#f15e1c] uppercase tracking-widest block">
-              ENTERPRISE AI CULMINATION
-            </span>
-            <div className="flex items-center justify-center gap-2 text-xs sm:text-sm font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] flex-wrap">
-              <span>DATA</span>
-              <span className="text-[#f15e1c]">&rarr;</span>
-              <span>CONTEXT</span>
-              <span className="text-[#f15e1c]">&rarr;</span>
-              <span>REASONING</span>
-              <span className="text-[#f15e1c]">&rarr;</span>
-              <span>ACTION</span>
-              <span className="text-[#f15e1c]">&rarr;</span>
-              <span>FEEDBACK</span>
-              <span className="text-[#f15e1c]">&rarr;</span>
-              <span className="text-[#2e936f]">CONTINUOUS INTELLIGENCE</span>
-            </div>
+      {/* =====================================================================
+          12. AI INSIGHTS
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              KNOWLEDGE BASE
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              AI Insights.
+            </h2>
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+              Explore our engineering perspectives on practical AI implementation, enterprise RAG, and governance.
+            </p>
           </div>
 
-          <div className="rounded-[3rem] bg-gradient-to-br from-[#f15e1c] via-[#e55215] to-[#d8480d] text-white p-10 sm:p-16 border-2 border-[#fab60a] shadow-2xl space-y-8 text-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-radial from-white/20 via-transparent to-transparent pointer-events-none" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {articles.map((post) => (
+              <Link key={post.slug} href={`/insights/${post.slug}`} className="group block">
+                <motion.div whileHover={{ y: -3 }} className="h-full p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-md transition-all duration-200 shadow-xs flex flex-col justify-between">
+                  <div>
+                    <Badge variant="subtle" className="mb-2.5 text-[10px] bg-[#F7D7B0]/40 text-[#F15E1C] font-semibold">
+                      {post.category}
+                    </Badge>
+                    <h3 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="mt-1.5 text-xs text-gray-600 dark:text-gray-300 line-clamp-3 leading-relaxed">
+                      {post.summary}
+                    </p>
+                  </div>
+                  <div className="pt-3 mt-3 border-t border-[#F7D7B0] flex items-center justify-between text-xs font-semibold text-[#F15E1C]">
+                    <span>Read Article</span>
+                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </div>
+                </motion.div>
+              </Link>
+            ))}
+          </div>
 
-            <div className="relative z-10 max-w-4xl mx-auto space-y-5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/20 border border-white/40 text-xs font-mono font-bold text-white">
-                <Sparkles className="w-4 h-4 text-[#ffec69]" />
-                <span>PUT PRACTICAL AI TO WORK</span>
-              </div>
+          <div className="text-center mt-8">
+            <Link href="/insights">
+              <Button3D variant="secondary" size="md" className="bg-[#2E936F] text-[#FFFFFF] border-[#2E936F]">
+                Explore All Insights
+              </Button3D>
+            </Link>
+          </div>
 
-              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-display tracking-tight text-white leading-tight">
-                Ready to build an AI system that is
-              </h2>
+        </div>
+      </section>
 
-              {/* Alternating Animated Word Display */}
-              <div className="h-12 flex items-center justify-center overflow-hidden">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={ctaWords[currentWordIdx]}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.35 }}
-                    className="text-2xl sm:text-4xl font-extrabold font-display text-[#ffec69] uppercase tracking-wider"
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          13. FAQ SECTION (EXACTLY 5 CONCISE FAQS)
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+            <Badge variant="outline" className="mb-2.5 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              QUESTIONS &amp; ANSWERS
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Frequently Asked Questions.
+            </h2>
+            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+              Clear answers regarding AI architecture, system integration, internal documents, and governance.
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto space-y-3">
+            {aiFaqs.map((faq, index) => {
+              const isOpen = openFaqIdx === index;
+              return (
+                <div
+                  key={index}
+                  className="rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#1b2823] overflow-hidden transition-all hover:border-[#F15E1C] hover:shadow-xs"
+                >
+                  <button
+                    onClick={() => setOpenFaqIdx(isOpen ? null : index)}
+                    className="w-full text-left p-4 flex items-center justify-between font-bold text-sm sm:text-base text-[#1b2823] dark:text-[#ffffff] hover:text-[#F15E1C] transition-colors cursor-pointer"
                   >
-                    {ctaWords[currentWordIdx]}
-                  </motion.div>
-                </AnimatePresence>
-              </div>
+                    <span>{faq.question}</span>
+                    <ChevronDown className={cn("w-4 h-4 transition-transform duration-200 text-[#F15E1C]", isOpen && "rotate-180")} />
+                  </button>
 
-              <p className="text-base sm:text-xl font-bold text-white/90">
-                Kick start an AI engineering initiative with us today
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <div className="p-4 pt-0 text-xs sm:text-sm text-gray-600 dark:text-gray-300 border-t border-[#F7D7B0] leading-relaxed">
+                          {faq.answer}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
+
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          14. CONTACT / LEAD FORM
+          ===================================================================== */}
+      <section id="inquire" className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto rounded-3xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] p-6 sm:p-10 shadow-xl space-y-6">
+            
+            <div className="text-center space-y-2">
+              <Badge variant="outline" className="border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+                START AN AI INITIATIVE
+              </Badge>
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#1b2823] dark:text-[#ffffff]">
+                Discuss an AI Use Case.
+              </h2>
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">
+                Share your current challenge or AI goal. Our engineering team will review feasibility and data architecture.
               </p>
             </div>
 
-            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-              <Link href="/contact" className="w-full sm:w-auto">
-                <MagneticButton className="w-full sm:w-auto">
-                  <Button3D
-                    variant="primary"
-                    size="lg"
-                    rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />}
-                    className="w-full sm:w-auto justify-center bg-white text-[#f15e1c] hover:bg-[#f7d7b0]"
-                  >
-                    Discuss an AI Use Case
-                  </Button3D>
-                </MagneticButton>
-              </Link>
-              <a
-                href="https://api.whatsapp.com/send?phone=971521555792&text=Hello%20Arav%20Innovations%2C%20I%27d%20like%20to%20discuss%20an%20AI%20project."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto"
-              >
-                <MagneticButton className="w-full sm:w-auto">
-                  <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center text-white border-white/60 hover:bg-white/10">
-                    Instant WhatsApp Inquiry
-                  </Button3D>
-                </MagneticButton>
-              </a>
-            </div>
+            {formSubmitted ? (
+              <div className="p-6 rounded-2xl bg-[#F7D7B0]/30 border border-[#2E936F] text-center space-y-3">
+                <CheckCircle2 className="w-8 h-8 text-[#2E936F] mx-auto" />
+                <h3 className="text-lg font-bold text-[#1b2823] dark:text-[#ffffff]">Thank You for Reaching Out.</h3>
+                <p className="text-xs text-gray-600 dark:text-gray-300">
+                  Your AI use case details have been received. An AI solutions engineer will follow up shortly.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleFormSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-gray-700 dark:text-gray-300">Your Name *</label>
+                    <input
+                      required
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="e.g. John Doe"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#1b2823] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
+                    />
+                  </div>
 
-            <div className="relative z-10 pt-6 border-t border-white/20 flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm text-white/90 font-medium">
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Zero Data Retention Guarantee
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> 100% Proprietary IP Ownership
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Regional Teams in Gurgaon &amp; Dubai
-              </span>
-            </div>
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-gray-700 dark:text-gray-300">Company Name *</label>
+                    <input
+                      required
+                      type="text"
+                      value={formData.company}
+                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                      placeholder="e.g. Acme Corp"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#1b2823] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-gray-700 dark:text-gray-300">Work Email *</label>
+                    <input
+                      required
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      placeholder="name@company.com"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#1b2823] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-gray-700 dark:text-gray-300">AI Use Case *</label>
+                    <select
+                      value={formData.useCase}
+                      onChange={(e) => setFormData({ ...formData, useCase: e.target.value })}
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#1b2823] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
+                    >
+                      <option value="AI Automation">AI Automation</option>
+                      <option value="AI Assistant">AI Assistant</option>
+                      <option value="RAG / Knowledge System">RAG / Knowledge System</option>
+                      <option value="AI Agent">AI Agent</option>
+                      <option value="AI Application">AI Application</option>
+                      <option value="AI Strategy / Discovery">AI Strategy / Discovery</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-gray-700 dark:text-gray-300">Current Challenge / Goal *</label>
+                  <textarea
+                    required
+                    rows={3}
+                    value={formData.challenge}
+                    onChange={(e) => setFormData({ ...formData, challenge: e.target.value })}
+                    placeholder="Describe the workflow friction or AI objective..."
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#1b2823] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-gray-700 dark:text-gray-300">Expected Timeline</label>
+                  <select
+                    value={formData.timeline}
+                    onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#1b2823] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
+                  >
+                    <option value="Immediately">Immediately</option>
+                    <option value="1-3 months">1-3 months</option>
+                    <option value="3-6 months">3-6 months</option>
+                    <option value="Exploratory">Exploratory / Roadmap</option>
+                  </select>
+                </div>
+
+                <div className="pt-2">
+                  <Button3D variant="primary" size="lg" className="w-full bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C]">
+                    Submit AI Use Case Inquiry
+                  </Button3D>
+                </div>
+              </form>
+            )}
+
           </div>
         </div>
       </section>
 
-      {/* =========================================================================
-          9. FOOTER BRAND MOMENT
-          ========================================================================= */}
-      <footer className="py-6 border-t border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] overflow-hidden select-none">
-        <div className="flex items-center justify-center gap-4 text-xs sm:text-sm font-mono font-extrabold text-[#7A6A5F] dark:text-[#B8ACA0] tracking-widest flex-wrap px-4">
-          <span>DATA</span>
-          <span className="text-[#f15e1c]">&bull;</span>
-          <span>CONTEXT</span>
-          <span className="text-[#f15e1c]">&bull;</span>
-          <span>REASONING</span>
-          <span className="text-[#f15e1c]">&bull;</span>
-          <span>ACTION</span>
-          <span className="text-[#f15e1c]">&bull;</span>
-          <span>FEEDBACK</span>
-          <span className="text-[#f15e1c]">&bull;</span>
-          <span>CONTINUOUS INTELLIGENCE</span>
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          15. FINAL CTA
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative rounded-3xl p-8 sm:p-12 bg-[#2E936F] text-[#FFFFFF] border border-[#2E936F] shadow-2xl overflow-hidden text-center space-y-5">
+            
+            {/* Ambient Accents */}
+            <div className="absolute -top-24 -left-24 w-80 h-80 bg-[#F15E1C]/30 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -right-24 w-80 h-80 bg-[#FAB60A]/25 rounded-full blur-3xl pointer-events-none" />
+
+            <Badge variant="outline" className="border-[#FFFFFF] text-[#FFFFFF] bg-[#FFFFFF]/10 px-3 py-1 font-semibold tracking-wider text-xs">
+              TAKE THE NEXT STEP
+            </Badge>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight max-w-3xl mx-auto leading-tight text-[#FFFFFF]">
+              Have an AI Use Case in Mind?
+            </h2>
+
+            <p className="text-base sm:text-lg text-[#FFEC69] max-w-2xl mx-auto leading-relaxed font-medium">
+              Let&apos;s turn the idea into a practical AI system built around the right data, workflow, integration and controls.
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-3">
+              <a href="#inquire">
+                <Button3D variant="primary" size="lg" className="flex items-center gap-2 font-semibold bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] hover:opacity-95 transition-all">
+                  Discuss Your AI Use Case
+                  <ArrowRight className="w-4 h-4" />
+                </Button3D>
+              </a>
+              <Link href="/services">
+                <Button3D variant="secondary" size="lg" className="flex items-center gap-2 font-medium bg-[#FFFFFF] text-[#2E936F] border-[#FFFFFF] hover:bg-[#F7D7B0] transition-all">
+                  Explore All Services
+                </Button3D>
+              </Link>
+            </div>
+
+          </div>
         </div>
-      </footer>
+      </section>
+
     </div>
   );
 }
