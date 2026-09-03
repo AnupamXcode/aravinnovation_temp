@@ -7,9 +7,6 @@ import {
   AnimatePresence,
   useReducedMotion,
   useInView,
-  useScroll,
-  useTransform,
-  useSpring,
 } from "framer-motion";
 import {
   Search,
@@ -19,42 +16,41 @@ import {
   ArrowRight,
   Sparkles,
   CheckCircle2,
-  Quote,
-  Star,
   Zap,
   Target,
   FileCode,
   Layers,
-  Check,
   RefreshCw,
   Eye,
   ArrowUpRight,
-  Gauge,
   Database,
-  Filter,
   Sliders,
-  Play,
-  Link2,
-  ArrowUp,
+  Workflow,
+  ChevronDown,
+  Cpu,
+  Share2,
+  BookOpen,
+  Building2,
+  ShieldCheck,
+  Code,
+  Network,
   Compass,
-  ChevronUp,
 } from "lucide-react";
 import { Service } from "@/data/services";
-import { caseStudiesData } from "@/data/case-studies";
-import { testimonialsData } from "@/data/testimonials";
+import { BlogPost, blogPostsData } from "@/data/insights";
 import { Button3D } from "@/components/ui/button-3d";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
 import { TiltCard } from "@/components/motion/TiltCard";
-import { MagneticButton } from "@/components/motion/MagneticButton";
 import { cn } from "@/lib/utils";
 
 interface SEOPageProps {
   service: Service;
+  relatedPosts?: BlogPost[];
 }
 
 // -----------------------------------------------------------------------------
-// 1. System Scan Transition Line (Subtle sweeping scan line between sections)
+// System Scan Transition Line
 // -----------------------------------------------------------------------------
 function SystemScanTransition() {
   const ref = React.useRef<HTMLDivElement>(null);
@@ -62,14 +58,14 @@ function SystemScanTransition() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <div ref={ref} className="relative w-full h-px my-4 overflow-hidden pointer-events-none select-none">
-      <div className="w-full h-full bg-[#f7d7b0]/30 dark:bg-[#1a1a1a]" />
+    <div ref={ref} className="relative w-full h-px my-6 overflow-hidden pointer-events-none select-none">
+      <div className="w-full h-full bg-[#F7D7B0]" />
       {!shouldReduceMotion && (
         <motion.div
           initial={{ x: "-100%" }}
           animate={isInView ? { x: "100%" } : {}}
           transition={{ duration: 1.4, ease: "easeInOut" }}
-          className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-transparent via-[#f15e1c] to-transparent shadow-[0_0_8px_#f15e1c]"
+          className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-transparent via-[#F15E1C] to-transparent shadow-[0_0_8px_#F15E1C]"
         />
       )}
     </div>
@@ -77,1243 +73,1378 @@ function SystemScanTransition() {
 }
 
 // -----------------------------------------------------------------------------
-// 2. Hero Search Results Field & Ranking Ascent Visual
+// Search Discovery Ecosystem Data (Section 2)
 // -----------------------------------------------------------------------------
-function SearchAscentHeroVisual() {
-  const shouldReduceMotion = useReducedMotion();
-
-  if (shouldReduceMotion) return null;
-
-  return (
-    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-30 dark:opacity-25 select-none flex items-center justify-center">
-      <div className="relative w-full max-w-4xl h-[420px] flex flex-col justify-between py-6 px-4">
-        {/* Competitor Result Card 03 */}
-        <div className="p-3 rounded-2xl bg-white/40 dark:bg-[#000000]/40 border border-[#f7d7b0]/40 backdrop-blur-xs flex items-center justify-between opacity-40">
-          <div className="flex items-center gap-3">
-            <div className="w-3 h-3 rounded-full bg-[#7A6A5F]" />
-            <span className="text-xs font-mono text-[#7A6A5F]">Competitor Result &bull; Informational</span>
-          </div>
-          <span className="text-[10px] font-mono text-[#7A6A5F]">POSITION 04</span>
-        </div>
-
-        {/* Competitor Result Card 02 */}
-        <div className="p-3.5 rounded-2xl bg-white/50 dark:bg-[#000000]/50 border border-[#f7d7b0]/60 backdrop-blur-xs flex items-center justify-between opacity-60">
-          <div className="flex items-center gap-3">
-            <div className="w-3.5 h-3.5 rounded-full bg-[#2e936f]" />
-            <span className="text-xs font-mono font-bold text-[#1b2823] dark:text-[#ffffff]">Industry Directory &bull; Listing</span>
-          </div>
-          <span className="text-[10px] font-mono text-[#2e936f] font-bold">POSITION 03</span>
-        </div>
-
-        {/* YOUR BRAND — ASCENDING RANKING CARD */}
-        <motion.div
-          initial={{ y: 40, opacity: 0.6, scale: 0.98 }}
-          animate={{ y: 0, opacity: 1, scale: 1.02 }}
-          transition={{ duration: 2, ease: "easeOut", repeat: Infinity, repeatType: "reverse", repeatDelay: 3 }}
-          className="p-5 rounded-2xl bg-white dark:bg-[#000000] border-2 border-[#f15e1c] shadow-2xl flex items-center justify-between z-10"
-        >
-          <div className="flex items-center gap-3">
-            <div className="w-4 h-4 rounded-full bg-[#f15e1c] flex items-center justify-center text-white text-[10px] font-bold">
-              ★
-            </div>
-            <div>
-              <span className="text-xs font-mono font-black text-[#f15e1c] block">
-                YOUR BRAND &bull; ARAV INNOVATIONS
-              </span>
-              <span className="text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]">
-                Enterprise Search Intelligence &bull; High Intent &bull; Core Web Vitals 99/100
-              </span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 px-3 py-1 rounded-xl bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c] text-xs font-mono font-bold text-[#f15e1c]">
-            <ArrowUp className="w-3.5 h-3.5" />
-            <span>RANK ASCENT</span>
-          </div>
-        </motion.div>
-
-        {/* Competitor Result Card 01 */}
-        <div className="p-3.5 rounded-2xl bg-white/40 dark:bg-[#000000]/40 border border-[#f7d7b0]/40 backdrop-blur-xs flex items-center justify-between opacity-50">
-          <div className="flex items-center gap-3">
-            <div className="w-3.5 h-3.5 rounded-full bg-[#7A6A5F]" />
-            <span className="text-xs font-mono text-[#7A6A5F]">Legacy Domain &bull; Generic Content</span>
-          </div>
-          <span className="text-[10px] font-mono text-[#7A6A5F]">PREVIOUS LEADER</span>
-        </div>
-      </div>
-    </div>
-  );
-}
+const searchDiscoveryPaths = [
+  {
+    id: "traditional",
+    name: "TRADITIONAL SEARCH",
+    title: "Organic Engine Visibility",
+    desc: "Crawlable pages, clear architecture, and intent-matched content that search engines index and rank reliably.",
+    icon: <Search className="w-5 h-5" />,
+    focus: "Technical Crawl • Indexing • On-Page Relevance",
+  },
+  {
+    id: "local",
+    name: "LOCAL DISCOVERY",
+    title: "Geographic & Hyperlocal Intent",
+    desc: "Geographic search signals, location landing pages, and proximity intent for regional service discovery.",
+    icon: <Globe2 className="w-5 h-5" />,
+    focus: "Location Signals • Local Intent • Regional Footprint",
+  },
+  {
+    id: "media",
+    name: "IMAGE & VIDEO DISCOVERY",
+    title: "Rich Media & Visual Search",
+    desc: "Structured media metadata, alt architectures, and visual assets indexed across visual search experiences.",
+    icon: <Eye className="w-5 h-5" />,
+    focus: "Structured Alt • Media Schemas • Visual Asset Indexing",
+  },
+  {
+    id: "ai",
+    name: "AI-ASSISTED SEARCH",
+    title: "Conversational & Generative Discovery",
+    desc: "Entity clarity, structured data, and authoritative citations that LLMs and AI search engines synthesize.",
+    icon: <Cpu className="w-5 h-5" />,
+    focus: "Entity Clarity • Structured Data • AI Source Synthesis",
+  },
+  {
+    id: "branded",
+    name: "BRANDED SEARCH",
+    title: "Entity Authority & Direct Intent",
+    desc: "Strengthening brand entity signals, knowledge graph alignment, and branded navigation pathways.",
+    icon: <Target className="w-5 h-5" />,
+    focus: "Knowledge Graph • Brand Entity • Navigational Intent",
+  },
+  {
+    id: "direct",
+    name: "DIRECT & RETURNING USERS",
+    title: "Sustained Audience Retention",
+    desc: "Topical depth and clear internal links that convert search discovery into repeatable site visits.",
+    icon: <RefreshCw className="w-5 h-5" />,
+    focus: "Internal Linking • Topic Depth • Audience Retention",
+  },
+];
 
 // -----------------------------------------------------------------------------
-// 3. Metric Counter Number Component (Viewport Ease-Out Count-Up)
+// SEO System Nodes (Section 3)
 // -----------------------------------------------------------------------------
-function CounterNumber({
-  value,
-  prefix = "",
-  suffix = "",
-  decimals = 0,
-}: {
-  value: number;
-  prefix?: string;
-  suffix?: string;
-  decimals?: number;
-}) {
-  const ref = React.useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-20px" });
-  const shouldReduceMotion = useReducedMotion();
-  const [displayValue, setDisplayValue] = React.useState<string>(
-    shouldReduceMotion ? value.toFixed(decimals) : (0).toFixed(decimals)
-  );
+const seoSystemNodes = [
+  { step: "01", label: "TECHNICAL FOUNDATION", title: "Crawlability & Rendering", desc: "Clean site structure, fast server responses, rendering pipelines, and error-free indexing." },
+  { step: "02", label: "SEARCH INTENT", title: "Query Intent Mapping", desc: "Understanding exact user needs (informational, commercial, transactional) behind search terms." },
+  { step: "03", label: "CONTENT ARCHITECTURE", title: "Topic Depth & Hierarchy", desc: "Building comprehensive topic structures, internal linking loops, and useful page depth." },
+  { step: "04", label: "ENTITY & TOPICAL AUTHORITY", title: "Brand Expertise Graph", desc: "Establishing entity signals and topical credibility that search algorithms recognize." },
+  { step: "05", label: "DISCOVERY", title: "Multi-Surface Indexing", desc: "Optimizing visibility across web, local, image, video, and conversational search surfaces." },
+  { step: "06", label: "CONVERSION", title: "Landing Page Relevance", desc: "Connecting organic traffic directly to relevant value propositions and clear action paths." },
+  { step: "07", label: "MEASUREMENT", title: "Search Console & Analytics", desc: "Tracking query impressions, landing page engagement, technical health, and business outcomes." },
+  { step: "08", label: "REFINEMENT", title: "Continuous Optimization", desc: "Iterating architecture and content based on search algorithm updates and real performance data." },
+];
 
-  React.useEffect(() => {
-    if (!isInView || shouldReduceMotion) {
-      setDisplayValue(value.toFixed(decimals));
-      return;
+// -----------------------------------------------------------------------------
+// 6 SEO Dimensions (Section 4)
+// -----------------------------------------------------------------------------
+const seoDimensions = [
+  { num: "01", title: "TECHNICAL ACCESS", desc: "Crawlability, indexing, site architecture, rendering, and technical health.", icon: <Code className="w-5 h-5 text-[#F15E1C]" /> },
+  { num: "02", title: "SEARCH INTENT", desc: "Understanding what users actually need behind the query.", icon: <Target className="w-5 h-5 text-[#2E936F]" /> },
+  { num: "03", title: "CONTENT ARCHITECTURE", desc: "Building useful topic structures, internal relationships, and content depth.", icon: <BookOpen className="w-5 h-5 text-[#FAB60A]" /> },
+  { num: "04", title: "ENTITY & TOPICAL AUTHORITY", desc: "Helping search systems understand the business, expertise, topics, and relationships around the brand.", icon: <Network className="w-5 h-5 text-[#F15E1C]" /> },
+  { num: "05", title: "EXPERIENCE & PERFORMANCE", desc: "Mobile usability, Core Web Vitals, accessibility, and fast useful experiences.", icon: <Zap className="w-5 h-5 text-[#2E936F]" /> },
+  { num: "06", title: "MEASUREMENT & LEARNING", desc: "Search Console, analytics, conversions, and continuous performance analysis.", icon: <BarChart3 className="w-5 h-5 text-[#FAB60A]" /> },
+];
+
+// -----------------------------------------------------------------------------
+// Technical SEO Architecture Layers (Section 5)
+// -----------------------------------------------------------------------------
+const techSeoLayers = [
+  { layer: "01", stage: "DISCOVER", title: "Sitemap & URL Discovery", desc: "XML sitemaps, robots.txt directives, and clean URL structure allowing search bots to discover new content.", tags: ["Robots.txt", "XML Sitemaps", "URL Structure"] },
+  { layer: "02", stage: "CRAWL", title: "Crawl Efficiency & Budget", desc: "Optimizing server response times, HTTP headers, canonical tags, and eliminating crawl loops.", tags: ["Canonicalization", "Crawl Budget", "Redirect Chains"] },
+  { layer: "03", stage: "RENDER", title: "JavaScript & HTML Rendering", desc: "Ensuring server-side rendering (SSR) and hydration allow search bots to process full DOM content seamlessly.", tags: ["SSR / SSG", "DOM Hydration", "Script Loading"] },
+  { layer: "04", stage: "INDEX", title: "Indexation & Directives", desc: "Managing meta robots tags, noindex rules, paginated series, and canonical indexation signals.", tags: ["Meta Robots", "Noindex Controls", "Pagination"] },
+  { layer: "05", stage: "UNDERSTAND", title: "Structured Data & Schema", desc: "JSON-LD schemas (Organization, Article, Service, FAQ, Product) providing explicit semantic context.", tags: ["JSON-LD Schemas", "Semantic HTML", "Entity Graph"] },
+  { layer: "06", stage: "SERVE", title: "Performance & Experience", desc: "Core Web Vitals (LCP, INP, CLS), mobile responsiveness, and HTTPS security standards.", tags: ["Core Web Vitals", "Mobile First", "HTTPS / SSL"] },
+];
+
+// -----------------------------------------------------------------------------
+// Search Intent Categories (Section 6)
+// -----------------------------------------------------------------------------
+const searchIntentCategories = [
+  {
+    type: "INFORMATIONAL",
+    query: "User is learning or researching",
+    desc: "The searcher wants background information, explanations, or educational guidance on a specific topic.",
+    response: "Comprehensive guides, technical explainers, educational articles, and architectural overviews.",
+    icon: <BookOpen className="w-5 h-5 text-[#F15E1C]" />,
+  },
+  {
+    type: "COMMERCIAL",
+    query: "User is comparing options",
+    desc: "The searcher is evaluating solutions, comparing service capabilities, or reviewing technology options.",
+    response: "Comparison pages, service capability breakdowns, technology stack overviews, and case studies.",
+    icon: <Sliders className="w-5 h-5 text-[#2E936F]" />,
+  },
+  {
+    type: "TRANSACTIONAL",
+    query: "User is ready to act",
+    desc: "The searcher has high intent to engage, request an audit, hire a team, or initiate a consultation.",
+    response: "Clear service landing pages, direct assessment request forms, and clear action pathways.",
+    icon: <Zap className="w-5 h-5 text-[#FAB60A]" />,
+  },
+  {
+    type: "NAVIGATIONAL",
+    query: "User is looking for a specific brand",
+    desc: "The searcher seeks the official website, specific service portal, or direct contact point for the brand.",
+    response: "Strong brand entity signals, clear site structure, sitelinks, and direct homepage navigation.",
+    icon: <Compass className="w-5 h-5 text-[#F15E1C]" />,
+  },
+];
+
+// -----------------------------------------------------------------------------
+// Entity Graph Nodes (Section 7)
+// -----------------------------------------------------------------------------
+const entityGraphNodes = [
+  { id: "center", label: "ARAV / BRAND ENTITY", type: "core", desc: "The central business entity, core authority, and verified organizational identity." },
+  { id: "services", label: "SERVICES", type: "branch", desc: "IT Strategy, Software Engineering, AI Solutions, Governance & SEO." },
+  { id: "expertise", label: "TECHNICAL EXPERTISE", type: "branch", desc: "Cloud Architecture, Web Development, Data Engineering & System Audits." },
+  { id: "industries", label: "INDUSTRIES", type: "branch", desc: "SaaS, Enterprise IT, Financial Services, Healthcare & Digital Platforms." },
+  { id: "topics", label: "TOPICAL CLUSTERS", type: "branch", desc: "Search Intelligence, Technical SEO, Entity Visibility & AI Search." },
+  { id: "people", label: "PRACTITIONERS", type: "branch", desc: "Senior Architects, Engineers, Consultants & Strategy Leads." },
+  { id: "references", label: "CITATIONS & SCHEMAS", type: "branch", desc: "Structured JSON-LD, Organization Schemas & Editorial References." },
+];
+
+// -----------------------------------------------------------------------------
+// Search Context Selector Data (Section 9)
+// -----------------------------------------------------------------------------
+const searchContexts = [
+  {
+    id: "enterprise",
+    name: "ENTERPRISE",
+    title: "Large-Scale Architecture & Multi-Domain SEO",
+    desc: "Complex site structures, international subdomains, legacy redirects, and large-scale indexation management across multi-region domains.",
+    focus: ["Multi-Region Indexing", "Crawl Budget Optimization", "Legacy Migration Safety"],
+  },
+  {
+    id: "local",
+    name: "LOCAL & REGIONAL",
+    title: "Geographic & Hyperlocal Visibility",
+    desc: "Proximity intent, regional landing page architectures, local schema markup, and geographic search presence.",
+    focus: ["Location Schema", "Geographic Landing Pages", "Regional Search Signals"],
+  },
+  {
+    id: "ecommerce",
+    name: "E-COMMERCE",
+    title: "Faceted Navigation & Product Indexing",
+    desc: "Faceted search parameter handling, product structured data, canonical controls, and category page hierarchy.",
+    focus: ["Faceted Navigation Controls", "Product Schemas", "Category Architecture"],
+  },
+  {
+    id: "b2b",
+    name: "B2B SERVICES",
+    title: "High-Intent Lead & Solution Discovery",
+    desc: "Commercial search intent mapping, technical service positioning, whitepaper indexation, and conversion-focused landing pages.",
+    focus: ["Commercial Intent Alignment", "Solution Pages", "Lead Journey Integration"],
+  },
+  {
+    id: "content",
+    name: "CONTENT-LED",
+    title: "Topical Authority & Knowledge Hubs",
+    desc: "Comprehensive topic clusters, internal linking networks, editorial standards, and digital publication architectures.",
+    focus: ["Topic Cluster Mapping", "Internal Link Loops", "Editorial Hub Architecture"],
+  },
+];
+
+// -----------------------------------------------------------------------------
+// Continuous SEO Loop Stages (Section 12)
+// -----------------------------------------------------------------------------
+const continuousSeoLoop = [
+  { step: "01", name: "OBSERVE", desc: "Monitor search crawl patterns, ranking movements, and algorithm shifts." },
+  { step: "02", name: "DIAGNOSE", desc: "Identify technical errors, intent mismatches, or indexation bottlenecks." },
+  { step: "03", name: "PRIORITIZE", desc: "Focus engineering & content effort on highest impact search fixes." },
+  { step: "04", name: "OPTIMIZE", desc: "Implement code updates, schema fixes, internal links, and content depth." },
+  { step: "05", name: "PUBLISH", desc: "Deploy clean updates into production with validated technical metadata." },
+  { step: "06", name: "MEASURE", desc: "Track query performance, organic traffic quality, and conversion signals." },
+  { step: "07", name: "LEARN", desc: "Extract search insights to refine technical architecture and future roadmaps." },
+];
+
+// -----------------------------------------------------------------------------
+// SEO Engagement Models (Section 13)
+// -----------------------------------------------------------------------------
+const seoEngagementModels = [
+  {
+    name: "SEARCH FOUNDATION",
+    title: "Technical & Structural Clarity",
+    desc: "Ideal for organizations needing an immediate technical cleanup, site architecture repair, schema implementation, and baseline search health.",
+    deliverables: ["Full Technical Audit & Remediation", "JSON-LD Schema Implementation", "Indexation & Crawl Budget Cleanup", "Search Console Configuration"],
+  },
+  {
+    name: "SEARCH GROWTH",
+    title: "Organic Discovery & Content Expansion",
+    desc: "For businesses ready to build comprehensive topic clusters, expand search intent coverage, and grow organic visibility systematically.",
+    deliverables: ["Topic Cluster Architecture", "Intent-Driven Content Alignment", "Internal Linking Optimization", "Monthly Performance & Analytics"],
+  },
+  {
+    name: "SEARCH TRANSFORMATION",
+    title: "Ongoing Strategy & Enterprise SEO",
+    desc: "Comprehensive partner engagement for complex or large-scale sites requiring ongoing technical engineering, AI search positioning, and continuous optimization.",
+    deliverables: ["Dedicated Search Strategy Lead", "AI Search & Entity Graph Alignment", "Continuous Technical Engineering", "Executive Reporting & Attribution"],
+  },
+];
+
+// -----------------------------------------------------------------------------
+// FAQ Data (Section 17)
+// -----------------------------------------------------------------------------
+const seoFaqData = [
+  {
+    question: "What does an SEO engagement with Arav Innovations include?",
+    answer:
+      "Our SEO engagements cover technical site architecture, search intent mapping, content depth, JSON-LD schema engineering, entity signals, and continuous performance measurement. We focus on building a clean, discoverable search foundation rather than quick-fix tactics.",
+  },
+  {
+    question: "How do you approach technical SEO?",
+    answer:
+      "We examine crawlability, indexation rules, server rendering (SSR/SSG), site speed (Core Web Vitals), canonicalization, XML sitemaps, and structured data. We fix underlying code and architectural issues directly alongside your engineering or web development team.",
+  },
+  {
+    question: "How do you align SEO with search intent and business goals?",
+    answer:
+      "Rather than targeting random keyword volumes, we map search terms into distinct intent categories (informational, commercial, transactional, navigational) and ensure every target page delivers the exact content type and value proposition the searcher requires.",
+  },
+  {
+    question: "How are AI-powered search experiences changing SEO?",
+    answer:
+      "AI-driven search engines and conversational LLMs rely heavily on clear entity definitions, authoritative structured data (JSON-LD), logical content architecture, and verified expertise. We optimize entity clarity so search systems can understand and reference your brand accurately.",
+  },
+  {
+    question: "How do you measure SEO performance?",
+    answer:
+      "We measure performance through Google Search Console data (impressions, query clicks, average position), organic landing page traffic quality, technical crawl health, and downstream conversion events mapped to real business outcomes.",
+  },
+];
+
+export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
+  const [activeDiscoveryPath, setActiveDiscoveryPath] = React.useState<number>(0);
+  const [activeSystemNode, setActiveSystemNode] = React.useState<number>(0);
+  const [activeDimension, setActiveDimension] = React.useState<number>(0);
+  const [activeTechLayer, setActiveTechLayer] = React.useState<number>(0);
+  const [activeIntentIdx, setActiveIntentIdx] = React.useState<number>(0);
+  const [activeEntityId, setActiveEntityId] = React.useState<string>("center");
+  const [activeContextId, setActiveContextId] = React.useState<string>("enterprise");
+  const [openFaqIdx, setOpenFaqIdx] = React.useState<number | null>(0);
+
+  // Hover states for interactive previews
+  const [hoverDiscoveryIdx, setHoverDiscoveryIdx] = React.useState<number | null>(null);
+  const [hoverSystemIdx, setHoverSystemIdx] = React.useState<number | null>(null);
+
+  // Dynamic Blog Posts from real CMS data
+  const articles = React.useMemo(() => {
+    if (relatedPosts && relatedPosts.length > 0) {
+      return relatedPosts.slice(0, 3);
     }
+    return blogPostsData.slice(0, 3);
+  }, [relatedPosts]);
 
-    let startTimestamp: number | null = null;
-    const duration = 1600;
+  const displayedDiscoveryIdx = hoverDiscoveryIdx !== null ? hoverDiscoveryIdx : activeDiscoveryPath;
+  const currentDiscoveryPath = searchDiscoveryPaths[displayedDiscoveryIdx];
 
-    const step = (timestamp: number) => {
-      if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-      const easeProgress = 1 - Math.pow(1 - progress, 3);
-      const current = easeProgress * value;
+  const displayedSystemIdx = hoverSystemIdx !== null ? hoverSystemIdx : activeSystemNode;
+  const currentSystemNode = seoSystemNodes[displayedSystemIdx];
 
-      setDisplayValue(current.toFixed(decimals));
-
-      if (progress < 1) {
-        window.requestAnimationFrame(step);
-      }
-    };
-
-    const animFrame = window.requestAnimationFrame(step);
-    return () => window.cancelAnimationFrame(animFrame);
-  }, [isInView, value, decimals, shouldReduceMotion]);
+  const currentContext = searchContexts.find((c) => c.id === activeContextId) || searchContexts[0];
+  const currentEntity = entityGraphNodes.find((e) => e.id === activeEntityId) || entityGraphNodes[0];
 
   return (
-    <span ref={ref} className="tabular-nums font-mono font-black">
-      {prefix}
-      {displayValue}
-      {suffix}
-    </span>
-  );
-}
-
-// -----------------------------------------------------------------------------
-// Data Collections
-// -----------------------------------------------------------------------------
-const seoSolutionsData = [
-  {
-    numStr: "01",
-    title: "Technical & On-Page SEO",
-    subtitle: "Core Web Vitals & Semantic Content Hierarchy",
-    description:
-      "We optimize website speed, crawlability, mobile responsiveness, and on-page semantic structure to ensure search engines accurately understand and rank your content.",
-    icon: <FileCode className="w-6 h-6 text-[#f15e1c]" />,
-    deliverables: [
-      "Sub-Second Core Web Vitals & Page Speed Tuning",
-      "Semantic HTML5 & JSON-LD Schema Integration",
-      "Mobile-First Responsive Crawl Architecture",
-      "URL & Internal Link Structure Optimization",
-    ],
-    metric: "99/100",
-    metricLabel: "Technical SEO Performance Score",
-    stageName: "TECHNICAL FOUNDATION",
-  },
-  {
-    numStr: "02",
-    title: "Enterprise & E-Commerce SEO",
-    subtitle: "Large-Scale Architecture & High-Intent Rankings",
-    description:
-      "For complex enterprise domains and e-commerce platforms, we optimize thousands of product pages, category taxonomies, and multi-region search strategies.",
-    icon: <Globe2 className="w-6 h-6 text-[#f15e1c]" />,
-    deliverables: [
-      "Facet & Dynamic Category Indexing Control",
-      "Multilingual Hreflang & Regional Search Scoping",
-      "High-Volume Product Schema Optimization",
-      "Cannibalization & Duplicate Content Cleanups",
-    ],
-    metric: "3.4x",
-    metricLabel: "Organic Traffic Growth Increase",
-    stageName: "ENTERPRISE SCALING",
-  },
-  {
-    numStr: "03",
-    title: "Local & Hyperlocal Marketing",
-    subtitle: "Geotargeted Visibility & Reputation Care",
-    description:
-      "We enhance local search presence for multi-location businesses through Google Business Profile optimization, local citation building, and online reputation management.",
-    icon: <Target className="w-6 h-6 text-[#f15e1c]" />,
-    deliverables: [
-      "Google Business Profile Optimization & Audit",
-      "Geotargeted Local Citation & Directory Sync",
-      "Localized Landing Page & Schema Creation",
-      "Online Review & Reputation Signals Management",
-    ],
-    metric: "#1",
-    metricLabel: "Local 3-Pack Visibility Goal",
-    stageName: "LOCAL DISCOVERY",
-  },
-  {
-    numStr: "04",
-    title: "Authority Building & Search Analytics",
-    subtitle: "High-Quality Backlinks & Data Science Insights",
-    description:
-      "We build domain authority through editorial outreach and provide AI-assisted analytics dashboards to track organic keywords, traffic quality, and conversions.",
-    icon: <TrendingUp className="w-6 h-6 text-[#f15e1c]" />,
-    deliverables: [
-      "Editorial PR & High-Authority Backlink Scoping",
-      "Topical Authority & Content Cluster Architecture",
-      "AI-Assisted Keyword Intent & Gap Analysis",
-      "Closed-Loop Revenue Attribution Dashboards",
-    ],
-    metric: "100%",
-    metricLabel: "White-Hat Compliance Guarantee",
-    stageName: "AUTHORITY & ANALYTICS",
-  },
-];
-
-const searchJourneyStages = [
-  { stage: "01", name: "DISCOVER", desc: "Search Intent & Competitor Landscape Scan" },
-  { stage: "02", name: "PRIORITIZE", desc: "Search Opportunity Priority Ladder" },
-  { stage: "03", name: "OPTIMIZE", desc: "Content Transformation & On-Page Schema" },
-  { stage: "04", name: "AUTHORITY", desc: "Authority Layer Stack & Editorial Signals" },
-  { stage: "05", name: "MEASURE", desc: "Search Performance Trend Line & Qualified Leads" },
-];
-
-const priorityLadderItems = [
-  { level: "HIGH VALUE", intent: "COMMERCIAL INTENT", title: "Enterprise Cloud IT Solutions", color: "bg-[#2e936f]/20 border-[#2e936f] text-[#2e936f]" },
-  { level: "HIGH INTENT", intent: "TRANSACTIONAL", title: "DPDP Compliance Advisory Dubai", color: "bg-[#2e936f]/20 border-[#2e936f] text-[#2e936f]" },
-  { level: "STRONG RELEVANCE", intent: "INFORMATIONAL", title: "ISO 27001 Audit Guide 2026", color: "bg-[#fab60a]/20 border-[#fab60a] text-[#fab60a]" },
-  { level: "SUPPORTING TOPIC", intent: "INFORMATIONAL", title: "What is SaaS Architecture", color: "bg-[#f15e1c]/15 border-[#f15e1c]/40 text-[#f15e1c]" },
-];
-
-const howWeWorkSteps = [
-  {
-    step: "01",
-    title: "Discover & Audit",
-    subtitle: "Technical SEO & Intent Gap Audit",
-    description:
-      "We analyze search intent, technical site health, and competitor gaps to establish a baseline SEO strategy for your domain.",
-    output: "Technical SEO & Intent Gap Audit",
-  },
-  {
-    step: "02",
-    title: "Plan & Prioritize",
-    subtitle: "Topical Cluster & Keyword Roadmap",
-    description:
-      "We structure high-value keyword clusters, topical pillar hierarchies, and technical optimization priorities.",
-    output: "Topical Cluster & Keyword Roadmap",
-  },
-  {
-    step: "03",
-    title: "Optimize & Create",
-    subtitle: "On-Page Optimization & Content Release",
-    description:
-      "We refine page architecture, enhance Core Web Vitals, and create search-intent aligned content for maximum engagement.",
-    output: "On-Page Optimization & Content Release",
-  },
-  {
-    step: "04",
-    title: "Build Authority",
-    subtitle: "High-Authority Editorial Links",
-    description:
-      "We build brand trust and domain authority through strategic content promotion, digital PR, and high-quality references.",
-    output: "High-Authority Editorial Links",
-  },
-  {
-    step: "05",
-    title: "Measure & Refine",
-    subtitle: "Continuous Search Optimization Loop",
-    description:
-      "We monitor organic traffic, keyword visibility, and conversion metrics to continuously refine search strategy.",
-    output: "Continuous Search Optimization Loop",
-  },
-];
-
-const continuousSearchCycleSteps = [
-  { id: "discover", name: "DISCOVER", desc: "Search Intent Audit" },
-  { id: "audit", name: "AUDIT", desc: "Technical Health Scan" },
-  { id: "plan", name: "PLAN", desc: "Priority Ladder Roadmap" },
-  { id: "optimize", name: "OPTIMIZE", desc: "Content Transformation" },
-  { id: "authority", name: "AUTHORITY", desc: "Authority Stack Building" },
-  { id: "measure", name: "MEASURE", desc: "Rank & Conversion Trend" },
-];
-
-const ctaWords = ["DISCOVERABLE", "RELEVANT", "VISIBLE", "AUTHORITATIVE", "GROWING"];
-
-export function SEOInteractivePage({ service }: SEOPageProps) {
-  const shouldReduceMotion = useReducedMotion();
-  const [activeSolutionIdx, setActiveSolutionIdx] = React.useState<number>(0);
-  const [activeJourneyStage, setActiveJourneyStage] = React.useState<number>(0);
-  const [activeWorkIdx, setActiveWorkIdx] = React.useState<number>(0);
-  const [currentWordIdx, setCurrentWordIdx] = React.useState<number>(0);
-  const [isContentOptimized, setIsContentOptimized] = React.useState<boolean>(false);
-
-  // ---------------------------------------------------------------------------
-  // 1. Search Journey Scroll Progression
-  // ---------------------------------------------------------------------------
-  const journeyContainerRef = React.useRef<HTMLDivElement>(null);
-  const { scrollYProgress: journeyProgress } = useScroll({
-    target: journeyContainerRef,
-    offset: ["start 80%", "end 20%"],
-  });
-  const smoothJourneyProgress = useSpring(journeyProgress, { stiffness: 45, damping: 25 });
-
-  React.useEffect(() => {
-    const unsub = smoothJourneyProgress.on("change", (v) => {
-      const count = searchJourneyStages.length;
-      const normalized = Math.min(Math.max(0, v), 0.999);
-      const calculatedStage = Math.floor(normalized * count);
-      setActiveJourneyStage(calculatedStage);
-    });
-    return () => unsub();
-  }, [smoothJourneyProgress]);
-
-  // ---------------------------------------------------------------------------
-  // 2. 5-Stage Framework Timeline Scroll Line
-  // ---------------------------------------------------------------------------
-  const timelineContainerRef = React.useRef<HTMLDivElement>(null);
-  const { scrollYProgress: timelineProgress } = useScroll({
-    target: timelineContainerRef,
-    offset: ["start 80%", "end 20%"],
-  });
-  const smoothTimelineProgress = useSpring(timelineProgress, { stiffness: 45, damping: 25 });
-  const timelineLineWidth = useTransform(smoothTimelineProgress, [0, 1], ["0%", "100%"]);
-
-  React.useEffect(() => {
-    const unsub = smoothTimelineProgress.on("change", (v) => {
-      const count = howWeWorkSteps.length;
-      const normalized = Math.min(Math.max(0, v), 0.999);
-      const calculatedIdx = Math.floor(normalized * count);
-      setActiveWorkIdx(calculatedIdx);
-    });
-    return () => unsub();
-  }, [smoothTimelineProgress]);
-
-  // ---------------------------------------------------------------------------
-  // 3. Continuous Search Cycle Signal Motion
-  // ---------------------------------------------------------------------------
-  const loopContainerRef = React.useRef<HTMLDivElement>(null);
-  const { scrollYProgress: loopProgress } = useScroll({
-    target: loopContainerRef,
-    offset: ["start end", "end start"],
-  });
-  const smoothLoopProgress = useSpring(loopProgress, { stiffness: 45, damping: 25 });
-  const [activeLoopStep, setActiveLoopStep] = React.useState<number>(0);
-
-  React.useEffect(() => {
-    const unsub = smoothLoopProgress.on("change", (v) => {
-      const count = continuousSearchCycleSteps.length;
-      const normalized = Math.min(Math.max(0, v), 0.999);
-      const calculatedIdx = Math.floor(normalized * count);
-      setActiveLoopStep(calculatedIdx);
-    });
-    return () => unsub();
-  }, [smoothLoopProgress]);
-
-  // ---------------------------------------------------------------------------
-  // 4. Parallax & Blur Typography for Search Discovery Philosophy
-  // ---------------------------------------------------------------------------
-  const missionRef = React.useRef<HTMLDivElement>(null);
-  const { scrollYProgress: missionProgress } = useScroll({
-    target: missionRef,
-    offset: ["start end", "end start"],
-  });
-  const backgroundTextX1 = useTransform(missionProgress, [0, 1], ["-10%", "10%"]);
-  const backgroundTextX2 = useTransform(missionProgress, [0, 1], ["10%", "-10%"]);
-
-  // InView references
-  const statementRef = React.useRef<HTMLDivElement>(null);
-  const isStatementInView = useInView(statementRef, { once: true, margin: "-80px" });
-
-  const testimonialRef = React.useRef<HTMLDivElement>(null);
-  const isTestimonialInView = useInView(testimonialRef, { once: true, margin: "-60px" });
-
-  // Rotating CTA Word Timer
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentWordIdx((prev) => (prev + 1) % ctaWords.length);
-    }, 2400);
-    return () => clearInterval(timer);
-  }, []);
-
-  const activeSolution = seoSolutionsData[activeSolutionIdx];
-  const activeWorkStep = howWeWorkSteps[activeWorkIdx];
-  const testimonial = testimonialsData.find((t) => t.id === "test-2") || testimonialsData[1];
-
-  return (
-    <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#000000] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c]">
+    <div className="min-h-screen bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300 overflow-x-hidden selection:bg-[#F15E1C]/20 selection:text-[#F15E1C]">
       
-      {/* =========================================================================
-          1. HERO — FROM INVISIBLE TO DISCOVERABLE (RANKING ASCENT)
-          ========================================================================= */}
-      <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none">
-        <SearchAscentHeroVisual />
+      {/* Breadcrumb Navigation */}
+      <div className="relative z-10 w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-3 sm:pt-4 pb-1 sm:pb-2">
+        <Breadcrumb
+          items={[
+            { label: "Services", href: "/services" },
+            { label: "SEO Services", href: "/services/seo-services" },
+          ]}
+        />
+      </div>
 
-        {/* Ambient Glows */}
-        <div className="absolute top-1/4 left-1/3 w-[450px] h-[450px] bg-radial from-[#f15e1c]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
-        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-radial from-[#2e936f]/8 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
-
-        <div className="max-w-[1536px] mx-auto w-full space-y-6 relative z-10">
-          {/* Top Breadcrumb & Badge */}
-          <div className="space-y-3">
-            <Breadcrumb
-              items={[
-                { label: "Services", href: "/services" },
-                { label: "SEO Services" },
-              ]}
-            />
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]"
-            >
-              <Sparkles className="w-4 h-4" />
-              <span>THE SEARCH JOURNEY &bull; BRAND RISING THROUGH SEARCH</span>
-            </motion.div>
-          </div>
-
-          {/* Headline & Hero Copy */}
-          <div className="max-w-5xl mx-auto w-full text-center space-y-5 pt-4 pb-4">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-              className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold font-display tracking-tight leading-[1.08] text-[#1b2823] dark:text-[#ffffff]"
-            >
-              Turn Search Visibility Into <span className="text-[#f15e1c]">Sustainable Growth</span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.25 }}
-              className="text-base sm:text-xl lg:text-2xl text-[#4a5c55] dark:text-[#d3eee4] max-w-3xl mx-auto font-medium leading-relaxed"
-            >
-              Data-driven search engine optimization combining technical Core Web Vitals excellence, semantic content clusters, and authoritative brand signals.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-4"
-            >
-              <Link href="/contact" className="w-full sm:w-auto">
-                <MagneticButton className="w-full sm:w-auto">
-                  <Button3D
-                    variant="primary"
-                    size="lg"
-                    rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />}
-                    className="w-full sm:w-auto justify-center shadow-lg shadow-[#f15e1c]/25"
-                  >
-                    Request SEO Audit
-                  </Button3D>
-                </MagneticButton>
-              </Link>
-              <Link href="/services" className="w-full sm:w-auto">
-                <MagneticButton className="w-full sm:w-auto">
-                  <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center">
-                    Explore Disciplines
-                  </Button3D>
-                </MagneticButton>
-              </Link>
-            </motion.div>
-          </div>
-
-          {/* Search System Status Bar */}
-          <div className="pt-4 text-center">
-            <div className="inline-flex flex-wrap items-center justify-center gap-4 px-4 py-2 rounded-2xl bg-white/80 dark:bg-[#000000]/80 border border-[#f7d7b0] dark:border-[#1a1a1a] backdrop-blur-md shadow-lg text-xs font-mono font-bold text-[#f15e1c]">
-              <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-ping" />
-                STATUS: DISCOVERABLE
-              </span>
-              <span className="text-[#7A6A5F]">&bull;</span>
-              <span>RANKING ASCENT: ACTIVE</span>
-              <span className="text-[#7A6A5F]">&bull;</span>
-              <span>CORE WEB VITALS: 99/100</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <SystemScanTransition />
-
-      {/* =========================================================================
-          2. SOLUTIONS — THE SEARCH JOURNEY (VERTICAL SEARCH ASCENT NARRATIVE)
-          ========================================================================= */}
-      <section
-        id="search-journey"
-        ref={journeyContainerRef}
-        className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none"
-      >
-        <div className="max-w-[1536px] mx-auto space-y-12">
-          <div className="text-center max-w-4xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              THE SEARCH JOURNEY
-            </Badge>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Vertical Search Ascent
-            </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              Scroll down to watch a brand rise from invisible to discoverable, relevant, visible, and authoritative.
-            </p>
-          </div>
-
-          {/* 5-Stage Search Journey Progress Strip */}
-          <div className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-sm max-w-5xl mx-auto flex items-center justify-between overflow-x-auto gap-2">
-            {searchJourneyStages.map((st, i) => (
-              <div
-                key={st.stage}
-                className={cn(
-                  "flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-mono font-bold shrink-0 transition-all",
-                  i <= activeJourneyStage
-                    ? "bg-[#f15e1c] text-white shadow-xs"
-                    : "bg-[#fefaf5] dark:bg-[#0a0a0a] text-[#7A6A5F] border border-[#f7d7b0]"
-                )}
-              >
-                <span>{st.stage}</span>
-                <span>{st.name}</span>
-                {i < 4 && <span className="opacity-60 ml-1">&rarr;</span>}
+      {/* =====================================================================
+          1. HERO — MAKE SEARCH THE VISUAL STORY
+          ===================================================================== */}
+      <section className="relative z-10 w-full border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-2 sm:pt-4 pb-8 sm:pb-12 md:pb-16 lg:pb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
+            
+            {/* Hero Copy */}
+            <div className="lg:col-span-6 space-y-6">
+              <div className="inline-flex items-center gap-2">
+                <Badge variant="outline" className="border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3.5 py-1.5 font-semibold tracking-wider text-xs rounded-full shadow-xs">
+                  SEARCH INTELLIGENCE • ORGANIC VISIBILITY
+                </Badge>
               </div>
-            ))}
-          </div>
 
-          {/* Active Stage Detail Card */}
-          <div className="max-w-5xl mx-auto">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={searchJourneyStages[activeJourneyStage].stage}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.35 }}
-                className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/40 shadow-2xl space-y-6 text-left relative overflow-hidden"
-              >
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-5">
-                  <div>
-                    <span className="text-xs font-mono font-black text-[#f15e1c] uppercase tracking-wider block">
-                      STAGE {searchJourneyStages[activeJourneyStage].stage} / 05 &bull; {searchJourneyStages[activeJourneyStage].name}
-                    </span>
-                    <h3 className="text-2xl sm:text-4xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] mt-1">
-                      {searchJourneyStages[activeJourneyStage].desc}
-                    </h3>
-                  </div>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-[1.12]">
+                Be Found When Your Customers Are Searching.
+              </h1>
 
-                  <div className="px-4 py-2 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#2e936f] shadow-xs">
-                    SEARCH ASCENT ENGINE
-                  </div>
+              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl leading-relaxed">
+                We build search strategies that connect technical foundations, search intent, content, authority and measurement — helping businesses become easier to discover, understand and choose across modern search experiences.
+              </p>
+
+              {/* CTAs */}
+              <div className="flex flex-wrap items-center gap-4 pt-2">
+                <Link href="/contact">
+                  <Button3D variant="primary" size="lg" className="flex items-center gap-2 font-semibold bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] hover:opacity-95 transition-all">
+                    Build My Search Strategy
+                    <ArrowRight className="w-4 h-4" />
+                  </Button3D>
+                </Link>
+                <a href="#search-discovery-map">
+                  <Button3D variant="secondary" size="lg" className="flex items-center gap-2 font-semibold bg-[#2E936F] text-[#FFFFFF] border-[#2E936F] hover:opacity-95 transition-all">
+                    Explore Our SEO Approach
+                  </Button3D>
+                </a>
+              </div>
+
+              {/* Supporting Keywords Bar */}
+              <div className="pt-4 border-t border-[#F7D7B0]">
+                <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 font-semibold mb-2.5">
+                  Core SEO Disciplines
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    "Technical SEO",
+                    "Search Intent",
+                    "Content",
+                    "Authority",
+                    "AI Search",
+                    "Analytics",
+                  ].map((tag, idx) => (
+                    <motion.span
+                      key={idx}
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      className="text-xs px-3.5 py-1.5 rounded-lg bg-gray-100 dark:bg-[#1b2823] text-gray-700 dark:text-gray-300 border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F15E1C] hover:text-[#FFFFFF] transition-all duration-200 cursor-pointer shadow-xs font-medium"
+                    >
+                      {tag}
+                    </motion.span>
+                  ))}
                 </div>
+              </div>
+            </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                  <div className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 space-y-1">
-                    <span className="text-[10px] font-mono font-bold text-[#7A6A5F] block uppercase">TECHNICAL SCORE</span>
-                    <span className="text-sm font-mono font-extrabold text-[#f15e1c]">99/100 VITALS</span>
-                  </div>
-                  <div className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 space-y-1">
-                    <span className="text-[10px] font-mono font-bold text-[#7A6A5F] block uppercase">ORGANIC TRAFFIC</span>
-                    <span className="text-sm font-mono font-extrabold text-[#2e936f]">3.4x INCREASE</span>
-                  </div>
-                  <div className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 space-y-1">
-                    <span className="text-[10px] font-mono font-bold text-[#7A6A5F] block uppercase">LOCAL VISIBILITY</span>
-                    <span className="text-sm font-mono font-extrabold text-[#fab60a]">#1 RANK GOAL</span>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* 4 Solution Workstream Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {seoSolutionsData.map((sol, idx) => {
-              const isActive = activeSolutionIdx === idx;
-
-              return (
-                <TiltCard key={sol.numStr} maxTilt={4} scale={1.01}>
-                  <div
-                    onClick={() => setActiveSolutionIdx(idx)}
-                    onMouseEnter={() => setActiveSolutionIdx(idx)}
-                    className={cn(
-                      "p-8 rounded-[2.5rem] border-2 transition-all duration-300 cursor-pointer space-y-6 text-left flex flex-col justify-between min-h-[340px] relative overflow-hidden group",
-                      isActive
-                        ? "bg-white dark:bg-[#000000] border-[#f15e1c] shadow-2xl ring-2 ring-[#f15e1c]/20"
-                        : "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] opacity-80 hover:opacity-100"
-                    )}
-                  >
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] group-hover:scale-110 transition-transform">
-                            {sol.icon}
-                          </div>
-                          <span className="text-xs font-mono font-black text-[#f15e1c]">
-                            DISCIPLINE {sol.numStr}
-                          </span>
-                        </div>
-
-                        <div className="px-3 py-1 rounded-xl bg-[#fce3d3] dark:bg-[#161616] text-xs font-mono font-bold text-[#f15e1c]">
-                          {sol.metric}
-                        </div>
-                      </div>
-
-                      <div>
-                        <h3 className="text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
-                          {sol.title}
-                        </h3>
-                        <p className="text-xs font-mono font-semibold text-[#2e936f] mt-1">
-                          {sol.subtitle}
-                        </p>
-                      </div>
-
-                      <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                        {sol.description}
-                      </p>
-                    </div>
-
-                    <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] space-y-2">
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#7A6A5F]">
-                        Key Scope Deliverables
+            {/* HERO VISUAL — REAL SEARCH ECOSYSTEM DIAGRAM */}
+            <div className="lg:col-span-6 w-full">
+              <TiltCard className="w-full">
+                <div className="relative rounded-2xl p-6 bg-white dark:bg-[#1b2823] border border-[#F7D7B0] shadow-xl overflow-hidden group hover:border-[#F15E1C] transition-all duration-300">
+                  
+                  <div className="flex items-center justify-between pb-4 border-b border-[#F7D7B0]">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#F15E1C] animate-pulse" />
+                      <span className="text-xs font-bold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
+                        Search Ecosystem Pipeline
                       </span>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]">
-                        {sol.deliverables.map((del, i) => (
-                          <div key={i} className="flex items-center gap-2 p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
-                            <span className="truncate">{del}</span>
+                    </div>
+                    <Badge variant="subtle" className="text-[10px] bg-[#2E936F]/10 text-[#2E936F] font-semibold">
+                      Search Architecture
+                    </Badge>
+                  </div>
+
+                  {/* Connected Search Pipeline Visual */}
+                  <div className="my-6 space-y-3">
+                    {[
+                      { step: "01", label: "USER QUERY", detail: "High-intent search term entered", icon: <Search className="w-4 h-4 text-[#F15E1C]" /> },
+                      { step: "02", label: "SEARCH INTENT", detail: "Query classification & intent mapping", icon: <Target className="w-4 h-4 text-[#2E936F]" /> },
+                      { step: "03", label: "CRAWL & RENDER", detail: "Technical indexing & schema parsing", icon: <Code className="w-4 h-4 text-[#FAB60A]" /> },
+                      { step: "04", label: "ENTITY & CONTENT", detail: "Topical depth & brand authority match", icon: <Network className="w-4 h-4 text-[#F15E1C]" /> },
+                      { step: "05", label: "DISCOVERY & ACTION", detail: "Qualified organic visit & business conversion", icon: <Zap className="w-4 h-4 text-[#2E936F]" /> },
+                    ].map((pipe, idx) => (
+                      <motion.div
+                        key={idx}
+                        whileHover={{ x: 4, borderColor: "#F15E1C" }}
+                        className="p-3 rounded-xl bg-[#F7D7B0]/20 border border-[#F7D7B0] flex items-center justify-between transition-all"
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className="text-[10px] font-mono font-bold text-[#F15E1C] px-2 py-0.5 rounded bg-white dark:bg-[#1b2823] border border-[#F7D7B0]">
+                            {pipe.step}
+                          </span>
+                          <div>
+                            <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff] block">{pipe.label}</span>
+                            <span className="text-[11px] text-gray-500 dark:text-gray-400">{pipe.detail}</span>
                           </div>
-                        ))}
-                      </div>
-                    </div>
+                        </div>
+                        <div className="p-1.5 rounded-lg bg-white dark:bg-[#1b2823]">
+                          {pipe.icon}
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
-                </TiltCard>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
-      <SystemScanTransition />
-
-      {/* =========================================================================
-          3. SEARCH OPPORTUNITY MAP (PRIORITY LADDER) & CONTENT TRANSFORMATION
-          ========================================================================= */}
-      <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none">
-        <div className="max-w-[1536px] mx-auto space-y-12">
-          <div className="text-center max-w-4xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              SEARCH OPPORTUNITY MAP
-            </Badge>
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Priority Ladder &amp; Content Morph
-            </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              Prioritizing high-intent keywords and transforming raw content into structured semantic assets.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Left Priority Ladder */}
-            <div className="lg:col-span-7 p-6 sm:p-8 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl space-y-4">
-              <div className="flex items-center justify-between text-xs font-mono font-bold text-[#7A6A5F] border-b border-[#f7d7b0] pb-3">
-                <span>PRIORITY LADDER &uarr;</span>
-                <span className="text-[#2e936f]">KEYWORD + INTENT ALIGNMENT</span>
-              </div>
-
-              <div className="space-y-3">
-                {priorityLadderItems.map((item, i) => (
-                  <div
-                    key={i}
-                    className={cn(
-                      "p-4 rounded-2xl border-2 flex items-center justify-between transition-all duration-300 hover:scale-[1.02]",
-                      item.color
-                    )}
-                  >
-                    <div>
-                      <span className="text-[10px] font-mono font-black uppercase tracking-wider block">{item.level}</span>
-                      <div className="text-xs sm:text-sm font-extrabold font-display">{item.title}</div>
-                    </div>
-                    <span className="px-3 py-1 rounded-xl bg-white/60 dark:bg-[#000000]/60 text-[10px] font-mono font-bold">
-                      {item.intent}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Right Content Transformation Toggle */}
-            <div className="lg:col-span-5 p-6 sm:p-8 rounded-[2.5rem] bg-white dark:bg-[#000000] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl space-y-6 text-left">
-              <div className="flex items-center justify-between border-b border-[#f7d7b0] pb-3">
-                <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#f15e1c]">
-                  CONTENT TRANSFORMATION
-                </span>
-                <button
-                  type="button"
-                  onClick={() => setIsContentOptimized(!isContentOptimized)}
-                  className="px-3 py-1.5 rounded-xl bg-[#f15e1c] text-white text-[11px] font-mono font-bold hover:bg-[#d44e14] transition-colors"
-                >
-                  {isContentOptimized ? "VIEW BEFORE" : "VIEW OPTIMIZED"}
-                </button>
-              </div>
-
-              <AnimatePresence mode="wait">
-                {!isContentOptimized ? (
-                  <motion.div
-                    key="before"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                    className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] space-y-2 opacity-70"
-                  >
-                    <span className="text-[10px] font-mono text-[#7A6A5F] block uppercase">BEFORE: UNSTRUCTURED CONTENT</span>
-                    <div className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff]">Generic Page Title</div>
-                    <p className="text-[11px] text-[#7A6A5F] leading-tight">
-                      Raw body copy with missing H1/H2 tags, missing JSON-LD schema, slow load speed.
+                  <div className="pt-3 border-t border-[#F7D7B0] text-center">
+                    <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 italic">
+                      “Making your business discoverable, understandable, and trusted across search engines.”
                     </p>
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="after"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                    className="p-4 rounded-2xl bg-[#e8f5f1] dark:bg-[#192a24] border-2 border-[#2e936f] space-y-2 shadow-md"
-                  >
-                    <span className="text-[10px] font-mono font-bold text-[#2e936f] block uppercase">AFTER: OPTIMIZED SEMANTIC ASSET</span>
-                    <div className="text-xs font-bold text-[#2e936f]">✓ High-Intent Title &amp; JSON-LD Schema</div>
-                    <p className="text-[11px] text-[#1b2823] dark:text-[#ffffff] leading-tight">
-                      Sub-second Core Web Vitals, mobile-first crawl, structured H2/H3 headers, high topical relevance.
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <SystemScanTransition />
-
-      {/* =========================================================================
-          4. PERFORMANCE METRIC — 99/100 TECHNICAL QUALITY BAR
-          ========================================================================= */}
-      <section className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] select-none">
-        <div className="max-w-[1536px] mx-auto space-y-10">
-          <div className="text-center max-w-4xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              PERFORMANCE BENCHMARK
-            </Badge>
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              99/100 Technical SEO Quality Bar
-            </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              Sub-second Core Web Vitals, mobile-first crawl architecture, and zero white-hat compliance risk.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                value: 99,
-                suffix: "/100",
-                label: "Technical SEO Score",
-                desc: "Core Web Vitals tuning",
-                icon: <FileCode className="w-5 h-5 text-[#f15e1c]" />,
-              },
-              {
-                value: 3.4,
-                suffix: "x",
-                decimals: 1,
-                label: "Organic Traffic Growth",
-                desc: "Enterprise domain scaling",
-                icon: <Globe2 className="w-5 h-5 text-[#2e936f]" />,
-              },
-              {
-                value: 1,
-                prefix: "#",
-                suffix: " Rank",
-                label: "Local 3-Pack Goal",
-                desc: "Geotargeted map visibility",
-                icon: <Target className="w-5 h-5 text-[#fab60a]" />,
-              },
-              {
-                value: 100,
-                suffix: "%",
-                label: "White-Hat Guarantee",
-                desc: "Strict search safety",
-                icon: <CheckCircle2 className="w-5 h-5 text-[#f15e1c]" />,
-              },
-            ].map((stat, idx) => (
-              <TiltCard key={idx} maxTilt={5} scale={1.01}>
-                <div className="h-full p-6 sm:p-8 rounded-[2rem] bg-white dark:bg-[#000000] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md hover:border-[#f15e1c] transition-all duration-300 space-y-4 text-left flex flex-col justify-between relative overflow-hidden group">
-                  <div className="flex items-center justify-between">
-                    <div className="p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0]/60">
-                      {stat.icon}
-                    </div>
-                    <span className="text-[#2e936f] text-sm font-bold">↗</span>
                   </div>
 
-                  <div>
-                    <div className="text-3xl sm:text-4xl lg:text-5xl font-black font-mono text-[#f15e1c]">
-                      <CounterNumber
-                        value={stat.value}
-                        prefix={stat.prefix}
-                        suffix={stat.suffix}
-                        decimals={stat.decimals || 0}
-                      />
-                    </div>
-                    <div className="text-sm sm:text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] mt-1">
-                      {stat.label}
-                    </div>
-                    <div className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] mt-0.5">
-                      {stat.desc}
-                    </div>
-                  </div>
                 </div>
               </TiltCard>
-            ))}
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* =========================================================================
-          5. 5-STAGE SEARCH OPTIMIZATION FRAMEWORK (VERTICAL SEARCH ASCENT)
-          ========================================================================= */}
-      <section
-        ref={timelineContainerRef}
-        className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none"
-      >
-        <div className="max-w-[1536px] mx-auto space-y-12">
-          <div className="text-center max-w-4xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              SEARCH OPTIMIZATION TIMELINE
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          2. UNIQUE SIGNATURE SECTION — SEARCH HAS CHANGED
+          ===================================================================== */}
+      <section id="search-discovery-map" className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              SEARCH DISCOVERY MAP
             </Badge>
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              5-Stage Search Optimization Framework
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Search Has Changed. Your SEO Should Too.
             </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              A discover &rarr; plan &rarr; optimize &rarr; authority &rarr; measure methodology cycling back to continuous refinement.
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              People no longer discover businesses through one search behaviour alone. Search now spans traditional results, local discovery, images, video, AI-assisted experiences and branded research journeys.
             </p>
           </div>
 
-          {/* Timeline Progress Bar */}
-          <div className="relative py-4 max-w-5xl mx-auto">
-            <div className="relative w-full bg-[#f7d7b0] dark:bg-[#1a1a1a] h-2.5 rounded-full overflow-hidden">
-              <motion.div
-                style={{ width: timelineLineWidth }}
-                className="h-full bg-gradient-to-r from-[#f15e1c] via-[#2e936f] to-[#fab60a]"
-              />
-            </div>
-
-            <div className="flex justify-between items-center absolute inset-x-0 -top-2.5">
-              {howWeWorkSteps.map((wf, idx) => {
-                const isActive = activeWorkIdx === idx;
-                const isPassed = idx <= activeWorkIdx;
-
+          {/* Interactive Discovery Ecosystem Grid */}
+          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg space-y-8">
+            
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 border-b border-[#F7D7B0] pb-6">
+              {searchDiscoveryPaths.map((path, idx) => {
+                const isActive = displayedDiscoveryIdx === idx;
                 return (
                   <button
-                    key={wf.step}
-                    type="button"
-                    onClick={() => setActiveWorkIdx(idx)}
+                    key={path.id}
+                    onClick={() => setActiveDiscoveryPath(idx)}
+                    onMouseEnter={() => setHoverDiscoveryIdx(idx)}
+                    onMouseLeave={() => setHoverDiscoveryIdx(null)}
                     className={cn(
-                      "w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 transition-all duration-300 flex items-center justify-center text-xs sm:text-sm font-mono font-black cursor-pointer shrink-0",
+                      "p-4 rounded-xl text-left transition-all duration-200 border cursor-pointer flex flex-col justify-between h-32 transform",
                       isActive
-                        ? "bg-[#f15e1c] border-white text-white scale-125 shadow-lg shadow-[#f15e1c]/40 ring-4 ring-[#f15e1c]/20 z-10"
-                        : isPassed
-                        ? "bg-[#2e936f] border-white text-white"
-                        : "bg-white dark:bg-[#000000] border-[#f7d7b0] dark:border-[#1a1a1a] text-[#7A6A5F]"
+                        ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-1 scale-102"
+                        : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 hover:-translate-y-0.5"
                     )}
                   >
-                    {isPassed && !isActive ? <Check className="w-4 h-4 text-white" /> : wf.step}
+                    <div className="flex items-center justify-between w-full">
+                      <span className={cn("text-[10px] font-mono font-bold", isActive ? "text-[#FFEC69]" : "text-[#F15E1C]")}>
+                        PATH 0{idx + 1}
+                      </span>
+                      <div className={cn("p-1.5 rounded-lg transition-colors", isActive ? "bg-[#FFFFFF] text-[#F15E1C]" : "bg-[#F7D7B0]/30 text-[#F15E1C]")}>
+                        {path.icon}
+                      </div>
+                    </div>
+                    <div>
+                      <span className={cn("text-xs font-bold block transition-colors", isActive ? "text-[#FFFFFF]" : "text-[#1b2823] dark:text-[#ffffff]")}>
+                        {path.name}
+                      </span>
+                    </div>
                   </button>
                 );
               })}
             </div>
-          </div>
 
-          {/* Active Stage Content */}
-          <div className="max-w-5xl mx-auto">
+            {/* Active Path Explanation Card */}
             <AnimatePresence mode="wait">
               <motion.div
-                key={activeWorkStep.step}
-                initial={{ opacity: 0, y: 16 }}
+                key={currentDiscoveryPath.id}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.35 }}
-                className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/40 shadow-2xl space-y-6 text-left relative overflow-hidden"
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="p-6 sm:p-8 rounded-xl border-2 border-[#F15E1C] bg-[#F7D7B0]/20 shadow-sm space-y-4"
               >
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-5">
-                  <div>
-                    <span className="text-xs font-mono font-black text-[#f15e1c] uppercase tracking-wider block">
-                      STAGE {activeWorkStep.step} / 05 &bull; {activeWorkStep.subtitle}
-                    </span>
-                    <h3 className="text-2xl sm:text-4xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] mt-1">
-                      {activeWorkStep.title}
-                    </h3>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 rounded-xl bg-[#F15E1C] text-[#FFFFFF] shadow-xs">
+                      {currentDiscoveryPath.icon}
+                    </div>
+                    <div>
+                      <span className="text-xs font-mono font-bold text-[#F15E1C]">DISCOVERY SURFACE &bull; {currentDiscoveryPath.name}</span>
+                      <h3 className="text-xl sm:text-2xl font-bold text-[#1b2823] dark:text-[#ffffff]">{currentDiscoveryPath.title}</h3>
+                    </div>
                   </div>
-
-                  <div className="px-4 py-2 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#2e936f] shadow-xs">
-                    {activeWorkStep.output}
-                  </div>
+                  <Badge variant="subtle" className="text-xs bg-[#F15E1C]/10 text-[#F15E1C] font-semibold">
+                    {currentDiscoveryPath.focus}
+                  </Badge>
                 </div>
-
-                <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                  {activeWorkStep.description}
+                <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
+                  {currentDiscoveryPath.desc}
                 </p>
-
-                <div className="pt-3 border-t border-[#f7d7b0] dark:border-[#1a1a1a] flex items-center justify-between text-xs font-mono font-bold text-[#f15e1c]">
-                  <span>CONTINUOUS SEARCH CYCLE</span>
-                  <span>STAGE 05 LOOPS BACK TO STAGE 01 &rarr;</span>
-                </div>
               </motion.div>
             </AnimatePresence>
+
           </div>
         </div>
       </section>
 
       <SystemScanTransition />
 
-      {/* =========================================================================
-          6. CONTINUOUS SEARCH CYCLE (SIGNATURE VISUAL MOMENT)
-          ========================================================================= */}
-      <section
-        ref={loopContainerRef}
-        className="relative py-28 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none"
-      >
-        <div className="max-w-[1536px] mx-auto space-y-12">
-          <div className="text-center max-w-4xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              CONTINUOUS SEARCH CYCLE
+      {/* =====================================================================
+          3. THE SEO SYSTEM — CONNECTED NETWORK
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              THE SEARCH ARCHITECTURE
             </Badge>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Continuous Search Intelligence Cycle
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              SEO Is a System, Not a Single Task.
             </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              SEO is not a one-time audit. Search intent and keyword visibility cycle continuously back into strategy refinement.
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Hover over any stage in the search engine pipeline to explore how technical foundations, intent mapping, content depth, and measurement form a continuous organic growth engine.
             </p>
           </div>
 
-          {/* Circular Iteration Loop Display */}
-          <div className="relative rounded-[3rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-8 sm:p-16 text-center overflow-hidden">
-            <div className="absolute inset-0 bg-radial from-[#f15e1c]/10 via-transparent to-transparent pointer-events-none" />
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-3 relative z-10">
-              {continuousSearchCycleSteps.map((step, idx) => {
-                const isActive = activeLoopStep === idx;
-
+          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-2xl p-6 sm:p-8 shadow-lg space-y-8">
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 border-b border-[#F7D7B0] pb-6">
+              {seoSystemNodes.map((node, idx) => {
+                const isActive = displayedSystemIdx === idx;
                 return (
-                  <div
-                    key={step.id}
-                    onClick={() => setActiveLoopStep(idx)}
+                  <button
+                    key={node.step}
+                    onClick={() => setActiveSystemNode(idx)}
+                    onMouseEnter={() => setHoverSystemIdx(idx)}
+                    onMouseLeave={() => setHoverSystemIdx(null)}
                     className={cn(
-                      "p-5 rounded-2xl border-2 transition-all duration-300 space-y-2 cursor-pointer text-center relative overflow-hidden",
+                      "p-3 rounded-xl text-left transition-all duration-200 border cursor-pointer flex flex-col justify-between h-28 transform",
                       isActive
-                        ? "bg-white dark:bg-[#000000] border-[#f15e1c] shadow-xl scale-105 ring-2 ring-[#f15e1c]/20"
-                        : "bg-white/60 dark:bg-[#000000]/60 border-[#f7d7b0] opacity-75 hover:opacity-100"
+                        ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-1"
+                        : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
                     )}
                   >
-                    <span className="text-[10px] font-mono font-black text-[#f15e1c] block">
-                      CYCLE 0{idx + 1}
+                    <span className={cn("text-[10px] font-mono font-bold", isActive ? "text-[#FFEC69]" : "text-[#F15E1C]")}>
+                      {node.step}
                     </span>
-                    <h4 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                      {step.name}
-                    </h4>
-                    <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] leading-tight">
-                      {step.desc}
-                    </p>
-                  </div>
+                    <span className={cn("text-[11px] font-bold block leading-tight", isActive ? "text-[#FFFFFF]" : "text-[#1b2823] dark:text-[#ffffff]")}>
+                      {node.label}
+                    </span>
+                  </button>
                 );
               })}
             </div>
 
-            {/* Loop Connection Statement */}
-            <div className="pt-8 relative z-10 flex items-center justify-center gap-3 text-xs font-mono font-bold text-[#f15e1c]">
-              <RefreshCw className="w-4 h-4 animate-spin-slow" />
-              <span>DISCOVER &rarr; AUDIT &rarr; PLAN &rarr; OPTIMIZE &rarr; AUTHORITY &rarr; MEASURE &rarr; REFINE &rarr; DISCOVER AGAIN</span>
-            </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSystemNode.step}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="p-6 rounded-xl border-2 border-[#2E936F] bg-[#F7D7B0]/20 space-y-2"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-mono font-bold text-[#2E936F]">STAGE {currentSystemNode.step} &bull; {currentSystemNode.label}</span>
+                </div>
+                <h3 className="text-xl font-bold text-[#1b2823] dark:text-[#ffffff]">{currentSystemNode.title}</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed font-medium">{currentSystemNode.desc}</p>
+              </motion.div>
+            </AnimatePresence>
           </div>
+
         </div>
       </section>
 
-      {/* =========================================================================
-          7. EDITORIAL SEARCH DISCOVERY PHILOSOPHY (SCROLL BLUR TYPOGRAPHY)
-          ========================================================================= */}
-      <section
-        ref={missionRef}
-        className="relative py-28 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000] overflow-hidden select-none"
-      >
-        {/* Subtle Background Parallax Typography */}
-        <div className="absolute inset-0 pointer-events-none z-0 flex flex-col justify-between py-8 opacity-5 dark:opacity-10 font-display font-black text-7xl sm:text-9xl text-[#1b2823] dark:text-[#ffffff] tracking-tighter">
-          <motion.div style={{ x: backgroundTextX1 }} className="whitespace-nowrap">
-            DISCOVER &bull; INTENT &bull; RELEVANCE
-          </motion.div>
-          <motion.div style={{ x: backgroundTextX2 }} className="whitespace-nowrap text-right">
-            AUTHORITY &bull; VISIBILITY &bull; GROWTH
-          </motion.div>
-        </div>
+      <SystemScanTransition />
 
-        <div className="max-w-[1536px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-          <div ref={statementRef} className="lg:col-span-7 space-y-6 text-left">
-            <Badge variant="secondary" size="md">
-              SEARCH DISCOVERY PHILOSOPHY
+      {/* =====================================================================
+          4. WHAT WE ACTUALLY OPTIMIZE — 6 DIMENSIONS
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              SEARCH READINESS
             </Badge>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={isStatementInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.75, ease: "easeOut" }}
-              className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-[1.12] tracking-tight"
-            >
-              Making your business discoverable when <span className="text-[#f15e1c]">your customers are searching.</span>
-            </motion.h2>
-
-            <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-normal">
-              Arav Innovations combines search intent analysis, technical Core Web Vitals optimization, and high-authority editorial outreach to capture high-intent organic traffic.
-            </p>
-          </div>
-
-          <div className="lg:col-span-5 flex items-center justify-center">
-            <div className="relative w-80 h-80 sm:w-96 sm:h-96 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-6 flex flex-col justify-between items-center text-center overflow-hidden">
-              <div className="absolute inset-0 bg-radial from-[#f15e1c]/15 via-[#2e936f]/10 to-transparent pointer-events-none" />
-
-              <div className="relative z-10 flex items-center gap-2 pt-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-ping" />
-                <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
-                  SEARCH ASCENT ENGINE
-                </span>
-              </div>
-
-              <div className="my-auto space-y-2 relative z-10">
-                <span className="text-3xl sm:text-4xl font-extrabold font-display text-[#f15e1c]">
-                  DISCOVERABLE
-                </span>
-                <span className="text-xs font-mono font-bold text-[#2e936f] block">
-                  BRAND RISING THROUGH SEARCH
-                </span>
-              </div>
-
-              <span className="relative z-10 text-[11px] font-mono font-bold text-[#2e936f] pb-1">
-                TOPICAL AUTHORITY ASCENT
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          8. CLIENT TESTIMONIAL — ENTERPRISE PROOF
-          ========================================================================= */}
-      <section ref={testimonialRef} className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1536px] mx-auto text-center space-y-8">
-          <Badge variant="secondary" size="md">
-            KIND WORDS FROM OUR CLIENTS
-          </Badge>
-
-          <div className="p-8 sm:p-14 lg:p-16 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl space-y-6 relative overflow-hidden max-w-5xl mx-auto">
-            <div className="p-3 rounded-2xl bg-[#f15e1c] text-white w-fit mx-auto shadow-md">
-              <Quote className="w-6 h-6" />
-            </div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isTestimonialInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="text-xl sm:text-3xl lg:text-4xl font-display font-medium text-[#1b2823] dark:text-[#ffffff] max-w-4xl mx-auto leading-relaxed italic"
-            >
-              &ldquo;{testimonial.quote}&rdquo;
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={isTestimonialInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-              transition={{ duration: 0.5, delay: 0.35 }}
-              className="pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] space-y-1"
-            >
-              <div className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                {testimonial.author}
-              </div>
-              <div className="text-xs text-[#f15e1c] font-bold">
-                {testimonial.designation} &bull; {testimonial.company}
-              </div>
-              <div className="text-xs font-mono font-bold text-[#2e936f] pt-1">
-                SEO &amp; Organic Search Growth Partner
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          9. ABOUT OUR CEO — EDITORIAL LEADERSHIP PROFILE
-          ========================================================================= */}
-      <section className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1536px] mx-auto rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-8 sm:p-14 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center text-left">
-          <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-3xl overflow-hidden border-2 border-[#f15e1c] shadow-xl bg-[#fce3d3] dark:bg-[#161616] flex items-center justify-center text-center p-6 space-y-2 flex-col">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#f15e1c] text-white flex items-center justify-center text-2xl sm:text-3xl font-black font-display shadow-md">
-                AS
-              </div>
-              <div className="text-lg sm:text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                Aryan Sayal
-              </div>
-              <div className="text-xs sm:text-sm font-mono font-bold text-[#f15e1c]">
-                CEO &amp; Managing Director
-              </div>
-              <span className="text-xs text-[#2e936f] font-mono">Arav Innovations</span>
-            </div>
-          </div>
-
-          <div className="lg:col-span-7 space-y-4">
-            <Badge variant="secondary" size="md">
-              About Our CEO
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-              Aryan Sayal
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              What Makes a Business Search-Ready?
             </h2>
-            <p className="text-xs sm:text-sm font-mono font-extrabold text-[#f15e1c] uppercase tracking-wider">
-              CEO, Arav Innovations
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Six core dimensions that determine whether search engines can crawl, index, understand, and value your website.
             </p>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-              Leading Arav Innovations with data-driven search strategy, Aryan Sayal guides SEO engineering and editorial teams across India and the UAE to achieve sustainable organic growth and market dominance.
-            </p>
-            <div className="pt-2">
-              <a
-                href="https://www.linkedin.com/company/aravinnovations/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#f15e1c] text-white text-xs sm:text-sm font-bold shadow-md hover:bg-[#d44e14] transition-colors"
-              >
-                <Globe2 className="w-4 h-4" />
-                <span>Connect on LinkedIn</span>
-              </a>
-            </div>
           </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {seoDimensions.map((dim, idx) => (
+              <motion.div
+                key={dim.num}
+                whileHover={{ scale: 1.02, y: -4 }}
+                className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 hover:shadow-lg transition-all duration-300 shadow-xs flex flex-col justify-between group cursor-pointer"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono font-bold text-[#F15E1C] px-2.5 py-1 rounded bg-[#F7D7B0]/40 group-hover:bg-[#F15E1C] group-hover:text-[#FFFFFF] transition-colors">
+                      DIMENSION {dim.num}
+                    </span>
+                    <div className="p-2 rounded-lg bg-[#F7D7B0]/30 group-hover:bg-[#F15E1C]/10 transition-colors">
+                      {dim.icon}
+                    </div>
+                  </div>
+                  <h3 className="text-lg font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">
+                    {dim.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                    {dim.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
         </div>
       </section>
 
-      {/* =========================================================================
-          10. FINAL CTA — PRODUCT CULMINATION SECTION
-          ========================================================================= */}
-      <section id="inquire" className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 select-none">
-        <div className="max-w-[1536px] mx-auto space-y-8">
-          {/* Connector Flow Header: INVISIBLE -> DISCOVERABLE -> RELEVANT -> VISIBLE -> AUTHORITATIVE -> GROWING */}
-          <div className="text-center space-y-2">
-            <span className="text-xs font-mono font-extrabold text-[#f15e1c] uppercase tracking-widest block">
-              THE SEARCH JOURNEY CULMINATION
-            </span>
-            <div className="flex items-center justify-center gap-2 text-xs sm:text-sm font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] flex-wrap">
-              <span>INVISIBLE</span>
-              <span className="text-[#f15e1c]">&rarr;</span>
-              <span>DISCOVERABLE</span>
-              <span className="text-[#f15e1c]">&rarr;</span>
-              <span>RELEVANT</span>
-              <span className="text-[#f15e1c]">&rarr;</span>
-              <span>VISIBLE</span>
-              <span className="text-[#f15e1c]">&rarr;</span>
-              <span>AUTHORITATIVE</span>
-              <span className="text-[#f15e1c]">&rarr;</span>
-              <span className="text-[#2e936f]">GROWING</span>
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          5. TECHNICAL SEO — LAYERED ARCHITECTURE
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              TECHNICAL ARCHITECTURE
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Before Search Can Understand You, It Has to Reach You.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Technical SEO ensures search bots can crawl your URLs, render dynamic content, parse structured schemas, and index key pages without technical friction.
+            </p>
+          </div>
+
+          {/* Layered Technical Stack */}
+          <div className="space-y-4 max-w-4xl mx-auto">
+            {techSeoLayers.map((layer, idx) => (
+              <motion.div
+                key={layer.layer}
+                whileHover={{ scale: 1.01, x: 4 }}
+                className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 transition-all duration-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group cursor-pointer"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="p-3 rounded-xl bg-[#F15E1C] text-[#FFFFFF] font-mono font-bold text-xs shrink-0">
+                    LAYER {layer.layer}
+                  </div>
+                  <div>
+                    <span className="text-xs font-mono font-bold text-[#F15E1C] block">{layer.stage} PIPELINE</span>
+                    <h3 className="text-lg font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">{layer.title}</h3>
+                    <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">{layer.desc}</p>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-1.5 shrink-0">
+                  {layer.tags.map((tag, tIdx) => (
+                    <span key={tIdx} className="text-[10px] font-mono font-semibold px-2 py-1 rounded bg-[#F7D7B0]/40 text-[#1b2823] dark:text-[#ffffff]">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          6. SEARCH INTENT + CONTENT
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              SEARCH INTENT ALIGNMENT
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Don't Start With Keywords. Start With the Question.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Search engines reward pages that fulfill specific search intent categories with the correct content structure and user value.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {searchIntentCategories.map((cat, idx) => (
+              <motion.div
+                key={cat.type}
+                whileHover={{ y: -4 }}
+                className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#2E936F] hover:bg-[#F7D7B0]/20 transition-all duration-300 shadow-xs space-y-4 flex flex-col justify-between group cursor-pointer"
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono font-bold text-[#2E936F] uppercase">{cat.type} INTENT</span>
+                    <div className="p-2 rounded-lg bg-[#F7D7B0]/30">{cat.icon}</div>
+                  </div>
+                  <h3 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2E936F] transition-colors">{cat.query}</h3>
+                  <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{cat.desc}</p>
+                </div>
+
+                <div className="pt-3 border-t border-[#F7D7B0]">
+                  <span className="text-[10px] font-mono font-bold text-[#F15E1C] uppercase block">Content Response:</span>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{cat.response}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          7. TOPICAL AUTHORITY / ENTITY GRAPH
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              ENTITY GRAPH ARCHITECTURE
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Build a Web of Meaning Around Your Expertise.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Select or hover over any node in the entity graph to examine how topics, expertise, services, and citations establish brand credibility in modern search algorithms.
+            </p>
+          </div>
+
+          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-3xl p-8 sm:p-12 shadow-lg space-y-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+              {entityGraphNodes.map((node) => {
+                const isActive = activeEntityId === node.id;
+                return (
+                  <button
+                    key={node.id}
+                    onClick={() => setActiveEntityId(node.id)}
+                    className={cn(
+                      "p-3 rounded-xl text-center transition-all duration-200 border cursor-pointer flex flex-col justify-center h-24 transform",
+                      isActive
+                        ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-1"
+                        : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
+                    )}
+                  >
+                    <span className={cn("text-[10px] font-mono font-bold uppercase block leading-tight", isActive ? "text-[#FFFFFF]" : "text-[#1b2823] dark:text-[#ffffff]")}>
+                      {node.label}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentEntity.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="p-6 rounded-2xl border-2 border-[#FAB60A] bg-[#F7D7B0]/20 text-center space-y-2"
+              >
+                <span className="text-xs font-mono font-bold text-[#FAB60A] uppercase">{currentEntity.label} ENTITY NODE</span>
+                <p className="text-base text-gray-600 dark:text-gray-300 font-medium leading-relaxed max-w-2xl mx-auto">{currentEntity.desc}</p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          8. AI SEARCH VISIBILITY
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              GENERATIVE &amp; AI SEARCH
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Search Is Becoming More Conversational.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Modern search experiences increasingly feature AI-generated answers and conversational discovery. We optimize entity signals and structured information so search models synthesize your brand accurately.
+            </p>
+          </div>
+
+          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-3xl p-8 sm:p-12 shadow-lg space-y-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 text-center">
+              {[
+                { title: "USER QUESTION", desc: "Natural Language Query" },
+                { title: "AI SEARCH ENGINE", desc: "LLM Parsing & Retrieval" },
+                { title: "ENTITY & SOURCE", desc: "JSON-LD & Citation Verification" },
+                { title: "AI SUMMARY", desc: "Synthesized Answer" },
+                { title: "SITE VISIT", desc: "Direct Business Engagement" },
+              ].map((item, idx) => (
+                <div key={idx} className="p-4 rounded-xl bg-[#F7D7B0]/20 border border-[#F7D7B0] space-y-1">
+                  <span className="text-xs font-mono font-bold text-[#F15E1C] block">{item.title}</span>
+                  <span className="text-[10px] text-gray-500 dark:text-gray-400 block">{item.desc}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-[#F7D7B0]">
+              <div className="p-4 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] text-left space-y-1">
+                <span className="text-xs font-bold text-[#F15E1C] uppercase block">Structured Data</span>
+                <p className="text-xs text-gray-600 dark:text-gray-300">Explicit schemas allowing models to parse entity facts.</p>
+              </div>
+
+              <div className="p-4 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] text-left space-y-1">
+                <span className="text-xs font-bold text-[#2E936F] uppercase block">Entity Authority</span>
+                <p className="text-xs text-gray-600 dark:text-gray-300">Consistent brand signals across editorial sources.</p>
+              </div>
+
+              <div className="p-4 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] text-left space-y-1">
+                <span className="text-xs font-bold text-[#FAB60A] uppercase block">Topic Coverage</span>
+                <p className="text-xs text-gray-600 dark:text-gray-300">Comprehensive answers matching natural queries.</p>
+              </div>
             </div>
           </div>
 
-          <div className="rounded-[3rem] bg-gradient-to-br from-[#f15e1c] via-[#e55215] to-[#d8480d] text-white p-10 sm:p-16 border-2 border-[#fab60a] shadow-2xl space-y-8 text-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-radial from-white/20 via-transparent to-transparent pointer-events-none" />
+        </div>
+      </section>
 
-            <div className="relative z-10 max-w-4xl mx-auto space-y-5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/20 border border-white/40 text-xs font-mono font-bold text-white">
-                <Sparkles className="w-4 h-4 text-[#ffec69]" />
-                <span>ACCELERATE ORGANIC GROWTH</span>
-              </div>
+      <SystemScanTransition />
 
-              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-display tracking-tight text-white leading-tight">
-                Let&apos;s Build What Comes Next
-              </h2>
+      {/* =====================================================================
+          9. SEARCH CONTEXT SELECTOR
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              SEARCH CONTEXT SELECTOR
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Tailored Strategy for Your Environment.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Select your business model to examine how search priorities change across enterprise, local, e-commerce, B2B, and content-led architectures.
+            </p>
+          </div>
 
-              {/* Alternating Animated Word Display */}
-              <div className="h-12 flex items-center justify-center overflow-hidden">
-                <AnimatePresence mode="wait">
+          <div className="max-w-5xl mx-auto space-y-8">
+            <div className="flex overflow-x-auto gap-3 justify-center pb-2 scrollbar-none">
+              {searchContexts.map((ctx) => {
+                const isActive = activeContextId === ctx.id;
+                return (
+                  <button
+                    key={ctx.id}
+                    onClick={() => setActiveContextId(ctx.id)}
+                    className={cn(
+                      "px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all duration-200 cursor-pointer shrink-0 border transform",
+                      isActive
+                        ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-0.5"
+                        : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
+                    )}
+                  >
+                    <span>{ctx.name}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentContext.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] shadow-xl space-y-6"
+              >
+                <div>
+                  <span className="text-xs font-mono font-bold text-[#F15E1C]">{currentContext.name} ARCHITECTURE</span>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-[#1b2823] dark:text-[#ffffff]">{currentContext.title}</h3>
+                </div>
+
+                <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
+                  {currentContext.desc}
+                </p>
+
+                <div className="pt-4 border-t border-[#F7D7B0]">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#2E936F] block mb-2">Key Focus Areas</span>
+                  <div className="flex flex-wrap gap-2">
+                    {currentContext.focus.map((f, idx) => (
+                      <span key={idx} className="text-xs px-3.5 py-1.5 rounded-lg bg-[#F7D7B0]/30 border border-[#F7D7B0] text-[#1b2823] dark:text-[#ffffff] font-semibold">
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          10. AUTHORITY WITHOUT SPAM
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              SUSTAINABLE GROWTH
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Authority Is Earned, Not Manufactured.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              We focus on building genuine domain authority through valuable content, digital PR, industry citations, and brand mentions rather than manipulative link schemes.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              { title: "Useful Content", desc: "Publishing original, expert insights that industry peers naturally reference.", icon: <BookOpen className="w-5 h-5 text-[#F15E1C]" /> },
+              { title: "Digital PR & Mentions", desc: "Earning brand mentions in reputable industry publications and trade press.", icon: <Share2 className="w-5 h-5 text-[#2E936F]" /> },
+              { title: "Editorial Relationships", desc: "Collaborating with authoritative industry channels for authentic reach.", icon: <Building2 className="w-5 h-5 text-[#FAB60A]" /> },
+              { title: "Brand Reputation", desc: "Establishing entity signals that reinforce expertise, authoritativeness, and trust.", icon: <ShieldCheck className="w-5 h-5 text-[#F15E1C]" /> },
+            ].map((item, idx) => (
+              <motion.div
+                key={idx}
+                whileHover={{ scale: 1.03, y: -4 }}
+                className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 transition-all duration-300 shadow-xs space-y-3 group cursor-pointer"
+              >
+                <div className="p-2.5 rounded-xl bg-[#F7D7B0]/30 w-fit">{item.icon}</div>
+                <h3 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">{item.title}</h3>
+                <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          11. MEASUREMENT SYSTEM
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              PERFORMANCE ATTRIBUTION
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Measure What Search Is Doing For the Business.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              We connect technical search console metrics directly to landing page performance, organic conversion events, and downstream business outcomes.
+            </p>
+          </div>
+
+          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-3xl p-8 sm:p-12 shadow-lg max-w-5xl mx-auto text-center space-y-8">
+            <div className="grid grid-cols-1 sm:grid-cols-6 gap-3 items-center">
+              {[
+                { title: "VISIBILITY", desc: "Search Console Impressions" },
+                { title: "ENGAGEMENT", desc: "Query Clicks & CTR" },
+                { title: "ORGANIC TRAFFIC", desc: "Landing Page Visits" },
+                { title: "PAGE PERFORMANCE", desc: "Dwell Time & Scroll" },
+                { title: "CONVERSION", desc: "Form & Goal Events" },
+                { title: "BUSINESS OUTCOME", desc: "Qualified Inquiries" },
+              ].map((item, idx) => (
+                <div key={idx} className="p-3.5 rounded-xl bg-[#F7D7B0]/20 border border-[#F7D7B0] space-y-1">
+                  <span className="text-xs font-mono font-bold text-[#2E936F] block">{item.title}</span>
+                  <span className="text-[10px] text-gray-500 dark:text-gray-400 block font-medium">{item.desc}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          12. CONTINUOUS SEO LOOP — UNIQUE VERTICAL SCROLL-DRIVEN TIMELINE
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              CONTINUOUS SEO LOOP
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Continuous Search Engineering Loop.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Search optimization is an iterative cycle of observation, technical diagnosis, strategic prioritization, execution, and continuous refinement.
+            </p>
+          </div>
+
+          {/* UNIQUE VERTICAL SCROLL-DRIVEN TIMELINE */}
+          <div className="relative max-w-5xl mx-auto py-4">
+            
+            {/* Central Vertical Line for Desktop / Left-aligned for Mobile */}
+            <div className="absolute left-4 md:left-1/2 top-4 bottom-16 w-0.5 -translate-x-1/2 bg-[#F7D7B0]" />
+
+            <div className="space-y-12 md:space-y-16">
+              {continuousSeoLoop.map((stage, idx) => {
+                const isEven = idx % 2 === 0;
+                return (
                   <motion.div
-                    key={ctaWords[currentWordIdx]}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.35 }}
-                    className="text-2xl sm:text-4xl font-extrabold font-display text-[#ffec69] uppercase tracking-wider"
+                    key={stage.step}
+                    initial={{ opacity: 0.4, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false, amount: 0.4 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    className={cn(
+                      "relative flex flex-col md:flex-row items-start md:items-center group cursor-pointer",
+                      isEven ? "md:flex-row-reverse" : ""
+                    )}
                   >
-                    {ctaWords[currentWordIdx]}
+                    {/* Content Card (Alternating on Desktop: Left / Right, Single Column Left-Aligned on Mobile) */}
+                    <div className={cn("w-full md:w-1/2 pl-12 md:pl-0", isEven ? "md:pr-12 md:text-right" : "md:pl-12 md:text-left")}>
+                      <div className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] group-hover:border-[#F15E1C] group-hover:bg-[#F7D7B0]/20 group-hover:shadow-lg group-hover:-translate-y-1 transition-all duration-300 shadow-xs space-y-2">
+                        <div className={cn("flex items-center gap-2", isEven ? "md:justify-end" : "md:justify-start")}>
+                          <span className="text-xs font-mono font-bold text-[#F15E1C] px-2.5 py-0.5 rounded bg-[#F7D7B0]/40 group-hover:bg-[#F15E1C] group-hover:text-[#FFFFFF] transition-colors">
+                            STAGE {stage.step}
+                          </span>
+                        </div>
+                        <h3 className="text-xl font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">
+                          {stage.name}
+                        </h3>
+                        <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                          {stage.desc}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Numbered Node Indicator in Center (Desktop) or Left (Mobile) */}
+                    <div className="absolute left-4 md:left-1/2 top-6 -translate-x-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#1b2823] border-2 border-[#F7D7B0] group-hover:border-[#F15E1C] group-hover:bg-[#F15E1C] flex items-center justify-center transition-all duration-300 shadow-sm z-10">
+                      <span className="text-[11px] font-mono font-bold text-[#F15E1C] group-hover:text-[#FFFFFF]">
+                        {stage.step}
+                      </span>
+                    </div>
+
+                    {/* Spacer for opposite side on Desktop */}
+                    <div className="hidden md:block w-1/2" />
                   </motion.div>
-                </AnimatePresence>
+                );
+              })}
+            </div>
+
+            {/* Subtle Return Loop Connector Path back to Stage 01 OBSERVE */}
+            <div className="relative pt-10 flex flex-col items-center text-center">
+              <div className="w-0.5 h-10 bg-gradient-to-b from-[#F7D7B0] to-[#F15E1C]" />
+              <div className="px-4 py-2 rounded-full border border-[#F15E1C] bg-[#F7D7B0]/30 text-[#F15E1C] font-mono font-bold text-xs flex items-center gap-2 shadow-xs mt-2">
+                <RefreshCw className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: "6s" }} />
+                <span>CYCLE RETURNS TO 01 OBSERVE</span>
               </div>
-
-              <p className="text-base sm:text-xl font-bold text-white/90">
-                Kick start a project with us today
-              </p>
             </div>
 
-            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-              <Link href="/contact" className="w-full sm:w-auto">
-                <MagneticButton className="w-full sm:w-auto">
-                  <Button3D
-                    variant="primary"
-                    size="lg"
-                    rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />}
-                    className="w-full sm:w-auto justify-center bg-white text-[#f15e1c] hover:bg-[#f7d7b0]"
-                  >
-                    Discuss a Project
-                  </Button3D>
-                </MagneticButton>
-              </Link>
-              <a
-                href="https://api.whatsapp.com/send?phone=971521555792&text=Hello%20Arav%20Innovations%2C%20I%27d%20like%20to%20discuss%20a%20project."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto"
+          </div>
+
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          13. SEO ENGAGEMENT MODELS
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              ENGAGEMENT STRUCTURES
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Different Search Problems Need Different SEO Engagements.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              We structure SEO partnerships around your current technical health, scale, and organic discovery goals.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {seoEngagementModels.map((model, idx) => (
+              <motion.div
+                key={idx}
+                whileHover={{ y: -4 }}
+                className="p-8 rounded-3xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-xl transition-all duration-300 space-y-6 flex flex-col justify-between group cursor-pointer"
               >
-                <MagneticButton className="w-full sm:w-auto">
-                  <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center text-white border-white/60 hover:bg-white/10">
-                    Instant WhatsApp Inquiry
-                  </Button3D>
-                </MagneticButton>
-              </a>
-            </div>
+                <div className="space-y-4">
+                  <span className="text-xs font-mono font-bold text-[#F15E1C] uppercase block">{model.name}</span>
+                  <h3 className="text-2xl font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">{model.title}</h3>
+                  <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{model.desc}</p>
 
-            <div className="relative z-10 pt-6 border-t border-white/20 flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm text-white/90 font-medium">
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> 99/100 Core Web Vitals
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> 100% White-Hat Guarantee
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Regional Teams in Gurgaon &amp; Dubai
-              </span>
+                  <div className="pt-4 border-t border-[#F7D7B0] space-y-2">
+                    <span className="text-[10px] font-mono font-bold text-[#2E936F] uppercase block">Core Deliverables</span>
+                    {model.deliverables.map((del, dIdx) => (
+                      <div key={dIdx} className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-300">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#F15E1C] shrink-0" />
+                        <span>{del}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-4">
+                  <Link href="/contact">
+                    <Button3D variant="secondary" size="md" className="w-full bg-[#2E936F] text-[#FFFFFF] border-[#2E936F]">
+                      Discuss {model.name}
+                    </Button3D>
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          14. SEO DIAGNOSTIC ASSESSMENT CTA
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          <div className="bg-[#F7D7B0]/20 border border-[#F7D7B0] rounded-3xl p-8 sm:p-12 text-center max-w-4xl mx-auto space-y-6">
+            <Badge variant="outline" className="border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              SEO ASSESSMENT
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#1b2823] dark:text-[#ffffff]">
+              Not Sure Where Search Is Breaking?
+            </h2>
+            <p className="text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              Start with a structured view of your technical health, search intent, content architecture, visibility and conversion path.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+              <Link href="/contact">
+                <Button3D variant="primary" size="lg" className="bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C]">
+                  Request an SEO Assessment
+                </Button3D>
+              </Link>
+              <Link href="/contact">
+                <Button3D variant="secondary" size="lg" className="bg-[#2E936F] text-[#FFFFFF] border-[#2E936F]">
+                  Talk to an SEO Specialist
+                </Button3D>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* =========================================================================
-          11. FOOTER BRAND MOMENT
-          ========================================================================= */}
-      <footer className="py-6 border-t border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] overflow-hidden select-none">
-        <div className="flex items-center justify-center gap-4 text-xs sm:text-sm font-mono font-extrabold text-[#7A6A5F] dark:text-[#B8ACA0] tracking-widest flex-wrap px-4">
-          <span>INVISIBLE</span>
-          <span className="text-[#f15e1c]">&bull;</span>
-          <span>DISCOVERABLE</span>
-          <span className="text-[#f15e1c]">&bull;</span>
-          <span>RELEVANT</span>
-          <span className="text-[#f15e1c]">&bull;</span>
-          <span>VISIBLE</span>
-          <span className="text-[#f15e1c]">&bull;</span>
-          <span>AUTHORITATIVE</span>
-          <span className="text-[#f15e1c]">&bull;</span>
-          <span>GROWING</span>
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          15. WHAT WE LOOK FOR — DIAGNOSTIC FRAMEWORK
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              DIAGNOSTIC CRITERIA
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              What We Look For in Every Audit.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Our evaluation isolates specific technical, structural, and content gaps across four critical diagnostic areas.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              { title: "Technical Friction", desc: "Indexing errors, canonical loops, rendering delays, and Core Web Vitals issues." },
+              { title: "Intent Gaps", desc: "Pages ranking for commercial terms without proper conversion or value response." },
+              { title: "Content Thinness", desc: "Orphaned topics, shallow articles, and missing internal linking loops." },
+              { title: "Schema Deficits", desc: "Missing JSON-LD structured data and unverified brand entity signals." },
+            ].map((diag, idx) => (
+              <div key={idx} className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] space-y-2">
+                <CheckCircle2 className="w-5 h-5 text-[#F15E1C]" />
+                <h4 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff]">{diag.title}</h4>
+                <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{diag.desc}</p>
+              </div>
+            ))}
+          </div>
+
         </div>
-      </footer>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          16. INSIGHTS & BLOGS
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              KNOWLEDGE BASE
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Search Intelligence &amp; Insights.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Read published analysis on technical SEO, search intent, entity visibility, and organic growth strategies.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            {articles.map((post) => (
+              <Link key={post.slug} href={`/insights/${post.slug}`} className="group block">
+                <motion.div whileHover={{ y: -4 }} className="h-full p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-lg transition-all duration-300 shadow-xs flex flex-col justify-between">
+                  <div>
+                    <Badge variant="subtle" className="mb-3 text-[10px] bg-[#F7D7B0]/40 text-[#F15E1C] font-semibold">
+                      {post.category}
+                    </Badge>
+                    <h3 className="text-base sm:text-lg font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="mt-2 text-xs sm:text-sm text-gray-600 dark:text-gray-300 line-clamp-3 leading-relaxed">
+                      {post.summary}
+                    </p>
+                  </div>
+                  <div className="pt-4 mt-4 border-t border-[#F7D7B0] flex items-center justify-between text-xs font-semibold text-[#F15E1C]">
+                    <span>Read Article</span>
+                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </div>
+                </motion.div>
+              </Link>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <Link href="/insights">
+              <Button3D variant="secondary" size="md" className="bg-[#2E936F] text-[#FFFFFF] border-[#2E936F]">
+                Explore All Insights
+              </Button3D>
+            </Link>
+          </div>
+
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          17. FAQ SECTION
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+            <Badge variant="outline" className="mb-3 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              QUESTIONS &amp; ANSWERS
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Frequently Asked Questions.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Concise answers regarding technical SEO, search intent, AI search experiences, and measurement.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto space-y-4">
+            {seoFaqData.map((faq, index) => {
+              const isOpen = openFaqIdx === index;
+              return (
+                <div
+                  key={index}
+                  className="rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#1b2823] overflow-hidden transition-all hover:border-[#F15E1C] hover:shadow-md"
+                >
+                  <button
+                    onClick={() => setOpenFaqIdx(isOpen ? null : index)}
+                    className="w-full text-left p-5 flex items-center justify-between font-bold text-sm sm:text-base text-[#1b2823] dark:text-[#ffffff] hover:text-[#F15E1C] transition-colors cursor-pointer"
+                  >
+                    <span>{faq.question}</span>
+                    <ChevronDown className={cn("w-5 h-5 transition-transform duration-200 text-[#F15E1C]", isOpen && "rotate-180")} />
+                  </button>
+
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <div className="p-5 pt-0 text-sm text-gray-600 dark:text-gray-300 border-t border-[#F7D7B0] leading-relaxed">
+                          {faq.answer}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
+
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          18. FINAL CTA
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          <div className="relative rounded-3xl p-8 sm:p-12 lg:p-16 bg-[#2E936F] text-[#FFFFFF] border border-[#2E936F] shadow-2xl overflow-hidden text-center space-y-6">
+            
+            {/* Ambient Palette Glows */}
+            <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#F15E1C]/30 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-[#FAB60A]/25 rounded-full blur-3xl pointer-events-none" />
+
+            <Badge variant="outline" className="border-[#FFFFFF] text-[#FFFFFF] bg-[#FFFFFF]/10 px-3 py-1 font-semibold tracking-wider text-xs">
+              TAKE THE NEXT STEP
+            </Badge>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight max-w-3xl mx-auto leading-tight text-[#FFFFFF]">
+              Make Your Business Easier to Find.
+            </h2>
+
+            <p className="text-base sm:text-lg text-[#FFEC69] max-w-2xl mx-auto leading-relaxed font-medium">
+              Build a search strategy that connects technical health, useful content, authority and measurement into one continuous system.
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+              <Link href="/contact">
+                <Button3D variant="primary" size="lg" className="flex items-center gap-2 font-semibold bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] hover:opacity-95 transition-all">
+                  Start Your SEO Assessment
+                  <ArrowRight className="w-4 h-4" />
+                </Button3D>
+              </Link>
+              <Link href="/contact">
+                <Button3D variant="secondary" size="lg" className="flex items-center gap-2 font-medium bg-[#FFFFFF] text-[#2E936F] border-[#FFFFFF] hover:bg-[#F7D7B0] transition-all">
+                  Talk to Our Search Team
+                </Button3D>
+              </Link>
+            </div>
+
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
