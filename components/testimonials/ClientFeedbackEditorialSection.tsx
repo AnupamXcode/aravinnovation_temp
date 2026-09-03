@@ -5,6 +5,8 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Quote, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+import { testimonialsData } from "@/data/testimonials";
+
 export interface EditorialTestimonial {
   id: string;
   numStr: string;
@@ -16,52 +18,16 @@ export interface EditorialTestimonial {
   location: string;
 }
 
-export const editorialTestimonials: EditorialTestimonial[] = [
-  {
-    id: "alex-turner-editorial",
-    numStr: "01",
-    quote:
-      "Partnering with Arav Innovations was a game-changer for our business. Their strategic approach and seamless execution helped us grow our digital presence exponentially. We couldn't be happier with the results.",
-    author: "Alex Turner",
-    role: "Digital Marketing Head",
-    company: "InnovateCo",
-    category: "Digital Marketing & Strategy",
-    location: "Global",
-  },
-  {
-    id: "maria-gomez-editorial",
-    numStr: "02",
-    quote:
-      "The team at Arav Innovations transformed our outdated systems into a state-of-the-art solution that not only boosted our efficiency but also provided us with a competitive edge. Truly remarkable work!",
-    author: "Maria Gomez",
-    role: "CTO",
-    company: "TechBridge Solutions",
-    category: "Web & App Development",
-    location: "Global",
-  },
-  {
-    id: "liam-shaw-editorial",
-    numStr: "03",
-    quote:
-      "Working with Arav Innovations was a fantastic experience. Their attention to detail and commitment to excellence set them apart. They understood our needs perfectly and delivered beyond expectations.",
-    author: "Liam Shaw",
-    role: "Founder",
-    company: "GreenSpace Enterprises",
-    category: "IT Strategy & Consulting",
-    location: "Global",
-  },
-  {
-    id: "sophie-lee-editorial",
-    numStr: "04",
-    quote:
-      "Arav Innovations provided unparalleled support and guidance throughout our project. Their expertise and proactive approach ensured the project's success, and their team was a pleasure to work with.",
-    author: "Sophie Lee",
-    role: "COO",
-    company: "Urban Insights",
-    category: "Risk Governance & Operations",
-    location: "Global",
-  },
-];
+export const editorialTestimonials: EditorialTestimonial[] = testimonialsData.map((t, idx) => ({
+  id: t.id,
+  numStr: (idx + 1).toString().padStart(2, "0"),
+  quote: t.quote,
+  author: t.author,
+  role: t.designation,
+  company: t.company,
+  category: t.service,
+  location: t.location,
+}));
 
 export function ClientFeedbackEditorialSection() {
   const shouldReduceMotion = useReducedMotion();
@@ -171,7 +137,7 @@ export function ClientFeedbackEditorialSection() {
             <div className="flex items-center gap-1 font-mono text-sm font-black">
               <span className="text-[#f15e1c]">{current.numStr}</span>
               <span className="text-[#7A6A5F] dark:text-[#B8ACA0] font-normal">/</span>
-              <span className="text-[#2e936f]">0{total}</span>
+              <span className="text-[#2e936f]">{total.toString().padStart(2, "0")}</span>
             </div>
           </div>
 
@@ -230,7 +196,7 @@ export function ClientFeedbackEditorialSection() {
                   transition={{ duration: 0.35, ease: "easeOut" }}
                 />
               </div>
-              <span className="text-xs font-mono font-bold text-[#2e936f]">0{total}</span>
+              <span className="text-xs font-mono font-bold text-[#2e936f]">{total.toString().padStart(2, "0")}</span>
             </div>
 
             {/* Pagination Controls */}
