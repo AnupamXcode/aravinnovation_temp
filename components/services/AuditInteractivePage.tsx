@@ -703,7 +703,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                   className={cn(
                     "shrink-0 min-w-[130px] sm:min-w-[150px] md:min-w-0 md:shrink p-3.5 sm:p-4 rounded-xl text-left transition-all duration-300 flex flex-col justify-between border cursor-pointer group hover:scale-102 hover:shadow-md",
                     activeTimelineStage === idx
-                      ? "bg-white dark:bg-[#F15E1C] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/20"
+                      ? "bg-[#F15E1C] text-[#FFFFFF] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/20"
                       : "bg-transparent border-transparent hover:bg-gray-100/80 dark:hover:bg-[#1b2823] hover:border-gray-300 dark:hover:border-gray-700"
                   )}
                 >
