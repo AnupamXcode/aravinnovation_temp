@@ -306,6 +306,10 @@ body {
   font-family: var(--font-arabic), var(--font-sans), system-ui, sans-serif;
 }
 
+[lang="hi"] {
+  font-family: var(--font-devanagari), var(--font-sans), system-ui, sans-serif;
+}
+
 /* ============================================================================
    3D VISUAL EFFECTS & TONAL SYSTEM UTILITIES
    ============================================================================ */

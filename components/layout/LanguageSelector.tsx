@@ -60,9 +60,12 @@ export function LanguageSelector() {
         onClick={() => setIsOpen(!isOpen)}
         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FFFDF9] dark:bg-[#0a0a0a] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] hover:border-[#f15e1c] transition-colors cursor-pointer shadow-xs"
         aria-expanded={isOpen}
+        aria-label="Select language / भाषा चुनें"
       >
         <Globe className="w-3.5 h-3.5 text-[#f15e1c]" />
-        <span className="uppercase font-bold font-mono">{currentLang.code}</span>
+        <span className="font-bold font-mono uppercase">{currentLang.code}</span>
+        <span className="text-[#7A6A5F] dark:text-[#B8ACA0] text-[10px]">&bull;</span>
+        <span className="font-semibold text-[11px]">{currentLang.nativeName}</span>
         <ChevronDown className={cn("w-3 h-3 text-[#7A6A5F] transition-transform duration-200", isOpen && "rotate-180")} />
       </button>
 

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Inter, Noto_Sans_Arabic } from "next/font/google";
+import { Plus_Jakarta_Sans, Inter, Noto_Sans_Arabic, Noto_Sans_Devanagari } from "next/font/google";
 import "../globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { SiteConfigProvider } from "@/lib/site-config";
@@ -36,6 +36,13 @@ const inter = Inter({
 const notoSansArabic = Noto_Sans_Arabic({
   variable: "--font-arabic",
   subsets: ["arabic"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+
+const notoSansDevanagari = Noto_Sans_Devanagari({
+  variable: "--font-devanagari",
+  subsets: ["devanagari"],
   display: "swap",
   weight: ["400", "500", "600", "700"],
 });
@@ -149,7 +156,7 @@ export default async function RootLayout({
       dir={locale === "ar" ? "rtl" : "ltr"}
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={`${plusJakartaSans.variable} ${inter.variable} ${notoSansArabic.variable} scroll-smooth`}
+      className={`${plusJakartaSans.variable} ${inter.variable} ${notoSansArabic.variable} ${notoSansDevanagari.variable} scroll-smooth`}
     >
       <head>
         <OrganizationSchema />
