@@ -513,10 +513,9 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
       <DiagnosticDotGrid />
 
       {/* Breadcrumb Navigation */}
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 pt-6 sm:pt-8 pb-4">
+      <div className="relative z-10 w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-3 sm:pt-4 pb-1 sm:pb-2">
         <Breadcrumb
           items={[
-            { label: "Home", href: "/" },
             { label: "Services", href: "/services" },
             { label: "Audit & Improvement", href: "/services/audit-improvement" },
           ]}
@@ -527,13 +526,13 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           2. HERO SECTION
           ===================================================================== */}
       <section className="relative z-10 w-full border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-10 sm:py-14 md:py-18 lg:py-24">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-2 sm:pt-4 pb-8 sm:pb-12 md:pb-16 lg:pb-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
             
             {/* Hero Copy */}
-            <div className="lg:col-span-7 xl:col-span-6 space-y-6 sm:space-y-8">
+            <div className="lg:col-span-6 space-y-6">
               <div className="inline-flex items-center gap-2">
-                <Badge variant="outline" className="border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5 px-3 py-1 font-semibold tracking-wider text-xs">
+                <Badge variant="outline" className="border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5 px-3.5 py-1.5 font-semibold tracking-wider text-xs rounded-full shadow-xs hover:bg-[#f15e1c]/10 transition-colors">
                   AUDIT • ASSURANCE • IMPROVEMENT
                 </Badge>
               </div>
@@ -553,13 +552,13 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
               {/* CTAs */}
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <Link href="/contact">
-                  <Button3D variant="primary" size="lg" className="flex items-center gap-2 font-semibold">
+                  <Button3D variant="primary" size="lg" className="flex items-center gap-2 font-semibold hover:scale-102 transition-transform">
                     Start an Assessment
                     <ArrowRight className="w-4 h-4" />
                   </Button3D>
                 </Link>
                 <a href="#diagnostic-view">
-                  <Button3D variant="secondary" size="lg" className="flex items-center gap-2 font-medium">
+                  <Button3D variant="secondary" size="lg" className="flex items-center gap-2 font-medium hover:scale-102 transition-transform">
                     Explore Our Approach
                   </Button3D>
                 </a>
@@ -572,12 +571,13 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {keywordTags.map((tag, idx) => (
-                    <span
+                    <motion.span
                       key={idx}
-                      className="text-xs px-3 py-1 rounded-md bg-gray-100 dark:bg-[#121824] text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-800"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      className="text-xs px-3.5 py-1.5 rounded-lg bg-gray-100 dark:bg-[#121824] text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/60 hover:bg-[#f15e1c]/10 hover:text-[#f15e1c] transition-all duration-200 cursor-pointer shadow-xs font-medium"
                     >
                       {tag}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
               </div>
@@ -588,10 +588,10 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
               </p>
             </div>
 
-            {/* Hero Visual Card */}
-            <div className="lg:col-span-5 xl:col-span-6 w-full flex justify-center">
-              <TiltCard className="w-full max-w-xl lg:max-w-full">
-                <div className="relative rounded-2xl p-4 sm:p-6 bg-gradient-to-b from-[#ffffff] to-[#fefaf5] dark:from-[#121824] dark:to-[#0b0f17] border border-gray-200 dark:border-gray-800 shadow-xl overflow-hidden group">
+            {/* Hero Visual Card (Side-by-side Layout with Scaled Image) */}
+            <div className="lg:col-span-6 w-full">
+              <TiltCard className="w-full">
+                <div className="relative rounded-2xl p-5 sm:p-6 bg-gradient-to-b from-[#ffffff] to-[#fefaf5] dark:from-[#121824] dark:to-[#0b0f17] border border-gray-200 dark:border-gray-800 shadow-xl overflow-hidden group hover:border-[#f15e1c]/50 transition-all duration-300">
                   
                   {/* Visual Header */}
                   <div className="flex items-center justify-between pb-3 border-b border-gray-200 dark:border-gray-800">
@@ -601,39 +601,56 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                         Business Diagnostic Visual
                       </span>
                     </div>
-                    <Badge variant="subtle" className="text-[10px] bg-[#2e936f]/10 text-[#2e936f]">
+                    <Badge variant="subtle" className="text-[10px] bg-[#2e936f]/10 text-[#2e936f] font-semibold">
                       System Blueprint
                     </Badge>
                   </div>
 
-                  {/* Main Hero Diagnostic Image */}
-                  <div className="my-4 relative rounded-xl overflow-hidden border border-gray-100 dark:border-gray-800 bg-black/5 dark:bg-black/40">
-                    <Image
-                      src="/images/audit-and-improvement-main.png"
-                      alt="Arav Innovations Business Diagnostic Audit & Improvement Architecture"
-                      width={1200}
-                      height={750}
-                      priority
-                      className="w-full h-auto max-h-[480px] object-contain rounded-xl transition-transform duration-500 group-hover:scale-[1.01]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                      <span className="text-xs font-medium text-white/90">
-                        BUSINESS → EVIDENCE → ASSESSMENT → FINDINGS → PRIORITIES → IMPROVEMENT
-                      </span>
+                  {/* Side-by-Side Content Grid inside Hero Card */}
+                  <div className="my-4 grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                    {/* Compact Image */}
+                    <div className="sm:col-span-7 relative rounded-xl overflow-hidden border border-gray-100 dark:border-gray-800 bg-black/5 dark:bg-black/40 group-hover:shadow-md transition-shadow">
+                      <Image
+                        src="/images/audit-and-improvement-main.png"
+                        alt="Arav Innovations Business Diagnostic Audit & Improvement Architecture"
+                        width={600}
+                        height={380}
+                        priority
+                        className="w-full h-auto max-h-[260px] sm:max-h-[280px] object-cover rounded-xl transition-transform duration-500 group-hover:scale-102"
+                      />
+                    </div>
+
+                    {/* Side-by-Side Key Summary Highlights */}
+                    <div className="sm:col-span-5 space-y-2.5">
+                      <div className="p-2.5 rounded-xl bg-white dark:bg-[#182030] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/40 transition-colors">
+                        <span className="text-[10px] font-mono font-bold text-[#f15e1c] uppercase block">Phase 01</span>
+                        <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff]">Evidence Mapping</span>
+                        <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-2">Document actual operational workflows and system telemetry.</p>
+                      </div>
+                      <div className="p-2.5 rounded-xl bg-white dark:bg-[#182030] border border-gray-200 dark:border-gray-800 hover:border-[#fab60a]/40 transition-colors">
+                        <span className="text-[10px] font-mono font-bold text-[#fab60a] uppercase block">Phase 02</span>
+                        <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff]">Gap & Friction Trace</span>
+                        <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-2">Isolate root cause bottlenecks and control weaknesses.</p>
+                      </div>
+                      <div className="p-2.5 rounded-xl bg-white dark:bg-[#182030] border border-gray-200 dark:border-gray-800 hover:border-[#2e936f]/40 transition-colors">
+                        <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase block">Phase 03</span>
+                        <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff]">Action Roadmap</span>
+                        <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-2">Deliver prioritized remediation focused on high ROI quick wins.</p>
+                      </div>
                     </div>
                   </div>
 
                   {/* Nodes Summary Strip */}
                   <div className="grid grid-cols-3 gap-2 text-center py-2.5 border-t border-gray-200 dark:border-gray-800">
-                    <div className="p-2 rounded-lg bg-gray-50 dark:bg-[#182030]">
+                    <div className="p-2 rounded-lg bg-gray-50 dark:bg-[#182030] hover:bg-[#f15e1c]/5 transition-colors cursor-pointer">
                       <span className="text-[10px] text-gray-500 dark:text-gray-400 block font-mono">OBSERVE</span>
                       <span className="text-xs font-bold text-[#f15e1c]">Workflows</span>
                     </div>
-                    <div className="p-2 rounded-lg bg-gray-50 dark:bg-[#182030]">
+                    <div className="p-2 rounded-lg bg-gray-50 dark:bg-[#182030] hover:bg-[#fab60a]/5 transition-colors cursor-pointer">
                       <span className="text-[10px] text-gray-500 dark:text-gray-400 block font-mono">IDENTIFY</span>
                       <span className="text-xs font-bold text-[#fab60a]">Root Cause</span>
                     </div>
-                    <div className="p-2 rounded-lg bg-gray-50 dark:bg-[#182030]">
+                    <div className="p-2 rounded-lg bg-gray-50 dark:bg-[#182030] hover:bg-[#2e936f]/5 transition-colors cursor-pointer">
                       <span className="text-[10px] text-gray-500 dark:text-gray-400 block font-mono">IMPROVE</span>
                       <span className="text-xs font-bold text-[#2e936f]">Validated</span>
                     </div>
@@ -660,10 +677,10 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           4. NEW SIGNATURE SECTION: THE DIAGNOSTIC VIEW
           ===================================================================== */}
       <section id="diagnostic-view" className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-b from-[#ffffff] via-[#fefaf5]/40 to-[#ffffff] dark:from-[#0b0f17] dark:via-[#101622] dark:to-[#0b0f17] border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#2e936f]/40 text-[#2e936f] bg-[#2e936f]/5">
+            <Badge variant="outline" className="mb-3 border-[#2e936f]/40 text-[#2e936f] bg-[#2e936f]/5 px-3 py-1 text-xs">
               THE DIAGNOSTIC VIEW
             </Badge>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
@@ -675,126 +692,127 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           </AnimatedSection>
 
           {/* Connected Diagnostic Timeline (OBSERVE -> COLLECT -> ANALYZE -> FIND -> PRIORITIZE) */}
-          <div className="w-full max-w-[1400px] mx-auto bg-gradient-to-b from-gray-50 to-white dark:from-[#121824] dark:to-[#0b0f17] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg">
+          <div className="w-full bg-gradient-to-b from-gray-50 to-white dark:from-[#121824] dark:to-[#0b0f17] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg">
             
             {/* Stage Controls Header */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 pb-6 sm:pb-8 border-b border-gray-200 dark:border-gray-800">
+            <div className="flex overflow-x-auto gap-2.5 pb-4 md:grid md:grid-cols-5 md:gap-4 sm:pb-8 border-b border-gray-200 dark:border-gray-800 scrollbar-none">
               {diagnosticViewStages.map((stage, idx) => (
                 <button
                   key={stage.num}
                   onClick={() => setActiveTimelineStage(idx)}
                   className={cn(
-                    "p-3 sm:p-4 rounded-xl text-left transition-all duration-200 flex flex-col justify-between border",
+                    "shrink-0 min-w-[130px] sm:min-w-[150px] md:min-w-0 md:shrink p-3.5 sm:p-4 rounded-xl text-left transition-all duration-300 flex flex-col justify-between border cursor-pointer group hover:scale-102 hover:shadow-md",
                     activeTimelineStage === idx
-                      ? "bg-white dark:bg-[#1a2234] border-[#f15e1c] shadow-md scale-102"
-                      : "bg-transparent border-transparent hover:bg-gray-100 dark:hover:bg-[#161e2e]"
+                      ? "bg-white dark:bg-[#1a2234] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/20"
+                      : "bg-transparent border-transparent hover:bg-gray-100/80 dark:hover:bg-[#161e2e] hover:border-gray-300 dark:hover:border-gray-700"
                   )}
                 >
                   <div className="flex items-center justify-between w-full">
                     <span className={cn(
-                      "text-xs font-mono font-bold px-2 py-0.5 rounded",
-                      activeTimelineStage === idx ? "bg-[#f15e1c] text-white" : "bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400"
+                      "text-xs font-mono font-bold px-2 py-0.5 rounded transition-colors",
+                      activeTimelineStage === idx ? "bg-[#f15e1c] text-white" : "bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 group-hover:bg-[#f15e1c]/20 group-hover:text-[#f15e1c]"
                     )}>
                       {stage.num}
                     </span>
                     <span className="text-[10px] text-gray-400 font-mono">Stage</span>
                   </div>
-                  <div className="mt-2 text-sm font-bold text-[#1b2823] dark:text-[#ffffff]">
+                  <div className="mt-2 text-sm font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
                     {stage.title}
                   </div>
                 </button>
               ))}
             </div>
 
-            {/* Active Stage Display Panel */}
-            <div className="pt-6 sm:pt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              
-              <div className="lg:col-span-7 space-y-4">
-                <div className="inline-flex items-center gap-2">
-                  <Badge variant="subtle" className="bg-[#f15e1c]/10 text-[#f15e1c]">
-                    {diagnosticViewStages[activeTimelineStage].badge}
-                  </Badge>
-                  <span className="text-xs text-gray-400 font-mono">
-                    Phase {diagnosticViewStages[activeTimelineStage].num} of 05
-                  </span>
-                </div>
-
-                <h3 className="text-2xl sm:text-3xl font-bold text-[#1b2823] dark:text-[#ffffff]">
-                  {diagnosticViewStages[activeTimelineStage].title}: {diagnosticViewStages[activeTimelineStage].question}
-                </h3>
-
-                <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {diagnosticViewStages[activeTimelineStage].desc}
-                </p>
-
-                <div className="p-4 sm:p-5 rounded-xl bg-white dark:bg-[#182030] border border-gray-200 dark:border-gray-800 flex items-start gap-3">
-                  <FileCheck className="w-5 h-5 text-[#2e936f] shrink-0 mt-0.5" />
-                  <div>
-                    <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider block">
-                      Diagnostic Output
-                    </span>
-                    <span className="text-sm sm:text-base font-bold text-[#1b2823] dark:text-[#ffffff]">
-                      {diagnosticViewStages[activeTimelineStage].output}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Interactive Timeline Visual Node */}
-              <div className="lg:col-span-5 flex justify-center">
-                <div className="relative w-full max-w-sm p-6 rounded-2xl bg-white dark:bg-[#182030] border border-gray-200 dark:border-gray-800 shadow-inner text-center space-y-4">
-                  <div className="w-16 h-16 mx-auto rounded-full bg-[#f15e1c]/10 flex items-center justify-center border border-[#f15e1c]/30 text-[#f15e1c]">
-                    <Search className="w-8 h-8 animate-pulse" />
-                  </div>
-                  <div className="text-lg font-bold text-[#1b2823] dark:text-[#ffffff]">
-                    {diagnosticViewStages[activeTimelineStage].title} STAGE
-                  </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 italic">
-                    Evidence connector active. Examining current state workflows & telemetry.
-                  </p>
-                  <div className="flex justify-center gap-1.5 pt-2">
-                    {diagnosticViewStages.map((_, i) => (
-                      <span
-                        key={i}
-                        className={cn(
-                          "h-1.5 rounded-full transition-all duration-300",
-                          activeTimelineStage === i ? "w-6 bg-[#f15e1c]" : "w-1.5 bg-gray-300 dark:bg-gray-700"
-                        )}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            {/* Diagnostic Architecture Visual Showcase */}
-            <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800">
-              <div className="relative rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#121824] shadow-md group">
-                <div className="p-4 bg-gray-50 dark:bg-[#182030] border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Badge variant="subtle" className="bg-[#f15e1c]/10 text-[#f15e1c]">
-                      System Architecture Map
+            {/* Active Stage Display Panel (Side-by-Side Layout with Image & Text) */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTimelineStage}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.3 }}
+                className="pt-6 sm:pt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+              >
+                
+                {/* Left Side: Stage Text Details & Deliverables */}
+                <div className="lg:col-span-7 space-y-4">
+                  <div className="inline-flex items-center gap-2">
+                    <Badge variant="subtle" className="bg-[#f15e1c]/10 text-[#f15e1c] font-semibold">
+                      {diagnosticViewStages[activeTimelineStage].badge}
                     </Badge>
-                    <span className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">
-                      End-to-End Operational Diagnostic View
+                    <span className="text-xs text-gray-400 font-mono">
+                      Phase {diagnosticViewStages[activeTimelineStage].num} of 05
                     </span>
                   </div>
-                  <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider hidden sm:inline">
-                    Diagnostic Overview
-                  </span>
+
+                  <h3 className="text-2xl sm:text-3xl font-bold text-[#1b2823] dark:text-[#ffffff]">
+                    {diagnosticViewStages[activeTimelineStage].title}: {diagnosticViewStages[activeTimelineStage].question}
+                  </h3>
+
+                  <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                    {diagnosticViewStages[activeTimelineStage].desc}
+                  </p>
+
+                  <div className="p-4 sm:p-5 rounded-xl bg-white dark:bg-[#182030] border border-gray-200 dark:border-gray-800 flex items-start gap-3 hover:border-[#2e936f]/40 transition-colors shadow-xs">
+                    <FileCheck className="w-5 h-5 text-[#2e936f] shrink-0 mt-0.5" />
+                    <div>
+                      <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider block">
+                        Diagnostic Output
+                      </span>
+                      <span className="text-sm sm:text-base font-bold text-[#1b2823] dark:text-[#ffffff]">
+                        {diagnosticViewStages[activeTimelineStage].output}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div className="p-2 sm:p-4 bg-black/5 dark:bg-black/30">
-                  <Image
-                    src="/images/audit-and-improvement.png"
-                    alt="Arav Innovations End-to-End Operational Diagnostic View Architecture"
-                    width={1400}
-                    height={800}
-                    className="w-full h-auto object-contain rounded-xl transition-transform duration-500 group-hover:scale-[1.01]"
-                  />
+
+                {/* Right Side: Resized Visual Diagram Side-by-Side with Text */}
+                <div className="lg:col-span-5 flex flex-col items-center justify-center space-y-4">
+                  <div className="relative w-full rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#121824] shadow-md group hover:border-[#f15e1c]/40 transition-all duration-300">
+                    <div className="p-3 bg-gray-50 dark:bg-[#182030] border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-[#f15e1c] animate-ping" />
+                        <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">
+                          Architecture Map
+                        </span>
+                      </div>
+                      <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider">
+                        Stage {diagnosticViewStages[activeTimelineStage].num} Visual
+                      </span>
+                    </div>
+                    <div className="p-2 bg-black/5 dark:bg-black/30">
+                      <Image
+                        src="/images/audit-and-improvement.png"
+                        alt="Arav Innovations End-to-End Operational Diagnostic View Architecture"
+                        width={700}
+                        height={400}
+                        className="w-full h-auto max-h-[260px] sm:max-h-[300px] object-cover rounded-xl transition-transform duration-500 group-hover:scale-102"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Interactive Timeline Visual Node Indicator */}
+                  <div className="w-full p-3 rounded-xl bg-white dark:bg-[#182030] border border-gray-200 dark:border-gray-800 text-center flex items-center justify-between text-xs font-medium">
+                    <div className="flex items-center gap-2">
+                      <Search className="w-4 h-4 text-[#f15e1c] animate-pulse" />
+                      <span className="font-bold text-[#1b2823] dark:text-[#ffffff]">{diagnosticViewStages[activeTimelineStage].title} STAGE ACTIVE</span>
+                    </div>
+                    <div className="flex gap-1.5">
+                      {diagnosticViewStages.map((_, i) => (
+                        <span
+                          key={i}
+                          className={cn(
+                            "h-1.5 rounded-full transition-all duration-300",
+                            activeTimelineStage === i ? "w-5 bg-[#f15e1c]" : "w-1.5 bg-gray-300 dark:bg-gray-700"
+                          )}
+                        />
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+
+              </motion.div>
+            </AnimatePresence>
 
           </div>
         </div>
@@ -806,10 +824,10 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           5. AUDIT -> DECISION
           ===================================================================== */}
       <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#fab60a]/40 text-[#fab60a] bg-[#fab60a]/5">
+            <Badge variant="outline" className="mb-3 border-[#fab60a]/40 text-[#fab60a] bg-[#fab60a]/5 px-3 py-1 text-xs">
               DECISION FRAMEWORK
             </Badge>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
@@ -823,21 +841,22 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           {/* Visual Transformation Sequence Flow */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 xl:gap-6">
             {decisionTransformationSteps.map((stepItem, idx) => (
-              <div
+              <motion.div
                 key={stepItem.step}
+                whileHover={{ scale: 1.03, y: -4 }}
                 onClick={() => setActiveDecisionStep(idx)}
                 className={cn(
-                  "cursor-pointer p-5 rounded-xl border transition-all duration-200 flex flex-col justify-between relative group",
+                  "cursor-pointer p-5 rounded-xl border transition-all duration-300 flex flex-col justify-between relative group hover:shadow-xl",
                   activeDecisionStep === idx
-                    ? "bg-white dark:bg-[#182030] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/20 scale-102"
-                    : "bg-gray-50 dark:bg-[#121824] border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700"
+                    ? "bg-white dark:bg-[#182030] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/20"
+                    : "bg-gray-50 dark:bg-[#121824] border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/50 hover:bg-white dark:hover:bg-[#182030]"
                 )}
               >
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-mono font-bold text-[#f15e1c]">
+                  <span className="text-xs font-mono font-bold text-[#f15e1c] group-hover:scale-110 transition-transform">
                     {stepItem.step}
                   </span>
-                  <div className="p-1.5 rounded-md bg-gray-100 dark:bg-[#0b0f17]">
+                  <div className="p-1.5 rounded-md bg-gray-100 dark:bg-[#0b0f17] group-hover:bg-[#f15e1c]/10 transition-colors">
                     {stepItem.icon}
                   </div>
                 </div>
@@ -850,9 +869,9 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                   </p>
                 </div>
                 {idx < decisionTransformationSteps.length - 1 && (
-                  <ArrowRight className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 z-20 pointer-events-none" />
+                  <ArrowRight className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 z-20 pointer-events-none group-hover:text-[#f15e1c] transition-colors" />
                 )}
-              </div>
+              </motion.div>
             ))}
           </div>
 
@@ -865,10 +884,10 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           6. WHAT WE ASSESS (WHAT WE EXAMINE)
           ===================================================================== */}
       <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#0e131f]/50 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5">
+            <Badge variant="outline" className="mb-3 border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5 px-3 py-1 text-xs">
               WHAT WE EXAMINE
             </Badge>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
@@ -886,90 +905,116 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
             {/* Navigation Tabs */}
-            <div className="lg:col-span-5 xl:col-span-4 space-y-3">
+            <div className="flex overflow-x-auto gap-2.5 pb-3 lg:flex-col lg:space-y-3 lg:gap-0 lg:pb-0 scrollbar-none lg:col-span-5 xl:col-span-4">
               {diagnosticAreas.map((area, idx) => (
                 <button
                   key={area.num}
                   onClick={() => setActiveDomain(idx)}
                   className={cn(
-                    "w-full text-left p-4 rounded-xl border transition-all duration-200 flex items-center justify-between",
+                    "shrink-0 min-w-[170px] sm:min-w-[200px] lg:min-w-0 lg:w-full text-left p-3.5 sm:p-4 rounded-xl border transition-all duration-300 flex items-center justify-between cursor-pointer group hover:scale-101 hover:shadow-md",
                     activeDomain === idx
                       ? "bg-white dark:bg-[#182030] border-[#f15e1c] shadow-md ring-1 ring-[#f15e1c]"
-                      : "bg-gray-100/70 dark:bg-[#121824] border-gray-200 dark:border-gray-800 hover:bg-white dark:hover:bg-[#161e2e]"
+                      : "bg-gray-100/70 dark:bg-[#121824] border-gray-200 dark:border-gray-800 hover:bg-white dark:hover:bg-[#161e2e] hover:border-[#f15e1c]/40"
                   )}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-gray-100 dark:bg-[#0b0f17]">
+                    <div className="p-2 rounded-lg bg-gray-100 dark:bg-[#0b0f17] group-hover:bg-[#f15e1c]/10 transition-colors">
                       {area.icon}
                     </div>
                     <div>
                       <span className="text-xs font-mono font-bold text-[#f15e1c] block">
                         {area.num}
                       </span>
-                      <span className="text-sm font-bold text-[#1b2823] dark:text-[#ffffff]">
+                      <span className="text-sm font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
                         {area.title}
                       </span>
                     </div>
                   </div>
-                  <ArrowRight className={cn("w-4 h-4 transition-transform", activeDomain === idx ? "text-[#f15e1c] translate-x-1" : "text-gray-400")} />
+                  <ArrowRight className={cn("w-4 h-4 transition-transform duration-200 hidden sm:block", activeDomain === idx ? "text-[#f15e1c] translate-x-1" : "text-gray-400 group-hover:text-[#f15e1c] group-hover:translate-x-1")} />
                 </button>
               ))}
             </div>
 
-            {/* Interactive Domain Detail Viewer */}
+            {/* Interactive Domain Detail Viewer (Side-by-Side Image and Points Layout) */}
             <div className="lg:col-span-7 xl:col-span-8 bg-white dark:bg-[#121824] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 shadow-lg">
-              <div className="flex items-center justify-between pb-6 border-b border-gray-200 dark:border-gray-800">
-                <div className="flex items-center gap-3">
-                  <div className="p-3 rounded-xl bg-[#f15e1c]/10 text-[#f15e1c]">
-                    {diagnosticAreas[activeDomain].icon}
-                  </div>
-                  <div>
-                    <span className="text-xs font-mono font-bold text-[#f15e1c]">
-                      AREA {diagnosticAreas[activeDomain].num}
-                    </span>
-                    <h3 className="text-xl sm:text-2xl font-bold text-[#1b2823] dark:text-[#ffffff]">
-                      {diagnosticAreas[activeDomain].title}
-                    </h3>
-                  </div>
-                </div>
-                <Badge variant="subtle" className="text-xs bg-[#2e936f]/10 text-[#2e936f]">
-                  Diagnostic Focus
-                </Badge>
-              </div>
-
-              <div className="py-6 space-y-4">
-                <p className="text-sm font-semibold text-[#f15e1c] font-mono">
-                  {diagnosticAreas[activeDomain].focus}
-                </p>
-                <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {diagnosticAreas[activeDomain].desc}
-                </p>
-
-                <div className="pt-4 border-t border-gray-200 dark:border-gray-800">
-                  <span className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 block mb-3">
-                    Key Examination Points
-                  </span>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
-                    {diagnosticAreas[activeDomain].details.map((item, i) => (
-                      <div key={i} className="flex items-center gap-2 text-xs font-medium text-[#1b2823] dark:text-[#f3f4f6] p-2.5 rounded-lg bg-gray-50 dark:bg-[#182030] border border-gray-100 dark:border-gray-800">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
-                        <span>{item}</span>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeDomain}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-6"
+                >
+                  <div className="flex items-center justify-between pb-6 border-b border-gray-200 dark:border-gray-800">
+                    <div className="flex items-center gap-3">
+                      <div className="p-3 rounded-xl bg-[#f15e1c]/10 text-[#f15e1c]">
+                        {diagnosticAreas[activeDomain].icon}
                       </div>
-                    ))}
+                      <div>
+                        <span className="text-xs font-mono font-bold text-[#f15e1c]">
+                          AREA {diagnosticAreas[activeDomain].num}
+                        </span>
+                        <h3 className="text-xl sm:text-2xl font-bold text-[#1b2823] dark:text-[#ffffff]">
+                          {diagnosticAreas[activeDomain].title}
+                        </h3>
+                      </div>
+                    </div>
+                    <Badge variant="subtle" className="text-xs bg-[#2e936f]/10 text-[#2e936f] font-semibold">
+                      Diagnostic Focus
+                    </Badge>
                   </div>
 
-                  {/* Secondary Diagnostic Graphic Panel */}
-                  <div className="mt-4 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-black/5 dark:bg-black/20 group">
-                    <Image
-                      src="/images/audit-and-improvement-secondary.png"
-                      alt="Arav Innovations Process, Control & Technology Examination Scope"
-                      width={900}
-                      height={500}
-                      className="w-full h-auto object-cover rounded-xl transition-transform duration-500 group-hover:scale-[1.01]"
-                    />
+                  <p className="text-sm font-semibold text-[#f15e1c] font-mono">
+                    {diagnosticAreas[activeDomain].focus}
+                  </p>
+                  <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                    {diagnosticAreas[activeDomain].desc}
+                  </p>
+
+                  {/* Side-by-Side Grid: Left Text Points, Right Compact Image Visual */}
+                  <div className="pt-4 border-t border-gray-200 dark:border-gray-800 grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
+                    
+                    {/* Left Column: Key Examination Points */}
+                    <div className="sm:col-span-7 space-y-3">
+                      <span className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 block">
+                        Key Examination Points
+                      </span>
+                      <div className="space-y-2">
+                        {diagnosticAreas[activeDomain].details.map((item, i) => (
+                          <motion.div
+                            key={i}
+                            whileHover={{ scale: 1.02, x: 4 }}
+                            className="flex items-center gap-2.5 text-xs font-medium text-[#1b2823] dark:text-[#f3f4f6] p-3 rounded-xl bg-gray-50 dark:bg-[#182030] border border-gray-100 dark:border-gray-800 hover:border-[#2e936f]/50 hover:bg-[#2e936f]/5 transition-all cursor-pointer shadow-xs"
+                          >
+                            <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
+                            <span>{item}</span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Right Column: Resized Compact Graphic Side-by-Side */}
+                    <div className="sm:col-span-5 flex justify-center">
+                      <div className="w-full rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-black/5 dark:bg-black/20 group hover:border-[#f15e1c]/40 transition-all duration-300 shadow-md">
+                        <Image
+                          src="/images/audit-and-improvement-secondary.png"
+                          alt="Arav Innovations Process, Control & Technology Examination Scope"
+                          width={500}
+                          height={300}
+                          className="w-full h-auto max-h-[220px] sm:max-h-[250px] object-cover rounded-xl transition-transform duration-500 group-hover:scale-102"
+                        />
+                        <div className="p-2 bg-gray-50 dark:bg-[#182030] text-center border-t border-gray-200 dark:border-gray-800">
+                          <span className="text-[10px] font-mono text-gray-500 dark:text-gray-400">
+                            {diagnosticAreas[activeDomain].title} Inspection Matrix
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
-                </div>
-              </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
 
           </div>
@@ -982,10 +1027,10 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           7. NEW INTERACTIVE ELEMENT — FRICTION MAP
           ===================================================================== */}
       <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5">
+            <Badge variant="outline" className="mb-3 border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5 px-3 py-1 text-xs">
               INTERACTIVE DIAGNOSTIC MAP
             </Badge>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
@@ -1008,24 +1053,24 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                   key={fp.id}
                   onClick={() => setActiveFrictionPoint(idx)}
                   className={cn(
-                    "p-4 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between relative group",
+                    "p-4 rounded-xl border text-left transition-all duration-300 flex flex-col justify-between relative group cursor-pointer hover:scale-102 hover:shadow-md",
                     activeFrictionPoint === idx
                       ? "bg-white dark:bg-[#182030] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/30"
-                      : "bg-gray-100/70 dark:bg-[#161e2e] border-gray-200 dark:border-gray-800 hover:border-gray-400"
+                      : "bg-gray-100/70 dark:bg-[#161e2e] border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/50 hover:bg-white dark:hover:bg-[#182030]"
                   )}
                 >
                   <div className="flex items-center justify-between w-full mb-2">
                     <span className="text-[10px] font-mono font-bold text-gray-500 dark:text-gray-400">
                       {fp.stage}
                     </span>
-                    <div className="p-1 rounded bg-white dark:bg-[#0b0f17]">
+                    <div className="p-1 rounded bg-white dark:bg-[#0b0f17] group-hover:bg-[#f15e1c]/10 transition-colors">
                       {fp.icon}
                     </div>
                   </div>
                   <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
                     {fp.label}
                   </span>
-                  <span className="text-[10px] text-[#f15e1c] font-semibold mt-1 block">
+                  <span className="text-[10px] text-[#f15e1c] font-semibold mt-1 block group-hover:translate-x-0.5 transition-transform">
                     Inspect →
                   </span>
                 </button>
@@ -1033,27 +1078,36 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
             </div>
 
             {/* Active Friction Explanation Card */}
-            <div className="p-6 rounded-xl bg-white dark:bg-[#182030] border border-gray-200 dark:border-gray-800 flex flex-col sm:flex-row items-start gap-4">
-              <div className="p-3 rounded-xl bg-[#f15e1c]/10 text-[#f15e1c] shrink-0">
-                {frictionPoints[activeFrictionPoint].icon}
-              </div>
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono font-bold text-[#f15e1c]">
-                    INSPECTION POINT: {frictionPoints[activeFrictionPoint].label}
-                  </span>
-                  <Badge variant="subtle" className="text-[10px] bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
-                    {frictionPoints[activeFrictionPoint].frictionType}
-                  </Badge>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeFrictionPoint}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.25 }}
+                className="p-6 rounded-xl bg-white dark:bg-[#182030] border border-gray-200 dark:border-gray-800 flex flex-col sm:flex-row items-start gap-4 hover:border-[#f15e1c]/40 transition-colors shadow-sm"
+              >
+                <div className="p-3 rounded-xl bg-[#f15e1c]/10 text-[#f15e1c] shrink-0">
+                  {frictionPoints[activeFrictionPoint].icon}
                 </div>
-                <h4 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff]">
-                  {frictionPoints[activeFrictionPoint].frictionType}
-                </h4>
-                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {frictionPoints[activeFrictionPoint].description}
-                </p>
-              </div>
-            </div>
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-mono font-bold text-[#f15e1c]">
+                      INSPECTION POINT: {frictionPoints[activeFrictionPoint].label}
+                    </span>
+                    <Badge variant="subtle" className="text-[10px] bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 font-semibold">
+                      {frictionPoints[activeFrictionPoint].frictionType}
+                    </Badge>
+                  </div>
+                  <h4 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff]">
+                    {frictionPoints[activeFrictionPoint].frictionType}
+                  </h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                    {frictionPoints[activeFrictionPoint].description}
+                  </p>
+                </div>
+              </motion.div>
+            </AnimatePresence>
 
           </div>
         </div>
@@ -1065,10 +1119,10 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           8. ROOT-CAUSE ANALYSIS
           ===================================================================== */}
       <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/40 dark:bg-[#0d121c]/40 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-            <Badge variant="outline" className="mb-3 border-[#2e936f]/40 text-[#2e936f] bg-[#2e936f]/5">
+            <Badge variant="outline" className="mb-3 border-[#2e936f]/40 text-[#2e936f] bg-[#2e936f]/5 px-3 py-1 text-xs">
               DIAGNOSTIC DEPTH
             </Badge>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
@@ -1083,13 +1137,14 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           </AnimatedSection>
 
           {/* Animated Layered Visual Breakdown */}
-          <div className="space-y-3 sm:space-y-4">
+          <div className="max-w-5xl mx-auto space-y-3 sm:space-y-4">
             {rootCauseLayers.map((layer, idx) => (
-              <div
+              <motion.div
                 key={layer.level}
+                whileHover={{ scale: 1.02, x: 4 }}
                 onClick={() => setActiveRootLayer(idx)}
                 className={cn(
-                  "cursor-pointer p-5 rounded-xl transition-all duration-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border",
+                  "cursor-pointer p-5 rounded-xl transition-all duration-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border hover:shadow-lg",
                   layer.color,
                   activeRootLayer === idx
                     ? "shadow-lg scale-101 ring-1 ring-gray-400 dark:ring-gray-600"
@@ -1113,7 +1168,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                 <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 sm:max-w-md text-left sm:text-right">
                   {layer.detail}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
 
@@ -1126,10 +1181,10 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           9. GLOBAL AUDIT APPROACH
           ===================================================================== */}
       <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#fab60a]/40 text-[#fab60a] bg-[#fab60a]/5">
+            <Badge variant="outline" className="mb-3 border-[#fab60a]/40 text-[#fab60a] bg-[#fab60a]/5 px-3 py-1 text-xs">
               AUDIT METHODOLOGY
             </Badge>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
@@ -1139,10 +1194,10 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
               Our audit approach applies internationally recognized principles to ensure findings are objective, thorough, and practical.
             </p>
             <div className="flex flex-wrap justify-center gap-3 pt-4">
-              <span className="text-xs px-3 py-1 rounded-full bg-gray-100 dark:bg-[#182030] text-gray-700 dark:text-gray-300 font-semibold border border-gray-200 dark:border-gray-800">
+              <span className="text-xs px-3.5 py-1.5 rounded-full bg-gray-100 dark:bg-[#182030] text-gray-700 dark:text-gray-300 font-semibold border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/40 transition-colors cursor-pointer">
                 IIA Global Internal Audit Standards Alignment
               </span>
-              <span className="text-xs px-3 py-1 rounded-full bg-gray-100 dark:bg-[#182030] text-gray-700 dark:text-gray-300 font-semibold border border-gray-200 dark:border-gray-800">
+              <span className="text-xs px-3.5 py-1.5 rounded-full bg-gray-100 dark:bg-[#182030] text-gray-700 dark:text-gray-300 font-semibold border border-gray-200 dark:border-gray-800 hover:border-[#2e936f]/40 transition-colors cursor-pointer">
                 ISO 19011 Auditing Principles
               </span>
             </div>
@@ -1151,20 +1206,21 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           {/* 6-Stage Methodology Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {methodologyStages.map((stage) => (
-              <div
+              <motion.div
                 key={stage.step}
-                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#121824] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/40 transition-all duration-200 shadow-sm flex flex-col justify-between"
+                whileHover={{ scale: 1.02, y: -4 }}
+                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#121824] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/60 hover:shadow-xl transition-all duration-300 shadow-sm flex flex-col justify-between group cursor-pointer"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-mono font-bold text-[#f15e1c] px-2 py-0.5 rounded bg-[#f15e1c]/10">
+                    <span className="text-xs font-mono font-bold text-[#f15e1c] px-2 py-0.5 rounded bg-[#f15e1c]/10 group-hover:bg-[#f15e1c] group-hover:text-white transition-colors">
                       STAGE {stage.step}
                     </span>
-                    <Badge variant="subtle" className="text-[10px] bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
+                    <Badge variant="subtle" className="text-[10px] bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 font-semibold">
                       Standardized Step
                     </Badge>
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-[#1b2823] dark:text-[#ffffff] mb-2">
+                  <h3 className="text-lg sm:text-xl font-bold text-[#1b2823] dark:text-[#ffffff] mb-2 group-hover:text-[#f15e1c] transition-colors">
                     {stage.name}
                   </h3>
                   <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
@@ -1174,9 +1230,9 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
 
                 <div className="pt-4 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between text-xs">
                   <span className="text-gray-400 font-mono">Deliverable:</span>
-                  <span className="font-semibold text-[#2e936f]">{stage.outcome}</span>
+                  <span className="font-semibold text-[#2e936f] group-hover:translate-x-0.5 transition-transform">{stage.outcome}</span>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
@@ -1189,10 +1245,10 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           10. PRIORITY MATRIX
           ===================================================================== */}
       <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#0e131f]/50 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5">
+            <Badge variant="outline" className="mb-3 border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5 px-3 py-1 text-xs">
               ACTION PRIORITIZATION
             </Badge>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
@@ -1252,10 +1308,10 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           11. BEFORE -> AFTER
           ===================================================================== */}
       <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#2e936f]/40 text-[#2e936f] bg-[#2e936f]/5">
+            <Badge variant="outline" className="mb-3 border-[#2e936f]/40 text-[#2e936f] bg-[#2e936f]/5 px-3 py-1 text-xs">
               OPERATIONAL TRANSFORMATION
             </Badge>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
@@ -1270,9 +1326,9 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             
             {/* BEFORE CARD */}
-            <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-red-50/50 to-white dark:from-[#1a1214] dark:to-[#121824] border border-red-200 dark:border-red-900/40 shadow-sm space-y-4">
+            <motion.div whileHover={{ y: -4 }} className="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-red-50/50 to-white dark:from-[#1a1214] dark:to-[#121824] border border-red-200 dark:border-red-900/40 shadow-sm hover:shadow-xl transition-all duration-300 space-y-4">
               <div className="flex items-center gap-2.5">
-                <span className="w-3 h-3 rounded-full bg-red-500" />
+                <span className="w-3 h-3 rounded-full bg-red-500 animate-pulse" />
                 <h3 className="text-xl font-bold text-red-700 dark:text-red-400">
                   BEFORE ASSESSMENT
                 </h3>
@@ -1285,18 +1341,18 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                   "Process Friction requiring constant employee workarounds",
                   "Reactive Decisions based on intuition rather than data",
                 ].map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-sm sm:text-base text-gray-700 dark:text-gray-300">
+                  <motion.li key={idx} whileHover={{ x: 4 }} className="flex items-start gap-3 text-sm sm:text-base text-gray-700 dark:text-gray-300 cursor-pointer">
                     <AlertTriangle className="w-4 h-4 text-red-500 shrink-0 mt-1" />
                     <span>{item}</span>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
 
             {/* AFTER CARD */}
-            <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-emerald-50/50 to-white dark:from-[#0d1c17] dark:to-[#121824] border border-emerald-200 dark:border-emerald-900/40 shadow-sm space-y-4">
+            <motion.div whileHover={{ y: -4 }} className="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-emerald-50/50 to-white dark:from-[#0d1c17] dark:to-[#121824] border border-emerald-200 dark:border-emerald-900/40 shadow-sm hover:shadow-xl transition-all duration-300 space-y-4">
               <div className="flex items-center gap-2.5">
-                <span className="w-3 h-3 rounded-full bg-[#2e936f]" />
+                <span className="w-3 h-3 rounded-full bg-[#2e936f] animate-pulse" />
                 <h3 className="text-xl font-bold text-[#2e936f]">
                   AFTER IMPROVEMENT
                 </h3>
@@ -1309,13 +1365,13 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                   "Prioritized Actions focused on high-value quick wins",
                   "Continuous Improvement embedded into operating rhythms",
                 ].map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-sm sm:text-base text-gray-700 dark:text-gray-300">
+                  <motion.li key={idx} whileHover={{ x: 4 }} className="flex items-start gap-3 text-sm sm:text-base text-gray-700 dark:text-gray-300 cursor-pointer">
                     <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0 mt-1" />
                     <span>{item}</span>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
 
           </div>
         </div>
@@ -1327,10 +1383,10 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           12. DELIVERABLES
           ===================================================================== */}
       <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#0e131f]/50 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#fab60a]/40 text-[#fab60a] bg-[#fab60a]/5">
+            <Badge variant="outline" className="mb-3 border-[#fab60a]/40 text-[#fab60a] bg-[#fab60a]/5 px-3 py-1 text-xs">
               ENGAGEMENT OUTPUTS
             </Badge>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
@@ -1347,20 +1403,21 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           {/* Clean Editorial Deliverables List */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {deliverables.map((del, i) => (
-              <div
+              <motion.div
                 key={i}
-                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#121824] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/40 transition-all duration-200 shadow-sm"
+                whileHover={{ scale: 1.02, y: -4 }}
+                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#121824] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/60 hover:shadow-xl transition-all duration-300 shadow-sm group cursor-pointer"
               >
-                <span className="text-xs font-mono font-bold text-[#f15e1c] block mb-2">
+                <span className="text-xs font-mono font-bold text-[#f15e1c] block mb-2 group-hover:translate-x-0.5 transition-transform">
                   DELIVERABLE 0{i + 1}
                 </span>
-                <h3 className="text-lg sm:text-xl font-bold text-[#1b2823] dark:text-[#ffffff] mb-2">
+                <h3 className="text-lg sm:text-xl font-bold text-[#1b2823] dark:text-[#ffffff] mb-2 group-hover:text-[#f15e1c] transition-colors">
                   {del.title}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
                   {del.desc}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
 
@@ -1373,10 +1430,10 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           13. CONTINUOUS IMPROVEMENT
           ===================================================================== */}
       <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#2e936f]/40 text-[#2e936f] bg-[#2e936f]/5">
+            <Badge variant="outline" className="mb-3 border-[#2e936f]/40 text-[#2e936f] bg-[#2e936f]/5 px-3 py-1 text-xs">
               OPERATIONAL RHYTHM
             </Badge>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
@@ -1398,17 +1455,18 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                 { title: "LEARN", desc: "Integrate operating lessons", icon: <BookOpen className="w-5 h-5" /> },
                 { title: "REPEAT", desc: "Maintain continuous cycle", icon: <RotateCw className="w-5 h-5" /> },
               ].map((cycleStep, i) => (
-                <div
+                <motion.div
                   key={cycleStep.title}
+                  whileHover={{ scale: 1.06, y: -4 }}
                   onClick={() => setActiveLoopStep(i)}
                   className={cn(
-                    "cursor-pointer p-4 rounded-xl border transition-all duration-200 flex flex-col items-center justify-between h-40",
+                    "cursor-pointer p-4 rounded-xl border transition-all duration-300 flex flex-col items-center justify-between h-40 group hover:shadow-xl",
                     activeLoopStep === i
                       ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-lg scale-105"
-                      : "bg-white dark:bg-[#182030] text-[#1b2823] dark:text-[#ffffff] border-gray-200 dark:border-gray-800 hover:border-gray-400"
+                      : "bg-white dark:bg-[#182030] text-[#1b2823] dark:text-[#ffffff] border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/50"
                   )}
                 >
-                  <div className={cn("p-2 rounded-lg", activeLoopStep === i ? "bg-white/20 text-white" : "bg-gray-100 dark:bg-[#0b0f17] text-[#f15e1c]")}>
+                  <div className={cn("p-2 rounded-lg transition-transform group-hover:rotate-6", activeLoopStep === i ? "bg-white/20 text-white" : "bg-gray-100 dark:bg-[#0b0f17] text-[#f15e1c]")}>
                     {cycleStep.icon}
                   </div>
                   <div>
@@ -1418,7 +1476,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                   <p className={cn("text-[10px] leading-tight", activeLoopStep === i ? "text-white/90" : "text-gray-500 dark:text-gray-400")}>
                     {cycleStep.desc}
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -1432,10 +1490,10 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           14. BUSINESS OUTCOMES
           ===================================================================== */}
       <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#0e131f]/50 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5">
+            <Badge variant="outline" className="mb-3 border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5 px-3 py-1 text-xs">
               VALUE DELIVERED
             </Badge>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
@@ -1449,22 +1507,23 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           {/* 6 Qualitative Outcomes */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {businessOutcomes.map((out) => (
-              <div
+              <motion.div
                 key={out.title}
-                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#121824] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/40 transition-all duration-200 shadow-sm flex items-start gap-4"
+                whileHover={{ scale: 1.02, y: -4 }}
+                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#121824] border border-gray-200 dark:border-gray-800 hover:border-[#2e936f]/60 hover:shadow-xl transition-all duration-300 shadow-sm flex items-start gap-4 group cursor-pointer"
               >
-                <div className="p-3 rounded-xl bg-gray-50 dark:bg-[#182030] shrink-0">
+                <div className="p-3 rounded-xl bg-gray-50 dark:bg-[#182030] group-hover:bg-[#2e936f]/10 transition-colors shrink-0">
                   {out.icon}
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-[#1b2823] dark:text-[#ffffff]">
+                  <h3 className="text-lg font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2e936f] transition-colors">
                     {out.title}
                   </h3>
                   <p className="mt-1 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
                     {out.desc}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
@@ -1477,10 +1536,10 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           15. CASE STUDIES / SCOPE: WHAT WE CAN HELP UNCOVER
           ===================================================================== */}
       <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#fab60a]/40 text-[#fab60a] bg-[#fab60a]/5">
+            <Badge variant="outline" className="mb-3 border-[#fab60a]/40 text-[#fab60a] bg-[#fab60a]/5 px-3 py-1 text-xs">
               DIAGNOSTIC SCOPE
             </Badge>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
@@ -1493,20 +1552,21 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {scopeHelpUncover.map((item, idx) => (
-              <div
+              <motion.div
                 key={idx}
-                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#121824] border border-gray-200 dark:border-gray-800 hover:border-[#2e936f]/40 transition-all duration-200 shadow-sm space-y-2"
+                whileHover={{ scale: 1.02, y: -4 }}
+                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#121824] border border-gray-200 dark:border-gray-800 hover:border-[#2e936f]/60 hover:shadow-xl transition-all duration-300 shadow-sm space-y-2 group cursor-pointer"
               >
                 <div className="flex items-center gap-2.5">
-                  <Search className="w-4 h-4 text-[#2e936f]" />
-                  <h3 className="text-base sm:text-lg font-bold text-[#1b2823] dark:text-[#ffffff]">
+                  <Search className="w-4 h-4 text-[#2e936f] group-hover:scale-110 transition-transform" />
+                  <h3 className="text-base sm:text-lg font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2e936f] transition-colors">
                     {item.title}
                   </h3>
                 </div>
                 <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
                   {item.desc}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
 
@@ -1519,10 +1579,10 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           16. INSIGHTS INTEGRATION
           ===================================================================== */}
       <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#0e131f]/50 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5">
+            <Badge variant="outline" className="mb-3 border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5 px-3 py-1 text-xs">
               KNOWLEDGE BASE
             </Badge>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
@@ -1536,9 +1596,9 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             {articles.map((post) => (
               <Link key={post.slug} href={`/insights/${post.slug}`} className="group block">
-                <div className="h-full p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#121824] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c] transition-all duration-200 shadow-sm flex flex-col justify-between">
+                <motion.div whileHover={{ y: -4 }} className="h-full p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#121824] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c] hover:shadow-xl transition-all duration-300 shadow-sm flex flex-col justify-between">
                   <div>
-                    <Badge variant="subtle" className="mb-3 text-[10px] bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+                    <Badge variant="subtle" className="mb-3 text-[10px] bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-semibold">
                       {post.category}
                     </Badge>
                     <h3 className="text-base sm:text-lg font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors line-clamp-2">
@@ -1552,7 +1612,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                     <span>Read Article</span>
                     <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </div>
-                </div>
+                </motion.div>
               </Link>
             ))}
           </div>
@@ -1574,10 +1634,10 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           17. FAQ SECTION
           ===================================================================== */}
       <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-            <Badge variant="outline" className="mb-3 border-[#2e936f]/40 text-[#2e936f] bg-[#2e936f]/5">
+            <Badge variant="outline" className="mb-3 border-[#2e936f]/40 text-[#2e936f] bg-[#2e936f]/5 px-3 py-1 text-xs">
               QUESTIONS & ANSWERS
             </Badge>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
@@ -1588,17 +1648,17 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
             </p>
           </AnimatedSection>
 
-          <div className="space-y-4">
+          <div className="max-w-4xl mx-auto space-y-4">
             {service.faqs.map((faq, index) => {
               const isOpen = openFaq === index;
               return (
                 <div
                   key={index}
-                  className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#121824] overflow-hidden transition-all"
+                  className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#121824] overflow-hidden transition-all hover:border-[#f15e1c]/40 hover:shadow-md"
                 >
                   <button
                     onClick={() => setOpenFaq(isOpen ? null : index)}
-                    className="w-full text-left p-5 flex items-center justify-between font-bold text-sm sm:text-base text-[#1b2823] dark:text-[#ffffff]"
+                    className="w-full text-left p-5 flex items-center justify-between font-bold text-sm sm:text-base text-[#1b2823] dark:text-[#ffffff] hover:text-[#f15e1c] transition-colors cursor-pointer"
                   >
                     <span>{faq.question}</span>
                     <ChevronDown className={cn("w-5 h-5 transition-transform duration-200 text-[#f15e1c]", isOpen && "rotate-180")} />
@@ -1632,7 +1692,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           18. FINAL CTA
           ===================================================================== */}
       <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24">
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           <div className="relative rounded-3xl p-8 sm:p-12 lg:p-16 bg-gradient-to-r from-[#1b2823] via-[#121824] to-[#0b0f17] text-white border border-gray-800 shadow-2xl overflow-hidden text-center space-y-6">
             
             {/* Subtle Background Glow */}
@@ -1653,13 +1713,13 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
 
             <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
               <Link href="/contact">
-                <Button3D variant="primary" size="lg" className="flex items-center gap-2 font-semibold">
+                <Button3D variant="primary" size="lg" className="flex items-center gap-2 font-semibold hover:scale-102 transition-transform">
                   Start an Assessment
                   <ArrowRight className="w-4 h-4" />
                 </Button3D>
               </Link>
               <Link href="/contact">
-                <Button3D variant="secondary" size="lg" className="flex items-center gap-2 font-medium">
+                <Button3D variant="secondary" size="lg" className="flex items-center gap-2 font-medium hover:scale-102 transition-transform">
                   Talk to an Advisor
                 </Button3D>
               </Link>
@@ -1671,3 +1731,4 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
     </div>
   );
 }
+
