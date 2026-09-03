@@ -466,7 +466,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300 overflow-x-hidden selection:bg-[#F15E1C]/20 selection:text-[#F15E1C]">
+    <div className="min-h-screen bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300 overflow-x-hidden selection:bg-[#F15E1C]/20 selection:text-[#F15E1C]">
       
       {/* Breadcrumb Navigation */}
       <div className="relative z-10 w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 pb-1">
@@ -562,7 +562,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
       {/* =====================================================================
           2. AI CAPABILITIES — AI THAT SOLVES REAL WORK
           ===================================================================== */}
-      <section id="capabilities" className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section id="capabilities" className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
@@ -583,7 +583,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
               <motion.div
                 key={cap.num}
                 whileHover={{ y: -3 }}
-                className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 hover:shadow-lg transition-all duration-200 shadow-xs space-y-3 flex flex-col justify-between group cursor-pointer"
+                className="p-6 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 hover:shadow-lg transition-all duration-200 shadow-xs space-y-3 flex flex-col justify-between group cursor-pointer"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
@@ -631,7 +631,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
           </div>
 
           {/* Connected AI-System Visualization */}
-          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-3xl p-6 sm:p-8 shadow-lg space-y-6 max-w-5xl mx-auto">
+          <div className="bg-white dark:bg-[#000000] border border-[#F7D7B0] rounded-3xl p-6 sm:p-8 shadow-lg space-y-6 max-w-5xl mx-auto">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
               {intelligenceFlowNodes.map((node, idx) => {
                 const isActive = activeFlowNode === idx;
@@ -644,7 +644,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
                       "p-4 rounded-xl text-left transition-all duration-200 border cursor-pointer flex flex-col justify-between h-28 transform",
                       isActive
                         ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-0.5"
-                        : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
+                        : "bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
                     )}
                   >
                     <div className="flex items-center justify-between w-full">
@@ -691,7 +691,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
       {/* =====================================================================
           4. AI SYSTEM VISUAL (IMAGE 2) — ONE AI SYSTEM. MULTIPLE POSSIBILITIES.
           ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
@@ -722,7 +722,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
                         "p-3 rounded-xl border transition-all duration-200 cursor-pointer flex items-center justify-between gap-3",
                         isActive
                           ? "bg-[#F7D7B0]/30 border-[#F15E1C] shadow-xs translate-x-1"
-                          : "bg-white dark:bg-[#1b2823] border-[#F7D7B0] hover:border-[#F15E1C]"
+                          : "bg-white dark:bg-[#000000] border-[#F7D7B0] hover:border-[#F15E1C]"
                       )}
                     >
                       <div className="flex items-center gap-3">
@@ -799,7 +799,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
                     "p-4 sm:p-4.5 rounded-2xl border transition-all duration-200 cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-3",
                     isActive
                       ? "bg-[#F7D7B0]/30 border-[#F15E1C] shadow-xs -translate-y-0.5"
-                      : "bg-white dark:bg-[#1b2823] border-[#F7D7B0] hover:border-[#F15E1C]"
+                      : "bg-white dark:bg-[#000000] border-[#F7D7B0] hover:border-[#F15E1C]"
                   )}
                 >
                   <div className="flex items-center gap-3.5">
@@ -828,7 +828,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
       {/* =====================================================================
           6. AI AGENTS SECTION
           ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
@@ -855,7 +855,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
                     "p-5 rounded-2xl border transition-all duration-200 cursor-pointer space-y-3 flex flex-col justify-between shadow-xs",
                     isActive
                       ? "bg-[#F7D7B0]/20 border-[#F15E1C] shadow-md -translate-y-0.5"
-                      : "bg-white dark:bg-[#1b2823] border-[#F7D7B0] hover:border-[#F15E1C]"
+                      : "bg-white dark:bg-[#000000] border-[#F7D7B0] hover:border-[#F15E1C]"
                   )}
                 >
                   <div className="space-y-2">
@@ -903,7 +903,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
               <motion.div
                 key={pt.point}
                 whileHover={{ y: -3 }}
-                className="p-5 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#2E936F] hover:bg-[#F7D7B0]/20 transition-all duration-300 shadow-xs space-y-2 group cursor-pointer text-center"
+                className="p-5 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#2E936F] hover:bg-[#F7D7B0]/20 transition-all duration-300 shadow-xs space-y-2 group cursor-pointer text-center"
               >
                 <span className="text-xs font-mono font-bold text-[#2E936F] px-2.5 py-0.5 rounded-full bg-[#2E936F]/10 inline-block">
                   CONTROL 0{idx + 1} &bull; {pt.point}
@@ -933,7 +933,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
       {/* =====================================================================
           8. AI DELIVERY TIMELINE (VERTICAL SCROLL-CONTROLLED)
           ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
@@ -968,7 +968,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
                     )}
                   >
                     <div className={cn("w-full md:w-1/2 pl-12 md:pl-0", isEven ? "md:pr-10 md:text-right" : "md:pl-10 md:text-left")}>
-                      <div className="p-5 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] group-hover:border-[#F15E1C] group-hover:bg-[#F7D7B0]/20 group-hover:shadow-md group-hover:-translate-y-0.5 transition-all duration-300 shadow-xs space-y-1.5">
+                      <div className="p-5 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] group-hover:border-[#F15E1C] group-hover:bg-[#F7D7B0]/20 group-hover:shadow-md group-hover:-translate-y-0.5 transition-all duration-300 shadow-xs space-y-1.5">
                         <span className="text-xs font-mono font-bold text-[#F15E1C] px-2 py-0.5 rounded bg-[#F7D7B0]/40 group-hover:bg-[#F15E1C] group-hover:text-[#FFFFFF] transition-colors inline-block">
                           STAGE {stage.num}
                         </span>
@@ -981,7 +981,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
                       </div>
                     </div>
 
-                    <div className="absolute left-4 md:left-1/2 top-5 -translate-x-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#1b2823] border-2 border-[#F7D7B0] group-hover:border-[#F15E1C] group-hover:bg-[#F15E1C] flex items-center justify-center transition-all duration-300 shadow-xs z-10">
+                    <div className="absolute left-4 md:left-1/2 top-5 -translate-x-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#000000] border-2 border-[#F7D7B0] group-hover:border-[#F15E1C] group-hover:bg-[#F15E1C] flex items-center justify-center transition-all duration-300 shadow-xs z-10">
                       <span className="text-[11px] font-mono font-bold text-[#F15E1C] group-hover:text-[#FFFFFF]">
                         {stage.num}
                       </span>
@@ -1029,7 +1029,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
                     "p-4 rounded-2xl text-left transition-all duration-200 border cursor-pointer flex flex-col justify-between h-32 transform",
                     isActive
                       ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-0.5"
-                      : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
+                      : "bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
                   )}
                 >
                   <span className={cn("text-[10px] font-mono font-bold", isActive ? "text-[#FFEC69]" : "text-[#F15E1C]")}>
@@ -1057,7 +1057,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
       {/* =====================================================================
           10. ENGAGEMENT MODELS
           ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
@@ -1077,7 +1077,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
               <motion.div
                 key={model.title}
                 whileHover={{ y: -3 }}
-                className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-xl transition-all duration-300 space-y-5 flex flex-col justify-between group cursor-pointer"
+                className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-xl transition-all duration-300 space-y-5 flex flex-col justify-between group cursor-pointer"
               >
                 <div className="space-y-3">
                   <span className="text-[10px] font-mono font-bold text-[#F15E1C] uppercase block">{model.tag}</span>
@@ -1131,7 +1131,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
             {leverageAreas.map((item) => (
-              <div key={item.title} className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] space-y-2">
+              <div key={item.title} className="p-6 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] space-y-2">
                 <div className="flex items-center gap-2">
                   <div className="p-1.5 rounded-lg bg-[#F7D7B0]/30">{item.icon}</div>
                   <span className="text-[10px] font-mono font-bold text-[#2E936F]">{item.tag}</span>
@@ -1150,7 +1150,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
       {/* =====================================================================
           12. AI INSIGHTS
           ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
@@ -1168,7 +1168,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {articles.map((post) => (
               <Link key={post.slug} href={`/insights/${post.slug}`} className="group block">
-                <motion.div whileHover={{ y: -3 }} className="h-full p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-md transition-all duration-200 shadow-xs flex flex-col justify-between">
+                <motion.div whileHover={{ y: -3 }} className="h-full p-6 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-md transition-all duration-200 shadow-xs flex flex-col justify-between">
                   <div>
                     <Badge variant="subtle" className="mb-2.5 text-[10px] bg-[#F7D7B0]/40 text-[#F15E1C] font-semibold">
                       {post.category}
@@ -1226,7 +1226,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
               return (
                 <div
                   key={index}
-                  className="rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#1b2823] overflow-hidden transition-all hover:border-[#F15E1C] hover:shadow-xs"
+                  className="rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#000000] overflow-hidden transition-all hover:border-[#F15E1C] hover:shadow-xs"
                 >
                   <button
                     onClick={() => setOpenFaqIdx(isOpen ? null : index)}
@@ -1263,9 +1263,9 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
       {/* =====================================================================
           14. CONTACT / LEAD FORM
           ===================================================================== */}
-      <section id="inquire" className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section id="inquire" className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto rounded-3xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] p-6 sm:p-10 shadow-xl space-y-6">
+          <div className="max-w-3xl mx-auto rounded-3xl bg-white dark:bg-[#000000] border border-[#F7D7B0] p-6 sm:p-10 shadow-xl space-y-6">
             
             <div className="text-center space-y-2">
               <Badge variant="outline" className="border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
@@ -1298,7 +1298,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="e.g. John Doe"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#1b2823] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#000000] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
                     />
                   </div>
 
@@ -1310,7 +1310,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                       placeholder="e.g. Acme Corp"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#1b2823] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#000000] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
                     />
                   </div>
                 </div>
@@ -1324,7 +1324,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="name@company.com"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#1b2823] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#000000] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
                     />
                   </div>
 
@@ -1333,7 +1333,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
                     <select
                       value={formData.useCase}
                       onChange={(e) => setFormData({ ...formData, useCase: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#1b2823] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#000000] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
                     >
                       <option value="AI Automation">AI Automation</option>
                       <option value="AI Assistant">AI Assistant</option>
@@ -1354,7 +1354,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
                     value={formData.challenge}
                     onChange={(e) => setFormData({ ...formData, challenge: e.target.value })}
                     placeholder="Describe the workflow friction or AI objective..."
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#1b2823] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#000000] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
                   />
                 </div>
 
@@ -1363,7 +1363,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
                   <select
                     value={formData.timeline}
                     onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#1b2823] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#000000] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
                   >
                     <option value="Immediately">Immediately</option>
                     <option value="1-3 months">1-3 months</option>

@@ -356,7 +356,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
   const currentEntity = entityGraphNodes.find((e) => e.id === activeEntityId) || entityGraphNodes[0];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300 overflow-x-hidden selection:bg-[#F15E1C]/20 selection:text-[#F15E1C]">
+    <div className="min-h-screen bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300 overflow-x-hidden selection:bg-[#F15E1C]/20 selection:text-[#F15E1C]">
       
       {/* Breadcrumb Navigation */}
       <div className="relative z-10 w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 pb-1">
@@ -422,7 +422,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
                   ].map((tag, idx) => (
                     <span
                       key={idx}
-                      className="text-xs px-3 py-1 rounded-lg bg-gray-100 dark:bg-[#1b2823] text-gray-700 dark:text-gray-300 border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F15E1C] hover:text-[#FFFFFF] transition-all duration-200 cursor-pointer shadow-xs font-medium"
+                      className="text-xs px-3 py-1 rounded-lg bg-gray-100 dark:bg-[#0a0a0a] text-gray-700 dark:text-gray-300 border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F15E1C] hover:text-[#FFFFFF] transition-all duration-200 cursor-pointer shadow-xs font-medium"
                     >
                       {tag}
                     </span>
@@ -477,7 +477,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
           </div>
 
           {/* Interactive Discovery Ecosystem Grid */}
-          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-2xl p-6 sm:p-8 shadow-lg space-y-6">
+          <div className="bg-white dark:bg-[#000000] border border-[#F7D7B0] rounded-2xl p-6 sm:p-8 shadow-lg space-y-6">
             
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 border-b border-[#F7D7B0] pb-6">
               {searchDiscoveryPaths.map((path, idx) => {
@@ -492,7 +492,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
                       "p-3.5 rounded-xl text-left transition-all duration-200 border cursor-pointer flex flex-col justify-between h-28 transform",
                       isActive
                         ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-0.5"
-                        : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
+                        : "bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
                     )}
                   >
                     <div className="flex items-center justify-between w-full">
@@ -552,7 +552,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       {/* =====================================================================
           3. THE SEO SYSTEM — CONNECTED NETWORK
           ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
@@ -567,7 +567,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
             </p>
           </div>
 
-          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-2xl p-6 sm:p-8 shadow-lg space-y-6">
+          <div className="bg-white dark:bg-[#000000] border border-[#F7D7B0] rounded-2xl p-6 sm:p-8 shadow-lg space-y-6">
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 border-b border-[#F7D7B0] pb-6">
               {seoSystemNodes.map((node, idx) => {
                 const isActive = displayedSystemIdx === idx;
@@ -581,7 +581,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
                       "p-3 rounded-xl text-left transition-all duration-200 border cursor-pointer flex flex-col justify-between h-26 transform",
                       isActive
                         ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-0.5"
-                        : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
+                        : "bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
                     )}
                   >
                     <span className={cn("text-[10px] font-mono font-bold", isActive ? "text-[#FFEC69]" : "text-[#F15E1C]")}>
@@ -686,7 +686,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       {/* =====================================================================
           5. WHAT WE ACTUALLY OPTIMIZE — 6 DIMENSIONS
           ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
@@ -706,7 +706,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
               <motion.div
                 key={dim.num}
                 whileHover={{ scale: 1.01, y: -3 }}
-                className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 hover:shadow-lg transition-all duration-300 shadow-xs flex flex-col justify-between group cursor-pointer"
+                className="p-6 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 hover:shadow-lg transition-all duration-300 shadow-xs flex flex-col justify-between group cursor-pointer"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
@@ -757,7 +757,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
               <motion.div
                 key={layer.layer}
                 whileHover={{ scale: 1.01, x: 3 }}
-                className="p-5 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 transition-all duration-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group cursor-pointer"
+                className="p-5 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 transition-all duration-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group cursor-pointer"
               >
                 <div className="flex items-center gap-4">
                   <div className="p-2.5 rounded-xl bg-[#F15E1C] text-[#FFFFFF] font-mono font-bold text-xs shrink-0">
@@ -789,7 +789,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       {/* =====================================================================
           7. SEARCH INTENT + CONTENT
           ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
@@ -809,7 +809,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
               <motion.div
                 key={cat.type}
                 whileHover={{ y: -3 }}
-                className="p-5 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#2E936F] hover:bg-[#F7D7B0]/20 transition-all duration-300 shadow-xs space-y-3 flex flex-col justify-between group cursor-pointer"
+                className="p-5 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#2E936F] hover:bg-[#F7D7B0]/20 transition-all duration-300 shadow-xs space-y-3 flex flex-col justify-between group cursor-pointer"
               >
                 <div className="space-y-2.5">
                   <div className="flex items-center justify-between">
@@ -851,7 +851,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
             </p>
           </div>
 
-          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-3xl p-6 sm:p-10 shadow-lg space-y-6 max-w-4xl mx-auto">
+          <div className="bg-white dark:bg-[#000000] border border-[#F7D7B0] rounded-3xl p-6 sm:p-10 shadow-lg space-y-6 max-w-4xl mx-auto">
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5">
               {entityGraphNodes.map((node) => {
                 const isActive = activeEntityId === node.id;
@@ -863,7 +863,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
                       "p-2.5 rounded-xl text-center transition-all duration-200 border cursor-pointer flex flex-col justify-center h-22 transform",
                       isActive
                         ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-0.5"
-                        : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
+                        : "bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
                     )}
                   >
                     <span className={cn("text-[10px] font-mono font-bold uppercase block leading-tight", isActive ? "text-[#FFFFFF]" : "text-[#1b2823] dark:text-[#ffffff]")}>
@@ -897,7 +897,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       {/* =====================================================================
           9. AI SEARCH VISIBILITY
           ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
@@ -912,7 +912,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
             </p>
           </div>
 
-          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-3xl p-6 sm:p-10 shadow-lg space-y-6 max-w-4xl mx-auto">
+          <div className="bg-white dark:bg-[#000000] border border-[#F7D7B0] rounded-3xl p-6 sm:p-10 shadow-lg space-y-6 max-w-4xl mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-5 gap-2.5 text-center">
               {[
                 { title: "USER QUESTION", desc: "Natural Language Query" },
@@ -929,17 +929,17 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-[#F7D7B0]">
-              <div className="p-3.5 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] text-left space-y-0.5">
+              <div className="p-3.5 rounded-xl bg-white dark:bg-[#000000] border border-[#F7D7B0] text-left space-y-0.5">
                 <span className="text-xs font-bold text-[#F15E1C] uppercase block">Structured Data</span>
                 <p className="text-xs text-gray-600 dark:text-gray-300">Explicit schemas allowing models to parse entity facts.</p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] text-left space-y-0.5">
+              <div className="p-3.5 rounded-xl bg-white dark:bg-[#000000] border border-[#F7D7B0] text-left space-y-0.5">
                 <span className="text-xs font-bold text-[#2E936F] uppercase block">Entity Authority</span>
                 <p className="text-xs text-gray-600 dark:text-gray-300">Consistent brand signals across editorial sources.</p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] text-left space-y-0.5">
+              <div className="p-3.5 rounded-xl bg-white dark:bg-[#000000] border border-[#F7D7B0] text-left space-y-0.5">
                 <span className="text-xs font-bold text-[#FAB60A] uppercase block">Topic Coverage</span>
                 <p className="text-xs text-gray-600 dark:text-gray-300">Comprehensive answers matching natural queries.</p>
               </div>
@@ -981,7 +981,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
                       "px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all duration-200 cursor-pointer shrink-0 border transform",
                       isActive
                         ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-0.5"
-                        : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
+                        : "bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
                     )}
                   >
                     <span>{ctx.name}</span>
@@ -997,7 +997,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
-                className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] shadow-lg space-y-5"
+                className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#F7D7B0] shadow-lg space-y-5"
               >
                 <div>
                   <span className="text-xs font-mono font-bold text-[#F15E1C]">{currentContext.name} ARCHITECTURE</span>
@@ -1030,7 +1030,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       {/* =====================================================================
           11. SUSTAINABLE AUTHORITY WITHOUT SPAM
           ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
@@ -1055,7 +1055,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
               <motion.div
                 key={idx}
                 whileHover={{ scale: 1.02, y: -3 }}
-                className="p-5 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 transition-all duration-300 shadow-xs space-y-2.5 group cursor-pointer"
+                className="p-5 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 transition-all duration-300 shadow-xs space-y-2.5 group cursor-pointer"
               >
                 <div className="p-2 rounded-xl bg-[#F7D7B0]/30 w-fit">{item.icon}</div>
                 <h3 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">{item.title}</h3>
@@ -1087,7 +1087,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
             </p>
           </div>
 
-          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-3xl p-6 sm:p-10 shadow-lg max-w-4xl mx-auto text-center space-y-6">
+          <div className="bg-white dark:bg-[#000000] border border-[#F7D7B0] rounded-3xl p-6 sm:p-10 shadow-lg max-w-4xl mx-auto text-center space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-6 gap-2.5 items-center">
               {[
                 { title: "VISIBILITY", desc: "Search Console Impressions" },
@@ -1113,7 +1113,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       {/* =====================================================================
           13. CONTINUOUS SEO LOOP — UNIQUE VERTICAL SCROLL-DRIVEN TIMELINE
           ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
@@ -1151,7 +1151,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
                   >
                     {/* Content Card (Alternating on Desktop: Left / Right, Single Column Left-Aligned on Mobile) */}
                     <div className={cn("w-full md:w-1/2 pl-12 md:pl-0", isEven ? "md:pr-10 md:text-right" : "md:pl-10 md:text-left")}>
-                      <div className="p-5 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] group-hover:border-[#F15E1C] group-hover:bg-[#F7D7B0]/20 group-hover:shadow-md group-hover:-translate-y-0.5 transition-all duration-300 shadow-xs space-y-1.5">
+                      <div className="p-5 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] group-hover:border-[#F15E1C] group-hover:bg-[#F7D7B0]/20 group-hover:shadow-md group-hover:-translate-y-0.5 transition-all duration-300 shadow-xs space-y-1.5">
                         <div className={cn("flex items-center gap-2", isEven ? "md:justify-end" : "md:justify-start")}>
                           <span className="text-xs font-mono font-bold text-[#F15E1C] px-2.5 py-0.5 rounded bg-[#F7D7B0]/40 group-hover:bg-[#F15E1C] group-hover:text-[#FFFFFF] transition-colors">
                             STAGE {stage.step}
@@ -1167,7 +1167,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
                     </div>
 
                     {/* Numbered Node Indicator in Center (Desktop) or Left (Mobile) */}
-                    <div className="absolute left-4 md:left-1/2 top-5 -translate-x-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#1b2823] border-2 border-[#F7D7B0] group-hover:border-[#F15E1C] group-hover:bg-[#F15E1C] flex items-center justify-center transition-all duration-300 shadow-xs z-10">
+                    <div className="absolute left-4 md:left-1/2 top-5 -translate-x-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#000000] border-2 border-[#F7D7B0] group-hover:border-[#F15E1C] group-hover:bg-[#F15E1C] flex items-center justify-center transition-all duration-300 shadow-xs z-10">
                       <span className="text-[11px] font-mono font-bold text-[#F15E1C] group-hover:text-[#FFFFFF]">
                         {stage.step}
                       </span>
@@ -1219,7 +1219,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
               <motion.div
                 key={idx}
                 whileHover={{ y: -3 }}
-                className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-xl transition-all duration-300 space-y-5 flex flex-col justify-between group cursor-pointer"
+                className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-xl transition-all duration-300 space-y-5 flex flex-col justify-between group cursor-pointer"
               >
                 <div className="space-y-3">
                   <span className="text-xs font-mono font-bold text-[#F15E1C] uppercase block">{model.name}</span>
@@ -1256,7 +1256,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       {/* =====================================================================
           15. SEO DIAGNOSTIC ASSESSMENT CTA
           ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-[#F7D7B0]/20 border border-[#F7D7B0] rounded-3xl p-8 sm:p-10 text-center max-w-3xl mx-auto space-y-5">
             <Badge variant="outline" className="border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
@@ -1311,7 +1311,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
               { title: "Content Thinness", desc: "Orphaned topics, shallow articles, and missing internal linking loops." },
               { title: "Schema Deficits", desc: "Missing JSON-LD structured data and unverified brand entity signals." },
             ].map((diag, idx) => (
-              <div key={idx} className="p-5 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] space-y-1.5">
+              <div key={idx} className="p-5 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] space-y-1.5">
                 <CheckCircle2 className="w-4 h-4 text-[#F15E1C]" />
                 <h4 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff]">{diag.title}</h4>
                 <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{diag.desc}</p>
@@ -1327,7 +1327,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
       {/* =====================================================================
           17. INSIGHTS & BLOGS
           ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
@@ -1345,7 +1345,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {articles.map((post) => (
               <Link key={post.slug} href={`/insights/${post.slug}`} className="group block">
-                <motion.div whileHover={{ y: -3 }} className="h-full p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-md transition-all duration-300 shadow-xs flex flex-col justify-between">
+                <motion.div whileHover={{ y: -3 }} className="h-full p-6 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-md transition-all duration-300 shadow-xs flex flex-col justify-between">
                   <div>
                     <Badge variant="subtle" className="mb-2.5 text-[10px] bg-[#F7D7B0]/40 text-[#F15E1C] font-semibold">
                       {post.category}
@@ -1403,7 +1403,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
               return (
                 <div
                   key={index}
-                  className="rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#1b2823] overflow-hidden transition-all hover:border-[#F15E1C] hover:shadow-sm"
+                  className="rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#000000] overflow-hidden transition-all hover:border-[#F15E1C] hover:shadow-sm"
                 >
                   <button
                     onClick={() => setOpenFaqIdx(isOpen ? null : index)}

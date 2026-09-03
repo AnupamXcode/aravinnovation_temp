@@ -503,7 +503,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
   };
 
   return (
-    <div className="relative w-full min-h-screen bg-[#ffffff] dark:bg-[#1b2823] text-[#1b2823] dark:text-[#f3f4f6] font-sans selection:bg-[#f15e1c] selection:text-white overflow-x-hidden min-w-0 box-border">
+    <div className="relative w-full min-h-screen bg-[#ffffff] dark:bg-[#000000] text-[#1b2823] dark:text-[#f3f4f6] font-sans selection:bg-[#f15e1c] selection:text-white overflow-x-hidden min-w-0 box-border">
       {/* Schema Injection */}
       <script
         type="application/ld+json"
@@ -574,7 +574,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                     <motion.span
                       key={idx}
                       whileHover={{ scale: 1.05, y: -2 }}
-                      className="text-xs px-3.5 py-1.5 rounded-lg bg-gray-100 dark:bg-[#1b2823] text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/60 hover:bg-[#f15e1c]/10 hover:text-[#f15e1c] transition-all duration-200 cursor-pointer shadow-xs font-medium"
+                      className="text-xs px-3.5 py-1.5 rounded-lg bg-gray-100 dark:bg-[#0a0a0a] text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/60 hover:bg-[#f15e1c]/10 hover:text-[#f15e1c] transition-all duration-200 cursor-pointer shadow-xs font-medium"
                     >
                       {tag}
                     </motion.span>
@@ -622,17 +622,17 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
 
                     {/* Side-by-Side Key Summary Highlights */}
                     <div className="sm:col-span-5 space-y-2.5">
-                      <div className="p-2.5 rounded-xl bg-white dark:bg-[#1b2823] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/40 transition-colors">
+                      <div className="p-2.5 rounded-xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/40 transition-colors">
                         <span className="text-[10px] font-mono font-bold text-[#f15e1c] uppercase block">Phase 01</span>
                         <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff]">Evidence Mapping</span>
                         <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-2">Document actual operational workflows and system telemetry.</p>
                       </div>
-                      <div className="p-2.5 rounded-xl bg-white dark:bg-[#1b2823] border border-gray-200 dark:border-gray-800 hover:border-[#fab60a]/40 transition-colors">
+                      <div className="p-2.5 rounded-xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 hover:border-[#fab60a]/40 transition-colors">
                         <span className="text-[10px] font-mono font-bold text-[#fab60a] uppercase block">Phase 02</span>
                         <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff]">Gap & Friction Trace</span>
                         <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-2">Isolate root cause bottlenecks and control weaknesses.</p>
                       </div>
-                      <div className="p-2.5 rounded-xl bg-white dark:bg-[#1b2823] border border-gray-200 dark:border-gray-800 hover:border-[#2e936f]/40 transition-colors">
+                      <div className="p-2.5 rounded-xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 hover:border-[#2e936f]/40 transition-colors">
                         <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase block">Phase 03</span>
                         <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff]">Action Roadmap</span>
                         <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-2">Deliver prioritized remediation focused on high ROI quick wins.</p>
@@ -642,15 +642,15 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
 
                   {/* Nodes Summary Strip */}
                   <div className="grid grid-cols-3 gap-2 text-center py-2.5 border-t border-gray-200 dark:border-gray-800">
-                    <div className="p-2 rounded-lg bg-gray-50 dark:bg-[#1b2823] hover:bg-[#f15e1c]/5 transition-colors cursor-pointer">
+                    <div className="p-2 rounded-lg bg-gray-50 dark:bg-[#0a0a0a] hover:bg-[#f15e1c]/5 transition-colors cursor-pointer">
                       <span className="text-[10px] text-gray-500 dark:text-gray-400 block font-mono">OBSERVE</span>
                       <span className="text-xs font-bold text-[#f15e1c]">Workflows</span>
                     </div>
-                    <div className="p-2 rounded-lg bg-gray-50 dark:bg-[#1b2823] hover:bg-[#fab60a]/5 transition-colors cursor-pointer">
+                    <div className="p-2 rounded-lg bg-gray-50 dark:bg-[#0a0a0a] hover:bg-[#fab60a]/5 transition-colors cursor-pointer">
                       <span className="text-[10px] text-gray-500 dark:text-gray-400 block font-mono">IDENTIFY</span>
                       <span className="text-xs font-bold text-[#fab60a]">Root Cause</span>
                     </div>
-                    <div className="p-2 rounded-lg bg-gray-50 dark:bg-[#1b2823] hover:bg-[#2e936f]/5 transition-colors cursor-pointer">
+                    <div className="p-2 rounded-lg bg-gray-50 dark:bg-[#0a0a0a] hover:bg-[#2e936f]/5 transition-colors cursor-pointer">
                       <span className="text-[10px] text-gray-500 dark:text-gray-400 block font-mono">IMPROVE</span>
                       <span className="text-xs font-bold text-[#2e936f]">Validated</span>
                     </div>
@@ -753,7 +753,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                     {diagnosticViewStages[activeTimelineStage].desc}
                   </p>
 
-                  <div className="p-4 sm:p-5 rounded-xl bg-white dark:bg-[#1b2823] border border-gray-200 dark:border-gray-800 flex items-start gap-3 hover:border-[#2e936f]/40 transition-colors shadow-xs">
+                  <div className="p-4 sm:p-5 rounded-xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 flex items-start gap-3 hover:border-[#2e936f]/40 transition-colors shadow-xs">
                     <FileCheck className="w-5 h-5 text-[#2e936f] shrink-0 mt-0.5" />
                     <div>
                       <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider block">
@@ -768,8 +768,8 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
 
                 {/* Right Side: Resized Visual Diagram Side-by-Side with Text */}
                 <div className="lg:col-span-5 flex flex-col items-center justify-center space-y-4">
-                  <div className="relative w-full rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1b2823] shadow-md group hover:border-[#f15e1c]/40 transition-all duration-300">
-                    <div className="p-3 bg-gray-50 dark:bg-[#1b2823] border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
+                  <div className="relative w-full rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#000000] shadow-md group hover:border-[#f15e1c]/40 transition-all duration-300">
+                    <div className="p-3 bg-gray-50 dark:bg-[#0a0a0a] border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <span className="w-2 h-2 rounded-full bg-[#f15e1c] animate-ping" />
                         <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">
@@ -792,7 +792,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                   </div>
 
                   {/* Interactive Timeline Visual Node Indicator */}
-                  <div className="w-full p-3 rounded-xl bg-white dark:bg-[#1b2823] border border-gray-200 dark:border-gray-800 text-center flex items-center justify-between text-xs font-medium">
+                  <div className="w-full p-3 rounded-xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 text-center flex items-center justify-between text-xs font-medium">
                     <div className="flex items-center gap-2">
                       <Search className="w-4 h-4 text-[#f15e1c] animate-pulse" />
                       <span className="font-bold text-[#1b2823] dark:text-[#ffffff]">{diagnosticViewStages[activeTimelineStage].title} STAGE ACTIVE</span>
@@ -848,15 +848,15 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                 className={cn(
                   "cursor-pointer p-5 rounded-xl border transition-all duration-300 flex flex-col justify-between relative group hover:shadow-xl",
                   activeDecisionStep === idx
-                    ? "bg-white dark:bg-[#1b2823] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/20"
-                    : "bg-gray-50 dark:bg-[#1b2823] border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/50 hover:bg-white dark:hover:bg-[#1b2823]"
+                    ? "bg-white dark:bg-[#000000] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/20"
+                    : "bg-gray-50 dark:bg-[#0a0a0a] border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/50 hover:bg-white dark:hover:bg-[#1b2823]"
                 )}
               >
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-xs font-mono font-bold text-[#f15e1c] group-hover:scale-110 transition-transform">
                     {stepItem.step}
                   </span>
-                  <div className="p-1.5 rounded-md bg-gray-100 dark:bg-[#1b2823] group-hover:bg-[#f15e1c]/10 transition-colors">
+                  <div className="p-1.5 rounded-md bg-gray-100 dark:bg-[#0a0a0a] group-hover:bg-[#f15e1c]/10 transition-colors">
                     {stepItem.icon}
                   </div>
                 </div>
@@ -883,7 +883,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
       {/* =====================================================================
           6. WHAT WE ASSESS (WHAT WE EXAMINE)
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#1b2823]/50 border-b border-gray-100 dark:border-gray-800/60">
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#0a0a0a]/50 border-b border-gray-100 dark:border-gray-800/60">
         <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
@@ -913,12 +913,12 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                   className={cn(
                     "shrink-0 min-w-[170px] sm:min-w-[200px] lg:min-w-0 lg:w-full text-left p-3.5 sm:p-4 rounded-xl border transition-all duration-300 flex items-center justify-between cursor-pointer group hover:scale-101 hover:shadow-md",
                     activeDomain === idx
-                      ? "bg-white dark:bg-[#1b2823] border-[#f15e1c] shadow-md ring-1 ring-[#f15e1c]"
-                      : "bg-gray-100/70 dark:bg-[#1b2823] border-gray-200 dark:border-gray-800 hover:bg-white dark:hover:bg-[#1b2823] hover:border-[#f15e1c]/40"
+                      ? "bg-white dark:bg-[#000000] border-[#f15e1c] shadow-md ring-1 ring-[#f15e1c]"
+                      : "bg-gray-100/70 dark:bg-[#0a0a0a] border-gray-200 dark:border-gray-800 hover:bg-white dark:hover:bg-[#1b2823] hover:border-[#f15e1c]/40"
                   )}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-gray-100 dark:bg-[#1b2823] group-hover:bg-[#f15e1c]/10 transition-colors">
+                    <div className="p-2 rounded-lg bg-gray-100 dark:bg-[#0a0a0a] group-hover:bg-[#f15e1c]/10 transition-colors">
                       {area.icon}
                     </div>
                     <div>
@@ -936,7 +936,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
             </div>
 
             {/* Interactive Domain Detail Viewer (Side-by-Side Image and Points Layout) */}
-            <div className="lg:col-span-7 xl:col-span-8 bg-white dark:bg-[#1b2823] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 shadow-lg">
+            <div className="lg:col-span-7 xl:col-span-8 bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 shadow-lg">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeDomain}
@@ -985,7 +985,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                           <motion.div
                             key={i}
                             whileHover={{ scale: 1.02, x: 4 }}
-                            className="flex items-center gap-2.5 text-xs font-medium text-[#1b2823] dark:text-[#f3f4f6] p-3 rounded-xl bg-gray-50 dark:bg-[#1b2823] border border-gray-100 dark:border-gray-800 hover:border-[#2e936f]/50 hover:bg-[#2e936f]/5 transition-all cursor-pointer shadow-xs"
+                            className="flex items-center gap-2.5 text-xs font-medium text-[#1b2823] dark:text-[#f3f4f6] p-3 rounded-xl bg-gray-50 dark:bg-[#0a0a0a] border border-gray-100 dark:border-gray-800 hover:border-[#2e936f]/50 hover:bg-[#2e936f]/5 transition-all cursor-pointer shadow-xs"
                           >
                             <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
                             <span>{item}</span>
@@ -1004,7 +1004,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                           height={300}
                           className="w-full h-auto max-h-[220px] sm:max-h-[250px] object-cover rounded-xl transition-transform duration-500 group-hover:scale-102"
                         />
-                        <div className="p-2 bg-gray-50 dark:bg-[#1b2823] text-center border-t border-gray-200 dark:border-gray-800">
+                        <div className="p-2 bg-gray-50 dark:bg-[#0a0a0a] text-center border-t border-gray-200 dark:border-gray-800">
                           <span className="text-[10px] font-mono text-gray-500 dark:text-gray-400">
                             {diagnosticAreas[activeDomain].title} Inspection Matrix
                           </span>
@@ -1055,15 +1055,15 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                   className={cn(
                     "p-4 rounded-xl border text-left transition-all duration-300 flex flex-col justify-between relative group cursor-pointer hover:scale-102 hover:shadow-md",
                     activeFrictionPoint === idx
-                      ? "bg-white dark:bg-[#1b2823] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/30"
-                      : "bg-gray-100/70 dark:bg-[#1b2823] border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/50 hover:bg-white dark:hover:bg-[#1b2823]"
+                      ? "bg-white dark:bg-[#000000] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/30"
+                      : "bg-gray-100/70 dark:bg-[#0a0a0a] border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/50 hover:bg-white dark:hover:bg-[#1b2823]"
                   )}
                 >
                   <div className="flex items-center justify-between w-full mb-2">
                     <span className="text-[10px] font-mono font-bold text-gray-500 dark:text-gray-400">
                       {fp.stage}
                     </span>
-                    <div className="p-1 rounded bg-white dark:bg-[#1b2823] group-hover:bg-[#f15e1c]/10 transition-colors">
+                    <div className="p-1 rounded bg-white dark:bg-[#000000] group-hover:bg-[#f15e1c]/10 transition-colors">
                       {fp.icon}
                     </div>
                   </div>
@@ -1085,7 +1085,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.25 }}
-                className="p-6 rounded-xl bg-white dark:bg-[#1b2823] border border-gray-200 dark:border-gray-800 flex flex-col sm:flex-row items-start gap-4 hover:border-[#f15e1c]/40 transition-colors shadow-sm"
+                className="p-6 rounded-xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 flex flex-col sm:flex-row items-start gap-4 hover:border-[#f15e1c]/40 transition-colors shadow-sm"
               >
                 <div className="p-3 rounded-xl bg-[#f15e1c]/10 text-[#f15e1c] shrink-0">
                   {frictionPoints[activeFrictionPoint].icon}
@@ -1152,7 +1152,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                 )}
               >
                 <div className="flex items-center gap-4">
-                  <div className="p-2 rounded-lg bg-white dark:bg-[#1b2823] shadow-xs shrink-0">
+                  <div className="p-2 rounded-lg bg-white dark:bg-[#000000] shadow-xs shrink-0">
                     {layer.icon}
                   </div>
                   <div>
@@ -1194,10 +1194,10 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
               Our audit approach applies internationally recognized principles to ensure findings are objective, thorough, and practical.
             </p>
             <div className="flex flex-wrap justify-center gap-3 pt-4">
-              <span className="text-xs px-3.5 py-1.5 rounded-full bg-gray-100 dark:bg-[#1b2823] text-gray-700 dark:text-gray-300 font-semibold border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/40 transition-colors cursor-pointer">
+              <span className="text-xs px-3.5 py-1.5 rounded-full bg-gray-100 dark:bg-[#0a0a0a] text-gray-700 dark:text-gray-300 font-semibold border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/40 transition-colors cursor-pointer">
                 IIA Global Internal Audit Standards Alignment
               </span>
-              <span className="text-xs px-3.5 py-1.5 rounded-full bg-gray-100 dark:bg-[#1b2823] text-gray-700 dark:text-gray-300 font-semibold border border-gray-200 dark:border-gray-800 hover:border-[#2e936f]/40 transition-colors cursor-pointer">
+              <span className="text-xs px-3.5 py-1.5 rounded-full bg-gray-100 dark:bg-[#0a0a0a] text-gray-700 dark:text-gray-300 font-semibold border border-gray-200 dark:border-gray-800 hover:border-[#2e936f]/40 transition-colors cursor-pointer">
                 ISO 19011 Auditing Principles
               </span>
             </div>
@@ -1209,7 +1209,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
               <motion.div
                 key={stage.step}
                 whileHover={{ scale: 1.02, y: -4 }}
-                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#1b2823] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/60 hover:shadow-xl transition-all duration-300 shadow-sm flex flex-col justify-between group cursor-pointer"
+                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/60 hover:shadow-xl transition-all duration-300 shadow-sm flex flex-col justify-between group cursor-pointer"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -1244,7 +1244,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
       {/* =====================================================================
           10. PRIORITY MATRIX
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#1b2823]/50 border-b border-gray-100 dark:border-gray-800/60">
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#0a0a0a]/50 border-b border-gray-100 dark:border-gray-800/60">
         <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
@@ -1274,7 +1274,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                   key={quad.id}
                   onMouseEnter={() => setActiveMatrixQuadrant(quad.id)}
                   className={cn(
-                    "p-6 sm:p-8 rounded-xl border-2 transition-all duration-200 cursor-pointer bg-white dark:bg-[#1b2823]",
+                    "p-6 sm:p-8 rounded-xl border-2 transition-all duration-200 cursor-pointer bg-white dark:bg-[#000000]",
                     quad.border,
                     activeMatrixQuadrant === quad.id ? "shadow-xl ring-2 ring-[#f15e1c]/20 scale-101" : "opacity-90 hover:opacity-100"
                   )}
@@ -1290,7 +1290,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                   <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
                     {quad.desc}
                   </p>
-                  <div className="p-3.5 rounded-lg bg-gray-50 dark:bg-[#1b2823] border border-gray-100 dark:border-gray-800">
+                  <div className="p-3.5 rounded-lg bg-gray-50 dark:bg-[#0a0a0a] border border-gray-100 dark:border-gray-800">
                     <span className="text-[11px] font-semibold text-gray-400 block uppercase mb-1">Sample Finding:</span>
                     <span className="text-xs sm:text-sm font-medium text-[#1b2823] dark:text-[#f3f4f6]">{quad.example}</span>
                   </div>
@@ -1382,7 +1382,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
       {/* =====================================================================
           12. DELIVERABLES
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#1b2823]/50 border-b border-gray-100 dark:border-gray-800/60">
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#0a0a0a]/50 border-b border-gray-100 dark:border-gray-800/60">
         <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
@@ -1406,7 +1406,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
               <motion.div
                 key={i}
                 whileHover={{ scale: 1.02, y: -4 }}
-                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#1b2823] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/60 hover:shadow-xl transition-all duration-300 shadow-sm group cursor-pointer"
+                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/60 hover:shadow-xl transition-all duration-300 shadow-sm group cursor-pointer"
               >
                 <span className="text-xs font-mono font-bold text-[#f15e1c] block mb-2 group-hover:translate-x-0.5 transition-transform">
                   DELIVERABLE 0{i + 1}
@@ -1463,10 +1463,10 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                     "cursor-pointer p-4 rounded-xl border transition-all duration-300 flex flex-col items-center justify-between h-40 group hover:shadow-xl",
                     activeLoopStep === i
                       ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-lg scale-105"
-                      : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/50"
+                      : "bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/50"
                   )}
                 >
-                  <div className={cn("p-2 rounded-lg transition-transform group-hover:rotate-6", activeLoopStep === i ? "bg-white/20 text-white" : "bg-gray-100 dark:bg-[#1b2823] text-[#f15e1c]")}>
+                  <div className={cn("p-2 rounded-lg transition-transform group-hover:rotate-6", activeLoopStep === i ? "bg-white/20 text-white" : "bg-gray-100 dark:bg-[#0a0a0a] text-[#f15e1c]")}>
                     {cycleStep.icon}
                   </div>
                   <div>
@@ -1489,7 +1489,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
       {/* =====================================================================
           14. BUSINESS OUTCOMES
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#1b2823]/50 border-b border-gray-100 dark:border-gray-800/60">
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#0a0a0a]/50 border-b border-gray-100 dark:border-gray-800/60">
         <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
@@ -1510,9 +1510,9 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
               <motion.div
                 key={out.title}
                 whileHover={{ scale: 1.02, y: -4 }}
-                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#1b2823] border border-gray-200 dark:border-gray-800 hover:border-[#2e936f]/60 hover:shadow-xl transition-all duration-300 shadow-sm flex items-start gap-4 group cursor-pointer"
+                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 hover:border-[#2e936f]/60 hover:shadow-xl transition-all duration-300 shadow-sm flex items-start gap-4 group cursor-pointer"
               >
-                <div className="p-3 rounded-xl bg-gray-50 dark:bg-[#1b2823] group-hover:bg-[#2e936f]/10 transition-colors shrink-0">
+                <div className="p-3 rounded-xl bg-gray-50 dark:bg-[#0a0a0a] group-hover:bg-[#2e936f]/10 transition-colors shrink-0">
                   {out.icon}
                 </div>
                 <div>
@@ -1555,7 +1555,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
               <motion.div
                 key={idx}
                 whileHover={{ scale: 1.02, y: -4 }}
-                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#1b2823] border border-gray-200 dark:border-gray-800 hover:border-[#2e936f]/60 hover:shadow-xl transition-all duration-300 shadow-sm space-y-2 group cursor-pointer"
+                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 hover:border-[#2e936f]/60 hover:shadow-xl transition-all duration-300 shadow-sm space-y-2 group cursor-pointer"
               >
                 <div className="flex items-center gap-2.5">
                   <Search className="w-4 h-4 text-[#2e936f] group-hover:scale-110 transition-transform" />
@@ -1578,7 +1578,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
       {/* =====================================================================
           16. INSIGHTS INTEGRATION
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#1b2823]/50 border-b border-gray-100 dark:border-gray-800/60">
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#0a0a0a]/50 border-b border-gray-100 dark:border-gray-800/60">
         <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
@@ -1596,7 +1596,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             {articles.map((post) => (
               <Link key={post.slug} href={`/insights/${post.slug}`} className="group block">
-                <motion.div whileHover={{ y: -4 }} className="h-full p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#1b2823] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c] hover:shadow-xl transition-all duration-300 shadow-sm flex flex-col justify-between">
+                <motion.div whileHover={{ y: -4 }} className="h-full p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c] hover:shadow-xl transition-all duration-300 shadow-sm flex flex-col justify-between">
                   <div>
                     <Badge variant="subtle" className="mb-3 text-[10px] bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-semibold">
                       {post.category}
@@ -1654,7 +1654,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
               return (
                 <div
                   key={index}
-                  className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1b2823] overflow-hidden transition-all hover:border-[#f15e1c]/40 hover:shadow-md"
+                  className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#000000] overflow-hidden transition-all hover:border-[#f15e1c]/40 hover:shadow-md"
                 >
                   <button
                     onClick={() => setOpenFaq(isOpen ? null : index)}

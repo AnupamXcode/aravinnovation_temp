@@ -357,7 +357,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
   const activeModel = teamModels.find((m) => m.id === displayedModelId) || teamModels[0];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300 overflow-x-hidden selection:bg-[#F15E1C]/20 selection:text-[#F15E1C]">
+    <div className="min-h-screen bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300 overflow-x-hidden selection:bg-[#F15E1C]/20 selection:text-[#F15E1C]">
       
       {/* Breadcrumb Navigation */}
       <div className="relative z-10 w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-3 sm:pt-4 pb-1 sm:pb-2">
@@ -414,7 +414,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                 <motion.div
                   whileHover={{ y: -3, scale: 1.01 }}
-                  className="p-4 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 transition-all duration-200 cursor-pointer shadow-xs"
+                  className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 transition-all duration-200 cursor-pointer shadow-xs"
                 >
                   <div className="flex items-center gap-2 mb-1">
                     <GraduationCap className="w-4 h-4 text-[#F15E1C]" />
@@ -425,7 +425,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
 
                 <motion.div
                   whileHover={{ y: -3, scale: 1.01 }}
-                  className="p-4 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#2E936F] hover:bg-[#F7D7B0]/20 transition-all duration-200 cursor-pointer shadow-xs"
+                  className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#2E936F] hover:bg-[#F7D7B0]/20 transition-all duration-200 cursor-pointer shadow-xs"
                 >
                   <div className="flex items-center gap-2 mb-1">
                     <UserPlus className="w-4 h-4 text-[#2E936F]" />
@@ -452,7 +452,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
                     <motion.span
                       key={idx}
                       whileHover={{ scale: 1.05, y: -2 }}
-                      className="text-xs px-3.5 py-1.5 rounded-lg bg-gray-100 dark:bg-[#1b2823] text-gray-700 dark:text-gray-300 border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F15E1C] hover:text-[#FFFFFF] transition-all duration-200 cursor-pointer shadow-xs font-medium"
+                      className="text-xs px-3.5 py-1.5 rounded-lg bg-gray-100 dark:bg-[#0a0a0a] text-gray-700 dark:text-gray-300 border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F15E1C] hover:text-[#FFFFFF] transition-all duration-200 cursor-pointer shadow-xs font-medium"
                     >
                       {tag}
                     </motion.span>
@@ -464,7 +464,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
             {/* IMAGE 1 — HERO VISUAL */}
             <div className="lg:col-span-6 w-full">
               <TiltCard className="w-full">
-                <div className="relative rounded-2xl p-3 sm:p-4 bg-white dark:bg-[#1b2823] border border-[#F7D7B0] shadow-xl overflow-hidden group hover:border-[#F15E1C] transition-all duration-300">
+                <div className="relative rounded-2xl p-3 sm:p-4 bg-white dark:bg-[#000000] border border-[#F7D7B0] shadow-xl overflow-hidden group hover:border-[#F15E1C] transition-all duration-300">
                   <div className="relative w-full overflow-hidden rounded-xl">
                     <Image
                       src="/images/training-staff-main.png"
@@ -514,7 +514,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
             <div className="lg:col-span-5 w-full">
               <motion.div
                 whileHover={{ y: -4 }}
-                className="p-4 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] shadow-lg transition-all duration-300 group"
+                className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#F15E1C] shadow-lg transition-all duration-300 group"
               >
                 <Image
                   src="/images/training-staff-secondary.png"
@@ -559,7 +559,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
                     { title: "Technical Training", desc: "Hands-on labs aligned with your stack." },
                     { title: "Knowledge Transfer", desc: "Ensure documentation stays permanently." },
                   ].map((item, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5 text-xs p-2.5 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0]">
+                    <div key={idx} className="flex items-start gap-2.5 text-xs p-2.5 rounded-xl bg-white dark:bg-[#000000] border border-[#F7D7B0]">
                       <CheckCircle2 className="w-3.5 h-3.5 text-[#F15E1C] shrink-0 mt-0.5" />
                       <div>
                         <span className="font-bold text-[#1b2823] dark:text-[#ffffff] block">{item.title}</span>
@@ -595,7 +595,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
                     { title: "Technical Roles", desc: "Fill critical disciplines without friction." },
                     { title: "Team Extension", desc: "Integrate seamlessly into your standups." },
                   ].map((item, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5 text-xs p-2.5 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0]">
+                    <div key={idx} className="flex items-start gap-2.5 text-xs p-2.5 rounded-xl bg-white dark:bg-[#000000] border border-[#F7D7B0]">
                       <CheckCircle2 className="w-3.5 h-3.5 text-[#2E936F] shrink-0 mt-0.5" />
                       <div>
                         <span className="font-bold text-[#1b2823] dark:text-[#ffffff] block">{item.title}</span>
@@ -617,7 +617,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
       {/* =====================================================================
           5. NEW SIGNATURE VISUAL — INTERACTIVE CAPABILITY MAP
           ===================================================================== */}
-      <section id="capability-map" className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section id="capability-map" className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
@@ -633,7 +633,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
           </div>
 
           {/* Interactive Flow Nodes */}
-          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg space-y-8">
+          <div className="bg-white dark:bg-[#000000] border border-[#F7D7B0] rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg space-y-8">
             
             <div className="flex overflow-x-auto gap-3 pb-4 md:grid md:grid-cols-6 md:gap-4 border-b border-[#F7D7B0] scrollbar-none">
               {capabilityMapNodes.map((node, idx) => {
@@ -648,7 +648,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
                       "shrink-0 min-w-[150px] md:min-w-0 md:shrink p-4 rounded-xl text-left transition-all duration-200 border cursor-pointer flex flex-col justify-between h-32 transform",
                       isActive
                         ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-1 scale-102"
-                        : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 hover:-translate-y-0.5"
+                        : "bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 hover:-translate-y-0.5"
                     )}
                   >
                     <div className="flex items-center justify-between w-full">
@@ -731,7 +731,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
               <motion.div
                 key={cap.num}
                 whileHover={{ scale: 1.02, y: -4 }}
-                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 hover:shadow-lg transition-all duration-300 shadow-xs flex flex-col justify-between group cursor-pointer"
+                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 hover:shadow-lg transition-all duration-300 shadow-xs flex flex-col justify-between group cursor-pointer"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
@@ -766,7 +766,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
       {/* =====================================================================
           7. STAFF AUGMENTATION — EXTEND CAPABILITY
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
@@ -787,7 +787,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
               <motion.div
                 key={role.title}
                 whileHover={{ scale: 1.03, y: -4 }}
-                className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#2E936F] hover:bg-[#F7D7B0]/20 hover:shadow-lg transition-all duration-300 shadow-xs space-y-3 group cursor-pointer"
+                className="p-6 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#2E936F] hover:bg-[#F7D7B0]/20 hover:shadow-lg transition-all duration-300 shadow-xs space-y-3 group cursor-pointer"
               >
                 <div className="p-2.5 rounded-xl bg-[#F7D7B0]/30 w-fit group-hover:bg-[#2E936F]/10 transition-colors">
                   {role.icon}
@@ -840,7 +840,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
                       "px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm transition-all duration-200 cursor-pointer shrink-0 flex items-center gap-2 border transform",
                       isActive
                         ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-0.5"
-                        : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
+                        : "bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
                     )}
                   >
                     <span className={cn(isActive ? "text-[#FFFFFF]" : "text-[#F15E1C]")}>{model.icon}</span>
@@ -858,7 +858,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] shadow-xl space-y-6"
+                className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#000000] border border-[#F7D7B0] shadow-xl space-y-6"
               >
                 <div className="flex items-center gap-4 pb-6 border-b border-[#F7D7B0]">
                   <div className="p-4 rounded-2xl bg-[#F15E1C] text-[#FFFFFF]">
@@ -902,7 +902,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
       {/* =====================================================================
           9. NEW VISUAL — TEAM INTEGRATION
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
@@ -918,7 +918,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
           </div>
 
           {/* Integration Visual Flow */}
-          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-3xl p-8 sm:p-12 shadow-lg space-y-8 max-w-5xl mx-auto text-center">
+          <div className="bg-white dark:bg-[#000000] border border-[#F7D7B0] rounded-3xl p-8 sm:p-12 shadow-lg space-y-8 max-w-5xl mx-auto text-center">
             
             <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 items-center">
               <div className="p-4 rounded-xl bg-[#F7D7B0]/20 border border-[#F7D7B0]">
@@ -991,7 +991,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
               <motion.div
                 key={st.step}
                 whileHover={{ scale: 1.02, y: -4 }}
-                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 hover:shadow-lg transition-all duration-300 shadow-xs flex flex-col justify-between group cursor-pointer"
+                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 hover:shadow-lg transition-all duration-300 shadow-xs flex flex-col justify-between group cursor-pointer"
               >
                 <div>
                   <span className="text-xs font-mono font-bold text-[#F15E1C] px-2.5 py-1 rounded bg-[#F7D7B0]/40 group-hover:bg-[#F15E1C] group-hover:text-[#FFFFFF] transition-colors block w-fit mb-3">
@@ -1016,7 +1016,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
       {/* =====================================================================
           11. SKILL -> ROLE -> TEAM INTERACTIVE VISUAL
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
@@ -1044,7 +1044,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
                       "px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all duration-200 cursor-pointer shrink-0 border transform",
                       isActive
                         ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md"
-                        : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
+                        : "bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
                     )}
                   >
                     <span>{ex.scenario}</span>
@@ -1061,7 +1061,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="p-8 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] shadow-xl space-y-6"
+                className="p-8 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] shadow-xl space-y-6"
               >
                 <div className="flex items-center justify-between pb-4 border-b border-[#F7D7B0]">
                   <h3 className="text-xl font-bold text-[#1b2823] dark:text-[#ffffff]">
@@ -1134,7 +1134,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
                 { title: "KNOWLEDGE TRANSFER", desc: "Handover Protocol", color: "text-[#F15E1C]" },
                 { title: "INTERNAL CAPABILITY", desc: "Permanent Skill", color: "text-[#2E936F]" },
               ].map((item, idx) => (
-                <div key={idx} className="p-4 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] space-y-1">
+                <div key={idx} className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#F7D7B0] space-y-1">
                   <span className={cn("text-xs font-mono font-bold block", item.color)}>{item.title}</span>
                   <span className="text-[10px] text-gray-500 dark:text-gray-400 block font-medium">{item.desc}</span>
                 </div>
@@ -1154,7 +1154,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
       {/* =====================================================================
           14. OUTCOMES
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
@@ -1174,7 +1174,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
               <motion.div
                 key={out.title}
                 whileHover={{ scale: 1.02, y: -4 }}
-                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#2E936F] hover:bg-[#F7D7B0]/20 hover:shadow-lg transition-all duration-300 shadow-xs flex items-start gap-4 group cursor-pointer"
+                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#2E936F] hover:bg-[#F7D7B0]/20 hover:shadow-lg transition-all duration-300 shadow-xs flex items-start gap-4 group cursor-pointer"
               >
                 <div className="p-3 rounded-xl bg-[#F7D7B0]/30 group-hover:bg-[#2E936F]/10 transition-colors shrink-0">
                   {out.icon}
@@ -1215,7 +1215,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
               {targetIndustries.map((ind, idx) => (
-                <div key={idx} className="p-5 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] space-y-1">
+                <div key={idx} className="p-5 rounded-xl bg-white dark:bg-[#000000] border border-[#F7D7B0] space-y-1">
                   <h4 className="text-sm font-bold text-[#1b2823] dark:text-[#ffffff]">{ind.title}</h4>
                   <p className="text-xs text-gray-500 dark:text-gray-400">{ind.desc}</p>
                 </div>
@@ -1236,7 +1236,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {whatWeAddress.map((item, idx) => (
-                <div key={idx} className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] space-y-2">
+                <div key={idx} className="p-6 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] space-y-2">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#F15E1C]" />
                     <h4 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff]">{item.title}</h4>
@@ -1255,7 +1255,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
       {/* =====================================================================
           17. BLOGS / INSIGHTS (REAL CMS DATA)
           ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
         <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           
           <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
@@ -1273,7 +1273,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             {articles.map((post) => (
               <Link key={post.slug} href={`/insights/${post.slug}`} className="group block">
-                <motion.div whileHover={{ y: -4 }} className="h-full p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-lg transition-all duration-300 shadow-xs flex flex-col justify-between">
+                <motion.div whileHover={{ y: -4 }} className="h-full p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-lg transition-all duration-300 shadow-xs flex flex-col justify-between">
                   <div>
                     <Badge variant="subtle" className="mb-3 text-[10px] bg-[#F7D7B0]/40 text-[#F15E1C] font-semibold">
                       {post.category}
@@ -1331,7 +1331,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
               return (
                 <div
                   key={index}
-                  className="rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#1b2823] overflow-hidden transition-all hover:border-[#F15E1C] hover:shadow-md"
+                  className="rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#000000] overflow-hidden transition-all hover:border-[#F15E1C] hover:shadow-md"
                 >
                   <button
                     onClick={() => setOpenFaqIdx(isOpen ? null : index)}

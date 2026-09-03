@@ -51,7 +51,7 @@ export function IndustrySolutionsSection({
 
   return (
     <section
-      className="py-16 md:py-24 px-4 sm:px-8 lg:px-12 rounded-[2.5rem] bg-[#f7d7b0]/30 border border-[#f7d7b0] shadow-2xl transition-all duration-300 relative overflow-hidden"
+      className="py-16 md:py-24 px-4 sm:px-8 lg:px-12 rounded-[2.5rem] bg-[#f7d7b0]/30 dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300 relative overflow-hidden"
       id="industry-solutions"
     >
       {/* Background Ornaments */}
@@ -63,10 +63,10 @@ export function IndustrySolutionsSection({
         <Badge variant="secondary" size="md">
           TAILORED INDUSTRY SOLUTIONS
         </Badge>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-display text-[#2e936f] tracking-tight">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-display text-[#2e936f] dark:text-[#34d399] tracking-tight">
           Vertical Digital Transformation
         </h2>
-        <p className="text-sm sm:text-base text-[#2e936f] leading-relaxed max-w-2xl mx-auto">
+        <p className="text-sm sm:text-base text-[#2e936f] dark:text-[#d3eee4] leading-relaxed max-w-2xl mx-auto">
           We apply our architectural, engineering, and compliance capabilities directly to specialized industry environments to eliminate operational bottlenecks and drive revenue.
         </p>
       </div>
@@ -84,7 +84,7 @@ export function IndustrySolutionsSection({
                 "px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold font-display transition-all duration-300 cursor-pointer border flex items-center gap-2.5",
                 isSel
                   ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-xl shadow-[#f15e1c]/30 scale-105"
-                  : "bg-white text-[#2e936f] border-[#f7d7b0] hover:border-[#f15e1c] hover:bg-[#f7d7b0]/20"
+                  : "bg-white dark:bg-[#000000] text-[#2e936f] dark:text-[#d3eee4] border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] dark:hover:border-[#f15e1c] hover:bg-[#f7d7b0]/20 dark:hover:bg-[#161616]"
               )}
             >
               <div
@@ -106,7 +106,7 @@ export function IndustrySolutionsSection({
         {/* Left Column: Industry Challenges & Arav Strategic Approach */}
         <div className="lg:col-span-6 space-y-6">
           {/* Industry Overview Box */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#f7d7b0] shadow-lg space-y-3">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg space-y-3">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-[#f15e1c]/10 text-[#f15e1c] flex items-center justify-center font-bold">
                 {iconMap[activeIndustry.icon] || <Briefcase className="w-5 h-5" />}
@@ -115,13 +115,13 @@ export function IndustrySolutionsSection({
                 {activeIndustry.name}
               </h3>
             </div>
-            <p className="text-sm text-[#2e936f] leading-relaxed">
+            <p className="text-sm text-[#2e936f] dark:text-[#d3eee4] leading-relaxed">
               {activeIndustry.description}
             </p>
           </div>
 
           {/* Industry Specific Challenges */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#f7d7b0] shadow-lg space-y-4">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg space-y-4">
             <h4 className="text-sm font-extrabold font-mono text-[#f15e1c] uppercase tracking-wider flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 text-[#f15e1c]" />
               <span>Core Industry Bottlenecks &amp; Pain Points</span>
@@ -134,7 +134,7 @@ export function IndustrySolutionsSection({
               ]).map((ch, idx) => (
                 <li
                   key={idx}
-                  className="flex items-start gap-3 text-xs sm:text-sm text-[#2e936f]"
+                  className="flex items-start gap-3 text-xs sm:text-sm text-[#2e936f] dark:text-[#d3eee4]"
                 >
                   <span className="w-5 h-5 rounded-full bg-[#f15e1c]/10 text-[#f15e1c] flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">
                     !
@@ -161,18 +161,18 @@ export function IndustrySolutionsSection({
         {/* Right Column: Capabilities, Target Outcome & Action CTAs */}
         <div className="lg:col-span-6 space-y-6 flex flex-col justify-between">
           {/* Key Capabilities Grid */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#f7d7b0] shadow-lg space-y-4">
-            <h4 className="text-sm font-extrabold font-mono text-[#2e936f] uppercase tracking-wider flex items-center gap-2">
-              <Layers className="w-4 h-4 text-[#2e936f]" />
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg space-y-4">
+            <h4 className="text-sm font-extrabold font-mono text-[#2e936f] dark:text-[#34d399] uppercase tracking-wider flex items-center gap-2">
+              <Layers className="w-4 h-4 text-[#2e936f] dark:text-[#34d399]" />
               <span>Tailored Solution Capabilities</span>
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {activeIndustry.capabilities.map((cap, cIdx) => (
                 <div
                   key={cIdx}
-                  className="p-3.5 rounded-2xl bg-[#f7d7b0]/40 border border-[#f15e1c]/20 flex items-center gap-2.5 text-xs font-bold text-[#2e936f]"
+                  className="p-3.5 rounded-2xl bg-[#f7d7b0]/40 dark:bg-[#161616] border border-[#f15e1c]/20 dark:border-[#1a1a1a] flex items-center gap-2.5 text-xs font-bold text-[#2e936f] dark:text-[#d3eee4]"
                 >
-                  <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-[#2e936f] dark:text-[#34d399] shrink-0" />
                   <span>{cap}</span>
                 </div>
               ))}
@@ -181,15 +181,15 @@ export function IndustrySolutionsSection({
 
           {/* Recommended Tech Stack Pills */}
           {activeIndustry.recommendedTech && (
-            <div className="p-5 rounded-3xl bg-white border border-[#f7d7b0] shadow-md space-y-2">
-              <span className="text-[10px] font-mono uppercase text-[#2e936f] font-extrabold tracking-wider">
+            <div className="p-5 rounded-3xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md space-y-2">
+              <span className="text-[10px] font-mono uppercase text-[#2e936f] dark:text-[#34d399] font-extrabold tracking-wider">
                 RECOMMENDED TECH STACK &amp; FRAMEWORKS
               </span>
               <div className="flex flex-wrap gap-2">
                 {activeIndustry.recommendedTech.map((t, idx) => (
                   <span
                     key={idx}
-                    className="px-3 py-1 rounded-xl bg-[#f7d7b0] text-[#f15e1c] text-xs font-mono font-bold border border-[#f15e1c]/30"
+                    className="px-3 py-1 rounded-xl bg-[#f7d7b0] dark:bg-[#161616] text-[#f15e1c] dark:text-[#ffffff] text-xs font-mono font-bold border border-[#f15e1c]/30 dark:border-[#1a1a1a]"
                   >
                     {t}
                   </span>
@@ -199,12 +199,12 @@ export function IndustrySolutionsSection({
           )}
 
           {/* Expected Business Outcome Box */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#2e936f] shadow-xl space-y-3">
-            <span className="text-xs font-mono font-bold text-[#2e936f] uppercase tracking-wider flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#2e936f]" />
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border-2 border-[#2e936f] dark:border-[#2e936f] shadow-xl space-y-3">
+            <span className="text-xs font-mono font-bold text-[#2e936f] dark:text-[#34d399] uppercase tracking-wider flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-[#2e936f] dark:text-[#34d399]" />
               <span>Target Business Outcome</span>
             </span>
-            <p className="text-base sm:text-lg font-bold font-display text-[#2e936f] leading-snug">
+            <p className="text-base sm:text-lg font-bold font-display text-[#2e936f] dark:text-[#ffffff] leading-snug">
               {activeIndustry.expectedOutcome ||
                 "Achieve operational stability, 99.99% uptime SLA, and zero compliance breach penalties."}
             </p>

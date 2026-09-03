@@ -97,14 +97,14 @@
   }
 
   .dark {
-    /* Dark Mode Tokens Derived from Palette Green-950 (#000000) Scale */
+    /* Pure AMOLED Dark Mode Tokens */
     --bg-primary: #000000;
-    --bg-secondary: #0a0a0a;
-    --bg-cream: #121212;
-    --bg-peach: #1a1a1a;
+    --bg-secondary: #050505;
+    --bg-cream: #0a0a0a;
+    --bg-peach: #0a0a0a;
     --bg-card: #0a0a0a;
-    --bg-card-hover: #121212;
-    --bg-elevated: #161616;
+    --bg-card-hover: #0f0f0f;
+    --bg-elevated: #0a0a0a;
 
     --accent-primary: #f15e1c;
     --accent-primary-hover: #f57b44;
@@ -121,11 +121,11 @@
 
     --border-primary: #1a1a1a;
     --border-secondary: #262626;
-    --border-subtle: #121212;
+    --border-subtle: #1a1a1a;
 
-    --shadow-warm-xs: 0 2px 10px rgba(16, 27, 23, 0.4);
-    --shadow-warm-md: 0 12px 30px -4px rgba(16, 27, 23, 0.58);
-    --shadow-3d: 0 24px 50px -10px rgba(16, 27, 23, 0.72), 0 0 0 1px rgba(241, 94, 28, 0.18);
+    --shadow-warm-xs: 0 2px 10px rgba(0, 0, 0, 0.5);
+    --shadow-warm-md: 0 12px 30px -4px rgba(0, 0, 0, 0.8);
+    --shadow-3d: 0 24px 50px -10px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(241, 94, 28, 0.18);
   }
 }
 

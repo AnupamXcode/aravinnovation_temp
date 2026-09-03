@@ -63,14 +63,14 @@ export function Modal({
         role="dialog"
         aria-modal="true"
         className={cn(
-          "relative w-full rounded-2xl bg-[#FFFDF9] p-6 sm:p-8 shadow-2xl border border-[#EFE2D6] z-10 max-h-[90vh] overflow-y-auto",
+          "relative w-full rounded-2xl bg-[#FFFDF9] dark:bg-[#0a0a0a] p-6 sm:p-8 shadow-2xl border border-[#EFE2D6] dark:border-[#1a1a1a] z-10 max-h-[90vh] overflow-y-auto text-[#1b2823] dark:text-[#ffffff]",
           maxWidthClasses[maxWidth]
         )}
       >
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-5 right-5 text-[#7A6A5F] hover:text-[#3A2E27] p-1.5 rounded-lg hover:bg-[#FBF3EA] transition-colors"
+          className="absolute top-5 right-5 text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#3A2E27] dark:hover:text-[#ffffff] p-1.5 rounded-lg hover:bg-[#FBF3EA] dark:hover:bg-[#161616] transition-colors"
           aria-label="Close modal"
         >
           <X className="w-5 h-5" />
@@ -78,11 +78,11 @@ export function Modal({
 
         {title && (
           <div className="mb-6 pr-8">
-            <h3 className="text-xl font-bold font-display text-[#3A2E27]">
+            <h3 className="text-xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
               {title}
             </h3>
             {description && (
-              <p className="mt-1 text-sm text-[#7A6A5F]">{description}</p>
+              <p className="mt-1 text-sm text-[#7A6A5F] dark:text-[#B8ACA0]">{description}</p>
             )}
           </div>
         )}
