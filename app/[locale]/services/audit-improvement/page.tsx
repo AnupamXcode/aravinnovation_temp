@@ -9,14 +9,14 @@ export async function generateMetadata() {
   return {
     title: "Audit & Improvement Services | Arav Innovations",
     description:
-      "Identify operational, process, technology and compliance gaps with structured audit and improvement services designed to turn findings into practical business improvements.",
+      "Identify operational, process, technology and control gaps with evidence-based audit and improvement services designed to turn findings into practical business action.",
     alternates: {
       canonical: "https://aravinnovations.com/services/audit-improvement",
     },
     openGraph: {
       title: "Audit & Improvement Services | Arav Innovations",
       description:
-        "Identify operational, process, technology and compliance gaps with structured audit and improvement services designed to turn findings into practical business improvements.",
+        "Identify operational, process, technology and control gaps with evidence-based audit and improvement services designed to turn findings into practical business action.",
       url: "https://aravinnovations.com/services/audit-improvement",
       type: "website",
     },

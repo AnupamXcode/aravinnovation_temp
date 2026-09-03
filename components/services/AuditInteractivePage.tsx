@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   motion,
   AnimatePresence,
@@ -38,6 +39,13 @@ import {
   CheckSquare,
   Wrench,
   GitBranch,
+  Filter,
+  ArrowRightLeft,
+  RotateCw,
+  SlidersHorizontal,
+  Crosshair,
+  Maximize2,
+  BookOpen,
 } from "lucide-react";
 import { Service } from "@/data/services";
 import { BlogPost, blogPostsData } from "@/data/insights";
@@ -45,7 +53,6 @@ import { Button3D } from "@/components/ui/button-3d";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
 import { TiltCard } from "@/components/motion/TiltCard";
-import { MagneticButton } from "@/components/motion/MagneticButton";
 import { cn } from "@/lib/utils";
 
 interface AuditPageProps {
@@ -87,7 +94,7 @@ function AnimatedSection({
 }
 
 // -----------------------------------------------------------------------------
-// 2. Diagnostic Scan Transition Line (Diagnostic Inspection Line Effect)
+// 2. Diagnostic Inspection Line Scanner Effect
 // -----------------------------------------------------------------------------
 function DiagnosticScanTransition() {
   const ref = React.useRef<HTMLDivElement>(null);
@@ -95,13 +102,13 @@ function DiagnosticScanTransition() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <div ref={ref} className="relative w-full h-px my-1 overflow-hidden pointer-events-none select-none">
+    <div ref={ref} className="relative w-full h-px overflow-hidden pointer-events-none select-none">
       <div className="w-full h-full bg-[#f7d7b0]/30 dark:bg-[#1a1a1a]" />
       {!shouldReduceMotion && (
         <motion.div
           initial={{ x: "-100%" }}
           animate={isInView ? { x: "100%" } : {}}
-          transition={{ duration: 1.4, ease: "easeInOut" }}
+          transition={{ duration: 1.6, ease: "easeInOut" }}
           className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-transparent via-[#f15e1c] to-transparent shadow-[0_0_10px_#f15e1c]"
         />
       )}
@@ -110,7 +117,7 @@ function DiagnosticScanTransition() {
 }
 
 // -----------------------------------------------------------------------------
-// 3. Diagnostic Matrix Grid Background
+// 3. Diagnostic Matrix Pattern Background
 // -----------------------------------------------------------------------------
 function DiagnosticDotGrid() {
   return (
@@ -131,1623 +138,1536 @@ function DiagnosticDotGrid() {
 }
 
 // -----------------------------------------------------------------------------
-// Data Collections for Audit & Improvement Diagnostic System
+// Core Business Diagnostic Data
 // -----------------------------------------------------------------------------
 
 const keywordTags = [
   "Operational Audit",
+  "Internal Audit Support",
   "Process Improvement",
-  "Technology Review",
-  "Compliance",
-  "Performance",
-  "Continuous Improvement",
+  "Technology Assessment",
+  "Control Review",
+  "Performance Improvement",
 ];
 
-// Hero Diagnostic Nodes
-const heroDiagnosticNodes = [
-  { id: "BUSINESS", label: "BUSINESS HEALTH", desc: "Strategy & Operational Goals", icon: <Target className="w-4 h-4 text-[#f15e1c]" /> },
-  { id: "PROCESS", label: "PROCESSES", desc: "Workflows & Handoff Friction", icon: <GitBranch className="w-4 h-4 text-[#2e936f]" /> },
-  { id: "SYSTEMS", label: "SYSTEMS", desc: "Tech Stack & Reliability", icon: <Cpu className="w-4 h-4 text-[#fab60a]" /> },
-  { id: "PEOPLE", label: "PEOPLE & ROLES", desc: "RACI & Operational Ownership", icon: <Users2 className="w-4 h-4 text-[#2e936f]" /> },
-  { id: "EVIDENCE", label: "EVIDENCE DATA", desc: "Metrics & Incident Records", icon: <FileCheck className="w-4 h-4 text-[#f15e1c]" /> },
-  { id: "IMPROVEMENT", label: "ROADMAP", desc: "Action Plan & Validation", icon: <RefreshCw className="w-4 h-4 text-[#2e936f]" /> },
-];
-
-// Section 4: Signature Diagnostic View (OBSERVE -> COLLECT -> ANALYZE -> FIND -> PRIORITIZE)
+// Signature Diagnostic Timeline Stages
 const diagnosticViewStages = [
   {
     num: "01",
     title: "OBSERVE",
     question: "How is work actually flowing today?",
-    desc: "Examine end-to-end operational workflows, actual employee practices, and technology touchpoints in practice.",
-    output: "Current-state process observation map",
+    desc: "We observe end-to-end workflows, system handoffs, and team practices in operation to document reality rather than assumptions.",
+    output: "Current-State Observation Map & Process Baseline",
+    badge: "Process Context",
   },
   {
     num: "02",
     title: "COLLECT",
     question: "What evidence exists?",
-    desc: "Gather system performance telemetry, process handoff logs, rework metrics, and compliance records.",
-    output: "Empirical diagnostic evidence repository",
+    desc: "We gather operational evidence, system integration telemetry, rework logs, policy documentation, and control records.",
+    output: "Empirical Diagnostic Repository",
+    badge: "Data & Telemetry",
   },
   {
     num: "03",
     title: "ANALYZE",
     question: "Where does friction occur?",
-    desc: "Cross-examine evidence against process benchmarks to isolate bottlenecks, redundancies, and control gaps.",
-    output: "Friction & root-cause diagnostic matrix",
+    desc: "We cross-examine evidence against operating benchmarks to isolate bottlenecks, redundancies, and control vulnerabilities.",
+    output: "Friction & Gap Matrix",
+    badge: "Root Cause Trace",
   },
   {
     num: "04",
     title: "FIND",
     question: "What is holding the business back?",
-    desc: "Synthesize diagnostic findings into clear operational insights, cost leakage points, and security vulnerabilities.",
-    output: "Structured audit findings report",
+    desc: "We synthesize findings into clear, plain-language insights detailing operational risk, duplication, and performance gaps.",
+    output: "Structured Audit Findings Report",
+    badge: "Executive Insight",
   },
   {
     num: "05",
     title: "PRIORITIZE",
     question: "What should be fixed first?",
-    desc: "Map findings against commercial impact and effort complexity to construct an actionable remediation sequence.",
-    output: "Impact-ranked improvement roadmap",
+    desc: "We map all findings by business impact and implementation complexity so leadership knows exactly where to focus first.",
+    output: "Impact-Ranked Remediation Roadmap",
+    badge: "Action Sequence",
   },
 ];
 
-// Section 5: Audit Decision Transformation Sequence
+// Audit -> Decision Transformation Sequence
 const decisionTransformationSteps = [
-  { step: "01", title: "AUDIT FINDING", desc: "Observed process bottleneck or system gap" },
-  { step: "02", title: "WHY IT MATTERS", desc: "Commercial impact & customer friction" },
-  { step: "03", title: "ROOT CAUSE", desc: "Underlying structural or tool dependency" },
-  { step: "04", title: "PRIORITY", desc: "High-impact focus vs tactical fix" },
-  { step: "05", title: "ACTION", desc: "Redesigned workflow & operational control" },
-  { step: "06", title: "VALIDATION", desc: "Empirical metric review & continuous check" },
+  { step: "01", title: "FINDING", desc: "Observed process delay or technology control gap", icon: <AlertTriangle className="w-5 h-5 text-[#f15e1c]" /> },
+  { step: "02", title: "ROOT CAUSE", desc: "Unclear ownership, legacy software, or missing data", icon: <Search className="w-5 h-5 text-[#2e936f]" /> },
+  { step: "03", title: "BUSINESS IMPACT", desc: "Increased cycle time, cost leakage, or risk exposure", icon: <TrendingUp className="w-5 h-5 text-[#fab60a]" /> },
+  { step: "04", title: "PRIORITY", desc: "Categorized as Quick Win or Strategic Focus", icon: <SlidersHorizontal className="w-5 h-5 text-[#f15e1c]" /> },
+  { step: "05", title: "ACTION", desc: "Streamlined approval workflow & updated ownership", icon: <Wrench className="w-5 h-5 text-[#2e936f]" /> },
+  { step: "06", title: "VALIDATION", desc: "Post-implementation check confirming friction reduction", icon: <CheckCircle2 className="w-5 h-5 text-[#fab60a]" /> },
 ];
 
-// Section 6: What We Examine (6 Diagnostic Areas)
+// What We Examine (6 Diagnostic Areas)
 const diagnosticAreas = [
   {
     num: "01",
     title: "OPERATIONS",
-    focus: "Processes • workflows • bottlenecks • resource utilisation",
-    desc: "Examine handoffs, cycle times, manual interventions, and operational bottlenecks across teams.",
-    icon: <BarChart3 className="w-5 h-5 text-[#f15e1c]" />,
+    focus: "Processes • workflows • handoffs • resource use",
+    desc: "We examine operational workflows, departmental handoffs, resource allocation, and cycle times to find bottlenecks.",
+    icon: <BarChart3 className="w-6 h-6 text-[#f15e1c]" />,
+    details: ["Workflow step mapping", "Handoff delay analysis", "Resource allocation balance", "Manual workaround identification"],
   },
   {
     num: "02",
     title: "TECHNOLOGY",
-    focus: "Systems • integrations • technical friction • reliability",
-    desc: "Evaluate software stack alignment, API integration gaps, system outages, and technical debt.",
-    icon: <Cpu className="w-5 h-5 text-[#2e936f]" />,
+    focus: "Systems • integrations • reliability • dependencies",
+    desc: "We evaluate application health, API integration gaps, system outages, and technology debt affecting daily operations.",
+    icon: <Cpu className="w-6 h-6 text-[#2e936f]" />,
+    details: ["Integration architecture checks", "System uptime & reliability logs", "Technical debt hotspots", "Data flow consistency"],
   },
   {
     num: "03",
-    title: "FINANCE",
-    focus: "Cost structures • leakage • inefficiencies • process controls",
-    desc: "Identify cloud overspending, redundant tool licenses, financial workflow leaks, and cost controls.",
-    icon: <TrendingUp className="w-5 h-5 text-[#fab60a]" />,
+    title: "CONTROLS",
+    focus: "Policies • procedures • responsibilities • effectiveness",
+    desc: "We review operational policies, RACI role clarity, control design, and key control testing effectiveness.",
+    icon: <ShieldCheck className="w-6 h-6 text-[#fab60a]" />,
+    details: ["Policy-to-practice alignment", "RACI role clarity", "Control execution testing", "Risk mitigation adequacy"],
   },
   {
     num: "04",
     title: "COMPLIANCE",
-    focus: "Policies • controls • evidence • regulatory alignment",
-    desc: "Audit policy adherence, RACI role clarity, control testing effectiveness, and evidence readiness.",
-    icon: <FileCheck className="w-5 h-5 text-[#2e936f]" />,
+    focus: "Requirements • documentation • evidence • readiness",
+    desc: "We audit documentation completeness, evidence readiness, and internal policy adherence to ensure audit readiness.",
+    icon: <FileCheck className="w-6 h-6 text-[#2e936f]" />,
+    details: ["Documentation completeness", "Audit-trail verification", "Evidence collection readiness", "Standards alignment"],
   },
   {
     num: "05",
     title: "PERFORMANCE",
-    focus: "KPIs • handoffs • delays • measurement gaps",
-    desc: "Review key performance indicators, SLA breaches, team handoff delays, and reporting blind spots.",
-    icon: <Activity className="w-5 h-5 text-[#f15e1c]" />,
+    focus: "KPIs • cycle times • bottlenecks • measurement gaps",
+    desc: "We analyze key performance metrics, SLA breaches, measurement blind spots, and reporting accuracy.",
+    icon: <Activity className="w-6 h-6 text-[#f15e1c]" />,
+    details: ["KPI calculation validity", "Cycle-time variance", "Reporting blind spot identification", "SLA tracking accuracy"],
   },
   {
     num: "06",
-    title: "CUSTOMER & USER EXPERIENCE",
-    focus: "Journeys • friction • drop-offs • service processes",
-    desc: "Diagnose user onboarding drop-offs, service desk resolution friction, and customer journey gaps.",
-    icon: <Eye className="w-5 h-5 text-[#fab60a]" />,
+    title: "CUSTOMER EXPERIENCE",
+    focus: "Journeys • friction points • service processes",
+    desc: "We evaluate front-line service delivery, customer journey friction points, onboarding delays, and support processes.",
+    icon: <Eye className="w-6 h-6 text-[#fab60a]" />,
+    details: ["Service process handoffs", "Onboarding bottleneck mapping", "Support escalation pathways", "Customer effort drivers"],
   },
 ];
 
-// Section 7: Friction Map Workflow Points
+// Friction Map Workflow Inspection Points
 const frictionPoints = [
   {
     id: "INPUT",
-    type: "WORKFLOW STEP",
-    name: "INPUT & INTAKE",
-    friction: "Unstructured Data Intake",
-    detail: "Information gaps or inconsistent request formats at entry point.",
+    stage: "01 INPUT",
+    label: "INTAKE & REQUEST",
+    frictionType: "Unstructured Data Intake",
+    description: "Inconsistent request forms and incomplete information at intake lead to downstream clarifications and delays.",
     icon: <FileText className="w-4 h-4 text-[#2e936f]" />,
   },
   {
     id: "PROCESS",
-    type: "FRICTION POINT",
-    name: "DUPLICATE WORK",
-    friction: "Manual Re-keying",
-    detail: "Repeated manual activity indicating process or integration inefficiency.",
+    stage: "02 PROCESS",
+    label: "DUPLICATE WORK",
+    frictionType: "Manual Re-keying",
+    description: "Repeated manual activity and data copy-pasting across systems that indicates process or integration inefficiency.",
     icon: <AlertTriangle className="w-4 h-4 text-[#f15e1c]" />,
   },
   {
     id: "HANDOFF",
-    type: "FRICTION POINT",
-    name: "HANDOFF DELAY",
-    friction: "Unclear RACI Role",
-    detail: "Handoff stalls caused by ambiguous ownership between departments.",
+    stage: "03 HANDOFF",
+    label: "HANDOFF DELAY",
+    frictionType: "Unclear RACI Role",
+    description: "Handoff stalls caused by ambiguous operational ownership between functional departments.",
     icon: <Clock className="w-4 h-4 text-[#fab60a]" />,
   },
   {
     id: "SYSTEM",
-    type: "FRICTION POINT",
-    name: "SYSTEM DEPENDENCY",
-    friction: "Legacy Silos",
-    detail: "Manual spreadsheets filling gaps between disconnected software platforms.",
+    stage: "04 SYSTEM",
+    label: "SYSTEM DEPENDENCY",
+    frictionType: "Legacy Silos",
+    description: "Manual spreadsheets and isolated tools used to bridge gaps between disconnected enterprise applications.",
     icon: <Wrench className="w-4 h-4 text-[#2e936f]" />,
   },
   {
     id: "DECISION",
-    type: "FRICTION POINT",
-    name: "APPROVAL GAP",
-    friction: "Multilayer Approvals",
-    detail: "Unnecessary approval layers causing delivery bottlenecks.",
+    stage: "05 DECISION",
+    label: "APPROVAL GAP",
+    frictionType: "Multilayer Approvals",
+    description: "Unnecessary or sequential approval sign-offs causing severe process throughput bottlenecks.",
     icon: <AlertOctagon className="w-4 h-4 text-[#f15e1c]" />,
   },
   {
     id: "OUTPUT",
-    type: "WORKFLOW STEP",
-    name: "OUTPUT & DELIVERY",
-    friction: "Rework & Defect Risk",
-    detail: "Errors requiring post-delivery remediation and customer friction.",
+    stage: "06 OUTPUT",
+    label: "REWORK & DEFECT RISK",
+    frictionType: "Quality Variances",
+    description: "Quality defects caught late in the cycle requiring costly post-delivery rework and customer friction.",
     icon: <CheckSquare className="w-4 h-4 text-[#2e936f]" />,
   },
 ];
 
-// Section 8: Root-Cause Illustrative Example
-const rootCauseExample = [
-  { stage: "VISIBLE PROBLEM", text: "Slow Approval Response Time", color: "text-[#f15e1c]" },
-  { stage: "PROCESS ISSUE", text: "Too Many Handoffs Across 4 Teams", color: "text-[#fab60a]" },
-  { stage: "CONTROL FACTOR", text: "Unclear RACI Ownership & Thresholds", color: "text-[#2e936f]" },
-  { stage: "ROOT CAUSE", text: "Outdated Approval Matrix Design Gap", color: "text-[#f15e1c]" },
-  { stage: "IMPROVEMENT ACTION", text: "Redesign Approval Flow with Automated Controls", color: "text-[#2e936f]" },
+// Root-Cause Layered Visual Breakdown (Illustrative Example)
+const rootCauseLayers = [
+  {
+    level: "STAGE 1",
+    label: "VISIBLE PROBLEM",
+    example: "Slow Purchase Order Approval",
+    detail: "Approval cycle takes 14 business days instead of the target 2 days.",
+    color: "border-l-4 border-l-[#f15e1c] bg-[#f15e1c]/5",
+    icon: <Eye className="w-5 h-5 text-[#f15e1c]" />,
+  },
+  {
+    level: "STAGE 2",
+    label: "PROCESS ISSUE",
+    example: "Too Many Sequential Handoffs",
+    detail: "Requests pass linearly through 5 different departmental managers.",
+    color: "border-l-4 border-l-[#fab60a] bg-[#fab60a]/5",
+    icon: <GitBranch className="w-5 h-5 text-[#fab60a]" />,
+  },
+  {
+    level: "STAGE 3",
+    label: "CONTRIBUTING FACTOR",
+    example: "Unclear Approval Thresholds",
+    detail: "Managers review low-value requests due to outdated threshold rules.",
+    color: "border-l-4 border-l-[#2e936f] bg-[#2e936f]/5",
+    icon: <Layers className="w-5 h-5 text-[#2e936f]" />,
+  },
+  {
+    level: "STAGE 4",
+    label: "ROOT CAUSE",
+    example: "Process & Governance Design Gap",
+    detail: "Approval matrix was created 7 years ago and never updated for current operations.",
+    color: "border-l-4 border-l-[#f15e1c] bg-[#f15e1c]/10",
+    icon: <Target className="w-5 h-5 text-[#f15e1c]" />,
+  },
+  {
+    level: "STAGE 5",
+    label: "IMPROVEMENT ACTION",
+    example: "Redesign Approval & Delegated Authority",
+    detail: "Establish automated tiered approvals, raising auto-approval threshold for low-risk spend.",
+    color: "border-l-4 border-l-[#2e936f] bg-[#2e936f]/10",
+    icon: <CheckCircle2 className="w-5 h-5 text-[#2e936f]" />,
+  },
 ];
 
-// Section 9: 6 Methodology Stages (From Finding to Fix)
+// Global Audit Approach Methodology
 const methodologyStages = [
   {
     step: "01",
-    title: "DISCOVER",
-    desc: "Understand business objectives, audit scope, key stakeholders and the operating environment.",
-    output: "Audit scope & stakeholder charter",
+    name: "DEFINE",
+    desc: "Clarify objectives, scope, stakeholders and evaluation criteria before starting.",
+    outcome: "Agreed Engagement Charter",
   },
   {
     step: "02",
-    title: "OBSERVE",
-    desc: "Examine end-to-end workflows, system logs, control documentation and actual operating practices.",
-    output: "Empirical observation records",
+    name: "UNDERSTAND",
+    desc: "Understand processes, systems, controls and operating context through evidence.",
+    outcome: "Current-State Baseline",
   },
   {
     step: "03",
-    title: "ANALYZE",
-    desc: "Compare evidence against performance baselines to isolate bottlenecks, gaps and dependencies.",
-    output: "Root-cause analysis matrix",
+    name: "ASSESS",
+    desc: "Review empirical evidence and evaluate current-state practices against standards.",
+    outcome: "Diagnostic Finding Log",
   },
   {
     step: "04",
-    title: "PRIORITIZE",
-    desc: "Separate critical business risks and quick wins from lower-value structural improvements.",
-    output: "2-Axis priority matrix",
+    name: "REPORT",
+    desc: "Communicate findings, root causes and practical improvement opportunities clearly.",
+    outcome: "Executive Audit Report",
   },
   {
     step: "05",
-    title: "IMPROVE",
-    desc: "Define actionable remediation plans, redesign processes and support implementation where agreed.",
-    output: "Target state operating model",
+    name: "PRIORITIZE",
+    desc: "Separate urgent operational issues from longer-term strategic improvements.",
+    outcome: "Prioritized Action Matrix",
   },
   {
     step: "06",
-    title: "VALIDATE",
-    desc: "Review post-implementation telemetry to confirm the issue was solved and plan next steps.",
-    output: "Validation report & continuous check",
+    name: "FOLLOW THROUGH",
+    desc: "Support agreed actions and validate progress where requested.",
+    outcome: "Progress Verification Check",
   },
 ];
 
-// Section 10: Priority Matrix Quadrants
-const priorityMatrixQuadrants = [
+// Priority Matrix Quadrants
+const priorityQuadrants = [
   {
-    quadrant: "QUICK WINS",
-    impact: "HIGH IMPACT",
-    effort: "LOW EFFORT",
-    badge: "DO FIRST",
-    color: "border-[#2e936f] bg-[#f0f9f5] dark:bg-[#05140d]",
-    textAccent: "text-[#2e936f]",
-    items: ["Process handoff simplification", "Eliminating duplicate data entry", "Policy documentation updates"],
+    id: "quick-win",
+    title: "QUICK WIN",
+    position: "High Impact • Low Effort",
+    desc: "Immediate operational improvements that deliver rapid relief with minimal capital or resource commitment.",
+    example: "Automating manual data intake validation to eliminate re-keying errors.",
+    border: "border-[#2e936f]",
+    badgeBg: "bg-[#2e936f]/10 text-[#2e936f]",
   },
   {
-    quadrant: "STRATEGIC IMPROVEMENTS",
-    impact: "HIGH IMPACT",
-    effort: "HIGH EFFORT",
-    badge: "PLAN & EXECUTE",
-    color: "border-[#f15e1c] bg-[#fff5f2] dark:bg-[#120805]",
-    textAccent: "text-[#f15e1c]",
-    items: ["Core system integration", "Workflow automation engine", "Data governance framework"],
+    id: "strategic",
+    title: "STRATEGIC IMPROVEMENT",
+    position: "High Impact • High Effort",
+    desc: "Core structural initiatives that transform key operating capabilities and require dedicated resource allocation.",
+    example: "Replacing legacy ERP integration layer with modern API architecture.",
+    border: "border-[#f15e1c]",
+    badgeBg: "bg-[#f15e1c]/10 text-[#f15e1c]",
   },
   {
-    quadrant: "OPERATIONAL FIXES",
-    impact: "LOW IMPACT",
-    effort: "LOW EFFORT",
-    badge: "SCHEDULE",
-    color: "border-[#fab60a] bg-[#fffdf0] dark:bg-[#141205]",
-    textAccent: "text-[#fab60a]",
-    items: ["Minor SLA template updates", "Form standardization", "Team checklist adjustments"],
+    id: "operational-fix",
+    title: "OPERATIONAL FIX",
+    position: "Low Impact • Low Effort",
+    desc: "Tactical process cleanups and documentation updates that maintain operating discipline.",
+    example: "Updating standard operating procedure manuals for department handoffs.",
+    border: "border-[#fab60a]",
+    badgeBg: "bg-[#fab60a]/10 text-[#fab60a]",
   },
   {
-    quadrant: "LONG-TERM TRANSFORMATION",
-    impact: "LOW IMPACT",
-    effort: "HIGH EFFORT",
-    badge: "DEFER / EVALUATE",
-    color: "border-[#7A6A5F] bg-[#fefaf5] dark:bg-[#0a0a0a]",
-    textAccent: "text-[#7A6A5F]",
-    items: ["Legacy platform replacement", "Complete org structure overhaul", "Custom internal tooling"],
-  },
-];
-
-// Section 11: Roadmap Timeline (NOW -> NEXT -> LATER)
-const roadmapPhases = [
-  {
-    phase: "NOW",
-    timeframe: "IMMEDIATE FOCUS",
-    color: "border-[#f15e1c]",
-    items: ["Critical process bottlenecks", "Immediate control safeguards", "High-impact cost leakage fixes"],
-  },
-  {
-    phase: "NEXT",
-    timeframe: "OPERATIONAL PHASE",
-    color: "border-[#2e936f]",
-    items: ["Workflow redesign & optimization", "Technology integration enhancements", "SLA & handoff metrics tracking"],
-  },
-  {
-    phase: "LATER",
-    timeframe: "CONTINUOUS PHASE",
-    color: "border-[#fab60a]",
-    items: ["Structural business transformation", "Automated telemetry & monitoring", "Continuous audit & improvement rhythm"],
+    id: "long-term",
+    title: "LONG-TERM CHANGE",
+    position: "Low Impact • High Effort",
+    desc: "Complex secondary adjustments evaluated carefully to determine if return on effort warrants scheduling.",
+    example: "Consolidating non-critical peripheral reporting tools across regional offices.",
+    border: "border-gray-300 dark:border-gray-700",
+    badgeBg: "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300",
   },
 ];
 
-// Section 13: What You Receive (Deliverables)
-const auditDeliverables = [
-  { title: "CURRENT-STATE FINDINGS", desc: "Empirical documentation of observed workflows, gaps, and friction points." },
-  { title: "ROOT-CAUSE ANALYSIS", desc: "Detailed breakdown of underlying process, system, or RACI control causes." },
-  { title: "PRIORITY MATRIX", desc: "Commercial impact vs effort framework to guide leadership decisions." },
-  { title: "IMPROVEMENT ROADMAP", desc: "Sequenced execution plan categorized into Now, Next, and Later milestones." },
-  { title: "MANAGEMENT INSIGHTS", desc: "Executive briefing covering key operational risks and resource priorities." },
-  { title: "NEXT-ACTION PLAN", desc: "Actionable technical and procedural recommendations for immediate execution." },
+// Deliverables List
+const deliverables = [
+  { title: "CURRENT-STATE FINDINGS", desc: "Comprehensive baseline documenting observed workflows, system state, and operating practices." },
+  { title: "ROOT-CAUSE INSIGHTS", desc: "Detailed breakdown of underlying structural, process, or technology drivers behind friction points." },
+  { title: "CONTROL & PROCESS OBSERVATIONS", desc: "Independent assessment of operating policies, RACI role clarity, and control effectiveness." },
+  { title: "PRIORITIZED IMPROVEMENT OPPORTUNITIES", desc: "Ranked remediation actions categorized by commercial value and effort complexity." },
+  { title: "MANAGEMENT INSIGHTS", desc: "Executive debrief highlighting critical risks, resource bottlenecks, and strategic priorities." },
+  { title: "ACTION ROADMAP", desc: "Sequential execution timeline detailing quick wins, milestone dependencies, and validation criteria." },
 ];
 
-// Section 14: Repeatable Operational Rhythm (SEE -> DECIDE -> CHANGE -> CHECK -> LEARN -> REPEAT)
-const continuousRhythm = [
-  { step: "01", name: "SEE", desc: "Observe operational metrics and telemetry." },
-  { step: "02", name: "DECIDE", desc: "Prioritize findings based on impact." },
-  { step: "03", name: "CHANGE", desc: "Implement targeted process or system fixes." },
-  { step: "04", name: "CHECK", desc: "Validate operational improvements empirical output." },
-  { step: "05", name: "LEARN", desc: "Incorporate findings into operational baseline." },
-  { step: "06", name: "REPEAT", desc: "Maintain continuous improvement cadence." },
-];
-
-// Section 15: 6 Business Outcomes
+// Business Outcomes
 const businessOutcomes = [
-  { title: "CLARITY", desc: "Understand how your business processes and technology actually operate.", icon: <Eye className="w-5 h-5 text-[#2e936f]" /> },
-  { title: "EFFICIENCY", desc: "Eliminate avoidable friction, redundant tasks, and resource leakage.", icon: <Zap className="w-5 h-5 text-[#f15e1c]" /> },
-  { title: "CONTROL", desc: "Strengthen RACI role ownership, operational discipline, and safeguard rules.", icon: <ShieldCheck className="w-5 h-5 text-[#fab60a]" /> },
-  { title: "PRIORITY", desc: "Focus executive bandwidth and capital on improvements that matter most.", icon: <Target className="w-5 h-5 text-[#2e936f]" /> },
-  { title: "VISIBILITY", desc: "Make performance telemetry, gaps, and SLA breaches simple to monitor.", icon: <BarChart3 className="w-5 h-5 text-[#f15e1c]" /> },
-  { title: "ADAPTABILITY", desc: "Create a resilient organizational foundation ready for operational change.", icon: <RefreshCw className="w-5 h-5 text-[#fab60a]" /> },
+  { title: "CLARITY", desc: "Understand current-state performance with an empirical, objective baseline.", icon: <Eye className="w-5 h-5 text-[#f15e1c]" /> },
+  { title: "EFFICIENCY", desc: "Reduce avoidable friction, manual duplication, and process handoff stalls.", icon: <Zap className="w-5 h-5 text-[#2e936f]" /> },
+  { title: "CONTROL", desc: "Strengthen operational ownership, RACI clarity, and governance discipline.", icon: <ShieldCheck className="w-5 h-5 text-[#fab60a]" /> },
+  { title: "PRIORITY", desc: "Focus management attention and resources where they deliver the greatest impact.", icon: <Target className="w-5 h-5 text-[#f15e1c]" /> },
+  { title: "VISIBILITY", desc: "Make operational gaps and technology dependencies easier to discuss and resolve.", icon: <BarChart3 className="w-5 h-5 text-[#2e936f]" /> },
+  { title: "ADAPTABILITY", desc: "Create a resilient, evidence-backed foundation for continuous business change.", icon: <RefreshCw className="w-5 h-5 text-[#fab60a]" /> },
 ];
 
-// Section 16: What We Can Help You Uncover
-const whatWeUncover = [
-  "Process bottlenecks & workflow delays",
-  "Operational inefficiencies & duplicate work",
-  "Technology integration friction & software debt",
-  "Control gaps & RACI ownership ambiguity",
-  "Resource misalignment & cost leakage",
-  "Performance blind spots & reporting gaps",
+// What We Can Help Uncover
+const scopeHelpUncover = [
+  { title: "Process Bottlenecks", desc: "Handoff stalls, redundant reviews, and manual workarounds slowing down service delivery." },
+  { title: "Control Gaps", desc: "Unclear role ownership, missing audit trails, or ineffective control execution." },
+  { title: "Technology Friction", desc: "Application disconnects, fragile integrations, and system performance regressions." },
+  { title: "Operational Inefficiencies", desc: "Resource allocation imbalances and duplicate data entry across departments." },
+  { title: "Documentation Gaps", desc: "Outdated standard operating procedures and unmapped technical architectures." },
+  { title: "Performance Blind Spots", desc: "Untracked cycle-time variances and unmeasured operational handoff delays." },
 ];
 
-// Section 18: 5 FAQs
-const faqList = [
-  {
-    q: "What does an Audit & Improvement engagement cover?",
-    a: "Depending on scope, we examine operational workflows, system integrations, financial cost structures, compliance controls, performance metrics, and user journey friction. We tailor each audit to your specific business priorities.",
-  },
-  {
-    q: "How is an operational audit different from a compliance audit?",
-    a: "A compliance audit verifies whether you meet specific external regulations or security standards. An operational audit examines how your business actually functions day-to-day—identifying friction, bottlenecks, and cost leakage to improve overall business performance.",
-  },
-  {
-    q: "Do you only provide audit reports, or can you also support implementation?",
-    a: "We do both. We deliver clear, prioritized diagnostic findings and actionable roadmaps. Where agreed, our team also provides hands-on technical and process implementation support to help bring the improvements to life.",
-  },
-  {
-    q: "How do you prioritize the issues discovered during an audit?",
-    a: "We use a 2-axis Priority Matrix that balances commercial business impact against effort and technical complexity. This separates quick wins from strategic multi-phase improvements so your leadership team can focus capital effectively.",
-  },
-  {
-    q: "When should a business consider an improvement audit?",
-    a: "Businesses usually reach out when experiencing rapid growth friction, recurring team handoff delays, high operational costs, upcoming digital transformations, or when launching new products requiring clean internal operations.",
-  },
-];
-
-// Service Ecosystem Links
-const internalServices = [
-  { name: "IT Strategy & Implementation", href: "/services/it-strategy-implementation", icon: <Compass className="w-4 h-4 text-[#f15e1c]" /> },
-  { name: "Digital Marketing & Brand", href: "/services/digital-marketing-brand-development", icon: <TrendingUp className="w-4 h-4 text-[#2e936f]" /> },
-  { name: "Web & Application Development", href: "/services/web-app-development", icon: <Code2 className="w-4 h-4 text-[#fab60a]" /> },
-  { name: "Risk, Compliance & Governance", href: "/services/risk-compliance-governance", icon: <ShieldCheck className="w-4 h-4 text-[#2e936f]" /> },
-  { name: "Training & Staff Augmentation", href: "/services/training-staff-augmentation", icon: <Users2 className="w-4 h-4 text-[#fab60a]" /> },
-  { name: "SEO Services", href: "/services/seo-services", icon: <Search className="w-4 h-4 text-[#2e936f]" /> },
-  { name: "AI Portfolio", href: "/services/ai-portfolio", icon: <Cpu className="w-4 h-4 text-[#f15e1c]" /> },
-];
-
+// -----------------------------------------------------------------------------
+// Component Implementation
+// -----------------------------------------------------------------------------
 export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) {
   const shouldReduceMotion = useReducedMotion();
-  const [activeHeroNodeIdx, setActiveHeroNodeIdx] = React.useState<number>(0);
-  const [activeDiagIdx, setActiveDiagIdx] = React.useState<number>(0);
-  const [activeAreaIdx, setActiveAreaIdx] = React.useState<number | null>(0);
-  const [activeFrictionIdx, setActiveFrictionIdx] = React.useState<number>(1);
-  const [activeMethodIdx, setActiveMethodIdx] = React.useState<number>(0);
-  const [activeRhythmIdx, setActiveRhythmIdx] = React.useState<number>(0);
-  const [openFaqIdx, setOpenFaqIdx] = React.useState<number | null>(0);
 
-  const displayPosts = React.useMemo(() => {
-    if (relatedPosts && relatedPosts.length > 0) {
-      return relatedPosts.slice(0, 3);
-    }
-    return blogPostsData.slice(0, 3);
-  }, [relatedPosts]);
+  // State management for interactive features
+  const [activeTimelineStage, setActiveTimelineStage] = React.useState(0);
+  const [activeDecisionStep, setActiveDecisionStep] = React.useState(0);
+  const [activeDomain, setActiveDomain] = React.useState(0);
+  const [activeFrictionPoint, setActiveFrictionPoint] = React.useState(1); // Default: Duplicate Work
+  const [activeRootLayer, setActiveRootLayer] = React.useState(3); // Default: Root Cause
+  const [activeMatrixQuadrant, setActiveMatrixQuadrant] = React.useState<string | null>("quick-win");
+  const [openFaq, setOpenFaq] = React.useState<number | null>(0);
+  const [activeLoopStep, setActiveLoopStep] = React.useState(0);
 
-  const activeDiagStage = diagnosticViewStages[activeDiagIdx];
+  // Auto-advance loop step for Continuous Improvement Cycle
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveLoopStep((prev) => (prev + 1) % 6);
+    }, 3500);
+    return () => clearInterval(timer);
+  }, []);
+
+  const articles = relatedPosts && relatedPosts.length > 0 ? relatedPosts.slice(0, 4) : blogPostsData.slice(0, 3);
+
+  // FAQ Schema Structured Data
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": service.faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer,
+      },
+    })),
+  };
 
   return (
-    <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#000000] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c] relative">
-      
-      {/* Background Dot Matrix Pattern */}
+    <div className="relative w-full min-h-screen bg-[#ffffff] dark:bg-[#0b0f17] text-[#1b2823] dark:text-[#f3f4f6] font-sans selection:bg-[#f15e1c] selection:text-white overflow-x-hidden min-w-0 box-border">
+      {/* Schema Injection */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       <DiagnosticDotGrid />
 
-      {/* =========================================================================
-          2. HERO SECTION — AUDIT • DIAGNOSTICS • IMPROVEMENT
-          ========================================================================= */}
-      <section className="relative pt-3 sm:pt-5 lg:pt-6 pb-12 sm:pb-16 lg:pb-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none">
-        
-        {/* Ambient Pulsing Background Glows */}
-        <motion.div
-          animate={shouldReduceMotion ? {} : { y: [0, -10, 0], opacity: [0.25, 0.35, 0.25] }}
-          transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
-          className="absolute inset-0 pointer-events-none z-0 overflow-hidden"
-        >
-          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-radial from-[#f15e1c]/15 via-transparent to-transparent blur-3xl rounded-full" />
-          <div className="absolute bottom-1/3 right-1/4 w-[550px] h-[550px] bg-radial from-[#2e936f]/12 via-transparent to-transparent blur-3xl rounded-full" />
-        </motion.div>
+      {/* Breadcrumb Navigation */}
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 pt-6 sm:pt-8 pb-4">
+        <Breadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Services", href: "/services" },
+            { label: "Audit & Improvement", href: "/services/audit-improvement" },
+          ]}
+        />
+      </div>
 
-        <div className="max-w-[1536px] mx-auto w-full space-y-6 sm:space-y-8 relative z-10">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      {/* =====================================================================
+          2. HERO SECTION
+          ===================================================================== */}
+      <section className="relative z-10 w-full border-b border-gray-100 dark:border-gray-800/60">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-10 sm:py-14 md:py-18 lg:py-24">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
             
-            {/* LEFT COLUMN: HERO COPY */}
-            <div className="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-left">
-              
-              <AnimatedSection delay={0.05} className="space-y-2">
-                <Breadcrumb
-                  items={[
-                    { label: "Services", href: "/services" },
-                    { label: "Audit & Improvement" },
-                  ]}
-                />
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fdf0e9] dark:bg-[#0a0a0a] border border-[#f15e1c]/40 text-xs font-mono font-bold text-[#f15e1c] shadow-2xs cursor-default transition-all duration-300"
-                >
-                  <Search className="w-3.5 h-3.5 text-[#f15e1c]" />
-                  <span>AUDIT &bull; DIAGNOSTICS &bull; IMPROVEMENT</span>
-                </motion.div>
-              </AnimatedSection>
+            {/* Hero Copy */}
+            <div className="lg:col-span-7 xl:col-span-6 space-y-6 sm:space-y-8">
+              <div className="inline-flex items-center gap-2">
+                <Badge variant="outline" className="border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5 px-3 py-1 font-semibold tracking-wider text-xs">
+                  AUDIT • ASSURANCE • IMPROVEMENT
+                </Badge>
+              </div>
 
-              <AnimatedSection delay={0.1} className="space-y-3">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold font-display tracking-tight leading-[1.12] text-[#1b2823] dark:text-[#ffffff]">
-                  Find What’s Holding Your Business Back.
-                </h1>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-[1.12]">
+                See What’s Working. <br className="hidden sm:inline" />
+                Find What Isn’t. <br className="hidden sm:inline" />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f15e1c] via-[#fab60a] to-[#2e936f]">
+                  Improve What Matters.
+                </span>
+              </h1>
 
-                <p className="text-sm sm:text-base lg:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-2xl">
-                  We examine how your processes, technology, controls and operations actually work — then turn the findings into a practical improvement roadmap your team can act on.
-                </p>
-              </AnimatedSection>
+              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl leading-relaxed">
+                We assess processes, technology, controls and operating practices to uncover gaps, understand root causes and turn evidence into practical improvement priorities.
+              </p>
 
-              <AnimatedSection delay={0.15} className="pt-1 flex flex-wrap items-center gap-3">
+              {/* CTAs */}
+              <div className="flex flex-wrap items-center gap-4 pt-2">
                 <Link href="/contact">
-                  <MagneticButton>
-                    <Button3D
-                      variant="primary"
-                      size="md"
-                      rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1.5" />}
-                      className="shadow-md shadow-[#f15e1c]/20 bg-[#f15e1c] hover:bg-[#d64e13] hover:-translate-y-0.5 transition-all duration-300 font-bold"
-                    >
-                      Start an Audit
-                    </Button3D>
-                  </MagneticButton>
+                  <Button3D variant="primary" size="lg" className="flex items-center gap-2 font-semibold">
+                    Start an Assessment
+                    <ArrowRight className="w-4 h-4" />
+                  </Button3D>
                 </Link>
+                <a href="#diagnostic-view">
+                  <Button3D variant="secondary" size="lg" className="flex items-center gap-2 font-medium">
+                    Explore Our Approach
+                  </Button3D>
+                </a>
+              </div>
 
-                <Link href="#diagnostic-view">
-                  <MagneticButton>
-                    <Button3D variant="outline" size="md" className="hover:-translate-y-0.5 transition-all duration-300">
-                      Explore Our Approach
-                    </Button3D>
-                  </MagneticButton>
-                </Link>
-              </AnimatedSection>
-
-              <AnimatedSection delay={0.2} className="pt-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  {keywordTags.map((tag, i) => (
-                    <motion.span
-                      key={i}
-                      whileHover={{ scale: 1.06, y: -2 }}
-                      transition={{ duration: 0.2 }}
-                      className="px-2.5 py-1 rounded-lg bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[11px] font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] hover:border-[#f15e1c]/40 transition-all duration-200 cursor-default"
+              {/* Keywords Bar */}
+              <div className="pt-4 border-t border-gray-200 dark:border-gray-800/80">
+                <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 font-semibold mb-2.5">
+                  Core Diagnostic Areas
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {keywordTags.map((tag, idx) => (
+                    <span
+                      key={idx}
+                      className="text-xs px-3 py-1 rounded-md bg-gray-100 dark:bg-[#121824] text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-800"
                     >
                       {tag}
-                    </motion.span>
+                    </span>
                   ))}
                 </div>
-              </AnimatedSection>
-            </div>
-
-            {/* RIGHT COLUMN: HERO VISUAL (BUSINESS DIAGNOSTIC SYSTEM) */}
-            <div className="lg:col-span-6 xl:col-span-7 w-full flex items-center justify-center">
-              <AnimatedSection delay={0.15} className="w-full">
-                <div className="p-6 sm:p-8 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl space-y-6 relative overflow-hidden text-left">
-                  
-                  <div className="flex items-center justify-between border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-3">
-                    <div className="flex items-center gap-2">
-                      <Search className="w-4 h-4 text-[#f15e1c]" />
-                      <span className="text-xs font-mono font-bold text-[#1b2823] dark:text-[#ffffff] uppercase tracking-wider">
-                        BUSINESS DIAGNOSTIC SYSTEM
-                      </span>
-                    </div>
-                    <span className="text-[10px] font-mono text-[#2e936f] font-bold">HEALTH ANALYSIS</span>
-                  </div>
-
-                  {/* 6-Node Diagnostic Interactive Flow */}
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 relative">
-                    {heroDiagnosticNodes.map((node, idx) => {
-                      const isHovered = activeHeroNodeIdx === idx;
-                      return (
-                        <motion.div
-                          key={node.id}
-                          onMouseEnter={() => setActiveHeroNodeIdx(idx)}
-                          whileHover={{ scale: 1.04, y: -2 }}
-                          className={cn(
-                            "p-3.5 rounded-2xl border transition-all duration-300 cursor-pointer space-y-1.5 text-left relative overflow-hidden select-none",
-                            isHovered
-                              ? "bg-white dark:bg-[#121212] border-[#f15e1c] shadow-md ring-1 ring-[#f15e1c]/30"
-                              : "bg-white/60 dark:bg-[#050505] border-[#f7d7b0]/60 dark:border-[#1a1a1a]"
-                          )}
-                        >
-                          <div className="flex items-center justify-between">
-                            <div className="p-1.5 rounded-lg bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a]">
-                              {node.icon}
-                            </div>
-                            <span className="text-[10px] font-mono font-bold text-[#f15e1c]">
-                              0{idx + 1}
-                            </span>
-                          </div>
-                          <div className="font-mono text-xs font-bold text-[#1b2823] dark:text-[#ffffff]">
-                            {node.label}
-                          </div>
-                          <div className="text-[10px] text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-tight line-clamp-1">
-                            {node.desc}
-                          </div>
-                        </motion.div>
-                      );
-                    })}
-                  </div>
-
-                  {/* Active Node Highlight Panel */}
-                  <div className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] flex items-center justify-between gap-4">
-                    <div className="space-y-1 text-left">
-                      <span className="text-[10px] font-mono font-bold text-[#f15e1c] uppercase block">
-                        DIAGNOSTIC SCOPE: {heroDiagnosticNodes[activeHeroNodeIdx].label}
-                      </span>
-                      <p className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff]">
-                        {heroDiagnosticNodes[activeHeroNodeIdx].desc}
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-xs font-mono text-[#2e936f] font-bold shrink-0">
-                      <span>INSPECTED</span>
-                      <CheckCircle2 className="w-4 h-4 text-[#2e936f]" />
-                    </div>
-                  </div>
-                </div>
-              </AnimatedSection>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Laser Scan Beam Section Separator */}
-      <DiagnosticScanTransition />
-
-      {/* =========================================================================
-          4. SIGNATURE SECTION — THE DIAGNOSTIC VIEW (OBSERVE -> COLLECT -> ANALYZE -> FIND -> PRIORITIZE)
-          ========================================================================= */}
-      <section id="diagnostic-view" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
-        <div className="max-w-[1536px] mx-auto space-y-10">
-          
-          <AnimatedSection>
-            <div className="max-w-4xl mx-auto text-center space-y-3">
-              <Badge variant="secondary" size="md">
-                THE DIAGNOSTIC VIEW
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                You Can't Improve What You Can't See.
-              </h2>
-              <p className="text-sm sm:text-base lg:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-3xl mx-auto">
-                Many improvement initiatives begin with assumptions. We begin with evidence. We examine how work moves through the organization, where friction appears, where controls weaken, where resources are lost and where technology or process decisions create unnecessary complexity. Then we turn those observations into priorities.
-              </p>
-            </div>
-          </AnimatedSection>
-
-          {/* Interactive Diagnostic Stage Selector & Detail Display */}
-          <AnimatedSection delay={0.1}>
-            <div className="rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl p-6 sm:p-10 space-y-8">
-              
-              {/* 5 Connected Stages Selector Bar */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 relative">
-                {diagnosticViewStages.map((stg, idx) => {
-                  const isSelected = activeDiagIdx === idx;
-                  return (
-                    <button
-                      key={stg.num}
-                      type="button"
-                      onClick={() => setActiveDiagIdx(idx)}
-                      onMouseEnter={() => setActiveDiagIdx(idx)}
-                      className={cn(
-                        "relative py-3.5 px-3 rounded-2xl text-xs font-extrabold font-display transition-all duration-250 cursor-pointer flex flex-col items-center justify-center gap-1 select-none z-10",
-                        isSelected
-                          ? "text-white shadow-md"
-                          : "bg-white dark:bg-[#000000] text-[#4a5c55] dark:text-[#d3eee4] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:bg-[#f15e1c]/5"
-                      )}
-                    >
-                      {isSelected && (
-                        <motion.div
-                          layoutId="activeDiagStagePill"
-                          className="absolute inset-0 bg-[#f15e1c] rounded-2xl shadow-md shadow-[#f15e1c]/20 z-[-1]"
-                          transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                        />
-                      )}
-                      <span className="font-mono text-[10px] opacity-80">{stg.num}.</span>
-                      <span>{stg.title}</span>
-                    </button>
-                  );
-                })}
               </div>
 
-              {/* Active Stage Detail Panel */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeDiagStage.num}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center text-left"
-                >
-                  <div className="lg:col-span-7 space-y-3">
+              {/* Regulatory Positioning Disclaimer */}
+              <p className="text-xs text-gray-500 dark:text-gray-400 italic pt-1">
+                Note: Arav Innovations provides independent operational, process, and technology diagnostics. We do not act as a statutory financial auditor, regulatory authority, or accredited certification body.
+              </p>
+            </div>
+
+            {/* Hero Visual Card */}
+            <div className="lg:col-span-5 xl:col-span-6 w-full flex justify-center">
+              <TiltCard className="w-full max-w-xl lg:max-w-full">
+                <div className="relative rounded-2xl p-4 sm:p-6 bg-gradient-to-b from-[#ffffff] to-[#fefaf5] dark:from-[#121824] dark:to-[#0b0f17] border border-gray-200 dark:border-gray-800 shadow-xl overflow-hidden group">
+                  
+                  {/* Visual Header */}
+                  <div className="flex items-center justify-between pb-3 border-b border-gray-200 dark:border-gray-800">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-mono font-bold text-[#f15e1c] uppercase tracking-wider">
-                        DIAGNOSTIC STAGE {activeDiagStage.num} &bull; {activeDiagStage.title}
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-pulse" />
+                      <span className="text-xs font-bold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
+                        Business Diagnostic Visual
                       </span>
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                      {activeDiagStage.question}
-                    </h3>
-                    <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                      {activeDiagStage.desc}
+                    <Badge variant="subtle" className="text-[10px] bg-[#2e936f]/10 text-[#2e936f]">
+                      System Blueprint
+                    </Badge>
+                  </div>
+
+                  {/* Main Hero Diagnostic Image */}
+                  <div className="my-4 relative rounded-xl overflow-hidden border border-gray-100 dark:border-gray-800 bg-black/5 dark:bg-black/40">
+                    <Image
+                      src="/images/audit-and-improvement-main.png"
+                      alt="Arav Innovations Business Diagnostic Audit & Improvement Architecture"
+                      width={1200}
+                      height={750}
+                      priority
+                      className="w-full h-auto max-h-[480px] object-contain rounded-xl transition-transform duration-500 group-hover:scale-[1.01]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                      <span className="text-xs font-medium text-white/90">
+                        BUSINESS → EVIDENCE → ASSESSMENT → FINDINGS → PRIORITIES → IMPROVEMENT
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Nodes Summary Strip */}
+                  <div className="grid grid-cols-3 gap-2 text-center py-2.5 border-t border-gray-200 dark:border-gray-800">
+                    <div className="p-2 rounded-lg bg-gray-50 dark:bg-[#182030]">
+                      <span className="text-[10px] text-gray-500 dark:text-gray-400 block font-mono">OBSERVE</span>
+                      <span className="text-xs font-bold text-[#f15e1c]">Workflows</span>
+                    </div>
+                    <div className="p-2 rounded-lg bg-gray-50 dark:bg-[#182030]">
+                      <span className="text-[10px] text-gray-500 dark:text-gray-400 block font-mono">IDENTIFY</span>
+                      <span className="text-xs font-bold text-[#fab60a]">Root Cause</span>
+                    </div>
+                    <div className="p-2 rounded-lg bg-gray-50 dark:bg-[#182030]">
+                      <span className="text-[10px] text-gray-500 dark:text-gray-400 block font-mono">IMPROVE</span>
+                      <span className="text-xs font-bold text-[#2e936f]">Validated</span>
+                    </div>
+                  </div>
+
+                  {/* Visual Communication Badge */}
+                  <div className="pt-2.5 border-t border-gray-200 dark:border-gray-800 text-center">
+                    <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 italic">
+                      “We examine how the organization actually works.”
                     </p>
                   </div>
 
-                  <div className="lg:col-span-5 space-y-2">
-                    <span className="text-xs font-mono font-bold uppercase text-[#2e936f] block">
-                      Empirical Stage Output:
-                    </span>
-                    <div className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-[#2e936f] shrink-0" />
-                      <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff]">
-                        {activeDiagStage.output}
-                      </span>
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
+                </div>
+              </TiltCard>
             </div>
-          </AnimatedSection>
-        </div>
-      </section>
 
-      {/* Laser Scan Beam Section Separator */}
-      <DiagnosticScanTransition />
-
-      {/* =========================================================================
-          5. "AN AUDIT SHOULD END WITH A DECISION" TRANSFORMATION
-          ========================================================================= */}
-      <section id="audit-decision" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1536px] mx-auto space-y-10 text-left">
-          
-          <AnimatedSection>
-            <div className="max-w-3xl space-y-3">
-              <Badge variant="secondary" size="md">
-                DECISION-DRIVEN AUDIT
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                An Audit Should End With a Decision.
-              </h2>
-              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                A report is useful only when it helps someone decide what to do next. Our approach connects findings with root causes, business impact, improvement priorities and practical next steps.
-              </p>
-            </div>
-          </AnimatedSection>
-
-          {/* 6-Step Connected Decision Sequence */}
-          <AnimatedSection delay={0.1}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
-              {decisionTransformationSteps.map((step, idx) => (
-                <motion.div
-                  key={step.step}
-                  whileHover={{ scale: 1.03, y: -2 }}
-                  className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] space-y-2 text-left transition-all duration-300 group"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-mono font-black text-[#f15e1c]">
-                      STEP {step.step}
-                    </span>
-                    <ArrowRight className="w-3.5 h-3.5 text-[#f15e1c] group-hover:translate-x-1 transition-transform" />
-                  </div>
-                  <h3 className="text-xs font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
-                    {step.title}
-                  </h3>
-                  <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-tight">
-                    {step.desc}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Laser Scan Beam Section Separator */}
-      <DiagnosticScanTransition />
-
-      {/* =========================================================================
-          6. WHAT WE EXAMINE (6 DIAGNOSTIC AREAS)
-          ========================================================================= */}
-      <section id="what-we-examine" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
-        <div className="max-w-[1536px] mx-auto space-y-10 text-left">
-          
-          <AnimatedSection>
-            <div className="max-w-3xl space-y-3">
-              <Badge variant="secondary" size="md">
-                WHAT WE EXAMINE
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                Look Beyond the Surface.
-              </h2>
-              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                We examine six critical operational and technical domains depending on your business scope and project goals.
-              </p>
-            </div>
-          </AnimatedSection>
-
-          {/* 6 Diagnostic Areas Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {diagnosticAreas.map((area, idx) => (
-              <AnimatedSection key={area.num} delay={idx * 0.05}>
-                <TiltCard maxTilt={5} scale={1.01} className="h-full">
-                  <div
-                    onMouseEnter={() => setActiveAreaIdx(idx)}
-                    className={cn(
-                      "h-full p-6 sm:p-7 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border transition-all duration-300 space-y-3 text-left flex flex-col justify-between group",
-                      activeAreaIdx === idx
-                        ? "border-[#f15e1c] shadow-lg ring-1 ring-[#f15e1c]/20"
-                        : "border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]"
-                    )}
-                  >
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-mono font-black text-[#f15e1c]">
-                          {area.num}
-                        </span>
-                        <div className="p-2.5 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-110 transition-all duration-300">
-                          {area.icon}
-                        </div>
-                      </div>
-                      <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
-                        {area.title}
-                      </h3>
-                      <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
-                        {area.desc}
-                      </p>
-                      <div className="pt-2">
-                        <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase block mb-1">
-                          Diagnostic Scope Focus:
-                        </span>
-                        <p className="text-[11px] font-mono font-semibold text-[#1b2823] dark:text-[#ffffff] leading-tight">
-                          {area.focus}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between text-[11px] font-mono font-bold text-[#f15e1c] opacity-0 group-hover:opacity-100 transition-opacity">
-                      <span>Examine Domain</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
-                    </div>
-                  </div>
-                </TiltCard>
-              </AnimatedSection>
-            ))}
           </div>
         </div>
       </section>
 
-      {/* Laser Scan Beam Section Separator */}
       <DiagnosticScanTransition />
 
-      {/* =========================================================================
-          7. NEW ELEMENT — FRICTION MAP
-          ========================================================================= */}
-      <section id="friction-map" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1536px] mx-auto space-y-10 text-left">
+      {/* =====================================================================
+          4. NEW SIGNATURE SECTION: THE DIAGNOSTIC VIEW
+          ===================================================================== */}
+      <section id="diagnostic-view" className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-b from-[#ffffff] via-[#fefaf5]/40 to-[#ffffff] dark:from-[#0b0f17] dark:via-[#101622] dark:to-[#0b0f17] border-b border-gray-100 dark:border-gray-800/60">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           
-          <AnimatedSection>
-            <div className="max-w-3xl space-y-3">
-              <Badge variant="secondary" size="md">
-                BUSINESS WORKFLOW DIAGNOSTIC
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                Where Does the Friction Live?
-              </h2>
-              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                Hover any workflow node below to examine common operational friction points we look for during business diagnostics.
-              </p>
-            </div>
+          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#2e936f]/40 text-[#2e936f] bg-[#2e936f]/5">
+              THE DIAGNOSTIC VIEW
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              You Can't Improve What You Can't See.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Improvement starts with an accurate view of the current state. We examine evidence, workflows, controls, technology and operating practices to understand where friction, risk, duplication, inconsistency or performance gaps may exist. The result is not simply a report—it is a clearer basis for deciding what to improve next.
+            </p>
           </AnimatedSection>
 
-          {/* Workflow Sequence Cards */}
-          <AnimatedSection delay={0.1}>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-              {frictionPoints.map((item, idx) => {
-                const isActive = activeFrictionIdx === idx;
-                return (
-                  <motion.div
-                    key={item.id}
-                    onMouseEnter={() => setActiveFrictionIdx(idx)}
-                    onClick={() => setActiveFrictionIdx(idx)}
-                    whileHover={{ scale: 1.03, y: -2 }}
-                    className={cn(
-                      "p-4 rounded-2xl border-2 transition-all duration-300 cursor-pointer space-y-2 text-left select-none flex flex-col justify-between min-h-[140px]",
-                      isActive
-                        ? "bg-white dark:bg-[#121212] border-[#f15e1c] shadow-lg ring-1 ring-[#f15e1c]/30"
-                        : "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a]"
-                    )}
-                  >
-                    <div className="space-y-1">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-mono font-bold text-[#f15e1c]">
-                          0{idx + 1}.
-                        </span>
-                        <div className="p-1 rounded-md bg-[#fefaf5] dark:bg-[#0a0a0a]">
-                          {item.icon}
-                        </div>
-                      </div>
-                      <span className="text-[9px] font-mono font-bold text-[#2e936f] uppercase block">
-                        {item.type}
-                      </span>
-                      <h3 className="text-xs font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                        {item.name}
-                      </h3>
-                    </div>
-
-                    <span className="text-[10px] font-mono font-bold text-[#f15e1c] block border-t border-[#f7d7b0]/40 dark:border-[#1a1a1a] pt-1.5">
-                      {item.friction}
-                    </span>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </AnimatedSection>
-
-          {/* Active Friction Detail Panel */}
-          <AnimatedSection delay={0.15}>
-            <div className="p-6 rounded-3xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div className="space-y-1 text-left">
-                <span className="text-xs font-mono font-bold text-[#f15e1c] uppercase block">
-                  WHAT WE LOOK FOR &bull; {frictionPoints[activeFrictionIdx].name}
-                </span>
-                <h4 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                  {frictionPoints[activeFrictionIdx].friction}
-                </h4>
-                <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] font-medium max-w-3xl">
-                  {frictionPoints[activeFrictionIdx].detail}
-                </p>
-              </div>
-              <div className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shrink-0">
-                <Search className="w-5 h-5 text-[#f15e1c]" />
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Laser Scan Beam Section Separator */}
-      <DiagnosticScanTransition />
-
-      {/* =========================================================================
-          8. ROOT-CAUSE SECTION
-          ========================================================================= */}
-      <section id="root-cause" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
-        <div className="max-w-[1536px] mx-auto space-y-10 text-left">
-          
-          <AnimatedSection>
-            <div className="max-w-3xl space-y-3">
-              <Badge variant="secondary" size="md">
-                ROOT-CAUSE ANALYSIS
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                Don't Fix the Symptom. Find the Cause.
-              </h2>
-              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                We trace surface-level operational friction down to its underlying process design, system dependency, or RACI control cause.
-              </p>
-            </div>
-          </AnimatedSection>
-
-          {/* Layered Diagnostic Sequence */}
-          <div className="space-y-3.5 max-w-4xl mx-auto">
-            {rootCauseExample.map((item, idx) => (
-              <AnimatedSection key={idx} delay={idx * 0.06}>
-                <motion.div
-                  whileHover={{ scale: 1.01, x: 4 }}
-                  className="p-4 sm:p-5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] shadow-xs transition-all duration-300 grid grid-cols-1 md:grid-cols-12 gap-3 items-center"
-                >
-                  <div className="md:col-span-4 space-y-0.5">
-                    <span className="text-[10px] font-mono font-bold text-[#f15e1c] block uppercase tracking-wider">
-                      DIAGNOSTIC LAYER 0{idx + 1}
-                    </span>
-                    <h3 className="text-sm font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                      {item.stage}
-                    </h3>
-                  </div>
-                  <div className="md:col-span-8 p-3 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a]">
-                    <span className={cn("text-xs font-mono font-bold", item.color)}>
-                      {item.text}
-                    </span>
-                  </div>
-                </motion.div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Laser Scan Beam Section Separator */}
-      <DiagnosticScanTransition />
-
-      {/* =========================================================================
-          9. AUDIT -> IMPROVEMENT METHODOLOGY WORKFLOW (FROM FINDING TO FIX)
-          ========================================================================= */}
-      <section id="methodology" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1536px] mx-auto space-y-12">
-          
-          <AnimatedSection>
-            <div className="text-center max-w-3xl mx-auto space-y-3">
-              <Badge variant="secondary" size="md">
-                DIAGNOSTIC METHODOLOGY
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                From Finding to Fix
-              </h2>
-              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                A disciplined 6-stage diagnostic journey designed for clarity, evidence collection, and actionable improvement.
-              </p>
-            </div>
-          </AnimatedSection>
-
-          {/* 6 Stage Methodology Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {methodologyStages.map((proc, idx) => {
-              const isSelected = activeMethodIdx === idx;
-              return (
-                <AnimatedSection key={proc.step} delay={idx * 0.06}>
-                  <motion.div
-                    onClick={() => setActiveMethodIdx(idx)}
-                    onMouseEnter={() => setActiveMethodIdx(idx)}
-                    whileHover={{ y: -4, scale: 1.02 }}
-                    className={cn(
-                      "p-6 rounded-3xl border-2 transition-all duration-300 cursor-pointer space-y-3 text-left flex flex-col justify-between min-h-[210px] select-none",
-                      isSelected
-                        ? "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/20"
-                        : "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]"
-                    )}
-                  >
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-mono font-black text-[#f15e1c]">
-                          STAGE {proc.step}
-                        </span>
-                        <div className="p-1.5 rounded-lg bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a]">
-                          <Search className="w-4 h-4 text-[#f15e1c]" />
-                        </div>
-                      </div>
-                      <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                        {proc.title}
-                      </h3>
-                      <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
-                        {proc.desc}
-                      </p>
-                    </div>
-
-                    <div className="pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a]">
-                      <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase block mb-0.5">
-                        Key Deliverable Outcome:
-                      </span>
-                      <span className="text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]">
-                        {proc.output}
-                      </span>
-                    </div>
-                  </motion.div>
-                </AnimatedSection>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Laser Scan Beam Section Separator */}
-      <DiagnosticScanTransition />
-
-      {/* =========================================================================
-          10. NEW ELEMENT — PRIORITY MATRIX (2-AXIS INTERACTIVE FRAMEWORK)
-          ========================================================================= */}
-      <section id="priority-matrix" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
-        <div className="max-w-[1536px] mx-auto space-y-10 text-left">
-          
-          <AnimatedSection>
-            <div className="max-w-3xl space-y-3">
-              <Badge variant="secondary" size="md">
-                DECISION MATRIX
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                Not Every Problem Deserves the Same Response.
-              </h2>
-              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                We map audit observations onto a 2-axis matrix of Commercial Impact vs Effort Complexity so your leadership team can focus capital effectively.
-              </p>
-            </div>
-          </AnimatedSection>
-
-          {/* 4 Quadrants Priority Matrix */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {priorityMatrixQuadrants.map((quad, idx) => (
-              <AnimatedSection key={quad.quadrant} delay={idx * 0.06}>
-                <TiltCard maxTilt={4} scale={1.01} className="h-full">
-                  <div className={cn("h-full p-6 rounded-3xl border-2 space-y-4 text-left transition-all duration-300 shadow-sm", quad.color)}>
-                    <div className="flex items-center justify-between border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] pb-3">
-                      <div>
-                        <span className={cn("text-xs font-mono font-black block uppercase", quad.textAccent)}>
-                          {quad.quadrant}
-                        </span>
-                        <span className="text-[10px] font-mono text-[#7A6A5F] font-bold">
-                          {quad.impact} &bull; {quad.effort}
-                        </span>
-                      </div>
-                      <span className={cn("px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a]", quad.textAccent)}>
-                        {quad.badge}
-                      </span>
-                    </div>
-
-                    <div className="space-y-2">
-                      <span className="text-[10px] font-mono font-bold text-[#1b2823] dark:text-[#ffffff] uppercase block">
-                        Illustrative Diagnostic Focus:
-                      </span>
-                      <ul className="space-y-1.5">
-                        {quad.items.map((item, i) => (
-                          <li key={i} className="flex items-center gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </TiltCard>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Laser Scan Beam Section Separator */}
-      <DiagnosticScanTransition />
-
-      {/* =========================================================================
-          11. IMPROVEMENT ROADMAP (NOW -> NEXT -> LATER)
-          ========================================================================= */}
-      <section id="roadmap" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1536px] mx-auto space-y-10 text-left">
-          
-          <AnimatedSection>
-            <div className="max-w-3xl space-y-3">
-              <Badge variant="secondary" size="md">
-                EXECUTION ROADMAP
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                Turn Findings Into a Roadmap.
-              </h2>
-              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                We organize agreed improvement actions into a structured timeline sequence so your internal team can execute cleanly.
-              </p>
-            </div>
-          </AnimatedSection>
-
-          {/* 3 Sequential Phases (NOW -> NEXT -> LATER) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {roadmapPhases.map((phase, idx) => (
-              <AnimatedSection key={phase.phase} delay={idx * 0.08}>
-                <motion.div
-                  whileHover={{ y: -4, scale: 1.01 }}
+          {/* Connected Diagnostic Timeline (OBSERVE -> COLLECT -> ANALYZE -> FIND -> PRIORITIZE) */}
+          <div className="w-full max-w-[1400px] mx-auto bg-gradient-to-b from-gray-50 to-white dark:from-[#121824] dark:to-[#0b0f17] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg">
+            
+            {/* Stage Controls Header */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 pb-6 sm:pb-8 border-b border-gray-200 dark:border-gray-800">
+              {diagnosticViewStages.map((stage, idx) => (
+                <button
+                  key={stage.num}
+                  onClick={() => setActiveTimelineStage(idx)}
                   className={cn(
-                    "p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 space-y-4 text-left transition-all duration-300 shadow-sm flex flex-col justify-between h-full",
-                    phase.color
+                    "p-3 sm:p-4 rounded-xl text-left transition-all duration-200 flex flex-col justify-between border",
+                    activeTimelineStage === idx
+                      ? "bg-white dark:bg-[#1a2234] border-[#f15e1c] shadow-md scale-102"
+                      : "bg-transparent border-transparent hover:bg-gray-100 dark:hover:bg-[#161e2e]"
                   )}
                 >
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-3">
-                      <span className="text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                        {phase.phase}
-                      </span>
-                      <span className="text-[10px] font-mono font-bold text-[#f15e1c]">
-                        {phase.timeframe}
-                      </span>
-                    </div>
-
-                    <div className="space-y-2">
-                      {phase.items.map((item, i) => (
-                        <div key={i} className="flex items-center gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff] p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a]">
-                          <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
-                          <span>{item}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Laser Scan Beam Section Separator */}
-      <DiagnosticScanTransition />
-
-      {/* =========================================================================
-          12. BEFORE -> AFTER TRANSFORMATION (FROM FRICTION TO FLOW)
-          ========================================================================= */}
-      <section id="transformation" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
-        <div className="max-w-[1536px] mx-auto space-y-10">
-          
-          <AnimatedSection>
-            <div className="text-center max-w-3xl mx-auto space-y-3">
-              <Badge variant="secondary" size="md">
-                OPERATIONAL TRANSFORMATION
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                From Friction to Flow
-              </h2>
-              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                See the contrast between a friction-filled process and an optimized, transparent operating state.
-              </p>
-            </div>
-          </AnimatedSection>
-
-          {/* Side-by-Side Comparison */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 text-left">
-            
-            {/* BEFORE (FRICTION) */}
-            <AnimatedSection delay={0.08}>
-              <div className="p-6 sm:p-8 rounded-3xl bg-[#fff5f2] dark:bg-[#120805] border-2 border-[#f15e1c]/40 space-y-6 h-full">
-                <div className="flex items-center justify-between border-b border-[#f15e1c]/20 pb-3">
-                  <div className="flex items-center gap-2 text-[#f15e1c]">
-                    <AlertTriangle className="w-5 h-5" />
-                    <span className="text-xs font-mono font-extrabold uppercase tracking-wider">
-                      BEFORE (CURRENT FRICTION STATE)
+                  <div className="flex items-center justify-between w-full">
+                    <span className={cn(
+                      "text-xs font-mono font-bold px-2 py-0.5 rounded",
+                      activeTimelineStage === idx ? "bg-[#f15e1c] text-white" : "bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400"
+                    )}>
+                      {stage.num}
                     </span>
+                    <span className="text-[10px] text-gray-400 font-mono">Stage</span>
                   </div>
-                  <span className="text-[10px] font-mono text-[#f15e1c] font-bold">HIGH FRICTION</span>
-                </div>
-
-                <div className="space-y-2.5">
-                  {["Fragmented Process", "Manual Handoffs", "Unclear RACI Ownership", "Limited Operational Visibility", "Reactive Management Decisions"].map((item, i) => (
-                    <motion.div
-                      key={i}
-                      whileHover={{ x: 4 }}
-                      className="p-3 rounded-2xl bg-white/80 dark:bg-[#000000]/60 border border-[#f15e1c]/30 flex items-center justify-between text-xs font-bold font-mono text-[#f15e1c]"
-                    >
-                      <div className="flex items-center gap-2">
-                        <span className="opacity-60">0{i + 1}.</span>
-                        <span>{item}</span>
-                      </div>
-                      <AlertTriangle className="w-4 h-4 text-[#f15e1c] shrink-0" />
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </AnimatedSection>
-
-            {/* AFTER (FLOW) */}
-            <AnimatedSection delay={0.14}>
-              <div className="p-6 sm:p-8 rounded-3xl bg-[#f0f9f5] dark:bg-[#05140d] border-2 border-[#2e936f]/40 space-y-6 h-full">
-                <div className="flex items-center justify-between border-b border-[#2e936f]/20 pb-3">
-                  <div className="flex items-center gap-2 text-[#2e936f]">
-                    <CheckCircle2 className="w-5 h-5" />
-                    <span className="text-xs font-mono font-extrabold uppercase tracking-wider">
-                      AFTER (IMPROVED FLOW STATE)
-                    </span>
+                  <div className="mt-2 text-sm font-bold text-[#1b2823] dark:text-[#ffffff]">
+                    {stage.title}
                   </div>
-                  <span className="text-[10px] font-mono text-[#2e936f] font-bold">OPTIMIZED</span>
-                </div>
-
-                <div className="space-y-2.5">
-                  {["Clear Process Design", "Defined RACI Ownership", "Connected Systems & Integrations", "Visible Performance Telemetry", "Continuous Improvement Rhythm"].map((item, i) => (
-                    <motion.div
-                      key={i}
-                      whileHover={{ x: 4 }}
-                      className="p-3 rounded-2xl bg-white/80 dark:bg-[#000000]/60 border border-[#2e936f]/30 flex items-center justify-between text-xs font-bold font-mono text-[#2e936f]"
-                    >
-                      <div className="flex items-center gap-2">
-                        <span className="opacity-60">0{i + 1}.</span>
-                        <span>{item}</span>
-                      </div>
-                      <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </AnimatedSection>
-
-          </div>
-        </div>
-      </section>
-
-      {/* Laser Scan Beam Section Separator */}
-      <DiagnosticScanTransition />
-
-      {/* =========================================================================
-          13. WHAT YOU RECEIVE (CONCISE DELIVERABLES LIST)
-          ========================================================================= */}
-      <section id="deliverables" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1536px] mx-auto space-y-10 text-left">
-          
-          <AnimatedSection>
-            <div className="max-w-3xl space-y-3">
-              <Badge variant="secondary" size="md">
-                ENGAGEMENT DELIVERABLES
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                What Comes Out of the Audit?
-              </h2>
-              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                Depending on project scope, our audit and improvement engagements produce clear, management-ready documentation:
-              </p>
+                </button>
+              ))}
             </div>
-          </AnimatedSection>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {auditDeliverables.map((del, idx) => (
-              <AnimatedSection key={idx} delay={idx * 0.05}>
-                <TiltCard maxTilt={5} scale={1.01} className="h-full">
-                  <div className="h-full p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#f15e1c] hover:shadow-lg transition-all duration-300 space-y-3 text-left group">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono font-bold text-[#f15e1c]">DELIVERABLE 0{idx + 1}</span>
-                      <FileText className="w-4 h-4 text-[#f15e1c]" />
-                    </div>
-                    <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
-                      {del.title}
-                    </h3>
-                    <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed">
-                      {del.desc}
-                    </p>
-                  </div>
-                </TiltCard>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Laser Scan Beam Section Separator */}
-      <DiagnosticScanTransition />
-
-      {/* =========================================================================
-          14. CONTINUOUS IMPROVEMENT (REPEATABLE OPERATIONAL RHYTHM)
-          ========================================================================= */}
-      <section id="rhythm" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
-        <div className="max-w-[1536px] mx-auto space-y-12">
-          
-          <AnimatedSection>
-            <div className="text-center max-w-3xl mx-auto space-y-3">
-              <Badge variant="secondary" size="md">
-                CONTINUOUS OPERATIONAL RHYTHM
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                Improvement Becomes Valuable When It Becomes a Habit.
-              </h2>
-              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                The objective is not to perform an audit and return to the same operating model. The objective is to create a repeatable way to identify issues, act on priorities, measure change and keep improving.
-              </p>
-            </div>
-          </AnimatedSection>
-
-          {/* 6 Step Rhythm Bar */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            {continuousRhythm.map((item, idx) => {
-              const isActive = activeRhythmIdx === idx;
-              return (
-                <AnimatedSection key={item.step} delay={idx * 0.06}>
-                  <motion.div
-                    onClick={() => setActiveRhythmIdx(idx)}
-                    onMouseEnter={() => setActiveRhythmIdx(idx)}
-                    whileHover={{ y: -4, scale: 1.02 }}
-                    className={cn(
-                      "p-4 rounded-2xl border-2 transition-all duration-300 cursor-pointer space-y-1.5 text-left flex flex-col justify-between min-h-[120px] select-none",
-                      isActive
-                        ? "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f15e1c] shadow-md ring-1 ring-[#f15e1c]/30"
-                        : "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a]"
-                    )}
-                  >
-                    <span className="text-[10px] font-mono font-black text-[#f15e1c]">
-                      STEP {item.step}
-                    </span>
-                    <h3 className="text-sm font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                      {item.name}
-                    </h3>
-                    <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-tight">
-                      {item.desc}
-                    </p>
-                  </motion.div>
-                </AnimatedSection>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Laser Scan Beam Section Separator */}
-      <DiagnosticScanTransition />
-
-      {/* =========================================================================
-          15. BUSINESS OUTCOMES (6 MINIMAL OUTCOMES)
-          ========================================================================= */}
-      <section id="outcomes" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1536px] mx-auto space-y-10">
-          
-          <AnimatedSection>
-            <div className="text-center max-w-3xl mx-auto space-y-3">
-              <Badge variant="secondary" size="md">
-                BUSINESS IMPACT
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                What Better Visibility Enables
-              </h2>
-            </div>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
-            {businessOutcomes.map((out, idx) => (
-              <AnimatedSection key={idx} delay={idx * 0.05}>
-                <TiltCard maxTilt={5} scale={1.01} className="h-full">
-                  <div className="h-full p-6 sm:p-7 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#f15e1c] hover:shadow-lg transition-all duration-300 space-y-3 group">
-                    <div className="p-2.5 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] w-fit group-hover:scale-110 transition-transform">
-                      {out.icon}
-                    </div>
-                    <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
-                      {out.title}
-                    </h3>
-                    <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
-                      {out.desc}
-                    </p>
-                  </div>
-                </TiltCard>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Laser Scan Beam Section Separator */}
-      <DiagnosticScanTransition />
-
-      {/* =========================================================================
-          16. PROOF / WHAT WE CAN HELP YOU UNCOVER
-          ========================================================================= */}
-      <section id="what-we-uncover" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
-        <div className="max-w-[1536px] mx-auto space-y-10">
-          
-          <AnimatedSection>
-            <div className="text-center max-w-3xl mx-auto space-y-3">
-              <Badge variant="secondary" size="md">
-                DIAGNOSTIC PROOF
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                See Improvement in Practice
-              </h2>
-              <p className="text-base font-mono font-bold text-[#f15e1c] uppercase tracking-wider">
-                What We Can Help You Uncover
-              </p>
-            </div>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-left">
-            {whatWeUncover.map((item, idx) => (
-              <AnimatedSection key={idx} delay={idx * 0.05}>
-                <motion.div
-                  whileHover={{ x: 4 }}
-                  className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] flex items-center gap-3 transition-all"
-                >
-                  <Search className="w-4 h-4 text-[#f15e1c] shrink-0" />
-                  <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff]">
-                    {item}
+            {/* Active Stage Display Panel */}
+            <div className="pt-6 sm:pt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              
+              <div className="lg:col-span-7 space-y-4">
+                <div className="inline-flex items-center gap-2">
+                  <Badge variant="subtle" className="bg-[#f15e1c]/10 text-[#f15e1c]">
+                    {diagnosticViewStages[activeTimelineStage].badge}
+                  </Badge>
+                  <span className="text-xs text-gray-400 font-mono">
+                    Phase {diagnosticViewStages[activeTimelineStage].num} of 05
                   </span>
-                </motion.div>
-              </AnimatedSection>
-            ))}
+                </div>
+
+                <h3 className="text-2xl sm:text-3xl font-bold text-[#1b2823] dark:text-[#ffffff]">
+                  {diagnosticViewStages[activeTimelineStage].title}: {diagnosticViewStages[activeTimelineStage].question}
+                </h3>
+
+                <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                  {diagnosticViewStages[activeTimelineStage].desc}
+                </p>
+
+                <div className="p-4 sm:p-5 rounded-xl bg-white dark:bg-[#182030] border border-gray-200 dark:border-gray-800 flex items-start gap-3">
+                  <FileCheck className="w-5 h-5 text-[#2e936f] shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider block">
+                      Diagnostic Output
+                    </span>
+                    <span className="text-sm sm:text-base font-bold text-[#1b2823] dark:text-[#ffffff]">
+                      {diagnosticViewStages[activeTimelineStage].output}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Interactive Timeline Visual Node */}
+              <div className="lg:col-span-5 flex justify-center">
+                <div className="relative w-full max-w-sm p-6 rounded-2xl bg-white dark:bg-[#182030] border border-gray-200 dark:border-gray-800 shadow-inner text-center space-y-4">
+                  <div className="w-16 h-16 mx-auto rounded-full bg-[#f15e1c]/10 flex items-center justify-center border border-[#f15e1c]/30 text-[#f15e1c]">
+                    <Search className="w-8 h-8 animate-pulse" />
+                  </div>
+                  <div className="text-lg font-bold text-[#1b2823] dark:text-[#ffffff]">
+                    {diagnosticViewStages[activeTimelineStage].title} STAGE
+                  </div>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 italic">
+                    Evidence connector active. Examining current state workflows & telemetry.
+                  </p>
+                  <div className="flex justify-center gap-1.5 pt-2">
+                    {diagnosticViewStages.map((_, i) => (
+                      <span
+                        key={i}
+                        className={cn(
+                          "h-1.5 rounded-full transition-all duration-300",
+                          activeTimelineStage === i ? "w-6 bg-[#f15e1c]" : "w-1.5 bg-gray-300 dark:bg-gray-700"
+                        )}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Diagnostic Architecture Visual Showcase */}
+            <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800">
+              <div className="relative rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#121824] shadow-md group">
+                <div className="p-4 bg-gray-50 dark:bg-[#182030] border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Badge variant="subtle" className="bg-[#f15e1c]/10 text-[#f15e1c]">
+                      System Architecture Map
+                    </Badge>
+                    <span className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">
+                      End-to-End Operational Diagnostic View
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider hidden sm:inline">
+                    Diagnostic Overview
+                  </span>
+                </div>
+                <div className="p-2 sm:p-4 bg-black/5 dark:bg-black/30">
+                  <Image
+                    src="/images/audit-and-improvement.png"
+                    alt="Arav Innovations End-to-End Operational Diagnostic View Architecture"
+                    width={1400}
+                    height={800}
+                    className="w-full h-auto object-contain rounded-xl transition-transform duration-500 group-hover:scale-[1.01]"
+                  />
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* Laser Scan Beam Section Separator */}
       <DiagnosticScanTransition />
 
-      {/* =========================================================================
-          17. DYNAMIC BLOG / INSIGHTS
-          ========================================================================= */}
-      <section id="insights" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1536px] mx-auto space-y-10">
+      {/* =====================================================================
+          5. AUDIT -> DECISION
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           
-          <AnimatedSection>
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-4">
-              <div className="space-y-2 text-left">
-                <Badge variant="secondary" size="md">
-                  KNOWLEDGE &amp; THOUGHT LEADERSHIP
-                </Badge>
-                <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                  Audit &amp; Improvement Insights
-                </h2>
-              </div>
-              <Link
-                href="/insights"
-                className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#f15e1c] hover:underline shrink-0 group"
+          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#fab60a]/40 text-[#fab60a] bg-[#fab60a]/5">
+              DECISION FRAMEWORK
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              An Audit Should Lead to a Decision.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              A finding becomes valuable when people understand why it exists, what it affects and what should happen next.
+            </p>
+          </AnimatedSection>
+
+          {/* Visual Transformation Sequence Flow */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 xl:gap-6">
+            {decisionTransformationSteps.map((stepItem, idx) => (
+              <div
+                key={stepItem.step}
+                onClick={() => setActiveDecisionStep(idx)}
+                className={cn(
+                  "cursor-pointer p-5 rounded-xl border transition-all duration-200 flex flex-col justify-between relative group",
+                  activeDecisionStep === idx
+                    ? "bg-white dark:bg-[#182030] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/20 scale-102"
+                    : "bg-gray-50 dark:bg-[#121824] border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700"
+                )}
               >
-                <span>Explore All Insights</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
-              </Link>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-mono font-bold text-[#f15e1c]">
+                    {stepItem.step}
+                  </span>
+                  <div className="p-1.5 rounded-md bg-gray-100 dark:bg-[#0b0f17]">
+                    {stepItem.icon}
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
+                    {stepItem.title}
+                  </h3>
+                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 line-clamp-2">
+                    {stepItem.desc}
+                  </p>
+                </div>
+                {idx < decisionTransformationSteps.length - 1 && (
+                  <ArrowRight className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 z-20 pointer-events-none" />
+                )}
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      <DiagnosticScanTransition />
+
+      {/* =====================================================================
+          6. WHAT WE ASSESS (WHAT WE EXAMINE)
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#0e131f]/50 border-b border-gray-100 dark:border-gray-800/60">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+          
+          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5">
+              WHAT WE EXAMINE
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Look Beyond the Surface.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              We inspect cross-functional domains to evaluate how processes, technology, and operating discipline work together.
+            </p>
+            <p className="mt-2 text-xs text-gray-500 dark:text-gray-400 italic">
+              Note: Assessment scope is tailored to each engagement based on organizational priorities and objectives. Assessments do not necessarily cover all six domains simultaneously.
+            </p>
+          </AnimatedSection>
+
+          {/* Interactive Diagnostic Map (6 Compact Areas) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+            
+            {/* Navigation Tabs */}
+            <div className="lg:col-span-5 xl:col-span-4 space-y-3">
+              {diagnosticAreas.map((area, idx) => (
+                <button
+                  key={area.num}
+                  onClick={() => setActiveDomain(idx)}
+                  className={cn(
+                    "w-full text-left p-4 rounded-xl border transition-all duration-200 flex items-center justify-between",
+                    activeDomain === idx
+                      ? "bg-white dark:bg-[#182030] border-[#f15e1c] shadow-md ring-1 ring-[#f15e1c]"
+                      : "bg-gray-100/70 dark:bg-[#121824] border-gray-200 dark:border-gray-800 hover:bg-white dark:hover:bg-[#161e2e]"
+                  )}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-gray-100 dark:bg-[#0b0f17]">
+                      {area.icon}
+                    </div>
+                    <div>
+                      <span className="text-xs font-mono font-bold text-[#f15e1c] block">
+                        {area.num}
+                      </span>
+                      <span className="text-sm font-bold text-[#1b2823] dark:text-[#ffffff]">
+                        {area.title}
+                      </span>
+                    </div>
+                  </div>
+                  <ArrowRight className={cn("w-4 h-4 transition-transform", activeDomain === idx ? "text-[#f15e1c] translate-x-1" : "text-gray-400")} />
+                </button>
+              ))}
+            </div>
+
+            {/* Interactive Domain Detail Viewer */}
+            <div className="lg:col-span-7 xl:col-span-8 bg-white dark:bg-[#121824] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 shadow-lg">
+              <div className="flex items-center justify-between pb-6 border-b border-gray-200 dark:border-gray-800">
+                <div className="flex items-center gap-3">
+                  <div className="p-3 rounded-xl bg-[#f15e1c]/10 text-[#f15e1c]">
+                    {diagnosticAreas[activeDomain].icon}
+                  </div>
+                  <div>
+                    <span className="text-xs font-mono font-bold text-[#f15e1c]">
+                      AREA {diagnosticAreas[activeDomain].num}
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-bold text-[#1b2823] dark:text-[#ffffff]">
+                      {diagnosticAreas[activeDomain].title}
+                    </h3>
+                  </div>
+                </div>
+                <Badge variant="subtle" className="text-xs bg-[#2e936f]/10 text-[#2e936f]">
+                  Diagnostic Focus
+                </Badge>
+              </div>
+
+              <div className="py-6 space-y-4">
+                <p className="text-sm font-semibold text-[#f15e1c] font-mono">
+                  {diagnosticAreas[activeDomain].focus}
+                </p>
+                <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                  {diagnosticAreas[activeDomain].desc}
+                </p>
+
+                <div className="pt-4 border-t border-gray-200 dark:border-gray-800">
+                  <span className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 block mb-3">
+                    Key Examination Points
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                    {diagnosticAreas[activeDomain].details.map((item, i) => (
+                      <div key={i} className="flex items-center gap-2 text-xs font-medium text-[#1b2823] dark:text-[#f3f4f6] p-2.5 rounded-lg bg-gray-50 dark:bg-[#182030] border border-gray-100 dark:border-gray-800">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Secondary Diagnostic Graphic Panel */}
+                  <div className="mt-4 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-black/5 dark:bg-black/20 group">
+                    <Image
+                      src="/images/audit-and-improvement-secondary.png"
+                      alt="Arav Innovations Process, Control & Technology Examination Scope"
+                      width={900}
+                      height={500}
+                      className="w-full h-auto object-cover rounded-xl transition-transform duration-500 group-hover:scale-[1.01]"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <DiagnosticScanTransition />
+
+      {/* =====================================================================
+          7. NEW INTERACTIVE ELEMENT — FRICTION MAP
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+          
+          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5">
+              INTERACTIVE DIAGNOSTIC MAP
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Where Does the Friction Live?
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Click or select inspection points across an illustrative business workflow to reveal common operational friction points.
+            </p>
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 italic">
+              Illustrative operational workflow showing sample diagnostic inspection points.
+            </p>
+          </AnimatedSection>
+
+          {/* Workflow Track */}
+          <div className="bg-gradient-to-b from-gray-50 to-white dark:from-[#121824] dark:to-[#0b0f17] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg">
+            
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-6 pb-6 sm:pb-8">
+              {frictionPoints.map((fp, idx) => (
+                <button
+                  key={fp.id}
+                  onClick={() => setActiveFrictionPoint(idx)}
+                  className={cn(
+                    "p-4 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between relative group",
+                    activeFrictionPoint === idx
+                      ? "bg-white dark:bg-[#182030] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/30"
+                      : "bg-gray-100/70 dark:bg-[#161e2e] border-gray-200 dark:border-gray-800 hover:border-gray-400"
+                  )}
+                >
+                  <div className="flex items-center justify-between w-full mb-2">
+                    <span className="text-[10px] font-mono font-bold text-gray-500 dark:text-gray-400">
+                      {fp.stage}
+                    </span>
+                    <div className="p-1 rounded bg-white dark:bg-[#0b0f17]">
+                      {fp.icon}
+                    </div>
+                  </div>
+                  <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
+                    {fp.label}
+                  </span>
+                  <span className="text-[10px] text-[#f15e1c] font-semibold mt-1 block">
+                    Inspect →
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {/* Active Friction Explanation Card */}
+            <div className="p-6 rounded-xl bg-white dark:bg-[#182030] border border-gray-200 dark:border-gray-800 flex flex-col sm:flex-row items-start gap-4">
+              <div className="p-3 rounded-xl bg-[#f15e1c]/10 text-[#f15e1c] shrink-0">
+                {frictionPoints[activeFrictionPoint].icon}
+              </div>
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-mono font-bold text-[#f15e1c]">
+                    INSPECTION POINT: {frictionPoints[activeFrictionPoint].label}
+                  </span>
+                  <Badge variant="subtle" className="text-[10px] bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+                    {frictionPoints[activeFrictionPoint].frictionType}
+                  </Badge>
+                </div>
+                <h4 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff]">
+                  {frictionPoints[activeFrictionPoint].frictionType}
+                </h4>
+                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                  {frictionPoints[activeFrictionPoint].description}
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <DiagnosticScanTransition />
+
+      {/* =====================================================================
+          8. ROOT-CAUSE ANALYSIS
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/40 dark:bg-[#0d121c]/40 border-b border-gray-100 dark:border-gray-800/60">
+        <div className="w-full max-w-4xl mx-auto px-4 sm:px-6">
+          
+          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+            <Badge variant="outline" className="mb-3 border-[#2e936f]/40 text-[#2e936f] bg-[#2e936f]/5">
+              DIAGNOSTIC DEPTH
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Don't Fix the Symptom. Find the Cause.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Surface problems are usually symptoms of deeper process, control, or design gaps. We trace issues layer by layer to uncover true root causes.
+            </p>
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 italic">
+              Illustrative diagnostic breakdown showing root cause isolation sequence.
+            </p>
+          </AnimatedSection>
+
+          {/* Animated Layered Visual Breakdown */}
+          <div className="space-y-3 sm:space-y-4">
+            {rootCauseLayers.map((layer, idx) => (
+              <div
+                key={layer.level}
+                onClick={() => setActiveRootLayer(idx)}
+                className={cn(
+                  "cursor-pointer p-5 rounded-xl transition-all duration-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border",
+                  layer.color,
+                  activeRootLayer === idx
+                    ? "shadow-lg scale-101 ring-1 ring-gray-400 dark:ring-gray-600"
+                    : "opacity-85 hover:opacity-100"
+                )}
+              >
+                <div className="flex items-center gap-4">
+                  <div className="p-2 rounded-lg bg-white dark:bg-[#182030] shadow-xs shrink-0">
+                    {layer.icon}
+                  </div>
+                  <div>
+                    <span className="text-xs font-mono font-bold text-gray-500 dark:text-gray-400 block">
+                      {layer.level}: {layer.label}
+                    </span>
+                    <h3 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff]">
+                      {layer.example}
+                    </h3>
+                  </div>
+                </div>
+
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 sm:max-w-md text-left sm:text-right">
+                  {layer.detail}
+                </p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      <DiagnosticScanTransition />
+
+      {/* =====================================================================
+          9. GLOBAL AUDIT APPROACH
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+          
+          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#fab60a]/40 text-[#fab60a] bg-[#fab60a]/5">
+              AUDIT METHODOLOGY
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              An Approach Built Around Evidence.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Our audit approach applies internationally recognized principles to ensure findings are objective, thorough, and practical.
+            </p>
+            <div className="flex flex-wrap justify-center gap-3 pt-4">
+              <span className="text-xs px-3 py-1 rounded-full bg-gray-100 dark:bg-[#182030] text-gray-700 dark:text-gray-300 font-semibold border border-gray-200 dark:border-gray-800">
+                IIA Global Internal Audit Standards Alignment
+              </span>
+              <span className="text-xs px-3 py-1 rounded-full bg-gray-100 dark:bg-[#182030] text-gray-700 dark:text-gray-300 font-semibold border border-gray-200 dark:border-gray-800">
+                ISO 19011 Auditing Principles
+              </span>
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {displayPosts.map((post, idx) => (
-              <AnimatedSection key={post.slug} delay={idx * 0.08}>
-                <TiltCard maxTilt={5} scale={1.01} className="h-full">
-                  <div className="h-full p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#f15e1c] hover:shadow-xl transition-all duration-300 flex flex-col justify-between text-left space-y-4 group">
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between text-[10px] font-mono font-bold text-[#f15e1c]">
-                        <span className="uppercase tracking-wider">{post.category}</span>
-                        <span>{post.publishedAt || post.dateFormatted}</span>
-                      </div>
-                      <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors line-clamp-2">
-                        {post.title}
-                      </h3>
-                      <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed line-clamp-3 font-medium">
-                        {post.summary}
-                      </p>
-                    </div>
-
-                    <div className="pt-3 border-t border-[#f7d7b0] dark:border-[#1a1a1a]">
-                      <Link
-                        href={`/insights/${post.slug}`}
-                        className="inline-flex items-center gap-1 text-xs font-mono font-bold text-[#f15e1c] group-hover:underline"
-                      >
-                        <span>Read Article</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                      </Link>
-                    </div>
+          {/* 6-Stage Methodology Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {methodologyStages.map((stage) => (
+              <div
+                key={stage.step}
+                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#121824] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/40 transition-all duration-200 shadow-sm flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-xs font-mono font-bold text-[#f15e1c] px-2 py-0.5 rounded bg-[#f15e1c]/10">
+                      STAGE {stage.step}
+                    </span>
+                    <Badge variant="subtle" className="text-[10px] bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
+                      Standardized Step
+                    </Badge>
                   </div>
-                </TiltCard>
-              </AnimatedSection>
+                  <h3 className="text-lg sm:text-xl font-bold text-[#1b2823] dark:text-[#ffffff] mb-2">
+                    {stage.name}
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                    {stage.desc}
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between text-xs">
+                  <span className="text-gray-400 font-mono">Deliverable:</span>
+                  <span className="font-semibold text-[#2e936f]">{stage.outcome}</span>
+                </div>
+              </div>
             ))}
+          </div>
+
+        </div>
+      </section>
+
+      <DiagnosticScanTransition />
+
+      {/* =====================================================================
+          10. PRIORITY MATRIX
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#0e131f]/50 border-b border-gray-100 dark:border-gray-800/60">
+        <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+          
+          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5">
+              ACTION PRIORITIZATION
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Not Every Finding Needs the Same Response.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              We categorize findings on an Impact vs. Effort matrix to ensure executive focus is directed toward high-value quick wins and essential strategic improvements.
+            </p>
+          </AnimatedSection>
+
+          {/* Clean Interactive 2x2 Matrix */}
+          <div className="bg-gradient-to-b from-gray-50 to-white dark:from-[#121824] dark:to-[#0b0f17] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg">
+            
+            <div className="text-center mb-6">
+              <span className="text-xs font-mono font-bold text-[#f15e1c] uppercase tracking-wider">
+                Y-AXIS: BUSINESS IMPACT (LOW → HIGH) • X-AXIS: IMPLEMENTATION EFFORT (LOW → HIGH)
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+              {priorityQuadrants.map((quad) => (
+                <div
+                  key={quad.id}
+                  onMouseEnter={() => setActiveMatrixQuadrant(quad.id)}
+                  className={cn(
+                    "p-6 sm:p-8 rounded-xl border-2 transition-all duration-200 cursor-pointer bg-white dark:bg-[#182030]",
+                    quad.border,
+                    activeMatrixQuadrant === quad.id ? "shadow-xl ring-2 ring-[#f15e1c]/20 scale-101" : "opacity-90 hover:opacity-100"
+                  )}
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <span className={cn("text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider", quad.badgeBg)}>
+                      {quad.title}
+                    </span>
+                    <span className="text-xs font-mono text-gray-400">
+                      {quad.position}
+                    </span>
+                  </div>
+                  <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                    {quad.desc}
+                  </p>
+                  <div className="p-3.5 rounded-lg bg-gray-50 dark:bg-[#0b0f17] border border-gray-100 dark:border-gray-800">
+                    <span className="text-[11px] font-semibold text-gray-400 block uppercase mb-1">Sample Finding:</span>
+                    <span className="text-xs sm:text-sm font-medium text-[#1b2823] dark:text-[#f3f4f6]">{quad.example}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* Laser Scan Beam Section Separator */}
       <DiagnosticScanTransition />
 
-      {/* =========================================================================
-          18. FREQUENTLY ASKED QUESTIONS (5 FAQS)
-          ========================================================================= */}
-      <section id="faq" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
-        <div className="max-w-4xl mx-auto space-y-10 text-left">
+      {/* =====================================================================
+          11. BEFORE -> AFTER
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
+        <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           
-          <AnimatedSection>
-            <div className="text-center space-y-3">
-              <Badge variant="secondary" size="md">
-                QUESTIONS &amp; ANSWERS
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                Frequently Asked Questions
-              </h2>
+          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#2e936f]/40 text-[#2e936f] bg-[#2e936f]/5">
+              OPERATIONAL TRANSFORMATION
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              From Findings to Better Ways of Working.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              See how evidence-based diagnostics replace operational uncertainty with structured clarity and defined ownership.
+            </p>
+          </AnimatedSection>
+
+          {/* Interactive Side-by-Side State Comparison */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            
+            {/* BEFORE CARD */}
+            <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-red-50/50 to-white dark:from-[#1a1214] dark:to-[#121824] border border-red-200 dark:border-red-900/40 shadow-sm space-y-4">
+              <div className="flex items-center gap-2.5">
+                <span className="w-3 h-3 rounded-full bg-red-500" />
+                <h3 className="text-xl font-bold text-red-700 dark:text-red-400">
+                  BEFORE ASSESSMENT
+                </h3>
+              </div>
+              <ul className="space-y-3 pt-2">
+                {[
+                  "Limited Visibility into actual workflow bottlenecks",
+                  "Manual Handoffs creating unnecessary delay and errors",
+                  "Unclear Ownership across overlapping department roles",
+                  "Process Friction requiring constant employee workarounds",
+                  "Reactive Decisions based on intuition rather than data",
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-3 text-sm sm:text-base text-gray-700 dark:text-gray-300">
+                    <AlertTriangle className="w-4 h-4 text-red-500 shrink-0 mt-1" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
+
+            {/* AFTER CARD */}
+            <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-emerald-50/50 to-white dark:from-[#0d1c17] dark:to-[#121824] border border-emerald-200 dark:border-emerald-900/40 shadow-sm space-y-4">
+              <div className="flex items-center gap-2.5">
+                <span className="w-3 h-3 rounded-full bg-[#2e936f]" />
+                <h3 className="text-xl font-bold text-[#2e936f]">
+                  AFTER IMPROVEMENT
+                </h3>
+              </div>
+              <ul className="space-y-3 pt-2">
+                {[
+                  "Clearer Processes mapped end-to-end with verified baselines",
+                  "Defined Ownership with explicit RACI governance roles",
+                  "Better Visibility across system dependencies and SLA metrics",
+                  "Prioritized Actions focused on high-value quick wins",
+                  "Continuous Improvement embedded into operating rhythms",
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-3 text-sm sm:text-base text-gray-700 dark:text-gray-300">
+                    <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0 mt-1" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <DiagnosticScanTransition />
+
+      {/* =====================================================================
+          12. DELIVERABLES
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#0e131f]/50 border-b border-gray-100 dark:border-gray-800/60">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+          
+          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#fab60a]/40 text-[#fab60a] bg-[#fab60a]/5">
+              ENGAGEMENT OUTPUTS
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              What You Take Away.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Every engagement delivers clear, objective artifacts designed for executive decision-making and team execution.
+            </p>
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 italic">
+              Engagement deliverables are tailored to project scope and may include:
+            </p>
+          </AnimatedSection>
+
+          {/* Clean Editorial Deliverables List */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {deliverables.map((del, i) => (
+              <div
+                key={i}
+                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#121824] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/40 transition-all duration-200 shadow-sm"
+              >
+                <span className="text-xs font-mono font-bold text-[#f15e1c] block mb-2">
+                  DELIVERABLE 0{i + 1}
+                </span>
+                <h3 className="text-lg sm:text-xl font-bold text-[#1b2823] dark:text-[#ffffff] mb-2">
+                  {del.title}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                  {del.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      <DiagnosticScanTransition />
+
+      {/* =====================================================================
+          13. CONTINUOUS IMPROVEMENT
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
+        <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+          
+          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#2e936f]/40 text-[#2e936f] bg-[#2e936f]/5">
+              OPERATIONAL RHYTHM
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Improvement Is a Cycle, Not a Report.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              The value of an assessment increases when findings lead to action, action is reviewed, and lessons become part of how the organization operates.
+            </p>
+          </AnimatedSection>
+
+          {/* Unique Circular Diagnostic Cycle: SEE -> DECIDE -> CHANGE -> CHECK -> LEARN -> REPEAT */}
+          <div className="bg-gradient-to-b from-gray-50 to-white dark:from-[#121824] dark:to-[#0b0f17] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 lg:p-12 shadow-lg">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-6 text-center">
+              {[
+                { title: "SEE", desc: "Observe current state & evidence", icon: <Eye className="w-5 h-5" /> },
+                { title: "DECIDE", desc: "Prioritize high-impact changes", icon: <SlidersHorizontal className="w-5 h-5" /> },
+                { title: "CHANGE", desc: "Execute agreed action plan", icon: <Wrench className="w-5 h-5" /> },
+                { title: "CHECK", desc: "Validate progress & metrics", icon: <CheckCircle2 className="w-5 h-5" /> },
+                { title: "LEARN", desc: "Integrate operating lessons", icon: <BookOpen className="w-5 h-5" /> },
+                { title: "REPEAT", desc: "Maintain continuous cycle", icon: <RotateCw className="w-5 h-5" /> },
+              ].map((cycleStep, i) => (
+                <div
+                  key={cycleStep.title}
+                  onClick={() => setActiveLoopStep(i)}
+                  className={cn(
+                    "cursor-pointer p-4 rounded-xl border transition-all duration-200 flex flex-col items-center justify-between h-40",
+                    activeLoopStep === i
+                      ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-lg scale-105"
+                      : "bg-white dark:bg-[#182030] text-[#1b2823] dark:text-[#ffffff] border-gray-200 dark:border-gray-800 hover:border-gray-400"
+                  )}
+                >
+                  <div className={cn("p-2 rounded-lg", activeLoopStep === i ? "bg-white/20 text-white" : "bg-gray-100 dark:bg-[#0b0f17] text-[#f15e1c]")}>
+                    {cycleStep.icon}
+                  </div>
+                  <div>
+                    <span className="text-xs font-mono font-bold block opacity-80">0{i + 1}</span>
+                    <span className="text-sm font-bold block">{cycleStep.title}</span>
+                  </div>
+                  <p className={cn("text-[10px] leading-tight", activeLoopStep === i ? "text-white/90" : "text-gray-500 dark:text-gray-400")}>
+                    {cycleStep.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <DiagnosticScanTransition />
+
+      {/* =====================================================================
+          14. BUSINESS OUTCOMES
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#0e131f]/50 border-b border-gray-100 dark:border-gray-800/60">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+          
+          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5">
+              VALUE DELIVERED
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              What Better Visibility Enables.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Evidence-based diagnostics give leadership the confidence to act on facts rather than assumptions.
+            </p>
+          </AnimatedSection>
+
+          {/* 6 Qualitative Outcomes */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {businessOutcomes.map((out) => (
+              <div
+                key={out.title}
+                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#121824] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/40 transition-all duration-200 shadow-sm flex items-start gap-4"
+              >
+                <div className="p-3 rounded-xl bg-gray-50 dark:bg-[#182030] shrink-0">
+                  {out.icon}
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-[#1b2823] dark:text-[#ffffff]">
+                    {out.title}
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                    {out.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      <DiagnosticScanTransition />
+
+      {/* =====================================================================
+          15. CASE STUDIES / SCOPE: WHAT WE CAN HELP UNCOVER
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+          
+          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#fab60a]/40 text-[#fab60a] bg-[#fab60a]/5">
+              DIAGNOSTIC SCOPE
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              What We Can Help Uncover.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Our diagnostics help leaders identify hidden operational risks, workflow drag, and system reliability gaps.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {scopeHelpUncover.map((item, idx) => (
+              <div
+                key={idx}
+                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#121824] border border-gray-200 dark:border-gray-800 hover:border-[#2e936f]/40 transition-all duration-200 shadow-sm space-y-2"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Search className="w-4 h-4 text-[#2e936f]" />
+                  <h3 className="text-base sm:text-lg font-bold text-[#1b2823] dark:text-[#ffffff]">
+                    {item.title}
+                  </h3>
+                </div>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      <DiagnosticScanTransition />
+
+      {/* =====================================================================
+          16. INSIGHTS INTEGRATION
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#0e131f]/50 border-b border-gray-100 dark:border-gray-800/60">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+          
+          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5">
+              KNOWLEDGE BASE
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Audit & Improvement Insights.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Read published analysis on operational audits, process optimization, and technology governance.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            {articles.map((post) => (
+              <Link key={post.slug} href={`/insights/${post.slug}`} className="group block">
+                <div className="h-full p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#121824] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c] transition-all duration-200 shadow-sm flex flex-col justify-between">
+                  <div>
+                    <Badge variant="subtle" className="mb-3 text-[10px] bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+                      {post.category}
+                    </Badge>
+                    <h3 className="text-base sm:text-lg font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="mt-2 text-xs sm:text-sm text-gray-600 dark:text-gray-300 line-clamp-3 leading-relaxed">
+                      {post.summary}
+                    </p>
+                  </div>
+                  <div className="pt-4 mt-4 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between text-xs font-semibold text-[#f15e1c]">
+                    <span>Read Article</span>
+                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <Link href="/insights">
+              <Button3D variant="secondary" size="md">
+                Explore All Insights
+              </Button3D>
+            </Link>
+          </div>
+
+        </div>
+      </section>
+
+      <DiagnosticScanTransition />
+
+      {/* =====================================================================
+          17. FAQ SECTION
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
+        <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+            <Badge variant="outline" className="mb-3 border-[#2e936f]/40 text-[#2e936f] bg-[#2e936f]/5">
+              QUESTIONS & ANSWERS
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Frequently Asked Questions.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Concise answers regarding scope, methodology, prioritization, and post-audit support.
+            </p>
           </AnimatedSection>
 
           <div className="space-y-4">
-            {faqList.map((faq, idx) => {
-              const isOpen = openFaqIdx === idx;
+            {service.faqs.map((faq, index) => {
+              const isOpen = openFaq === index;
               return (
-                <AnimatedSection key={idx} delay={idx * 0.05}>
-                  <motion.div
-                    whileHover={{ scale: 1.005 }}
-                    className="rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/60 overflow-hidden transition-all shadow-xs"
+                <div
+                  key={index}
+                  className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#121824] overflow-hidden transition-all"
+                >
+                  <button
+                    onClick={() => setOpenFaq(isOpen ? null : index)}
+                    className="w-full text-left p-5 flex items-center justify-between font-bold text-sm sm:text-base text-[#1b2823] dark:text-[#ffffff]"
                   >
-                    <button
-                      type="button"
-                      onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
-                      className="w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer group select-none"
-                    >
-                      <span className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
-                        {faq.q}
-                      </span>
-                      <ChevronDown
-                        className={cn(
-                          "w-5 h-5 text-[#f15e1c] transition-transform duration-300 shrink-0",
-                          isOpen && "rotate-180"
-                        )}
-                      />
-                    </button>
-                    <AnimatePresence>
-                      {isOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.3, ease: "easeInOut" }}
-                          className="px-6 pb-6 text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium border-t border-[#f7d7b0]/40 dark:border-[#1a1a1a] pt-4"
-                        >
-                          {faq.a}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                </AnimatedSection>
+                    <span>{faq.question}</span>
+                    <ChevronDown className={cn("w-5 h-5 transition-transform duration-200 text-[#f15e1c]", isOpen && "rotate-180")} />
+                  </button>
+
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                      >
+                        <div className="p-5 pt-0 text-sm text-gray-600 dark:text-gray-300 border-t border-gray-100 dark:border-gray-800/60 leading-relaxed">
+                          {faq.answer}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               );
             })}
           </div>
+
         </div>
       </section>
 
-      {/* Laser Scan Beam Section Separator */}
       <DiagnosticScanTransition />
 
-      {/* =========================================================================
-          SERVICE ECOSYSTEM LINKS
-          ========================================================================= */}
-      <section className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1536px] mx-auto space-y-8 text-left">
-          
-          <AnimatedSection>
-            <div className="space-y-2">
-              <span className="text-xs font-mono font-bold text-[#f15e1c] uppercase tracking-wider block">
-                ARAV SERVICE ECOSYSTEM
-              </span>
-              <h3 className="text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                Connected Enterprise Capabilities
-              </h3>
-            </div>
-          </AnimatedSection>
+      {/* =====================================================================
+          18. FINAL CTA
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+          <div className="relative rounded-3xl p-8 sm:p-12 lg:p-16 bg-gradient-to-r from-[#1b2823] via-[#121824] to-[#0b0f17] text-white border border-gray-800 shadow-2xl overflow-hidden text-center space-y-6">
+            
+            {/* Subtle Background Glow */}
+            <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#f15e1c]/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-[#2e936f]/20 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {internalServices.map((item, idx) => (
-              <AnimatedSection key={idx} delay={idx * 0.04}>
-                <motion.div whileHover={{ y: -4, scale: 1.01 }} transition={{ duration: 0.2 }}>
-                  <Link
-                    href={item.href}
-                    className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-110 transition-all">
-                        {item.icon}
-                      </div>
-                      <span className="text-xs font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
-                        {item.name}
-                      </span>
-                    </div>
-                    <ArrowRight className="w-4 h-4 text-[#f15e1c] group-hover:translate-x-1.5 transition-transform shrink-0" />
-                  </Link>
-                </motion.div>
-              </AnimatedSection>
-            ))}
+            <Badge variant="outline" className="border-[#f15e1c] text-[#f15e1c] bg-[#f15e1c]/10 px-3 py-1 font-semibold tracking-wider text-xs">
+              TAKE THE NEXT STEP
+            </Badge>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight max-w-3xl mx-auto leading-tight">
+              Know What Needs to Change Before You Change It.
+            </h2>
+
+            <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              Start with evidence, understand the root causes and turn your findings into a practical improvement path.
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+              <Link href="/contact">
+                <Button3D variant="primary" size="lg" className="flex items-center gap-2 font-semibold">
+                  Start an Assessment
+                  <ArrowRight className="w-4 h-4" />
+                </Button3D>
+              </Link>
+              <Link href="/contact">
+                <Button3D variant="secondary" size="lg" className="flex items-center gap-2 font-medium">
+                  Talk to an Advisor
+                </Button3D>
+              </Link>
+            </div>
+
           </div>
         </div>
       </section>
-
-      {/* Laser Scan Beam Section Separator */}
-      <DiagnosticScanTransition />
-
-      {/* =========================================================================
-          19. FINAL CTA — KNOW WHERE THE FRICTION IS BEFORE YOU TRY TO FIX IT
-          ========================================================================= */}
-      <section id="contact" className="relative py-20 px-4 sm:px-6 lg:px-12">
-        <AnimatedSection>
-          <div className="max-w-5xl mx-auto rounded-[3rem] bg-gradient-to-br from-[#f15e1c] via-[#d84e12] to-[#b33d0b] text-white p-10 sm:p-16 border-2 border-[#fab60a] shadow-2xl space-y-8 text-center relative overflow-hidden">
-            <div className="relative z-10 max-w-3xl mx-auto space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 border border-white/40 text-xs font-mono font-bold text-white">
-                <Search className="w-3.5 h-3.5 text-[#ffec69]" />
-                <span>EVIDENCE-BASED BUSINESS DIAGNOSTICS</span>
-              </div>
-
-              <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-white leading-tight">
-                Know Where the Friction Is Before You Try to Fix It.
-              </h2>
-
-              <p className="text-sm sm:text-base font-medium text-white/90 leading-relaxed">
-                Start with evidence, understand the root causes and turn your findings into a practical path for improvement.
-              </p>
-            </div>
-
-            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-              <Link href="/contact">
-                <MagneticButton>
-                  <Button3D
-                    variant="primary"
-                    size="lg"
-                    rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1.5" />}
-                    className="w-full sm:w-auto justify-center bg-white text-[#f15e1c] hover:bg-[#f7d7b0] hover:-translate-y-0.5 transition-all duration-300 font-bold"
-                  >
-                    Start an Audit
-                  </Button3D>
-                </MagneticButton>
-              </Link>
-
-              <Link href="/contact">
-                <MagneticButton>
-                  <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center text-white border-white/60 hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-300">
-                    Discuss an Improvement Project
-                  </Button3D>
-                </MagneticButton>
-              </Link>
-            </div>
-
-            <div className="relative z-10 pt-6 border-t border-white/20 flex flex-wrap items-center justify-center gap-6 text-xs text-white/90 font-medium">
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Process, Tech &amp; Operational Audits
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> 2-Axis Impact &amp; Effort Priority Matrix
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Actionable Now / Next / Later Roadmap
-              </span>
-            </div>
-          </div>
-        </AnimatedSection>
-      </section>
-
     </div>
   );
 }
-
-export default AuditInteractivePage;
