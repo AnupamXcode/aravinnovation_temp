@@ -131,7 +131,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
 
   // Render Immersive Audit & Improvement Interactive Page for Audit Slugs
   if (service.slug === "audit-improvement" || service.slug === "audit-and-improvement" || slug === "audit" || slug === "audit-improvement" || slug === "audit-and-improvement") {
-    return <AuditInteractivePage service={service} />;
+    return <AuditInteractivePage service={service} relatedPosts={relatedPosts} />;
   }
 
   // Render Immersive Training & Staff Augmentation Interactive Page for Training & Staff Slugs
