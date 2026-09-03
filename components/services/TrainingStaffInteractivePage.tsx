@@ -7,65 +7,60 @@ import {
   AnimatePresence,
   useReducedMotion,
   useInView,
-  useScroll,
-  useTransform,
-  useSpring,
 } from "framer-motion";
 import {
   Users,
   GraduationCap,
-  UserCheck,
-  Award,
   ArrowRight,
-  Sparkles,
   CheckCircle2,
-  Quote,
-  Globe2,
-  Zap,
-  Layers,
-  HeartHandshake,
-  Check,
   Code,
   ShieldCheck,
   Cpu,
   RefreshCw,
   UserPlus,
   Target,
-  Clock,
-  Activity,
   ArrowUpRight,
+  BookOpen,
+  ChevronDown,
+  Search,
+  Share2,
+  Workflow,
+  Zap,
+  Building2,
+  Cloud,
+  Database,
+  Layout,
 } from "lucide-react";
 import { Service } from "@/data/services";
-import { caseStudiesData } from "@/data/case-studies";
-import { testimonialsData } from "@/data/testimonials";
+import { BlogPost, blogPostsData } from "@/data/insights";
 import { Button3D } from "@/components/ui/button-3d";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
 import { TiltCard } from "@/components/motion/TiltCard";
-import { MagneticButton } from "@/components/motion/MagneticButton";
 import { cn } from "@/lib/utils";
 
 interface TrainingStaffPageProps {
   service: Service;
+  relatedPosts?: BlogPost[];
 }
 
 // -----------------------------------------------------------------------------
-// 1. System Scan Transition Line (Subtle sweeping scan line between sections)
+// System Scan Transition (Brand scan line)
 // -----------------------------------------------------------------------------
-function SystemScanTransition() {
+function CapabilityScanTransition() {
   const ref = React.useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-20px" });
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <div ref={ref} className="relative w-full h-px my-4 overflow-hidden pointer-events-none select-none">
-      <div className="w-full h-full bg-[#f7d7b0]/30 dark:bg-[#1a1a1a]" />
+    <div ref={ref} className="relative w-full h-px my-6 overflow-hidden pointer-events-none select-none">
+      <div className="w-full h-full bg-[#F7D7B0]" />
       {!shouldReduceMotion && (
         <motion.div
           initial={{ x: "-100%" }}
           animate={isInView ? { x: "100%" } : {}}
           transition={{ duration: 1.4, ease: "easeInOut" }}
-          className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-transparent via-[#f15e1c] to-transparent shadow-[0_0_8px_#f15e1c]"
+          className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-transparent via-[#F15E1C] to-transparent shadow-[0_0_8px_#F15E1C]"
         />
       )}
     </div>
@@ -73,1204 +68,1380 @@ function SystemScanTransition() {
 }
 
 // -----------------------------------------------------------------------------
-// 2. Hero Team Assembly Background (Human Capability Engine)
+// Interactive Capability Map Data (Signature Visual)
 // -----------------------------------------------------------------------------
-function TeamAssemblyBackground() {
-  const shouldReduceMotion = useReducedMotion();
-
-  if (shouldReduceMotion) return null;
-
-  return (
-    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-30 dark:opacity-25 select-none">
-      <svg className="w-full h-full" viewBox="0 0 1200 600" fill="none">
-        <defs>
-          <linearGradient id="ts-hero-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#f15e1c" stopOpacity="0.8" />
-            <stop offset="50%" stopColor="#2e936f" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="#fab60a" stopOpacity="0.7" />
-          </linearGradient>
-        </defs>
-
-        {/* Abstract Team Node Network */}
-        <circle cx="600" cy="180" r="28" fill="#f15e1c" fillOpacity="0.15" stroke="#f15e1c" strokeWidth="1.5" />
-        <circle cx="420" cy="320" r="24" fill="#2e936f" fillOpacity="0.15" stroke="#2e936f" strokeWidth="1.5" />
-        <circle cx="780" cy="320" r="24" fill="#fab60a" fillOpacity="0.15" stroke="#fab60a" strokeWidth="1.5" />
-        <circle cx="320" cy="460" r="20" fill="#f15e1c" fillOpacity="0.15" stroke="#f15e1c" strokeWidth="1.5" />
-        <circle cx="520" cy="460" r="20" fill="#2e936f" fillOpacity="0.15" stroke="#2e936f" strokeWidth="1.5" />
-        <circle cx="680" cy="460" r="20" fill="#fab60a" fillOpacity="0.15" stroke="#fab60a" strokeWidth="1.5" />
-        <circle cx="880" cy="460" r="20" fill="#2e936f" fillOpacity="0.15" stroke="#2e936f" strokeWidth="1.5" />
-
-        {/* Interconnecting Connection Lines */}
-        <line x1="600" y1="208" x2="420" y2="296" stroke="#f15e1c" strokeWidth="1.5" strokeDasharray="4 4" />
-        <line x1="600" y1="208" x2="780" y2="296" stroke="#fab60a" strokeWidth="1.5" strokeDasharray="4 4" />
-        <line x1="420" y1="344" x2="320" y2="440" stroke="#2e936f" strokeWidth="1.5" />
-        <line x1="420" y1="344" x2="520" y2="440" stroke="#2e936f" strokeWidth="1.5" />
-        <line x1="780" y1="344" x2="680" y2="440" stroke="#fab60a" strokeWidth="1.5" />
-        <line x1="780" y1="344" x2="880" y2="440" stroke="#fab60a" strokeWidth="1.5" />
-
-        {/* Node Role Badges */}
-        <g transform="translate(560, 174)">
-          <text x="0" y="12" fill="#f15e1c" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">LEAD</text>
-        </g>
-        <g transform="translate(420, 314)">
-          <text x="0" y="12" fill="#2e936f" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">DEV</text>
-        </g>
-        <g transform="translate(780, 314)">
-          <text x="0" y="12" fill="#fab60a" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">ARCH</text>
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-// -----------------------------------------------------------------------------
-// 3. Metric Counter Number Component (Viewport Ease-Out Count-Up)
-// -----------------------------------------------------------------------------
-function CounterNumber({
-  value,
-  prefix = "",
-  suffix = "",
-  decimals = 0,
-}: {
-  value: number;
-  prefix?: string;
-  suffix?: string;
-  decimals?: number;
-}) {
-  const ref = React.useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-20px" });
-  const shouldReduceMotion = useReducedMotion();
-  const [displayValue, setDisplayValue] = React.useState<string>(
-    shouldReduceMotion ? value.toFixed(decimals) : (0).toFixed(decimals)
-  );
-
-  React.useEffect(() => {
-    if (!isInView || shouldReduceMotion) {
-      setDisplayValue(value.toFixed(decimals));
-      return;
-    }
-
-    let startTimestamp: number | null = null;
-    const duration = 1600;
-
-    const step = (timestamp: number) => {
-      if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-      const easeProgress = 1 - Math.pow(1 - progress, 3);
-      const current = easeProgress * value;
-
-      setDisplayValue(current.toFixed(decimals));
-
-      if (progress < 1) {
-        window.requestAnimationFrame(step);
-      }
-    };
-
-    const animFrame = window.requestAnimationFrame(step);
-    return () => window.cancelAnimationFrame(animFrame);
-  }, [isInView, value, decimals, shouldReduceMotion]);
-
-  return (
-    <span ref={ref} className="tabular-nums font-mono font-black">
-      {prefix}
-      {displayValue}
-      {suffix}
-    </span>
-  );
-}
-
-// -----------------------------------------------------------------------------
-// Data Collections
-// -----------------------------------------------------------------------------
-const trainingStaffSolutionsData = [
+const capabilityMapNodes = [
   {
-    numStr: "01",
-    title: "Customized Training Programs",
-    subtitle: "Specialized Upskilling & Capability Acceleration",
-    description:
-      "We develop and deliver specialized training programs that address your team’s unique needs in areas like compliance, governance, cloud architecture, and technical skills.",
-    icon: <GraduationCap className="w-6 h-6 text-[#f15e1c]" />,
-    deliverables: [
-      "Custom Enterprise Tech Stack & Cloud Curriculum",
-      "Hands-On Interactive Workshops & Code Labs",
-      "Governance & Compliance Upskilling Seminars",
-      "Role-Based Skill Certification & Verification",
-    ],
-    metric: "95%",
-    metricLabel: "Team Skill Mastery Acceleration",
-    stageName: "CAPABILITY BUILDING",
-  },
-  {
-    numStr: "02",
-    title: "Staff Augmentation & Role Recruitment",
-    subtitle: "Pre-Vetted Senior Developers & Tech Specialists",
-    description:
-      "Arav Innovations provides skilled professionals to augment your existing teams, ensuring you have the right expertise for each project without recruitment friction.",
-    icon: <UserCheck className="w-6 h-6 text-[#f15e1c]" />,
-    deliverables: [
-      "Pre-Vetted Full-Stack & Cloud Engineers",
-      "Role-Specific Skill & Cultural Matchmaking",
-      "Scalable Pod Augmentation (1 to 20+ Engineers)",
-      "Zero-Friction Contract & Ownership Transition",
-    ],
-    metric: "48 hours",
-    metricLabel: "Talent Matching & Deployment SLA",
-    stageName: "TALENT MATCHING",
-  },
-  {
-    numStr: "03",
-    title: "Onboarding and Integration Support",
-    subtitle: "Seamless Team Assimilation & Ramp-Up",
-    description:
-      "We make the onboarding process seamless, with a structured integration plan to help new team members quickly adapt to your work culture, tools, and codebases.",
-    icon: <HeartHandshake className="w-6 h-6 text-[#f15e1c]" />,
-    deliverables: [
-      "Structured 14-Day Team Assimilation Protocol",
-      "Tooling, CI/CD & Repo Onboarding Checklists",
-      "Cultural & Operational Alignment Sessions",
-      "Immediate Day-1 Productivity Enablement",
-    ],
-    metric: "Day-1",
-    metricLabel: "Productive Contribution Speed",
-    stageName: "TEAM INTEGRATION",
-  },
-  {
-    numStr: "04",
-    title: "Performance Management & Continuous Support",
-    subtitle: "KPI Tracking & Ongoing Talent Retention",
-    description:
-      "We help establish performance metrics and provide ongoing support to ensure augmented staff meets performance expectations and aligns with your organizational goals.",
-    icon: <Award className="w-6 h-6 text-[#f15e1c]" />,
-    deliverables: [
-      "Monthly Team KPI & Velocity Tracking",
-      "Bi-Weekly Retrospective & Feedback Loops",
-      "Ongoing Mentorship & Technical Guidance",
-      "100% Talent Retention & Substitution Guarantee",
-    ],
-    metric: "98%",
-    metricLabel: "Retention & Satisfaction Rate",
-    stageName: "CONTINUOUS SUPPORT",
-  },
-];
-
-const teamMaturityStages = [
-  { stage: "01", name: "ASSESS NEED", desc: "Role Requirements & Skill Gap Analysis" },
-  { stage: "02", name: "MATCH TALENT", desc: "Pre-Vetted Pod & Specialist Matchmaking" },
-  { stage: "03", name: "ONBOARD", desc: "Day-1 Zero-Downtime Integration" },
-  { stage: "04", name: "PERFORM", desc: "Sprint Delivery & Coordinated Execution" },
-  { stage: "05", name: "GROW TEAM", desc: "Continuous Upskilling & Capability Acceleration" },
-];
-
-const skillGapBars = [
-  { skill: "FRONTEND ENGINEERING", current: 70, required: 95, color: "bg-[#f15e1c]" },
-  { skill: "BACKEND ARCHITECTURE", current: 60, required: 90, color: "bg-[#2e936f]" },
-  { skill: "CLOUD & FINOPS", current: 45, required: 88, color: "bg-[#fab60a]" },
-  { skill: "SECURITY & COMPLIANCE", current: 40, required: 92, color: "bg-[#f15e1c]" },
-];
-
-const preVettedPodMembers = [
-  { role: "LEAD ARCHITECT", exp: "10+ Yrs", status: "READY", icon: <Cpu className="w-5 h-5 text-[#f15e1c]" /> },
-  { role: "SENIOR FULL-STACK", exp: "7+ Yrs", status: "READY", icon: <Code className="w-5 h-5 text-[#2e936f]" /> },
-  { role: "QA AUTOMATION", exp: "5+ Yrs", status: "READY", icon: <ShieldCheck className="w-5 h-5 text-[#fab60a]" /> },
-  { role: "DEVOPS ENGINEER", exp: "6+ Yrs", status: "READY", icon: <Zap className="w-5 h-5 text-[#2e936f]" /> },
-];
-
-const howWeWorkSteps = [
-  {
+    id: "goal",
     step: "01",
-    title: "Assess and Design",
-    subtitle: "Skill Gap Analysis & Staffing Blueprint",
-    description:
-      "We start by assessing your organization’s specific needs, whether for training or staffing. Our team designs a customized plan to address your unique requirements, setting a foundation for success.",
-    output: "Skill Gap Analysis & Staffing Blueprint",
+    label: "BUSINESS GOAL",
+    short: "Target Outcomes",
+    title: "Define Business & Project Objectives",
+    desc: "Every capability requirement begins with a clear business priority—whether scaling digital products, modernizing infrastructure, or launching new capabilities.",
+    icon: <Target className="w-5 h-5" />,
   },
   {
+    id: "need",
     step: "02",
-    title: "Deliver Tailored Training & Source Top Talent",
-    subtitle: "Curriculum Delivery & Talent Vetting",
-    description:
-      "We provide hands-on, specialized training sessions and recruit the right professionals to augment your team, ensuring alignment with your project and business objectives.",
-    output: "Curriculum Delivery & Talent Vetting",
+    label: "CAPABILITY NEED",
+    short: "Identify Skill Gaps",
+    title: "Isolate Skill & Capacity Gaps",
+    desc: "Assess whether the challenge requires strengthening existing team competencies, adding specialized role expertise, or expanding delivery throughput.",
+    icon: <Search className="w-5 h-5" />,
   },
   {
+    id: "skill",
     step: "03",
-    title: "Onboard and Integrate",
-    subtitle: "Zero-Downtime Team Assimilation",
-    description:
-      "Our onboarding process ensures seamless integration, with support to help new team members quickly adapt and start contributing effectively, reducing downtime and accelerating productivity.",
-    output: "Zero-Downtime Team Assimilation",
+    label: "SKILL / ROLE",
+    short: "Required Expertise",
+    title: "Specify Technical & Domain Roles",
+    desc: "Identify the exact technical disciplines, engineering levels, frameworks, and operating experience needed to fulfill the delivery requirements.",
+    icon: <Code className="w-5 h-5" />,
   },
   {
+    id: "model",
     step: "04",
-    title: "Monitor and Support",
-    subtitle: "Performance Tracking & Ongoing Mentorship",
-    description:
-      "Post-training or recruitment, we provide continuous support, monitoring performance and refining strategies to ensure ongoing alignment with your goals and high-quality results.",
-    output: "Performance Tracking & Ongoing Mentorship",
+    label: "TEAM MODEL",
+    short: "Select Model",
+    title: "Choose the Engagement Model",
+    desc: "Select structured training & upskilling for internal teams, specialist role placement, or extended delivery squad integration based on project scope.",
+    icon: <Users className="w-5 h-5" />,
+  },
+  {
+    id: "delivery",
+    step: "05",
+    label: "DELIVERY",
+    short: "Collaborative Work",
+    title: "Execute Within Shared Workflows",
+    desc: "Integrate capability seamlessly into active sprints, engineering practices, tools, and communication structures alongside your core team.",
+    icon: <Workflow className="w-5 h-5" />,
+  },
+  {
+    id: "transfer",
+    step: "06",
+    label: "KNOWLEDGE TRANSFER",
+    short: "Retain Capability",
+    title: "Anchor Skills Within Your Organization",
+    desc: "Ensure long-term value through documentation, pair working, mentorship, and operational handover so team capability grows permanently.",
+    icon: <Share2 className="w-5 h-5" />,
   },
 ];
 
-const continuousCapabilityLoopSteps = [
-  { id: "assess", name: "ASSESS", desc: "Role Requirements Audit" },
-  { id: "build", name: "BUILD", desc: "Tailored Training Workshops" },
-  { id: "match", name: "MATCH", desc: "Pre-Vetted Talent Matching" },
-  { id: "integrate", name: "INTEGRATE", desc: "Zero-Downtime Onboarding" },
-  { id: "perform", name: "PERFORM", desc: "Coordinated Sprint Delivery" },
-  { id: "support", name: "SUPPORT", desc: "Continuous Mentorship & Retention" },
+// -----------------------------------------------------------------------------
+// Training Offering Data (Build Capability)
+// -----------------------------------------------------------------------------
+const trainingCapabilities = [
+  {
+    num: "01",
+    title: "Technical Upskilling",
+    desc: "Modern development practices, cloud architecture, data pipelines, AI integration, and relevant engineering disciplines aligned with your technology stack.",
+    icon: <Code className="w-6 h-6 text-[#F15E1C]" />,
+    focus: "Development • Cloud • Data • AI Capabilities",
+  },
+  {
+    num: "02",
+    title: "Role-Based Training",
+    desc: "Targeted learning paths designed around specific responsibilities, engineering experience levels, and architectural standards within your team.",
+    icon: <GraduationCap className="w-6 h-6 text-[#2E936F]" />,
+    focus: "Role Alignment • Responsibilities • Skill Levels",
+  },
+  {
+    num: "03",
+    title: "Workshops & Hands-On Learning",
+    desc: "Practical sessions, guided technical labs, and interactive problem-solving exercises focused on real production scenarios rather than theory alone.",
+    icon: <BookOpen className="w-6 h-6 text-[#FAB60A]" />,
+    focus: "Practical Labs • Real Scenarios • Guided Exercises",
+  },
+  {
+    num: "04",
+    title: "Team Enablement",
+    desc: "Shared practices, code standards, CI/CD routines, and collaborative patterns that help engineering groups adopt new technologies smoothly.",
+    icon: <Users className="w-6 h-6 text-[#F15E1C]" />,
+    focus: "Shared Practices • Operating Standards • Tool Adoption",
+  },
+  {
+    num: "05",
+    title: "Knowledge Transfer",
+    desc: "Structured handover protocols, architectural documentation, and pair-programming sessions ensuring internal teams retain capability permanently.",
+    icon: <Share2 className="w-6 h-6 text-[#2E936F]" />,
+    focus: "Documentation • Handover • Long-Term Retention",
+  },
 ];
 
-const ctaWords = ["CAPABILITY", "AUGMENTATION", "INTEGRATION", "HIGH-PERFORMING", "SCALABLE"];
+// -----------------------------------------------------------------------------
+// Staff Augmentation Roles Data (Extend Capability)
+// -----------------------------------------------------------------------------
+const augmentationRoles = [
+  { title: "Software Engineering", desc: "Full-Stack, Frontend, Backend & Mobile Engineers", icon: <Code className="w-5 h-5 text-[#F15E1C]" /> },
+  { title: "Cloud & DevOps", desc: "Cloud Architects, CI/CD & Infrastructure Engineers", icon: <Cloud className="w-5 h-5 text-[#2E936F]" /> },
+  { title: "Data & Analytics", desc: "Data Engineers, Analytics Specialists & Pipeline Architects", icon: <Database className="w-5 h-5 text-[#FAB60A]" /> },
+  { title: "AI / ML", desc: "AI Integration Engineers & Applied Machine Learning Developers", icon: <Cpu className="w-5 h-5 text-[#F15E1C]" /> },
+  { title: "QA & Testing", desc: "Automation Engineers & Quality Assurance Specialists", icon: <ShieldCheck className="w-5 h-5 text-[#2E936F]" /> },
+  { title: "UI / UX Design", desc: "Product Designers, UX Researchers & System Designers", icon: <Layout className="w-5 h-5 text-[#FAB60A]" /> },
+  { title: "Project & Delivery Support", desc: "Technical Delivery Leads, Scrum Masters & Project Coordinators", icon: <Workflow className="w-5 h-5 text-[#F15E1C]" /> },
+  { title: "Technology Consulting", desc: "Solution Architects & Technical Strategy Advisors", icon: <Building2 className="w-5 h-5 text-[#2E936F]" /> },
+];
 
-export function TrainingStaffInteractivePage({ service }: TrainingStaffPageProps) {
-  const shouldReduceMotion = useReducedMotion();
-  const [activeSolutionIdx, setActiveSolutionIdx] = React.useState<number>(0);
-  const [activeMaturityStage, setActiveMaturityStage] = React.useState<number>(0);
-  const [activeWorkIdx, setActiveWorkIdx] = React.useState<number>(0);
-  const [currentWordIdx, setCurrentWordIdx] = React.useState<number>(0);
+// -----------------------------------------------------------------------------
+// Interactive Team Models Data
+// -----------------------------------------------------------------------------
+const teamModels = [
+  {
+    id: "specialist",
+    name: "SPECIALIST MODEL",
+    title: "Focused Expertise for Defined Initiatives",
+    tagline: "Bring in focused technical expertise to solve specific capability gaps or complex delivery hurdles.",
+    bestFor: "Initiatives requiring niche technical skills, architectural guidance, or short-term expert consulting.",
+    engagement: "Role-based or project-aligned engagement alongside internal teams.",
+    primaryValue: "Immediate access to specialized technical depth without long-term overhead.",
+    icon: <Cpu className="w-6 h-6" />,
+  },
+  {
+    id: "extended",
+    name: "EXTENDED TEAM MODEL",
+    title: "Complementary Capacity for Active Squads",
+    tagline: "Add experienced professionals directly into your existing engineering squads to boost delivery throughput.",
+    bestFor: "Teams facing capacity constraints, tight product deadlines, or scaling roadmaps.",
+    engagement: "Integrated sprint-based participation using your tools, workflows, and standups.",
+    primaryValue: "Flexible capacity expansion that seamlessly aligns with your internal team rhythm.",
+    icon: <Users className="w-6 h-6" />,
+  },
+  {
+    id: "capability",
+    name: "CAPABILITY PROGRAM MODEL",
+    title: "Structured Upskilling & Team Enablement",
+    tagline: "Develop internal skills through tailored curriculum, workshops, and structured knowledge transfer.",
+    bestFor: "Organizations adopting new tech stacks, modernizing legacy systems, or upskilling internal staff.",
+    engagement: "Structured training modules, hands-on labs, and post-training mentorship.",
+    primaryValue: "Permanent capability growth that stays within your organization.",
+    icon: <GraduationCap className="w-6 h-6" />,
+  },
+];
 
-  // ---------------------------------------------------------------------------
-  // 1. Team Maturity Journey Scroll Progression
-  // ---------------------------------------------------------------------------
-  const journeyContainerRef = React.useRef<HTMLDivElement>(null);
-  const { scrollYProgress: journeyProgress } = useScroll({
-    target: journeyContainerRef,
-    offset: ["start 80%", "end 20%"],
-  });
-  const smoothJourneyProgress = useSpring(journeyProgress, { stiffness: 45, damping: 25 });
+// -----------------------------------------------------------------------------
+// How We Work (6 Stages)
+// -----------------------------------------------------------------------------
+const workStages = [
+  { step: "01", name: "DISCOVER", desc: "Understand business objectives, current team roles, capability gaps, and delivery context." },
+  { step: "02", name: "DEFINE", desc: "Identify the precise skills, roles, or team engagement model required for the work ahead." },
+  { step: "03", name: "BUILD / EXTEND", desc: "Deliver structured training programs or introduce aligned specialist professionals." },
+  { step: "04", name: "INTEGRATE", desc: "Align people with existing workflows, tools, communication channels, and quality standards." },
+  { step: "05", name: "ENABLE", desc: "Support ongoing knowledge sharing, technical documentation, and capability adoption." },
+  { step: "06", name: "EVOLVE", desc: "Review changing team needs and identify the next capability priority as projects progress." },
+];
 
-  React.useEffect(() => {
-    const unsub = smoothJourneyProgress.on("change", (v) => {
-      const count = teamMaturityStages.length;
-      const normalized = Math.min(Math.max(0, v), 0.999);
-      const calculatedStage = Math.floor(normalized * count);
-      setActiveMaturityStage(calculatedStage);
-    });
-    return () => unsub();
-  }, [smoothJourneyProgress]);
+// -----------------------------------------------------------------------------
+// Skill -> Role -> Team Matrix Illustrative Examples
+// -----------------------------------------------------------------------------
+const skillToTeamExamples = [
+  {
+    scenario: "Cloud Migration & Modernization",
+    gap: "Legacy Infrastructure Dependencies",
+    expertise: "Cloud Architecture & Infrastructure as Code",
+    role: "Senior Cloud / DevOps Engineer",
+    structure: "Extended Delivery Team",
+    model: "Delivery Support & Mentorship",
+  },
+  {
+    scenario: "Applied AI Integration",
+    gap: "Limited AI/ML Implementation Experience",
+    expertise: "LLM API Integration & Prompt Engineering",
+    role: "AI Solution Specialist",
+    structure: "Specialist Placement + Team Training",
+    model: "Knowledge Transfer & Pair Working",
+  },
+  {
+    scenario: "Frontend System Standardization",
+    gap: "Inconsistent Component & UI Practices",
+    expertise: "Design Systems & Modern React Frameworks",
+    role: "Senior Frontend Lead",
+    structure: "Capability Upskilling Program",
+    model: "Workshop & Architecture Coaching",
+  },
+];
 
-  // ---------------------------------------------------------------------------
-  // 2. 4-Stage Framework Timeline Scroll Line
-  // ---------------------------------------------------------------------------
-  const timelineContainerRef = React.useRef<HTMLDivElement>(null);
-  const { scrollYProgress: timelineProgress } = useScroll({
-    target: timelineContainerRef,
-    offset: ["start 80%", "end 20%"],
-  });
-  const smoothTimelineProgress = useSpring(timelineProgress, { stiffness: 45, damping: 25 });
-  const timelineLineWidth = useTransform(smoothTimelineProgress, [0, 1], ["0%", "100%"]);
+// -----------------------------------------------------------------------------
+// Outcomes Data (6 Qualitative Outcomes)
+// -----------------------------------------------------------------------------
+const capabilityOutcomes = [
+  { title: "Faster Access to Expertise", desc: "Bring relevant technical skills into active work when specific capability gaps arise.", icon: <Zap className="w-5 h-5 text-[#F15E1C]" /> },
+  { title: "Stronger Internal Capability", desc: "Develop knowledge, modern practices, and engineering confidence that remain within the organization.", icon: <GraduationCap className="w-5 h-5 text-[#2E936F]" /> },
+  { title: "Flexible Delivery Capacity", desc: "Extend team throughput smoothly around changing project demands and product roadmaps.", icon: <Users className="w-5 h-5 text-[#FAB60A]" /> },
+  { title: "Better Knowledge Sharing", desc: "Connect specialists with internal team members through structured collaboration and documentation.", icon: <Share2 className="w-5 h-5 text-[#F15E1C]" /> },
+  { title: "Clearer Role Alignment", desc: "Match capability and technical responsibilities accurately to the actual work required.", icon: <Target className="w-5 h-5 text-[#2E936F]" /> },
+  { title: "Continuous Development", desc: "Keep team skills continuously aligned with evolving technologies and business priorities.", icon: <RefreshCw className="w-5 h-5 text-[#FAB60A]" /> },
+];
 
-  React.useEffect(() => {
-    const unsub = smoothTimelineProgress.on("change", (v) => {
-      const count = howWeWorkSteps.length;
-      const normalized = Math.min(Math.max(0, v), 0.999);
-      const calculatedIdx = Math.floor(normalized * count);
-      setActiveWorkIdx(calculatedIdx);
-    });
-    return () => unsub();
-  }, [smoothTimelineProgress]);
+// -----------------------------------------------------------------------------
+// Industries / Use Cases Data
+// -----------------------------------------------------------------------------
+const targetIndustries = [
+  { title: "Technology & SaaS", desc: "Scaling engineering throughput for active product roadmaps and platform features." },
+  { title: "Enterprise IT", desc: "Upskilling internal IT teams and extending capacity during major technology shifts." },
+  { title: "Professional Services", desc: "Adding specialized technical expertise for client-facing delivery initiatives." },
+  { title: "Financial & Business Services", desc: "Strengthening technical capabilities, data engineering, and modern standards." },
+  { title: "Healthcare & Life Sciences", desc: "Extending technical capacity while maintaining strict quality and process discipline." },
+  { title: "Education & Digital Platforms", desc: "Modernizing core systems and enabling internal teams on cloud and data technologies." },
+  { title: "Digital Businesses", desc: "Accelerating web, mobile, and digital product delivery with flexible team models." },
+];
 
-  // ---------------------------------------------------------------------------
-  // 3. Continuous Capability Loop Signal Motion
-  // ---------------------------------------------------------------------------
-  const loopContainerRef = React.useRef<HTMLDivElement>(null);
-  const { scrollYProgress: loopProgress } = useScroll({
-    target: loopContainerRef,
-    offset: ["start end", "end start"],
-  });
-  const smoothLoopProgress = useSpring(loopProgress, { stiffness: 45, damping: 25 });
-  const [activeLoopStep, setActiveLoopStep] = React.useState<number>(0);
+// -----------------------------------------------------------------------------
+// What We Help Address Data
+// -----------------------------------------------------------------------------
+const whatWeAddress = [
+  { title: "Skill Gaps", desc: "Addressing missing technical competencies within existing team structures." },
+  { title: "Capacity Constraints", desc: "Relieving delivery pressure when project roadmaps outpace internal bandwidth." },
+  { title: "Specialist Expertise Needs", desc: "Accessing niche technical knowledge for complex architectural challenges." },
+  { title: "Technology Adoption", desc: "Helping teams adopt modern cloud, AI, data, and engineering frameworks." },
+  { title: "Team Expansion", desc: "Scaling delivery teams systematically without disrupting existing workflows." },
+  { title: "Knowledge Transfer", desc: "Ensuring external expertise translates into permanent internal capability." },
+  { title: "Capability Development", desc: "Establishing long-term learning and skill progression paths for technical staff." },
+];
 
-  React.useEffect(() => {
-    const unsub = smoothLoopProgress.on("change", (v) => {
-      const count = continuousCapabilityLoopSteps.length;
-      const normalized = Math.min(Math.max(0, v), 0.999);
-      const calculatedIdx = Math.floor(normalized * count);
-      setActiveLoopStep(calculatedIdx);
-    });
-    return () => unsub();
-  }, [smoothLoopProgress]);
+// -----------------------------------------------------------------------------
+// FAQ Data
+// -----------------------------------------------------------------------------
+const faqData = [
+  {
+    question: "What is staff augmentation and when should a company use it?",
+    answer:
+      "Staff augmentation is an engagement model where skilled professionals join your existing team to extend delivery capacity or provide specific role expertise. It is ideal when you face tight project deadlines, capacity bottlenecks, or temporary skill gaps, while retaining full management and direction of your delivery process.",
+  },
+  {
+    question: "How is staff augmentation different from outsourcing?",
+    answer:
+      "Unlike traditional project outsourcing—where an external vendor takes full ownership of project management and delivery deliverables—staff augmentation integrates individual specialists or pods directly into your existing team, workflows, and management structure.",
+  },
+  {
+    question: "Can you train our existing technology teams?",
+    answer:
+      "Yes. Our training and upskilling programs are structured around your organization's specific technical stack, engineering roles, and business goals, combining practical workshops, guided labs, and structured knowledge transfer.",
+  },
+  {
+    question: "Can training and staff augmentation be combined?",
+    answer:
+      "Yes. Many organizations combine both approaches: introducing specialist capability to help deliver immediate project goals while simultaneously running upskilling programs so internal teams can take over long-term maintenance and evolution.",
+  },
+  {
+    question: "How do you integrate augmented professionals with an existing team?",
+    answer:
+      "Augmented professionals align directly with your existing communication channels, daily standups, version control repositories, CI/CD pipelines, and engineering standards, ensuring smooth collaboration from day one.",
+  },
+];
 
-  // ---------------------------------------------------------------------------
-  // 4. Parallax Background Typography for Capability Philosophy
-  // ---------------------------------------------------------------------------
-  const missionRef = React.useRef<HTMLDivElement>(null);
-  const { scrollYProgress: missionProgress } = useScroll({
-    target: missionRef,
-    offset: ["start end", "end start"],
-  });
-  const backgroundTextX1 = useTransform(missionProgress, [0, 1], ["-10%", "10%"]);
-  const backgroundTextX2 = useTransform(missionProgress, [0, 1], ["10%", "-10%"]);
+export function TrainingStaffInteractivePage({ service, relatedPosts }: TrainingStaffPageProps) {
+  const [activeNodeIdx, setActiveNodeIdx] = React.useState<number>(0);
+  const [activeModelId, setActiveModelId] = React.useState<string>("specialist");
+  const [activeExampleIdx, setActiveExampleIdx] = React.useState<number>(0);
+  const [openFaqIdx, setOpenFaqIdx] = React.useState<number | null>(0);
 
-  // InView references
-  const statementRef = React.useRef<HTMLDivElement>(null);
-  const isStatementInView = useInView(statementRef, { once: true, margin: "-80px" });
+  // Hover state for interactive node preview on desktop
+  const [hoverNodeIdx, setHoverNodeIdx] = React.useState<number | null>(null);
+  const [hoverModelId, setHoverModelId] = React.useState<string | null>(null);
 
-  const testimonialRef = React.useRef<HTMLDivElement>(null);
-  const isTestimonialInView = useInView(testimonialRef, { once: true, margin: "-60px" });
+  // Dynamic Blog Posts (Real CMS data)
+  const articles = React.useMemo(() => {
+    if (relatedPosts && relatedPosts.length > 0) {
+      return relatedPosts.slice(0, 3);
+    }
+    return blogPostsData.slice(0, 3);
+  }, [relatedPosts]);
 
-  // Rotating CTA Word Timer
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentWordIdx((prev) => (prev + 1) % ctaWords.length);
-    }, 2400);
-    return () => clearInterval(timer);
-  }, []);
+  // Displayed Node: Hovered node takes visual precedence, fallback to active selected node
+  const displayedNodeIdx = hoverNodeIdx !== null ? hoverNodeIdx : activeNodeIdx;
+  const activeNode = capabilityMapNodes[displayedNodeIdx];
 
-  const activeSolution = trainingStaffSolutionsData[activeSolutionIdx];
-  const activeWorkStep = howWeWorkSteps[activeWorkIdx];
-  const testimonial = testimonialsData.find((t) => t.id === "test-3") || testimonialsData[2];
+  // Displayed Model: Hovered model takes visual precedence, fallback to active selected model
+  const displayedModelId = hoverModelId !== null ? hoverModelId : activeModelId;
+  const activeModel = teamModels.find((m) => m.id === displayedModelId) || teamModels[0];
 
   return (
-    <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#000000] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c]">
+    <div className="min-h-screen bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300 overflow-x-hidden selection:bg-[#F15E1C]/20 selection:text-[#F15E1C]">
       
-      {/* =========================================================================
-          1. HERO — TEAM ASSEMBLY ANIMATION & HUMAN CAPABILITY ENGINE
-          ========================================================================= */}
-      <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none">
-        <TeamAssemblyBackground />
+      {/* Breadcrumb Navigation */}
+      <div className="relative z-10 w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-3 sm:pt-4 pb-1 sm:pb-2">
+        <Breadcrumb
+          items={[
+            { label: "Services", href: "/services" },
+            { label: "Training & Staff Augmentation", href: "/services/training-staff-augmentation" },
+          ]}
+        />
+      </div>
 
-        {/* Ambient Glows */}
-        <div className="absolute top-1/4 left-1/3 w-[450px] h-[450px] bg-radial from-[#f15e1c]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
-        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-radial from-[#2e936f]/8 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
-
-        <div className="max-w-[1536px] mx-auto w-full space-y-6 relative z-10">
-          {/* Top Breadcrumb & Badge */}
-          <div className="space-y-3">
-            <Breadcrumb
-              items={[
-                { label: "Services", href: "/services" },
-                { label: "Training & Staff Augmentation" },
-              ]}
-            />
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]"
-            >
-              <Sparkles className="w-4 h-4" />
-              <span>TALENT AUGMENTATION &amp; TEAM CAPABILITY ENGINE</span>
-            </motion.div>
-          </div>
-
-          {/* Headline & Hero Copy */}
-          <div className="max-w-5xl mx-auto w-full text-center space-y-5 pt-4 pb-4">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-              className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold font-display tracking-tight leading-[1.08] text-[#1b2823] dark:text-[#ffffff]"
-            >
-              Empowering Teams, Enhancing <span className="text-[#f15e1c]">Capabilities</span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.25 }}
-              className="text-base sm:text-xl lg:text-2xl text-[#4a5c55] dark:text-[#d3eee4] max-w-3xl mx-auto font-medium leading-relaxed"
-            >
-              From tailored enterprise upskilling to pre-vetted senior software engineering pods, we build and augment high-performing teams equipped to deliver complex digital products.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-4"
-            >
-              <Link href="/contact" className="w-full sm:w-auto">
-                <MagneticButton className="w-full sm:w-auto">
-                  <Button3D
-                    variant="primary"
-                    size="lg"
-                    rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />}
-                    className="w-full sm:w-auto justify-center shadow-lg shadow-[#f15e1c]/25"
-                  >
-                    Build Your Team
-                  </Button3D>
-                </MagneticButton>
-              </Link>
-              <Link href="/services" className="w-full sm:w-auto">
-                <MagneticButton className="w-full sm:w-auto">
-                  <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center">
-                    Explore Disciplines
-                  </Button3D>
-                </MagneticButton>
-              </Link>
-            </motion.div>
-          </div>
-
-          {/* System Status Bar */}
-          <div className="pt-4 text-center">
-            <div className="inline-flex flex-wrap items-center justify-center gap-4 px-4 py-2 rounded-2xl bg-white/80 dark:bg-[#000000]/80 border border-[#f7d7b0] dark:border-[#1a1a1a] backdrop-blur-md shadow-lg text-xs font-mono font-bold text-[#f15e1c]">
-              <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-ping" />
-                STATUS: TEAM ASSEMBLED
-              </span>
-              <span className="text-[#7A6A5F]">&bull;</span>
-              <span>DEPLOYMENT: 48 HOURS</span>
-              <span className="text-[#7A6A5F]">&bull;</span>
-              <span>RETENTION: 98%</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <SystemScanTransition />
-
-      {/* =========================================================================
-          2. SOLUTIONS — TEAM MATURITY JOURNEY (SIGNATURE SCROLL NARRATIVE)
-          ========================================================================= */}
-      <section
-        id="team-maturity"
-        ref={journeyContainerRef}
-        className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none"
-      >
-        <div className="max-w-[1536px] mx-auto space-y-12">
-          <div className="text-center max-w-4xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              TEAM MATURITY JOURNEY
-            </Badge>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              High-Performing Team Journey
-            </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              Scroll down to observe individual skill requirements assembling into a fully integrated, high-performing team pod.
-            </p>
-          </div>
-
-          {/* 5-Stage Team Maturity Progress Strip */}
-          <div className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-sm max-w-5xl mx-auto flex items-center justify-between overflow-x-auto gap-2">
-            {teamMaturityStages.map((st, i) => (
-              <div
-                key={st.stage}
-                className={cn(
-                  "flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-mono font-bold shrink-0 transition-all",
-                  i <= activeMaturityStage
-                    ? "bg-[#f15e1c] text-white shadow-xs"
-                    : "bg-[#fefaf5] dark:bg-[#0a0a0a] text-[#7A6A5F] border border-[#f7d7b0]"
-                )}
-              >
-                <span>{st.stage}</span>
-                <span>{st.name}</span>
-                {i < 4 && <span className="opacity-60 ml-1">&rarr;</span>}
+      {/* =====================================================================
+          2. HERO SECTION — DUAL PATHWAY: BUILD + EXTEND CAPABILITY
+          ===================================================================== */}
+      <section className="relative z-10 w-full border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-2 sm:pt-4 pb-8 sm:pb-12 md:pb-16 lg:pb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
+            
+            {/* Hero Copy */}
+            <div className="lg:col-span-6 space-y-6">
+              <div className="inline-flex items-center gap-2">
+                <Badge variant="outline" className="border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3.5 py-1.5 font-semibold tracking-wider text-xs rounded-full shadow-xs">
+                  TEAM CAPABILITY • TALENT • ENABLEMENT
+                </Badge>
               </div>
-            ))}
-          </div>
 
-          {/* Active Stage Detail Card */}
-          <div className="max-w-5xl mx-auto">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={teamMaturityStages[activeMaturityStage].stage}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.35 }}
-                className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/40 shadow-2xl space-y-6 text-left relative overflow-hidden"
-              >
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-5">
-                  <div>
-                    <span className="text-xs font-mono font-black text-[#f15e1c] uppercase tracking-wider block">
-                      STAGE {teamMaturityStages[activeMaturityStage].stage} / 05 &bull; {teamMaturityStages[activeMaturityStage].name}
-                    </span>
-                    <h3 className="text-2xl sm:text-4xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] mt-1">
-                      {teamMaturityStages[activeMaturityStage].desc}
-                    </h3>
-                  </div>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-[1.12]">
+                Build Stronger Teams. <br className="hidden sm:inline" />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F15E1C] via-[#FAB60A] to-[#2E936F]">
+                  Add the Right Expertise When You Need It.
+                </span>
+              </h1>
 
-                  <div className="px-4 py-2 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#2e936f] shadow-xs">
-                    HUMAN CAPABILITY ENGINE
+              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl leading-relaxed">
+                Develop the capabilities your teams need and extend delivery capacity with skilled professionals who can integrate into your existing ways of working.
+              </p>
+
+              {/* CTAs */}
+              <div className="flex flex-wrap items-center gap-4 pt-2">
+                <Link href="/contact">
+                  <Button3D variant="primary" size="lg" className="flex items-center gap-2 font-semibold bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] hover:opacity-95 transition-all">
+                    Build My Team Capability
+                    <ArrowRight className="w-4 h-4" />
+                  </Button3D>
+                </Link>
+                <a href="#capability-map">
+                  <Button3D variant="secondary" size="lg" className="flex items-center gap-2 font-semibold bg-[#2E936F] text-[#FFFFFF] border-[#2E936F] hover:opacity-95 transition-all">
+                    Explore Our Approach
+                  </Button3D>
+                </a>
+              </div>
+
+              {/* Dual Pathway Distinction Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                <motion.div
+                  whileHover={{ y: -3, scale: 1.01 }}
+                  className="p-4 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 transition-all duration-200 cursor-pointer shadow-xs"
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <GraduationCap className="w-4 h-4 text-[#F15E1C]" />
+                    <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff] uppercase tracking-wider">TRAIN YOUR TEAM</span>
                   </div>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">Upskill &amp; reskill internal staff on modern stacks, tools, and practices.</p>
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ y: -3, scale: 1.01 }}
+                  className="p-4 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#2E936F] hover:bg-[#F7D7B0]/20 transition-all duration-200 cursor-pointer shadow-xs"
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <UserPlus className="w-4 h-4 text-[#2E936F]" />
+                    <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff] uppercase tracking-wider">EXTEND YOUR TEAM</span>
+                  </div>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">Add aligned technical specialists and complementary project capacity.</p>
+                </motion.div>
+              </div>
+
+              {/* Supporting Keywords Bar */}
+              <div className="pt-4 border-t border-[#F7D7B0]">
+                <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 font-semibold mb-2.5">
+                  Capability Disciplines
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    "Technology Training",
+                    "Team Upskilling",
+                    "Staff Augmentation",
+                    "Technical Specialists",
+                    "Team Enablement",
+                    "Knowledge Transfer",
+                  ].map((tag, idx) => (
+                    <motion.span
+                      key={idx}
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      className="text-xs px-3.5 py-1.5 rounded-lg bg-gray-100 dark:bg-[#1b2823] text-gray-700 dark:text-gray-300 border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F15E1C] hover:text-[#FFFFFF] transition-all duration-200 cursor-pointer shadow-xs font-medium"
+                    >
+                      {tag}
+                    </motion.span>
+                  ))}
                 </div>
+              </div>
+            </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                  <div className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 space-y-1">
-                    <span className="text-[10px] font-mono font-bold text-[#7A6A5F] block uppercase">DEPLOYMENT SLA</span>
-                    <span className="text-sm font-mono font-extrabold text-[#f15e1c]">48 HOURS</span>
-                  </div>
-                  <div className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 space-y-1">
-                    <span className="text-[10px] font-mono font-bold text-[#7A6A5F] block uppercase">ONBOARDING SPEED</span>
-                    <span className="text-sm font-mono font-extrabold text-[#2e936f]">DAY-1 PRODUCTIVE</span>
-                  </div>
-                  <div className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 space-y-1">
-                    <span className="text-[10px] font-mono font-bold text-[#7A6A5F] block uppercase">RETENTION RATE</span>
-                    <span className="text-sm font-mono font-extrabold text-[#fab60a]">98% SATISFACTION</span>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* 4 Solution Workstream Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {trainingStaffSolutionsData.map((sol, idx) => {
-              const isActive = activeSolutionIdx === idx;
-
-              return (
-                <TiltCard key={sol.numStr} maxTilt={4} scale={1.01}>
-                  <div
-                    onClick={() => setActiveSolutionIdx(idx)}
-                    onMouseEnter={() => setActiveSolutionIdx(idx)}
-                    className={cn(
-                      "p-8 rounded-[2.5rem] border-2 transition-all duration-300 cursor-pointer space-y-6 text-left flex flex-col justify-between min-h-[340px] relative overflow-hidden group",
-                      isActive
-                        ? "bg-white dark:bg-[#000000] border-[#f15e1c] shadow-2xl ring-2 ring-[#f15e1c]/20"
-                        : "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] opacity-80 hover:opacity-100"
-                    )}
-                  >
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] group-hover:scale-110 transition-transform">
-                            {sol.icon}
-                          </div>
-                          <span className="text-xs font-mono font-black text-[#f15e1c]">
-                            CAPABILITY {sol.numStr}
-                          </span>
-                        </div>
-
-                        <div className="px-3 py-1 rounded-xl bg-[#fce3d3] dark:bg-[#161616] text-xs font-mono font-bold text-[#f15e1c]">
-                          {sol.metric}
-                        </div>
-                      </div>
-
-                      <div>
-                        <h3 className="text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
-                          {sol.title}
-                        </h3>
-                        <p className="text-xs font-mono font-semibold text-[#2e936f] mt-1">
-                          {sol.subtitle}
-                        </p>
-                      </div>
-
-                      <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                        {sol.description}
-                      </p>
-                    </div>
-
-                    <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] space-y-2">
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#7A6A5F]">
-                        Key Deliverables &amp; Outcomes
+            {/* Hero Visual Card — Unique Identity: People + Skills + Delivery */}
+            <div className="lg:col-span-6 w-full">
+              <TiltCard className="w-full">
+                <div className="relative rounded-2xl p-6 bg-white dark:bg-[#1b2823] border border-[#F7D7B0] shadow-xl overflow-hidden group hover:border-[#F15E1C] transition-all duration-300">
+                  
+                  <div className="flex items-center justify-between pb-4 border-b border-[#F7D7B0]">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#F15E1C] animate-pulse" />
+                      <span className="text-xs font-bold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
+                        People + Skills + Delivery Engine
                       </span>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]">
-                        {sol.deliverables.map((del, i) => (
-                          <div key={i} className="flex items-center gap-2 p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
-                            <span className="truncate">{del}</span>
-                          </div>
-                        ))}
-                      </div>
                     </div>
-                  </div>
-                </TiltCard>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <SystemScanTransition />
-
-      {/* =========================================================================
-          3. SKILL GAP ANALYSIS & PRE-VETTED POD CLUSTER
-          ========================================================================= */}
-      <section className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none">
-        <div className="max-w-[1536px] mx-auto space-y-12">
-          <div className="text-center max-w-4xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              PRE-VETTED POD &amp; SKILL GAP ANALYSIS
-            </Badge>
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Current vs Required Skill Acceleration
-            </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              Visualizing how Arav fills team capability gaps with pre-vetted senior software engineering pods.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Left Skill Gap Bars */}
-            <div className="lg:col-span-7 p-6 sm:p-8 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl space-y-6">
-              <div className="flex items-center justify-between text-xs font-mono font-bold text-[#7A6A5F] border-b border-[#f7d7b0] pb-3">
-                <span>SKILL DISCIPLINE</span>
-                <span className="text-[#2e936f]">CURRENT % vs REQUIRED TARGET %</span>
-              </div>
-
-              <div className="space-y-4">
-                {skillGapBars.map((bar, i) => (
-                  <div key={i} className="space-y-1.5">
-                    <div className="flex justify-between text-xs font-mono font-extrabold text-[#1b2823] dark:text-[#ffffff]">
-                      <span>{bar.skill}</span>
-                      <span className="text-[#f15e1c]">{bar.current}% &rarr; {bar.required}%</span>
-                    </div>
-
-                    <div className="relative w-full h-3 rounded-full bg-[#f7d7b0]/50 dark:bg-[#1a1a1a] overflow-hidden">
-                      <div
-                        style={{ width: `${bar.current}%` }}
-                        className={cn("h-full rounded-full opacity-60", bar.color)}
-                      />
-                      <div
-                        style={{ width: `${bar.required}%` }}
-                        className={cn("absolute top-0 left-0 h-full rounded-full opacity-30 border-r-2 border-white", bar.color)}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Right Pre-Vetted Pod Cluster Grid */}
-            <div className="lg:col-span-5 p-6 sm:p-8 rounded-[2.5rem] bg-white dark:bg-[#000000] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl space-y-4 text-left">
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#f15e1c] block">
-                PRE-VETTED POD CLUSTER (READY TO DEPLOY)
-              </span>
-
-              <div className="grid grid-cols-2 gap-3">
-                {preVettedPodMembers.map((member, i) => (
-                  <div key={i} className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] space-y-2 text-center">
-                    <div className="p-2 rounded-xl bg-white dark:bg-[#000000] w-fit mx-auto shadow-xs">
-                      {member.icon}
-                    </div>
-                    <div className="text-xs font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                      {member.role}
-                    </div>
-                    <span className="text-[10px] font-mono text-[#2e936f] font-bold block">{member.exp} &bull; {member.status}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <SystemScanTransition />
-
-      {/* =========================================================================
-          4. PERFORMANCE METRIC — 95% TEAM SKILL MASTERY ACCELERATION
-          ========================================================================= */}
-      <section className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] select-none">
-        <div className="max-w-[1536px] mx-auto space-y-10">
-          <div className="text-center max-w-4xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              HUMAN CAPABILITY BENCHMARK
-            </Badge>
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              95% Team Skill Mastery Acceleration
-            </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              Accelerating technical throughput, eliminating hiring lag, and maintaining 98% talent retention.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                value: 95,
-                suffix: "%",
-                label: "Skill Mastery Acceleration",
-                desc: "Rapid technical ramp-up",
-                icon: <GraduationCap className="w-5 h-5 text-[#f15e1c]" />,
-              },
-              {
-                value: 48,
-                suffix: " hours",
-                label: "Talent Deployment SLA",
-                desc: "Pre-vetted engineering pods",
-                icon: <Clock className="w-5 h-5 text-[#2e936f]" />,
-              },
-              {
-                value: 1,
-                prefix: "Day-",
-                suffix: "",
-                label: "Productive Speed",
-                desc: "Immediate repo contribution",
-                icon: <Zap className="w-5 h-5 text-[#fab60a]" />,
-              },
-              {
-                value: 98,
-                suffix: "%",
-                label: "Talent Retention Rate",
-                desc: "Long-term pod stability",
-                icon: <HeartHandshake className="w-5 h-5 text-[#f15e1c]" />,
-              },
-            ].map((stat, idx) => (
-              <TiltCard key={idx} maxTilt={5} scale={1.01}>
-                <div className="h-full p-6 sm:p-8 rounded-[2rem] bg-white dark:bg-[#000000] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md hover:border-[#f15e1c] transition-all duration-300 space-y-4 text-left flex flex-col justify-between relative overflow-hidden group">
-                  <div className="flex items-center justify-between">
-                    <div className="p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0]/60">
-                      {stat.icon}
-                    </div>
-                    <span className="text-[#2e936f] text-sm font-bold">↗</span>
+                    <Badge variant="subtle" className="text-[10px] bg-[#2E936F]/10 text-[#2E936F] font-semibold">
+                      Capability Network
+                    </Badge>
                   </div>
 
-                  <div>
-                    <div className="text-3xl sm:text-4xl lg:text-5xl font-black font-mono text-[#f15e1c]">
-                      <CounterNumber
-                        value={stat.value}
-                        prefix={stat.prefix}
-                        suffix={stat.suffix}
-                      />
+                  {/* Connected Node Network Diagram */}
+                  <div className="my-6 space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      {/* Node 1: Core Team */}
+                      <motion.div whileHover={{ y: -2, borderColor: "#F15E1C" }} className="p-4 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] transition-all">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Users className="w-4 h-4 text-[#F15E1C]" />
+                          <span className="text-xs font-bold font-mono text-[#F15E1C]">YOUR CORE TEAM</span>
+                        </div>
+                        <p className="text-xs text-gray-600 dark:text-gray-300">Domain context, internal ownership &amp; business goals.</p>
+                      </motion.div>
+
+                      {/* Node 2: Specialist Expertise */}
+                      <motion.div whileHover={{ y: -2, borderColor: "#2E936F" }} className="p-4 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] transition-all">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Cpu className="w-4 h-4 text-[#2E936F]" />
+                          <span className="text-xs font-bold font-mono text-[#2E936F]">SPECIALIST EXPERTISE</span>
+                        </div>
+                        <p className="text-xs text-gray-600 dark:text-gray-300">Technical depth, training &amp; extended capacity.</p>
+                      </motion.div>
                     </div>
-                    <div className="text-sm sm:text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] mt-1">
-                      {stat.label}
+
+                    {/* Flow Arrow */}
+                    <div className="flex items-center justify-center gap-2 text-xs font-mono text-gray-400">
+                      <span className="w-8 h-px bg-[#F7D7B0]" />
+                      <span className="font-bold text-[#F15E1C]">INTEGRATED WORKFLOW</span>
+                      <span className="w-8 h-px bg-[#F7D7B0]" />
                     </div>
-                    <div className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] mt-0.5">
-                      {stat.desc}
+
+                    <div className="grid grid-cols-2 gap-4">
+                      {/* Node 3: Shared Delivery */}
+                      <motion.div whileHover={{ y: -2, borderColor: "#FAB60A" }} className="p-4 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] transition-all">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Workflow className="w-4 h-4 text-[#FAB60A]" />
+                          <span className="text-xs font-bold font-mono text-[#FAB60A]">SHARED DELIVERY</span>
+                        </div>
+                        <p className="text-xs text-gray-600 dark:text-gray-300">Joint sprint execution, code standards &amp; quality.</p>
+                      </motion.div>
+
+                      {/* Node 4: Capability Growth */}
+                      <motion.div whileHover={{ y: -2, borderColor: "#2E936F" }} className="p-4 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] transition-all">
+                        <div className="flex items-center gap-2 mb-2">
+                          <GraduationCap className="w-4 h-4 text-[#2E936F]" />
+                          <span className="text-xs font-bold font-mono text-[#2E936F]">CAPABILITY GROWTH</span>
+                        </div>
+                        <p className="text-xs text-gray-600 dark:text-gray-300">Permanent internal skills &amp; knowledge retention.</p>
+                      </motion.div>
                     </div>
                   </div>
+
+                  <div className="pt-3 border-t border-[#F7D7B0] text-center">
+                    <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 italic">
+                      “Integrating skills, people, and practices into your existing ways of working.”
+                    </p>
+                  </div>
+
                 </div>
               </TiltCard>
-            ))}
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* =========================================================================
-          5. 4-STAGE TEAM BUILDING FRAMEWORK & SPLIT SOURCING VISUAL
-          ========================================================================= */}
-      <section
-        ref={timelineContainerRef}
-        className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none"
-      >
-        <div className="max-w-[1536px] mx-auto space-y-12">
-          <div className="text-center max-w-4xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              TEAM MATURITY TIMELINE
+      <CapabilityScanTransition />
+
+      {/* =====================================================================
+          4. CORE POSITIONING — THE CAPABILITY GAP
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              THE CAPABILITY GAP
             </Badge>
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              4-Stage Team Building Framework
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Sometimes You Need New Skills. <br className="hidden sm:inline" /> Sometimes You Need More Hands.
             </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              An assess &rarr; train/source &rarr; integrate &rarr; support methodology for sustainable team scaling.
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Organizations can face very different capability challenges. You may need to strengthen an existing team's skills, bring in specialist expertise for a defined initiative, or extend delivery capacity while your internal team remains focused on core priorities. Arav Innovations supports both paths without treating them as the same problem.
             </p>
           </div>
 
-          {/* Timeline Progress Bar */}
-          <div className="relative py-4 max-w-5xl mx-auto">
-            <div className="relative w-full bg-[#f7d7b0] dark:bg-[#1a1a1a] h-2.5 rounded-full overflow-hidden">
-              <motion.div
-                style={{ width: timelineLineWidth }}
-                className="h-full bg-gradient-to-r from-[#f15e1c] via-[#2e936f] to-[#fab60a]"
-              />
-            </div>
+          {/* Two Distinct Paths Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            {/* PATH 1: BUILD CAPABILITY */}
+            <motion.div whileHover={{ y: -4 }} className="p-8 rounded-2xl bg-[#F7D7B0]/20 border border-[#F15E1C]/40 shadow-sm hover:shadow-md hover:border-[#F15E1C] transition-all duration-300 space-y-6">
+              <div className="flex items-center justify-between pb-4 border-b border-[#F15E1C]/20">
+                <div className="flex items-center gap-3">
+                  <div className="p-3 rounded-xl bg-[#F15E1C] text-[#FFFFFF]">
+                    <GraduationCap className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <span className="text-xs font-mono font-bold text-[#F15E1C]">PATHWAY 01</span>
+                    <h3 className="text-2xl font-bold text-[#1b2823] dark:text-[#ffffff]">BUILD CAPABILITY</h3>
+                  </div>
+                </div>
+                <Badge variant="subtle" className="text-xs bg-[#F15E1C]/10 text-[#F15E1C] font-semibold">
+                  For Internal Teams
+                </Badge>
+              </div>
 
-            <div className="flex justify-between items-center absolute inset-x-0 -top-2.5">
-              {howWeWorkSteps.map((wf, idx) => {
-                const isActive = activeWorkIdx === idx;
-                const isPassed = idx <= activeWorkIdx;
+              <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
+                Empower your existing staff with modern technical skills, framework proficiency, and operational best practices tailored to your architecture.
+              </p>
 
+              <div className="space-y-3 pt-2">
+                {[
+                  { title: "Upskilling", desc: "Modernize technical skills in cloud, AI, data, and development frameworks." },
+                  { title: "Reskilling", desc: "Transition engineers into new engineering roles or modern technologies." },
+                  { title: "Technical Training", desc: "Hands-on labs and practical workshops aligned with your code environment." },
+                  { title: "Role-Based Learning", desc: "Structured learning paths customized to specific team responsibilities." },
+                  { title: "Knowledge Transfer", desc: "Ensure technical practices and documentation stay within your team permanently." },
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-3 text-sm p-3 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0]">
+                    <CheckCircle2 className="w-4 h-4 text-[#F15E1C] shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-bold text-[#1b2823] dark:text-[#ffffff] block">{item.title}</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400">{item.desc}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* PATH 2: EXTEND CAPABILITY */}
+            <motion.div whileHover={{ y: -4 }} className="p-8 rounded-2xl bg-[#F7D7B0]/20 border border-[#2E936F]/40 shadow-sm hover:shadow-md hover:border-[#2E936F] transition-all duration-300 space-y-6">
+              <div className="flex items-center justify-between pb-4 border-b border-[#2E936F]/20">
+                <div className="flex items-center gap-3">
+                  <div className="p-3 rounded-xl bg-[#2E936F] text-[#FFFFFF]">
+                    <UserPlus className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <span className="text-xs font-mono font-bold text-[#2E936F]">PATHWAY 02</span>
+                    <h3 className="text-2xl font-bold text-[#1b2823] dark:text-[#ffffff]">EXTEND CAPABILITY</h3>
+                  </div>
+                </div>
+                <Badge variant="subtle" className="text-xs bg-[#2E936F]/10 text-[#2E936F] font-semibold">
+                  For Delivery Squads
+                </Badge>
+              </div>
+
+              <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
+                Add experienced technical professionals directly into your engineering squads to expand project capacity and provide niche role expertise.
+              </p>
+
+              <div className="space-y-3 pt-2">
+                {[
+                  { title: "Specialist Expertise", desc: "Access targeted technical depth for specific architectural challenges." },
+                  { title: "Project Capacity", desc: "Expand delivery throughput when deadlines require additional engineering hands." },
+                  { title: "Technical Roles", desc: "Fill critical engineering disciplines without recruitment friction." },
+                  { title: "Delivery Support", desc: "Complement existing team leads with seasoned technical contributors." },
+                  { title: "Team Extension", desc: "Seamlessly integrate professionals into your agile tools and standups." },
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-3 text-sm p-3 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0]">
+                    <CheckCircle2 className="w-4 h-4 text-[#2E936F] shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-bold text-[#1b2823] dark:text-[#ffffff] block">{item.title}</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400">{item.desc}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
+      <CapabilityScanTransition />
+
+      {/* =====================================================================
+          5. NEW SIGNATURE VISUAL — INTERACTIVE CAPABILITY MAP
+          ===================================================================== */}
+      <section id="capability-map" className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              SIGNATURE CAPABILITY ENGINE
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              The Right Capability at the Right Moment.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Hover over or select any node in the team capability map below to see how business goals translate systematically into skills, team models, and permanent internal knowledge.
+            </p>
+          </div>
+
+          {/* Interactive Flow Nodes */}
+          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg space-y-8">
+            
+            <div className="flex overflow-x-auto gap-3 pb-4 md:grid md:grid-cols-6 md:gap-4 border-b border-[#F7D7B0] scrollbar-none">
+              {capabilityMapNodes.map((node, idx) => {
+                const isActive = displayedNodeIdx === idx;
                 return (
                   <button
-                    key={wf.step}
-                    type="button"
-                    onClick={() => setActiveWorkIdx(idx)}
+                    key={node.id}
+                    onClick={() => setActiveNodeIdx(idx)}
+                    onMouseEnter={() => setHoverNodeIdx(idx)}
+                    onMouseLeave={() => setHoverNodeIdx(null)}
                     className={cn(
-                      "w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 transition-all duration-300 flex items-center justify-center text-xs sm:text-sm font-mono font-black cursor-pointer shrink-0",
+                      "shrink-0 min-w-[150px] md:min-w-0 md:shrink p-4 rounded-xl text-left transition-all duration-200 border cursor-pointer flex flex-col justify-between h-32 transform",
                       isActive
-                        ? "bg-[#f15e1c] border-white text-white scale-125 shadow-lg shadow-[#f15e1c]/40 ring-4 ring-[#f15e1c]/20 z-10"
-                        : isPassed
-                        ? "bg-[#2e936f] border-white text-white"
-                        : "bg-white dark:bg-[#000000] border-[#f7d7b0] dark:border-[#1a1a1a] text-[#7A6A5F]"
+                        ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-1 scale-102"
+                        : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 hover:-translate-y-0.5"
                     )}
                   >
-                    {isPassed && !isActive ? <Check className="w-4 h-4 text-white" /> : wf.step}
+                    <div className="flex items-center justify-between w-full">
+                      <span className={cn("text-[10px] font-mono font-bold", isActive ? "text-[#FFEC69]" : "text-[#F15E1C]")}>
+                        {node.step}
+                      </span>
+                      <div className={cn("p-1.5 rounded-lg transition-colors", isActive ? "bg-[#FFFFFF] text-[#F15E1C]" : "bg-[#F7D7B0]/30 text-[#F15E1C]")}>
+                        {node.icon}
+                      </div>
+                    </div>
+                    <div>
+                      <span className={cn("text-xs font-bold block transition-colors", isActive ? "text-[#FFFFFF]" : "text-[#1b2823] dark:text-[#ffffff]")}>
+                        {node.label}
+                      </span>
+                      <span className={cn("text-[10px] block mt-0.5", isActive ? "text-[#FFFFFF]/90" : "text-gray-500 dark:text-gray-400")}>
+                        {node.short}
+                      </span>
+                    </div>
                   </button>
                 );
               })}
             </div>
-          </div>
 
-          {/* Active Framework Stage Content & Stage 02 Split Sourcing Visual */}
-          <div className="max-w-5xl mx-auto">
+            {/* Active Node Detail Explanation Card */}
             <AnimatePresence mode="wait">
               <motion.div
-                key={activeWorkStep.step}
-                initial={{ opacity: 0, y: 16 }}
+                key={activeNode.id}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.35 }}
-                className="p-8 sm:p-12 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/40 shadow-2xl space-y-6 text-left relative overflow-hidden"
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="p-6 sm:p-8 rounded-xl border-2 border-[#F15E1C] bg-[#F7D7B0]/20 shadow-sm space-y-4"
               >
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-5">
+                <div className="flex items-center gap-3">
+                  <div className="p-3 rounded-xl bg-[#F15E1C] text-[#FFFFFF] shadow-xs">
+                    {activeNode.icon}
+                  </div>
                   <div>
-                    <span className="text-xs font-mono font-black text-[#f15e1c] uppercase tracking-wider block">
-                      STAGE {activeWorkStep.step} / 04 &bull; {activeWorkStep.subtitle}
+                    <span className="text-xs font-mono font-bold text-[#F15E1C]">
+                      STAGE {activeNode.step} OF 06 &bull; {activeNode.label}
                     </span>
-                    <h3 className="text-2xl sm:text-4xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] mt-1">
-                      {activeWorkStep.title}
+                    <h3 className="text-xl sm:text-2xl font-bold text-[#1b2823] dark:text-[#ffffff]">
+                      {activeNode.title}
                     </h3>
                   </div>
-
-                  <div className="px-4 py-2 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#2e936f] shadow-xs">
-                    {activeWorkStep.output}
-                  </div>
                 </div>
-
-                <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                  {activeWorkStep.description}
+                <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed max-w-4xl font-medium">
+                  {activeNode.desc}
                 </p>
-
-                {/* SPECIAL STAGE 02 SPLIT VISUAL (TRAINING + TALENT SOURCING) */}
-                {activeWorkIdx === 1 && (
-                  <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] space-y-2">
-                      <span className="text-xs font-mono font-bold text-[#f15e1c] block uppercase">TRAINING TRACK</span>
-                      <div className="text-xs text-[#1b2823] dark:text-[#ffffff] space-y-1">
-                        <div>&bull; Custom Tech Stack Curriculum</div>
-                        <div>&bull; Hands-on Code Labs</div>
-                      </div>
-                    </div>
-                    <div className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] space-y-2">
-                      <span className="text-xs font-mono font-bold text-[#2e936f] block uppercase">TALENT SOURCING TRACK</span>
-                      <div className="text-xs text-[#1b2823] dark:text-[#ffffff] space-y-1">
-                        <div>&bull; Pre-vetted Engineer Matching</div>
-                        <div>&bull; 48-Hour SLA Deployment</div>
-                      </div>
-                    </div>
-                  </div>
-                )}
               </motion.div>
             </AnimatePresence>
+
           </div>
         </div>
       </section>
 
-      <SystemScanTransition />
+      <CapabilityScanTransition />
 
-      {/* =========================================================================
-          6. CONTINUOUS TEAM CAPABILITY LOOP (SIGNATURE VISUAL MOMENT)
-          ========================================================================= */}
-      <section
-        ref={loopContainerRef}
-        className="relative py-28 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] select-none"
-      >
-        <div className="max-w-[1536px] mx-auto space-y-12">
-          <div className="text-center max-w-4xl mx-auto space-y-3">
-            <Badge variant="secondary" size="md">
-              CONTINUOUS TEAM SUPPORT LOOP
+      {/* =====================================================================
+          6. TRAINING OFFERING — BUILD CAPABILITY
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              BUILD CAPABILITY
             </Badge>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Continuous Capability Loop
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Turn Skill Gaps Into Practical Capability.
             </h2>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-              Team development is an ongoing lifecycle of upskilling, integration, performance tracking, and support.
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Our training programs can be structured around your team's roles, technology environment and business objectives, with emphasis on practical application rather than theory alone.
             </p>
           </div>
 
-          {/* Circular Iteration Loop Display */}
-          <div className="relative rounded-[3rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-8 sm:p-16 text-center overflow-hidden">
-            <div className="absolute inset-0 bg-radial from-[#f15e1c]/10 via-transparent to-transparent pointer-events-none" />
+          {/* Editorial Capability Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {trainingCapabilities.map((cap) => (
+              <motion.div
+                key={cap.num}
+                whileHover={{ scale: 1.02, y: -4 }}
+                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 hover:shadow-lg transition-all duration-300 shadow-xs flex flex-col justify-between group cursor-pointer"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono font-bold text-[#F15E1C] px-2.5 py-1 rounded bg-[#F7D7B0]/40 group-hover:bg-[#F15E1C] group-hover:text-[#FFFFFF] transition-colors">
+                      CAPABILITY {cap.num}
+                    </span>
+                    <div className="p-2 rounded-lg bg-[#F7D7B0]/30 group-hover:bg-[#F15E1C]/10 transition-colors">
+                      {cap.icon}
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">
+                    {cap.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                    {cap.desc}
+                  </p>
+                </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-3 relative z-10">
-              {continuousCapabilityLoopSteps.map((step, idx) => {
-                const isActive = activeLoopStep === idx;
+                <div className="pt-4 mt-6 border-t border-[#F7D7B0] flex items-center justify-between text-xs">
+                  <span className="text-gray-400 font-mono font-bold">Focus:</span>
+                  <span className="font-semibold text-[#2E936F] group-hover:text-[#F15E1C] group-hover:translate-x-0.5 transition-all">{cap.focus}</span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
 
+        </div>
+      </section>
+
+      <CapabilityScanTransition />
+
+      {/* =====================================================================
+          7. STAFF AUGMENTATION — EXTEND CAPABILITY
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              EXTEND CAPABILITY
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Add Expertise Without Rebuilding Your Team.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              When additional capability is needed, we can help extend existing teams with professionals aligned to the technical requirements, delivery environment and engagement model.
+            </p>
+          </div>
+
+          {/* 8 Technical Role Categories */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            {augmentationRoles.map((role) => (
+              <motion.div
+                key={role.title}
+                whileHover={{ scale: 1.03, y: -4 }}
+                className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#2E936F] hover:bg-[#F7D7B0]/20 hover:shadow-lg transition-all duration-300 shadow-xs space-y-3 group cursor-pointer"
+              >
+                <div className="p-2.5 rounded-xl bg-[#F7D7B0]/30 w-fit group-hover:bg-[#2E936F]/10 transition-colors">
+                  {role.icon}
+                </div>
+                <h3 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">
+                  {role.title}
+                </h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                  {role.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      <CapabilityScanTransition />
+
+      {/* =====================================================================
+          8. TEAM MODELS — INTERACTIVE SELECTOR
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              ENGAGEMENT MODELS
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Choose the Team Model That Fits the Work.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Hover or select a team model below to examine how different engagement structures align with your delivery goals and organizational context.
+            </p>
+          </div>
+
+          {/* Model Selector Tabs */}
+          <div className="max-w-5xl mx-auto space-y-8">
+            <div className="flex overflow-x-auto gap-3 justify-center pb-2 scrollbar-none">
+              {teamModels.map((model) => {
+                const isActive = displayedModelId === model.id;
                 return (
-                  <div
-                    key={step.id}
-                    onClick={() => setActiveLoopStep(idx)}
+                  <button
+                    key={model.id}
+                    onClick={() => setActiveModelId(model.id)}
+                    onMouseEnter={() => setHoverModelId(model.id)}
+                    onMouseLeave={() => setHoverModelId(null)}
                     className={cn(
-                      "p-5 rounded-2xl border-2 transition-all duration-300 space-y-2 cursor-pointer text-center relative overflow-hidden",
+                      "px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm transition-all duration-200 cursor-pointer shrink-0 flex items-center gap-2 border transform",
                       isActive
-                        ? "bg-white dark:bg-[#000000] border-[#f15e1c] shadow-xl scale-105 ring-2 ring-[#f15e1c]/20"
-                        : "bg-white/60 dark:bg-[#000000]/60 border-[#f7d7b0] opacity-75 hover:opacity-100"
+                        ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-0.5"
+                        : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
                     )}
                   >
-                    <span className="text-[10px] font-mono font-black text-[#f15e1c] block">
-                      CYCLE 0{idx + 1}
-                    </span>
-                    <h4 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                      {step.name}
-                    </h4>
-                    <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] leading-tight">
-                      {step.desc}
-                    </p>
-                  </div>
+                    <span className={cn(isActive ? "text-[#FFFFFF]" : "text-[#F15E1C]")}>{model.icon}</span>
+                    <span>{model.name}</span>
+                  </button>
                 );
               })}
             </div>
 
-            {/* Loop Connection Statement */}
-            <div className="pt-8 relative z-10 flex items-center justify-center gap-3 text-xs font-mono font-bold text-[#f15e1c]">
-              <RefreshCw className="w-4 h-4 animate-spin-slow" />
-              <span>ASSESS &rarr; BUILD &rarr; MATCH &rarr; INTEGRATE &rarr; PERFORM &rarr; SUPPORT &rarr; ASSESS AGAIN</span>
-            </div>
+            {/* Selected Model Card Details */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeModel.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] shadow-xl space-y-6"
+              >
+                <div className="flex items-center gap-4 pb-6 border-b border-[#F7D7B0]">
+                  <div className="p-4 rounded-2xl bg-[#F15E1C] text-[#FFFFFF]">
+                    {activeModel.icon}
+                  </div>
+                  <div>
+                    <span className="text-xs font-mono font-bold text-[#F15E1C]">{activeModel.name}</span>
+                    <h3 className="text-2xl sm:text-3xl font-bold text-[#1b2823] dark:text-[#ffffff]">{activeModel.title}</h3>
+                  </div>
+                </div>
+
+                <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed font-semibold">
+                  {activeModel.tagline}
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                  <div className="p-4 rounded-xl bg-[#F7D7B0]/20 border border-[#F7D7B0] space-y-1">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#F15E1C] block">Best For</span>
+                    <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{activeModel.bestFor}</p>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-[#F7D7B0]/20 border border-[#F7D7B0] space-y-1">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#2E936F] block">Typical Engagement</span>
+                    <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{activeModel.engagement}</p>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-[#F7D7B0]/20 border border-[#F7D7B0] space-y-1">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#FAB60A] block">Primary Value</span>
+                    <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{activeModel.primaryValue}</p>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
+
         </div>
       </section>
 
-      {/* =========================================================================
-          7. EDITORIAL HUMAN CAPABILITY STATEMENT & BACKGROUND PARALLAX
-          ========================================================================= */}
-      <section
-        ref={missionRef}
-        className="relative py-28 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000] overflow-hidden select-none"
-      >
-        {/* Subtle Background Parallax Typography */}
-        <div className="absolute inset-0 pointer-events-none z-0 flex flex-col justify-between py-8 opacity-5 dark:opacity-10 font-display font-black text-7xl sm:text-9xl text-[#1b2823] dark:text-[#ffffff] tracking-tighter">
-          <motion.div style={{ x: backgroundTextX1 }} className="whitespace-nowrap">
-            SKILLS &bull; PEOPLE &bull; SUPPORT
-          </motion.div>
-          <motion.div style={{ x: backgroundTextX2 }} className="whitespace-nowrap text-right">
-            PERFORMANCE &bull; GROWTH &bull; TEAM
-          </motion.div>
-        </div>
+      <CapabilityScanTransition />
 
-        <div className="max-w-[1536px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-          <div ref={statementRef} className="lg:col-span-7 space-y-6 text-left">
-            <Badge variant="secondary" size="md">
-              HUMAN CAPABILITY PHILOSOPHY
+      {/* =====================================================================
+          9. NEW VISUAL — TEAM INTEGRATION
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              TEAM INTEGRATION ARCHITECTURE
             </Badge>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={isStatementInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.75, ease: "easeOut" }}
-              className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-[1.12] tracking-tight"
-            >
-              Building stronger teams through <span className="text-[#f15e1c]">the right skills, the right people, and the right support.</span>
-            </motion.h2>
-
-            <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-normal">
-              Arav Innovations delivers pre-vetted engineering talent and tailored capability building to help your enterprise scale digital products with confidence.
-            </p>
-          </div>
-
-          <div className="lg:col-span-5 flex items-center justify-center">
-            <div className="relative w-80 h-80 sm:w-96 sm:h-96 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-6 flex flex-col justify-between items-center text-center overflow-hidden">
-              <div className="absolute inset-0 bg-radial from-[#f15e1c]/15 via-[#2e936f]/10 to-transparent pointer-events-none" />
-
-              <div className="relative z-10 flex items-center gap-2 pt-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-ping" />
-                <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
-                  TEAM CORE
-                </span>
-              </div>
-
-              <svg className="w-48 h-48 relative z-10 my-auto" viewBox="0 0 100 100" fill="none">
-                <circle cx="50" cy="50" r="32" stroke="#f15e1c" strokeWidth="2" strokeDasharray="3 3" />
-                <circle cx="35" cy="40" r="6" fill="#2e936f" />
-                <circle cx="65" cy="40" r="6" fill="#fab60a" />
-                <circle cx="50" cy="65" r="8" fill="#f15e1c" className="animate-pulse" />
-                <line x1="35" y1="40" x2="65" y2="40" stroke="#2e936f" strokeWidth="1.5" />
-                <line x1="35" y1="40" x2="50" y2="65" stroke="#f15e1c" strokeWidth="1.5" />
-                <line x1="65" y1="40" x2="50" y2="65" stroke="#fab60a" strokeWidth="1.5" />
-              </svg>
-
-              <span className="relative z-10 text-[11px] font-mono font-bold text-[#2e936f] pb-1">
-                HIGH-PERFORMING TEAM SYSTEM
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          8. CLIENT TESTIMONIAL — ENTERPRISE PROOF
-          ========================================================================= */}
-      <section ref={testimonialRef} className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1536px] mx-auto text-center space-y-8">
-          <Badge variant="secondary" size="md">
-            KIND WORDS FROM OUR CLIENTS
-          </Badge>
-
-          <div className="p-8 sm:p-14 lg:p-16 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl space-y-6 relative overflow-hidden max-w-5xl mx-auto">
-            <div className="p-3 rounded-2xl bg-[#f15e1c] text-white w-fit mx-auto shadow-md">
-              <Quote className="w-6 h-6" />
-            </div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isTestimonialInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="text-xl sm:text-3xl lg:text-4xl font-display font-medium text-[#1b2823] dark:text-[#ffffff] max-w-4xl mx-auto leading-relaxed italic"
-            >
-              &ldquo;{testimonial.quote}&rdquo;
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={isTestimonialInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-              transition={{ duration: 0.5, delay: 0.35 }}
-              className="pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] space-y-1"
-            >
-              <div className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                {testimonial.author}
-              </div>
-              <div className="text-xs text-[#f15e1c] font-bold">
-                {testimonial.designation} &bull; {testimonial.company}
-              </div>
-              <div className="text-xs font-mono font-bold text-[#2e936f] pt-1">
-                Staff Augmentation &amp; Upskilling Partner
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          9. ABOUT OUR CEO — EDITORIAL LEADERSHIP PROFILE
-          ========================================================================= */}
-      <section className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1536px] mx-auto rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-8 sm:p-14 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center text-left">
-          <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-3xl overflow-hidden border-2 border-[#f15e1c] shadow-xl bg-[#fce3d3] dark:bg-[#161616] flex items-center justify-center text-center p-6 space-y-2 flex-col">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#f15e1c] text-white flex items-center justify-center text-2xl sm:text-3xl font-black font-display shadow-md">
-                AS
-              </div>
-              <div className="text-lg sm:text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                Aryan Sayal
-              </div>
-              <div className="text-xs sm:text-sm font-mono font-bold text-[#f15e1c]">
-                CEO &amp; Managing Director
-              </div>
-              <span className="text-xs text-[#2e936f] font-mono">Arav Innovations</span>
-            </div>
-          </div>
-
-          <div className="lg:col-span-7 space-y-4">
-            <Badge variant="secondary" size="md">
-              About Our CEO
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-              Aryan Sayal
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Aligned Integration, Not Isolated Sourcing.
             </h2>
-            <p className="text-xs sm:text-sm font-mono font-extrabold text-[#f15e1c] uppercase tracking-wider">
-              CEO, Arav Innovations
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Successful team extension relies on clear communication, shared practices, explicit roles, and active knowledge sharing.
             </p>
-            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-              Leading Arav Innovations with a vision for human capability engineering, Aryan Sayal guides team-building advisory squads across India and the UAE to deliver top tech talent and accelerate enterprise product delivery.
-            </p>
-            <div className="pt-2">
-              <a
-                href="https://www.linkedin.com/company/aravinnovations/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#f15e1c] text-white text-xs sm:text-sm font-bold shadow-md hover:bg-[#d44e14] transition-colors"
-              >
-                <Globe2 className="w-4 h-4" />
-                <span>Connect on LinkedIn</span>
-              </a>
+          </div>
+
+          {/* Integration Visual Flow */}
+          <div className="bg-white dark:bg-[#1b2823] border border-[#F7D7B0] rounded-3xl p-8 sm:p-12 shadow-lg space-y-8 max-w-5xl mx-auto text-center">
+            
+            <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 items-center">
+              <div className="p-4 rounded-xl bg-[#F7D7B0]/20 border border-[#F7D7B0]">
+                <Users className="w-5 h-5 text-[#F15E1C] mx-auto mb-1" />
+                <span className="text-xs font-bold block text-[#1b2823] dark:text-[#ffffff]">CLIENT TEAM</span>
+                <span className="text-[10px] text-gray-500 dark:text-gray-400">Context &amp; Goals</span>
+              </div>
+
+              <div className="text-[#F15E1C] font-bold text-lg hidden sm:block">+</div>
+
+              <div className="p-4 rounded-xl bg-[#F7D7B0]/20 border border-[#F7D7B0]">
+                <Cpu className="w-5 h-5 text-[#2E936F] mx-auto mb-1" />
+                <span className="text-xs font-bold block text-[#1b2823] dark:text-[#ffffff]">ARAV SPECIALISTS</span>
+                <span className="text-[10px] text-gray-500 dark:text-gray-400">Role Capability</span>
+              </div>
+
+              <div className="text-[#2E936F] font-bold text-lg hidden sm:block">&rarr;</div>
+
+              <div className="p-4 rounded-xl bg-[#F15E1C]/10 border border-[#F15E1C]/40">
+                <Workflow className="w-5 h-5 text-[#F15E1C] mx-auto mb-1" />
+                <span className="text-xs font-bold block text-[#F15E1C]">SHARED WORKFLOW</span>
+                <span className="text-[10px] text-[#F15E1C]">Aligned Delivery</span>
+              </div>
             </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-[#F7D7B0]">
+              <div className="p-4 rounded-xl bg-[#F7D7B0]/20 text-left space-y-1">
+                <span className="text-xs font-bold text-[#F15E1C] uppercase block">Shared Standards</span>
+                <p className="text-xs text-gray-600 dark:text-gray-300">Working practices, repos, CI/CD tools &amp; code reviews.</p>
+              </div>
+
+              <div className="p-4 rounded-xl bg-[#F7D7B0]/20 text-left space-y-1">
+                <span className="text-xs font-bold text-[#2E936F] uppercase block">Knowledge Transfer</span>
+                <p className="text-xs text-gray-600 dark:text-gray-300">Continuous technical exchange, pair working &amp; handover.</p>
+              </div>
+
+              <div className="p-4 rounded-xl bg-[#F7D7B0]/20 text-left space-y-1">
+                <span className="text-xs font-bold text-[#FAB60A] uppercase block">Stronger Capability</span>
+                <p className="text-xs text-gray-600 dark:text-gray-300">Permanent increase in overall team skill &amp; throughput.</p>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* =========================================================================
-          10. FINAL CTA — PRODUCT CULMINATION SECTION
-          ========================================================================= */}
-      <section id="inquire" className="relative py-24 px-4 sm:px-6 md:px-8 lg:px-12 select-none">
-        <div className="max-w-[1536px] mx-auto space-y-8">
-          {/* Connector Flow Header: SKILLS -> TALENT -> TEAM -> PERFORMANCE -> GROWTH */}
-          <div className="text-center space-y-2">
-            <span className="text-xs font-mono font-extrabold text-[#f15e1c] uppercase tracking-widest block">
-              HUMAN CAPABILITY CULMINATION
-            </span>
-            <div className="flex items-center justify-center gap-2 text-xs sm:text-sm font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0]">
-              <span>SKILLS</span>
-              <span className="text-[#f15e1c]">&rarr;</span>
-              <span>TALENT</span>
-              <span className="text-[#f15e1c]">&rarr;</span>
-              <span>TEAM</span>
-              <span className="text-[#f15e1c]">&rarr;</span>
-              <span>PERFORMANCE</span>
-              <span className="text-[#f15e1c]">&rarr;</span>
-              <span className="text-[#2e936f]">GROWTH</span>
-            </div>
+      <CapabilityScanTransition />
+
+      {/* =====================================================================
+          10. HOW WE WORK — 6 STAGE JOURNEY
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              CAPABILITY ENGAGEMENT JOURNEY
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              How We Work With Your Teams.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              A structured 6-stage path designed to discover requirements, define the model, integrate seamlessly, and support capability growth.
+            </p>
           </div>
 
-          <div className="rounded-[3rem] bg-gradient-to-br from-[#f15e1c] via-[#e55215] to-[#d8480d] text-white p-10 sm:p-16 border-2 border-[#fab60a] shadow-2xl space-y-8 text-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-radial from-white/20 via-transparent to-transparent pointer-events-none" />
+          {/* 6-Stage Journey Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {workStages.map((st) => (
+              <motion.div
+                key={st.step}
+                whileHover={{ scale: 1.02, y: -4 }}
+                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 hover:shadow-lg transition-all duration-300 shadow-xs flex flex-col justify-between group cursor-pointer"
+              >
+                <div>
+                  <span className="text-xs font-mono font-bold text-[#F15E1C] px-2.5 py-1 rounded bg-[#F7D7B0]/40 group-hover:bg-[#F15E1C] group-hover:text-[#FFFFFF] transition-colors block w-fit mb-3">
+                    STAGE {st.step}
+                  </span>
+                  <h3 className="text-xl font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors mb-2">
+                    {st.name}
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                    {st.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
 
-            <div className="relative z-10 max-w-4xl mx-auto space-y-5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/20 border border-white/40 text-xs font-mono font-bold text-white">
-                <Sparkles className="w-4 h-4 text-[#ffec69]" />
-                <span>BUILD HIGH-PERFORMING TEAMS</span>
-              </div>
+        </div>
+      </section>
 
-              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-display tracking-tight text-white leading-tight">
-                Let&apos;s Build What Comes Next
+      <CapabilityScanTransition />
+
+      {/* =====================================================================
+          11. SKILL -> ROLE -> TEAM INTERACTIVE VISUAL
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              CAPABILITY MATRIX
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Start With the Capability. Then Choose the Model.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Examine sample scenarios showing how technical skill requirements map to specific roles and team structures.
+            </p>
+          </div>
+
+          <div className="max-w-5xl mx-auto space-y-6">
+            {/* Example Tabs */}
+            <div className="flex overflow-x-auto gap-3 justify-center pb-2 scrollbar-none">
+              {skillToTeamExamples.map((ex, idx) => {
+                const isActive = activeExampleIdx === idx;
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveExampleIdx(idx)}
+                    className={cn(
+                      "px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all duration-200 cursor-pointer shrink-0 border transform",
+                      isActive
+                        ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md"
+                        : "bg-white dark:bg-[#1b2823] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
+                    )}
+                  >
+                    <span>{ex.scenario}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Active Example Matrix Breakdown */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeExampleIdx}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="p-8 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] shadow-xl space-y-6"
+              >
+                <div className="flex items-center justify-between pb-4 border-b border-[#F7D7B0]">
+                  <h3 className="text-xl font-bold text-[#1b2823] dark:text-[#ffffff]">
+                    Scenario: {skillToTeamExamples[activeExampleIdx].scenario}
+                  </h3>
+                  <Badge variant="subtle" className="text-xs bg-[#2E936F]/10 text-[#2E936F] font-semibold">
+                    Sample Mapping
+                  </Badge>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 text-center">
+                  <div className="p-4 rounded-xl bg-[#F7D7B0]/20 border border-[#F7D7B0] space-y-1">
+                    <span className="text-[10px] font-mono text-[#F15E1C] font-bold block uppercase">1. SKILL GAP</span>
+                    <span className="text-xs font-bold text-[#F15E1C] block">{skillToTeamExamples[activeExampleIdx].gap}</span>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-[#F7D7B0]/20 border border-[#F7D7B0] space-y-1">
+                    <span className="text-[10px] font-mono text-gray-500 dark:text-gray-400 font-bold block uppercase">2. EXPERTISE</span>
+                    <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff] block">{skillToTeamExamples[activeExampleIdx].expertise}</span>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-[#F7D7B0]/20 border border-[#F7D7B0] space-y-1">
+                    <span className="text-[10px] font-mono text-[#2E936F] font-bold block uppercase">3. ROLE</span>
+                    <span className="text-xs font-bold text-[#2E936F] block">{skillToTeamExamples[activeExampleIdx].role}</span>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-[#F7D7B0]/20 border border-[#F7D7B0] space-y-1">
+                    <span className="text-[10px] font-mono text-[#FAB60A] font-bold block uppercase">4. STRUCTURE</span>
+                    <span className="text-xs font-bold text-[#FAB60A] block">{skillToTeamExamples[activeExampleIdx].structure}</span>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-[#F7D7B0]/20 border border-[#F7D7B0] space-y-1">
+                    <span className="text-[10px] font-mono text-[#2E936F] font-bold block uppercase">5. MODEL</span>
+                    <span className="text-xs font-bold text-[#2E936F] block">{skillToTeamExamples[activeExampleIdx].model}</span>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+          </div>
+        </div>
+      </section>
+
+      <CapabilityScanTransition />
+
+      {/* =====================================================================
+          12. KNOWLEDGE TRANSFER (DEDICATED SECTION)
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              LONG-TERM VALUE ANCHOR
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              The Goal Is Capability That Stays With You.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              External expertise creates greater value when knowledge can move back into the organization permanently.
+            </p>
+          </div>
+
+          <div className="bg-[#F7D7B0]/20 border border-[#F7D7B0] rounded-3xl p-8 sm:p-12 shadow-lg max-w-5xl mx-auto text-center space-y-8">
+            <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 items-center">
+              {[
+                { title: "EXPERTISE", desc: "Technical Knowledge", color: "text-[#F15E1C]" },
+                { title: "COLLABORATION", desc: "Pair Programming", color: "text-[#2E936F]" },
+                { title: "DOCUMENTATION", desc: "Code Standards", color: "text-[#FAB60A]" },
+                { title: "KNOWLEDGE TRANSFER", desc: "Handover Protocol", color: "text-[#F15E1C]" },
+                { title: "INTERNAL CAPABILITY", desc: "Permanent Skill", color: "text-[#2E936F]" },
+              ].map((item, idx) => (
+                <div key={idx} className="p-4 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] space-y-1">
+                  <span className={cn("text-xs font-mono font-bold block", item.color)}>{item.title}</span>
+                  <span className="text-[10px] text-gray-500 dark:text-gray-400 block font-medium">{item.desc}</span>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed font-medium">
+              Unlike traditional staffing agencies where knowledge leaves when an assignment finishes, our models explicitly build technical documentation and handover into the engagement rhythm.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <CapabilityScanTransition />
+
+      {/* =====================================================================
+          14. OUTCOMES
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              VALUE DELIVERED
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              What Stronger Capability Enables.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Practical advantages of combining internal upskilling with aligned technical specialists.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {capabilityOutcomes.map((out) => (
+              <motion.div
+                key={out.title}
+                whileHover={{ scale: 1.02, y: -4 }}
+                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#2E936F] hover:bg-[#F7D7B0]/20 hover:shadow-lg transition-all duration-300 shadow-xs flex items-start gap-4 group cursor-pointer"
+              >
+                <div className="p-3 rounded-xl bg-[#F7D7B0]/30 group-hover:bg-[#2E936F]/10 transition-colors shrink-0">
+                  {out.icon}
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">
+                    {out.title}
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                    {out.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      <CapabilityScanTransition />
+
+      {/* =====================================================================
+          15. INDUSTRIES / USE CASES & WHAT WE HELP ADDRESS
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 space-y-16">
+          
+          {/* Section A: Where Teams Need Support */}
+          <div>
+            <div className="text-center max-w-3xl mx-auto mb-10">
+              <Badge variant="outline" className="mb-3 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+                WHERE TEAMS NEED SUPPORT
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#1b2823] dark:text-[#ffffff]">
+                Environments Where These Models Apply.
               </h2>
-
-              {/* Alternating Animated Word Display */}
-              <div className="h-12 flex items-center justify-center overflow-hidden">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={ctaWords[currentWordIdx]}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.35 }}
-                    className="text-2xl sm:text-4xl font-extrabold font-display text-[#ffec69] uppercase tracking-wider"
-                  >
-                    {ctaWords[currentWordIdx]}
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              <p className="text-base sm:text-xl font-bold text-white/90">
-                Kick start a project with us today
-              </p>
             </div>
 
-            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-              <Link href="/contact" className="w-full sm:w-auto">
-                <MagneticButton className="w-full sm:w-auto">
-                  <Button3D
-                    variant="primary"
-                    size="lg"
-                    rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />}
-                    className="w-full sm:w-auto justify-center bg-white text-[#f15e1c] hover:bg-[#f7d7b0]"
-                  >
-                    Discuss a Project
-                  </Button3D>
-                </MagneticButton>
-              </Link>
-              <a
-                href="https://api.whatsapp.com/send?phone=971521555792&text=Hello%20Arav%20Innovations%2C%20I%27d%20like%20to%20discuss%20a%20project."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto"
-              >
-                <MagneticButton className="w-full sm:w-auto">
-                  <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center text-white border-white/60 hover:bg-white/10">
-                    Instant WhatsApp Inquiry
-                  </Button3D>
-                </MagneticButton>
-              </a>
-            </div>
-
-            <div className="relative z-10 pt-6 border-t border-white/20 flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm text-white/90 font-medium">
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Pre-Vetted Senior Engineers
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> 48-Hour SLA Deployment
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Regional Teams in Gurgaon &amp; Dubai
-              </span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+              {targetIndustries.map((ind, idx) => (
+                <div key={idx} className="p-5 rounded-xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] space-y-1">
+                  <h4 className="text-sm font-bold text-[#1b2823] dark:text-[#ffffff]">{ind.title}</h4>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{ind.desc}</p>
+                </div>
+              ))}
             </div>
           </div>
+
+          {/* Section B: What We Help Address */}
+          <div>
+            <div className="text-center max-w-3xl mx-auto mb-10">
+              <Badge variant="outline" className="mb-3 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+                WHAT WE HELP ORGANIZATIONS ADDRESS
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#1b2823] dark:text-[#ffffff]">
+                Common Operational &amp; Capability Challenges.
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {whatWeAddress.map((item, idx) => (
+                <div key={idx} className="p-6 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] space-y-2">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#F15E1C]" />
+                    <h4 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff]">{item.title}</h4>
+                  </div>
+                  <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
 
-      {/* =========================================================================
-          11. FOOTER BRAND MOMENT
-          ========================================================================= */}
-      <footer className="py-6 border-t border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] overflow-hidden select-none">
-        <div className="flex items-center justify-center gap-6 text-xs sm:text-sm font-mono font-extrabold text-[#7A6A5F] dark:text-[#B8ACA0] tracking-widest">
-          <span>SKILLS</span>
-          <span className="text-[#f15e1c]">&bull;</span>
-          <span>PEOPLE</span>
-          <span className="text-[#f15e1c]">&bull;</span>
-          <span>PERFORMANCE</span>
-          <span className="text-[#f15e1c]">&bull;</span>
-          <span>GROWTH</span>
+      <CapabilityScanTransition />
+
+      {/* =====================================================================
+          17. BLOGS / INSIGHTS (REAL CMS DATA)
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#1b2823] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
+            <Badge variant="outline" className="mb-3 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              KNOWLEDGE BASE
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Team &amp; Capability Insights.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Read published analysis on team development, technical leadership, and engineering capability.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            {articles.map((post) => (
+              <Link key={post.slug} href={`/insights/${post.slug}`} className="group block">
+                <motion.div whileHover={{ y: -4 }} className="h-full p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#1b2823] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-lg transition-all duration-300 shadow-xs flex flex-col justify-between">
+                  <div>
+                    <Badge variant="subtle" className="mb-3 text-[10px] bg-[#F7D7B0]/40 text-[#F15E1C] font-semibold">
+                      {post.category}
+                    </Badge>
+                    <h3 className="text-base sm:text-lg font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="mt-2 text-xs sm:text-sm text-gray-600 dark:text-gray-300 line-clamp-3 leading-relaxed">
+                      {post.summary}
+                    </p>
+                  </div>
+                  <div className="pt-4 mt-4 border-t border-[#F7D7B0] flex items-center justify-between text-xs font-semibold text-[#F15E1C]">
+                    <span>Read Article</span>
+                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </div>
+                </motion.div>
+              </Link>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <Link href="/insights">
+              <Button3D variant="secondary" size="md" className="bg-[#2E936F] text-[#FFFFFF] border-[#2E936F]">
+                Explore All Insights
+              </Button3D>
+            </Link>
+          </div>
+
         </div>
-      </footer>
+      </section>
+
+      <CapabilityScanTransition />
+
+      {/* =====================================================================
+          18. FAQ SECTION
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+            <Badge variant="outline" className="mb-3 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
+              QUESTIONS &amp; ANSWERS
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              Frequently Asked Questions.
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              Concise answers regarding staff augmentation, team training, integration, and engagement models.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto space-y-4">
+            {faqData.map((faq, index) => {
+              const isOpen = openFaqIdx === index;
+              return (
+                <div
+                  key={index}
+                  className="rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#1b2823] overflow-hidden transition-all hover:border-[#F15E1C] hover:shadow-md"
+                >
+                  <button
+                    onClick={() => setOpenFaqIdx(isOpen ? null : index)}
+                    className="w-full text-left p-5 flex items-center justify-between font-bold text-sm sm:text-base text-[#1b2823] dark:text-[#ffffff] hover:text-[#F15E1C] transition-colors cursor-pointer"
+                  >
+                    <span>{faq.question}</span>
+                    <ChevronDown className={cn("w-5 h-5 transition-transform duration-200 text-[#F15E1C]", isOpen && "rotate-180")} />
+                  </button>
+
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <div className="p-5 pt-0 text-sm text-gray-600 dark:text-gray-300 border-t border-[#F7D7B0] leading-relaxed">
+                          {faq.answer}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
+
+        </div>
+      </section>
+
+      <CapabilityScanTransition />
+
+      {/* =====================================================================
+          19. FINAL CTA
+          ===================================================================== */}
+      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24">
+        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          <div className="relative rounded-3xl p-8 sm:p-12 lg:p-16 bg-[#2E936F] text-[#FFFFFF] border border-[#2E936F] shadow-2xl overflow-hidden text-center space-y-6">
+            
+            {/* Ambient Palette Glows */}
+            <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#F15E1C]/30 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-[#FAB60A]/25 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#FFEC69]/20 rounded-full blur-3xl pointer-events-none" />
+
+            <Badge variant="outline" className="border-[#FFFFFF] text-[#FFFFFF] bg-[#FFFFFF]/10 px-3 py-1 font-semibold tracking-wider text-xs">
+              TAKE THE NEXT STEP
+            </Badge>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight max-w-3xl mx-auto leading-tight text-[#FFFFFF]">
+              Build the Capability Your Next Stage Requires.
+            </h2>
+
+            <p className="text-base sm:text-lg text-[#FFEC69] max-w-2xl mx-auto leading-relaxed font-medium">
+              Whether you need to strengthen existing skills or extend your team with specialist expertise, we'll help you identify the right capability model for the work ahead.
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+              <Link href="/contact">
+                <Button3D variant="primary" size="lg" className="flex items-center gap-2 font-semibold bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] hover:opacity-95 transition-all">
+                  Discuss Your Capability Needs
+                  <ArrowRight className="w-4 h-4" />
+                </Button3D>
+              </Link>
+              <a href="#capability-map">
+                <Button3D variant="secondary" size="lg" className="flex items-center gap-2 font-medium bg-[#FFFFFF] text-[#2E936F] border-[#FFFFFF] hover:bg-[#F7D7B0] transition-all">
+                  Explore Team Models
+                </Button3D>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

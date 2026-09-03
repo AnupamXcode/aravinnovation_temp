@@ -5,10 +5,9 @@ import { TrainingStaffInteractivePage } from "@/components/services/TrainingStaf
 import { notFound } from "next/navigation";
 
 export async function generateMetadata() {
-  const service = getServiceBySlug("training-staff-augmentation");
   return {
-    title: `${service?.title || "Training and Staff Augmentation"} | Arav Innovations`,
-    description: service?.description || "Vetted on-demand technical talent, enterprise upskilling programs & dedicated engineering squads.",
+    title: "Training & Staff Augmentation Services | Arav Innovations",
+    description: "Build technology capabilities and extend delivery teams with tailored training, specialist expertise, staff augmentation and knowledge transfer.",
     alternates: {
       canonical: "https://aravinnovations.com/services/training-staff-augmentation",
     },
