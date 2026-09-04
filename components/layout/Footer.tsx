@@ -169,7 +169,7 @@ const enterprisePractices = [
 
 const companyLinks = [
   { label: "About Us", href: "/about" },
-  { label: "Working With Us", href: "/careers" },
+  { label: "Working With Us", href: "/#process" },
   { label: "Careers", href: "/careers" },
   { label: "Blogs", href: "/blogs" },
   { label: "Contact", href: "/contact" },
@@ -344,7 +344,7 @@ export function Footer() {
               </h4>
               <ul className="space-y-1.5 text-xs font-semibold text-white/90">
                 {companyLinks.map((item) => (
-                  <li key={item.href}>
+                  <li key={item.label}>
                     <Link
                       href={item.href}
                       className="hover:text-[#ffec69] transition-colors inline-block focus:outline-hidden focus:ring-1 focus:ring-[#f15e1c] rounded-xs"
@@ -363,7 +363,7 @@ export function Footer() {
               </h4>
               <ul className="space-y-1.5 text-xs font-semibold text-white/90">
                 {exploreLinks.map((item) => (
-                  <li key={item.href}>
+                  <li key={item.label}>
                     <Link
                       href={item.href}
                       className="hover:text-[#ffec69] transition-colors inline-block focus:outline-hidden focus:ring-1 focus:ring-[#f15e1c] rounded-xs"
@@ -471,7 +471,7 @@ export function Footer() {
           {/* Legal Links */}
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-5">
             {legalLinks.map((link, idx) => (
-              <React.Fragment key={link.href}>
+              <React.Fragment key={link.label}>
                 <Link
                   href={link.href}
                   className="hover:text-[#ffec69] transition-colors focus:outline-hidden focus:ring-1 focus:ring-[#f15e1c] rounded-xs text-[11px]"

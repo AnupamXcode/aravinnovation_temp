@@ -56,13 +56,7 @@ export function HomeInsightsSection({ posts }: HomeInsightsSectionProps) {
                 {/* Visual Header / Cover Image */}
                 <div className="relative w-full h-48 sm:h-52 bg-[#f7d7b0]/30 dark:bg-[#0a0a0a] overflow-hidden border-b border-[#f7d7b0]/60 dark:border-[#2a3c35]">
                   {post.featuredImageUrl ? (
-                    <Image
-                      src={post.featuredImageUrl}
-                      alt={post.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
+                    <BlogCoverImage src={post.featuredImageUrl} title={post.title} />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-[#f15e1c]/10 via-[#f7d7b0]/20 to-[#2e936f]/10 dark:from-[#f15e1c]/20 dark:to-[#1a1a1a] flex items-center justify-center p-6">
                       <div className="w-14 h-14 rounded-2xl bg-white dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center text-[#f15e1c] shadow-sm group-hover:scale-110 transition-transform">
@@ -119,5 +113,30 @@ export function HomeInsightsSection({ posts }: HomeInsightsSectionProps) {
         </div>
       </div>
     </section>
+  );
+}
+
+function BlogCoverImage({ src, title }: { src: string; title: string }) {
+  const [hasError, setHasError] = React.useState(false);
+
+  if (hasError) {
+    return (
+      <div className="w-full h-full bg-gradient-to-br from-[#f15e1c]/10 via-[#f7d7b0]/20 to-[#2e936f]/10 dark:from-[#f15e1c]/20 dark:to-[#1a1a1a] flex items-center justify-center p-6">
+        <div className="w-14 h-14 rounded-2xl bg-white dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center text-[#f15e1c] shadow-sm">
+          <BookOpen className="w-7 h-7" />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <Image
+      src={src}
+      alt={title}
+      fill
+      className="object-cover group-hover:scale-105 transition-transform duration-500"
+      sizes="(max-width: 768px) 100vw, 33vw"
+      onError={() => setHasError(true)}
+    />
   );
 }
