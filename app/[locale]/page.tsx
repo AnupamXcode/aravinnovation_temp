@@ -24,6 +24,8 @@ import {
 } from "lucide-react";
 
 import { getSEOForPath, SITE_BASE_URL } from "@/lib/seo";
+import { getBlogPosts } from "@/lib/cms";
+import { HomeInsightsSection } from "@/components/home/HomeInsightsSection";
 
 export async function generateMetadata() {
   const seo = getSEOForPath("/");
@@ -208,6 +210,9 @@ export default async function HomePage({
           </div>
         </section>
       </div>
+
+      {/* 6.5. KNOWLEDGE HUB / HOMEPAGE INSIGHTS SECTION */}
+      <HomeInsightsSection posts={await getBlogPosts(locale)} />
 
       {/* 7. FINAL LEAD FORM & CTA SECTION */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="contact">
