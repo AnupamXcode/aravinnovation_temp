@@ -57,14 +57,14 @@ export function WhyAravDigitalCore({
       <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#2e936f]/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Header Section */}
-      <div className="text-center max-w-4xl mx-auto mb-14 space-y-4 relative z-10">
+      <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14 space-y-4 relative z-10">
         <Badge variant="secondary" size="md">
           WHY ARAV INNOVATIONS
         </Badge>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-display text-[#2e936f] tracking-tight">
+        <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight leading-tight">
           {headline}
         </h2>
-        <p className="text-sm sm:text-base text-[#2e936f] leading-relaxed max-w-2xl mx-auto">
+        <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed max-w-2xl mx-auto font-medium">
           {subheadline}
         </p>
       </div>
@@ -83,8 +83,8 @@ export function WhyAravDigitalCore({
                 className={cn(
                   "w-full text-left p-4 sm:p-5 rounded-2xl border transition-all duration-300 flex items-start gap-4 group cursor-pointer relative overflow-hidden",
                   isActive
-                    ? "bg-white border-[#f15e1c] shadow-xl ring-2 ring-[#f15e1c]/20 scale-[1.02]"
-                    : "bg-white border-[#f7d7b0] hover:border-[#f15e1c]/50 hover:bg-white"
+                    ? "bg-white dark:bg-[#16221d] border-[#f15e1c] shadow-xl ring-2 ring-[#f15e1c]/20 scale-[1.01]"
+                    : "bg-white dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/50"
                 )}
               >
                 {/* Active Indicator Bar */}
@@ -94,30 +94,30 @@ export function WhyAravDigitalCore({
 
                 <div
                   className={cn(
-                    "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors shadow-sm",
+                    "w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center shrink-0 transition-colors shadow-sm",
                     isActive
                       ? "bg-[#f15e1c] text-white"
-                      : "bg-[#f7d7b0] text-[#f15e1c] group-hover:bg-[#f15e1c] group-hover:text-white"
+                      : "bg-[#f7d7b0] dark:bg-[#161616] text-[#f15e1c] group-hover:bg-[#f15e1c] group-hover:text-white"
                   )}
                 >
-                  {iconMap[pillar.icon] || <Zap className="w-5 h-5" />}
+                  {iconMap[pillar.icon] || <Zap className="w-6 h-6 sm:w-7 sm:h-7" />}
                 </div>
 
-                <div className="flex-1 space-y-1">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-extrabold font-mono text-[#f15e1c] uppercase tracking-widest">
+                <div className="flex-1 space-y-1 min-w-0">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[11px] font-extrabold font-mono text-[#f15e1c] uppercase tracking-widest">
                       PILLAR {pillar.number}
                     </span>
-                    <span className="text-[11px] font-mono font-bold text-[#2e936f]">
+                    <span className="text-xs font-mono font-bold text-[#2e936f] dark:text-[#74c4ab] truncate">
                       {pillar.subtitle}
                     </span>
                   </div>
                   <h3
                     className={cn(
-                      "text-sm sm:text-base font-bold font-display transition-colors",
+                      "text-base sm:text-lg font-bold font-display transition-colors leading-snug break-words",
                       isActive
                         ? "text-[#f15e1c]"
-                        : "text-[#2e936f] group-hover:text-[#f15e1c]"
+                        : "text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c]"
                     )}
                   >
                     {pillar.title}

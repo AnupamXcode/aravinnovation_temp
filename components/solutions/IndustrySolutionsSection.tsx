@@ -59,20 +59,20 @@ export function IndustrySolutionsSection({
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#2e936f]/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Header */}
-      <div className="text-center max-w-4xl mx-auto mb-12 space-y-3 relative z-10">
+      <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-12 space-y-3 relative z-10">
         <Badge variant="secondary" size="md">
           TAILORED INDUSTRY SOLUTIONS
         </Badge>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-display text-[#2e936f] dark:text-[#34d399] tracking-tight">
+        <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight leading-tight">
           Vertical Digital Transformation
         </h2>
-        <p className="text-sm sm:text-base text-[#2e936f] dark:text-[#d3eee4] leading-relaxed max-w-2xl mx-auto">
+        <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed max-w-2xl mx-auto font-medium">
           We apply our architectural, engineering, and compliance capabilities directly to specialized industry environments to eliminate operational bottlenecks and drive revenue.
         </p>
       </div>
 
       {/* Industry Tab Navigation Bar */}
-      <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-3 mb-10 relative z-10">
+      <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-10 relative z-10">
         {industries.map((ind) => {
           const isSel = ind.slug === selectedSlug;
           return (
@@ -81,21 +81,21 @@ export function IndustrySolutionsSection({
               type="button"
               onClick={() => setSelectedSlug(ind.slug)}
               className={cn(
-                "px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold font-display transition-all duration-300 cursor-pointer border flex items-center gap-2.5",
+                "px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl text-xs sm:text-sm font-extrabold font-display transition-all duration-300 cursor-pointer border flex items-center gap-2 min-h-[44px]",
                 isSel
                   ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-xl shadow-[#f15e1c]/30 scale-105"
-                  : "bg-white dark:bg-[#000000] text-[#2e936f] dark:text-[#d3eee4] border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] dark:hover:border-[#f15e1c] hover:bg-[#f7d7b0]/20 dark:hover:bg-[#161616]"
+                  : "bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#d3eee4] border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] dark:hover:border-[#f15e1c]"
               )}
             >
               <div
                 className={cn(
-                  "p-1 rounded-lg transition-colors",
+                  "p-1 rounded-lg transition-colors shrink-0",
                   isSel ? "text-white" : "text-[#f15e1c]"
                 )}
               >
                 {iconMap[ind.icon] || <Briefcase className="w-4 h-4" />}
               </div>
-              <span>{ind.name}</span>
+              <span className="truncate">{ind.name}</span>
             </button>
           );
         })}
@@ -108,14 +108,14 @@ export function IndustrySolutionsSection({
           {/* Industry Overview Box */}
           <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg space-y-3">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#f15e1c]/10 text-[#f15e1c] flex items-center justify-center font-bold">
-                {iconMap[activeIndustry.icon] || <Briefcase className="w-5 h-5" />}
+              <div className="w-12 h-12 rounded-xl bg-[#f15e1c]/10 text-[#f15e1c] flex items-center justify-center font-bold shrink-0">
+                {iconMap[activeIndustry.icon] || <Briefcase className="w-6 h-6" />}
               </div>
               <h3 className="text-xl sm:text-2xl font-black font-display text-[#f15e1c]">
                 {activeIndustry.name}
               </h3>
             </div>
-            <p className="text-sm text-[#2e936f] dark:text-[#d3eee4] leading-relaxed">
+            <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
               {activeIndustry.description}
             </p>
           </div>
