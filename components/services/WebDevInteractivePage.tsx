@@ -709,43 +709,43 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
             {/* LEFT COLUMN: INTRODUCTORY TEXT (~45% width) */}
-            <div className="lg:col-span-5 space-y-5 text-left order-2 lg:order-1">
-              <AnimatedSection delay={0.08} className="space-y-3">
+            <div className="lg:col-span-5 space-y-6 text-left order-2 lg:order-1">
+              <AnimatedSection delay={0.08} className="space-y-4">
                 <Badge variant="secondary" size="md">
                   DIGITAL PRODUCT ENGINEERING
                 </Badge>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-tight">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black font-display tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-tight">
                   From Digital Experience to Business-Critical Product
                 </h2>
-                <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed">
-                  Your digital product is more than its interface. It is the experience customers use, the workflows your teams depend on, and the systems that keep everything connected.
+                <p className="text-base sm:text-lg text-[#1b2823] dark:text-[#ffffff] font-bold leading-snug">
+                  Your digital product is the operational backbone your customers use and your teams rely on.
                 </p>
                 <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed">
-                  Arav Innovations brings strategy, UX, frontend, backend, APIs, integrations, data, and deployment into one engineering process—so the product is designed to perform today and evolve tomorrow.
+                  Arav Innovations unifies UX strategy, Next.js frontend, microservices APIs, database architecture, and automated CI/CD deployment into a single engineering lifecycle designed to perform at scale.
                 </p>
               </AnimatedSection>
 
-              {/* 3 Compact Supporting Points */}
-              <AnimatedSection delay={0.14} className="space-y-3 pt-2">
+              {/* 3 Crisp Supporting Capability Cards */}
+              <AnimatedSection delay={0.14} className="space-y-3.5 pt-1">
                 {experienceAreas.map((area) => (
                   <motion.div
                     key={area.num}
                     whileHover={{ x: 4 }}
-                    className="p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/50 transition-all duration-200 flex items-start gap-3 text-left group"
+                    className="p-4 sm:p-5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] transition-all duration-200 flex items-start gap-4 text-left group shadow-xs"
                   >
-                    <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shrink-0 group-hover:scale-110 transition-transform">
+                    <div className="p-2.5 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shrink-0 group-hover:scale-105 transition-transform shadow-2xs">
                       {area.icon}
                     </div>
-                    <div className="space-y-0.5">
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
+                    <div className="space-y-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-sm sm:text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
                           {area.title}
                         </span>
-                        <span className="text-[10px] font-mono text-[#2e936f] font-bold">
+                        <span className="text-xs font-mono text-[#2e936f] font-bold">
                           ({area.subtitle})
                         </span>
                       </div>
-                      <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
+                      <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
                         {area.description}
                       </p>
                     </div>
