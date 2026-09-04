@@ -26,10 +26,11 @@ export function AnimatedTestimonialsCarousel() {
   React.useEffect(() => {
     if (isHovered) return;
     const timer = setInterval(() => {
-      nextTestimonial();
+      setDirection(1);
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
     }, 6500);
     return () => clearInterval(timer);
-  }, [isHovered, currentIndex, nextTestimonial]);
+  }, [isHovered, currentIndex, testimonials.length]);
 
   const current: Testimonial = testimonials[currentIndex] || testimonials[0];
 

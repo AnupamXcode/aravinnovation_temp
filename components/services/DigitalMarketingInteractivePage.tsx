@@ -474,28 +474,40 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
       <AnimatedDotGrid />
 
       {/* =========================================================================
-          1. HERO — DIGITAL GROWTH & BRAND STRATEGY (2-COLUMN WITH DUAL THEME INFOGRAPHIC)
+          1. HERO — DIGITAL GROWTH & BRAND STRATEGY (FULL-BLEED CINEMATIC BACKGROUND)
           ========================================================================= */}
-      <section className="relative pt-3 sm:pt-5 lg:pt-6 pb-8 sm:pb-10 lg:pb-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none">
+      <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-10 sm:pb-14 lg:pb-18 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none min-h-[calc(100vh-80px)] flex flex-col justify-start">
+        
+        {/* Full-Bleed Desktop Background Visual — Crisp Integrated Background Art for PC / DESKTOP VIEW */}
+        <div className="absolute inset-0 pointer-events-none hidden lg:block select-none overflow-hidden">
+          <Image
+            src="/images/digital-marketing-bg.png"
+            alt="Digital Marketing &amp; Brand Development Strategy"
+            fill
+            priority
+            className="object-cover object-right opacity-95 dark:opacity-90 transition-opacity duration-500"
+            sizes="100vw"
+          />
+          {/* Subtle minimal gradient overlay providing crisp image clarity with minor soft text backdrop on desktop */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/75 via-45% to-transparent dark:from-[#000000] dark:via-[#000000]/75 dark:via-45% dark:to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#FFFDF9]/20 via-transparent to-[#FFFDF9]/60 dark:from-[#000000]/20 dark:via-transparent dark:to-[#000000]/60 pointer-events-none" />
+        </div>
+
+        <AnimatedDotGrid />
+
         {/* Ambient Subtle Pulsing Glow */}
-        <motion.div
-          animate={shouldReduceMotion ? {} : { y: [0, -12, 0], opacity: [0.25, 0.35, 0.25] }}
-          transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
-          className="absolute inset-0 pointer-events-none z-0 overflow-hidden"
-        >
-          <div className="absolute top-1/4 left-1/3 w-[500px] h-[500px] bg-radial from-[#f15e1c]/15 via-transparent to-transparent blur-3xl rounded-full" />
-          <div className="absolute bottom-1/3 right-1/4 w-[550px] h-[550px] bg-radial from-[#2e936f]/12 via-transparent to-transparent blur-3xl rounded-full" />
-        </motion.div>
+        <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-radial from-[#f15e1c]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
+        <div className="absolute bottom-1/3 right-1/4 w-[450px] h-[450px] bg-radial from-[#2e936f]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none lg:hidden" />
 
         <div className="max-w-[1536px] mx-auto w-full space-y-6 sm:space-y-8 relative z-10">
           
           {/* 2-Column Hero Composition */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
-            {/* LEFT COLUMN: HERO COPY */}
-            <div className="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-left">
+            {/* LEFT COLUMN: HERO COPY ALIGNED TO THE TOP LEFT */}
+            <div className="lg:col-span-7 xl:col-span-6 space-y-4 sm:space-y-5 text-left max-w-2xl">
               
-              {/* Breadcrumb & Eyebrow Badge */}
+              {/* Breadcrumb &amp; Eyebrow Badge */}
               <AnimatedSection delay={0.05} className="space-y-2">
                 <Breadcrumb
                   items={[
@@ -512,20 +524,37 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                 </motion.div>
               </AnimatedSection>
 
-              {/* Main Headline & Supporting Text */}
+              {/* Main Headline */}
               <AnimatedSection delay={0.1} className="space-y-3">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold font-display tracking-tight leading-[1.12] text-[#1b2823] dark:text-[#ffffff]">
                   Turn Digital Presence Into{" "}
-                  <span className="text-[#f15e1c] bg-clip-text hover:opacity-90 transition-opacity">Measurable Business Growth</span>
+                  <span className="text-[#f15e1c]">Measurable Business Growth</span>
                 </h1>
+              </AnimatedSection>
 
+              {/* Dedicated Cropped Mobile Hero Image Card (Mobile/Tablet Viewports < 1024px) */}
+              <AnimatedSection delay={0.12} className="w-full lg:hidden my-3">
+                <div className="relative w-full aspect-[941/1171] max-w-md mx-auto rounded-2xl border-2 border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] overflow-hidden shadow-xl">
+                  <Image
+                    src="/images/digital-marketing-mobile-hero.png"
+                    alt="Digital Marketing &amp; Brand Development Strategy"
+                    fill
+                    priority
+                    className="object-contain"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                </div>
+              </AnimatedSection>
+
+              {/* Supporting Text */}
+              <AnimatedSection delay={0.14} className="space-y-3">
                 <p className="text-sm sm:text-base lg:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-2xl">
                   We help businesses build stronger digital brands, become easier to discover, reach high-intent audiences and turn digital activity into qualified opportunities through strategy, content, SEO, paid media and continuous optimization.
                 </p>
               </AnimatedSection>
 
               {/* CTA Buttons */}
-              <AnimatedSection delay={0.15} className="pt-1 flex flex-wrap items-center gap-3">
+              <AnimatedSection delay={0.16} className="pt-1 flex flex-wrap items-center gap-3">
                 <Link href="/contact">
                   <MagneticButton>
                     <Button3D
@@ -548,15 +577,15 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                 </Link>
               </AnimatedSection>
 
-              {/* Interactive Keywords Bar */}
-              <AnimatedSection delay={0.2} className="pt-1">
+              {/* Capability / Service Indicators */}
+              <AnimatedSection delay={0.18} className="pt-1">
                 <div className="flex flex-wrap items-center gap-2">
                   {keywordTags.map((tag, i) => (
                     <motion.span
                       key={i}
                       whileHover={{ scale: 1.06, y: -2 }}
                       transition={{ duration: 0.2 }}
-                      className="px-2.5 py-1 rounded-lg bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[11px] font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] hover:border-[#f15e1c]/40 transition-all duration-200 cursor-default"
+                      className="px-3 py-1.5 rounded-lg bg-[#fefaf5]/90 dark:bg-[#0a0a0a]/90 backdrop-blur-xs border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] hover:border-[#f15e1c]/40 transition-all duration-200 cursor-default"
                     >
                       {tag}
                     </motion.span>
@@ -565,35 +594,8 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
               </AnimatedSection>
             </div>
 
-            {/* RIGHT COLUMN: DUAL-THEME HERO INFOGRAPHIC WITH HOVER TILT */}
-            <div className="lg:col-span-6 xl:col-span-7 w-full flex items-center justify-center">
-              <AnimatedSection delay={0.15} className="w-full">
-                <motion.div
-                  whileHover={{ scale: 1.015 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="relative w-full flex items-center justify-center rounded-2xl overflow-hidden border border-[#f7d7b0]/60 dark:border-[#1a1a1a] shadow-lg group"
-                >
-                  {/* Light Mode Image */}
-                  <Image
-                    src="/images/digital-marketing-light.png"
-                    alt="Arav Innovations Digital Marketing &amp; Growth System (Light Mode)"
-                    width={1200}
-                    height={800}
-                    priority
-                    className="w-full h-auto max-w-full object-contain dark:hidden transition-transform duration-500 group-hover:scale-[1.02]"
-                  />
-                  {/* Dark Mode Image */}
-                  <Image
-                    src="/images/digital-marketing-dark.png"
-                    alt="Arav Innovations Digital Marketing &amp; Growth System (Dark Mode)"
-                    width={1200}
-                    height={800}
-                    priority
-                    className="w-full h-auto max-w-full object-contain hidden dark:block transition-transform duration-500 group-hover:scale-[1.02]"
-                  />
-                </motion.div>
-              </AnimatedSection>
-            </div>
+            {/* RIGHT COLUMN: DESKTOP SPACER */}
+            <div className="hidden lg:block lg:col-span-5 xl:col-span-6 h-full min-h-[300px]" />
           </div>
         </div>
       </section>
