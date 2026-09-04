@@ -40,33 +40,32 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Editorial Content (Sitting Directly on Background Image) */}
           <div className="lg:col-span-8 space-y-6 sm:space-y-7 text-left max-w-3xl">
-            {/* Eyebrow Label matching Reference Image */}
+            {/* Eyebrow Label */}
             <ScrollTextFlip>
               <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-[#4A3D35] dark:text-[#D8CBC0]">
                 <span className="w-2 h-2 rounded-full bg-[#f15e1c] shrink-0" />
                 <span className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.18em]">
-                  ENTERPRISE TECHNOLOGY <span className="text-[#f15e1c] font-bold mx-1">&bull;</span> STRATEGY <span className="text-[#f15e1c] font-bold mx-1">&bull;</span> DIGITAL GROWTH
+                  ENTERPRISE TECHNOLOGY <span className="text-[#f15e1c] font-bold mx-1">&bull;</span> DIGITAL TRANSFORMATION <span className="text-[#f15e1c] font-bold mx-1">&bull;</span> GROWTH
                 </span>
               </div>
             </ScrollTextFlip>
 
-            {/* Headline with Exact 3-Line Structure & Color Highlights from Reference Image */}
+            {/* Main Heading */}
             <ScrollReveal direction="up" delay={0.15}>
-              <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-[58px] xl:text-[66px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.08]">
-                Building High-Impact<br className="hidden sm:inline" />
-                <span className="text-[#f15e1c]">Technology</span> Platforms &amp;<br className="hidden sm:inline" />
-                Accelerated <span className="text-[#2e936f]">B2B Growth</span>
+              <h1 className="font-display font-extrabold text-4xl sm:text-[3.25rem] md:text-6xl lg:text-[66px] xl:text-[74px] 2xl:text-[80px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.06]">
+                Technology That Moves<br className="hidden sm:inline" />
+                <span className="text-[#f15e1c]"> Business </span><span className="text-[#2e936f]">Forward.</span>
               </h1>
             </ScrollReveal>
 
             {/* Supporting Description */}
             <ScrollReveal direction="up" delay={0.25}>
               <p className="text-base sm:text-lg lg:text-[18px] text-[#5A4A3F] dark:text-[#D8CBC0] max-w-xl leading-relaxed font-medium">
-                Enterprise IT strategy, full-stack software engineering, data compliance (DPDP/SOC-2), and high-intent digital marketing for global brands.
+                Arav Innovations helps businesses modernize technology, build better digital experiences, strengthen governance and turn technology investments into practical business progress.
               </p>
             </ScrollReveal>
 
-            {/* Pill CTAs matching Reference Image */}
+            {/* CTAs */}
             <ScrollReveal direction="up" delay={0.35}>
               <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4">
                 <Link href="/contact" className="w-full sm:w-auto">
@@ -76,42 +75,42 @@ export function Hero() {
                     className="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm font-semibold shadow-md hover:shadow-lg shadow-[#f15e1c]/25 bg-[#f15e1c] text-white hover:bg-[#d84e12] transition-all transform hover:-translate-y-0.5"
                     rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
                   >
-                    Schedule Exploratory Call
+                    Start a Conversation
                   </Button>
                 </Link>
 
-                <Link href="/services" className="w-full sm:w-auto">
+                <Link href="#services" className="w-full sm:w-auto">
                   <Button
                     variant="outline"
                     size="lg"
                     className="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm font-semibold bg-white/70 dark:bg-black/50 backdrop-blur-xs border border-[#3A2E27]/25 dark:border-white/20 text-[#221811] dark:text-[#FAF5EE] hover:bg-white/95 dark:hover:bg-black/80 hover:border-[#f15e1c] hover:text-[#f15e1c] transition-all"
                   >
-                    Explore Practices
+                    Explore Our Services
                   </Button>
                 </Link>
               </div>
             </ScrollReveal>
 
-            {/* Bottom Proof Row matching Reference Image */}
+            {/* Bottom Proof Row with Truthful Capabilities */}
             <ScrollReveal direction="up" delay={0.45}>
               <div className="pt-6 border-t border-[#3A2E27]/15 dark:border-white/15 flex flex-wrap items-center gap-6 sm:gap-8 text-left text-xs sm:text-sm font-semibold text-[#2C211A] dark:text-[#EFE2D6]">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4.5 h-4.5 text-[#f15e1c] shrink-0" />
-                  <span>7 Dedicated Practices</span>
+                  <span>Integrated Practice Ecosystem</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Globe2 className="w-4.5 h-4.5 text-[#f15e1c] shrink-0" />
-                  <span>India, UAE, US, EU &amp; Canada</span>
+                  <span>India &amp; UAE Operations</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Zap className="w-4.5 h-4.5 text-[#f15e1c] shrink-0" />
-                  <span>100/100 Core Web Vitals</span>
+                  <Zap className="w-4.5 h-4.5 text-[#2e936f] shrink-0" />
+                  <span>Zero-Downtime Delivery</span>
                 </div>
               </div>
             </ScrollReveal>
           </div>
 
-          {/* Right Column: Environmental Glass Script Overlay matching Reference Image */}
+          {/* Right Column: Environmental Glass Script Overlay */}
           <div className="hidden lg:flex lg:col-span-4 justify-center items-center pointer-events-none relative min-h-[280px]">
             <ScrollReveal direction="left" delay={0.3}>
               <div className="text-center transform -rotate-3 select-none opacity-85 hover:opacity-100 transition-opacity">

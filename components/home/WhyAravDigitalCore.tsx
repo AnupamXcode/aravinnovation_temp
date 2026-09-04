@@ -3,8 +3,10 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion, AnimatePresence } from "framer-motion";
 import { whyAravPillarsData, WhyAravPillar } from "@/data/why-arav";
-import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,17 +20,23 @@ import {
   ArrowRight,
   Zap,
   CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
 const iconMap: Record<string, React.ReactNode> = {
-  Compass: <Compass className="w-5 h-5" />,
-  ShieldCheck: <ShieldCheck className="w-5 h-5" />,
-  TrendingUp: <TrendingUp className="w-5 h-5" />,
-  Cpu: <Cpu className="w-5 h-5" />,
-  Lock: <Lock className="w-5 h-5" />,
-  Users2: <Users2 className="w-5 h-5" />,
-  Sparkles: <Sparkles className="w-5 h-5" />,
+  Compass: <Compass className="w-5 h-5 shrink-0" />,
+  ShieldCheck: <ShieldCheck className="w-5 h-5 shrink-0" />,
+  TrendingUp: <TrendingUp className="w-5 h-5 shrink-0" />,
+  Cpu: <Cpu className="w-5 h-5 shrink-0" />,
+  Lock: <Lock className="w-5 h-5 shrink-0" />,
+  Users2: <Users2 className="w-5 h-5 shrink-0" />,
+  Sparkles: <Sparkles className="w-5 h-5 shrink-0" />,
 };
 
 interface WhyAravDigitalCoreProps {
@@ -42,221 +50,365 @@ export function WhyAravDigitalCore({
   headline = "Engineered for Measurable Business Outcomes",
   subheadline = "Arav Innovations goes beyond generic digital service delivery. We align enterprise strategy, robust cloud architecture, and regulatory awareness to achieve verifiable business results.",
 }: WhyAravDigitalCoreProps) {
-  const [activePillarId, setActivePillarId] = React.useState<string>(
-    pillars[0]?.id || "tech-strategy"
-  );
-  const activePillar =
-    pillars.find((p) => p.id === activePillarId) || pillars[0];
+  const trackRef = React.useRef<HTMLDivElement>(null);
+  const pinnedStageRef = React.useRef<HTMLDivElement>(null);
+  const touchStartRef = React.useRef<number | null>(null);
 
-  // Auto-scroll viewport activation for pillars
-  const sectionRef = React.useRef<HTMLDivElement>(null);
+  const [activePillarIdx, setActivePillarIdx] = React.useState<number>(0);
+
+  // Synchronize ScrollTrigger Pinning on Desktop (>= 768px)
   React.useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const pillarId = entry.target.getAttribute("data-pillar-id");
-            if (pillarId) {
-              setActivePillarId(pillarId);
-            }
-          }
-        });
-      },
-      { threshold: 0.5, rootMargin: "-10% 0px -10% 0px" }
-    );
+    if (!trackRef.current || !pinnedStageRef.current) return;
+    if (window.innerWidth < 768) return; // Use touch/tabs on mobile
 
-    const elements = sectionRef.current?.querySelectorAll("[data-pillar-id]");
-    elements?.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: trackRef.current,
+        start: "top top",
+        end: "bottom bottom",
+        pin: pinnedStageRef.current,
+        pinSpacing: true,
+        scrub: 0.1, // Smooth scrub for deterministic 1 scroll = 1 pillar step progress
+        onUpdate: (self) => {
+          // Map self.progress (0..1) strictly into 7 equal pillar steps (0..6)
+          const step = Math.min(6, Math.max(0, Math.floor(self.progress * 7.0)));
+          setActivePillarIdx(step);
+        },
+      });
+    }, trackRef);
+
+    return () => ctx.revert();
   }, []);
 
-  return (
-    <section
-      ref={sectionRef}
-      className="py-16 md:py-24 px-4 sm:px-8 lg:px-12 rounded-[2.5rem] bg-[#f7d7b0]/30 border border-[#f7d7b0] shadow-2xl transition-all duration-300 relative overflow-hidden"
-      id="why-arav"
-    >
-      {/* Background Decorative Accent Gradients */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#f15e1c]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#2e936f]/10 rounded-full blur-3xl pointer-events-none" />
+  // Touch Swipe Gesture Handler for Mobile Viewports
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartRef.current = e.touches[0].clientX;
+  };
 
-      {/* Header Section */}
-      <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14 space-y-4 relative z-10">
-        <Badge variant="secondary" size="md">
-          WHY ARAV INNOVATIONS
-        </Badge>
-        <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black font-display text-[#2e936f] dark:text-[#ffffff] tracking-tight leading-tight">
-          {headline}
-        </h2>
-        <p className="text-base sm:text-lg text-[#5A4D44] dark:text-[#d3eee4] leading-relaxed max-w-2xl mx-auto font-medium">
-          {subheadline}
-        </p>
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartRef.current === null) return;
+    const touchEnd = e.changedTouches[0].clientX;
+    const diffX = touchStartRef.current - touchEnd;
+
+    if (Math.abs(diffX) > 40) {
+      if (diffX > 0) {
+        // Swipe left -> Next pillar (01 -> 02 -> ... -> 07)
+        setActivePillarIdx((prev) => Math.min(6, prev + 1));
+      } else {
+        // Swipe right -> Previous pillar (07 -> 06 -> ... -> 01)
+        setActivePillarIdx((prev) => Math.max(0, prev - 1));
+      }
+    }
+    touchStartRef.current = null;
+  };
+
+  const activePillar = pillars[activePillarIdx] || pillars[0];
+
+  return (
+    <section className="relative w-full bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300" id="why-arav">
+      {/* DESKTOP SCROLL-DRIVEN PILLAR EXPLORATION (>= 768px) */}
+      <div ref={trackRef} className="hidden md:block relative w-full h-[250vh]">
+        <div
+          ref={pinnedStageRef}
+          className="w-full min-h-screen flex flex-col justify-center py-8 px-4 sm:px-8 lg:px-12 xl:px-16"
+        >
+          {/* Header Section */}
+          <div className="text-center max-w-4xl mx-auto mb-8 space-y-3">
+            <Badge variant="secondary" size="md">
+              WHY ARAV INNOVATIONS
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#2e936f] dark:text-[#ffffff] tracking-tight leading-tight">
+              {headline}
+            </h2>
+            <p className="text-sm sm:text-base text-[#5A4D44] dark:text-[#d3eee4] leading-relaxed max-w-2xl mx-auto font-medium">
+              {subheadline}
+            </p>
+          </div>
+
+          {/* Main 2-Column Composition */}
+          <div className="max-w-7xl mx-auto w-full grid grid-cols-12 gap-8 items-center">
+            {/* Left Column: 7 Pillar Cards (EVERY CARD HAS 100% IDENTICAL HEIGHT & WIDTH) */}
+            <div className="col-span-5 space-y-2.5">
+              {pillars.map((pillar, idx) => {
+                const isActive = idx === activePillarIdx;
+                return (
+                  <button
+                    key={pillar.id}
+                    type="button"
+                    onClick={() => setActivePillarIdx(idx)}
+                    className={cn(
+                      "w-full h-20 text-left p-3.5 sm:p-4 rounded-2xl border transition-all duration-300 flex items-center gap-3.5 group cursor-pointer relative overflow-hidden shrink-0",
+                      isActive
+                        ? "bg-white dark:bg-[#16221d] border-[#f15e1c] shadow-xl ring-2 ring-[#f15e1c]/20 scale-[1.01]"
+                        : "bg-white/80 dark:bg-[#0a0a0a]/80 border-[#f7d7b0]/60 dark:border-[#1a1a1a] opacity-75 hover:opacity-100 hover:border-[#f15e1c]/50 hover:bg-white dark:hover:bg-[#121212]"
+                    )}
+                  >
+                    {/* Active Accent Indicator */}
+                    {isActive && (
+                      <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#f15e1c]" />
+                    )}
+
+                    {/* Icon Box */}
+                    <div
+                      className={cn(
+                        "w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-colors shadow-xs",
+                        isActive
+                          ? "bg-[#f15e1c] text-white"
+                          : "bg-[#f7d7b0]/50 dark:bg-[#161616] text-[#f15e1c] group-hover:bg-[#f15e1c] group-hover:text-white"
+                      )}
+                    >
+                      {iconMap[pillar.icon] || <Zap className="w-5 h-5 shrink-0" />}
+                    </div>
+
+                    <div className="flex-1 min-w-0 space-y-0.5">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-[10px] font-extrabold font-mono text-[#f15e1c] uppercase tracking-widest">
+                          PILLAR {pillar.number}
+                        </span>
+                        <span className="text-[11px] font-mono font-bold text-[#2e936f] dark:text-[#74c4ab] truncate">
+                          {pillar.subtitle}
+                        </span>
+                      </div>
+                      <h3
+                        className={cn(
+                          "text-sm font-extrabold font-display truncate transition-colors",
+                          isActive
+                            ? "text-[#f15e1c]"
+                            : "text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c]"
+                        )}
+                      >
+                        {pillar.title}
+                      </h3>
+                    </div>
+
+                    <ArrowRight
+                      className={cn(
+                        "w-4 h-4 shrink-0 transition-transform duration-300",
+                        isActive
+                          ? "text-[#f15e1c] translate-x-1"
+                          : "text-transparent group-hover:text-[#f15e1c]"
+                      )}
+                    />
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Right Column: Central Display Canvas for Active Pillar */}
+            <div className="col-span-7">
+              <div className="p-6 lg:p-8 rounded-3xl bg-white dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/30 shadow-2xl space-y-6 relative overflow-hidden min-h-[500px] flex flex-col justify-between">
+                {/* Background Subtle Gradient Glow */}
+                <div
+                  className="absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl pointer-events-none opacity-20 transition-all duration-500 bg-[#f15e1c]"
+                />
+
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activePillar.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    className="space-y-6 relative z-10"
+                  >
+                    {/* Header Badge & Number */}
+                    <div className="flex items-center justify-between border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-[#f15e1c]/10 text-[#f15e1c] flex items-center justify-center font-bold text-lg border border-[#f15e1c]/20 shadow-inner">
+                          {iconMap[activePillar.icon] || <Zap className="w-5 h-5" />}
+                        </div>
+                        <div>
+                          <span className="text-[10px] font-mono uppercase text-[#2e936f] dark:text-[#74c4ab] font-extrabold tracking-widest">
+                            ACTIVE ARCHITECTURAL PILLAR
+                          </span>
+                          <h3 className="text-xl lg:text-2xl font-black font-display text-[#f15e1c]">
+                            {activePillar.title}
+                          </h3>
+                        </div>
+                      </div>
+                      <span className="text-3xl font-extrabold font-mono text-[#f15e1c]/40">
+                        {activePillar.number}
+                      </span>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-sm lg:text-base text-[#2e936f] dark:text-[#d3eee4] leading-relaxed font-medium">
+                      {activePillar.description}
+                    </p>
+
+                    {/* Enterprise Visual Showcase Image */}
+                    <div className="relative w-full h-52 lg:h-60 rounded-2xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] shadow-md bg-[#FFFDF9] dark:bg-[#050505]">
+                      <Image
+                        src="/images/it-strategy-main.png"
+                        alt="Enterprise Technology Architectural Blueprint"
+                        fill
+                        unoptimized
+                        priority
+                        className="object-contain object-center"
+                      />
+                    </div>
+
+                    {/* Target Business Outcome Callout */}
+                    <div className="p-4 rounded-2xl bg-[#f7d7b0]/40 dark:bg-[#141414] border border-[#f15e1c]/20 space-y-1">
+                      <span className="text-xs font-mono font-bold text-[#2e936f] uppercase tracking-wider flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#2e936f]" />
+                        <span>Target Business Outcome</span>
+                      </span>
+                      <p className="text-sm font-bold font-display text-[#2e936f] dark:text-[#ffffff]">
+                        {activePillar.businessOutcome}
+                      </p>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Footer Progress & Audit CTA */}
+                <div className="pt-4 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between relative z-10">
+                  <span className="text-xs font-mono text-[#7A6A5F] dark:text-[#A09085]">
+                    Pillar {activePillarIdx + 1} of 7 &bull; Scroll to navigate
+                  </span>
+                  <Link href="/contact">
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      className="rounded-full bg-[#f15e1c] hover:bg-[#d94e10]"
+                      rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
+                    >
+                      Schedule Technical Audit
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Progress Bar */}
+          <div className="max-w-7xl mx-auto w-full pt-6 flex items-center justify-between text-xs font-mono text-[#7A6A5F] dark:text-[#A09085]">
+            <span>ENGINEERED FOR MEASURABLE BUSINESS OUTCOMES</span>
+            <div className="flex items-center gap-2">
+              <div className="w-48 h-2 rounded-full bg-[#f7d7b0]/50 dark:bg-[#1a1a1a] overflow-hidden">
+                <div
+                  className="h-full bg-[#f15e1c] transition-all duration-300"
+                  style={{ width: `${((activePillarIdx + 1) / 7) * 100}%` }}
+                />
+              </div>
+              <span className="font-bold text-[#f15e1c]">{activePillarIdx + 1}/7</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* INTERACTIVE ARAV DIGITAL CORE COMPOSITION */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-        {/* Left Side / Mobile Pillar Selector Tabs (7 Pillars) */}
-        <div className="lg:col-span-5 space-y-3 order-2 lg:order-1">
+      {/* MOBILE PILLAR EXPLORATION (< 768px Viewports) */}
+      <div className="block md:hidden py-8 px-4 sm:px-6">
+        {/* Section Header */}
+        <div className="text-center max-w-xl mx-auto mb-6 space-y-2">
+          <Badge variant="secondary" size="md">
+            WHY ARAV INNOVATIONS
+          </Badge>
+          <h2 className="text-2xl sm:text-3xl font-extrabold font-display text-[#2e936f] dark:text-[#ffffff]">
+            {headline}
+          </h2>
+          <p className="text-xs sm:text-sm text-[#5A4D44] dark:text-[#d3eee4]">
+            Tap or swipe to explore our seven core engineering pillars.
+          </p>
+        </div>
+
+        {/* Mobile Pillar Selector Pill Bar */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-4 no-scrollbar">
           {pillars.map((pillar, idx) => {
-            const isActive = pillar.id === activePillarId;
+            const isSel = idx === activePillarIdx;
             return (
               <button
                 key={pillar.id}
                 type="button"
-                data-pillar-id={pillar.id}
-                onClick={() => setActivePillarId(pillar.id)}
+                onClick={() => setActivePillarIdx(idx)}
                 className={cn(
-                  "w-full text-left p-4 sm:p-5 rounded-2xl border transition-all duration-300 flex items-start gap-4 group cursor-pointer relative overflow-hidden",
-                  isActive
-                    ? "bg-white dark:bg-[#16221d] border-[#f15e1c] shadow-xl ring-2 ring-[#f15e1c]/20 scale-[1.01]"
-                    : "bg-white dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/50"
+                  "px-3.5 py-2 rounded-xl text-xs font-mono font-bold whitespace-nowrap shrink-0 transition-all border flex items-center gap-1.5",
+                  isSel
+                    ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-md"
+                    : "bg-white dark:bg-[#0a0a0a] text-[#4A3D35] dark:text-[#D8CBC0] border-[#f7d7b0] dark:border-[#1a1a1a]"
                 )}
               >
-                {/* Active Indicator Bar */}
-                {isActive && (
-                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#f15e1c]" />
-                )}
-
-                <div
-                  className={cn(
-                    "w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center shrink-0 transition-colors shadow-sm",
-                    isActive
-                      ? "bg-[#f15e1c] text-white"
-                      : "bg-[#f7d7b0] dark:bg-[#161616] text-[#f15e1c] group-hover:bg-[#f15e1c] group-hover:text-white"
-                  )}
-                >
-                  {iconMap[pillar.icon] || <Zap className="w-6 h-6 sm:w-7 sm:h-7" />}
-                </div>
-
-                <div className="flex-1 space-y-1 min-w-0">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-[11px] font-extrabold font-mono text-[#f15e1c] uppercase tracking-widest">
-                      PILLAR {pillar.number}
-                    </span>
-                    <span className="text-xs font-mono font-bold text-[#2e936f] dark:text-[#74c4ab] truncate">
-                      {pillar.subtitle}
-                    </span>
-                  </div>
-                  <h3
-                    className={cn(
-                      "text-base sm:text-lg font-bold font-display transition-colors leading-snug break-words",
-                      isActive
-                        ? "text-[#f15e1c]"
-                        : "text-[#2e936f] dark:text-[#ffffff] group-hover:text-[#f15e1c]"
-                    )}
-                  >
-                    {pillar.title}
-                  </h3>
-                </div>
+                <span>{pillar.number}</span>
+                <span>{pillar.title}</span>
               </button>
             );
           })}
         </div>
 
-        {/* Right Side / Central Arav Digital Core Display Canvas */}
-        <div className="lg:col-span-7 order-1 lg:order-2">
-          <div className="p-6 sm:p-10 rounded-3xl bg-white border-2 border-[#f15e1c]/30 shadow-2xl space-y-6 relative overflow-hidden">
-            {/* Top Badge & Number */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-[#f15e1c]/10 text-[#f15e1c] flex items-center justify-center font-bold text-xl border border-[#f15e1c]/20 shadow-inner">
-                  {iconMap[activePillar.icon] || <Zap className="w-6 h-6" />}
-                </div>
-                <div>
-                  <span className="text-[10px] font-mono uppercase text-[#2e936f] font-extrabold tracking-widest">
-                    ACTIVE ARCHITECTURAL PILLAR
-                  </span>
-                  <h3 className="text-xl sm:text-2xl font-black font-display text-[#f15e1c]">
-                    {activePillar.title}
-                  </h3>
-                </div>
-              </div>
-              <span className="text-3xl sm:text-4xl font-extrabold font-mono text-[#f15e1c]/30">
+        {/* Active Mobile Pillar Card with Touch Swipe Gesture Support */}
+        <div
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          className="p-5 rounded-2xl bg-white dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/40 shadow-xl space-y-4 touch-pan-y w-full"
+        >
+          <div className="flex items-center justify-between border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-3">
+            <div className="flex items-center gap-2.5">
+              <span className="font-mono text-xs font-extrabold px-2.5 py-1 rounded-lg bg-[#f15e1c] text-white">
                 {activePillar.number}
               </span>
+              <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase tracking-wider">
+                {activePillar.subtitle}
+              </span>
+            </div>
+            <span className="text-xs font-mono text-[#7A6A5F] dark:text-[#A09085]">
+              {activePillarIdx + 1} of 7
+            </span>
+          </div>
+
+          <h3 className="text-lg font-bold font-display text-[#f15e1c]">
+            {activePillar.title}
+          </h3>
+
+          <p className="text-xs text-[#5A4D44] dark:text-[#d3eee4] leading-relaxed font-medium">
+            {activePillar.description}
+          </p>
+
+          <div className="relative w-full h-44 rounded-xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] bg-[#FFFDF9] dark:bg-[#050505]">
+            <Image
+              src="/images/it-strategy-main.png"
+              alt={activePillar.title}
+              fill
+              unoptimized
+              className="object-contain object-center"
+            />
+          </div>
+
+          <div className="p-3 rounded-xl bg-[#f7d7b0]/40 dark:bg-[#141414] border border-[#f15e1c]/20 space-y-1">
+            <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase tracking-wider flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f]" />
+              <span>Target Outcome</span>
+            </span>
+            <p className="text-xs font-bold font-display text-[#2e936f] dark:text-[#ffffff]">
+              {activePillar.businessOutcome}
+            </p>
+          </div>
+
+          {/* Navigation Controls */}
+          <div className="pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setActivePillarIdx((prev) => Math.max(0, prev - 1))}
+                disabled={activePillarIdx === 0}
+                className="w-9 h-9 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center disabled:opacity-40"
+              >
+                <ChevronLeft className="w-4 h-4 text-[#f15e1c]" />
+              </button>
+              <button
+                type="button"
+                onClick={() => setActivePillarIdx((prev) => Math.min(6, prev + 1))}
+                disabled={activePillarIdx === 6}
+                className="w-9 h-9 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center disabled:opacity-40"
+              >
+                <ChevronRight className="w-4 h-4 text-[#f15e1c]" />
+              </button>
             </div>
 
-            {/* Core Description & Rationale */}
-            <div className="space-y-4 py-2">
-              <p className="text-sm sm:text-base text-[#2e936f] leading-relaxed font-medium">
-                {activePillar.description}
-              </p>
-
-              {/* Enterprise IT Strategy Visual Showcase */}
-              <div className="relative w-full rounded-2xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] shadow-md bg-white dark:bg-[#0a0a0a]">
-                <Image
-                  src="/images/it-strategy-main.png"
-                  alt="Enterprise IT Strategy & Implementation Blueprint"
-                  width={1200}
-                  height={750}
-                  priority
-                  className="w-full h-auto object-contain rounded-2xl transition-transform duration-300 hover:scale-[1.005]"
-                />
-              </div>
-
-              <div className="p-4 sm:p-5 rounded-2xl bg-[#f7d7b0]/40 border border-[#f15e1c]/20 space-y-2">
-                <span className="text-xs font-mono font-bold text-[#2e936f] uppercase tracking-wider flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#2e936f]" />
-                  <span>Target Business Outcome</span>
-                </span>
-                <p className="text-sm font-bold font-display text-[#2e936f]">
-                  {activePillar.businessOutcome}
-                </p>
-              </div>
-            </div>
-
-            {/* Central Arav Digital Core Visual Network Diagram */}
-            <div className="p-6 rounded-2xl bg-[#2e936f] text-white border border-[#2e936f] space-y-4 relative overflow-hidden shadow-xl">
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] font-mono font-bold text-[#ffec69] uppercase tracking-widest flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#ffec69] animate-ping" />
-                  <span>ARAV DIGITAL CORE SYNERGY</span>
-                </span>
-                <span className="text-[10px] font-mono text-white font-bold">
-                  CONNECTED &amp; ACTIVE
-                </span>
-              </div>
-
-              {/* 7 Core Connecting Nodes Visual Pill List */}
-              <div className="flex flex-wrap gap-2 pt-2">
-                {pillars.map((p) => {
-                  const isSel = p.id === activePillarId;
-                  return (
-                    <button
-                      key={p.id}
-                      type="button"
-                      onClick={() => setActivePillarId(p.id)}
-                      className={cn(
-                        "px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer flex items-center gap-1.5 border",
-                        isSel
-                          ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-lg shadow-[#f15e1c]/40"
-                          : "bg-white/20 text-white border-white/40 hover:bg-white hover:text-[#2e936f]"
-                      )}
-                    >
-                      <span>{p.number}.</span>
-                      <span>{p.title}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Supporting Rationale Callout */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 border-t border-[#f7d7b0]">
-              <p className="text-xs text-[#2e936f] font-semibold">
-                Want to see how these pillars solve your specific technical challenges?
-              </p>
-              <Link href="/contact" className="shrink-0 w-full sm:w-auto">
-                <Button
-                  variant="primary"
-                  size="sm"
-                  className="w-full rounded-xl bg-[#f15e1c] hover:bg-[#d94e10]"
-                  rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
-                >
-                  Schedule Technical Audit
-                </Button>
-              </Link>
-            </div>
+            <Link href="/contact" className="flex-1 text-right">
+              <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#f15e1c] text-white font-semibold text-xs shadow-md">
+                Schedule Audit <ArrowRight className="w-3.5 h-3.5" />
+              </span>
+            </Link>
           </div>
         </div>
       </div>

@@ -2,10 +2,10 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "lenis";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Compass,
   TrendingUp,
@@ -15,690 +15,583 @@ import {
   Users2,
   Search,
   Cpu,
-  Sparkles,
   ArrowRight,
-  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  CheckCircle2,
+  Sparkles,
 } from "lucide-react";
-import { useSiteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const iconMap: Record<string, React.ReactNode> = {
-  Compass: <Compass className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />,
-  TrendingUp: <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />,
-  Code2: <Code2 className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />,
-  ShieldCheck: <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />,
-  BarChart3: <BarChart3 className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />,
-  Users2: <Users2 className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />,
-  Search: <Search className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />,
-  Cpu: <Cpu className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />,
+export interface ServiceItem {
+  id: number;
+  number: string;
+  category: string;
+  name: string;
+  shortName: string;
+  description: string;
+  image: string;
+  tone: string;
+  href: string;
+  iconName: string;
+  outcomes: string[];
+}
+
+const servicesData: ServiceItem[] = [
+  {
+    id: 0,
+    number: "01",
+    category: "IT STRATEGY",
+    name: "IT Strategy & Implementation",
+    shortName: "IT Strategy",
+    description:
+      "Enterprise roadmaps, cloud strategy, modernization and technology implementation aligned around real business outcomes.",
+    image: "/images/it-strategy-main.png",
+    tone: "#f15e1c",
+    href: "/services/it-strategy-implementation",
+    iconName: "Compass",
+    outcomes: [
+      "Enterprise Cloud & Infrastructure Roadmaps",
+      "Legacy System Modernization",
+      "Technology Governance & Cost Optimization",
+    ],
+  },
+  {
+    id: 1,
+    number: "02",
+    category: "DIGITAL GROWTH",
+    name: "Digital Marketing & Brand Development",
+    shortName: "Digital Marketing",
+    description:
+      "Brand strategy, digital campaigns and performance growth programs engineered to generate high-intent customer pipeline.",
+    image: "/images/digital-marketing-main-1.png",
+    tone: "#2e936f",
+    href: "/services/digital-marketing-brand-development",
+    iconName: "TrendingUp",
+    outcomes: [
+      "B2B Brand Positioning & Messaging",
+      "Multi-Channel Demand Generation",
+      "Conversion Rate & ROI Optimization",
+    ],
+  },
+  {
+    id: 2,
+    number: "03",
+    category: "ENGINEERING",
+    name: "Web & Application Development",
+    shortName: "Web & App Dev",
+    description:
+      "Scalable web applications, customer portals and mobile platforms engineered for high reliability and modern performance.",
+    image: "/images/web-app-main-1.png",
+    tone: "#fab60a",
+    href: "/services/web-application-development",
+    iconName: "Code2",
+    outcomes: [
+      "Custom Enterprise Web Applications",
+      "Microservices & API Architecture",
+      "Performance & Security Optimization",
+    ],
+  },
+  {
+    id: 3,
+    number: "04",
+    category: "GOVERNANCE",
+    name: "Risk, Compliance & Governance",
+    shortName: "Risk & Governance",
+    description:
+      "Practical frameworks for privacy, security, regulatory compliance (DPDP, ISO 27001) and responsible technology operations.",
+    image: "/images/risk-gov-primary.png",
+    tone: "#f15e1c",
+    href: "/services/risk-compliance-governance",
+    iconName: "ShieldCheck",
+    outcomes: [
+      "DPDP & GDPR Data Privacy Readiness",
+      "ISO 27001 & SOC 2 Security Governance",
+      "Automated Control & Evidence Frameworks",
+    ],
+  },
+  {
+    id: 4,
+    number: "05",
+    category: "DIAGNOSTICS",
+    name: "Audit & Improvement",
+    shortName: "Audit & Improvement",
+    description:
+      "Technical, operational and process assessments that identify friction and outline clear, practical improvement steps.",
+    image: "/images/audit-and-improvement-main.png",
+    tone: "#2e936f",
+    href: "/services/audit-improvement",
+    iconName: "BarChart3",
+    outcomes: [
+      "Architecture & Code Quality Audits",
+      "Performance & Bottleneck Analysis",
+      "Actionable Remediation Blueprints",
+    ],
+  },
+  {
+    id: 5,
+    number: "06",
+    category: "TALENT",
+    name: "Training & Staff Augmentation",
+    shortName: "Staff Augmentation",
+    description:
+      "Pre-vetted senior technology talent and structured training support that strengthens internal engineering capability.",
+    image: "/images/training-staff-main.png",
+    tone: "#f15e1c",
+    href: "/services/training-staff-augmentation",
+    iconName: "Users2",
+    outcomes: [
+      "Dedicated Senior Engineering Talent",
+      "Specialized Technical Skill Augmentation",
+      "Internal Capability Building & Mentorship",
+    ],
+  },
+  {
+    id: 6,
+    number: "07",
+    category: "SEARCH",
+    name: "SEO Services",
+    shortName: "SEO Services",
+    description:
+      "Technical SEO, search architecture and content strategy focused on sustainable organic visibility and growth.",
+    image: "/images/seo-hero.png",
+    tone: "#fab60a",
+    href: "/services/seo-services",
+    iconName: "Search",
+    outcomes: [
+      "Technical Crawlability & Site Architecture",
+      "High-Intent Organic Search Strategy",
+      "Authority Building & Sustainable Rankings",
+    ],
+  },
+  {
+    id: 7,
+    number: "08",
+    category: "INTELLIGENCE",
+    name: "AI Portfolio",
+    shortName: "AI Portfolio",
+    description:
+      "Practical AI solutions, workflow automation and intelligent systems aligned with real enterprise business use cases.",
+    image: "/images/ai-portfolio-main.png",
+    tone: "#f15e1c",
+    href: "/products",
+    iconName: "Cpu",
+    outcomes: [
+      "Enterprise AI Integration & Automation",
+      "Custom Agentic AI & Workflow Engines",
+      "Real-Time Telemetry & Data Intelligence",
+    ],
+  },
+];
+
+const renderServiceIcon = (iconName: string, tone: string) => {
+  const props = { className: "w-4 h-4 sm:w-5 sm:h-5 shrink-0" };
+  switch (iconName) {
+    case "Compass":
+      return <Compass {...props} />;
+    case "TrendingUp":
+      return <TrendingUp {...props} />;
+    case "Code2":
+      return <Code2 {...props} />;
+    case "ShieldCheck":
+      return <ShieldCheck {...props} />;
+    case "BarChart3":
+      return <BarChart3 {...props} />;
+    case "Users2":
+      return <Users2 {...props} />;
+    case "Search":
+      return <Search {...props} />;
+    case "Cpu":
+      return <Cpu {...props} />;
+    default:
+      return <Sparkles {...props} />;
+  }
 };
 
 export function InteractiveServiceStack3D() {
-  const { config } = useSiteConfig();
-  const shouldReduceMotion = useReducedMotion();
-  const rootRef = React.useRef<HTMLDivElement>(null);
+  const trackRef = React.useRef<HTMLDivElement>(null);
+  const pinnedStageRef = React.useRef<HTMLDivElement>(null);
+  const touchStartRef = React.useRef<number | null>(null);
+
   const [activeServiceIdx, setActiveServiceIdx] = React.useState<number>(0);
-  const [revealedCount, setRevealedCount] = React.useState<number>(1);
   const [hoveredIdx, setHoveredIdx] = React.useState<number | null>(null);
 
-  const practicesConfig = config.enterprisePracticesConfig;
-  const isEnabled =
-    config.websiteEnabled !== false &&
-    config.servicesVisible !== false &&
-    practicesConfig?.enabled !== false;
-
-  const serviceLayers = (practicesConfig?.serviceLayers || []).filter(
-    (l) => l.visible !== false
-  );
-
+  // Synchronize ScrollTrigger Pinning on Desktop (>= 768px)
   React.useEffect(() => {
-    if (!rootRef.current || !isEnabled) return;
-
-    // Mobile check: Bypass GSAP pinning, ScrollTrigger scrub, and Lenis scroll-jacking on mobile viewports (< 768px)
-    if (window.innerWidth < 768) return;
-
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let cancelled = false;
-    let lenis: Lenis | null = null;
-    let raf: ((time: number) => void) | null = null;
-    let observer: ResizeObserver | null = null;
+    if (!trackRef.current || !pinnedStageRef.current) return;
+    if (window.innerWidth < 768) return; // Use native touch/tabs on mobile
 
     const ctx = gsap.context(() => {
-      const layers = gsap.utils.toArray<HTMLElement>(".service-disc-layer", rootRef.current!);
-      const cards = gsap.utils.toArray<HTMLElement>(".service-side-card", rootRef.current!);
-      const stack = rootRef.current!.querySelector<HTMLElement>(".service-stack-container");
-      const track = rootRef.current!.querySelector<HTMLElement>(".service-stack-track");
-      const bar = rootRef.current!.querySelector<HTMLElement>(".service-progress-bar");
-      const leadersContainer = rootRef.current!.querySelector<SVGSVGElement>(".service-leaders-svg");
-      const stage = rootRef.current!.querySelector<HTMLElement>(".service-pinned-stage");
-
-      if (!stack || !track || layers.length === 0) return;
-
-      const n = serviceLayers.length;
-
-      // Draw SVG connector paths, disc rim node dots & arrowheads locked frame-by-frame to live stage bounding rect
-      const place = (
-        currentRevealedCount: number,
-        currentActiveIdx: number,
-        currentHoveredIdx: number | null = null
-      ) => {
-        if (!stack || !stage || !leadersContainer) return;
-        const stageBox = stage.getBoundingClientRect();
-
-        leadersContainer.innerHTML = "";
-
-        cards.forEach((card) => {
-          const targetId = card.getAttribute("data-for");
-          const idx = parseInt(targetId || "0", 10);
-          const isRevealed = idx < currentRevealedCount;
-          const isActive = idx === currentActiveIdx;
-          const isHovered = idx === currentHoveredIdx;
-          const isHighlighted = isActive || isHovered;
-
-          if (!isRevealed) return;
-
-          const layerEl = layers.find((l) => l.getAttribute("data-i") === targetId);
-          if (!layerEl) return;
-
-          const layerBox = layerEl.getBoundingClientRect();
-          const cardBox = card.getBoundingClientRect();
-          const isLeft = card.parentElement?.classList.contains("left");
-          const color = card.getAttribute("data-tone") || "#f15e1c";
-
-          // Card target pin coordinate relative to pinned stage
-          const cardPinX = isLeft
-            ? cardBox.right - stageBox.left - 2
-            : cardBox.left - stageBox.left + 2;
-          const cardPinY = cardBox.top + cardBox.height / 2 - stageBox.top;
-
-          // Disc outer rim node coordinate relative to pinned stage
-          const stackAnchorX = isLeft
-            ? layerBox.left - stageBox.left + 16
-            : layerBox.right - stageBox.left - 16;
-          const layerAnchorY = layerBox.top + layerBox.height / 2 - stageBox.top;
-
-          // Disc rim node dot with hover pulse scale
-          const discNode = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-          discNode.setAttribute("cx", `${stackAnchorX}`);
-          discNode.setAttribute("cy", `${layerAnchorY}`);
-          discNode.setAttribute("r", isHighlighted ? "6.5" : "4");
-          discNode.setAttribute("fill", color);
-          discNode.setAttribute("stroke", "#ffffff");
-          discNode.setAttribute("stroke-width", "2");
-          leadersContainer.appendChild(discNode);
-
-          // Curved S-connector path with hover glow transition
-          const deltaX = Math.abs(cardPinX - stackAnchorX);
-          const midX1 = isLeft ? stackAnchorX - deltaX * 0.4 : stackAnchorX + deltaX * 0.4;
-          const midX2 = isLeft ? cardPinX + deltaX * 0.4 : cardPinX - deltaX * 0.4;
-          const d = `M ${stackAnchorX} ${layerAnchorY} C ${midX1} ${layerAnchorY}, ${midX2} ${cardPinY}, ${cardPinX} ${cardPinY}`;
-          const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-          path.setAttribute("d", d);
-          path.setAttribute("stroke", color);
-          path.setAttribute("stroke-width", isHighlighted ? "3" : "1.75");
-          path.setAttribute("stroke-dasharray", isHighlighted ? "none" : "4 4");
-          path.setAttribute("fill", "none");
-          path.setAttribute("opacity", isHighlighted ? "1" : "0.7");
-          leadersContainer.appendChild(path);
-
-          // Terminating Arrowhead pointing directly at card border
-          const arrow = document.createElementNS("http://www.w3.org/2000/svg", "path");
-          const arrowSize = isHighlighted ? "8" : "6";
-          const arrowSizeNum = isHighlighted ? 8 : 6;
-          const arrowD = isLeft
-            ? `M ${cardPinX + arrowSizeNum * 1.4} ${cardPinY - arrowSizeNum} L ${cardPinX} ${cardPinY} L ${cardPinX + arrowSizeNum * 1.4} ${cardPinY + arrowSizeNum} Z`
-            : `M ${cardPinX - arrowSizeNum * 1.4} ${cardPinY - arrowSizeNum} L ${cardPinX} ${cardPinY} L ${cardPinX - arrowSizeNum * 1.4} ${cardPinY + arrowSizeNum} Z`;
-          arrow.setAttribute("d", arrowD);
-          arrow.setAttribute("fill", color);
-          arrow.setAttribute("opacity", isHighlighted ? "1" : "0.85");
-          leadersContainer.appendChild(arrow);
-
-          // Flowing data-pulse dot on highlighted connector line
-          if (isHighlighted) {
-            const pulseDot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-            pulseDot.setAttribute("cx", `${(stackAnchorX + cardPinX) / 2}`);
-            pulseDot.setAttribute("cy", `${(layerAnchorY + cardPinY) / 2}`);
-            pulseDot.setAttribute("r", "4.5");
-            pulseDot.setAttribute("fill", color);
-            pulseDot.setAttribute("class", "animate-ping");
-            leadersContainer.appendChild(pulseDot);
-          }
-        });
-      };
-
-      // 60 FPS explode transform calculation with hover state reaction
-      const explode = (p: number, currentHovered: number | null = hoveredIdx) => {
-        if (!stack) return;
-        const clampedP = Math.max(0, Math.min(1, p));
-
-        // Determine revealed count (1 to n) and active index
-        const currentCount = Math.min(n, Math.max(1, Math.floor(clampedP * n) + 1));
-        const activeIdx = Math.min(n - 1, Math.floor(clampedP * n));
-
-        setRevealedCount(currentCount);
-        setActiveServiceIdx(activeIdx);
-
-        const stepY = 38; // Vertical separation of 3D stack discs (grand stack size)
-        const stepZ = 22; // Perspective depth Z offset
-
-        // Transform 3D Stack Architectural Discs vertically along Y & Z
-        layers.forEach((layer) => {
-          const targetId = layer.getAttribute("data-i");
-          const isCore = targetId === "core";
-          const i = isCore ? 3.5 : parseInt(targetId || "0", 10);
-          const isRevealed = isCore || i < currentCount;
-          const isActive = !isCore && i === activeIdx;
-          const isHovered = !isCore && i === currentHovered;
-          const isHighlighted = isActive || isHovered;
-
-          const layerP = Math.max(0, Math.min(1, (clampedP - (isCore ? 0.4 : i / n)) * n));
-          const eased = 1 - Math.pow(1 - layerP, 3);
-          const factor = isRevealed ? 0.22 + 0.78 * eased : 0.08;
-
-          // Vertical Y separation (Layer 0 at top, Layer 7 at bottom)
-          const y = (i - (n - 1) / 2) * stepY * factor;
-          // Perspective Z depth
-          const baseZ = ((n - 1) / 2 - i) * stepZ * factor;
-          const z = isHighlighted ? baseZ + 42 : baseZ;
-          const scale = isHighlighted ? 1.08 : isRevealed ? 1 : 0.94;
-          const opacity = isRevealed ? (isHighlighted ? 1 : 0.88) : 0.35;
-
-          layer.style.transform = `translate3d(0px, ${y}px, ${z}px) scale(${scale})`;
-          layer.style.opacity = `${opacity}`;
-          layer.style.zIndex = `${25 - (isCore ? 4 : Math.floor(i))}`;
-        });
-
-        // Synchronize Side Cards vertically with their corresponding disc layer (Y_i)
-        cards.forEach((card) => {
-          const targetId = card.getAttribute("data-for");
-          const i = parseInt(targetId || "0", 10);
-          const isRevealed = i < currentCount;
-          const isActive = i === activeIdx;
-          const isHovered = i === currentHovered;
-          const isHighlighted = isActive || isHovered;
-          const isLeft = card.parentElement?.classList.contains("left");
-
-          // Calculate vertical position Y_i matching disc layer i
-          const layerP = Math.max(0, Math.min(1, (clampedP - i / n) * n));
-          const eased = 1 - Math.pow(1 - layerP, 3);
-          const factor = isRevealed ? 0.22 + 0.78 * eased : 0.08;
-          const y_i = (i - (n - 1) / 2) * stepY * factor;
-
-          if (isRevealed) {
-            const emergeProgress = Math.max(0, Math.min(1, (clampedP - i / n) * n * 2));
-            const cardX = isLeft ? 0 : 0;
-            card.style.opacity = `${emergeProgress}`;
-            card.style.transform = isHighlighted
-              ? `translate3d(${cardX}px, ${y_i}px, 20px) scale(1.05)`
-              : `translate3d(${cardX}px, ${y_i}px, 0px) scale(1)`;
-            card.style.pointerEvents = "auto";
-          } else {
-            card.style.opacity = "0";
-            card.style.transform = `translate3d(${isLeft ? "-25px" : "25px"}, ${y_i}px, 0px) scale(0.92)`;
-            card.style.pointerEvents = "none";
-          }
-        });
-
-        const lift = (clampedP - 0.5) * -20;
-        stack.style.transform = `translateY(${lift}px) rotateX(42deg)`;
-
-        if (bar) {
-          bar.style.width = `${clampedP * 100}%`;
-        }
-
-        // Throttle SVG connector placement to next animation frame to prevent scroll-blocking reflows
-        if (scheduledPlace === null) {
-          scheduledPlace = requestAnimationFrame(() => {
-            scheduledPlace = null;
-            place(currentCount, activeIdx, currentHovered);
-          });
-        }
-      };
-
-      let scheduledPlace: number | null = null;
-
-      if (reduce) {
-        explode(1);
-        return;
-      }
-
-      // Lenis smooth scroll ticker initialization
-      if (practicesConfig?.scrollAnimationEnabled !== false) {
-        lenis = new Lenis();
-        lenis.on("scroll", ScrollTrigger.update);
-        raf = (t: number) => lenis?.raf(t * 1000);
-        gsap.ticker.add(raf);
-        gsap.ticker.lagSmoothing(0);
-      }
-
-      explode(0);
-
-      // Pinned GSAP ScrollTrigger Stage scrub
-      const triggerInstance = ScrollTrigger.create({
-        trigger: track,
-        pin: stage,
+      ScrollTrigger.create({
+        trigger: trackRef.current,
         start: "top top",
         end: "bottom bottom",
-        scrub: 0.3,
+        pin: pinnedStageRef.current,
         pinSpacing: true,
-        onUpdate: (self) => explode(self.progress),
-        onRefresh: (self) => explode(self.progress),
-        invalidateOnRefresh: true,
+        scrub: 0.1, // Smooth 0.1s scrub for deterministic 1 scroll = 1 service step progress
+        onUpdate: (self) => {
+          // Map self.progress (0..1) strictly into 8 equal service steps (0..7)
+          const step = Math.min(7, Math.max(0, Math.floor(self.progress * 8.0)));
+          setActiveServiceIdx(step);
+        },
       });
+    }, trackRef);
 
-      // Passive window scroll listener fallback
-      const handleWindowScroll = () => {
-        const trackRect = track.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const totalDistance = trackRect.height - windowHeight;
-        if (totalDistance <= 0) return;
+    return () => ctx.revert();
+  }, []);
 
-        const current = -trackRect.top;
-        const progress = Math.max(0, Math.min(1, current / totalDistance));
-        explode(progress);
-      };
+  // Touch Swipe Gesture Handler for Mobile Viewports
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartRef.current = e.touches[0].clientX;
+  };
 
-      window.addEventListener("scroll", handleWindowScroll, { passive: true });
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartRef.current === null) return;
+    const touchEnd = e.changedTouches[0].clientX;
+    const diffX = touchStartRef.current - touchEnd;
 
-      if (window.ResizeObserver) {
-        observer = new ResizeObserver(() => place(revealedCount, activeServiceIdx));
-        observer.observe(stack);
+    if (Math.abs(diffX) > 40) {
+      if (diffX > 0) {
+        // Swipe left -> Next service step (01 -> 02 -> ... -> 08)
+        setActiveServiceIdx((prev) => Math.min(7, prev + 1));
+      } else {
+        // Swipe right -> Previous service step (08 -> 07 -> ... -> 01)
+        setActiveServiceIdx((prev) => Math.max(0, prev - 1));
       }
+    }
+    touchStartRef.current = null;
+  };
 
-      document.fonts?.ready.then(() => {
-        if (!cancelled) ScrollTrigger.refresh();
-      });
-
-      return () => {
-        window.removeEventListener("scroll", handleWindowScroll);
-        triggerInstance.kill();
-      };
-    }, rootRef);
-
-    return () => {
-      cancelled = true;
-      observer?.disconnect();
-      if (raf) gsap.ticker.remove(raf);
-      lenis?.off("scroll", ScrollTrigger.update);
-      lenis?.destroy();
-      ctx.revert();
-    };
-  }, [isEnabled, practicesConfig, activeServiceIdx, revealedCount, serviceLayers]);
-
-  if (!isEnabled || serviceLayers.length === 0) {
-    return null;
-  }
-
-  // Left column (Even i: 0 IT Strategy, 2 Web & App, 4 Audit, 6 SEO)
-  // Right column (Odd i: 1 Digital Marketing, 3 Risk & Compliance, 5 Training, 7 AI Portfolio)
-  const leftServices = serviceLayers.filter((_, idx) => idx % 2 === 0);
-  const rightServices = serviceLayers.filter((_, idx) => idx % 2 !== 0);
-
-  const topStackLayers = serviceLayers.slice(0, 4);
-  const bottomStackLayers = serviceLayers.slice(4);
+  const displayedIdx = hoveredIdx !== null ? hoveredIdx : activeServiceIdx;
+  const currentService = servicesData[displayedIdx] || servicesData[0];
 
   return (
-    <div ref={rootRef} className="relative w-full select-none overflow-hidden my-1 md:my-4" id="services">
-      {/* Pinned Scroll Track Container (180vh for compact 8-step synchronized reveal) */}
-      <div className="service-stack-track relative w-full h-auto md:h-[180vh]">
-        {/* Pinned Viewport Stage */}
-        <div className="service-pinned-stage w-full h-auto md:h-screen flex flex-col justify-between py-3 md:py-4 px-4 sm:px-8 lg:px-12 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
-          {/* Top Header Section */}
-          <div className="relative z-20 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-4 max-w-7xl mx-auto w-full">
-            <div className="space-y-1">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>OUR CORE SERVICES ECOSYSTEM</span>
-              </div>
-              <h2 className="text-2xl sm:text-4xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
-                Enterprise Technology Practices
-              </h2>
-              <p className="text-xs sm:text-sm text-[#7A6A5F] dark:text-[#B8ACA0]">
-                <span className="hidden md:inline">Scroll to explore how our integrated practices work together to drive enterprise growth.</span>
-                <span className="inline md:hidden">Explore how our integrated practices work together to drive enterprise growth.</span>
-              </p>
-            </div>
-            <Link href="/services">
-              <span className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#f15e1c] text-white font-semibold text-xs shadow-md hover:bg-[#d94e10] transition-all hover:shadow-lg hover:shadow-[#f15e1c]/25">
-                Explore All Services <ArrowRight className="w-3.5 h-3.5" />
-              </span>
-            </Link>
+    <section className="relative w-full bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300" id="services">
+      {/* DESKTOP SCROLL-DRIVEN EXPLORATION (Hidden on mobile < 768px) */}
+      <div ref={trackRef} className="hidden md:block relative w-full h-[280vh]">
+        <div
+          ref={pinnedStageRef}
+          className="w-full min-h-screen flex flex-col justify-center py-8 px-4 sm:px-8 lg:px-12 xl:px-16"
+        >
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-8 space-y-3">
+            <Badge variant="secondary" size="md">
+              WHAT WE DO
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
+              Enterprise Technology Practices
+            </h2>
+            <p className="text-sm sm:text-base text-[#5A4A3F] dark:text-[#D8CBC0]">
+              From technology strategy to implementation and digital growth, we solve complex business problems with practical, connected solutions.
+            </p>
           </div>
 
-          {/* SVG Leaders & Arrowhead Connectors Overlay */}
-          <svg className="service-leaders-svg absolute inset-0 w-full h-full pointer-events-none z-20" />
-
-          {/* Main Desktop Vertical 3D Stage (Hidden on mobile portrait) */}
-          <div
-            className="hidden md:flex service-stage relative flex-1 w-full max-w-6xl mx-auto items-center justify-between my-2 px-3"
-            style={{ perspective: "1400px", perspectiveOrigin: "50% 42%" }}
-          >
-            {/* LEFT COLUMN SERVICE CARDS (0: IT Strategy, 2: Web & App, 4: Audit, 6: SEO) */}
-            <ul className="exploded-notes left relative z-40 space-y-3 w-[220px] lg:w-[255px] pointer-events-auto">
-              {leftServices.map((layer) => {
-                const isActive = layer.id === activeServiceIdx;
-                const isHovered = layer.id === hoveredIdx;
-                const isHighlit = isActive || isHovered;
+          {/* Main 2-Column Exploration Stage */}
+          <div className="max-w-7xl mx-auto w-full grid grid-cols-12 gap-8 items-center">
+            {/* Left Column: Vertical 8-Service Selector List (01 to 08) */}
+            <div className="col-span-5 space-y-2">
+              {servicesData.map((service) => {
+                const isHighlighted = service.id === displayedIdx;
 
                 return (
-                  <li
-                    key={layer.id}
-                    data-for={layer.id}
-                    data-tone={layer.tone}
-                    className="service-side-card"
+                  <button
+                    key={service.id}
+                    type="button"
+                    onClick={() => setActiveServiceIdx(service.id)}
+                    onMouseEnter={() => setHoveredIdx(service.id)}
+                    onMouseLeave={() => setHoveredIdx(null)}
+                    className={cn(
+                      "w-full text-left p-3.5 rounded-2xl border transition-all duration-300 flex items-center justify-between gap-3 group cursor-pointer relative overflow-hidden",
+                      isHighlighted
+                        ? "bg-white dark:bg-[#16221d] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/20 scale-[1.01]"
+                        : "bg-white/80 dark:bg-[#0a0a0a]/80 border-[#f7d7b0]/60 dark:border-[#1a1a1a] opacity-75 hover:opacity-100 hover:border-[#f15e1c]/50 hover:bg-white dark:hover:bg-[#121212]"
+                    )}
                   >
-                    <Link
-                      href={layer.href}
-                      onMouseEnter={() => setHoveredIdx(layer.id)}
-                      onMouseLeave={() => setHoveredIdx(null)}
-                      className="block group"
-                    >
+                    {/* Active Accent Indicator */}
+                    {isHighlighted && (
+                      <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#f15e1c]" />
+                    )}
+
+                    <div className="flex items-center gap-3 min-w-0">
+                      {/* Number Pill */}
+                      <span
+                        className={cn(
+                          "font-mono text-xs font-bold px-2.5 py-1 rounded-lg shrink-0 transition-colors",
+                          isHighlighted
+                            ? "bg-[#f15e1c] text-white"
+                            : "bg-[#fce3d3] dark:bg-[#1a1a1a] text-[#f15e1c] group-hover:bg-[#f15e1c] group-hover:text-white"
+                        )}
+                      >
+                        {service.number}
+                      </span>
+
+                      {/* Icon */}
                       <div
                         className={cn(
-                          "p-3.5 rounded-2xl backdrop-blur-md border shadow-lg cursor-pointer transition-all duration-300 transform group-hover:scale-[1.05] group-hover:-translate-y-1",
-                          isHighlit
-                            ? "bg-white dark:bg-[#1a2924] shadow-2xl"
-                            : "bg-white/95 dark:bg-[#0a0a0a]/95 border-[#f7d7b0] dark:border-[#1a1a1a]"
+                          "w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors",
+                          isHighlighted
+                            ? "bg-[#f15e1c]/10 text-[#f15e1c]"
+                            : "text-[#5A4A3F] dark:text-[#A09085] group-hover:text-[#f15e1c]"
                         )}
-                        style={{
-                          borderColor: isHighlit ? layer.tone : undefined,
-                          boxShadow: isHighlit
-                            ? `0 20px 40px -10px ${layer.tone}45, 0 0 0 3px ${layer.tone}35`
-                            : undefined,
-                          background: isHighlit
-                            ? `linear-gradient(135deg, color-mix(in srgb, ${layer.tone} 14%, white) 0%, white 100%)`
-                            : undefined,
-                        }}
                       >
-                        <div className="flex items-center gap-2 mb-1">
-                          <div
-                            className="w-7 h-7 rounded-lg flex items-center justify-center shadow-xs shrink-0 text-white font-bold transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
-                            style={{ backgroundColor: layer.tone }}
-                          >
-                            {iconMap[layer.icon] || <Sparkles className="w-4 h-4 text-white" />}
-                          </div>
-                          <b
-                            className="text-xs font-bold font-display uppercase tracking-wider line-clamp-1 transition-colors duration-300"
-                            style={{ color: isHighlit ? layer.tone : undefined }}
-                          >
-                            {layer.name}
-                          </b>
-                        </div>
-                        <p className="text-[10px] text-[#4a5c55] dark:text-[#d3eee4] leading-snug line-clamp-2">
-                          {layer.description}
-                        </p>
+                        {renderServiceIcon(service.iconName, service.tone)}
                       </div>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
 
-            {/* CENTRAL VERTICAL 3D DISC STACK WITH ARAV DIGITAL CORE AT CENTER */}
-            <div className="relative flex flex-col items-center justify-center z-30 mx-auto">
-              <div
-                className="service-stack-container relative w-64 h-44 sm:w-80 sm:h-56 md:w-[440px] md:h-72 cursor-pointer"
-                style={{
-                  transformStyle: "preserve-3d",
-                  transform: "translateY(var(--lift, 0px)) rotateX(42deg)",
-                }}
-              >
-                {/* Top 4 Discs */}
-                {topStackLayers.map((layer) => {
-                  const isActive = layer.id === activeServiceIdx;
-                  const isHovered = layer.id === hoveredIdx;
-                  const isHighlit = isActive || isHovered;
-
-                  return (
-                    <Link key={layer.id} href={layer.href}>
-                      <i
-                        data-i={layer.id}
-                        onMouseEnter={() => setHoveredIdx(layer.id)}
-                        onMouseLeave={() => setHoveredIdx(null)}
+                      {/* Service Name */}
+                      <span
                         className={cn(
-                          "service-disc-layer absolute inset-0 rounded-[50%] border-b-4 border-t border-white/70 flex items-center justify-center px-6 text-center select-none shadow-2xl group transition-all duration-300",
-                          isHighlit
-                            ? "ring-4 border-b-white scale-105"
-                            : "border-b-black/30 hover:border-b-white"
+                          "text-sm font-bold font-display truncate transition-colors",
+                          isHighlighted
+                            ? "text-[#1b2823] dark:text-[#ffffff]"
+                            : "text-[#4A3D35] dark:text-[#D8CBC0] group-hover:text-[#f15e1c]"
                         )}
-                        style={{
-                          transformStyle: "preserve-3d",
-                          background: `linear-gradient(145deg, color-mix(in srgb, ${layer.tone} 88%, white) 0%, ${layer.tone} 52%, color-mix(in srgb, ${layer.tone} 75%, black) 100%)`,
-                          boxShadow: isHighlit
-                            ? `0 30px 60px -5px ${layer.tone}90, 0 0 35px ${layer.tone}70, inset 0 2px 12px rgba(255,255,255,0.9)`
-                            : `0 15px 30px -8px ${layer.tone}40, inset 0 2px 6px rgba(255,255,255,0.5)`,
-                        }}
                       >
-                        <div className="relative z-10 flex items-center justify-center gap-2.5 text-white pointer-events-none drop-shadow-md">
-                          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0 border border-white/40 group-hover:scale-110">
-                            {iconMap[layer.icon] || <Sparkles className="w-4 h-4 text-white" />}
-                          </div>
-                          <span className="text-xs sm:text-sm font-extrabold font-display tracking-tight text-white drop-shadow-lg">
-                            {layer.name}
-                          </span>
-                        </div>
-                      </i>
-                    </Link>
-                  );
-                })}
-
-                {/* Center Core Layer: ARAV DIGITAL CORE */}
-                <i
-                  data-i="core"
-                  className="service-disc-layer absolute inset-0 rounded-[50%] border-b-4 border-t border-white flex items-center justify-center px-6 text-center select-none shadow-2xl bg-white dark:bg-[#1c2a25] border-b-[#f15e1c] ring-4 ring-[#f15e1c]/40"
-                  style={{
-                    transformStyle: "preserve-3d",
-                    boxShadow: "0 25px 50px -5px rgba(241,94,28,0.5), inset 0 2px 10px rgba(255,255,255,0.9)",
-                  }}
-                >
-                  <div className="relative z-10 flex items-center justify-center gap-3 text-[#1b2823] dark:text-white drop-shadow-md">
-                    <div className="w-8 h-8 rounded-full bg-[#f15e1c] flex items-center justify-center shrink-0 shadow-md">
-                      <Sparkles className="w-4.5 h-4.5 text-white" />
-                    </div>
-                    <div className="text-left">
-                      <span className="block text-xs sm:text-sm font-extrabold font-display tracking-tight text-[#f15e1c] dark:text-[#f15e1c]">
-                        ARAV DIGITAL CORE
-                      </span>
-                      <span className="block text-[9px] font-mono font-medium text-[#4a5c55] dark:text-[#d3eee4]">
-                        Integrated Enterprise Capabilities
+                        {service.name}
                       </span>
                     </div>
-                  </div>
-                </i>
 
-                {/* Bottom 4 Discs */}
-                {bottomStackLayers.map((layer) => {
-                  const isActive = layer.id === activeServiceIdx;
-                  const isHovered = layer.id === hoveredIdx;
-                  const isHighlit = isActive || isHovered;
-
-                  return (
-                    <Link key={layer.id} href={layer.href}>
-                      <i
-                        data-i={layer.id}
-                        onMouseEnter={() => setHoveredIdx(layer.id)}
-                        onMouseLeave={() => setHoveredIdx(null)}
-                        className={cn(
-                          "service-disc-layer absolute inset-0 rounded-[50%] border-b-4 border-t border-white/70 flex items-center justify-center px-6 text-center select-none shadow-2xl group transition-all duration-300",
-                          isHighlit
-                            ? "ring-4 border-b-white scale-105"
-                            : "border-b-black/30 hover:border-b-white"
-                        )}
-                        style={{
-                          transformStyle: "preserve-3d",
-                          background: `linear-gradient(145deg, color-mix(in srgb, ${layer.tone} 88%, white) 0%, ${layer.tone} 52%, color-mix(in srgb, ${layer.tone} 75%, black) 100%)`,
-                          boxShadow: isHighlit
-                            ? `0 30px 60px -5px ${layer.tone}90, 0 0 35px ${layer.tone}70, inset 0 2px 12px rgba(255,255,255,0.9)`
-                            : `0 15px 30px -8px ${layer.tone}40, inset 0 2px 6px rgba(255,255,255,0.5)`,
-                        }}
-                      >
-                        <div className="relative z-10 flex items-center justify-center gap-2.5 text-white pointer-events-none drop-shadow-md">
-                          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0 border border-white/40 group-hover:scale-110">
-                            {iconMap[layer.icon] || <Sparkles className="w-4 h-4 text-white" />}
-                          </div>
-                          <span className="text-xs sm:text-sm font-extrabold font-display tracking-tight text-white drop-shadow-lg">
-                            {layer.name}
-                          </span>
-                        </div>
-                      </i>
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* RIGHT COLUMN SERVICE CARDS (1: Digital Marketing, 3: Risk & Compliance, 5: Training, 7: AI Portfolio) */}
-            <ul className="exploded-notes right relative z-40 space-y-2 w-[220px] lg:w-[250px] pointer-events-auto">
-              {rightServices.map((layer) => {
-                const isActive = layer.id === activeServiceIdx;
-                const isHovered = layer.id === hoveredIdx;
-                const isHighlit = isActive || isHovered;
-
-                return (
-                  <li
-                    key={layer.id}
-                    data-for={layer.id}
-                    data-tone={layer.tone}
-                    className="service-side-card"
-                  >
-                    <Link
-                      href={layer.href}
-                      onMouseEnter={() => setHoveredIdx(layer.id)}
-                      onMouseLeave={() => setHoveredIdx(null)}
-                      className="block group"
-                    >
-                      <div
-                        className={cn(
-                          "p-3 rounded-2xl backdrop-blur-md border shadow-lg cursor-pointer transition-all duration-300 transform group-hover:scale-[1.05] group-hover:-translate-y-1",
-                          isHighlit
-                            ? "bg-white dark:bg-[#1a2924] shadow-2xl"
-                            : "bg-white/95 dark:bg-[#0a0a0a]/95 border-[#f7d7b0] dark:border-[#1a1a1a]"
-                        )}
-                        style={{
-                          borderColor: isHighlit ? layer.tone : undefined,
-                          boxShadow: isHighlit
-                            ? `0 20px 40px -10px ${layer.tone}45, 0 0 0 3px ${layer.tone}35`
-                            : undefined,
-                          background: isHighlit
-                            ? `linear-gradient(135deg, color-mix(in srgb, ${layer.tone} 14%, white) 0%, white 100%)`
-                            : undefined,
-                        }}
-                      >
-                        <div className="flex items-center gap-2 mb-1">
-                          <div
-                            className="w-7 h-7 rounded-lg flex items-center justify-center shadow-xs shrink-0 text-white font-bold transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
-                            style={{ backgroundColor: layer.tone }}
-                          >
-                            {iconMap[layer.icon] || <Sparkles className="w-4 h-4 text-white" />}
-                          </div>
-                          <b
-                            className="text-xs font-bold font-display uppercase tracking-wider line-clamp-1 transition-colors duration-300"
-                            style={{ color: isHighlit ? layer.tone : undefined }}
-                          >
-                            {layer.name}
-                          </b>
-                        </div>
-                        <p className="text-[10px] text-[#4a5c55] dark:text-[#d3eee4] leading-snug line-clamp-2">
-                          {layer.description}
-                        </p>
-                      </div>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-
-          {/* DEDICATED RESPONSIVE MOBILE STACK (Clean, unpinned vertical list with smooth viewport entrance animations) */}
-          <div className="flex md:hidden flex-col gap-4 my-4 w-full overflow-x-clip px-1">
-            {serviceLayers.map((layer, idx) => {
-              const isActive = layer.id === activeServiceIdx;
-              const formattedNum = String(idx + 1).padStart(2, "0");
-
-              const categories = [
-                "TECHNOLOGY",
-                "GROWTH",
-                "ENGINEERING",
-                "COMPLIANCE",
-                "DIAGNOSTIC",
-                "TALENT",
-                "SEARCH",
-                "AI INNOVATION",
-              ];
-              const categoryTag = categories[idx] || "PRACTICE";
-
-              return (
-                <motion.div
-                  key={layer.id}
-                  initial={shouldReduceMotion ? {} : { opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.1 }}
-                  transition={{
-                    duration: 0.4,
-                    delay: idx * 0.05,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="w-full"
-                >
-                  <Link href={layer.href} className="w-full block group">
-                    <div
+                    <ArrowRight
                       className={cn(
-                        "p-5 rounded-2xl border flex items-center justify-between gap-4 shadow-sm active:scale-[0.99] transition-all duration-200",
-                        isActive
-                          ? "bg-white dark:bg-[#1a2924] border-[#f15e1c] ring-2 ring-[#f15e1c]/40 shadow-md"
-                          : "bg-white dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]"
+                        "w-4 h-4 shrink-0 transition-transform duration-300",
+                        isHighlighted
+                          ? "text-[#f15e1c] translate-x-1"
+                          : "text-transparent group-hover:text-[#f15e1c]"
                       )}
-                    >
-                      <div className="flex items-start gap-4 min-w-0 flex-1">
+                    />
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Right Column: Active Service Visual Showcase Canvas */}
+            <div className="col-span-7">
+              <div className="p-6 lg:p-8 rounded-3xl bg-white dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/30 shadow-2xl space-y-6 relative overflow-hidden min-h-[520px] flex flex-col justify-between">
+                {/* Background Subtle Gradient Glow */}
+                <div
+                  className="absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl pointer-events-none opacity-20 transition-all duration-500"
+                  style={{ backgroundColor: currentService.tone }}
+                />
+
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentService.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    className="space-y-6 relative z-10"
+                  >
+                    {/* Header: Service Category & Number Badge */}
+                    <div className="flex items-center justify-between border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-4">
+                      <div className="flex items-center gap-3">
                         <div
-                          className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shrink-0 shadow-xs mt-0.5 border border-white/20"
-                          style={{ backgroundColor: layer.tone }}
+                          className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold shadow-sm"
+                          style={{ backgroundColor: currentService.tone }}
                         >
-                          {iconMap[layer.icon] || <Sparkles className="w-6 h-6 text-white" />}
+                          {renderServiceIcon(currentService.iconName, "#ffffff")}
                         </div>
-                        <div className="min-w-0 flex-1 space-y-1">
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs font-mono font-black text-[#f15e1c] px-2.5 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/30">
-                              {formattedNum}
-                            </span>
-                            <span className="text-[10px] font-mono font-bold text-[#2e936f] dark:text-[#2e936f] tracking-wider uppercase">
-                              {categoryTag}
-                            </span>
-                          </div>
-                          <h4 className="text-base sm:text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug break-words">
-                            {layer.name}
-                          </h4>
-                          <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
-                            {layer.description}
-                          </p>
+                        <div>
+                          <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#2e936f] dark:text-[#74c4ab]">
+                            {currentService.category}
+                          </span>
+                          <h3 className="text-xl lg:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                            {currentService.name}
+                          </h3>
                         </div>
                       </div>
-                      <div className="w-9 h-9 rounded-full bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center shrink-0 group-hover:bg-[#f15e1c] group-hover:text-white transition-all">
-                        <ArrowRight className="w-4 h-4 text-[#f15e1c] group-hover:text-white transition-colors" />
+                      <span className="text-3xl font-extrabold font-mono text-[#f15e1c]/40">
+                        {currentService.number}
+                      </span>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-sm lg:text-base text-[#4A3D35] dark:text-[#D8CBC0] font-medium leading-relaxed">
+                      {currentService.description}
+                    </p>
+
+                    {/* Enterprise Visual Showcase Image */}
+                    <div className="relative w-full h-56 lg:h-64 rounded-2xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] shadow-md bg-[#FFFDF9] dark:bg-[#050505] group">
+                      <Image
+                        src={currentService.image}
+                        alt={currentService.name}
+                        fill
+                        unoptimized
+                        priority
+                        className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                    </div>
+
+                    {/* Core Outcomes List */}
+                    <div className="space-y-2">
+                      <span className="text-xs font-mono font-bold text-[#f15e1c] uppercase tracking-wider">
+                        Key Capabilities &amp; Deliverables
+                      </span>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        {currentService.outcomes.map((outcome, i) => (
+                          <div
+                            key={i}
+                            className="p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#141414] border border-[#f7d7b0]/60 dark:border-[#222222] flex items-center gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]"
+                          >
+                            <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
+                            <span className="line-clamp-2">{outcome}</span>
+                          </div>
+                        ))}
                       </div>
                     </div>
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Footer CTA */}
+                <div className="pt-4 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between relative z-10">
+                  <span className="text-xs font-mono text-[#7A6A5F] dark:text-[#A09085]">
+                    Step {displayedIdx + 1} of 8 &bull; Scroll to navigate
+                  </span>
+                  <Link href={currentService.href}>
+                    <span className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#f15e1c] text-white font-semibold text-xs shadow-md hover:bg-[#d84e12] transition-all hover:shadow-lg hover:shadow-[#f15e1c]/25">
+                      Explore Service <ArrowRight className="w-4 h-4 ml-1" />
+                    </span>
                   </Link>
-                </motion.div>
-              );
-            })}
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Bottom Navigation Indicator Bar (Desktop only) */}
-          <div className="hidden md:flex relative z-20 items-center justify-between max-w-7xl mx-auto w-full border-t border-[#f7d7b0] dark:border-[#1a1a1a] pt-3 text-xs font-mono text-[#7A6A5F] dark:text-[#B8ACA0]">
-            <span className="inline-flex items-center gap-1.5">
-              <span>Scroll Down to Explore Each Practice</span>
-              <ChevronDown className="w-3.5 h-3.5 text-[#f15e1c] animate-bounce" />
-            </span>
-            <div className="w-44 h-1.5 rounded-full bg-[#f7d7b0]/50 dark:bg-[#1a1a1a] overflow-hidden">
-              <div className="service-progress-bar h-full bg-[#f15e1c] transition-all duration-100 w-0" />
+          {/* Bottom Progress Bar */}
+          <div className="max-w-7xl mx-auto w-full pt-6 flex items-center justify-between text-xs font-mono text-[#7A6A5F] dark:text-[#A09085]">
+            <span>SCROLL CONTROLLED SERVICE EXPLORATION</span>
+            <div className="flex items-center gap-2">
+              <div className="w-48 h-2 rounded-full bg-[#f7d7b0]/50 dark:bg-[#1a1a1a] overflow-hidden">
+                <div
+                  className="h-full bg-[#f15e1c] transition-all duration-300"
+                  style={{ width: `${((displayedIdx + 1) / 8) * 100}%` }}
+                />
+              </div>
+              <span className="font-bold text-[#f15e1c]">{displayedIdx + 1}/8</span>
             </div>
           </div>
         </div>
       </div>
-    </div>
+
+      {/* MOBILE INTERACTIVE EXPLORATION (< 768px Viewports) */}
+      <div className="block md:hidden py-8 px-4 sm:px-6">
+        {/* Section Header */}
+        <div className="text-center max-w-xl mx-auto mb-6 space-y-2">
+          <Badge variant="secondary" size="md">
+            WHAT WE DO
+          </Badge>
+          <h2 className="text-2xl sm:text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+            Enterprise Services
+          </h2>
+          <p className="text-xs sm:text-sm text-[#5A4A3F] dark:text-[#D8CBC0]">
+            Tap or swipe to explore our eight enterprise practices.
+          </p>
+        </div>
+
+        {/* Mobile Service Selector Pill Bar */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-4 no-scrollbar">
+          {servicesData.map((service) => {
+            const isSel = service.id === activeServiceIdx;
+            return (
+              <button
+                key={service.id}
+                type="button"
+                onClick={() => setActiveServiceIdx(service.id)}
+                className={cn(
+                  "px-3.5 py-2 rounded-xl text-xs font-mono font-bold whitespace-nowrap shrink-0 transition-all border flex items-center gap-1.5",
+                  isSel
+                    ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-md"
+                    : "bg-white dark:bg-[#0a0a0a] text-[#4A3D35] dark:text-[#D8CBC0] border-[#f7d7b0] dark:border-[#1a1a1a]"
+                )}
+              >
+                <span>{service.number}</span>
+                <span>{service.shortName}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Active Mobile Service Card with Touch Swipe Gesture Support */}
+        <div
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          className="p-5 rounded-2xl bg-white dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/40 shadow-xl space-y-4 touch-pan-y"
+        >
+          <div className="flex items-center justify-between border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-3">
+            <div className="flex items-center gap-2.5">
+              <span className="font-mono text-xs font-extrabold px-2.5 py-1 rounded-lg bg-[#f15e1c] text-white">
+                {currentService.number}
+              </span>
+              <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase tracking-wider">
+                {currentService.category}
+              </span>
+            </div>
+            <span className="text-xs font-mono text-[#7A6A5F] dark:text-[#A09085]">
+              {activeServiceIdx + 1} of 8
+            </span>
+          </div>
+
+          <h3 className="text-lg font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
+            {currentService.name}
+          </h3>
+
+          <p className="text-xs text-[#5A4A3F] dark:text-[#D8CBC0] leading-relaxed font-medium">
+            {currentService.description}
+          </p>
+
+          <div className="relative w-full h-48 rounded-xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626]">
+            <Image
+              src={currentService.image}
+              alt={currentService.name}
+              fill
+              unoptimized
+              className="object-cover object-center"
+            />
+          </div>
+
+          <div className="space-y-1.5 pt-1">
+            {currentService.outcomes.map((outcome, i) => (
+              <div key={i} className="flex items-center gap-2 text-xs text-[#1b2823] dark:text-[#ffffff] font-medium">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
+                <span>{outcome}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Navigation Controls & CTA */}
+          <div className="pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setActiveServiceIdx((prev) => Math.max(0, prev - 1))}
+                disabled={activeServiceIdx === 0}
+                className="w-9 h-9 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center disabled:opacity-40"
+              >
+                <ChevronLeft className="w-4 h-4 text-[#f15e1c]" />
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveServiceIdx((prev) => Math.min(7, prev + 1))}
+                disabled={activeServiceIdx === 7}
+                className="w-9 h-9 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center disabled:opacity-40"
+              >
+                <ChevronRight className="w-4 h-4 text-[#f15e1c]" />
+              </button>
+            </div>
+
+            <Link href={currentService.href} className="flex-1 text-right">
+              <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#f15e1c] text-white font-semibold text-xs shadow-md">
+                Explore <ArrowRight className="w-3.5 h-3.5" />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
