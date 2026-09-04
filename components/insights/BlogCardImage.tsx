@@ -54,7 +54,7 @@ export function BlogCardImage({
           fill
           unoptimized
           sizes={sizes}
-          className="object-cover group-hover:scale-105 transition-transform duration-500 text-transparent"
+          className="object-cover object-center group-hover:scale-105 transition-transform duration-500 text-transparent"
           onError={handleImageError}
         />
       ) : (

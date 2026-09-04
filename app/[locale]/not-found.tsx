@@ -52,7 +52,7 @@ export default function NotFound() {
                 <Compass className="w-4 h-4" />
               </div>
               <div>
-                <div className="font-bold group-hover:text-[#f15e1c] transition-colors">7 Core Practices</div>
+                <div className="font-bold group-hover:text-[#f15e1c] transition-colors">Core Practices</div>
                 <div className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">Explore our services</div>
               </div>
             </Link>

@@ -47,8 +47,31 @@ export function WhyAravDigitalCore({
   const activePillar =
     pillars.find((p) => p.id === activePillarId) || pillars[0];
 
+  // Auto-scroll viewport activation for pillars
+  const sectionRef = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const pillarId = entry.target.getAttribute("data-pillar-id");
+            if (pillarId) {
+              setActivePillarId(pillarId);
+            }
+          }
+        });
+      },
+      { threshold: 0.5, rootMargin: "-10% 0px -10% 0px" }
+    );
+
+    const elements = sectionRef.current?.querySelectorAll("[data-pillar-id]");
+    elements?.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       className="py-16 md:py-24 px-4 sm:px-8 lg:px-12 rounded-[2.5rem] bg-[#f7d7b0]/30 border border-[#f7d7b0] shadow-2xl transition-all duration-300 relative overflow-hidden"
       id="why-arav"
     >
@@ -61,10 +84,10 @@ export function WhyAravDigitalCore({
         <Badge variant="secondary" size="md">
           WHY ARAV INNOVATIONS
         </Badge>
-        <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight leading-tight">
+        <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black font-display text-[#2e936f] dark:text-[#ffffff] tracking-tight leading-tight">
           {headline}
         </h2>
-        <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed max-w-2xl mx-auto font-medium">
+        <p className="text-base sm:text-lg text-[#5A4D44] dark:text-[#d3eee4] leading-relaxed max-w-2xl mx-auto font-medium">
           {subheadline}
         </p>
       </div>
@@ -79,6 +102,7 @@ export function WhyAravDigitalCore({
               <button
                 key={pillar.id}
                 type="button"
+                data-pillar-id={pillar.id}
                 onClick={() => setActivePillarId(pillar.id)}
                 className={cn(
                   "w-full text-left p-4 sm:p-5 rounded-2xl border transition-all duration-300 flex items-start gap-4 group cursor-pointer relative overflow-hidden",
@@ -117,7 +141,7 @@ export function WhyAravDigitalCore({
                       "text-base sm:text-lg font-bold font-display transition-colors leading-snug break-words",
                       isActive
                         ? "text-[#f15e1c]"
-                        : "text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c]"
+                        : "text-[#2e936f] dark:text-[#ffffff] group-hover:text-[#f15e1c]"
                     )}
                   >
                     {pillar.title}

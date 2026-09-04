@@ -1179,7 +1179,7 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
                           isActive ? "text-[#f15e1c]" : "text-[#7A6A5F]"
                         )}
                       >
-                        LOOP STEP {item.step}
+                        STEP {item.step}
                       </span>
                       <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                         {item.name}

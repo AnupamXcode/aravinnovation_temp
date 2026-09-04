@@ -72,7 +72,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   ];
 
   const highlights = [
-    "7 Integrated Practices under unified leadership",
+    "Integrated Practices under unified leadership",
     "Dual Delivery Centers in Bengaluru/Noida & Dubai",
     "100% Code & IP Ownership guaranteed to clients",
     "Zero shelfware: actionable blueprints & engineering",
@@ -139,7 +139,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               <div className="pt-4 flex flex-wrap gap-4">
                 <Link href="/services">
                   <Button variant="primary" size="md" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                    Explore Our 8 Practices
+                    Explore All Services
                   </Button>
                 </Link>
                 <Link href="/contact">
