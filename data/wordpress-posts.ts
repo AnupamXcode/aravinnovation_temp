@@ -124,7 +124,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 7,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2024/12/19198948-2-scaled.jpg"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2024/12/19198948-2-scaled.jpg"
   },
   {
     "slug": "ai-in-digital-marketing",
@@ -275,7 +275,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 32,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2024/12/campaign-creators-yktK2qaiVHI-unsplash.jpg"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2024/12/campaign-creators-yktK2qaiVHI-unsplash.jpg"
   },
   {
     "slug": "top-digital-marketing-trends-2025",
@@ -461,7 +461,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 45,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/01/businessman-plan-strategy-marketing-finance-goal-2025-planning-business-growth-with-technology-ai-environmental-care-new-year-resolutions-business_184421-3962.avif"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/01/businessman-plan-strategy-marketing-finance-goal-2025-planning-business-growth-with-technology-ai-environmental-care-new-year-resolutions-business_184421-3962.avif"
   },
   {
     "slug": "business-risk-management-tips",
@@ -611,7 +611,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 53,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/01/two-businessmen-risk-management_24877-73703.avif"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/01/two-businessmen-risk-management_24877-73703.avif"
   },
   {
     "slug": "top-2025-social-media-trends",
@@ -726,7 +726,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 79,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/01/trending-topic-social-media-concept_112255-2227.avif"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/01/trending-topic-social-media-concept_112255-2227.avif"
   },
   {
     "slug": "real-estate-compliance-in-uae",
@@ -854,7 +854,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 131,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/02/standard-quality-control-concept-m-scaled.jpg"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/02/standard-quality-control-concept-m-scaled.jpg"
   },
   {
     "slug": "avoid-it-compliance-mistakes-in-uae-real-estate-easily",
@@ -1032,7 +1032,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 140,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/02/standard-quality-control-concept-m-1-scaled.jpg"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/02/standard-quality-control-concept-m-1-scaled.jpg"
   },
   {
     "slug": "navigating-the-risks-of-third-party-ai",
@@ -1118,7 +1118,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 151,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/02/3d-internet-secuirty-badge-scaled.jpg"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/02/3d-internet-secuirty-badge-scaled.jpg"
   },
   {
     "slug": "it-strategy-in-green-energy",
@@ -1237,7 +1237,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 159,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/03/pexels-pixabay-414837-scaled.jpg"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/03/pexels-pixabay-414837-scaled.jpg"
   },
   {
     "slug": "web-and-app-development-is-crucial-for-agro-and-battery-companies",
@@ -1375,7 +1375,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 170,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/04/istockphoto-1329026753-612x612-1.jpg"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/04/istockphoto-1329026753-612x612-1.jpg"
   },
   {
     "slug": "cybersecurity-in-renewable-energy-sector",
@@ -1512,7 +1512,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 179,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/04/woman-working-environment-projects-scaled.jpg"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/04/woman-working-environment-projects-scaled.jpg"
   },
   {
     "slug": "seo-vs-ppc-which-one-is-right-for-you",
@@ -1787,7 +1787,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 242,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/06/SEO-vs-PPC-Which-One-Is-Right-for-You.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/06/SEO-vs-PPC-Which-One-Is-Right-for-You.png"
   },
   {
     "slug": "top-10-trends-in-digital-marketing-for-2025",
@@ -2134,7 +2134,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 248,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/06/Top-10-Trends-in-Digital-Marketing-for-2025-1.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/06/Top-10-Trends-in-Digital-Marketing-for-2025-1.png"
   },
   {
     "slug": "seo-vs-paid-ads-which-one-you-invest",
@@ -2311,7 +2311,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 272,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/06/SEO-vs-Paid-Ads.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/06/SEO-vs-Paid-Ads.png"
   },
   {
     "slug": "generate-leads-through-facebook-ads",
@@ -2601,7 +2601,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 280,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/06/How-to-Generate-Leads-Through-Facebook-Ads.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/06/How-to-Generate-Leads-Through-Facebook-Ads.png"
   },
   {
     "slug": "ai-tools-to-generate-images-online-for-free",
@@ -2793,7 +2793,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 291,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/07/Top-10-AI-Tools-to-Generate-Images-Online-for-Free-in-2025-1.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/07/Top-10-AI-Tools-to-Generate-Images-Online-for-Free-in-2025-1.png"
   },
   {
     "slug": "google-algorithm-updates",
@@ -2997,7 +2997,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 380,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/07/Google-Algorithm-Updates-Decoding-the-Secret-Sauce-Behind-Search-Rankings.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/07/Google-Algorithm-Updates-Decoding-the-Secret-Sauce-Behind-Search-Rankings.png"
   },
   {
     "slug": "facebook-ads-strategy-for-clinics",
@@ -3200,7 +3200,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 407,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/07/Facebook-Ads-Strategy-for-Clinics-A-Complete-Guide-to-Grow-Your-Patient-Base.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/07/Facebook-Ads-Strategy-for-Clinics-A-Complete-Guide-to-Grow-Your-Patient-Base.png"
   },
   {
     "slug": "top-10-seo-tips-for-real-estate",
@@ -3490,7 +3490,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 446,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/08/Top-10-SEO-Tips-for-Real-Estate.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/08/Top-10-SEO-Tips-for-Real-Estate.png"
   },
   {
     "slug": "digital-marketing-for-real-estate",
@@ -3717,7 +3717,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 453,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/08/Digital-Marketing-for-Real-Estate.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/08/Digital-Marketing-for-Real-Estate.png"
   },
   {
     "slug": "facebook-ads-strategy-for-real-estate",
@@ -3953,7 +3953,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 459,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/08/Facebook-Ads-Strategy-for-Real-Estate.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/08/Facebook-Ads-Strategy-for-Real-Estate.png"
   },
   {
     "slug": "local-seo-checklist-for-real-estate",
@@ -4211,7 +4211,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 469,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/08/Local-SEO-Checklist-for-Real-Estate.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/08/Local-SEO-Checklist-for-Real-Estate.png"
   },
   {
     "slug": "top-10-seo-tips-for-lawyers",
@@ -4410,7 +4410,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 510,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/09/Top-10-SEO-Tips-for-Lawyers-.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/09/Top-10-SEO-Tips-for-Lawyers-.png"
   },
   {
     "slug": "facebook-ads-strategy-for-lawyers",
@@ -4629,7 +4629,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 528,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/09/Facebook-Ads-Strategy-for-Lawyers.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/09/Facebook-Ads-Strategy-for-Lawyers.png"
   },
   {
     "slug": "local-seo-checklist-for-lawyers",
@@ -4899,7 +4899,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 540,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/09/Local-SEO-Checklist-for-Lawyers.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/09/Local-SEO-Checklist-for-Lawyers.png"
   },
   {
     "slug": "digital-marketing-for-lawyers",
@@ -5103,7 +5103,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 547,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/09/Digital-Marketing-for-Lawyers.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/09/Digital-Marketing-for-Lawyers.png"
   },
   {
     "slug": "local-seo-checklist-for-startups",
@@ -5388,7 +5388,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 559,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/10/Local-SEO-Checklist-for-Startups.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/10/Local-SEO-Checklist-for-Startups.png"
   },
   {
     "slug": "top-10-seo-tips-for-startups",
@@ -5642,7 +5642,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 567,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/10/Untitled-design.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/10/Untitled-design.png"
   },
   {
     "slug": "digital-marketing-for-startups",
@@ -5812,7 +5812,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 573,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/10/Digital-Marketing-for-Startups.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/10/Digital-Marketing-for-Startups.png"
   },
   {
     "slug": "top-10-seo-tips-for-fashion-brands",
@@ -6032,7 +6032,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 585,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/10/Top-10-SEO-Tips-for-Fashion-Brands.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/10/Top-10-SEO-Tips-for-Fashion-Brands.png"
   },
   {
     "slug": "local-seo-checklist-for-fashion-brands",
@@ -6264,7 +6264,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 592,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/10/Local-SEO-Checklist-for-Fashion-Brands.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/10/Local-SEO-Checklist-for-Fashion-Brands.png"
   },
   {
     "slug": "facebook-ads-strategy-for-fashion-brands",
@@ -6442,7 +6442,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 602,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/10/Facebook-Ads-Strategy-for-Fashion-Brands-1.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/10/Facebook-Ads-Strategy-for-Fashion-Brands-1.png"
   },
   {
     "slug": "digital-marketing-for-fashion-brands",
@@ -6625,7 +6625,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 612,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/11/Untitled-design-4.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/11/Untitled-design-4.png"
   },
   {
     "slug": "top-10-seo-tips-for-clothing-manufacture",
@@ -6902,7 +6902,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 627,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/11/Top-10-SEO-Tips-for-Clothing-Manufacturers.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/11/Top-10-SEO-Tips-for-Clothing-Manufacturers.png"
   },
   {
     "slug": "tips-to-create-an-effective-seo-strategy",
@@ -7062,7 +7062,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 633,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/11/Tips-to-Create-an-Effective-SEO-Strategy.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/11/Tips-to-Create-an-Effective-SEO-Strategy.png"
   },
   {
     "slug": "website-seo-for-organic-and-ai-search",
@@ -7231,7 +7231,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 643,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/11/Tips-to-Improve-Website-SEO-for-Organic-and-AI-Search.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/11/Tips-to-Improve-Website-SEO-for-Organic-and-AI-Search.png"
   },
   {
     "slug": "top-100-ai-tools-changing-the-world",
@@ -7595,7 +7595,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 656,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/11/Top-100-AI-Tools-Changing-the-World-in-2026.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/11/Top-100-AI-Tools-Changing-the-World-in-2026.png"
   },
   {
     "slug": "top-10-ai-tools-for-seo-optimization",
@@ -7750,7 +7750,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 664,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/12/Top-10-AI-Tools-for-SEO-Optimization.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/12/Top-10-AI-Tools-for-SEO-Optimization.png"
   },
   {
     "slug": "best-10-ai-tools-for-content-writing",
@@ -7946,7 +7946,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 671,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/12/Best-10-AI-Tools-for-Content-Writing.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/12/Best-10-AI-Tools-for-Content-Writing.png"
   },
   {
     "slug": "top-10-ai-tools-for-image-generation-and-design",
@@ -8100,7 +8100,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 679,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2025/12/Top-10-AI-Tools-for-Image-Generation-and-Design.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2025/12/Top-10-AI-Tools-for-Image-Generation-and-Design.png"
   },
   {
     "slug": "top-10-ai-tools-for-seo-optimization-2",
@@ -8255,7 +8255,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 715,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2026/02/Untitled-design-1.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2026/02/Untitled-design-1.png"
   },
   {
     "slug": "local-seo-for-small-businesses-in-2026",
@@ -8446,7 +8446,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 725,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2026/02/image-1-1.jpeg"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2026/02/image-1-1.jpeg"
   },
   {
     "slug": "google-ads-for-business-growth",
@@ -8646,7 +8646,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 751,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2026/02/ChatGPT-Image-Aug-14-2026-04_48_35-PM.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2026/02/ChatGPT-Image-Aug-14-2026-04_48_35-PM.png"
   },
   {
     "slug": "ai-automation-in-ppc-strategy-2026",
@@ -8793,7 +8793,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 780,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2026/03/ChatGPT-Image-Aug-14-2026-04_45_57-PM.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2026/03/ChatGPT-Image-Aug-14-2026-04_45_57-PM.png"
   },
   {
     "slug": "aeo-help-ai-discover-content",
@@ -9023,7 +9023,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 791,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2026/03/ChatGPT-Image-Aug-14-2026-03_04_29-PM.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2026/03/ChatGPT-Image-Aug-14-2026-03_04_29-PM.png"
   },
   {
     "slug": "meta-ads-for-small-businesses-the-ultimate-guide-to-better-roi",
@@ -9126,7 +9126,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 805,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2026/08/ChatGPT-Image-Aug-14-2026-04_28_45-PM.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2026/08/ChatGPT-Image-Aug-14-2026-04_28_45-PM.png"
   },
   {
     "slug": "google-ads-strategy",
@@ -9696,7 +9696,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 811,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2026/08/ChatGPT-Image-Aug-14-2026-04_23_08-PM.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2026/08/ChatGPT-Image-Aug-14-2026-04_23_08-PM.png"
   },
   {
     "slug": "best-dropshipping-business-ideas",
@@ -9965,7 +9965,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 827,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2026/08/ChatGPT-Image-Aug-14-2026-04_20_20-PM.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2026/08/ChatGPT-Image-Aug-14-2026-04_20_20-PM.png"
   },
   {
     "slug": "generative-engine-optimization",
@@ -10155,7 +10155,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 841,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2026/08/ChatGPT-Image-Aug-14-2026-05_16_32-PM.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2026/08/ChatGPT-Image-Aug-14-2026-05_16_32-PM.png"
   },
   {
     "slug": "email-marketing-for-events",
@@ -10312,7 +10312,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 846,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2026/08/ChatGPT-Image-Aug-17-2026-07_30_14-PM.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2026/08/ChatGPT-Image-Aug-17-2026-07_30_14-PM.png"
   },
   {
     "slug": "seo-for-ecommerce-website",
@@ -10584,7 +10584,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 851,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2026/08/ChatGPT-Image-Aug-18-2026-07_39_52-PM.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2026/08/ChatGPT-Image-Aug-18-2026-07_39_52-PM.png"
   },
   {
     "slug": "google-ads-smart-bidding-strategy",
@@ -10939,7 +10939,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 859,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2026/08/ChatGPT-Image-Aug-19-2026-04_45_36-PM.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2026/08/ChatGPT-Image-Aug-19-2026-04_45_36-PM.png"
   },
   {
     "slug": "cybersecurity-cloud-security-protect-your-business-and-grow",
@@ -11413,7 +11413,7 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 891,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2026/08/ChatGPT-Image-Aug-28-2026-11_14_16-AM.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2026/08/ChatGPT-Image-Aug-28-2026-11_14_16-AM.png"
   },
   {
     "slug": "yourwebsite-com-website-chatbot-benefits",
@@ -11722,6 +11722,6 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonHref": "/contact"
     },
     "wpPostId": 910,
-    "featuredImageUrl": "http://blog.aravinnovations.com/wp-content/uploads/2026/08/ChatGPT-Image-Aug-29-2026-05_14_07-PM.png"
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2026/08/ChatGPT-Image-Aug-29-2026-05_14_07-PM.png"
   }
 ];

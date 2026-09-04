@@ -86,6 +86,7 @@ export const blogPostsData: BlogPost[] = [
     ],
     relatedServiceSlug: "risk-governance-compliance",
     relatedProductSlug: "arav-compliance-guard",
+    featuredImageUrl: "https://blog.aravinnovations.com/wp-content/uploads/2025/02/3d-internet-secuirty-badge-scaled.jpg",
     cta: {
       badge: "DPDP Compliance Audit",
       headline: "Accelerate Your DPDP Readiness Without Slowing Product Velocity",
@@ -139,6 +140,7 @@ export const blogPostsData: BlogPost[] = [
       },
     ],
     relatedServiceSlug: "web-app-development",
+    featuredImageUrl: "https://blog.aravinnovations.com/wp-content/uploads/2025/03/pexels-pixabay-414837-scaled.jpg",
     cta: {
       badge: "High-Performance Engineering",
       headline: "Upgrade Your Web Platforms to Sub-Second Next.js Architecture",
@@ -185,6 +187,7 @@ export const blogPostsData: BlogPost[] = [
       },
     ],
     relatedServiceSlug: "digital-marketing",
+    featuredImageUrl: "https://blog.aravinnovations.com/wp-content/uploads/2024/12/campaign-creators-yktK2qaiVHI-unsplash.jpg",
     cta: {
       badge: "Revenue-Driven Growth",
       headline: "Scale Your B2B Qualified Pipeline With Engineering Rigor",
@@ -232,6 +235,7 @@ export const blogPostsData: BlogPost[] = [
     ],
     relatedServiceSlug: "it-strategy-consulting",
     relatedProductSlug: "arav-cloud-finops-optimizer",
+    featuredImageUrl: "https://blog.aravinnovations.com/wp-content/uploads/2025/01/businessman-plan-strategy-marketing-finance-goal-2025-planning-business-growth-with-technology-ai-environmental-care-new-year-resolutions-business_184421-3962.avif",
     cta: {
       badge: "Cloud Optimization Sprint",
       headline: "Uncover 25%+ Immediate Cloud Savings in 14 Days",

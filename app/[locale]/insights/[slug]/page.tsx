@@ -23,6 +23,7 @@ import {
   CheckCircle2,
   Layers,
 } from "lucide-react";
+import { BlogCardImage } from "@/components/insights/BlogCardImage";
 
 interface InsightPostPageProps {
   params: Promise<{ slug: string }>;
@@ -169,17 +170,16 @@ export default async function InsightPostDetailPage({
             </div>
           </ScrollReveal>
 
-          {post.featuredImageUrl && (
-            <ScrollReveal direction="up" delay={0.12}>
-              <div className="relative w-full h-64 sm:h-[480px] lg:h-[540px] rounded-3xl overflow-hidden border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md my-6">
-                <img
-                  src={post.featuredImageUrl}
-                  alt={post.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </ScrollReveal>
-          )}
+          <ScrollReveal direction="up" delay={0.12}>
+            <div className="my-6">
+              <BlogCardImage
+                post={post}
+                aspectRatio="h-64 sm:h-[400px] lg:h-[480px]"
+                className="rounded-3xl border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md"
+                sizes="100vw"
+              />
+            </div>
+          </ScrollReveal>
         </div>
 
         {/* Key Takeaways Callout Box */}

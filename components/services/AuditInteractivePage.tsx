@@ -9,6 +9,7 @@ import {
   useReducedMotion,
   useInView,
 } from "framer-motion";
+import { BlogCardImage } from "@/components/insights/BlogCardImage";
 import {
   Search,
   Activity,
@@ -1598,6 +1599,9 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
               <Link key={post.slug} href={`/insights/${post.slug}`} className="group block">
                 <motion.div whileHover={{ y: -4 }} className="h-full p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c] hover:shadow-xl transition-all duration-300 shadow-sm flex flex-col justify-between">
                   <div>
+                    <div className="w-full mb-4 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800">
+                      <BlogCardImage post={post} aspectRatio="aspect-video" />
+                    </div>
                     <Badge variant="subtle" className="mb-3 text-[10px] bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-semibold">
                       {post.category}
                     </Badge>

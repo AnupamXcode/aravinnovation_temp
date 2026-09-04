@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { ArrowRight, Clock, Sparkles, Filter, ArrowUpDown, ChevronDown } from "lucide-react";
+import { BlogCardImage } from "@/components/insights/BlogCardImage";
 
 interface InsightsFilterClientProps {
   initialPosts: BlogPost[];
@@ -225,15 +226,9 @@ export function InsightsFilterClient({ initialPosts, categories }: InsightsFilte
               <TiltCard maxTilt={4} scale={1.01} className="h-full">
                 <div className="h-full p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:shadow-2xl hover:border-[#f15e1c]/40 transition-all flex flex-col justify-between group">
                   <div className="space-y-4">
-                    {art.featuredImageUrl && (
-                      <div className="w-full h-44 sm:h-48 rounded-2xl overflow-hidden mb-3 border border-[#EFE2D6] dark:border-[#1f1f1f]">
-                        <img
-                          src={art.featuredImageUrl}
-                          alt={art.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                    )}
+                    <div className="w-full rounded-2xl overflow-hidden mb-3 border border-[#EFE2D6] dark:border-[#1f1f1f]">
+                      <BlogCardImage post={art} aspectRatio="aspect-video" />
+                    </div>
                     <div className="flex items-center justify-between gap-2">
                       <Badge variant="secondary" size="sm" className="truncate max-w-[160px]">
                         {art.category}

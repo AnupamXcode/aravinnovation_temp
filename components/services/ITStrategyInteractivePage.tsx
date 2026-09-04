@@ -38,6 +38,7 @@ import {
   Clock,
   Calendar,
 } from "lucide-react";
+import { BlogCardImage } from "@/components/insights/BlogCardImage";
 import { Service } from "@/data/services";
 import { BlogPost } from "@/data/insights";
 import { Button3D } from "@/components/ui/button-3d";
@@ -1476,15 +1477,9 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                     <div className="h-full p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#000000] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 text-left flex flex-col justify-between group">
                       <div className="space-y-3">
                         
-                        {post.featuredImageUrl && (
-                          <div className="relative w-full h-44 rounded-xl overflow-hidden mb-3 border border-[#f7d7b0]/60">
-                            <img
-                              src={post.featuredImageUrl}
-                              alt={post.title}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
-                          </div>
-                        )}
+                        <div className="w-full mb-3 rounded-xl overflow-hidden border border-[#f7d7b0]/60">
+                          <BlogCardImage post={post} aspectRatio="aspect-video" />
+                        </div>
 
                         <div className="flex items-center justify-between">
                           <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] text-[#f15e1c] border border-[#f7d7b0]/50">

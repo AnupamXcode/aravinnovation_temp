@@ -28,6 +28,9 @@ import {
   Eye,
   RefreshCw,
   ArrowUpRight,
+} from "lucide-react";
+import { BlogCardImage } from "@/components/insights/BlogCardImage";
+import {
   Sparkles,
   Search,
   MessageSquare,
@@ -1170,6 +1173,9 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
               <Link key={post.slug} href={`/insights/${post.slug}`} className="group block">
                 <motion.div whileHover={{ y: -3 }} className="h-full p-6 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-md transition-all duration-200 shadow-xs flex flex-col justify-between">
                   <div>
+                    <div className="w-full mb-3 rounded-xl overflow-hidden border border-[#F7D7B0]/60">
+                      <BlogCardImage post={post} aspectRatio="aspect-video" />
+                    </div>
                     <Badge variant="subtle" className="mb-2.5 text-[10px] bg-[#F7D7B0]/40 text-[#F15E1C] font-semibold">
                       {post.category}
                     </Badge>

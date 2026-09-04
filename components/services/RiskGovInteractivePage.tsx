@@ -9,6 +9,7 @@ import {
   useReducedMotion,
   useInView,
 } from "framer-motion";
+import { BlogCardImage } from "@/components/insights/BlogCardImage";
 import {
   ShieldCheck,
   Lock,
@@ -1201,6 +1202,9 @@ export function RiskGovInteractivePage({ service, relatedPosts }: RiskGovPagePro
                 <TiltCard maxTilt={5} scale={1.01} className="h-full">
                   <div className="h-full p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#2e936f] hover:shadow-xl transition-all duration-300 flex flex-col justify-between text-left space-y-4 group">
                     <div className="space-y-3">
+                      <div className="w-full mb-3 rounded-2xl overflow-hidden border border-[#f7d7b0]/60">
+                        <BlogCardImage post={post} aspectRatio="aspect-video" />
+                      </div>
                       <div className="flex items-center justify-between text-[10px] font-mono font-bold text-[#2e936f]">
                         <span className="uppercase tracking-wider">{post.category}</span>
                         <span>{post.publishedAt || post.dateFormatted}</span>
