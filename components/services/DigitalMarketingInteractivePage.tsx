@@ -534,13 +534,13 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
 
               {/* Dedicated Cropped Mobile Hero Image Card (Mobile/Tablet Viewports < 1024px) */}
               <AnimatedSection delay={0.12} className="w-full lg:hidden my-3">
-                <div className="relative w-full aspect-[941/1171] max-w-md mx-auto rounded-2xl border-2 border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] overflow-hidden shadow-xl">
+                <div className="relative w-full aspect-[941/970] rounded-2xl border-2 border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] overflow-hidden shadow-xl">
                   <Image
                     src="/images/digital-marketing-mobile-hero.png"
                     alt="Digital Marketing &amp; Brand Development Strategy"
                     fill
                     priority
-                    className="object-contain"
+                    className="object-cover object-center"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                 </div>
