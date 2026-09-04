@@ -719,26 +719,26 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
             {positioningCapabilities.map((cap, idx) => (
               <AnimatedSection key={cap.num} delay={idx * 0.08}>
                 <TiltCard maxTilt={6} scale={1.01} glare={true} className="h-full">
-                  <div className="h-full p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#f15e1c] transition-all duration-300 space-y-3 flex flex-col justify-between group relative overflow-hidden">
-                    <div className="space-y-2 text-left">
+                  <div className="h-full p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md hover:shadow-2xl hover:border-[#f15e1c] transition-all duration-300 space-y-4 flex flex-col justify-between group relative overflow-hidden text-left">
+                    <div className="space-y-3.5">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-mono font-black text-[#f15e1c] group-hover:scale-110 transition-transform">
+                        <span className="text-xs font-mono font-black text-[#f15e1c] px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/30">
                           {cap.num}
                         </span>
-                        <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-110 group-hover:rotate-6 group-hover:border-[#f15e1c]/40 transition-all duration-300">
-                          {cap.icon}
+                        <div className="w-14 h-14 rounded-2xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform">
+                          {React.cloneElement(cap.icon as React.ReactElement<{ className?: string }>, { className: "w-7 h-7 text-[#fab60a] stroke-[2]" })}
                         </div>
                       </div>
-                      <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] group-hover:translate-x-1 transition-all duration-300">
+                      <h3 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug break-words">
                         {cap.title}
                       </h3>
-                      <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
+                      <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
                         {cap.description}
                       </p>
                     </div>
 
                     {/* Subtle Accent Bottom Indicator Line */}
-                    <div className="h-0.5 w-0 group-hover:w-full bg-gradient-to-r from-[#f15e1c] to-[#2e936f] transition-all duration-300 rounded-full" />
+                    <div className="h-1 w-0 group-hover:w-full bg-gradient-to-r from-[#f15e1c] via-[#2e936f] to-[#fab60a] transition-all duration-300 rounded-full" />
                   </div>
                 </TiltCard>
               </AnimatedSection>

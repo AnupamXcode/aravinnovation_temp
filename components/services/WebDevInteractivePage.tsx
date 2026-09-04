@@ -42,6 +42,7 @@ import {
   Workflow,
   Wrench,
   GitBranch,
+  Smartphone,
 } from "lucide-react";
 import { Service } from "@/data/services";
 import { BlogPost, blogPostsData } from "@/data/insights";
@@ -261,7 +262,7 @@ const productCapabilities = [
     title: "High-Performance Websites",
     description:
       "Corporate websites, marketing platforms, content-driven experiences and conversion-focused digital experiences built for speed and clarity.",
-    icon: <Globe2 className="w-5 h-5 text-[#f15e1c]" />,
+    icon: <Globe2 className="w-7 h-7 text-[#f15e1c] stroke-[2]" />,
     techLayer: "Frontend & Content System",
   },
   {
@@ -269,7 +270,7 @@ const productCapabilities = [
     title: "Web Applications",
     description:
       "Customer portals, internal platforms, interactive dashboards, workflow applications and enterprise business systems.",
-    icon: <Code2 className="w-5 h-5 text-[#2e936f]" />,
+    icon: <Code2 className="w-7 h-7 text-[#2e936f] stroke-[2]" />,
     techLayer: "Full-Stack Application Layer",
   },
   {
@@ -277,7 +278,7 @@ const productCapabilities = [
     title: "E-Commerce Experiences",
     description:
       "Product discovery, catalogues, checkout journeys, payment gateway integrations and scalable custom commerce experiences.",
-    icon: <ShoppingBag className="w-5 h-5 text-[#fab60a]" />,
+    icon: <ShoppingBag className="w-7 h-7 text-[#fab60a] stroke-[2]" />,
     techLayer: "Commerce & Payment Gateway",
   },
   {
@@ -285,7 +286,7 @@ const productCapabilities = [
     title: "Custom Business Applications",
     description:
       "Software engineered around specific operational workflows instead of forcing your business into rigid off-the-shelf platforms.",
-    icon: <Wrench className="w-5 h-5 text-[#f15e1c]" />,
+    icon: <Wrench className="w-7 h-7 text-[#f15e1c] stroke-[2]" />,
     techLayer: "Domain Logic & Workflows",
   },
   {
@@ -293,7 +294,7 @@ const productCapabilities = [
     title: "API & System Integration",
     description:
       "Connect applications, services, data sources and third-party platforms through reliable, well-documented integration architecture.",
-    icon: <Terminal className="w-5 h-5 text-[#2e936f]" />,
+    icon: <Terminal className="w-7 h-7 text-[#2e936f] stroke-[2]" />,
     techLayer: "REST & GraphQL Gateways",
   },
   {
@@ -301,8 +302,24 @@ const productCapabilities = [
     title: "Progressive Web Experiences",
     description:
       "Where appropriate, create installable, app-like web experiences with capabilities such as offline support and background operation.",
-    icon: <Cpu className="w-5 h-5 text-[#fab60a]" />,
+    icon: <Cpu className="w-7 h-7 text-[#fab60a] stroke-[2]" />,
     techLayer: "PWA & Service Worker Layer",
+  },
+  {
+    num: "07",
+    title: "Android Applications",
+    description:
+      "Native or cross-platform Android application development for business, customer and operational use cases.",
+    icon: <Smartphone className="w-7 h-7 text-[#2e936f] stroke-[2]" />,
+    techLayer: "Android & Mobile Ecosystem",
+  },
+  {
+    num: "08",
+    title: "iPhone / iOS Applications",
+    description:
+      "Professional iPhone and iOS application development with responsive, user-focused experiences.",
+    icon: <Smartphone className="w-7 h-7 text-[#f15e1c] stroke-[2]" />,
+    techLayer: "iOS & Apple Ecosystem",
   },
 ];
 
@@ -899,35 +916,37 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
                   <div
                     onMouseEnter={() => setActiveCapIdx(idx)}
                     className={cn(
-                      "h-full p-6 sm:p-7 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border transition-all duration-300 space-y-3 flex flex-col justify-between group relative overflow-hidden text-left",
+                      "h-full p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0a0a0a] border transition-all duration-300 space-y-5 flex flex-col justify-between group relative overflow-hidden text-left shadow-md hover:shadow-2xl",
                       activeCapIdx === idx
-                        ? "border-[#f15e1c] shadow-lg ring-1 ring-[#f15e1c]/20"
+                        ? "border-[#f15e1c] ring-2 ring-[#f15e1c]/30"
                         : "border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]"
                     )}
                   >
-                    <div className="space-y-3">
+                    <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-mono font-black text-[#f15e1c] group-hover:scale-110 transition-transform">
+                        <span className="text-xs font-mono font-black text-[#f15e1c] px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/30">
                           {cap.num}
                         </span>
-                        <div className="p-2.5 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-110 group-hover:rotate-6 group-hover:border-[#f15e1c]/40 transition-all duration-300">
-                          {cap.icon}
+                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 group-hover:border-[#f15e1c] transition-all duration-300">
+                          {React.cloneElement(cap.icon as React.ReactElement<{ className?: string }>, { className: "w-7 h-7 sm:w-8 sm:h-8 stroke-[2]" })}
                         </div>
                       </div>
-                      <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
-                        {cap.title}
-                      </h3>
-                      <p className="text-xs font-mono font-bold text-[#2e936f]">
-                        {cap.techLayer}
-                      </p>
-                      <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
+                      <div className="space-y-1.5">
+                        <h3 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug break-words">
+                          {cap.title}
+                        </h3>
+                        <p className="text-xs sm:text-sm font-mono font-extrabold text-[#2e936f] uppercase tracking-wider">
+                          {cap.techLayer}
+                        </p>
+                      </div>
+                      <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
                         {cap.description}
                       </p>
                     </div>
 
-                    <div className="pt-2 flex items-center justify-between border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] text-[11px] font-mono font-bold text-[#f15e1c] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="pt-4 border-t border-[#f7d7b0]/60 dark:border-[#1a1a1a] flex items-center justify-between text-xs font-mono font-extrabold uppercase tracking-wider text-[#f15e1c]">
                       <span>Explore Capability</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-300" />
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
                     </div>
                   </div>
                 </TiltCard>

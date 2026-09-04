@@ -33,8 +33,8 @@ export function Hero() {
             <ScrollTextFlip>
               {/* Single Eyebrow Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f7d7b0]/40 dark:bg-[#121212] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-semibold shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-[#f15e1c] animate-pulse" />
-                <span className="font-mono text-[11px] uppercase tracking-widest text-[#f15e1c]">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-pulse" />
+                <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#f15e1c]">
                   ENTERPRISE TECHNOLOGY &bull; STRATEGY &bull; DIGITAL GROWTH
                 </span>
               </div>

@@ -38,42 +38,42 @@ export function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
 
           {/* Title & Summary */}
           <div>
-            <h3 className="text-xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors">
+            <h3 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug break-words">
               {caseStudy.title}
             </h3>
-            <p className="mt-2 text-sm text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
+            <p className="mt-2 text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
               {caseStudy.summary}
             </p>
           </div>
 
           {/* Visual Metric Highlight Callout */}
           {caseStudy.results && caseStudy.results.length > 0 && (
-            <div className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#1C1814] border border-[#EFE2D6] dark:border-[#1f1f1f] flex items-center justify-between">
+            <div className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-between shadow-xs">
               <div>
-                <span className="text-2xl font-black font-mono text-[#f15e1c] block">
+                <span className="text-2xl sm:text-3xl font-black font-mono text-[#f15e1c] block">
                   {caseStudy.results[0].metric}
                 </span>
-                <span className="text-xs font-mono font-semibold text-[#7A6A5F] dark:text-[#B8ACA0] block">
+                <span className="text-xs font-mono font-bold text-[#2e936f] dark:text-[#2e936f] block uppercase tracking-wider">
                   {caseStudy.results[0].label}
                 </span>
               </div>
-              <CheckCircle2 className="w-5 h-5 text-[#2e936f] shrink-0" />
+              <CheckCircle2 className="w-6 h-6 text-[#2e936f] shrink-0" />
             </div>
           )}
         </div>
 
         {/* Footer CTA */}
-        <div className="mt-6 pt-5 border-t border-[#EFE2D6] dark:border-[#1f1f1f] flex items-center justify-between relative z-20">
-          <span className="text-xs font-mono text-[#7A6A5F] dark:text-[#B8ACA0]">
+        <div className="mt-6 pt-5 border-t border-[#f7d7b0]/60 dark:border-[#1a1a1a] flex items-center justify-between relative z-20">
+          <span className="text-xs font-mono font-bold text-[#4a5c55] dark:text-[#d3eee4]">
             {caseStudy.client}
           </span>
           <Link
             href={`/case-studies/${caseStudy.slug}`}
             onClick={(e) => e.stopPropagation()}
-            className="inline-flex items-center text-sm font-semibold text-[#f15e1c] group-hover:text-[#d4581f] transition-colors gap-1.5 py-1"
+            className="inline-flex items-center text-sm font-extrabold text-[#f15e1c] group-hover:text-[#d8480d] transition-colors gap-1.5 py-1 uppercase tracking-wider"
           >
             <span>Full Case Study</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
           </Link>
         </div>
       </div>

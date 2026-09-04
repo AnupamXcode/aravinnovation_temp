@@ -102,9 +102,9 @@ export function Process3DPathway() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full max-w-5xl mx-auto py-12 px-4 select-none"
+      className="relative w-full max-w-5xl mx-auto py-6 sm:py-12 px-1 sm:px-4 select-none"
     >
-      <div className="relative border-l-2 border-[#f7d7b0] dark:border-[#1a1a1a] ml-4 sm:ml-8 pl-6 sm:pl-12 space-y-12">
+      <div className="relative border-l-2 border-[#f7d7b0] dark:border-[#1a1a1a] ml-2 sm:ml-8 pl-3.5 sm:pl-12 space-y-6 sm:space-y-10">
         {/* Animated 3D Trajectory Orange Line */}
         <motion.div
           style={{ height: shouldReduceMotion ? "100%" : pathHeight }}
@@ -118,53 +118,55 @@ export function Process3DPathway() {
           return (
             <motion.div
               key={step.number}
-              whileHover={{ x: 6 }}
+              whileHover={{ x: 4 }}
               onClick={() => setActiveStep(idx)}
               className={cn(
-                "relative z-20 p-6 sm:p-8 rounded-3xl border shadow-lg transition-all duration-300 cursor-pointer space-y-4",
+                "relative z-20 p-5 sm:p-8 rounded-3xl border shadow-md transition-all duration-300 cursor-pointer space-y-4 w-full",
                 isActive
-                  ? "bg-[#fefaf5] dark:bg-[#000000] border-[#f15e1c] ring-2 ring-[#f15e1c]/30 shadow-[#f15e1c]/20 scale-[1.01]"
+                  ? "bg-white dark:bg-[#000000] border-[#f15e1c] ring-2 ring-[#f15e1c]/30 shadow-[#f15e1c]/15"
                   : isPassed
-                  ? "bg-white dark:bg-[#0a0a0a] border-[#2e936f]/60 opacity-90"
-                  : "bg-white/80 dark:bg-[#1a2622]/80 border-[#f7d7b0] dark:border-[#1a1a1a] opacity-60"
+                  ? "bg-white dark:bg-[#0a0a0a] border-[#2e936f]/60"
+                  : "bg-white dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a]"
               )}
             >
               {/* Timeline Trajectory Node Dot */}
               <div
                 className={cn(
-                  "absolute -left-[31px] sm:-left-[55px] top-8 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-300 z-20",
+                  "absolute -left-[20px] sm:-left-[55px] top-8 w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 flex items-center justify-center transition-all duration-300 z-20",
                   isActive
-                    ? "bg-[#f15e1c] border-white text-white ring-4 ring-[#f15e1c]/30 scale-125"
+                    ? "bg-[#f15e1c] border-white text-white ring-4 ring-[#f15e1c]/30 scale-110"
                     : isPassed
                     ? "bg-[#2e936f] border-white text-white"
                     : "bg-white dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a]"
                 )}
               >
-                <div className="w-2 h-2 rounded-full bg-current" />
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-current" />
               </div>
 
               {/* Step Header */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-4">
-                <div className="flex items-center gap-3">
-                  <div className="p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0]">
-                    {step.icon}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] pb-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center shrink-0 shadow-xs">
+                    {React.cloneElement(step.icon as React.ReactElement<{ className?: string }>, { className: "w-7 h-7 text-[#f15e1c] stroke-[2]" })}
                   </div>
-                  <div>
-                    <span className="text-xs font-mono font-bold text-[#f15e1c]">
-                      STAGE {step.number}
-                    </span>
-                    <h3 className="text-lg sm:text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-mono font-black text-[#f15e1c] px-3 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/30">
+                        STEP {step.number}
+                      </span>
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-snug">
                       {step.title}
                     </h3>
                   </div>
                 </div>
-                <span className="text-xs font-mono text-[#2e936f] font-semibold">
+                <span className="text-xs sm:text-sm font-mono text-[#2e936f] font-extrabold uppercase tracking-wider">
                   {step.subtitle}
                 </span>
               </div>
 
               {/* Step Body */}
-              <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
                 {step.description}
               </p>
 
@@ -173,9 +175,9 @@ export function Process3DPathway() {
                 {step.deliverables.map((del, dIdx) => (
                   <div
                     key={dIdx}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white dark:bg-[#000000] border border-[#f7d7b0] text-[11px] font-semibold text-[#1b2823] dark:text-[#ffffff]"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#262626] text-xs font-semibold text-[#1b2823] dark:text-[#ffffff] shadow-xs"
                   >
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#f15e1c]" />
+                    <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
                     <span>{del}</span>
                   </div>
                 ))}

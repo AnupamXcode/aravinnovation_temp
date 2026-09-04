@@ -184,7 +184,7 @@ export function InteractiveServiceSelector() {
       </div>
 
       {/* MOBILE ACCORDION LAYOUT */}
-      <div className="lg:hidden space-y-3">
+      <div className="lg:hidden space-y-3.5">
         {servicesData.map((svc, idx) => {
           const isSelected = selectedIndex === idx;
           const mobilePillars = svc.ourSolution?.keyPillars || [];
@@ -196,46 +196,46 @@ export function InteractiveServiceSelector() {
               <button
                 type="button"
                 onClick={() => setSelectedIndex(isSelected ? -1 : idx)}
-                className={`w-full p-4 text-left flex items-center justify-between transition-colors ${
+                className={`w-full p-4 sm:p-5 text-left flex items-center justify-between transition-colors ${
                   isSelected ? "bg-[#f15e1c] text-white" : "text-[#1b2823] dark:text-[#ffffff]"
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <span className="font-mono text-xs font-extrabold tracking-wider">
+                  <span className="font-mono text-xs font-black tracking-wider shrink-0">
                     {shortLabels[idx]}
                   </span>
-                  <span className="font-display font-bold text-sm">
+                  <span className="font-display font-extrabold text-sm sm:text-base leading-snug">
                     {svc.title}
                   </span>
                 </div>
-                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isSelected ? "rotate-180" : ""}`} />
+                <ChevronDown className={`w-5 h-5 transition-transform duration-200 shrink-0 ml-2 ${isSelected ? "rotate-180" : ""}`} />
               </button>
 
               {isSelected && (
-                <div className="p-5 space-y-5 border-t border-[#f7d7b0] dark:border-[#1a1a1a]">
-                  <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                <div className="p-5 sm:p-6 space-y-5 border-t border-[#f7d7b0] dark:border-[#1a1a1a]">
+                  <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
                     {svc.description}
                   </p>
 
-                  <div className="space-y-2">
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#f15e1c] block">
+                  <div className="space-y-2.5">
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#f15e1c] block">
                       {t("coreCapabilities")}
                     </span>
-                    {mobilePillars.slice(0, 3).map((pillar: { title: string; description: string }, i: number) => (
-                      <div key={i} className="text-xs font-medium flex items-center gap-2 text-[#1b2823] dark:text-[#ffffff]">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
+                    {mobilePillars.slice(0, 4).map((pillar: { title: string; description: string }, i: number) => (
+                      <div key={i} className="text-xs sm:text-sm font-semibold flex items-center gap-2.5 text-[#1b2823] dark:text-[#ffffff]">
+                        <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
                         <span>{pillar.title}</span>
                       </div>
                     ))}
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                     <Link href={`/services/${svc.slug}`} className="block">
                       <Button
                         variant="primary"
-                        size="sm"
-                        className="w-full rounded-xl py-2 text-xs bg-[#f15e1c] text-white"
-                        rightIcon={<ArrowRight className="w-3.5 h-3.5 ml-1" />}
+                        size="md"
+                        className="w-full rounded-xl py-3 text-xs sm:text-sm bg-[#f15e1c] text-white font-bold"
+                        rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
                       >
                         {t("explorePractice")}
                       </Button>
@@ -252,9 +252,9 @@ export function InteractiveServiceSelector() {
                           );
                         }
                       }}
-                      className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-[#f15e1c]/10 dark:bg-[#f15e1c]/20 hover:bg-[#f15e1c] text-[#f15e1c] hover:text-white border border-[#f15e1c]/40 text-xs font-mono font-bold transition-all duration-200 cursor-pointer shadow-xs min-h-[36px]"
+                      className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#f15e1c]/10 dark:bg-[#f15e1c]/20 hover:bg-[#f15e1c] text-[#f15e1c] hover:text-white border border-[#f15e1c]/40 text-xs sm:text-sm font-mono font-bold transition-all duration-200 cursor-pointer shadow-xs min-h-[44px]"
                     >
-                      <Phone className="w-3.5 h-3.5" />
+                      <Phone className="w-4 h-4" />
                       <span>Setup Call</span>
                     </button>
                   </div>

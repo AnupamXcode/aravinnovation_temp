@@ -277,8 +277,8 @@ export function Footer() {
             </Link>
           </div>
 
-          {/* Clean Multi-Column Editorial Service List (No Boxed Cards, Premium Navigation) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-3 pt-1">
+          {/* Clean Multi-Column Editorial Service List (High Contrast, Mobile-Optimized Navigation) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-2">
             {enterprisePractices.map((practice, index) => (
               <motion.div
                 key={practice.num}
@@ -289,23 +289,28 @@ export function Footer() {
               >
                 <Link
                   href={practice.href}
-                  className="group flex items-center justify-between py-2.5 border-b border-white/15 hover:border-[#ffec69]/70 transition-colors duration-200 text-left cursor-pointer"
+                  className="group flex items-center justify-between p-3.5 sm:p-4 rounded-2xl bg-white/10 dark:bg-white/5 border border-white/20 hover:border-[#ffec69] hover:bg-white/20 transition-all duration-200 text-left cursor-pointer shadow-xs"
                 >
-                  <div className="flex items-start gap-2.5">
-                    <span className="text-xs font-mono font-bold text-[#ffec69] group-hover:text-white transition-colors shrink-0 pt-0.5">
-                      {practice.num}
-                    </span>
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-10 h-10 rounded-xl bg-white/15 border border-white/30 flex items-center justify-center shrink-0 group-hover:scale-105 group-hover:bg-[#f15e1c] transition-all duration-200">
+                      {React.cloneElement(practice.icon, { className: "w-5 h-5 text-white group-hover:text-white" })}
+                    </div>
                     <div className="space-y-0.5">
-                      <h4 className="text-xs sm:text-sm font-extrabold font-display text-white group-hover:text-[#ffec69] group-hover:translate-x-1 transition-all duration-200 leading-snug">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-mono font-black text-[#ffec69] group-hover:text-white transition-colors">
+                          {practice.num}
+                        </span>
+                        <span className="text-[10px] font-mono font-bold text-white/80 uppercase">
+                          {practice.category}
+                        </span>
+                      </div>
+                      <h4 className="text-sm sm:text-base font-extrabold font-display text-white group-hover:text-[#ffec69] transition-all duration-200 leading-snug">
                         {practice.title}
                       </h4>
-                      <span className="text-[10px] font-mono text-white/70 block group-hover:text-white transition-colors">
-                        {practice.category}
-                      </span>
                     </div>
                   </div>
 
-                  <ArrowRight className="w-3.5 h-3.5 text-white/60 group-hover:text-[#ffec69] group-hover:translate-x-1.5 transition-transform duration-200 shrink-0 ml-2" />
+                  <ArrowRight className="w-4 h-4 text-white/70 group-hover:text-[#ffec69] group-hover:translate-x-1 transition-transform duration-200 shrink-0 ml-2" />
                 </Link>
               </motion.div>
             ))}
@@ -321,16 +326,11 @@ export function Footer() {
           <div className="lg:col-span-4 space-y-3">
             <BrandLogo variant="footer" />
             
-            <div className="space-y-0.5">
-              <h3 className="text-base font-extrabold font-display text-white tracking-wide">
-                ARAV INNOVATIONS
-              </h3>
-              <p className="text-[11px] font-mono font-bold text-[#ffec69] italic">
-                &ldquo;Elevating Brands, One Click at a Time.&rdquo;
-              </p>
-            </div>
+            <p className="text-[11px] font-mono font-bold text-[#ffec69] italic">
+              &ldquo;Elevating Brands, One Click at a Time.&rdquo;
+            </p>
 
-            <p className="text-xs text-white/90 leading-relaxed max-w-sm font-medium">
+            <p className="text-xs sm:text-sm text-white/90 leading-relaxed max-w-sm font-medium">
               Technology strategy, engineering, compliance and digital growth for organizations ready to move forward.
             </p>
           </div>

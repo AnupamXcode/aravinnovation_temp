@@ -12,6 +12,8 @@ import {
   TrendingUp,
   Cpu,
   BarChart3,
+  Cloud,
+  RefreshCw,
 } from "lucide-react";
 import { Button3D } from "@/components/ui/button-3d";
 import { cn } from "@/lib/utils";
@@ -33,7 +35,7 @@ const transformationSteps: TransformationStep[] = [
     subtitle: "Deconstruct Monoliths & Tech Debt",
     metric: "45%",
     metricLabel: "Latency Reduced",
-    icon: <Cpu className="w-5 h-5 text-[#f15e1c]" />,
+    icon: <RefreshCw className="w-6 h-6 text-[#f15e1c]" />,
     color: "#f15e1c",
   },
   {
@@ -42,7 +44,7 @@ const transformationSteps: TransformationStep[] = [
     subtitle: "Next.js App Router & Microservices",
     metric: "100/100",
     metricLabel: "Core Web Vitals",
-    icon: <Zap className="w-5 h-5 text-[#2e936f]" />,
+    icon: <Cloud className="w-6 h-6 text-[#2e936f]" />,
     color: "#2e936f",
   },
   {
@@ -51,7 +53,7 @@ const transformationSteps: TransformationStep[] = [
     subtitle: "DPDP Governance & Continuous CI/CD",
     metric: "100%",
     metricLabel: "DPDP Compliant",
-    icon: <ShieldCheck className="w-5 h-5 text-[#fab60a]" />,
+    icon: <ShieldCheck className="w-6 h-6 text-[#fab60a]" />,
     color: "#fab60a",
   },
   {
@@ -60,7 +62,7 @@ const transformationSteps: TransformationStep[] = [
     subtitle: "Closed-Loop Demand & High Intent",
     metric: "3.4x",
     metricLabel: "Conversion Uplift",
-    icon: <TrendingUp className="w-5 h-5 text-[#f15e1c]" />,
+    icon: <TrendingUp className="w-6 h-6 text-[#f15e1c]" />,
     color: "#f15e1c",
   },
 ];
@@ -127,7 +129,7 @@ export function CaseStudy3DTransformation() {
                 whileHover={{ y: -6, scale: 1.02 }}
                 onClick={() => setActiveStep(idx)}
                 className={cn(
-                  "relative z-10 p-7 sm:p-8 rounded-3xl border shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between space-y-6 min-h-[260px]",
+                  "relative z-10 p-6 sm:p-8 rounded-3xl border shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between space-y-6 min-h-[280px]",
                   isActive
                     ? "bg-[#fefaf5] dark:bg-[#000000] border-[#f15e1c] ring-2 ring-[#f15e1c]/30 shadow-[#f15e1c]/20"
                     : "bg-white dark:bg-[#1a2622] border-[#f7d7b0] dark:border-[#1a1a1a]"
@@ -135,35 +137,35 @@ export function CaseStudy3DTransformation() {
               >
                 {/* Step Header */}
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono font-extrabold text-[#f15e1c] px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#161616]">
+                  <span className="text-xs font-mono font-extrabold text-[#f15e1c] px-3.5 py-1.5 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/30">
                     STEP {step.step}
                   </span>
-                  <div className="p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0]/60">
+                  <div className="w-12 h-12 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0]/80 dark:border-[#1a1a1a] flex items-center justify-center shrink-0 shadow-xs">
                     {step.icon}
                   </div>
                 </div>
 
                 {/* Step Body */}
-                <div className="space-y-2">
-                  <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                <div className="space-y-2.5">
+                  <h3 className="text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-snug tracking-tight">
                     {step.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                  <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
                     {step.subtitle}
                   </p>
                 </div>
 
                 {/* Step Metric Highlight */}
-                <div className="pt-4 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between">
+                <div className="pt-4 border-t border-[#f7d7b0]/60 dark:border-[#1a1a1a] flex items-center justify-between">
                   <div>
-                    <div className="text-2xl font-extrabold font-display text-[#f15e1c]">
+                    <div className="text-2xl sm:text-3xl font-extrabold font-display text-[#f15e1c]">
                       {step.metric}
                     </div>
-                    <div className="text-[11px] font-medium text-[#4a5c55] dark:text-[#d3eee4]">
+                    <div className="text-xs font-semibold text-[#4a5c55] dark:text-[#d3eee4] mt-0.5">
                       {step.metricLabel}
                     </div>
                   </div>
-                  <CheckCircle2 className={cn("w-6 h-6", isActive ? "text-[#f15e1c]" : "text-[#2e936f]")} />
+                  <CheckCircle2 className={cn("w-7 h-7 shrink-0", isActive ? "text-[#f15e1c]" : "text-[#2e936f]")} />
                 </div>
               </motion.div>
             );

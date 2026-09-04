@@ -739,28 +739,28 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                 <TiltCard maxTilt={2} scale={1.01}>
                   <a
                     href={card.href}
-                    className="block h-full p-6 sm:p-7 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 space-y-3.5 text-left group"
+                    className="block h-full p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 space-y-4 text-left group"
                   >
                     <div className="flex items-center justify-between">
-                      <div className="p-3 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] group-hover:scale-105 transition-transform">
-                        {card.icon}
+                      <div className="w-14 h-14 rounded-2xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform">
+                        {React.cloneElement(card.icon as React.ReactElement<{ className?: string }>, { className: "w-7 h-7 text-[#f15e1c] stroke-[2]" })}
                       </div>
-                      <span className="text-xs font-mono font-black text-[#f15e1c] px-2.5 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#000000]">
+                      <span className="text-xs font-mono font-black text-[#f15e1c] px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/30">
                         {card.id}
                       </span>
                     </div>
 
-                    <h3 className="text-lg sm:text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
+                    <h3 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug break-words">
                       {card.title}
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                    <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
                       {card.desc}
                     </p>
 
-                    <div className="pt-2 text-xs font-mono font-bold text-[#f15e1c] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                    <div className="pt-3 border-t border-[#f7d7b0]/60 dark:border-[#1a1a1a] text-xs font-mono font-extrabold uppercase tracking-wider text-[#f15e1c] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                       <span>Explore Capability</span>
-                      <ChevronRight className="w-3.5 h-3.5" />
+                      <ChevronRight className="w-4 h-4" />
                     </div>
                   </a>
                 </TiltCard>

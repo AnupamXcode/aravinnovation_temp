@@ -62,36 +62,36 @@ export function ProblemToSolutionSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
           {pillars.map((pillar, idx) => (
             <ScrollReveal key={pillar.tag} direction="up" delay={idx * 0.15} className="h-full">
-              <div className="h-full rounded-3xl bg-white dark:bg-[#1f2d27] p-8 border border-[#f7d7b0] dark:border-[#2a3c35] hover:border-[#f15e1c] transition-all duration-300 shadow-md hover:shadow-2xl hover:-translate-y-1 flex flex-col justify-between group relative overflow-hidden">
-                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl ${pillar.bgGradient} rounded-bl-full pointer-events-none`} />
+              <div className="h-full rounded-3xl bg-white dark:bg-[#16221d] p-6 sm:p-8 border border-[#f7d7b0] dark:border-[#2a3c35] hover:border-[#f15e1c] transition-all duration-300 shadow-md hover:shadow-2xl hover:-translate-y-1 flex flex-col justify-between group relative overflow-hidden">
+                <div className={`absolute top-0 right-0 w-36 h-36 bg-gradient-to-bl ${pillar.bgGradient} rounded-bl-full pointer-events-none`} />
 
                 <div className="space-y-6 relative z-10">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-extrabold tracking-widest px-3 py-1 rounded-full bg-[#f7d7b0]/30 dark:bg-[#283b33] text-[#1b2823] dark:text-white">
+                    <span className="text-xs font-mono font-black tracking-widest px-3.5 py-1.5 rounded-full bg-[#fce3d3] dark:bg-[#161616] text-[#f15e1c] border border-[#f15e1c]/30">
                       {pillar.step} &bull; {pillar.tag}
                     </span>
-                    <div className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0]/60 dark:border-[#1a1a1a] group-hover:scale-110 transition-transform">
-                      {pillar.icon}
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform">
+                      {React.cloneElement(pillar.icon, { className: "w-7 h-7 sm:w-8 sm:h-8 stroke-[2]" })}
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <h3 className="text-xl sm:text-2xl font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
+                  <div className="space-y-3">
+                    <h3 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug">
                       {pillar.title}
                     </h3>
-                    <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                    <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
                       {pillar.description}
                     </p>
                   </div>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-[#f7d7b0]/40 dark:border-[#2a3c35] relative z-10">
+                <div className="pt-6 mt-6 border-t border-[#f7d7b0]/60 dark:border-[#2a3c35] relative z-10">
                   <Link
                     href="#services"
-                    className="inline-flex items-center gap-2 text-xs font-bold font-display uppercase tracking-wider text-[#f15e1c] hover:underline"
+                    className="inline-flex items-center gap-2 text-sm font-extrabold font-display uppercase tracking-wider text-[#f15e1c] hover:text-[#d8480d] transition-colors py-1 cursor-pointer"
                   >
                     <span>Explore {pillar.tag} Capabilities</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
                   </Link>
                 </div>
               </div>

@@ -332,13 +332,13 @@ export function ExplodedServicesStack3D() {
   }, []);
 
   return (
-    <section ref={rootRef} className="relative w-full select-none overflow-hidden my-12">
-      {/* Track Container (180vh height for compact scroll response) */}
-      <div className="exploded-track relative w-full h-[180vh]">
-        {/* Pinned Stage Container */}
+    <section ref={rootRef} className="relative w-full select-none overflow-hidden my-6 md:my-12">
+      {/* Track Container (180vh height on desktop, natural h-auto on mobile) */}
+      <div className="exploded-track relative w-full h-auto md:h-[180vh]">
+        {/* Viewport Stage Container */}
         <div
           ref={stageRef}
-          className="exploded-pinned-stage relative w-full h-screen flex flex-col justify-between py-6 px-4 sm:px-8 lg:px-12 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300 overflow-hidden"
+          className="exploded-pinned-stage relative w-full h-auto md:h-screen flex flex-col justify-between py-4 sm:py-6 px-4 sm:px-8 lg:px-12 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300 overflow-hidden"
         >
           {/* Header Title Bar */}
           <div className="relative z-20 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-4 max-w-7xl mx-auto w-full">

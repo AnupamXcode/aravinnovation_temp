@@ -614,61 +614,72 @@ export function InteractiveServiceStack3D() {
           </div>
 
           {/* DEDICATED RESPONSIVE MOBILE STACK (Clean, unpinned vertical list with smooth viewport entrance animations) */}
-          <div className="flex md:hidden flex-col gap-3.5 my-4 w-full overflow-x-clip px-0.5">
+          <div className="flex md:hidden flex-col gap-4 my-4 w-full overflow-x-clip px-1">
             {serviceLayers.map((layer, idx) => {
               const isActive = layer.id === activeServiceIdx;
+              const formattedNum = String(idx + 1).padStart(2, "0");
 
-              // Directional variation: Primary Left -> Center (-60px), Right -> Center (50px), Up -> Center (35px)
-              const initialTransform = shouldReduceMotion
-                ? { opacity: 1, x: 0, y: 0, scale: 1 }
-                : idx % 3 === 0
-                ? { opacity: 0, x: -60, y: 0, scale: 0.98 }
-                : idx % 3 === 1
-                ? { opacity: 0, x: 50, y: 0, scale: 0.98 }
-                : { opacity: 0, x: 0, y: 35, scale: 0.98 };
+              const categories = [
+                "TECHNOLOGY",
+                "GROWTH",
+                "ENGINEERING",
+                "COMPLIANCE",
+                "DIAGNOSTIC",
+                "TALENT",
+                "SEARCH",
+                "AI INNOVATION",
+              ];
+              const categoryTag = categories[idx] || "PRACTICE";
 
               return (
                 <motion.div
                   key={layer.id}
-                  initial={initialTransform}
-                  whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
-                  viewport={{ once: true, amount: 0.15 }}
+                  initial={shouldReduceMotion ? {} : { opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.1 }}
                   transition={{
-                    duration: 0.9,
-                    delay: (idx % 2) * 0.1,
+                    duration: 0.4,
+                    delay: idx * 0.05,
                     ease: [0.22, 1, 0.36, 1],
                   }}
                   className="w-full"
                 >
-                  <Link href={layer.href} className="w-full block">
+                  <Link href={layer.href} className="w-full block group">
                     <div
                       className={cn(
-                        "p-4 rounded-2xl border flex items-center justify-between gap-3 shadow-xs active:scale-[0.99] transition-all duration-150",
+                        "p-5 rounded-2xl border flex items-center justify-between gap-4 shadow-sm active:scale-[0.99] transition-all duration-200",
                         isActive
                           ? "bg-white dark:bg-[#1a2924] border-[#f15e1c] ring-2 ring-[#f15e1c]/40 shadow-md"
-                          : "bg-white/95 dark:bg-[#0a0a0a]/95 border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/40"
+                          : "bg-white dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]"
                       )}
                     >
-                      <div className="flex items-center gap-3 min-w-0 flex-1">
+                      <div className="flex items-start gap-4 min-w-0 flex-1">
                         <div
-                          className="w-9 h-9 rounded-xl flex items-center justify-center text-white shrink-0 shadow-xs"
+                          className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shrink-0 shadow-xs mt-0.5 border border-white/20"
                           style={{ backgroundColor: layer.tone }}
                         >
-                          {iconMap[layer.icon] || <Sparkles className="w-5 h-5 text-white" />}
+                          {iconMap[layer.icon] || <Sparkles className="w-6 h-6 text-white" />}
                         </div>
-                        <div className="min-w-0 flex-1">
-                          <h4
-                            className="text-xs font-bold font-display uppercase tracking-wider truncate"
-                            style={{ color: isActive ? "#f15e1c" : layer.tone }}
-                          >
+                        <div className="min-w-0 flex-1 space-y-1">
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-mono font-black text-[#f15e1c] px-2.5 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/30">
+                              {formattedNum}
+                            </span>
+                            <span className="text-[10px] font-mono font-bold text-[#2e936f] dark:text-[#2e936f] tracking-wider uppercase">
+                              {categoryTag}
+                            </span>
+                          </div>
+                          <h4 className="text-base sm:text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug break-words">
                             {layer.name}
                           </h4>
-                          <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] line-clamp-1 mt-0.5">
+                          <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
                             {layer.description}
                           </p>
                         </div>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-[#f15e1c] shrink-0 ml-1" />
+                      <div className="w-9 h-9 rounded-full bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center shrink-0 group-hover:bg-[#f15e1c] group-hover:text-white transition-all">
+                        <ArrowRight className="w-4 h-4 text-[#f15e1c] group-hover:text-white transition-colors" />
+                      </div>
                     </div>
                   </Link>
                 </motion.div>

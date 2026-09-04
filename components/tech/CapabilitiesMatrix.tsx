@@ -129,14 +129,14 @@ export function CapabilitiesMatrix() {
             <motion.div
               key={cap.id}
               whileHover={shouldReduceMotion ? {} : { y: -6, scale: 1.02 }}
-              className="p-6 rounded-3xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md hover:shadow-2xl hover:border-[#f15e1c]/50 transition-all duration-300 flex flex-col justify-between space-y-6 group"
+              className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md hover:shadow-2xl hover:border-[#f15e1c]/50 transition-all duration-300 flex flex-col justify-between space-y-6 group"
             >
               {/* Card Header */}
               <div className="flex items-center justify-between">
-                <div className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0]/60">
-                  {cap.icon}
+                <div className="w-14 h-14 rounded-2xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform">
+                  {React.cloneElement(cap.icon as React.ReactElement<{ className?: string }>, { className: "w-7 h-7 text-[#f15e1c] stroke-[2]" })}
                 </div>
-                <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#161616] text-[#f15e1c] border border-[#f7d7b0]/50">
+                <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#161616] text-[#f15e1c] border border-[#f15e1c]/30">
                   {cap.badge}
                 </span>
               </div>
@@ -212,10 +212,13 @@ export function CapabilitiesMatrix() {
 
               {/* Title & Description */}
               <div className="space-y-2">
-                <h3 className="text-base font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
+                <span className="text-xs font-mono font-bold text-[#2e936f] block uppercase tracking-wider">
+                  {cap.category}
+                </span>
+                <h3 className="text-lg sm:text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug">
                   {cap.title}
                 </h3>
-                <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
                   {cap.description}
                 </p>
               </div>
@@ -225,7 +228,7 @@ export function CapabilitiesMatrix() {
                 {cap.techStack.map((tech) => (
                   <span
                     key={tech}
-                    className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-[#fefaf5] dark:bg-[#0a0a0a] text-[#1b2823] dark:text-[#ffffff] border border-[#f7d7b0]"
+                    className="text-xs font-mono font-medium px-2.5 py-1 rounded-md bg-[#fefaf5] dark:bg-[#0a0a0a] text-[#1b2823] dark:text-[#ffffff] border border-[#f7d7b0] dark:border-[#262626]"
                   >
                     {tech}
                   </span>
