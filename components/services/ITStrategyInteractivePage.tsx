@@ -471,20 +471,38 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
       {/* =========================================================================
           SECTION 01 — HERO SECTION
           ========================================================================= */}
-      <section className="relative pt-3 sm:pt-5 lg:pt-6 pb-8 sm:pb-10 lg:pb-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#E3E5E7] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none">
+      {/* =========================================================================
+          SECTION 01 — HERO SECTION (FULL-BLEED CINEMATIC BACKGROUND)
+          ========================================================================= */}
+      <section className="relative pt-3 sm:pt-4 lg:pt-5 pb-8 sm:pb-12 lg:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFFFF] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none min-h-[calc(100vh-80px)] flex flex-col justify-start">
+        
+        {/* Full-Bleed Desktop Background Visual (Image 2) — PC / DESKTOP VIEW ONLY */}
+        <div className="absolute inset-0 pointer-events-none hidden lg:block select-none overflow-hidden">
+          <Image
+            src="/images/it-strategy-hero-bg.png"
+            alt="Enterprise IT Strategy & Implementation"
+            fill
+            priority
+            className="object-cover object-right dark:opacity-90"
+            sizes="100vw"
+          />
+          {/* Soft dark-mode enhancement only */}
+          <div className="absolute inset-0 hidden dark:block bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none" />
+        </div>
+
         <AnimatedDotGrid />
 
         {/* Ambient Glows */}
         <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-radial from-[#f15e1c]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-radial from-[#2e936f]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-radial from-[#2e936f]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none lg:hidden" />
 
         <div className="max-w-[1536px] mx-auto w-full space-y-6 sm:space-y-8 relative z-10">
           
-          {/* 2-Column Hero Composition */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* 2-Column Hero Grid Composition (Top-Aligned) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
-            {/* LEFT COLUMN: HERO COPY */}
-            <div className="lg:col-span-6 xl:col-span-6 space-y-4 sm:space-y-5 text-left">
+            {/* LEFT COLUMN: HERO COPY ALIGNED TO THE TOP LEFT EMPTY SPACE */}
+            <div className="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-left max-w-xl">
               
               {/* Breadcrumb & Eyebrow Badge */}
               <AnimatedSection delay={0.05} className="space-y-2">
@@ -506,7 +524,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                   Turn Technology Complexity Into a <span className="text-[#f15e1c]">Clear Path Forward</span>
                 </h1>
 
-                <p className="text-sm sm:text-base lg:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-2xl">
+                <p className="text-sm sm:text-base lg:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-xl">
                   We help businesses modernize legacy systems, build practical technology roadmaps, adopt cloud with confidence, and turn complex IT decisions into measurable business outcomes.
                 </p>
               </AnimatedSection>
@@ -549,33 +567,33 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
               </AnimatedSection>
             </div>
 
-            {/* RIGHT COLUMN: ENTERPRISE IT STRATEGY HERO VIDEO WITH SEAMLESS EDGE BLENDING */}
-            <div className="lg:col-span-6 xl:col-span-6 w-full flex items-center justify-center">
-              <AnimatedSection delay={0.15} className="w-full flex justify-center">
-                <div
-                  className="relative w-full max-w-[840px] aspect-[16/9] bg-[#E3E5E7] dark:bg-[#0a0a0a] dark:border dark:border-[#1a1a1a] overflow-hidden transition-transform duration-300 hover:scale-[1.01] group flex items-center justify-center p-0"
-                  style={{
-                    maskImage: "radial-gradient(ellipse at center, black 82%, transparent 99%)",
-                    WebkitMaskImage: "radial-gradient(ellipse at center, black 82%, transparent 99%)",
-                  }}
-                >
-                  <video
-                    src="/videos/it-strategy.mp4"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="auto"
-                    className="w-full h-full object-contain pointer-events-none"
-                    aria-hidden="true"
+            {/* RIGHT COLUMN: SPACER ON DESKTOP (REVEALING FULL-BLEED BACKGROUND ARTWORK) & MOBILE HERO IMAGE */}
+            <div className="lg:col-span-6 xl:col-span-7 w-full flex items-center justify-center">
+              {/* Mobile / Tablet View: Uses dedicated Mobile Hero Image provided by user */}
+              <AnimatedSection delay={0.15} className="w-full flex justify-center lg:hidden">
+                <div className="relative w-full rounded-2xl border border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] overflow-hidden shadow-lg">
+                  <Image
+                    src="/images/it-strategy-mobile-hero.png"
+                    alt="Enterprise IT Strategy & Implementation Roadmap"
+                    width={1200}
+                    height={1200}
+                    priority
+                    className="w-full h-auto object-contain rounded-2xl"
                   />
                 </div>
               </AnimatedSection>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* SECTION 02 — HERO VISUAL / SYSTEM ARCHITECTURE FLOW BAR */}
-          <AnimatedSection delay={0.25} className="pt-2">
+      {/* =========================================================================
+          SECTION 02 — TRANSFORMATION BLUEPRINT / ENTERPRISE ARCHITECTURE FLOW
+          (Appears naturally upon scrolling down past the Hero section)
+          ========================================================================= */}
+      <section className="relative py-8 sm:py-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFFFF] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none">
+        <div className="max-w-[1536px] mx-auto w-full">
+          <AnimatedSection delay={0.1}>
             <div className="p-4 sm:p-6 rounded-2xl sm:rounded-[2rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md space-y-3 relative overflow-hidden w-full">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-2.5">
                 <div>

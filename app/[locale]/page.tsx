@@ -3,6 +3,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Hero } from "@/components/hero/Hero";
 import { BeforeAfterSlider } from "@/components/motion/BeforeAfterSlider";
 import { ProblemToSolutionSection } from "@/components/home/ProblemToSolutionSection";
+import { WhyAravDigitalCore } from "@/components/home/WhyAravDigitalCore";
 import { AnimatedTestimonialsCarousel } from "@/components/testimonials/AnimatedTestimonialsCarousel";
 import { ClientFeedbackEditorialSection } from "@/components/testimonials/ClientFeedbackEditorialSection";
 import { LeadForm } from "@/components/forms/LeadForm";
@@ -119,6 +120,11 @@ export default async function HomePage({
 
       {/* TECHNOLOGY IS ONLY VALUABLE WHEN IT SOLVES A REAL PROBLEM SECTION */}
       <ProblemToSolutionSection />
+
+      {/* ENTERPRISE DIGITAL CORE & IT STRATEGY ARCHITECTURE */}
+      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
+        <WhyAravDigitalCore />
+      </div>
 
       {/* 3D INTERACTIVE SERVICE STACK WITH SCROLL-LINKED SERVICE MAPPING */}
       <div id="services">

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { whyAravPillarsData, WhyAravPillar } from "@/data/why-arav";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Badge } from "@/components/ui/badge";
@@ -177,9 +178,21 @@ export function WhyAravDigitalCore({
 
             {/* Core Description & Rationale */}
             <div className="space-y-4 py-2">
-              <p className="text-sm sm:text-base text-[#2e936f] leading-relaxed">
+              <p className="text-sm sm:text-base text-[#2e936f] leading-relaxed font-medium">
                 {activePillar.description}
               </p>
+
+              {/* Enterprise IT Strategy Visual Showcase */}
+              <div className="relative w-full rounded-2xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] shadow-md bg-white dark:bg-[#0a0a0a]">
+                <Image
+                  src="/images/it-strategy-main.png"
+                  alt="Enterprise IT Strategy & Implementation Blueprint"
+                  width={1200}
+                  height={750}
+                  priority
+                  className="w-full h-auto object-contain rounded-2xl transition-transform duration-300 hover:scale-[1.005]"
+                />
+              </div>
 
               <div className="p-4 sm:p-5 rounded-2xl bg-[#f7d7b0]/40 border border-[#f15e1c]/20 space-y-2">
                 <span className="text-xs font-mono font-bold text-[#2e936f] uppercase tracking-wider flex items-center gap-2">
