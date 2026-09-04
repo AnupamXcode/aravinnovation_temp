@@ -2,68 +2,78 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Hero3DDigitalArchitecture } from "@/components/hero/Hero3DDigitalArchitecture";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { ScrollTextFlip } from "@/components/motion/ScrollTextFlip";
-import { TextReveal } from "@/components/motion/TextReveal";
-import { ParallaxContainer } from "@/components/motion/ParallaxContainer";
 import {
   ArrowRight,
   ShieldCheck,
   Zap,
   Globe2,
-  Award,
-  BarChart3,
 } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="relative pt-4 sm:pt-10 md:pt-16 pb-8 md:pb-12 overflow-hidden bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300 md:min-h-[75vh] flex items-center">
-      {/* Soft Ambient Background 3D Glows */}
-      <ParallaxContainer speed={-15} className="absolute inset-0 pointer-events-none -z-10">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] md:w-[950px] md:h-[950px] bg-radial from-[#FCE3D3]/70 via-[#FBF3EA]/30 to-transparent dark:from-[#f15e1c]/15 dark:via-[#1A1613]/40 dark:to-transparent rounded-full blur-3xl" />
-        <div className="absolute top-12 right-12 w-80 h-80 bg-[#F4A97F]/20 dark:bg-[#f15e1c]/10 rounded-full blur-3xl" />
-      </ParallaxContainer>
+    <section className="relative pt-8 sm:pt-14 md:pt-20 pb-16 md:pb-28 overflow-hidden bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300 min-h-[88vh] flex items-center">
+      {/* 1. Full-Bleed Continuous Photographic Environment Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <Image
+          src="/images/homepage-main-bg.png"
+          alt="Arav Innovations Executive Technology Platform Environment"
+          fill
+          priority
+          unoptimized
+          className="object-cover object-center lg:object-right-top transition-opacity duration-700 opacity-100 dark:opacity-90"
+        />
 
-      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Left Column: Messaging & CTAs */}
-          <div className="lg:col-span-6 space-y-7 text-center lg:text-left">
+        {/* Minimal Localized Vignette Mask for Text Readability - Sharp Background Intact */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9]/90 via-[#FFFDF9]/40 to-transparent dark:hidden pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FFFDF9]/40 via-transparent to-[#FFFDF9]/85 dark:hidden pointer-events-none" />
+
+        {/* Dark Mode Vignette */}
+        <div className="hidden dark:block absolute inset-0 bg-gradient-to-r from-[#050505]/95 via-[#050505]/50 to-transparent pointer-events-none" />
+        <div className="hidden dark:block absolute inset-0 bg-gradient-to-b from-[#050505]/50 via-transparent to-[#050505]/90 pointer-events-none" />
+      </div>
+
+      <div className="relative z-10 w-full px-4 sm:px-8 lg:px-12 xl:px-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Left Column: Editorial Content (Sitting Directly on Background Image) */}
+          <div className="lg:col-span-8 space-y-6 sm:space-y-7 text-left max-w-3xl">
+            {/* Eyebrow Label matching Reference Image */}
             <ScrollTextFlip>
-              {/* Single Eyebrow Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f7d7b0]/40 dark:bg-[#121212] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-semibold shadow-xs">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-pulse" />
-                <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#f15e1c]">
-                  ENTERPRISE TECHNOLOGY &bull; STRATEGY &bull; DIGITAL GROWTH
+              <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-[#4A3D35] dark:text-[#D8CBC0]">
+                <span className="w-2 h-2 rounded-full bg-[#f15e1c] shrink-0" />
+                <span className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.18em]">
+                  ENTERPRISE TECHNOLOGY <span className="text-[#f15e1c] font-bold mx-1">&bull;</span> STRATEGY <span className="text-[#f15e1c] font-bold mx-1">&bull;</span> DIGITAL GROWTH
                 </span>
               </div>
             </ScrollTextFlip>
 
+            {/* Headline with Exact 3-Line Structure & Color Highlights from Reference Image */}
             <ScrollReveal direction="up" delay={0.15}>
-              {/* Word-by-Word Masked Text Reveal Headline */}
-              <TextReveal
-                text="Building High-Impact Technology Platforms & Accelerated B2B Growth"
-                className="font-display font-extrabold text-4xl sm:text-6xl lg:text-[58px] text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight leading-[1.08]"
-                stagger={0.05}
-              />
+              <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-[58px] xl:text-[66px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.08]">
+                Building High-Impact<br className="hidden sm:inline" />
+                <span className="text-[#f15e1c]">Technology</span> Platforms &amp;<br className="hidden sm:inline" />
+                Accelerated <span className="text-[#2e936f]">B2B Growth</span>
+              </h1>
             </ScrollReveal>
 
+            {/* Supporting Description */}
             <ScrollReveal direction="up" delay={0.25}>
-              {/* Punchy Supporting Copy */}
-              <p className="text-base sm:text-lg text-[#7A6A5F] dark:text-[#B8ACA0] max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
+              <p className="text-base sm:text-lg lg:text-[18px] text-[#5A4A3F] dark:text-[#D8CBC0] max-w-xl leading-relaxed font-medium">
                 Enterprise IT strategy, full-stack software engineering, data compliance (DPDP/SOC-2), and high-intent digital marketing for global brands.
               </p>
             </ScrollReveal>
 
+            {/* Pill CTAs matching Reference Image */}
             <ScrollReveal direction="up" delay={0.35}>
-              {/* Pill Action Buttons */}
-              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4">
                 <Link href="/contact" className="w-full sm:w-auto">
                   <Button
                     variant="primary"
                     size="lg"
-                    className="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm shadow-lg hover:shadow-xl hover:shadow-[#f15e1c]/25"
+                    className="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm font-semibold shadow-md hover:shadow-lg shadow-[#f15e1c]/25 bg-[#f15e1c] text-white hover:bg-[#d84e12] transition-all transform hover:-translate-y-0.5"
                     rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
                   >
                     Schedule Exploratory Call
@@ -74,7 +84,7 @@ export function Hero() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm border-[#EFE2D6] dark:border-[#1f1f1f] text-[#f15e1c] hover:border-[#f15e1c]"
+                    className="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm font-semibold bg-white/70 dark:bg-black/50 backdrop-blur-xs border border-[#3A2E27]/25 dark:border-white/20 text-[#221811] dark:text-[#FAF5EE] hover:bg-white/95 dark:hover:bg-black/80 hover:border-[#f15e1c] hover:text-[#f15e1c] transition-all"
                   >
                     Explore Practices
                   </Button>
@@ -82,37 +92,35 @@ export function Hero() {
               </div>
             </ScrollReveal>
 
+            {/* Bottom Proof Row matching Reference Image */}
             <ScrollReveal direction="up" delay={0.45}>
-              {/* Trust Badges */}
-              <div className="pt-6 border-t border-[#EFE2D6] dark:border-[#1f1f1f] flex flex-wrap items-center justify-center lg:justify-start gap-8 text-left">
+              <div className="pt-6 border-t border-[#3A2E27]/15 dark:border-white/15 flex flex-wrap items-center gap-6 sm:gap-8 text-left text-xs sm:text-sm font-semibold text-[#2C211A] dark:text-[#EFE2D6]">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4.5 h-4.5 text-[#f15e1c] shrink-0" />
-                  <span className="text-xs sm:text-sm font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
-                    7 Dedicated Practices
-                  </span>
+                  <span>7 Dedicated Practices</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Globe2 className="w-4.5 h-4.5 text-[#f15e1c] shrink-0" />
-                  <span className="text-xs sm:text-sm font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
-                    India, UAE, US, EU &amp; Canada
-                  </span>
+                  <span>India, UAE, US, EU &amp; Canada</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Zap className="w-4.5 h-4.5 text-[#f15e1c] shrink-0" />
-                  <span className="text-xs sm:text-sm font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
-                    100/100 Core Web Vitals
-                  </span>
+                  <span>100/100 Core Web Vitals</span>
                 </div>
               </div>
             </ScrollReveal>
           </div>
 
-          {/* Right Column: Signature 3D Digital Architecture Ecosystem */}
-          <div className="lg:col-span-6 relative w-full">
+          {/* Right Column: Environmental Glass Script Overlay matching Reference Image */}
+          <div className="hidden lg:flex lg:col-span-4 justify-center items-center pointer-events-none relative min-h-[280px]">
             <ScrollReveal direction="left" delay={0.3}>
-              <ParallaxContainer depth="midground" speed={30}>
-                <Hero3DDigitalArchitecture />
-              </ParallaxContainer>
+              <div className="text-center transform -rotate-3 select-none opacity-85 hover:opacity-100 transition-opacity">
+                <p className="font-serif italic text-lg xl:text-xl text-[#5A4A3F] dark:text-[#C5B8AC] tracking-wide drop-shadow-xs">
+                  Technology for a<br />
+                  <span className="font-semibold not-italic text-[#f15e1c]">Brighter Tomorrow</span>
+                </p>
+                <div className="w-24 h-0.5 mx-auto mt-1.5 bg-gradient-to-r from-transparent via-[#f15e1c]/60 to-transparent rounded-full" />
+              </div>
             </ScrollReveal>
           </div>
         </div>
