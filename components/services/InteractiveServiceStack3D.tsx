@@ -276,40 +276,46 @@ export function InteractiveServiceStack3D() {
       <div ref={trackRef} className="hidden md:block relative w-full h-[280vh]">
         <div
           ref={pinnedStageRef}
-          className="w-full min-h-screen flex flex-col justify-center py-8 px-4 sm:px-8 lg:px-12 xl:px-16"
+          className="w-full h-screen max-h-screen flex flex-col justify-between py-4 sm:py-6 px-4 sm:px-8 lg:px-12 xl:px-16 overflow-hidden"
         >
-          {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-8 space-y-3">
+          {/* Section Header (Always Visible at Top of Pinned Viewport) */}
+          <div className="text-center max-w-3xl mx-auto mb-4 space-y-1.5 shrink-0">
             <Badge variant="secondary" size="md">
               WHAT WE DO
             </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
               Enterprise Technology Practices
             </h2>
-            <p className="text-sm sm:text-base text-[#5A4A3F] dark:text-[#D8CBC0]">
+            <p className="text-xs sm:text-sm text-[#5A4A3F] dark:text-[#D8CBC0]">
               From technology strategy to implementation and digital growth, we solve complex business problems with practical, connected solutions.
             </p>
           </div>
 
           {/* Main 2-Column Exploration Stage */}
-          <div className="max-w-7xl mx-auto w-full grid grid-cols-12 gap-8 items-center">
-            {/* Left Column: Vertical 8-Service Selector List (01 to 08) */}
+          <div className="max-w-7xl mx-auto w-full grid grid-cols-12 gap-6 items-center flex-1 my-auto">
+            {/* Left Column: All 8 Services Visible Together in Viewport */}
             <div className="col-span-5 space-y-2">
               {servicesData.map((service) => {
                 const isHighlighted = service.id === displayedIdx;
 
                 return (
-                  <button
+                  <motion.button
                     key={service.id}
                     type="button"
                     onClick={() => setActiveServiceIdx(service.id)}
                     onMouseEnter={() => setHoveredIdx(service.id)}
                     onMouseLeave={() => setHoveredIdx(null)}
+                    animate={{
+                      y: isHighlighted ? -2 : 0,
+                      scale: isHighlighted ? 1.015 : 1,
+                      opacity: isHighlighted ? 1 : 0.8,
+                    }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
                     className={cn(
-                      "w-full text-left p-3.5 rounded-2xl border transition-all duration-300 flex items-center justify-between gap-3 group cursor-pointer relative overflow-hidden",
+                      "w-full h-[56px] sm:h-[58px] text-left px-3.5 py-2 rounded-xl border transition-all duration-300 flex items-center justify-between gap-3 group cursor-pointer relative overflow-hidden shrink-0",
                       isHighlighted
-                        ? "bg-white dark:bg-[#16221d] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/20 scale-[1.01]"
-                        : "bg-white/80 dark:bg-[#0a0a0a]/80 border-[#f7d7b0]/60 dark:border-[#1a1a1a] opacity-75 hover:opacity-100 hover:border-[#f15e1c]/50 hover:bg-white dark:hover:bg-[#121212]"
+                        ? "bg-white dark:bg-[#16221d] border-[#f15e1c] shadow-md ring-2 ring-[#f15e1c]/20"
+                        : "bg-white/80 dark:bg-[#0a0a0a]/80 border-[#f7d7b0]/60 dark:border-[#1a1a1a] hover:opacity-100 hover:border-[#f15e1c]/50 hover:bg-white dark:hover:bg-[#121212]"
                     )}
                   >
                     {/* Active Accent Indicator */}
@@ -321,7 +327,7 @@ export function InteractiveServiceStack3D() {
                       {/* Number Pill */}
                       <span
                         className={cn(
-                          "font-mono text-xs font-bold px-2.5 py-1 rounded-lg shrink-0 transition-colors",
+                          "font-mono text-xs font-bold px-2.5 py-1 rounded-md shrink-0 transition-colors",
                           isHighlighted
                             ? "bg-[#f15e1c] text-white"
                             : "bg-[#fce3d3] dark:bg-[#1a1a1a] text-[#f15e1c] group-hover:bg-[#f15e1c] group-hover:text-white"
@@ -345,7 +351,7 @@ export function InteractiveServiceStack3D() {
                       {/* Service Name */}
                       <span
                         className={cn(
-                          "text-sm font-bold font-display truncate transition-colors",
+                          "text-xs sm:text-[14px] font-bold font-display truncate transition-colors",
                           isHighlighted
                             ? "text-[#1b2823] dark:text-[#ffffff]"
                             : "text-[#4A3D35] dark:text-[#D8CBC0] group-hover:text-[#f15e1c]"
@@ -363,14 +369,14 @@ export function InteractiveServiceStack3D() {
                           : "text-transparent group-hover:text-[#f15e1c]"
                       )}
                     />
-                  </button>
+                  </motion.button>
                 );
               })}
             </div>
 
             {/* Right Column: Active Service Visual Showcase Canvas */}
             <div className="col-span-7">
-              <div className="p-6 lg:p-8 rounded-3xl bg-white dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/30 shadow-2xl space-y-6 relative overflow-hidden min-h-[520px] flex flex-col justify-between">
+              <div className="p-6 lg:p-8 rounded-3xl bg-white dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/30 shadow-2xl space-y-5 relative overflow-hidden min-h-fit flex flex-col justify-between">
                 {/* Background Subtle Gradient Glow */}
                 <div
                   className="absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl pointer-events-none opacity-20 transition-all duration-500"
@@ -384,7 +390,7 @@ export function InteractiveServiceStack3D() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
-                    className="space-y-6 relative z-10"
+                    className="space-y-5 relative z-10"
                   >
                     {/* Header: Service Category & Number Badge */}
                     <div className="flex items-center justify-between border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-4">
@@ -414,17 +420,16 @@ export function InteractiveServiceStack3D() {
                       {currentService.description}
                     </p>
 
-                    {/* Enterprise Visual Showcase Image */}
-                    <div className="relative w-full h-56 lg:h-64 rounded-2xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] shadow-md bg-[#FFFDF9] dark:bg-[#050505] group">
+                    {/* Enterprise Visual Showcase Image (100% Uncropped) */}
+                    <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] shadow-md bg-[#FFFDF9] dark:bg-[#050505]">
                       <Image
                         src={currentService.image}
                         alt={currentService.name}
                         fill
                         unoptimized
                         priority
-                        className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                        className="object-contain object-center transition-transform duration-500 hover:scale-[1.01]"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
                     </div>
 
                     {/* Core Outcomes List */}
@@ -516,80 +521,91 @@ export function InteractiveServiceStack3D() {
           })}
         </div>
 
-        {/* Active Mobile Service Card with Touch Swipe Gesture Support */}
+        {/* Active Mobile Service Card with Upward Tile Motion & Touch Swipe Support */}
         <div
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
-          className="p-5 rounded-2xl bg-white dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/40 shadow-xl space-y-4 touch-pan-y"
+          className="rounded-2xl bg-white dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/40 shadow-xl overflow-hidden touch-pan-y"
         >
-          <div className="flex items-center justify-between border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-3">
-            <div className="flex items-center gap-2.5">
-              <span className="font-mono text-xs font-extrabold px-2.5 py-1 rounded-lg bg-[#f15e1c] text-white">
-                {currentService.number}
-              </span>
-              <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase tracking-wider">
-                {currentService.category}
-              </span>
-            </div>
-            <span className="text-xs font-mono text-[#7A6A5F] dark:text-[#A09085]">
-              {activeServiceIdx + 1} of 8
-            </span>
-          </div>
-
-          <h3 className="text-lg font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
-            {currentService.name}
-          </h3>
-
-          <p className="text-xs text-[#5A4A3F] dark:text-[#D8CBC0] leading-relaxed font-medium">
-            {currentService.description}
-          </p>
-
-          <div className="relative w-full h-48 rounded-xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626]">
-            <Image
-              src={currentService.image}
-              alt={currentService.name}
-              fill
-              unoptimized
-              className="object-cover object-center"
-            />
-          </div>
-
-          <div className="space-y-1.5 pt-1">
-            {currentService.outcomes.map((outcome, i) => (
-              <div key={i} className="flex items-center gap-2 text-xs text-[#1b2823] dark:text-[#ffffff] font-medium">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
-                <span>{outcome}</span>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentService.id}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -24 }}
+              transition={{ duration: 0.45, ease: "easeOut" }}
+              className="p-5 space-y-4"
+            >
+              <div className="flex items-center justify-between border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-3">
+                <div className="flex items-center gap-2.5">
+                  <span className="font-mono text-xs font-extrabold px-2.5 py-1 rounded-lg bg-[#f15e1c] text-white">
+                    {currentService.number}
+                  </span>
+                  <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase tracking-wider">
+                    {currentService.category}
+                  </span>
+                </div>
+                <span className="text-xs font-mono text-[#7A6A5F] dark:text-[#A09085]">
+                  {activeServiceIdx + 1} of 8
+                </span>
               </div>
-            ))}
-          </div>
 
-          {/* Navigation Controls & CTA */}
-          <div className="pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setActiveServiceIdx((prev) => Math.max(0, prev - 1))}
-                disabled={activeServiceIdx === 0}
-                className="w-9 h-9 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center disabled:opacity-40"
-              >
-                <ChevronLeft className="w-4 h-4 text-[#f15e1c]" />
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveServiceIdx((prev) => Math.min(7, prev + 1))}
-                disabled={activeServiceIdx === 7}
-                className="w-9 h-9 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center disabled:opacity-40"
-              >
-                <ChevronRight className="w-4 h-4 text-[#f15e1c]" />
-              </button>
-            </div>
+              <h3 className="text-lg font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
+                {currentService.name}
+              </h3>
 
-            <Link href={currentService.href} className="flex-1 text-right">
-              <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#f15e1c] text-white font-semibold text-xs shadow-md">
-                Explore <ArrowRight className="w-3.5 h-3.5" />
-              </span>
-            </Link>
-          </div>
+              <p className="text-xs text-[#5A4A3F] dark:text-[#D8CBC0] leading-relaxed font-medium">
+                {currentService.description}
+              </p>
+
+              <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] bg-[#FFFDF9] dark:bg-[#050505]">
+                <Image
+                  src={currentService.image}
+                  alt={currentService.name}
+                  fill
+                  unoptimized
+                  className="object-contain object-center"
+                />
+              </div>
+
+              <div className="space-y-1.5 pt-1">
+                {currentService.outcomes.map((outcome, i) => (
+                  <div key={i} className="flex items-center gap-2 text-xs text-[#1b2823] dark:text-[#ffffff] font-medium">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
+                    <span>{outcome}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Navigation Controls & CTA */}
+              <div className="pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setActiveServiceIdx((prev) => Math.max(0, prev - 1))}
+                    disabled={activeServiceIdx === 0}
+                    className="w-9 h-9 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center disabled:opacity-40"
+                  >
+                    <ChevronLeft className="w-4 h-4 text-[#f15e1c]" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveServiceIdx((prev) => Math.min(7, prev + 1))}
+                    disabled={activeServiceIdx === 7}
+                    className="w-9 h-9 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center disabled:opacity-40"
+                  >
+                    <ChevronRight className="w-4 h-4 text-[#f15e1c]" />
+                  </button>
+                </div>
+
+                <Link href={currentService.href} className="flex-1 text-right">
+                  <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#f15e1c] text-white font-semibold text-xs shadow-md">
+                    Explore <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </Link>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </section>

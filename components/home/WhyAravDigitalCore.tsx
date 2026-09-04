@@ -110,37 +110,43 @@ export function WhyAravDigitalCore({
       <div ref={trackRef} className="hidden md:block relative w-full h-[250vh]">
         <div
           ref={pinnedStageRef}
-          className="w-full min-h-screen flex flex-col justify-center py-8 px-4 sm:px-8 lg:px-12 xl:px-16"
+          className="w-full h-screen max-h-screen flex flex-col justify-between py-4 sm:py-6 px-4 sm:px-8 lg:px-12 xl:px-16 overflow-hidden"
         >
-          {/* Header Section */}
-          <div className="text-center max-w-4xl mx-auto mb-8 space-y-3">
+          {/* Header Section (Always Visible at Top of Pinned Viewport) */}
+          <div className="text-center max-w-4xl mx-auto mb-4 space-y-1.5 shrink-0">
             <Badge variant="secondary" size="md">
               WHY ARAV INNOVATIONS
             </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#2e936f] dark:text-[#ffffff] tracking-tight leading-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display text-[#2e936f] dark:text-[#ffffff] tracking-tight leading-tight">
               {headline}
             </h2>
-            <p className="text-sm sm:text-base text-[#5A4D44] dark:text-[#d3eee4] leading-relaxed max-w-2xl mx-auto font-medium">
+            <p className="text-xs sm:text-sm text-[#5A4D44] dark:text-[#d3eee4] leading-relaxed max-w-2xl mx-auto font-medium">
               {subheadline}
             </p>
           </div>
 
           {/* Main 2-Column Composition */}
-          <div className="max-w-7xl mx-auto w-full grid grid-cols-12 gap-8 items-center">
-            {/* Left Column: 7 Pillar Cards (EVERY CARD HAS 100% IDENTICAL HEIGHT & WIDTH) */}
-            <div className="col-span-5 space-y-2.5">
+          <div className="max-w-7xl mx-auto w-full grid grid-cols-12 gap-6 items-center flex-1 my-auto">
+            {/* Left Column: All 7 Pillar Cards Visible Together (EXACTLY EQUAL SUBSTANTIAL SIZE) */}
+            <div className="col-span-5 space-y-2">
               {pillars.map((pillar, idx) => {
                 const isActive = idx === activePillarIdx;
                 return (
-                  <button
+                  <motion.button
                     key={pillar.id}
                     type="button"
                     onClick={() => setActivePillarIdx(idx)}
+                    animate={{
+                      y: isActive ? -2 : 0,
+                      scale: isActive ? 1.015 : 1,
+                      opacity: isActive ? 1 : 0.8,
+                    }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
                     className={cn(
-                      "w-full h-20 text-left p-3.5 sm:p-4 rounded-2xl border transition-all duration-300 flex items-center gap-3.5 group cursor-pointer relative overflow-hidden shrink-0",
+                      "w-full h-[60px] text-left px-3.5 py-2 rounded-xl border transition-all duration-300 flex items-center gap-3 group cursor-pointer relative overflow-hidden shrink-0",
                       isActive
-                        ? "bg-white dark:bg-[#16221d] border-[#f15e1c] shadow-xl ring-2 ring-[#f15e1c]/20 scale-[1.01]"
-                        : "bg-white/80 dark:bg-[#0a0a0a]/80 border-[#f7d7b0]/60 dark:border-[#1a1a1a] opacity-75 hover:opacity-100 hover:border-[#f15e1c]/50 hover:bg-white dark:hover:bg-[#121212]"
+                        ? "bg-white dark:bg-[#16221d] border-[#f15e1c] shadow-md ring-2 ring-[#f15e1c]/20"
+                        : "bg-white/80 dark:bg-[#0a0a0a]/80 border-[#f7d7b0]/60 dark:border-[#1a1a1a] hover:opacity-100 hover:border-[#f15e1c]/50 hover:bg-white dark:hover:bg-[#121212]"
                     )}
                   >
                     {/* Active Accent Indicator */}
@@ -151,13 +157,13 @@ export function WhyAravDigitalCore({
                     {/* Icon Box */}
                     <div
                       className={cn(
-                        "w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-colors shadow-xs",
+                        "w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors shadow-xs",
                         isActive
                           ? "bg-[#f15e1c] text-white"
                           : "bg-[#f7d7b0]/50 dark:bg-[#161616] text-[#f15e1c] group-hover:bg-[#f15e1c] group-hover:text-white"
                       )}
                     >
-                      {iconMap[pillar.icon] || <Zap className="w-5 h-5 shrink-0" />}
+                      {iconMap[pillar.icon] || <Zap className="w-4 h-4 shrink-0" />}
                     </div>
 
                     <div className="flex-1 min-w-0 space-y-0.5">
@@ -165,13 +171,13 @@ export function WhyAravDigitalCore({
                         <span className="text-[10px] font-extrabold font-mono text-[#f15e1c] uppercase tracking-widest">
                           PILLAR {pillar.number}
                         </span>
-                        <span className="text-[11px] font-mono font-bold text-[#2e936f] dark:text-[#74c4ab] truncate">
+                        <span className="text-[10px] font-mono font-bold text-[#2e936f] dark:text-[#74c4ab] truncate">
                           {pillar.subtitle}
                         </span>
                       </div>
                       <h3
                         className={cn(
-                          "text-sm font-extrabold font-display truncate transition-colors",
+                          "text-xs sm:text-[14px] font-extrabold font-display truncate transition-colors",
                           isActive
                             ? "text-[#f15e1c]"
                             : "text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c]"
@@ -189,14 +195,14 @@ export function WhyAravDigitalCore({
                           : "text-transparent group-hover:text-[#f15e1c]"
                       )}
                     />
-                  </button>
+                  </motion.button>
                 );
               })}
             </div>
 
             {/* Right Column: Central Display Canvas for Active Pillar */}
             <div className="col-span-7">
-              <div className="p-6 lg:p-8 rounded-3xl bg-white dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/30 shadow-2xl space-y-6 relative overflow-hidden min-h-[500px] flex flex-col justify-between">
+              <div className="p-6 lg:p-8 rounded-3xl bg-white dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/30 shadow-2xl space-y-5 relative overflow-hidden min-h-fit flex flex-col justify-between">
                 {/* Background Subtle Gradient Glow */}
                 <div
                   className="absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl pointer-events-none opacity-20 transition-all duration-500 bg-[#f15e1c]"
@@ -209,7 +215,7 @@ export function WhyAravDigitalCore({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
-                    className="space-y-6 relative z-10"
+                    className="space-y-5 relative z-10"
                   >
                     {/* Header Badge & Number */}
                     <div className="flex items-center justify-between border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-4">
@@ -236,8 +242,8 @@ export function WhyAravDigitalCore({
                       {activePillar.description}
                     </p>
 
-                    {/* Enterprise Visual Showcase Image */}
-                    <div className="relative w-full h-52 lg:h-60 rounded-2xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] shadow-md bg-[#FFFDF9] dark:bg-[#050505]">
+                    {/* Enterprise Visual Showcase Image (100% Uncropped) */}
+                    <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] shadow-md bg-[#FFFDF9] dark:bg-[#050505]">
                       <Image
                         src="/images/it-strategy-main.png"
                         alt="Enterprise Technology Architectural Blueprint"
@@ -335,81 +341,92 @@ export function WhyAravDigitalCore({
           })}
         </div>
 
-        {/* Active Mobile Pillar Card with Touch Swipe Gesture Support */}
+        {/* Active Mobile Pillar Card with Upward Tile Motion & Touch Swipe Gesture Support */}
         <div
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
-          className="p-5 rounded-2xl bg-white dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/40 shadow-xl space-y-4 touch-pan-y w-full"
+          className="rounded-2xl bg-white dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/40 shadow-xl overflow-hidden touch-pan-y w-full"
         >
-          <div className="flex items-center justify-between border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-3">
-            <div className="flex items-center gap-2.5">
-              <span className="font-mono text-xs font-extrabold px-2.5 py-1 rounded-lg bg-[#f15e1c] text-white">
-                {activePillar.number}
-              </span>
-              <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase tracking-wider">
-                {activePillar.subtitle}
-              </span>
-            </div>
-            <span className="text-xs font-mono text-[#7A6A5F] dark:text-[#A09085]">
-              {activePillarIdx + 1} of 7
-            </span>
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activePillar.id}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -24 }}
+              transition={{ duration: 0.45, ease: "easeOut" }}
+              className="p-5 space-y-4"
+            >
+              <div className="flex items-center justify-between border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-3">
+                <div className="flex items-center gap-2.5">
+                  <span className="font-mono text-xs font-extrabold px-2.5 py-1 rounded-lg bg-[#f15e1c] text-white">
+                    {activePillar.number}
+                  </span>
+                  <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase tracking-wider">
+                    {activePillar.subtitle}
+                  </span>
+                </div>
+                <span className="text-xs font-mono text-[#7A6A5F] dark:text-[#A09085]">
+                  {activePillarIdx + 1} of 7
+                </span>
+              </div>
 
-          <h3 className="text-lg font-bold font-display text-[#f15e1c]">
-            {activePillar.title}
-          </h3>
+              <h3 className="text-lg font-bold font-display text-[#f15e1c]">
+                {activePillar.title}
+              </h3>
 
-          <p className="text-xs text-[#5A4D44] dark:text-[#d3eee4] leading-relaxed font-medium">
-            {activePillar.description}
-          </p>
+              <p className="text-xs text-[#5A4D44] dark:text-[#d3eee4] leading-relaxed font-medium">
+                {activePillar.description}
+              </p>
 
-          <div className="relative w-full h-44 rounded-xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] bg-[#FFFDF9] dark:bg-[#050505]">
-            <Image
-              src="/images/it-strategy-main.png"
-              alt={activePillar.title}
-              fill
-              unoptimized
-              className="object-contain object-center"
-            />
-          </div>
+              <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] bg-[#FFFDF9] dark:bg-[#050505]">
+                <Image
+                  src="/images/it-strategy-main.png"
+                  alt={activePillar.title}
+                  fill
+                  unoptimized
+                  className="object-contain object-center"
+                />
+              </div>
 
-          <div className="p-3 rounded-xl bg-[#f7d7b0]/40 dark:bg-[#141414] border border-[#f15e1c]/20 space-y-1">
-            <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase tracking-wider flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f]" />
-              <span>Target Outcome</span>
-            </span>
-            <p className="text-xs font-bold font-display text-[#2e936f] dark:text-[#ffffff]">
-              {activePillar.businessOutcome}
-            </p>
-          </div>
+              <div className="p-3 rounded-xl bg-[#f7d7b0]/40 dark:bg-[#141414] border border-[#f15e1c]/20 space-y-1">
+                <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase tracking-wider flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f]" />
+                  <span>Target Outcome</span>
+                </span>
+                <p className="text-xs font-bold font-display text-[#2e936f] dark:text-[#ffffff]">
+                  {activePillar.businessOutcome}
+                </p>
+              </div>
 
-          {/* Navigation Controls */}
-          <div className="pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setActivePillarIdx((prev) => Math.max(0, prev - 1))}
-                disabled={activePillarIdx === 0}
-                className="w-9 h-9 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center disabled:opacity-40"
-              >
-                <ChevronLeft className="w-4 h-4 text-[#f15e1c]" />
-              </button>
-              <button
-                type="button"
-                onClick={() => setActivePillarIdx((prev) => Math.min(6, prev + 1))}
-                disabled={activePillarIdx === 6}
-                className="w-9 h-9 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center disabled:opacity-40"
-              >
-                <ChevronRight className="w-4 h-4 text-[#f15e1c]" />
-              </button>
-            </div>
+              {/* Navigation Controls */}
+              <div className="pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setActivePillarIdx((prev) => Math.max(0, prev - 1))}
+                    disabled={activePillarIdx === 0}
+                    className="w-9 h-9 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center disabled:opacity-40"
+                  >
+                    <ChevronLeft className="w-4 h-4 text-[#f15e1c]" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActivePillarIdx((prev) => Math.min(6, prev + 1))}
+                    disabled={activePillarIdx === 6}
+                    className="w-9 h-9 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center disabled:opacity-40"
+                  >
+                    <ChevronRight className="w-4 h-4 text-[#f15e1c]" />
+                  </button>
+                </div>
 
-            <Link href="/contact" className="flex-1 text-right">
-              <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#f15e1c] text-white font-semibold text-xs shadow-md">
-                Schedule Audit <ArrowRight className="w-3.5 h-3.5" />
-              </span>
-            </Link>
-          </div>
+                <Link href="/contact" className="flex-1 text-right">
+                  <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#f15e1c] text-white font-semibold text-xs shadow-md">
+                    Schedule Audit <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </Link>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </section>

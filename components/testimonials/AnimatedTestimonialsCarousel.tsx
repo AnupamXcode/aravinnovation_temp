@@ -22,14 +22,14 @@ export function AnimatedTestimonialsCarousel() {
     setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   }, [testimonials.length]);
 
-  // Autoplay interval every 6.5 seconds, pauses when hovered
+  // Autoplay interval every 6.5 seconds, pauses when hovered, resets on manual navigation
   React.useEffect(() => {
     if (isHovered) return;
     const timer = setInterval(() => {
       nextTestimonial();
     }, 6500);
     return () => clearInterval(timer);
-  }, [isHovered, nextTestimonial]);
+  }, [isHovered, currentIndex, nextTestimonial]);
 
   const current: Testimonial = testimonials[currentIndex] || testimonials[0];
 
