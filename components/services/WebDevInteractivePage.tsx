@@ -534,28 +534,40 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
       <AnimatedDotGrid />
 
       {/* =========================================================================
-          HERO SECTION — DIGITAL PRODUCT ENGINEERING
+          HERO SECTION — DIGITAL PRODUCT ENGINEERING (FULL-BLEED CINEMATIC BACKGROUND)
           ========================================================================= */}
-      <section className="relative pt-3 sm:pt-5 lg:pt-6 pb-12 sm:pb-16 lg:pb-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none">
+      <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-10 sm:pb-14 lg:pb-18 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none min-h-[calc(100vh-80px)] flex flex-col justify-start">
+        
+        {/* Full-Bleed Desktop Background Visual — Crisp Integrated Background Art for PC / DESKTOP VIEW */}
+        <div className="absolute inset-0 pointer-events-none hidden lg:block select-none overflow-hidden">
+          <Image
+            src="/images/web-dev-bg.png"
+            alt="Web &amp; Application Development Strategy"
+            fill
+            priority
+            className="object-cover object-right opacity-95 dark:opacity-90 transition-opacity duration-500"
+            sizes="100vw"
+          />
+          {/* Subtle minimal gradient overlay providing crisp image clarity with minor soft text backdrop on desktop */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/75 via-45% to-transparent dark:from-[#000000] dark:via-[#000000]/75 dark:via-45% dark:to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#FFFDF9]/20 via-transparent to-[#FFFDF9]/60 dark:from-[#000000]/20 dark:via-transparent dark:to-[#000000]/60 pointer-events-none" />
+        </div>
+
+        <AnimatedDotGrid />
+
         {/* Ambient Pulsing Background Glows */}
-        <motion.div
-          animate={shouldReduceMotion ? {} : { y: [0, -12, 0], opacity: [0.25, 0.35, 0.25] }}
-          transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
-          className="absolute inset-0 pointer-events-none z-0 overflow-hidden"
-        >
-          <div className="absolute top-1/4 left-1/3 w-[500px] h-[500px] bg-radial from-[#f15e1c]/15 via-transparent to-transparent blur-3xl rounded-full" />
-          <div className="absolute bottom-1/3 right-1/4 w-[550px] h-[550px] bg-radial from-[#2e936f]/12 via-transparent to-transparent blur-3xl rounded-full" />
-        </motion.div>
+        <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-radial from-[#f15e1c]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
+        <div className="absolute bottom-1/3 right-1/4 w-[450px] h-[450px] bg-radial from-[#2e936f]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none lg:hidden" />
 
         <div className="max-w-[1536px] mx-auto w-full space-y-6 sm:space-y-8 relative z-10">
           
           {/* 2-Column Hero Composition */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
-            {/* LEFT COLUMN: HERO COPY */}
-            <div className="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-left">
+            {/* LEFT COLUMN: HERO COPY ALIGNED TO THE TOP LEFT */}
+            <div className="lg:col-span-7 xl:col-span-6 space-y-4 sm:space-y-5 text-left max-w-2xl">
               
-              {/* Breadcrumb & Eyebrow Badge */}
+              {/* Breadcrumb &amp; Eyebrow Badge */}
               <AnimatedSection delay={0.05} className="space-y-2">
                 <Breadcrumb
                   items={[
@@ -572,20 +584,37 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
                 </motion.div>
               </AnimatedSection>
 
-              {/* Main H1 Headline & Supporting Text */}
+              {/* Main H1 Headline */}
               <AnimatedSection delay={0.1} className="space-y-3">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold font-display tracking-tight leading-[1.12] text-[#1b2823] dark:text-[#ffffff]">
                   Build Digital Products That{" "}
                   <span className="text-[#f15e1c]">Work as Hard as Your Business</span>
                 </h1>
+              </AnimatedSection>
 
+              {/* Dedicated Cropped Mobile Hero Image Card (Mobile/Tablet Viewports < 1024px) */}
+              <AnimatedSection delay={0.12} className="w-full lg:hidden my-3">
+                <div className="relative w-full aspect-[941/1036] rounded-2xl border-2 border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] overflow-hidden shadow-xl">
+                  <Image
+                    src="/images/web-dev-mobile-hero.png"
+                    alt="Web &amp; Application Development Strategy"
+                    fill
+                    priority
+                    className="object-cover object-center"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                </div>
+              </AnimatedSection>
+
+              {/* Supporting Text */}
+              <AnimatedSection delay={0.14} className="space-y-3">
                 <p className="text-sm sm:text-base lg:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-2xl">
                   We design and engineer high-performance websites, web applications, and digital products around real user journeys, business workflows, and long-term scalability.
                 </p>
               </AnimatedSection>
 
               {/* CTA Buttons */}
-              <AnimatedSection delay={0.15} className="pt-1 flex flex-wrap items-center gap-3">
+              <AnimatedSection delay={0.16} className="pt-1 flex flex-wrap items-center gap-3">
                 <Link href="/contact">
                   <MagneticButton>
                     <Button3D
@@ -608,15 +637,15 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
                 </Link>
               </AnimatedSection>
 
-              {/* Keywords Bar */}
-              <AnimatedSection delay={0.2} className="pt-1">
+              {/* Capability / Service Indicators */}
+              <AnimatedSection delay={0.18} className="pt-1">
                 <div className="flex flex-wrap items-center gap-2">
                   {keywordTags.map((tag, i) => (
                     <motion.span
                       key={i}
                       whileHover={{ scale: 1.06, y: -2 }}
                       transition={{ duration: 0.2 }}
-                      className="px-2.5 py-1 rounded-lg bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[11px] font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] hover:border-[#f15e1c]/40 transition-all duration-200 cursor-default"
+                      className="px-3 py-1.5 rounded-lg bg-[#fefaf5]/90 dark:bg-[#0a0a0a]/90 backdrop-blur-xs border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] hover:border-[#f15e1c]/40 transition-all duration-200 cursor-default"
                     >
                       {tag}
                     </motion.span>
@@ -625,74 +654,8 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
               </AnimatedSection>
             </div>
 
-            {/* RIGHT COLUMN: INTERACTIVE HERO PRODUCT ARCHITECTURE VISUAL (USER -> UI -> APP -> API -> DATA -> CLOUD) */}
-            <div className="lg:col-span-6 xl:col-span-7 w-full flex items-center justify-center">
-              <AnimatedSection delay={0.15} className="w-full">
-                <div className="p-6 sm:p-8 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl space-y-6 relative overflow-hidden">
-                  
-                  <div className="flex items-center justify-between border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-3">
-                    <div className="flex items-center gap-2">
-                      <Terminal className="w-4 h-4 text-[#f15e1c]" />
-                      <span className="text-xs font-mono font-bold text-[#1b2823] dark:text-[#ffffff] uppercase tracking-wider">
-                        PRODUCT ARCHITECTURE FLOW
-                      </span>
-                    </div>
-                    <span className="text-[10px] font-mono text-[#2e936f] font-bold">LIVE SYSTEM MAP</span>
-                  </div>
-
-                  {/* Connected 6-Node Architecture Map */}
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 relative">
-                    {heroProductNodes.map((node, idx) => {
-                      const isHovered = activeHeroNodeIdx === idx;
-                      return (
-                        <motion.div
-                          key={node.id}
-                          onMouseEnter={() => setActiveHeroNodeIdx(idx)}
-                          whileHover={{ scale: 1.04, y: -2 }}
-                          className={cn(
-                            "p-3.5 rounded-2xl border transition-all duration-300 cursor-pointer space-y-1.5 text-left relative overflow-hidden",
-                            isHovered
-                              ? "bg-white dark:bg-[#121212] border-[#f15e1c] shadow-md ring-1 ring-[#f15e1c]/30"
-                              : "bg-white/60 dark:bg-[#050505] border-[#f7d7b0]/60 dark:border-[#1a1a1a]"
-                          )}
-                        >
-                          <div className="flex items-center justify-between">
-                            <div className="p-1.5 rounded-lg bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a]">
-                              {node.icon}
-                            </div>
-                            <span className="text-[10px] font-mono font-bold text-[#f15e1c]">
-                              0{idx + 1}
-                            </span>
-                          </div>
-                          <div className="font-mono text-xs font-bold text-[#1b2823] dark:text-[#ffffff]">
-                            {node.label}
-                          </div>
-                          <div className="text-[10px] text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-tight line-clamp-1">
-                            {node.desc}
-                          </div>
-                        </motion.div>
-                      );
-                    })}
-                  </div>
-
-                  {/* Active Node Detail Card */}
-                  <div className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] flex items-center justify-between gap-4">
-                    <div className="space-y-1 text-left">
-                      <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase block">
-                        HIGHLIGHTED NODE: {heroProductNodes[activeHeroNodeIdx].label}
-                      </span>
-                      <p className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff]">
-                        {heroProductNodes[activeHeroNodeIdx].desc}
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-xs font-mono text-[#f15e1c] font-bold shrink-0">
-                      <span>CONNECTED</span>
-                      <CheckCircle2 className="w-4 h-4 text-[#2e936f]" />
-                    </div>
-                  </div>
-                </div>
-              </AnimatedSection>
-            </div>
+            {/* RIGHT COLUMN: DESKTOP SPACER REVEALING THE BACKGROUND VISUAL */}
+            <div className="hidden lg:block lg:col-span-5 xl:col-span-6 h-full min-h-[300px]" />
           </div>
         </div>
       </section>
