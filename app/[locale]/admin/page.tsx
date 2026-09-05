@@ -18,6 +18,7 @@ import {
 import { productsData, Product } from "@/data/products";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { SEOAdminPanel } from "@/components/admin/SEOAdminPanel";
+import { NavbarAdminPanel } from "@/components/admin/NavbarAdminPanel";
 import {
   Shield,
   MessageSquare,
@@ -224,6 +225,7 @@ export default function AdminDashboardPage() {
     if ("languages translation rtl english hindi arabic".includes(q)) matches.push({ label: "Languages & RTL", tab: "languages" });
     if ("seo title meta canonical indexing search".includes(q)) matches.push({ label: "Global SEO", tab: "seo" });
     if ("legal privacy terms refund security dpdp".includes(q)) matches.push({ label: "Legal & DPDP Content", tab: "legal" });
+    if ("navbar translucent transparency header opacity blur design surface".includes(q)) matches.push({ label: "Navbar & Translucency", tab: "navbar" });
     if ("system animations hover maintenance toggle".includes(q)) matches.push({ label: "Maintenance Controls", tab: "system" });
     return matches;
   };
@@ -298,15 +300,15 @@ export default function AdminDashboardPage() {
               className="rounded-xl border-[#EFE2D6] dark:border-[#1f1f1f]"
               leftIcon={<RotateCcw className="w-4 h-4" />}
             >
-              Reset Defaults
+              Reset Factory Defaults
             </Button>
           </div>
         </div>
 
-        {/* Global Admin Search Results Bar */}
+        {/* Search Results Dropdown overlay */}
         {searchMatches && searchMatches.length > 0 && (
-          <div className="p-4 rounded-2xl bg-[#FCE3D3]/50 dark:bg-[#161616] border border-[#f15e1c]/30 space-y-2">
-            <span className="text-xs font-bold text-[#f15e1c]">Search Matches:</span>
+          <div className="p-4 rounded-2xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#f15e1c]/30 shadow-xl space-y-2">
+            <span className="text-xs font-bold text-[#7A6A5F] dark:text-[#B8ACA0]">Matching Sections:</span>
             <div className="flex flex-wrap gap-2">
               {searchMatches.map((m, idx) => (
                 <button
@@ -323,6 +325,13 @@ export default function AdminDashboardPage() {
               ))}
             </div>
           </div>
+        )}
+
+        {/* ========================================================================= */}
+        {/* TAB: NAVBAR TRANSLUCENCY SETTINGS */}
+        {/* ========================================================================= */}
+        {activeTab === "navbar" && (
+          <NavbarAdminPanel showToast={showToast} />
         )}
 
         {/* ========================================================================= */}

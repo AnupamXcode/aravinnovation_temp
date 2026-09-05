@@ -56,6 +56,7 @@ export function AdminSidebar({
     {
       groupLabel: "DESIGN SYSTEM",
       items: [
+        { id: "navbar", label: "Navbar / Translucency", icon: SlidersHorizontal },
         { id: "design", label: "Brand Colours & Palette", icon: Zap },
       ],
     },

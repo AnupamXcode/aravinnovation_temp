@@ -36,6 +36,7 @@ import {
   Phone,
 } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
+import { useSiteConfig, defaultNavbarConfig } from "@/lib/site-config";
 
 const serviceIcons: Record<string, React.ReactNode> = {
   "/services/it-strategy-implementation": <Compass className="w-4 h-4 text-[#f15e1c]" />,
@@ -69,11 +70,55 @@ export function Navbar() {
   if (pathname?.includes("/admin")) {
     return null;
   }
+
+  const { config } = useSiteConfig();
+  const navConfig = config?.navbarConfig || defaultNavbarConfig;
+
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [activeDropdown, setActiveDropdown] = React.useState<string | null>(null);
   const [mobileServicesOpen, setMobileServicesOpen] = React.useState(false);
   const [mobileWorkingWithUsOpen, setMobileWorkingWithUsOpen] = React.useState(false);
+
+  const scrollTransparencyActive =
+    navConfig.enabled !== false &&
+    navConfig.translucent !== false &&
+    navConfig.scrollTransparencyEnabled !== false;
+
+  const scrolledOpacityPct = navConfig.scrolledOpacity ?? 75;
+
+  // AT TOP OF PAGE: Solid (100% opacity, 0px blur)
+  // WHEN SCROLLED: Translucent (scrolledOpacityPct, backdropBlur)
+  const activeOpacityPct = mobileMenuOpen
+    ? 96
+    : isScrolled
+    ? (scrollTransparencyActive ? scrolledOpacityPct : 100)
+    : 100;
+  const alpha = (activeOpacityPct / 100).toFixed(2);
+
+  const blurAmount = isScrolled && scrollTransparencyActive ? (navConfig.backdropBlur ?? 14) : 0;
+  const borderVisible = !isScrolled || navConfig.borderVisible !== false;
+  const borderOpacityPct = isScrolled ? (navConfig.borderOpacity ?? 80) : 100;
+  const borderAlpha = borderVisible ? (borderOpacityPct / 100).toFixed(2) : "0";
+
+  const transitionDuration =
+    navConfig.transitionSpeed === "fast"
+      ? "duration-150"
+      : navConfig.transitionSpeed === "smooth"
+      ? "duration-500"
+      : "duration-300";
+
+  let shadowClass = "shadow-xs";
+  if (isScrolled) {
+    if (navConfig.shadowVisible === false) {
+      shadowClass = "shadow-none";
+    } else {
+      const intensity = navConfig.shadowIntensity || "sm";
+      if (intensity === "sm") shadowClass = "shadow-xs sm:shadow-sm";
+      else if (intensity === "md") shadowClass = "shadow-md";
+      else if (intensity === "lg") shadowClass = "shadow-lg";
+    }
+  }
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -125,11 +170,22 @@ export function Navbar() {
   return (
     <>
       <header
+        style={
+          {
+            "--nav-bg-light": `rgb(255 253 249 / ${alpha})`,
+            "--nav-bg-dark": `rgb(0 0 0 / ${alpha})`,
+            "--nav-border-light": borderVisible ? `rgb(239 226 214 / ${borderAlpha})` : "transparent",
+            "--nav-border-dark": borderVisible ? `rgb(31 31 31 / ${borderAlpha})` : "transparent",
+            backdropFilter: blurAmount > 0 ? `blur(${blurAmount}px)` : "none",
+            WebkitBackdropFilter: blurAmount > 0 ? `blur(${blurAmount}px)` : "none",
+          } as React.CSSProperties
+        }
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ease-in-out border-b",
-          isScrolled
-            ? "py-2.5 bg-[#FFFDF9]/85 dark:bg-[#000000]/85 backdrop-blur-md border-[#EFE2D6]/90 dark:border-[#1f1f1f]/90 shadow-md"
-            : "py-3 bg-[#FFFDF9] dark:bg-[#000000] border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm"
+          "fixed top-0 left-0 right-0 z-50 w-full ease-in-out border-b transition-all",
+          transitionDuration,
+          "bg-[var(--nav-bg-light)] dark:bg-[var(--nav-bg-dark)] border-[var(--nav-border-light)] dark:border-[var(--nav-border-dark)]",
+          isScrolled ? "py-2.5" : "py-3",
+          shadowClass
         )}
       >
         <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12">

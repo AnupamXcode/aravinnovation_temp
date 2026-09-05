@@ -73,9 +73,38 @@ export const defaultBrandColors: BrandColors = {
   buttonHover: "#D8480D",
 };
 
+export interface NavbarConfig {
+  enabled: boolean;
+  translucent: boolean;
+  scrollTransparencyEnabled: boolean;
+  topOpacity: number;
+  scrolledOpacity: number;
+  backdropBlur: number;
+  borderVisible: boolean;
+  borderOpacity: number;
+  shadowVisible: boolean;
+  shadowIntensity: "none" | "sm" | "md" | "lg";
+  transitionSpeed: "fast" | "standard" | "smooth";
+}
+
+export const defaultNavbarConfig: NavbarConfig = {
+  enabled: true,
+  translucent: true,
+  scrollTransparencyEnabled: true,
+  topOpacity: 100,
+  scrolledOpacity: 75,
+  backdropBlur: 14,
+  borderVisible: true,
+  borderOpacity: 80,
+  shadowVisible: true,
+  shadowIntensity: "sm",
+  transitionSpeed: "standard",
+};
+
 export interface SiteConfig {
   websiteEnabled: boolean;
   brandColors: BrandColors;
+  navbarConfig: NavbarConfig;
   chatbotEnabled: boolean;
   chatbotDelaySeconds: number;
   animationsEnabled: boolean;
@@ -115,6 +144,7 @@ export interface SiteConfig {
 const defaultConfig: SiteConfig = {
   websiteEnabled: true,
   brandColors: defaultBrandColors,
+  navbarConfig: defaultNavbarConfig,
   chatbotEnabled: true,
   chatbotDelaySeconds: 10,
   animationsEnabled: true,
@@ -277,6 +307,7 @@ const defaultConfig: SiteConfig = {
 interface SiteConfigContextType {
   config: SiteConfig;
   updateConfig: (key: keyof SiteConfig, value: any) => void;
+  updateNavbarConfig: (updates: Partial<NavbarConfig>) => void;
   updateSectionTheme: (section: keyof SectionThemes, theme: string) => void;
   updateCardStyle: (style: CardStyleOption) => void;
   toggleServiceState: (slug: string) => void;
@@ -290,6 +321,7 @@ interface SiteConfigContextType {
 const SiteConfigContext = React.createContext<SiteConfigContextType>({
   config: defaultConfig,
   updateConfig: () => {},
+  updateNavbarConfig: () => {},
   updateSectionTheme: () => {},
   updateCardStyle: () => {},
   toggleServiceState: () => {},
@@ -322,6 +354,22 @@ export function SiteConfigProvider({ children }: { children: React.ReactNode }) 
   const updateConfig = (key: keyof SiteConfig, value: any) => {
     setConfig((prev) => {
       const updated = { ...prev, [key]: value };
+      try {
+        localStorage.setItem("arav_site_config", JSON.stringify(updated));
+      } catch {
+        // ignore
+      }
+      return updated;
+    });
+  };
+
+  const updateNavbarConfig = (updates: Partial<NavbarConfig>) => {
+    setConfig((prev) => {
+      const updatedNavbarConfig = {
+        ...(prev.navbarConfig || defaultNavbarConfig),
+        ...updates,
+      };
+      const updated = { ...prev, navbarConfig: updatedNavbarConfig };
       try {
         localStorage.setItem("arav_site_config", JSON.stringify(updated));
       } catch {
@@ -417,6 +465,7 @@ export function SiteConfigProvider({ children }: { children: React.ReactNode }) 
       value={{
         config,
         updateConfig,
+        updateNavbarConfig,
         updateSectionTheme,
         updateCardStyle,
         toggleServiceState,
