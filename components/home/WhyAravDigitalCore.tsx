@@ -242,19 +242,6 @@ export function WhyAravDigitalCore({
                       {activePillar.description}
                     </p>
 
-                    {/* Enterprise Visual Showcase Image (100% Uncropped) */}
-                    <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] shadow-md bg-[#FFFDF9] dark:bg-[#050505]">
-                      <Image
-                        src="/images/it-strategy-main.png"
-                        alt="Enterprise Technology Architectural Blueprint"
-                        fill
-                        unoptimized
-                        priority
-                        loading="eager"
-                        className="object-contain object-center"
-                      />
-                    </div>
-
                     {/* Target Business Outcome Callout */}
                     <div className="p-4 rounded-2xl bg-[#f7d7b0]/40 dark:bg-[#141414] border border-[#f15e1c]/20 space-y-1">
                       <span className="text-xs font-mono font-bold text-[#2e936f] uppercase tracking-wider flex items-center gap-2">
@@ -271,7 +258,7 @@ export function WhyAravDigitalCore({
                 {/* Footer Progress & Audit CTA */}
                 <div className="pt-4 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between relative z-10">
                   <span className="text-xs font-mono text-[#7A6A5F] dark:text-[#A09085]">
-                    Pillar {activePillarIdx + 1} of 7 &bull; Scroll to navigate
+                    Architectural Focus &bull; Scroll to navigate
                   </span>
                   <Link href="/contact">
                     <Button
@@ -378,18 +365,6 @@ export function WhyAravDigitalCore({
               <p className="text-xs text-[#5A4D44] dark:text-[#d3eee4] leading-relaxed font-medium">
                 {activePillar.description}
               </p>
-
-              <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] bg-[#FFFDF9] dark:bg-[#050505]">
-                <Image
-                  src="/images/it-strategy-main.png"
-                  alt={activePillar.title}
-                  fill
-                  unoptimized
-                  priority
-                  loading="eager"
-                  className="object-contain object-center"
-                />
-              </div>
 
               <div className="p-3 rounded-xl bg-[#f7d7b0]/40 dark:bg-[#141414] border border-[#f15e1c]/20 space-y-1">
                 <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase tracking-wider flex items-center gap-1.5">

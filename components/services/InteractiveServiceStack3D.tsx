@@ -51,7 +51,7 @@ const servicesData: ServiceItem[] = [
     shortName: "IT Strategy",
     description:
       "Enterprise roadmaps, cloud strategy, modernization and technology implementation aligned around real business outcomes.",
-    image: "/images/it-strategy-main.png",
+    image: "/images/homepage-services/it-strategy-homepage.png",
     tone: "#f15e1c",
     href: "/services/it-strategy-implementation",
     iconName: "Compass",
@@ -69,7 +69,7 @@ const servicesData: ServiceItem[] = [
     shortName: "Digital Marketing",
     description:
       "Brand strategy, digital campaigns and performance growth programs engineered to generate high-intent customer pipeline.",
-    image: "/images/digital-marketing-main-1.png",
+    image: "/images/homepage-services/digital-marketing-homepage.png",
     tone: "#2e936f",
     href: "/services/digital-marketing-brand-development",
     iconName: "TrendingUp",
@@ -87,9 +87,9 @@ const servicesData: ServiceItem[] = [
     shortName: "Web & App Dev",
     description:
       "Scalable web applications, customer portals and mobile platforms engineered for high reliability and modern performance.",
-    image: "/images/web-app-main-1.png",
+    image: "/images/homepage-services/web-dev-homepage.png",
     tone: "#fab60a",
-    href: "/services/web-application-development",
+    href: "/services/web-app-development",
     iconName: "Code2",
     outcomes: [
       "Custom Enterprise Web Applications",
@@ -105,7 +105,7 @@ const servicesData: ServiceItem[] = [
     shortName: "Risk & Governance",
     description:
       "Practical frameworks for privacy, security, regulatory compliance (DPDP, ISO 27001) and responsible technology operations.",
-    image: "/images/risk-compliance-hero-bg.png",
+    image: "/images/homepage-services/risk-compliance-homepage.png",
     tone: "#f15e1c",
     href: "/services/risk-compliance-governance",
     iconName: "ShieldCheck",
@@ -123,7 +123,7 @@ const servicesData: ServiceItem[] = [
     shortName: "Audit & Improvement",
     description:
       "Technical, operational and process assessments that identify friction and outline clear, practical improvement steps.",
-    image: "/images/audit-improvement-hero-bg.png",
+    image: "/images/homepage-services/audit-improvement-homepage.png",
     tone: "#2e936f",
     href: "/services/audit-improvement",
     iconName: "BarChart3",
@@ -141,7 +141,7 @@ const servicesData: ServiceItem[] = [
     shortName: "Staff Augmentation",
     description:
       "Pre-vetted senior technology talent and structured training support that strengthens internal engineering capability.",
-    image: "/images/training-staff-hero-bg.png",
+    image: "/images/homepage-services/training-staff-homepage.png",
     tone: "#f15e1c",
     href: "/services/training-staff-augmentation",
     iconName: "Users2",
@@ -159,7 +159,7 @@ const servicesData: ServiceItem[] = [
     shortName: "SEO Services",
     description:
       "Technical SEO, search architecture and content strategy focused on sustainable organic visibility and growth.",
-    image: "/images/seo-hero.png",
+    image: "/images/homepage-services/seo-homepage.png",
     tone: "#fab60a",
     href: "/services/seo-services",
     iconName: "Search",
@@ -177,7 +177,7 @@ const servicesData: ServiceItem[] = [
     shortName: "AI Portfolio",
     description:
       "Practical AI solutions, workflow automation and intelligent systems aligned with real enterprise business use cases.",
-    image: "/images/ai-portfolio-main.png",
+    image: "/images/homepage-services/ai-portfolio-homepage.png",
     tone: "#f15e1c",
     href: "/products",
     iconName: "Cpu",
@@ -221,7 +221,7 @@ export function InteractiveServiceStack3D() {
   const [activeServiceIdx, setActiveServiceIdx] = React.useState<number>(0);
   const [hoveredIdx, setHoveredIdx] = React.useState<number | null>(null);
 
-  // Synchronize ScrollTrigger Pinning on Desktop (>= 768px)
+  // Synchronize ScrollTrigger Pinning on Desktop (>= 768px) with 84px Navbar Offset
   React.useEffect(() => {
     if (!trackRef.current || !pinnedStageRef.current) return;
     if (window.innerWidth < 768) return; // Use native touch/tabs on mobile
@@ -229,7 +229,7 @@ export function InteractiveServiceStack3D() {
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
         trigger: trackRef.current,
-        start: "top top",
+        start: "top 84px", // Offset below the 80px fixed navbar so section header is NEVER clipped
         end: "bottom bottom",
         pin: pinnedStageRef.current,
         pinSpacing: true,
@@ -257,10 +257,10 @@ export function InteractiveServiceStack3D() {
 
     if (Math.abs(diffX) > 40) {
       if (diffX > 0) {
-        // Swipe left -> Next service step (01 -> 02 -> ... -> 08)
+        // Swipe left -> Next service step
         setActiveServiceIdx((prev) => Math.min(7, prev + 1));
       } else {
-        // Swipe right -> Previous service step (08 -> 07 -> ... -> 01)
+        // Swipe right -> Previous service step
         setActiveServiceIdx((prev) => Math.max(0, prev - 1));
       }
     }
@@ -271,14 +271,14 @@ export function InteractiveServiceStack3D() {
   const currentService = servicesData[displayedIdx] || servicesData[0];
 
   return (
-    <section className="relative w-full bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300" id="services">
+    <section className="relative w-full bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300 scroll-mt-24 sm:scroll-mt-28" id="services">
       {/* DESKTOP SCROLL-DRIVEN EXPLORATION (Hidden on mobile < 768px) */}
       <div ref={trackRef} className="hidden md:block relative w-full h-[280vh]">
         <div
           ref={pinnedStageRef}
-          className="w-full h-screen max-h-screen flex flex-col justify-between py-4 sm:py-6 px-4 sm:px-8 lg:px-12 xl:px-16 overflow-hidden"
+          className="w-full h-screen max-h-screen flex flex-col justify-between pt-20 sm:pt-24 lg:pt-26 pb-6 px-4 sm:px-8 lg:px-12 xl:px-16 overflow-hidden"
         >
-          {/* Section Header (Always Visible at Top of Pinned Viewport) */}
+          {/* Section Header (Always 100% Visible & Centered Below Navbar) */}
           <div className="text-center max-w-3xl mx-auto mb-4 space-y-1.5 shrink-0">
             <Badge variant="secondary" size="md">
               WHAT WE DO
@@ -293,29 +293,24 @@ export function InteractiveServiceStack3D() {
 
           {/* Main 2-Column Exploration Stage */}
           <div className="max-w-7xl mx-auto w-full grid grid-cols-12 gap-6 items-center flex-1 my-auto">
-            {/* Left Column: All 8 Services Visible Together in Viewport */}
+            {/* Left Column: All 8 Services - Every Card is 100% Clickable & Hoverable */}
             <div className="col-span-5 space-y-2">
               {servicesData.map((service) => {
                 const isHighlighted = service.id === displayedIdx;
 
                 return (
-                  <motion.button
+                  <Link
                     key={service.id}
-                    type="button"
+                    href={service.href}
                     onClick={() => setActiveServiceIdx(service.id)}
                     onMouseEnter={() => setHoveredIdx(service.id)}
                     onMouseLeave={() => setHoveredIdx(null)}
-                    animate={{
-                      y: isHighlighted ? -2 : 0,
-                      scale: isHighlighted ? 1.015 : 1,
-                      opacity: isHighlighted ? 1 : 0.8,
-                    }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    aria-label={`View ${service.name} practice details`}
                     className={cn(
-                      "w-full h-[56px] sm:h-[58px] text-left px-3.5 py-2 rounded-xl border transition-all duration-300 flex items-center justify-between gap-3 group cursor-pointer relative overflow-hidden shrink-0",
+                      "w-full h-[56px] sm:h-[58px] text-left px-3.5 py-2 rounded-xl border transition-all duration-300 flex items-center justify-between gap-3 group cursor-pointer relative overflow-hidden shrink-0 block",
                       isHighlighted
-                        ? "bg-white dark:bg-[#16221d] border-[#f15e1c] shadow-md ring-2 ring-[#f15e1c]/20"
-                        : "bg-white/80 dark:bg-[#0a0a0a]/80 border-[#f7d7b0]/60 dark:border-[#1a1a1a] hover:opacity-100 hover:border-[#f15e1c]/50 hover:bg-white dark:hover:bg-[#121212]"
+                        ? "bg-white dark:bg-[#16221d] border-[#f15e1c] shadow-md ring-2 ring-[#f15e1c]/20 -translate-y-0.5"
+                        : "bg-white/80 dark:bg-[#0a0a0a]/80 border-[#f7d7b0]/60 dark:border-[#1a1a1a] hover:opacity-100 hover:border-[#f15e1c]/70 hover:bg-white dark:hover:bg-[#121212] hover:-translate-y-0.5 hover:shadow-sm"
                     )}
                   >
                     {/* Active Accent Indicator */}
@@ -324,7 +319,7 @@ export function InteractiveServiceStack3D() {
                     )}
 
                     <div className="flex items-center gap-3 min-w-0">
-                      {/* Number Pill */}
+                      {/* Step Badge */}
                       <span
                         className={cn(
                           "font-mono text-xs font-bold px-2.5 py-1 rounded-md shrink-0 transition-colors",
@@ -365,11 +360,11 @@ export function InteractiveServiceStack3D() {
                       className={cn(
                         "w-4 h-4 shrink-0 transition-transform duration-300",
                         isHighlighted
-                          ? "text-[#f15e1c] translate-x-1"
-                          : "text-transparent group-hover:text-[#f15e1c]"
+                          ? "text-[#f15e1c] translate-x-1.5"
+                          : "text-[#7A6A5F] opacity-40 group-hover:opacity-100 group-hover:text-[#f15e1c] group-hover:translate-x-1"
                       )}
                     />
-                  </motion.button>
+                  </Link>
                 );
               })}
             </div>
@@ -389,10 +384,10 @@ export function InteractiveServiceStack3D() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    transition={{ duration: 0.35, ease: "easeOut" }}
                     className="space-y-5 relative z-10"
                   >
-                    {/* Header: Service Category & Number Badge */}
+                    {/* Header: Service Category */}
                     <div className="flex items-center justify-between border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-4">
                       <div className="flex items-center gap-3">
                         <div
@@ -410,8 +405,8 @@ export function InteractiveServiceStack3D() {
                           </h3>
                         </div>
                       </div>
-                      <span className="text-3xl font-extrabold font-mono text-[#f15e1c]/40">
-                        {currentService.number}
+                      <span className="text-xs font-mono font-extrabold px-3 py-1 rounded-full bg-[#f15e1c]/10 text-[#f15e1c]">
+                        {currentService.shortName}
                       </span>
                     </div>
 
@@ -420,18 +415,20 @@ export function InteractiveServiceStack3D() {
                       {currentService.description}
                     </p>
 
-                    {/* Enterprise Visual Showcase Image (100% Uncropped) */}
-                    <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] shadow-md bg-[#FFFDF9] dark:bg-[#050505]">
-                      <Image
-                        src={currentService.image}
-                        alt={currentService.name}
-                        fill
-                        unoptimized
-                        priority
-                        loading="eager"
-                        className="object-contain object-center transition-transform duration-500 hover:scale-[1.01]"
-                      />
-                    </div>
+                    {/* Enterprise Visual Showcase Image (100% Uncropped & Wide Contain) */}
+                    <Link href={currentService.href} className="block group">
+                      <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] shadow-md bg-[#FFFDF9] dark:bg-[#050505]">
+                        <Image
+                          src={currentService.image}
+                          alt={currentService.name}
+                          fill
+                          unoptimized
+                          priority
+                          loading="eager"
+                          className="object-contain object-center transition-transform duration-500 group-hover:scale-[1.01]"
+                        />
+                      </div>
+                    </Link>
 
                     {/* Core Outcomes List */}
                     <div className="space-y-2">
@@ -456,7 +453,7 @@ export function InteractiveServiceStack3D() {
                 {/* Footer CTA */}
                 <div className="pt-4 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between relative z-10">
                   <span className="text-xs font-mono text-[#7A6A5F] dark:text-[#A09085]">
-                    Step {displayedIdx + 1} of 8 &bull; Scroll to navigate
+                    Scroll to explore services &bull; Click card to view details
                   </span>
                   <Link href={currentService.href}>
                     <span className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#f15e1c] text-white font-semibold text-xs shadow-md hover:bg-[#d84e12] transition-all hover:shadow-lg hover:shadow-[#f15e1c]/25">
@@ -469,16 +466,16 @@ export function InteractiveServiceStack3D() {
           </div>
 
           {/* Bottom Progress Bar */}
-          <div className="max-w-7xl mx-auto w-full pt-6 flex items-center justify-between text-xs font-mono text-[#7A6A5F] dark:text-[#A09085]">
-            <span>SCROLL CONTROLLED SERVICE EXPLORATION</span>
+          <div className="max-w-7xl mx-auto w-full pt-4 flex items-center justify-between text-xs font-mono text-[#7A6A5F] dark:text-[#A09085]">
+            <span>ENTERPRISE TECHNOLOGY PRACTICES</span>
             <div className="flex items-center gap-2">
               <div className="w-48 h-2 rounded-full bg-[#f7d7b0]/50 dark:bg-[#1a1a1a] overflow-hidden">
                 <div
                   className="h-full bg-[#f15e1c] transition-all duration-300"
-                  style={{ width: `${((displayedIdx + 1) / 8) * 100}%` }}
+                  style={{ width: `${((displayedIdx + 1) / servicesData.length) * 100}%` }}
                 />
               </div>
-              <span className="font-bold text-[#f15e1c]">{displayedIdx + 1}/8</span>
+              <span className="font-bold text-[#f15e1c]">SCROLL TO EXPLORE</span>
             </div>
           </div>
         </div>
@@ -495,7 +492,7 @@ export function InteractiveServiceStack3D() {
             Enterprise Services
           </h2>
           <p className="text-xs sm:text-sm text-[#5A4A3F] dark:text-[#D8CBC0]">
-            Tap or swipe to explore our eight enterprise practices.
+            Tap or swipe to explore our enterprise practices.
           </p>
         </div>
 
@@ -522,7 +519,7 @@ export function InteractiveServiceStack3D() {
           })}
         </div>
 
-        {/* Active Mobile Service Card with Upward Tile Motion & Touch Swipe Support */}
+        {/* Active Mobile Service Card with Touch Swipe & Clickable Link */}
         <div
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
@@ -534,7 +531,7 @@ export function InteractiveServiceStack3D() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -24 }}
-              transition={{ duration: 0.45, ease: "easeOut" }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
               className="p-5 space-y-4"
             >
               <div className="flex items-center justify-between border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-3">
@@ -546,30 +543,32 @@ export function InteractiveServiceStack3D() {
                     {currentService.category}
                   </span>
                 </div>
-                <span className="text-xs font-mono text-[#7A6A5F] dark:text-[#A09085]">
-                  {activeServiceIdx + 1} of 8
+                <span className="text-xs font-mono font-bold text-[#f15e1c]">
+                  Enterprise Practice
                 </span>
               </div>
 
-              <h3 className="text-lg font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
-                {currentService.name}
-              </h3>
+              <Link href={currentService.href} className="block group">
+                <h3 className="text-lg font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
+                  {currentService.name}
+                </h3>
 
-              <p className="text-xs text-[#5A4A3F] dark:text-[#D8CBC0] leading-relaxed font-medium">
-                {currentService.description}
-              </p>
+                <p className="text-xs text-[#5A4A3F] dark:text-[#D8CBC0] leading-relaxed font-medium mt-2">
+                  {currentService.description}
+                </p>
 
-              <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] bg-[#FFFDF9] dark:bg-[#050505]">
-                <Image
-                  src={currentService.image}
-                  alt={currentService.name}
-                  fill
-                  unoptimized
-                  priority
-                  loading="eager"
-                  className="object-contain object-center"
-                />
-              </div>
+                <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] bg-[#FFFDF9] dark:bg-[#050505] mt-3">
+                  <Image
+                    src={currentService.image}
+                    alt={currentService.name}
+                    fill
+                    unoptimized
+                    priority
+                    loading="eager"
+                    className="object-contain object-center"
+                  />
+                </div>
+              </Link>
 
               <div className="space-y-1.5 pt-1">
                 {currentService.outcomes.map((outcome, i) => (
@@ -593,8 +592,8 @@ export function InteractiveServiceStack3D() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => setActiveServiceIdx((prev) => Math.min(7, prev + 1))}
-                    disabled={activeServiceIdx === 7}
+                    onClick={() => setActiveServiceIdx((prev) => Math.min(servicesData.length - 1, prev + 1))}
+                    disabled={activeServiceIdx === servicesData.length - 1}
                     className="w-9 h-9 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center disabled:opacity-40"
                   >
                     <ChevronRight className="w-4 h-4 text-[#f15e1c]" />
@@ -603,7 +602,7 @@ export function InteractiveServiceStack3D() {
 
                 <Link href={currentService.href} className="flex-1 text-right">
                   <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#f15e1c] text-white font-semibold text-xs shadow-md">
-                    Explore <ArrowRight className="w-3.5 h-3.5" />
+                    Explore Practice <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </Link>
               </div>
