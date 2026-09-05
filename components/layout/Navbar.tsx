@@ -84,7 +84,7 @@ export function Navbar() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -126,8 +126,10 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 border-b bg-[#FFFDF9] dark:bg-[#000000] border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm",
-          isScrolled ? "py-2.5" : "py-3"
+          "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ease-in-out border-b",
+          isScrolled
+            ? "py-2.5 bg-[#FFFDF9]/85 dark:bg-[#000000]/85 backdrop-blur-md border-[#EFE2D6]/90 dark:border-[#1f1f1f]/90 shadow-md"
+            : "py-3 bg-[#FFFDF9] dark:bg-[#000000] border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm"
         )}
       >
         <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12">
@@ -170,7 +172,7 @@ export function Navbar() {
                 {/* Mega Dropdown Menu */}
                 {activeDropdown === "services" && (
                   <div className="absolute top-full left-0 w-[580px] pt-2 z-50">
-                    <div className="rounded-3xl bg-[#FFFDF9] dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] p-4 shadow-2xl grid grid-cols-1 gap-1">
+                    <div className="rounded-3xl bg-[#FFFDF9]/95 dark:bg-[#000000]/95 backdrop-blur-xl border border-[#EFE2D6] dark:border-[#1f1f1f] p-4 shadow-2xl grid grid-cols-1 gap-1">
                       <div className="px-3 py-1.5 border-b border-[#EFE2D6] dark:border-[#1f1f1f] mb-1 flex items-center justify-between">
                         <span className="text-[11px] font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0]">
                           Our Core Services
@@ -268,7 +270,7 @@ export function Navbar() {
 
                 {activeDropdown === "working-with-us" && (
                   <div className="absolute top-full left-0 w-[420px] pt-2 z-50">
-                    <div className="rounded-3xl bg-[#FFFDF9] dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] p-3 shadow-2xl space-y-1">
+                    <div className="rounded-3xl bg-[#FFFDF9]/95 dark:bg-[#000000]/95 backdrop-blur-xl border border-[#EFE2D6] dark:border-[#1f1f1f] p-3 shadow-2xl space-y-1">
                       <Link
                         href="/contact"
                         onClick={() => setActiveDropdown(null)}
