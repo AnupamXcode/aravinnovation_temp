@@ -105,7 +105,7 @@ const servicesData: ServiceItem[] = [
     shortName: "Risk & Governance",
     description:
       "Practical frameworks for privacy, security, regulatory compliance (DPDP, ISO 27001) and responsible technology operations.",
-    image: "/images/risk-gov-primary.png",
+    image: "/images/risk-compliance-hero-bg.png",
     tone: "#f15e1c",
     href: "/services/risk-compliance-governance",
     iconName: "ShieldCheck",

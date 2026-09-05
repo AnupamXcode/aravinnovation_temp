@@ -15,28 +15,28 @@ import {
 
 export function Hero() {
   return (
-    <section className="relative pt-8 sm:pt-14 md:pt-20 pb-16 md:pb-28 overflow-hidden bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300 min-h-[88vh] flex items-center">
+    <section className="relative w-full min-h-[calc(100vh-80px)] sm:min-h-[calc(100vh-90px)] flex flex-col justify-center py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300">
       {/* 1. Full-Bleed Continuous Photographic Environment Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
         <Image
           src="/images/homepage-main-bg.png"
           alt="Arav Innovations Executive Technology Platform Environment"
           fill
           priority
           unoptimized
-          className="object-cover object-center lg:object-right-top transition-opacity duration-700 opacity-100 dark:opacity-90"
+          className="object-cover object-center lg:object-right-top transition-opacity duration-700 opacity-100 dark:opacity-95"
         />
 
         {/* Minimal Localized Vignette Mask for Text Readability - Sharp Background Intact */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9]/90 via-[#FFFDF9]/40 to-transparent dark:hidden pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FFFDF9]/40 via-transparent to-[#FFFDF9]/85 dark:hidden pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9]/85 via-[#FFFDF9]/30 to-transparent dark:hidden pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FFFDF9]/20 via-transparent to-[#FFFDF9]/60 dark:hidden pointer-events-none" />
 
         {/* Dark Mode Vignette */}
-        <div className="hidden dark:block absolute inset-0 bg-gradient-to-r from-[#050505]/95 via-[#050505]/50 to-transparent pointer-events-none" />
-        <div className="hidden dark:block absolute inset-0 bg-gradient-to-b from-[#050505]/50 via-transparent to-[#050505]/90 pointer-events-none" />
+        <div className="hidden dark:block absolute inset-0 bg-gradient-to-r from-[#050505]/90 via-[#050505]/40 to-transparent pointer-events-none" />
+        <div className="hidden dark:block absolute inset-0 bg-gradient-to-b from-[#050505]/20 via-transparent to-[#050505]/70 pointer-events-none" />
       </div>
 
-      <div className="relative z-10 w-full px-4 sm:px-8 lg:px-12 xl:px-16">
+      <div className="relative z-10 w-full px-4 sm:px-8 lg:px-12 xl:px-16 my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Editorial Content (Sitting Directly on Background Image) */}
           <div className="lg:col-span-8 space-y-6 sm:space-y-7 text-left max-w-3xl">

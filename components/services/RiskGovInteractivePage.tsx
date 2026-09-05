@@ -406,25 +406,37 @@ export function RiskGovInteractivePage({ service, relatedPosts }: RiskGovPagePro
       <AnimatedDotGrid />
 
       {/* =========================================================================
-          1. HERO — ENTERPRISE GOVERNANCE CONTROL CENTER DIAGRAM
+          1. HERO — ENTERPRISE GOVERNANCE CONTROL CENTER DIAGRAM (FULL-BLEED CINEMATIC BACKGROUND)
           ========================================================================= */}
-      <section className="relative pt-3 sm:pt-5 lg:pt-6 pb-12 sm:pb-16 lg:pb-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none">
+      <section className="relative pt-3 sm:pt-4 lg:pt-5 pb-8 sm:pb-12 lg:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none min-h-[calc(100vh-80px)] flex flex-col justify-start">
         
-        <motion.div
-          animate={shouldReduceMotion ? {} : { y: [0, -10, 0], opacity: [0.2, 0.3, 0.2] }}
-          transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
-          className="absolute inset-0 pointer-events-none z-0 overflow-hidden"
-        >
-          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-radial from-[#2e936f]/15 via-transparent to-transparent blur-3xl rounded-full" />
-          <div className="absolute bottom-1/3 right-1/4 w-[550px] h-[550px] bg-radial from-[#f15e1c]/12 via-transparent to-transparent blur-3xl rounded-full" />
-        </motion.div>
+        {/* Full-Bleed Desktop Background Visual — PC / DESKTOP VIEW ONLY */}
+        <div className="absolute inset-0 pointer-events-none hidden lg:block select-none overflow-hidden">
+          <Image
+            src="/images/risk-compliance-hero-bg.png"
+            alt="Enterprise Risk, Compliance & Governance"
+            fill
+            priority
+            className="object-cover object-right dark:opacity-90"
+            sizes="100vw"
+          />
+          {/* Soft dark-mode enhancement */}
+          <div className="absolute inset-0 hidden dark:block bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none" />
+        </div>
+
+        <AnimatedDotGrid />
+
+        {/* Ambient Subtle Glows */}
+        <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-radial from-[#2e936f]/15 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-radial from-[#f15e1c]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none lg:hidden" />
 
         <div className="max-w-[1536px] mx-auto w-full space-y-6 sm:space-y-8 relative z-10">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* 2-Column Hero Grid Composition (Top-Aligned) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
             {/* LEFT COLUMN: HERO COPY */}
-            <div className="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-left">
+            <div className="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-left max-w-xl">
               
               <AnimatedSection delay={0.05} className="space-y-2">
                 <Breadcrumb
@@ -492,24 +504,24 @@ export function RiskGovInteractivePage({ service, relatedPosts }: RiskGovPagePro
               </AnimatedSection>
             </div>
 
-            {/* RIGHT COLUMN: PRIMARY 3D GOVERNANCE VISUAL (IMAGE 1 - BLENDED NO BORDER) */}
+            {/* RIGHT COLUMN: SPACER ON DESKTOP (REVEALING FULL-BLEED BACKGROUND ARTWORK) & DEDICATED MOBILE HERO IMAGE */}
             <div className="lg:col-span-6 xl:col-span-7 w-full flex items-center justify-center">
-              <AnimatedSection delay={0.15} className="w-full">
-                <motion.div
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  transition={{ duration: 0.4 }}
-                  className="relative w-full transition-all duration-300 group flex items-center justify-center"
-                >
+              
+              {/* Mobile / Tablet View: Uses dedicated auto-cropped Mobile Hero Image */}
+              <AnimatedSection delay={0.15} className="w-full flex justify-center lg:hidden pt-2 sm:pt-4">
+                <div className="relative w-full max-w-sm sm:max-w-md rounded-2xl border-2 border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] overflow-hidden shadow-xl select-none aspect-[941/1150]">
                   <Image
-                    src="/images/risk-gov-primary.png"
-                    alt="Arav Innovations Enterprise Risk, Compliance & Governance System Architecture"
-                    width={1200}
-                    height={800}
+                    src="/images/risk-compliance-mobile-cropped.png"
+                    alt="Arav Innovations Enterprise Risk, Compliance & Governance System Architecture (Mobile)"
+                    width={941}
+                    height={1150}
                     priority
-                    className="w-full h-auto max-w-full object-contain block transition-transform duration-500 group-hover:scale-[1.02] drop-shadow-sm"
+                    className="w-full h-auto object-contain object-center rounded-2xl"
+                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 40vw"
                   />
-                </motion.div>
+                </div>
               </AnimatedSection>
+
             </div>
           </div>
         </div>
