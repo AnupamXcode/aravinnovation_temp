@@ -428,6 +428,7 @@ export function InteractiveServiceStack3D() {
                         fill
                         unoptimized
                         priority
+                        loading="eager"
                         className="object-contain object-center transition-transform duration-500 hover:scale-[1.01]"
                       />
                     </div>
@@ -564,6 +565,8 @@ export function InteractiveServiceStack3D() {
                   alt={currentService.name}
                   fill
                   unoptimized
+                  priority
+                  loading="eager"
                   className="object-contain object-center"
                 />
               </div>

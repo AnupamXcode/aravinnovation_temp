@@ -696,6 +696,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                   width={1200}
                   height={800}
                   priority
+                  loading="eager"
                   className="w-full h-auto max-w-full object-contain rounded-xl sm:rounded-2xl transition-transform duration-300 group-hover:scale-[1.01]"
                 />
               </div>

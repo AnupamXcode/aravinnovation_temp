@@ -250,6 +250,7 @@ export function WhyAravDigitalCore({
                         fill
                         unoptimized
                         priority
+                        loading="eager"
                         className="object-contain object-center"
                       />
                     </div>
@@ -384,6 +385,8 @@ export function WhyAravDigitalCore({
                   alt={activePillar.title}
                   fill
                   unoptimized
+                  priority
+                  loading="eager"
                   className="object-contain object-center"
                 />
               </div>
