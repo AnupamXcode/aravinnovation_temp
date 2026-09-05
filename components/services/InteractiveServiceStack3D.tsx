@@ -141,7 +141,7 @@ const servicesData: ServiceItem[] = [
     shortName: "Staff Augmentation",
     description:
       "Pre-vetted senior technology talent and structured training support that strengthens internal engineering capability.",
-    image: "/images/training-staff-main.png",
+    image: "/images/training-staff-hero-bg.png",
     tone: "#f15e1c",
     href: "/services/training-staff-augmentation",
     iconName: "Users2",

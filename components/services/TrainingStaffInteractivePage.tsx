@@ -14,6 +14,7 @@ import {
   Users,
   GraduationCap,
   ArrowRight,
+  Sparkles,
   CheckCircle2,
   Code,
   ShieldCheck,
@@ -38,12 +39,46 @@ import { BlogPost, blogPostsData } from "@/data/insights";
 import { Button3D } from "@/components/ui/button-3d";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
+import { MagneticButton } from "@/components/motion/MagneticButton";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { cn } from "@/lib/utils";
 
 interface TrainingStaffPageProps {
   service: Service;
   relatedPosts?: BlogPost[];
+}
+
+// -----------------------------------------------------------------------------
+// 1. Scroll-Triggered Section Wrapper Component
+// -----------------------------------------------------------------------------
+function AnimatedSection({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-30px" });
+  const shouldReduceMotion = useReducedMotion();
+
+  if (shouldReduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 16 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+      transition={{ duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
 }
 
 // -----------------------------------------------------------------------------
@@ -358,90 +393,122 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
   const activeModel = teamModels.find((m) => m.id === displayedModelId) || teamModels[0];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300 overflow-x-hidden selection:bg-[#F15E1C]/20 selection:text-[#F15E1C]">
+    <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300 overflow-x-hidden selection:bg-[#F15E1C]/20 selection:text-[#F15E1C]">
       
-      {/* Breadcrumb Navigation */}
-      <div className="relative z-10 w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-3 sm:pt-4 pb-1 sm:pb-2">
-        <Breadcrumb
-          items={[
-            { label: "Services", href: "/services" },
-            { label: "Training & Staff Augmentation", href: "/services/training-staff-augmentation" },
-          ]}
-        />
-      </div>
-
       {/* =====================================================================
-          2. HERO SECTION — DUAL PATHWAY WITH IMAGE 1 MAIN VISUAL
+          2. HERO SECTION — FULL-BLEED CINEMATIC BACKGROUND WITH DUAL PATHWAY
           ===================================================================== */}
-      <section className="relative z-10 w-full border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-2 sm:pt-4 pb-8 sm:pb-12 md:pb-16 lg:pb-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
+      <section className="relative pt-3 sm:pt-4 lg:pt-5 pb-8 sm:pb-12 lg:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none min-h-[calc(100vh-80px)] flex flex-col justify-start">
+        
+        {/* Full-Bleed Desktop Background Visual — PC / DESKTOP VIEW ONLY */}
+        <div className="absolute inset-0 pointer-events-none hidden lg:block select-none overflow-hidden">
+          <Image
+            src="/images/training-staff-hero-bg.png"
+            alt="Team Capability & Staff Augmentation Strategy"
+            fill
+            priority
+            className="object-cover object-right opacity-100 dark:opacity-95 transition-opacity duration-500"
+            sizes="100vw"
+          />
+          {/* Light backdrop gradient for text readability while preserving full image opacity */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/60 via-35% to-transparent dark:from-[#000000] dark:via-[#000000]/60 dark:via-35% dark:to-transparent pointer-events-none" />
+        </div>
+
+        <div className="max-w-[1536px] mx-auto w-full space-y-6 sm:space-y-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
             {/* Hero Copy */}
-            <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center gap-2">
-                <Badge variant="outline" className="border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3.5 py-1.5 font-semibold tracking-wider text-xs rounded-full shadow-xs">
-                  TEAM CAPABILITY • TALENT • ENABLEMENT
-                </Badge>
-              </div>
+            <div className="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-left max-w-xl">
+              
+              <AnimatedSection delay={0.05} className="space-y-2">
+                <Breadcrumb
+                  items={[
+                    { label: "Services", href: "/services" },
+                    { label: "Training & Staff Augmentation", href: "/services/training-staff-augmentation" },
+                  ]}
+                />
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
+                  <Sparkles className="w-3.5 h-3.5 text-[#f15e1c]" />
+                  <span>TEAM CAPABILITY • TALENT • ENABLEMENT</span>
+                </div>
+              </AnimatedSection>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-[1.12]">
-                Build Stronger Teams. <br className="hidden sm:inline" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F15E1C] via-[#FAB60A] to-[#2E936F]">
-                  Add the Right Expertise When You Need It.
-                </span>
-              </h1>
+              <AnimatedSection delay={0.1} className="space-y-3">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-[1.12]">
+                  Build Stronger Teams. <br className="hidden sm:inline" />
+                  <span className="text-[#f15e1c]">
+                    Add the Right Expertise When You Need It.
+                  </span>
+                </h1>
+              </AnimatedSection>
 
-              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl leading-relaxed">
-                Develop the capabilities your teams need and extend delivery capacity with skilled professionals who can integrate into your existing ways of working.
-              </p>
+              {/* Dedicated Mobile Hero Visual Card (Placed directly below H1 Headline on Mobile/Tablet Viewports < 1024px) */}
+              <AnimatedSection delay={0.12} className="w-full lg:hidden my-3">
+                <div className="relative w-full max-w-sm sm:max-w-md rounded-2xl border-2 border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] overflow-hidden shadow-xl select-none aspect-[936/1024]">
+                  <Image
+                    src="/images/training-staff-mobile-cropped.png"
+                    alt="Arav Innovations Team Capability & Staff Augmentation Architecture (Mobile)"
+                    width={936}
+                    height={1024}
+                    priority
+                    className="w-full h-auto object-contain object-center rounded-2xl"
+                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 40vw"
+                  />
+                </div>
+              </AnimatedSection>
+
+              <AnimatedSection delay={0.14} className="space-y-3">
+                <p className="text-sm sm:text-base lg:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-2xl">
+                  Develop the capabilities your teams need and extend delivery capacity with skilled professionals who can integrate into your existing ways of working.
+                </p>
+              </AnimatedSection>
 
               {/* CTAs */}
-              <div className="flex flex-wrap items-center gap-4 pt-2">
+              <AnimatedSection delay={0.16} className="pt-1 flex flex-wrap items-center gap-3">
                 <Link href="/contact">
-                  <Button3D variant="primary" size="lg" className="flex items-center gap-2 font-semibold bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] hover:opacity-95 transition-all">
-                    Build My Team Capability
-                    <ArrowRight className="w-4 h-4" />
-                  </Button3D>
+                  <MagneticButton>
+                    <Button3D variant="primary" size="md" rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />} className="shadow-md shadow-[#f15e1c]/20">
+                      Build My Team Capability
+                    </Button3D>
+                  </MagneticButton>
                 </Link>
                 <a href="#capability-map">
-                  <Button3D variant="secondary" size="lg" className="flex items-center gap-2 font-semibold bg-[#2E936F] text-[#FFFFFF] border-[#2E936F] hover:opacity-95 transition-all">
-                    Explore Our Approach
-                  </Button3D>
+                  <MagneticButton>
+                    <Button3D variant="outline" size="md">
+                      Explore Our Approach
+                    </Button3D>
+                  </MagneticButton>
                 </a>
-              </div>
+              </AnimatedSection>
 
               {/* Dual Pathway Distinction Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              <AnimatedSection delay={0.18} className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                 <motion.div
                   whileHover={{ y: -3, scale: 1.01 }}
-                  className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 transition-all duration-200 cursor-pointer shadow-xs"
+                  className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:bg-[#fefaf5] dark:hover:bg-[#0a0a0a] transition-all duration-200 cursor-pointer shadow-xs"
                 >
                   <div className="flex items-center gap-2 mb-1">
-                    <GraduationCap className="w-4 h-4 text-[#F15E1C]" />
+                    <GraduationCap className="w-4 h-4 text-[#f15e1c]" />
                     <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff] uppercase tracking-wider">TRAIN YOUR TEAM</span>
                   </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Upskill &amp; reskill internal staff on modern stacks, tools, and practices.</p>
+                  <p className="text-xs text-gray-500 dark:text-[#d3eee4]">Upskill &amp; reskill internal staff on modern stacks, tools, and practices.</p>
                 </motion.div>
 
                 <motion.div
                   whileHover={{ y: -3, scale: 1.01 }}
-                  className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#2E936F] hover:bg-[#F7D7B0]/20 transition-all duration-200 cursor-pointer shadow-xs"
+                  className="p-4 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#2e936f] hover:bg-[#fefaf5] dark:hover:bg-[#0a0a0a] transition-all duration-200 cursor-pointer shadow-xs"
                 >
                   <div className="flex items-center gap-2 mb-1">
-                    <UserPlus className="w-4 h-4 text-[#2E936F]" />
+                    <UserPlus className="w-4 h-4 text-[#2e936f]" />
                     <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff] uppercase tracking-wider">EXTEND YOUR TEAM</span>
                   </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Add aligned technical specialists and complementary project capacity.</p>
+                  <p className="text-xs text-gray-500 dark:text-[#d3eee4]">Add aligned technical specialists and complementary project capacity.</p>
                 </motion.div>
-              </div>
+              </AnimatedSection>
 
               {/* Supporting Keywords Bar */}
-              <div className="pt-4 border-t border-[#F7D7B0]">
-                <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 font-semibold mb-2.5">
-                  Capability Disciplines
-                </p>
-                <div className="flex flex-wrap gap-2">
+              <AnimatedSection delay={0.2} className="pt-1">
+                <div className="flex flex-wrap items-center gap-2">
                   {[
                     "Technology Training",
                     "Team Upskilling",
@@ -452,38 +519,19 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
                   ].map((tag, idx) => (
                     <motion.span
                       key={idx}
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      className="text-xs px-3.5 py-1.5 rounded-lg bg-gray-100 dark:bg-[#0a0a0a] text-gray-700 dark:text-gray-300 border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F15E1C] hover:text-[#FFFFFF] transition-all duration-200 cursor-pointer shadow-xs font-medium"
+                      whileHover={{ scale: 1.06, y: -2 }}
+                      transition={{ duration: 0.2 }}
+                      className="px-2.5 py-1 rounded-lg bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[11px] font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] hover:border-[#f15e1c]/40 transition-all duration-200 cursor-default"
                     >
                       {tag}
                     </motion.span>
                   ))}
                 </div>
-              </div>
+              </AnimatedSection>
             </div>
 
-            {/* IMAGE 1 — HERO VISUAL */}
-            <div className="lg:col-span-6 w-full">
-              <TiltCard className="w-full">
-                <div className="relative rounded-2xl p-3 sm:p-4 bg-white dark:bg-[#000000] border border-[#F7D7B0] shadow-xl overflow-hidden group hover:border-[#F15E1C] transition-all duration-300">
-                  <div className="relative w-full overflow-hidden rounded-xl">
-                    <Image
-                      src="/images/training-staff-main.png"
-                      alt="Training and staff augmentation team collaboration"
-                      width={800}
-                      height={600}
-                      priority
-                      className="w-full h-auto max-h-[500px] object-contain rounded-xl group-hover:scale-102 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="pt-3 border-t border-[#F7D7B0] text-center">
-                    <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 italic">
-                      “Integrating skills, people, and practices into your existing ways of working.”
-                    </p>
-                  </div>
-                </div>
-              </TiltCard>
-            </div>
+            {/* RIGHT COLUMN: SPACER ON DESKTOP (REVEALING FULL-BLEED BACKGROUND ARTWORK) */}
+            <div className="lg:col-span-6 xl:col-span-7 w-full hidden lg:flex items-center justify-center pointer-events-none min-h-[300px]" />
 
           </div>
         </div>
