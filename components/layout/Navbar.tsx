@@ -182,7 +182,7 @@ export function Navbar() {
                           className="text-xs font-semibold text-[#f15e1c] hover:underline inline-flex items-center gap-1"
                           onClick={() => setActiveDropdown(null)}
                         >
-                          View All 8 Services <ArrowRight className="w-3 h-3" />
+                          View All Services <ArrowRight className="w-3 h-3" />
                         </Link>
                       </div>
 

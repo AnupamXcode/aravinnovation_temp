@@ -212,7 +212,7 @@ export default function AdminDashboardPage() {
     const q = searchQuery.toLowerCase();
     const matches: { label: string; tab: string }[] = [];
     if ("homepage hero title eyebrow cta".includes(q)) matches.push({ label: "Homepage & Hero", tab: "hero" });
-    if ("services 7 practices marketing web dev seo compliance audit".includes(q)) matches.push({ label: "7 Core Practices", tab: "services" });
+    if ("services core services marketing web dev seo compliance audit".includes(q)) matches.push({ label: "Core Services", tab: "services" });
     if ("industry solutions verticals ecommerce fintech saas".includes(q)) matches.push({ label: "Industry Solutions", tab: "industries" });
     if ("case studies proven track record metrics outcomes".includes(q)) matches.push({ label: "Case Studies", tab: "casestudies" });
     if ("methodology 5-step process execution delivery".includes(q)) matches.push({ label: "5-Step Methodology", tab: "methodology" });
@@ -434,7 +434,7 @@ export default function AdminDashboardPage() {
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
                 {[
                   { label: "Homepage & Hero", tab: "hero" },
-                  { label: "7 Core Practices", tab: "services" },
+                  { label: "Core Services", tab: "services" },
                   { label: "Industry Solutions", tab: "industries" },
                   { label: "Case Studies", tab: "casestudies" },
                   { label: "5-Step Methodology", tab: "methodology" },
@@ -2377,7 +2377,7 @@ export default function AdminDashboardPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold">7 Core Practices Base Theme</label>
+                  <label className="text-xs font-bold">Core Services Base Theme</label>
                   <select
                     value={config.sectionThemes?.services || "soft_orange"}
                     onChange={(e) => {

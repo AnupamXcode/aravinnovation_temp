@@ -1,7 +1,7 @@
 {
   "Navigation": {
     "whatWeDo": "Ce que nous faisons",
-    "sevenServices": "Nos 7 Pôles de Services",
+    "sevenServices": "Nos Pôles de Services",
     "viewAllServices": "Voir Tous les Services",
     "products": "Produits",
     "workingWithUs": "Travailler Avec Nous",
@@ -24,7 +24,7 @@
     "headlineHighlight": "À l'Échelle Mondiale",
     "supportingText": "Associez-vous à Arav Innovations pour la stratégie IT, le développement logiciel, le marketing digital et la conformité.",
     "contactCta": "Contactez-nous →",
-    "exploreCta": "Explorer les 7 Pôles",
+    "exploreCta": "Explorer les Pôles",
     "badgeScalability": "Évolutivité Entreprise",
     "badgeSla": "Protection SLA Stricte",
     "badgeIp": "Propriété Intellectuelle 100% Client"
@@ -61,7 +61,7 @@
     "afterPillar4Desc": "Haute Disponibilité Élastique"
   },
   "Services": {
-    "badge": "Nos 7 Expertises Principales",
+    "badge": "Nos Expertises Principales",
     "title": "Navigateur d'Expertises Interactif",
     "description": "Sélectionnez une expertise ci-dessous pour consulter les capacités et engagements de service.",
     "viewAll": "Voir Toutes les Expertises",

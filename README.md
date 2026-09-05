@@ -22,7 +22,7 @@ Arav Innovations is a multidisciplinary technology, IT strategy, full-stack soft
 
 ### 2. 🎛️ Complete Website CMS Admin Control Center
 - Persistent Left Navigation Sidebar grouped into:
-  - **WEBSITE PAGES**: Hero, 7 Core Practices, Industry Solutions, Case Studies, Methodology, Testimonials, Footer & Regional Details.
+  - **WEBSITE PAGES**: Hero, Core Services, Industry Solutions, Case Studies, Methodology, Testimonials, Footer & Regional Details.
   - **DIGITAL PRESENCE & SOCIAL**: Dynamic Social Media Manager (Instagram, Facebook, LinkedIn, WhatsApp, X, YouTube, Clutch).
   - **COMMUNICATION**: Chatbot Knowledge Base & Contact Inquiries.
   - **LOCALIZATION & SEO**: Languages & RTL, Global Metadata.
@@ -41,7 +41,7 @@ Arav Innovations is a multidisciplinary technology, IT strategy, full-stack soft
 - **Universal Hover Interactions**: Left-to-right animated link underlines, button lift with arrow shifts (`→ -> →→`), card elevation, and social icon scaling.
 - Full `prefers-reduced-motion` accessibility support.
 
-### 5. 🏢 7 Core Practice Lines
+### 5. 🏢 Core Practice Lines
 1. **IT Strategy & Consulting** — Legacy modernization, cloud migration, technology roadmaps.
 2. **Web & App Development** — Subsecond Next.js web applications, SaaS platforms, native mobile apps.
 3. **Digital Marketing (B2B)** — High-intent LinkedIn & Google Search demand generation, closed-loop attribution.

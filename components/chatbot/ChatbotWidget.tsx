@@ -57,13 +57,14 @@ export function ChatbotWidget() {
         // ignore
       }
     }
+    const welcomeMsg = chatbotKB?.defaultGreeting || t("greeting");
     return [
       {
         id: "welcome",
         sender: "bot",
-        text: t("greeting"),
+        text: welcomeMsg,
         options: [
-          { label: locale === "hi" ? "सेवाएं देखें" : locale === "ar" ? "استكشف الخدمات" : "Explore Practices", action: "all_services" },
+          { label: locale === "hi" ? "सेवाएं देखें" : locale === "ar" ? "استكشف الخدمات" : "Explore Services", action: "all_services" },
           { label: locale === "hi" ? "प्रोजेक्ट शुरू करें" : locale === "ar" ? "بدء مشروع" : "Start a Project", action: "start_project" },
           { label: locale === "hi" ? "कार्यालय स्थान" : locale === "ar" ? "الفروع والمكاتب" : "Office Locations", action: "locations" },
         ],
@@ -205,10 +206,10 @@ export function ChatbotWidget() {
     if (option.action === "all_services") {
       const text =
         locale === "hi"
-          ? "आरव इनोवेशन 7 मुख्य सेवाएं प्रदान करता है:\n\n• आईटी रणनीति एवं कंसल्टिंग\n• वेब एवं ऐप इंजीनियरिंग\n• डिजिटल मार्केटिंग एवं SEO\n• जोखिम एवं DPDP अनुपालन\n• सिस्टम ऑडिट एवं परफॉरमेंस\n• समर्पित इंजीनियरिंग स्क्वॉड\n• एआई एवं ऑटोमेशन समाधान"
+          ? "आरव इनोवेशन मुख्य सेवाएं प्रदान करता है:\n\n• आईटी रणनीति एवं कंसल्टिंग\n• वेब एवं ऐप इंजीनियरिंग\n• डिजिटल मार्केटिंग एवं SEO\n• जोखिम एवं DPDP अनुपालन\n• सिस्टम ऑडिट एवं परफॉरमेंस\n• समर्पित इंजीनियरिंग स्क्वॉड\n• एआई एवं ऑटोमेशन समाधान"
           : locale === "ar"
-          ? "تقدم آراف إينوفيشينز 7 خدمات أساسية:\n\n• استراتيجية تكنولوجيا المعلومات\n• تطوير الويب والموبايل\n• التسويق الرقمي و SEO\n• الحوكمة والامتثال\n• تدقيق الأنظمة والأداء\n• الفرق الهندسية المخصصة\n• حلول الذكاء الاصطناعي"
-          : "Arav Innovations provides 7 core practices:\n\n• IT Strategy & Consulting\n• Web & App Development\n• Digital Marketing & SEO\n• Risk Governance & Compliance\n• Audit & FinOps Tuning\n• Dedicated Engineering Pods\n• AI & Automation Solutions";
+          ? "تقدم آراف إينوفيشينز خدمات أساسية:\n\n• استراتيجية تكنولوجيا المعلومات\n• تطوير الويب والموبايل\n• التسويق الرقمي و SEO\n• الحوكمة والامتثال\n• تدقيق الأنظمة والأداء\n• الفرق الهندسية المخصصة\n• حلول الذكاء الاصطناعي"
+          : "Arav Innovations provides core services across:\n\n• IT Strategy & Consulting\n• Web & App Development\n• Digital Marketing & SEO\n• Risk Governance & Compliance\n• Audit & FinOps Tuning\n• Dedicated Engineering Pods\n• AI & Automation Solutions";
 
       botMsg = {
         id: `bot-${Date.now()}`,
@@ -216,9 +217,9 @@ export function ChatbotWidget() {
         text,
         options: [
           { label: locale === "hi" ? "वेब विकास" : locale === "ar" ? "تطوير الويب" : "Web & App Dev", action: "navigate", route: "/services/web-app-development" },
-          { label: locale === "hi" ? "आईटी रणनीति" : locale === "ar" ? "استراتيجية التقنية" : "IT Strategy", action: "navigate", route: "/services/it-strategy-consulting" },
-          { label: locale === "hi" ? "मार्केटिंग" : locale === "ar" ? "التسويق الرقمي" : "Digital Marketing", action: "navigate", route: "/services/digital-marketing" },
-          { label: locale === "hi" ? "सभी सेवाएं देखें" : locale === "ar" ? "جميع الخدمات" : "View All Practices", action: "navigate", route: "/services" },
+          { label: locale === "hi" ? "एसईओ सेवाएं" : locale === "ar" ? "خدمات SEO" : "SEO Services", action: "navigate", route: "/services/seo-services" },
+          { label: locale === "hi" ? "आईटी रणनीति" : locale === "ar" ? "استراتيجية التقنية" : "IT Strategy", action: "navigate", route: "/services/it-strategy-implementation" },
+          { label: locale === "hi" ? "सभी सेवाएं देखें" : locale === "ar" ? "جميع الخدمات" : "View All Services", action: "navigate", route: "/services" },
         ],
       };
     } else if (option.action === "locations") {
@@ -239,11 +240,11 @@ export function ChatbotWidget() {
         ],
       };
     } else if (option.action === "start_project") {
-      const prefills = sessionContext.mentionedService
+      const prefills = option.payload || (sessionContext.mentionedService
         ? `Inquiry regarding ${sessionContext.mentionedService}`
         : sessionContext.mentionedIndustry
         ? `Inquiry for ${sessionContext.mentionedIndustry} sector`
-        : "";
+        : "");
 
       if (prefills && !leadFormState.requirement) {
         setLeadFormState((prev) => ({ ...prev, requirement: prefills }));
@@ -259,9 +260,9 @@ export function ChatbotWidget() {
       botMsg = {
         id: `bot-${Date.now()}`,
         sender: "bot",
-        text: t("greeting"),
+        text: chatbotKB?.defaultGreeting || t("greeting"),
         options: [
-          { label: locale === "hi" ? "सेवाएं देखें" : locale === "ar" ? "استكشف الخدمات" : "Explore Practices", action: "all_services" },
+          { label: locale === "hi" ? "सेवाएं देखें" : locale === "ar" ? "استكشف الخدمات" : "Explore Services", action: "all_services" },
           { label: locale === "hi" ? "प्रोजेक्ट शुरू करें" : locale === "ar" ? "بدء مشروع" : "Start a Project", action: "start_project" },
         ],
       };
@@ -327,18 +328,20 @@ export function ChatbotWidget() {
         isLeadForm: matched.isLeadForm,
       };
     } else {
+      const fallbackText = chatbotKB?.fallbackResponse ||
+        (locale === "hi"
+          ? "मैं आरव इनोवेशन की सेवाओं, तकनीकों, और परियोजनाओं से संबंधित प्रश्नों में मदद कर सकता हूँ। क्या आप अपनी आवश्यकता बताना चाहेंगे?"
+          : locale === "ar"
+          ? "أنا هنا لمساعدتك في استفسارات خدمات آراف إينوفيشينز ومشاريعها. هل ترغب في بدء مناقشة مشروعك؟"
+          : "I can help with questions about Arav Innovations' services, architecture, or project scope. Would you like to discuss your project requirements?");
+
       botMsg = {
         id: `bot-${Date.now()}`,
         sender: "bot",
-        text:
-          locale === "hi"
-            ? "मैं आरव इनोवेशन की सेवाओं, तकनीकों, और परियोजनाओं से संबंधित प्रश्नों में मदद कर सकता हूँ। क्या आप अपनी आवश्यकता बताना चाहेंगे?"
-            : locale === "ar"
-            ? "أنا هنا لمساعدتك في استفسارات خدمات آراف إينوفيشينز ومشاريعها. هل ترغب في بدء مناقشة مشروعك؟"
-            : "I can help with questions about Arav Innovations' services, architecture, or project scope. Would you like to discuss your project requirements?",
+        text: fallbackText,
         options: [
-          { label: locale === "hi" ? "सेवाएं देखें" : locale === "ar" ? "جميع الخدمات" : "Explore Practices", action: "all_services" },
-          { label: locale === "hi" ? "प्रोजेक्ट शुरू करें" : locale === "ar" ? "بدء مشروع" : "Start a Project", action: "start_project" },
+          { label: locale === "hi" ? "सेवाएं देखें" : locale === "ar" ? "جميع الخدمات" : "Explore Services", action: "all_services" },
+          { label: locale === "hi" ? "प्रोजेक्ट शुरू करें" : locale === "ar" ? "بدء مشروع" : "Start a Conversation", action: "start_project" },
         ],
       };
     }

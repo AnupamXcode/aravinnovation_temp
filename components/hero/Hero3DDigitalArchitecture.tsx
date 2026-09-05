@@ -352,7 +352,7 @@ export function Hero3DDigitalArchitecture() {
               href="/services"
               className="text-xs font-bold text-[#f15e1c] hover:underline inline-flex items-center gap-1"
             >
-              Explore All 8 Services <ArrowRight className="w-3.5 h-3.5" />
+              Explore All Services <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>

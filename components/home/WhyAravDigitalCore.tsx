@@ -314,7 +314,7 @@ export function WhyAravDigitalCore({
             {headline}
           </h2>
           <p className="text-xs sm:text-sm text-[#5A4D44] dark:text-[#d3eee4]">
-            Tap or swipe to explore our seven core engineering pillars.
+            Tap or swipe to explore our core engineering pillars.
           </p>
         </div>
 

@@ -1,7 +1,7 @@
 {
   "Navigation": {
     "whatWeDo": "Qué Hacemos",
-    "sevenServices": "Nuestras 7 Líneas de Servicios",
+    "sevenServices": "Nuestras Líneas de Servicios",
     "viewAllServices": "Ver Todos los Servicios",
     "products": "Productos",
     "workingWithUs": "Trabajar Con Nosotros",
@@ -24,7 +24,7 @@
     "headlineHighlight": "A Nivel Global",
     "supportingText": "Asóciese con Arav Innovations para estrategia de TI, desarrollo de software full-stack, marketing digital y cumplimiento normativo.",
     "contactCta": "Contáctanos →",
-    "exploreCta": "Explorar las 7 Prácticas",
+    "exploreCta": "Explorar las Prácticas",
     "badgeScalability": "Escalabilidad Empresarial",
     "badgeSla": "Protección de SLA Estricta",
     "badgeIp": "Propiedad Intelectual 100% del Cliente"
@@ -61,7 +61,7 @@
     "afterPillar4Desc": "Alta Disponibilidad Elástica"
   },
   "Services": {
-    "badge": "Nuestras 7 Prácticas Principales",
+    "badge": "Nuestras Prácticas Principales",
     "title": "Navegador de Prácticas Interactivo",
     "description": "Seleccione una práctica a continuación para inspeccionar capacidades y acuerdos de nivel de servicio.",
     "viewAll": "Ver Todas las Prácticas",
