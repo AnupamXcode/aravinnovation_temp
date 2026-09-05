@@ -53,6 +53,7 @@ import { BlogPost, blogPostsData } from "@/data/insights";
 import { Button3D } from "@/components/ui/button-3d";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
+import { MagneticButton } from "@/components/motion/MagneticButton";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { cn } from "@/lib/utils";
 
@@ -510,164 +511,121 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-
-      <DiagnosticDotGrid />
-
-      {/* Breadcrumb Navigation */}
-      <div className="relative z-10 w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-3 sm:pt-4 pb-1 sm:pb-2">
-        <Breadcrumb
-          items={[
-            { label: "Services", href: "/services" },
-            { label: "Audit & Improvement", href: "/services/audit-improvement" },
-          ]}
-        />
-      </div>
-
       {/* =====================================================================
-          2. HERO SECTION
+          2. HERO SECTION (FULL-BLEED CINEMATIC BACKGROUND)
           ===================================================================== */}
-      <section className="relative z-10 w-full border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-2 sm:pt-4 pb-8 sm:pb-12 md:pb-16 lg:pb-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
+      <section className="relative pt-3 sm:pt-4 lg:pt-5 pb-8 sm:pb-12 lg:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none min-h-[calc(100vh-80px)] flex flex-col justify-start">
+        
+        {/* Full-Bleed Desktop Background Visual — PC / DESKTOP VIEW ONLY */}
+        <div className="absolute inset-0 pointer-events-none hidden lg:block select-none overflow-hidden">
+          <Image
+            src="/images/audit-improvement-hero-bg.png"
+            alt="Audit & Improvement Strategy & Implementation"
+            fill
+            priority
+            className="object-cover object-right dark:opacity-90"
+            sizes="100vw"
+          />
+          {/* Soft dark-mode enhancement */}
+          <div className="absolute inset-0 hidden dark:block bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none" />
+        </div>
+
+        <DiagnosticDotGrid />
+
+        <div className="max-w-[1536px] mx-auto w-full space-y-6 sm:space-y-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
             {/* Hero Copy */}
-            <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center gap-2">
-                <Badge variant="outline" className="border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5 px-3.5 py-1.5 font-semibold tracking-wider text-xs rounded-full shadow-xs hover:bg-[#f15e1c]/10 transition-colors">
-                  AUDIT • ASSURANCE • IMPROVEMENT
-                </Badge>
-              </div>
+            <div className="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-left max-w-xl">
+              
+              <AnimatedSection delay={0.05} className="space-y-2">
+                <Breadcrumb
+                  items={[
+                    { label: "Services", href: "/services" },
+                    { label: "Audit & Improvement", href: "/services/audit-improvement" },
+                  ]}
+                />
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
+                  <Sparkles className="w-3.5 h-3.5 text-[#f15e1c]" />
+                  <span>AUDIT • ASSURANCE • IMPROVEMENT</span>
+                </div>
+              </AnimatedSection>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-[1.12]">
-                See What’s Working. <br className="hidden sm:inline" />
-                Find What Isn’t. <br className="hidden sm:inline" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f15e1c] via-[#fab60a] to-[#2e936f]">
-                  Improve What Matters.
-                </span>
-              </h1>
+              <AnimatedSection delay={0.1} className="space-y-3">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-[1.12]">
+                  See What’s Working. <br className="hidden sm:inline" />
+                  Find What Isn’t. <br className="hidden sm:inline" />
+                  <span className="text-[#f15e1c]">
+                    Improve What Matters.
+                  </span>
+                </h1>
+              </AnimatedSection>
 
-              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl leading-relaxed">
-                We assess processes, technology, controls and operating practices to uncover gaps, understand root causes and turn evidence into practical improvement priorities.
-              </p>
+              {/* Dedicated Mobile Hero Visual Card (Placed directly below H1 Headline on Mobile/Tablet Viewports < 1024px) */}
+              <AnimatedSection delay={0.12} className="w-full lg:hidden my-3">
+                <div className="relative w-full max-w-sm sm:max-w-md rounded-2xl border-2 border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] overflow-hidden shadow-xl select-none aspect-[941/1180]">
+                  <Image
+                    src="/images/audit-improvement-mobile-cropped.png"
+                    alt="Arav Innovations Audit & Improvement Architecture (Mobile)"
+                    width={941}
+                    height={1180}
+                    priority
+                    className="w-full h-auto object-contain object-center rounded-2xl"
+                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 40vw"
+                  />
+                </div>
+              </AnimatedSection>
+
+              <AnimatedSection delay={0.14} className="space-y-3">
+                <p className="text-sm sm:text-base lg:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-2xl">
+                  We assess processes, technology, controls and operating practices to uncover gaps, understand root causes and turn evidence into practical improvement priorities.
+                </p>
+              </AnimatedSection>
 
               {/* CTAs */}
-              <div className="flex flex-wrap items-center gap-4 pt-2">
+              <AnimatedSection delay={0.16} className="pt-1 flex flex-wrap items-center gap-3">
                 <Link href="/contact">
-                  <Button3D variant="primary" size="lg" className="flex items-center gap-2 font-semibold hover:scale-102 transition-transform">
-                    Start an Assessment
-                    <ArrowRight className="w-4 h-4" />
-                  </Button3D>
+                  <MagneticButton>
+                    <Button3D variant="primary" size="md" rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />} className="shadow-md shadow-[#f15e1c]/20">
+                      Start an Assessment
+                    </Button3D>
+                  </MagneticButton>
                 </Link>
                 <a href="#diagnostic-view">
-                  <Button3D variant="secondary" size="lg" className="flex items-center gap-2 font-medium hover:scale-102 transition-transform">
-                    Explore Our Approach
-                  </Button3D>
+                  <MagneticButton>
+                    <Button3D variant="outline" size="md">
+                      Explore Our Approach
+                    </Button3D>
+                  </MagneticButton>
                 </a>
-              </div>
+              </AnimatedSection>
 
               {/* Keywords Bar */}
-              <div className="pt-4 border-t border-gray-200 dark:border-gray-800/80">
-                <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 font-semibold mb-2.5">
-                  Core Diagnostic Areas
-                </p>
-                <div className="flex flex-wrap gap-2">
+              <AnimatedSection delay={0.2} className="pt-1">
+                <div className="flex flex-wrap items-center gap-2">
                   {keywordTags.map((tag, idx) => (
                     <motion.span
                       key={idx}
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      className="text-xs px-3.5 py-1.5 rounded-lg bg-gray-100 dark:bg-[#0a0a0a] text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/60 hover:bg-[#f15e1c]/10 hover:text-[#f15e1c] transition-all duration-200 cursor-pointer shadow-xs font-medium"
+                      whileHover={{ scale: 1.06, y: -2 }}
+                      transition={{ duration: 0.2 }}
+                      className="px-2.5 py-1 rounded-lg bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[11px] font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] hover:border-[#f15e1c]/40 transition-all duration-200 cursor-default"
                     >
                       {tag}
                     </motion.span>
                   ))}
                 </div>
-              </div>
+              </AnimatedSection>
 
               {/* Regulatory Positioning Disclaimer */}
-              <p className="text-xs text-gray-500 dark:text-gray-400 italic pt-1">
-                Note: Arav Innovations provides independent operational, process, and technology diagnostics. We do not act as a statutory financial auditor, regulatory authority, or accredited certification body.
-              </p>
+              <AnimatedSection delay={0.22}>
+                <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] italic pt-1">
+                  Note: Arav Innovations provides independent operational, process, and technology diagnostics. We do not act as a statutory financial auditor, regulatory authority, or accredited certification body.
+                </p>
+              </AnimatedSection>
             </div>
 
-            {/* Hero Visual Card (Side-by-side Layout with Scaled Image) */}
-            <div className="lg:col-span-6 w-full">
-              <TiltCard className="w-full">
-                <div className="relative rounded-2xl p-5 sm:p-6 bg-gradient-to-b from-[#ffffff] to-[#fefaf5] dark:from-[#1b2823] dark:to-[#1b2823] border border-gray-200 dark:border-gray-800 shadow-xl overflow-hidden group hover:border-[#f15e1c]/50 transition-all duration-300">
-                  
-                  {/* Visual Header */}
-                  <div className="flex items-center justify-between pb-3 border-b border-gray-200 dark:border-gray-800">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-pulse" />
-                      <span className="text-xs font-bold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
-                        Business Diagnostic Visual
-                      </span>
-                    </div>
-                    <Badge variant="subtle" className="text-[10px] bg-[#2e936f]/10 text-[#2e936f] font-semibold">
-                      System Blueprint
-                    </Badge>
-                  </div>
-
-                  {/* Side-by-Side Content Grid inside Hero Card */}
-                  <div className="my-4 grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
-                    {/* Compact Image */}
-                    <div className="sm:col-span-7 relative rounded-xl overflow-hidden border border-gray-100 dark:border-gray-800 bg-black/5 dark:bg-black/40 group-hover:shadow-md transition-shadow">
-                      <Image
-                        src="/images/audit-and-improvement-main.png"
-                        alt="Arav Innovations Business Diagnostic Audit & Improvement Architecture"
-                        width={600}
-                        height={380}
-                        priority
-                        className="w-full h-auto max-h-[260px] sm:max-h-[280px] object-cover rounded-xl transition-transform duration-500 group-hover:scale-102"
-                      />
-                    </div>
-
-                    {/* Side-by-Side Key Summary Highlights */}
-                    <div className="sm:col-span-5 space-y-2.5">
-                      <div className="p-2.5 rounded-xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/40 transition-colors">
-                        <span className="text-[10px] font-mono font-bold text-[#f15e1c] uppercase block">Phase 01</span>
-                        <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff]">Evidence Mapping</span>
-                        <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-2">Document actual operational workflows and system telemetry.</p>
-                      </div>
-                      <div className="p-2.5 rounded-xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 hover:border-[#fab60a]/40 transition-colors">
-                        <span className="text-[10px] font-mono font-bold text-[#fab60a] uppercase block">Phase 02</span>
-                        <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff]">Gap & Friction Trace</span>
-                        <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-2">Isolate root cause bottlenecks and control weaknesses.</p>
-                      </div>
-                      <div className="p-2.5 rounded-xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 hover:border-[#2e936f]/40 transition-colors">
-                        <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase block">Phase 03</span>
-                        <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff]">Action Roadmap</span>
-                        <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-2">Deliver prioritized remediation focused on high ROI quick wins.</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Nodes Summary Strip */}
-                  <div className="grid grid-cols-3 gap-2 text-center py-2.5 border-t border-gray-200 dark:border-gray-800">
-                    <div className="p-2 rounded-lg bg-gray-50 dark:bg-[#0a0a0a] hover:bg-[#f15e1c]/5 transition-colors cursor-pointer">
-                      <span className="text-[10px] text-gray-500 dark:text-gray-400 block font-mono">OBSERVE</span>
-                      <span className="text-xs font-bold text-[#f15e1c]">Workflows</span>
-                    </div>
-                    <div className="p-2 rounded-lg bg-gray-50 dark:bg-[#0a0a0a] hover:bg-[#fab60a]/5 transition-colors cursor-pointer">
-                      <span className="text-[10px] text-gray-500 dark:text-gray-400 block font-mono">IDENTIFY</span>
-                      <span className="text-xs font-bold text-[#fab60a]">Root Cause</span>
-                    </div>
-                    <div className="p-2 rounded-lg bg-gray-50 dark:bg-[#0a0a0a] hover:bg-[#2e936f]/5 transition-colors cursor-pointer">
-                      <span className="text-[10px] text-gray-500 dark:text-gray-400 block font-mono">IMPROVE</span>
-                      <span className="text-xs font-bold text-[#2e936f]">Validated</span>
-                    </div>
-                  </div>
-
-                  {/* Visual Communication Badge */}
-                  <div className="pt-2.5 border-t border-gray-200 dark:border-gray-800 text-center">
-                    <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 italic">
-                      “We examine how the organization actually works.”
-                    </p>
-                  </div>
-
-                </div>
-              </TiltCard>
-            </div>
-
+            {/* RIGHT COLUMN: SPACER ON DESKTOP (REVEALING FULL-BLEED BACKGROUND ARTWORK) */}
+            <div className="lg:col-span-6 xl:col-span-7 w-full hidden lg:flex items-center justify-center pointer-events-none min-h-[300px]" />
           </div>
         </div>
       </section>

@@ -123,7 +123,7 @@ const servicesData: ServiceItem[] = [
     shortName: "Audit & Improvement",
     description:
       "Technical, operational and process assessments that identify friction and outline clear, practical improvement steps.",
-    image: "/images/audit-and-improvement-main.png",
+    image: "/images/audit-improvement-hero-bg.png",
     tone: "#2e936f",
     href: "/services/audit-improvement",
     iconName: "BarChart3",
