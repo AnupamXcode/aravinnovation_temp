@@ -18,7 +18,7 @@ export function BrandLogo({ className, variant = "header" }: BrandLogoProps) {
         "inline-flex items-center group select-none transition-transform hover:scale-[1.02] shrink-0",
         className
       )}
-      aria-label="Arav Innovations - Elevating Brands, One Click at a Time"
+      aria-label="Arav Innovations - Technology & Digital Transformation"
     >
       <div
         className={cn(
@@ -30,7 +30,7 @@ export function BrandLogo({ className, variant = "header" }: BrandLogoProps) {
       >
         <Image
           src="/logos/arav-logo.png"
-          alt="Arav Innovations Logo - Elevating Brands, One Click at a Time"
+          alt="Arav Innovations Logo"
           fill
           sizes="(max-width: 640px) 200px, 256px"
           className="object-contain object-left"

@@ -324,15 +324,14 @@ export function Footer() {
           
           {/* BRAND BLOCK (4 Cols) */}
           <div className="lg:col-span-4 space-y-3">
-            <BrandLogo variant="footer" />
-            
-            <p className="text-[11px] font-mono font-bold text-[#ffec69] italic">
-              &ldquo;Elevating Brands, One Click at a Time.&rdquo;
-            </p>
-
-            <p className="text-xs sm:text-sm text-white/90 leading-relaxed max-w-sm font-medium">
-              Technology strategy, engineering, compliance and digital growth for organizations ready to move forward.
-            </p>
+            <div className="space-y-1.5">
+              <span className="text-base font-extrabold font-display text-white tracking-wider uppercase block">
+                ARAV INNOVATIONS
+              </span>
+              <p className="text-xs sm:text-sm text-white/90 leading-relaxed max-w-sm font-medium">
+                Technology, transformation and digital growth built around measurable business outcomes.
+              </p>
+            </div>
           </div>
 
           {/* COMPANY & EXPLORE LINKS (3 Cols) */}
