@@ -231,7 +231,7 @@ export default function AdminDashboardPage() {
   const searchMatches = filteredTabItems();
 
   return (
-    <div className="min-h-screen bg-[#FAF5EE] dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] flex flex-col lg:flex-row transition-colors duration-300">
+    <div data-admin-root="true" className="min-h-screen bg-[#FAF5EE] dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] flex flex-col lg:flex-row transition-colors duration-300">
       {/* Toast Notification Banner */}
       {toastMessage && (
         <div className="fixed top-6 right-6 z-50 px-5 py-3 rounded-2xl bg-[#f15e1c] text-white text-xs font-semibold shadow-2xl animate-in fade-in slide-in-from-top-4 flex items-center gap-2">
@@ -248,7 +248,7 @@ export default function AdminDashboardPage() {
       />
 
       {/* Main CMS Control Center Content Area */}
-      <main className="flex-1 p-4 sm:p-8 lg:p-10 overflow-y-auto mt-14 lg:mt-0 space-y-8 max-w-[1600px]">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto mt-14 lg:mt-0 space-y-8 max-w-[1600px]">
         {/* Top Header Bar & Global Admin Search */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl">
           <div className="space-y-1">

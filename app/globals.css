@@ -533,3 +533,9 @@ html, body {
   will-change: transform;
   transform: translateZ(0);
 }
+
+/* Remove default website navbar top padding on Admin Panel pages */
+main#main-content:has([data-admin-root]) {
+  padding-top: 0 !important;
+}
+
