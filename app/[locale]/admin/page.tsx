@@ -141,6 +141,35 @@ export default function AdminDashboardPage() {
   const [productsList, setProductsList] = React.useState<Product[]>(productsData);
   const [editingProductSlug, setEditingProductSlug] = React.useState<string | null>(null);
 
+  // Media Library & Focal Point State
+  const [mediaItems, setMediaItems] = React.useState([
+    { id: "media-1", title: "SEO Desktop Hero", category: "SEO Services", desktopUrl: "/images/seo-hero-bg.png", mobileUrl: "/images/seo-mobile-cropped.png", altText: "SEO Search Intelligence", focalX: 80, focalY: 50, scale: 100, overlayOpacity: 20 },
+    { id: "media-2", title: "AI Portfolio Desktop Hero", category: "AI Portfolio", desktopUrl: "/images/ai-portfolio-hero-bg.png", mobileUrl: "/images/ai-portfolio-mobile-cropped.png", altText: "Enterprise AI & Intelligent Systems", focalX: 75, focalY: 50, scale: 100, overlayOpacity: 20 },
+    { id: "media-3", title: "IT Strategy Hero BG", category: "IT Strategy", desktopUrl: "/images/it-strategy-hero-bg.png", mobileUrl: "/images/it-strategy-main.png", altText: "Enterprise IT Strategy & Implementation", focalX: 85, focalY: 50, scale: 100, overlayOpacity: 20 },
+    { id: "media-4", title: "Risk & Governance Hero BG", category: "Risk & Governance", desktopUrl: "/images/risk-compliance-hero-bg.png", mobileUrl: "/images/risk-compliance-mobile-cropped.png", altText: "Risk, Compliance & Governance", focalX: 80, focalY: 50, scale: 100, overlayOpacity: 20 },
+    { id: "media-5", title: "Audit & Improvement Hero BG", category: "Audit & Improvement", desktopUrl: "/images/audit-improvement-hero-bg.png", mobileUrl: "/images/audit-improvement-mobile-cropped.png", altText: "Audit & Improvement Strategy", focalX: 80, focalY: 50, scale: 100, overlayOpacity: 20 },
+    { id: "media-6", title: "Training & Staff Hero BG", category: "Training & Staff", desktopUrl: "/images/training-staff-hero-bg.png", mobileUrl: "/images/training-staff-mobile-cropped.png", altText: "Training & Staff Augmentation", focalX: 80, focalY: 50, scale: 100, overlayOpacity: 20 },
+    { id: "media-7", title: "Web Dev Hero BG", category: "Web Development", desktopUrl: "/images/web-app-main-1.png", mobileUrl: "/images/web-app-main-2.png", altText: "Web & Application Development", focalX: 50, focalY: 50, scale: 100, overlayOpacity: 20 },
+    { id: "media-8", title: "Digital Marketing Hero BG", category: "Digital Marketing", desktopUrl: "/images/digital-marketing-main-1.png", mobileUrl: "/images/digital-marketing-main-2.png", altText: "Digital Marketing & Brand Development", focalX: 50, focalY: 50, scale: 100, overlayOpacity: 20 },
+    { id: "media-9", title: "Arav Brand Logo", category: "General", desktopUrl: "/logos/arav-logo.png", mobileUrl: "/logos/arav-logo.png", altText: "Arav Innovations Logo", focalX: 50, focalY: 50, scale: 100, overlayOpacity: 0 },
+  ]);
+  const [selectedMediaId, setSelectedMediaId] = React.useState("media-1");
+  const [previewDevice, setPreviewDevice] = React.useState<"desktop" | "tablet" | "mobile">("desktop");
+
+  // Brand Colors Form State
+  const [brandColorsForm, setBrandColorsForm] = React.useState({
+    primary: "#F15E1C",
+    secondary: "#2E936F",
+    white: "#FFFFFF",
+    lightYellow: "#FFEC69",
+    gold: "#FAB60A",
+    peach: "#F7D7B0",
+    cardAccent: "#F15E1C",
+    badgeBg: "#F7D7B0",
+    iconAccent: "#2E936F",
+    buttonHover: "#D8480D",
+  });
+
   React.useEffect(() => {
     if (!isAuthenticated) {
       router.replace(`/${locale}/admin/login`);
@@ -455,6 +484,334 @@ export default function AdminDashboardPage() {
         )}
 
         {/* ========================================================================= */}
+        {/* TAB: MEDIA LIBRARY & FOCAL POINT EDITOR */}
+        {/* ========================================================================= */}
+        {activeTab === "media" && (
+          <div className="space-y-6">
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-2">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <h2 className="text-lg font-bold font-display flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-[#f15e1c]" />
+                    <span>Media Manager &amp; Visual Focal Point Editor</span>
+                  </h2>
+                  <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+                    Manage hero artwork, separate desktop &amp; mobile images, focal points (X/Y), and live responsive previews.
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 bg-[#FBF3EA] dark:bg-[#1A1613] p-1.5 rounded-2xl border border-[#EFE2D6] dark:border-[#1f1f1f]">
+                  {(["desktop", "tablet", "mobile"] as const).map((dev) => (
+                    <button
+                      key={dev}
+                      type="button"
+                      onClick={() => setPreviewDevice(dev)}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold capitalize transition-all cursor-pointer ${
+                        previewDevice === dev
+                          ? "bg-[#f15e1c] text-white shadow-xs"
+                          : "text-[#7A6A5F] hover:text-[#3A2E27] dark:hover:text-[#FAF5EE]"
+                      }`}
+                    >
+                      {dev}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              {/* Media Items Selector List (4 Cols) */}
+              <div className="lg:col-span-4 p-5 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md space-y-4">
+                <h3 className="text-xs font-mono font-bold uppercase text-[#f15e1c] tracking-wider">
+                  Asset Library ({mediaItems.length})
+                </h3>
+                <div className="space-y-2 max-h-[500px] overflow-y-auto pr-1">
+                  {mediaItems.map((item) => (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => setSelectedMediaId(item.id)}
+                      className={`w-full p-3 rounded-2xl text-left border transition-all cursor-pointer flex items-center justify-between ${
+                        selectedMediaId === item.id
+                          ? "bg-[#FCE3D3] dark:bg-[#2C221B] border-[#f15e1c] shadow-xs"
+                          : "bg-[#FBF3EA] dark:bg-[#1A1613] border-[#EFE2D6] dark:border-[#1f1f1f] hover:border-[#f15e1c]/40"
+                      }`}
+                    >
+                      <div className="space-y-0.5">
+                        <span className="text-[10px] font-mono font-bold text-[#f15e1c] block uppercase">
+                          {item.category}
+                        </span>
+                        <h4 className="text-xs font-bold text-[#3A2E27] dark:text-[#FAF5EE]">
+                          {item.title}
+                        </h4>
+                      </div>
+                      <span className="text-[10px] font-mono text-gray-500">
+                        {item.scale}%
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Media Controls & Visual Focal Point Drag Canvas (8 Cols) */}
+              {(() => {
+                const activeMedia = mediaItems.find((m) => m.id === selectedMediaId) || mediaItems[0];
+                return (
+                  <div className="lg:col-span-8 space-y-6">
+                    {/* Focal Point Alignment & Device Frame Live Preview */}
+                    <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md space-y-4">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-sm font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
+                          Interactive Focal Point Editor ({activeMedia.title})
+                        </h3>
+                        <span className="text-xs font-mono font-bold text-[#2e936f]">
+                          Focal X: {activeMedia.focalX}% • Focal Y: {activeMedia.focalY}%
+                        </span>
+                      </div>
+
+                      {/* Interactive Drag/Click Canvas for Focal Point */}
+                      <div
+                        onClick={(e) => {
+                          const rect = e.currentTarget.getBoundingClientRect();
+                          const x = Math.round(((e.clientX - rect.left) / rect.width) * 100);
+                          const y = Math.round(((e.clientY - rect.top) / rect.height) * 100);
+                          setMediaItems((prev) =>
+                            prev.map((m) =>
+                              m.id === activeMedia.id ? { ...m, focalX: x, focalY: y } : m
+                            )
+                          );
+                        }}
+                        className={`relative mx-auto overflow-hidden rounded-2xl border-2 border-dashed border-[#f15e1c] cursor-crosshair shadow-inner bg-black ${
+                          previewDevice === "mobile"
+                            ? "max-w-[280px] h-[400px]"
+                            : previewDevice === "tablet"
+                            ? "max-w-[500px] h-[350px]"
+                            : "w-full h-[320px]"
+                        }`}
+                      >
+                        <img
+                          src={previewDevice === "mobile" ? activeMedia.mobileUrl : activeMedia.desktopUrl}
+                          alt={activeMedia.altText}
+                          style={{
+                            objectPosition: `${activeMedia.focalX}% ${activeMedia.focalY}%`,
+                            transform: `scale(${activeMedia.scale / 100})`,
+                          }}
+                          className="w-full h-full object-cover transition-all duration-200"
+                        />
+                        {/* Target Marker */}
+                        <div
+                          style={{
+                            left: `${activeMedia.focalX}%`,
+                            top: `${activeMedia.focalY}%`,
+                          }}
+                          className="absolute w-6 h-6 -ml-3 -mt-3 rounded-full border-2 border-white bg-[#f15e1c] shadow-lg pointer-events-none flex items-center justify-center"
+                        >
+                          <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                        </div>
+                      </div>
+
+                      {/* Controls Sliders */}
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                        <div className="space-y-1">
+                          <label className="text-xs font-bold">Focal X Position ({activeMedia.focalX}%)</label>
+                          <input
+                            type="range"
+                            min={0}
+                            max={100}
+                            value={activeMedia.focalX}
+                            onChange={(e) => {
+                              const val = Number(e.target.value);
+                              setMediaItems((prev) =>
+                                prev.map((m) => (m.id === activeMedia.id ? { ...m, focalX: val } : m))
+                              );
+                            }}
+                            className="w-full accent-[#f15e1c]"
+                          />
+                        </div>
+
+                        <div className="space-y-1">
+                          <label className="text-xs font-bold">Focal Y Position ({activeMedia.focalY}%)</label>
+                          <input
+                            type="range"
+                            min={0}
+                            max={100}
+                            value={activeMedia.focalY}
+                            onChange={(e) => {
+                              const val = Number(e.target.value);
+                              setMediaItems((prev) =>
+                                prev.map((m) => (m.id === activeMedia.id ? { ...m, focalY: val } : m))
+                              );
+                            }}
+                            className="w-full accent-[#f15e1c]"
+                          />
+                        </div>
+
+                        <div className="space-y-1">
+                          <label className="text-xs font-bold">Zoom Scale ({activeMedia.scale}%)</label>
+                          <input
+                            type="range"
+                            min={50}
+                            max={200}
+                            value={activeMedia.scale}
+                            onChange={(e) => {
+                              const val = Number(e.target.value);
+                              setMediaItems((prev) =>
+                                prev.map((m) => (m.id === activeMedia.id ? { ...m, scale: val } : m))
+                              );
+                            }}
+                            className="w-full accent-[#f15e1c]"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <div className="space-y-1">
+                          <label className="text-xs font-bold">Desktop Image URL</label>
+                          <input
+                            type="text"
+                            value={activeMedia.desktopUrl}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              setMediaItems((prev) =>
+                                prev.map((m) => (m.id === activeMedia.id ? { ...m, desktopUrl: val } : m))
+                              );
+                            }}
+                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                          />
+                        </div>
+
+                        <div className="space-y-1">
+                          <label className="text-xs font-bold">Mobile Image URL</label>
+                          <input
+                            type="text"
+                            value={activeMedia.mobileUrl}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              setMediaItems((prev) =>
+                                prev.map((m) => (m.id === activeMedia.id ? { ...m, mobileUrl: val } : m))
+                              );
+                            }}
+                            className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="pt-2 flex justify-end">
+                        <Button
+                          variant="primary"
+                          size="sm"
+                          onClick={() => showToast(`Media alignment for "${activeMedia.title}" saved`)}
+                          className="rounded-xl cursor-pointer"
+                          leftIcon={<Save className="w-3.5 h-3.5" />}
+                        >
+                          Save Media Settings
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================================= */}
+        {/* TAB: BRAND COLOURS & DESIGN SYSTEM */}
+        {/* ========================================================================= */}
+        {activeTab === "design" && (
+          <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 className="text-lg font-bold font-display flex items-center gap-2">
+                  <Palette className="w-5 h-5 text-[#f15e1c]" />
+                  <span>Brand Colours &amp; Design System Palette</span>
+                </h2>
+                <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+                  Manage the official 6-color brand palette (#f15e1c, #2e936f, #ffffff, #ffec69, #fab60a, #f7d7b0) and theme presets.
+                </p>
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setBrandColorsForm({
+                    primary: "#F15E1C",
+                    secondary: "#2E936F",
+                    white: "#FFFFFF",
+                    lightYellow: "#FFEC69",
+                    gold: "#FAB60A",
+                    peach: "#F7D7B0",
+                    cardAccent: "#F15E1C",
+                    badgeBg: "#F7D7B0",
+                    iconAccent: "#2E936F",
+                    buttonHover: "#D8480D",
+                  });
+                  showToast("Applied Official 6-Color Brand Standard");
+                }}
+                className="rounded-xl border-[#f15e1c] text-[#f15e1c] cursor-pointer"
+                leftIcon={<Sparkles className="w-4 h-4" />}
+              >
+                Apply 6-Color Brand Standard
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 pt-2">
+              {[
+                { key: "primary", label: "Primary Orange", desc: "Main CTAs, key highlights, badges", defaultVal: "#F15E1C" },
+                { key: "secondary", label: "Secondary Green", desc: "Secondary buttons, tech accents", defaultVal: "#2E936F" },
+                { key: "white", label: "Clean White", desc: "Cards, backgrounds, contrast text", defaultVal: "#FFFFFF" },
+                { key: "lightYellow", label: "Light Yellow", desc: "Banner text, bright highlights", defaultVal: "#FFEC69" },
+                { key: "gold", label: "Gold Accent", desc: "Badges, ratings, secondary highlights", defaultVal: "#FAB60A" },
+                { key: "peach", label: "Peach Accent", desc: "Borders, soft pill backgrounds", defaultVal: "#F7D7B0" },
+              ].map((c) => (
+                <div
+                  key={c.key}
+                  className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-3"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold">{c.label}</span>
+                    <div
+                      style={{ backgroundColor: (brandColorsForm as any)[c.key] }}
+                      className="w-6 h-6 rounded-full border border-gray-400 shadow-xs"
+                    />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="color"
+                      value={(brandColorsForm as any)[c.key]}
+                      onChange={(e) =>
+                        setBrandColorsForm({ ...brandColorsForm, [c.key]: e.target.value })
+                      }
+                      className="w-8 h-8 rounded-lg cursor-pointer border-0 bg-transparent"
+                    />
+                    <input
+                      type="text"
+                      value={(brandColorsForm as any)[c.key]}
+                      onChange={(e) =>
+                        setBrandColorsForm({ ...brandColorsForm, [c.key]: e.target.value })
+                      }
+                      className="w-full text-xs p-2 rounded-lg border border-[#EFE2D6] font-mono font-bold uppercase"
+                    />
+                  </div>
+                  <p className="text-[10px] text-gray-500">{c.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="pt-4 flex justify-end">
+              <Button
+                variant="primary"
+                size="md"
+                onClick={() => showToast("Brand palette updated successfully")}
+                className="rounded-xl cursor-pointer"
+                leftIcon={<Save className="w-4 h-4" />}
+              >
+                Save Brand Colors
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================================= */}
         {/* TAB 2: HOMEPAGE & HERO */}
         {/* ========================================================================= */}
         {activeTab === "hero" && (
@@ -532,17 +889,17 @@ export default function AdminDashboardPage() {
         )}
 
         {/* ========================================================================= */}
-        {/* TAB 3: 7 CORE PRACTICES EDITOR */}
+        {/* TAB 3: ALL 8 CORE PRACTICES & SERVICES CMS CONTROL */}
         {/* ========================================================================= */}
         {activeTab === "services" && (
           <div className="space-y-6">
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
                 <Briefcase className="w-5 h-5 text-[#f15e1c]" />
-                <span>7 Core Practices &amp; Services CMS</span>
+                <span>All 8 Core Practices &amp; AI Portfolio CMS Control System</span>
               </h2>
               <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
-                Edit titles, descriptions, capabilities, CTAs, and maintenance state for all 7 core practice lines
+                Edit titles, descriptions, hero imagery, focal positioning (X/Y), CTAs, and visibility status for all 8 core practices.
               </p>
             </div>
 
@@ -622,17 +979,63 @@ export default function AdminDashboardPage() {
                         </div>
 
                         <div className="space-y-1">
-                          <label className="text-[11px] font-bold">Tagline</label>
+                          <label className="text-[11px] font-bold">Tagline / Eyebrow</label>
                           <input
                             type="text"
-                            value={srv.tagline || ""}
-                            onChange={(e) => updateService(srv.slug, { tagline: e.target.value })}
+                            value={srv.tagline || srv.eyebrow || ""}
+                            onChange={(e) => updateService(srv.slug, { tagline: e.target.value, eyebrow: e.target.value })}
                             className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                           />
                         </div>
 
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div className="space-y-1">
+                            <label className="text-[11px] font-bold">Desktop Hero Image URL</label>
+                            <input
+                              type="text"
+                              value={srv.desktopImage || `/images/${srv.slug}-hero-bg.png`}
+                              onChange={(e) => updateService(srv.slug, { desktopImage: e.target.value })}
+                              className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                            />
+                          </div>
+                          <div className="space-y-1">
+                            <label className="text-[11px] font-bold">Mobile Hero Image URL</label>
+                            <input
+                              type="text"
+                              value={srv.mobileImage || `/images/${srv.slug}-mobile-cropped.png`}
+                              onChange={(e) => updateService(srv.slug, { mobileImage: e.target.value })}
+                              className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-3">
+                          <div className="space-y-1">
+                            <label className="text-[11px] font-bold">Focal Position X ({srv.imagePositionX ?? 80}%)</label>
+                            <input
+                              type="range"
+                              min={0}
+                              max={100}
+                              value={srv.imagePositionX ?? 80}
+                              onChange={(e) => updateService(srv.slug, { imagePositionX: Number(e.target.value) })}
+                              className="w-full accent-[#f15e1c]"
+                            />
+                          </div>
+                          <div className="space-y-1">
+                            <label className="text-[11px] font-bold">Focal Position Y ({srv.imagePositionY ?? 50}%)</label>
+                            <input
+                              type="range"
+                              min={0}
+                              max={100}
+                              value={srv.imagePositionY ?? 50}
+                              onChange={(e) => updateService(srv.slug, { imagePositionY: Number(e.target.value) })}
+                              className="w-full accent-[#f15e1c]"
+                            />
+                          </div>
+                        </div>
+
                         <Button type="submit" variant="primary" size="sm" className="rounded-xl mt-2 cursor-pointer" leftIcon={<Save className="w-3.5 h-3.5" />}>
-                          Done Editing
+                          Save Practice CMS Settings
                         </Button>
                       </form>
                     )}

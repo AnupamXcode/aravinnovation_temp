@@ -41,6 +41,13 @@ export interface Service {
   tagline: string;
   description: string;
   icon: "Compass" | "Code2" | "TrendingUp" | "Search" | "ShieldCheck" | "BarChart3" | "Users2" | "Cpu" | "Sparkles";
+  desktopImage?: string;
+  mobileImage?: string;
+  imagePositionX?: number;
+  imagePositionY?: number;
+  imageScale?: number;
+  overlayOpacity?: number;
+  visible?: boolean;
   businessProblem: {
     title: string;
     description: string;

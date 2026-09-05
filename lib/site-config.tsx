@@ -47,8 +47,35 @@ export interface EnterprisePracticesConfig {
   serviceLayers: EnterpriseServiceLayerConfig[];
 }
 
+export interface BrandColors {
+  primary: string;
+  secondary: string;
+  white: string;
+  lightYellow: string;
+  gold: string;
+  peach: string;
+  cardAccent: string;
+  badgeBg: string;
+  iconAccent: string;
+  buttonHover: string;
+}
+
+export const defaultBrandColors: BrandColors = {
+  primary: "#F15E1C",
+  secondary: "#2E936F",
+  white: "#FFFFFF",
+  lightYellow: "#FFEC69",
+  gold: "#FAB60A",
+  peach: "#F7D7B0",
+  cardAccent: "#F15E1C",
+  badgeBg: "#F7D7B0",
+  iconAccent: "#2E936F",
+  buttonHover: "#D8480D",
+};
+
 export interface SiteConfig {
   websiteEnabled: boolean;
+  brandColors: BrandColors;
   chatbotEnabled: boolean;
   chatbotDelaySeconds: number;
   animationsEnabled: boolean;
@@ -87,6 +114,7 @@ export interface SiteConfig {
 
 const defaultConfig: SiteConfig = {
   websiteEnabled: true,
+  brandColors: defaultBrandColors,
   chatbotEnabled: true,
   chatbotDelaySeconds: 10,
   animationsEnabled: true,

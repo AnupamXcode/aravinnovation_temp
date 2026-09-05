@@ -48,7 +48,19 @@ export function AdminSidebar({
       ],
     },
     {
-      groupLabel: "WEBSITE",
+      groupLabel: "MEDIA",
+      items: [
+        { id: "media", label: "Media Library & Focal Editor", icon: Sparkles },
+      ],
+    },
+    {
+      groupLabel: "DESIGN SYSTEM",
+      items: [
+        { id: "design", label: "Brand Colours & Palette", icon: Zap },
+      ],
+    },
+    {
+      groupLabel: "WEBSITE CONTENT",
       items: [
         { id: "hero", label: "Homepage & Hero", icon: Globe },
         { id: "services", label: "Core Services", icon: Briefcase },
