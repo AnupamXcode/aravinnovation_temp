@@ -359,34 +359,62 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
   return (
     <div className="min-h-screen bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300 overflow-x-hidden selection:bg-[#F15E1C]/20 selection:text-[#F15E1C]">
       
-      {/* Breadcrumb Navigation */}
-      <div className="relative z-10 w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 pb-1">
-        <Breadcrumb
-          items={[
-            { label: "Services", href: "/services" },
-            { label: "SEO Services", href: "/services/seo-services" },
-          ]}
-        />
-      </div>
-
       {/* =====================================================================
-          1. HERO — MAIN HERO VISUAL (IMAGE 1: SEO_HERO_IMAGE)
+          1. HERO — MAIN HERO VISUAL (FULL-BLEED CINEMATIC DESKTOP + MOBILE CARD)
           ===================================================================== */}
-      <section className="relative z-10 w-full border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 pt-2 sm:pt-4 pb-8 sm:pb-12 md:pb-14">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <section className="relative pt-3 sm:pt-4 lg:pt-5 pb-8 sm:pb-12 lg:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-white dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none min-h-[calc(100vh-80px)] flex flex-col justify-start">
+        {/* Full-Bleed Desktop Background Visual — PC / DESKTOP VIEW ONLY */}
+        <div className="absolute inset-0 pointer-events-none hidden lg:block select-none overflow-hidden">
+          <Image
+            src="/images/seo-hero-bg.png"
+            alt="Search Intelligence & Organic Discovery Strategy"
+            fill
+            priority
+            className="object-cover object-right opacity-100 dark:opacity-95 transition-opacity duration-500"
+            sizes="100vw"
+          />
+          {/* Light backdrop gradient for text readability while preserving full image opacity */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/60 via-35% to-transparent dark:from-[#000000] dark:via-[#000000]/60 dark:via-35% dark:to-transparent pointer-events-none" />
+        </div>
+
+        <div className="max-w-[1536px] mx-auto w-full space-y-6 sm:space-y-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
-            {/* Hero Copy (Left Column - 50%) */}
-            <div className="lg:col-span-6 space-y-5">
-              <div className="inline-flex items-center gap-2">
-                <Badge variant="outline" className="border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3.5 py-1.5 font-semibold tracking-wider text-xs rounded-full shadow-xs">
-                  SEARCH INTELLIGENCE • ORGANIC VISIBILITY
-                </Badge>
+            {/* Hero Copy (Left Column) */}
+            <div className="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-left max-w-xl">
+              
+              {/* Breadcrumb & Eyebrow Badge */}
+              <div className="space-y-2">
+                <Breadcrumb
+                  items={[
+                    { label: "Services", href: "/services" },
+                    { label: "SEO Services", href: "/services/seo-services" },
+                  ]}
+                />
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
+                  <Sparkles className="w-3.5 h-3.5 text-[#f15e1c]" />
+                  <span>SEARCH INTELLIGENCE • ORGANIC VISIBILITY</span>
+                </div>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-[1.12]">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-[1.12]">
                 Be Found When Your Customers Are Searching.
               </h1>
+
+              {/* Dedicated Mobile Hero Visual Card — Mobile View Only */}
+              <div className="lg:hidden w-full my-3">
+                <div className="relative w-full rounded-2xl overflow-hidden border-2 border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] shadow-xl select-none aspect-[1145/1374]">
+                  <Image
+                    priority
+                    src="/images/seo-mobile-cropped.png"
+                    alt="Search Intelligence & Mobile Discovery Visual"
+                    width={1145}
+                    height={1374}
+                    className="w-full h-auto object-contain object-center rounded-2xl"
+                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 40vw"
+                  />
+                </div>
+              </div>
 
               <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl leading-relaxed font-normal">
                 We build search strategies that connect technical foundations, search intent, content, authority and measurement — helping businesses become easier to discover, understand and choose across modern search experiences.
@@ -432,26 +460,8 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
               </div>
             </div>
 
-            {/* HERO VISUAL — IMAGE 1 (Right Column - 50%) */}
-            <div className="lg:col-span-6 w-full flex items-center justify-center">
-              <TiltCard className="w-full">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                  className="relative w-full overflow-hidden group flex items-center justify-center"
-                >
-                  <Image
-                    priority
-                    src={SEO_HERO_IMAGE}
-                    alt="Search intelligence and team organic discovery workflow"
-                    width={800}
-                    height={600}
-                    className="w-full h-auto object-contain max-h-[480px] rounded-2xl group-hover:scale-[1.02] transition-transform duration-300 drop-shadow-lg"
-                  />
-                </motion.div>
-              </TiltCard>
-            </div>
+            {/* HERO VISUAL SPACER — DESKTOP VIEW ONLY (Fills right column to reveal Desktop BG Artwork) */}
+            <div className="lg:col-span-6 xl:col-span-7 w-full hidden lg:flex items-center justify-center pointer-events-none min-h-[300px]" />
 
           </div>
         </div>
