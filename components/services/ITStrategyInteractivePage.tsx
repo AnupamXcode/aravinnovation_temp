@@ -484,7 +484,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
             fill
             priority
             className="object-cover object-right dark:opacity-90"
-            sizes="100vw"
+            sizes="(min-width: 1024px) 100vw, 1px"
           />
           {/* Soft dark-mode enhancement only */}
           <div className="absolute inset-0 hidden dark:block bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none" />

@@ -486,7 +486,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
             fill
             priority
             className="object-cover object-right opacity-95 dark:opacity-90 transition-opacity duration-500"
-            sizes="100vw"
+            sizes="(min-width: 1024px) 100vw, 1px"
           />
           {/* Subtle minimal gradient overlay providing crisp image clarity with minor soft text backdrop on desktop */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/75 via-45% to-transparent dark:from-[#000000] dark:via-[#000000]/75 dark:via-45% dark:to-transparent pointer-events-none" />

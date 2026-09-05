@@ -371,7 +371,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
             fill
             priority
             className="object-cover object-right opacity-100 dark:opacity-95 transition-opacity duration-500"
-            sizes="100vw"
+            sizes="(min-width: 1024px) 100vw, 1px"
           />
           {/* Light backdrop gradient for text readability while preserving full image opacity */}
           <div className="absolute inset-0 bg-gradient-to-r from-white via-white/60 via-35% to-transparent dark:from-[#000000] dark:via-[#000000]/60 dark:via-35% dark:to-transparent pointer-events-none" />
