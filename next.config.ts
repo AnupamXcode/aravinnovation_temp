@@ -4,6 +4,7 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 const nextConfig: NextConfig = {
+  productionBrowserSourceMaps: true,
   images: {
     qualities: [75, 95],
     formats: ["image/avif", "image/webp"],

@@ -122,16 +122,19 @@ export function Navbar() {
   }
 
   React.useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      if (window.scrollY > 8) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 8);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
     // Check initial scroll position
-    handleScroll();
+    setIsScrolled(window.scrollY > 8);
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);

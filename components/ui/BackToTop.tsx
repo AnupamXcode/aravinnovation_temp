@@ -8,11 +8,14 @@ export function BackToTop() {
   const [isVisible, setIsVisible] = React.useState(false);
 
   React.useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      if (window.scrollY > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsVisible(window.scrollY > 300);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
@@ -36,6 +39,7 @@ export function BackToTop() {
           exit={{ opacity: 0, scale: 0.8, y: 10 }}
           transition={{ duration: 0.2 }}
           type="button"
+          aria-label="Back to top"
           onClick={scrollToTop}
           className="fixed bottom-4 left-3 sm:bottom-6 sm:left-6 z-40 p-2.5 sm:p-3 rounded-full bg-[#f15e1c] text-white shadow-xl hover:bg-[#d44e14] focus:outline-none focus:ring-2 focus:ring-[#f15e1c] focus:ring-offset-2 transition-all cursor-pointer group min-h-[40px] min-w-[40px] sm:min-h-[44px] sm:min-w-[44px] flex items-center justify-center border border-white/20"
           style={{ bottom: "calc(1rem + env(safe-area-inset-bottom, 0px))" }}
