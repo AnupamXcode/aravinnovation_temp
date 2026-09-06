@@ -18,35 +18,26 @@ export function ClientChatbot() {
     if (pathname?.includes("/admin")) return;
     if (shouldLoadChatbot) return;
 
-    // Load heavy AI chatbot chunk on explicit user interaction or browser idle delay
+    // Load heavy AI chatbot chunk on user interaction (click, scroll > 300px, or pointer hover)
     const handleScroll = () => {
-      if (window.scrollY > 600) {
+      if (window.scrollY > 300) {
         setShouldLoadChatbot(true);
         cleanup();
       }
     };
 
-    let idleTimer: any = null;
-    if (typeof window !== "undefined") {
-      if ("requestIdleCallback" in window) {
-        idleTimer = (window as any).requestIdleCallback(() => setShouldLoadChatbot(true), { timeout: 6000 });
-      } else {
-        idleTimer = setTimeout(() => setShouldLoadChatbot(true), 6000);
-      }
-    }
+    const handleTouch = () => {
+      setShouldLoadChatbot(true);
+      cleanup();
+    };
 
     const cleanup = () => {
       window.removeEventListener("scroll", handleScroll);
-      if (idleTimer) {
-        if ("cancelIdleCallback" in window) {
-          (window as any).cancelIdleCallback(idleTimer);
-        } else {
-          clearTimeout(idleTimer);
-        }
-      }
+      window.removeEventListener("touchstart", handleTouch);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("touchstart", handleTouch, { passive: true });
 
     return cleanup;
   }, [pathname, shouldLoadChatbot]);

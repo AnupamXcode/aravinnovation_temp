@@ -44,7 +44,7 @@ export function useMagneticHover(distanceThreshold: number = 100, strength: numb
   const springY = useSpring(y, springConfig);
 
   React.useEffect(() => {
-    if (reduceMotion || typeof window === "undefined" || window.innerWidth < 768) return;
+    if (reduceMotion || typeof window === "undefined") return;
 
     const handleMouseMove = (e: MouseEvent) => {
       if (!ref.current) return;

@@ -2,6 +2,7 @@ import * as React from "react";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import dynamic from "next/dynamic";
 import { Hero } from "@/components/hero/Hero";
+import { ProblemToSolutionSection } from "@/components/home/ProblemToSolutionSection";
 import { Badge } from "@/components/ui/badge";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { ScrollTextFlip } from "@/components/motion/ScrollTextFlip";
@@ -9,9 +10,6 @@ import { MovingLogoStrip } from "@/components/motion/MovingLogoStrip";
 import { ShieldCheck, Zap, Users, Award, CheckCircle } from "lucide-react";
 
 // Code-split heavy below-the-fold components
-const ProblemToSolutionSection = dynamic(
-  () => import("@/components/home/ProblemToSolutionSection").then((m) => m.ProblemToSolutionSection)
-);
 const InteractiveServiceStack3D = dynamic(
   () => import("@/components/services/InteractiveServiceStack3D").then((m) => m.InteractiveServiceStack3D)
 );
@@ -30,15 +28,11 @@ const AnimatedTestimonialsCarousel = dynamic(
 const LeadForm = dynamic(
   () => import("@/components/forms/LeadForm").then((m) => m.LeadForm)
 );
-const HomeInsightsSection = dynamic(
-  () => import("@/components/home/HomeInsightsSection").then((m) => m.HomeInsightsSection)
-);
-const WhoWeHelpSection = dynamic(
-  () => import("@/components/home/WhoWeHelpSection").then((m) => m.WhoWeHelpSection)
-);
 
 import { getSEOForPath, SITE_BASE_URL } from "@/lib/seo";
 import { getHomeBlogPosts } from "@/lib/cms";
+import { HomeInsightsSection } from "@/components/home/HomeInsightsSection";
+import { WhoWeHelpSection } from "@/components/home/WhoWeHelpSection";
 
 export async function generateMetadata() {
   const seo = getSEOForPath("/");
