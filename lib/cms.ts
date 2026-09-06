@@ -135,6 +135,15 @@ export async function getBlogPosts(locale = "en"): Promise<BlogPost[]> {
   return allPosts.map(ensureExactDate);
 }
 
+export async function getHomeBlogPosts(locale = "en"): Promise<BlogPost[]> {
+  const posts = await getBlogPosts(locale);
+  return posts.slice(0, 3).map((p) => ({
+    ...p,
+    sections: [],
+    keyTakeaways: [],
+  }));
+}
+
 export async function getBlogPostBySlug(slug: string, locale = "en"): Promise<BlogPost | undefined> {
   const posts = await getBlogPosts(locale);
   return posts.find((p) => p.slug === slug);

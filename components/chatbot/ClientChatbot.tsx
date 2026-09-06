@@ -16,31 +16,31 @@ export function ClientChatbot() {
 
   React.useEffect(() => {
     if (pathname?.includes("/admin")) return;
+    if (shouldLoadChatbot) return;
 
-    let timer: NodeJS.Timeout;
-    const triggerLoad = () => setShouldLoadChatbot(true);
+    // Load heavy AI chatbot chunk on user interaction (click, scroll > 300px, or pointer hover)
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShouldLoadChatbot(true);
+        cleanup();
+      }
+    };
 
-    // Defer loading heavy chatbot JS until browser is idle or user scrolls / interacts
-    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
-      const idleId = (window as any).requestIdleCallback(triggerLoad, { timeout: 4000 });
-      const handleInteraction = () => {
-        triggerLoad();
-        window.removeEventListener("scroll", handleInteraction);
-        window.removeEventListener("touchstart", handleInteraction);
-      };
-      window.addEventListener("scroll", handleInteraction, { passive: true });
-      window.addEventListener("touchstart", handleInteraction, { passive: true });
+    const handleTouch = () => {
+      setShouldLoadChatbot(true);
+      cleanup();
+    };
 
-      return () => {
-        if ((window as any).cancelIdleCallback) (window as any).cancelIdleCallback(idleId);
-        window.removeEventListener("scroll", handleInteraction);
-        window.removeEventListener("touchstart", handleInteraction);
-      };
-    } else {
-      timer = setTimeout(triggerLoad, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [pathname]);
+    const cleanup = () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("touchstart", handleTouch);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("touchstart", handleTouch, { passive: true });
+
+    return cleanup;
+  }, [pathname, shouldLoadChatbot]);
 
   if (pathname?.includes("/admin")) {
     return null;
@@ -55,6 +55,7 @@ export function ClientChatbot() {
         <button
           type="button"
           onClick={() => setShouldLoadChatbot(true)}
+          onPointerEnter={() => setShouldLoadChatbot(true)}
           className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#f15e1c] text-white flex items-center justify-center shadow-2xl shadow-[#f15e1c]/40 hover:bg-[#d4581f] transition-all duration-200 cursor-pointer shrink-0"
           aria-label="Open Arav Assistant Chat"
         >

@@ -26,20 +26,15 @@ export function Hero() {
   const [isMobileVideo, setIsMobileVideo] = React.useState(false);
   const [videoMounted, setVideoMounted] = React.useState(false);
 
-  // Defer video element initialization until after initial paint frame to preserve immediate H1 LCP paint
+  // Initialize viewport and video state in a single batch to avoid layout re-renders
   React.useEffect(() => {
     if (typeof window === "undefined") return;
     const checkMobile = () => setIsMobileVideo(window.innerWidth < 768);
     checkMobile();
+    setVideoMounted(true);
+
     window.addEventListener("resize", checkMobile, { passive: true });
-
-    // Mount video after initial paint frame
-    const timer = setTimeout(() => setVideoMounted(true), 150);
-
-    return () => {
-      window.removeEventListener("resize", checkMobile);
-      clearTimeout(timer);
-    };
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   // Check prefers-reduced-motion on mount
@@ -196,7 +191,7 @@ export function Hero() {
             </h1>
 
             {/* Supporting Description - Immediate Paint */}
-            <p className="text-base sm:text-lg lg:text-[18px] text-[#5A4A3F] dark:text-[#D8CBC0] max-w-xl leading-relaxed font-medium">
+            <p className="text-base sm:text-lg lg:text-[18px] text-[#3A2E27] dark:text-[#FAF5EE] max-w-xl leading-relaxed font-medium">
               Arav Innovations helps businesses modernize technology, build better digital experiences, strengthen governance and turn technology investments into practical business progress.
             </p>
 

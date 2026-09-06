@@ -30,7 +30,7 @@ const LeadForm = dynamic(
 );
 
 import { getSEOForPath, SITE_BASE_URL } from "@/lib/seo";
-import { getBlogPosts } from "@/lib/cms";
+import { getHomeBlogPosts } from "@/lib/cms";
 import { HomeInsightsSection } from "@/components/home/HomeInsightsSection";
 import { WhoWeHelpSection } from "@/components/home/WhoWeHelpSection";
 
@@ -175,7 +175,7 @@ export default async function HomePage({
       </div>
 
       {/* 10 — INSIGHTS THAT HELP YOU MOVE FORWARD */}
-      <HomeInsightsSection posts={await getBlogPosts(locale)} />
+      <HomeInsightsSection posts={await getHomeBlogPosts(locale)} />
 
       {/* 11 — FINAL CONVERSION SECTION */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="contact">

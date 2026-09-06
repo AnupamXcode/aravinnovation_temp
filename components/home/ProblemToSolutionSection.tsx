@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { ScrollTextFlip } from "@/components/motion/ScrollTextFlip";
