@@ -8,7 +8,6 @@ import { OrganizationSchema } from "@/components/seo/StructuredData";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageLoader } from "@/components/layout/PageLoader";
-import { ChatbotWidget } from "@/components/chatbot/ChatbotWidget";
 import { GlobalBackgroundMotion } from "@/components/motion/GlobalBackgroundMotion";
 import { WebsiteShutdownOverlay } from "@/components/layout/WebsiteShutdownOverlay";
 import { BackToTop } from "@/components/ui/BackToTop";
@@ -18,6 +17,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { ClientChatbot } from "@/components/chatbot/ClientChatbot";
 import Script from "next/script";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -175,7 +175,7 @@ export default async function RootLayout({
                   <Footer />
                   <BackToTop />
                   <SetupCall />
-                  <ChatbotWidget />
+                  <ClientChatbot />
                   {(process.env.NODE_ENV === "development" || process.env.VERCEL_ENVIRONMENT === "development") && (
                     <MobilePreviewToggle />
                   )}

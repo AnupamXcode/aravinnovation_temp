@@ -53,7 +53,7 @@ const servicesData: ServiceItem[] = [
     shortName: "IT Strategy",
     description:
       "Enterprise roadmaps, cloud strategy, modernization and technology implementation aligned around real business outcomes.",
-    image: "/images/homepage-services/it-strategy-homepage.png",
+    image: "/images/homepage-services/it-strategy-homepage.webp",
     tone: "#f15e1c",
     href: "/services/it-strategy-implementation",
     iconName: "Compass",
@@ -73,7 +73,7 @@ const servicesData: ServiceItem[] = [
     shortName: "Digital Marketing",
     description:
       "Brand strategy, digital campaigns and performance growth programs engineered to generate high-intent customer pipeline.",
-    image: "/images/homepage-services/digital-marketing-homepage.png",
+    image: "/images/homepage-services/digital-marketing-homepage.webp",
     tone: "#2e936f",
     href: "/services/digital-marketing-brand-development",
     iconName: "TrendingUp",
@@ -93,7 +93,7 @@ const servicesData: ServiceItem[] = [
     shortName: "Web & App Dev",
     description:
       "Scalable web applications, customer portals and mobile platforms engineered for high reliability and modern performance.",
-    image: "/images/homepage-services/web-dev-homepage.png",
+    image: "/images/homepage-services/web-dev-homepage.webp",
     tone: "#fab60a",
     href: "/services/web-app-development",
     iconName: "Code2",
@@ -113,7 +113,7 @@ const servicesData: ServiceItem[] = [
     shortName: "Risk & Governance",
     description:
       "Practical frameworks for privacy, security, regulatory compliance (DPDP, ISO 27001) and responsible technology operations.",
-    image: "/images/homepage-services/risk-compliance-homepage.png",
+    image: "/images/homepage-services/risk-compliance-homepage.webp",
     tone: "#f15e1c",
     href: "/services/risk-compliance-governance",
     iconName: "ShieldCheck",
@@ -133,7 +133,7 @@ const servicesData: ServiceItem[] = [
     shortName: "Audit & Improvement",
     description:
       "Technical, operational and process assessments that identify friction and outline clear, practical improvement steps.",
-    image: "/images/homepage-services/audit-improvement-homepage.png",
+    image: "/images/homepage-services/audit-improvement-homepage.webp",
     tone: "#2e936f",
     href: "/services/audit-improvement",
     iconName: "BarChart3",
@@ -153,7 +153,7 @@ const servicesData: ServiceItem[] = [
     shortName: "Staff Augmentation",
     description:
       "Pre-vetted senior technology talent and structured training support that strengthens internal engineering capability.",
-    image: "/images/homepage-services/training-staff-homepage.png",
+    image: "/images/homepage-services/training-staff-homepage.webp",
     tone: "#f15e1c",
     href: "/services/training-staff-augmentation",
     iconName: "Users2",
@@ -173,7 +173,7 @@ const servicesData: ServiceItem[] = [
     shortName: "SEO Services",
     description:
       "Technical SEO, search architecture and content strategy focused on sustainable organic visibility and growth.",
-    image: "/images/homepage-services/seo-homepage.png",
+    image: "/images/homepage-services/seo-homepage.webp",
     tone: "#fab60a",
     href: "/services/seo-services",
     iconName: "Search",
@@ -193,7 +193,7 @@ const servicesData: ServiceItem[] = [
     shortName: "AI Portfolio",
     description:
       "Practical AI solutions, workflow automation and intelligent systems aligned with real enterprise business use cases.",
-    image: "/images/homepage-services/ai-portfolio-homepage.png",
+    image: "/images/homepage-services/ai-portfolio-homepage.webp",
     tone: "#f15e1c",
     href: "/products",
     iconName: "Cpu",
@@ -441,9 +441,7 @@ export function InteractiveServiceStack3D() {
                           src={currentService.image}
                           alt={currentService.name}
                           fill
-                          unoptimized
-                          priority
-                          loading="eager"
+                          sizes="(max-width: 1024px) 100vw, 50vw"
                           className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
                         />
                       </div>
@@ -581,9 +579,7 @@ export function InteractiveServiceStack3D() {
                     src={currentService.image}
                     alt={currentService.name}
                     fill
-                    unoptimized
-                    priority
-                    loading="eager"
+                    sizes="100vw"
                     className="object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
                   />
                 </div>

@@ -121,7 +121,7 @@ export function Hero() {
       ref={sectionRef}
       className="relative w-full min-h-[calc(100vh-80px)] sm:min-h-[calc(100vh-90px)] flex flex-col justify-center py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300"
     >
-      {/* 1. Full-Bleed Authoritative Background Video (No Old Image Fallback) */}
+      {/* 1. Full-Bleed Authoritative Background Video */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
         {/* Dynamic Authoritative Hero Background Video */}
         {isVideoEnabled && !videoError && (
@@ -132,7 +132,7 @@ export function Hero() {
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
             onLoadedMetadata={setVideoSpeed}
             onCanPlay={setVideoSpeed}
             onPlay={setVideoSpeed}
@@ -159,30 +159,24 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Dynamic Content Column Controlled via CMS Layout Settings */}
           <div className={`${layoutColClass} ${maxWidthClass} space-y-6 sm:space-y-7 ${textAlignClass}`}>
-            {/* Eyebrow Label */}
-            <ScrollTextFlip>
-              <div className={`inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-[#4A3D35] dark:text-[#D8CBC0] ${flexAlignClass}`}>
-                <span className="w-2 h-2 rounded-full bg-[#f15e1c] shrink-0" />
-                <span className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.18em]">
-                  ENTERPRISE TECHNOLOGY <span className="text-[#f15e1c] font-bold mx-1">&bull;</span> DIGITAL TRANSFORMATION <span className="text-[#f15e1c] font-bold mx-1">&bull;</span> GROWTH
-                </span>
-              </div>
-            </ScrollTextFlip>
+            {/* Eyebrow Label - Immediate Render */}
+            <div className={`inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-[#4A3D35] dark:text-[#D8CBC0] ${flexAlignClass}`}>
+              <span className="w-2 h-2 rounded-full bg-[#f15e1c] shrink-0" />
+              <span className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.18em]">
+                ENTERPRISE TECHNOLOGY <span className="text-[#f15e1c] font-bold mx-1">&bull;</span> DIGITAL TRANSFORMATION <span className="text-[#f15e1c] font-bold mx-1">&bull;</span> GROWTH
+              </span>
+            </div>
 
-            {/* Main Heading */}
-            <ScrollReveal direction="up" delay={0.15}>
-              <h1 className="font-display font-extrabold text-4xl sm:text-[3.25rem] md:text-6xl lg:text-[66px] xl:text-[74px] 2xl:text-[80px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.06]">
-                Technology That Moves<br className="hidden sm:inline" />
-                <span className="text-[#f15e1c]"> Business </span><span className="text-[#2e936f]">Forward.</span>
-              </h1>
-            </ScrollReveal>
+            {/* Main Heading - LCP Immediate Paint */}
+            <h1 className="font-display font-extrabold text-4xl sm:text-[3.25rem] md:text-6xl lg:text-[66px] xl:text-[74px] 2xl:text-[80px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.06]">
+              Technology That Moves<br className="hidden sm:inline" />
+              <span className="text-[#f15e1c]"> Business </span><span className="text-[#2e936f]">Forward.</span>
+            </h1>
 
-            {/* Supporting Description */}
-            <ScrollReveal direction="up" delay={0.25}>
-              <p className="text-base sm:text-lg lg:text-[18px] text-[#5A4A3F] dark:text-[#D8CBC0] max-w-xl leading-relaxed font-medium">
-                Arav Innovations helps businesses modernize technology, build better digital experiences, strengthen governance and turn technology investments into practical business progress.
-              </p>
-            </ScrollReveal>
+            {/* Supporting Description - Immediate Paint */}
+            <p className="text-base sm:text-lg lg:text-[18px] text-[#5A4A3F] dark:text-[#D8CBC0] max-w-xl leading-relaxed font-medium">
+              Arav Innovations helps businesses modernize technology, build better digital experiences, strengthen governance and turn technology investments into practical business progress.
+            </p>
 
             {/* CTAs */}
             <ScrollReveal direction="up" delay={0.35}>

@@ -13,7 +13,17 @@ export function GlobalBackgroundMotion() {
     config.animationsEnabled !== false &&
     config.backgroundMotionEnabled !== false;
 
-  const parallaxEnabled = config.parallaxEnabled !== false && !shouldReduceMotion;
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile, { passive: true });
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const parallaxEnabled = config.parallaxEnabled !== false && !shouldReduceMotion && !isMobile;
 
   const { scrollY } = useScroll();
   const rawY1 = useTransform(scrollY, [0, 3000], [0, -320]);

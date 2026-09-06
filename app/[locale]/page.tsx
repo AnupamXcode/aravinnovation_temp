@@ -94,9 +94,7 @@ export default async function HomePage({
   return (
     <div className="flex flex-col min-h-screen w-full bg-[#ffffff] dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] space-y-6 md:space-y-12 pb-8 transition-colors duration-300 overflow-x-hidden">
       {/* 01 — CINEMATIC HERO */}
-      <Scroll3DContainer variant="hero">
-        <Hero />
-      </Scroll3DContainer>
+      <Hero />
 
       {/* 02 — TRUST / CAPABILITY STRIP */}
       <section className="w-full py-5 md:py-7 bg-[#fefaf5] dark:bg-[#0a0a0a] border-y border-[#f7d7b0] dark:border-[#1a1a1a] shadow-sm transition-all duration-300 overflow-hidden">
