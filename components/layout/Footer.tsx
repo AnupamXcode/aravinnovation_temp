@@ -63,6 +63,69 @@ function YoutubeIcon({ className }: { className?: string }) {
   );
 }
 
+/**
+ * Perimeter White Border Draw Interactive Wrapper Component
+ * Progressively draws a crisp white border line around the entire 4-side perimeter on hover (500-800ms)
+ */
+function BorderDrawWrapper({
+  children,
+  className = "",
+  roundedClass = "rounded-xl",
+  rx = 12,
+  as: Component = "div",
+  ...props
+}: {
+  children: React.ReactNode;
+  className?: string;
+  roundedClass?: string;
+  rx?: number;
+  as?: any;
+  [key: string]: any;
+}) {
+  const [isHovered, setIsHovered] = React.useState(false);
+  const [isTouched, setIsTouched] = React.useState(false);
+
+  const handleTouch = () => {
+    setIsTouched(true);
+    setTimeout(() => setIsTouched(false), 700);
+  };
+
+  return (
+    <Component
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={handleTouch}
+      className={cn("relative group overflow-hidden transition-all duration-300", roundedClass, className)}
+      {...props}
+    >
+      {/* SVG Perimeter Line Draw Animation (Top-Left -> Top -> Right -> Bottom -> Left -> Complete) */}
+      <svg
+        className={cn("absolute inset-0 w-full h-full pointer-events-none z-20", roundedClass)}
+        style={{ width: "100%", height: "100%" }}
+      >
+        <rect
+          x="1"
+          y="1"
+          width="calc(100% - 2px)"
+          height="calc(100% - 2px)"
+          rx={rx}
+          fill="none"
+          stroke="#FFFFFF"
+          strokeWidth="2"
+          pathLength="100"
+          strokeDasharray="100"
+          strokeDashoffset={isHovered || isTouched ? "0" : "100"}
+          style={{
+            transition: "stroke-dashoffset 650ms cubic-bezier(0.4, 0, 0.2, 1), stroke-opacity 300ms ease",
+            strokeOpacity: isHovered || isTouched ? 1 : 0,
+          }}
+        />
+      </svg>
+      {children}
+    </Component>
+  );
+}
+
 function AnimatedFooterSection({
   children,
   className = "",
@@ -83,9 +146,9 @@ function AnimatedFooterSection({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 12 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-      transition={{ duration: 0.35, delay, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ opacity: 0, y: 14 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
+      transition={{ duration: 0.4, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
       {children}
@@ -164,391 +227,431 @@ export function Footer() {
   const { config } = useSiteConfig();
   const footerConfig = config.footerConfig;
 
+  const footerRef = React.useRef<HTMLElement>(null);
+  const isInView = useInView(footerRef, { once: false, amount: 0.1 });
+  const shouldReduceMotion = useReducedMotion();
+
   // Do not render footer on admin routes
   if (pathname?.includes("/admin")) {
     return null;
   }
 
   return (
-    <footer className="w-full relative bg-gradient-to-br from-[#1b2823] via-[#223b31] to-[#1b2823] text-white pt-12 pb-8 overflow-hidden select-none border-t border-[#2e936f]/40">
-      
-      {/* =========================================================================
-          3D ATMOSPHERIC MOVING GRADIENT BACKGROUND (APPROVED PALETTE ONLY: #f15e1c, #2e936f, #fab60a, #ffec69, #f7d7b0)
-          ========================================================================= */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
-        {/* Layer 1: Soft Primary Orange Radial Gradient Field */}
-        <div
-          className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full bg-[#f15e1c]/20 blur-3xl opacity-80"
-          style={{ animation: "floatSlow1 28s ease-in-out infinite alternate" }}
-        />
+    <div className="w-full relative pt-12 sm:pt-16 overflow-hidden">
+      {/* Visual Section Boundary Divider: Page Ends First with Crisp Warm Separation Line */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent mb-6 sm:mb-8" />
 
-        {/* Layer 2: Warm Gold / Peach Ambient Lighting Field */}
-        <div
-          className="absolute -bottom-40 -right-40 w-[650px] h-[650px] rounded-full bg-[#fab60a]/20 blur-3xl opacity-75"
-          style={{ animation: "floatSlow2 32s ease-in-out infinite alternate" }}
-        />
+      {/* Cinematic Rise Reveal Footer Panel */}
+      <motion.footer
+        ref={footerRef}
+        initial={{ y: shouldReduceMotion ? 0 : 70, opacity: shouldReduceMotion ? 1 : 0.88 }}
+        animate={isInView || shouldReduceMotion ? { y: 0, opacity: 1 } : { y: 70, opacity: 0.88 }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full relative bg-gradient-to-b from-[#d84a0d] via-[#f15e1c] to-[#b83e0a] text-white pt-12 pb-8 overflow-hidden select-none rounded-t-[2rem] sm:rounded-t-[3rem] shadow-[0_-20px_50px_rgba(241,94,28,0.25)] border-t border-white/30"
+      >
+        {/* =========================================================================
+            SLOW MOVING ATMOSPHERIC GRADIENT (ORANGE + WHITE PALETTE ONLY)
+            20–35s Slow Ambient Fields with 0% dark/green elements
+            ========================================================================= */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
+          {/* Layer 1: Soft Pure White Radiant Light Field */}
+          <div
+            className="absolute -top-36 -left-36 w-[650px] h-[650px] rounded-full bg-white/20 blur-3xl opacity-90"
+            style={{ animation: shouldReduceMotion ? "none" : "floatSlow1 28s ease-in-out infinite alternate" }}
+          />
 
-        {/* Layer 3: Restrained Emerald Green Lighting Surface */}
-        <div
-          className="absolute top-1/3 right-1/4 w-[500px] h-[500px] rounded-full bg-[#2e936f]/25 blur-3xl opacity-80"
-          style={{ animation: "floatSlow3 24s ease-in-out infinite alternate" }}
-        />
+          {/* Layer 2: Warm Peach Glow Field */}
+          <div
+            className="absolute -bottom-40 -right-40 w-[700px] h-[700px] rounded-full bg-[#f7d7b0]/25 blur-3xl opacity-80"
+            style={{ animation: shouldReduceMotion ? "none" : "floatSlow2 32s ease-in-out infinite alternate" }}
+          />
 
-        {/* Layer 4: Soft Gold Highlight Field */}
-        <div
-          className="absolute bottom-1/4 left-1/3 w-[450px] h-[450px] rounded-full bg-[#ffec69]/15 blur-3xl opacity-70"
-          style={{ animation: "floatSlow4 30s ease-in-out infinite alternate" }}
-        />
+          {/* Layer 3: Rich Warm Orange Core Accent */}
+          <div
+            className="absolute top-1/3 right-1/4 w-[550px] h-[550px] rounded-full bg-[#e04f0f]/35 blur-3xl opacity-85"
+            style={{ animation: shouldReduceMotion ? "none" : "floatSlow3 24s ease-in-out infinite alternate" }}
+          />
 
-        {/* Subtle Depth Overlay for Uncompromised Text Readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1b2823]/40 via-transparent to-[#1b2823]/60 pointer-events-none" />
-      </div>
+          {/* Layer 4: Soft Gold Ambient Lighting */}
+          <div
+            className="absolute bottom-1/4 left-1/3 w-[500px] h-[500px] rounded-full bg-[#ffec69]/20 blur-3xl opacity-75"
+            style={{ animation: shouldReduceMotion ? "none" : "floatSlow4 30s ease-in-out infinite alternate" }}
+          />
 
-      {/* Embedded CSS Keyframes for slow, elegant 3D atmospheric movement */}
-      <style jsx global>{`
-        @keyframes floatSlow1 {
-          0% { transform: translate(0px, 0px) scale(1); }
-          50% { transform: translate(45px, 35px) scale(1.08); }
-          100% { transform: translate(-25px, 50px) scale(0.95); }
-        }
-        @keyframes floatSlow2 {
-          0% { transform: translate(0px, 0px) scale(1); }
-          50% { transform: translate(-50px, -30px) scale(1.1); }
-          100% { transform: translate(30px, -45px) scale(0.92); }
-        }
-        @keyframes floatSlow3 {
-          0% { transform: translate(0px, 0px) scale(0.95); }
-          50% { transform: translate(35px, -40px) scale(1.12); }
-          100% { transform: translate(-35px, 25px) scale(1); }
-        }
-        @keyframes floatSlow4 {
-          0% { transform: translate(0px, 0px) scale(1); }
-          50% { transform: translate(-40px, 35px) scale(1.06); }
-          100% { transform: translate(30px, -25px) scale(0.98); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          footer div[style*="animation"] {
-            animation: none !important;
+          {/* Clean Overlay for Pure Text Contrast */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#d84a0d]/20 via-transparent to-[#b83e0a]/40 pointer-events-none" />
+        </div>
+
+        {/* Embedded CSS Keyframes for slow, elegant 3D atmospheric movement */}
+        <style jsx global>{`
+          @keyframes floatSlow1 {
+            0% { transform: translate(0px, 0px) scale(1); }
+            50% { transform: translate(45px, 35px) scale(1.08); }
+            100% { transform: translate(-25px, 50px) scale(0.95); }
           }
-        }
-      `}</style>
+          @keyframes floatSlow2 {
+            0% { transform: translate(0px, 0px) scale(1); }
+            50% { transform: translate(-50px, -30px) scale(1.1); }
+            100% { transform: translate(30px, -45px) scale(0.92); }
+          }
+          @keyframes floatSlow3 {
+            0% { transform: translate(0px, 0px) scale(0.95); }
+            50% { transform: translate(35px, -40px) scale(1.12); }
+            100% { transform: translate(-35px, 25px) scale(1); }
+          }
+          @keyframes floatSlow4 {
+            0% { transform: translate(0px, 0px) scale(1); }
+            50% { transform: translate(-40px, 35px) scale(1.06); }
+            100% { transform: translate(30px, -25px) scale(0.98); }
+          }
+        `}</style>
 
-      {/* Main Centered Content Container (STATIC & STABLE Z-10) */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10 space-y-12">
-        
-        {/* =========================================================================
-            LAYER 1: COMPACT TOP CTA AREA (Vibrant Brand Gradient CTA Card)
-            ========================================================================= */}
-        <AnimatedFooterSection delay={0.03}>
-          <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#f15e1c] via-[#e04f0f] to-[#fab60a] border border-[#ffec69]/40 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden text-white">
-            {/* Soft Ambient Inner Glow */}
-            <div className="absolute -top-12 -left-12 w-48 h-48 bg-white/20 rounded-full blur-2xl pointer-events-none" />
-            <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-[#ffec69]/30 rounded-full blur-2xl pointer-events-none" />
-
-            <div className="space-y-2 text-left max-w-2xl relative z-10">
-              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/20 border border-white/40 text-[11px] font-mono font-bold text-white shadow-xs">
-                <Sparkles className="w-3.5 h-3.5 text-[#ffec69]" />
-                <span>START YOUR TRANSFORMATION</span>
-              </div>
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold font-display tracking-tight text-white leading-snug">
-                {footerConfig.ctaHeading}
-              </h2>
-              <p className="text-xs sm:text-sm text-white/95 font-medium leading-relaxed">
-                {footerConfig.ctaDescription}
-              </p>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-3 w-full md:w-auto shrink-0 relative z-10">
-              <Link
-                href={footerConfig.ctaPrimaryHref}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#1b2823] hover:bg-white text-white hover:text-[#1b2823] text-xs font-mono font-bold uppercase tracking-wider shadow-md hover:shadow-xl hover:shadow-[#f15e1c]/30 hover:-translate-y-0.5 active:translate-y-0 active:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] transition-all duration-200 group cursor-pointer"
-              >
-                <span>{footerConfig.ctaPrimaryText}</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-              </Link>
-
-              <Link
-                href={footerConfig.ctaSecondaryHref}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/20 hover:bg-white text-white hover:text-[#1b2823] border border-white/40 hover:border-[#ffec69] backdrop-blur-md text-xs font-mono font-bold uppercase tracking-wider shadow-xs hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] transition-all duration-200 group cursor-pointer"
-              >
-                <span>{footerConfig.ctaSecondaryHref === "/services" ? "EXPLORE SERVICES" : footerConfig.ctaSecondaryText}</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-              </Link>
-            </div>
-          </div>
-        </AnimatedFooterSection>
-
-        {/* =========================================================================
-            LAYER 2: MAIN FOOTER NAVIGATION (STRUCTURED MULTI-COLUMN)
-            ========================================================================= */}
-        <AnimatedFooterSection delay={0.08} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 text-left border-b border-[#2e936f]/30 pb-10">
+        {/* Main Centered Content Container (STATIC & STABLE Z-10) */}
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10 space-y-12">
           
-          {/* COLUMN 1: SERVICES (5 Cols on Large screens - Minimal clean list) */}
-          <div className="lg:col-span-5 space-y-4">
-            <div className="space-y-1">
-              <h3 className="text-xs font-mono font-black text-[#ffec69] uppercase tracking-widest">
-                SERVICES
-              </h3>
-              <p className="text-[11px] text-[#f7d7b0]/90 font-mono">
-                Enterprise Technology &amp; Growth Practices
-              </p>
-            </div>
+          {/* =========================================================================
+              LAYER 1: COMPACT TOP CTA AREA (Vibrant Brand Gradient CTA Card)
+              ========================================================================= */}
+          <AnimatedFooterSection delay={0.03}>
+            <BorderDrawWrapper
+              roundedClass="rounded-2xl"
+              rx={16}
+              className="p-6 sm:p-8 bg-gradient-to-r from-white/20 via-white/15 to-white/20 border border-white/40 shadow-2xl backdrop-blur-md flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden text-white"
+            >
+              {/* Soft Ambient Inner Glow */}
+              <div className="absolute -top-12 -left-12 w-48 h-48 bg-white/20 rounded-full blur-2xl pointer-events-none" />
+              <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-[#ffec69]/30 rounded-full blur-2xl pointer-events-none" />
 
-            <ul className="space-y-2">
-              {serviceLinks.map((service, idx) => (
-                <motion.li
-                  key={service.num}
-                  initial={{ opacity: 0, x: -8 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.25, delay: idx * 0.03 }}
-                >
-                  <Link
-                    href={service.href}
-                    className="group flex items-center justify-between py-1.5 px-2.5 -mx-2.5 rounded-lg hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] transition-all duration-200 cursor-pointer"
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="text-[11px] font-mono font-bold text-[#ffec69] group-hover:text-white transition-colors">
-                        {service.num}
-                      </span>
-                      <span className="text-xs sm:text-sm font-sans font-semibold text-white/90 group-hover:text-[#ffec69] group-hover:translate-x-1 transition-all duration-200">
-                        {service.title}
-                      </span>
-                    </div>
-
-                    <ArrowRight className="w-3.5 h-3.5 text-[#ffec69] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200 shrink-0 ml-2" />
-                  </Link>
-                </motion.li>
-              ))}
-            </ul>
-          </div>
-
-          {/* COLUMN 2: COMPANY (2 Cols) */}
-          <div className="lg:col-span-2 space-y-4">
-            <h3 className="text-xs font-mono font-black text-[#ffec69] uppercase tracking-widest">
-              COMPANY
-            </h3>
-            <ul className="space-y-2.5 text-xs font-semibold text-white/85">
-              {companyLinks.map((item) => (
-                <li key={item.label}>
-                  <Link
-                    href={item.href}
-                    className="hover:text-[#ffec69] hover:translate-x-1 transition-all duration-200 inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] rounded-xs cursor-pointer"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* COLUMN 3: EXPLORE (2 Cols) */}
-          <div className="lg:col-span-2 space-y-4">
-            <h3 className="text-xs font-mono font-black text-[#ffec69] uppercase tracking-widest">
-              EXPLORE
-            </h3>
-            <ul className="space-y-2.5 text-xs font-semibold text-white/85">
-              {exploreLinks.map((item) => (
-                <li key={item.label}>
-                  <Link
-                    href={item.href}
-                    className="hover:text-[#ffec69] hover:translate-x-1 transition-all duration-200 inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] rounded-xs cursor-pointer"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* COLUMN 4: CONNECT (3 Cols) */}
-          <div className="lg:col-span-3 space-y-4">
-            <h3 className="text-xs font-mono font-black text-[#ffec69] uppercase tracking-widest">
-              CONNECT
-            </h3>
-            
-            <ul className="space-y-2.5 text-xs font-medium text-white/90">
-              <li>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-1.5 text-white font-bold hover:text-[#ffec69] hover:translate-x-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] rounded-xs cursor-pointer"
-                >
-                  <span>Start a Conversation</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-[#ffec69]" />
-                </Link>
-              </li>
-              <li>
-                <a
-                  href={`mailto:${footerConfig.supportEmail}`}
-                  className="inline-flex items-center gap-2 hover:text-[#ffec69] hover:translate-x-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] rounded-xs cursor-pointer"
-                >
-                  <Mail className="w-3.5 h-3.5 text-[#ffec69] shrink-0" />
-                  <span>{footerConfig.supportEmail}</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`tel:${footerConfig.phoneIndia.replace(/\s+/g, '')}`}
-                  className="inline-flex items-center gap-2 hover:text-[#ffec69] hover:translate-x-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] rounded-xs cursor-pointer"
-                >
-                  <Phone className="w-3.5 h-3.5 text-[#ffec69] shrink-0" />
-                  <span>{footerConfig.phoneIndia} (India)</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`tel:${footerConfig.phoneUAE.replace(/\s+/g, '')}`}
-                  className="inline-flex items-center gap-2 hover:text-[#ffec69] hover:translate-x-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] rounded-xs cursor-pointer"
-                >
-                  <Phone className="w-3.5 h-3.5 text-[#fab60a] shrink-0" />
-                  <span>{footerConfig.phoneUAE} (UAE)</span>
-                </a>
-              </li>
-            </ul>
-
-            {/* Social Media Row */}
-            <div className="pt-2 space-y-2">
-              <span className="text-[10px] font-mono text-[#f7d7b0] uppercase tracking-wider block">
-                FOLLOW US
-              </span>
-              <div className="flex items-center gap-2">
-                {[
-                  { name: "LinkedIn", href: config.linkedinUrl || "https://www.linkedin.com/company/aravinnovations/", icon: <LinkedInIcon className="w-3.5 h-3.5" /> },
-                  { name: "Instagram", href: config.instagramUrl || "https://www.instagram.com/aravinnovations", icon: <InstagramIcon className="w-3.5 h-3.5" /> },
-                  { name: "Facebook", href: config.facebookUrl || "https://www.facebook.com/people/Arav-Innovations/61566419637071/", icon: <FacebookIcon className="w-3.5 h-3.5" /> },
-                  { name: "WhatsApp", href: config.whatsappUrl || "https://api.whatsapp.com/send?phone=971521555792", icon: <WhatsAppIcon className="w-3.5 h-3.5" /> },
-                  { name: "Twitter", href: config.twitterUrl || "https://x.com/AravInnovations", icon: <TwitterIcon className="w-3.5 h-3.5" /> },
-                  { name: "YouTube", href: config.youtubeUrl || "https://www.youtube.com/@AravInnovations", icon: <YoutubeIcon className="w-3.5 h-3.5" /> },
-                ].map((soc) => (
-                  <a
-                    key={soc.name}
-                    href={soc.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={soc.name}
-                    className="w-8.5 h-8.5 rounded-xl bg-white/15 hover:bg-[#f15e1c] text-white flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] shadow-xs cursor-pointer"
-                  >
-                    {soc.icon}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-
-        </AnimatedFooterSection>
-
-        {/* =========================================================================
-            LAYER 3: REGIONAL PRESENCE & BRAND STATEMENT
-            ========================================================================= */}
-        <AnimatedFooterSection delay={0.12} className="space-y-8 text-left">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-            
-            {/* BRAND STATEMENT (4 Cols) */}
-            <div className="lg:col-span-4 flex flex-col justify-between space-y-3">
-              <div className="space-y-2">
-                <span className="text-base font-extrabold font-display text-white uppercase tracking-wider block">
-                  ARAV INNOVATIONS
-                </span>
-                <p className="text-xs sm:text-sm text-white/90 leading-relaxed font-sans max-w-sm font-medium">
-                  {footerConfig.brandStatement}
+              <div className="space-y-2 text-left max-w-2xl relative z-10">
+                <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/20 border border-white/40 text-[11px] font-mono font-bold text-white shadow-xs">
+                  <Sparkles className="w-3.5 h-3.5 text-[#ffec69]" />
+                  <span>START YOUR TRANSFORMATION</span>
+                </div>
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold font-display tracking-tight text-white leading-snug">
+                  {footerConfig.ctaHeading}
+                </h2>
+                <p className="text-xs sm:text-sm text-white/95 font-medium leading-relaxed">
+                  {footerConfig.ctaDescription}
                 </p>
               </div>
 
-              <div className="text-[11px] font-mono text-[#ffec69] font-bold">
-                Global Operations: India &bull; UAE &bull; US &bull; EU &bull; Canada
+              <div className="flex flex-wrap items-center gap-3 w-full md:w-auto shrink-0 relative z-10">
+                <BorderDrawWrapper roundedClass="rounded-xl" rx={12}>
+                  <Link
+                    href={footerConfig.ctaPrimaryHref}
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white text-[#d84a0d] hover:bg-[#fff5ee] text-xs font-mono font-bold uppercase tracking-wider shadow-md hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white transition-all duration-200 group cursor-pointer"
+                  >
+                    <span>{footerConfig.ctaPrimaryText}</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                  </Link>
+                </BorderDrawWrapper>
+
+                <BorderDrawWrapper roundedClass="rounded-xl" rx={12}>
+                  <Link
+                    href={footerConfig.ctaSecondaryHref}
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/20 hover:bg-white text-white hover:text-[#d84a0d] border border-white/40 backdrop-blur-md text-xs font-mono font-bold uppercase tracking-wider shadow-xs hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white transition-all duration-200 group cursor-pointer"
+                  >
+                    <span>{footerConfig.ctaSecondaryHref === "/services" ? "EXPLORE SERVICES" : footerConfig.ctaSecondaryText}</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                  </Link>
+                </BorderDrawWrapper>
               </div>
+            </BorderDrawWrapper>
+          </AnimatedFooterSection>
+
+          {/* =========================================================================
+              LAYER 2: MAIN FOOTER NAVIGATION (STRUCTURED MULTI-COLUMN)
+              ========================================================================= */}
+          <AnimatedFooterSection delay={0.08} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 text-left border-b border-white/25 pb-10">
+            
+            {/* COLUMN 1: SERVICES (5 Cols on Large screens - Interactive Tag Grid) */}
+            <div className="lg:col-span-5 space-y-4">
+              <div className="space-y-1">
+                <h3 className="text-xs font-mono font-black text-[#ffec69] uppercase tracking-widest">
+                  SERVICES
+                </h3>
+                <p className="text-[11px] text-white/90 font-mono">
+                  Enterprise Technology &amp; Growth Practices
+                </p>
+              </div>
+
+              <ul className="space-y-2">
+                {serviceLinks.map((service, idx) => (
+                  <motion.li
+                    key={service.num}
+                    initial={{ opacity: 0, x: -8 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.25, delay: idx * 0.03 }}
+                  >
+                    <BorderDrawWrapper roundedClass="rounded-lg" rx={8}>
+                      <Link
+                        href={service.href}
+                        className="group flex items-center justify-between py-2 px-3 rounded-lg bg-white/10 hover:bg-white/20 backdrop-blur-xs transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className="text-[11px] font-mono font-bold text-[#ffec69] group-hover:text-white transition-colors">
+                            {service.num}
+                          </span>
+                          <span className="text-xs sm:text-sm font-sans font-semibold text-white/95 group-hover:text-white group-hover:translate-x-1 transition-all duration-200">
+                            {service.title}
+                          </span>
+                        </div>
+
+                        <ArrowRight className="w-3.5 h-3.5 text-[#ffec69] group-hover:text-white group-hover:translate-x-1 transition-all duration-200 shrink-0 ml-2" />
+                      </Link>
+                    </BorderDrawWrapper>
+                  </motion.li>
+                ))}
+              </ul>
             </div>
 
-            {/* REGIONAL PRESENCE (8 Cols - Equal Height Aligned Office Cards) */}
-            <div className="lg:col-span-8 space-y-3">
+            {/* COLUMN 2: COMPANY (2 Cols) */}
+            <div className="lg:col-span-2 space-y-4">
               <h3 className="text-xs font-mono font-black text-[#ffec69] uppercase tracking-widest">
-                REGIONAL PRESENCE
+                COMPANY
               </h3>
+              <ul className="space-y-2 text-xs font-semibold text-white/95">
+                {companyLinks.map((item) => (
+                  <li key={item.label}>
+                    <BorderDrawWrapper roundedClass="rounded-md" rx={6}>
+                      <Link
+                        href={item.href}
+                        className="w-full py-1.5 px-2.5 rounded-md bg-white/10 hover:bg-white/20 inline-block transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
+                      >
+                        {item.label}
+                      </Link>
+                    </BorderDrawWrapper>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-stretch">
-                
-                {/* INDIA HQ CARD */}
-                <div className="p-4.5 rounded-xl bg-white/10 border border-white/20 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:border-[#ffec69] hover:bg-white/20 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] shadow-xs group cursor-pointer">
-                  <div className="space-y-1.5">
-                    <div className="font-extrabold font-display text-white text-xs flex items-center gap-2 group-hover:text-[#ffec69] transition-colors">
-                      <MapPin className="w-3.5 h-3.5 text-[#ffec69] group-hover:scale-110 transition-transform shrink-0" />
-                      <span>INDIA HQ</span>
-                    </div>
-                    <p className="text-xs text-white/85 leading-relaxed font-sans">
-                      {footerConfig.addressIndia}
-                    </p>
-                  </div>
-                  <div className="pt-2 border-t border-white/20 flex items-center justify-between text-xs">
+            {/* COLUMN 3: EXPLORE (2 Cols) */}
+            <div className="lg:col-span-2 space-y-4">
+              <h3 className="text-xs font-mono font-black text-[#ffec69] uppercase tracking-widest">
+                EXPLORE
+              </h3>
+              <ul className="space-y-2 text-xs font-semibold text-white/95">
+                {exploreLinks.map((item) => (
+                  <li key={item.label}>
+                    <BorderDrawWrapper roundedClass="rounded-md" rx={6}>
+                      <Link
+                        href={item.href}
+                        className="w-full py-1.5 px-2.5 rounded-md bg-white/10 hover:bg-white/20 inline-block transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
+                      >
+                        {item.label}
+                      </Link>
+                    </BorderDrawWrapper>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* COLUMN 4: CONNECT (3 Cols) */}
+            <div className="lg:col-span-3 space-y-4">
+              <h3 className="text-xs font-mono font-black text-[#ffec69] uppercase tracking-widest">
+                CONNECT
+              </h3>
+              
+              <ul className="space-y-2 text-xs font-medium text-white/95">
+                <li>
+                  <BorderDrawWrapper roundedClass="rounded-md" rx={6}>
+                    <Link
+                      href="/contact"
+                      className="w-full py-1.5 px-2.5 rounded-md bg-white/15 hover:bg-white/25 inline-flex items-center justify-between font-bold text-white transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
+                    >
+                      <span>Start a Conversation</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 text-[#ffec69]" />
+                    </Link>
+                  </BorderDrawWrapper>
+                </li>
+                <li>
+                  <BorderDrawWrapper roundedClass="rounded-md" rx={6}>
+                    <a
+                      href={`mailto:${footerConfig.supportEmail}`}
+                      className="w-full py-1.5 px-2.5 rounded-md bg-white/10 hover:bg-white/20 inline-flex items-center gap-2 transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
+                    >
+                      <Mail className="w-3.5 h-3.5 text-[#ffec69] shrink-0" />
+                      <span className="truncate">{footerConfig.supportEmail}</span>
+                    </a>
+                  </BorderDrawWrapper>
+                </li>
+                <li>
+                  <BorderDrawWrapper roundedClass="rounded-md" rx={6}>
                     <a
                       href={`tel:${footerConfig.phoneIndia.replace(/\s+/g, '')}`}
-                      className="font-mono font-bold text-[#ffec69] group-hover:underline"
+                      className="w-full py-1.5 px-2.5 rounded-md bg-white/10 hover:bg-white/20 inline-flex items-center gap-2 transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
                     >
-                      {footerConfig.phoneIndia}
+                      <Phone className="w-3.5 h-3.5 text-[#ffec69] shrink-0" />
+                      <span>{footerConfig.phoneIndia} (India)</span>
                     </a>
-                    <span className="text-[10px] font-mono text-[#ffec69] font-bold">INDIA</span>
-                  </div>
-                </div>
-
-                {/* UAE REGIONAL OFFICE CARD */}
-                <div className="p-4.5 rounded-xl bg-white/10 border border-white/20 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:border-[#ffec69] hover:bg-white/20 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] shadow-xs group cursor-pointer">
-                  <div className="space-y-1.5">
-                    <div className="font-extrabold font-display text-white text-xs flex items-center gap-2 group-hover:text-[#ffec69] transition-colors">
-                      <MapPin className="w-3.5 h-3.5 text-[#ffec69] group-hover:scale-110 transition-transform shrink-0" />
-                      <span>UAE REGIONAL OFFICE</span>
-                    </div>
-                    <p className="text-xs text-white/85 leading-relaxed font-sans">
-                      {footerConfig.addressUAE}
-                    </p>
-                  </div>
-                  <div className="pt-2 border-t border-white/20 flex items-center justify-between text-xs">
+                  </BorderDrawWrapper>
+                </li>
+                <li>
+                  <BorderDrawWrapper roundedClass="rounded-md" rx={6}>
                     <a
                       href={`tel:${footerConfig.phoneUAE.replace(/\s+/g, '')}`}
-                      className="font-mono font-bold text-[#ffec69] group-hover:underline"
+                      className="w-full py-1.5 px-2.5 rounded-md bg-white/10 hover:bg-white/20 inline-flex items-center gap-2 transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
                     >
-                      {footerConfig.phoneUAE}
+                      <Phone className="w-3.5 h-3.5 text-[#ffec69] shrink-0" />
+                      <span>{footerConfig.phoneUAE} (UAE)</span>
                     </a>
-                    <span className="text-[10px] font-mono text-[#fab60a] font-bold">UAE</span>
-                  </div>
-                </div>
+                  </BorderDrawWrapper>
+                </li>
+              </ul>
 
+              {/* Social Media Row with Perimeter Border Draw */}
+              <div className="pt-2 space-y-2">
+                <span className="text-[10px] font-mono text-white/90 uppercase tracking-wider block">
+                  FOLLOW US
+                </span>
+                <div className="flex items-center gap-2">
+                  {[
+                    { name: "LinkedIn", href: config.linkedinUrl || "https://www.linkedin.com/company/aravinnovations/", icon: <LinkedInIcon className="w-3.5 h-3.5" /> },
+                    { name: "Instagram", href: config.instagramUrl || "https://www.instagram.com/aravinnovations", icon: <InstagramIcon className="w-3.5 h-3.5" /> },
+                    { name: "Facebook", href: config.facebookUrl || "https://www.facebook.com/people/Arav-Innovations/61566419637071/", icon: <FacebookIcon className="w-3.5 h-3.5" /> },
+                    { name: "WhatsApp", href: config.whatsappUrl || "https://api.whatsapp.com/send?phone=971521555792", icon: <WhatsAppIcon className="w-3.5 h-3.5" /> },
+                    { name: "Twitter", href: config.twitterUrl || "https://x.com/AravInnovations", icon: <TwitterIcon className="w-3.5 h-3.5" /> },
+                    { name: "YouTube", href: config.youtubeUrl || "https://www.youtube.com/@AravInnovations", icon: <YoutubeIcon className="w-3.5 h-3.5" /> },
+                  ].map((soc) => (
+                    <BorderDrawWrapper key={soc.name} roundedClass="rounded-xl" rx={12}>
+                      <a
+                        href={soc.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={soc.name}
+                        className="w-8.5 h-8.5 rounded-xl bg-white/20 hover:bg-white text-white hover:text-[#d84a0d] flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-xs cursor-pointer"
+                      >
+                        {soc.icon}
+                      </a>
+                    </BorderDrawWrapper>
+                  ))}
+                </div>
               </div>
             </div>
 
+          </AnimatedFooterSection>
+
+          {/* =========================================================================
+              LAYER 3: REGIONAL PRESENCE & BRAND STATEMENT
+              ========================================================================= */}
+          <AnimatedFooterSection delay={0.12} className="space-y-8 text-left">
+            
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+              
+              {/* BRAND STATEMENT (4 Cols) */}
+              <div className="lg:col-span-4 flex flex-col justify-between space-y-3">
+                <div className="space-y-2">
+                  <span className="text-base font-extrabold font-display text-white uppercase tracking-wider block">
+                    ARAV INNOVATIONS
+                  </span>
+                  <p className="text-xs sm:text-sm text-white/95 leading-relaxed font-sans max-w-sm font-medium">
+                    {footerConfig.brandStatement}
+                  </p>
+                </div>
+
+                <div className="text-[11px] font-mono text-[#ffec69] font-bold">
+                  Global Operations: India &bull; UAE &bull; US &bull; EU &bull; Canada
+                </div>
+              </div>
+
+              {/* REGIONAL PRESENCE (8 Cols - Office Cards with White Perimeter Border Draw) */}
+              <div className="lg:col-span-8 space-y-3">
+                <h3 className="text-xs font-mono font-black text-[#ffec69] uppercase tracking-widest">
+                  REGIONAL PRESENCE
+                </h3>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-stretch">
+                  
+                  {/* INDIA HQ CARD */}
+                  <BorderDrawWrapper roundedClass="rounded-xl" rx={12} className="h-full">
+                    <div className="p-4.5 rounded-xl bg-white/15 border border-white/30 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:bg-white/25 hover:-translate-y-1 shadow-xs group cursor-pointer">
+                      <div className="space-y-1.5">
+                        <div className="font-extrabold font-display text-white text-xs flex items-center gap-2 group-hover:text-white transition-colors">
+                          <MapPin className="w-3.5 h-3.5 text-[#ffec69] group-hover:scale-110 transition-transform shrink-0" />
+                          <span>INDIA HQ</span>
+                        </div>
+                        <p className="text-xs text-white/95 leading-relaxed font-sans">
+                          {footerConfig.addressIndia}
+                        </p>
+                      </div>
+                      <div className="pt-2 border-t border-white/30 flex items-center justify-between text-xs">
+                        <a
+                          href={`tel:${footerConfig.phoneIndia.replace(/\s+/g, '')}`}
+                          className="font-mono font-bold text-white group-hover:underline"
+                        >
+                          {footerConfig.phoneIndia}
+                        </a>
+                        <span className="text-[10px] font-mono text-[#ffec69] font-bold">INDIA</span>
+                      </div>
+                    </div>
+                  </BorderDrawWrapper>
+
+                  {/* UAE REGIONAL OFFICE CARD */}
+                  <BorderDrawWrapper roundedClass="rounded-xl" rx={12} className="h-full">
+                    <div className="p-4.5 rounded-xl bg-white/15 border border-white/30 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:bg-white/25 hover:-translate-y-1 shadow-xs group cursor-pointer">
+                      <div className="space-y-1.5">
+                        <div className="font-extrabold font-display text-white text-xs flex items-center gap-2 group-hover:text-white transition-colors">
+                          <MapPin className="w-3.5 h-3.5 text-[#ffec69] group-hover:scale-110 transition-transform shrink-0" />
+                          <span>UAE REGIONAL OFFICE</span>
+                        </div>
+                        <p className="text-xs text-white/95 leading-relaxed font-sans">
+                          {footerConfig.addressUAE}
+                        </p>
+                      </div>
+                      <div className="pt-2 border-t border-white/30 flex items-center justify-between text-xs">
+                        <a
+                          href={`tel:${footerConfig.phoneUAE.replace(/\s+/g, '')}`}
+                          className="font-mono font-bold text-white group-hover:underline"
+                        >
+                          {footerConfig.phoneUAE}
+                        </a>
+                        <span className="text-[10px] font-mono text-[#ffec69] font-bold">UAE</span>
+                      </div>
+                    </div>
+                  </BorderDrawWrapper>
+
+                </div>
+              </div>
+
+            </div>
+
+          </AnimatedFooterSection>
+
+          {/* =========================================================================
+              LEGAL BAR & COPYRIGHT
+              ========================================================================= */}
+          <div className="pt-6 border-t border-white/30 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-white/95">
+            
+            {/* Legal Links */}
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-5">
+              {legalLinks.map((link, idx) => (
+                <React.Fragment key={link.label}>
+                  <BorderDrawWrapper roundedClass="rounded-xs" rx={4}>
+                    <Link
+                      href={link.href}
+                      className="hover:text-white px-1.5 py-0.5 rounded-xs transition-colors text-[11px] cursor-pointer"
+                    >
+                      {link.label}
+                    </Link>
+                  </BorderDrawWrapper>
+                  {idx < legalLinks.length - 1 && (
+                    <span className="text-white/40 text-[9px]">&bull;</span>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+
+            {/* Copyright */}
+            <div className="font-mono text-center sm:text-right text-white/90 text-[11px]">
+              &copy; 2024–{new Date().getFullYear()} Arav Innovations. All rights reserved.
+            </div>
           </div>
 
-        </AnimatedFooterSection>
-
-        {/* =========================================================================
-            LEGAL BAR & COPYRIGHT
-            ========================================================================= */}
-        <div className="pt-6 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-white/85">
-          
-          {/* Legal Links */}
-          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6">
-            {legalLinks.map((link, idx) => (
-              <React.Fragment key={link.label}>
-                <Link
-                  href={link.href}
-                  className="hover:text-[#ffec69] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] rounded-xs text-[11px] cursor-pointer"
-                >
-                  {link.label}
-                </Link>
-                {idx < legalLinks.length - 1 && (
-                  <span className="text-white/40 text-[9px]">&bull;</span>
-                )}
-              </React.Fragment>
-            ))}
-          </div>
-
-          {/* Copyright */}
-          <div className="font-mono text-center sm:text-right text-white/80 text-[11px]">
-            &copy; 2024–{new Date().getFullYear()} Arav Innovations. All rights reserved.
-          </div>
         </div>
-
-      </div>
-    </footer>
+      </motion.footer>
+    </div>
   );
 }
 
