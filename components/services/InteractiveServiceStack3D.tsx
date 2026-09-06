@@ -297,7 +297,8 @@ export function InteractiveServiceStack3D() {
           className="w-full h-[calc(100vh-80px)] max-h-[calc(100vh-80px)] flex flex-col justify-between pt-3 sm:pt-4 pb-3 px-4 sm:px-8 lg:px-12 xl:px-16 overflow-hidden"
         >
           {/* Section Header (Always 100% Visible & Centered Below Navbar) */}
-          <div className="text-center max-w-3xl mx-auto mb-4 space-y-1.5 shrink-0">
+          {/* Section Header (Always 100% Visible & Centered Below Navbar) */}
+          <div className="text-center max-w-3xl mx-auto mb-2.5 sm:mb-3 space-y-1 shrink-0">
             <Badge variant="secondary" size="md">
               WHAT WE DO
             </Badge>
@@ -310,9 +311,9 @@ export function InteractiveServiceStack3D() {
           </div>
 
           {/* Main 2-Column Exploration Stage */}
-          <div className="max-w-7xl mx-auto w-full grid grid-cols-12 gap-6 items-center flex-1 my-auto">
-            {/* Left Column: All 8 Services - Every Card is 100% Clickable & Hoverable */}
-            <div className="col-span-5 space-y-2">
+          <div className="max-w-7xl mx-auto w-full grid grid-cols-12 gap-5 lg:gap-6 items-center flex-1 my-auto min-h-0">
+            {/* Left Column: All 8 Services - Every Card is 100% Visible, Clickable & Hoverable */}
+            <div className="col-span-5 space-y-1.5">
               {servicesData.map((service) => {
                 const isHighlighted = service.id === displayedIdx;
 
@@ -325,10 +326,10 @@ export function InteractiveServiceStack3D() {
                     onMouseLeave={() => setHoveredIdx(null)}
                     aria-label={`View ${service.name} practice details`}
                     className={cn(
-                      "w-full h-[56px] sm:h-[58px] text-left px-3.5 py-2 rounded-xl border transition-all duration-300 flex items-center justify-between gap-3 group cursor-pointer relative overflow-hidden shrink-0 block",
+                      "w-full h-[45px] sm:h-[48px] text-left px-3 py-1.5 rounded-xl border transition-all duration-200 flex items-center justify-between gap-2.5 group cursor-pointer relative overflow-hidden shrink-0 block",
                       isHighlighted
-                        ? "bg-white dark:bg-[#16221d] border-[#f15e1c] shadow-md ring-2 ring-[#f15e1c]/20 -translate-y-0.5"
-                        : "bg-white/80 dark:bg-[#0a0a0a]/80 border-[#f7d7b0]/60 dark:border-[#1a1a1a] hover:opacity-100 hover:border-[#f15e1c]/70 hover:bg-white dark:hover:bg-[#121212] hover:-translate-y-0.5 hover:shadow-sm"
+                        ? "bg-white dark:bg-[#16221d] border-[#f15e1c] shadow-md ring-2 ring-[#f15e1c]/20"
+                        : "bg-white/80 dark:bg-[#0a0a0a]/80 border-[#f7d7b0]/60 dark:border-[#1a1a1a] hover:opacity-100 hover:border-[#f15e1c]/70 hover:bg-white dark:hover:bg-[#121212] hover:shadow-xs"
                     )}
                   >
                     {/* Active Accent Indicator */}
@@ -336,11 +337,11 @@ export function InteractiveServiceStack3D() {
                       <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#f15e1c]" />
                     )}
 
-                    <div className="flex items-center gap-3 min-w-0">
+                    <div className="flex items-center gap-2.5 min-w-0">
                       {/* Step Badge */}
                       <span
                         className={cn(
-                          "font-mono text-xs font-bold px-2.5 py-1 rounded-md shrink-0 transition-colors",
+                          "font-mono text-[11px] font-bold px-2 py-0.5 rounded-md shrink-0 transition-colors",
                           isHighlighted
                             ? "bg-[#f15e1c] text-white"
                             : "bg-[#fce3d3] dark:bg-[#1a1a1a] text-[#f15e1c] group-hover:bg-[#f15e1c] group-hover:text-white"
@@ -352,7 +353,7 @@ export function InteractiveServiceStack3D() {
                       {/* Icon */}
                       <div
                         className={cn(
-                          "w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors",
+                          "w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors",
                           isHighlighted
                             ? "bg-[#f15e1c]/10 text-[#f15e1c]"
                             : "text-[#5A4A3F] dark:text-[#A09085] group-hover:text-[#f15e1c]"
@@ -364,7 +365,7 @@ export function InteractiveServiceStack3D() {
                       {/* Service Name */}
                       <span
                         className={cn(
-                          "text-xs sm:text-[14px] font-bold font-display truncate transition-colors",
+                          "text-xs sm:text-[13.5px] font-extrabold font-display truncate transition-colors",
                           isHighlighted
                             ? "text-[#1b2823] dark:text-[#ffffff]"
                             : "text-[#4A3D35] dark:text-[#D8CBC0] group-hover:text-[#f15e1c]"
@@ -376,10 +377,10 @@ export function InteractiveServiceStack3D() {
 
                     <ArrowRight
                       className={cn(
-                        "w-4 h-4 shrink-0 transition-transform duration-300",
+                        "w-3.5 h-3.5 shrink-0 transition-transform duration-200",
                         isHighlighted
-                          ? "text-[#f15e1c] translate-x-1.5"
-                          : "text-[#7A6A5F] opacity-40 group-hover:opacity-100 group-hover:text-[#f15e1c] group-hover:translate-x-1"
+                          ? "text-[#f15e1c] translate-x-1"
+                          : "text-[#7A6A5F] opacity-40 group-hover:opacity-100 group-hover:text-[#f15e1c] group-hover:translate-x-0.5"
                       )}
                     />
                   </Link>
@@ -389,7 +390,7 @@ export function InteractiveServiceStack3D() {
 
             {/* Right Column: Active Service Visual Showcase Canvas */}
             <div className="col-span-7">
-              <div className="p-6 lg:p-8 rounded-3xl bg-white dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/30 shadow-2xl space-y-5 relative overflow-hidden min-h-fit flex flex-col justify-between">
+              <div className="p-4 sm:p-5 lg:p-6 rounded-3xl bg-white dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/30 shadow-xl space-y-3.5 relative overflow-hidden flex flex-col justify-between">
                 {/* Background Subtle Gradient Glow */}
                 <div
                   className="absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl pointer-events-none opacity-20 transition-all duration-500"
@@ -399,43 +400,43 @@ export function InteractiveServiceStack3D() {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentService.id}
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.35, ease: "easeOut" }}
-                    className="space-y-5 relative z-10"
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    className="space-y-3.5 relative z-10"
                   >
                     {/* Header: Service Category */}
-                    <div className="flex items-center justify-between border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-4">
-                      <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-between border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-3">
+                      <div className="flex items-center gap-2.5">
                         <div
-                          className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold shadow-sm"
+                          className="w-9 h-9 rounded-xl flex items-center justify-center text-white font-bold shadow-xs"
                           style={{ backgroundColor: currentService.tone }}
                         >
                           {renderServiceIcon(currentService.iconName, "#ffffff")}
                         </div>
                         <div>
-                          <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#2e936f] dark:text-[#74c4ab]">
+                          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#2e936f] dark:text-[#74c4ab]">
                             {currentService.category}
                           </span>
-                          <h3 className="text-xl lg:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                          <h3 className="text-lg lg:text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                             {currentService.name}
                           </h3>
                         </div>
                       </div>
-                      <span className="text-xs font-mono font-extrabold px-3 py-1 rounded-full bg-[#f15e1c]/10 text-[#f15e1c]">
+                      <span className="text-[11px] font-mono font-extrabold px-2.5 py-0.5 rounded-full bg-[#f15e1c]/10 text-[#f15e1c]">
                         {currentService.shortName}
                       </span>
                     </div>
 
                     {/* Description */}
-                    <p className="text-sm lg:text-base text-[#4A3D35] dark:text-[#D8CBC0] font-medium leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#4A3D35] dark:text-[#D8CBC0] font-medium leading-relaxed">
                       {currentService.description}
                     </p>
 
                     {/* Enterprise Visual Showcase Image (100% Complete & Aspect-Ratio 16:9 Fit) */}
                     <Link href={currentService.href} className="block group">
-                      <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] shadow-md bg-white dark:bg-[#080808]">
+                      <div className="relative w-full aspect-[16/8.5] max-h-[220px] lg:max-h-[240px] rounded-2xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] shadow-sm bg-white dark:bg-[#080808]">
                         <Image
                           src={currentService.image}
                           alt={currentService.name}
@@ -449,15 +450,15 @@ export function InteractiveServiceStack3D() {
                     </Link>
 
                     {/* Core Outcomes List */}
-                    <div className="space-y-2">
-                      <span className="text-xs font-mono font-bold text-[#f15e1c] uppercase tracking-wider">
+                    <div className="space-y-1.5">
+                      <span className="text-[11px] font-mono font-bold text-[#f15e1c] uppercase tracking-wider">
                         Key Capabilities &amp; Deliverables
                       </span>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                         {currentService.outcomes.map((outcome, i) => (
                           <div
                             key={i}
-                            className="p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#141414] border border-[#f7d7b0]/60 dark:border-[#222222] flex items-center gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]"
+                            className="p-2 rounded-xl bg-[#fefaf5] dark:bg-[#141414] border border-[#f7d7b0]/60 dark:border-[#222222] flex items-center gap-1.5 text-[11px] font-semibold text-[#1b2823] dark:text-[#ffffff]"
                           >
                             <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
                             <span className="line-clamp-2">{outcome}</span>
@@ -469,13 +470,13 @@ export function InteractiveServiceStack3D() {
                 </AnimatePresence>
 
                 {/* Footer CTA */}
-                <div className="pt-4 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between relative z-10">
-                  <span className="text-xs font-mono text-[#7A6A5F] dark:text-[#A09085]">
-                    Scroll to explore services &bull; Click card to view details
+                <div className="pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between relative z-10">
+                  <span className="text-[11px] font-mono text-[#7A6A5F] dark:text-[#A09085]">
+                    Scroll to explore services &bull; Click to view details
                   </span>
                   <Link href={currentService.href}>
-                    <span className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#f15e1c] text-white font-semibold text-xs shadow-md hover:bg-[#d84e12] transition-all hover:shadow-lg hover:shadow-[#f15e1c]/25">
-                      Explore Service <ArrowRight className="w-4 h-4 ml-1" />
+                    <span className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#f15e1c] text-white font-semibold text-xs shadow-md hover:bg-[#d84e12] transition-all hover:shadow-lg hover:shadow-[#f15e1c]/25">
+                      Explore Service <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
                     </span>
                   </Link>
                 </div>
