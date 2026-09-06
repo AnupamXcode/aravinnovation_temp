@@ -381,37 +381,41 @@ export function Footer() {
               CONTACT &amp; REGIONAL OFFICES
             </h4>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-medium text-white/90">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-medium text-white/90 items-stretch">
               
               {/* INDIA HQ GLASS CARD */}
-              <div className="p-3 rounded-xl bg-white/10 border border-white/20 space-y-1 backdrop-blur-md">
-                <div className="font-extrabold font-display text-white text-[11px] flex items-center gap-1.5">
-                  <MapPin className="w-3 h-3 text-[#ffec69]" />
-                  <span>INDIA HQ</span>
+              <div className="p-3.5 rounded-xl bg-white/10 border border-white/20 backdrop-blur-md flex flex-col justify-between h-full space-y-2 transition-all duration-300 hover:border-[#ffec69] hover:bg-white/20 hover:-translate-y-0.5 shadow-xs group">
+                <div className="space-y-1">
+                  <div className="font-extrabold font-display text-white text-[11px] flex items-center gap-1.5 group-hover:text-[#ffec69] transition-colors">
+                    <MapPin className="w-3.5 h-3.5 text-[#ffec69] group-hover:scale-110 transition-transform shrink-0" />
+                    <span>INDIA HQ</span>
+                  </div>
+                  <p className="text-[10px] text-white/80 leading-relaxed font-medium">
+                    Platinum Floor D 14/23, Ardee City Sec 52, Gurgaon 122002
+                  </p>
                 </div>
-                <p className="text-[10px] text-white/80 leading-relaxed">
-                  Platinum Floor D 14/23, Ardee City Sec 52, Gurgaon 122002
-                </p>
                 <a
                   href="tel:+919650625777"
-                  className="font-bold text-[#ffec69] hover:underline inline-block text-[11px]"
+                  className="font-bold text-[#ffec69] group-hover:underline inline-block text-[11px] pt-1"
                 >
                   +91 9650625777
                 </a>
               </div>
 
               {/* UAE REGIONAL OFFICE GLASS CARD */}
-              <div className="p-3 rounded-xl bg-white/10 border border-white/20 space-y-1 backdrop-blur-md">
-                <div className="font-extrabold font-display text-white text-[11px] flex items-center gap-1.5">
-                  <MapPin className="w-3 h-3 text-[#ffec69]" />
-                  <span>UAE REGIONAL OFFICE</span>
+              <div className="p-3.5 rounded-xl bg-white/10 border border-white/20 backdrop-blur-md flex flex-col justify-between h-full space-y-2 transition-all duration-300 hover:border-[#ffec69] hover:bg-white/20 hover:-translate-y-0.5 shadow-xs group">
+                <div className="space-y-1">
+                  <div className="font-extrabold font-display text-white text-[11px] flex items-center gap-1.5 group-hover:text-[#ffec69] transition-colors">
+                    <MapPin className="w-3.5 h-3.5 text-[#ffec69] group-hover:scale-110 transition-transform shrink-0" />
+                    <span>UAE REGIONAL OFFICE</span>
+                  </div>
+                  <p className="text-[10px] text-white/80 leading-relaxed font-medium">
+                    55764-001 IFZA Business Park FZCO, Building A1 Dubai Silicon Oasis, Dubai, U.A.E
+                  </p>
                 </div>
-                <p className="text-[10px] text-white/80 leading-relaxed">
-                  55764-001 IFZA Business Park FZCO, Building A1 Dubai Silicon Oasis, Dubai, U.A.E
-                </p>
                 <a
                   href="tel:+971521555792"
-                  className="font-bold text-[#ffec69] hover:underline inline-block text-[11px]"
+                  className="font-bold text-[#ffec69] group-hover:underline inline-block text-[11px] pt-1"
                 >
                   +971 521555792
                 </a>

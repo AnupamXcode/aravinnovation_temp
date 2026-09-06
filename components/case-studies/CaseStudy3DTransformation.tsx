@@ -123,31 +123,51 @@ export function CaseStudy3DTransformation() {
 
           {transformationSteps.map((step, idx) => {
             const isActive = activeStep === idx;
+            const accentBorderClass =
+              idx === 0
+                ? "hover:border-[#f15e1c] hover:shadow-[#f15e1c]/15"
+                : idx === 1
+                ? "hover:border-[#2e936f] hover:shadow-[#2e936f]/15"
+                : idx === 2
+                ? "hover:border-[#fab60a] hover:shadow-[#fab60a]/15"
+                : "hover:border-[#f15e1c] hover:shadow-[#f15e1c]/15";
+
+            const accentBadgeBg =
+              idx === 0
+                ? "bg-[#fce3d3] text-[#f15e1c]"
+                : idx === 1
+                ? "bg-[#d3eee4] text-[#2e936f]"
+                : idx === 2
+                ? "bg-[#fff7d1] text-[#b88000]"
+                : "bg-[#fce3d3] text-[#f15e1c]";
+
             return (
               <motion.div
                 key={step.step}
-                whileHover={{ y: -6, scale: 1.02 }}
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
                 onClick={() => setActiveStep(idx)}
                 className={cn(
-                  "relative z-10 p-6 sm:p-8 rounded-3xl border shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between space-y-6 min-h-[280px]",
+                  "relative z-10 p-6 sm:p-8 rounded-3xl border shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between space-y-6 min-h-[280px] group",
+                  accentBorderClass,
                   isActive
                     ? "bg-[#fefaf5] dark:bg-[#000000] border-[#f15e1c] ring-2 ring-[#f15e1c]/30 shadow-[#f15e1c]/20"
-                    : "bg-white dark:bg-[#1a2622] border-[#f7d7b0] dark:border-[#1a1a1a]"
+                    : "bg-white dark:bg-[#1a2622] border-[#f7d7b0] dark:border-[#1a1a1a] hover:bg-[#FFFDF9] dark:hover:bg-[#121c18]"
                 )}
               >
                 {/* Step Header */}
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono font-extrabold text-[#f15e1c] px-3.5 py-1.5 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/30">
+                  <span className={cn("text-xs font-mono font-extrabold px-3.5 py-1.5 rounded-full border border-current/20 shadow-xs", accentBadgeBg)}>
                     STEP {step.step}
                   </span>
-                  <div className="w-12 h-12 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0]/80 dark:border-[#1a1a1a] flex items-center justify-center shrink-0 shadow-xs">
+                  <div className="w-12 h-12 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0]/80 dark:border-[#1a1a1a] flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 group-hover:border-current transition-all duration-300">
                     {step.icon}
                   </div>
                 </div>
 
                 {/* Step Body */}
                 <div className="space-y-2.5">
-                  <h3 className="text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-snug tracking-tight">
+                  <h3 className="text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] dark:group-hover:text-[#f15e1c] transition-colors leading-snug tracking-tight">
                     {step.title}
                   </h3>
                   <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
@@ -158,14 +178,17 @@ export function CaseStudy3DTransformation() {
                 {/* Step Metric Highlight */}
                 <div className="pt-4 border-t border-[#f7d7b0]/60 dark:border-[#1a1a1a] flex items-center justify-between">
                   <div>
-                    <div className="text-2xl sm:text-3xl font-extrabold font-display text-[#f15e1c]">
+                    <div className="text-2xl sm:text-3xl font-extrabold font-display text-[#f15e1c] group-hover:scale-105 origin-left transition-transform duration-200">
                       {step.metric}
                     </div>
                     <div className="text-xs font-semibold text-[#4a5c55] dark:text-[#d3eee4] mt-0.5">
                       {step.metricLabel}
                     </div>
                   </div>
-                  <CheckCircle2 className={cn("w-7 h-7 shrink-0", isActive ? "text-[#f15e1c]" : "text-[#2e936f]")} />
+                  <div className="flex items-center gap-1">
+                    <CheckCircle2 className={cn("w-6 h-6 shrink-0 transition-colors duration-200", isActive ? "text-[#f15e1c]" : "text-[#2e936f] group-hover:text-[#f15e1c]")} />
+                    <ArrowRight className="w-4 h-4 text-transparent group-hover:text-[#f15e1c] group-hover:translate-x-1 transition-all duration-200" />
+                  </div>
                 </div>
               </motion.div>
             );

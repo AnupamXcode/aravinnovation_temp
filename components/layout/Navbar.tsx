@@ -122,12 +122,15 @@ export function Navbar() {
 
   React.useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
+      if (window.scrollY > 8) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
     };
+
+    // Check initial scroll position
+    handleScroll();
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -227,8 +230,8 @@ export function Navbar() {
 
                 {/* Mega Dropdown Menu */}
                 {activeDropdown === "services" && (
-                  <div className="absolute top-full left-0 w-[580px] pt-2 z-50">
-                    <div className="rounded-3xl bg-[#FFFDF9]/95 dark:bg-[#000000]/95 backdrop-blur-xl border border-[#EFE2D6] dark:border-[#1f1f1f] p-4 shadow-2xl grid grid-cols-1 gap-1">
+                  <div className="absolute top-full left-0 w-[580px] pt-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="rounded-3xl bg-[#FFFDF9]/98 dark:bg-[#0a0a0a]/98 backdrop-blur-2xl border-2 border-[#EFE2D6] dark:border-[#262626] p-4 shadow-2xl grid grid-cols-1 gap-1">
                       <div className="px-3 py-1.5 border-b border-[#EFE2D6] dark:border-[#1f1f1f] mb-1 flex items-center justify-between">
                         <span className="text-[11px] font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0]">
                           Our Core Services
@@ -325,8 +328,8 @@ export function Navbar() {
                 </button>
 
                 {activeDropdown === "working-with-us" && (
-                  <div className="absolute top-full left-0 w-[420px] pt-2 z-50">
-                    <div className="rounded-3xl bg-[#FFFDF9]/95 dark:bg-[#000000]/95 backdrop-blur-xl border border-[#EFE2D6] dark:border-[#1f1f1f] p-3 shadow-2xl space-y-1">
+                  <div className="absolute top-full left-0 w-[420px] pt-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="rounded-3xl bg-[#FFFDF9]/98 dark:bg-[#0a0a0a]/98 backdrop-blur-2xl border-2 border-[#EFE2D6] dark:border-[#262626] p-3 shadow-2xl space-y-1">
                       <Link
                         href="/contact"
                         onClick={() => setActiveDropdown(null)}

@@ -64,7 +64,7 @@ export function WhyAravDigitalCore({
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
         trigger: trackRef.current,
-        start: "top top",
+        start: "top 80px",
         end: "bottom bottom",
         pin: pinnedStageRef.current,
         pinSpacing: true,
@@ -110,7 +110,7 @@ export function WhyAravDigitalCore({
       <div ref={trackRef} className="hidden md:block relative w-full h-[250vh]">
         <div
           ref={pinnedStageRef}
-          className="w-full h-screen max-h-screen flex flex-col justify-between py-4 sm:py-6 px-4 sm:px-8 lg:px-12 xl:px-16 overflow-hidden"
+          className="w-full h-[calc(100vh-80px)] max-h-[calc(100vh-80px)] flex flex-col justify-between pt-3 pb-4 sm:pt-4 sm:pb-6 px-4 sm:px-8 lg:px-12 xl:px-16 overflow-hidden"
         >
           {/* Header Section (Always Visible at Top of Pinned Viewport) */}
           <div className="text-center max-w-4xl mx-auto mb-4 space-y-1.5 shrink-0">
