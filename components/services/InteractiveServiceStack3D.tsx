@@ -229,7 +229,7 @@ export function InteractiveServiceStack3D() {
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
         trigger: trackRef.current,
-        start: "top 84px", // Offset below the 80px fixed navbar so section header is NEVER clipped
+        start: "top 80px", // Pin strictly at 80px from viewport top (below navbar)
         end: "bottom bottom",
         pin: pinnedStageRef.current,
         pinSpacing: true,
@@ -276,7 +276,7 @@ export function InteractiveServiceStack3D() {
       <div ref={trackRef} className="hidden md:block relative w-full h-[280vh]">
         <div
           ref={pinnedStageRef}
-          className="w-full h-screen max-h-screen flex flex-col justify-between pt-20 sm:pt-24 lg:pt-26 pb-6 px-4 sm:px-8 lg:px-12 xl:px-16 overflow-hidden"
+          className="w-full h-[calc(100vh-80px)] max-h-[calc(100vh-80px)] flex flex-col justify-between pt-3 sm:pt-4 pb-3 px-4 sm:px-8 lg:px-12 xl:px-16 overflow-hidden"
         >
           {/* Section Header (Always 100% Visible & Centered Below Navbar) */}
           <div className="text-center max-w-3xl mx-auto mb-4 space-y-1.5 shrink-0">
