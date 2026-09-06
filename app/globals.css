@@ -535,3 +535,16 @@ main#main-content:has([data-admin-root]) {
   padding-top: 0 !important;
 }
 
+/* Mobile-Only Critical Hero LCP Render Path - Instant HTML/CSS Paint (0ms JS delay) */
+@media (max-width: 767px) {
+  .mobile-hero-h1,
+  .mobile-hero-subtext,
+  .mobile-hero-cta {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+

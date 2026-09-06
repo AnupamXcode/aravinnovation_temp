@@ -28,18 +28,18 @@ export function Hero() {
             </div>
 
             {/* Main Heading - LCP Immediate Paint (Zero JS / zero animation delay dependency) */}
-            <h1 className="font-display font-extrabold text-4xl sm:text-[3.25rem] md:text-6xl lg:text-[66px] xl:text-[74px] 2xl:text-[80px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.06]">
+            <h1 className="mobile-hero-h1 font-display font-extrabold text-4xl sm:text-[3.25rem] md:text-6xl lg:text-[66px] xl:text-[74px] 2xl:text-[80px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.06]">
               Technology That Moves<br className="hidden sm:inline" />
               <span className="text-[#f15e1c]"> Business </span><span className="text-[#2e936f]">Forward.</span>
             </h1>
 
             {/* Supporting Description - Immediate Paint */}
-            <p className="text-base sm:text-lg lg:text-[18px] text-[#3A2E27] dark:text-[#FAF5EE] max-w-xl leading-relaxed font-medium">
+            <p className="mobile-hero-subtext text-base sm:text-lg lg:text-[18px] text-[#3A2E27] dark:text-[#FAF5EE] max-w-xl leading-relaxed font-medium">
               Arav Innovations helps businesses modernize technology, build better digital experiences, strengthen governance and turn technology investments into practical business progress.
             </p>
 
             {/* Primary CTAs - Rendered Immediately for Zero Delay */}
-            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4">
+            <div className="mobile-hero-cta pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4">
               <Link href="/contact" className="w-full sm:w-auto">
                 <Button
                   variant="primary"

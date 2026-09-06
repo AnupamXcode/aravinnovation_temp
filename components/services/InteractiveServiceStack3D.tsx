@@ -445,6 +445,7 @@ export function InteractiveServiceStack3D() {
                           alt={currentService.name}
                           fill
                           sizes="(max-width: 1024px) 100vw, 50vw"
+                          loading="lazy"
                           className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
                         />
                       </div>

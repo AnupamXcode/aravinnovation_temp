@@ -15,12 +15,14 @@ export function HeroVideoBackground() {
   const [videoError, setVideoError] = React.useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
   const [videoMounted, setVideoMounted] = React.useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
 
   // Mount video on client after initial paint to guarantee zero impact on FCP/LCP
   React.useEffect(() => {
-    setVideoMounted(true);
-
     if (typeof window !== "undefined") {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+
       const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
       setPrefersReducedMotion(mediaQuery.matches);
 
@@ -29,7 +31,20 @@ export function HeroVideoBackground() {
       };
 
       mediaQuery.addEventListener("change", handleChange);
-      return () => mediaQuery.removeEventListener("change", handleChange);
+
+      if (mobile) {
+        // On mobile, delay mounting video by 300ms so H1 paint completes first
+        const timer = setTimeout(() => {
+          setVideoMounted(true);
+        }, 300);
+        return () => {
+          clearTimeout(timer);
+          mediaQuery.removeEventListener("change", handleChange);
+        };
+      } else {
+        setVideoMounted(true);
+        return () => mediaQuery.removeEventListener("change", handleChange);
+      }
     }
   }, []);
 
@@ -88,13 +103,17 @@ export function HeroVideoBackground() {
           tabIndex={-1}
           aria-hidden="true"
           onLoadedMetadata={setVideoPlaybackSpeed}
-          onCanPlay={setVideoPlaybackSpeed}
-          onPlay={setVideoPlaybackSpeed}
           onError={() => setVideoError(true)}
           className="absolute inset-0 w-full h-full object-cover object-center lg:object-right-top transform-gpu transition-opacity duration-500 opacity-100"
         >
-          <source media="(max-width: 767px)" src="/videos/hero-bg-mobile.mp4" type="video/mp4" />
-          <source media="(min-width: 768px)" src={desktopSrc} type="video/mp4" />
+          {isMobile ? (
+            <source src="/videos/hero-bg-mobile.mp4" type="video/mp4" />
+          ) : (
+            <>
+              <source media="(max-width: 767px)" src="/videos/hero-bg-mobile.mp4" type="video/mp4" />
+              <source media="(min-width: 768px)" src={desktopSrc} type="video/mp4" />
+            </>
+          )}
         </video>
       )}
 
