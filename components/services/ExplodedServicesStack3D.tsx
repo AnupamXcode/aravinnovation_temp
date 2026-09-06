@@ -1,16 +1,9 @@
 "use client";
 
 import * as React from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "lenis";
 import { Sparkles, ArrowRight, Compass, Code2, ShieldCheck, TrendingUp, Users2, BarChart3, Search, Cpu } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 interface ServiceLayer {
   id: number;
@@ -116,17 +109,29 @@ export function ExplodedServicesStack3D() {
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let cancelled = false;
-    let lenis: Lenis | null = null;
+    let lenis: any = null;
     let raf: ((time: number) => void) | null = null;
     let resizeObserver: ResizeObserver | null = null;
 
-    const ctx = gsap.context(() => {
-      const layers = gsap.utils.toArray<HTMLElement>(".exploded-layer", rootRef.current!);
-      const cards = gsap.utils.toArray<HTMLElement>(".exploded-card-item", rootRef.current!);
-      const stack = rootRef.current!.querySelector<HTMLElement>(".exploded-stack");
-      const track = rootRef.current!.querySelector<HTMLElement>(".exploded-track");
-      const bar = rootRef.current!.querySelector<HTMLElement>(".exploded-progress-bar");
-      const svg = svgRef.current;
+    let ctx: any;
+    Promise.all([
+      import("gsap"),
+      import("gsap/ScrollTrigger"),
+      import("lenis"),
+    ]).then(([gsapModule, triggerModule, lenisModule]) => {
+      if (cancelled) return;
+      const gsap = gsapModule.default;
+      const ScrollTrigger = triggerModule.ScrollTrigger;
+      const Lenis = lenisModule.default;
+      gsap.registerPlugin(ScrollTrigger);
+
+      ctx = gsap.context(() => {
+        const layers = gsap.utils.toArray<HTMLElement>(".exploded-layer", rootRef.current!);
+        const cards = gsap.utils.toArray<HTMLElement>(".exploded-card-item", rootRef.current!);
+        const stack = rootRef.current!.querySelector<HTMLElement>(".exploded-stack");
+        const track = rootRef.current!.querySelector<HTMLElement>(".exploded-track");
+        const bar = rootRef.current!.querySelector<HTMLElement>(".exploded-progress-bar");
+        const svg = svgRef.current;
 
       if (!stack || !track || layers.length === 0) return;
 
@@ -320,6 +325,7 @@ export function ExplodedServicesStack3D() {
         triggerInstance.kill();
       };
     }, rootRef);
+    });
 
     return () => {
       cancelled = true;
@@ -327,7 +333,7 @@ export function ExplodedServicesStack3D() {
       if (raf) gsap.ticker.remove(raf);
       lenis?.off("scroll", ScrollTrigger.update);
       lenis?.destroy();
-      ctx.revert();
+      if (ctx) ctx.revert();
     };
   }, []);
 

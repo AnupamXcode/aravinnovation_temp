@@ -12,7 +12,8 @@ export function BackToTop() {
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          setIsVisible(window.scrollY > 300);
+          const visible = window.scrollY > 300;
+          setIsVisible((prev) => (prev !== visible ? visible : prev));
           ticking = false;
         });
         ticking = true;

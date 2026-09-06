@@ -126,7 +126,8 @@ export function Navbar() {
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          setIsScrolled(window.scrollY > 8);
+          const scrolled = window.scrollY > 8;
+          setIsScrolled((prev) => (prev !== scrolled ? scrolled : prev));
           ticking = false;
         });
         ticking = true;

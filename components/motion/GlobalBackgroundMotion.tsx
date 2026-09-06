@@ -7,24 +7,41 @@ import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "fr
 export function GlobalBackgroundMotion() {
   const { config } = useSiteConfig();
   const shouldReduceMotion = useReducedMotion();
-
-  const isEnabled =
-    config.websiteEnabled !== false &&
-    config.animationsEnabled !== false &&
-    config.backgroundMotionEnabled !== false;
-
   const [isMobile, setIsMobile] = React.useState(false);
+  const [isMounted, setIsMounted] = React.useState(false);
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
+    setIsMounted(true);
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener("resize", checkMobile, { passive: true });
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const parallaxEnabled = config.parallaxEnabled !== false && !shouldReduceMotion && !isMobile;
+  const isEnabled =
+    config.websiteEnabled !== false &&
+    config.animationsEnabled !== false &&
+    config.backgroundMotionEnabled !== false;
 
+  if (!isEnabled) {
+    return null;
+  }
+
+  // Simplified static CSS ambient background on mobile or reduced motion to preserve 100% main thread CPU performance
+  if (shouldReduceMotion || isMobile || !isMounted) {
+    return (
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none opacity-20">
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-[#f15e1c]/10 rounded-full blur-3xl" />
+        <div className="absolute top-2/3 -right-20 w-96 h-96 bg-[#2e936f]/10 rounded-full blur-3xl" />
+      </div>
+    );
+  }
+
+  return <DesktopParallaxBackground config={config} />;
+}
+
+function DesktopParallaxBackground({ config }: { config: any }) {
   const { scrollY } = useScroll();
   const rawY1 = useTransform(scrollY, [0, 3000], [0, -320]);
   const rawY2 = useTransform(scrollY, [0, 3000], [0, 240]);
@@ -34,23 +51,11 @@ export function GlobalBackgroundMotion() {
   const smoothY2 = useSpring(rawY2, { damping: 35, stiffness: 100, mass: 0.8 });
   const smoothYGrid = useSpring(rawYGrid, { damping: 40, stiffness: 90, mass: 1 });
 
-  if (!isEnabled) {
-    return null;
-  }
-
-  // Simplified static background on reduced motion
-  if (shouldReduceMotion) {
-    return (
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-20">
-        <div className="absolute top-1/4 left-10 w-96 h-96 bg-[#f15e1c]/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/3 right-10 w-96 h-96 bg-[#2e936f]/10 rounded-full blur-3xl" />
-      </div>
-    );
-  }
+  const parallaxEnabled = config.parallaxEnabled !== false;
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
-      {/* Soft Ambient Floating Glow Orbs (Brand colors: #f15e1c and #2e936f) */}
+      {/* Soft Ambient Floating Glow Orbs */}
       <motion.div
         style={{ y: parallaxEnabled ? smoothY1 : 0, willChange: "transform" }}
         className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-radial from-[#f15e1c]/12 via-[#f7d7b0]/8 to-transparent rounded-full blur-3xl"

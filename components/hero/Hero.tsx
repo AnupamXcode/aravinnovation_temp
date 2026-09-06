@@ -3,8 +3,6 @@
 import * as React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ScrollReveal } from "@/components/motion/ScrollReveal";
-import { ScrollTextFlip } from "@/components/motion/ScrollTextFlip";
 import { useSiteConfig, defaultHeroVideoConfig } from "@/lib/site-config";
 import {
   ArrowRight,
@@ -25,16 +23,23 @@ export function Hero() {
   const [videoLoaded, setVideoLoaded] = React.useState(false);
   const [videoError, setVideoError] = React.useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
-
   const [isMobileVideo, setIsMobileVideo] = React.useState(false);
+  const [videoMounted, setVideoMounted] = React.useState(false);
 
-  // Detect mobile viewport to serve compressed mobile background video
+  // Defer video element initialization until after initial paint frame to preserve immediate H1 LCP paint
   React.useEffect(() => {
     if (typeof window === "undefined") return;
     const checkMobile = () => setIsMobileVideo(window.innerWidth < 768);
     checkMobile();
     window.addEventListener("resize", checkMobile, { passive: true });
-    return () => window.removeEventListener("resize", checkMobile);
+
+    // Mount video after initial paint frame
+    const timer = setTimeout(() => setVideoMounted(true), 150);
+
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      clearTimeout(timer);
+    };
   }, []);
 
   // Check prefers-reduced-motion on mount
@@ -96,7 +101,7 @@ export function Hero() {
     return () => {
       observer.disconnect();
     };
-  }, [prefersReducedMotion, videoLoaded, videoSpeed, isVideoEnabled]);
+  }, [prefersReducedMotion, videoLoaded, videoSpeed, isVideoEnabled, videoMounted]);
 
   // Dynamic layout styling from CMS config
   const textAlignClass =
@@ -127,6 +132,10 @@ export function Hero() {
       ? "max-w-4xl"
       : "max-w-3xl";
 
+  const videoSrc = isMobileVideo
+    ? "/videos/hero-bg-mobile.mp4"
+    : (videoConfig.videoUrl || "/videos/hero-bg.mp4");
+
   return (
     <section
       ref={sectionRef}
@@ -134,8 +143,8 @@ export function Hero() {
     >
       {/* 1. Full-Bleed Authoritative Background Video */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none" aria-hidden="true">
-        {/* Dynamic Authoritative Hero Background Video */}
-        {isVideoEnabled && !videoError && (
+        {/* Dynamic Authoritative Hero Background Video - Deferred mount so H1 LCP paints instantly */}
+        {isVideoEnabled && !videoError && videoMounted && (
           <video
             ref={videoRef}
             autoPlay
@@ -153,8 +162,7 @@ export function Hero() {
             }}
             className="absolute inset-0 w-full h-full object-cover object-center lg:object-right-top transform-gpu transition-opacity duration-500 opacity-100"
           >
-            <source src="/videos/hero-bg-mobile.mp4" media="(max-width: 767px)" type="video/mp4" />
-            <source src={videoConfig.videoUrl || "/videos/hero-bg.mp4"} type="video/mp4" />
+            <source src={videoSrc} type="video/mp4" />
           </video>
         )}
 
@@ -181,7 +189,7 @@ export function Hero() {
               </span>
             </div>
 
-            {/* Main Heading - LCP Immediate Paint */}
+            {/* Main Heading - LCP Immediate Paint (Zero JS / zero animation delay dependency) */}
             <h1 className="font-display font-extrabold text-4xl sm:text-[3.25rem] md:text-6xl lg:text-[66px] xl:text-[74px] 2xl:text-[80px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.06]">
               Technology That Moves<br className="hidden sm:inline" />
               <span className="text-[#f15e1c]"> Business </span><span className="text-[#2e936f]">Forward.</span>
@@ -192,66 +200,59 @@ export function Hero() {
               Arav Innovations helps businesses modernize technology, build better digital experiences, strengthen governance and turn technology investments into practical business progress.
             </p>
 
-            {/* CTAs */}
-            <ScrollReveal direction="up" delay={0.35}>
-              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4">
-                <Link href="/contact" className="w-full sm:w-auto">
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    className="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm font-semibold shadow-md hover:shadow-lg shadow-[#f15e1c]/25 bg-[#f15e1c] text-white hover:bg-[#d84e12] transition-all transform hover:-translate-y-0.5"
-                    rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
-                  >
-                    Start a Conversation
-                  </Button>
-                </Link>
+            {/* Primary CTAs - Rendered Immediately for Zero Delay */}
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4">
+              <Link href="/contact" className="w-full sm:w-auto">
+                <Button
+                  variant="primary"
+                  size="lg"
+                  className="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm font-semibold shadow-md hover:shadow-lg shadow-[#f15e1c]/25 bg-[#f15e1c] text-white hover:bg-[#d84e12] transition-all transform hover:-translate-y-0.5"
+                  rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
+                >
+                  Start a Conversation
+                </Button>
+              </Link>
 
-                <Link href="#services" className="w-full sm:w-auto">
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm font-semibold bg-white/70 dark:bg-black/50 backdrop-blur-xs border border-[#3A2E27]/25 dark:border-white/20 text-[#221811] dark:text-[#FAF5EE] hover:bg-white/95 dark:hover:bg-black/80 hover:border-[#f15e1c] hover:text-[#f15e1c] transition-all"
-                  >
-                    Explore Our Services
-                  </Button>
-                </Link>
-              </div>
-            </ScrollReveal>
+              <Link href="#services" className="w-full sm:w-auto">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm font-semibold bg-white/70 dark:bg-black/50 backdrop-blur-xs border border-[#3A2E27]/25 dark:border-white/20 text-[#221811] dark:text-[#FAF5EE] hover:bg-white/95 dark:hover:bg-black/80 hover:border-[#f15e1c] hover:text-[#f15e1c] transition-all"
+                >
+                  Explore Our Services
+                </Button>
+              </Link>
+            </div>
 
-            {/* Bottom Proof Row with Truthful Capabilities */}
-            <ScrollReveal direction="up" delay={0.45}>
-              <div className="pt-6 border-t border-[#3A2E27]/15 dark:border-white/15 flex flex-wrap items-center gap-6 sm:gap-8 text-left text-xs sm:text-sm font-semibold text-[#2C211A] dark:text-[#EFE2D6]">
-                <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4.5 h-4.5 text-[#f15e1c] shrink-0" />
-                  <span>Integrated Practice Ecosystem</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Globe2 className="w-4.5 h-4.5 text-[#f15e1c] shrink-0" />
-                  <span>India &amp; UAE Operations</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Zap className="w-4.5 h-4.5 text-[#2e936f] shrink-0" />
-                  <span>Zero-Downtime Delivery</span>
-                </div>
+            {/* Bottom Proof Row - Rendered Immediately */}
+            <div className="pt-6 border-t border-[#3A2E27]/15 dark:border-white/15 flex flex-wrap items-center gap-6 sm:gap-8 text-left text-xs sm:text-sm font-semibold text-[#2C211A] dark:text-[#EFE2D6]">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-4.5 h-4.5 text-[#f15e1c] shrink-0" />
+                <span>Integrated Practice Ecosystem</span>
               </div>
-            </ScrollReveal>
+              <div className="flex items-center gap-2">
+                <Globe2 className="w-4.5 h-4.5 text-[#f15e1c] shrink-0" />
+                <span>India &amp; UAE Operations</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Zap className="w-4.5 h-4.5 text-[#2e936f] shrink-0" />
+                <span>Zero-Downtime Delivery</span>
+              </div>
+            </div>
           </div>
 
           {/* Right Column: Environmental Glass Script Overlay */}
           <div className="hidden lg:flex lg:col-span-4 justify-center items-center pointer-events-none relative min-h-[280px]">
-            <ScrollReveal direction="left" delay={0.3}>
-              <div className="text-center transform -rotate-3 select-none opacity-85 hover:opacity-100 transition-opacity">
-                <p className="font-serif italic text-lg xl:text-xl text-[#5A4A3F] dark:text-[#C5B8AC] tracking-wide drop-shadow-xs">
-                  Technology for a<br />
-                  <span className="font-semibold not-italic text-[#f15e1c]">Brighter Tomorrow</span>
-                </p>
-                <div className="w-24 h-0.5 mx-auto mt-1.5 bg-gradient-to-r from-transparent via-[#f15e1c]/60 to-transparent rounded-full" />
-              </div>
-            </ScrollReveal>
+            <div className="text-center transform -rotate-3 select-none opacity-85 hover:opacity-100 transition-opacity">
+              <p className="font-serif italic text-lg xl:text-xl text-[#5A4A3F] dark:text-[#C5B8AC] tracking-wide drop-shadow-xs">
+                Technology for a<br />
+                <span className="font-semibold not-italic text-[#f15e1c]">Brighter Tomorrow</span>
+              </p>
+              <div className="w-24 h-0.5 mx-auto mt-1.5 bg-gradient-to-r from-transparent via-[#f15e1c]/60 to-transparent rounded-full" />
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
-

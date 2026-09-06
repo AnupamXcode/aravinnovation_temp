@@ -3,8 +3,6 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
 import { whyAravPillarsData, WhyAravPillar } from "@/data/why-arav";
 import { Badge } from "@/components/ui/badge";
@@ -24,10 +22,6 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 const iconMap: Record<string, React.ReactNode> = {
   Compass: <Compass className="w-5 h-5 shrink-0" />,
@@ -61,23 +55,32 @@ export function WhyAravDigitalCore({
     if (!trackRef.current || !pinnedStageRef.current) return;
     if (window.innerWidth < 768) return; // Use touch/tabs on mobile
 
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: trackRef.current,
-        start: "top 80px",
-        end: "bottom bottom",
-        pin: pinnedStageRef.current,
-        pinSpacing: true,
-        scrub: 0.1, // Smooth scrub for deterministic 1 scroll = 1 pillar step progress
-        onUpdate: (self) => {
-          // Map self.progress (0..1) strictly into 7 equal pillar steps (0..6)
-          const step = Math.min(6, Math.max(0, Math.floor(self.progress * 7.0)));
-          setActivePillarIdx(step);
-        },
-      });
-    }, trackRef);
+    let ctx: any;
+    Promise.all([import("gsap"), import("gsap/ScrollTrigger")]).then(([gsapModule, triggerModule]) => {
+      const gsap = gsapModule.default;
+      const ScrollTrigger = triggerModule.ScrollTrigger;
+      gsap.registerPlugin(ScrollTrigger);
 
-    return () => ctx.revert();
+      ctx = gsap.context(() => {
+        ScrollTrigger.create({
+          trigger: trackRef.current,
+          start: "top 80px",
+          end: "bottom bottom",
+          pin: pinnedStageRef.current,
+          pinSpacing: true,
+          scrub: 0.1, // Smooth scrub for deterministic 1 scroll = 1 pillar step progress
+          onUpdate: (self) => {
+            // Map self.progress (0..1) strictly into 7 equal pillar steps (0..6)
+            const step = Math.min(6, Math.max(0, Math.floor(self.progress * 7.0)));
+            setActivePillarIdx(step);
+          },
+        });
+      }, trackRef);
+    });
+
+    return () => {
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   // Touch Swipe Gesture Handler for Mobile Viewports

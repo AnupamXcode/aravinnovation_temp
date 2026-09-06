@@ -25,18 +25,27 @@ export function ScrollReveal({
   once = true,
 }: ScrollRevealProps) {
   const ref = React.useRef<HTMLDivElement>(null);
-  // Responsive margin so scrolling on mobile finger triggers animation smoothly
   const isInView = useInView(ref, { once, margin: "0px -20px -20px 0px" });
   const { config } = useSiteConfig();
 
   const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
 
   React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setPrefersReducedMotion(mediaQuery.matches);
     const handler = () => setPrefersReducedMotion(mediaQuery.matches);
     mediaQuery.addEventListener("change", handler);
-    return () => mediaQuery.removeEventListener("change", handler);
+    window.addEventListener("resize", checkMobile, { passive: true });
+
+    return () => {
+      mediaQuery.removeEventListener("change", handler);
+      window.removeEventListener("resize", checkMobile);
+    };
   }, []);
 
   const animationsDisabled =
@@ -48,18 +57,23 @@ export function ScrollReveal({
     return <div className={cn(className)}>{children}</div>;
   }
 
+  // Lightweight mobile reveal: shorter distance (12px) and faster duration (0.25s) to avoid layout reflows
+  const effectiveDistance = isMobile ? Math.min(distance, 12) : distance;
+  const effectiveDuration = isMobile ? Math.min(duration, 0.3) : duration;
+  const effectiveDelay = isMobile ? 0 : delay;
+
   const getInitialPosition = () => {
     switch (direction) {
       case "up":
-        return { y: distance, opacity: 0 };
+        return { y: effectiveDistance, opacity: 0 };
       case "down":
-        return { y: -distance, opacity: 0 };
+        return { y: -effectiveDistance, opacity: 0 };
       case "left":
-        return { x: distance, opacity: 0 };
+        return { x: effectiveDistance, opacity: 0 };
       case "right":
-        return { x: -distance, opacity: 0 };
+        return { x: -effectiveDistance, opacity: 0 };
       default:
-        return { opacity: 0, y: distance };
+        return { opacity: 0, y: effectiveDistance };
     }
   };
 
@@ -69,8 +83,8 @@ export function ScrollReveal({
       initial={getInitialPosition()}
       animate={isInView ? { x: 0, y: 0, opacity: 1 } : getInitialPosition()}
       transition={{
-        duration,
-        delay,
+        duration: effectiveDuration,
+        delay: effectiveDelay,
         ease: [0.21, 0.47, 0.32, 0.98],
       }}
       className={cn(className)}

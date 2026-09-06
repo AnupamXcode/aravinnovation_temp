@@ -17,6 +17,19 @@ export function Scroll3DContainer({
 }: Scroll3DContainerProps) {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "0px -20px -20px 0px" });
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile, { passive: true });
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  if (isMobile) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <div ref={containerRef} className={className}>
