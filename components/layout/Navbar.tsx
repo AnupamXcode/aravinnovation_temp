@@ -80,25 +80,24 @@ export function Navbar() {
   const [mobileServicesOpen, setMobileServicesOpen] = React.useState(false);
   const [mobileWorkingWithUsOpen, setMobileWorkingWithUsOpen] = React.useState(false);
 
-  const scrollTransparencyActive =
-    navConfig.enabled !== false &&
-    navConfig.translucent !== false &&
-    navConfig.scrollTransparencyEnabled !== false;
+  // Global Translucent Navbar: Translucent from initial page load and throughout the site
+  const initialOpacityPct = navConfig.topOpacity ?? 80;
+  const scrolledOpacityPct = navConfig.scrolledOpacity ?? 85;
 
-  const scrolledOpacityPct = navConfig.scrolledOpacity ?? 75;
-
-  // AT TOP OF PAGE: Solid (100% opacity, 0px blur)
-  // WHEN SCROLLED: Translucent (scrolledOpacityPct, backdropBlur)
   const activeOpacityPct = mobileMenuOpen
     ? 96
     : isScrolled
-    ? (scrollTransparencyActive ? scrolledOpacityPct : 100)
-    : 100;
+    ? scrolledOpacityPct
+    : initialOpacityPct;
+
   const alpha = (activeOpacityPct / 100).toFixed(2);
 
-  const blurAmount = isScrolled && scrollTransparencyActive ? (navConfig.backdropBlur ?? 14) : 0;
-  const borderVisible = !isScrolled || navConfig.borderVisible !== false;
-  const borderOpacityPct = isScrolled ? (navConfig.borderOpacity ?? 80) : 100;
+  // Backdrop blur active from initial page load (16px default)
+  const baseBlur = navConfig.backdropBlur ?? 16;
+  const blurAmount = isScrolled ? Math.min(baseBlur + 2, 20) : baseBlur;
+
+  const borderVisible = navConfig.borderVisible !== false;
+  const borderOpacityPct = isScrolled ? (navConfig.borderOpacity ?? 70) : (navConfig.borderOpacity ?? 50);
   const borderAlpha = borderVisible ? (borderOpacityPct / 100).toFixed(2) : "0";
 
   const transitionDuration =
@@ -176,11 +175,11 @@ export function Navbar() {
         style={
           {
             "--nav-bg-light": `rgb(255 253 249 / ${alpha})`,
-            "--nav-bg-dark": `rgb(0 0 0 / ${alpha})`,
+            "--nav-bg-dark": `rgb(10 10 10 / ${alpha})`,
             "--nav-border-light": borderVisible ? `rgb(239 226 214 / ${borderAlpha})` : "transparent",
-            "--nav-border-dark": borderVisible ? `rgb(31 31 31 / ${borderAlpha})` : "transparent",
-            backdropFilter: blurAmount > 0 ? `blur(${blurAmount}px)` : "none",
-            WebkitBackdropFilter: blurAmount > 0 ? `blur(${blurAmount}px)` : "none",
+            "--nav-border-dark": borderVisible ? `rgb(255 255 255 / ${borderAlpha})` : "transparent",
+            backdropFilter: `blur(${blurAmount}px)`,
+            WebkitBackdropFilter: `blur(${blurAmount}px)`,
           } as React.CSSProperties
         }
         className={cn(
