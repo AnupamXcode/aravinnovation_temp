@@ -170,17 +170,74 @@ export function Footer() {
   }
 
   return (
-    <footer className="w-full relative bg-gradient-to-br from-[#1b2823] via-[#243e34] to-[#1b2823] text-white pt-12 pb-8 overflow-hidden select-none border-t border-[#2e936f]/40">
+    <footer className="w-full relative bg-gradient-to-br from-[#1b2823] via-[#223b31] to-[#1b2823] text-white pt-12 pb-8 overflow-hidden select-none border-t border-[#2e936f]/40">
       
-      {/* Refined Ambient Background Lighting (Arav Brand Colors: Warm Orange #f15e1c & Emerald Green #2e936f) */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#f15e1c]/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#2e936f]/25 rounded-full blur-3xl pointer-events-none" />
+      {/* =========================================================================
+          3D ATMOSPHERIC MOVING GRADIENT BACKGROUND (APPROVED PALETTE ONLY: #f15e1c, #2e936f, #fab60a, #ffec69, #f7d7b0)
+          ========================================================================= */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
+        {/* Layer 1: Soft Primary Orange Radial Gradient Field */}
+        <div
+          className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full bg-[#f15e1c]/20 blur-3xl opacity-80"
+          style={{ animation: "floatSlow1 28s ease-in-out infinite alternate" }}
+        />
 
-      {/* Main Centered Max-Width Container */}
+        {/* Layer 2: Warm Gold / Peach Ambient Lighting Field */}
+        <div
+          className="absolute -bottom-40 -right-40 w-[650px] h-[650px] rounded-full bg-[#fab60a]/20 blur-3xl opacity-75"
+          style={{ animation: "floatSlow2 32s ease-in-out infinite alternate" }}
+        />
+
+        {/* Layer 3: Restrained Emerald Green Lighting Surface */}
+        <div
+          className="absolute top-1/3 right-1/4 w-[500px] h-[500px] rounded-full bg-[#2e936f]/25 blur-3xl opacity-80"
+          style={{ animation: "floatSlow3 24s ease-in-out infinite alternate" }}
+        />
+
+        {/* Layer 4: Soft Gold Highlight Field */}
+        <div
+          className="absolute bottom-1/4 left-1/3 w-[450px] h-[450px] rounded-full bg-[#ffec69]/15 blur-3xl opacity-70"
+          style={{ animation: "floatSlow4 30s ease-in-out infinite alternate" }}
+        />
+
+        {/* Subtle Depth Overlay for Uncompromised Text Readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1b2823]/40 via-transparent to-[#1b2823]/60 pointer-events-none" />
+      </div>
+
+      {/* Embedded CSS Keyframes for slow, elegant 3D atmospheric movement */}
+      <style jsx global>{`
+        @keyframes floatSlow1 {
+          0% { transform: translate(0px, 0px) scale(1); }
+          50% { transform: translate(45px, 35px) scale(1.08); }
+          100% { transform: translate(-25px, 50px) scale(0.95); }
+        }
+        @keyframes floatSlow2 {
+          0% { transform: translate(0px, 0px) scale(1); }
+          50% { transform: translate(-50px, -30px) scale(1.1); }
+          100% { transform: translate(30px, -45px) scale(0.92); }
+        }
+        @keyframes floatSlow3 {
+          0% { transform: translate(0px, 0px) scale(0.95); }
+          50% { transform: translate(35px, -40px) scale(1.12); }
+          100% { transform: translate(-35px, 25px) scale(1); }
+        }
+        @keyframes floatSlow4 {
+          0% { transform: translate(0px, 0px) scale(1); }
+          50% { transform: translate(-40px, 35px) scale(1.06); }
+          100% { transform: translate(30px, -25px) scale(0.98); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          footer div[style*="animation"] {
+            animation: none !important;
+          }
+        }
+      `}</style>
+
+      {/* Main Centered Content Container (STATIC & STABLE Z-10) */}
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10 space-y-12">
         
         {/* =========================================================================
-            LAYER 1: COMPACT TOP CTA AREA (Vibrant Brand Gradient CTA)
+            LAYER 1: COMPACT TOP CTA AREA (Vibrant Brand Gradient CTA Card)
             ========================================================================= */}
         <AnimatedFooterSection delay={0.03}>
           <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#f15e1c] via-[#e04f0f] to-[#fab60a] border border-[#ffec69]/40 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden text-white">
@@ -204,18 +261,18 @@ export function Footer() {
             <div className="flex flex-wrap items-center gap-3 w-full md:w-auto shrink-0 relative z-10">
               <Link
                 href={footerConfig.ctaPrimaryHref}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#1b2823] hover:bg-white text-white hover:text-[#1b2823] text-xs font-mono font-bold uppercase tracking-wider shadow-lg hover:shadow-xl transition-all duration-300 group"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#1b2823] hover:bg-white text-white hover:text-[#1b2823] text-xs font-mono font-bold uppercase tracking-wider shadow-md hover:shadow-xl hover:shadow-[#f15e1c]/30 hover:-translate-y-0.5 active:translate-y-0 active:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] transition-all duration-200 group cursor-pointer"
               >
                 <span>{footerConfig.ctaPrimaryText}</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
               </Link>
 
               <Link
                 href={footerConfig.ctaSecondaryHref}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/20 hover:bg-white text-white hover:text-[#1b2823] border border-white/40 backdrop-blur-md text-xs font-mono font-bold uppercase tracking-wider shadow-sm transition-all duration-300 group"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/20 hover:bg-white text-white hover:text-[#1b2823] border border-white/40 hover:border-[#ffec69] backdrop-blur-md text-xs font-mono font-bold uppercase tracking-wider shadow-xs hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] transition-all duration-200 group cursor-pointer"
               >
                 <span>{footerConfig.ctaSecondaryHref === "/services" ? "EXPLORE SERVICES" : footerConfig.ctaSecondaryText}</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
               </Link>
             </div>
           </div>
@@ -226,7 +283,7 @@ export function Footer() {
             ========================================================================= */}
         <AnimatedFooterSection delay={0.08} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 text-left border-b border-[#2e936f]/30 pb-10">
           
-          {/* COLUMN 1: SERVICES (5 Cols on Large screens - Minimal clean list, NO 8 large cards) */}
+          {/* COLUMN 1: SERVICES (5 Cols on Large screens - Minimal clean list) */}
           <div className="lg:col-span-5 space-y-4">
             <div className="space-y-1">
               <h3 className="text-xs font-mono font-black text-[#ffec69] uppercase tracking-widest">
@@ -248,7 +305,7 @@ export function Footer() {
                 >
                   <Link
                     href={service.href}
-                    className="group flex items-center justify-between py-1.5 px-2 -mx-2 rounded-lg hover:bg-white/10 transition-all duration-200"
+                    className="group flex items-center justify-between py-1.5 px-2.5 -mx-2.5 rounded-lg hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] transition-all duration-200 cursor-pointer"
                   >
                     <div className="flex items-center gap-3">
                       <span className="text-[11px] font-mono font-bold text-[#ffec69] group-hover:text-white transition-colors">
@@ -276,7 +333,7 @@ export function Footer() {
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    className="hover:text-[#ffec69] hover:translate-x-0.5 transition-all inline-block focus:outline-none focus:ring-1 focus:ring-[#f15e1c] rounded-xs"
+                    className="hover:text-[#ffec69] hover:translate-x-1 transition-all duration-200 inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] rounded-xs cursor-pointer"
                   >
                     {item.label}
                   </Link>
@@ -295,7 +352,7 @@ export function Footer() {
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    className="hover:text-[#ffec69] hover:translate-x-0.5 transition-all inline-block focus:outline-none focus:ring-1 focus:ring-[#f15e1c] rounded-xs"
+                    className="hover:text-[#ffec69] hover:translate-x-1 transition-all duration-200 inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] rounded-xs cursor-pointer"
                   >
                     {item.label}
                   </Link>
@@ -314,7 +371,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-1.5 text-white font-bold hover:text-[#ffec69] transition-colors"
+                  className="inline-flex items-center gap-1.5 text-white font-bold hover:text-[#ffec69] hover:translate-x-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] rounded-xs cursor-pointer"
                 >
                   <span>Start a Conversation</span>
                   <ArrowUpRight className="w-3.5 h-3.5 text-[#ffec69]" />
@@ -323,7 +380,7 @@ export function Footer() {
               <li>
                 <a
                   href={`mailto:${footerConfig.supportEmail}`}
-                  className="inline-flex items-center gap-2 hover:text-[#ffec69] transition-colors"
+                  className="inline-flex items-center gap-2 hover:text-[#ffec69] hover:translate-x-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] rounded-xs cursor-pointer"
                 >
                   <Mail className="w-3.5 h-3.5 text-[#ffec69] shrink-0" />
                   <span>{footerConfig.supportEmail}</span>
@@ -332,7 +389,7 @@ export function Footer() {
               <li>
                 <a
                   href={`tel:${footerConfig.phoneIndia.replace(/\s+/g, '')}`}
-                  className="inline-flex items-center gap-2 hover:text-[#ffec69] transition-colors"
+                  className="inline-flex items-center gap-2 hover:text-[#ffec69] hover:translate-x-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] rounded-xs cursor-pointer"
                 >
                   <Phone className="w-3.5 h-3.5 text-[#ffec69] shrink-0" />
                   <span>{footerConfig.phoneIndia} (India)</span>
@@ -341,7 +398,7 @@ export function Footer() {
               <li>
                 <a
                   href={`tel:${footerConfig.phoneUAE.replace(/\s+/g, '')}`}
-                  className="inline-flex items-center gap-2 hover:text-[#ffec69] transition-colors"
+                  className="inline-flex items-center gap-2 hover:text-[#ffec69] hover:translate-x-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] rounded-xs cursor-pointer"
                 >
                   <Phone className="w-3.5 h-3.5 text-[#fab60a] shrink-0" />
                   <span>{footerConfig.phoneUAE} (UAE)</span>
@@ -369,7 +426,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={soc.name}
-                    className="w-8 h-8 rounded-xl bg-white/15 hover:bg-[#f15e1c] text-white flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5 shadow-xs"
+                    className="w-8.5 h-8.5 rounded-xl bg-white/15 hover:bg-[#f15e1c] text-white flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] shadow-xs cursor-pointer"
                   >
                     {soc.icon}
                   </a>
@@ -412,7 +469,7 @@ export function Footer() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-stretch">
                 
                 {/* INDIA HQ CARD */}
-                <div className="p-4 rounded-xl bg-white/10 border border-white/20 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:border-[#ffec69] hover:bg-white/20 hover:-translate-y-1 shadow-xs group">
+                <div className="p-4.5 rounded-xl bg-white/10 border border-white/20 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:border-[#ffec69] hover:bg-white/20 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] shadow-xs group cursor-pointer">
                   <div className="space-y-1.5">
                     <div className="font-extrabold font-display text-white text-xs flex items-center gap-2 group-hover:text-[#ffec69] transition-colors">
                       <MapPin className="w-3.5 h-3.5 text-[#ffec69] group-hover:scale-110 transition-transform shrink-0" />
@@ -434,7 +491,7 @@ export function Footer() {
                 </div>
 
                 {/* UAE REGIONAL OFFICE CARD */}
-                <div className="p-4 rounded-xl bg-white/10 border border-white/20 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:border-[#ffec69] hover:bg-white/20 hover:-translate-y-1 shadow-xs group">
+                <div className="p-4.5 rounded-xl bg-white/10 border border-white/20 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:border-[#ffec69] hover:bg-white/20 hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] shadow-xs group cursor-pointer">
                   <div className="space-y-1.5">
                     <div className="font-extrabold font-display text-white text-xs flex items-center gap-2 group-hover:text-[#ffec69] transition-colors">
                       <MapPin className="w-3.5 h-3.5 text-[#ffec69] group-hover:scale-110 transition-transform shrink-0" />
@@ -473,7 +530,7 @@ export function Footer() {
               <React.Fragment key={link.label}>
                 <Link
                   href={link.href}
-                  className="hover:text-[#ffec69] transition-colors focus:outline-none focus:ring-1 focus:ring-[#f15e1c] rounded-xs text-[11px]"
+                  className="hover:text-[#ffec69] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] rounded-xs text-[11px] cursor-pointer"
                 >
                   {link.label}
                 </Link>
