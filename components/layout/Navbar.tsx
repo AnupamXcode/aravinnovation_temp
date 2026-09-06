@@ -37,6 +37,8 @@ import {
 } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 import { useSiteConfig, defaultNavbarConfig } from "@/lib/site-config";
+import { MobileMenuButton } from "./MobileMenuButton";
+import { motion, AnimatePresence } from "framer-motion";
 
 const serviceIcons: Record<string, React.ReactNode> = {
   "/services/it-strategy-implementation": <Compass className="w-4 h-4 text-[#f15e1c]" />,
@@ -415,183 +417,202 @@ export function Navbar() {
                 <LanguageSelector />
               </div>
               <ThemeToggle />
-              <button
-                type="button"
+              <MobileMenuButton
+                isOpen={mobileMenuOpen}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2.5 rounded-xl bg-[#f15e1c] text-white hover:bg-[#d44e14] transition-all shadow-md flex items-center justify-center shrink-0 min-w-[44px] min-h-[44px] cursor-pointer"
-                aria-label="Toggle navigation menu"
-              >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
+                ariaLabel="Toggle navigation menu"
+              />
             </div>
           </div>
         </div>
       </header>
 
-      {/* TASK D — Mobile Navigation Backdrop Overlay & Drawer */}
-      {mobileMenuOpen && (
-        <>
-          {/* Backdrop Blur Overlay: Subdues and blurs the underlying page, disables background interaction */}
-          <div
-            className="lg:hidden fixed inset-0 top-[65px] z-40 bg-[#000000]/50 dark:bg-[#000000]/80 backdrop-blur-md transition-all duration-300 pointer-events-auto"
-            onClick={() => setMobileMenuOpen(false)}
-            aria-hidden="true"
-          />
+      {/* Mobile Navigation Backdrop Overlay & Drawer with Framer Motion */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            {/* Backdrop Blur Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.22, ease: "easeInOut" }}
+              className="lg:hidden fixed inset-0 top-[65px] z-40 bg-[#000000]/50 dark:bg-[#000000]/80 backdrop-blur-md pointer-events-auto"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-hidden="true"
+            />
 
-          {/* Premium Mobile Navigation Drawer Panel */}
-          <div className="lg:hidden fixed inset-x-0 top-[65px] bottom-0 z-50 bg-white/95 dark:bg-[#000000]/95 backdrop-blur-xl border-t border-[#f7d7b0] dark:border-[#1a1a1a] px-5 py-6 overflow-y-auto shadow-2xl animate-in fade-in slide-in-from-top-3 duration-250 pointer-events-auto">
-            <div className="space-y-6 max-w-lg mx-auto">
-              {/* Mobile Utility Controls */}
-              <div className="sm:hidden flex items-center justify-between pb-4 border-b border-[#EFE2D6] dark:border-[#1f1f1f]">
-                <span className="text-xs font-bold text-[#7A6A5F] dark:text-[#B8ACA0]">Preferences</span>
-                <LanguageSelector />
-              </div>
-
-              {/* Group 1: What We Do */}
-              <div>
-                <button
-                  type="button"
-                  className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] mb-3 py-2 border-b border-transparent focus:outline-none cursor-pointer"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setMobileServicesOpen(!mobileServicesOpen);
-                  }}
-                >
-                  <span className="pointer-events-none font-display text-sm font-bold text-[#3A2E27] dark:text-[#FAF5EE]">
-                    What We Do
-                  </span>
-                  <ChevronDown
-                    className={cn(
-                      "w-5 h-5 transition-transform duration-200 pointer-events-none text-[#f15e1c]",
-                      mobileServicesOpen ? "rotate-180" : ""
-                    )}
-                  />
-                </button>
-
-                <div
-                  className={cn(
-                    "grid transition-all duration-300 ease-in-out",
-                    mobileServicesOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                  )}
-                >
-                  <div className="overflow-hidden flex flex-col gap-2">
-                    {servicesNavigation.map((s) => (
-                      <Link
-                        key={s.href}
-                        href={s.href}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-center gap-3 p-3 rounded-xl bg-[#FBF3EA]/80 dark:bg-[#1A1613] hover:bg-[#FCE3D3] dark:hover:bg-[#161616] text-sm font-semibold text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#1f1f1f] min-h-[44px]"
-                      >
-                        <div className="shrink-0">{serviceIcons[s.href]}</div>
-                        <span className="truncate">{s.label}</span>
-                      </Link>
-                    ))}
-                  </div>
+            {/* Premium Mobile Navigation Drawer Panel */}
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:hidden fixed inset-x-0 top-[65px] bottom-0 z-50 bg-white/95 dark:bg-[#000000]/95 backdrop-blur-xl border-t border-[#f7d7b0] dark:border-[#1a1a1a] px-5 py-6 overflow-y-auto shadow-2xl pointer-events-auto"
+            >
+              <div className="space-y-6 max-w-lg mx-auto">
+                {/* Mobile Utility Controls */}
+                <div className="sm:hidden flex items-center justify-between pb-4 border-b border-[#EFE2D6] dark:border-[#1f1f1f]">
+                  <span className="text-xs font-bold text-[#7A6A5F] dark:text-[#B8ACA0]">Preferences</span>
+                  <LanguageSelector />
                 </div>
-              </div>
 
-              {/* Group 2: Products */}
-              <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
-                <Link
-                  href="/products"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 text-base font-semibold font-display text-[#3A2E27] dark:text-[#FAF5EE]"
-                >
-                  Products & Platforms
-                </Link>
-              </div>
-
-              {/* Group 3: Working With Us */}
-              <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
-                <button
-                  type="button"
-                  className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] mb-3 py-2 border-b border-transparent focus:outline-none cursor-pointer"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setMobileWorkingWithUsOpen(!mobileWorkingWithUsOpen);
-                  }}
-                >
-                  <span className="pointer-events-none font-display text-sm font-bold text-[#3A2E27] dark:text-[#FAF5EE]">
-                    Working With Us
-                  </span>
-                  <ChevronDown
-                    className={cn(
-                      "w-5 h-5 transition-transform duration-200 pointer-events-none text-[#f15e1c]",
-                      mobileWorkingWithUsOpen ? "rotate-180" : ""
-                    )}
-                  />
-                </button>
-
-                <div
-                  className={cn(
-                    "grid transition-all duration-300 ease-in-out",
-                    mobileWorkingWithUsOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                  )}
-                >
-                  <div className="overflow-hidden flex flex-col gap-2">
-                    {workingWithUsNavigation.map((item) => (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className={cn(
-                          "flex items-center gap-3 p-3 rounded-xl text-sm font-medium border border-[#EFE2D6] dark:border-[#1f1f1f] min-h-[44px]",
-                          item.href === "/contact"
-                            ? "bg-[#FCE3D3]/90 dark:bg-[#2C221B] font-bold text-[#f15e1c]"
-                            : "bg-[#FBF3EA]/80 dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE]"
-                        )}
-                      >
-                        <div className="shrink-0">{workingWithUsIcons[item.href]}</div>
-                        <div className="truncate">{item.label}</div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Group 4: Blogs & Insights */}
-              <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
-                <Link
-                  href="/insights"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 text-base font-semibold font-display text-[#3A2E27] dark:text-[#FAF5EE]"
-                >
-                  Blogs &amp; Insights
-                </Link>
-              </div>
-
-              {/* Mobile Bottom Conversion CTA */}
-              <div className="pt-4 border-t border-[#EFE2D6] dark:border-[#1f1f1f] space-y-3">
-                <a
-                  href="tel:+971521555792"
-                  className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#f7d7b0]/40 dark:bg-[#1a1a1a] border border-[#f15e1c]/40 text-[#f15e1c] font-bold text-xs font-mono min-h-[44px]"
-                >
-                  <Phone className="w-4 h-4 text-[#f15e1c]" />
-                  <span>UAE Regional Office (+971 521555792)</span>
-                </a>
-
-                <div className="grid grid-cols-2 gap-2">
-                  <a
-                    href="https://api.whatsapp.com/send?phone=971521555792&text=Hello%20Arav%20Innovations%2C%20I%27d%20like%20to%20discuss%20a%20project."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-1.5 p-2.5 rounded-2xl bg-[#2e936f] text-white text-xs font-bold shadow-xs min-h-[44px]"
+                {/* Group 1: What We Do */}
+                <div>
+                  <button
+                    type="button"
+                    className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] mb-3 py-2 border-b border-transparent focus:outline-none cursor-pointer"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setMobileServicesOpen(!mobileServicesOpen);
+                    }}
                   >
-                    <span>Instant WhatsApp</span>
-                  </a>
-                  <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="block w-full">
-                    <Button variant="primary" size="md" className="w-full justify-center shadow-md bg-[#f15e1c] hover:bg-[#d44e14] min-h-[44px] text-xs">
-                      Discuss Project &rarr;
-                    </Button>
+                    <span className="pointer-events-none font-display text-sm font-bold text-[#3A2E27] dark:text-[#FAF5EE]">
+                      What We Do
+                    </span>
+                    <ChevronDown
+                      className={cn(
+                        "w-5 h-5 transition-transform duration-200 pointer-events-none text-[#f15e1c]",
+                        mobileServicesOpen ? "rotate-180" : ""
+                      )}
+                    />
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {mobileServicesOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: "easeOut" }}
+                        className="overflow-hidden"
+                      >
+                        <div className="flex flex-col gap-2 pt-1 pb-2">
+                          {servicesNavigation.map((s) => (
+                            <Link
+                              key={s.href}
+                              href={s.href}
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="flex items-center gap-3 p-3 rounded-xl bg-[#FBF3EA]/80 dark:bg-[#1A1613] hover:bg-[#FCE3D3] dark:hover:bg-[#161616] active:scale-[0.98] transition-all text-sm font-semibold text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#1f1f1f] min-h-[44px]"
+                            >
+                              <div className="shrink-0">{serviceIcons[s.href]}</div>
+                              <span className="truncate">{s.label}</span>
+                            </Link>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                {/* Group 2: Products */}
+                <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
+                  <Link
+                    href="/products"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block py-2 text-base font-semibold font-display text-[#3A2E27] dark:text-[#FAF5EE] active:scale-[0.99] transition-transform"
+                  >
+                    Products & Platforms
                   </Link>
                 </div>
+
+                {/* Group 3: Working With Us */}
+                <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
+                  <button
+                    type="button"
+                    className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] mb-3 py-2 border-b border-transparent focus:outline-none cursor-pointer"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setMobileWorkingWithUsOpen(!mobileWorkingWithUsOpen);
+                    }}
+                  >
+                    <span className="pointer-events-none font-display text-sm font-bold text-[#3A2E27] dark:text-[#FAF5EE]">
+                      Working With Us
+                    </span>
+                    <ChevronDown
+                      className={cn(
+                        "w-5 h-5 transition-transform duration-200 pointer-events-none text-[#f15e1c]",
+                        mobileWorkingWithUsOpen ? "rotate-180" : ""
+                      )}
+                    />
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {mobileWorkingWithUsOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: "easeOut" }}
+                        className="overflow-hidden"
+                      >
+                        <div className="flex flex-col gap-2 pt-1 pb-2">
+                          {workingWithUsNavigation.map((item) => (
+                            <Link
+                              key={item.href}
+                              href={item.href}
+                              onClick={() => setMobileMenuOpen(false)}
+                              className={cn(
+                                "flex items-center gap-3 p-3 rounded-xl text-sm font-medium border border-[#EFE2D6] dark:border-[#1f1f1f] min-h-[44px] active:scale-[0.98] transition-all",
+                                item.href === "/contact"
+                                  ? "bg-[#FCE3D3]/90 dark:bg-[#2C221B] font-bold text-[#f15e1c]"
+                                  : "bg-[#FBF3EA]/80 dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE]"
+                              )}
+                            >
+                              <div className="shrink-0">{workingWithUsIcons[item.href]}</div>
+                              <div className="truncate">{item.label}</div>
+                            </Link>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                {/* Group 4: Blogs & Insights */}
+                <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
+                  <Link
+                    href="/insights"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block py-2 text-base font-semibold font-display text-[#3A2E27] dark:text-[#FAF5EE] active:scale-[0.99] transition-transform"
+                  >
+                    Blogs &amp; Insights
+                  </Link>
+                </div>
+
+                {/* Mobile Bottom Conversion CTA */}
+                <div className="pt-4 border-t border-[#EFE2D6] dark:border-[#1f1f1f] space-y-3">
+                  <a
+                    href="tel:+971521555792"
+                    className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#f7d7b0]/40 dark:bg-[#1a1a1a] border border-[#f15e1c]/40 text-[#f15e1c] font-bold text-xs font-mono min-h-[44px] active:scale-[0.98] transition-transform"
+                  >
+                    <Phone className="w-4 h-4 text-[#f15e1c]" />
+                    <span>UAE Regional Office (+971 521555792)</span>
+                  </a>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <a
+                      href="https://api.whatsapp.com/send?phone=971521555792&text=Hello%20Arav%20Innovations%2C%20I%27d%20like%20to%20discuss%20a%20project."
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-1.5 p-2.5 rounded-2xl bg-[#2e936f] text-white text-xs font-bold shadow-xs min-h-[44px] active:scale-[0.98] transition-transform"
+                    >
+                      <span>Instant WhatsApp</span>
+                    </a>
+                    <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="block w-full">
+                      <Button variant="primary" size="md" className="w-full justify-center shadow-md bg-[#f15e1c] hover:bg-[#d44e14] min-h-[44px] text-xs active:scale-[0.98]">
+                        Discuss Project &rarr;
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </>
-      )}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 }
