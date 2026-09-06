@@ -101,10 +101,31 @@ export const defaultNavbarConfig: NavbarConfig = {
   transitionSpeed: "standard",
 };
 
+export interface HeroVideoConfig {
+  enabled: boolean;
+  videoUrl: string;
+  playbackSpeed: number; // e.g. 0.25, 0.5, 0.65, 0.75, 1.0, 1.25, 1.5, 2.0
+  overlayOpacity: number; // 0 to 100
+  textAlignment: "left" | "center" | "right";
+  textLayoutPosition: "left" | "center" | "right";
+  textMaxWidth: "compact" | "standard" | "wide";
+}
+
+export const defaultHeroVideoConfig: HeroVideoConfig = {
+  enabled: true,
+  videoUrl: "/videos/hero-bg.mp4",
+  playbackSpeed: 1.0,
+  overlayOpacity: 75,
+  textAlignment: "left",
+  textLayoutPosition: "left",
+  textMaxWidth: "standard",
+};
+
 export interface SiteConfig {
   websiteEnabled: boolean;
   brandColors: BrandColors;
   navbarConfig: NavbarConfig;
+  heroVideoConfig: HeroVideoConfig;
   chatbotEnabled: boolean;
   chatbotDelaySeconds: number;
   animationsEnabled: boolean;
@@ -145,6 +166,7 @@ const defaultConfig: SiteConfig = {
   websiteEnabled: true,
   brandColors: defaultBrandColors,
   navbarConfig: defaultNavbarConfig,
+  heroVideoConfig: defaultHeroVideoConfig,
   chatbotEnabled: true,
   chatbotDelaySeconds: 10,
   animationsEnabled: true,
@@ -308,6 +330,7 @@ interface SiteConfigContextType {
   config: SiteConfig;
   updateConfig: (key: keyof SiteConfig, value: any) => void;
   updateNavbarConfig: (updates: Partial<NavbarConfig>) => void;
+  updateHeroVideoConfig: (updates: Partial<HeroVideoConfig>) => void;
   updateSectionTheme: (section: keyof SectionThemes, theme: string) => void;
   updateCardStyle: (style: CardStyleOption) => void;
   toggleServiceState: (slug: string) => void;
@@ -322,6 +345,7 @@ const SiteConfigContext = React.createContext<SiteConfigContextType>({
   config: defaultConfig,
   updateConfig: () => {},
   updateNavbarConfig: () => {},
+  updateHeroVideoConfig: () => {},
   updateSectionTheme: () => {},
   updateCardStyle: () => {},
   toggleServiceState: () => {},
@@ -370,6 +394,22 @@ export function SiteConfigProvider({ children }: { children: React.ReactNode }) 
         ...updates,
       };
       const updated = { ...prev, navbarConfig: updatedNavbarConfig };
+      try {
+        localStorage.setItem("arav_site_config", JSON.stringify(updated));
+      } catch {
+        // ignore
+      }
+      return updated;
+    });
+  };
+
+  const updateHeroVideoConfig = (updates: Partial<HeroVideoConfig>) => {
+    setConfig((prev) => {
+      const updatedHeroVideoConfig = {
+        ...(prev.heroVideoConfig || defaultHeroVideoConfig),
+        ...updates,
+      };
+      const updated = { ...prev, heroVideoConfig: updatedHeroVideoConfig };
       try {
         localStorage.setItem("arav_site_config", JSON.stringify(updated));
       } catch {
@@ -466,6 +506,7 @@ export function SiteConfigProvider({ children }: { children: React.ReactNode }) 
         config,
         updateConfig,
         updateNavbarConfig,
+        updateHeroVideoConfig,
         updateSectionTheme,
         updateCardStyle,
         toggleServiceState,

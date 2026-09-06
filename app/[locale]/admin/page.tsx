@@ -19,6 +19,7 @@ import { productsData, Product } from "@/data/products";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { SEOAdminPanel } from "@/components/admin/SEOAdminPanel";
 import { NavbarAdminPanel } from "@/components/admin/NavbarAdminPanel";
+import { HeroAdminPanel } from "@/components/admin/HeroAdminPanel";
 import {
   Shield,
   MessageSquare,
@@ -821,80 +822,10 @@ export default function AdminDashboardPage() {
         )}
 
         {/* ========================================================================= */}
-        {/* TAB 2: HOMEPAGE & HERO */}
+        {/* TAB 2: HOMEPAGE & HERO MEDIA / VIDEO / LAYOUT STUDIO */}
         {/* ========================================================================= */}
         {activeTab === "hero" && (
-          <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-6">
-            <h2 className="text-lg font-bold font-display flex items-center gap-2">
-              <Globe className="w-5 h-5 text-[#f15e1c]" />
-              <span>Homepage Hero Content Editor</span>
-            </h2>
-
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                updateHero(heroForm);
-                showToast("Homepage Hero content saved successfully");
-              }}
-              className="space-y-4"
-            >
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold">Eyebrow Tagline</label>
-                <input
-                  type="text"
-                  value={heroForm.eyebrow}
-                  onChange={(e) => setHeroForm({ ...heroForm, eyebrow: e.target.value })}
-                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold">Main Headline</label>
-                <textarea
-                  rows={2}
-                  value={heroForm.title}
-                  onChange={(e) => setHeroForm({ ...heroForm, title: e.target.value })}
-                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold">Sub-headline Description</label>
-                <textarea
-                  rows={3}
-                  value={heroForm.description}
-                  onChange={(e) => setHeroForm({ ...heroForm, description: e.target.value })}
-                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold">Primary CTA Button Text</label>
-                  <input
-                    type="text"
-                    value={heroForm.primaryCtaText}
-                    onChange={(e) => setHeroForm({ ...heroForm, primaryCtaText: e.target.value })}
-                    className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                  />
-                </div>
-
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold">Primary CTA URL Route</label>
-                  <input
-                    type="text"
-                    value={heroForm.primaryCtaUrl}
-                    onChange={(e) => setHeroForm({ ...heroForm, primaryCtaUrl: e.target.value })}
-                    className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                  />
-                </div>
-              </div>
-
-              <Button type="submit" variant="primary" size="md" className="rounded-xl" leftIcon={<Save className="w-4 h-4" />}>
-                Save Hero Content
-              </Button>
-            </form>
-          </div>
+          <HeroAdminPanel showToast={showToast} />
         )}
 
         {/* ========================================================================= */}

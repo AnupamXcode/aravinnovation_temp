@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { ScrollTextFlip } from "@/components/motion/ScrollTextFlip";
+import { useSiteConfig, defaultHeroVideoConfig } from "@/lib/site-config";
 import {
   ArrowRight,
   ShieldCheck,
@@ -14,6 +15,12 @@ import {
 } from "lucide-react";
 
 export function Hero() {
+  const { config } = useSiteConfig();
+  const videoConfig = config.heroVideoConfig || defaultHeroVideoConfig;
+  const isVideoEnabled = videoConfig.enabled !== false;
+  const videoSpeed = videoConfig.playbackSpeed || 1.0;
+  const overlayOpacityVal = (videoConfig.overlayOpacity ?? 75) / 100;
+
   const sectionRef = React.useRef<HTMLElement>(null);
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const [videoLoaded, setVideoLoaded] = React.useState(false);
@@ -34,17 +41,24 @@ export function Hero() {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
-  // Set playbackRate = 1.0 (Normal native playback speed)
+  // Set playbackRate dynamically from CMS config
   const setVideoSpeed = React.useCallback(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 1.0;
+      videoRef.current.playbackRate = videoSpeed;
       setVideoLoaded(true);
     }
-  }, []);
+  }, [videoSpeed]);
+
+  // Update video speed dynamically if CMS config changes
+  React.useEffect(() => {
+    if (videoRef.current && videoLoaded) {
+      videoRef.current.playbackRate = videoSpeed;
+    }
+  }, [videoSpeed, videoLoaded]);
 
   // IntersectionObserver to pause video when out of viewport & resume when visible
   React.useEffect(() => {
-    if (!sectionRef.current || !videoRef.current || prefersReducedMotion) return;
+    if (!sectionRef.current || !videoRef.current || prefersReducedMotion || !isVideoEnabled) return;
 
     const videoNode = videoRef.current;
 
@@ -52,7 +66,7 @@ export function Hero() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            videoNode.playbackRate = 1.0;
+            videoNode.playbackRate = videoSpeed;
             videoNode.play().catch(() => {
               // Ignore autoplay error if blocked by browser policy
             });
@@ -69,7 +83,36 @@ export function Hero() {
     return () => {
       observer.disconnect();
     };
-  }, [prefersReducedMotion, videoLoaded]);
+  }, [prefersReducedMotion, videoLoaded, videoSpeed, isVideoEnabled]);
+
+  // Dynamic layout styling from CMS config
+  const textAlignClass =
+    videoConfig.textAlignment === "center"
+      ? "text-center mx-auto"
+      : videoConfig.textAlignment === "right"
+      ? "text-right ml-auto"
+      : "text-left";
+
+  const flexAlignClass =
+    videoConfig.textAlignment === "center"
+      ? "justify-center"
+      : videoConfig.textAlignment === "right"
+      ? "justify-end"
+      : "justify-start";
+
+  const layoutColClass =
+    videoConfig.textLayoutPosition === "center"
+      ? "lg:col-span-12 text-center mx-auto"
+      : videoConfig.textLayoutPosition === "right"
+      ? "lg:col-span-8 lg:col-start-5 text-right ml-auto"
+      : "lg:col-span-8 text-left";
+
+  const maxWidthClass =
+    videoConfig.textMaxWidth === "compact"
+      ? "max-w-2xl"
+      : videoConfig.textMaxWidth === "wide"
+      ? "max-w-4xl"
+      : "max-w-3xl";
 
   return (
     <section
@@ -78,7 +121,7 @@ export function Hero() {
     >
       {/* 1. Full-Bleed Continuous Photographic / Video Environment Background */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
-        {/* Fallback Static Image (Shown if video loading, failed, or prefers-reduced-motion) */}
+        {/* Fallback Static Image (Shown if video loading, failed, disabled, or prefers-reduced-motion) */}
         <Image
           src="/images/homepage-main-bg.png"
           alt="Arav Innovations Executive Technology Platform Environment"
@@ -86,15 +129,15 @@ export function Hero() {
           priority
           unoptimized
           className={`object-cover object-center lg:object-right-top transition-opacity duration-700 ${
-            videoLoaded && !videoError && !prefersReducedMotion ? "opacity-0" : "opacity-100 dark:opacity-95"
+            isVideoEnabled && videoLoaded && !videoError && !prefersReducedMotion ? "opacity-0" : "opacity-100 dark:opacity-95"
           }`}
         />
 
-        {/* Crisp Unblurred Video Background (Normal 1.0x Speed, Autoplay, Muted, Loop, PlaysInline) */}
-        {!prefersReducedMotion && !videoError && (
+        {/* Dynamic CMS Background Video */}
+        {isVideoEnabled && !prefersReducedMotion && !videoError && (
           <video
             ref={videoRef}
-            src="/videos/hero-bg.mp4"
+            src={videoConfig.videoUrl || "/videos/hero-bg.mp4"}
             autoPlay
             muted
             loop
@@ -110,20 +153,24 @@ export function Hero() {
           />
         )}
 
-        {/* Minimal Subtle Gradient for Text Contrast (Crisp Video Intact & Unblurred) */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9]/75 via-[#FFFDF9]/20 to-transparent dark:hidden pointer-events-none" />
-
-        {/* Dark Mode Gradient */}
-        <div className="hidden dark:block absolute inset-0 bg-gradient-to-r from-[#050505]/80 via-[#050505]/20 to-transparent pointer-events-none" />
+        {/* Dynamic CMS Overlay Vignette for Text Readability */}
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/40 to-transparent dark:hidden pointer-events-none transition-opacity duration-300"
+          style={{ opacity: overlayOpacityVal }}
+        />
+        <div
+          className="hidden dark:block absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/40 to-transparent pointer-events-none transition-opacity duration-300"
+          style={{ opacity: overlayOpacityVal }}
+        />
       </div>
 
       <div className="relative z-10 w-full px-4 sm:px-8 lg:px-12 xl:px-16 my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Left Column: Editorial Content (Sitting Directly on Background Media) */}
-          <div className="lg:col-span-8 space-y-6 sm:space-y-7 text-left max-w-3xl">
+          {/* Dynamic Content Column Controlled via CMS Layout Settings */}
+          <div className={`${layoutColClass} ${maxWidthClass} space-y-6 sm:space-y-7 ${textAlignClass}`}>
             {/* Eyebrow Label */}
             <ScrollTextFlip>
-              <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-[#4A3D35] dark:text-[#D8CBC0]">
+              <div className={`inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-[#4A3D35] dark:text-[#D8CBC0] ${flexAlignClass}`}>
                 <span className="w-2 h-2 rounded-full bg-[#f15e1c] shrink-0" />
                 <span className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.18em]">
                   ENTERPRISE TECHNOLOGY <span className="text-[#f15e1c] font-bold mx-1">&bull;</span> DIGITAL TRANSFORMATION <span className="text-[#f15e1c] font-bold mx-1">&bull;</span> GROWTH
