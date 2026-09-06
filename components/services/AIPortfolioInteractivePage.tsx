@@ -29,6 +29,7 @@ import {
   RefreshCw,
   ArrowUpRight,
 } from "lucide-react";
+import { CEOLeadershipSection } from "@/components/services/CEOLeadershipSection";
 import { BlogCardImage } from "@/components/insights/BlogCardImage";
 import {
   Sparkles,
@@ -1212,6 +1213,13 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
 
         </div>
       </section>
+
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          SECTION — ABOUT OUR CEO / LEADERSHIP PERSPECTIVE
+          ===================================================================== */}
+      <CEOLeadershipSection serviceContext="The focus is on applying AI where it can create practical business value, not simply adding AI for the sake of it." />
 
       <SystemScanTransition />
 

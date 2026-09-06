@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { CEOLeadershipSection } from "@/components/services/CEOLeadershipSection";
 import {
   motion,
   AnimatePresence,
@@ -1267,45 +1268,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
       {/* =========================================================================
           SECTION 12 — CEO / LEADERSHIP PERSPECTIVE
           ========================================================================= */}
-      <section className="relative py-12 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] select-none">
-        <div className="max-w-[1440px] mx-auto space-y-8">
-          
-          <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
-            <Badge variant="secondary" size="sm">
-              LEADERSHIP PERSPECTIVE
-            </Badge>
-            <h2 className="text-2xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Technology Leadership With a Practical Business Perspective
-            </h2>
-          </AnimatedSection>
-
-          <AnimatedSection delay={0.08} className="max-w-4xl mx-auto">
-            <div className="p-6 sm:p-10 rounded-2xl bg-white dark:bg-[#000000] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md space-y-4 text-left relative overflow-hidden">
-              <div className="p-2.5 rounded-xl bg-[#f15e1c] text-white w-fit shadow-xs">
-                <Quote className="w-5 h-5" />
-              </div>
-
-              <p className="text-base sm:text-xl font-display font-medium text-[#1b2823] dark:text-[#ffffff] leading-relaxed italic">
-                &ldquo;Our focus is helping businesses make technology decisions that are commercially sensible, technically sound, secure, scalable and executable. We don&apos;t build unnecessary complexity — we build clear pathways for sustainable growth.&rdquo;
-              </p>
-
-              <div className="pt-3 border-t border-[#f7d7b0] dark:border-[#1a1a1a] flex items-center justify-between">
-                <div>
-                  <div className="text-sm font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                    Aryan Sayal
-                  </div>
-                  <div className="text-xs text-[#f15e1c] font-bold font-mono">
-                    Founder &amp; Managing Partner &bull; Arav Innovations
-                  </div>
-                </div>
-                <div className="text-xs font-mono font-bold text-[#2e936f] hidden sm:block">
-                  Confidential Enterprise Engagement Standards
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
+      <CEOLeadershipSection serviceContext="His approach starts with aligning technology decisions to business direction." />
 
       <SystemScanTransition />
 

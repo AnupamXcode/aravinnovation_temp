@@ -158,8 +158,22 @@ export interface SiteConfig {
   twitterUrl: string;
   youtubeUrl: string;
   serviceStates: Record<string, boolean>;
+  ceoSectionConfig: CEOSectionConfig;
   sectionThemes: SectionThemes;
   cardStyle: CardStyleOption;
+}
+
+export interface CEOSectionConfig {
+  visible: boolean;
+  name: string;
+  designation: string;
+  portrait: string;
+  statement: string;
+  statementSupportingLine: string;
+  biographyParagraph1: string;
+  biographyParagraph2: string;
+  linkedinUrl: string;
+  ctaText: string;
 }
 
 const defaultConfig: SiteConfig = {
@@ -314,6 +328,18 @@ const defaultConfig: SiteConfig = {
     "audit-improvement": true,
     "training-staff-augmentation": true,
     "ai-solutions": true,
+  },
+  ceoSectionConfig: {
+    visible: true,
+    name: "Aryan Sayal",
+    designation: "Founder & CEO, Arav Innovations",
+    portrait: "/images/aryan-sayal-clean.png",
+    statement: "Technology should create progress, not complexity.",
+    statementSupportingLine: "That principle shapes how we approach strategy, transformation and technology delivery at Arav Innovations.",
+    biographyParagraph1: "Aryan Sayal, Founder & CEO of Arav Innovations, brings more than 19 years of experience across technology and digital media. His leadership is grounded in helping businesses turn technology complexity into practical, scalable progress.",
+    biographyParagraph2: "His experience spans IT strategy, cybersecurity, cloud services, application development, data analytics and digital media, with a focus on connecting technology decisions to real business priorities.",
+    linkedinUrl: "https://www.linkedin.com/company/aravinnovations/",
+    ctaText: "Connect with Aryan",
   },
   sectionThemes: {
     services: "soft_orange",

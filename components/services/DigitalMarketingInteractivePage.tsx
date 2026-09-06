@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { CEOLeadershipSection } from "@/components/services/CEOLeadershipSection";
 import { BlogCardImage } from "@/components/insights/BlogCardImage";
 import {
   motion,
@@ -1274,6 +1275,14 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
           </div>
         </div>
       </section>
+
+      {/* Laser Scan Beam Section Separator */}
+      <SystemScanTransition />
+
+      {/* =========================================================================
+          SECTION — ABOUT OUR CEO / LEADERSHIP PERSPECTIVE
+          ========================================================================= */}
+      <CEOLeadershipSection serviceContext="His perspective connects digital presence with measurable business growth." />
 
       {/* Laser Scan Beam Section Separator */}
       <SystemScanTransition />

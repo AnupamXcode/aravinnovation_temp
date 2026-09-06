@@ -9,6 +9,7 @@ import {
   useReducedMotion,
   useInView,
 } from "framer-motion";
+import { CEOLeadershipSection } from "@/components/services/CEOLeadershipSection";
 import { BlogCardImage } from "@/components/insights/BlogCardImage";
 import {
   Search,
@@ -1387,6 +1388,13 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
 
         </div>
       </section>
+
+      <SystemScanTransition />
+
+      {/* =====================================================================
+          SECTION — ABOUT OUR CEO / LEADERSHIP PERSPECTIVE
+          ===================================================================== */}
+      <CEOLeadershipSection serviceContext="The broader approach connects digital visibility with sustainable business growth." />
 
       <SystemScanTransition />
 

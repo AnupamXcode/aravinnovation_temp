@@ -9,6 +9,7 @@ import {
   useReducedMotion,
   useInView,
 } from "framer-motion";
+import { CEOLeadershipSection } from "@/components/services/CEOLeadershipSection";
 import { BlogCardImage } from "@/components/insights/BlogCardImage";
 import {
   Search,
@@ -1587,6 +1588,13 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
 
         </div>
       </section>
+
+      <DiagnosticScanTransition />
+
+      {/* =====================================================================
+          SECTION — ABOUT OUR CEO / LEADERSHIP PERSPECTIVE
+          ===================================================================== */}
+      <CEOLeadershipSection serviceContext="The focus is on identifying friction, improving systems and creating a stronger operational foundation." />
 
       <DiagnosticScanTransition />
 

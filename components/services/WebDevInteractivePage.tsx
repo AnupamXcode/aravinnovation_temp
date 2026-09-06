@@ -9,6 +9,7 @@ import {
   useReducedMotion,
   useInView,
 } from "framer-motion";
+import { CEOLeadershipSection } from "@/components/services/CEOLeadershipSection";
 import { BlogCardImage } from "@/components/insights/BlogCardImage";
 import {
   TrendingUp,
@@ -1428,6 +1429,14 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
           </div>
         </div>
       </section>
+
+      {/* Laser Scan Beam Section Separator */}
+      <SystemScanTransition />
+
+      {/* =========================================================================
+          SECTION — ABOUT OUR CEO / LEADERSHIP PERSPECTIVE
+          ========================================================================= */}
+      <CEOLeadershipSection serviceContext="The focus is on building technology that remains useful, scalable and aligned with business needs." />
 
       {/* Laser Scan Beam Section Separator */}
       <SystemScanTransition />

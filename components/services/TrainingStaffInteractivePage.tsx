@@ -9,6 +9,7 @@ import {
   useReducedMotion,
   useInView,
 } from "framer-motion";
+import { CEOLeadershipSection } from "@/components/services/CEOLeadershipSection";
 import { BlogCardImage } from "@/components/insights/BlogCardImage";
 import {
   Users,
@@ -1356,6 +1357,13 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
 
         </div>
       </section>
+
+      <CapabilityScanTransition />
+
+      {/* =====================================================================
+          SECTION — ABOUT OUR CEO / LEADERSHIP PERSPECTIVE
+          ===================================================================== */}
+      <CEOLeadershipSection serviceContext="The philosophy extends beyond technology to the people and capabilities required to deliver it." />
 
       <CapabilityScanTransition />
 

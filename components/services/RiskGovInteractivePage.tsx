@@ -9,6 +9,7 @@ import {
   useReducedMotion,
   useInView,
 } from "framer-motion";
+import { CEOLeadershipSection } from "@/components/services/CEOLeadershipSection";
 import { BlogCardImage } from "@/components/insights/BlogCardImage";
 import {
   ShieldCheck,
@@ -1243,6 +1244,14 @@ export function RiskGovInteractivePage({ service, relatedPosts }: RiskGovPagePro
           </div>
         </div>
       </section>
+
+      {/* Laser Scan Beam Section Separator */}
+      <SystemScanTransition />
+
+      {/* =========================================================================
+          SECTION — ABOUT OUR CEO / LEADERSHIP PERSPECTIVE
+          ========================================================================= */}
+      <CEOLeadershipSection serviceContext="The approach places governance and responsible technology practices alongside transformation." />
 
       {/* Laser Scan Beam Section Separator */}
       <SystemScanTransition />
