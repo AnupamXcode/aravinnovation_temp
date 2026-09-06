@@ -723,15 +723,14 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
                 <motion.div
                   whileHover={{ scale: 1.02, y: -2 }}
                   transition={{ duration: 0.4 }}
-                  className="relative w-full rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-[#fefaf5] dark:bg-[#0a0a0a] shadow-lg hover:shadow-2xl hover:border-[#f15e1c]/50 transition-all duration-300 group"
+                  className="relative w-full aspect-[16/9] rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-white dark:bg-[#080808] shadow-lg hover:shadow-2xl hover:border-[#f15e1c]/50 transition-all duration-300 group"
                 >
                   <Image
                     src="/images/web-app-main-1.png"
                     alt="Arav Innovations Digital Product Engineering & Web Application Architecture"
-                    width={1200}
-                    height={800}
+                    fill
                     priority
-                    className="w-full h-auto max-w-full object-contain block transition-transform duration-500 group-hover:scale-[1.02]"
+                    className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                 </motion.div>
               </AnimatedSection>
@@ -936,14 +935,13 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
                 <motion.div
                   whileHover={{ scale: 1.02, y: -2 }}
                   transition={{ duration: 0.4 }}
-                  className="relative w-full rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-[#fefaf5] dark:bg-[#0a0a0a] shadow-lg hover:shadow-2xl hover:border-[#f15e1c]/50 transition-all duration-300 group"
+                  className="relative w-full aspect-[16/9] rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-white dark:bg-[#080808] shadow-lg hover:shadow-2xl hover:border-[#f15e1c]/50 transition-all duration-300 group"
                 >
                   <Image
                     src="/images/web-app-main-2.png"
                     alt="Arav Innovations Full-Stack Web Application Architecture & System Integration"
-                    width={1200}
-                    height={800}
-                    className="w-full h-auto max-w-full object-contain block transition-transform duration-500 group-hover:scale-[1.02]"
+                    fill
+                    className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                 </motion.div>
               </AnimatedSection>

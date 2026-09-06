@@ -689,15 +689,14 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
             
             {/* LEFT (Desktop) / TOP (Mobile): Configurable Image Container */}
             <AnimatedSection className="lg:col-span-6 w-full order-1">
-              <div className="relative w-full rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] bg-[#fefaf5] dark:bg-[#0a0a0a] shadow-md overflow-hidden p-3 sm:p-5 group">
+              <div className="relative w-full aspect-[16/9] rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#080808] shadow-md overflow-hidden group">
                 <Image
                   src="/images/it-strategy-main.png"
                   alt="Arav Innovation Enterprise Technology Strategy Architecture"
-                  width={1200}
-                  height={800}
+                  fill
                   priority
                   loading="eager"
-                  className="w-full h-auto max-w-full object-contain rounded-xl sm:rounded-2xl transition-transform duration-300 group-hover:scale-[1.01]"
+                  className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
                 />
               </div>
             </AnimatedSection>

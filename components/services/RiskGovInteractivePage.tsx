@@ -628,14 +628,13 @@ export function RiskGovInteractivePage({ service, relatedPosts }: RiskGovPagePro
                 <motion.div
                   whileHover={{ scale: 1.02, y: -2 }}
                   transition={{ duration: 0.4 }}
-                  className="relative w-full transition-all duration-300 group flex items-center justify-center"
+                  className="relative w-full aspect-[16/9] rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-white dark:bg-[#080808] shadow-md transition-all duration-300 group"
                 >
                   <Image
                     src="/images/risk-gov-tertiary.png"
                     alt="Arav Innovations Risk Identification, Assessment and Control Safeguard Lifecycle"
-                    width={1200}
-                    height={800}
-                    className="w-full h-auto max-w-full object-contain block transition-transform duration-500 group-hover:scale-[1.02] drop-shadow-sm"
+                    fill
+                    className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                 </motion.div>
               </AnimatedSection>
@@ -746,14 +745,13 @@ export function RiskGovInteractivePage({ service, relatedPosts }: RiskGovPagePro
                 <motion.div
                   whileHover={{ scale: 1.02, y: -2 }}
                   transition={{ duration: 0.4 }}
-                  className="relative w-full transition-all duration-300 group flex items-center justify-center"
+                  className="relative w-full aspect-[16/9] rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-white dark:bg-[#080808] shadow-md transition-all duration-300 group"
                 >
                   <Image
                     src="/images/risk-gov-secondary.png"
                     alt="Arav Innovations Governance Operating Model & Layered Architecture Diagram"
-                    width={1200}
-                    height={800}
-                    className="w-full h-auto max-w-full object-contain block transition-transform duration-500 group-hover:scale-[1.02] drop-shadow-sm"
+                    fill
+                    className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                 </motion.div>
               </AnimatedSection>

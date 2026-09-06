@@ -433,9 +433,9 @@ export function InteractiveServiceStack3D() {
                       {currentService.description}
                     </p>
 
-                    {/* Enterprise Visual Showcase Image (100% Complete & Wide Fit) */}
+                    {/* Enterprise Visual Showcase Image (100% Complete & Aspect-Ratio 16:9 Fit) */}
                     <Link href={currentService.href} className="block group">
-                      <div className="relative w-full aspect-[16/9] min-h-[240px] lg:min-h-[260px] rounded-2xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] shadow-md bg-white dark:bg-[#080808] p-1.5">
+                      <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] shadow-md bg-white dark:bg-[#080808]">
                         <Image
                           src={currentService.image}
                           alt={currentService.name}
@@ -443,7 +443,7 @@ export function InteractiveServiceStack3D() {
                           unoptimized
                           priority
                           loading="eager"
-                          className="object-contain object-center transition-transform duration-500 group-hover:scale-[1.01]"
+                          className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
                         />
                       </div>
                     </Link>
@@ -575,7 +575,7 @@ export function InteractiveServiceStack3D() {
                   {currentService.description}
                 </p>
 
-                <div className="relative w-full aspect-[16/10] min-h-[250px] xs:min-h-[280px] sm:min-h-[320px] rounded-xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] bg-white dark:bg-[#080808] p-1 shadow-md mt-3">
+                <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] bg-white dark:bg-[#080808] shadow-md mt-3">
                   <Image
                     src={currentService.image}
                     alt={currentService.name}
@@ -583,7 +583,7 @@ export function InteractiveServiceStack3D() {
                     unoptimized
                     priority
                     loading="eager"
-                    className="object-contain object-center transition-transform duration-300 group-hover:scale-[1.01]"
+                    className="object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
                   />
                 </div>
               </Link>

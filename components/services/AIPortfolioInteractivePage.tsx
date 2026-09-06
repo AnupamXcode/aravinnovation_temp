@@ -758,19 +758,16 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
             <div className="lg:col-span-7 w-full flex items-center justify-center">
               <TiltCard className="w-full">
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5 }}
-                  className="relative w-full flex items-center justify-center group"
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  transition={{ duration: 0.4 }}
+                  className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-white dark:bg-[#080808] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md group"
                 >
                   <Image
                     loading="lazy"
                     src={AI_PORTFOLIO_SECONDARY_IMAGE}
                     alt="AI portfolio visualization showing intelligent applications, AI agents, data and automation."
-                    width={900}
-                    height={650}
-                    className="w-full h-auto object-contain max-h-[480px] rounded-2xl group-hover:scale-[1.01] transition-transform duration-300 drop-shadow-md"
+                    fill
+                    className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                 </motion.div>
               </TiltCard>

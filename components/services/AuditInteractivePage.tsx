@@ -739,13 +739,12 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                         Stage {diagnosticViewStages[activeTimelineStage].num} Visual
                       </span>
                     </div>
-                    <div className="p-2 bg-black/5 dark:bg-black/30">
+                    <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-white dark:bg-[#080808]">
                       <Image
                         src="/images/audit-and-improvement.png"
                         alt="Arav Innovations End-to-End Operational Diagnostic View Architecture"
-                        width={700}
-                        height={400}
-                        className="w-full h-auto max-h-[260px] sm:max-h-[300px] object-cover rounded-xl transition-transform duration-500 group-hover:scale-102"
+                        fill
+                        className="object-cover object-center rounded-xl transition-transform duration-500 group-hover:scale-102"
                       />
                     </div>
                   </div>
@@ -955,13 +954,12 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
 
                     {/* Right Column: Resized Compact Graphic Side-by-Side */}
                     <div className="sm:col-span-5 flex justify-center">
-                      <div className="w-full rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-black/5 dark:bg-black/20 group hover:border-[#f15e1c]/40 transition-all duration-300 shadow-md">
+                      <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#080808] group hover:border-[#f15e1c]/40 transition-all duration-300 shadow-md">
                         <Image
                           src="/images/audit-and-improvement-secondary.png"
                           alt="Arav Innovations Process, Control & Technology Examination Scope"
-                          width={500}
-                          height={300}
-                          className="w-full h-auto max-h-[220px] sm:max-h-[250px] object-cover rounded-xl transition-transform duration-500 group-hover:scale-102"
+                          fill
+                          className="object-cover object-center rounded-xl transition-transform duration-500 group-hover:scale-102"
                         />
                         <div className="p-2 bg-gray-50 dark:bg-[#0a0a0a] text-center border-t border-gray-200 dark:border-gray-800">
                           <span className="text-[10px] font-mono text-gray-500 dark:text-gray-400">

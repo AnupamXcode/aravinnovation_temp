@@ -638,19 +638,16 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
             <div className="lg:col-span-6 w-full flex items-center justify-center">
               <TiltCard className="w-full">
                 <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5 }}
-                  className="relative w-full overflow-hidden group flex items-center justify-center"
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  transition={{ duration: 0.4 }}
+                  className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-white dark:bg-[#080808] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md group"
                 >
                   <Image
                     loading="lazy"
                     src={SEO_SECOND_IMAGE}
                     alt="SEO search performance and optimization strategy visual"
-                    width={800}
-                    height={600}
-                    className="w-full h-auto object-contain max-h-[440px] rounded-2xl group-hover:scale-[1.02] transition-transform duration-300 drop-shadow-md"
+                    fill
+                    className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                 </motion.div>
               </TiltCard>

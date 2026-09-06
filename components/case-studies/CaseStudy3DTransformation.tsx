@@ -112,7 +112,7 @@ export function CaseStudy3DTransformation() {
         </div>
 
         {/* Full Width 4-Step Transformation Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 relative">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 relative items-stretch">
           {/* Progress Connecting Line */}
           <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1.5 bg-[#f7d7b0] dark:bg-[#1a1a1a] -translate-y-1/2 z-0">
             <motion.div
@@ -148,11 +148,11 @@ export function CaseStudy3DTransformation() {
                 transition={{ duration: 0.25, ease: "easeOut" }}
                 onClick={() => setActiveStep(idx)}
                 className={cn(
-                  "relative z-10 p-6 sm:p-8 rounded-3xl border shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between space-y-6 min-h-[280px] group",
+                  "relative z-10 p-6 sm:p-8 rounded-3xl border shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between space-y-6 h-full min-h-[280px] group",
                   accentBorderClass,
                   isActive
                     ? "bg-[#fefaf5] dark:bg-[#000000] border-[#f15e1c] ring-2 ring-[#f15e1c]/30 shadow-[#f15e1c]/20"
-                    : "bg-white dark:bg-[#1a2622] border-[#f7d7b0] dark:border-[#1a1a1a] hover:bg-[#FFFDF9] dark:hover:bg-[#121c18]"
+                    : "bg-white dark:bg-[#1a2622] border-[#f7d7b0] dark:border-[#1a1a1a] hover:bg-[#FBF3EA] dark:hover:bg-[#121c18]"
                 )}
               >
                 {/* Step Header */}

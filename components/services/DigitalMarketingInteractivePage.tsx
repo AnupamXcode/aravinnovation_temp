@@ -616,14 +616,13 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                 <motion.div
                   whileHover={{ scale: 1.02, y: -2 }}
                   transition={{ duration: 0.4 }}
-                  className="relative w-full rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-[#fefaf5] dark:bg-[#0a0a0a] shadow-lg hover:shadow-2xl hover:border-[#f15e1c]/50 transition-all duration-300 group"
+                  className="relative w-full aspect-[16/9] rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-white dark:bg-[#080808] shadow-lg hover:shadow-2xl hover:border-[#f15e1c]/50 transition-all duration-300 group"
                 >
                   <Image
                     src="/images/digital-marketing-main-1.png"
                     alt="Arav Innovations Digital Marketing Strategy & Ecosystem Overview"
-                    width={1000}
-                    height={667}
-                    className="w-full h-auto max-w-full object-contain block transition-transform duration-500 group-hover:scale-[1.02]"
+                    fill
+                    className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                 </motion.div>
               </AnimatedSection>
@@ -913,14 +912,13 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                 <motion.div
                   whileHover={{ scale: 1.025, y: -3 }}
                   transition={{ duration: 0.4 }}
-                  className="relative w-full rounded-2xl sm:rounded-3xl border-2 border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] overflow-hidden bg-[#fefaf5] dark:bg-[#0a0a0a] shadow-lg hover:shadow-[0_0_35px_rgba(241,94,28,0.45)] dark:hover:shadow-[0_0_45px_rgba(241,94,28,0.55)] transition-all duration-500 group"
+                  className="relative w-full aspect-[16/9] rounded-2xl sm:rounded-3xl border-2 border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] overflow-hidden bg-white dark:bg-[#080808] shadow-lg hover:shadow-[0_0_35px_rgba(241,94,28,0.45)] dark:hover:shadow-[0_0_45px_rgba(241,94,28,0.55)] transition-all duration-500 group"
                 >
                   <Image
                     src="/images/digital-marketing-main-2.png"
                     alt="Arav Innovations Digital Marketing Growth System & Pipeline Optimization"
-                    width={1000}
-                    height={667}
-                    className="w-full h-auto max-w-full object-contain block transition-transform duration-500 group-hover:scale-[1.03]"
+                    fill
+                    className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
                   />
 
                   {/* Radiant Outer Glowing Rectangle Border on Hover */}
