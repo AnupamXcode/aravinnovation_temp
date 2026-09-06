@@ -170,33 +170,33 @@ export function Footer() {
   }
 
   return (
-    <footer className="w-full relative bg-[#090909] text-white pt-12 pb-8 overflow-hidden select-none border-t border-[#f7d7b0]/30 dark:border-[#1a1a1a]">
+    <footer className="w-full relative bg-gradient-to-br from-[#1b2823] via-[#243e34] to-[#1b2823] text-white pt-12 pb-8 overflow-hidden select-none border-t border-[#2e936f]/40">
       
       {/* Refined Ambient Background Lighting (Arav Brand Colors: Warm Orange #f15e1c & Emerald Green #2e936f) */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#f15e1c]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#2e936f]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#f15e1c]/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#2e936f]/25 rounded-full blur-3xl pointer-events-none" />
 
       {/* Main Centered Max-Width Container */}
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10 space-y-12">
         
         {/* =========================================================================
-            LAYER 1: COMPACT TOP CTA AREA
+            LAYER 1: COMPACT TOP CTA AREA (Vibrant Brand Gradient CTA)
             ========================================================================= */}
         <AnimatedFooterSection delay={0.03}>
-          <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#17110d] via-[#1c1813] to-[#121815] border border-[#f7d7b0]/30 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden">
+          <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#f15e1c] via-[#e04f0f] to-[#fab60a] border border-[#ffec69]/40 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden text-white">
             {/* Soft Ambient Inner Glow */}
-            <div className="absolute -top-12 -left-12 w-48 h-48 bg-[#f15e1c]/15 rounded-full blur-2xl pointer-events-none" />
-            <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-[#2e936f]/15 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -top-12 -left-12 w-48 h-48 bg-white/20 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-[#ffec69]/30 rounded-full blur-2xl pointer-events-none" />
 
             <div className="space-y-2 text-left max-w-2xl relative z-10">
-              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#f15e1c]/15 border border-[#f15e1c]/30 text-[11px] font-mono font-bold text-[#f15e1c]">
-                <Sparkles className="w-3.5 h-3.5 text-[#fab60a]" />
+              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/20 border border-white/40 text-[11px] font-mono font-bold text-white shadow-xs">
+                <Sparkles className="w-3.5 h-3.5 text-[#ffec69]" />
                 <span>START YOUR TRANSFORMATION</span>
               </div>
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold font-display tracking-tight text-white leading-snug">
                 {footerConfig.ctaHeading}
               </h2>
-              <p className="text-xs sm:text-sm text-[#d0e0d8] font-medium leading-relaxed">
+              <p className="text-xs sm:text-sm text-white/95 font-medium leading-relaxed">
                 {footerConfig.ctaDescription}
               </p>
             </div>
@@ -204,7 +204,7 @@ export function Footer() {
             <div className="flex flex-wrap items-center gap-3 w-full md:w-auto shrink-0 relative z-10">
               <Link
                 href={footerConfig.ctaPrimaryHref}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#f15e1c] hover:bg-[#d8480d] text-white text-xs font-mono font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 group"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#1b2823] hover:bg-white text-white hover:text-[#1b2823] text-xs font-mono font-bold uppercase tracking-wider shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
                 <span>{footerConfig.ctaPrimaryText}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -212,7 +212,7 @@ export function Footer() {
 
               <Link
                 href={footerConfig.ctaSecondaryHref}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/10 hover:bg-white text-white hover:text-[#1b2823] border border-[#f7d7b0]/30 backdrop-blur-md text-xs font-mono font-bold uppercase tracking-wider shadow-sm transition-all duration-300 group"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/20 hover:bg-white text-white hover:text-[#1b2823] border border-white/40 backdrop-blur-md text-xs font-mono font-bold uppercase tracking-wider shadow-sm transition-all duration-300 group"
               >
                 <span>{footerConfig.ctaSecondaryHref === "/services" ? "EXPLORE SERVICES" : footerConfig.ctaSecondaryText}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -224,15 +224,15 @@ export function Footer() {
         {/* =========================================================================
             LAYER 2: MAIN FOOTER NAVIGATION (STRUCTURED MULTI-COLUMN)
             ========================================================================= */}
-        <AnimatedFooterSection delay={0.08} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 text-left border-b border-[#f7d7b0]/20 pb-10">
+        <AnimatedFooterSection delay={0.08} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 text-left border-b border-[#2e936f]/30 pb-10">
           
           {/* COLUMN 1: SERVICES (5 Cols on Large screens - Minimal clean list, NO 8 large cards) */}
           <div className="lg:col-span-5 space-y-4">
             <div className="space-y-1">
-              <h3 className="text-xs font-mono font-black text-[#f15e1c] uppercase tracking-widest">
+              <h3 className="text-xs font-mono font-black text-[#ffec69] uppercase tracking-widest">
                 SERVICES
               </h3>
-              <p className="text-[11px] text-[#a0b8b0] font-mono">
+              <p className="text-[11px] text-[#f7d7b0]/90 font-mono">
                 Enterprise Technology &amp; Growth Practices
               </p>
             </div>
@@ -248,18 +248,18 @@ export function Footer() {
                 >
                   <Link
                     href={service.href}
-                    className="group flex items-center justify-between py-1.5 px-2 -mx-2 rounded-lg hover:bg-white/5 transition-all duration-200"
+                    className="group flex items-center justify-between py-1.5 px-2 -mx-2 rounded-lg hover:bg-white/10 transition-all duration-200"
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-[11px] font-mono font-bold text-[#f15e1c]/80 group-hover:text-[#f15e1c] transition-colors">
+                      <span className="text-[11px] font-mono font-bold text-[#ffec69] group-hover:text-white transition-colors">
                         {service.num}
                       </span>
-                      <span className="text-xs sm:text-sm font-sans font-semibold text-white/90 group-hover:text-[#f15e1c] group-hover:translate-x-1 transition-all duration-200">
+                      <span className="text-xs sm:text-sm font-sans font-semibold text-white/90 group-hover:text-[#ffec69] group-hover:translate-x-1 transition-all duration-200">
                         {service.title}
                       </span>
                     </div>
 
-                    <ArrowRight className="w-3.5 h-3.5 text-[#f15e1c] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200 shrink-0 ml-2" />
+                    <ArrowRight className="w-3.5 h-3.5 text-[#ffec69] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200 shrink-0 ml-2" />
                   </Link>
                 </motion.li>
               ))}
@@ -268,15 +268,15 @@ export function Footer() {
 
           {/* COLUMN 2: COMPANY (2 Cols) */}
           <div className="lg:col-span-2 space-y-4">
-            <h3 className="text-xs font-mono font-black text-[#2e936f] uppercase tracking-widest">
+            <h3 className="text-xs font-mono font-black text-[#ffec69] uppercase tracking-widest">
               COMPANY
             </h3>
-            <ul className="space-y-2.5 text-xs font-semibold text-white/80">
+            <ul className="space-y-2.5 text-xs font-semibold text-white/85">
               {companyLinks.map((item) => (
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    className="hover:text-[#f15e1c] hover:translate-x-0.5 transition-all inline-block focus:outline-none focus:ring-1 focus:ring-[#f15e1c] rounded-xs"
+                    className="hover:text-[#ffec69] hover:translate-x-0.5 transition-all inline-block focus:outline-none focus:ring-1 focus:ring-[#f15e1c] rounded-xs"
                   >
                     {item.label}
                   </Link>
@@ -287,15 +287,15 @@ export function Footer() {
 
           {/* COLUMN 3: EXPLORE (2 Cols) */}
           <div className="lg:col-span-2 space-y-4">
-            <h3 className="text-xs font-mono font-black text-[#fab60a] uppercase tracking-widest">
+            <h3 className="text-xs font-mono font-black text-[#ffec69] uppercase tracking-widest">
               EXPLORE
             </h3>
-            <ul className="space-y-2.5 text-xs font-semibold text-white/80">
+            <ul className="space-y-2.5 text-xs font-semibold text-white/85">
               {exploreLinks.map((item) => (
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    className="hover:text-[#f15e1c] hover:translate-x-0.5 transition-all inline-block focus:outline-none focus:ring-1 focus:ring-[#f15e1c] rounded-xs"
+                    className="hover:text-[#ffec69] hover:translate-x-0.5 transition-all inline-block focus:outline-none focus:ring-1 focus:ring-[#f15e1c] rounded-xs"
                   >
                     {item.label}
                   </Link>
@@ -306,42 +306,42 @@ export function Footer() {
 
           {/* COLUMN 4: CONNECT (3 Cols) */}
           <div className="lg:col-span-3 space-y-4">
-            <h3 className="text-xs font-mono font-black text-[#f15e1c] uppercase tracking-widest">
+            <h3 className="text-xs font-mono font-black text-[#ffec69] uppercase tracking-widest">
               CONNECT
             </h3>
             
-            <ul className="space-y-2.5 text-xs font-medium text-white/80">
+            <ul className="space-y-2.5 text-xs font-medium text-white/90">
               <li>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-1.5 text-white font-bold hover:text-[#f15e1c] transition-colors"
+                  className="inline-flex items-center gap-1.5 text-white font-bold hover:text-[#ffec69] transition-colors"
                 >
                   <span>Start a Conversation</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-[#f15e1c]" />
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#ffec69]" />
                 </Link>
               </li>
               <li>
                 <a
                   href={`mailto:${footerConfig.supportEmail}`}
-                  className="inline-flex items-center gap-2 hover:text-[#f15e1c] transition-colors"
+                  className="inline-flex items-center gap-2 hover:text-[#ffec69] transition-colors"
                 >
-                  <Mail className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
+                  <Mail className="w-3.5 h-3.5 text-[#ffec69] shrink-0" />
                   <span>{footerConfig.supportEmail}</span>
                 </a>
               </li>
               <li>
                 <a
                   href={`tel:${footerConfig.phoneIndia.replace(/\s+/g, '')}`}
-                  className="inline-flex items-center gap-2 hover:text-[#f15e1c] transition-colors"
+                  className="inline-flex items-center gap-2 hover:text-[#ffec69] transition-colors"
                 >
-                  <Phone className="w-3.5 h-3.5 text-[#f15e1c] shrink-0" />
+                  <Phone className="w-3.5 h-3.5 text-[#ffec69] shrink-0" />
                   <span>{footerConfig.phoneIndia} (India)</span>
                 </a>
               </li>
               <li>
                 <a
                   href={`tel:${footerConfig.phoneUAE.replace(/\s+/g, '')}`}
-                  className="inline-flex items-center gap-2 hover:text-[#f15e1c] transition-colors"
+                  className="inline-flex items-center gap-2 hover:text-[#ffec69] transition-colors"
                 >
                   <Phone className="w-3.5 h-3.5 text-[#fab60a] shrink-0" />
                   <span>{footerConfig.phoneUAE} (UAE)</span>
@@ -351,7 +351,7 @@ export function Footer() {
 
             {/* Social Media Row */}
             <div className="pt-2 space-y-2">
-              <span className="text-[10px] font-mono text-[#a0b8b0] uppercase tracking-wider block">
+              <span className="text-[10px] font-mono text-[#f7d7b0] uppercase tracking-wider block">
                 FOLLOW US
               </span>
               <div className="flex items-center gap-2">
@@ -369,7 +369,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={soc.name}
-                    className="w-8 h-8 rounded-xl bg-white/10 hover:bg-[#f15e1c] text-white flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5 shadow-xs"
+                    className="w-8 h-8 rounded-xl bg-white/15 hover:bg-[#f15e1c] text-white flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5 shadow-xs"
                   >
                     {soc.icon}
                   </a>
@@ -393,61 +393,61 @@ export function Footer() {
                 <span className="text-base font-extrabold font-display text-white uppercase tracking-wider block">
                   ARAV INNOVATIONS
                 </span>
-                <p className="text-xs sm:text-sm text-[#a0b8b0] leading-relaxed font-sans max-w-sm">
+                <p className="text-xs sm:text-sm text-white/90 leading-relaxed font-sans max-w-sm font-medium">
                   {footerConfig.brandStatement}
                 </p>
               </div>
 
-              <div className="text-[11px] font-mono text-[#2e936f] font-bold">
+              <div className="text-[11px] font-mono text-[#ffec69] font-bold">
                 Global Operations: India &bull; UAE &bull; US &bull; EU &bull; Canada
               </div>
             </div>
 
             {/* REGIONAL PRESENCE (8 Cols - Equal Height Aligned Office Cards) */}
             <div className="lg:col-span-8 space-y-3">
-              <h3 className="text-xs font-mono font-black text-[#f15e1c] uppercase tracking-widest">
+              <h3 className="text-xs font-mono font-black text-[#ffec69] uppercase tracking-widest">
                 REGIONAL PRESENCE
               </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-stretch">
                 
                 {/* INDIA HQ CARD */}
-                <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:border-[#f15e1c]/60 hover:bg-white/10 hover:-translate-y-1 shadow-xs group">
+                <div className="p-4 rounded-xl bg-white/10 border border-white/20 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:border-[#ffec69] hover:bg-white/20 hover:-translate-y-1 shadow-xs group">
                   <div className="space-y-1.5">
-                    <div className="font-extrabold font-display text-white text-xs flex items-center gap-2 group-hover:text-[#f15e1c] transition-colors">
-                      <MapPin className="w-3.5 h-3.5 text-[#f15e1c] group-hover:scale-110 transition-transform shrink-0" />
+                    <div className="font-extrabold font-display text-white text-xs flex items-center gap-2 group-hover:text-[#ffec69] transition-colors">
+                      <MapPin className="w-3.5 h-3.5 text-[#ffec69] group-hover:scale-110 transition-transform shrink-0" />
                       <span>INDIA HQ</span>
                     </div>
-                    <p className="text-xs text-[#a0b8b0] leading-relaxed font-sans">
+                    <p className="text-xs text-white/85 leading-relaxed font-sans">
                       {footerConfig.addressIndia}
                     </p>
                   </div>
-                  <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs">
+                  <div className="pt-2 border-t border-white/20 flex items-center justify-between text-xs">
                     <a
                       href={`tel:${footerConfig.phoneIndia.replace(/\s+/g, '')}`}
-                      className="font-mono font-bold text-[#f15e1c] group-hover:underline"
+                      className="font-mono font-bold text-[#ffec69] group-hover:underline"
                     >
                       {footerConfig.phoneIndia}
                     </a>
-                    <span className="text-[10px] font-mono text-[#2e936f] font-bold">INDIA</span>
+                    <span className="text-[10px] font-mono text-[#ffec69] font-bold">INDIA</span>
                   </div>
                 </div>
 
                 {/* UAE REGIONAL OFFICE CARD */}
-                <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:border-[#2e936f]/60 hover:bg-white/10 hover:-translate-y-1 shadow-xs group">
+                <div className="p-4 rounded-xl bg-white/10 border border-white/20 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:border-[#ffec69] hover:bg-white/20 hover:-translate-y-1 shadow-xs group">
                   <div className="space-y-1.5">
-                    <div className="font-extrabold font-display text-white text-xs flex items-center gap-2 group-hover:text-[#2e936f] transition-colors">
-                      <MapPin className="w-3.5 h-3.5 text-[#2e936f] group-hover:scale-110 transition-transform shrink-0" />
+                    <div className="font-extrabold font-display text-white text-xs flex items-center gap-2 group-hover:text-[#ffec69] transition-colors">
+                      <MapPin className="w-3.5 h-3.5 text-[#ffec69] group-hover:scale-110 transition-transform shrink-0" />
                       <span>UAE REGIONAL OFFICE</span>
                     </div>
-                    <p className="text-xs text-[#a0b8b0] leading-relaxed font-sans">
+                    <p className="text-xs text-white/85 leading-relaxed font-sans">
                       {footerConfig.addressUAE}
                     </p>
                   </div>
-                  <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs">
+                  <div className="pt-2 border-t border-white/20 flex items-center justify-between text-xs">
                     <a
                       href={`tel:${footerConfig.phoneUAE.replace(/\s+/g, '')}`}
-                      className="font-mono font-bold text-[#2e936f] group-hover:underline"
+                      className="font-mono font-bold text-[#ffec69] group-hover:underline"
                     >
                       {footerConfig.phoneUAE}
                     </a>
@@ -465,7 +465,7 @@ export function Footer() {
         {/* =========================================================================
             LEGAL BAR & COPYRIGHT
             ========================================================================= */}
-        <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-[#a0b8b0]">
+        <div className="pt-6 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-white/85">
           
           {/* Legal Links */}
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6">
@@ -473,19 +473,19 @@ export function Footer() {
               <React.Fragment key={link.label}>
                 <Link
                   href={link.href}
-                  className="hover:text-white transition-colors focus:outline-none focus:ring-1 focus:ring-[#f15e1c] rounded-xs text-[11px]"
+                  className="hover:text-[#ffec69] transition-colors focus:outline-none focus:ring-1 focus:ring-[#f15e1c] rounded-xs text-[11px]"
                 >
                   {link.label}
                 </Link>
                 {idx < legalLinks.length - 1 && (
-                  <span className="text-white/20 text-[9px]">&bull;</span>
+                  <span className="text-white/40 text-[9px]">&bull;</span>
                 )}
               </React.Fragment>
             ))}
           </div>
 
           {/* Copyright */}
-          <div className="font-mono text-center sm:text-right text-[#a0b8b0] text-[11px]">
+          <div className="font-mono text-center sm:text-right text-white/80 text-[11px]">
             &copy; 2024–{new Date().getFullYear()} Arav Innovations. All rights reserved.
           </div>
         </div>
