@@ -74,9 +74,6 @@ export function TestimonialsColumn({
                 <img
                   src={item.image}
                   alt={item.name}
-                  width={44}
-                  height={44}
-                  loading="lazy"
                   className="w-11 h-11 rounded-full object-cover border border-[#f7d7b0] shrink-0"
                 />
               ) : (
@@ -85,9 +82,9 @@ export function TestimonialsColumn({
                 </div>
               )}
               <div>
-                <div className="text-sm font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
+                <h4 className="text-sm font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
                   {item.name}
-                </div>
+                </h4>
                 <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4]">
                   {item.role}
                 </p>
