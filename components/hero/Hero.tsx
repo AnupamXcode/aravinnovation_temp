@@ -14,18 +14,107 @@ import {
 } from "lucide-react";
 
 export function Hero() {
+  const sectionRef = React.useRef<HTMLElement>(null);
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+  const [videoLoaded, setVideoLoaded] = React.useState(false);
+  const [videoError, setVideoError] = React.useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
+
+  // Check prefers-reduced-motion on mount
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  // Set playbackRate = 0.75 when video metadata is loaded
+  const handleLoadedMetadata = () => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.75;
+      setVideoLoaded(true);
+    }
+  };
+
+  // Ensure playbackRate remains 0.75 when video plays
+  const handlePlay = () => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.75;
+    }
+  };
+
+  // IntersectionObserver to pause video when out of viewport & resume when visible
+  React.useEffect(() => {
+    if (!sectionRef.current || !videoRef.current || prefersReducedMotion) return;
+
+    const videoNode = videoRef.current;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            videoNode.playbackRate = 0.75;
+            videoNode.play().catch(() => {
+              // Ignore autoplay error if blocked by browser policy
+            });
+          } else {
+            videoNode.pause();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(sectionRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [prefersReducedMotion, videoLoaded]);
+
   return (
-    <section className="relative w-full min-h-[calc(100vh-80px)] sm:min-h-[calc(100vh-90px)] flex flex-col justify-center py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300">
-      {/* 1. Full-Bleed Continuous Photographic Environment Background */}
+    <section
+      ref={sectionRef}
+      className="relative w-full min-h-[calc(100vh-80px)] sm:min-h-[calc(100vh-90px)] flex flex-col justify-center py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300"
+    >
+      {/* 1. Full-Bleed Continuous Photographic / Video Environment Background */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
+        {/* Fallback Static Image (Shown if video loading, failed, or prefers-reduced-motion) */}
         <Image
           src="/images/homepage-main-bg.png"
           alt="Arav Innovations Executive Technology Platform Environment"
           fill
           priority
           unoptimized
-          className="object-cover object-center lg:object-right-top transition-opacity duration-700 opacity-100 dark:opacity-95"
+          className={`object-cover object-center lg:object-right-top transition-opacity duration-700 ${
+            videoLoaded && !videoError && !prefersReducedMotion ? "opacity-0" : "opacity-100 dark:opacity-95"
+          }`}
         />
+
+        {/* Video Background (0.75x Speed, Autoplay, Muted, Loop, PlaysInline) */}
+        {!prefersReducedMotion && !videoError && (
+          <video
+            ref={videoRef}
+            src="/videos/hero-bg.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            onLoadedMetadata={handleLoadedMetadata}
+            onPlay={handlePlay}
+            onError={() => setVideoError(true)}
+            className={`absolute inset-0 w-full h-full object-cover object-center lg:object-right-top transition-opacity duration-700 ${
+              videoLoaded ? "opacity-100 dark:opacity-95" : "opacity-0"
+            }`}
+          />
+        )}
 
         {/* Minimal Localized Vignette Mask for Text Readability - Sharp Background Intact */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9]/85 via-[#FFFDF9]/30 to-transparent dark:hidden pointer-events-none" />
@@ -38,7 +127,7 @@ export function Hero() {
 
       <div className="relative z-10 w-full px-4 sm:px-8 lg:px-12 xl:px-16 my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Left Column: Editorial Content (Sitting Directly on Background Image) */}
+          {/* Left Column: Editorial Content (Sitting Directly on Background Media) */}
           <div className="lg:col-span-8 space-y-6 sm:space-y-7 text-left max-w-3xl">
             {/* Eyebrow Label */}
             <ScrollTextFlip>
