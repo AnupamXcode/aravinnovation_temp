@@ -40,6 +40,8 @@ export interface ServiceItem {
   href: string;
   iconName: string;
   outcomes: string[];
+  objectPosition?: string;
+  mobileObjectPosition?: string;
 }
 
 const servicesData: ServiceItem[] = [
@@ -60,6 +62,8 @@ const servicesData: ServiceItem[] = [
       "Legacy System Modernization",
       "Technology Governance & Cost Optimization",
     ],
+    objectPosition: "center center",
+    mobileObjectPosition: "center center",
   },
   {
     id: 1,
@@ -78,6 +82,8 @@ const servicesData: ServiceItem[] = [
       "Multi-Channel Demand Generation",
       "Conversion Rate & ROI Optimization",
     ],
+    objectPosition: "center center",
+    mobileObjectPosition: "center center",
   },
   {
     id: 2,
@@ -96,6 +102,8 @@ const servicesData: ServiceItem[] = [
       "Microservices & API Architecture",
       "Performance & Security Optimization",
     ],
+    objectPosition: "center center",
+    mobileObjectPosition: "center center",
   },
   {
     id: 3,
@@ -114,6 +122,8 @@ const servicesData: ServiceItem[] = [
       "ISO 27001 & SOC 2 Security Governance",
       "Automated Control & Evidence Frameworks",
     ],
+    objectPosition: "center center",
+    mobileObjectPosition: "center center",
   },
   {
     id: 4,
@@ -132,6 +142,8 @@ const servicesData: ServiceItem[] = [
       "Performance & Bottleneck Analysis",
       "Actionable Remediation Blueprints",
     ],
+    objectPosition: "center center",
+    mobileObjectPosition: "center center",
   },
   {
     id: 5,
@@ -150,6 +162,8 @@ const servicesData: ServiceItem[] = [
       "Specialized Technical Skill Augmentation",
       "Internal Capability Building & Mentorship",
     ],
+    objectPosition: "center center",
+    mobileObjectPosition: "center center",
   },
   {
     id: 6,
@@ -168,6 +182,8 @@ const servicesData: ServiceItem[] = [
       "High-Intent Organic Search Strategy",
       "Authority Building & Sustainable Rankings",
     ],
+    objectPosition: "center center",
+    mobileObjectPosition: "center center",
   },
   {
     id: 7,
@@ -186,6 +202,8 @@ const servicesData: ServiceItem[] = [
       "Custom Agentic AI & Workflow Engines",
       "Real-Time Telemetry & Data Intelligence",
     ],
+    objectPosition: "center center",
+    mobileObjectPosition: "center center",
   },
 ];
 
@@ -415,9 +433,9 @@ export function InteractiveServiceStack3D() {
                       {currentService.description}
                     </p>
 
-                    {/* Enterprise Visual Showcase Image (100% Uncropped & Wide Contain) */}
+                    {/* Enterprise Visual Showcase Image (Smartly Cropped & Wide Cover) */}
                     <Link href={currentService.href} className="block group">
-                      <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] shadow-md bg-[#FFFDF9] dark:bg-[#050505]">
+                      <div className="relative w-full h-[220px] lg:h-[250px] rounded-2xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] shadow-md bg-[#FFFDF9] dark:bg-[#050505]">
                         <Image
                           src={currentService.image}
                           alt={currentService.name}
@@ -425,7 +443,8 @@ export function InteractiveServiceStack3D() {
                           unoptimized
                           priority
                           loading="eager"
-                          className="object-contain object-center transition-transform duration-500 group-hover:scale-[1.01]"
+                          className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                          style={{ objectPosition: currentService.objectPosition || "center center" }}
                         />
                       </div>
                     </Link>
@@ -557,7 +576,7 @@ export function InteractiveServiceStack3D() {
                   {currentService.description}
                 </p>
 
-                <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] bg-[#FFFDF9] dark:bg-[#050505] mt-3">
+                <div className="relative w-full h-[210px] sm:h-[240px] rounded-xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] bg-[#FFFDF9] dark:bg-[#050505] mt-3">
                   <Image
                     src={currentService.image}
                     alt={currentService.name}
@@ -565,7 +584,8 @@ export function InteractiveServiceStack3D() {
                     unoptimized
                     priority
                     loading="eager"
-                    className="object-contain object-center"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    style={{ objectPosition: currentService.mobileObjectPosition || currentService.objectPosition || "center center" }}
                   />
                 </div>
               </Link>
