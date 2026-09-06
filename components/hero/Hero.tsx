@@ -34,10 +34,10 @@ export function Hero() {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
-  // Set playbackRate = 0.4 (40% speed ultra slow-motion)
+  // Set playbackRate = 0.65 (Smooth 65% speed cinematic motion)
   const setVideoSpeed = React.useCallback(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.4;
+      videoRef.current.playbackRate = 0.65;
       setVideoLoaded(true);
     }
   }, []);
@@ -52,7 +52,7 @@ export function Hero() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            videoNode.playbackRate = 0.4;
+            videoNode.playbackRate = 0.65;
             videoNode.play().catch(() => {
               // Ignore autoplay error if blocked by browser policy
             });
@@ -90,7 +90,7 @@ export function Hero() {
           }`}
         />
 
-        {/* Crisp Unblurred Video Background (0.4x Ultra-Slow Motion, Autoplay, Muted, Loop, PlaysInline) */}
+        {/* Crisp Unblurred Video Background (Smooth 0.65x Motion, Autoplay, Muted, Loop, PlaysInline) */}
         {!prefersReducedMotion && !videoError && (
           <video
             ref={videoRef}
@@ -104,7 +104,7 @@ export function Hero() {
             onCanPlay={setVideoSpeed}
             onPlay={setVideoSpeed}
             onError={() => setVideoError(true)}
-            className={`absolute inset-0 w-full h-full object-cover object-center lg:object-right-top transition-opacity duration-700 ${
+            className={`absolute inset-0 w-full h-full object-cover object-center lg:object-right-top transform-gpu transition-opacity duration-700 ${
               videoLoaded ? "opacity-100 dark:opacity-100" : "opacity-0"
             }`}
           />
