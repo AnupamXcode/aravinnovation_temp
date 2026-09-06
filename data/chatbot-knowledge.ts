@@ -1,5 +1,5 @@
 import Fuse from "fuse.js";
-import { servicesData, getServiceBySlug } from "@/data/services";
+import { getServiceBySlug } from "@/data/services";
 
 export interface ChatbotIntentOption {
   label: string;
@@ -49,505 +49,563 @@ export function normalizeQuery(q: string): string {
     .trim();
 }
 
-export const WARM_OPENERS = {
-  en: [
-    "Great question! ",
-    "Here is how Arav Innovations can help: ",
-    "That's a key requirement. ",
-    "Happy to explain: ",
-  ],
-  hi: [
-    "बहुत अच्छा सवाल! ",
-    "आरव इनोवेशन इसमें आपकी मदद कर सकता है: ",
-    "यह एक महत्वपूर्ण आवश्यकता है। ",
-    "विवरण साझा करने में खुशी है: ",
-  ],
-  ar: [
-    "سؤال ممتاز! ",
-    "إليك كيف يمكن لآراف إينوفيشينز مساعدتك: ",
-    "هذا متطلب أساسي في التكنولوجيا. ",
-    "يسعدني تقديم التفاصيل: ",
-  ],
-};
-
-export const CASUAL_FOLLOWUPS = {
-  en: [
-    "Would you like to explore the service or discuss your requirement?",
-    "Feel free to ask any follow-up questions!",
-    "Would you like to speak with our technical team?",
-  ],
-  hi: [
-    "क्या आप सेवा देखना चाहेंगे या अपनी आवश्यकता पर चर्चा करना चाहेंगे?",
-    "बेझिझक कोई भी और सवाल पूछें!",
-    "क्या आप हमारी तकनीकी टीम से बात करना चाहेंगे?",
-  ],
-  ar: [
-    "هل ترغب في استكشاف الخدمة أو مناقشة متطلباتك؟",
-    "لا تتردد في طرح أي سؤال إضافي!",
-    "هل تود التحدث مع فريقنا الفني؟",
-  ],
-};
-
-export const BUYING_INTENT_CONFIG = {
-  strongBuyingAutoLeadForm: true,
-  moderateBuyingSuggestLeadForm: true,
-  informationalLeadFormThreshold: false,
-};
-
+// CONVERSATIONAL INTENTS CATALOGUE
 export const chatbotIntents: ChatbotIntent[] = [
-  // 1. GREETING
+  // 1. GREETINGS
   {
-    id: "greeting",
+    id: "greeting_hi",
     intentLevel: "INFORMATIONAL",
-    keywords: [
-      "hi", "hello", "hey", "hii", "namaste", "marhaba", "سلام", "नमस्ते",
-      "who are you", "what's up", "how are you", "good morning", "good afternoon",
-      "hey there", "greetings", "hello arav", "hi bot", "kya haal hai", "kaisa hai"
-    ],
+    keywords: ["hi", "hii", "hiii", "hi bot", "hi arav"],
     response: {
-      en: "Hello! Welcome to Arav Innovations. I am your business strategy assistant. How can I help with your technology, marketing, governance, or project requirements today?",
-      hi: "नमस्ते! आरव इनोवेशन में आपका स्वागत है। मैं आपका व्यावसायिक सहायक हूँ। आज मैं आपकी प्रौद्योगिकी, विपणन या परियोजना आवश्यकताओं में कैसे मदद कर सकता हूँ?",
-      ar: "مرحباً بك في آراف إينوفيشينز. أنا مساعدك الاستراتيجي. كيف يمكنني مساعدتك في استفسارات التقنية والتسويق وإدارة المشاريع اليوم؟",
+      en: "Hi! How can I help you today?",
+      hi: "नमस्ते! आज मैं आपकी क्या मदद कर सकता हूँ?",
+      ar: "مرحباً! كيف يمكنني مساعدتك اليوم؟",
     },
     options: {
       en: [
         { label: "Explore Services", action: "all_services" },
-        { label: "Start a Conversation", action: "start_project" },
-        { label: "Office Locations", action: "locations" },
+        { label: "Build / Improve a Website", action: "navigate", route: "/services/web-app-development" },
+        { label: "Modernize IT", action: "navigate", route: "/services/it-strategy-implementation" },
+        { label: "Grow Online", action: "navigate", route: "/services/digital-marketing-brand-development" },
+        { label: "Explore AI", action: "navigate", route: "/services/ai-portfolio" },
+        { label: "Talk to Our Team", action: "navigate", route: "/contact" },
       ],
       hi: [
         { label: "सेवाएं देखें", action: "all_services" },
-        { label: "चर्चा शुरू करें", action: "start_project" },
-        { label: "कार्यालय स्थान", action: "locations" },
+        { label: "वेबसाइट बनाएं", action: "navigate", route: "/services/web-app-development" },
+        { label: "आईटी आधुनिक बनाएं", action: "navigate", route: "/services/it-strategy-implementation" },
+        { label: "टीम से बात करें", action: "navigate", route: "/contact" },
       ],
       ar: [
         { label: "استكشف الخدمات", action: "all_services" },
-        { label: "بدء مشروع", action: "start_project" },
-        { label: "الفروع والمكاتب", action: "locations" },
+        { label: "تطوير موقع", action: "navigate", route: "/services/web-app-development" },
+        { label: "التواصل معنا", action: "navigate", route: "/contact" },
       ],
     },
   },
+  {
+    id: "greeting_hello",
+    intentLevel: "INFORMATIONAL",
+    keywords: ["hello", "hello arav", "hello bot", "namaste", "marhaba", "नमस्ते"],
+    response: {
+      en: "Hello! What are you looking to improve or build?",
+      hi: "नमस्ते! आप क्या बनाना या बेहतर करना चाहते हैं?",
+      ar: "أهلاً بك! ما الذي تتطلع لتطويره أو بنائه؟",
+    },
+    options: {
+      en: [
+        { label: "Explore Core Services", action: "all_services" },
+        { label: "Start a Conversation", action: "start_project" },
+      ],
+      hi: [
+        { label: "मुख्य सेवाएं देखें", action: "all_services" },
+        { label: "बातचीत शुरू करें", action: "start_project" },
+      ],
+      ar: [
+        { label: "استكشف الخدمات", action: "all_services" },
+        { label: "بدء المحادثة", action: "start_project" },
+      ],
+    },
+  },
+  {
+    id: "greeting_hey",
+    intentLevel: "INFORMATIONAL",
+    keywords: ["hey", "hey there", "heyy", "heya"],
+    response: {
+      en: "Hey! Happy to help. What can I help you with?",
+      hi: "हे! मदद करके खुशी होगी। मैं आपकी क्या मदद कर सकता हूँ?",
+      ar: "مرحباً! يسعدني مساعدتك. كيف يمكنني إفادتك؟",
+    },
+  },
+  {
+    id: "greeting_morning",
+    intentLevel: "INFORMATIONAL",
+    keywords: ["good morning", "good afternoon", "good evening"],
+    response: {
+      en: "Good morning! What can I help you explore today?",
+      hi: "शुभ प्रभात! आज आप क्या एक्सप्लोर करना चाहते हैं?",
+      ar: "صباح الخير! ما الذي ترغب في استكشافه اليوم؟",
+    },
+  },
+  {
+    id: "greeting_how_are_you",
+    intentLevel: "INFORMATIONAL",
+    keywords: ["how are you", "how r u", "kya haal hai", "kaisa hai", "how do you do", "what's up"],
+    response: {
+      en: "I'm doing well, thanks! How can I help with your business or technology needs?",
+      hi: "मैं बढ़िया हूँ, धन्यवाद! आज आपकी व्यावसायिक या तकनीकी आवश्यकताओं में कैसे मदद कर सकता हूँ?",
+      ar: "أنا بخير، شكراً لك! كيف يمكنني مساعدتك في متطلبات عملك या تقنيتك؟",
+    },
+  },
 
-  // 2. SERVICES OVERVIEW
+  // 2. GENERAL OVERVIEW & "WHAT DO YOU DO?"
   {
     id: "services_overview",
     intentLevel: "INFORMATIONAL",
     keywords: [
-      "services", "practices", "what do you offer", "capabilities", "خدمات", "सेवाएं", "क्या करते हो",
-      "what does arav do", "what are your services", "what can you help with", "whats your expertise",
-      "tell me about your offerings", "what's your specialty", "what problems can you solve",
-      "are you a development agency", "list your services", "what do you guys do", "what do you build",
-      "what solutions do you provide", "core competencies", "service catalog",
-      "servises", "wht servises", "wht services", "what servises", "wht offer", "servises offer",
-      "what servises do yu offer", "wht servises do yu offer", "services do you offer", "services offered",
-      "our services", "core services"
+      "what do you do", "what services do you provide", "what can you help with",
+      "how can arav help me", "what do you guys actually do", "what does arav do",
+      "whats your expertise", "what problems can you solve", "what solutions do you provide",
+      "core competencies", "capabilities", "what do you offer"
     ],
     response: {
-      en: "Arav Innovations provides enterprise technology & digital services across IT Strategy, Web & App Development, Digital Marketing, SEO, Risk & Compliance, System Audits, Staff Augmentation, and AI Solutions.",
-      hi: "आरव इनोवेशन आईटी रणनीति, वेब एवं ऐप विकास, डिजिटल मार्केटिंग, एसईओ, जोखिम अनुपालन, ऑडिट, टीम विस्तार और एआई समाधानों में मुख्य सेवाएं प्रदान करता है।",
-      ar: "تقدم آراف إينوفيشينز خدمات استراتيجية التقنية، تطوير الويب، التسويق الرقمي، SEO، الامتثال والتدقيق، ودعم الكفاءات وحلول الذكاء الاصطناعي.",
+      en: "Arav Innovations helps businesses with technology strategy, digital growth, software development, governance, audit, SEO, talent and practical AI solutions.\n\nTell me what you're trying to achieve, and I can point you to the most relevant area.",
+      hi: "आरव इनोवेशन तकनीक रणनीति, डिजिटल ग्रोथ, सॉफ्टवेयर डेवलपमेंट, अनुपालन, ऑडिट, एसईओ और एआई समाधानों में मदद करता है।\n\nआप क्या हासिल करना चाहते हैं बताएं, मैं आपको सही सेवा की सलाह दूंगा।",
+      ar: "تساعد آراف إينوفيشينز الشركات في استراتيجيات التقنية، النمو الرقمي، تطوير البرمجيات، الحوكمة، التدقيق، وحلول الذكاء الاصطناعي.\n\nأخبرنا بما تريد تحقيقه لنوجهك للخدمة المناسبة.",
     },
     options: {
       en: [
-        { label: "Web & App Dev", action: "navigate", route: "/services/web-app-development" },
-        { label: "SEO Services", action: "navigate", route: "/services/seo-services" },
         { label: "IT Strategy", action: "navigate", route: "/services/it-strategy-implementation" },
-        { label: "AI Portfolio", action: "navigate", route: "/services/ai-portfolio" },
+        { label: "Digital Growth", action: "navigate", route: "/services/digital-marketing-brand-development" },
+        { label: "Web & Applications", action: "navigate", route: "/services/web-app-development" },
+        { label: "Governance", action: "navigate", route: "/services/risk-compliance-governance" },
+        { label: "Audit", action: "navigate", route: "/services/audit-improvement" },
+        { label: "Training & Talent", action: "navigate", route: "/services/training-staff-augmentation" },
+        { label: "SEO", action: "navigate", route: "/services/seo-services" },
+        { label: "AI Solutions", action: "navigate", route: "/services/ai-portfolio" },
       ],
       hi: [
-        { label: "वेब एवं ऐप विकास", action: "navigate", route: "/services/web-app-development" },
-        { label: "एसईओ सेवाएं", action: "navigate", route: "/services/seo-services" },
         { label: "आईटी रणनीति", action: "navigate", route: "/services/it-strategy-implementation" },
+        { label: "वेब एवं ऐप", action: "navigate", route: "/services/web-app-development" },
+        { label: "एसईओ सेवाएं", action: "navigate", route: "/services/seo-services" },
         { label: "एआई समाधान", action: "navigate", route: "/services/ai-portfolio" },
       ],
       ar: [
+        { label: "استراتيجية التقنية", action: "navigate", route: "/services/it-strategy-implementation" },
         { label: "تطوير الويب", action: "navigate", route: "/services/web-app-development" },
         { label: "خدمات SEO", action: "navigate", route: "/services/seo-services" },
-        { label: "استراتيجية التقنية", action: "navigate", route: "/services/it-strategy-implementation" },
         { label: "حلول AI", action: "navigate", route: "/services/ai-portfolio" },
       ],
     },
   },
 
-  // 3. SEO INTENT
+  // 3. ALL CORE SERVICES EXPLICIT LIST
+  {
+    id: "all_services_list",
+    intentLevel: "INFORMATIONAL",
+    keywords: [
+      "tell me all your services", "what are your core services", "what services do you offer",
+      "tell me everything about all your services", "list your services", "all services",
+      "show all services", "service catalog", "full service list", "core services list", "explain all services"
+    ],
+    response: {
+      en: "Sure. Our core services cover:\n\n• IT Strategy & Implementation\n• Digital Marketing & Brand Development\n• Web & Application Development\n• Risk, Compliance & Governance\n• Audit & Improvement\n• Training & Staff Augmentation\n• SEO Services\n• AI Portfolio\n\nWhich one would you like to explore?",
+      hi: "ज़रूर। हमारी मुख्य सेवाएं निम्नलिखित हैं:\n\n• आईटी रणनीति एवं कार्यान्वयन\n• डिजिटल मार्केटिंग एवं ब्रांड विकास\n• वेब एवं एप्लिकेशन विकास\n• जोखिम, अनुपालन एवं गवर्नेंस\n• ऑडिट एवं सुधार\n• प्रशिक्षण एवं टीम विस्तार\n• एसईओ सेवाएं\n• एआई पोर्टफोलियो\n\nआप किस सेवा के बारे में जानना चाहते हैं?",
+      ar: "تشمل خدماتنا الرئيسية:\n\n• استراتيجية التقنية والتنفيذ\n• التسويق الرقمي وبناء العلامة\n• تطوير الويب والتطبيقات\n• الحوكمة والامتثال والارتقاء\n• التدقيق والتحسين\n• التدريب ودعم الكفاءات\n• خدمات SEO\n• حلول الذكاء الاصطناعي",
+    },
+    options: {
+      en: [
+        { label: "IT Strategy", action: "navigate", route: "/services/it-strategy-implementation", ctaType: "page" },
+        { label: "Web & App Dev", action: "navigate", route: "/services/web-app-development", ctaType: "page" },
+        { label: "Digital Marketing", action: "navigate", route: "/services/digital-marketing-brand-development", ctaType: "page" },
+        { label: "SEO Services", action: "navigate", route: "/services/seo-services", ctaType: "page" },
+        { label: "Risk & Governance", action: "navigate", route: "/services/risk-compliance-governance", ctaType: "page" },
+        { label: "Audit & FinOps", action: "navigate", route: "/services/audit-improvement", ctaType: "page" },
+        { label: "Staff Augmentation", action: "navigate", route: "/services/training-staff-augmentation", ctaType: "page" },
+        { label: "AI Portfolio", action: "navigate", route: "/services/ai-portfolio", ctaType: "page" },
+      ],
+      hi: [
+        { label: "वेब एवं ऐप विकास", action: "navigate", route: "/services/web-app-development", ctaType: "page" },
+        { label: "एसईओ सेवाएं", action: "navigate", route: "/services/seo-services", ctaType: "page" },
+        { label: "सभी सेवाएं देखें", action: "navigate", route: "/services", ctaType: "page" },
+      ],
+      ar: [
+        { label: "تطوير الويب", action: "navigate", route: "/services/web-app-development", ctaType: "page" },
+        { label: "جميع الخدمات", action: "navigate", route: "/services", ctaType: "page" },
+      ],
+    },
+  },
+
+  // 4. "HOW CAN YOU HELP ME?" OUTCOME INTENT
+  {
+    id: "how_can_you_help_me",
+    intentLevel: "INFORMATIONAL",
+    keywords: [
+      "how can you help me", "how can arav help my business", "what can you do for my company",
+      "how can you help our business", "how can you help my company"
+    ],
+    response: {
+      en: "We can help you modernize technology, improve digital growth, build or improve applications, strengthen governance, improve operational efficiency, develop SEO visibility, add technical talent and apply AI where it makes business sense.\n\nTell me the challenge you're facing, and I'll suggest the best starting point.",
+      hi: "हम तकनीक को आधुनिक बनाने, ऑनलाइन ग्रोथ बढ़ाने, स्केलेबल ऐप्स बनाने, अनुपालन मजबूत करने और एआई लागू करने में मदद करते हैं।\n\nअपनी चुनौती बताएं, हम सही शुरुआत की सिफारिश करेंगे।",
+      ar: "نساعدك في تحديث التكنولوجيا، تحسين النمو الرقمي، بناء التطبيقات، تعزيز الحوكمة، وتطبيق الذكاء الاصطناعي.\n\nأخبرنا بالتحدي الذي تواجهه لنقترح نقطة البداية.",
+    },
+  },
+
+  // 5. SEO SERVICES INTENT
   {
     id: "seo_services",
     intentLevel: "INFORMATIONAL",
     associatedServiceSlug: "seo-services",
     keywords: [
-      "seo", "seo services", "search engine optimization", "google ranking", "organic traffic",
-      "search visibility", "help me rank on google", "rank my website", "rank website", "higher on google",
-      "b2b seo", "technical seo", "gugle", "gogle", "rankin", "reank", "search strategy", "seo services pls",
-      "can u help me rank my website", "need seo for b2b company", "get website higher on google"
+      "seo", "seo services", "search engine optimization", "google ranking", "search visibility",
+      "organic traffic", "rank higher", "technical seo", "my website isn't ranking", "my website isn't getting traffic",
+      "website traffic", "seo servic", "gugle", "gogle", "rankin", "seo?", "seo improve karni hai",
+      "rank my website", "search traffic", "google ranking", "higher on google", "seo strategy"
     ],
     response: {
-      en: "We help businesses improve organic search visibility through technical SEO, Core Web Vitals remediation, search intent alignment, structured data schema, and topical authority hubs.\n\nOur SEO Services are engineered around how customers discover and evaluate businesses today.",
-      hi: "हम तकनीकी एसईओ, सर्च इंटेंट अनुकूलन, कोर वेब वाइटल्स और विषयगत अथॉरिटी द्वारा व्यवसायों की ऑर्गेनिक विजिबिलिटी बढ़ाने में मदद करते हैं।",
-      ar: "نساعد الشركات على تحسين ظهورها في نتائج البحث من خلال SEO الفني، وتحسين سرعة الموقع، وهيكلة البيانات، وبناء السمعة الرقمية.",
+      en: "Yes, we can help improve search visibility through technical SEO, content and site optimization.\n\nIs the main issue low rankings or low organic traffic?",
+      hi: "हाँ, हम तकनीकी एसईओ, कंटेंट और साइट ऑप्टिमाइजेशन के माध्यम से आपकी सर्च विजिबिलिटी में सुधार कर सकते हैं।\n\nक्या मुख्य समस्या कम रैंकिंग है या कम ऑर्गेनिक ट्रैफिक?",
+      ar: "نعم، نساعدك في تحسين الظهور عبر محركات البحث من خلال SEO الفني وتحسين الموقع.",
     },
     options: {
       en: [
-        { label: "Explore SEO Services", action: "navigate", route: "/services/seo-services", ctaType: "page" },
-        { label: "Build My Search Strategy", action: "start_project", payload: "SEO Strategy Discussion", ctaType: "action" },
+        { label: "Explore SEO Services →", action: "navigate", route: "/services/seo-services", ctaType: "page" },
+        { label: "Start a Conversation →", action: "start_project", payload: "SEO Requirement", ctaType: "action" },
       ],
       hi: [
-        { label: "एसईओ सेवाएं देखें", action: "navigate", route: "/services/seo-services", ctaType: "page" },
-        { label: "सर्च रणनीति बनाएं", action: "start_project", payload: "SEO Strategy Discussion", ctaType: "action" },
+        { label: "एसईओ सेवाएं देखें →", action: "navigate", route: "/services/seo-services", ctaType: "page" },
+        { label: "चर्चा शुरू करें →", action: "start_project", payload: "SEO Requirement", ctaType: "action" },
       ],
       ar: [
-        { label: "استكشف خدمات SEO", action: "navigate", route: "/services/seo-services", ctaType: "page" },
-        { label: "بناء استراتيجية البحث", action: "start_project", payload: "SEO Strategy Discussion", ctaType: "action" },
+        { label: "استكشف خدمات SEO →", action: "navigate", route: "/services/seo-services", ctaType: "page" },
+        { label: "بدء المحادثة →", action: "start_project", payload: "SEO Requirement", ctaType: "action" },
       ],
     },
   },
 
-  // 4. DIGITAL MARKETING INTENT
-  {
-    id: "digital_marketing",
-    intentLevel: "INFORMATIONAL",
-    associatedServiceSlug: "digital-marketing-brand-development",
-    keywords: [
-      "marketing", "digital marketing", "online marketing", "lead generation", "digital growth",
-      "online growth", "b2b marketing", "linkedin ads", "google ads", "brand development", "growth strategy",
-      "lead gen", "online visibility", "digital visibility and leads", "better digital visibility",
-      "brand strategy", "performance marketing"
-    ],
-    response: {
-      en: "We engineer high-intent B2B demand generation campaigns across LinkedIn & Search, supported by brand positioning, landing page conversion optimization, and closed-loop revenue attribution.\n\nOur Digital Marketing and Brand Development service replaces generic ad spend with verified pipeline.",
-      hi: "हम लिंक्डइन और सर्च पर उच्च-इरादे वाले B2B डिमांड जनरेशन अभियान चलाते हैं, जो ब्रांड पोजिशनिंग और रूपांतरण अनुकूलन द्वारा समर्थित हैं।",
-      ar: "نصمم حملات التسويق الرقمي واستقطاب العملاء B2B عبر LinkedIn و Google Search مع تحسين نسب التحويل وهيكلة العلامة التجارية.",
-    },
-    options: {
-      en: [
-        { label: "Explore Digital Marketing", action: "navigate", route: "/services/digital-marketing-brand-development", ctaType: "page" },
-        { label: "Build My Growth Strategy", action: "start_project", payload: "Digital Growth Discussion", ctaType: "action" },
-      ],
-      hi: [
-        { label: "डिजिटल मार्केटिंग देखें", action: "navigate", route: "/services/digital-marketing-brand-development", ctaType: "page" },
-        { label: "ग्रोथ रणनीति बनाएं", action: "start_project", payload: "Digital Growth Discussion", ctaType: "action" },
-      ],
-      ar: [
-        { label: "استكشف التسويق الرقمي", action: "navigate", route: "/services/digital-marketing-brand-development", ctaType: "page" },
-        { label: "بناء استراتيجية النمو", action: "start_project", payload: "Digital Growth Discussion", ctaType: "action" },
-      ],
-    },
-  },
-
-  // 5. WEB & APPLICATION DEVELOPMENT INTENT
+  // 6. WEB & APPLICATION DEVELOPMENT INTENT
   {
     id: "web_app_dev",
     intentLevel: "INFORMATIONAL",
     associatedServiceSlug: "web-app-development",
     keywords: [
-      "website", "web development", "website development", "web app", "application development",
-      "software development", "custom application", "enterprise application", "build an enterprise application",
-      "modernize our old software", "modernize old software", "erp", "old erp", "build app", "saas portal",
-      "frontend", "backend", "full stack", "mondernize", "devoloper", "web app dev", "custom software",
-      "need a new enterprise application", "i need a new enterprise application", "build web app", "web application"
+      "website", "web development", "website development", "web app", "application", "software",
+      "platform", "portal", "enterprise application", "custom software", "build a website",
+      "need a new business website", "new business website", "web devlopment", "website?",
+      "mujhe website banwani hai", "mujhe apne business ke liye website banwani hai", "build web app",
+      "web application", "saas portal", "mobile app", "ecommerce website", "e-commerce website", "e-commerce"
     ],
     response: {
-      en: "We build subsecond Next.js web portals, multi-tenant SaaS platforms, microservices, and native mobile applications engineered for security and high scale.\n\nOur Web and Application Development practice transforms legacy systems into resilient digital experiences.",
-      hi: "हम Next.js वेब पोर्टल, मल्टी-टैनेंट SaaS प्लेटफॉर्म, माइक्रोसर्विसेज और मोबाइल ऐप बनाते हैं जो उच्च सुरक्षा और स्केलेबिलिटी के लिए इंजीनियर किए गए हैं।",
-      ar: "نبني منصات Next.js السريعة، وبوابات SaaS، وتطبيقات الجوال ذات الأداء العالي والأمان المؤسسي.",
+      en: "Absolutely. We design and develop scalable web and application experiences around your business goals.",
+      hi: "बिल्कुल! हम आपकी व्यावसायिक प्राथमिकताओं के अनुसार आधुनिक और स्केलेबल वेब अनुभव डिजाइन और विकसित करते हैं।\n\nक्या आपको नई वेबसाइट चाहिए या पुरानी वेबसाइट बेहतर करनी है?",
+      ar: "بالتأكيد! نصمم ونطور تطبيقات وتجارب ويب سريعة وآمنة وقابلة للتوسع.",
     },
     options: {
       en: [
-        { label: "Explore Web & App Dev", action: "navigate", route: "/services/web-app-development", ctaType: "page" },
-        { label: "Build My Application", action: "start_project", payload: "Web Application Requirement", ctaType: "action" },
+        { label: "Explore Web & Application Development →", action: "navigate", route: "/services/web-app-development", ctaType: "page" },
+        { label: "Discuss Web Project →", action: "start_project", payload: "Web Application Project", ctaType: "action" },
       ],
       hi: [
-        { label: "वेब विकास देखें", action: "navigate", route: "/services/web-app-development", ctaType: "page" },
-        { label: "एप्लिकेशन बनाएं", action: "start_project", payload: "Web Application Requirement", ctaType: "action" },
+        { label: "वेब विकास देखें →", action: "navigate", route: "/services/web-app-development", ctaType: "page" },
+        { label: "प्रोजेक्ट शुरू करें →", action: "start_project", payload: "Web Application Project", ctaType: "action" },
       ],
       ar: [
-        { label: "استكشف تطوير الويب", action: "navigate", route: "/services/web-app-development", ctaType: "page" },
-        { label: "بناء التطبيق", action: "start_project", payload: "Web Application Requirement", ctaType: "action" },
+        { label: "استكشف تطوير الويب →", action: "navigate", route: "/services/web-app-development", ctaType: "page" },
+        { label: "بدء مشروع →", action: "start_project", payload: "Web Application Project", ctaType: "action" },
       ],
     },
   },
 
-  // 6. IT STRATEGY & CONSULTING INTENT
+  // 7. IT STRATEGY & IMPLEMENTATION INTENT
   {
     id: "it_strategy",
     intentLevel: "INFORMATIONAL",
     associatedServiceSlug: "it-strategy-implementation",
     keywords: [
-      "it strategy", "technology strategy", "it roadmap", "legacy modernization", "cloud strategy",
-      "technology planning", "cloud migration", "cto consulting", "architecture", "modernization",
-      "tech roadmap", "it infrastructure", "technology help", "need technology help", "cloud infrastructure"
+      "it strategy", "it strategy & implementation", "technology strategy", "it roadmap", "technology roadmap",
+      "modernize it", "legacy modernization", "cloud strategy", "technology transformation",
+      "infrastructure modernization", "digital transformation", "our it is outdated",
+      "modernizing our old it infrastructure", "it strategy?", "it infrastructure", "cloud migration",
+      "cto consulting", "outdated infrastructure", "modernize legacy infrastructure"
     ],
     response: {
-      en: "We partner with CTOs and leadership teams to modernize legacy codebases, design zero-trust multi-cloud roadmaps (AWS/Azure/GCP), and optimize technical architecture for long-term growth.\n\nOur IT Strategy & Implementation practice ensures technology investments drive verified ROI.",
-      hi: "हम सीटीओ और वरिष्ठ निदेशकों के साथ मिलकर लेगेसी प्रणालियों का आधुनिकीकरण करते हैं और क्लाउड रोडमैप तैयार करते हैं।",
-      ar: "نشترك مع مدراء التكنولوجيا لتحديث الأنظمة القديمة وتصميم الخطط السحابية وتطوير الهندسة المعمارية البرمجية.",
+      en: "Absolutely. We can help modernize legacy infrastructure through IT strategy, cloud modernization, application transformation and implementation.\n\nAre you looking to modernize infrastructure, applications, or both?",
+      hi: "बिल्कुल! हम आईटी रणनीति, क्लाउड आधुनिकीकरण और एप्लिकेशन ट्रांसफॉर्मेशन के माध्यम से लेगेसी इंफ्रास्ट्रक्चर को आधुनिक बनाने में मदद करते हैं।",
+      ar: "بالتأكيد! نساعدك في تحديث البنية التحتية القديمة وتصميم الاستراتيجيات السحابية والهندسة المعمارية.",
     },
     options: {
       en: [
-        { label: "Explore IT Strategy", action: "navigate", route: "/services/it-strategy-implementation", ctaType: "page" },
-        { label: "Build My Technology Roadmap", action: "start_project", payload: "IT Strategy Roadmap", ctaType: "action" },
+        { label: "Explore IT Strategy & Implementation →", action: "navigate", route: "/services/it-strategy-implementation", ctaType: "page" },
+        { label: "Schedule Technical Audit →", action: "start_project", payload: "IT Strategy Audit", ctaType: "action" },
       ],
       hi: [
-        { label: "आईटी रणनीति देखें", action: "navigate", route: "/services/it-strategy-implementation", ctaType: "page" },
-        { label: "टेक्नोलॉजी रोडमैप बनाएं", action: "start_project", payload: "IT Strategy Roadmap", ctaType: "action" },
+        { label: "आईटी रणनीति देखें →", action: "navigate", route: "/services/it-strategy-implementation", ctaType: "page" },
+        { label: "तकनीकी ऑडिट शेड्यूल करें →", action: "start_project", payload: "IT Strategy Audit", ctaType: "action" },
       ],
       ar: [
-        { label: "استكشف استراتيجية التقنية", action: "navigate", route: "/services/it-strategy-implementation", ctaType: "page" },
-        { label: "بناء خريطة الطريق", action: "start_project", payload: "IT Strategy Roadmap", ctaType: "action" },
+        { label: "استكشف استراتيجية التقنية →", action: "navigate", route: "/services/it-strategy-implementation", ctaType: "page" },
+        { label: "جدولة تدقيق فني →", action: "start_project", payload: "IT Strategy Audit", ctaType: "action" },
       ],
     },
   },
 
-  // 7. RISK, COMPLIANCE & GOVERNANCE INTENT
-  {
-    id: "risk_compliance",
-    intentLevel: "INFORMATIONAL",
-    associatedServiceSlug: "risk-compliance-governance",
-    keywords: [
-      "compliance", "governance", "risk", "security governance", "regulatory requirements",
-      "dpdp", "gdpr", "soc2", "iso 27001", "data privacy", "cybersecurity governance", "compilance",
-      "regulatory", "compliance and governance support", "compliance support", "governance support"
-    ],
-    response: {
-      en: "We assist enterprise organizations with India DPDP Act 2023 readiness, SOC-2 framework preparedness, ISO 27001 evidence tracking, and end-to-end data governance controls.\n\nOur Risk, Compliance & Governance practice protects enterprise resilience without slowing speed.",
-      hi: "हम भारत DPDP एक्ट 2023, SOC-2 ढाँचे और ISO 27001 अनुपालन के साथ डेटा सुरक्षा और गवर्नेंस लागू करते हैं।",
-      ar: "نساعد المؤسسات في الالتزام بقوانين حماية البيانات DPDP والمعايير الدولية SOC 2 و ISO 27001 لضمان الأمان السيبراني.",
-    },
-    options: {
-      en: [
-        { label: "Explore Risk & Compliance", action: "navigate", route: "/services/risk-compliance-governance", ctaType: "page" },
-        { label: "Check Compliance Readiness", action: "start_project", payload: "Compliance Check Inquiry", ctaType: "action" },
-      ],
-      hi: [
-        { label: "जोखिम अनुपालन देखें", action: "navigate", route: "/services/risk-compliance-governance", ctaType: "page" },
-        { label: "अनुपालन जांच करें", action: "start_project", payload: "Compliance Check Inquiry", ctaType: "action" },
-      ],
-      ar: [
-        { label: "استكشف الامتثال والحوكمة", action: "navigate", route: "/services/risk-compliance-governance", ctaType: "page" },
-        { label: "فحص الامتثال", action: "start_project", payload: "Compliance Check Inquiry", ctaType: "action" },
-      ],
-    },
-  },
-
-  // 8. AUDIT & IMPROVEMENT INTENT
-  {
-    id: "system_audit_finops",
-    intentLevel: "INFORMATIONAL",
-    associatedServiceSlug: "audit-improvement",
-    keywords: [
-      "audit", "assessment", "review", "technology assessment", "technology audit", "system audit",
-      "finops", "cloud cost", "reduce cloud bill", "improve our systems", "audt", "system assessment",
-      "audit our technology environment", "audit technology", "system review", "performance audit"
-    ],
-    response: {
-      en: "We assess operational processes, technology architectures, and cloud environments to uncover friction, optimize query latencies, and reduce cloud infrastructure bills by up to 40%.\n\nOur Audit & Improvement practice turns objective evidence into practical priorities.",
-      hi: "हम प्रक्रियाओं और क्लाउड इंफ्रास्ट्रक्चर का निष्पक्ष ऑडिट करते हैं और क्लाउड बिल को 40% तक कम करने में मदद करते हैं।",
-      ar: "نقوم بتدقيق الأنظمة والبنية التحتية السحابية لتقليل التكاليف بنسبة تصل إلى 40% وتحسين الأداء التشغيلي.",
-    },
-    options: {
-      en: [
-        { label: "Explore Audit & Improvement", action: "navigate", route: "/services/audit-improvement", ctaType: "page" },
-        { label: "Start System Audit", action: "start_project", payload: "Audit & Assessment Requirement", ctaType: "action" },
-      ],
-      hi: [
-        { label: "ऑडिट एवं सुधार देखें", action: "navigate", route: "/services/audit-improvement", ctaType: "page" },
-        { label: "सिस्टम ऑडिट शुरू करें", action: "start_project", payload: "Audit & Assessment Requirement", ctaType: "action" },
-      ],
-      ar: [
-        { label: "استكشف التدقيق والتحسين", action: "navigate", route: "/services/audit-improvement", ctaType: "page" },
-        { label: "بدء تدقيق الأنظمة", action: "start_project", payload: "Audit & Assessment Requirement", ctaType: "action" },
-      ],
-    },
-  },
-
-  // 9. TRAINING & STAFF AUGMENTATION INTENT
-  {
-    id: "staff_augmentation",
-    intentLevel: "INFORMATIONAL",
-    associatedServiceSlug: "training-staff-augmentation",
-    keywords: [
-      "training", "upskilling", "reskilling", "capability building", "developers", "technical staff",
-      "specialists", "additional team members", "extended team", "hire developers", "pod", "staff augmentation",
-      "need developers", "devoloper", "devs", "team capability", "developers or technical specialists",
-      "technical specialists for a project", "need developers or technical specialists"
-    ],
-    response: {
-      en: "We deploy pre-vetted senior software engineers, cloud architects, DevOps leads, and QA specialists who integrate into your sprint cycles within 48 to 72 hours, alongside corporate upskilling cohorts.\n\nOur Training & Staff Augmentation practice accelerates delivery velocity.",
-      hi: "हम सीनियर सॉफ्टवेयर इंजीनियर्स और क्लाउड विशेषज्ञों को 48-72 घंटों में आपकी टीम के साथ एकीकृत करते हैं।",
-      ar: "نوفر فرق عمل هندسية مخصصة ومستقلة تندمج مع فريقك خلال 48-72 ساعة لزيادة سرعة التنفيذ.",
-    },
-    options: {
-      en: [
-        { label: "Explore Staff Augmentation", action: "navigate", route: "/services/training-staff-augmentation", ctaType: "page" },
-        { label: "Build My Team Capability", action: "start_project", payload: "Staff Augmentation Requirement", ctaType: "action" },
-      ],
-      hi: [
-        { label: "टीम विस्तार देखें", action: "navigate", route: "/services/training-staff-augmentation", ctaType: "page" },
-        { label: "टीम क्षमता बढ़ाएं", action: "start_project", payload: "Staff Augmentation Requirement", ctaType: "action" },
-      ],
-      ar: [
-        { label: "استكشف دعم الكفاءات", action: "navigate", route: "/services/training-staff-augmentation", ctaType: "page" },
-        { label: "بناء قدرات الفريق", action: "start_project", payload: "Staff Augmentation Requirement", ctaType: "action" },
-      ],
-    },
-  },
-
-  // 10. AI PORTFOLIO & AUTOMATION INTENT
+  // 8. AI PORTFOLIO & AUTOMATION INTENT
   {
     id: "ai_automation",
     intentLevel: "INFORMATIONAL",
     associatedServiceSlug: "ai-portfolio",
     keywords: [
-      "ai", "artificial intelligence", "ai solutions", "automation", "ai systems", "intelligent workflows",
-      "llm", "rag", "chatbots", "machine learning", "ai portfolio", "intelligent automation",
-      "how can ai help our business", "how can ai help my business", "ai for business", "i want ai",
-      "ai solutions for my company"
+      "ai", "ai?", "artificial intelligence", "ai automation", "workflow automation", "ai agents",
+      "ai implementation", "ai integration", "business ai", "artifical intelligence", "automtion",
+      "ai solutions", "ai se automation karna hai", "automate repetitive business processes with ai",
+      "llm", "rag", "chatbots", "automate process"
     ],
     response: {
-      en: "We design, build, and deploy production-ready AI solutions, including Retrieval-Augmented Generation (RAG) knowledge search engines, LLM pipelines, automated bots, and intelligent workflow automation.\n\nOur AI Portfolio delivers secure, measurable AI implementation.",
-      hi: "हम कस्टम RAG नॉलेज सर्च इंजन, LLM पाइपलाइनों और बुद्धिमान स्वचालन के साथ एंटरप्राइज एआई समाधान बनाते हैं।",
-      ar: "نبني تطبيقات ذكاء اصطناعي مخصصة للمؤسسات تشمل محركات بحث RAG، وأتمتة مسارات العمل الذكية.",
+      en: "Yes. We help identify practical AI and workflow-automation opportunities and turn them into working business systems.\n\nWhat process are you looking to automate?",
+      hi: "हाँ! हम व्यावहारिक एआई और वर्कफ़्लो ऑटोमेशन के अवसरों की पहचान करते हैं और उन्हें कार्यशील व्यावसायिक प्रणालियों में बदलते हैं।\n\nआप किस प्रक्रिया को ऑटोमेट करना चाहते हैं?",
+      ar: "نعم! نحدد فرص الذكاء الاصطناعي وأتمتة مسارات العمل ونحولها إلى أنظمة عمل مؤسسية فعالة.",
     },
     options: {
       en: [
-        { label: "Explore AI Solutions", action: "navigate", route: "/services/ai-portfolio", ctaType: "page" },
-        { label: "Discuss an AI Use Case", action: "start_project", payload: "AI Use Case Discussion", ctaType: "action" },
+        { label: "Explore AI Solutions →", action: "navigate", route: "/services/ai-portfolio", ctaType: "page" },
+        { label: "Discuss AI Use Case →", action: "start_project", payload: "AI Automation Project", ctaType: "action" },
       ],
       hi: [
-        { label: "एआई समाधान देखें", action: "navigate", route: "/services/ai-portfolio", ctaType: "page" },
-        { label: "एआई उपयोग पर चर्चा करें", action: "start_project", payload: "AI Use Case Discussion", ctaType: "action" },
+        { label: "एआई समाधान देखें →", action: "navigate", route: "/services/ai-portfolio", ctaType: "page" },
+        { label: "एआई उपयोग पर चर्चा करें →", action: "start_project", payload: "AI Automation Project", ctaType: "action" },
       ],
       ar: [
-        { label: "استكشف حلول الذكاء الاصطناعي", action: "navigate", route: "/services/ai-portfolio", ctaType: "page" },
-        { label: "مناقشة مشروع AI", action: "start_project", payload: "AI Use Case Discussion", ctaType: "action" },
+        { label: "استكشف حلول الذكاء الاصطناعي →", action: "navigate", route: "/services/ai-portfolio", ctaType: "page" },
+        { label: "مناقشة مشروع الذكاء الاصطناعي →", action: "start_project", payload: "AI Automation Project", ctaType: "action" },
       ],
     },
   },
 
-  // 11. PRICING & COST INTENT
+  // 9. RISK, COMPLIANCE & GOVERNANCE INTENT
   {
-    id: "pricing_cost",
-    intentLevel: "MODERATE_BUYING",
-    keywords: [
-      "cost", "price", "pricing", "quote", "budget", "how much", "تكلفة", "أسعار", "लागत", "कीमत", "बजट",
-      "how much does it cost", "what's your pricing", "how much do you charge", "what are your rates",
-      "do you offer fixed pricing", "what's the engagement model", "how do you bill", "what's your price range",
-      "are you affordable", "how much for a project", "pricing model", "retainer cost", "hourly rate", "project cost"
-    ],
-    response: {
-      en: "Our enterprise engagements are custom-built around your specific project scope and technical requirements. Share your objectives with our team for a tailored proposal under NDA.",
-      hi: "हमारी सेवाएं आपकी विशिष्ट व्यावसायिक प्राथमिकताओं के अनुसार तैयार की जाती हैं। हमें अपनी आवश्यकताएं बताएं और हम कस्टम प्रस्ताव साझा करेंगे।",
-      ar: "تخصص مشاريعنا وفقاً لأهدافك الاستراتيجية والمؤسسية. شاركنا متطلباتك لنقدم لك عرضاً مخصصاً.",
-    },
-    options: {
-      en: [
-        { label: "Start a Conversation", action: "start_project", ctaType: "action" },
-        { label: "Explore Core Services", action: "navigate", route: "/services", ctaType: "page" },
-      ],
-      hi: [
-        { label: "चर्चा शुरू करें", action: "start_project", ctaType: "action" },
-        { label: "मुख्य सेवाएं देखें", action: "navigate", route: "/services", ctaType: "page" },
-      ],
-      ar: [
-        { label: "بدء المحادثة", action: "start_project", ctaType: "action" },
-        { label: "عرض الخدمات الرئيسية", action: "navigate", route: "/services", ctaType: "page" },
-      ],
-    },
-  },
-
-  // 12. TIMELINE & PROCESS INTENT
-  {
-    id: "timeline_process",
+    id: "risk_compliance",
     intentLevel: "INFORMATIONAL",
+    associatedServiceSlug: "risk-compliance-governance",
     keywords: [
-      "timeline", "how long", "process", "how do you work", "timeline process", "fast delivery",
-      "how long does a project take", "what's your timeline", "how fast can you deliver",
-      "when can you start", "what's your process", "walk me through your approach", "methodology"
+      "compliance", "risk", "privacy", "security governance", "regulations", "controls",
+      "dpdp", "gdpr", "soc2", "iso 27001", "complaince", "need help with compliance", "governance",
+      "regulatory requirements", "compliance support"
     ],
     response: {
-      en: "We follow a 5-step delivery methodology: Understand → Strategize → Implement → Optimize → Deliver. Timelines depend on complexity (e.g., MVPs in 4-6 weeks, Enterprise portals in 8-12 weeks).",
-      hi: "हम 5-चरणीय डिलीवरी पद्धति का पालन करते हैं: समझें → रणनीति बनाएं → लागू करें → अनुकूलित करें → डिलीवर करें। समय सीमा 4-12 सप्ताह होती है।",
-      ar: "نتبع منهجية محددة من 5 خطوات: الفهم ← الاستراتيجية ← التنفيذ ← التحسين ← التسليم.",
+      en: "Absolutely. We can help strengthen governance, compliance processes, risk controls and technology practices.",
+      hi: "बिल्कुल! हम डेटा अनुपालन (DPDP Act/GDPR), SOC-2 और साइबर सुरक्षा गवर्नेंस नियंत्रणों को लागू करने में मदद करते हैं।",
+      ar: "بالتأكيد! نساعدك في تعزيز الحوكمة، والالتزام بقوانين حماية البيانات DPDP و SOC-2.",
     },
     options: {
       en: [
-        { label: "Start a Conversation", action: "start_project", ctaType: "action" },
-        { label: "View Case Studies", action: "navigate", route: "/case-studies", ctaType: "page" },
+        { label: "Explore Risk, Compliance & Governance →", action: "navigate", route: "/services/risk-compliance-governance", ctaType: "page" },
+        { label: "Check Compliance Readiness →", action: "start_project", payload: "Compliance Readiness", ctaType: "action" },
       ],
       hi: [
-        { label: "चर्चा शुरू करें", action: "start_project", ctaType: "action" },
-        { label: "केस स्टडी देखें", action: "navigate", route: "/case-studies", ctaType: "page" },
+        { label: "जोखिम अनुपालन देखें →", action: "navigate", route: "/services/risk-compliance-governance", ctaType: "page" },
+        { label: "अनुपालन जांचें →", action: "start_project", payload: "Compliance Readiness", ctaType: "action" },
       ],
       ar: [
-        { label: "بدء المحادثة", action: "start_project", ctaType: "action" },
-        { label: "عرض دراسات الحالة", action: "navigate", route: "/case-studies", ctaType: "page" },
+        { label: "استكشف الامتثال والحوكمة →", action: "navigate", route: "/services/risk-compliance-governance", ctaType: "page" },
+        { label: "فحص الامتثال →", action: "start_project", payload: "Compliance Readiness", ctaType: "action" },
       ],
     },
   },
 
-  // 13. LOCATIONS & CONTACT
+  // 10. AUDIT & IMPROVEMENT INTENT
   {
-    id: "locations_contact",
+    id: "audit_improvement",
+    intentLevel: "INFORMATIONAL",
+    associatedServiceSlug: "audit-improvement",
+    keywords: [
+      "audit", "system review", "technology assessment", "process improvement", "find bottlenecks",
+      "improve efficiency", "technical assessment", "finops", "cloud cost", "reduce cloud bill",
+      "system audit", "audt", "performance audit"
+    ],
+    response: {
+      en: "We evaluate operational processes, software architecture and cloud infrastructure to eliminate bottlenecks and optimize operational efficiency.",
+      hi: "हम निष्पक्ष ऑडिट के माध्यम से प्रक्रियाओं, तकनीक और क्लाउड इंफ्रास्ट्रक्चर का मूल्यांकन करते हैं ताकि बाधाओं को दूर किया जा सके।",
+      ar: "نقوم بتدقيق الأنظمة والبنية التحتية التقنية لإزالة الاختناقات وتحسين الكفاءة التشغيلية.",
+    },
+    options: {
+      en: [
+        { label: "Explore Audit & Improvement →", action: "navigate", route: "/services/audit-improvement", ctaType: "page" },
+        { label: "Request System Audit →", action: "start_project", payload: "System Audit Request", ctaType: "action" },
+      ],
+      hi: [
+        { label: "ऑडिट एवं सुधार देखें →", action: "navigate", route: "/services/audit-improvement", ctaType: "page" },
+        { label: "सिस्टम ऑडिट का अनुरोध करें →", action: "start_project", payload: "System Audit Request", ctaType: "action" },
+      ],
+      ar: [
+        { label: "استكشف التدقيق والتحسين →", action: "navigate", route: "/services/audit-improvement", ctaType: "page" },
+        { label: "طلب تدقيق الأنظمة →", action: "start_project", payload: "System Audit Request", ctaType: "action" },
+      ],
+    },
+  },
+
+  // 11. TRAINING & STAFF AUGMENTATION INTENT
+  {
+    id: "staff_augmentation",
+    intentLevel: "INFORMATIONAL",
+    associatedServiceSlug: "training-staff-augmentation",
+    keywords: [
+      "need developers", "developers", "technical resource", "technical resources", "hire developers",
+      "staff augmentation", "upskill team", "training", "technical talent", "additional engineers",
+      "team ke liye developers chahiye", "devoloper", "devs", "technical people for a project",
+      "need technical people"
+    ],
+    response: {
+      en: "Sure. We can support teams with technical talent and staff augmentation based on project needs.",
+      hi: "ज़रूर! हम आपकी परियोजनाओं की आवश्यकताओं के अनुसार अनुभवी डेवलपर्स और तकनीकी विशेषज्ञों की सहायता प्रदान कर सकते हैं।",
+      ar: "بالتأكيد! نوفر مهندسين ومختصين ينضمون لفريقك حسب متطلبات 프로젝트.",
+    },
+    options: {
+      en: [
+        { label: "Explore Training & Staff Augmentation →", action: "navigate", route: "/services/training-staff-augmentation", ctaType: "page" },
+        { label: "Request Talent Pod →", action: "start_project", payload: "Staff Augmentation Inquiry", ctaType: "action" },
+      ],
+      hi: [
+        { label: "टीम विस्तार देखें →", action: "navigate", route: "/services/training-staff-augmentation", ctaType: "page" },
+        { label: "डेवलपर्स का अनुरोध करें →", action: "start_project", payload: "Staff Augmentation Inquiry", ctaType: "action" },
+      ],
+      ar: [
+        { label: "استكشف دعم الكفاءات →", action: "navigate", route: "/services/training-staff-augmentation", ctaType: "page" },
+        { label: "طلب فريق فني →", action: "start_project", payload: "Staff Augmentation Inquiry", ctaType: "action" },
+      ],
+    },
+  },
+
+  // 12. DIGITAL MARKETING & BRAND DEVELOPMENT INTENT
+  {
+    id: "digital_marketing",
+    intentLevel: "INFORMATIONAL",
+    associatedServiceSlug: "digital-marketing-brand-development",
+    keywords: [
+      "grow online", "online marketing", "brand growth", "lead generation", "demand generation",
+      "digital presence", "marketing strategy", "customer acquisition", "business ko online grow karna hai",
+      "digitial marketing", "marketing", "digital marketing", "b2b marketing", "linkedin ads", "google ads"
+    ],
+    response: {
+      en: "We engineer high-intent B2B demand generation campaigns and brand positioning focused on pipeline and business results.",
+      hi: "हम लिंक्डइन और गूगल सर्च पर परिणाम-उन्मुख B2B मार्केटिंग अभियान और ब्रांड निर्माण करते हैं।",
+      ar: "نصمم حملات التسويق الرقمي واستقطاب العملاء لتوسيع الأعمال وتحقيق النتائج.",
+    },
+    options: {
+      en: [
+        { label: "Explore Digital Marketing & Brand Development →", action: "navigate", route: "/services/digital-marketing-brand-development", ctaType: "page" },
+        { label: "Discuss Growth Strategy →", action: "start_project", payload: "Digital Growth Campaign", ctaType: "action" },
+      ],
+      hi: [
+        { label: "डिजिटल मार्केटिंग देखें →", action: "navigate", route: "/services/digital-marketing-brand-development", ctaType: "page" },
+        { label: "ग्रोथ रणनीति पर चर्चा करें →", action: "start_project", payload: "Digital Growth Campaign", ctaType: "action" },
+      ],
+      ar: [
+        { label: "استكشف التسويق الرقمي →", action: "navigate", route: "/services/digital-marketing-brand-development", ctaType: "page" },
+        { label: "مناقشة استراتيجية النمو →", action: "start_project", payload: "Digital Growth Campaign", ctaType: "action" },
+      ],
+    },
+  },
+
+  // 13. CONTACT & SALES INTENT
+  {
+    id: "contact_sales",
     intentLevel: "STRONG_BUYING",
     keywords: [
-      "contact", "reach you", "get started", "call", "phone", "email", "office", "location", "gurgaon", "dubai",
-      "phone number", "email address", "book a call", "schedule consultation", "where are you located"
+      "talk to someone", "speak with your team", "speak with team", "consultation", "quote",
+      "contact", "talk to sales", "book a call", "schedule consultation", "how do i contact you",
+      "call", "phone", "email", "reach out", "start a project", "office locations", "gurgaon", "dubai", "talk to our team"
     ],
     response: {
-      en: "Arav Innovations operates dual regional hubs:\n\n• India HQ: Sector 44, Gurgaon (Tel: +91 96506 25777)\n• UAE Office: Dubai Silicon Oasis / Boulevard Plaza, Dubai (Tel: +971 52155 5792)\n• Email: support@aravinnovations.com",
-      hi: "हमारे दो मुख्य कार्यालय हैं: गुरुग्राम (भारत HQ) और दुबई (यूएई कार्यालय)। ईमेल: support@aravinnovations.com",
-      ar: "تمتلك آراف إينوفيشينز مركزين: المقر الرئيسي في جورجاون (الهند) والمكتب الإقليمي في دبي (الإمارات).",
+      en: "Absolutely. You can connect with the Arav Innovations team here:\n\nIf you'd like, tell me briefly what you're looking for and I can point you to the right service first.",
+      hi: "बिल्कुल! आप यहाँ आरव इनोवेशन टीम से सीधे संपर्क कर सकते हैं:\n\nयदि आप चाहें, तो मुझे बताएं कि आप क्या ढूंढ रहे हैं और मैं आपको सही सेवा बता सकता हूँ।",
+      ar: "بالتأكيد! يمكنك التواصل مع فريق آراف إينوفيشينز المباشر من هنا:",
     },
     options: {
       en: [
-        { label: "Contact Page", action: "navigate", route: "/contact", ctaType: "page" },
-        { label: "Start a Conversation", action: "start_project", ctaType: "action" },
+        { label: "Start a Conversation →", action: "navigate", route: "/contact", ctaType: "page" },
+        { label: "Explore Core Services →", action: "navigate", route: "/services", ctaType: "page" },
       ],
       hi: [
-        { label: "संपर्क पेज देखें", action: "navigate", route: "/contact", ctaType: "page" },
-        { label: "चर्चा शुरू करें", action: "start_project", ctaType: "action" },
+        { label: "बातचीत शुरू करें →", action: "navigate", route: "/contact", ctaType: "page" },
+        { label: "मुख्य सेवाएं देखें →", action: "navigate", route: "/services", ctaType: "page" },
       ],
       ar: [
-        { label: "صفحة التواصل", action: "navigate", route: "/contact", ctaType: "page" },
-        { label: "بدء المحادثة", action: "start_project", ctaType: "action" },
+        { label: "بدء المحادثة →", action: "navigate", route: "/contact", ctaType: "page" },
+        { label: "استكشف الخدمات →", action: "navigate", route: "/services", ctaType: "page" },
       ],
     },
     triggerLeadForm: true,
   },
 
-  // 14. OUT-OF-SCOPE GENERAL TECH QUERY
+  // 14. PRICING & COST INTENT
   {
-    id: "general_tech",
-    intentLevel: "INFORMATIONAL",
+    id: "pricing_cost",
+    intentLevel: "MODERATE_BUYING",
     keywords: [
-      "what is python", "what is react", "what is nextjs", "what is node", "what is cloud",
-      "what is aws", "what is llm", "what is typescript", "what is javascript"
+      "cost", "price", "pricing", "rates", "how much", "how much does it cost", "what's your pricing",
+      "how much do you charge", "budget", "quote"
     ],
     response: {
-      en: "Python, React, and modern cloud technologies are foundational tools used for web backends, automation, and AI platforms.\n\nIf you're asking because you have an enterprise project requirement, Arav Innovations provides full-stack software development, cloud strategy, and AI engineering.",
-      hi: "पायथन, रिएक्ट और आधुनिक क्लाउड तकनीकें वेब और एआई अनुप्रयोगों के लिए उपयोग की जाती हैं। यदि आपकी कोई परियोजना आवश्यकता है, तो आरव इनोवेशन आपकी मदद कर सकता है।",
-      ar: "بايثون ورياكت والتقنيات السحابية هي أدوات أساسية لبناء البرمجيات والذكاء الاصطناعي. يمكن لآراف إينوفيشينز تقديم الدعم الفني لمشروعك.",
+      en: "Pricing depends on the scope and requirements. The best next step is to discuss your specific need with the team.",
+      hi: "मूल्य निर्धारण आपकी परियोजना की आवश्यकताओं पर निर्भर करता है। सही अगला कदम हमारी टीम के साथ अपनी आवश्यकता पर चर्चा करना है।",
+      ar: "تعتمد التكلفة على نطاق المشروع والمتطلبات التقنية. الخطوة التالية هي مناقشة متطلباتك مع الفريق.",
     },
     options: {
       en: [
-        { label: "Explore Web & App Dev", action: "navigate", route: "/services/web-app-development", ctaType: "page" },
-        { label: "Explore AI Solutions", action: "navigate", route: "/services/ai-portfolio", ctaType: "page" },
-        { label: "Start a Conversation", action: "start_project", ctaType: "action" },
+        { label: "Start a Conversation →", action: "navigate", route: "/contact", ctaType: "page" },
+        { label: "Explore Core Services →", action: "navigate", route: "/services", ctaType: "page" },
       ],
       hi: [
-        { label: "वेब विकास देखें", action: "navigate", route: "/services/web-app-development", ctaType: "page" },
-        { label: "एआई समाधान देखें", action: "navigate", route: "/services/ai-portfolio", ctaType: "page" },
-        { label: "चर्चा शुरू करें", action: "start_project", ctaType: "action" },
+        { label: "बातचीत शुरू करें →", action: "navigate", route: "/contact", ctaType: "page" },
+        { label: "मुख्य सेवाएं देखें →", action: "navigate", route: "/services", ctaType: "page" },
       ],
       ar: [
-        { label: "استكشف تطوير الويب", action: "navigate", route: "/services/web-app-development", ctaType: "page" },
-        { label: "استكشف حلول AI", action: "navigate", route: "/services/ai-portfolio", ctaType: "page" },
-        { label: "بدء المحادثة", action: "start_project", ctaType: "action" },
+        { label: "بدء المحادثة →", action: "navigate", route: "/contact", ctaType: "page" },
+        { label: "عرض الخدمات →", action: "navigate", route: "/services", ctaType: "page" },
+      ],
+    },
+  },
+
+  // 15. MULTI-SERVICE OR COMPLEX COMBINATION INTENTS
+  {
+    id: "multi_service_legacy_web",
+    intentLevel: "INFORMATIONAL",
+    keywords: [
+      "modernize our technology and improve our website", "modernize technology and website",
+      "legacy and web", "infrastructure and website"
+    ],
+    response: {
+      en: "Your main requirement sounds like technology modernization, with web experience as a supporting need.\n\nI'd start with IT Strategy & Implementation, and we can connect the web/application work from there.",
+      hi: "आपकी मुख्य आवश्यकता तकनीक का आधुनिकीकरण प्रतीत होती है, जिसके साथ वेब अनुभव एक सहायक आवश्यकता है।\n\nमैं आईटी रणनीति से शुरुआत करने की सलाह दूंगा।",
+      ar: "يبدو أن متطلبك الرئيسي هو تحديث التكنولوجيا مع تحسين الموقع كمتطلب داعم. نوصي بالبدء باستراتيجية التقنية.",
+    },
+    options: {
+      en: [
+        { label: "Explore IT Strategy & Implementation →", action: "navigate", route: "/services/it-strategy-implementation", ctaType: "page" },
+        { label: "Explore Web & Application Development →", action: "navigate", route: "/services/web-app-development", ctaType: "page" },
+      ],
+      hi: [
+        { label: "आईटी रणनीति देखें →", action: "navigate", route: "/services/it-strategy-implementation", ctaType: "page" },
+        { label: "वेब विकास देखें →", action: "navigate", route: "/services/web-app-development", ctaType: "page" },
+      ],
+      ar: [
+        { label: "استكشف استراتيجية التقنية →", action: "navigate", route: "/services/it-strategy-implementation", ctaType: "page" },
+        { label: "استكشف تطوير الويب →", action: "navigate", route: "/services/web-app-development", ctaType: "page" },
+      ],
+    },
+  },
+
+  // 16. LONG INPUT MODERNIZATION EXTRACTION
+  {
+    id: "long_input_modernization",
+    intentLevel: "INFORMATIONAL",
+    keywords: [
+      "outdated infrastructure", "disconnected applications", "slow internal processes",
+      "difficulty integrating data", "growing company with an outdated infrastructure"
+    ],
+    response: {
+      en: "It sounds like your main challenge is technology modernization and system integration.\n\nI'd recommend starting with IT Strategy & Implementation.\n\nIf you want, tell me whether infrastructure, applications, or data integration is the biggest pain point.",
+      hi: "ऐसा लगता है कि आपकी मुख्य चुनौती तकनीक का आधुनिकीकरण और सिस्टम इंटीग्रेशन है। मैं आईटी रणनीति से शुरुआत करने की सलाह दूंगा।",
+      ar: "يبدو أن تحديك الرئيسي هو تحديث التكنولوجيا وتكامل الأنظمة. نوصي بالبدء باستراتيجية التقنية والتنفيذ.",
+    },
+    options: {
+      en: [
+        { label: "Explore IT Strategy & Implementation →", action: "navigate", route: "/services/it-strategy-implementation", ctaType: "page" },
+        { label: "Start a Conversation →", action: "navigate", route: "/contact", ctaType: "page" },
+      ],
+      hi: [
+        { label: "आईटी रणनीति देखें →", action: "navigate", route: "/services/it-strategy-implementation", ctaType: "page" },
+        { label: "बातचीत शुरू करें →", action: "navigate", route: "/contact", ctaType: "page" },
+      ],
+      ar: [
+        { label: "استكشف استراتيجية التقنية →", action: "navigate", route: "/services/it-strategy-implementation", ctaType: "page" },
+        { label: "بدء المحادثة →", action: "navigate", route: "/contact", ctaType: "page" },
       ],
     },
   },
 ];
 
-// Initialize Fuse.js instance for fuzzy pattern matching
+// Initialize Fuse.js instance for fuzzy pattern matching & typo resilience
 const fuseKeys = chatbotIntents.map((intent) => ({
   id: intent.id,
   keywords: intent.keywords.join(" "),
@@ -555,11 +613,12 @@ const fuseKeys = chatbotIntents.map((intent) => ({
 
 const fuse = new Fuse(fuseKeys, {
   keys: ["keywords"],
-  threshold: 0.45,
+  threshold: 0.48,
   ignoreLocation: true,
   minMatchCharLength: 2,
 });
 
+// MAIN INTENT LOOKUP ENGINE
 export function findIntent(
   query: string,
   locale = "en",
@@ -576,22 +635,22 @@ export function findIntent(
 
   const langKey = (locale === "hi" ? "hi" : locale === "ar" ? "ar" : "en") as "en" | "hi" | "ar";
 
-  // 1. Check for vague query needing clarification
-  if (["help", "need help", "technology help", "support", "capabilities"].includes(normQ)) {
-    const defaultClarify = chatbotIntents.find((i) => i.id === "services_overview")!;
-    const text = locale === "hi"
-      ? "ज़रूर! क्या आप आईटी रणनीति, सॉफ्टवेयर डेवलपमेंट, डिजिटल मार्केटिंग, अनुपालन या एआई समाधानों की तलाश कर रहे हैं?"
-      : locale === "ar"
-      ? "بالتأكيد! هل تبحث عن استراتيجية التقنية، تطوير البرمجيات، التسويق الرقمي، الامتثال، أو حلول الذكاء الاصطناعي؟"
-      : "Sure! Are you looking for technology strategy, software development, digital marketing, compliance, or AI solutions?";
+  // 1. CONTEXT AWARENESS CHECK: If user extends previous topic (e.g., "for an e-commerce website" after SEO query)
+  if (sessionContext?.lastIntentId === "seo_services" && (normQ.includes("ecommerce") || normQ.includes("e-commerce") || normQ.includes("online store"))) {
+    const seoIntent = chatbotIntents.find((i) => i.id === "seo_services")!;
     return {
-      intent: defaultClarify,
-      responseText: text,
+      intent: seoIntent,
+      responseText: langKey === "hi"
+        ? "समझ गया। एक ई-कॉमर्स वेबसाइट के लिए, हम तकनीकी स्वास्थ्य, सर्च विजिबिलिटी और उत्पाद खोजयोग्यता के आसपास एसईओ दृष्टिकोण पर ध्यान केंद्रित कर सकते हैं।\n\nक्या आपकी मुख्य समस्या रैंकिंग है या ऑर्गेनिक ट्रैफिक?"
+        : langKey === "ar"
+        ? "فهمت ذلك. بالنسبة لموقع التجارة الإلكترونية، يمكننا التركيز على الصحة الفنية وظهور المنتجات في نتائج البحث."
+        : "Got it. For an e-commerce site, we can focus the SEO approach around technical health, search visibility and product/category discoverability.\n\nIs your main issue rankings or organic traffic?",
       isLeadForm: false,
+      detectedService: "seo-services",
     };
   }
 
-  // 2. Direct Keyword Check: collect all matching intents and pick the one with the longest keyword match
+  // 2. Direct Keyword Match: Find intent with longest keyword overlap
   let bestMatch: { intent: ChatbotIntent; kwLength: number } | null = null;
 
   for (const intent of chatbotIntents) {
@@ -601,7 +660,7 @@ export function findIntent(
 
       let matched = false;
 
-      // Require word boundary for short keywords (<= 4 chars like "seo", "ai", "hi")
+      // Word boundary enforcement for short keywords (<= 4 chars like "seo", "ai", "hi")
       if (/^[a-z0-9]+$/i.test(cleanKw) && cleanKw.length <= 4) {
         const regex = new RegExp(`\\b${cleanKw}\\b`, "i");
         matched = regex.test(normQ);
@@ -619,15 +678,7 @@ export function findIntent(
 
   if (bestMatch) {
     const intent = bestMatch.intent;
-    let text = intent.response[langKey] || intent.response.en;
-
-    // Check if live service data from CMS/data/services can enrich the response
-    if (intent.associatedServiceSlug) {
-      const liveService = getServiceBySlug(intent.associatedServiceSlug);
-      if (liveService && langKey === "en") {
-        text = `${liveService.description}\n\nOur ${liveService.title} is designed around how modern enterprises scale.`;
-      }
-    }
+    const text = intent.response[langKey] || intent.response.en;
 
     return {
       intent,
@@ -637,19 +688,13 @@ export function findIntent(
     };
   }
 
-  // 3. Fuzzy Matching fallback via Fuse.js for misspelled queries
+  // 3. Fuzzy Matching Fallback via Fuse.js for misspelled queries
   const fuseResults = fuse.search(normQ);
   if (fuseResults.length > 0) {
     const matchedId = fuseResults[0].item.id;
     const intent = chatbotIntents.find((i) => i.id === matchedId);
     if (intent) {
-      let text = intent.response[langKey] || intent.response.en;
-      if (intent.associatedServiceSlug && langKey === "en") {
-        const liveService = getServiceBySlug(intent.associatedServiceSlug);
-        if (liveService) {
-          text = `${liveService.description}\n\nOur ${liveService.title} is designed around how modern enterprises scale.`;
-        }
-      }
+      const text = intent.response[langKey] || intent.response.en;
       return {
         intent,
         responseText: text,
@@ -659,23 +704,6 @@ export function findIntent(
     }
   }
 
-  // 4. Industry detection fallback
-  let detectedIndustry: string | undefined;
-  if (normQ.includes("fintech") || normQ.includes("finance")) detectedIndustry = "FinTech & Banking";
-  else if (normQ.includes("health") || normQ.includes("hospital")) detectedIndustry = "Healthcare";
-  else if (normQ.includes("ecommerce") || normQ.includes("retail")) detectedIndustry = "E-Commerce";
-  else if (normQ.includes("startup")) detectedIndustry = "Startups";
-  else if (normQ.includes("enterprise")) detectedIndustry = "Enterprise";
-
-  if (detectedIndustry) {
-    const defaultIntent = chatbotIntents.find((i) => i.id === "services_overview")!;
-    return {
-      intent: defaultIntent,
-      responseText: defaultIntent.response[langKey] || defaultIntent.response.en,
-      isLeadForm: false,
-      detectedIndustry,
-    };
-  }
-
+  // 4. Default Fallback
   return null;
 }

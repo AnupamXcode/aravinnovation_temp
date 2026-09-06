@@ -10,7 +10,7 @@ import { useSiteConfig } from "@/lib/site-config";
 import { useSiteContent } from "@/lib/site-content";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
-import { findIntent, WARM_OPENERS, CASUAL_FOLLOWUPS, ChatSessionContext } from "@/data/chatbot-knowledge";
+import { findIntent, ChatSessionContext } from "@/data/chatbot-knowledge";
 
 interface ChatMessage {
   id: string;
@@ -37,7 +37,8 @@ export function ChatbotWidget() {
 
   const [shouldShowLauncher, setShouldShowLauncher] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
-  
+  const [isTyping, setIsTyping] = React.useState(false);
+
   const [sessionContext, setSessionContext] = React.useState<ChatSessionContext>({
     locale,
     history: [],
@@ -57,7 +58,14 @@ export function ChatbotWidget() {
         // ignore
       }
     }
-    const welcomeMsg = chatbotKB?.defaultGreeting || t("greeting");
+    const welcomeMsg =
+      chatbotKB?.defaultGreeting ||
+      (locale === "hi"
+        ? "नमस्ते! आरव इनोवेशन में आपका स्वागत है। आप क्या बनाना या बेहतर करना चाहते हैं?"
+        : locale === "ar"
+        ? "مرحباً! أهلاً بك في آراف إينوفيشينز. ما الذي تتطلع لتطويره أو بنائه؟"
+        : "Hi! Welcome to Arav Innovations. What are you looking to build, improve or transform?");
+
     return [
       {
         id: "welcome",
@@ -65,8 +73,11 @@ export function ChatbotWidget() {
         text: welcomeMsg,
         options: [
           { label: locale === "hi" ? "सेवाएं देखें" : locale === "ar" ? "استكشف الخدمات" : "Explore Services", action: "all_services" },
-          { label: locale === "hi" ? "प्रोजेक्ट शुरू करें" : locale === "ar" ? "بدء مشروع" : "Start a Project", action: "start_project" },
-          { label: locale === "hi" ? "कार्यालय स्थान" : locale === "ar" ? "الفروع والمكاتب" : "Office Locations", action: "locations" },
+          { label: locale === "hi" ? "वेबसाइट बनाएं" : locale === "ar" ? "تطوير موقع" : "Build / Improve a Website", action: "navigate", route: "/services/web-app-development" },
+          { label: locale === "hi" ? "आईटी आधुनिक बनाएं" : locale === "ar" ? "تحديث التقنية" : "Modernize IT", action: "navigate", route: "/services/it-strategy-implementation" },
+          { label: locale === "hi" ? "ऑनलाइन ग्रोथ" : locale === "ar" ? "النمو الرقمي" : "Grow Online", action: "navigate", route: "/services/digital-marketing-brand-development" },
+          { label: locale === "hi" ? "एआई समाधान" : locale === "ar" ? "حلول الذكاء الاصطناعي" : "Explore AI", action: "navigate", route: "/services/ai-portfolio" },
+          { label: locale === "hi" ? "टीम से बात करें" : locale === "ar" ? "التواصل معنا" : "Talk to Our Team", action: "navigate", route: "/contact" },
         ],
       },
     ];
@@ -82,7 +93,7 @@ export function ChatbotWidget() {
   const [leadSubmitted, setLeadSubmitted] = React.useState(false);
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
 
-  // Restore session context across page navigations / reloads
+  // Restore session context
   React.useEffect(() => {
     try {
       const savedContext = sessionStorage.getItem("arav_chat_context");
@@ -95,7 +106,7 @@ export function ChatbotWidget() {
     }
   }, [locale]);
 
-  // Sync messages to sessionStorage whenever updated
+  // Save messages to session storage
   React.useEffect(() => {
     try {
       if (messages.length > 0) {
@@ -157,7 +168,7 @@ export function ChatbotWidget() {
 
   React.useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, isOpen]);
+  }, [messages, isOpen, isTyping]);
 
   if (!isMasterOn) return null;
 
@@ -206,20 +217,24 @@ export function ChatbotWidget() {
     if (option.action === "all_services") {
       const text =
         locale === "hi"
-          ? "आरव इनोवेशन मुख्य सेवाएं प्रदान करता है:\n\n• आईटी रणनीति एवं कंसल्टिंग\n• वेब एवं ऐप इंजीनियरिंग\n• डिजिटल मार्केटिंग एवं SEO\n• जोखिम एवं DPDP अनुपालन\n• सिस्टम ऑडिट एवं परफॉरमेंस\n• समर्पित इंजीनियरिंग स्क्वॉड\n• एआई एवं ऑटोमेशन समाधान"
+          ? "ज़रूर। हमारी मुख्य सेवाएं निम्नलिखित हैं:\n\n• आईटी रणनीति एवं कार्यान्वयन\n• डिजिटल मार्केटिंग एवं ब्रांड विकास\n• वेब एवं एप्लिकेशन विकास\n• जोखिम, अनुपालन एवं गवर्नेंस\n• ऑडिट एवं सुधार\n• प्रशिक्षण एवं टीम विस्तार\n• एसईओ सेवाएं\n• एआई पोर्टफोलियो\n\nआप किस सेवा के बारे में जानना चाहते हैं?"
           : locale === "ar"
-          ? "تقدم آراف إينوفيشينز خدمات أساسية:\n\n• استراتيجية تكنولوجيا المعلومات\n• تطوير الويب والموبايل\n• التسويق الرقمي و SEO\n• الحوكمة والامتثال\n• تدقيق الأنظمة والأداء\n• الفرق الهندسية المخصصة\n• حلول الذكاء الاصطناعي"
-          : "Arav Innovations provides core services across:\n\n• IT Strategy & Consulting\n• Web & App Development\n• Digital Marketing & SEO\n• Risk Governance & Compliance\n• Audit & FinOps Tuning\n• Dedicated Engineering Pods\n• AI & Automation Solutions";
+          ? "تشمل خدماتنا الرئيسية:\n\n• استراتيجية التقنية والتنفيذ\n• التسويق الرقمي وبناء العلامة\n• تطوير الويب والتطبيقات\n• الحوكمة والامتثال والارتقاء\n• التدقيق والتحسين\n• التدريب ودعم الكفاءات\n• خدمات SEO\n• حلول الذكاء الاصطناعي"
+          : "Sure. Our core services cover:\n\n• IT Strategy & Implementation\n• Digital Marketing & Brand Development\n• Web & Application Development\n• Risk, Compliance & Governance\n• Audit & Improvement\n• Training & Staff Augmentation\n• SEO Services\n• AI Portfolio\n\nWhich one would you like to explore?";
 
       botMsg = {
         id: `bot-${Date.now()}`,
         sender: "bot",
         text,
         options: [
-          { label: locale === "hi" ? "वेब विकास" : locale === "ar" ? "تطوير الويب" : "Web & App Dev", action: "navigate", route: "/services/web-app-development" },
-          { label: locale === "hi" ? "एसईओ सेवाएं" : locale === "ar" ? "خدمات SEO" : "SEO Services", action: "navigate", route: "/services/seo-services" },
-          { label: locale === "hi" ? "आईटी रणनीति" : locale === "ar" ? "استراتيجية التقنية" : "IT Strategy", action: "navigate", route: "/services/it-strategy-implementation" },
-          { label: locale === "hi" ? "सभी सेवाएं देखें" : locale === "ar" ? "جميع الخدمات" : "View All Services", action: "navigate", route: "/services" },
+          { label: "IT Strategy", action: "navigate", route: "/services/it-strategy-implementation", ctaType: "page" },
+          { label: "Web & App Dev", action: "navigate", route: "/services/web-app-development", ctaType: "page" },
+          { label: "Digital Marketing", action: "navigate", route: "/services/digital-marketing-brand-development", ctaType: "page" },
+          { label: "SEO Services", action: "navigate", route: "/services/seo-services", ctaType: "page" },
+          { label: "Risk & Governance", action: "navigate", route: "/services/risk-compliance-governance", ctaType: "page" },
+          { label: "Audit & Improvement", action: "navigate", route: "/services/audit-improvement", ctaType: "page" },
+          { label: "Staff Augmentation", action: "navigate", route: "/services/training-staff-augmentation", ctaType: "page" },
+          { label: "AI Portfolio", action: "navigate", route: "/services/ai-portfolio", ctaType: "page" },
         ],
       };
     } else if (option.action === "locations") {
@@ -268,7 +283,13 @@ export function ChatbotWidget() {
       };
     }
 
-    setMessages((prev) => [...prev, userMsg, botMsg]);
+    setMessages((prev) => [...prev, userMsg]);
+    setIsTyping(true);
+
+    setTimeout(() => {
+      setIsTyping(false);
+      setMessages((prev) => [...prev, botMsg]);
+    }, 400);
   };
 
   const handleCustomSend = (e: React.FormEvent) => {
@@ -284,69 +305,64 @@ export function ChatbotWidget() {
       text: userText,
     };
 
-    let botMsg: ChatMessage;
+    setMessages((prev) => [...prev, userMsg]);
+    setIsTyping(true);
 
-    const matched = findIntent(userText, locale, sessionContext);
+    setTimeout(() => {
+      let botMsg: ChatMessage;
 
-    if (matched) {
-      if (matched.detectedService) updateContext({ mentionedService: matched.detectedService });
-      if (matched.detectedIndustry) updateContext({ mentionedIndustry: matched.detectedIndustry });
+      const matched = findIntent(userText, locale, sessionContext);
 
-      const langKey = (locale === "hi" ? "hi" : locale === "ar" ? "ar" : "en") as "en" | "hi" | "ar";
-      const options = matched.intent.options ? matched.intent.options[langKey] : undefined;
+      if (matched) {
+        updateContext({
+          lastIntentId: matched.intent.id,
+          mentionedService: matched.detectedService || sessionContext.mentionedService,
+          mentionedIndustry: matched.detectedIndustry || sessionContext.mentionedIndustry,
+        });
 
-      // Select dynamic warm opener & follow-up if not greeting
-      let finalResponseText = matched.responseText;
-      if (matched.intent.id !== "greeting") {
-        const openers = WARM_OPENERS[langKey] || WARM_OPENERS.en;
-        const followups = CASUAL_FOLLOWUPS[langKey] || CASUAL_FOLLOWUPS.en;
-        const opener = openers[Math.floor(Math.random() * openers.length)];
-        const followup = followups[Math.floor(Math.random() * followups.length)];
+        const langKey = (locale === "hi" ? "hi" : locale === "ar" ? "ar" : "en") as "en" | "hi" | "ar";
+        const options = matched.intent.options ? matched.intent.options[langKey] : undefined;
 
-        finalResponseText = `${opener}${matched.responseText}\n\n${followup}`;
+        if (matched.isLeadForm) {
+          const detectedSvc = matched.detectedService || sessionContext.mentionedService;
+          const detectedInd = matched.detectedIndustry || sessionContext.mentionedIndustry;
+          const prefills = detectedSvc
+            ? `Inquiry regarding ${detectedSvc}`
+            : detectedInd
+            ? `Inquiry for ${detectedInd} sector`
+            : userText;
+          setLeadFormState((prev) => ({
+            ...prev,
+            requirement: prev.requirement || prefills,
+          }));
+        }
+
+        botMsg = {
+          id: `bot-${Date.now()}`,
+          sender: "bot",
+          text: matched.responseText,
+          options,
+          isLeadForm: matched.isLeadForm,
+        };
+      } else {
+        const fallbackText =
+          chatbotKB?.fallbackResponse ||
+          "I can help with Arav Innovations' services, solutions and business technology capabilities. What are you looking to build, improve or transform?";
+
+        botMsg = {
+          id: `bot-${Date.now()}`,
+          sender: "bot",
+          text: fallbackText,
+          options: [
+            { label: locale === "hi" ? "सेवाएं देखें" : locale === "ar" ? "جميع الخدمات" : "Explore Services", action: "all_services" },
+            { label: locale === "hi" ? "प्रोजेक्ट शुरू करें" : locale === "ar" ? "بدء مشروع" : "Start a Conversation", action: "start_project" },
+          ],
+        };
       }
 
-      if (matched.isLeadForm) {
-        const detectedSvc = matched.detectedService || sessionContext.mentionedService;
-        const detectedInd = matched.detectedIndustry || sessionContext.mentionedIndustry;
-        const prefills = detectedSvc
-          ? `Inquiry regarding ${detectedSvc}`
-          : detectedInd
-          ? `Inquiry for ${detectedInd} sector`
-          : userText;
-        setLeadFormState((prev) => ({
-          ...prev,
-          requirement: prev.requirement || prefills,
-        }));
-      }
-
-      botMsg = {
-        id: `bot-${Date.now()}`,
-        sender: "bot",
-        text: finalResponseText,
-        options,
-        isLeadForm: matched.isLeadForm,
-      };
-    } else {
-      const fallbackText = chatbotKB?.fallbackResponse ||
-        (locale === "hi"
-          ? "मैं आरव इनोवेशन की सेवाओं, तकनीकों, और परियोजनाओं से संबंधित प्रश्नों में मदद कर सकता हूँ। क्या आप अपनी आवश्यकता बताना चाहेंगे?"
-          : locale === "ar"
-          ? "أنا هنا لمساعدتك في استفسارات خدمات آراف إينوفيشينز ومشاريعها. هل ترغب في بدء مناقشة مشروعك؟"
-          : "I can help with questions about Arav Innovations' services, architecture, or project scope. Would you like to discuss your project requirements?");
-
-      botMsg = {
-        id: `bot-${Date.now()}`,
-        sender: "bot",
-        text: fallbackText,
-        options: [
-          { label: locale === "hi" ? "सेवाएं देखें" : locale === "ar" ? "جميع الخدمات" : "Explore Services", action: "all_services" },
-          { label: locale === "hi" ? "प्रोजेक्ट शुरू करें" : locale === "ar" ? "بدء مشروع" : "Start a Conversation", action: "start_project" },
-        ],
-      };
-    }
-
-    setMessages((prev) => [...prev, userMsg, botMsg]);
+      setIsTyping(false);
+      setMessages((prev) => [...prev, botMsg]);
+    }, 450);
   };
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
@@ -467,8 +483,8 @@ export function ChatbotWidget() {
                   className={cn(
                     "max-w-[85%] rounded-2xl p-3.5 leading-relaxed",
                     msg.sender === "user"
-                      ? "bg-[#f15e1c] text-white rounded-br-xs"
-                      : "bg-[#FBF3EA] dark:bg-[#0a0a0a] text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#1f1f1f] rounded-bl-xs whitespace-pre-line"
+                      ? "bg-[#f15e1c] text-white rounded-br-xs font-medium"
+                      : "bg-[#FBF3EA] dark:bg-[#0a0a0a] text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#1f1f1f] rounded-bl-xs whitespace-pre-line font-medium"
                   )}
                 >
                   {msg.text}
@@ -476,21 +492,21 @@ export function ChatbotWidget() {
 
                 {/* Option Buttons */}
                 {msg.options && (
-                  <div className="flex flex-wrap gap-1.5 mt-2 max-w-[90%]">
+                  <div className="flex flex-wrap gap-1.5 mt-2 max-w-[95%]">
                     {msg.options.map((opt, idx) => (
                       <button
                         key={idx}
                         type="button"
                         onClick={() => handleOptionClick(opt)}
                         className={cn(
-                          "text-[11px] px-3 py-1.5 rounded-xl border font-medium transition-colors text-left cursor-pointer flex items-center gap-1",
+                          "text-[11px] px-3 py-1.5 rounded-xl border font-semibold transition-all duration-200 text-left cursor-pointer flex items-center gap-1 shadow-2xs",
                           opt.route || opt.ctaType === "page"
-                            ? "bg-[#f15e1c] text-white border-[#f15e1c] hover:bg-[#d4581f]"
-                            : "bg-white dark:bg-[#0a0a0a] border-[#EFE2D6] dark:border-[#1f1f1f] hover:border-[#f15e1c] text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FCE3D3]/30 dark:hover:bg-[#161616]"
+                            ? "bg-[#f15e1c] text-white border-[#f15e1c] hover:bg-[#d4581f] hover:scale-[1.02]"
+                            : "bg-white dark:bg-[#0a0a0a] border-[#EFE2D6] dark:border-[#1f1f1f] hover:border-[#f15e1c] text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#161616]"
                         )}
                       >
                         <span>{opt.label}</span>
-                        {(opt.route || opt.ctaType === "page") && <ExternalLink className="w-3 h-3" />}
+                        {(opt.route || opt.ctaType === "page") && <ExternalLink className="w-3 h-3 ml-0.5 shrink-0" />}
                       </button>
                     ))}
                   </div>
@@ -551,7 +567,7 @@ export function ChatbotWidget() {
                       type="submit"
                       variant="primary"
                       size="sm"
-                      className="w-full justify-center text-xs h-8"
+                      className="w-full justify-center text-xs h-8 bg-[#f15e1c] hover:bg-[#d4581f]"
                     >
                       {t("submitLead")} <ArrowRight className="w-3.5 h-3.5 ml-1" />
                     </Button>
@@ -559,6 +575,15 @@ export function ChatbotWidget() {
                 )}
               </div>
             ))}
+
+            {/* Typing Indicator */}
+            {isTyping && (
+              <div className="flex items-center gap-2 p-2 rounded-2xl bg-[#FBF3EA] dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] w-max text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+                <Bot className="w-4 h-4 text-[#f15e1c] animate-bounce" />
+                <span className="font-mono text-[11px] font-medium">Arav Assistant is typing...</span>
+              </div>
+            )}
+
             <div ref={messagesEndRef} />
           </div>
 
