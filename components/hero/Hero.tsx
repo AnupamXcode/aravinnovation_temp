@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { ScrollTextFlip } from "@/components/motion/ScrollTextFlip";
@@ -18,7 +17,7 @@ export function Hero() {
   const { config } = useSiteConfig();
   const videoConfig = config.heroVideoConfig || defaultHeroVideoConfig;
   const isVideoEnabled = videoConfig.enabled !== false;
-  const videoSpeed = videoConfig.playbackSpeed || 1.0;
+  const videoSpeed = videoConfig.playbackSpeed || 0.75;
   const overlayOpacityVal = (videoConfig.overlayOpacity ?? 75) / 100;
 
   const sectionRef = React.useRef<HTMLElement>(null);
@@ -41,7 +40,7 @@ export function Hero() {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
-  // Set playbackRate dynamically from CMS config
+  // Set playbackRate = 0.75x dynamically from CMS config
   const setVideoSpeed = React.useCallback(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = videoSpeed;
@@ -53,8 +52,11 @@ export function Hero() {
   React.useEffect(() => {
     if (videoRef.current && videoLoaded) {
       videoRef.current.playbackRate = videoSpeed;
+      if (prefersReducedMotion) {
+        videoRef.current.pause();
+      }
     }
-  }, [videoSpeed, videoLoaded]);
+  }, [videoSpeed, videoLoaded, prefersReducedMotion]);
 
   // IntersectionObserver to pause video when out of viewport & resume when visible
   React.useEffect(() => {
@@ -119,22 +121,10 @@ export function Hero() {
       ref={sectionRef}
       className="relative w-full min-h-[calc(100vh-80px)] sm:min-h-[calc(100vh-90px)] flex flex-col justify-center py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300"
     >
-      {/* 1. Full-Bleed Continuous Photographic / Video Environment Background */}
+      {/* 1. Full-Bleed Authoritative Background Video (No Old Image Fallback) */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
-        {/* Fallback Static Image (Shown if video loading, failed, disabled, or prefers-reduced-motion) */}
-        <Image
-          src="/images/homepage-main-bg.png"
-          alt="Arav Innovations Executive Technology Platform Environment"
-          fill
-          priority
-          unoptimized
-          className={`object-cover object-center lg:object-right-top transition-opacity duration-700 ${
-            isVideoEnabled && videoLoaded && !videoError && !prefersReducedMotion ? "opacity-0" : "opacity-100 dark:opacity-95"
-          }`}
-        />
-
-        {/* Dynamic CMS Background Video */}
-        {isVideoEnabled && !prefersReducedMotion && !videoError && (
+        {/* Dynamic Authoritative Hero Background Video */}
+        {isVideoEnabled && !videoError && (
           <video
             ref={videoRef}
             src={videoConfig.videoUrl || "/videos/hero-bg.mp4"}
@@ -146,10 +136,11 @@ export function Hero() {
             onLoadedMetadata={setVideoSpeed}
             onCanPlay={setVideoSpeed}
             onPlay={setVideoSpeed}
-            onError={() => setVideoError(true)}
-            className={`absolute inset-0 w-full h-full object-cover object-center lg:object-right-top transform-gpu transition-opacity duration-700 ${
-              videoLoaded ? "opacity-100 dark:opacity-100" : "opacity-0"
-            }`}
+            onError={(e) => {
+              console.error("Hero background video playback error:", e);
+              setVideoError(true);
+            }}
+            className="absolute inset-0 w-full h-full object-cover object-center lg:object-right-top transform-gpu transition-opacity duration-500 opacity-100"
           />
         )}
 

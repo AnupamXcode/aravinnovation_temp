@@ -114,7 +114,7 @@ export interface HeroVideoConfig {
 export const defaultHeroVideoConfig: HeroVideoConfig = {
   enabled: true,
   videoUrl: "/videos/hero-bg.mp4",
-  playbackSpeed: 1.0,
+  playbackSpeed: 0.75,
   overlayOpacity: 75,
   textAlignment: "left",
   textLayoutPosition: "left",
