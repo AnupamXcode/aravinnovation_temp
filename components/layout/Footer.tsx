@@ -9,16 +9,10 @@ import {
   Mail,
   MapPin,
   Sparkles,
-  Compass,
-  TrendingUp,
-  Code2,
-  ShieldCheck,
-  BarChart3,
-  Users2,
-  Search,
-  Cpu,
+  Phone,
+  ArrowUpRight,
 } from "lucide-react";
-import { BrandLogo } from "./BrandLogo";
+import { useSiteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
 function LinkedInIcon({ className }: { className?: string }) {
@@ -89,9 +83,9 @@ function AnimatedFooterSection({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 16 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-      transition={{ duration: 0.4, delay, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ opacity: 0, y: 12 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+      transition={{ duration: 0.35, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
       {children}
@@ -99,71 +93,47 @@ function AnimatedFooterSection({
   );
 }
 
-// Official Ecosystem Service Practice Cards Data
-const enterprisePractices = [
+// 8 Verified Enterprise Services
+const serviceLinks = [
   {
     num: "01",
     title: "IT Strategy & Implementation",
     href: "/services/it-strategy-implementation",
-    accent: "#f15e1c",
-    category: "TECHNOLOGY",
-    icon: <Compass className="w-4 h-4 text-[#f15e1c]" />,
   },
   {
     num: "02",
     title: "Digital Marketing & Brand Development",
     href: "/services/digital-marketing-brand-development",
-    accent: "#fab60a",
-    category: "GROWTH",
-    icon: <TrendingUp className="w-4 h-4 text-[#fab60a]" />,
   },
   {
     num: "03",
     title: "Web & Application Development",
     href: "/services/web-app-development",
-    accent: "#2e936f",
-    category: "ENGINEERING",
-    icon: <Code2 className="w-4 h-4 text-[#2e936f]" />,
   },
   {
     num: "04",
     title: "Risk, Compliance & Governance",
     href: "/services/risk-compliance-governance",
-    accent: "#2e936f",
-    category: "COMPLIANCE",
-    icon: <ShieldCheck className="w-4 h-4 text-[#2e936f]" />,
   },
   {
     num: "05",
     title: "Audit & Improvement",
     href: "/services/audit-improvement",
-    accent: "#f15e1c",
-    category: "DIAGNOSTIC",
-    icon: <BarChart3 className="w-4 h-4 text-[#f15e1c]" />,
   },
   {
     num: "06",
     title: "Training & Staff Augmentation",
     href: "/services/training-staff-augmentation",
-    accent: "#fab60a",
-    category: "TALENT",
-    icon: <Users2 className="w-4 h-4 text-[#fab60a]" />,
   },
   {
     num: "07",
     title: "SEO Services",
     href: "/services/seo-services",
-    accent: "#2e936f",
-    category: "SEARCH",
-    icon: <Search className="w-4 h-4 text-[#2e936f]" />,
   },
   {
     num: "08",
     title: "AI Portfolio",
     href: "/services/ai-portfolio",
-    accent: "#f15e1c",
-    category: "AI INNOVATION",
-    icon: <Cpu className="w-4 h-4 text-[#f15e1c]" />,
   },
 ];
 
@@ -171,27 +141,28 @@ const companyLinks = [
   { label: "About Us", href: "/about" },
   { label: "Working With Us", href: "/#process" },
   { label: "Careers", href: "/careers" },
-  { label: "Blogs", href: "/blogs" },
   { label: "Contact", href: "/contact" },
 ];
 
 const exploreLinks = [
-  { label: "Our Practices", href: "/services" },
   { label: "Our Approach", href: "/about" },
-  { label: "Technology", href: "/solutions" },
+  { label: "Technology", href: "/services" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Insights", href: "/insights" },
+  { label: "Blogs", href: "/blogs" },
 ];
 
 const legalLinks = [
   { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "Refund Policy", href: "/refund-policy" },
   { label: "Terms & Conditions", href: "/terms-and-conditions" },
+  { label: "Refund Policy", href: "/refund-policy" },
   { label: "Security & DPDP", href: "/security-dpdp" },
 ];
 
 export function Footer() {
   const pathname = usePathname();
+  const { config } = useSiteConfig();
+  const footerConfig = config.footerConfig;
 
   // Do not render footer on admin routes
   if (pathname?.includes("/admin")) {
@@ -199,298 +170,323 @@ export function Footer() {
   }
 
   return (
-    <footer className="w-full relative bg-gradient-to-br from-[#f7d7b0] via-[#f15e1c] to-[#fab60a] dark:from-[#0a0a0a] dark:via-[#000000] dark:to-[#1e2d27] text-white pt-10 pb-8 overflow-hidden select-none transition-colors duration-300 border-t border-[#f7d7b0]/40 dark:border-[#1a1a1a]">
+    <footer className="w-full relative bg-[#090909] text-white pt-12 pb-8 overflow-hidden select-none border-t border-[#f7d7b0]/30 dark:border-[#1a1a1a]">
       
-      {/* Background Abstract Technology Connected SVG Line Pattern */}
-      <div className="absolute inset-0 pointer-events-none z-0 opacity-15 dark:opacity-20 overflow-hidden">
-        <svg className="w-full h-full" viewBox="0 0 1440 500" fill="none">
-          <path d="M -100 100 C 300 30, 700 250, 1540 60" stroke="#FFFFFF" strokeWidth="1.2" strokeDasharray="5 5" />
-          <path d="M -100 350 C 400 220, 900 420, 1540 260" stroke="#F7D7B0" strokeWidth="1" strokeDasharray="4 4" />
-          <circle cx="350" cy="90" r="4" fill="#FAB60A" />
-          <circle cx="850" cy="320" r="4" fill="#FFFFFF" />
-        </svg>
-      </div>
+      {/* Refined Ambient Background Lighting (Arav Brand Colors: Warm Orange #f15e1c & Emerald Green #2e936f) */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#f15e1c]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#2e936f]/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Main Centered Max-Width Container */}
-      <div className="max-w-[1536px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10 space-y-10">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10 space-y-12">
         
         {/* =========================================================================
-            ZONE 1: COMPACT TOP BRAND / CTA BAR
+            LAYER 1: COMPACT TOP CTA AREA
             ========================================================================= */}
         <AnimatedFooterSection delay={0.03}>
-          <div className="p-5 sm:p-7 rounded-2xl bg-white/15 dark:bg-white/10 border border-white/30 backdrop-blur-md shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="space-y-1 text-left max-w-2xl">
-              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/20 border border-white/30 text-[11px] font-mono font-bold text-white">
-                <Sparkles className="w-3.5 h-3.5 text-[#ffec69]" />
+          <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#17110d] via-[#1c1813] to-[#121815] border border-[#f7d7b0]/30 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden">
+            {/* Soft Ambient Inner Glow */}
+            <div className="absolute -top-12 -left-12 w-48 h-48 bg-[#f15e1c]/15 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-[#2e936f]/15 rounded-full blur-2xl pointer-events-none" />
+
+            <div className="space-y-2 text-left max-w-2xl relative z-10">
+              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#f15e1c]/15 border border-[#f15e1c]/30 text-[11px] font-mono font-bold text-[#f15e1c]">
+                <Sparkles className="w-3.5 h-3.5 text-[#fab60a]" />
                 <span>START YOUR TRANSFORMATION</span>
               </div>
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold font-display tracking-tight text-white leading-snug">
-                READY TO BUILD WHAT COMES NEXT?
+                {footerConfig.ctaHeading}
               </h2>
-              <p className="text-xs sm:text-sm text-white/90 font-medium leading-relaxed">
-                From technology strategy to digital growth, Arav Innovations helps organizations build stronger foundations for what&apos;s next.
+              <p className="text-xs sm:text-sm text-[#d0e0d8] font-medium leading-relaxed">
+                {footerConfig.ctaDescription}
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3 w-full md:w-auto shrink-0">
+            <div className="flex flex-wrap items-center gap-3 w-full md:w-auto shrink-0 relative z-10">
               <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#f15e1c] hover:bg-[#d8480d] text-white text-xs font-extrabold font-display shadow-md hover:shadow-lg transition-all duration-300 group ring-1 ring-white/30"
+                href={footerConfig.ctaPrimaryHref}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#f15e1c] hover:bg-[#d8480d] text-white text-xs font-mono font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 group"
               >
-                <span>TALK TO AN EXPERT</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                <span>{footerConfig.ctaPrimaryText}</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
 
               <Link
-                href="/services"
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-white/15 hover:bg-white text-white hover:text-[#f15e1c] border border-white/40 backdrop-blur-md text-xs font-extrabold font-display shadow-sm transition-all duration-300 group"
+                href={footerConfig.ctaSecondaryHref}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/10 hover:bg-white text-white hover:text-[#1b2823] border border-[#f7d7b0]/30 backdrop-blur-md text-xs font-mono font-bold uppercase tracking-wider shadow-sm transition-all duration-300 group"
               >
-                <span>EXPLORE SERVICES</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                <span>{footerConfig.ctaSecondaryHref === "/services" ? "EXPLORE SERVICES" : footerConfig.ctaSecondaryText}</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
         </AnimatedFooterSection>
 
         {/* =========================================================================
-            ZONE 2: CLEAN EDITORIAL ENTERPRISE SERVICES NAVIGATION LIST
+            LAYER 2: MAIN FOOTER NAVIGATION (STRUCTURED MULTI-COLUMN)
             ========================================================================= */}
-        <AnimatedFooterSection delay={0.08} className="space-y-4 text-left">
-          <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-white/20 pb-3 gap-2">
-            <div className="space-y-1">
-              <span className="text-[10px] font-mono font-black text-[#ffec69] uppercase tracking-widest block">
-                OUR CORE SERVICES
-              </span>
-              <h3 className="text-lg sm:text-xl font-extrabold font-display text-white tracking-tight">
-                Enterprise Technology &amp; Growth Services
-              </h3>
-              <p className="text-xs text-white/80 max-w-2xl font-medium leading-relaxed">
-                Combining strategy, engineering, digital growth, governance, diagnostic audits, talent, and AI capabilities.
-              </p>
-            </div>
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-1.5 text-[11px] font-mono font-extrabold text-[#ffec69] hover:text-white transition-colors group shrink-0"
-            >
-              <span>VIEW ALL SERVICES</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-[#ffec69]" />
-            </Link>
-          </div>
-
-          {/* Clean Multi-Column Editorial Service List (High Contrast, Mobile-Optimized Navigation) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-2">
-            {enterprisePractices.map((practice, index) => (
-              <motion.div
-                key={practice.num}
-                initial={{ opacity: 0, x: 12 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-10px" }}
-                transition={{ duration: 0.35, delay: index * 0.03 }}
-              >
-                <Link
-                  href={practice.href}
-                  className="group flex items-center justify-between p-3.5 sm:p-4 rounded-2xl bg-white/10 dark:bg-white/5 border border-white/20 hover:border-[#ffec69] hover:bg-white/20 transition-all duration-200 text-left cursor-pointer shadow-xs"
-                >
-                  <div className="flex items-center gap-3.5">
-                    <div className="w-10 h-10 rounded-xl bg-white/15 border border-white/30 flex items-center justify-center shrink-0 group-hover:scale-105 group-hover:bg-[#f15e1c] transition-all duration-200">
-                      {React.cloneElement(practice.icon, { className: "w-5 h-5 text-white group-hover:text-white" })}
-                    </div>
-                    <div className="space-y-0.5">
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-mono font-black text-[#ffec69] group-hover:text-white transition-colors">
-                          {practice.num}
-                        </span>
-                        <span className="text-[10px] font-mono font-bold text-white/80 uppercase">
-                          {practice.category}
-                        </span>
-                      </div>
-                      <h4 className="text-sm sm:text-base font-extrabold font-display text-white group-hover:text-[#ffec69] transition-all duration-200 leading-snug">
-                        {practice.title}
-                      </h4>
-                    </div>
-                  </div>
-
-                  <ArrowRight className="w-4 h-4 text-white/70 group-hover:text-[#ffec69] group-hover:translate-x-1 transition-transform duration-200 shrink-0 ml-2" />
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </AnimatedFooterSection>
-
-        {/* =========================================================================
-            ZONE 3 & 4: COMPACT LOWER INFORMATION AREA (BRAND, NAV & CONTACT)
-            ========================================================================= */}
-        <AnimatedFooterSection delay={0.12} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 text-left">
+        <AnimatedFooterSection delay={0.08} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 text-left border-b border-[#f7d7b0]/20 pb-10">
           
-          {/* BRAND BLOCK (4 Cols) */}
-          <div className="lg:col-span-4 space-y-3">
-            <div className="space-y-1.5">
-              <span className="text-base font-extrabold font-display text-white tracking-wider uppercase block">
-                ARAV INNOVATIONS
-              </span>
-              <p className="text-xs sm:text-sm text-white/90 leading-relaxed max-w-sm font-medium">
-                Technology, transformation and digital growth built around measurable business outcomes.
+          {/* COLUMN 1: SERVICES (5 Cols on Large screens - Minimal clean list, NO 8 large cards) */}
+          <div className="lg:col-span-5 space-y-4">
+            <div className="space-y-1">
+              <h3 className="text-xs font-mono font-black text-[#f15e1c] uppercase tracking-widest">
+                SERVICES
+              </h3>
+              <p className="text-[11px] text-[#a0b8b0] font-mono">
+                Enterprise Technology &amp; Growth Practices
               </p>
             </div>
-          </div>
 
-          {/* COMPANY & EXPLORE LINKS (3 Cols) */}
-          <div className="lg:col-span-3 grid grid-cols-2 gap-4">
-            {/* COMPANY */}
-            <div className="space-y-2">
-              <h4 className="text-[11px] font-mono font-black text-[#ffec69] uppercase tracking-wider">
-                COMPANY
-              </h4>
-              <ul className="space-y-1.5 text-xs font-semibold text-white/90">
-                {companyLinks.map((item) => (
-                  <li key={item.label}>
-                    <Link
-                      href={item.href}
-                      className="hover:text-[#ffec69] transition-colors inline-block focus:outline-hidden focus:ring-1 focus:ring-[#f15e1c] rounded-xs"
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* EXPLORE */}
-            <div className="space-y-2">
-              <h4 className="text-[11px] font-mono font-black text-[#ffec69] uppercase tracking-wider">
-                EXPLORE
-              </h4>
-              <ul className="space-y-1.5 text-xs font-semibold text-white/90">
-                {exploreLinks.map((item) => (
-                  <li key={item.label}>
-                    <Link
-                      href={item.href}
-                      className="hover:text-[#ffec69] transition-colors inline-block focus:outline-hidden focus:ring-1 focus:ring-[#f15e1c] rounded-xs"
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* CONTACT & REGIONAL OFFICES (5 Cols) */}
-          <div className="lg:col-span-5 space-y-3">
-            <h4 className="text-[11px] font-mono font-black text-[#ffec69] uppercase tracking-wider">
-              CONTACT &amp; REGIONAL OFFICES
-            </h4>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-medium text-white/90 items-stretch">
-              
-              {/* INDIA HQ GLASS CARD */}
-              <div className="p-3.5 rounded-xl bg-white/10 border border-white/20 backdrop-blur-md flex flex-col justify-between h-full space-y-2 transition-all duration-300 hover:border-[#ffec69] hover:bg-white/20 hover:-translate-y-0.5 shadow-xs group">
-                <div className="space-y-1">
-                  <div className="font-extrabold font-display text-white text-[11px] flex items-center gap-1.5 group-hover:text-[#ffec69] transition-colors">
-                    <MapPin className="w-3.5 h-3.5 text-[#ffec69] group-hover:scale-110 transition-transform shrink-0" />
-                    <span>INDIA HQ</span>
-                  </div>
-                  <p className="text-[10px] text-white/80 leading-relaxed font-medium">
-                    Platinum Floor D 14/23, Ardee City Sec 52, Gurgaon 122002
-                  </p>
-                </div>
-                <a
-                  href="tel:+919650625777"
-                  className="font-bold text-[#ffec69] group-hover:underline inline-block text-[11px] pt-1"
+            <ul className="space-y-2">
+              {serviceLinks.map((service, idx) => (
+                <motion.li
+                  key={service.num}
+                  initial={{ opacity: 0, x: -8 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.25, delay: idx * 0.03 }}
                 >
-                  +91 9650625777
-                </a>
-              </div>
+                  <Link
+                    href={service.href}
+                    className="group flex items-center justify-between py-1.5 px-2 -mx-2 rounded-lg hover:bg-white/5 transition-all duration-200"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="text-[11px] font-mono font-bold text-[#f15e1c]/80 group-hover:text-[#f15e1c] transition-colors">
+                        {service.num}
+                      </span>
+                      <span className="text-xs sm:text-sm font-sans font-semibold text-white/90 group-hover:text-[#f15e1c] group-hover:translate-x-1 transition-all duration-200">
+                        {service.title}
+                      </span>
+                    </div>
 
-              {/* UAE REGIONAL OFFICE GLASS CARD */}
-              <div className="p-3.5 rounded-xl bg-white/10 border border-white/20 backdrop-blur-md flex flex-col justify-between h-full space-y-2 transition-all duration-300 hover:border-[#ffec69] hover:bg-white/20 hover:-translate-y-0.5 shadow-xs group">
-                <div className="space-y-1">
-                  <div className="font-extrabold font-display text-white text-[11px] flex items-center gap-1.5 group-hover:text-[#ffec69] transition-colors">
-                    <MapPin className="w-3.5 h-3.5 text-[#ffec69] group-hover:scale-110 transition-transform shrink-0" />
-                    <span>UAE REGIONAL OFFICE</span>
-                  </div>
-                  <p className="text-[10px] text-white/80 leading-relaxed font-medium">
-                    55764-001 IFZA Business Park FZCO, Building A1 Dubai Silicon Oasis, Dubai, U.A.E
-                  </p>
-                </div>
-                <a
-                  href="tel:+971521555792"
-                  className="font-bold text-[#ffec69] group-hover:underline inline-block text-[11px] pt-1"
+                    <ArrowRight className="w-3.5 h-3.5 text-[#f15e1c] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200 shrink-0 ml-2" />
+                  </Link>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+
+          {/* COLUMN 2: COMPANY (2 Cols) */}
+          <div className="lg:col-span-2 space-y-4">
+            <h3 className="text-xs font-mono font-black text-[#2e936f] uppercase tracking-widest">
+              COMPANY
+            </h3>
+            <ul className="space-y-2.5 text-xs font-semibold text-white/80">
+              {companyLinks.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="hover:text-[#f15e1c] hover:translate-x-0.5 transition-all inline-block focus:outline-none focus:ring-1 focus:ring-[#f15e1c] rounded-xs"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* COLUMN 3: EXPLORE (2 Cols) */}
+          <div className="lg:col-span-2 space-y-4">
+            <h3 className="text-xs font-mono font-black text-[#fab60a] uppercase tracking-widest">
+              EXPLORE
+            </h3>
+            <ul className="space-y-2.5 text-xs font-semibold text-white/80">
+              {exploreLinks.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="hover:text-[#f15e1c] hover:translate-x-0.5 transition-all inline-block focus:outline-none focus:ring-1 focus:ring-[#f15e1c] rounded-xs"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* COLUMN 4: CONNECT (3 Cols) */}
+          <div className="lg:col-span-3 space-y-4">
+            <h3 className="text-xs font-mono font-black text-[#f15e1c] uppercase tracking-widest">
+              CONNECT
+            </h3>
+            
+            <ul className="space-y-2.5 text-xs font-medium text-white/80">
+              <li>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-1.5 text-white font-bold hover:text-[#f15e1c] transition-colors"
                 >
-                  +971 521555792
+                  <span>Start a Conversation</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#f15e1c]" />
+                </Link>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${footerConfig.supportEmail}`}
+                  className="inline-flex items-center gap-2 hover:text-[#f15e1c] transition-colors"
+                >
+                  <Mail className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
+                  <span>{footerConfig.supportEmail}</span>
                 </a>
-              </div>
-            </div>
+              </li>
+              <li>
+                <a
+                  href={`tel:${footerConfig.phoneIndia.replace(/\s+/g, '')}`}
+                  className="inline-flex items-center gap-2 hover:text-[#f15e1c] transition-colors"
+                >
+                  <Phone className="w-3.5 h-3.5 text-[#f15e1c] shrink-0" />
+                  <span>{footerConfig.phoneIndia} (India)</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`tel:${footerConfig.phoneUAE.replace(/\s+/g, '')}`}
+                  className="inline-flex items-center gap-2 hover:text-[#f15e1c] transition-colors"
+                >
+                  <Phone className="w-3.5 h-3.5 text-[#fab60a] shrink-0" />
+                  <span>{footerConfig.phoneUAE} (UAE)</span>
+                </a>
+              </li>
+            </ul>
 
-            {/* EMAIL ROW */}
-            <div>
-              <a
-                href="mailto:support@aravinnovations.com"
-                className="inline-flex items-center gap-1.5 text-xs font-extrabold text-white hover:text-[#ffec69] transition-colors"
-              >
-                <Mail className="w-3.5 h-3.5 text-[#ffec69]" />
-                <span>support@aravinnovations.com</span>
-              </a>
+            {/* Social Media Row */}
+            <div className="pt-2 space-y-2">
+              <span className="text-[10px] font-mono text-[#a0b8b0] uppercase tracking-wider block">
+                FOLLOW US
+              </span>
+              <div className="flex items-center gap-2">
+                {[
+                  { name: "LinkedIn", href: config.linkedinUrl || "https://www.linkedin.com/company/aravinnovations/", icon: <LinkedInIcon className="w-3.5 h-3.5" /> },
+                  { name: "Instagram", href: config.instagramUrl || "https://www.instagram.com/aravinnovations", icon: <InstagramIcon className="w-3.5 h-3.5" /> },
+                  { name: "Facebook", href: config.facebookUrl || "https://www.facebook.com/people/Arav-Innovations/61566419637071/", icon: <FacebookIcon className="w-3.5 h-3.5" /> },
+                  { name: "WhatsApp", href: config.whatsappUrl || "https://api.whatsapp.com/send?phone=971521555792", icon: <WhatsAppIcon className="w-3.5 h-3.5" /> },
+                  { name: "Twitter", href: config.twitterUrl || "https://x.com/AravInnovations", icon: <TwitterIcon className="w-3.5 h-3.5" /> },
+                  { name: "YouTube", href: config.youtubeUrl || "https://www.youtube.com/@AravInnovations", icon: <YoutubeIcon className="w-3.5 h-3.5" /> },
+                ].map((soc) => (
+                  <a
+                    key={soc.name}
+                    href={soc.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={soc.name}
+                    className="w-8 h-8 rounded-xl bg-white/10 hover:bg-[#f15e1c] text-white flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5 shadow-xs"
+                  >
+                    {soc.icon}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
+
         </AnimatedFooterSection>
 
         {/* =========================================================================
-            ZONE 5: SOCIAL MEDIA ("FOLLOW US")
+            LAYER 3: REGIONAL PRESENCE & BRAND STATEMENT
             ========================================================================= */}
-        <AnimatedFooterSection delay={0.15} className="pt-4 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <span className="text-[11px] font-mono font-bold text-white/90 uppercase tracking-widest">
-            FOLLOW US
-          </span>
+        <AnimatedFooterSection delay={0.12} className="space-y-8 text-left">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            
+            {/* BRAND STATEMENT (4 Cols) */}
+            <div className="lg:col-span-4 flex flex-col justify-between space-y-3">
+              <div className="space-y-2">
+                <span className="text-base font-extrabold font-display text-white uppercase tracking-wider block">
+                  ARAV INNOVATIONS
+                </span>
+                <p className="text-xs sm:text-sm text-[#a0b8b0] leading-relaxed font-sans max-w-sm">
+                  {footerConfig.brandStatement}
+                </p>
+              </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-2.5">
-            {[
-              { name: "LinkedIn", href: "https://www.linkedin.com/company/aravinnovations/", icon: <LinkedInIcon className="w-3.5 h-3.5" /> },
-              { name: "Instagram", href: "https://www.instagram.com/aravinnovations/", icon: <InstagramIcon className="w-3.5 h-3.5" /> },
-              { name: "Facebook", href: "https://www.facebook.com/aravinnovations", icon: <FacebookIcon className="w-3.5 h-3.5" /> },
-              { name: "WhatsApp", href: "https://api.whatsapp.com/send?phone=971521555792", icon: <WhatsAppIcon className="w-3.5 h-3.5" /> },
-              { name: "Twitter", href: "https://twitter.com/aravinnovations", icon: <TwitterIcon className="w-3.5 h-3.5" /> },
-              { name: "YouTube", href: "https://youtube.com/@aravinnovations", icon: <YoutubeIcon className="w-3.5 h-3.5" /> },
-            ].map((soc) => (
-              <a
-                key={soc.name}
-                href={soc.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={soc.name}
-                className="w-8 h-8 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#f15e1c] flex items-center justify-center transition-all duration-300 hover:scale-105 shadow-xs focus:outline-hidden focus:ring-1 focus:ring-[#ffec69]"
-              >
-                {soc.icon}
-              </a>
-            ))}
+              <div className="text-[11px] font-mono text-[#2e936f] font-bold">
+                Global Operations: India &bull; UAE &bull; US &bull; EU &bull; Canada
+              </div>
+            </div>
+
+            {/* REGIONAL PRESENCE (8 Cols - Equal Height Aligned Office Cards) */}
+            <div className="lg:col-span-8 space-y-3">
+              <h3 className="text-xs font-mono font-black text-[#f15e1c] uppercase tracking-widest">
+                REGIONAL PRESENCE
+              </h3>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-stretch">
+                
+                {/* INDIA HQ CARD */}
+                <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:border-[#f15e1c]/60 hover:bg-white/10 hover:-translate-y-1 shadow-xs group">
+                  <div className="space-y-1.5">
+                    <div className="font-extrabold font-display text-white text-xs flex items-center gap-2 group-hover:text-[#f15e1c] transition-colors">
+                      <MapPin className="w-3.5 h-3.5 text-[#f15e1c] group-hover:scale-110 transition-transform shrink-0" />
+                      <span>INDIA HQ</span>
+                    </div>
+                    <p className="text-xs text-[#a0b8b0] leading-relaxed font-sans">
+                      {footerConfig.addressIndia}
+                    </p>
+                  </div>
+                  <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs">
+                    <a
+                      href={`tel:${footerConfig.phoneIndia.replace(/\s+/g, '')}`}
+                      className="font-mono font-bold text-[#f15e1c] group-hover:underline"
+                    >
+                      {footerConfig.phoneIndia}
+                    </a>
+                    <span className="text-[10px] font-mono text-[#2e936f] font-bold">INDIA</span>
+                  </div>
+                </div>
+
+                {/* UAE REGIONAL OFFICE CARD */}
+                <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:border-[#2e936f]/60 hover:bg-white/10 hover:-translate-y-1 shadow-xs group">
+                  <div className="space-y-1.5">
+                    <div className="font-extrabold font-display text-white text-xs flex items-center gap-2 group-hover:text-[#2e936f] transition-colors">
+                      <MapPin className="w-3.5 h-3.5 text-[#2e936f] group-hover:scale-110 transition-transform shrink-0" />
+                      <span>UAE REGIONAL OFFICE</span>
+                    </div>
+                    <p className="text-xs text-[#a0b8b0] leading-relaxed font-sans">
+                      {footerConfig.addressUAE}
+                    </p>
+                  </div>
+                  <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs">
+                    <a
+                      href={`tel:${footerConfig.phoneUAE.replace(/\s+/g, '')}`}
+                      className="font-mono font-bold text-[#2e936f] group-hover:underline"
+                    >
+                      {footerConfig.phoneUAE}
+                    </a>
+                    <span className="text-[10px] font-mono text-[#fab60a] font-bold">UAE</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
           </div>
+
         </AnimatedFooterSection>
 
         {/* =========================================================================
-            ZONE 6: LEGAL BAR & COPYRIGHT
+            LEGAL BAR & COPYRIGHT
             ========================================================================= */}
-        <div className="pt-4 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-semibold text-white/90">
+        <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-[#a0b8b0]">
           
           {/* Legal Links */}
-          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-5">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6">
             {legalLinks.map((link, idx) => (
               <React.Fragment key={link.label}>
                 <Link
                   href={link.href}
-                  className="hover:text-[#ffec69] transition-colors focus:outline-hidden focus:ring-1 focus:ring-[#f15e1c] rounded-xs text-[11px]"
+                  className="hover:text-white transition-colors focus:outline-none focus:ring-1 focus:ring-[#f15e1c] rounded-xs text-[11px]"
                 >
                   {link.label}
                 </Link>
                 {idx < legalLinks.length - 1 && (
-                  <span className="text-white/40 text-[9px]">&bull;</span>
+                  <span className="text-white/20 text-[9px]">&bull;</span>
                 )}
               </React.Fragment>
             ))}
           </div>
 
           {/* Copyright */}
-          <div className="font-mono text-center sm:text-right text-white/80 text-[10px]">
-            &copy; 2024–2026 Arav Innovations. All rights reserved.
+          <div className="font-mono text-center sm:text-right text-[#a0b8b0] text-[11px]">
+            &copy; 2024–{new Date().getFullYear()} Arav Innovations. All rights reserved.
           </div>
         </div>
 

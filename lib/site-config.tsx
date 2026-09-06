@@ -159,8 +159,24 @@ export interface SiteConfig {
   youtubeUrl: string;
   serviceStates: Record<string, boolean>;
   ceoSectionConfig: CEOSectionConfig;
+  footerConfig: FooterConfig;
   sectionThemes: SectionThemes;
   cardStyle: CardStyleOption;
+}
+
+export interface FooterConfig {
+  ctaHeading: string;
+  ctaDescription: string;
+  ctaPrimaryText: string;
+  ctaPrimaryHref: string;
+  ctaSecondaryText: string;
+  ctaSecondaryHref: string;
+  brandStatement: string;
+  addressIndia: string;
+  addressUAE: string;
+  phoneIndia: string;
+  phoneUAE: string;
+  supportEmail: string;
 }
 
 export interface CEOSectionConfig {
@@ -340,6 +356,20 @@ const defaultConfig: SiteConfig = {
     biographyParagraph2: "His experience spans IT strategy, cybersecurity, cloud services, application development, data analytics and digital media, with a focus on connecting technology decisions to real business priorities.",
     linkedinUrl: "https://www.linkedin.com/company/aravinnovations/",
     ctaText: "Connect with Aryan",
+  },
+  footerConfig: {
+    ctaHeading: "READY TO BUILD WHAT COMES NEXT?",
+    ctaDescription: "From technology strategy to digital growth, Arav Innovations helps organizations build stronger foundations for what's next.",
+    ctaPrimaryText: "TALK TO AN EXPERT",
+    ctaPrimaryHref: "/contact",
+    ctaSecondaryText: "EXPLORE SERVICES",
+    ctaSecondaryHref: "/services",
+    brandStatement: "Technology, transformation and digital growth built around measurable business outcomes.",
+    addressIndia: "Platinum Floor D 14/23, Ardee City Sec 52, Gurgaon 122002",
+    addressUAE: "55764-001 IFZA Business Park FZCO, Building A1 Dubai Silicon Oasis, Dubai, U.A.E",
+    phoneIndia: "+91 9650625777",
+    phoneUAE: "+971 521555792",
+    supportEmail: "support@aravinnovations.com",
   },
   sectionThemes: {
     services: "soft_orange",
