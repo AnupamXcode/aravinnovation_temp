@@ -367,11 +367,11 @@ export function WhyAravDigitalCore({
               </p>
 
               <div className="p-3 rounded-xl bg-[#f7d7b0]/40 dark:bg-[#141414] border border-[#f15e1c]/20 space-y-1">
-                <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase tracking-wider flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f]" />
+                <span className="text-[10px] font-mono font-bold text-[#1e6b50] dark:text-[#74c4ab] uppercase tracking-wider flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#1e6b50] dark:text-[#74c4ab]" />
                   <span>Target Outcome</span>
                 </span>
-                <p className="text-xs font-bold font-display text-[#2e936f] dark:text-[#ffffff]">
+                <p className="text-xs font-bold font-display text-[#1e6b50] dark:text-[#ffffff]">
                   {activePillar.businessOutcome}
                 </p>
               </div>
@@ -383,6 +383,7 @@ export function WhyAravDigitalCore({
                     type="button"
                     onClick={() => setActivePillarIdx((prev) => Math.max(0, prev - 1))}
                     disabled={activePillarIdx === 0}
+                    aria-label="Previous pillar"
                     className="w-9 h-9 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center disabled:opacity-40"
                   >
                     <ChevronLeft className="w-4 h-4 text-[#f15e1c]" />
@@ -391,6 +392,7 @@ export function WhyAravDigitalCore({
                     type="button"
                     onClick={() => setActivePillarIdx((prev) => Math.min(6, prev + 1))}
                     disabled={activePillarIdx === 6}
+                    aria-label="Next pillar"
                     className="w-9 h-9 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center disabled:opacity-40"
                   >
                     <ChevronRight className="w-4 h-4 text-[#f15e1c]" />

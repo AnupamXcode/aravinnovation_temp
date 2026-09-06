@@ -1,28 +1,33 @@
 import * as React from "react";
 import { setRequestLocale, getTranslations } from "next-intl/server";
+import dynamic from "next/dynamic";
 import { Hero } from "@/components/hero/Hero";
-import { BeforeAfterSlider } from "@/components/motion/BeforeAfterSlider";
 import { ProblemToSolutionSection } from "@/components/home/ProblemToSolutionSection";
-import { WhyAravDigitalCore } from "@/components/home/WhyAravDigitalCore";
-import { AnimatedTestimonialsCarousel } from "@/components/testimonials/AnimatedTestimonialsCarousel";
-import { ClientFeedbackEditorialSection } from "@/components/testimonials/ClientFeedbackEditorialSection";
-import { LeadForm } from "@/components/forms/LeadForm";
 import { Badge } from "@/components/ui/badge";
-import { TiltCard } from "@/components/motion/TiltCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { ScrollTextFlip } from "@/components/motion/ScrollTextFlip";
-import { Services3DConstellation } from "@/components/services/Services3DConstellation";
-import { InteractiveServiceStack3D } from "@/components/services/InteractiveServiceStack3D";
-import { CaseStudy3DTransformation } from "@/components/case-studies/CaseStudy3DTransformation";
-import { Process3DPathway } from "@/components/motion/Process3DPathway";
 import { MovingLogoStrip } from "@/components/motion/MovingLogoStrip";
-import {
-  ShieldCheck,
-  Zap,
-  Users,
-  Award,
-  CheckCircle,
-} from "lucide-react";
+import { ShieldCheck, Zap, Users, Award, CheckCircle } from "lucide-react";
+
+// Code-split heavy below-the-fold components
+const InteractiveServiceStack3D = dynamic(
+  () => import("@/components/services/InteractiveServiceStack3D").then((m) => m.InteractiveServiceStack3D)
+);
+const WhyAravDigitalCore = dynamic(
+  () => import("@/components/home/WhyAravDigitalCore").then((m) => m.WhyAravDigitalCore)
+);
+const Process3DPathway = dynamic(
+  () => import("@/components/motion/Process3DPathway").then((m) => m.Process3DPathway)
+);
+const CaseStudy3DTransformation = dynamic(
+  () => import("@/components/case-studies/CaseStudy3DTransformation").then((m) => m.CaseStudy3DTransformation)
+);
+const AnimatedTestimonialsCarousel = dynamic(
+  () => import("@/components/testimonials/AnimatedTestimonialsCarousel").then((m) => m.AnimatedTestimonialsCarousel)
+);
+const LeadForm = dynamic(
+  () => import("@/components/forms/LeadForm").then((m) => m.LeadForm)
+);
 
 import { getSEOForPath, SITE_BASE_URL } from "@/lib/seo";
 import { getBlogPosts } from "@/lib/cms";

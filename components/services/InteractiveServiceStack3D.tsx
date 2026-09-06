@@ -601,6 +601,7 @@ export function InteractiveServiceStack3D() {
                     type="button"
                     onClick={() => setActiveServiceIdx((prev) => Math.max(0, prev - 1))}
                     disabled={activeServiceIdx === 0}
+                    aria-label="Previous service"
                     className="w-9 h-9 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center disabled:opacity-40"
                   >
                     <ChevronLeft className="w-4 h-4 text-[#f15e1c]" />
@@ -609,6 +610,7 @@ export function InteractiveServiceStack3D() {
                     type="button"
                     onClick={() => setActiveServiceIdx((prev) => Math.min(servicesData.length - 1, prev + 1))}
                     disabled={activeServiceIdx === servicesData.length - 1}
+                    aria-label="Next service"
                     className="w-9 h-9 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center disabled:opacity-40"
                   >
                     <ChevronRight className="w-4 h-4 text-[#f15e1c]" />

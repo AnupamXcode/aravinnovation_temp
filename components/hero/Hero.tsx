@@ -26,6 +26,17 @@ export function Hero() {
   const [videoError, setVideoError] = React.useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
 
+  const [isMobileVideo, setIsMobileVideo] = React.useState(false);
+
+  // Detect mobile viewport to serve compressed mobile background video
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const checkMobile = () => setIsMobileVideo(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile, { passive: true });
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   // Check prefers-reduced-motion on mount
   React.useEffect(() => {
     if (typeof window === "undefined") return;
@@ -127,7 +138,7 @@ export function Hero() {
         {isVideoEnabled && !videoError && (
           <video
             ref={videoRef}
-            src={videoConfig.videoUrl || "/videos/hero-bg.mp4"}
+            src={isMobileVideo ? "/videos/hero-bg-mobile.mp4" : (videoConfig.videoUrl || "/videos/hero-bg.mp4")}
             autoPlay
             muted
             loop

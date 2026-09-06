@@ -155,7 +155,7 @@ export function Process3DPathway() {
                   </div>
                   <div className="space-y-0.5 sm:space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] sm:text-xs font-mono font-black text-[#f15e1c] px-2.5 sm:px-3 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/30">
+                      <span className="text-[10px] sm:text-xs font-mono font-black text-[#c2410c] dark:text-[#f15e1c] px-2.5 sm:px-3 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/30">
                         STEP {step.number}
                       </span>
                     </div>
@@ -164,7 +164,7 @@ export function Process3DPathway() {
                     </h3>
                   </div>
                 </div>
-                <span className="text-[11px] sm:text-sm font-mono text-[#2e936f] font-extrabold uppercase tracking-wider">
+                <span className="text-[11px] sm:text-sm font-mono text-[#1e6b50] dark:text-[#74c4ab] font-extrabold uppercase tracking-wider">
                   {step.subtitle}
                 </span>
               </div>

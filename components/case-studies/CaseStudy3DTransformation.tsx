@@ -200,7 +200,7 @@ export function CaseStudy3DTransformation() {
           <div className="flex items-center gap-4 text-sm sm:text-base text-[#1b2823] dark:text-[#ffffff]">
             <BarChart3 className="w-6 h-6 text-[#f15e1c] shrink-0" />
             <span className="font-semibold">
-              Enterprise Transformation Benchmark: <strong className="text-[#f15e1c]">3.4x Revenue Uplift</strong> &amp; <strong className="text-[#2e936f]">100% DPDP Compliance Guaranteed</strong>
+              Enterprise Transformation Benchmark: <strong className="text-[#c2410c] dark:text-[#f15e1c]">3.4x Revenue Uplift</strong> &amp; <strong className="text-[#1e6b50] dark:text-[#74c4ab]">100% DPDP Compliance Guaranteed</strong>
             </span>
           </div>
           <Link href="/contact" className="shrink-0 w-full sm:w-auto">

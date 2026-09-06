@@ -94,6 +94,7 @@ export function HomeInsightsSection({ posts }: HomeInsightsSectionProps) {
                   <div className="pt-4 border-t border-[#f7d7b0]/50 dark:border-[#2a3c35]">
                     <Link
                       href={`/insights/${post.slug}`}
+                      aria-label={`Read article: ${post.title}`}
                       className="inline-flex items-center gap-2 text-sm font-extrabold font-display text-[#f15e1c] group-hover:text-[#d8480d] transition-colors cursor-pointer"
                     >
                       <span>Read Article</span>

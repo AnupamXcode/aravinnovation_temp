@@ -253,6 +253,7 @@ export function InsightsFilterClient({ initialPosts, categories }: InsightsFilte
                     <span className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">{art.dateFormatted}</span>
                     <Link
                       href={`/insights/${art.slug}`}
+                      aria-label={`Read article: ${art.title}`}
                       className="text-xs font-bold text-[#f15e1c] hover:underline inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform min-h-[44px] items-center"
                     >
                       Read Article <ArrowRight className="w-3.5 h-3.5" />
