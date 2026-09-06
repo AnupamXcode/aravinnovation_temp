@@ -122,7 +122,7 @@ export function Hero() {
       className="relative w-full min-h-[calc(100vh-80px)] sm:min-h-[calc(100vh-90px)] flex flex-col justify-center py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300"
     >
       {/* 1. Full-Bleed Authoritative Background Video */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none" aria-hidden="true">
         {/* Dynamic Authoritative Hero Background Video */}
         {isVideoEnabled && !videoError && (
           <video
@@ -133,6 +133,8 @@ export function Hero() {
             loop
             playsInline
             preload="metadata"
+            tabIndex={-1}
+            aria-hidden="true"
             onLoadedMetadata={setVideoSpeed}
             onCanPlay={setVideoSpeed}
             onPlay={setVideoSpeed}

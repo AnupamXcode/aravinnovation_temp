@@ -191,9 +191,9 @@ export default async function HomePage({
                 </p>
 
                 <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] space-y-3.5 mt-6 shadow-md">
-                  <h4 className="text-base font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
+                  <h3 className="text-base font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
                     Our Engagement Approach
-                  </h4>
+                  </h3>
                   <ul className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] space-y-2.5">
                     <li className="flex items-center gap-2.5">
                       <CheckCircle className="w-4 h-4 text-[#2e936f] shrink-0" />

@@ -75,9 +75,9 @@ export function AnimatedTestimonialsCarousel() {
             {/* Author Attribution */}
             <div className="pt-2 flex items-center justify-between">
               <div>
-                <h4 className="text-base sm:text-lg font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
+                <div className="text-base sm:text-lg font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
                   {current.author}
-                </h4>
+                </div>
                 <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] font-medium">
                   {current.designation}, {current.company}
                 </p>

@@ -39,6 +39,7 @@ const notoSansArabic = Noto_Sans_Arabic({
   subsets: ["arabic"],
   display: "swap",
   weight: ["400", "500", "600", "700"],
+  preload: false,
 });
 
 const notoSansDevanagari = Noto_Sans_Devanagari({
@@ -46,6 +47,7 @@ const notoSansDevanagari = Noto_Sans_Devanagari({
   subsets: ["devanagari"],
   display: "swap",
   weight: ["400", "500", "600", "700"],
+  preload: false,
 });
 
 export const viewport: Viewport = {

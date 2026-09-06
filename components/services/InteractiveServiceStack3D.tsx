@@ -344,7 +344,7 @@ export function InteractiveServiceStack3D() {
                           "font-mono text-[11px] font-bold px-2 py-0.5 rounded-md shrink-0 transition-colors",
                           isHighlighted
                             ? "bg-[#f15e1c] text-white"
-                            : "bg-[#fce3d3] dark:bg-[#1a1a1a] text-[#f15e1c] group-hover:bg-[#f15e1c] group-hover:text-white"
+                            : "bg-[#fce3d3] dark:bg-[#1a1a1a] text-[#c2410c] dark:text-[#f15e1c] group-hover:bg-[#f15e1c] group-hover:text-white"
                         )}
                       >
                         {service.number}
@@ -416,7 +416,7 @@ export function InteractiveServiceStack3D() {
                           {renderServiceIcon(currentService.iconName, "#ffffff")}
                         </div>
                         <div>
-                          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#2e936f] dark:text-[#74c4ab]">
+                          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#227055] dark:text-[#74c4ab]">
                             {currentService.category}
                           </span>
                           <h3 className="text-lg lg:text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">

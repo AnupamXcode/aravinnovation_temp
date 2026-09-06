@@ -399,7 +399,7 @@ export function Navbar() {
                 )}
               >
                 <span className="relative py-0.5">
-                  Blogs
+                  Insights &amp; Articles
                   <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 group-hover:w-full h-0.5 bg-[#f15e1c] transition-all duration-300 ease-out rounded-full" />
                 </span>
               </Link>

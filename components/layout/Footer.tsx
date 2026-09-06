@@ -212,7 +212,7 @@ const exploreLinks = [
   { label: "Technology", href: "/services" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Insights", href: "/insights" },
-  { label: "Blogs", href: "/blogs" },
+  { label: "Blog Archive", href: "/blogs" },
 ];
 
 const legalLinks = [
