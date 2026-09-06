@@ -34,10 +34,10 @@ export function Hero() {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
-  // Set playbackRate = 0.65 (Smooth 65% speed cinematic motion)
+  // Set playbackRate = 1.0 (Normal native playback speed)
   const setVideoSpeed = React.useCallback(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.65;
+      videoRef.current.playbackRate = 1.0;
       setVideoLoaded(true);
     }
   }, []);
@@ -52,7 +52,7 @@ export function Hero() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            videoNode.playbackRate = 0.65;
+            videoNode.playbackRate = 1.0;
             videoNode.play().catch(() => {
               // Ignore autoplay error if blocked by browser policy
             });
@@ -90,7 +90,7 @@ export function Hero() {
           }`}
         />
 
-        {/* Crisp Unblurred Video Background (Smooth 0.65x Motion, Autoplay, Muted, Loop, PlaysInline) */}
+        {/* Crisp Unblurred Video Background (Normal 1.0x Speed, Autoplay, Muted, Loop, PlaysInline) */}
         {!prefersReducedMotion && !videoError && (
           <video
             ref={videoRef}
