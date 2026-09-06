@@ -68,7 +68,7 @@ export function HeroVideoBackground() {
     };
   }, [prefersReducedMotion, videoSpeed, isVideoEnabled, videoMounted]);
 
-  const desktopSrc = videoConfig.videoUrl || "/videos/hero-bg.mp4";
+  const videoSrc = videoConfig.videoUrl || "/videos/Create_a_premium_minimalist_ci.mp4";
 
   return (
     <div
@@ -76,10 +76,11 @@ export function HeroVideoBackground() {
       className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none"
       aria-hidden="true"
     >
-      {/* Dynamic Authoritative Hero Background Video */}
+      {/* Single Authoritative Hero Background Video Instance */}
       {isVideoEnabled && !videoError && videoMounted && (
         <video
           ref={videoRef}
+          src={videoSrc}
           autoPlay
           muted
           loop
@@ -91,20 +92,17 @@ export function HeroVideoBackground() {
           onCanPlay={setVideoPlaybackSpeed}
           onPlay={setVideoPlaybackSpeed}
           onError={() => setVideoError(true)}
-          className="absolute inset-0 w-full h-full object-cover object-center lg:object-right-top transform-gpu transition-opacity duration-500 opacity-100"
-        >
-          <source media="(max-width: 767px)" src="/videos/hero-bg-mobile.mp4" type="video/mp4" />
-          <source media="(min-width: 768px)" src={desktopSrc} type="video/mp4" />
-        </video>
+          className="absolute inset-0 w-full h-full object-cover object-center transform-gpu transition-opacity duration-500 opacity-100"
+        />
       )}
 
-      {/* Dynamic CMS Overlay Vignette for Text Readability */}
+      {/* Dynamic Overlay Vignette for Text Readability */}
       <div
-        className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/40 to-transparent dark:hidden pointer-events-none transition-opacity duration-300"
+        className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/40 to-transparent dark:hidden pointer-events-none transition-opacity duration-300 z-[1]"
         style={{ opacity: overlayOpacityVal }}
       />
       <div
-        className="hidden dark:block absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/40 to-transparent pointer-events-none transition-opacity duration-300"
+        className="hidden dark:block absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/40 to-transparent pointer-events-none transition-opacity duration-300 z-[1]"
         style={{ opacity: overlayOpacityVal }}
       />
     </div>

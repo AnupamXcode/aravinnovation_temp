@@ -132,11 +132,11 @@ export function HeroAdminPanel({ showToast }: HeroAdminPanelProps) {
               </label>
               <input
                 type="text"
-                value={heroVideo.videoUrl || "/videos/hero-bg.mp4"}
+                value={heroVideo.videoUrl || "/videos/Create_a_premium_minimalist_ci.mp4"}
                 onChange={(e) => {
                   updateHeroVideoConfig({ videoUrl: e.target.value });
                 }}
-                placeholder="/videos/hero-bg.mp4"
+                placeholder="/videos/Create_a_premium_minimalist_ci.mp4"
                 className="w-full px-3.5 py-2.5 rounded-xl text-xs bg-[#FBF3EA] dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] font-mono"
               />
               <div className="flex flex-wrap gap-2 pt-1">
@@ -144,12 +144,12 @@ export function HeroAdminPanel({ showToast }: HeroAdminPanelProps) {
                 <button
                   type="button"
                   onClick={() => {
-                    updateHeroVideoConfig({ videoUrl: "/videos/hero-bg.mp4" });
-                    showToast("Video source set to /videos/hero-bg.mp4");
+                    updateHeroVideoConfig({ videoUrl: "/videos/Create_a_premium_minimalist_ci.mp4" });
+                    showToast("Video source set to /videos/Create_a_premium_minimalist_ci.mp4");
                   }}
                   className="px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold bg-[#FFFDF9] dark:bg-[#201C18] border border-[#f15e1c]/40 text-[#f15e1c] hover:bg-[#f15e1c] hover:text-white transition-all cursor-pointer"
                 >
-                  /videos/hero-bg.mp4 (Default)
+                  /videos/Create_a_premium_minimalist_ci.mp4 (Default)
                 </button>
               </div>
             </div>
