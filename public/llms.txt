@@ -5,28 +5,20 @@
 ## Overview
 Arav Innovations is a multidisciplinary technology consulting and engineering firm operating across India (Gurugram) and the UAE (Dubai). We help enterprises, scale-ups, and organizations modernize technology infrastructure, build scalable web and mobile software, achieve regulatory compliance (DPDP, ISO 27001, GDPR), and accelerate digital market growth.
 
-## Core Capabilities & Services
-- **IT Strategy & Implementation**: Enterprise cloud roadmaps, architecture modernization, IT governance.
-  - URL: https://aravinnovations.com/services/it-strategy-implementation
-- **Web & Application Development**: Scalable React/Next.js web apps, microservices, cloud APIs, mobile platforms.
-  - URL: https://aravinnovations.com/services/web-app-development
-- **Digital Marketing & Brand Development**: Demand generation, brand positioning, performance marketing.
-  - URL: https://aravinnovations.com/services/digital-marketing-brand-development
-- **Risk, Compliance & Governance**: DPDP readiness, ISO 27001, GDPR compliance frameworks, SOC 2.
-  - URL: https://aravinnovations.com/services/risk-compliance-governance
-- **Audit & Technical Improvement**: Architecture reviews, code audits, performance optimization blueprints.
-  - URL: https://aravinnovations.com/services/audit-improvement
-- **Training & Staff Augmentation**: Pre-vetted senior engineering talent and capability building.
-  - URL: https://aravinnovations.com/services/training-staff-augmentation
-- **SEO Services**: Technical crawlability, search architecture, organic growth engineering.
-  - URL: https://aravinnovations.com/services/seo-services
-- **AI Portfolio**: Practical enterprise AI integration, agentic AI engines, workflow automation.
-  - URL: https://aravinnovations.com/services/ai-portfolio
+## Core Services
+- [IT Strategy & Implementation](https://aravinnovations.com/services/it-strategy-implementation): Enterprise cloud roadmaps, architecture modernization, IT governance.
+- [Web & Application Development](https://aravinnovations.com/services/web-app-development): Scalable React/Next.js web apps, microservices, cloud APIs, mobile platforms.
+- [Digital Marketing & Brand Development](https://aravinnovations.com/services/digital-marketing-brand-development): Demand generation, brand positioning, performance marketing.
+- [Risk, Compliance & Governance](https://aravinnovations.com/services/risk-compliance-governance): DPDP readiness, ISO 27001, GDPR compliance frameworks, SOC 2.
+- [Audit & Technical Improvement](https://aravinnovations.com/services/audit-improvement): Architecture reviews, code audits, performance optimization blueprints.
+- [Training & Staff Augmentation](https://aravinnovations.com/services/training-staff-augmentation): Pre-vetted senior engineering talent and capability building.
+- [SEO Services](https://aravinnovations.com/services/seo-services): Technical crawlability, search architecture, organic growth engineering.
+- [AI Portfolio](https://aravinnovations.com/services/ai-portfolio): Practical enterprise AI integration, agentic AI engines, workflow automation.
 
-## Canonical Resources
-- Homepage: https://aravinnovations.com
-- Services Directory: https://aravinnovations.com/services
-- Products & Platforms: https://aravinnovations.com/products
-- Case Studies: https://aravinnovations.com/case-studies
-- Insights & Articles: https://aravinnovations.com/insights
-- Contact & Consultations: https://aravinnovations.com/contact
+## Key Sections
+- [Homepage](https://aravinnovations.com): Official company overview and core offerings.
+- [Services Directory](https://aravinnovations.com/services): Complete listing of enterprise technology services.
+- [Products & Platforms](https://aravinnovations.com/products): Proprietary SaaS products including AstroBeams and OmniGRC.
+- [Case Studies](https://aravinnovations.com/case-studies): Real-world enterprise client case studies and benchmarks.
+- [Insights & Articles](https://aravinnovations.com/insights): Thought leadership, industry trends, and technical articles.
+- [Contact & Consultations](https://aravinnovations.com/contact): Get in touch with senior technology architects.

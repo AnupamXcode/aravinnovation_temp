@@ -22,9 +22,12 @@ export async function fetchBlogsFromVercel(): Promise<BlogPost[]> {
     if (customUrl && !customUrl.includes("xxxxxxxx")) {
       const res = await fetch(customUrl, { next: { revalidate: 60 } });
       if (res.ok) {
-        const data = await res.json();
-        if (Array.isArray(data)) {
-          return data as BlogPost[];
+        const text = await res.text();
+        if (text && text.trim()) {
+          const data = JSON.parse(text);
+          if (Array.isArray(data)) {
+            return data as BlogPost[];
+          }
         }
       }
     }
@@ -35,9 +38,12 @@ export async function fetchBlogsFromVercel(): Promise<BlogPost[]> {
       if (targetBlob) {
         const res = await fetch(targetBlob.url, { next: { revalidate: 60 } });
         if (res.ok) {
-          const data = await res.json();
-          if (Array.isArray(data)) {
-            return data as BlogPost[];
+          const text = await res.text();
+          if (text && text.trim()) {
+            const data = JSON.parse(text);
+            if (Array.isArray(data)) {
+              return data as BlogPost[];
+            }
           }
         }
       }

@@ -138,7 +138,6 @@ export function Hero() {
         {isVideoEnabled && !videoError && (
           <video
             ref={videoRef}
-            src={isMobileVideo ? "/videos/hero-bg-mobile.mp4" : (videoConfig.videoUrl || "/videos/hero-bg.mp4")}
             autoPlay
             muted
             loop
@@ -149,12 +148,14 @@ export function Hero() {
             onLoadedMetadata={setVideoSpeed}
             onCanPlay={setVideoSpeed}
             onPlay={setVideoSpeed}
-            onError={(e) => {
-              console.error("Hero background video playback error:", e);
+            onError={() => {
               setVideoError(true);
             }}
             className="absolute inset-0 w-full h-full object-cover object-center lg:object-right-top transform-gpu transition-opacity duration-500 opacity-100"
-          />
+          >
+            <source src="/videos/hero-bg-mobile.mp4" media="(max-width: 767px)" type="video/mp4" />
+            <source src={videoConfig.videoUrl || "/videos/hero-bg.mp4"} type="video/mp4" />
+          </video>
         )}
 
         {/* Dynamic CMS Overlay Vignette for Text Readability */}
