@@ -297,16 +297,25 @@ export function ExplodedServicesStack3D() {
         invalidateOnRefresh: true,
       });
 
-      // Window Scroll Listener for guaranteed scrubbing updates
+      // Window Scroll Listener for guaranteed scrubbing updates (throttled with rAF to avoid forced reflow)
+      let ticking = false;
       const handleWindowScroll = () => {
-        const trackRect = track.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const totalScrollableDistance = trackRect.height - windowHeight;
-        if (totalScrollableDistance <= 0) return;
-
-        const currentScroll = -trackRect.top;
-        const progress = Math.max(0, Math.min(1, currentScroll / totalScrollableDistance));
-        explode(progress);
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            if (track) {
+              const trackRect = track.getBoundingClientRect();
+              const windowHeight = window.innerHeight;
+              const totalScrollableDistance = trackRect.height - windowHeight;
+              if (totalScrollableDistance > 0) {
+                const currentScroll = -trackRect.top;
+                const progress = Math.max(0, Math.min(1, currentScroll / totalScrollableDistance));
+                explode(progress);
+              }
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
       };
 
       window.addEventListener("scroll", handleWindowScroll, { passive: true });

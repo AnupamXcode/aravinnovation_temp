@@ -1,9 +1,7 @@
-"use client";
-
 import * as React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { useSiteConfig, defaultHeroVideoConfig } from "@/lib/site-config";
+import { HeroVideoBackground } from "./HeroVideoBackground";
 import {
   ArrowRight,
   ShieldCheck,
@@ -12,172 +10,17 @@ import {
 } from "lucide-react";
 
 export function Hero() {
-  const { config } = useSiteConfig();
-  const videoConfig = config.heroVideoConfig || defaultHeroVideoConfig;
-  const isVideoEnabled = videoConfig.enabled !== false;
-  const videoSpeed = videoConfig.playbackSpeed || 0.75;
-  const overlayOpacityVal = (videoConfig.overlayOpacity ?? 75) / 100;
-
-  const sectionRef = React.useRef<HTMLElement>(null);
-  const videoRef = React.useRef<HTMLVideoElement>(null);
-  const [videoLoaded, setVideoLoaded] = React.useState(false);
-  const [videoError, setVideoError] = React.useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
-  const [isMobileVideo, setIsMobileVideo] = React.useState(false);
-  const [videoMounted, setVideoMounted] = React.useState(false);
-
-  // Initialize viewport and video state in a single batch to avoid layout re-renders
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-    const checkMobile = () => setIsMobileVideo(window.innerWidth < 768);
-    checkMobile();
-    setVideoMounted(true);
-
-    window.addEventListener("resize", checkMobile, { passive: true });
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  // Check prefers-reduced-motion on mount
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReducedMotion(mediaQuery.matches);
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setPrefersReducedMotion(e.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
-
-  // Set playbackRate = 0.75x dynamically from CMS config
-  const setVideoSpeed = React.useCallback(() => {
-    if (videoRef.current) {
-      videoRef.current.playbackRate = videoSpeed;
-      setVideoLoaded(true);
-    }
-  }, [videoSpeed]);
-
-  // Update video speed dynamically if CMS config changes
-  React.useEffect(() => {
-    if (videoRef.current && videoLoaded) {
-      videoRef.current.playbackRate = videoSpeed;
-      if (prefersReducedMotion) {
-        videoRef.current.pause();
-      }
-    }
-  }, [videoSpeed, videoLoaded, prefersReducedMotion]);
-
-  // IntersectionObserver to pause video when out of viewport & resume when visible
-  React.useEffect(() => {
-    if (!sectionRef.current || !videoRef.current || prefersReducedMotion || !isVideoEnabled) return;
-
-    const videoNode = videoRef.current;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            videoNode.playbackRate = videoSpeed;
-            videoNode.play().catch(() => {
-              // Ignore autoplay error if blocked by browser policy
-            });
-          } else {
-            videoNode.pause();
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(sectionRef.current);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [prefersReducedMotion, videoLoaded, videoSpeed, isVideoEnabled, videoMounted]);
-
-  // Dynamic layout styling from CMS config
-  const textAlignClass =
-    videoConfig.textAlignment === "center"
-      ? "text-center mx-auto"
-      : videoConfig.textAlignment === "right"
-      ? "text-right ml-auto"
-      : "text-left";
-
-  const flexAlignClass =
-    videoConfig.textAlignment === "center"
-      ? "justify-center"
-      : videoConfig.textAlignment === "right"
-      ? "justify-end"
-      : "justify-start";
-
-  const layoutColClass =
-    videoConfig.textLayoutPosition === "center"
-      ? "lg:col-span-12 text-center mx-auto"
-      : videoConfig.textLayoutPosition === "right"
-      ? "lg:col-span-8 lg:col-start-5 text-right ml-auto"
-      : "lg:col-span-8 text-left";
-
-  const maxWidthClass =
-    videoConfig.textMaxWidth === "compact"
-      ? "max-w-2xl"
-      : videoConfig.textMaxWidth === "wide"
-      ? "max-w-4xl"
-      : "max-w-3xl";
-
-  const videoSrc = isMobileVideo
-    ? "/videos/hero-bg-mobile.mp4"
-    : (videoConfig.videoUrl || "/videos/hero-bg.mp4");
-
   return (
-    <section
-      ref={sectionRef}
-      className="relative w-full min-h-[calc(100vh-80px)] sm:min-h-[calc(100vh-90px)] flex flex-col justify-center py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300"
-    >
-      {/* 1. Full-Bleed Authoritative Background Video */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none" aria-hidden="true">
-        {/* Dynamic Authoritative Hero Background Video - Deferred mount so H1 LCP paints instantly */}
-        {isVideoEnabled && !videoError && videoMounted && (
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            tabIndex={-1}
-            aria-hidden="true"
-            onLoadedMetadata={setVideoSpeed}
-            onCanPlay={setVideoSpeed}
-            onPlay={setVideoSpeed}
-            onError={() => {
-              setVideoError(true);
-            }}
-            className="absolute inset-0 w-full h-full object-cover object-center lg:object-right-top transform-gpu transition-opacity duration-500 opacity-100"
-          >
-            <source src={videoSrc} type="video/mp4" />
-          </video>
-        )}
-
-        {/* Dynamic CMS Overlay Vignette for Text Readability */}
-        <div
-          className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/40 to-transparent dark:hidden pointer-events-none transition-opacity duration-300"
-          style={{ opacity: overlayOpacityVal }}
-        />
-        <div
-          className="hidden dark:block absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/40 to-transparent pointer-events-none transition-opacity duration-300"
-          style={{ opacity: overlayOpacityVal }}
-        />
-      </div>
+    <section className="relative w-full min-h-[calc(100vh-80px)] sm:min-h-[calc(100vh-90px)] flex flex-col justify-center py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300">
+      {/* 1. Full-Bleed Background Video Subcomponent */}
+      <HeroVideoBackground />
 
       <div className="relative z-10 w-full px-4 sm:px-8 lg:px-12 xl:px-16 my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Dynamic Content Column Controlled via CMS Layout Settings */}
-          <div className={`${layoutColClass} ${maxWidthClass} space-y-6 sm:space-y-7 ${textAlignClass}`}>
+          {/* Main Hero Content Column - Immediate Paint & Zero Hydration Delay */}
+          <div className="lg:col-span-8 text-left max-w-3xl space-y-6 sm:space-y-7">
             {/* Eyebrow Label - Immediate Render */}
-            <div className={`inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-[#4A3D35] dark:text-[#D8CBC0] ${flexAlignClass}`}>
+            <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-[#4A3D35] dark:text-[#D8CBC0] justify-start">
               <span className="w-2 h-2 rounded-full bg-[#f15e1c] shrink-0" />
               <span className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.18em]">
                 ENTERPRISE TECHNOLOGY <span className="text-[#f15e1c] font-bold mx-1">&bull;</span> DIGITAL TRANSFORMATION <span className="text-[#f15e1c] font-bold mx-1">&bull;</span> GROWTH
