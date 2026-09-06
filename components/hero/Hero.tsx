@@ -34,20 +34,13 @@ export function Hero() {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
-  // Set playbackRate = 0.75 when video metadata is loaded
-  const handleLoadedMetadata = () => {
+  // Set playbackRate = 0.4 (40% speed ultra slow-motion)
+  const setVideoSpeed = React.useCallback(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.75;
+      videoRef.current.playbackRate = 0.4;
       setVideoLoaded(true);
     }
-  };
-
-  // Ensure playbackRate remains 0.75 when video plays
-  const handlePlay = () => {
-    if (videoRef.current) {
-      videoRef.current.playbackRate = 0.75;
-    }
-  };
+  }, []);
 
   // IntersectionObserver to pause video when out of viewport & resume when visible
   React.useEffect(() => {
@@ -59,7 +52,7 @@ export function Hero() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            videoNode.playbackRate = 0.75;
+            videoNode.playbackRate = 0.4;
             videoNode.play().catch(() => {
               // Ignore autoplay error if blocked by browser policy
             });
@@ -97,7 +90,7 @@ export function Hero() {
           }`}
         />
 
-        {/* Video Background (0.75x Speed, Autoplay, Muted, Loop, PlaysInline) */}
+        {/* Crisp Unblurred Video Background (0.4x Ultra-Slow Motion, Autoplay, Muted, Loop, PlaysInline) */}
         {!prefersReducedMotion && !videoError && (
           <video
             ref={videoRef}
@@ -106,23 +99,22 @@ export function Hero() {
             muted
             loop
             playsInline
-            preload="metadata"
-            onLoadedMetadata={handleLoadedMetadata}
-            onPlay={handlePlay}
+            preload="auto"
+            onLoadedMetadata={setVideoSpeed}
+            onCanPlay={setVideoSpeed}
+            onPlay={setVideoSpeed}
             onError={() => setVideoError(true)}
             className={`absolute inset-0 w-full h-full object-cover object-center lg:object-right-top transition-opacity duration-700 ${
-              videoLoaded ? "opacity-100 dark:opacity-95" : "opacity-0"
+              videoLoaded ? "opacity-100 dark:opacity-100" : "opacity-0"
             }`}
           />
         )}
 
-        {/* Minimal Localized Vignette Mask for Text Readability - Sharp Background Intact */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9]/85 via-[#FFFDF9]/30 to-transparent dark:hidden pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FFFDF9]/20 via-transparent to-[#FFFDF9]/60 dark:hidden pointer-events-none" />
+        {/* Minimal Subtle Gradient for Text Contrast (Crisp Video Intact & Unblurred) */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9]/75 via-[#FFFDF9]/20 to-transparent dark:hidden pointer-events-none" />
 
-        {/* Dark Mode Vignette */}
-        <div className="hidden dark:block absolute inset-0 bg-gradient-to-r from-[#050505]/90 via-[#050505]/40 to-transparent pointer-events-none" />
-        <div className="hidden dark:block absolute inset-0 bg-gradient-to-b from-[#050505]/20 via-transparent to-[#050505]/70 pointer-events-none" />
+        {/* Dark Mode Gradient */}
+        <div className="hidden dark:block absolute inset-0 bg-gradient-to-r from-[#050505]/80 via-[#050505]/20 to-transparent pointer-events-none" />
       </div>
 
       <div className="relative z-10 w-full px-4 sm:px-8 lg:px-12 xl:px-16 my-auto">
