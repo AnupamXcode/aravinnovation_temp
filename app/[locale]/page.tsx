@@ -29,10 +29,15 @@ const LeadForm = dynamic(
   () => import("@/components/forms/LeadForm").then((m) => m.LeadForm)
 );
 
+const HomeInsightsSection = dynamic(
+  () => import("@/components/home/HomeInsightsSection").then((m) => m.HomeInsightsSection)
+);
+const WhoWeHelpSection = dynamic(
+  () => import("@/components/home/WhoWeHelpSection").then((m) => m.WhoWeHelpSection)
+);
+
 import { getSEOForPath, SITE_BASE_URL } from "@/lib/seo";
 import { getBlogPosts } from "@/lib/cms";
-import { HomeInsightsSection } from "@/components/home/HomeInsightsSection";
-import { WhoWeHelpSection } from "@/components/home/WhoWeHelpSection";
 
 export async function generateMetadata() {
   const seo = getSEOForPath("/");
