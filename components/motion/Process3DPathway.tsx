@@ -78,8 +78,19 @@ const steps: ProcessStep[] = [
 
 export function Process3DPathway() {
   const containerRef = React.useRef<HTMLDivElement>(null);
+  const cardRefs = React.useRef<(HTMLDivElement | null)[]>([]);
   const shouldReduceMotion = useReducedMotion();
   const [activeStep, setActiveStep] = React.useState<number>(0);
+  const [isMobile, setIsMobile] = React.useState<boolean>(false);
+
+  // Detect mobile viewport (< 768px)
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile, { passive: true });
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -88,7 +99,9 @@ export function Process3DPathway() {
 
   const pathHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
+  // Desktop scroll progress listener (runs only when not mobile)
   React.useEffect(() => {
+    if (isMobile) return;
     const unsubscribe = scrollYProgress.on("change", (latest) => {
       const stepIndex = Math.min(
         Math.floor(latest * steps.length),
@@ -97,7 +110,57 @@ export function Process3DPathway() {
       setActiveStep(Math.max(0, stepIndex));
     });
     return () => unsubscribe();
-  }, [scrollYProgress]);
+  }, [scrollYProgress, isMobile]);
+
+  // Mobile focus-zone IntersectionObserver (lightweight, zero scroll-jacking, zero forced reflow)
+  React.useEffect(() => {
+    if (!isMobile || typeof window === "undefined") return;
+
+    const intersectingMap = new Map<number, number>();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const indexStr = entry.target.getAttribute("data-step-index");
+          if (indexStr !== null) {
+            const index = parseInt(indexStr, 10);
+            if (entry.isIntersecting) {
+              intersectingMap.set(index, entry.intersectionRatio);
+            } else {
+              intersectingMap.delete(index);
+            }
+          }
+        });
+
+        if (intersectingMap.size > 0) {
+          let maxIndex = -1;
+          let maxRatio = -1;
+          intersectingMap.forEach((ratio, idx) => {
+            if (ratio > maxRatio) {
+              maxRatio = ratio;
+              maxIndex = idx;
+            }
+          });
+          if (maxIndex !== -1) {
+            setActiveStep((prev) => (prev !== maxIndex ? maxIndex : prev));
+          }
+        }
+      },
+      {
+        root: null,
+        rootMargin: "-25% 0px -25% 0px",
+        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1.0],
+      }
+    );
+
+    cardRefs.current.forEach((card) => {
+      if (card) observer.observe(card);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [isMobile]);
 
   return (
     <div
@@ -118,6 +181,10 @@ export function Process3DPathway() {
           return (
             <motion.div
               key={step.number}
+              ref={(el) => {
+                cardRefs.current[idx] = el;
+              }}
+              data-step-index={idx}
               initial={{ opacity: 0.85, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
@@ -125,12 +192,12 @@ export function Process3DPathway() {
               whileHover={{ x: 3 }}
               onClick={() => setActiveStep(idx)}
               className={cn(
-                "relative z-20 p-3.5 sm:p-8 rounded-2xl sm:rounded-3xl border shadow-md transition-all duration-300 cursor-pointer space-y-3 sm:space-y-4 w-full",
+                "relative z-20 p-3.5 sm:p-8 rounded-2xl sm:rounded-3xl border transition-all duration-300 cursor-pointer space-y-3 sm:space-y-4 w-full",
                 isActive
-                  ? "bg-white dark:bg-[#000000] border-[#f15e1c] ring-2 ring-[#f15e1c]/30 shadow-[#f15e1c]/15"
+                  ? "bg-white dark:bg-[#000000] border-[#f15e1c] ring-2 ring-[#f15e1c]/40 shadow-lg shadow-[#f15e1c]/15"
                   : isPassed
-                  ? "bg-white dark:bg-[#0a0a0a] border-[#2e936f]/60"
-                  : "bg-white dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a]"
+                  ? "bg-white dark:bg-[#0a0a0a] border-[#2e936f]/60 shadow-md"
+                  : "bg-white dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md"
               )}
             >
               {/* Timeline Trajectory Node Dot */}
