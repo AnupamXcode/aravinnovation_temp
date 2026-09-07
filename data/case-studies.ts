@@ -11,6 +11,8 @@ export interface CaseStudy {
   objective: string;
   approach: string;
   solution: string;
+  verificationStatus?: "Draft" | "Needs Verification" | "Verified" | "Approved for Public Use" | "Archived";
+  permissionStatus?: "Approved for Public Use" | "Needs Verification" | "Anonymized";
   pipelineStages: {
     stage: string;
     subtext: string;
@@ -53,9 +55,11 @@ export const caseStudiesData: CaseStudy[] = [
     title: "Enterprise Cloud Migration & Architecture Modernization",
     client: "Confidential Global FinTech & Logistics Enterprise",
     clientIndustry: "Financial Technology & Logistics",
-    serviceCategory: "IT Strategy & Consulting",
-    serviceSlug: "it-strategy-consulting",
+    serviceCategory: "IT Strategy & Implementation",
+    serviceSlug: "it-strategy-implementation",
     location: "Global",
+    verificationStatus: "Approved for Public Use",
+    permissionStatus: "Anonymized",
     summary:
       "Transitioning an on-premise monolithic architecture to a high-availability cloud-native microservices infrastructure.",
     challenge:
@@ -108,9 +112,11 @@ export const caseStudiesData: CaseStudy[] = [
     title: "High-Performance Modern Web Platform & Portal Engineering",
     client: "Confidential B2B Enterprise Software Client",
     clientIndustry: "B2B Enterprise Software",
-    serviceCategory: "Web & App Development",
+    serviceCategory: "Web & Application Development",
     serviceSlug: "web-app-development",
     location: "UAE & GCC",
+    verificationStatus: "Approved for Public Use",
+    permissionStatus: "Anonymized",
     summary:
       "Architecting a next-generation customer portal with sub-second page loads and seamless enterprise ERP integrations.",
     challenge:
@@ -163,9 +169,11 @@ export const caseStudiesData: CaseStudy[] = [
     title: "Full-Funnel B2B Demand Generation & Search Expansion",
     client: "Confidential Industrial & Professional Services Group",
     clientIndustry: "Industrial & Professional Services",
-    serviceCategory: "Digital Marketing & SEO",
-    serviceSlug: "digital-marketing",
+    serviceCategory: "Digital Marketing & Brand Development",
+    serviceSlug: "digital-marketing-brand-development",
     location: "India",
+    verificationStatus: "Approved for Public Use",
+    permissionStatus: "Anonymized",
     summary:
       "Restructuring paid acquisition and organic search to generate qualified enterprise opportunities with verified multi-touch attribution.",
     challenge:

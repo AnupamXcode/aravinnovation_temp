@@ -7,6 +7,8 @@ export interface Testimonial {
   service: string;
   location: string;
   rating: number;
+  verificationStatus?: "Draft" | "Needs Verification" | "Verified" | "Approved for Public Use" | "Archived";
+  permissionStatus?: "Approved for Public Use" | "Needs Verification" | "Anonymized";
 }
 
 export const testimonialsData: Testimonial[] = [
@@ -17,9 +19,11 @@ export const testimonialsData: Testimonial[] = [
     author: "Anupam Shrivastava",
     designation: "CTO",
     company: "Nexora Technologies",
-    service: "IT Strategy & Enterprise Architecture",
+    service: "IT Strategy & Implementation",
     location: "Global",
     rating: 5,
+    verificationStatus: "Approved for Public Use",
+    permissionStatus: "Approved for Public Use",
   },
   {
     id: "test-2",

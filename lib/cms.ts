@@ -68,21 +68,25 @@ export async function getAllServiceSlugs(): Promise<string[]> {
    ========================================================================= */
 
 export async function getCaseStudies(locale = "en"): Promise<CaseStudy[]> {
-  return getLocalizedCaseStudies(locale);
+  const caseStudies = getLocalizedCaseStudies(locale);
+  return caseStudies.filter(
+    (c) => !c.verificationStatus || c.verificationStatus === "Approved for Public Use" || c.verificationStatus === "Verified"
+  );
 }
 
 export async function getCaseStudyBySlug(slug: string, locale = "en"): Promise<CaseStudy | undefined> {
-  const caseStudies = getLocalizedCaseStudies(locale);
+  const caseStudies = await getCaseStudies(locale);
   return caseStudies.find((c) => c.slug === slug);
 }
 
 export async function getAllCaseStudySlugs(): Promise<string[]> {
-  return caseStudiesData.map((c) => c.slug);
+  const caseStudies = await getCaseStudies();
+  return caseStudies.map((c) => c.slug);
 }
 
 export async function getCaseStudiesByService(serviceSlug: string, locale = "en"): Promise<CaseStudy[]> {
-  const caseStudies = getLocalizedCaseStudies(locale);
-  return caseStudies.filter((c) => c.serviceSlug === serviceSlug);
+  const caseStudies = await getCaseStudies(locale);
+  return caseStudies.filter((c) => c.serviceSlug === serviceSlug || c.serviceSlug === serviceSlug.replace(/-/g, ""));
 }
 
 /* =========================================================================
@@ -185,11 +189,14 @@ export async function getRelatedBlogPosts(currentSlug: string, locale = "en", li
    ========================================================================= */
 
 export async function getTestimonials(locale = "en"): Promise<Testimonial[]> {
-  return getLocalizedTestimonials(locale);
+  const testimonials = getLocalizedTestimonials(locale);
+  return testimonials.filter(
+    (t) => !t.verificationStatus || t.verificationStatus === "Approved for Public Use" || t.verificationStatus === "Verified"
+  );
 }
 
 export async function getTestimonialsByService(serviceName: string, locale = "en"): Promise<Testimonial[]> {
-  const testimonials = getLocalizedTestimonials(locale);
+  const testimonials = await getTestimonials(locale);
   return testimonials.filter(
     (t) => t.service.toLowerCase().includes(serviceName.toLowerCase())
   );
