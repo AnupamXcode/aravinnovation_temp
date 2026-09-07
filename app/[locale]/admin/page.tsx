@@ -20,6 +20,7 @@ import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { SEOAdminPanel } from "@/components/admin/SEOAdminPanel";
 import { NavbarAdminPanel } from "@/components/admin/NavbarAdminPanel";
 import { HeroAdminPanel } from "@/components/admin/HeroAdminPanel";
+import { AdminVerificationPanel } from "@/components/admin/AdminVerificationPanel";
 import {
   Shield,
   MessageSquare,
@@ -2146,6 +2147,11 @@ export default function AdminDashboardPage() {
         {/* TAB 13: GLOBAL SEO */}
         {/* ========================================================================= */}
         {activeTab === "seo" && <SEOAdminPanel />}
+
+        {/* ========================================================================= */}
+        {/* TAB 13.5: CLAIMS & VERIFICATION */}
+        {/* ========================================================================= */}
+        {activeTab === "verification" && <AdminVerificationPanel />}
 
         {/* ========================================================================= */}
         {/* TAB 14: LEGAL & DPDP CONTENT */}

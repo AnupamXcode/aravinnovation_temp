@@ -93,6 +93,18 @@ export function AdminSidebar({
       ],
     },
     {
+      groupLabel: "GOVERNANCE & CLAIMS",
+      items: [
+        { id: "verification", label: "Verification & Claims", icon: ShieldCheck },
+      ],
+    },
+    {
+      groupLabel: "LEGAL & POLICIES",
+      items: [
+        { id: "legal", label: "Legal Policies", icon: ShieldCheck },
+      ],
+    },
+    {
       groupLabel: "LOCALIZATION",
       items: [
         { id: "languages", label: "Languages & RTL", icon: Languages },
