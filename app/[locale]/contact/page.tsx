@@ -6,6 +6,7 @@ import { TiltCard } from "@/components/motion/TiltCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { companyContactInfo } from "@/data/navigation";
 import { LocalBusinessSchema, BreadcrumbSchema } from "@/components/seo/StructuredData";
+import { LocationMapsSection } from "@/components/location/LocationMapsSection";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
   MapPin,
@@ -217,6 +218,9 @@ export default async function ContactPage({
             </ScrollReveal>
           </div>
         </div>
+
+        {/* Working India & UAE Location Maps Section */}
+        <LocationMapsSection />
       </div>
     </div>
   );

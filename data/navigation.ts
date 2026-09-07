@@ -124,14 +124,22 @@ export const companyContactInfo = {
     {
       country: "India",
       city: "Gurgaon",
+      name: "Arav Innovations — India",
       address: "Platinum Floor, 14/23, Ardee City, Sector 52, Gurgaon, 122002",
       status: "Regional Headquarters & Delivery Center",
+      mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.8286591147814!2d77.0842247!3d28.4385311!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d22757279f187%3A0xb35a0928e1d53086!2sArdee%20City%2C%20Sector%2052%2C%20Gurugram%2C%20Haryana%20122002!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin",
+      directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=Platinum+Floor,+14/23,+Ardee+City,+Sector+52,+Gurgaon,+122002",
+      openInMapsUrl: "https://www.google.com/maps/search/?api=1&query=Platinum+Floor,+14/23,+Ardee+City,+Sector+52,+Gurgaon,+122002",
     },
     {
       country: "UAE",
       city: "Dubai",
+      name: "Arav Innovations — UAE",
       address: "AravInnovations Consultancy - FZCO, 55764-001 IFZA Business Park FZCO, Building A1 Dubai Silicon Oasis, Dubai, U.A.E",
       status: "Middle East Operations & Strategy",
+      mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3612.441995874251!2d55.3853924!3d25.1207914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f647953c39c89%3A0xa1aa6b0dfef9cb81!2sIFZA%20Business%20Park!5e0!3m2!1sen!2sae!4v1700000000000!5m2!1sen!2sae",
+      directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=IFZA+Business+Park+FZCO,+Building+A1,+Dubai+Silicon+Oasis,+Dubai,+UAE",
+      openInMapsUrl: "https://www.google.com/maps/search/?api=1&query=IFZA+Business+Park+FZCO,+Building+A1,+Dubai+Silicon+Oasis,+Dubai,+UAE",
     },
   ],
   socials: {
