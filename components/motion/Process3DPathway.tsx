@@ -40,7 +40,7 @@ const steps: ProcessStep[] = [
     subtitle: "Enterprise Blueprint & SOW",
     description:
       "Formulating custom multi-phase roadmaps, cloud component selection, and SLA milestones prior to codebase mutation.",
-    deliverables: ["Cloud Blueprint", "SLA SLA Framework", "Fixed Milestone SOW"],
+    deliverables: ["Cloud Blueprint", "SLA Framework", "Fixed Milestone SOW"],
     icon: <Compass className="w-5 h-5 text-[#2e936f]" />,
     color: "#2e936f",
   },

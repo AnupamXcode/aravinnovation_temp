@@ -33,6 +33,7 @@ import { getSEOForPath, SITE_BASE_URL } from "@/lib/seo";
 import { getHomeBlogPosts } from "@/lib/cms";
 import { HomeInsightsSection } from "@/components/home/HomeInsightsSection";
 import { WhoWeHelpSection } from "@/components/home/WhoWeHelpSection";
+import { EarlyTrustProofSection } from "@/components/home/EarlyTrustProofSection";
 
 export async function generateMetadata() {
   const seo = getSEOForPath("/");
@@ -113,10 +114,13 @@ export default async function HomePage({
         </ScrollReveal>
       </section>
 
-      {/* 03 — WHAT WE DO (8 PREMIUM SERVICE CARDS) */}
+      {/* 03 — WHAT WE DO (ENTERPRISE SERVICE PRACTICES) */}
       <div id="services">
         <InteractiveServiceStack3D />
       </div>
+
+      {/* 03.5 — EARLY TRUST & PROOF LAYER */}
+      <EarlyTrustProofSection />
 
       {/* 04 — THINK &bull; BUILD &bull; GROW */}
       <ProblemToSolutionSection />
