@@ -70,8 +70,8 @@ export interface Service {
 export const servicesData: Service[] = [
   {
     slug: "it-strategy-implementation",
-    title: "IT Strategy and Implementation",
-    shortTitle: "IT Strategy",
+    title: "IT Strategy & Implementation",
+    shortTitle: "IT Strategy & Implementation",
     eyebrow: "ENTERPRISE IT STRATEGY & MODERNIZATION",
     tagline: "Turn Technology Complexity Into a Clear Path Forward",
     description:
@@ -211,8 +211,8 @@ export const servicesData: Service[] = [
   },
   {
     slug: "digital-marketing-brand-development",
-    title: "Digital Marketing and Brand Development",
-    shortTitle: "Digital Marketing & Branding",
+    title: "Digital Marketing & Brand Development",
+    shortTitle: "Digital Marketing & Brand Development",
     eyebrow: "B2B Demand Gen • Brand Strategy • Performance Marketing",
     tagline: "Performance-focused campaigns built to generate qualified B2B pipeline and elevate brand authority.",
     description:
@@ -352,8 +352,8 @@ export const servicesData: Service[] = [
   },
   {
     slug: "web-app-development",
-    title: "Web and Application Development",
-    shortTitle: "Web & App Dev",
+    title: "Web & Application Development",
+    shortTitle: "Web & Application Development",
     eyebrow: "Full-Stack Engineering • Cloud-Native Portals • Mobile Applications",
     tagline: "High-performance digital products engineered for reliability, security, and speed.",
     description:
@@ -493,8 +493,8 @@ export const servicesData: Service[] = [
   },
   {
     slug: "risk-compliance-governance",
-    title: "Risk, Compliance, and Governance",
-    shortTitle: "Risk & Compliance",
+    title: "Risk, Compliance & Governance",
+    shortTitle: "Risk, Compliance & Governance",
     eyebrow: "Data Privacy • Cybersecurity Governance • Regulatory Frameworks",
     tagline: "Protecting enterprise resilience through rigorous compliance and proactive risk governance.",
     description:
@@ -634,7 +634,7 @@ export const servicesData: Service[] = [
   },
   {
     slug: "audit-improvement",
-    title: "Audit and Improvement",
+    title: "Audit & Improvement",
     shortTitle: "Audit & Improvement",
     eyebrow: "AUDIT • ASSURANCE • IMPROVEMENT",
     tagline: "See What’s Working. Find What Isn’t. Improve What Matters.",
@@ -796,8 +796,8 @@ export const servicesData: Service[] = [
   },
   {
     slug: "training-staff-augmentation",
-    title: "Training and Staff Augmentation",
-    shortTitle: "Staff Augmentation",
+    title: "Training & Staff Augmentation",
+    shortTitle: "Training & Staff Augmentation",
     eyebrow: "Vetted Tech Talent • Dedicated Squads • Corporate Upskilling",
     tagline: "High-caliber engineering talent and tailored training programs to accelerate your delivery roadmap.",
     description:

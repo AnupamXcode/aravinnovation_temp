@@ -8,32 +8,32 @@ export interface NavItem {
 
 export const servicesNavigation: NavItem[] = [
   {
-    label: "IT Strategy and Implementation",
+    label: "IT Strategy & Implementation",
     href: "/services/it-strategy-implementation",
     description: "Enterprise tech roadmaps, digital transformation blueprints, cloud architecture & IT governance.",
   },
   {
-    label: "Digital Marketing and Brand Development",
+    label: "Digital Marketing & Brand Development",
     href: "/services/digital-marketing-brand-development",
     description: "B2B demand generation, brand positioning, multi-channel performance marketing & closed-loop attribution.",
   },
   {
-    label: "Web and Application Development",
+    label: "Web & Application Development",
     href: "/services/web-app-development",
     description: "Scalable modern web applications, cloud native systems, enterprise SaaS portals & mobile apps.",
   },
   {
-    label: "Risk, Compliance, and Governance",
+    label: "Risk, Compliance & Governance",
     href: "/services/risk-compliance-governance",
     description: "Regulatory compliance frameworks, data privacy (GDPR/DPDP), cybersecurity posture & risk mitigation.",
   },
   {
-    label: "Audit and Improvement",
+    label: "Audit & Improvement",
     href: "/services/audit-improvement",
     description: "System efficiency reviews, process bottleneck remediation, codebase audits & cloud cost optimization.",
   },
   {
-    label: "Training and Staff Augmentation",
+    label: "Training & Staff Augmentation",
     href: "/services/training-staff-augmentation",
     description: "Vetted on-demand technical talent, enterprise upskilling programs & dedicated engineering squads.",
   },
@@ -44,7 +44,7 @@ export const servicesNavigation: NavItem[] = [
   },
   {
     label: "AI Portfolio",
-    href: "/services/ai-portfolio",
+    href: "/products",
     description: "Enterprise AI solutions, Intelligent Automation pipelines, RAG systems & seamless LLM integrations.",
   },
 ];
