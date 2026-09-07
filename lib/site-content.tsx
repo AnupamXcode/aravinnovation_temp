@@ -467,7 +467,7 @@ const defaultFooter: FooterContent = {
   description: "Arav Innovations delivers enterprise technology platforms, IT strategy, full-stack software, data compliance, and B2B growth.",
   indiaCountry: "India HQ",
   indiaPhone: "+91 9650625777",
-  indiaAddress: "Platinum Floor D 14/23, Ardee City Sec 52, Gurgaon 122002",
+  indiaAddress: "Platinum Floor, 14/23, Ardee City, Sector 52, Gurgaon, 122002",
   indiaDisplayLabel: "+91 9650625777 - India HQ",
   indiaVisible: true,
   uaeCountry: "UAE Regional Office",

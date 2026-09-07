@@ -143,7 +143,7 @@ export default async function RefundPolicyPage({
                 </div>
                 <div className="flex items-start gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
                   <MapPin className="w-4 h-4 text-[#f15e1c] shrink-0 mt-1" />
-                  <span>Address: Platinum Floor D 14/23 Ardee City Sec 52 Gurgaon 122002</span>
+                  <span>Address: Platinum Floor, 14/23, Ardee City, Sector 52, Gurgaon, 122002</span>
                 </div>
               </div>
             </section>

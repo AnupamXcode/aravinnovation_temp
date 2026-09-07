@@ -79,8 +79,8 @@ export const siteOrganizationSchema = {
       email: "support@aravinnovations.com",
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Cyber City Tech Zone",
-        addressLocality: "Gurugram",
+        streetAddress: "Platinum Floor, 14/23, Ardee City, Sector 52",
+        addressLocality: "Gurgaon",
         addressRegion: "Haryana",
         postalCode: "122002",
         addressCountry: "IN",

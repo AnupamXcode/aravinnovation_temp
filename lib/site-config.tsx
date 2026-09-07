@@ -365,7 +365,7 @@ const defaultConfig: SiteConfig = {
     ctaSecondaryText: "EXPLORE SERVICES",
     ctaSecondaryHref: "/services",
     brandStatement: "Technology, transformation and digital growth built around measurable business outcomes.",
-    addressIndia: "Platinum Floor D 14/23, Ardee City Sec 52, Gurgaon 122002",
+    addressIndia: "Platinum Floor, 14/23, Ardee City, Sector 52, Gurgaon, 122002",
     addressUAE: "55764-001 IFZA Business Park FZCO, Building A1 Dubai Silicon Oasis, Dubai, U.A.E",
     phoneIndia: "+91 9650625777",
     phoneUAE: "+971 521555792",

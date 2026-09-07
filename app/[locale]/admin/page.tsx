@@ -1555,7 +1555,7 @@ export default function AdminDashboardPage() {
                   <label className="text-xs font-bold">India Address</label>
                   <textarea
                     rows={2}
-                    value={footerForm.indiaAddress || "Platinum Floor D 14/23\nArdee City Sec 52\nGurgaon 122002"}
+                    value={footerForm.indiaAddress || "Platinum Floor, 14/23, Ardee City, Sector 52, Gurgaon, 122002"}
                     onChange={(e) => setFooterForm({ ...footerForm, indiaAddress: e.target.value })}
                     className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                   />

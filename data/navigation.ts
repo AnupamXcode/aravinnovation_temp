@@ -124,7 +124,7 @@ export const companyContactInfo = {
     {
       country: "India",
       city: "Gurgaon",
-      address: "Platinum Floor D 14/23, Ardee City Sec 52, Gurgaon 122002",
+      address: "Platinum Floor, 14/23, Ardee City, Sector 52, Gurgaon, 122002",
       status: "Regional Headquarters & Delivery Center",
     },
     {
