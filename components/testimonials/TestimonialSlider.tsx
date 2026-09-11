@@ -63,7 +63,7 @@ export function TestimonialSlider() {
               <button
                 type="button"
                 onClick={prev}
-                className="w-10 h-10 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FFFDF9] dark:bg-[#0a0a0a] hover:bg-[#FBF3EA] dark:hover:bg-[#161616] hover:border-[#f15e1c] dark:hover:border-[#f15e1c] flex items-center justify-center text-[#3A2E27] dark:text-[#FAF5EE] transition-colors cursor-pointer shadow-xs"
+                className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FFFDF9] dark:bg-[#0a0a0a] hover:bg-[#FBF3EA] dark:hover:bg-[#161616] hover:border-[#f15e1c] dark:hover:border-[#f15e1c] flex items-center justify-center text-[#3A2E27] dark:text-[#FAF5EE] transition-colors cursor-pointer shadow-xs"
                 aria-label="Previous testimonial"
               >
                 <ChevronLeft className="w-5 h-5" />
@@ -71,7 +71,7 @@ export function TestimonialSlider() {
               <button
                 type="button"
                 onClick={next}
-                className="w-10 h-10 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FFFDF9] dark:bg-[#0a0a0a] hover:bg-[#FBF3EA] dark:hover:bg-[#161616] hover:border-[#f15e1c] dark:hover:border-[#f15e1c] flex items-center justify-center text-[#3A2E27] dark:text-[#FAF5EE] transition-colors cursor-pointer shadow-xs"
+                className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FFFDF9] dark:bg-[#0a0a0a] hover:bg-[#FBF3EA] dark:hover:bg-[#161616] hover:border-[#f15e1c] dark:hover:border-[#f15e1c] flex items-center justify-center text-[#3A2E27] dark:text-[#FAF5EE] transition-colors cursor-pointer shadow-xs"
                 aria-label="Next testimonial"
               >
                 <ChevronRight className="w-5 h-5" />
@@ -81,21 +81,25 @@ export function TestimonialSlider() {
         </div>
       </TiltCard>
 
-      {/* Dots Indicator */}
-      <div className="flex justify-center items-center space-x-2 mt-6">
+      {/* Dots Indicator with Accessible Hit Target */}
+      <div className="flex justify-center items-center gap-1 sm:gap-1.5 mt-6 flex-wrap">
         {list.map((_, idx) => (
           <button
             key={idx}
             type="button"
             onClick={() => setCurrentIndex(idx)}
-            className={cn(
-              "w-2.5 h-2.5 rounded-full transition-all duration-200 cursor-pointer",
-              currentIndex === idx
-                ? "w-8 bg-[#f15e1c]"
-                : "bg-[#EFE2D6] dark:bg-[#1f1f1f] hover:bg-[#F4A97F]"
-            )}
+            className="min-h-[44px] min-w-[30px] flex items-center justify-center cursor-pointer p-1 border-0 bg-transparent"
             aria-label={`Go to slide ${idx + 1}`}
-          />
+          >
+            <span
+              className={cn(
+                "h-2.5 rounded-full transition-all duration-200 block",
+                currentIndex === idx
+                  ? "w-8 bg-[#f15e1c]"
+                  : "w-2.5 bg-[#EFE2D6] dark:bg-[#1f1f1f] hover:bg-[#F4A97F]"
+              )}
+            />
+          </button>
         ))}
       </div>
     </div>

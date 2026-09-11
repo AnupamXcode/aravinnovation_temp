@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface ScrollTextFlipProps {
@@ -13,50 +13,21 @@ export function ScrollTextFlip({
   children,
   className = "",
 }: ScrollTextFlipProps) {
-  const containerRef = React.useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = React.useState(false);
 
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile, { passive: true });
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 95%", "center 60%"],
-  });
-
-  const rawY = useTransform(scrollYProgress, [0, 1], [70, 0]);
-  const rawOpacity = useTransform(scrollYProgress, [0, 0.4, 1], [0, 0.5, 1]);
-  const rawScale = useTransform(scrollYProgress, [0, 1], [0.86, 1]);
-
-  const smoothY = useSpring(rawY, { damping: 28, stiffness: 85, mass: 0.8 });
-  const smoothOpacity = useSpring(rawOpacity, { damping: 30, stiffness: 90 });
-  const smoothScale = useSpring(rawScale, { damping: 28, stiffness: 85, mass: 0.8 });
-
-  if (shouldReduceMotion || isMobile) {
+  if (shouldReduceMotion) {
     return <div className={cn(className)}>{children}</div>;
   }
 
   return (
-    <div
-      ref={containerRef}
+    <motion.div
+      initial={{ opacity: 0.6, y: 20, scale: 0.98 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
       className={cn("relative overflow-visible", className)}
     >
-      <motion.div
-        style={{
-          y: smoothY,
-          opacity: smoothOpacity,
-          scale: smoothScale,
-          willChange: "transform, opacity",
-        }}
-      >
-        {children}
-      </motion.div>
-    </div>
+      {children}
+    </motion.div>
   );
 }

@@ -92,14 +92,14 @@ export function AnimatedTestimonialsCarousel() {
         <button
           type="button"
           onClick={prevTestimonial}
-          className="w-10 h-10 rounded-full bg-white dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c] hover:text-[#f15e1c] flex items-center justify-center transition-all cursor-pointer shadow-sm hover:scale-105"
+          className="min-w-[44px] min-h-[44px] w-11 h-11 rounded-full bg-white dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c] hover:text-[#f15e1c] flex items-center justify-center transition-all cursor-pointer shadow-sm hover:scale-105"
           aria-label="Previous Endorsement"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
 
-        {/* 12 Centered Dots for 12 Testimonials */}
-        <div className="flex items-center gap-1.5 sm:gap-2">
+        {/* 12 Centered Dots with Accessible Hit Target */}
+        <div className="flex items-center gap-1 sm:gap-1.5 flex-wrap justify-center">
           {testimonials.map((t, idx) => (
             <button
               key={t.id}
@@ -108,21 +108,25 @@ export function AnimatedTestimonialsCarousel() {
                 setDirection(idx > currentIndex ? 1 : -1);
                 setCurrentIndex(idx);
               }}
-              className={cn(
-                "h-2.5 rounded-full transition-all cursor-pointer",
-                idx === currentIndex
-                  ? "w-7 bg-[#f15e1c]"
-                  : "w-2.5 bg-[#f7d7b0] dark:bg-[#262626] hover:bg-[#f15e1c]/60"
-              )}
+              className="min-h-[44px] min-w-[28px] sm:min-w-[32px] flex items-center justify-center cursor-pointer p-1 border-0 bg-transparent"
               aria-label={`Go to endorsement ${idx + 1}`}
-            />
+            >
+              <span
+                className={cn(
+                  "h-2.5 rounded-full transition-all block",
+                  idx === currentIndex
+                    ? "w-7 bg-[#f15e1c]"
+                    : "w-2.5 bg-[#f7d7b0] dark:bg-[#262626] hover:bg-[#f15e1c]/60"
+                )}
+              />
+            </button>
           ))}
         </div>
 
         <button
           type="button"
           onClick={nextTestimonial}
-          className="w-10 h-10 rounded-full bg-white dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c] hover:text-[#f15e1c] flex items-center justify-center transition-all cursor-pointer shadow-sm hover:scale-105"
+          className="min-w-[44px] min-h-[44px] w-11 h-11 rounded-full bg-white dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c] hover:text-[#f15e1c] flex items-center justify-center transition-all cursor-pointer shadow-sm hover:scale-105"
           aria-label="Next Endorsement"
         >
           <ChevronRight className="w-5 h-5" />

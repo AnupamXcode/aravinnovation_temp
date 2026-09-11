@@ -101,7 +101,7 @@ export function HeroVideoBackground() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           tabIndex={-1}
           aria-hidden="true"
           onLoadedMetadata={setVideoPlaybackSpeed}

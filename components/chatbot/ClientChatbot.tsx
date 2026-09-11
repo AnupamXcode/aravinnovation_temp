@@ -14,32 +14,23 @@ export function ClientChatbot() {
   const pathname = usePathname();
   const [shouldLoadChatbot, setShouldLoadChatbot] = React.useState(false);
 
+  // Heavy AI chatbot bundle loads only when user explicitly interacts with the chat launcher button or after idle timeout
   React.useEffect(() => {
     if (pathname?.includes("/admin")) return;
     if (shouldLoadChatbot) return;
 
-    // Load heavy AI chatbot chunk on user interaction (click, scroll > 300px, or pointer hover)
-    const handleScroll = () => {
-      if (window.scrollY > 300) {
-        setShouldLoadChatbot(true);
-        cleanup();
-      }
-    };
-
-    const handleTouch = () => {
-      setShouldLoadChatbot(true);
-      cleanup();
-    };
-
-    const cleanup = () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("touchstart", handleTouch);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("touchstart", handleTouch, { passive: true });
-
-    return cleanup;
+    // Optional background prefetch only after browser is completely idle (5s)
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      const handle = (window as any).requestIdleCallback(
+        () => setShouldLoadChatbot(true),
+        { timeout: 8000 }
+      );
+      return () => {
+        if ("cancelIdleCallback" in window) {
+          (window as any).cancelIdleCallback(handle);
+        }
+      };
+    }
   }, [pathname, shouldLoadChatbot]);
 
   if (pathname?.includes("/admin")) {

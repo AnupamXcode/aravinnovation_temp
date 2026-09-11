@@ -202,28 +202,32 @@ export function ClientFeedbackEditorialSection() {
             <button
               type="button"
               onClick={handlePrev}
-              className="p-2.5 sm:px-4 sm:py-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#1b2823] dark:text-[#ffffff] hover:bg-[#f15e1c] hover:text-white hover:border-[#f15e1c] transition-all cursor-pointer active:scale-95 flex items-center gap-1.5 text-xs font-semibold shrink-0 shadow-xs"
+              className="min-w-[44px] min-h-[44px] p-2.5 sm:px-4 sm:py-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#1b2823] dark:text-[#ffffff] hover:bg-[#f15e1c] hover:text-white hover:border-[#f15e1c] transition-all cursor-pointer active:scale-95 flex items-center justify-center gap-1.5 text-xs font-semibold shrink-0 shadow-xs"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="w-4 h-4" />
               <span className="hidden sm:inline">Previous</span>
             </button>
 
-            {/* Centered Dot Pagination (12 Dots) */}
-            <div className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap max-w-full">
+            {/* Centered Dot Pagination (12 Dots with accessible hit target) */}
+            <div className="flex items-center justify-center gap-0.5 sm:gap-1 flex-wrap max-w-full">
               {editorialTestimonials.map((item, idx) => (
                 <button
                   key={item.id}
                   type="button"
                   onClick={() => handleSelect(idx)}
-                  className={cn(
-                    "w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 cursor-pointer p-0 border-0 shrink-0",
-                    activeIndex === idx
-                      ? "bg-[#f15e1c] scale-125 shadow-xs"
-                      : "bg-[#f7d7b0] dark:bg-[#262626] hover:bg-[#f15e1c]/60"
-                  )}
+                  className="min-h-[44px] min-w-[28px] sm:min-w-[32px] flex items-center justify-center cursor-pointer p-1 border-0 bg-transparent shrink-0"
                   aria-label={`Go to testimonial ${idx + 1}`}
-                />
+                >
+                  <span
+                    className={cn(
+                      "w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 block",
+                      activeIndex === idx
+                        ? "bg-[#f15e1c] scale-125 shadow-xs"
+                        : "bg-[#f7d7b0] dark:bg-[#262626] hover:bg-[#f15e1c]/60"
+                    )}
+                  />
+                </button>
               ))}
             </div>
 
@@ -231,7 +235,7 @@ export function ClientFeedbackEditorialSection() {
             <button
               type="button"
               onClick={handleNext}
-              className="p-2.5 sm:px-4 sm:py-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#1b2823] dark:text-[#ffffff] hover:bg-[#f15e1c] hover:text-white hover:border-[#f15e1c] transition-all cursor-pointer active:scale-95 flex items-center gap-1.5 text-xs font-semibold shrink-0 shadow-xs"
+              className="min-w-[44px] min-h-[44px] p-2.5 sm:px-4 sm:py-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#1b2823] dark:text-[#ffffff] hover:bg-[#f15e1c] hover:text-white hover:border-[#f15e1c] transition-all cursor-pointer active:scale-95 flex items-center justify-center gap-1.5 text-xs font-semibold shrink-0 shadow-xs"
               aria-label="Next testimonial"
             >
               <span className="hidden sm:inline">Next</span>
