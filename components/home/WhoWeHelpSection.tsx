@@ -67,7 +67,11 @@ export function WhoWeHelpSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
           {audienceList.map((audience, idx) => (
             <ScrollReveal key={audience.title} direction="up" delay={idx * 0.08} className="h-full">
-              <div className="h-full rounded-2xl bg-[#fefaf5] dark:bg-[#161616] p-6 border border-[#f7d7b0] dark:border-[#262626] hover:border-[#f15e1c] hover:shadow-lg transition-all duration-300 flex flex-col justify-between group">
+              <Link
+                href="/contact"
+                aria-label={`Discuss requirements for ${audience.title}`}
+                className="h-full rounded-2xl bg-[#fefaf5] dark:bg-[#161616] p-6 border border-[#f7d7b0] dark:border-[#262626] hover:border-[#f15e1c] hover:shadow-lg transition-all duration-300 flex flex-col justify-between group block cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f15e1c] active:scale-[0.99]"
+              >
                 <div className="space-y-4">
                   <div className="w-12 h-12 rounded-xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform">
                     {audience.icon}
@@ -81,15 +85,14 @@ export function WhoWeHelpSection() {
                 </div>
 
                 <div className="pt-4 mt-4 border-t border-[#f7d7b0]/50 dark:border-[#262626]">
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#f15e1c] hover:text-[#d8480d] transition-colors"
+                  <div
+                    className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#f15e1c] group-hover:text-[#d8480d] transition-colors"
                   >
                     <span>Discuss Your Requirements</span>
                     <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                  </Link>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </ScrollReveal>
           ))}
         </div>

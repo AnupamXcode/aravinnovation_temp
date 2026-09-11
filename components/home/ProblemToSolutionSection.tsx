@@ -15,6 +15,7 @@ export function ProblemToSolutionSection() {
       icon: <Compass className="w-6 h-6 text-[#f15e1c]" />,
       tone: "#f15e1c",
       bgGradient: "from-[#f15e1c]/10 to-transparent",
+      href: "/services/it-strategy-implementation",
     },
     {
       step: "02",
@@ -24,6 +25,7 @@ export function ProblemToSolutionSection() {
       icon: <Code2 className="w-6 h-6 text-[#2e936f]" />,
       tone: "#2e936f",
       bgGradient: "from-[#2e936f]/10 to-transparent",
+      href: "/services/web-app-development",
     },
     {
       step: "03",
@@ -33,6 +35,7 @@ export function ProblemToSolutionSection() {
       icon: <TrendingUp className="w-6 h-6 text-[#fab60a]" />,
       tone: "#fab60a",
       bgGradient: "from-[#fab60a]/10 to-transparent",
+      href: "/services/digital-marketing-brand-development",
     },
   ];
 
@@ -60,7 +63,11 @@ export function ProblemToSolutionSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
           {pillars.map((pillar, idx) => (
             <ScrollReveal key={pillar.tag} direction="up" delay={idx * 0.15} className="h-full">
-              <div className="h-full rounded-3xl bg-white dark:bg-[#16221d] p-6 sm:p-8 border border-[#f7d7b0] dark:border-[#2a3c35] hover:border-[#f15e1c] transition-all duration-300 shadow-md hover:shadow-2xl hover:-translate-y-1 flex flex-col justify-between group relative overflow-hidden">
+              <Link
+                href={pillar.href}
+                aria-label={`Explore ${pillar.tag} Capabilities - ${pillar.title}`}
+                className="h-full rounded-3xl bg-white dark:bg-[#16221d] p-6 sm:p-8 border border-[#f7d7b0] dark:border-[#2a3c35] hover:border-[#f15e1c] transition-all duration-300 shadow-md hover:shadow-2xl hover:-translate-y-1 active:scale-[0.99] flex flex-col justify-between group relative overflow-hidden block cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f15e1c]"
+              >
                 <div className={`absolute top-0 right-0 w-36 h-36 bg-gradient-to-bl ${pillar.bgGradient} rounded-bl-full pointer-events-none`} />
 
                 <div className="space-y-6 relative z-10">
@@ -84,15 +91,14 @@ export function ProblemToSolutionSection() {
                 </div>
 
                 <div className="pt-6 mt-6 border-t border-[#f7d7b0]/60 dark:border-[#2a3c35] relative z-10">
-                  <Link
-                    href="#services"
-                    className="inline-flex items-center gap-2 text-sm font-extrabold font-display uppercase tracking-wider text-[#f15e1c] hover:text-[#d8480d] transition-colors py-1 cursor-pointer"
+                  <div
+                    className="inline-flex items-center gap-2 text-sm font-extrabold font-display uppercase tracking-wider text-[#f15e1c] group-hover:text-[#d8480d] transition-colors py-1"
                   >
                     <span>Explore {pillar.tag} Capabilities</span>
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
-                  </Link>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </ScrollReveal>
           ))}
         </div>

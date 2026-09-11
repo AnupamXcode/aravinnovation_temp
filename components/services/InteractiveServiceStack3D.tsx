@@ -189,7 +189,7 @@ const renderServiceIcon = (iconName: string, tone: string) => {
 export function InteractiveServiceStack3D() {
   const trackRef = React.useRef<HTMLDivElement>(null);
   const pinnedStageRef = React.useRef<HTMLDivElement>(null);
-  const mobileCardRefs = React.useRef<(HTMLDivElement | null)[]>([]);
+  const mobileCardRefs = React.useRef<(HTMLElement | null)[]>([]);
 
   const [activeServiceIdx, setActiveServiceIdx] = React.useState<number>(0);
   const [hoveredIdx, setHoveredIdx] = React.useState<number | null>(null);
@@ -540,21 +540,23 @@ export function InteractiveServiceStack3D() {
           </div>
         </div>
 
-        {/* All 8 Mobile Service Cards in Vertical Natural Scroll Flow */}
+        {/* All Mobile Service Cards in Vertical Natural Scroll Flow */}
         <div className="space-y-6">
           {servicesData.map((service) => {
             const isActive = service.id === activeServiceIdx;
 
             return (
-              <div
+              <Link
                 key={service.id}
+                href={service.href}
                 ref={(el) => {
                   mobileCardRefs.current[service.id] = el;
                 }}
                 data-service-idx={service.id}
                 onClick={() => setActiveServiceIdx(service.id)}
+                aria-label={`Explore ${service.name} - ${service.category}`}
                 className={cn(
-                  "rounded-2xl p-5 sm:p-6 transition-all duration-300 border-2 space-y-4 relative overflow-hidden cursor-pointer",
+                  "rounded-2xl p-5 sm:p-6 transition-all duration-300 border-2 space-y-4 relative overflow-hidden cursor-pointer block group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f15e1c] active:scale-[0.99]",
                   isActive
                     ? "bg-white dark:bg-[#0a0a0a] border-[#f15e1c] shadow-xl ring-2 ring-[#f15e1c]/30"
                     : "bg-white/90 dark:bg-[#0a0a0a]/90 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md hover:border-[#f15e1c]/50"
@@ -592,11 +594,9 @@ export function InteractiveServiceStack3D() {
                 </div>
 
                 {/* Service Title */}
-                <Link href={service.href} className="block group">
-                  <h3 className="text-lg font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug">
-                    {service.name}
-                  </h3>
-                </Link>
+                <h3 className="text-lg font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug">
+                  {service.name}
+                </h3>
 
                 {/* Description */}
                 <p className="text-xs sm:text-sm text-[#5A4A3F] dark:text-[#D8CBC0] leading-relaxed font-medium">
@@ -604,17 +604,15 @@ export function InteractiveServiceStack3D() {
                 </p>
 
                 {/* 16:9 Image Showcase */}
-                <Link href={service.href} className="block group">
-                  <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] bg-white dark:bg-[#080808] shadow-md">
-                    <Image
-                      src={service.image}
-                      alt={service.name}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
-                    />
-                  </div>
-                </Link>
+                <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] bg-white dark:bg-[#080808] shadow-md">
+                  <Image
+                    src={service.image}
+                    alt={service.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                </div>
 
                 {/* Deliverables / Outcomes Badges */}
                 <div className="space-y-1.5 pt-1">
@@ -637,13 +635,11 @@ export function InteractiveServiceStack3D() {
                   <span className="text-[11px] font-mono text-[#7A6A5F] dark:text-[#A09085]">
                     Enterprise Practice
                   </span>
-                  <Link href={service.href}>
-                    <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#f15e1c] text-white font-semibold text-xs shadow-md hover:bg-[#d84e12] transition-colors">
-                      Explore Practice <ArrowRight className="w-3.5 h-3.5" />
-                    </span>
-                  </Link>
+                  <div className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#f15e1c] text-white font-semibold text-xs shadow-md group-hover:bg-[#d84e12] transition-colors">
+                    <span>Explore Practice</span> <ArrowRight className="w-3.5 h-3.5" />
+                  </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
