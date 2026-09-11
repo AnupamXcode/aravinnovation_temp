@@ -96,7 +96,6 @@ export function HeroVideoBackground() {
       {isVideoEnabled && !videoError && !prefersReducedMotion && (
         <video
           ref={videoRef}
-          src={videoSrc}
           autoPlay
           muted
           loop
@@ -109,7 +108,9 @@ export function HeroVideoBackground() {
           onPlay={setVideoPlaybackSpeed}
           onError={() => setVideoError(true)}
           className="absolute inset-0 w-full h-full object-cover object-center transform-gpu transition-opacity duration-500 opacity-100"
-        />
+        >
+          <source src={videoSrc} type="video/mp4" />
+        </video>
       )}
 
       {/* Vignette Overlay for Text Legibility (No blur, crisp video display) */}
