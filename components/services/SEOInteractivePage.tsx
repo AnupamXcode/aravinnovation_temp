@@ -394,12 +394,12 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
                 />
                 <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
                   <Sparkles className="w-3.5 h-3.5 text-[#f15e1c]" />
-                  <span>SEARCH INTELLIGENCE • ORGANIC VISIBILITY</span>
+                  <span>TECHNICAL SEO &bull; ANSWER ENGINE OPTIMIZATION (AEO)</span>
                 </div>
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-[1.12]">
-                Be Found When Your Customers Are Searching.
+                Be Found Across Traditional Search &amp; Generative AI Engines.
               </h1>
 
               {/* Dedicated Mobile Hero Visual Card — Mobile View Only */}
@@ -418,7 +418,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
               </div>
 
               <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl leading-relaxed font-normal">
-                We build search strategies that connect technical foundations, search intent, content, authority and measurement — helping businesses become easier to discover, understand and choose across modern search experiences.
+                We build comprehensive search and answer discovery strategies. Traditional SEO optimizes crawlability, performance, and keyword rankings across search engines, while Answer Engine Optimization (AEO) structures useful answers and entity data so AI models cite your business as the direct answer.
               </p>
 
               {/* CTAs */}

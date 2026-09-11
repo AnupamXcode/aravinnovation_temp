@@ -1,10 +1,30 @@
 import { NextResponse } from "next/server";
 import { leadFormSchema } from "@/lib/validations";
 
+function sanitizeString(str?: string): string {
+  if (!str) return "";
+  return str
+    .replace(/[<>]/g, "") // Strip HTML tag angle brackets
+    .trim();
+}
+
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const validatedData = leadFormSchema.parse(body);
+    const rawBody = await request.json();
+    
+    // Sanitize input strings before validation
+    const sanitizedBody = {
+      name: sanitizeString(rawBody.name),
+      company: sanitizeString(rawBody.company),
+      email: sanitizeString(rawBody.email).toLowerCase(),
+      phone: sanitizeString(rawBody.phone),
+      service: sanitizeString(rawBody.service),
+      requirement: sanitizeString(rawBody.requirement),
+      timeline: sanitizeString(rawBody.timeline),
+      budget: rawBody.budget ? sanitizeString(rawBody.budget) : undefined,
+    };
+
+    const validatedData = leadFormSchema.parse(sanitizedBody);
 
     // In production, send to CRM webhook / Email service / DB
     // No client secrets are exposed
@@ -13,7 +33,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         success: true,
-        message: "Thank you! Your requirement has been received. Our leadership team will review and connect within 1 business day.",
+        message: "Thank you! Your requirement has been received. Our expert team will review your requirements and provide a clear, actionable roadmap.",
         leadId: `ARAV-${Date.now()}`,
       },
       { status: 200 }
@@ -31,3 +51,4 @@ export async function POST(request: Request) {
     );
   }
 }
+

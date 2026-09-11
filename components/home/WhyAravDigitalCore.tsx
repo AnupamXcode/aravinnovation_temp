@@ -41,8 +41,8 @@ interface WhyAravDigitalCoreProps {
 
 export function WhyAravDigitalCore({
   pillars = whyAravPillarsData,
-  headline = "Engineered for Measurable Business Outcomes",
-  subheadline = "Arav Innovations goes beyond generic digital service delivery. We align enterprise strategy, robust cloud architecture, and regulatory awareness to achieve verifiable business results.",
+  headline = "Why Leading Businesses Partner With Us",
+  subheadline = "Arav Innovations combines cross-border engineering rigor, AI automation, and performance marketing to deliver predictable business outcomes.",
 }: WhyAravDigitalCoreProps) {
   const trackRef = React.useRef<HTMLDivElement>(null);
   const pinnedStageRef = React.useRef<HTMLDivElement>(null);
@@ -70,8 +70,7 @@ export function WhyAravDigitalCore({
           pinSpacing: true,
           scrub: 0.1, // Smooth scrub for deterministic 1 scroll = 1 pillar step progress
           onUpdate: (self) => {
-            // Map self.progress (0..1) strictly into 7 equal pillar steps (0..6)
-            const step = Math.min(6, Math.max(0, Math.floor(self.progress * 7.0)));
+            const step = Math.min(pillars.length - 1, Math.max(0, Math.floor(self.progress * pillars.length)));
             setActivePillarIdx(step);
           },
         });
@@ -81,7 +80,8 @@ export function WhyAravDigitalCore({
     return () => {
       if (ctx) ctx.revert();
     };
-  }, []);
+  }, [pillars.length]);
+
 
   // Touch Swipe Gesture Handler for Mobile Viewports
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -334,12 +334,12 @@ export function WhyAravDigitalCore({
 
           {/* Bottom Progress Bar */}
           <div className="max-w-7xl mx-auto w-full pt-6 flex items-center justify-between text-xs font-mono text-[#7A6A5F] dark:text-[#A09085]">
-            <span>ENGINEERED FOR MEASURABLE BUSINESS OUTCOMES</span>
+            <span>WHY LEADING BUSINESSES PARTNER WITH US</span>
             <div className="flex items-center gap-2">
               <div className="w-48 h-2 rounded-full bg-[#f7d7b0]/50 dark:bg-[#1a1a1a] overflow-hidden">
                 <div
                   className="h-full bg-[#f15e1c] transition-all duration-300"
-                  style={{ width: `${((activePillarIdx + 1) / 7) * 100}%` }}
+                  style={{ width: `${((activePillarIdx + 1) / pillars.length) * 100}%` }}
                 />
               </div>
               <span className="font-bold text-[#f15e1c]">SCROLL TO EXPLORE</span>
@@ -353,13 +353,13 @@ export function WhyAravDigitalCore({
         {/* Section Header */}
         <div className="text-center max-w-xl mx-auto mb-6 space-y-2">
           <Badge variant="secondary" size="md">
-            WHY ARAV INNOVATIONS
+            PARTNERSHIP ADVANTAGE
           </Badge>
-          <h2 className="text-2xl sm:text-3xl font-extrabold font-display text-[#2e936f] dark:text-[#ffffff]">
+          <h2 className="text-2xl sm:text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
             {headline}
           </h2>
           <p className="text-xs sm:text-sm text-[#5A4D44] dark:text-[#d3eee4]">
-            Scroll to explore our core enterprise engineering pillars.
+            {subheadline}
           </p>
         </div>
 

@@ -164,48 +164,48 @@ const heroArchitectureFlow = [
   },
 ];
 
-// Core Solutions (6 Capabilities)
+// Core Solutions (Capabilities Matrix based on CEO Blueprint)
 const coreSolutions = [
   {
     id: "01",
-    title: "IT Strategy & Roadmapping",
-    desc: "Build practical technology roadmaps aligned with business priorities, budgets and growth plans.",
+    title: "IT Strategy & Technology Roadmaps",
+    desc: "Craft practical, high-impact technology roadmaps that seamlessly connect business goals with modern architecture and execution plans.",
     icon: <Compass className="w-6 h-6 text-[#f15e1c]" />,
     href: "#inquire",
   },
   {
     id: "02",
-    title: "Legacy Modernization",
-    desc: "Identify technical debt, architectural bottlenecks and outdated systems, then define a realistic modernization path.",
-    icon: <Cpu className="w-6 h-6 text-[#fab60a]" />,
-    href: "#inquire",
-  },
-  {
-    id: "03",
-    title: "Cloud Strategy & Migration",
-    desc: "Plan secure, scalable cloud environments with architecture, cost and operational requirements considered from the beginning.",
+    title: "Cloud Strategy & Infrastructure Planning",
+    desc: "Plan secure, scalable cloud environments and infrastructure roadmaps engineered to adapt as your business expands.",
     icon: <Cloud className="w-6 h-6 text-[#2e936f]" />,
     href: "#inquire",
   },
   {
+    id: "03",
+    title: "Legacy System Modernization",
+    desc: "Eliminate technical debt, refactor brittle monolithic systems, and transition to agile, modular digital foundations.",
+    icon: <Cpu className="w-6 h-6 text-[#fab60a]" />,
+    href: "#inquire",
+  },
+  {
     id: "04",
-    title: "Digital Architecture",
-    desc: "Design connected application, data, infrastructure and security architectures that can scale with the business.",
-    icon: <LayoutGrid className="w-6 h-6 text-[#f15e1c]" />,
+    title: "Cost & Performance Optimization",
+    desc: "Optimize cloud spend, improve system performance, eliminate architectural bottlenecks, and drive predictable technology ROI.",
+    icon: <Activity className="w-6 h-6 text-[#f15e1c]" />,
     href: "#inquire",
   },
   {
     id: "05",
-    title: "IT Governance & Security",
-    desc: "Strengthen technology governance, access controls, risk management and compliance readiness.",
-    icon: <Shield className="w-6 h-6 text-[#2e936f]" />,
+    title: "Digital Architecture & Integration",
+    desc: "Design connected application, data, infrastructure and security architectures ready for AI and high concurrency.",
+    icon: <LayoutGrid className="w-6 h-6 text-[#2e936f]" />,
     href: "#inquire",
   },
   {
     id: "06",
-    title: "Technology Optimization",
-    desc: "Improve infrastructure efficiency, system performance, deployment processes and ongoing technology operations.",
-    icon: <Activity className="w-6 h-6 text-[#fab60a]" />,
+    title: "IT Governance & Compliance Readiness",
+    desc: "Strengthen technology governance, access controls, risk management and regulatory readiness across India and the UAE.",
+    icon: <Shield className="w-6 h-6 text-[#fab60a]" />,
     href: "#inquire",
   },
 ];
@@ -515,7 +515,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                 />
                 <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span>ENTERPRISE IT STRATEGY &amp; MODERNIZATION</span>
+                  <span>ENTERPRISE IT STRATEGY CONSULTING INDIA &bull; UAE</span>
                 </div>
               </AnimatedSection>
 
@@ -526,7 +526,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                 </h1>
 
                 <p className="text-sm sm:text-base lg:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-xl">
-                  We help businesses modernize legacy systems, build practical technology roadmaps, adopt cloud with confidence, and turn complex IT decisions into measurable business outcomes.
+                  Technology should support and accelerate business growth, not slow it down. We craft practical, high-impact technology roadmaps that seamlessly connect business goals with modern architecture, cloud infrastructure, and execution plans.
                 </p>
               </AnimatedSection>
 

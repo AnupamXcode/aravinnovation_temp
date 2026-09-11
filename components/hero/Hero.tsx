@@ -19,26 +19,28 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Main Hero Content Column - Immediate Paint & Zero Hydration Delay */}
           <div className="lg:col-span-8 text-left max-w-3xl space-y-6 sm:space-y-7">
-            {/* Eyebrow Label - Immediate Render */}
-            <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-[#4A3D35] dark:text-[#D8CBC0] justify-start">
-              <span className="w-2 h-2 rounded-full bg-[#f15e1c] shrink-0" />
-              <span className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.18em]">
-                ENTERPRISE TECHNOLOGY <span className="text-[#f15e1c] font-bold mx-1">&bull;</span> DIGITAL TRANSFORMATION <span className="text-[#f15e1c] font-bold mx-1">&bull;</span> GROWTH
-              </span>
+            {/* Eyebrow Label & Single Semantic H1 for SEO/AEO */}
+            <div className="space-y-2.5">
+              <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-[#4A3D35] dark:text-[#D8CBC0] justify-start">
+                <span className="w-2 h-2 rounded-full bg-[#f15e1c] shrink-0" />
+                <h1 className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.18em] text-[#f15e1c]">
+                  Enterprise Technology, AI &amp; Digital Growth Solutions
+                </h1>
+              </div>
+
+              {/* Main Visual Headline */}
+              <p className="font-display font-extrabold text-4xl sm:text-[3.25rem] md:text-6xl lg:text-[66px] xl:text-[74px] 2xl:text-[80px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.06]">
+                Technology That Moves<br className="hidden sm:inline" />
+                <span className="text-[#f15e1c]"> Business </span><span className="text-[#2e936f]">Forward.</span>
+              </p>
             </div>
 
-            {/* Main Heading - LCP Immediate Paint (Zero JS / zero animation delay dependency) */}
-            <h1 className="font-display font-extrabold text-4xl sm:text-[3.25rem] md:text-6xl lg:text-[66px] xl:text-[74px] 2xl:text-[80px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.06]">
-              Technology That Moves<br className="hidden sm:inline" />
-              <span className="text-[#f15e1c]"> Business </span><span className="text-[#2e936f]">Forward.</span>
-            </h1>
-
-            {/* Supporting Description - Immediate Paint */}
+            {/* Supporting Description — CEO Blueprint Approved Copy */}
             <p className="text-base sm:text-lg lg:text-[18px] text-[#3A2E27] dark:text-[#FAF5EE] max-w-xl leading-relaxed font-medium">
-              Arav Innovations helps businesses modernize technology, build better digital experiences, strengthen governance and turn technology investments into practical business progress.
+              Arav Innovations helps growing enterprises modernize legacy technology, build exceptional digital experiences, automate workflows with AI, strengthen governance, and turn technology investments into predictable revenue growth.
             </p>
 
-            {/* Primary CTAs - Rendered Immediately for Zero Delay */}
+            {/* Primary CTAs — CEO Blueprint Text */}
             <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4">
               <Link href="/contact" className="w-full sm:w-auto">
                 <Button
@@ -47,7 +49,7 @@ export function Hero() {
                   className="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm font-semibold shadow-md hover:shadow-lg shadow-[#f15e1c]/25 bg-[#f15e1c] text-white hover:bg-[#d84e12] transition-all transform hover:-translate-y-0.5"
                   rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
                 >
-                  Start a Conversation
+                  Talk to an Expert
                 </Button>
               </Link>
 
@@ -62,11 +64,11 @@ export function Hero() {
               </Link>
             </div>
 
-            {/* Bottom Proof Row - Rendered Immediately */}
+            {/* Bottom Proof Row */}
             <div className="pt-6 border-t border-[#3A2E27]/15 dark:border-white/15 flex flex-wrap items-center gap-6 sm:gap-8 text-left text-xs sm:text-sm font-semibold text-[#2C211A] dark:text-[#EFE2D6]">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4.5 h-4.5 text-[#f15e1c] shrink-0" />
-                <span>Integrated Practice Ecosystem</span>
+                <span>Unified Practice Ecosystem</span>
               </div>
               <div className="flex items-center gap-2">
                 <Globe2 className="w-4.5 h-4.5 text-[#f15e1c] shrink-0" />
@@ -74,7 +76,7 @@ export function Hero() {
               </div>
               <div className="flex items-center gap-2">
                 <Zap className="w-4.5 h-4.5 text-[#2e936f] shrink-0" />
-                <span>Zero-Downtime Delivery</span>
+                <span>Outcome-First Engineering</span>
               </div>
             </div>
           </div>
@@ -94,3 +96,4 @@ export function Hero() {
     </section>
   );
 }
+

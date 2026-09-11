@@ -128,89 +128,99 @@ function AnimatedDotGrid() {
 // Data Collections for Digital Marketing Page
 // -----------------------------------------------------------------------------
 
-// Section 01: 4 Concise Capability Areas
+// Section 01: 4 Core Capability Areas (CEO Blueprint)
 const positioningCapabilities = [
   {
     num: "01",
-    title: "Brand Positioning",
+    title: "Technical SEO & On-Page Optimization",
     description:
-      "Build a clear market position, messaging system and digital identity that makes the business easier to understand and remember.",
-    icon: <Target className="w-5 h-5 text-[#f15e1c]" />,
+      "Engineered site architecture, schema markup, crawl efficiency, and high-performance pages to capture organic search dominance.",
+    icon: <Search className="w-5 h-5 text-[#f15e1c]" />,
   },
   {
     num: "02",
-    title: "Search & AI Visibility",
+    title: "Answer Engine Optimization (AEO)",
     description:
-      "Improve technical SEO, content structure, topical authority and discoverability across traditional search and emerging AI-driven search experiences.",
-    icon: <Search className="w-5 h-5 text-[#2e936f]" />,
+      "Structured entity answers and topical authority so AI engines (ChatGPT, Claude, Gemini, SGE) extract and cite your company directly.",
+    icon: <Cpu className="w-5 h-5 text-[#2e936f]" />,
   },
   {
     num: "03",
-    title: "Demand Generation",
+    title: "Google Ads & Meta Performance Campaigns",
     description:
-      "Reach high-intent B2B audiences through Google Search, LinkedIn and carefully selected paid channels aligned with commercial objectives.",
+      "Precision B2B and enterprise acquisition campaigns with multi-touch attribution, conversion tracking, and high Return on Ad Spend (ROAS).",
     icon: <Megaphone className="w-5 h-5 text-[#fab60a]" />,
   },
   {
     num: "04",
-    title: "Conversion & Measurement",
+    title: "Lead Generation & CRO",
     description:
-      "Turn visits into meaningful actions through landing-page optimization, conversion journeys, analytics and continuous performance analysis.",
+      "Turn high-intent traffic into qualified pipeline opportunities through frictionless landing pages, conversion audits, and user journey optimization.",
     icon: <BarChart3 className="w-5 h-5 text-[#f15e1c]" />,
   },
 ];
 
-// Section 02: Digital Growth Engine (5 Stages)
+// Section 02: Our Digital Growth & Marketing Framework (6 Phases)
 const growthEngineStages = [
   {
-    id: "POSITION",
+    id: "PHASE-01",
     stageNum: "01",
-    title: "POSITION",
-    subtitle: "Brand & Audience Foundations",
+    title: "Research & Intent Mapping",
+    subtitle: "Phase 01: Audience & Query Landscape",
     description:
-      "Clarify brand, audience, proposition and messaging. We establish your unique market positioning, key messaging pillars, and target B2B buyer profiles.",
-    icon: <Target className="w-5 h-5 text-[#f15e1c]" />,
-    deliverables: ["Brand Positioning Blueprint", "Ideal Customer Profile (ICP) Matrix", "Value Proposition Architecture"],
+      "In-depth research into business goals, competitive landscapes, target audience behaviors, and high-intent keyword/query mapping.",
+    icon: <Compass className="w-5 h-5 text-[#f15e1c]" />,
+    deliverables: ["Competitive Landscape Audit", "Target Audience Personas", "High-Intent Query Map"],
   },
   {
-    id: "DISCOVER",
+    id: "PHASE-02",
     stageNum: "02",
-    title: "DISCOVER",
-    subtitle: "Multi-Channel Search & AI Presence",
+    title: "Strategy & Offer Architecture",
+    subtitle: "Phase 02: Messaging & Conversion Funnels",
     description:
-      "Build organic and paid visibility across search, AI discovery and relevant digital channels. We establish technical SEO foundations and high-intent acquisition campaigns.",
-    icon: <Search className="w-5 h-5 text-[#2e936f]" />,
-    deliverables: ["Technical SEO & Crawl Audit", "AI Search & Topic Authority Hubs", "Google & LinkedIn Paid Search Campaigns"],
+      "Defining messaging frameworks, brand positioning, campaign structures, and conversion funnel paths.",
+    icon: <Target className="w-5 h-5 text-[#2e936f]" />,
+    deliverables: ["Messaging Architecture", "Brand Positioning Blueprint", "Funnel Conversion Blueprint"],
   },
   {
-    id: "ENGAGE",
+    id: "PHASE-03",
     stageNum: "03",
-    title: "ENGAGE",
-    subtitle: "Trust-Building Content Systems",
+    title: "Asset Creation & Engineering",
+    subtitle: "Phase 03: Landing Pages & Content",
     description:
-      "Use useful content, thought leadership, landing pages and campaigns to build trust. We equip decision-makers with insight-led articles, case studies, and executive commentary.",
-    icon: <Users2 className="w-5 h-5 text-[#fab60a]" />,
-    deliverables: ["Executive Thought Leadership", "B2B Insight Articles & Case Studies", "High-Converting Landing Pages"],
+      "Designing high-converting ad creatives, persuasive landing pages, SEO/AEO content assets, and lead-capture mechanisms.",
+    icon: <Layers className="w-5 h-5 text-[#fab60a]" />,
+    deliverables: ["High-Converting Landing Pages", "SEO/AEO Topical Content Assets", "Ad Creative Sets"],
   },
   {
-    id: "CONVERT",
+    id: "PHASE-04",
     stageNum: "04",
-    title: "CONVERT",
-    subtitle: "Journey & Lead Optimization",
+    title: "Campaign Launch & Execution",
+    subtitle: "Phase 04: Multi-Channel Deployment",
     description:
-      "Optimize journeys, forms, CTAs, landing pages and lead qualification. We remove user friction to ensure high-intent traffic turns into qualified sales inquiries.",
-    icon: <TrendingUp className="w-5 h-5 text-[#f15e1c]" />,
-    deliverables: ["Conversion Rate Optimization (CRO)", "Form & CTA Friction Reduction", "Lead Qualification Workflows"],
+      "Deploying targeted search, social, and display campaigns backed by rigorous tracking and multi-touch attribution.",
+    icon: <Megaphone className="w-5 h-5 text-[#f15e1c]" />,
+    deliverables: ["Paid Search & Social Campaigns", "Server-Side Tracking & Pixels", "Multi-Touch Attribution Setup"],
   },
   {
-    id: "LEARN",
+    id: "PHASE-05",
     stageNum: "05",
-    title: "LEARN",
-    subtitle: "Continuous Analysis & Iteration",
+    title: "Continuous Optimization & CRO",
+    subtitle: "Phase 05: Performance & Iteration",
     description:
-      "Measure performance, identify friction and continuously improve the system. We connect marketing activity to commercial outcomes and continually refine growth tactics.",
+      "Real-time monitoring, A/B testing, and data analysis to reduce Cost Per Lead (CPL) and maximize conversion rates.",
     icon: <RefreshCw className="w-5 h-5 text-[#2e936f]" />,
-    deliverables: ["First-Party Attribution Analytics", "Monthly Growth Audits", "Continuous Strategy Iteration"],
+    deliverables: ["A/B Testing Experiments", "CPL Reduction Analytics", "Conversion Rate Audits"],
+  },
+  {
+    id: "PHASE-06",
+    stageNum: "06",
+    title: "Insightful Reporting & Scaling",
+    subtitle: "Phase 06: ROAS & Scaling Opportunities",
+    description:
+      "Providing actionable reporting with direct visibility into Return on Ad Spend (ROAS), lead quality, and next-stage scaling opportunities.",
+    icon: <TrendingUp className="w-5 h-5 text-[#fab60a]" />,
+    deliverables: ["Executive ROAS Dashboards", "Lead Quality Scoring", "Scale Expansion Strategy"],
   },
 ];
 
@@ -521,15 +531,15 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                   className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c] shadow-2xs cursor-default transition-all duration-300"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-[#f15e1c] animate-pulse" />
-                  <span>DIGITAL GROWTH &amp; BRAND STRATEGY</span>
+                  <span>B2B DIGITAL MARKETING AND TECHNICAL SEO SERVICES</span>
                 </motion.div>
               </AnimatedSection>
 
               {/* Main Headline */}
               <AnimatedSection delay={0.1} className="space-y-3">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold font-display tracking-tight leading-[1.12] text-[#1b2823] dark:text-[#ffffff]">
-                  Turn Digital Presence Into{" "}
-                  <span className="text-[#f15e1c]">Measurable Business Growth</span>
+                  Digital Marketing, SEO &amp;{" "}
+                  <span className="text-[#f15e1c]">Answer Engine Optimization (AEO)</span>
                 </h1>
               </AnimatedSection>
 
@@ -538,7 +548,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                 <div className="relative w-full aspect-[941/970] rounded-2xl border-2 border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] overflow-hidden shadow-xl">
                   <Image
                     src="/images/digital-marketing-mobile-hero.png"
-                    alt="Digital Marketing &amp; Brand Development Strategy"
+                    alt="Digital Marketing, SEO and AEO Strategy"
                     fill
                     priority
                     className="object-cover object-center"
@@ -550,7 +560,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
               {/* Supporting Text */}
               <AnimatedSection delay={0.14} className="space-y-3">
                 <p className="text-sm sm:text-base lg:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-2xl">
-                  We help businesses build stronger digital brands, become easier to discover, reach high-intent audiences and turn digital activity into qualified opportunities through strategy, content, SEO, paid media and continuous optimization.
+                  Establish a powerful online presence that generates real revenue. We integrate performance advertising, content strategy, technical SEO, and AEO to win top positions across both Google and generative AI discovery engines.
                 </p>
               </AnimatedSection>
 

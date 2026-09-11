@@ -136,10 +136,13 @@ export function LeadForm({
       onSubmit={handleSubmit(onSubmit)}
       className="rounded-3xl bg-white dark:bg-[#000000] p-7 sm:p-10 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-2xl space-y-6"
     >
-      <div className="border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-3">
+      <div className="border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-3 space-y-1">
         <h3 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-          Initiate Project Discussion
+          Have a Technology, AI, or Growth Challenge?
         </h3>
+        <p className="text-xs sm:text-sm text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
+          Tell us about your current priorities and goals. Our expert team will review your requirements and provide a clear, actionable roadmap.
+        </p>
       </div>
 
       {errorMessage && (
@@ -152,14 +155,14 @@ export function LeadForm({
       {/* Row 1: Name & Company */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Input
-          label="Your Full Name"
+          label="Full Name*"
           placeholder="e.g. Rahul Sharma / Fatima Al Mansoori"
           required
           {...register("name")}
           error={errors.name?.message}
         />
         <Input
-          label="Company / Enterprise Name"
+          label="Company / Business Name*"
           placeholder="e.g. Apex Global Solutions"
           required
           {...register("company")}
@@ -171,7 +174,7 @@ export function LeadForm({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Input
           type="email"
-          label="Official Work Email"
+          label="Work Email*"
           placeholder="name@company.com"
           required
           {...register("email")}
@@ -179,7 +182,7 @@ export function LeadForm({
         />
         <Input
           type="tel"
-          label="Phone / WhatsApp Number"
+          label="Phone / WhatsApp Number*"
           placeholder="+91 98765 43210 or +971 50 123 4567"
           required
           {...register("phone")}
@@ -190,7 +193,7 @@ export function LeadForm({
       {/* Row 3: Service Selection & Timeline */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Select
-          label="Target Practice / Service"
+          label="Service Required*"
           options={serviceOptions}
           required
           {...register("service")}
@@ -206,7 +209,7 @@ export function LeadForm({
 
       {/* Row 4: Requirement Description */}
       <Textarea
-        label="Project Scope & Specific Objectives"
+        label="Tell Us About Your Requirement*"
         placeholder="Briefly describe your current challenge, desired deliverables, technology stack (if known), or team expansion goals..."
         required
         rows={4}
@@ -215,10 +218,10 @@ export function LeadForm({
         helperText="Minimum 10 characters. Confidential."
       />
 
-      {/* Optional Engagement Scope */}
+      {/* Optional Budget */}
       <Input
-        label="Target Engagement Scope (Optional)"
-        placeholder="e.g. Enterprise Scoping, Cloud Architecture, Custom Pod"
+        label="Project Budget (Optional)"
+        placeholder="e.g. $10k-$25k, $25k-$50k, Enterprise"
         {...register("budget")}
         error={errors.budget?.message}
       />
@@ -233,13 +236,13 @@ export function LeadForm({
           isLoading={isSubmitting}
           rightIcon={<ArrowRight className="w-4 h-4" />}
         >
-          Submit Project Inquiry
+          Request an Expert Consultation
         </Button>
       </div>
 
       <div className="flex items-center justify-center gap-2 text-xs text-[#4a5c55] dark:text-[#d3eee4] text-center pt-1">
         <ShieldCheck className="w-4 h-4 text-[#2e936f]" />
-        <span>Strict Confidentiality Guaranteed. Operating Globally.</span>
+        <span>Strict Confidentiality Guaranteed. Strategic Hubs in India &amp; UAE.</span>
       </div>
     </form>
   );

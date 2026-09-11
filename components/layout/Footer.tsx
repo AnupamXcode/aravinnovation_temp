@@ -551,8 +551,8 @@ export function Footer() {
                   </p>
                 </div>
 
-                <div className="text-[11px] font-mono text-[#ffec69] font-bold">
-                  Global Operations: India &bull; UAE &bull; US &bull; EU &bull; Canada
+                <div className="text-[11px] font-mono text-[#ffec69] font-bold leading-relaxed">
+                  India &amp; UAE Operations | IT Strategy | Web &amp; App Development | AI &amp; Automation | SEO &amp; AEO Growth | Risk &amp; Governance
                 </div>
               </div>
 

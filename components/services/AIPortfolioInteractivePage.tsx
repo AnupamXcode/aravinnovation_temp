@@ -81,33 +81,31 @@ function SystemScanTransition() {
   );
 }
 
-// -----------------------------------------------------------------------------
-// 1. SECTION — AI THAT SOLVES REAL WORK (Section 6 in prompt)
-// -----------------------------------------------------------------------------
+// 1. SECTION — AI THAT SOLVES REAL WORK (CEO Blueprint Capabilities)
 const realWorkCapabilities = [
   {
     num: "01",
-    title: "AI Applications",
-    desc: "Intelligent experiences built around real business needs.",
+    title: "Custom LLM Solutions & Integrations",
+    desc: "Domain-tailored Large Language Models securely connected to proprietary enterprise data and knowledge repositories.",
     icon: <Bot className="w-5 h-5 text-[#F15E1C]" />,
   },
   {
     num: "02",
-    title: "RAG & Knowledge",
-    desc: "Connect AI to trusted internal information and context.",
-    icon: <Database className="w-5 h-5 text-[#2E936F]" />,
+    title: "AI Workflow Automation",
+    desc: "Cuts manual operational overhead and accelerates decision-making across departments with autonomous agent pipelines.",
+    icon: <Workflow className="w-5 h-5 text-[#2E936F]" />,
   },
   {
     num: "03",
-    title: "AI Agents",
-    desc: "Task-oriented systems that can reason, act and escalate when needed.",
-    icon: <Cpu className="w-5 h-5 text-[#FAB60A]" />,
+    title: "Intelligent Data Processing",
+    desc: "Automated extraction, classification, and structured insights from high-volume complex documents and data streams.",
+    icon: <Database className="w-5 h-5 text-[#FAB60A]" />,
   },
   {
     num: "04",
-    title: "Intelligent Automation",
-    desc: "AI-assisted workflows that reduce repetitive operational effort.",
-    icon: <Workflow className="w-5 h-5 text-[#F15E1C]" />,
+    title: "Process Improvement & AI Consulting",
+    desc: "Strategic roadmaps to adopt safe, scalable AI tools that boost productivity, lower operational costs, and maintain strict governance.",
+    icon: <Cpu className="w-5 h-5 text-[#F15E1C]" />,
   },
 ];
 
@@ -506,12 +504,12 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
                 />
                 <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
                   <Sparkles className="w-3.5 h-3.5 text-[#f15e1c]" />
-                  <span>AI ENGINEERING • AUTOMATION • INTELLIGENT SYSTEMS</span>
+                  <span>ENTERPRISE AI WORKFLOW AUTOMATION SOLUTIONS</span>
                 </div>
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-[1.12]">
-                Turn AI Potential Into Business Intelligence.
+                AI &amp; Intelligent Process Automation
               </h1>
 
               {/* Dedicated Mobile Hero Visual Card — Mobile View Only */}
@@ -530,7 +528,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
               </div>
 
               <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed font-normal">
-                We design practical AI systems that connect data, knowledge and automation to real business workflows — helping organizations make better decisions and get more from their technology.
+                Turn repetitive, manual tasks into streamlined intelligent workflows. We guide organizations through adopting safe, scalable AI tools and custom automation solutions that boost productivity, lower operational costs, and improve customer satisfaction.
               </p>
 
               {/* CTAs */}

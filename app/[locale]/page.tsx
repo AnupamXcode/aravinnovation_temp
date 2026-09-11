@@ -34,6 +34,8 @@ import { getHomeBlogPosts } from "@/lib/cms";
 import { HomeInsightsSection } from "@/components/home/HomeInsightsSection";
 import { WhoWeHelpSection } from "@/components/home/WhoWeHelpSection";
 import { EarlyTrustProofSection } from "@/components/home/EarlyTrustProofSection";
+import { DirectAnswerAEOBlock } from "@/components/home/DirectAnswerAEOBlock";
+import { HomeFAQSection } from "@/components/home/HomeFAQSection";
 
 export async function generateMetadata() {
   const seo = getSEOForPath("/");
@@ -114,6 +116,9 @@ export default async function HomePage({
         </ScrollReveal>
       </section>
 
+      {/* 02.5 — DIRECT ANSWER / AEO BLOCK */}
+      <DirectAnswerAEOBlock />
+
       {/* 03 — WHAT WE DO (ENTERPRISE SERVICE PRACTICES) */}
       <div id="services">
         <InteractiveServiceStack3D />
@@ -177,6 +182,9 @@ export default async function HomePage({
           </section>
         </Scroll3DContainer>
       </div>
+
+      {/* 09.5 — AEO / FREQUENTLY ASKED QUESTIONS */}
+      <HomeFAQSection />
 
       {/* 10 — INSIGHTS THAT HELP YOU MOVE FORWARD */}
       <HomeInsightsSection posts={await getHomeBlogPosts(locale)} />

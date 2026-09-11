@@ -146,35 +146,35 @@ export const chatbotIntents: ChatbotIntent[] = [
       "what do you do", "what services do you provide", "what can you help with",
       "how can arav help me", "what do you guys actually do", "what does arav do",
       "whats your expertise", "what problems can you solve", "what solutions do you provide",
-      "core competencies", "capabilities", "what do you offer"
+      "core competencies", "capabilities", "what do you offer", "who is arav", "about arav"
     ],
     response: {
-      en: "Arav Innovations helps businesses with technology strategy, digital growth, software development, governance, audit, SEO, talent and practical AI solutions.\n\nTell me what you're trying to achieve, and I can point you to the most relevant area.",
-      hi: "आरव इनोवेशन तकनीक रणनीति, डिजिटल ग्रोथ, सॉफ्टवेयर डेवलपमेंट, अनुपालन, ऑडिट, एसईओ और एआई समाधानों में मदद करता है।\n\nआप क्या हासिल करना चाहते हैं बताएं, मैं आपको सही सेवा की सलाह दूंगा।",
-      ar: "تساعد آراف إينوفيشينز الشركات في استراتيجيات التقنية، النمو الرقمي، تطوير البرمجيات، الحوكمة، التدقيق، وحلول الذكاء الاصطناعي.\n\nأخبرنا بما تريد تحقيقه لنوجهك للخدمة المناسبة.",
+      en: "Arav Innovations is an enterprise technology transformation and digital growth firm with strategic delivery hubs in India and the UAE.\n\nWe integrate IT strategy, custom software engineering, AI workflow automation, performance marketing, and enterprise risk & compliance into a unified operational ecosystem designed to drive measurable business outcomes.\n\nWhich area would you like to explore?",
+      hi: "आरव इनोवेशन भारत और संयुक्त अरब अमीरात में सक्रिय एक एंटरप्राइज टेक्नोलॉजी ट्रांसफॉर्मेशन और डिजिटल ग्रोथ फर्म है।\n\nहम आईटी रणनीति, कस्टम सॉफ्टवेयर इंजीनियरिंग, एआई ऑटोमेशन, परफॉर्मेंस मार्केटिंग और एंटरप्राइज रिस्क एवं गवर्नेंस को एकीकृत करते हैं।\n\nआप किस क्षेत्र के बारे में जानना चाहते हैं?",
+      ar: "آراف إينوفيشينز هي شركة رائدة في التحول التقني للمؤسسات والنمو الرقمي عبر مراكزنا في الهند والإمارات.\n\nنجمع بين استراتيجية تكنولوجيا المعلومات، هندسة البرمجيات، أتمتة الذكاء الاصطناعي، والتسويق الرقمي.\n\nأي مجال ترغب في استكشافه؟",
     },
     options: {
       en: [
         { label: "IT Strategy", action: "navigate", route: "/services/it-strategy-implementation" },
-        { label: "Digital Growth", action: "navigate", route: "/services/digital-marketing-brand-development" },
-        { label: "Web & Applications", action: "navigate", route: "/services/web-app-development" },
-        { label: "Governance", action: "navigate", route: "/services/risk-compliance-governance" },
-        { label: "Audit", action: "navigate", route: "/services/audit-improvement" },
-        { label: "Training & Talent", action: "navigate", route: "/services/training-staff-augmentation" },
-        { label: "SEO", action: "navigate", route: "/services/seo-services" },
-        { label: "AI Solutions", action: "navigate", route: "/services/ai-portfolio" },
+        { label: "AI & Automation", action: "navigate", route: "/services/ai-portfolio" },
+        { label: "Web & App Development", action: "navigate", route: "/services/web-app-development" },
+        { label: "Digital Marketing & AEO", action: "navigate", route: "/services/digital-marketing-brand-development" },
+        { label: "Risk & Governance", action: "navigate", route: "/services/risk-compliance-governance" },
+        { label: "Audit & FinOps", action: "navigate", route: "/services/audit-improvement" },
+        { label: "Staff Augmentation", action: "navigate", route: "/services/training-staff-augmentation" },
+        { label: "SEO Services", action: "navigate", route: "/services/seo-services" },
       ],
       hi: [
         { label: "आईटी रणनीति", action: "navigate", route: "/services/it-strategy-implementation" },
+        { label: "एआई ऑटोमेशन", action: "navigate", route: "/services/ai-portfolio" },
         { label: "वेब एवं ऐप", action: "navigate", route: "/services/web-app-development" },
-        { label: "एसईओ सेवाएं", action: "navigate", route: "/services/seo-services" },
-        { label: "एआई समाधान", action: "navigate", route: "/services/ai-portfolio" },
+        { label: "सभी सेवाएं देखें", action: "navigate", route: "/services" },
       ],
       ar: [
         { label: "استراتيجية التقنية", action: "navigate", route: "/services/it-strategy-implementation" },
         { label: "تطوير الويب", action: "navigate", route: "/services/web-app-development" },
-        { label: "خدمات SEO", action: "navigate", route: "/services/seo-services" },
         { label: "حلول AI", action: "navigate", route: "/services/ai-portfolio" },
+        { label: "جميع الخدمات", action: "navigate", route: "/services" },
       ],
     },
   },
@@ -189,24 +189,22 @@ export const chatbotIntents: ChatbotIntent[] = [
       "show all services", "service catalog", "full service list", "core services list", "explain all services"
     ],
     response: {
-      en: "Sure. Our core services cover:\n\n• IT Strategy & Implementation\n• Digital Marketing & Brand Development\n• Web & Application Development\n• Risk, Compliance & Governance\n• Audit & Improvement\n• Training & Staff Augmentation\n• SEO Services\n• AI Portfolio\n\nWhich one would you like to explore?",
-      hi: "ज़रूर। हमारी मुख्य सेवाएं निम्नलिखित हैं:\n\n• आईटी रणनीति एवं कार्यान्वयन\n• डिजिटल मार्केटिंग एवं ब्रांड विकास\n• वेब एवं एप्लिकेशन विकास\n• जोखिम, अनुपालन एवं गवर्नेंस\n• ऑडिट एवं सुधार\n• प्रशिक्षण एवं टीम विस्तार\n• एसईओ सेवाएं\n• एआई पोर्टफोलियो\n\nआप किस सेवा के बारे में जानना चाहते हैं?",
-      ar: "تشمل خدماتنا الرئيسية:\n\n• استراتيجية التقنية والتنفيذ\n• التسويق الرقمي وبناء العلامة\n• تطوير الويب والتطبيقات\n• الحوكمة والامتثال والارتقاء\n• التدقيق والتحسين\n• التدريب ودعم الكفاءات\n• خدمات SEO\n• حلول الذكاء الاصطناعي",
+      en: "Our core enterprise capabilities include:\n\n• IT Strategy & Implementation\n• AI & Workflow Automation\n• Web & Custom Application Development\n• Digital Marketing, SEO & AEO\n• Risk, Governance & Systems Audits\n• Audit & Performance Improvement\n• Staff Augmentation & Training\n• SEO & Answer Engine Optimization\n\nWhich practice can we assist you with?",
+      hi: "हमारी प्रमुख एंटरप्राइज क्षमताएं:\n\n• आईटी रणनीति एवं कार्यान्वयन\n• एआई एवं वर्कफ़्लो ऑटोमेशन\n• वेब एवं कस्टम एप्लिकेशन विकास\n• डिजिटल मार्केटिंग, एसईओ एवं AEO\n• जोखिम, गवर्नेंस एवं सिस्टम ऑडिट\n• ऑडिट एवं परफॉर्मेंस सुधार\n• टीम विस्तार एवं प्रशिक्षण\n\nआप किसके बारे में चर्चा करना चाहते हैं?",
+      ar: "تشمل قدراتنا المؤسسية الرئيسية:\n\n• استراتيجية تكنولوجيا المعلومات والتنفيذ\n• الذكاء الاصطناعي وأتمتة العمليات\n• تطوير تطبيقات الويب والمواقع المخصصة\n• التسويق الرقمي والظهور في محركات الذكاء الاصطناعي (AEO)\n• الحوكمة والمخاطر والتدقيق\n• دعم الكفاءات وتوسيع الفرق",
     },
     options: {
       en: [
         { label: "IT Strategy", action: "navigate", route: "/services/it-strategy-implementation", ctaType: "page" },
+        { label: "AI & Automation", action: "navigate", route: "/services/ai-portfolio", ctaType: "page" },
         { label: "Web & App Dev", action: "navigate", route: "/services/web-app-development", ctaType: "page" },
-        { label: "Digital Marketing", action: "navigate", route: "/services/digital-marketing-brand-development", ctaType: "page" },
-        { label: "SEO Services", action: "navigate", route: "/services/seo-services", ctaType: "page" },
+        { label: "Digital Marketing & AEO", action: "navigate", route: "/services/digital-marketing-brand-development", ctaType: "page" },
         { label: "Risk & Governance", action: "navigate", route: "/services/risk-compliance-governance", ctaType: "page" },
-        { label: "Audit & FinOps", action: "navigate", route: "/services/audit-improvement", ctaType: "page" },
         { label: "Staff Augmentation", action: "navigate", route: "/services/training-staff-augmentation", ctaType: "page" },
-        { label: "AI Portfolio", action: "navigate", route: "/services/ai-portfolio", ctaType: "page" },
       ],
       hi: [
         { label: "वेब एवं ऐप विकास", action: "navigate", route: "/services/web-app-development", ctaType: "page" },
-        { label: "एसईओ सेवाएं", action: "navigate", route: "/services/seo-services", ctaType: "page" },
+        { label: "एआई पोर्टफोलियो", action: "navigate", route: "/services/ai-portfolio", ctaType: "page" },
         { label: "सभी सेवाएं देखें", action: "navigate", route: "/services", ctaType: "page" },
       ],
       ar: [
@@ -225,9 +223,64 @@ export const chatbotIntents: ChatbotIntent[] = [
       "how can you help our business", "how can you help my company"
     ],
     response: {
-      en: "We can help you modernize technology, improve digital growth, build or improve applications, strengthen governance, improve operational efficiency, develop SEO visibility, add technical talent and apply AI where it makes business sense.\n\nTell me the challenge you're facing, and I'll suggest the best starting point.",
-      hi: "हम तकनीक को आधुनिक बनाने, ऑनलाइन ग्रोथ बढ़ाने, स्केलेबल ऐप्स बनाने, अनुपालन मजबूत करने और एआई लागू करने में मदद करते हैं।\n\nअपनी चुनौती बताएं, हम सही शुरुआत की सिफारिश करेंगे।",
-      ar: "نساعدك في تحديث التكنولوجيا، تحسين النمو الرقمي، بناء التطبيقات، تعزيز الحوكمة، وتطبيق الذكاء الاصطناعي.\n\nأخبرنا بالتحدي الذي تواجهه لنقترح نقطة البداية.",
+      en: "We align technology deliverables with tangible business outcomes—focusing on conversion performance, system efficiency, security compliance, and ROI across India and the UAE.\n\nTell me about your current priority, and I will recommend the right engagement roadmap.",
+      hi: "हम तकनीक को स्पष्ट व्यावसायिक परिणामों से जोड़ते हैं—कन्वर्जन परफॉर्मेंस, सिस्टम दक्षता, सुरक्षा अनुपालन और आरओआई पर ध्यान केंद्रित करते हुए।\n\nअपनी वर्तमान प्राथमिकता बताएं, मैं सही रोडमैप सुझाऊंगा।",
+      ar: "نربط مخرجات التكنولوجيا بنتائج الأعمال الملموسة—مع التركيز على الأداء، الكفاءة، الامتثال الأمني وعائد الاستثمار.",
+    },
+  },
+
+  // 4.1. ANSWER ENGINE OPTIMIZATION (AEO) DEDICATED INTENT
+  {
+    id: "aeo_explanation",
+    intentLevel: "INFORMATIONAL",
+    associatedServiceSlug: "seo-services",
+    keywords: [
+      "what is aeo", "aeo", "answer engine optimization", "chatgpt seo", "ai search ranking",
+      "how to rank on chatgpt", "google sge", "perplexity ranking", "generative ai search"
+    ],
+    response: {
+      en: "Answer Engine Optimization (AEO) optimizes your web presence so that conversational AI engines—such as ChatGPT, Claude, Gemini, and Google SGE—can easily extract and cite your company as the direct answer to user queries.\n\nWhile traditional SEO targets blue link rankings, AEO focuses on positioning your brand as the direct AI answer.",
+      hi: "आंसर इंजन ऑप्टिमाइजेशन (AEO) आपकी डिजिटल उपस्थिति को अनुकूलित करता है ताकि संवादात्मक एआई इंजन (ChatGPT, Claude, Gemini, SGE) आपकी कंपनी को सीधे सटीक उत्तर के रूप में उद्धृत कर सकें।",
+      ar: "يعمل تحسين محركات الإجابة (AEO) على تهيئة حضورك الرقمي بحيث تستطيع نماذج الذكاء الاصطناعي استخراج شركتك والاستشهاد بها كإجابة مباشرة لاستفسارات المستخدمين.",
+    },
+    options: {
+      en: [
+        { label: "Explore SEO & AEO Services →", action: "navigate", route: "/services/seo-services", ctaType: "page" },
+        { label: "Discuss Growth Strategy →", action: "start_project", payload: "AEO Strategy Requirement", ctaType: "action" },
+      ],
+      hi: [
+        { label: "एसईओ एवं AEO सेवाएं देखें →", action: "navigate", route: "/services/seo-services", ctaType: "page" },
+      ],
+      ar: [
+        { label: "استكشف خدمات SEO و AEO →", action: "navigate", route: "/services/seo-services", ctaType: "page" },
+      ],
+    },
+  },
+
+  // 4.2. REGIONAL PRESENCE / INDIA & UAE INTENT
+  {
+    id: "regional_presence",
+    intentLevel: "INFORMATIONAL",
+    keywords: [
+      "which regions do you serve", "locations", "india", "uae", "dubai", "where are you located",
+      "where is arav based", "office locations", "middle east operations"
+    ],
+    response: {
+      en: "We maintain active operations in India and the UAE, serving growing mid-market businesses, enterprise organizations, SaaS companies, and digital brands across the Middle East, Asia, and global markets.",
+      hi: "हम भारत और संयुक्त अरब अमीरात (UAE) में सक्रिय संचालन बनाए रखते हैं, और मध्य पूर्व, एशिया तथा वैश्विक स्तर पर उद्यमों की सेवा करते हैं।",
+      ar: "ندير عمليات نشطة في الهند ودولة الإمارات العربية المتحدة، ونخدم الشركات المتنامية والمؤسسات عبر الشرق الأوسط وآسيا والأسواق العالمية.",
+    },
+    options: {
+      en: [
+        { label: "Contact Strategic Hubs →", action: "navigate", route: "/contact", ctaType: "page" },
+        { label: "Explore Services →", action: "all_services", ctaType: "page" },
+      ],
+      hi: [
+        { label: "संपर्क करें →", action: "navigate", route: "/contact", ctaType: "page" },
+      ],
+      ar: [
+        { label: "تواصل معنا →", action: "navigate", route: "/contact", ctaType: "page" },
+      ],
     },
   },
 

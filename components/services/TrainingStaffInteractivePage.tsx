@@ -430,15 +430,15 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
                 />
                 <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
                   <Sparkles className="w-3.5 h-3.5 text-[#f15e1c]" />
-                  <span>TEAM CAPABILITY • TALENT • ENABLEMENT</span>
+                  <span>STAFF AUGMENTATION &bull; TRAINING &bull; TEAM ENABLEMENT</span>
                 </div>
               </AnimatedSection>
 
               <AnimatedSection delay={0.1} className="space-y-3">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-[1.12]">
-                  Build Stronger Teams. <br className="hidden sm:inline" />
+                  Staff Augmentation &amp; <br className="hidden sm:inline" />
                   <span className="text-[#f15e1c]">
-                    Add the Right Expertise When You Need It.
+                    Enterprise Technical Training
                   </span>
                 </h1>
               </AnimatedSection>
@@ -460,7 +460,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
 
               <AnimatedSection delay={0.14} className="space-y-3">
                 <p className="text-sm sm:text-base lg:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-2xl">
-                  Develop the capabilities your teams need and extend delivery capacity with skilled professionals who can integrate into your existing ways of working.
+                  Scales engineering capability on demand without recruitment friction. We provide dedicated tech teams, project staffing, and technical upskilling tailored to your architecture and delivery goals.
                 </p>
               </AnimatedSection>
 

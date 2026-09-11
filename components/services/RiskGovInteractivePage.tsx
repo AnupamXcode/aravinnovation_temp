@@ -274,37 +274,27 @@ const governedRiskSteps = [
   "BETTER DECISION",
 ];
 
-// Section 7: Compact 2-Column Capability List
+// Section 7: 4 Core Capabilities (CEO Blueprint)
 const compactCapabilities = [
   {
     num: "01",
-    title: "Enterprise Risk Assessment",
-    desc: "Identify operational, technology, information, third-party and compliance risks across the organization.",
+    title: "Cybersecurity & Risk Assessment",
+    desc: "Evaluate technical vulnerabilities, cloud threat vectors, identity access, and enterprise operational risk exposures.",
   },
   {
     num: "02",
-    title: "Compliance & Regulatory Readiness",
-    desc: "Translate applicable regulatory and contractual requirements into practical controls, responsibilities and evidence.",
+    title: "Technology & Website Performance Audits",
+    desc: "In-depth code reviews, architecture stress-tests, Core Web Vitals, API security, and reliability benchmarking.",
   },
   {
     num: "03",
-    title: "Governance Frameworks",
-    desc: "Build governance structures that define who decides, who owns, who approves and who is accountable.",
+    title: "Data Protection & Compliance Readiness",
+    desc: "Practical advisory and control alignment for GDPR, DPDP Act, and enterprise privacy mandates without administrative burden.",
   },
   {
     num: "04",
-    title: "Privacy & Data Governance",
-    desc: "Turn privacy obligations into operational practices across how data is collected, used, stored, shared and retained.",
-  },
-  {
-    num: "05",
-    title: "Cybersecurity Governance",
-    desc: "Connect cybersecurity controls with business risk rather than treating security as an isolated technical function.",
-  },
-  {
-    num: "06",
-    title: "AI Governance",
-    desc: "Help organizations establish practical governance around how AI is selected, used, monitored and controlled.",
+    title: "Policy & Process Governance Improvement",
+    desc: "Streamline RACI matrices, engineering security standards, vendor risk frameworks, and business continuity playbooks.",
   },
 ];
 
@@ -451,18 +441,18 @@ export function RiskGovInteractivePage({ service, relatedPosts }: RiskGovPagePro
                   className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#e3f4ee] dark:bg-[#0a0a0a] border border-[#2e936f]/40 text-xs font-mono font-bold text-[#2e936f] shadow-2xs cursor-default transition-all duration-300"
                 >
                   <ShieldCheck className="w-3.5 h-3.5 text-[#2e936f]" />
-                  <span>RISK &bull; COMPLIANCE &bull; GOVERNANCE</span>
+                  <span>IT GOVERNANCE AND SECURITY AUDIT SERVICES</span>
                 </motion.div>
               </AnimatedSection>
 
               <AnimatedSection delay={0.1} className="space-y-3">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold font-display tracking-tight leading-[1.12] text-[#1b2823] dark:text-[#ffffff]">
-                  Make Risk Visible.{" "}
-                  <span className="text-[#2e936f]">Make Compliance Actionable.</span>
+                  Risk, Governance &amp;{" "}
+                  <span className="text-[#2e936f]">Systems Audits</span>
                 </h1>
 
                 <p className="text-sm sm:text-base lg:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-2xl">
-                  Build a governance system that helps your organization understand its risks, meet its obligations, protect critical information, and make better decisions before problems become business disruptions.
+                  Protect enterprise operations, lower technical liabilities, and maintain compliance readiness with robust governance frameworks and in-depth performance reviews.
                 </p>
               </AnimatedSection>
 

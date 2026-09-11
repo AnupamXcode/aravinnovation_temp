@@ -257,71 +257,39 @@ const architectureFlowStages = [
   },
 ];
 
-// Section 3: 6 Capability Areas
+// Section 3: Core Capabilities (CEO Blueprint)
 const productCapabilities = [
   {
     num: "01",
-    title: "High-Performance Websites",
+    title: "Corporate Web Platforms & Portals",
     description:
-      "Corporate websites, marketing platforms, content-driven experiences and conversion-focused digital experiences built for speed and clarity.",
+      "Enterprise websites, corporate portals, and marketing platforms engineered for lightning speed, technical SEO, and conversion retention.",
     icon: <Globe2 className="w-7 h-7 text-[#f15e1c] stroke-[2]" />,
-    techLayer: "Frontend & Content System",
+    techLayer: "Frontend & Content Systems",
   },
   {
     num: "02",
-    title: "Web Applications",
+    title: "Custom Software & SaaS Development",
     description:
-      "Customer portals, internal platforms, interactive dashboards, workflow applications and enterprise business systems.",
+      "Bespoke web applications, SaaS multi-tenant platforms, internal portals, and automated workflow engines tailored to your domain logic.",
     icon: <Code2 className="w-7 h-7 text-[#2e936f] stroke-[2]" />,
-    techLayer: "Full-Stack Application Layer",
+    techLayer: "Full-Stack Application & SaaS",
   },
   {
     num: "03",
-    title: "E-Commerce Experiences",
+    title: "Mobile Application Development (iOS/Android)",
     description:
-      "Product discovery, catalogues, checkout journeys, payment gateway integrations and scalable custom commerce experiences.",
-    icon: <ShoppingBag className="w-7 h-7 text-[#fab60a] stroke-[2]" />,
-    techLayer: "Commerce & Payment Gateway",
+      "Native and cross-platform iOS and Android mobile platforms designed around intuitive user journeys and robust offline capabilities.",
+    icon: <Smartphone className="w-7 h-7 text-[#fab60a] stroke-[2]" />,
+    techLayer: "iOS & Android Ecosystem",
   },
   {
     num: "04",
-    title: "Custom Business Applications",
+    title: "API & Third-Party System Integration",
     description:
-      "Software engineered around specific operational workflows instead of forcing your business into rigid off-the-shelf platforms.",
-    icon: <Wrench className="w-7 h-7 text-[#f15e1c] stroke-[2]" />,
-    techLayer: "Domain Logic & Workflows",
-  },
-  {
-    num: "05",
-    title: "API & System Integration",
-    description:
-      "Connect applications, services, data sources and third-party platforms through reliable, well-documented integration architecture.",
-    icon: <Terminal className="w-7 h-7 text-[#2e936f] stroke-[2]" />,
-    techLayer: "REST & GraphQL Gateways",
-  },
-  {
-    num: "06",
-    title: "Progressive Web Experiences",
-    description:
-      "Where appropriate, create installable, app-like web experiences with capabilities such as offline support and background operation.",
-    icon: <Cpu className="w-7 h-7 text-[#fab60a] stroke-[2]" />,
-    techLayer: "PWA & Service Worker Layer",
-  },
-  {
-    num: "07",
-    title: "Android Applications",
-    description:
-      "Native or cross-platform Android application development for business, customer and operational use cases.",
-    icon: <Smartphone className="w-7 h-7 text-[#2e936f] stroke-[2]" />,
-    techLayer: "Android & Mobile Ecosystem",
-  },
-  {
-    num: "08",
-    title: "iPhone / iOS Applications",
-    description:
-      "Professional iPhone and iOS application development with responsive, user-focused experiences.",
-    icon: <Smartphone className="w-7 h-7 text-[#f15e1c] stroke-[2]" />,
-    techLayer: "iOS & Apple Ecosystem",
+      "Connect applications, microservices, databases, CRM/ERP systems, and payment gateways through secure, high-concurrency API architectures.",
+    icon: <Terminal className="w-7 h-7 text-[#f15e1c] stroke-[2]" />,
+    techLayer: "REST, GraphQL & Webhooks",
   },
 ];
 
@@ -581,15 +549,14 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
                   className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c] shadow-2xs cursor-default transition-all duration-300"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-[#f15e1c] animate-pulse" />
-                  <span>DIGITAL PRODUCT ENGINEERING</span>
+                  <span>CUSTOM WEB AND MOBILE APPLICATION DEVELOPMENT</span>
                 </motion.div>
               </AnimatedSection>
 
               {/* Main H1 Headline */}
               <AnimatedSection delay={0.1} className="space-y-3">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold font-display tracking-tight leading-[1.12] text-[#1b2823] dark:text-[#ffffff]">
-                  Build Digital Products That{" "}
-                  <span className="text-[#f15e1c]">Work as Hard as Your Business</span>
+                  Web &amp; Custom <span className="text-[#f15e1c]">Application Development</span>
                 </h1>
               </AnimatedSection>
 
@@ -610,7 +577,7 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
               {/* Supporting Text */}
               <AnimatedSection delay={0.14} className="space-y-3">
                 <p className="text-sm sm:text-base lg:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-2xl">
-                  We design and engineer high-performance websites, web applications, and digital products around real user journeys, business workflows, and long-term scalability.
+                  We engineer high-performance websites, custom web applications, and mobile platforms designed around the exact needs of your business and customers. Fast, secure, accessible, and scalable.
                 </p>
               </AnimatedSection>
 
