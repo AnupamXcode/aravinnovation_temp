@@ -129,29 +129,12 @@ function BorderDrawWrapper({
 function AnimatedFooterSection({
   children,
   className = "",
-  delay = 0,
 }: {
   children: React.ReactNode;
   className?: string;
   delay?: number;
 }) {
-  const shouldReduceMotion = useReducedMotion();
-
-  if (shouldReduceMotion) {
-    return <div className={className}>{children}</div>;
-  }
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 14 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-20px" }}
-      transition={{ duration: 0.4, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={className}>{children}</div>;
 }
 
 // 8 Verified Enterprise Services
@@ -224,7 +207,6 @@ export function Footer() {
   const pathname = usePathname();
   const { config } = useSiteConfig();
   const footerConfig = config.footerConfig;
-
   const shouldReduceMotion = useReducedMotion();
 
   // Do not render footer on admin routes
@@ -237,14 +219,8 @@ export function Footer() {
       {/* Visual Section Boundary Divider: Page Ends First with Crisp Warm Separation Line */}
       <div className="w-full h-px bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent mb-6 sm:mb-8" />
 
-      {/* Cinematic Rise Reveal Footer Panel */}
-      <motion.footer
-        initial={{ y: shouldReduceMotion ? 0 : 35, opacity: shouldReduceMotion ? 1 : 0.92 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        viewport={{ once: true, margin: "0px 0px -40px 0px" }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="w-full relative bg-gradient-to-b from-[#d84a0d] via-[#f15e1c] to-[#b83e0a] text-white pt-10 sm:pt-12 pb-8 overflow-hidden select-none rounded-t-[2rem] sm:rounded-t-[3rem] shadow-[0_-20px_50px_rgba(241,94,28,0.25)] border-t border-white/30"
-      >
+      {/* Static Enterprise Footer Panel */}
+      <footer className="w-full relative bg-gradient-to-b from-[#d84a0d] via-[#f15e1c] to-[#b83e0a] text-white pt-10 sm:pt-12 pb-8 overflow-hidden select-none rounded-t-[2rem] sm:rounded-t-[3rem] shadow-[0_-20px_50px_rgba(241,94,28,0.25)] border-t border-white/30">
         {/* =========================================================================
             SLOW MOVING ATMOSPHERIC GRADIENT (ORANGE + WHITE PALETTE ONLY)
             20–35s Slow Ambient Fields with 0% dark/green elements
@@ -372,14 +348,8 @@ export function Footer() {
               </div>
 
               <ul className="space-y-2">
-                {serviceLinks.map((service, idx) => (
-                  <motion.li
-                    key={service.num}
-                    initial={{ opacity: 0, x: -8 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.25, delay: idx * 0.03 }}
-                  >
+                {serviceLinks.map((service) => (
+                  <li key={service.num}>
                     <BorderDrawWrapper roundedClass="rounded-lg" rx={8}>
                       <Link
                         href={service.href}
@@ -397,7 +367,7 @@ export function Footer() {
                         <ArrowRight className="w-3.5 h-3.5 text-[#ffec69] group-hover:text-white group-hover:translate-x-1 transition-all duration-200 shrink-0 ml-2" />
                       </Link>
                     </BorderDrawWrapper>
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -670,7 +640,7 @@ export function Footer() {
           </div>
 
         </div>
-      </motion.footer>
+      </footer>
     </div>
   );
 }
