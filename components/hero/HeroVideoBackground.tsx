@@ -8,18 +8,17 @@ export function HeroVideoBackground() {
   const videoConfig = config.heroVideoConfig || defaultHeroVideoConfig;
   const isVideoEnabled = videoConfig.enabled !== false;
   const videoSpeed = videoConfig.playbackSpeed || 0.75;
-  const overlayOpacityVal = (videoConfig.overlayOpacity ?? 75) / 100;
+  const overlayOpacityVal = (videoConfig.overlayOpacity ?? 45) / 100;
 
   const containerRef = React.useRef<HTMLDivElement>(null);
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const [videoError, setVideoError] = React.useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
-  const [videoMounted, setVideoMounted] = React.useState(false);
 
-  // Mount video on client after initial paint to guarantee zero impact on FCP/LCP
+  const videoSrc = videoConfig.videoUrl || "/videos/Create_a_premium_minimalist_ci.mp4";
+
+  // Check prefers-reduced-motion
   React.useEffect(() => {
-    setVideoMounted(true);
-
     if (typeof window !== "undefined") {
       const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
       setPrefersReducedMotion(mediaQuery.matches);
@@ -39,9 +38,28 @@ export function HeroVideoBackground() {
     }
   }, [videoSpeed]);
 
-  // Pause video when out of viewport to reduce GPU/CPU draw on mobile
+  // Ensure autoplay triggers reliably on initial load, navigation, and page reload
   React.useEffect(() => {
-    if (!containerRef.current || !videoRef.current || prefersReducedMotion || !isVideoEnabled || !videoMounted) {
+    if (!videoRef.current || prefersReducedMotion || !isVideoEnabled) return;
+
+    const videoNode = videoRef.current;
+    videoNode.muted = true;
+    videoNode.defaultMuted = true;
+    videoNode.setAttribute("muted", "");
+    videoNode.setAttribute("playsinline", "");
+    videoNode.playbackRate = videoSpeed;
+
+    const playPromise = videoNode.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Auto-play policy handled safely
+      });
+    }
+  }, [prefersReducedMotion, videoSpeed, isVideoEnabled, videoSrc]);
+
+  // Pause video when out of viewport to conserve battery/GPU, resume when in viewport
+  React.useEffect(() => {
+    if (!containerRef.current || !videoRef.current || prefersReducedMotion || !isVideoEnabled) {
       return;
     }
 
@@ -58,7 +76,7 @@ export function HeroVideoBackground() {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.05 }
     );
 
     observer.observe(containerRef.current);
@@ -66,9 +84,7 @@ export function HeroVideoBackground() {
     return () => {
       observer.disconnect();
     };
-  }, [prefersReducedMotion, videoSpeed, isVideoEnabled, videoMounted]);
-
-  const videoSrc = videoConfig.videoUrl || "/videos/Create_a_premium_minimalist_ci.mp4";
+  }, [prefersReducedMotion, videoSpeed, isVideoEnabled]);
 
   return (
     <div
@@ -77,7 +93,7 @@ export function HeroVideoBackground() {
       aria-hidden="true"
     >
       {/* Single Authoritative Hero Background Video Instance */}
-      {isVideoEnabled && !videoError && videoMounted && (
+      {isVideoEnabled && !videoError && !prefersReducedMotion && (
         <video
           ref={videoRef}
           src={videoSrc}
@@ -85,7 +101,7 @@ export function HeroVideoBackground() {
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           tabIndex={-1}
           aria-hidden="true"
           onLoadedMetadata={setVideoPlaybackSpeed}
@@ -96,7 +112,7 @@ export function HeroVideoBackground() {
         />
       )}
 
-      {/* Dynamic Overlay Vignette for Text Readability */}
+      {/* Vignette Overlay for Text Legibility (No blur, crisp video display) */}
       <div
         className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/40 to-transparent dark:hidden pointer-events-none transition-opacity duration-300 z-[1]"
         style={{ opacity: overlayOpacityVal }}
@@ -108,3 +124,5 @@ export function HeroVideoBackground() {
     </div>
   );
 }
+
+

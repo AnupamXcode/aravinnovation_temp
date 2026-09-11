@@ -265,26 +265,44 @@ export function InteractiveServiceStack3D() {
     };
   }, []);
 
-  // Mobile Focus-Zone Intersection Observer: naturally activates the card centered in the viewport during finger scroll
+  // Mobile Focus-Zone Intersection Observer: naturally activates the card centered in the viewport during finger/touch scroll
   React.useEffect(() => {
     if (typeof window === "undefined" || window.innerWidth >= 768) return;
+
+    const intersectingMap = new Map<number, number>();
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const idxStr = entry.target.getAttribute("data-service-idx");
-            if (idxStr !== null) {
-              const idx = parseInt(idxStr, 10);
-              setActiveServiceIdx(idx);
+          const idxStr = entry.target.getAttribute("data-service-idx");
+          if (idxStr !== null) {
+            const idx = parseInt(idxStr, 10);
+            if (entry.isIntersecting) {
+              intersectingMap.set(idx, entry.intersectionRatio);
+            } else {
+              intersectingMap.delete(idx);
             }
           }
         });
+
+        if (intersectingMap.size > 0) {
+          let maxIdx = -1;
+          let maxRatio = -1;
+          intersectingMap.forEach((ratio, idx) => {
+            if (ratio > maxRatio) {
+              maxRatio = ratio;
+              maxIdx = idx;
+            }
+          });
+          if (maxIdx !== -1) {
+            setActiveServiceIdx((prev) => (prev !== maxIdx ? maxIdx : prev));
+          }
+        }
       },
       {
         root: null,
-        rootMargin: "-20% 0px -20% 0px",
-        threshold: [0.1, 0.3, 0.6],
+        rootMargin: "-25% 0px -25% 0px",
+        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1.0],
       }
     );
 
@@ -339,9 +357,9 @@ export function InteractiveServiceStack3D() {
                 const isHighlighted = service.id === displayedIdx;
 
                 return (
-                  <Link
+                  <button
                     key={service.id}
-                    href={service.href}
+                    type="button"
                     onClick={() => setActiveServiceIdx(service.id)}
                     onMouseEnter={() => setHoveredIdx(service.id)}
                     onMouseLeave={() => setHoveredIdx(null)}
@@ -404,7 +422,7 @@ export function InteractiveServiceStack3D() {
                           : "text-[#7A6A5F] opacity-40 group-hover:opacity-100 group-hover:text-[#f15e1c] group-hover:translate-x-0.5"
                       )}
                     />
-                  </Link>
+                  </button>
                 );
               })}
             </div>

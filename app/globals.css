@@ -515,8 +515,6 @@ input:focus, select:focus, textarea:focus {
 /* Mobile Responsiveness & Hardware Acceleration Optimizations */
 html, body {
   -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-  overscroll-behavior-y: none;
 }
 
 @media (max-width: 640px) {
