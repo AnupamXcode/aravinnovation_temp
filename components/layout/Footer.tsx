@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, useReducedMotion, useInView } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   Mail,
@@ -135,8 +135,6 @@ function AnimatedFooterSection({
   className?: string;
   delay?: number;
 }) {
-  const ref = React.useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-20px" });
   const shouldReduceMotion = useReducedMotion();
 
   if (shouldReduceMotion) {
@@ -145,9 +143,9 @@ function AnimatedFooterSection({
 
   return (
     <motion.div
-      ref={ref}
       initial={{ opacity: 0, y: 14 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-20px" }}
       transition={{ duration: 0.4, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
@@ -227,8 +225,6 @@ export function Footer() {
   const { config } = useSiteConfig();
   const footerConfig = config.footerConfig;
 
-  const footerRef = React.useRef<HTMLElement>(null);
-  const isInView = useInView(footerRef, { once: true, margin: "0px 0px -40px 0px" });
   const shouldReduceMotion = useReducedMotion();
 
   // Do not render footer on admin routes
@@ -243,9 +239,9 @@ export function Footer() {
 
       {/* Cinematic Rise Reveal Footer Panel */}
       <motion.footer
-        ref={footerRef}
         initial={{ y: shouldReduceMotion ? 0 : 35, opacity: shouldReduceMotion ? 1 : 0.92 }}
-        animate={isInView || shouldReduceMotion ? { y: 0, opacity: 1 } : { y: 35, opacity: 0.92 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true, margin: "0px 0px -40px 0px" }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className="w-full relative bg-gradient-to-b from-[#d84a0d] via-[#f15e1c] to-[#b83e0a] text-white pt-10 sm:pt-12 pb-8 overflow-hidden select-none rounded-t-[2rem] sm:rounded-t-[3rem] shadow-[0_-20px_50px_rgba(241,94,28,0.25)] border-t border-white/30"
       >
