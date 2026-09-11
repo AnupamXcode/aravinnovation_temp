@@ -173,7 +173,9 @@ export interface FooterConfig {
   ctaSecondaryHref: string;
   brandStatement: string;
   addressIndia: string;
+  mapsUrlIndia?: string;
   addressUAE: string;
+  mapsUrlUAE?: string;
   phoneIndia: string;
   phoneUAE: string;
   supportEmail: string;
@@ -366,7 +368,9 @@ const defaultConfig: SiteConfig = {
     ctaSecondaryHref: "/services",
     brandStatement: "Technology, transformation and digital growth built around measurable business outcomes.",
     addressIndia: "Platinum Floor, 14/23, Ardee City, Sector 52, Gurgaon, 122002",
-    addressUAE: "55764-001 IFZA Business Park FZCO, Building A1 Dubai Silicon Oasis, Dubai, U.A.E",
+    mapsUrlIndia: "https://www.google.com/maps/search/?api=1&query=Platinum+Floor%2C+14%2F23%2C+Ardee+City%2C+Sector+52%2C+Gurgaon%2C+122002",
+    addressUAE: "55764-001 IFZA Business Park FZCO, Building A1, Dubai Silicon Oasis, Dubai, UAE",
+    mapsUrlUAE: "https://www.google.com/maps/search/?api=1&query=IFZA+Business+Park+Building+A1+Dubai+Silicon+Oasis+Dubai+UAE",
     phoneIndia: "+91 9650625777",
     phoneUAE: "+971 521555792",
     supportEmail: "support@aravinnovations.com",

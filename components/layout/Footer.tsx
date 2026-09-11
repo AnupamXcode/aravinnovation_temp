@@ -566,20 +566,32 @@ export function Footer() {
                   
                   {/* INDIA HQ CARD */}
                   <BorderDrawWrapper roundedClass="rounded-xl" rx={12} className="h-full">
-                    <div className="p-4.5 rounded-xl bg-white/15 border border-white/30 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:bg-white/25 hover:-translate-y-1 shadow-xs group cursor-pointer">
-                      <div className="space-y-1.5">
-                        <div className="font-extrabold font-display text-white text-xs flex items-center gap-2 group-hover:text-white transition-colors">
-                          <MapPin className="w-3.5 h-3.5 text-[#ffec69] group-hover:scale-110 transition-transform shrink-0" />
-                          <span>INDIA HQ</span>
+                    <div className="p-4.5 rounded-xl bg-white/15 border border-white/30 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:bg-white/25 hover:-translate-y-1 shadow-xs group">
+                      <a
+                        href={footerConfig.mapsUrlIndia || "https://www.google.com/maps/search/?api=1&query=Platinum+Floor%2C+14%2F23%2C+Ardee+City%2C+Sector+52%2C+Gurgaon%2C+122002"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="View Arav Innovations India office on Google Maps"
+                        className="space-y-1.5 block group/link focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] rounded-lg p-1 -m-1 transition-all cursor-pointer"
+                      >
+                        <div className="font-extrabold font-display text-white text-xs flex items-center justify-between gap-2 group-hover/link:text-[#ffec69] transition-colors">
+                          <div className="flex items-center gap-2">
+                            <MapPin className="w-3.5 h-3.5 text-[#ffec69] group-hover/link:scale-110 transition-transform shrink-0" />
+                            <span>INDIA HQ</span>
+                          </div>
+                          <span className="text-[10px] font-mono text-white/80 group-hover/link:text-[#ffec69] flex items-center gap-0.5 opacity-90 group-hover/link:opacity-100 transition-all font-semibold">
+                            <span>View Map</span>
+                            <ArrowUpRight className="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                          </span>
                         </div>
-                        <p className="text-xs text-white/95 leading-relaxed font-sans">
+                        <p className="text-xs text-white/95 leading-relaxed font-sans group-hover/link:text-white group-hover/link:underline decoration-[#ffec69]/60 underline-offset-2 transition-colors">
                           {footerConfig.addressIndia}
                         </p>
-                      </div>
+                      </a>
                       <div className="pt-2 border-t border-white/30 flex items-center justify-between text-xs">
                         <a
                           href={`tel:${footerConfig.phoneIndia.replace(/\s+/g, '')}`}
-                          className="font-mono font-bold text-white group-hover:underline"
+                          className="font-mono font-bold text-white hover:underline focus:outline-none focus-visible:ring-1 focus-visible:ring-[#ffec69] rounded-xs"
                         >
                           {footerConfig.phoneIndia}
                         </a>
@@ -590,20 +602,32 @@ export function Footer() {
 
                   {/* UAE REGIONAL OFFICE CARD */}
                   <BorderDrawWrapper roundedClass="rounded-xl" rx={12} className="h-full">
-                    <div className="p-4.5 rounded-xl bg-white/15 border border-white/30 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:bg-white/25 hover:-translate-y-1 shadow-xs group cursor-pointer">
-                      <div className="space-y-1.5">
-                        <div className="font-extrabold font-display text-white text-xs flex items-center gap-2 group-hover:text-white transition-colors">
-                          <MapPin className="w-3.5 h-3.5 text-[#ffec69] group-hover:scale-110 transition-transform shrink-0" />
-                          <span>UAE REGIONAL OFFICE</span>
+                    <div className="p-4.5 rounded-xl bg-white/15 border border-white/30 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:bg-white/25 hover:-translate-y-1 shadow-xs group">
+                      <a
+                        href={footerConfig.mapsUrlUAE || "https://www.google.com/maps/search/?api=1&query=IFZA+Business+Park+Building+A1+Dubai+Silicon+Oasis+Dubai+UAE"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="View Arav Innovations UAE office on Google Maps"
+                        className="space-y-1.5 block group/link focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ffec69] rounded-lg p-1 -m-1 transition-all cursor-pointer"
+                      >
+                        <div className="font-extrabold font-display text-white text-xs flex items-center justify-between gap-2 group-hover/link:text-[#ffec69] transition-colors">
+                          <div className="flex items-center gap-2">
+                            <MapPin className="w-3.5 h-3.5 text-[#ffec69] group-hover/link:scale-110 transition-transform shrink-0" />
+                            <span>UAE REGIONAL OFFICE</span>
+                          </div>
+                          <span className="text-[10px] font-mono text-white/80 group-hover/link:text-[#ffec69] flex items-center gap-0.5 opacity-90 group-hover/link:opacity-100 transition-all font-semibold">
+                            <span>View Map</span>
+                            <ArrowUpRight className="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                          </span>
                         </div>
-                        <p className="text-xs text-white/95 leading-relaxed font-sans">
+                        <p className="text-xs text-white/95 leading-relaxed font-sans group-hover/link:text-white group-hover/link:underline decoration-[#ffec69]/60 underline-offset-2 transition-colors">
                           {footerConfig.addressUAE}
                         </p>
-                      </div>
+                      </a>
                       <div className="pt-2 border-t border-white/30 flex items-center justify-between text-xs">
                         <a
                           href={`tel:${footerConfig.phoneUAE.replace(/\s+/g, '')}`}
-                          className="font-mono font-bold text-white group-hover:underline"
+                          className="font-mono font-bold text-white hover:underline focus:outline-none focus-visible:ring-1 focus-visible:ring-[#ffec69] rounded-xs"
                         >
                           {footerConfig.phoneUAE}
                         </a>
