@@ -103,13 +103,22 @@ export function Hero3DDigitalArchitecture() {
   const mouseRotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), springConfig);
   const mouseRotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), springConfig);
 
+  const tickingRef = React.useRef(false);
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (shouldReduceMotion || !containerRef.current || !threeDEnabled) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
+    if (shouldReduceMotion || !containerRef.current || !threeDEnabled || tickingRef.current) return;
+    tickingRef.current = true;
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+    window.requestAnimationFrame(() => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const x = (clientX - rect.left) / rect.width - 0.5;
+        const y = (clientY - rect.top) / rect.height - 0.5;
+        mouseX.set(x);
+        mouseY.set(y);
+      }
+      tickingRef.current = false;
+    });
   };
 
   const handleMouseLeave = () => {

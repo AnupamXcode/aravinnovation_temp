@@ -509,7 +509,7 @@ export function InteractiveServiceStack3D() {
 
                 {/* Footer CTA */}
                 <div className="pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between relative z-10">
-                  <span className="text-[11px] font-mono text-[#7A6A5F] dark:text-[#A09085]">
+                  <span className="text-[11px] font-mono text-[#5A4A3F] dark:text-[#D4C8BC]">
                     Scroll to explore services &bull; Click to view details
                   </span>
                   <Link href={currentService.href}>
@@ -523,7 +523,7 @@ export function InteractiveServiceStack3D() {
           </div>
 
           {/* Bottom Progress Bar */}
-          <div className="max-w-7xl mx-auto w-full pt-4 flex items-center justify-between text-xs font-mono text-[#7A6A5F] dark:text-[#A09085]">
+          <div className="max-w-7xl mx-auto w-full pt-4 flex items-center justify-between text-xs font-mono text-[#5A4A3F] dark:text-[#D4C8BC]">
             <span>ENTERPRISE TECHNOLOGY PRACTICES</span>
             <div className="flex items-center gap-2">
               <div className="w-48 h-2 rounded-full bg-[#f7d7b0]/50 dark:bg-[#1a1a1a] overflow-hidden">
@@ -672,7 +672,7 @@ export function InteractiveServiceStack3D() {
 
                 {/* Footer Action */}
                 <div className="pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between">
-                  <span className="text-[11px] font-mono text-[#7A6A5F] dark:text-[#A09085]">
+                  <span className="text-[11px] font-mono text-[#5A4A3F] dark:text-[#D4C8BC]">
                     Enterprise Practice
                   </span>
                   <div className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#f15e1c] text-white font-semibold text-xs shadow-md group-hover:bg-[#d84e12] transition-colors">

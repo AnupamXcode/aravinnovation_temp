@@ -28,14 +28,24 @@ const AnimatedTestimonialsCarousel = dynamic(
 const LeadForm = dynamic(
   () => import("@/components/forms/LeadForm").then((m) => m.LeadForm)
 );
+const WhoWeHelpSection = dynamic(
+  () => import("@/components/home/WhoWeHelpSection").then((m) => m.WhoWeHelpSection)
+);
+const EarlyTrustProofSection = dynamic(
+  () => import("@/components/home/EarlyTrustProofSection").then((m) => m.EarlyTrustProofSection)
+);
+const DirectAnswerAEOBlock = dynamic(
+  () => import("@/components/home/DirectAnswerAEOBlock").then((m) => m.DirectAnswerAEOBlock)
+);
+const HomeFAQSection = dynamic(
+  () => import("@/components/home/HomeFAQSection").then((m) => m.HomeFAQSection)
+);
+const HomeInsightsSection = dynamic(
+  () => import("@/components/home/HomeInsightsSection").then((m) => m.HomeInsightsSection)
+);
 
 import { getSEOForPath, SITE_BASE_URL } from "@/lib/seo";
 import { getHomeBlogPosts } from "@/lib/cms";
-import { HomeInsightsSection } from "@/components/home/HomeInsightsSection";
-import { WhoWeHelpSection } from "@/components/home/WhoWeHelpSection";
-import { EarlyTrustProofSection } from "@/components/home/EarlyTrustProofSection";
-import { DirectAnswerAEOBlock } from "@/components/home/DirectAnswerAEOBlock";
-import { HomeFAQSection } from "@/components/home/HomeFAQSection";
 
 export async function generateMetadata() {
   const seo = getSEOForPath("/");

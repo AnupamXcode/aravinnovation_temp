@@ -52,13 +52,22 @@ export function Hero3DScene() {
   const floatX2 = useSpring(useTransform(mouseX, [-0.5, 0.5], [22, -22]), springConfig);
   const floatY2 = useSpring(useTransform(mouseY, [-0.5, 0.5], [22, -22]), springConfig);
 
+  const tickingRef = React.useRef(false);
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (shouldReduceMotion || !containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
+    if (shouldReduceMotion || !containerRef.current || tickingRef.current) return;
+    tickingRef.current = true;
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+    window.requestAnimationFrame(() => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const x = (clientX - rect.left) / rect.width - 0.5;
+        const y = (clientY - rect.top) / rect.height - 0.5;
+        mouseX.set(x);
+        mouseY.set(y);
+      }
+      tickingRef.current = false;
+    });
   };
 
   const handleMouseLeave = () => {

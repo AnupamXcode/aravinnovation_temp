@@ -84,7 +84,7 @@
 
     --text-primary: #1b2823; /* WCAG AAA contrast > 10:1 */
     --text-secondary: #4a5c55;
-    --text-muted: #6f827b;
+    --text-muted: #4a5c55;
     --text-inverted: #ffffff;
 
     --border-primary: #f7d7b0;

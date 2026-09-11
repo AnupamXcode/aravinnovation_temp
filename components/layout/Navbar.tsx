@@ -227,7 +227,7 @@ export function Navbar() {
                   </span>
                   <ChevronDown
                     className={cn(
-                      "w-4 h-4 transition-transform duration-200 text-[#7A6A5F] dark:text-[#B8ACA0]",
+                      "w-4 h-4 transition-transform duration-200 text-[#5A4A3F] dark:text-[#D4C8BC]",
                       activeDropdown === "services" && "rotate-180 text-[#f15e1c] dark:text-[#f15e1c]"
                     )}
                   />
@@ -238,7 +238,7 @@ export function Navbar() {
                   <div className="absolute top-full left-0 w-[580px] pt-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                     <div className="rounded-3xl bg-[#FFFDF9]/98 dark:bg-[#0a0a0a]/98 backdrop-blur-2xl border-2 border-[#EFE2D6] dark:border-[#262626] p-4 shadow-2xl grid grid-cols-1 gap-1">
                       <div className="px-3 py-1.5 border-b border-[#EFE2D6] dark:border-[#1f1f1f] mb-1 flex items-center justify-between">
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0]">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#5A4A3F] dark:text-[#D4C8BC]">
                           Our Core Services
                         </span>
                         <Link
@@ -276,7 +276,7 @@ export function Navbar() {
                               <div className="text-sm font-semibold text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] dark:group-hover:text-[#f15e1c] transition-colors flex items-center gap-2">
                                 {service.label}
                               </div>
-                              <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] line-clamp-1 mt-0.5">
+                              <p className="text-xs text-[#5A4A3F] dark:text-[#D4C8BC] line-clamp-1 mt-0.5">
                                 {service.description}
                               </p>
                             </div>
@@ -326,7 +326,7 @@ export function Navbar() {
                   </span>
                   <ChevronDown
                     className={cn(
-                      "w-4 h-4 transition-transform duration-200 text-[#7A6A5F] dark:text-[#B8ACA0]",
+                      "w-4 h-4 transition-transform duration-200 text-[#5A4A3F] dark:text-[#D4C8BC]",
                       activeDropdown === "working-with-us" && "rotate-180 text-[#f15e1c] dark:text-[#f15e1c]"
                     )}
                   />
@@ -348,7 +348,7 @@ export function Navbar() {
                             <div className="text-sm font-bold text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors">
                               Contact & Project Inquiries
                             </div>
-                            <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+                            <p className="text-xs text-[#5A4A3F] dark:text-[#D4C8BC]">
                               Schedule an exploratory consultation & NDA
                             </p>
                           </div>
@@ -357,7 +357,7 @@ export function Navbar() {
                       </Link>
 
                       <div className="pt-1.5 pb-1 px-3 border-b border-[#EFE2D6] dark:border-[#1f1f1f]">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0]">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#5A4A3F] dark:text-[#D4C8BC]">
                           Company & Engagements
                         </span>
                       </div>
@@ -380,7 +380,7 @@ export function Navbar() {
                               <div className="text-xs font-bold text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] dark:group-hover:text-[#f15e1c] transition-colors">
                                 {item.label}
                               </div>
-                              <p className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0] mt-0.5 line-clamp-1">
+                              <p className="text-[11px] text-[#5A4A3F] dark:text-[#D4C8BC] mt-0.5 line-clamp-1">
                                 {item.description}
                               </p>
                             </div>
@@ -457,7 +457,7 @@ export function Navbar() {
               <div className="space-y-6 max-w-lg mx-auto">
                 {/* Mobile Utility Controls */}
                 <div className="sm:hidden flex items-center justify-between pb-4 border-b border-[#EFE2D6] dark:border-[#1f1f1f]">
-                  <span className="text-xs font-bold text-[#7A6A5F] dark:text-[#B8ACA0]">Preferences</span>
+                  <span className="text-xs font-bold text-[#5A4A3F] dark:text-[#D4C8BC]">Preferences</span>
                   <LanguageSelector />
                 </div>
 
@@ -465,7 +465,7 @@ export function Navbar() {
                 <div>
                   <button
                     type="button"
-                    className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] mb-3 py-2 border-b border-transparent focus:outline-none cursor-pointer"
+                    className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#5A4A3F] dark:text-[#D4C8BC] mb-3 py-2 border-b border-transparent focus:outline-none cursor-pointer"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
@@ -525,7 +525,7 @@ export function Navbar() {
                 <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
                   <button
                     type="button"
-                    className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] mb-3 py-2 border-b border-transparent focus:outline-none cursor-pointer"
+                    className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#5A4A3F] dark:text-[#D4C8BC] mb-3 py-2 border-b border-transparent focus:outline-none cursor-pointer"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();

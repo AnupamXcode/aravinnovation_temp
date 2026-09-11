@@ -7,11 +7,8 @@ import { SiteContentProvider } from "@/lib/site-content";
 import { OrganizationSchema } from "@/components/seo/StructuredData";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { PageLoader } from "@/components/layout/PageLoader";
 import { GlobalBackgroundMotion } from "@/components/motion/GlobalBackgroundMotion";
-import { WebsiteShutdownOverlay } from "@/components/layout/WebsiteShutdownOverlay";
-import { BackToTop } from "@/components/ui/BackToTop";
-import { MobilePreviewToggle } from "@/components/layout/MobilePreviewToggle";
+import dynamic from "next/dynamic";
 import { SkipToContent } from "@/components/ui/SkipToContent";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
@@ -59,7 +56,7 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-import { SetupCall } from "@/components/layout/SetupCall";
+import { ClientOverlays } from "@/components/layout/ClientOverlays";
 
 export async function generateMetadata({
   params,
@@ -170,18 +167,12 @@ export default async function RootLayout({
             <SiteContentProvider>
               <ThemeProvider>
                 <GlobalBackgroundMotion />
-                <WebsiteShutdownOverlay>
-                  <PageLoader />
+                <ClientOverlays>
                   <Navbar />
                   <main id="main-content" className="flex-1 w-full pt-16 sm:pt-20">{children}</main>
                   <Footer />
-                  <BackToTop />
-                  <SetupCall />
                   <ClientChatbot />
-                  {(process.env.NODE_ENV === "development" || process.env.VERCEL_ENVIRONMENT === "development") && (
-                    <MobilePreviewToggle />
-                  )}
-                </WebsiteShutdownOverlay>
+                </ClientOverlays>
               </ThemeProvider>
             </SiteContentProvider>
           </SiteConfigProvider>

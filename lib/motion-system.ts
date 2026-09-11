@@ -44,29 +44,48 @@ export function useMagneticHover(distanceThreshold: number = 100, strength: numb
   const springY = useSpring(y, springConfig);
 
   React.useEffect(() => {
-    if (reduceMotion || typeof window === "undefined") return;
+    if (reduceMotion || typeof window === "undefined" || !ref.current) return;
+
+    const node = ref.current;
+    let ticking = false;
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (!ref.current) return;
-      const rect = ref.current.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (!node) return;
+          const rect = node.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
 
-      const distX = e.clientX - centerX;
-      const distY = e.clientY - centerY;
-      const distance = Math.hypot(distX, distY);
+          const distX = e.clientX - centerX;
+          const distY = e.clientY - centerY;
+          const distance = Math.hypot(distX, distY);
 
-      if (distance < distanceThreshold) {
-        x.set(distX * strength);
-        y.set(distY * strength);
-      } else {
-        x.set(0);
-        y.set(0);
+          if (distance < distanceThreshold) {
+            x.set(distX * strength);
+            y.set(distY * strength);
+          } else {
+            x.set(0);
+            y.set(0);
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    const handleMouseLeave = () => {
+      x.set(0);
+      y.set(0);
+    };
+
+    node.addEventListener("mousemove", handleMouseMove, { passive: true } as any);
+    node.addEventListener("mouseleave", handleMouseLeave, { passive: true } as any);
+
+    return () => {
+      node.removeEventListener("mousemove", handleMouseMove);
+      node.removeEventListener("mouseleave", handleMouseLeave);
+    };
   }, [reduceMotion, distanceThreshold, strength, x, y]);
 
   return { ref, x: springX, y: springY };
