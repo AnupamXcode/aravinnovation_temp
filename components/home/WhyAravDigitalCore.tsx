@@ -288,7 +288,7 @@ export function WhyAravDigitalCore({
                   style={{ width: `${((activePillarIdx + 1) / 7) * 100}%` }}
                 />
               </div>
-              <span className="font-bold text-[#f15e1c]">{activePillarIdx + 1}/7</span>
+              <span className="font-bold text-[#f15e1c]">SCROLL TO EXPLORE</span>
             </div>
           </div>
         </div>
@@ -356,8 +356,8 @@ export function WhyAravDigitalCore({
                     {activePillar.subtitle}
                   </span>
                 </div>
-                <span className="text-xs font-mono text-[#7A6A5F] dark:text-[#A09085]">
-                  {activePillarIdx + 1} of 7
+                <span className="text-xs font-mono font-bold text-[#f15e1c]">
+                  Core Pillar
                 </span>
               </div>
 

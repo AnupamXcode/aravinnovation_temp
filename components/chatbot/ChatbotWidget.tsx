@@ -35,7 +35,7 @@ export function ChatbotWidget() {
   const chatbotKB = content.chatbotKB;
   const isMasterOn = config.chatbotEnabled && chatbotKB?.masterEnabled !== false;
 
-  const [shouldShowLauncher, setShouldShowLauncher] = React.useState(false);
+  const [shouldShowLauncher, setShouldShowLauncher] = React.useState(true);
   const [isOpen, setIsOpen] = React.useState(false);
   const [isTyping, setIsTyping] = React.useState(false);
 

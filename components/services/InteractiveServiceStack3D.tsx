@@ -228,15 +228,15 @@ const renderServiceIcon = (iconName: string, tone: string) => {
 export function InteractiveServiceStack3D() {
   const trackRef = React.useRef<HTMLDivElement>(null);
   const pinnedStageRef = React.useRef<HTMLDivElement>(null);
-  const touchStartRef = React.useRef<number | null>(null);
+  const mobileCardRefs = React.useRef<(HTMLDivElement | null)[]>([]);
 
   const [activeServiceIdx, setActiveServiceIdx] = React.useState<number>(0);
   const [hoveredIdx, setHoveredIdx] = React.useState<number | null>(null);
 
-  // Synchronize ScrollTrigger Pinning on Desktop (>= 768px) with 84px Navbar Offset
+  // Synchronize ScrollTrigger Pinning on Desktop (>= 768px) with 80px Navbar Offset
   React.useEffect(() => {
     if (!trackRef.current || !pinnedStageRef.current) return;
-    if (window.innerWidth < 768) return; // Use native touch/tabs on mobile
+    if (window.innerWidth < 768) return;
 
     let ctx: any;
     Promise.all([import("gsap"), import("gsap/ScrollTrigger")]).then(([gsapModule, triggerModule]) => {
@@ -247,14 +247,13 @@ export function InteractiveServiceStack3D() {
       ctx = gsap.context(() => {
         ScrollTrigger.create({
           trigger: trackRef.current,
-          start: "top 80px", // Pin strictly at 80px from viewport top (below navbar)
+          start: "top 80px",
           end: "bottom bottom",
           pin: pinnedStageRef.current,
           pinSpacing: true,
-          scrub: 0.1, // Smooth 0.1s scrub for deterministic 1 scroll = 1 service step progress
+          scrub: 0.1,
           onUpdate: (self) => {
-            // Map self.progress (0..1) strictly into 8 equal service steps (0..7)
-            const step = Math.min(7, Math.max(0, Math.floor(self.progress * 8.0)));
+            const step = Math.min(servicesData.length - 1, Math.max(0, Math.floor(self.progress * servicesData.length)));
             setActiveServiceIdx(step);
           },
         });
@@ -266,26 +265,44 @@ export function InteractiveServiceStack3D() {
     };
   }, []);
 
-  // Touch Swipe Gesture Handler for Mobile Viewports
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartRef.current = e.touches[0].clientX;
-  };
+  // Mobile Focus-Zone Intersection Observer: naturally activates the card centered in the viewport during finger scroll
+  React.useEffect(() => {
+    if (typeof window === "undefined" || window.innerWidth >= 768) return;
 
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartRef.current === null) return;
-    const touchEnd = e.changedTouches[0].clientX;
-    const diffX = touchStartRef.current - touchEnd;
-
-    if (Math.abs(diffX) > 40) {
-      if (diffX > 0) {
-        // Swipe left -> Next service step
-        setActiveServiceIdx((prev) => Math.min(7, prev + 1));
-      } else {
-        // Swipe right -> Previous service step
-        setActiveServiceIdx((prev) => Math.max(0, prev - 1));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idxStr = entry.target.getAttribute("data-service-idx");
+            if (idxStr !== null) {
+              const idx = parseInt(idxStr, 10);
+              setActiveServiceIdx(idx);
+            }
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "-20% 0px -20% 0px",
+        threshold: [0.1, 0.3, 0.6],
       }
+    );
+
+    mobileCardRefs.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  const scrollToMobileCard = (idx: number) => {
+    setActiveServiceIdx(idx);
+    const targetCard = mobileCardRefs.current[idx];
+    if (targetCard) {
+      targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
     }
-    touchStartRef.current = null;
   };
 
   const displayedIdx = hoveredIdx !== null ? hoveredIdx : activeServiceIdx;
@@ -293,13 +310,14 @@ export function InteractiveServiceStack3D() {
 
   return (
     <section className="relative w-full bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300 scroll-mt-24 sm:scroll-mt-28" id="services">
-      {/* DESKTOP SCROLL-DRIVEN EXPLORATION (Hidden on mobile < 768px) */}
+      {/* ========================================================================
+          DESKTOP SCROLL-DRIVEN EXPLORATION (>= 768px Viewports)
+          ======================================================================== */}
       <div ref={trackRef} className="hidden md:block relative w-full h-[280vh]">
         <div
           ref={pinnedStageRef}
           className="w-full h-[calc(100vh-80px)] max-h-[calc(100vh-80px)] flex flex-col justify-between pt-3 sm:pt-4 pb-3 px-4 sm:px-8 lg:px-12 xl:px-16 overflow-hidden"
         >
-          {/* Section Header (Always 100% Visible & Centered Below Navbar) */}
           {/* Section Header (Always 100% Visible & Centered Below Navbar) */}
           <div className="text-center max-w-3xl mx-auto mb-2.5 sm:mb-3 space-y-1 shrink-0">
             <Badge variant="secondary" size="md">
@@ -437,7 +455,7 @@ export function InteractiveServiceStack3D() {
                       {currentService.description}
                     </p>
 
-                    {/* Enterprise Visual Showcase Image (100% Complete & Aspect-Ratio 16:9 Fit) */}
+                    {/* Enterprise Visual Showcase Image */}
                     <Link href={currentService.href} className="block group">
                       <div className="relative w-full aspect-[16/8.5] max-h-[220px] lg:max-h-[240px] rounded-2xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] shadow-sm bg-white dark:bg-[#080808]">
                         <Image
@@ -501,7 +519,9 @@ export function InteractiveServiceStack3D() {
         </div>
       </div>
 
-      {/* MOBILE INTERACTIVE EXPLORATION (< 768px Viewports) */}
+      {/* ========================================================================
+          MOBILE NATURAL SCROLL EXPLORATION (< 768px Viewports)
+          ======================================================================== */}
       <div className="block md:hidden py-8 px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center max-w-xl mx-auto mb-6 space-y-2">
@@ -512,122 +532,141 @@ export function InteractiveServiceStack3D() {
             Enterprise Services
           </h2>
           <p className="text-xs sm:text-sm text-[#5A4A3F] dark:text-[#D8CBC0]">
-            Tap or swipe to explore our enterprise practices.
+            Scroll to explore our enterprise practices with connected capabilities and proven delivery outcomes.
           </p>
         </div>
 
-        {/* Mobile Service Selector Pill Bar */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-4 no-scrollbar">
-          {servicesData.map((service) => {
-            const isSel = service.id === activeServiceIdx;
-            return (
-              <button
-                key={service.id}
-                type="button"
-                onClick={() => setActiveServiceIdx(service.id)}
-                className={cn(
-                  "px-3.5 py-2 rounded-xl text-xs font-mono font-bold whitespace-nowrap shrink-0 transition-all border flex items-center gap-1.5",
-                  isSel
-                    ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-md"
-                    : "bg-white dark:bg-[#0a0a0a] text-[#4A3D35] dark:text-[#D8CBC0] border-[#f7d7b0] dark:border-[#1a1a1a]"
-                )}
-              >
-                <span>{service.number}</span>
-                <span>{service.shortName}</span>
-              </button>
-            );
-          })}
+        {/* Sticky Mobile Quick-Jump Pill Bar */}
+        <div className="sticky top-[60px] z-30 bg-[#FFFDF9]/95 dark:bg-[#050505]/95 backdrop-blur-md py-2 -mx-4 px-4 sm:-mx-6 sm:px-6 mb-5 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+            {servicesData.map((service) => {
+              const isSel = service.id === activeServiceIdx;
+              return (
+                <button
+                  key={service.id}
+                  type="button"
+                  onClick={() => scrollToMobileCard(service.id)}
+                  className={cn(
+                    "px-3 py-1.5 rounded-xl text-xs font-mono font-bold whitespace-nowrap shrink-0 transition-all border flex items-center gap-1.5 cursor-pointer",
+                    isSel
+                      ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-md scale-[1.02]"
+                      : "bg-white dark:bg-[#0a0a0a] text-[#4A3D35] dark:text-[#D8CBC0] border-[#f7d7b0] dark:border-[#1a1a1a]"
+                  )}
+                >
+                  <span>{service.number}</span>
+                  <span>{service.shortName}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Active Mobile Service Card with Touch Swipe & Clickable Link */}
-        <div
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-          className="rounded-2xl bg-white dark:bg-[#0a0a0a] border-2 border-[#f15e1c]/40 shadow-xl overflow-hidden touch-pan-y"
-        >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentService.id}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -24 }}
-              transition={{ duration: 0.35, ease: "easeOut" }}
-              className="p-5 space-y-4"
-            >
-              <div className="flex items-center justify-between border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-3">
-                <div className="flex items-center gap-2.5">
-                  <span className="font-mono text-xs font-extrabold px-2.5 py-1 rounded-lg bg-[#f15e1c] text-white">
-                    {currentService.number}
-                  </span>
-                  <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase tracking-wider">
-                    {currentService.category}
-                  </span>
+        {/* All 8 Mobile Service Cards in Vertical Natural Scroll Flow */}
+        <div className="space-y-6">
+          {servicesData.map((service) => {
+            const isActive = service.id === activeServiceIdx;
+
+            return (
+              <div
+                key={service.id}
+                ref={(el) => {
+                  mobileCardRefs.current[service.id] = el;
+                }}
+                data-service-idx={service.id}
+                onClick={() => setActiveServiceIdx(service.id)}
+                className={cn(
+                  "rounded-2xl p-5 sm:p-6 transition-all duration-300 border-2 space-y-4 relative overflow-hidden cursor-pointer",
+                  isActive
+                    ? "bg-white dark:bg-[#0a0a0a] border-[#f15e1c] shadow-xl ring-2 ring-[#f15e1c]/30"
+                    : "bg-white/90 dark:bg-[#0a0a0a]/90 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md hover:border-[#f15e1c]/50"
+                )}
+              >
+                {/* Active Accent Bar */}
+                {isActive && (
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-[#f15e1c]" />
+                )}
+
+                {/* Card Top: Number, Category & Icon */}
+                <div className="flex items-center justify-between border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-3">
+                  <div className="flex items-center gap-2.5">
+                    <span
+                      className={cn(
+                        "font-mono text-xs font-extrabold px-2.5 py-1 rounded-lg transition-colors",
+                        isActive
+                          ? "bg-[#f15e1c] text-white"
+                          : "bg-[#fce3d3] dark:bg-[#161616] text-[#c2410c] dark:text-[#f15e1c]"
+                      )}
+                    >
+                      {service.number}
+                    </span>
+                    <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase tracking-wider">
+                      {service.category}
+                    </span>
+                  </div>
+
+                  <div
+                    className="w-8 h-8 rounded-lg flex items-center justify-center text-white shadow-xs"
+                    style={{ backgroundColor: service.tone }}
+                  >
+                    {renderServiceIcon(service.iconName, "#ffffff")}
+                  </div>
                 </div>
-                <span className="text-xs font-mono font-bold text-[#f15e1c]">
-                  Enterprise Practice
-                </span>
-              </div>
 
-              <Link href={currentService.href} className="block group">
-                <h3 className="text-lg font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
-                  {currentService.name}
-                </h3>
+                {/* Service Title */}
+                <Link href={service.href} className="block group">
+                  <h3 className="text-lg font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug">
+                    {service.name}
+                  </h3>
+                </Link>
 
-                <p className="text-xs text-[#5A4A3F] dark:text-[#D8CBC0] leading-relaxed font-medium mt-2">
-                  {currentService.description}
+                {/* Description */}
+                <p className="text-xs sm:text-sm text-[#5A4A3F] dark:text-[#D8CBC0] leading-relaxed font-medium">
+                  {service.description}
                 </p>
 
-                <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] bg-white dark:bg-[#080808] shadow-md mt-3">
-                  <Image
-                    src={currentService.image}
-                    alt={currentService.name}
-                    fill
-                    sizes="100vw"
-                    className="object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
-                  />
-                </div>
-              </Link>
-
-              <div className="space-y-1.5 pt-1">
-                {currentService.outcomes.map((outcome, i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs text-[#1b2823] dark:text-[#ffffff] font-medium">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
-                    <span>{outcome}</span>
+                {/* 16:9 Image Showcase */}
+                <Link href={service.href} className="block group">
+                  <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] bg-white dark:bg-[#080808] shadow-md">
+                    <Image
+                      src={service.image}
+                      alt={service.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
+                    />
                   </div>
-                ))}
-              </div>
+                </Link>
 
-              {/* Navigation Controls & CTA */}
-              <div className="pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setActiveServiceIdx((prev) => Math.max(0, prev - 1))}
-                    disabled={activeServiceIdx === 0}
-                    aria-label="Previous service"
-                    className="w-9 h-9 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center disabled:opacity-40"
-                  >
-                    <ChevronLeft className="w-4 h-4 text-[#f15e1c]" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setActiveServiceIdx((prev) => Math.min(servicesData.length - 1, prev + 1))}
-                    disabled={activeServiceIdx === servicesData.length - 1}
-                    aria-label="Next service"
-                    className="w-9 h-9 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center disabled:opacity-40"
-                  >
-                    <ChevronRight className="w-4 h-4 text-[#f15e1c]" />
-                  </button>
+                {/* Deliverables / Outcomes Badges */}
+                <div className="space-y-1.5 pt-1">
+                  <span className="text-[10px] font-mono font-bold text-[#f15e1c] uppercase tracking-wider block">
+                    Key Capabilities &amp; Deliverables
+                  </span>
+                  {service.outcomes.map((outcome, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center gap-2 text-xs text-[#1b2823] dark:text-[#ffffff] font-medium p-1.5 rounded-lg bg-[#fefaf5] dark:bg-[#141414] border border-[#f7d7b0]/50 dark:border-[#222222]"
+                    >
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
+                      <span>{outcome}</span>
+                    </div>
+                  ))}
                 </div>
 
-                <Link href={currentService.href} className="flex-1 text-right">
-                  <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#f15e1c] text-white font-semibold text-xs shadow-md">
-                    Explore Practice <ArrowRight className="w-3.5 h-3.5" />
+                {/* Footer Action */}
+                <div className="pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between">
+                  <span className="text-[11px] font-mono text-[#7A6A5F] dark:text-[#A09085]">
+                    Enterprise Practice
                   </span>
-                </Link>
+                  <Link href={service.href}>
+                    <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#f15e1c] text-white font-semibold text-xs shadow-md hover:bg-[#d84e12] transition-colors">
+                      Explore Practice <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </Link>
+                </div>
               </div>
-            </motion.div>
-          </AnimatePresence>
+            );
+          })}
         </div>
       </div>
     </section>

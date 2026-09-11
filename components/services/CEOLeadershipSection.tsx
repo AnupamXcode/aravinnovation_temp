@@ -32,47 +32,14 @@ export function CEOLeadershipSection({
 
   // Ref & InView detector for scroll triggering
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-80px" });
-
-  // Typing interaction state
-  const [displayedText, setDisplayedText] = useState("");
-  const [isTypingComplete, setIsTypingComplete] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
+  const isInView = useInView(containerRef, { once: true, margin: "0px" });
 
   const fullStatement = ceoConfig.statement || "Technology should create progress, not complexity.";
 
-  useEffect(() => {
-    if (!isInView) return;
-
-    // Check prefers-reduced-motion
-    const prefersReducedMotion =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (prefersReducedMotion) {
-      setDisplayedText(fullStatement);
-      setIsTypingComplete(true);
-      setShowDetails(true);
-      return;
-    }
-
-    let currentIndex = 0;
-    const typingInterval = setInterval(() => {
-      if (currentIndex < fullStatement.length) {
-        setDisplayedText(fullStatement.slice(0, currentIndex + 1));
-        currentIndex++;
-      } else {
-        clearInterval(typingInterval);
-        setIsTypingComplete(true);
-        // Pause 600ms before fading in supporting bio details
-        setTimeout(() => {
-          setShowDetails(true);
-        }, 600);
-      }
-    }, 40);
-
-    return () => clearInterval(typingInterval);
-  }, [isInView, fullStatement]);
+  // Baseline visible state for zero layout blanking / zero JS wait
+  const [displayedText, setDisplayedText] = useState(fullStatement);
+  const [isTypingComplete, setIsTypingComplete] = useState(true);
+  const [showDetails, setShowDetails] = useState(true);
 
   if (ceoConfig && !ceoConfig.visible) {
     return null;

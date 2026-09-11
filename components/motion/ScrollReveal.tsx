@@ -25,7 +25,7 @@ export function ScrollReveal({
   once = true,
 }: ScrollRevealProps) {
   const ref = React.useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once, margin: "0px -20px -20px 0px" });
+  const isInView = useInView(ref, { once, margin: "0px 0px -5% 0px" });
   const { config } = useSiteConfig();
 
   const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
@@ -51,29 +51,29 @@ export function ScrollReveal({
   const animationsDisabled =
     config.animationsEnabled === false ||
     config.scrollAnimationsEnabled === false ||
-    prefersReducedMotion;
+    prefersReducedMotion ||
+    isMobile;
 
   if (animationsDisabled) {
     return <div className={cn(className)}>{children}</div>;
   }
 
-  // Lightweight mobile reveal: shorter distance (12px) and faster duration (0.25s) to avoid layout reflows
-  const effectiveDistance = isMobile ? Math.min(distance, 12) : distance;
-  const effectiveDuration = isMobile ? Math.min(duration, 0.3) : duration;
-  const effectiveDelay = isMobile ? 0 : delay;
+  const effectiveDistance = distance;
+  const effectiveDuration = duration;
+  const effectiveDelay = delay;
 
   const getInitialPosition = () => {
     switch (direction) {
       case "up":
-        return { y: effectiveDistance, opacity: 0 };
+        return { y: effectiveDistance, opacity: 0.1 };
       case "down":
-        return { y: -effectiveDistance, opacity: 0 };
+        return { y: -effectiveDistance, opacity: 0.1 };
       case "left":
-        return { x: effectiveDistance, opacity: 0 };
+        return { x: effectiveDistance, opacity: 0.1 };
       case "right":
-        return { x: -effectiveDistance, opacity: 0 };
+        return { x: -effectiveDistance, opacity: 0.1 };
       default:
-        return { opacity: 0, y: effectiveDistance };
+        return { opacity: 0.1, y: effectiveDistance };
     }
   };
 

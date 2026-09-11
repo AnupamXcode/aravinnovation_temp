@@ -16,7 +16,7 @@ export function Scroll3DContainer({
   className = "",
 }: Scroll3DContainerProps) {
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: "0px -20px -20px 0px" });
+  const isInView = useInView(containerRef, { once: true, margin: "0px 0px -5% 0px" });
   const [isMobile, setIsMobile] = React.useState(false);
 
   React.useEffect(() => {
@@ -34,10 +34,10 @@ export function Scroll3DContainer({
   return (
     <div ref={containerRef} className={className}>
       <motion.div
-        initial={{ opacity: 0, y: 32, scale: 0.98 }}
-        animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 32, scale: 0.98 }}
+        initial={{ opacity: 0.2, y: 24, scale: 0.99 }}
+        animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0.2, y: 24, scale: 0.99 }}
         transition={{
-          duration: 0.55,
+          duration: 0.5,
           delay,
           ease: [0.21, 0.47, 0.32, 0.98],
         }}
