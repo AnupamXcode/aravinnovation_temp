@@ -772,9 +772,9 @@ export function ChatbotWidget() {
 
           {/* Voice Status Error / Warning Message */}
           {voiceStatusMsg && !isListening && (
-            <div className="px-4 py-2 bg-amber-500/15 border-t border-amber-500/30 text-amber-800 dark:text-amber-300 text-[11px] font-mono font-bold flex items-center justify-between">
+            <div role="status" aria-live="polite" className="px-4 py-2 bg-amber-500/15 border-t border-amber-500/30 text-amber-800 dark:text-amber-300 text-[11px] font-mono font-bold flex items-center justify-between">
               <span>{voiceStatusMsg}</span>
-              <button type="button" onClick={() => setVoiceStatusMsg(null)} className="text-xs font-extrabold ml-2">✕</button>
+              <button type="button" onClick={() => setVoiceStatusMsg(null)} aria-label="Dismiss status message" className="text-xs font-extrabold ml-2">✕</button>
             </div>
           )}
 
