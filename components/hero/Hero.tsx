@@ -19,18 +19,18 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center">
           {/* Main Hero Content Column - Immediate Paint & Zero Hydration Delay */}
           <div className="lg:col-span-8 text-left max-w-3xl space-y-4.5 sm:space-y-7">
-            {/* Eyebrow Label & Single Semantic H1 for SEO/AEO */}
+            {/* Eyebrow Label & Single Semantic H1 for LCP Paint Priority & SEO/AEO */}
             <div className="space-y-2">
               <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-[#4A3D35] dark:text-[#D8CBC0] justify-start">
                 <span className="w-2 h-2 rounded-full bg-[#f15e1c] shrink-0" />
-                <h1 className="font-mono text-[10px] sm:text-xs font-bold uppercase tracking-[0.14em] sm:tracking-[0.18em] text-[#f15e1c]">
+                <span className="font-mono text-[10px] sm:text-xs font-bold uppercase tracking-[0.14em] sm:tracking-[0.18em] text-[#f15e1c]">
                   <span className="sm:hidden">ENTERPRISE TECHNOLOGY • AI • DIGITAL GROWTH</span>
                   <span className="hidden sm:inline">Enterprise Technology, AI &amp; Digital Growth Solutions</span>
-                </h1>
+                </span>
               </div>
 
-              {/* Main Visual Headline */}
-              <p className="font-display font-extrabold text-3xl sm:text-[3.25rem] md:text-6xl lg:text-[66px] xl:text-[74px] 2xl:text-[80px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.1] sm:leading-[1.06]">
+              {/* Main Visual Headline & LCP Element */}
+              <h1 className="font-display font-extrabold text-3xl sm:text-[3.25rem] md:text-6xl lg:text-[66px] xl:text-[74px] 2xl:text-[80px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.1] sm:leading-[1.06]">
                 <span className="sm:hidden">
                   Technology That<br />
                   Moves <span className="text-[#f15e1c]">Business</span><br />
@@ -40,7 +40,7 @@ export function Hero() {
                   Technology That Moves<br />
                   <span className="text-[#f15e1c]"> Business </span><span className="text-[#2e936f]">Forward.</span>
                 </span>
-              </p>
+              </h1>
             </div>
 
             {/* Supporting Description — CEO Blueprint Approved Copy */}
