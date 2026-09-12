@@ -14,14 +14,8 @@ export function HeroVideoBackground() {
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const [videoError, setVideoError] = React.useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
-  const [isMounted, setIsMounted] = React.useState(false);
 
   const videoSrc = videoConfig.videoUrl || "/videos/Create_a_premium_minimalist_ci.mp4";
-
-  // Unblock initial hero text paint on mobile (LCP Optimization) then mount video
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   // Check prefers-reduced-motion
   React.useEffect(() => {
@@ -99,7 +93,7 @@ export function HeroVideoBackground() {
       aria-hidden="true"
     >
       {/* Single Authoritative Hero Background Video Instance */}
-      {isMounted && isVideoEnabled && !videoError && !prefersReducedMotion && (
+      {isVideoEnabled && !videoError && !prefersReducedMotion && (
         <video
           ref={videoRef}
           autoPlay
