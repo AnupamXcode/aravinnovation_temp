@@ -481,7 +481,7 @@ export function InteractiveServiceStack3D() {
                           src={currentService.image}
                           alt={currentService.name}
                           fill
-                          sizes="(max-width: 1024px) 100vw, 50vw"
+                          sizes="(max-width: 640px) 360px, (max-width: 1024px) 600px, 700px"
                           className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
                         />
                       </div>
@@ -649,7 +649,7 @@ export function InteractiveServiceStack3D() {
                     src={service.image}
                     alt={service.name}
                     fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    sizes="(max-width: 640px) 360px, (max-width: 768px) 600px, 700px"
                     className="object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
                   />
                 </div>
