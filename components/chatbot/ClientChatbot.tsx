@@ -19,8 +19,8 @@ export function ClientChatbot() {
     if (pathname?.includes("/admin")) return;
     if (shouldLoadChatbot) return;
 
-    // Optional background prefetch only after browser is completely idle (5s)
-    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+    // Optional background prefetch only after browser is completely idle on desktop screens (>=768px)
+    if (typeof window !== "undefined" && window.innerWidth >= 768 && "requestIdleCallback" in window) {
       const handle = (window as any).requestIdleCallback(
         () => setShouldLoadChatbot(true),
         { timeout: 8000 }
