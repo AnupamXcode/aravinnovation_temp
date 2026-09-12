@@ -134,7 +134,7 @@ export function ChatbotWidget() {
     }
   }, [locale]);
 
-  const toggleListening = async () => {
+  const toggleListening = () => {
     if (isListening) {
       if (recognitionRef.current) {
         try {
@@ -156,29 +156,11 @@ export function ChatbotWidget() {
       return;
     }
 
-    // Pre-flight microphone permission check via getUserMedia
-    try {
-      if (navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === "function") {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        stream.getTracks().forEach((track) => track.stop());
-      }
-    } catch (permError: any) {
-      const errName = permError?.name || "";
-      if (errName === "NotAllowedError" || errName === "PermissionDeniedError") {
-        setVoiceStatusMsg("Microphone access was denied. Please allow microphone access for this site.");
-      } else if (errName === "NotFoundError" || errName === "DevicesNotFoundError") {
-        setVoiceStatusMsg("No microphone hardware found.");
-      } else {
-        setVoiceStatusMsg("Microphone access is required. Please check your browser settings.");
-      }
-      setTimeout(() => setVoiceStatusMsg(null), 5000);
-      return;
-    }
-
     try {
       initialInputRef.current = inputText.trim();
       setVoiceStatusMsg(null);
 
+      // Synchronous instantiation within user click gesture handler
       const recognition = new SpeechRecognition();
       recognition.continuous = true;
       recognition.interimResults = true;
