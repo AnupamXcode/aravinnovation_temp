@@ -186,7 +186,11 @@
     "requirementLabel": "Resumen del Proyecto",
     "submitLead": "Enviar y Solicitar Llamada",
     "leadSubmittedTitle": "¡Gracias!",
-    "leadSubmittedMsg": "Hemos recibido sus requisitos. Nuestro equipo se pondrá en contacto pronto."
+    "leadSubmittedMsg": "Hemos recibido sus requisitos. Nuestro equipo se pondrá en contacto pronto.",
+    "micStartAriaLabel": "Iniciar entrada de voz",
+    "micStopAriaLabel": "Detener escucha de voz",
+    "micStartTitle": "Hablar para chatear",
+    "micStopTitle": "Escuchando... Haga clic para detener"
   },
   "Common": {
     "language": "Idioma",
