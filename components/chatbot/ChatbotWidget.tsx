@@ -134,7 +134,7 @@ export function ChatbotWidget() {
     }
   }, [locale]);
 
-  const toggleListening = () => {
+  const toggleListening = async () => {
     if (isListening) {
       if (recognitionRef.current) {
         try {
@@ -156,13 +156,31 @@ export function ChatbotWidget() {
       return;
     }
 
+    setVoiceStatusMsg(null);
+
+    // Request browser permission explicitly via getUserMedia first if available
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        stream.getTracks().forEach((track) => track.stop());
+      } catch (err: any) {
+        if (err.name === "NotAllowedError" || err.name === "PermissionDeniedError") {
+          setVoiceStatusMsg("Microphone access was denied. Please allow microphone access for this site.");
+        } else if (err.name === "NotFoundError" || err.name === "DevicesNotFoundError") {
+          setVoiceStatusMsg("No microphone hardware found.");
+        } else {
+          setVoiceStatusMsg("Microphone access could not be granted. Please check browser settings.");
+        }
+        setTimeout(() => setVoiceStatusMsg(null), 4000);
+        return;
+      }
+    }
+
     try {
       initialInputRef.current = inputText.trim();
-      setVoiceStatusMsg(null);
 
-      // Synchronous instantiation within user click gesture handler
       const recognition = new SpeechRecognition();
-      recognition.continuous = true;
+      recognition.continuous = false;
       recognition.interimResults = true;
 
       // Map application locale to BCP-47 speech recognition locale
