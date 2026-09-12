@@ -83,24 +83,17 @@ function BorderDrawWrapper({
   [key: string]: any;
 }) {
   const [isHovered, setIsHovered] = React.useState(false);
-  const [isTouched, setIsTouched] = React.useState(false);
-
-  const handleTouch = () => {
-    setIsTouched(true);
-    setTimeout(() => setIsTouched(false), 700);
-  };
 
   return (
     <Component
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onTouchStart={handleTouch}
       className={cn("relative group overflow-hidden transition-all duration-300", roundedClass, className)}
       {...props}
     >
-      {/* SVG Perimeter Line Draw Animation (Top-Left -> Top -> Right -> Bottom -> Left -> Complete) */}
+      {/* SVG Perimeter Line Draw Animation (Desktop Only: hidden on mobile to prevent touch scroll lag) */}
       <svg
-        className={cn("absolute inset-0 w-full h-full pointer-events-none z-20", roundedClass)}
+        className={cn("hidden sm:block absolute inset-0 w-full h-full pointer-events-none z-20", roundedClass)}
         style={{ width: "100%", height: "100%" }}
       >
         <rect
@@ -114,10 +107,10 @@ function BorderDrawWrapper({
           strokeWidth="2"
           pathLength="100"
           strokeDasharray="100"
-          strokeDashoffset={isHovered || isTouched ? "0" : "100"}
+          strokeDashoffset={isHovered ? "0" : "100"}
           style={{
             transition: "stroke-dashoffset 650ms cubic-bezier(0.4, 0, 0.2, 1), stroke-opacity 300ms ease",
-            strokeOpacity: isHovered || isTouched ? 1 : 0,
+            strokeOpacity: isHovered ? 1 : 0,
           }}
         />
       </svg>
@@ -226,27 +219,27 @@ export function Footer() {
             20–35s Slow Ambient Fields with 0% dark/green elements
             ========================================================================= */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
-          {/* Layer 1: Soft Pure White Radiant Light Field */}
+          {/* Layer 1: Soft Pure White Radiant Light Field (Desktop Only to prevent mobile white flash) */}
           <div
-            className="absolute -top-36 -left-36 w-[650px] h-[650px] rounded-full bg-white/20 blur-3xl opacity-90"
+            className="hidden sm:block absolute -top-36 -left-36 w-[650px] h-[650px] rounded-full bg-white/20 blur-3xl opacity-90"
             style={{ animation: shouldReduceMotion ? "none" : "floatSlow1 28s ease-in-out infinite alternate" }}
           />
 
           {/* Layer 2: Warm Peach Glow Field */}
           <div
-            className="absolute -bottom-40 -right-40 w-[700px] h-[700px] rounded-full bg-[#f7d7b0]/25 blur-3xl opacity-80"
+            className="hidden sm:block absolute -bottom-40 -right-40 w-[700px] h-[700px] rounded-full bg-[#f7d7b0]/25 blur-3xl opacity-80"
             style={{ animation: shouldReduceMotion ? "none" : "floatSlow2 32s ease-in-out infinite alternate" }}
           />
 
           {/* Layer 3: Rich Warm Orange Core Accent */}
           <div
-            className="absolute top-1/3 right-1/4 w-[550px] h-[550px] rounded-full bg-[#e04f0f]/35 blur-3xl opacity-85"
+            className="hidden sm:block absolute top-1/3 right-1/4 w-[550px] h-[550px] rounded-full bg-[#e04f0f]/35 blur-3xl opacity-85"
             style={{ animation: shouldReduceMotion ? "none" : "floatSlow3 24s ease-in-out infinite alternate" }}
           />
 
           {/* Layer 4: Soft Gold Ambient Lighting */}
           <div
-            className="absolute bottom-1/4 left-1/3 w-[500px] h-[500px] rounded-full bg-[#ffec69]/20 blur-3xl opacity-75"
+            className="hidden sm:block absolute bottom-1/4 left-1/3 w-[500px] h-[500px] rounded-full bg-[#ffec69]/20 blur-3xl opacity-75"
             style={{ animation: shouldReduceMotion ? "none" : "floatSlow4 30s ease-in-out infinite alternate" }}
           />
 
