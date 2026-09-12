@@ -255,7 +255,7 @@ export function InteractiveServiceStack3D() {
           scrub: 0.1,
           onUpdate: (self) => {
             const step = Math.min(servicesData.length - 1, Math.max(0, Math.floor(self.progress * servicesData.length)));
-            setActiveServiceIdx(step);
+            setActiveServiceIdx((prev) => (prev !== step ? step : prev));
           },
         });
       }, trackRef);

@@ -27,28 +27,38 @@ export function TiltCard({
   const [glarePosition, setGlarePosition] = React.useState({ x: 50, y: 50, opacity: 0 });
   const [isHovered, setIsHovered] = React.useState(false);
 
+  const rafRef = React.useRef<number | null>(null);
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+    if (!cardRef.current || rafRef.current) return;
+    const target = cardRef.current;
+    const clientX = e.clientX;
+    const clientY = e.clientY;
 
-    const xPercent = (mouseX / width - 0.5) * 2;
-    const yPercent = (mouseY / height - 0.5) * 2;
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = null;
+      if (!target) return;
+      const rect = target.getBoundingClientRect();
+      const width = rect.width;
+      const height = rect.height;
+      const mouseX = clientX - rect.left;
+      const mouseY = clientY - rect.top;
 
-    const rotateX = -yPercent * maxTilt;
-    const rotateY = xPercent * maxTilt;
+      const xPercent = (mouseX / width - 0.5) * 2;
+      const yPercent = (mouseY / height - 0.5) * 2;
 
-    setTilt({ x: rotateX, y: rotateY });
-    if (glare) {
-      setGlarePosition({
-        x: (mouseX / width) * 100,
-        y: (mouseY / height) * 100,
-        opacity: 0.12,
-      });
-    }
+      const rotateX = -yPercent * maxTilt;
+      const rotateY = xPercent * maxTilt;
+
+      setTilt({ x: rotateX, y: rotateY });
+      if (glare) {
+        setGlarePosition({
+          x: (mouseX / width) * 100,
+          y: (mouseY / height) * 100,
+          opacity: 0.12,
+        });
+      }
+    });
   };
 
   const handleMouseEnter = () => {
@@ -56,6 +66,10 @@ export function TiltCard({
   };
 
   const handleMouseLeave = () => {
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
     setIsHovered(false);
     setTilt({ x: 0, y: 0 });
     if (glare) {

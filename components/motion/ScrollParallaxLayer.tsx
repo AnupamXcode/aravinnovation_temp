@@ -29,7 +29,10 @@ export function ScrollParallaxLayer({
 
   React.useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile((prev) => {
+        const mobile = window.innerWidth < 768;
+        return prev !== mobile ? mobile : prev;
+      });
     };
     checkMobile();
     window.addEventListener("resize", checkMobile, { passive: true });
