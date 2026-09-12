@@ -186,7 +186,11 @@
     "requirementLabel": "परियोजना विवरण",
     "submitLead": "सबमिट करें एवं कॉल का अनुरोध करें",
     "leadSubmittedTitle": "धन्यवाद!",
-    "leadSubmittedMsg": "हमें आपकी आवश्यकता प्राप्त हो गई है। हमारी टीम जल्द ही आपसे संपर्क करेगी।"
+    "leadSubmittedMsg": "हमें आपकी आवश्यकता प्राप्त हो गई है। हमारी टीम जल्द ही आपसे संपर्क करेगी।",
+    "micStartAriaLabel": "वॉइस इनपुट शुरू करें",
+    "micStopAriaLabel": "वॉइस सुनना बंद करें",
+    "micStartTitle": "बोलकर चैट करें",
+    "micStopTitle": "सुन रहे हैं... रोकने के लिए क्लिक करें"
   },
   "Common": {
     "language": "भाषा",

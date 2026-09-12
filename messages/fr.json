@@ -186,7 +186,11 @@
     "requirementLabel": "Résumé du Projet",
     "submitLead": "Envoyer et Demander un Rappel",
     "leadSubmittedTitle": "Merci !",
-    "leadSubmittedMsg": "Nous avons bien reçu votre demande. Notre équipe vous recontactera sous peu."
+    "leadSubmittedMsg": "Nous avons bien reçu votre demande. Notre équipe vous recontactera sous peu.",
+    "micStartAriaLabel": "Démarrer la saisie vocale",
+    "micStopAriaLabel": "Arrêter l'écoute vocale",
+    "micStartTitle": "Parler pour discuter",
+    "micStopTitle": "Écoute en cours... Cliquez pour arrêter"
   },
   "Common": {
     "language": "Langue",

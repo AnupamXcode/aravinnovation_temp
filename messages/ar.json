@@ -186,7 +186,11 @@
     "requirementLabel": "ملخص المشروع",
     "submitLead": "إرسال وطلب التواصل",
     "leadSubmittedTitle": "شكراً لك!",
-    "leadSubmittedMsg": "تم استلام متطلباتك بنجاح. سيتواصل معك فريقنا في أقرب وقت."
+    "leadSubmittedMsg": "تم استلام متطلباتك بنجاح. سيتواصل معك فريقنا في أقرب وقت.",
+    "micStartAriaLabel": "بدء الإدخال الصوتي",
+    "micStopAriaLabel": "إيقاف الاستماع الصوتي",
+    "micStartTitle": "التحدث للدردشة",
+    "micStopTitle": "جاري الاستماع... انقر للإيقاف"
   },
   "Common": {
     "language": "اللغة",

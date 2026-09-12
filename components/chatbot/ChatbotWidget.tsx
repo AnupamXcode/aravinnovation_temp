@@ -764,7 +764,7 @@ export function ChatbotWidget() {
 
           {/* Listening Overlay Status */}
           {isListening && (
-            <div className="px-4 py-2 bg-rose-500 text-white text-[11px] font-mono font-bold flex items-center justify-between animate-pulse">
+            <div className="px-4 py-2 bg-rose-500 text-white text-[11px] font-mono font-bold flex items-center justify-between animate-pulse motion-reduce:animate-none">
               <span>🎙️ Listening... Speak your question now</span>
               <button type="button" onClick={toggleListening} className="underline text-xs">Cancel</button>
             </div>
@@ -798,13 +798,13 @@ export function ChatbotWidget() {
               className={cn(
                 "w-8 h-8 rounded-xl flex items-center justify-center transition-all shrink-0 cursor-pointer shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f15e1c]",
                 isListening
-                  ? "bg-rose-500 text-white animate-pulse shadow-rose-500/40"
+                  ? "bg-rose-500 text-white animate-pulse motion-reduce:animate-none shadow-rose-500/40"
                   : "bg-white dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] text-[#f15e1c] hover:bg-[#FCE3D3]/40"
               )}
-              aria-label={isListening ? "Stop voice listening" : "Start voice input"}
-              title={isListening ? "Listening... Click to stop" : "Speak to Chat"}
+              aria-label={isListening ? t("micStopAriaLabel") : t("micStartAriaLabel")}
+              title={isListening ? t("micStopTitle") : t("micStartTitle")}
             >
-              <Mic className={cn("w-3.5 h-3.5", isListening && "animate-bounce")} />
+              <Mic className={cn("w-3.5 h-3.5", isListening && "animate-bounce motion-reduce:animate-none")} />
             </button>
             <button
               type="submit"

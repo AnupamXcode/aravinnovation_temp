@@ -186,7 +186,11 @@
     "requirementLabel": "Project Brief",
     "submitLead": "Submit & Request Callback",
     "leadSubmittedTitle": "Thank You!",
-    "leadSubmittedMsg": "We have received your requirement. Our team will contact you shortly."
+    "leadSubmittedMsg": "We have received your requirement. Our team will contact you shortly.",
+    "micStartAriaLabel": "Start voice input",
+    "micStopAriaLabel": "Stop voice listening",
+    "micStartTitle": "Speak to Chat",
+    "micStopTitle": "Listening... Click to stop"
   },
   "Common": {
     "language": "Language",
