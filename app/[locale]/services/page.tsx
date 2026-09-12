@@ -58,7 +58,7 @@ export default async function ServicesHubPage({
           </div>
         </ScrollReveal>
 
-        {/* 7 Practice Grid */}
+        {/* Core Practice Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <ScrollReveal key={service.slug} delay={index * 0.08} direction="up">
