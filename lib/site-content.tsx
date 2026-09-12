@@ -108,10 +108,22 @@ export interface ChatbotCommandItem {
   enabled: boolean;
 }
 
+export interface PublicClaim {
+  id: string;
+  claimText: string;
+  category: "Performance" | "Uptime" | "Compliance" | "ROI" | "Client Result";
+  metricValue?: string;
+  verificationSource?: string;
+  status: "DRAFT" | "NEEDS VERIFICATION" | "VERIFIED" | "APPROVED FOR PUBLIC USE" | "ARCHIVED";
+}
+
 export interface ChatbotKB {
   masterEnabled: boolean;
   defaultGreeting: string;
   fallbackResponse: string;
+  voiceEnabled?: boolean;
+  autoReadAloud?: boolean;
+  speechLanguage?: string;
   commands: ChatbotCommandItem[];
 }
 
@@ -141,6 +153,7 @@ export interface SiteContent {
   chatbotKB: ChatbotKB;
   seo: SEOContent;
   legal: LegalContent;
+  claims: PublicClaim[];
   translations: Record<string, Record<string, string>>;
 }
 
@@ -459,8 +472,46 @@ const defaultChatbotKB: ChatbotKB = {
   masterEnabled: true,
   defaultGreeting: "Hey there! 👋 Welcome to Arav Innovations. How can our team help accelerate your technology & growth goals today?",
   fallbackResponse: "I'm here to help with Arav Innovations' services, projects, industries and contact options. Could you tell me what you're looking for?",
+  voiceEnabled: true,
+  autoReadAloud: false,
+  speechLanguage: "en-US",
   commands: defaultChatbotCommands,
 };
+
+const defaultClaims: PublicClaim[] = [
+  {
+    id: "claim-1",
+    claimText: "Sub-second Next.js SSR performance response benchmarking",
+    category: "Performance",
+    metricValue: "< 1.5s LCP",
+    verificationSource: "Lighthouse & Core Web Vitals Audits",
+    status: "APPROVED FOR PUBLIC USE",
+  },
+  {
+    id: "claim-2",
+    claimText: "Enterprise system availability and uptime SLA readiness",
+    category: "Uptime",
+    metricValue: "99.99%",
+    verificationSource: "SecOps Monitoring & SLA Contracts",
+    status: "APPROVED FOR PUBLIC USE",
+  },
+  {
+    id: "claim-3",
+    claimText: "Operational manual workload reduction through AI workflow automation",
+    category: "ROI",
+    metricValue: "Up to 60%",
+    verificationSource: "Enterprise AI Portfolio Case Audits",
+    status: "APPROVED FOR PUBLIC USE",
+  },
+  {
+    id: "claim-4",
+    claimText: "India DPDP Act & Global Data Protection GRC readiness",
+    category: "Compliance",
+    metricValue: "100%",
+    verificationSource: "Internal Security & Audit Framework",
+    status: "APPROVED FOR PUBLIC USE",
+  },
+];
 
 const defaultFooter: FooterContent = {
   mainHeading: "WE 🤍 WORKING WITH AMBITIOUS BRANDS, ACROSS EVERY SECTOR",
@@ -517,6 +568,7 @@ const defaultContent: SiteContent = {
   chatbotKB: defaultChatbotKB,
   seo: defaultSEO,
   legal: defaultLegal,
+  claims: defaultClaims,
   translations: {},
 };
 
@@ -550,6 +602,9 @@ interface SiteContentContextType {
   updateSEO: (seo: Partial<SEOContent>) => void;
   updateLegal: (legal: Partial<LegalContent>) => void;
   updateTranslation: (locale: string, key: string, val: string) => void;
+  addClaim: (claim: PublicClaim) => void;
+  updateClaim: (id: string, updated: Partial<PublicClaim>) => void;
+  deleteClaim: (id: string) => void;
   resetAllContent: () => void;
 }
 
@@ -583,6 +638,9 @@ const SiteContentContext = React.createContext<SiteContentContextType>({
   updateSEO: () => {},
   updateLegal: () => {},
   updateTranslation: () => {},
+  addClaim: () => {},
+  updateClaim: () => {},
+  deleteClaim: () => {},
   resetAllContent: () => {},
 });
 
@@ -807,6 +865,27 @@ export function SiteContentProvider({ children }: { children: React.ReactNode })
     });
   };
 
+  const addClaim = (claim: PublicClaim) => {
+    saveContent({
+      ...content,
+      claims: [...(content.claims || []), claim],
+    });
+  };
+
+  const updateClaim = (id: string, updated: Partial<PublicClaim>) => {
+    saveContent({
+      ...content,
+      claims: (content.claims || []).map((c) => (c.id === id ? { ...c, ...updated } : c)),
+    });
+  };
+
+  const deleteClaim = (id: string) => {
+    saveContent({
+      ...content,
+      claims: (content.claims || []).filter((c) => c.id !== id),
+    });
+  };
+
   const resetAllContent = () => {
     saveContent(defaultContent);
     try {
@@ -848,6 +927,9 @@ export function SiteContentProvider({ children }: { children: React.ReactNode })
         updateSEO,
         updateLegal,
         updateTranslation,
+        addClaim,
+        updateClaim,
+        deleteClaim,
         resetAllContent,
       }}
     >

@@ -55,6 +55,8 @@ import {
   Power,
   ShieldAlert,
   AlertTriangle,
+  Mic,
+  Volume2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -1823,6 +1825,68 @@ export default function AdminDashboardPage() {
                   onChange={(e) => updateChatbotKB({ fallbackResponse: e.target.value })}
                   className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
                 />
+              </div>
+            </div>
+
+            {/* Voice Chatbot & Speech Synthesis Controls */}
+            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md space-y-4">
+              <h3 className="text-sm font-bold font-display text-[#f15e1c] flex items-center gap-2">
+                <Mic className="w-4 h-4" />
+                <span>Voice Chatbot &amp; Read Aloud Controls</span>
+              </h3>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="space-y-1">
+                  <label className="text-xs font-bold">Voice Speech Input (STT)</label>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const nextVal = !content.chatbotKB?.voiceEnabled;
+                      updateChatbotKB({ voiceEnabled: nextVal });
+                      showToast(`Voice Speech Input ${nextVal !== false ? "ENABLED" : "DISABLED"}`);
+                    }}
+                    className={`w-full py-2.5 px-3 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
+                      content.chatbotKB?.voiceEnabled !== false ? "bg-emerald-500 text-white shadow-xs" : "bg-rose-500 text-white"
+                    }`}
+                  >
+                    {content.chatbotKB?.voiceEnabled !== false ? "ON (Microphone Active)" : "OFF (Text Only)"}
+                  </button>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-bold">Auto Read Aloud (TTS)</label>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const nextVal = !content.chatbotKB?.autoReadAloud;
+                      updateChatbotKB({ autoReadAloud: nextVal });
+                      showToast(`Auto Read Aloud ${nextVal ? "ENABLED" : "DISABLED"}`);
+                    }}
+                    className={`w-full py-2.5 px-3 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
+                      content.chatbotKB?.autoReadAloud ? "bg-emerald-500 text-white shadow-xs" : "bg-[#FBF3EA] dark:bg-[#1A1613] text-[#7A6A5F] border border-[#EFE2D6]"
+                    }`}
+                  >
+                    {content.chatbotKB?.autoReadAloud ? "ON (Auto Speak Bot)" : "OFF (Manual Click 🔊)"}
+                  </button>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-bold">Speech Language</label>
+                  <select
+                    value={content.chatbotKB?.speechLanguage || "en-US"}
+                    onChange={(e) => {
+                      updateChatbotKB({ speechLanguage: e.target.value });
+                      showToast(`Speech language set to ${e.target.value}`);
+                    }}
+                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613] font-mono cursor-pointer"
+                  >
+                    <option value="en-US">English (en-US)</option>
+                    <option value="hi-IN">Hindi (hi-IN)</option>
+                    <option value="ar-SA">Arabic (ar-SA)</option>
+                    <option value="fr-FR">French (fr-FR)</option>
+                    <option value="es-ES">Spanish (es-ES)</option>
+                  </select>
+                </div>
               </div>
             </div>
 

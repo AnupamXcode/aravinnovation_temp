@@ -1,8 +1,6 @@
-"use client";
-
 import * as React from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { MessageSquare, X, Send, Bot, ArrowRight, ExternalLink } from "lucide-react";
+import { MessageSquare, X, Send, Bot, ArrowRight, ExternalLink, Mic, Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
@@ -18,6 +16,15 @@ interface ChatMessage {
   text: string;
   options?: { label: string; action: string; payload?: string; route?: string; ctaType?: string }[];
   isLeadForm?: boolean;
+}
+
+function cleanSpeechText(text: string): string {
+  return text
+    .replace(/https?:\/\/\S+/g, "")
+    .replace(/[*_#`~]/g, "")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 export function ChatbotWidget() {
@@ -38,6 +45,9 @@ export function ChatbotWidget() {
   const [shouldShowLauncher, setShouldShowLauncher] = React.useState(true);
   const [isOpen, setIsOpen] = React.useState(false);
   const [isTyping, setIsTyping] = React.useState(false);
+  const [isListening, setIsListening] = React.useState(false);
+  const [speakingMsgId, setSpeakingMsgId] = React.useState<string | null>(null);
+  const recognitionRef = React.useRef<any>(null);
 
   const [sessionContext, setSessionContext] = React.useState<ChatSessionContext>({
     locale,
@@ -92,6 +102,89 @@ export function ChatbotWidget() {
   });
   const [leadSubmitted, setLeadSubmitted] = React.useState(false);
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
+
+  // Clean up speech synthesis on unmount
+  React.useEffect(() => {
+    return () => {
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+      if (recognitionRef.current) {
+        try {
+          recognitionRef.current.stop();
+        } catch {
+          // ignore
+        }
+      }
+    };
+  }, []);
+
+  const toggleListening = () => {
+    if (isListening) {
+      if (recognitionRef.current) {
+        try {
+          recognitionRef.current.stop();
+        } catch {
+          // ignore
+        }
+      }
+      setIsListening(false);
+      return;
+    }
+
+    if (typeof window === "undefined") return;
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      alert("Voice speech recognition is not supported in this browser. Please use keyboard input.");
+      return;
+    }
+
+    try {
+      const recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = true;
+      recognition.lang = locale === "hi" ? "hi-IN" : locale === "ar" ? "ar-SA" : chatbotKB?.speechLanguage || "en-US";
+
+      recognition.onstart = () => setIsListening(true);
+      recognition.onend = () => setIsListening(false);
+      recognition.onerror = () => setIsListening(false);
+
+      recognition.onresult = (event: any) => {
+        const transcript = Array.from(event.results)
+          .map((res: any) => res[0].transcript)
+          .join("");
+        setInputText(transcript);
+      };
+
+      recognitionRef.current = recognition;
+      recognition.start();
+    } catch {
+      setIsListening(false);
+    }
+  };
+
+  const toggleReadAloud = (msgId: string, rawText: string) => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+
+    if (speakingMsgId === msgId) {
+      window.speechSynthesis.cancel();
+      setSpeakingMsgId(null);
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+    const spokenText = cleanSpeechText(rawText);
+    if (!spokenText) return;
+
+    const utterance = new SpeechSynthesisUtterance(spokenText);
+    utterance.lang = locale === "hi" ? "hi-IN" : locale === "ar" ? "ar-SA" : chatbotKB?.speechLanguage || "en-US";
+    utterance.onend = () => setSpeakingMsgId(null);
+    utterance.onerror = () => setSpeakingMsgId(null);
+
+    setSpeakingMsgId(msgId);
+    window.speechSynthesis.speak(utterance);
+  };
 
   // Restore session context
   React.useEffect(() => {
@@ -181,6 +274,10 @@ export function ChatbotWidget() {
   const handleMinimize = () => {
     setIsOpen(false);
     setShouldShowLauncher(true);
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+      setSpeakingMsgId(null);
+    }
     try {
       sessionStorage.setItem("arav_chat_dismissed", "true");
     } catch {
@@ -240,10 +337,10 @@ export function ChatbotWidget() {
     } else if (option.action === "locations") {
       const text =
         locale === "hi"
-          ? "हमारे दो मुख्य कार्यालय हैं:\n\n• भारत मुख्यालय: सेक्टर 44, गुरुग्राम\n• यूएई कार्यालय: बुलेवार्ड प्लाजा, डाउनटाउन दुबई"
+          ? "हमारे दो मुख्य कार्यालय हैं:\n\n• भारत मुख्यालय: अर्डी सिटी, गुरुग्राम\n• यूएई कार्यालय: दुबई सिलिकॉन ओएसिस, दुबई"
           : locale === "ar"
-          ? "تمتلك آراف إينوفيشينز مركزين إقليميين:\n\n• المقر الرئيسي: قطاع 44، جورجاون (الهند)\n• المكتب الإقليمي: بوليفارد प्लाजा، دبي (الإمارات)"
-          : "We operate dual regional hubs:\n\n• India HQ: Sector 44, Gurgaon\n• UAE Office: Boulevard Plaza, Downtown Dubai";
+          ? "تمتلك آراف إينوفيشينز مركزين إقليميين:\n\n• المقر الرئيسي: ارضي سيتي، جورجاون (الهند)\n• المكتب الإقليمي: دبي سيليكون واحة، دبي (الإمارات)"
+          : "We operate dual regional hubs:\n\n• India HQ: Platinum Floor, Ardee City, Gurgaon\n• UAE Office: IFZA Business Park, Dubai Silicon Oasis";
 
       botMsg = {
         id: `bot-${Date.now()}`,
@@ -289,6 +386,9 @@ export function ChatbotWidget() {
     setTimeout(() => {
       setIsTyping(false);
       setMessages((prev) => [...prev, botMsg]);
+      if (chatbotKB?.autoReadAloud) {
+        toggleReadAloud(botMsg.id, botMsg.text);
+      }
     }, 400);
   };
 
@@ -362,6 +462,9 @@ export function ChatbotWidget() {
 
       setIsTyping(false);
       setMessages((prev) => [...prev, botMsg]);
+      if (chatbotKB?.autoReadAloud) {
+        toggleReadAloud(botMsg.id, botMsg.text);
+      }
     }, 450);
   };
 
@@ -490,6 +593,29 @@ export function ChatbotWidget() {
                   {msg.text}
                 </div>
 
+                {/* Read Aloud Button for Bot Messages */}
+                {msg.sender === "bot" && (
+                  <button
+                    type="button"
+                    onClick={() => toggleReadAloud(msg.id, msg.text)}
+                    className="mt-1 flex items-center gap-1 text-[10px] font-mono text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] transition-colors cursor-pointer"
+                    aria-label="Read message aloud"
+                    title="Read Aloud"
+                  >
+                    {speakingMsgId === msg.id ? (
+                      <>
+                        <VolumeX className="w-3 h-3 text-[#f15e1c] animate-pulse" />
+                        <span className="text-[#f15e1c] font-bold">Stop Speaking</span>
+                      </>
+                    ) : (
+                      <>
+                        <Volume2 className="w-3 h-3 text-[#2e936f]" />
+                        <span>Read Aloud</span>
+                      </>
+                    )}
+                  </button>
+                )}
+
                 {/* Option Buttons */}
                 {msg.options && (
                   <div className="flex flex-wrap gap-1.5 mt-2 max-w-[95%]">
@@ -587,6 +713,14 @@ export function ChatbotWidget() {
             <div ref={messagesEndRef} />
           </div>
 
+          {/* Listening Overlay Status */}
+          {isListening && (
+            <div className="px-4 py-2 bg-rose-500 text-white text-[11px] font-mono font-bold flex items-center justify-between animate-pulse">
+              <span>🎙️ Listening... Speak your question now</span>
+              <button type="button" onClick={toggleListening} className="underline text-xs">Cancel</button>
+            </div>
+          )}
+
           {/* Bottom Chat Input Bar */}
           <form
             onSubmit={handleCustomSend}
@@ -594,11 +728,26 @@ export function ChatbotWidget() {
           >
             <input
               type="text"
-              placeholder={t("inputPlaceholder")}
+              placeholder={isListening ? "Listening to your voice..." : t("inputPlaceholder")}
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               className="flex-1 text-xs px-3 py-2 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-white dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-1 focus:ring-[#f15e1c]"
             />
+            {/* Microphone Voice Input Button */}
+            <button
+              type="button"
+              onClick={toggleListening}
+              className={cn(
+                "w-8 h-8 rounded-xl flex items-center justify-center transition-all shrink-0 cursor-pointer shadow-xs",
+                isListening
+                  ? "bg-rose-500 text-white animate-pulse"
+                  : "bg-white dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] text-[#f15e1c] hover:bg-[#FCE3D3]/40"
+              )}
+              aria-label="Voice Speech Input"
+              title={isListening ? "Listening... Click to stop" : "Speak to Chat"}
+            >
+              <Mic className="w-3.5 h-3.5" />
+            </button>
             <button
               type="submit"
               className="w-8 h-8 rounded-xl bg-[#f15e1c] text-white flex items-center justify-center hover:bg-[#d4581f] transition-colors shrink-0 cursor-pointer shadow-xs"
