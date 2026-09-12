@@ -37,13 +37,6 @@
     "tailwindcss": "^4",
     "typescript": "^5"
   },
-  "browserslist": [
-    "chrome >= 100",
-    "safari >= 15",
-    "firefox >= 100",
-    "edge >= 100",
-    "ios >= 15"
-  ],
   "allowScripts": {
     "@parcel/watcher@2.6.0": true,
     "@swc/core@1.15.47": true,

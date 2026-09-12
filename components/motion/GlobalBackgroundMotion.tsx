@@ -7,21 +7,14 @@ import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "fr
 export function GlobalBackgroundMotion() {
   const { config } = useSiteConfig();
   const shouldReduceMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = React.useState(() => {
-    if (typeof window !== "undefined") {
-      return window.innerWidth < 768;
-    }
-    return false;
-  });
+  const [isMobile, setIsMobile] = React.useState(false);
   const [isMounted, setIsMounted] = React.useState(false);
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
     setIsMounted(true);
-    const checkMobile = () => {
-      const mobile = window.innerWidth < 768;
-      setIsMobile((prev) => (prev !== mobile ? mobile : prev));
-    };
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
     window.addEventListener("resize", checkMobile, { passive: true });
     return () => window.removeEventListener("resize", checkMobile);
   }, []);

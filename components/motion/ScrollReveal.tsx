@@ -29,19 +29,12 @@ export function ScrollReveal({
   const { config } = useSiteConfig();
 
   const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
-  const [isMobile, setIsMobile] = React.useState(() => {
-    if (typeof window !== "undefined") {
-      return window.innerWidth < 768;
-    }
-    return false;
-  });
+  const [isMobile, setIsMobile] = React.useState(false);
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
-    const checkMobile = () => {
-      const mobile = window.innerWidth < 768;
-      setIsMobile((prev) => (prev !== mobile ? mobile : prev));
-    };
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
 
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setPrefersReducedMotion(mediaQuery.matches);

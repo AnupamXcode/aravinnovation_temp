@@ -25,19 +25,13 @@ export function ScrollParallaxLayer({
 }: ScrollParallaxLayerProps) {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = React.useState(() => {
-    if (typeof window !== "undefined") {
-      return window.innerWidth < 768;
-    }
-    return false;
-  });
+  const [isMobile, setIsMobile] = React.useState(false);
 
   React.useEffect(() => {
-    if (typeof window === "undefined") return;
     const checkMobile = () => {
-      const mobile = window.innerWidth < 768;
-      setIsMobile((prev) => (prev !== mobile ? mobile : prev));
+      setIsMobile(window.innerWidth < 768);
     };
+    checkMobile();
     window.addEventListener("resize", checkMobile, { passive: true });
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
