@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   productionBrowserSourceMaps: false,
   reactStrictMode: true,
   experimental: {
-    optimizePackageImports: ["lucide-react", "framer-motion", "gsap"],
+    optimizePackageImports: ["lucide-react", "framer-motion", "gsap", "date-fns", "lodash-es"],
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error", "warn"] } : false,

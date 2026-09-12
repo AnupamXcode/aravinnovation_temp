@@ -158,6 +158,12 @@ export default async function RootLayout({
       data-scroll-behavior="smooth"
       className={`${plusJakartaSans.variable} ${inter.variable} ${notoSansArabic.variable} ${notoSansDevanagari.variable} scroll-smooth`}
     >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+      </head>
       <body className="min-h-screen flex flex-col w-full bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans antialiased selection:bg-[#FCE3D3] dark:selection:bg-[#f15e1c]/30 selection:text-[#f15e1c]">
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <OrganizationSchema />
