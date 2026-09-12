@@ -119,6 +119,9 @@ export function ChatbotWidget() {
     };
   }, []);
 
+  const initialInputRef = React.useRef<string>("");
+  const [voiceStatusMsg, setVoiceStatusMsg] = React.useState<string | null>(null);
+
   const toggleListening = () => {
     if (isListening) {
       if (recognitionRef.current) {
@@ -136,31 +139,77 @@ export function ChatbotWidget() {
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
-      alert("Voice speech recognition is not supported in this browser. Please use keyboard input.");
+      setVoiceStatusMsg("Voice input is not supported in this browser. Please use text input.");
+      setTimeout(() => setVoiceStatusMsg(null), 4000);
       return;
     }
 
     try {
+      initialInputRef.current = inputText.trim();
+      setVoiceStatusMsg(null);
+
       const recognition = new SpeechRecognition();
       recognition.continuous = false;
       recognition.interimResults = true;
-      recognition.lang = locale === "hi" ? "hi-IN" : locale === "ar" ? "ar-SA" : chatbotKB?.speechLanguage || "en-US";
 
-      recognition.onstart = () => setIsListening(true);
-      recognition.onend = () => setIsListening(false);
-      recognition.onerror = () => setIsListening(false);
+      // Map application locale to BCP-47 speech recognition locale
+      const speechLang =
+        locale === "hi"
+          ? "hi-IN"
+          : locale === "ar"
+          ? "ar-SA"
+          : locale === "fr"
+          ? "fr-FR"
+          : locale === "es"
+          ? "es-ES"
+          : chatbotKB?.speechLanguage || "en-US";
+
+      recognition.lang = speechLang;
+
+      recognition.onstart = () => {
+        setIsListening(true);
+      };
+
+      recognition.onend = () => {
+        setIsListening(false);
+      };
+
+      recognition.onerror = (event: any) => {
+        setIsListening(false);
+        const err = event?.error;
+        if (err === "not-allowed" || err === "service-not-allowed") {
+          setVoiceStatusMsg("Microphone permission is required. Please allow access in browser settings.");
+        } else if (err === "no-speech") {
+          setVoiceStatusMsg("No speech detected. Click 🎙️ to try again.");
+        } else if (err === "audio-capture") {
+          setVoiceStatusMsg("No microphone hardware found.");
+        } else {
+          setVoiceStatusMsg("Speech recognition paused. Try again.");
+        }
+        setTimeout(() => setVoiceStatusMsg(null), 4000);
+      };
 
       recognition.onresult = (event: any) => {
-        const transcript = Array.from(event.results)
+        const rawTranscript = Array.from(event.results)
           .map((res: any) => res[0].transcript)
-          .join("");
-        setInputText(transcript);
+          .join("")
+          .trim();
+
+        if (!rawTranscript) return;
+
+        if (initialInputRef.current) {
+          setInputText(`${initialInputRef.current} ${rawTranscript}`);
+        } else {
+          setInputText(rawTranscript);
+        }
       };
 
       recognitionRef.current = recognition;
       recognition.start();
     } catch {
       setIsListening(false);
+      setVoiceStatusMsg("Could not start speech recognition.");
+      setTimeout(() => setVoiceStatusMsg(null), 3000);
     }
   };
 
@@ -718,6 +767,14 @@ export function ChatbotWidget() {
             <div className="px-4 py-2 bg-rose-500 text-white text-[11px] font-mono font-bold flex items-center justify-between animate-pulse">
               <span>🎙️ Listening... Speak your question now</span>
               <button type="button" onClick={toggleListening} className="underline text-xs">Cancel</button>
+            </div>
+          )}
+
+          {/* Voice Status Error / Warning Message */}
+          {voiceStatusMsg && !isListening && (
+            <div className="px-4 py-2 bg-amber-500/15 border-t border-amber-500/30 text-amber-800 dark:text-amber-300 text-[11px] font-mono font-bold flex items-center justify-between">
+              <span>{voiceStatusMsg}</span>
+              <button type="button" onClick={() => setVoiceStatusMsg(null)} className="text-xs font-extrabold ml-2">✕</button>
             </div>
           )}
 
