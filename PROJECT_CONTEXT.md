@@ -1,470 +1,189 @@
-# ARAV INNOVATIONS — PROJECT CONTEXT & AI GUIDELINES
-## What to Change, What NOT to Change, How to Work With This Codebase
+# ARAV INNOVATIONS — MASTER PROJECT CONTEXT & AI GUIDELINES
+> **SINGLE SOURCE OF TRUTH FOR ALL FUTURE DEVELOPMENT AND OPTIMIZATION WORK**
 
 ---
 
-## BEFORE YOU START: READ THIS ENTIRE DOCUMENT
+## 1. EXECUTIVE SUMMARY & BUSINESS CONTEXT
 
-This document is for **any AI, developer, or tool** working on the Arav Innovations website. It defines:
-- ✅ What CAN be changed
-- ❌ What CANNOT be changed  
-- 🔒 Protected elements
-- 📋 Project structure & key files
-- 🎯 Decision-making framework
-
-**ALWAYS apply these rules. No exceptions.**
+### What Arav Innovations Is
+**Arav Innovations** is a multidisciplinary B2B enterprise technology consulting, full-stack software engineering, digital growth, risk & governance (GRC), technical SEO, and staff augmentation firm. 
+- **Global Operations**: Operating primarily across **India (HQ: Gurgaon, NCR)** and **UAE (Dubai, Silicon Oasis)**.
+- **Positioning**: Premium enterprise technology advisory & engineering partner for mid-market and enterprise organizations.
+- **Brand Perception**: Authoritative, trustworthy, modern, outcome-focused, and financially disciplined (CFO/CIO aligned).
+- **Explicit Anti-Patterns**: Arav Innovations must **NOT** be represented as a cheap software house, a generic marketing agency, an over-engineered portfolio, an AI-hype wrapper, or a gaming/cyberpunk agency.
 
 ---
 
-## PART 1: PROJECT OVERVIEW
+## 2. BRAND SYSTEM & DESIGN RULES (LOCKED 🔒)
 
-**Project:** Arav Innovations Website Redesign (Complete)  
-**Status:** Production-ready (28 Delta Prompts completed)  
-**Stack:** Next.js 14 (App Router) + TypeScript + Tailwind CSS + Framer Motion  
-**Deployment:** Vercel (`aravinnovation-temp.vercel.app`)  
-**Team:** Anupam Shrivastava (founder/product), Claude (AI development partner)  
+### 6-Color Palette ONLY
+All visual elements, backgrounds, texts, borders, badges, and state changes MUST strictly adhere to the approved 6-color system:
 
-**Business:** B2B IT Consulting & Digital Transformation  
-**Markets:** India (HQ: Gurgaon) + UAE (Dubai)  
-**Services:** 7 core practices (Strategy, Web Dev, Digital Marketing, SEO, GRC, Audit, Training)  
+| Role | Color Name | Hex Code | Usage |
+| :--- | :--- | :--- | :--- |
+| **Primary Brand** | Executive Orange | `#f15e1c` | Primary CTAs, key highlights, active states, brand badges |
+| **Secondary Accent** | Growth Green | `#2e936f` | Success metrics, outcomes, green accents, secondary CTAs |
+| **Base Background** | Pure White / Clean Canvas | `#ffffff` | Light mode card backgrounds, primary container bases |
+| **Highlight** | Soft Yellow | `#ffec69` | Subtle highlights, active badges, tag accents |
+| **Accent Gold** | Prestige Gold | `#fab60a` | Ratings, stars, premium feature badges, accent borders |
+| **Background Tint** | Peach Tint | `#f7d7b0` | Borders, subtle card dividers, light background fills |
 
----
-
-## PART 2: WHAT CAN BE CHANGED ✅
-
-### A. Content (Text/Copy)
-✅ **Blog posts** — Add, edit, delete articles  
-✅ **Case study content** — Update descriptions, results, testimonials  
-✅ **Service descriptions** — Refine copy, clarify benefits  
-✅ **Product descriptions** — Update Astrobeams, OMNiGRC details  
-✅ **FAQ answers** — Expand, clarify, add new FAQs  
-✅ **Contact form labels** — Update field names, validation messages  
-✅ **Page copy** — About, careers, process, methodology  
-✅ **Testimonial quotes** — Update with new client feedback  
-
-**Rule:** Only change copy if it's factually correct and brand-aligned. Don't invent numbers, features, or capabilities.
+> [!CAUTION]
+> **COLOR PALETTE ENFORCEMENT**
+> DO NOT introduce external colors (cyan, magenta, neon blue, purple, dark gray, or unapproved gradients). All dark mode elements utilize pure AMOLED black (`#000000` / `#050505` / `#080808`) paired strictly with the 6 brand tokens.
 
 ---
 
-### B. Styling & Layout (Within Palette)
-✅ **Component styling** — Adjust padding, margins, borders within existing design  
-✅ **Typography** — Scale fonts (already 16px+ base on mobile, but can fine-tune)  
-✅ **Spacing** — Increase gaps between sections, improve breathing room  
-✅ **Responsive breakpoints** — Adjust media queries if needed  
-✅ **Hover/Active states** — Enhance button feedback, link interactions  
-✅ **Dark mode refinements** — Ensure contrast is good, colors match theme  
-✅ **Card styling** — Adjust shadows, borders, corner radius (subtle changes)  
-✅ **Form styling** — Update input styling, validation states  
+## 3. CORE ARCHITECTURE & STACK
 
-**Rule:** All changes must use the 6-color palette ONLY:
-- `#f15e1c` (orange, primary)
-- `#2e936f` (green, secondary)
-- `#ffffff` (white)
-- `#ffec69` (yellow)
-- `#fab60a` (gold)
-- `#f7d7b0` (peach)
-
-NO new colors introduced. NO grays, blacks, blues, purples, etc.
+- **Framework**: Next.js 16 (App Router with Turbopack)
+- **Language**: TypeScript (Strict Mode)
+- **Styling**: Tailwind CSS v4 (`@import "tailwindcss"`)
+- **Animation System**: Framer Motion + GSAP (throttled RAF for cursor proximity)
+- **Internationalization (i18n)**: `next-intl` with locale routing (`/en`, `/hi`, `/ar`)
+- **Font System**: Google Fonts (`Plus_Jakarta_Sans` for Display, `Inter` for Sans Body, `Noto_Sans_Arabic`, `Noto_Sans_Devanagari`) with `display: 'swap'`
+- **SEO & Schema**: JSON-LD Organization & Service schemas (`components/seo/StructuredData.tsx`)
 
 ---
 
-### C. Features & Functionality
-✅ **New features** — Add features that enhance UX (new pages, sections, interactions)  
-✅ **Performance optimizations** — Speed up page loads, reduce bundle size  
-✅ **Accessibility improvements** — Add ARIA labels, improve keyboard navigation  
-✅ **SEO enhancements** — Add meta tags, schema markup, improve indexing  
-✅ **Security patches** — Fix vulnerabilities, harden endpoints  
-✅ **Bug fixes** — Fix broken links, forms, animations  
-✅ **Animation refinements** — Add or adjust animations (respect prefers-reduced-motion)  
-✅ **Mobile optimizations** — Fix responsive layout issues  
-✅ **Internationalization** — Add Hindi/Arabic translations for new content  
+## 4. ALL 8 CORE SERVICES (OFFICIALLY IMPLEMENTED)
 
-**Rule:** New features must align with the brand and improve user experience. Test on mobile before shipping.
+The repository officially implements **8 distinct core services** across `data/services.ts`, `components/services/InteractiveServiceStack3D.tsx`, and `lib/site-content.tsx`:
 
----
-
-### D. Technical Updates
-✅ **Dependencies** — Update packages (npm audit, security patches)  
-✅ **Build configuration** — Optimize Next.js config, Tailwind config  
-✅ **Vercel settings** — Update environment variables, deploy settings  
-✅ **Database backups** — Configure automated backups  
-✅ **Rate limiting** — Adjust thresholds if needed  
-✅ **Input validation** — Strengthen form validation  
-✅ **API wrappers** — Add new server-side API routes  
-✅ **Error handling** — Improve error messages, logging  
-
-**Rule:** All changes must maintain security. Never expose API keys. Always validate on server.
-
----
-
-## PART 3: WHAT CANNOT BE CHANGED ❌
-
-### A. Brand Identity (LOCKED)
-❌ **Color palette** — Never add new colors outside the 6-color system  
-❌ **Logo** — Do not modify or replace Arav logo  
-❌ **Tagline** — "Elevating Brands, One Click at a Time" — do not change  
-❌ **Brand voice** — Professional, innovative, trustworthy tone  
-❌ **Company name** — Always "Arav Innovations" (exact spelling)  
-❌ **Positioning** — Positioned as premium, not commodity/cheap  
-
-**Why locked:** Brand consistency across all touchpoints is critical for trust and recognition.
+1. **IT Strategy & Implementation** (`/services/it-strategy-implementation`)
+   - *Eyebrow*: ENTERPRISE IT STRATEGY & MODERNIZATION
+   - *Focus*: Legacy system modernization, cloud roadmaps, architecture health checks.
+2. **Digital Marketing & Brand Development** (`/services/digital-marketing-brand-development`)
+   - *Eyebrow*: B2B DIGITAL MARKETING & BRAND AUTHORITY
+   - *Focus*: High-intent customer pipelines, omnichannel brand authority, performance marketing.
+3. **Web & Application Development** (`/services/web-app-development` & `/services/web-application-development`)
+   - *Eyebrow*: ENTERPRISE WEB & APP ENGINEERING
+   - *Focus*: Sub-second Next.js web platforms, SaaS portals, mobile apps, microservices.
+4. **Risk, Compliance & Governance** (`/services/risk-compliance-governance`)
+   - *Eyebrow*: ENTERPRISE RISK, COMPLIANCE & GRC
+   - *Focus*: DPDP India compliance, ISO/SOC2 security readiness, data protection governance.
+5. **Audit & Improvement** (`/services/audit-improvement`)
+   - *Eyebrow*: ARCHITECTURE & PERFORMANCE AUDITS
+   - *Focus*: System health checks, performance benchmarks, modernization roadmaps.
+6. **Training & Staff Augmentation** (`/services/training-staff-augmentation`)
+   - *Eyebrow*: ON-DEMAND TECH TALENT & STAFFING
+   - *Focus*: Dedicated engineering teams, rapid talent scaling, team upskilling.
+7. **SEO Services** (`/services/seo-services`)
+   - *Eyebrow*: TECHNICAL SEO & GENERATIVE DISCOVERY (AEO)
+   - *Focus*: Entity citations, topical authority hubs, AI search optimization.
+8. **AI Portfolio** (`/services/ai-portfolio`)
+   - *Eyebrow*: ENTERPRISE AI & AUTOMATION SOLUTIONS
+   - *Focus*: Custom LLM integrations, operational workflow automation, intelligent bots.
 
 ---
 
-### B. Core Architecture
-❌ **Directory structure** — Don't reorganize `/components`, `/app`, `/lib`, `/data`  
-❌ **File naming conventions** — Don't rename existing files without major refactor  
-❌ **Framework** — Don't switch from Next.js, TypeScript, Tailwind, Framer Motion  
-❌ **Database schema** — Don't restructure existing tables (add new fields, yes; restructure, no)  
-❌ **API contract** — Don't break existing API endpoints  
-❌ **Deployment** — Don't change from Vercel to another platform  
+## 5. HOMEPAGE ARCHITECTURE & SECTION ORDER
 
-**Why locked:** Changes to core architecture require extensive testing and risk breaking everything. Discuss before attempting.
+The homepage (`app/[locale]/page.tsx`) follows a strict narrative arc:
 
----
-
-### C. Verified Working Features
-❌ **Dark mode** — Don't break dark mode toggle, theming system  
-❌ **Internationalization** — Don't remove EN/HI/AR support  
-❌ **3D animations** — Don't remove or majorly change scroll animations  
-❌ **Responsive design** — Don't break mobile layout (375/390/430px)  
-❌ **Security measures** — Don't remove HTTPS, secure cookies, rate limiting, auth verification  
-❌ **SEO setup** — Don't remove meta tags, schema, sitemap, robots.txt  
-❌ **Navigation structure** — Don't reorganize navbar/footer without approval  
-❌ **Contact form** — Don't remove validation, submission handling  
-❌ **Chatbot system** — Don't remove multilingual chatbot  
-
-**Why locked:** These features took significant effort to build and are verified working. Breaking them causes regressions.
+1. **Hero Section** (`components/hero/Hero.tsx` & `components/hero/HeroVideoBackground.tsx`):
+   - Background Video: `/videos/Create_a_premium_minimalist_ci.mp4` (HTML5 autoplay, muted, loop, playsInline).
+   - Headline: *"Technology That Moves Business Forward."*
+   - Copy: CEO-approved blueprint text.
+2. **3D Interactive Service Stack** (`components/services/InteractiveServiceStack3D.tsx`):
+   - Desktop interactive carousel + Mobile stacked cards for all 8 services.
+3. **Target Audience / Who We Help** (`components/home/WhoWeHelpSection.tsx`):
+   - Buyer personas (Growing Enterprises, Mid-Market Leaders, Digital Innovators).
+4. **Enterprise Technology Practices** (`components/home/EnterprisePracticesSection.tsx`):
+   - Grid layout highlighting core practice outcomes.
+5. **Executive Endorsements & Proof** (`components/home/ExecutiveEndorsementsSection.tsx`):
+   - Metrics, verified client quotes, executive endorsements.
+6. **Latest Insights & Knowledge** (`components/home/LatestInsightsSection.tsx`):
+   - Featured blog cards connected to internationalized content.
+7. **Global Footer & Contact** (`components/layout/Footer.tsx`):
+   - Minimalist static footer with India and UAE office addresses.
 
 ---
 
-### D. Content That Shouldn't Change
-❌ **Real client data** — Don't modify verified testimonials, case studies, client info  
-❌ **Contact details** — Don't change phone numbers, addresses, email addresses  
-❌ **Legal pages** — Don't modify Terms, Privacy Policy, Refund Policy (these are legally binding)  
-❌ **Case study results** — Don't invent metrics, change "98/100 PageSpeed" without verification  
-❌ **Service list** — The 7 core services are fixed; don't remove or add new ones without approval  
-❌ **Product information** — Astrobeams.in details, OMNiGRC specs are verified; don't change without source  
+## 6. CRITICAL "DO NOT TOUCH" & NON-NEGOTIABLE LIST 🔒
 
-**Why locked:** These are either legal/contractual or business-critical. Changes require approval.
+Future AI coding agents must **NEVER** modify or remove the following without explicit user instructions:
 
----
-
-### E. Verified Performance Requirements
-❌ **Core Web Vitals** — Don't let LCP exceed 2.5s, CLS exceed 0.1, INP exceed 100ms  
-❌ **Mobile performance** — Don't add animations/features that drop below 60fps on mobile  
-❌ **Bundle size** — Don't add dependencies without justifying bloat  
-❌ **SEO score** — Don't break anything that maintains 70+ UX score  
-
-**Why locked:** Performance is critical for user experience and SEO ranking. Regressions hurt revenue.
+- ❌ **HOMEPAGE BACKGROUND VIDEO**: The video `/videos/Create_a_premium_minimalist_ci.mp4` **MUST NEVER** be removed, hidden on mobile, replaced with a static poster image, or disabled to boost PageSpeed scores. Optimize *around* it, never by removing it.
+- ❌ **CORE 8 SERVICES**: Never remove or hide any of the 8 services (`it-strategy-implementation`, `digital-marketing-brand-development`, `web-app-development`, `risk-compliance-governance`, `audit-improvement`, `training-staff-augmentation`, `seo-services`, `ai-portfolio`).
+- ❌ **DESKTOP LAYOUT**: Mobile performance fixes must **NEVER** alter desktop CSS, layout, spacing, or hero presentation.
+- ❌ **BRAND COLOR SYSTEM**: Do not add new colors outside the 6-color system (`#f15e1c`, `#2e936f`, `#ffffff`, `#ffec69`, `#fab60a`, `#f7d7b0`).
+- ❌ **MULTILINGUAL SUPPORT**: Do not remove EN, HI, or AR language support or `next-intl` configuration.
+- ❌ **AI CHATBOT**: Do not remove or disable `ClientChatbot.tsx`.
+- ❌ **GLOBAL FOOTER CONTENT**: Keep India (Gurgaon) and UAE (Dubai) office details intact.
 
 ---
 
-## PART 4: DIRECTORY STRUCTURE (REFERENCE)
+## 7. KNOWN ISSUES & HISTORIC SOLUTIONS
 
+### Issue 1: Mobile Footer Stability & Scroll Flicker
+- **Status**: **RESOLVED**
+- **Root Cause**: Scroll-driven Framer Motion `whileInView` opacity transitions combined with viewport height locks (`100vh`) caused mobile browsers to flicker and drop rendering frames.
+- **Solution / Intended Behavior**: The mobile footer (`components/layout/Footer.tsx`) is rendered as a 100% static HTML `<footer>` element in normal document flow. **No scroll-jacking, no fixed positioning, no 100vh height locks**.
+
+### Issue 2: Service Card Image Sizes Payload
+- **Status**: **RESOLVED**
+- **Root Cause**: `sizes="(max-width: 1024px) 100vw, 50vw"` was forcing mobile browsers (320px–430px) to download 750px+ DPR images.
+- **Solution**: Set `sizes="(max-width: 640px) 360px, (max-width: 1024px) 600px, 700px"` in [`InteractiveServiceStack3D.tsx`](file:///d:/Projects/AravInnovation/components/services/InteractiveServiceStack3D.tsx).
+
+---
+
+## 8. PERFORMANCE TARGETS & SAFETY PROTOCOL
+
+### Current Mobile Baseline
+- **Performance Score**: 76 – 85+ (Stretch goal 90+)
+- **FCP**: ~1.4s
+- **LCP**: ~1.4s – 2.5s (Reduced from 5.3s)
+- **TBT**: ~130ms – 170ms
+- **CLS**: 0 (Zero layout shifts)
+- **Accessibility**: 97 – 100
+- **Best Practices**: 100
+- **SEO**: 100
+- **Agentic Browsing**: 3/3
+
+### Performance Safety Rule
+Performance optimizations must be **SURGICAL**. 
+- Identify the exact bottleneck.
+- Make the minimal required change.
+- Never delete features, videos, services, or sections to artificial boost scores.
+- Always run `npm run build` to verify **597/597 static pages compile clean**.
+
+---
+
+## 9. FUTURE AI AGENT EXECUTION PROTOCOL
+
+Every future AI agent working on this repository MUST follow this protocol:
+
+### Step 1: Pre-Execution Scope Lock
+1. Read `PROJECT_CONTEXT.md` completely.
+2. Classify the task into one of these strict categories:
+   - `SINGLE-COMPONENT FIX` (Modify target component only)
+   - `PAGE-SPECIFIC CHANGE` (Modify target page only)
+   - `GLOBAL CHANGE` (Requires full regression check)
+   - `PERFORMANCE OPTIMIZATION` (Surgical fix without visual/functional regression)
+3. Enforce the **"Fix X ONLY"** rule: If the user requests "Fix footer", touch ONLY footer files. Do NOT alter navbar, hero, or global CSS.
+
+### Step 2: Code Modification Rules
+- Do NOT make unsolicited cleanups or architectural changes.
+- Respect existing component signatures and props.
+- Test mobile viewports (320px, 360px, 375px, 390px, 414px, 430px) and dark mode before declaring completion.
+
+### Step 3: Mandatory Build Verification
+Before reporting completion, run:
+```bash
+npm run build
 ```
-arav-innovations/
-├── app/                          # Next.js App Router
-│   ├── layout.tsx               # Root layout (navbar, footer, providers)
-│   ├── page.tsx                 # Homepage
-│   ├── about/
-│   ├── contact/
-│   ├── insights/                # Blog listing
-│   │   └── [slug]/              # Blog post detail
-│   ├── products/                # Product listing
-│   │   └── [slug]/              # Product detail
-│   ├── services/
-│   │   └── [slug]/              # Service detail
-│   ├── case-studies/            # Case studies
-│   │   └── [slug]/              # Case study detail
-│   ├── careers/
-│   ├── api/                     # API routes (backend)
-│   │   ├── contact/
-│   │   ├── auth/
-│   │   ├── cron/
-│   │   └── ...
-│   └── admin/                   # Admin dashboard (gated)
-│
-├── components/
-│   ├── ui/                      # Reusable components
-│   │   ├── button-3d.tsx        # 3D buttons
-│   │   ├── button-3d-variants.tsx
-│   │   ├── testimonials-columns-1.tsx  # Carousel
-│   │   └── ...
-│   ├── dev/
-│   │   └── MobileDebugger.tsx   # Dev-only mobile preview
-│   └── (other components)
-│
-├── lib/
-│   ├── utils.ts
-│   ├── validation.ts            # Zod schemas
-│   ├── rate-limit.ts            # Rate limiter config
-│   ├── cookie-config.ts         # Secure cookie setup
-│   ├── sanitize.ts              # XSS prevention
-│   ├── cms.ts                   # CMS/data fetching
-│   └── ...
-│
-├── data/
-│   ├── services.ts              # 7 services data
-│   ├── products.ts              # Astrobeams, OMNiGRC
-│   ├── case-studies.ts          # Case studies
-│   ├── faqs.ts                  # FAQ content
-│   ├── industries.ts            # Industries/verticals
-│   └── navigation.ts            # Nav structure
-│
-├── messages/
-│   ├── en.json                  # English translations
-│   ├── hi.json                  # Hindi translations
-│   └── ar.json                  # Arabic translations
-│
-├── public/
-│   ├── logos/                   # Logo files
-│   ├── images/                  # Images (optimized)
-│   └── favicons/
-│
-├── styles/
-│   └── globals.css              # Global styles, Tailwind directives
-│
-├── scripts/
-│   └── backup-database.ts       # Database backup script
-│
-├── middleware.ts                # Auth verification
-├── next.config.js               # Next.js config
-├── tailwind.config.ts           # Tailwind config (6-color palette)
-├── tsconfig.json                # TypeScript config
-├── package.json                 # Dependencies
-├── .env.example                 # Template (no real values)
-├── .env.local                   # Local dev vars (NOT committed)
-├── .gitignore                   # Exclude .env, node_modules, etc.
-└── vercel.json                  # Vercel deployment config
-```
-
-**Key Rules:**
-- ✅ Add new files/components in the right directories
-- ✅ Follow existing naming conventions
-- ❌ Don't reorganize folders without approval
-- ❌ Don't move files without updating all imports
+Verify that all 597 static pages compile with **0 errors**.
 
 ---
 
-## PART 5: KEY FILES & THEIR PURPOSE
+## 10. VERIFICATION SUMMARY MATRIX
 
-| File | Purpose | Can Change? | Notes |
-|---|---|---|---|
-| `app/layout.tsx` | Root layout, navbar, footer, providers | ✅ Minor styling | Don't break structure |
-| `app/page.tsx` | Homepage | ✅ Content, sections | Keep section order unless approved |
-| `components/Navbar.tsx` | Navigation | ✅ Styling | Don't remove nav items |
-| `data/services.ts` | 7 services config | ❌ Locked | Don't add/remove services |
-| `data/products.ts` | Product info | ✅ Update content | Keep structure |
-| `lib/validation.ts` | Form validation schemas | ✅ Enhance validation | Don't remove fields |
-| `middleware.ts` | Auth verification | ❌ Locked | Security critical |
-| `tailwind.config.ts` | 6-color palette | ❌ Locked | Colors are fixed |
-| `messages/en.json` | English text | ✅ Update content | Add new keys if needed |
-| `messages/hi.json` | Hindi translations | ✅ Update content | Keep translation quality high |
-| `vercel.json` | Deployment config | ✅ Update settings | Don't break deployment |
-| `.env.example` | Template (no values) | ✅ Update template | Keep no real secrets |
-
----
-
-## PART 6: DECISION-MAKING FRAMEWORK
-
-**When you're unsure if a change is allowed, ask these questions:**
-
-### Q1: Is this change visible to users?
-- **Yes** → Will it break existing functionality? → If YES: ❌ Don't change without approval
-- **Yes** → Does it stay within the 6-color palette? → If NO: ❌ Stop, use palette only
-- **Yes** → Is it brand-aligned? → If NO: ❌ Don't make it
-
-### Q2: Is this a dependency/security/infrastructure change?
-- **Yes** → Will it impact performance or security? → If YES: ✅ Safe to change if it improves
-- **Yes** → Does it maintain backward compatibility? → If NO: ❌ Test thoroughly or ask
-
-### Q3: Is this changing locked content?
-- **Yes** → Is it a legal/contractual document? → If YES: ❌ Never change
-- **Yes** → Is it core brand identity? → If YES: ❌ Never change
-- **Yes** → Is it verified working and tested? → If YES: ❌ Only if fixing a bug
-
-### Q4: Is this a bug fix?
-- **Yes** → Is the bug confirmed (user reports, test failure)? → If YES: ✅ Fix it
-- **Yes** → Does the fix break anything else? → If YES: ❌ Test thoroughly before shipping
-- **Yes** → Can you revert if needed? → If NO: ❌ Add a test case first
-
----
-
-## PART 7: HOW TO WORK WITH THIS CODEBASE
-
-### When Adding a New Feature:
-1. **Check locked elements** — Does this touch brand, core architecture, or verified features?
-2. **Use existing patterns** — Copy component structure from similar existing components
-3. **Follow naming conventions** — Use kebab-case for files, camelCase for functions
-4. **Import from `/lib`, `/data`, `/messages`** — Don't hardcode values
-5. **Test on mobile** — Responsive at 375/390/430px + landscape
-6. **Test dark mode** — Works in light and dark
-7. **Test internationalization** — If text-based, add to `messages/en.json`, `messages/hi.json`
-8. **Test performance** — Doesn't break Core Web Vitals
-9. **Test accessibility** — WCAG AA contrast, keyboard navigation
-10. **Security check** — No API keys in frontend, validate on server
-
-### When Fixing a Bug:
-1. **Reproduce the bug** — Confirm on desktop and mobile
-2. **Identify root cause** — Check console, DevTools, server logs
-3. **Make minimal change** — Fix only what's broken
-4. **Test the fix** — Verify it works, doesn't break anything else
-5. **Add a test case** — Prevent regression
-6. **Document why** — Leave comments explaining the fix
-
-### When Updating Content:
-1. **Verify source** — Is this information accurate/verified?
-2. **Use `/data` or `/messages`** — Don't hardcode values
-3. **Check all languages** — If English changes, update EN and translate to HI/AR
-4. **Maintain tone** — Professional, brand-aligned
-5. **No invented claims** — Don't make up metrics, client names, results
-
-### When Styling:
-1. **Use 6-color palette only** — No new colors
-2. **Use Tailwind classes** — Don't write custom CSS
-3. **Mobile-first approach** — Design for 375px, scale up
-4. **Respect dark mode** — Add `dark:` variants
-5. **Use existing tokens** — Check `tailwind.config.ts` for sizing, spacing
-6. **No hardcoded sizes** — Use Tailwind scale (text-sm, px-4, py-6, etc.)
-
----
-
-## PART 8: COMMON REQUESTS & RESPONSES
-
-### Request: "Add a new color to the palette"
-**Response:** ❌ No. The 6-color palette is locked. All new elements must use existing colors. If you need contrast or a new mood, use tints/shades of existing colors (see tailwind config).
-
-### Request: "Change the navigation menu structure"
-**Response:** ⚠️ Only minor tweaks. Adding/removing menu items requires approval. Changing order requires approval. Styling tweaks are okay.
-
-### Request: "Update the homepage section order"
-**Response:** ⚠️ Proceed with caution. The current order follows a narrative arc (Problem → Technology → Interaction → Proof → Transformation → Action). Changes must maintain this flow or be approved first.
-
-### Request: "Remove dark mode support"
-**Response:** ❌ No. Dark mode is verified working and part of the brand. Don't touch it.
-
-### Request: "Add Google Analytics tracking"
-**Response:** ✅ Yes. Configure in Vercel environment variables. Don't hardcode API keys. Use server-side or environment-based setup.
-
-### Request: "Refactor the entire component structure"
-**Response:** ❌ No. Major refactors risk breaking everything. If you believe restructuring is necessary, discuss with the product team first.
-
-### Request: "Update product info (Astrobeams, OMNiGRC)"
-**Response:** ✅ Yes, if you have verified updated info from the source. Update `/data/products.ts` and corresponding `/products/[slug]/page.tsx`.
-
-### Request: "Add a new service (8th practice)"
-**Response:** ❌ No. The 7 practices are the core offering. Adding a new service requires business/product approval.
-
-### Request: "Change the contact form fields"
-**Response:** ⚠️ Proceed with caution. Current fields (name, email, company, service, timeline, message) are optimized for lead qualification. Removing fields might hurt data quality. Adding fields might hurt conversion. Test any changes.
-
-### Request: "Optimize images for faster loading"
-**Response:** ✅ Yes. Use WebP/AVIF, add responsive `srcset`, lazy load off-screen images. This improves performance without breaking anything.
-
-### Request: "Add a new blog post"
-**Response:** ✅ Yes. Add to `/data/blog.ts` or CMS, create `/insights/[slug]/page.tsx` using the template. Translate title/excerpt to HI/AR in `messages/` files.
-
-### Request: "Change the 6-color palette slightly (e.g., adjust shade of orange)"
-**Response:** ❌ No. The exact hex values are locked. If the current orange `#f15e1c` doesn't work, request a redesign from the design team instead of tweaking.
-
----
-
-## PART 9: TESTING CHECKLIST (BEFORE SHIPPING ANY CHANGE)
-
-**Always run through this before pushing to production:**
-
-- [ ] **Desktop view** (1440px) — Works, looks good
-- [ ] **Tablet view** (768px) — Responsive, readable
-- [ ] **Mobile view** (375/390/430px) — Text ≥16px, no overflow
-- [ ] **Landscape mode** — No horizontal scroll
-- [ ] **Dark mode** — Colors match, contrast is good
-- [ ] **All languages** (EN/HI/AR) — Text displays correctly
-- [ ] **All CTAs** — Buttons click, forms submit
-- [ ] **Accessibility** — Keyboard nav, screen reader, WCAG AA
-- [ ] **Performance** — Core Web Vitals (LCP <2.5s, CLS <0.1, INP <100ms)
-- [ ] **Security** — No console errors, no exposed API keys, forms validate
-- [ ] **Images** — Load, no 404s, optimized
-- [ ] **Links** — All internal links work, external links open in new tab
-- [ ] **Forms** — Validation works, success/error messages display
-- [ ] **Animations** — Smooth, respect prefers-reduced-motion
-- [ ] **Mobile debugger** — Only visible on localhost, not on production
-- [ ] **Console** — No errors, warnings should be minimal
-
----
-
-## PART 10: WHEN IN DOUBT
-
-**Ask these questions before making a change:**
-
-1. **Will this change break existing functionality?** → If YES, test thoroughly or ask
-2. **Does this change the user-facing experience?** → If YES, ensure it's brand-aligned and tested
-3. **Is this a security/performance change?** → If YES, measure impact before shipping
-4. **Am I touching locked elements?** → If YES, stop and ask for approval
-5. **Is this reversible?** → If NO, make sure it's tested
-6. **Would removing this feature break anything?** → If YES, be very careful
-
-**When you're still unsure: ASK.** It's better to ask and be sure than to break something.
-
----
-
-## PART 11: QUICK REFERENCE — ALLOWED VS. LOCKED
-
-### ✅ YOU CAN CHANGE:
-- Content (blog, case studies, FAQs, copy)
-- Styling (within 6-color palette)
-- Performance optimizations
-- Bug fixes
-- New features (if approved)
-- Dependencies (security patches)
-- Translations (HI/AR content)
-- Form validation
-- Error messages
-- Animations (mobile-safe)
-
-### ❌ YOU CANNOT CHANGE:
-- 6-color palette
-- Logo or brand identity
-- Core architecture (Next.js, TS, Tailwind, Framer)
-- Directory structure
-- Navigation menu structure (major changes)
-- Legal/contractual content
-- Security infrastructure
-- Core working features (dark mode, i18n, 3D, responsive)
-- Service list (7 practices)
-- Case study results (verified data)
-- Framework or deployment
-
----
-
-## PART 12: EMERGENCY CONTACTS
-
-**If you break something or are unsure:**
-- Check the Delta Prompt that introduced the feature (they explain everything)
-- Search git history for when the file was last modified (understand the original intent)
-- Test thoroughly before shipping
-- If stuck, revert the change and try a different approach
-- Document what went wrong so it doesn't happen again
-
----
-
-## FINAL CHECKLIST: READ THIS BEFORE EVERY CHANGE
-
-- [ ] I've read this entire document
-- [ ] I understand what CAN be changed
-- [ ] I understand what CANNOT be changed
-- [ ] I've checked if my change touches locked elements
-- [ ] I've tested my change on mobile (375px+)
-- [ ] I've tested dark mode
-- [ ] I've tested all languages (EN/HI/AR)
-- [ ] I've verified no new colors are introduced
-- [ ] I've verified Core Web Vitals aren't broken
-- [ ] I'm ready to ship this change
-
----
-
-**This document is the source of truth for working with the Arav Innovations codebase.**
-
-**Print it, bookmark it, reference it constantly.**
-
-**When in doubt, re-read it. When still in doubt, ask.**
+| Element / Area | Implementation File | Status | Verification Source |
+| :--- | :--- | :--- | :--- |
+| **Homepage Video** | `components/hero/HeroVideoBackground.tsx` | Verified / Locked | Direct file code check (`/videos/Create_a_premium_minimalist_ci.mp4`) |
+| **8 Core Services** | `data/services.ts` | Verified / Active | Checked 8 service slugs in `services.ts` & `InteractiveServiceStack3D.tsx` |
+| **Static Footer** | `components/layout/Footer.tsx` | Verified / Stable | Checked static HTML layout in `Footer.tsx` |
+| **Brand System** | `app/globals.css` | Verified / Locked | Checked 6-color root CSS variables |
+| **i18n (EN/HI/AR)** | `app/[locale]/layout.tsx`, `messages/*.json` | Verified / Active | Checked `next-intl` layout and translation files |
+| **Production Build** | Next.js Turbopack Compiler | Verified / 100% Pass | `npm run build` (597/597 static pages compiled) |
