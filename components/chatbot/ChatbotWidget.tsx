@@ -122,7 +122,19 @@ export function ChatbotWidget() {
   const initialInputRef = React.useRef<string>("");
   const [voiceStatusMsg, setVoiceStatusMsg] = React.useState<string | null>(null);
 
-  const toggleListening = () => {
+  // Stop active speech recognition if locale changes mid-session
+  React.useEffect(() => {
+    if (isListening && recognitionRef.current) {
+      try {
+        recognitionRef.current.stop();
+      } catch {
+        // ignore
+      }
+      setIsListening(false);
+    }
+  }, [locale]);
+
+  const toggleListening = async () => {
     if (isListening) {
       if (recognitionRef.current) {
         try {
@@ -144,12 +156,31 @@ export function ChatbotWidget() {
       return;
     }
 
+    // Pre-flight microphone permission check via getUserMedia
+    try {
+      if (navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === "function") {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        stream.getTracks().forEach((track) => track.stop());
+      }
+    } catch (permError: any) {
+      const errName = permError?.name || "";
+      if (errName === "NotAllowedError" || errName === "PermissionDeniedError") {
+        setVoiceStatusMsg("Microphone access was denied. Please allow microphone access for this site.");
+      } else if (errName === "NotFoundError" || errName === "DevicesNotFoundError") {
+        setVoiceStatusMsg("No microphone hardware found.");
+      } else {
+        setVoiceStatusMsg("Microphone access is required. Please check your browser settings.");
+      }
+      setTimeout(() => setVoiceStatusMsg(null), 5000);
+      return;
+    }
+
     try {
       initialInputRef.current = inputText.trim();
       setVoiceStatusMsg(null);
 
       const recognition = new SpeechRecognition();
-      recognition.continuous = false;
+      recognition.continuous = true;
       recognition.interimResults = true;
 
       // Map application locale to BCP-47 speech recognition locale
@@ -177,14 +208,21 @@ export function ChatbotWidget() {
       recognition.onerror = (event: any) => {
         setIsListening(false);
         const err = event?.error;
-        if (err === "not-allowed" || err === "service-not-allowed") {
-          setVoiceStatusMsg("Microphone permission is required. Please allow access in browser settings.");
+        if (err === "aborted") {
+          return;
+        }
+        if (err === "not-allowed") {
+          setVoiceStatusMsg("Microphone access was denied. Please allow microphone access for this site.");
+        } else if (err === "service-not-allowed") {
+          setVoiceStatusMsg("Voice recognition is unavailable in this browser.");
+        } else if (err === "network") {
+          setVoiceStatusMsg("Voice recognition service is unavailable. Please try again.");
         } else if (err === "no-speech") {
-          setVoiceStatusMsg("No speech detected. Click 🎙️ to try again.");
+          setVoiceStatusMsg("No speech detected. Please try again.");
         } else if (err === "audio-capture") {
           setVoiceStatusMsg("No microphone hardware found.");
         } else {
-          setVoiceStatusMsg("Speech recognition paused. Try again.");
+          setVoiceStatusMsg("Voice input couldn't start. Please try again.");
         }
         setTimeout(() => setVoiceStatusMsg(null), 4000);
       };
@@ -208,7 +246,7 @@ export function ChatbotWidget() {
       recognition.start();
     } catch {
       setIsListening(false);
-      setVoiceStatusMsg("Could not start speech recognition.");
+      setVoiceStatusMsg("Could not start speech recognition. Please try again.");
       setTimeout(() => setVoiceStatusMsg(null), 3000);
     }
   };
