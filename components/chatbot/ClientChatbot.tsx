@@ -23,7 +23,7 @@ export function ClientChatbot() {
     if (typeof window !== "undefined" && "requestIdleCallback" in window) {
       const handle = (window as any).requestIdleCallback(
         () => setShouldLoadChatbot(true),
-        { timeout: 8000 }
+        { timeout: 15000 }
       );
       return () => {
         if ("cancelIdleCallback" in window) {
