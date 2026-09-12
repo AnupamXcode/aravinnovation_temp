@@ -234,7 +234,11 @@ export function ChatbotWidget() {
   };
 
   const toggleReadAloud = (msgId: string, rawText: string) => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) {
+      setVoiceStatusMsg("Read Aloud is not supported in this browser.");
+      setTimeout(() => setVoiceStatusMsg(null), 3000);
+      return;
+    }
 
     if (speakingMsgId === msgId) {
       window.speechSynthesis.cancel();
@@ -247,7 +251,35 @@ export function ChatbotWidget() {
     if (!spokenText) return;
 
     const utterance = new SpeechSynthesisUtterance(spokenText);
-    utterance.lang = locale === "hi" ? "hi-IN" : locale === "ar" ? "ar-SA" : chatbotKB?.speechLanguage || "en-US";
+    const targetLang =
+      locale === "hi"
+        ? "hi-IN"
+        : locale === "ar"
+        ? "ar-SA"
+        : locale === "fr"
+        ? "fr-FR"
+        : locale === "es"
+        ? "es-ES"
+        : chatbotKB?.speechLanguage || "en-US";
+
+    utterance.lang = targetLang;
+
+    // Best matching voice selection from browser voice list
+    try {
+      const voices = window.speechSynthesis.getVoices();
+      if (voices && voices.length > 0) {
+        const langPrefix = targetLang.split("-")[0];
+        const match =
+          voices.find((v) => v.lang === targetLang) ||
+          voices.find((v) => v.lang.startsWith(langPrefix));
+        if (match) {
+          utterance.voice = match;
+        }
+      }
+    } catch {
+      // fallback to default voice
+    }
+
     utterance.onend = () => setSpeakingMsgId(null);
     utterance.onerror = () => setSpeakingMsgId(null);
 
