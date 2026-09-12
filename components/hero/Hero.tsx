@@ -11,16 +11,16 @@ import {
 
 export function Hero() {
   return (
-    <section className="relative w-full sm:min-h-[calc(100vh-90px)] flex flex-col justify-center py-6 sm:py-16 md:py-20 lg:py-24 overflow-hidden bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300">
+    <section className="relative w-full sm:min-h-[calc(100vh-90px)] flex flex-col justify-center py-4 sm:py-16 md:py-20 lg:py-24 overflow-hidden bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300">
       {/* 1. Full-Bleed Background Video Subcomponent */}
       <HeroVideoBackground />
 
       <div className="relative z-10 w-full px-4 sm:px-8 lg:px-12 xl:px-16 my-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 lg:gap-12 items-center">
           {/* Main Hero Content Column - Immediate Paint & Zero Hydration Delay */}
-          <div className="lg:col-span-8 text-left max-w-3xl space-y-4.5 sm:space-y-7">
+          <div className="lg:col-span-8 text-left max-w-3xl space-y-3.5 sm:space-y-7">
             {/* Eyebrow Label & Single Semantic H1 for SEO/AEO */}
-            <div className="space-y-2">
+            <div className="space-y-1.5 sm:space-y-2">
               <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-[#4A3D35] dark:text-[#D8CBC0] justify-start">
                 <span className="w-2 h-2 rounded-full bg-[#f15e1c] shrink-0" />
                 <h1 className="font-mono text-[10px] sm:text-xs font-bold uppercase tracking-[0.14em] sm:tracking-[0.18em] text-[#f15e1c]">
@@ -30,7 +30,7 @@ export function Hero() {
               </div>
 
               {/* Main Visual Headline */}
-              <p className="font-display font-extrabold text-3xl sm:text-[3.25rem] md:text-6xl lg:text-[66px] xl:text-[74px] 2xl:text-[80px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.1] sm:leading-[1.06]">
+              <p className="font-display font-extrabold text-2xl xs:text-3xl sm:text-[3.25rem] md:text-6xl lg:text-[66px] xl:text-[74px] 2xl:text-[80px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.1] sm:leading-[1.06]">
                 <span className="sm:hidden">
                   Technology That<br />
                   Moves <span className="text-[#f15e1c]">Business</span><br />
@@ -44,7 +44,7 @@ export function Hero() {
             </div>
 
             {/* Supporting Description — CEO Blueprint Approved Copy */}
-            <p className="text-sm sm:text-lg lg:text-[18px] text-[#3A2E27] dark:text-[#FAF5EE] max-w-xl leading-relaxed font-medium">
+            <p className="text-xs sm:text-lg lg:text-[18px] text-[#3A2E27] dark:text-[#FAF5EE] max-w-xl leading-relaxed font-medium">
               <span className="sm:hidden">
                 We turn complex technology into smarter systems, stronger digital experiences, and measurable business growth.
               </span>
@@ -54,12 +54,12 @@ export function Hero() {
             </p>
 
             {/* Primary CTAs — CEO Blueprint Text */}
-            <div className="pt-1 sm:pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3 sm:gap-4">
+            <div className="pt-1 sm:pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-2.5 sm:gap-4">
               <Link href="/contact" className="w-full sm:w-auto">
                 <Button
                   variant="primary"
                   size="lg"
-                  className="w-full sm:w-auto rounded-full px-7 py-3 sm:px-8 sm:py-3.5 text-sm font-semibold shadow-md hover:shadow-lg shadow-[#f15e1c]/25 bg-[#f15e1c] text-white hover:bg-[#d84e12] transition-all transform hover:-translate-y-0.5"
+                  className="w-full sm:w-auto rounded-full px-7 py-2.5 sm:px-8 sm:py-3.5 text-xs sm:text-sm font-semibold shadow-md hover:shadow-lg shadow-[#f15e1c]/25 bg-[#f15e1c] text-white hover:bg-[#d84e12] transition-all transform hover:-translate-y-0.5"
                   rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
                 >
                   Talk to an Expert
@@ -70,7 +70,7 @@ export function Hero() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="w-full sm:w-auto rounded-full px-7 py-3 sm:px-8 sm:py-3.5 text-sm font-semibold bg-white/70 dark:bg-black/50 backdrop-blur-xs border border-[#3A2E27]/25 dark:border-white/20 text-[#221811] dark:text-[#FAF5EE] hover:bg-white/95 dark:hover:bg-black/80 hover:border-[#f15e1c] hover:text-[#f15e1c] transition-all"
+                  className="w-full sm:w-auto rounded-full px-7 py-2.5 sm:px-8 sm:py-3.5 text-xs sm:text-sm font-semibold bg-white/70 dark:bg-black/50 backdrop-blur-xs border border-[#3A2E27]/25 dark:border-white/20 text-[#221811] dark:text-[#FAF5EE] hover:bg-white/95 dark:hover:bg-black/80 hover:border-[#f15e1c] hover:text-[#f15e1c] transition-all"
                 >
                   Explore Our Services
                 </Button>
@@ -78,18 +78,18 @@ export function Hero() {
             </div>
 
             {/* Bottom Proof Row */}
-            <div className="pt-4 sm:pt-6 border-t border-[#3A2E27]/15 dark:border-white/15 flex flex-wrap items-center gap-3.5 sm:gap-8 text-left text-xs sm:text-sm font-semibold text-[#2C211A] dark:text-[#EFE2D6]">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#f15e1c] shrink-0" />
+            <div className="pt-3 sm:pt-6 border-t border-[#3A2E27]/15 dark:border-white/15 flex flex-wrap items-center gap-2.5 sm:gap-8 text-left text-[11px] sm:text-sm font-semibold text-[#2C211A] dark:text-[#EFE2D6]">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <ShieldCheck className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 text-[#f15e1c] shrink-0" />
                 <span className="sm:hidden">One Connected Technology Partner</span>
                 <span className="hidden sm:inline">Unified Practice Ecosystem</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Globe2 className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#f15e1c] shrink-0" />
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <Globe2 className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 text-[#f15e1c] shrink-0" />
                 <span>India &amp; UAE Operations</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Zap className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#2e936f] shrink-0" />
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <Zap className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 text-[#2e936f] shrink-0" />
                 <span className="sm:hidden">Built Around Business Outcomes</span>
                 <span className="hidden sm:inline">Outcome-First Engineering</span>
               </div>

@@ -110,15 +110,15 @@ export default async function HomePage({
   ];
 
   return (
-    <div className="flex flex-col min-h-screen w-full bg-[#ffffff] dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] space-y-6 md:space-y-12 pb-8 transition-colors duration-300 overflow-x-hidden">
+    <div className="flex flex-col min-h-screen w-full bg-[#ffffff] dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] space-y-4 sm:space-y-6 md:space-y-12 pb-8 transition-colors duration-300 overflow-x-hidden">
       {/* 01 — CINEMATIC HERO */}
       <Hero />
 
       {/* 02 — TRUST / CAPABILITY STRIP */}
-      <section className="w-full py-5 md:py-7 bg-[#fefaf5] dark:bg-[#0a0a0a] border-y border-[#f7d7b0] dark:border-[#1a1a1a] shadow-sm transition-all duration-300 overflow-hidden">
+      <section className="w-full py-3.5 sm:py-5 md:py-7 bg-[#fefaf5] dark:bg-[#0a0a0a] border-y border-[#f7d7b0] dark:border-[#1a1a1a] shadow-sm transition-all duration-300 overflow-hidden">
         <ScrollReveal direction="up">
-          <div className="text-center mb-3 px-4">
-            <span className="text-[11px] font-bold font-mono uppercase tracking-widest text-[#4a5c55] dark:text-[#d3eee4]">
+          <div className="text-center mb-2 sm:mb-3 px-4">
+            <span className="text-[10px] sm:text-[11px] font-bold font-mono uppercase tracking-widest text-[#4a5c55] dark:text-[#d3eee4]">
               STRATEGY &bull; ENGINEERING &bull; GROWTH &bull; GOVERNANCE &bull; AI
             </span>
           </div>
@@ -147,8 +147,8 @@ export default async function HomePage({
 
       {/* 06 — TRANSFORMATION JOURNEY (ASSESS -> STRATEGIZE -> BUILD -> OPTIMIZE -> SCALE) */}
       <div className="w-full px-2 sm:px-8 lg:px-12 xl:px-16" id="process">
-        <section className="py-6 md:py-14 px-1 sm:px-12 lg:px-14 rounded-2xl md:rounded-[2.5rem] bg-transparent md:bg-[#fefaf5] md:dark:bg-[#0a0a0a] border-0 md:border md:border-[#f7d7b0] md:dark:border-[#1a1a1a] shadow-none md:shadow-2xl transition-all duration-300">
-          <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-10 space-y-2 sm:space-y-3 px-2">
+        <section className="py-4 sm:py-6 md:py-14 px-1 sm:px-12 lg:px-14 rounded-2xl md:rounded-[2.5rem] bg-transparent md:bg-[#fefaf5] md:dark:bg-[#0a0a0a] border-0 md:border md:border-[#f7d7b0] md:dark:border-[#1a1a1a] shadow-none md:shadow-2xl transition-all duration-300">
+          <div className="text-center max-w-3xl mx-auto mb-4 sm:mb-10 space-y-1.5 sm:space-y-3 px-2">
             <Badge variant="secondary" size="md">
               TRANSFORMATION BLUEPRINT
             </Badge>
@@ -172,15 +172,15 @@ export default async function HomePage({
       {/* 09 — EXECUTIVE ENDORSEMENTS (1 TESTIMONIAL AT A TIME, 12 DOTS, AUTOPLAY) */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="executive-endorsements">
         <Scroll3DContainer variant="testimonial">
-          <section className="py-8 md:py-14 px-6 sm:px-12 lg:px-14 rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300 relative overflow-hidden">
+          <section className="py-5 sm:py-8 md:py-14 px-4 sm:px-12 lg:px-14 rounded-2xl sm:rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300 relative overflow-hidden">
             <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent" />
 
-            <div className="text-center max-w-3xl mx-auto mb-6 space-y-3">
+            <div className="text-center max-w-3xl mx-auto mb-4 sm:mb-6 space-y-2 sm:space-y-3">
               <Badge variant="secondary" size="md">
                 EXECUTIVE REVIEWS
               </Badge>
               <ScrollTextFlip>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                   What Our Partners Say
                 </h2>
               </ScrollTextFlip>

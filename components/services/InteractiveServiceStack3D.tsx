@@ -541,9 +541,9 @@ export function InteractiveServiceStack3D() {
       {/* ========================================================================
           MOBILE NATURAL SCROLL EXPLORATION (< 768px Viewports)
           ======================================================================== */}
-      <div className="block md:hidden py-8 px-4 sm:px-6">
+      <div className="block md:hidden py-5 sm:py-8 px-3.5 sm:px-6">
         {/* Section Header */}
-        <div className="text-center max-w-xl mx-auto mb-6 space-y-2">
+        <div className="text-center max-w-xl mx-auto mb-4 sm:mb-6 space-y-1.5 sm:space-y-2">
           <Badge variant="secondary" size="md">
             WHAT WE DO
           </Badge>
@@ -556,7 +556,7 @@ export function InteractiveServiceStack3D() {
         </div>
 
         {/* Sticky Mobile Quick-Jump Pill Bar */}
-        <div className="sticky top-[60px] z-30 bg-[#FFFDF9]/95 dark:bg-[#050505]/95 backdrop-blur-md py-2 -mx-4 px-4 sm:-mx-6 sm:px-6 mb-5 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="sticky top-[60px] z-30 bg-[#FFFDF9]/95 dark:bg-[#050505]/95 backdrop-blur-md py-2 -mx-4 px-4 sm:-mx-6 sm:px-6 mb-4 sm:mb-5 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
           <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
             {servicesData.map((service) => {
               const isSel = service.id === activeServiceIdx;
@@ -581,7 +581,7 @@ export function InteractiveServiceStack3D() {
         </div>
 
         {/* All Mobile Service Cards in Vertical Natural Scroll Flow */}
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {servicesData.map((service) => {
             const isActive = service.id === activeServiceIdx;
 
@@ -596,7 +596,7 @@ export function InteractiveServiceStack3D() {
                 onClick={() => setActiveServiceIdx(service.id)}
                 aria-label={`Explore ${service.name} - ${service.category}`}
                 className={cn(
-                  "rounded-2xl p-5 sm:p-6 transition-all duration-300 border-2 space-y-4 relative overflow-hidden cursor-pointer block group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f15e1c] active:scale-[0.99]",
+                  "rounded-2xl p-4 sm:p-6 transition-all duration-300 border-2 space-y-3 sm:space-y-4 relative overflow-hidden cursor-pointer block group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f15e1c] active:scale-[0.99]",
                   isActive
                     ? "bg-white dark:bg-[#0a0a0a] border-[#f15e1c] shadow-xl ring-2 ring-[#f15e1c]/30"
                     : "bg-white/90 dark:bg-[#0a0a0a]/90 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md hover:border-[#f15e1c]/50"
@@ -608,11 +608,11 @@ export function InteractiveServiceStack3D() {
                 )}
 
                 {/* Card Top: Number, Category & Icon */}
-                <div className="flex items-center justify-between border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-3">
-                  <div className="flex items-center gap-2.5">
+                <div className="flex items-center justify-between border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-2.5 sm:pb-3">
+                  <div className="flex items-center gap-2">
                     <span
                       className={cn(
-                        "font-mono text-xs font-extrabold px-2.5 py-1 rounded-lg transition-colors",
+                        "font-mono text-xs font-extrabold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg transition-colors",
                         isActive
                           ? "bg-[#f15e1c] text-white"
                           : "bg-[#fce3d3] dark:bg-[#161616] text-[#c2410c] dark:text-[#f15e1c]"
@@ -626,7 +626,7 @@ export function InteractiveServiceStack3D() {
                   </div>
 
                   <div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center text-white shadow-xs"
+                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center text-white shadow-xs"
                     style={{ backgroundColor: service.tone }}
                   >
                     {renderServiceIcon(service.iconName, "#ffffff")}
@@ -634,7 +634,7 @@ export function InteractiveServiceStack3D() {
                 </div>
 
                 {/* Service Title */}
-                <h3 className="text-lg font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug">
+                <h3 className="text-base sm:text-lg font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug">
                   {service.name}
                 </h3>
 
@@ -671,11 +671,11 @@ export function InteractiveServiceStack3D() {
                 </div>
 
                 {/* Footer Action */}
-                <div className="pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between">
-                  <span className="text-[11px] font-mono text-[#5A4A3F] dark:text-[#D4C8BC]">
+                <div className="pt-2.5 sm:pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between">
+                  <span className="text-[10px] sm:text-[11px] font-mono text-[#5A4A3F] dark:text-[#D4C8BC]">
                     Enterprise Practice
                   </span>
-                  <div className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#f15e1c] text-white font-semibold text-xs shadow-md group-hover:bg-[#d84e12] transition-colors">
+                  <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-[#f15e1c] text-white font-semibold text-xs shadow-md group-hover:bg-[#d84e12] transition-colors">
                     <span>Explore Practice</span> <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
