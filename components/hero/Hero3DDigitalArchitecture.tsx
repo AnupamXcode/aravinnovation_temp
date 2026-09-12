@@ -103,7 +103,15 @@ export function Hero3DDigitalArchitecture() {
   const mouseRotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), springConfig);
   const mouseRotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), springConfig);
 
+  const rectRef = React.useRef<DOMRect | null>(null);
   const tickingRef = React.useRef(false);
+
+  const handleMouseEnter = () => {
+    if (containerRef.current) {
+      rectRef.current = containerRef.current.getBoundingClientRect();
+    }
+  };
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (shouldReduceMotion || !containerRef.current || !threeDEnabled || tickingRef.current) return;
     tickingRef.current = true;
@@ -111,7 +119,10 @@ export function Hero3DDigitalArchitecture() {
     const clientY = e.clientY;
     window.requestAnimationFrame(() => {
       if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
+        if (!rectRef.current) {
+          rectRef.current = containerRef.current.getBoundingClientRect();
+        }
+        const rect = rectRef.current;
         const x = (clientX - rect.left) / rect.width - 0.5;
         const y = (clientY - rect.top) / rect.height - 0.5;
         mouseX.set(x);
@@ -122,6 +133,7 @@ export function Hero3DDigitalArchitecture() {
   };
 
   const handleMouseLeave = () => {
+    rectRef.current = null;
     mouseX.set(0);
     mouseY.set(0);
   };
@@ -131,6 +143,7 @@ export function Hero3DDigitalArchitecture() {
       {/* DESKTOP EXPERIENCE (lg:block hidden) (TASK B & E) */}
       <div
         ref={containerRef}
+        onMouseEnter={handleMouseEnter}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         className="hidden lg:block relative w-full"

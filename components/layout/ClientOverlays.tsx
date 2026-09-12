@@ -28,6 +28,11 @@ const MobilePreviewToggle = dynamic(
   { ssr: false }
 );
 
+const ClientChatbot = dynamic(
+  () => import("@/components/chatbot/ClientChatbot").then((mod) => mod.ClientChatbot),
+  { ssr: false }
+);
+
 export function ClientOverlays({ children }: { children: React.ReactNode }) {
   return (
     <WebsiteShutdownOverlay>
@@ -35,6 +40,7 @@ export function ClientOverlays({ children }: { children: React.ReactNode }) {
       {children}
       <BackToTop />
       <SetupCall />
+      <ClientChatbot />
       {(process.env.NODE_ENV === "development" || process.env.VERCEL_ENVIRONMENT === "development") && (
         <MobilePreviewToggle />
       )}

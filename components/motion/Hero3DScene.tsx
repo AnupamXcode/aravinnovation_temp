@@ -52,7 +52,15 @@ export function Hero3DScene() {
   const floatX2 = useSpring(useTransform(mouseX, [-0.5, 0.5], [22, -22]), springConfig);
   const floatY2 = useSpring(useTransform(mouseY, [-0.5, 0.5], [22, -22]), springConfig);
 
+  const rectRef = React.useRef<DOMRect | null>(null);
   const tickingRef = React.useRef(false);
+
+  const handleMouseEnter = () => {
+    if (containerRef.current) {
+      rectRef.current = containerRef.current.getBoundingClientRect();
+    }
+  };
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (shouldReduceMotion || !containerRef.current || tickingRef.current) return;
     tickingRef.current = true;
@@ -60,7 +68,10 @@ export function Hero3DScene() {
     const clientY = e.clientY;
     window.requestAnimationFrame(() => {
       if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
+        if (!rectRef.current) {
+          rectRef.current = containerRef.current.getBoundingClientRect();
+        }
+        const rect = rectRef.current;
         const x = (clientX - rect.left) / rect.width - 0.5;
         const y = (clientY - rect.top) / rect.height - 0.5;
         mouseX.set(x);
@@ -71,6 +82,7 @@ export function Hero3DScene() {
   };
 
   const handleMouseLeave = () => {
+    rectRef.current = null;
     mouseX.set(0);
     mouseY.set(0);
   };
@@ -89,6 +101,7 @@ export function Hero3DScene() {
   return (
     <div
       ref={containerRef}
+      onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className="relative w-full max-w-lg mx-auto perspective-1200 py-6 select-none"

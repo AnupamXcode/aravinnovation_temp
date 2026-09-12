@@ -14,7 +14,6 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import { ClientChatbot } from "@/components/chatbot/ClientChatbot";
 import Script from "next/script";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -171,7 +170,6 @@ export default async function RootLayout({
                   <Navbar />
                   <main id="main-content" className="flex-1 w-full pt-16 sm:pt-20">{children}</main>
                   <Footer />
-                  <ClientChatbot />
                 </ClientOverlays>
               </ThemeProvider>
             </SiteContentProvider>
