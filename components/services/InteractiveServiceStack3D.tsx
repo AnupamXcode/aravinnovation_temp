@@ -378,17 +378,6 @@ export function InteractiveServiceStack3D() {
                     )}
 
                     <div className="flex items-center gap-2.5 min-w-0">
-                      {/* Step Badge */}
-                      <span
-                        className={cn(
-                          "font-mono text-[11px] font-bold px-2 py-0.5 rounded-md shrink-0 transition-colors",
-                          isHighlighted
-                            ? "bg-[#f15e1c] text-white"
-                            : "bg-[#fce3d3] dark:bg-[#1a1a1a] text-[#c2410c] dark:text-[#f15e1c] group-hover:bg-[#f15e1c] group-hover:text-white"
-                        )}
-                      >
-                        {service.number}
-                      </span>
 
                       {/* Icon */}
                       <div
@@ -509,12 +498,14 @@ export function InteractiveServiceStack3D() {
 
                 {/* Footer CTA */}
                 <div className="pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between relative z-10">
-                  <span className="text-[11px] font-mono text-[#5A4A3F] dark:text-[#D4C8BC]">
-                    Scroll to explore services &bull; Click to view details
-                  </span>
+                  <Link href="/contact">
+                    <span className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full bg-white dark:bg-[#161616] text-[#3A2E27] dark:text-[#FAF5EE] font-semibold text-xs border border-[#EFE2D6] dark:border-[#1f1f1f] hover:border-[#f15e1c] transition-colors">
+                      Setup Call
+                    </span>
+                  </Link>
                   <Link href={currentService.href}>
                     <span className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#f15e1c] text-white font-semibold text-xs shadow-md hover:bg-[#d84e12] transition-all hover:shadow-lg hover:shadow-[#f15e1c]/25">
-                      Explore Service <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
+                      Explore Practice <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
                     </span>
                   </Link>
                 </div>
@@ -543,41 +534,16 @@ export function InteractiveServiceStack3D() {
           ======================================================================== */}
       <div className="block md:hidden py-5 sm:py-8 px-3.5 sm:px-6">
         {/* Section Header */}
-        <div className="text-center max-w-xl mx-auto mb-4 sm:mb-6 space-y-1.5 sm:space-y-2">
+        <div className="text-center max-w-xl mx-auto mb-6 space-y-2">
           <Badge variant="secondary" size="md">
             WHAT WE DO
           </Badge>
           <h2 className="text-2xl sm:text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-            Enterprise Services
+            Enterprise Technology Practices
           </h2>
           <p className="text-xs sm:text-sm text-[#5A4A3F] dark:text-[#D8CBC0]">
-            Scroll to explore our enterprise practices with connected capabilities and proven delivery outcomes.
+            Explore our core practices designed to solve critical technology, governance, and digital growth challenges.
           </p>
-        </div>
-
-        {/* Sticky Mobile Quick-Jump Pill Bar */}
-        <div className="sticky top-[60px] z-30 bg-[#FFFDF9]/95 dark:bg-[#050505]/95 backdrop-blur-md py-2 -mx-4 px-4 sm:-mx-6 sm:px-6 mb-4 sm:mb-5 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
-            {servicesData.map((service) => {
-              const isSel = service.id === activeServiceIdx;
-              return (
-                <button
-                  key={service.id}
-                  type="button"
-                  onClick={() => scrollToMobileCard(service.id)}
-                  className={cn(
-                    "px-3 py-1.5 rounded-xl text-xs font-mono font-bold whitespace-nowrap shrink-0 transition-all border flex items-center gap-1.5 cursor-pointer",
-                    isSel
-                      ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-md scale-[1.02]"
-                      : "bg-white dark:bg-[#0a0a0a] text-[#4A3D35] dark:text-[#D8CBC0] border-[#f7d7b0] dark:border-[#1a1a1a]"
-                  )}
-                >
-                  <span>{service.number}</span>
-                  <span>{service.shortName}</span>
-                </button>
-              );
-            })}
-          </div>
         </div>
 
         {/* All Mobile Service Cards in Vertical Natural Scroll Flow */}
@@ -586,20 +552,17 @@ export function InteractiveServiceStack3D() {
             const isActive = service.id === activeServiceIdx;
 
             return (
-              <Link
+              <div
                 key={service.id}
-                href={service.href}
                 ref={(el) => {
                   mobileCardRefs.current[service.id] = el;
                 }}
                 data-service-idx={service.id}
-                onClick={() => setActiveServiceIdx(service.id)}
-                aria-label={`Explore ${service.name} - ${service.category}`}
                 className={cn(
-                  "rounded-2xl p-4 sm:p-6 transition-all duration-300 border-2 space-y-3 sm:space-y-4 relative overflow-hidden cursor-pointer block group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f15e1c] active:scale-[0.99]",
+                  "rounded-2xl p-4 sm:p-6 transition-all duration-300 border-2 space-y-3.5 relative overflow-hidden block group focus:outline-none",
                   isActive
-                    ? "bg-white dark:bg-[#0a0a0a] border-[#f15e1c] shadow-xl ring-2 ring-[#f15e1c]/30"
-                    : "bg-white/90 dark:bg-[#0a0a0a]/90 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md hover:border-[#f15e1c]/50"
+                    ? "bg-white dark:bg-[#0a0a0a] border-[#f15e1c] shadow-xl ring-2 ring-[#f15e1c]/20"
+                    : "bg-white/90 dark:bg-[#0a0a0a]/90 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md"
                 )}
               >
                 {/* Active Accent Bar */}
@@ -607,26 +570,14 @@ export function InteractiveServiceStack3D() {
                   <div className="absolute top-0 left-0 right-0 h-1 bg-[#f15e1c]" />
                 )}
 
-                {/* Card Top: Number, Category & Icon */}
-                <div className="flex items-center justify-between border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-2.5 sm:pb-3">
-                  <div className="flex items-center gap-2">
-                    <span
-                      className={cn(
-                        "font-mono text-xs font-extrabold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg transition-colors",
-                        isActive
-                          ? "bg-[#f15e1c] text-white"
-                          : "bg-[#fce3d3] dark:bg-[#161616] text-[#c2410c] dark:text-[#f15e1c]"
-                      )}
-                    >
-                      {service.number}
-                    </span>
-                    <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase tracking-wider">
-                      {service.category}
-                    </span>
-                  </div>
+                {/* Card Top: Category & Icon */}
+                <div className="flex items-center justify-between border-b border-[#f7d7b0]/50 dark:border-[#1a1a1a] pb-2.5">
+                  <span className="text-[11px] font-mono font-bold text-[#2e936f] uppercase tracking-wider">
+                    {service.category}
+                  </span>
 
                   <div
-                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center text-white shadow-xs"
+                    className="w-7 h-7 rounded-lg flex items-center justify-center text-white shadow-xs"
                     style={{ backgroundColor: service.tone }}
                   >
                     {renderServiceIcon(service.iconName, "#ffffff")}
@@ -634,7 +585,7 @@ export function InteractiveServiceStack3D() {
                 </div>
 
                 {/* Service Title */}
-                <h3 className="text-base sm:text-lg font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug">
+                <h3 className="text-base sm:text-lg font-bold font-display text-[#1b2823] dark:text-[#ffffff] leading-snug">
                   {service.name}
                 </h3>
 
@@ -644,15 +595,15 @@ export function InteractiveServiceStack3D() {
                 </p>
 
                 {/* 16:9 Image Showcase */}
-                <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] bg-white dark:bg-[#080808] shadow-md">
+                <Link href={service.href} className="block relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] bg-white dark:bg-[#080808] shadow-md group/img">
                   <Image
                     src={service.image}
                     alt={service.name}
                     fill
                     sizes="(max-width: 640px) 360px, (max-width: 768px) 600px, 700px"
-                    className="object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
+                    className="object-cover object-center transition-transform duration-300 group-hover/img:scale-[1.02]"
                   />
-                </div>
+                </Link>
 
                 {/* Deliverables / Outcomes Badges */}
                 <div className="space-y-1.5 pt-1">
@@ -670,16 +621,20 @@ export function InteractiveServiceStack3D() {
                   ))}
                 </div>
 
-                {/* Footer Action */}
-                <div className="pt-2.5 sm:pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between">
-                  <span className="text-[10px] sm:text-[11px] font-mono text-[#5A4A3F] dark:text-[#D4C8BC]">
-                    Enterprise Practice
-                  </span>
-                  <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-[#f15e1c] text-white font-semibold text-xs shadow-md group-hover:bg-[#d84e12] transition-colors">
-                    <span>Explore Practice</span> <ArrowRight className="w-3.5 h-3.5" />
-                  </div>
+                {/* Footer Action Buttons */}
+                <div className="pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] flex items-center justify-between gap-2">
+                  <Link href="/contact" className="flex-1">
+                    <span className="w-full inline-flex items-center justify-center gap-1 px-3 py-2 rounded-xl bg-white dark:bg-[#161616] text-[#3A2E27] dark:text-[#FAF5EE] font-semibold text-xs border border-[#EFE2D6] dark:border-[#1f1f1f] hover:border-[#f15e1c] transition-colors">
+                      Setup Call
+                    </span>
+                  </Link>
+                  <Link href={service.href} className="flex-1">
+                    <span className="w-full inline-flex items-center justify-center gap-1 px-3.5 py-2 rounded-xl bg-[#f15e1c] text-white font-semibold text-xs shadow-md hover:bg-[#d84e12] transition-colors">
+                      <span>Explore Practice</span> <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </Link>
                 </div>
-              </Link>
+              </div>
             );
           })}
         </div>

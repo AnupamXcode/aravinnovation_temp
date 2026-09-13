@@ -208,12 +208,12 @@ export function Footer() {
   }
 
   return (
-    <div className="w-full relative pt-10 sm:pt-16 overflow-hidden">
-      {/* Visual Section Boundary Divider: Page Ends First with Crisp Warm Separation Line */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent mb-6 sm:mb-8" />
+    <div className="w-full relative pt-6 sm:pt-12 bg-[#FFFDF9] dark:bg-[#000000]">
+      {/* Visual Section Boundary Divider */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent mb-4 sm:mb-6" />
 
       {/* Static Enterprise Footer Panel */}
-      <footer className="w-full relative bg-gradient-to-b from-[#d84a0d] via-[#f15e1c] to-[#b83e0a] text-white pt-10 sm:pt-12 pb-8 overflow-hidden select-none rounded-t-[2rem] sm:rounded-t-[3rem] shadow-[0_-20px_50px_rgba(241,94,28,0.25)] border-t border-white/30">
+      <footer className="w-full relative bg-gradient-to-b from-[#d84a0d] via-[#f15e1c] to-[#b83e0a] text-white pt-8 sm:pt-12 pb-8 overflow-hidden select-none rounded-t-[2rem] sm:rounded-t-[3rem] shadow-[0_-20px_50px_rgba(241,94,28,0.25)] border-t border-white/30">
         {/* =========================================================================
             SLOW MOVING ATMOSPHERIC GRADIENT (ORANGE + WHITE PALETTE ONLY)
             20–35s Slow Ambient Fields with 0% dark/green elements

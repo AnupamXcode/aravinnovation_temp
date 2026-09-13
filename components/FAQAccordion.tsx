@@ -3,7 +3,7 @@
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { aiPortfolioFAQs, FAQItem } from "@/data/faqs";
+import { buyerFAQs, FAQItem } from "@/data/faqs";
 import { cn } from "@/lib/utils";
 
 interface FAQAccordionProps {
@@ -15,9 +15,9 @@ interface FAQAccordionProps {
 }
 
 export function FAQAccordion({
-  items = aiPortfolioFAQs,
+  items = buyerFAQs,
   title = "Frequently Asked Questions",
-  subtitle = "Everything you need to know about our AI portfolio, enterprise integration, and privacy controls.",
+  subtitle = "Clear, direct answers regarding our technology capabilities, delivery models, and engagement options.",
   badge = "FAQ",
   className,
 }: FAQAccordionProps) {

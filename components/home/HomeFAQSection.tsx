@@ -8,16 +8,24 @@ import { ChevronDown, HelpCircle, Sparkles } from "lucide-react";
 
 export const homeFaqs = [
   {
-    q: "How does Arav Innovations combine technology with digital growth?",
-    a: "Arav Innovations operates as an integrated partner. Rather than separating software development from digital marketing, our engineers, AI specialists, and performance marketers collaborate. This ensures every platform we build is engineered for speed, technical SEO, user conversion, and long-term scalability.",
+    q: "How does Arav Innovations help businesses combine technology and digital growth?",
+    a: "We unify executive IT consulting, custom software engineering, AI workflow automation, performance marketing, and technical SEO into a single connected ecosystem. Rather than managing disconnected vendors, your business gains a single accountable partner focused on revenue outcomes and system efficiency.",
   },
   {
-    q: "Which regions does Arav Innovations serve?",
-    a: "We maintain active operations in India and the UAE, serving growing mid-market businesses, enterprise organizations, SaaS companies, and digital brands across the Middle East, Asia, and global markets.",
+    q: "Which industries does Arav Innovations work with?",
+    a: "We work across 10 high-concurrency and highly regulated sectors including FinTech & Financial Services, B2B SaaS, Healthcare & HealthTech, Professional Services, E-Commerce & Retail, Education & EdTech, Industrial Manufacturing, Real Estate, Logistics & Supply Chain, and High-Growth Scale-Ups across India and the UAE.",
   },
   {
-    q: "What is Answer Engine Optimization (AEO) and why is it essential?",
-    a: "Answer Engine Optimization (AEO) optimizes your web presence so that conversational AI engines—such as ChatGPT, Claude, Gemini, and Google SGE—can easily extract and cite your company as the direct answer to user queries. While traditional SEO targets blue link rankings, AEO focuses on positioning your brand as the direct AI answer.",
+    q: "How does Arav Innovations approach a new technology or digital transformation project?",
+    a: "Every engagement follows a structured 5-step lifecycle: Discovery & Audit → Architectural Scope → Agile Sprint Engineering → Compliance & Governance Hardening → Production Launch & Continuous Optimization. All intellectual property remains 100% owned by the client.",
+  },
+  {
+    q: "Can Arav Innovations work with an existing internal technology or marketing team?",
+    a: "Yes. We frequently embed as specialized staff augmentation pods or fractional practice directors alongside internal CIOs, CTOs, and marketing leads to accelerate release sprints, solve legacy bottlenecks, or scale engineering bandwidth without hiring delays.",
+  },
+  {
+    q: "How can I discuss my requirements with Arav Innovations?",
+    a: "You can initiate a discussion by scheduling a consultation or submitting an inquiry via our contact form. A senior practice director will review your project brief under strict confidentiality (NDA) and respond within 1 business day.",
   },
 ];
 

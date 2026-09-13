@@ -20,12 +20,12 @@ export function ProblemToSolutionSection() {
     {
       step: "02",
       tag: "BUILD",
-      title: "Technology & AI",
-      description: "Engineering resilient web products, custom mobile platforms, intelligent LLM automation, and high-performance digital systems.",
+      title: "Technology & AI MVP Delivery",
+      description: "Engineering resilient web products, custom mobile platforms, and rapid 2-to-4 week AI Proofs of Concept (MVPs) that validate business automation before full-scale rollouts.",
       icon: <Code2 className="w-6 h-6 text-[#2e936f]" />,
       tone: "#2e936f",
       bgGradient: "from-[#2e936f]/10 to-transparent",
-      href: "/services/web-app-development",
+      href: "/services/ai-portfolio",
     },
     {
       step: "03",
