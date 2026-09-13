@@ -76,7 +76,7 @@ export const siteOrganizationSchema = {
       name: "Arav Innovations - India HQ",
       image: `${SITE_BASE_URL}/og-default.jpg`,
       telephone: "+91-9650625777",
-      email: "support@aravinnovations.com",
+      email: "Info@aravinnovations.com",
       address: {
         "@type": "PostalAddress",
         streetAddress: "Platinum Floor, 14/23, Ardee City, Sector 52",
@@ -94,7 +94,7 @@ export const siteOrganizationSchema = {
       name: "Arav Innovations - UAE Hub",
       image: `${SITE_BASE_URL}/og-default.jpg`,
       telephone: "+971-521555792",
-      email: "support@aravinnovations.com",
+      email: "Info@aravinnovations.com",
       address: {
         "@type": "PostalAddress",
         streetAddress: "Business Bay Tower",

@@ -188,7 +188,7 @@ export default async function TermsAndConditionsPage({
                 Contact Us
               </h2>
               <p className="text-[#7A6A5F] dark:text-[#B8ACA0]">
-                For inquiries, feedback, or support, feel free to reach out to us. Our team is always ready to assist you. Connect with us today at <a href="mailto:support@aravinnovations.com" className="text-[#f15e1c] font-semibold hover:underline">support@aravinnovations.com</a>.
+                For inquiries, feedback, or support, feel free to reach out to us. Our team is always ready to assist you. Connect with us today at <a href="mailto:Info@aravinnovations.com" className="text-[#f15e1c] font-semibold hover:underline">Info@aravinnovations.com</a>.
               </p>
             </section>
           </div>

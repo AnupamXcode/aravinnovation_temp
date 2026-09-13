@@ -200,9 +200,9 @@ export function CEOLeadershipSection({
                     href={ceoConfig.linkedinUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-[#1b2823] hover:bg-[#f15e1c] text-white dark:bg-white dark:text-[#1b2823] dark:hover:bg-[#f15e1c] dark:hover:text-white font-mono font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 group"
+                    className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-[#2e936f] hover:bg-[#237457] text-white border border-[#2e936f] font-mono font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 group"
                   >
-                    <LinkedInIcon className="w-4 h-4 text-[#0077b5] group-hover:text-white transition-colors" />
+                    <LinkedInIcon className="w-4 h-4 text-white group-hover:scale-110 transition-transform" />
                     <span>{ceoConfig.ctaText}</span>
                     <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </a>

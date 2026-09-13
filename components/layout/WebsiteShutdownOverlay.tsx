@@ -111,7 +111,7 @@ export function WebsiteShutdownOverlay({ children }: { children: React.ReactNode
             <div className="pt-3 border-t border-[#1f1f1f] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
               <div className="flex items-center gap-2 text-[#B8ACA0]">
                 <Mail className="w-4 h-4 text-[#f15e1c]" />
-                <span>support@aravinnovations.com</span>
+                <span>Info@aravinnovations.com</span>
               </div>
               <div className="flex items-center gap-2 text-[#B8ACA0]">
                 <Phone className="w-4 h-4 text-[#f15e1c]" />

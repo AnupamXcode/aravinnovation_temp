@@ -135,7 +135,7 @@ export default async function RefundPolicyPage({
               <div className="p-6 rounded-2xl bg-[#FBF3EA] dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-2.5">
                 <div className="flex items-center gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
                   <Mail className="w-4 h-4 text-[#f15e1c]" />
-                  <span>Email: <a href="mailto:support@aravinnovations.com" className="text-[#f15e1c] hover:underline">support@aravinnovations.com</a></span>
+                  <span>Email: <a href="mailto:Info@aravinnovations.com" className="text-[#f15e1c] hover:underline">Info@aravinnovations.com</a></span>
                 </div>
                 <div className="flex items-center gap-2 font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
                   <Phone className="w-4 h-4 text-[#f15e1c]" />

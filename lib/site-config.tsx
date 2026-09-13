@@ -330,7 +330,7 @@ const defaultConfig: SiteConfig = {
   bannerText: "🚀 Operating Globally across India, UAE, US, EU & Canada Hubs",
   phoneIndia: "+91 9650625777",
   phoneUAE: "+971 521555792",
-  supportEmail: "support@aravinnovations.com",
+  supportEmail: "Info@aravinnovations.com",
   linkedinUrl: "https://www.linkedin.com/company/aravinnovations/",
   instagramUrl: "https://www.instagram.com/aravinnovations",
   facebookUrl: "https://www.facebook.com/people/Arav-Innovations/61566419637071/",
@@ -373,7 +373,7 @@ const defaultConfig: SiteConfig = {
     mapsUrlUAE: "https://www.google.com/maps/search/?api=1&query=IFZA+Business+Park+Building+A1+Dubai+Silicon+Oasis+Dubai+UAE",
     phoneIndia: "+91 9650625777",
     phoneUAE: "+971 521555792",
-    supportEmail: "support@aravinnovations.com",
+    supportEmail: "Info@aravinnovations.com",
   },
   sectionThemes: {
     services: "soft_orange",

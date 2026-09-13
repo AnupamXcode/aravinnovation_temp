@@ -116,7 +116,7 @@ export const mainNavigation: NavItem[] = [
 export const companyContactInfo = {
   name: "Arav Innovations",
   tagline: "Technology • Strategy • Digital Growth",
-  email: "support@aravinnovations.com",
+  email: "Info@aravinnovations.com",
   connectEmail: "connect@aravinnovations.com",
   salesEmail: "sales@aravinnovations.com",
   careersEmail: "careers@aravinnovations.com",

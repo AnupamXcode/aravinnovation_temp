@@ -133,42 +133,34 @@ function AnimatedFooterSection({
 // 8 Verified Enterprise Services
 const serviceLinks = [
   {
-    num: "01",
     title: "IT Strategy & Implementation",
     href: "/services/it-strategy-implementation",
   },
   {
-    num: "02",
     title: "Digital Marketing & Brand Development",
     href: "/services/digital-marketing-brand-development",
   },
   {
-    num: "03",
     title: "Web & Application Development",
     href: "/services/web-app-development",
   },
   {
-    num: "04",
     title: "Risk, Compliance & Governance",
     href: "/services/risk-compliance-governance",
   },
   {
-    num: "05",
     title: "Audit & Improvement",
     href: "/services/audit-improvement",
   },
   {
-    num: "06",
     title: "Training & Staff Augmentation",
     href: "/services/training-staff-augmentation",
   },
   {
-    num: "07",
     title: "SEO Services",
     href: "/services/seo-services",
   },
   {
-    num: "08",
     title: "AI Portfolio",
     href: "/services/ai-portfolio",
   },
@@ -342,20 +334,15 @@ export function Footer() {
 
               <ul className="space-y-2">
                 {serviceLinks.map((service) => (
-                  <li key={service.num}>
+                  <li key={service.href}>
                     <BorderDrawWrapper roundedClass="rounded-lg" rx={8}>
                       <Link
                         href={service.href}
                         className="group flex items-center justify-between py-2 px-3 rounded-lg bg-white/10 hover:bg-white/20 backdrop-blur-xs transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
                       >
-                        <div className="flex items-center gap-3">
-                          <span className="text-[11px] font-mono font-bold text-[#ffec69] group-hover:text-white transition-colors">
-                            {service.num}
-                          </span>
-                          <span className="text-xs sm:text-sm font-sans font-semibold text-white/95 group-hover:text-white group-hover:translate-x-1 transition-all duration-200">
-                            {service.title}
-                          </span>
-                        </div>
+                        <span className="text-xs sm:text-sm font-sans font-semibold text-white/95 group-hover:text-white group-hover:translate-x-1 transition-all duration-200">
+                          {service.title}
+                        </span>
 
                         <ArrowRight className="w-3.5 h-3.5 text-[#ffec69] group-hover:text-white group-hover:translate-x-1 transition-all duration-200 shrink-0 ml-2" />
                       </Link>

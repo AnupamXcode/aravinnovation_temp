@@ -31,28 +31,28 @@ export default async function ServicesHubPage({
   const services = await getServices(locale);
 
   return (
-    <div className="pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
+    <div className="pt-6 sm:pt-10 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300 scroll-mt-24">
       <BreadcrumbSchema items={[{ name: "Services & Practices", url: "/services" }]} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
         <ScrollReveal direction="up">
-          <div className="mb-8">
+          <div className="mb-6 sm:mb-8">
             <Breadcrumb items={[{ label: t("badge") }]} />
           </div>
         </ScrollReveal>
 
         {/* Hero Banner */}
         <ScrollReveal direction="up" delay={0.1}>
-          <div className="max-w-3xl space-y-4 mb-16">
+          <div className="max-w-3xl space-y-4 mb-12 sm:mb-16">
             <Badge variant="secondary" size="md">
               {t("badge")}
             </Badge>
             <ScrollTextFlip>
-              <h1 className="text-4xl sm:text-5xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#2e936f] dark:text-[#2e936f] tracking-tight leading-tight">
                 {t("title")}
               </h1>
             </ScrollTextFlip>
-            <p className="text-lg text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
+            <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#B8ACA0] leading-relaxed">
               {t("description")}
             </p>
           </div>
