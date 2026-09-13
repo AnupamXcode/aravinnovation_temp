@@ -470,7 +470,7 @@ export function ChatbotWidget() {
           { label: locale === "hi" ? "प्रोजेक्ट शुरू करें" : locale === "ar" ? "بدء مشروع" : "Start a Project", action: "start_project" },
         ],
       };
-    } else if (option.action === "start_project") {
+    } else if (option.action === "start_project" || option.action === "progressive_lead") {
       const prefills = option.payload || (sessionContext.mentionedService
         ? `Inquiry regarding ${sessionContext.mentionedService}`
         : sessionContext.mentionedIndustry
@@ -481,11 +481,38 @@ export function ChatbotWidget() {
         setLeadFormState((prev) => ({ ...prev, requirement: prefills }));
       }
 
+      updateContext({ leadStep: "NAME" });
+
+      const namePrompt =
+        locale === "hi"
+          ? "आपकी टीम से बात करवा कर खुशी होगी! मैं आपको किस नाम से संबोधित करूँ?"
+          : locale === "ar"
+          ? "يسعدنا تواصلك مع فريقنا! ما اسمك الكريم؟"
+          : "Happy to connect you with our team! What should I call you?";
+
       botMsg = {
         id: `bot-${Date.now()}`,
         sender: "bot",
-        text: t("leadSubtitle"),
-        isLeadForm: true,
+        text: namePrompt,
+      };
+    } else if (option.action === "submit_lead_confirm") {
+      const submitText =
+        locale === "hi"
+          ? "धन्यवाद! आपकी पूछताछ सफलतापूर्वक आरव टीम को भेज दी गई है। एक वरिष्ठ सलाहकार 24 घंटे के भीतर आपसे संपर्क करेगा।"
+          : locale === "ar"
+          ? "شكراً لك! تم إرسال استفسارك بنجاح إلى فريق آراف. سيتواصل معك مستشار فني خلال 24 ساعة."
+          : "Thank you! Your enquiry has been successfully submitted to the Arav team. A senior technical consultant will reach out to you within 24 hours.";
+
+      handleLeadSubmitInternal();
+
+      botMsg = {
+        id: `bot-${Date.now()}`,
+        sender: "bot",
+        text: submitText,
+        options: [
+          { label: locale === "hi" ? "सेवाएं देखें" : locale === "ar" ? "استكشف الخدمات" : "Explore Core Services", action: "all_services" },
+          { label: locale === "hi" ? "होमपेज" : locale === "ar" ? "الصفحة الرئيسية" : "Go to Homepage", action: "navigate", route: "/" },
+        ],
       };
     } else {
       botMsg = {
@@ -494,7 +521,7 @@ export function ChatbotWidget() {
         text: chatbotKB?.defaultGreeting || t("greeting"),
         options: [
           { label: locale === "hi" ? "सेवाएं देखें" : locale === "ar" ? "استكشف الخدمات" : "Explore Services", action: "all_services" },
-          { label: locale === "hi" ? "प्रोजेक्ट शुरू करें" : locale === "ar" ? "بدء مشروع" : "Start a Project", action: "start_project" },
+          { label: locale === "hi" ? "प्रोजेक्ट शुरू करें" : locale === "ar" ? "بدء مشروع" : "Start a Conversation", action: "start_project" },
         ],
       };
     }
@@ -509,6 +536,29 @@ export function ChatbotWidget() {
         toggleReadAloud(botMsg.id, botMsg.text);
       }
     }, 400);
+  };
+
+  const handleLeadSubmitInternal = async (overrideState?: typeof leadFormState) => {
+    const dataToSend = overrideState || leadFormState;
+    try {
+      await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: dataToSend.name || "Inquirer",
+          company: dataToSend.phone || "Direct Inquirer (Chatbot)",
+          email: dataToSend.email || "noreply@aravinnovations.com",
+          phone: dataToSend.phone || "N/A",
+          service: sessionContext.mentionedService || "General Inquiry (Chatbot)",
+          requirement: dataToSend.requirement || "Inquiry from chatbot assistant",
+          timeline: "1 - 3 Months",
+        }),
+      });
+      setLeadSubmitted(true);
+      updateContext({ leadStep: undefined });
+    } catch {
+      // ignore
+    }
   };
 
   const handleCustomSend = (e: React.FormEvent) => {
@@ -530,53 +580,100 @@ export function ChatbotWidget() {
     setTimeout(() => {
       let botMsg: ChatMessage;
 
-      const matched = findIntent(userText, locale, sessionContext);
+      // Handle Progressive Lead Collection Steps
+      if (sessionContext.leadStep === "NAME") {
+        setLeadFormState((prev) => ({ ...prev, name: userText }));
+        updateContext({ leadStep: "COMPANY" });
+        const text =
+          locale === "hi"
+            ? `धन्यवाद, ${userText}! आपकी कंपनी या संगठन का नाम क्या है?`
+            : locale === "ar"
+            ? `شكراً ${userText}! ما اسم شركتك أو مؤسستك؟`
+            : `Thanks, ${userText}! What is your company or organization name?`;
+        botMsg = { id: `bot-${Date.now()}`, sender: "bot", text };
+      } else if (sessionContext.leadStep === "COMPANY") {
+        setLeadFormState((prev) => ({ ...prev, phone: userText }));
+        updateContext({ leadStep: "EMAIL" });
+        const text =
+          locale === "hi"
+            ? `समझ गया। आप किस कार्य ईमेल पर संपर्क प्राप्त करना चाहेंगे?`
+            : locale === "ar"
+            ? `ممتاز. ما هو البريد الإلكتروني للعمل المناسب للتواصل معك؟`
+            : `Got it. What is the best work email to reach you at?`;
+        botMsg = { id: `bot-${Date.now()}`, sender: "bot", text };
+      } else if (sessionContext.leadStep === "EMAIL") {
+        setLeadFormState((prev) => ({ ...prev, email: userText }));
+        updateContext({ leadStep: "REQUIREMENT" });
+        const text =
+          locale === "hi"
+            ? `धन्यवाद! संक्षेप में, आप किस मुख्य चुनौती या सेवा में मदद चाहते हैं?`
+            : locale === "ar"
+            ? `شكراً! باختصار، ما هي الخدمة أو التحدي الرئيسي الذي تطلب المساعدة فيه؟`
+            : `Thank you! Briefly, what main challenge or service are you looking for help with?`;
+        botMsg = { id: `bot-${Date.now()}`, sender: "bot", text };
+      } else if (sessionContext.leadStep === "REQUIREMENT") {
+        const updatedRequirement = userText;
+        setLeadFormState((prev) => ({ ...prev, requirement: updatedRequirement }));
+        updateContext({ leadStep: undefined });
 
-      if (matched) {
-        updateContext({
-          lastIntentId: matched.intent.id,
-          mentionedService: matched.detectedService || sessionContext.mentionedService,
-          mentionedIndustry: matched.detectedIndustry || sessionContext.mentionedIndustry,
-        });
+        const nameVal = leadFormState.name || "Client";
+        const companyVal = leadFormState.phone || "Company";
+        const emailVal = leadFormState.email || "Email";
 
-        const langKey = (locale === "hi" ? "hi" : locale === "ar" ? "ar" : "en") as "en" | "hi" | "ar";
-        const options = matched.intent.options ? matched.intent.options[langKey] : undefined;
-
-        if (matched.isLeadForm) {
-          const detectedSvc = matched.detectedService || sessionContext.mentionedService;
-          const detectedInd = matched.detectedIndustry || sessionContext.mentionedIndustry;
-          const prefills = detectedSvc
-            ? `Inquiry regarding ${detectedSvc}`
-            : detectedInd
-            ? `Inquiry for ${detectedInd} sector`
-            : userText;
-          setLeadFormState((prev) => ({
-            ...prev,
-            requirement: prev.requirement || prefills,
-          }));
-        }
+        const text =
+          locale === "hi"
+            ? `धन्यवाद, ${nameVal}! मैंने आपके विवरण नोट कर लिए हैं:\n\n• नाम: ${nameVal}\n• कंपनी: ${companyVal}\n• ईमेल: ${emailVal}\n• आवश्यकता: ${updatedRequirement}\n\nक्या आप चाहते हैं कि मैं इस पूछताछ को आरव टीम को भेजूं?`
+            : locale === "ar"
+            ? `شكراً ${nameVal}! لقد سجلت تفاصيلك:\n\n• الاسم: ${nameVal}\n• الشركة: ${companyVal}\n• البريد الإلكتروني: ${emailVal}\n• المتطلب: ${updatedRequirement}\n\nهل ترغب في إرسال هذا الاستفسار إلى فريق آراف الآن؟`
+            : `Thanks, ${nameVal}! I've noted your details:\n\n• Name: ${nameVal}\n• Company/Org: ${companyVal}\n• Email: ${emailVal}\n• Requirement: ${updatedRequirement}\n\nWould you like me to submit this enquiry to our team now?`;
 
         botMsg = {
           id: `bot-${Date.now()}`,
           sender: "bot",
-          text: matched.responseText,
-          options,
-          isLeadForm: matched.isLeadForm,
-        };
-      } else {
-        const fallbackText =
-          chatbotKB?.fallbackResponse ||
-          "I can help with Arav Innovations' services, solutions and business technology capabilities. What are you looking to build, improve or transform?";
-
-        botMsg = {
-          id: `bot-${Date.now()}`,
-          sender: "bot",
-          text: fallbackText,
+          text,
           options: [
-            { label: locale === "hi" ? "सेवाएं देखें" : locale === "ar" ? "جميع الخدمات" : "Explore Services", action: "all_services" },
-            { label: locale === "hi" ? "प्रोजेक्ट शुरू करें" : locale === "ar" ? "بدء مشروع" : "Start a Conversation", action: "start_project" },
+            {
+              label: locale === "hi" ? "पूछताछ भेजें →" : locale === "ar" ? "إرسال الاستفسار →" : "Submit Enquiry →",
+              action: "submit_lead_confirm",
+              ctaType: "action",
+            },
           ],
         };
+      } else {
+        const matched = findIntent(userText, locale, sessionContext);
+
+        if (matched) {
+          updateContext({
+            lastIntentId: matched.intent.id,
+            mentionedService: matched.detectedService || sessionContext.mentionedService,
+            mentionedIndustry: matched.detectedIndustry || sessionContext.mentionedIndustry,
+          });
+
+          const langKey = (locale === "hi" ? "hi" : locale === "ar" ? "ar" : "en") as "en" | "hi" | "ar";
+          const options = matched.intent.options ? matched.intent.options[langKey] : undefined;
+
+          botMsg = {
+            id: `bot-${Date.now()}`,
+            sender: "bot",
+            text: matched.responseText,
+            options,
+            isLeadForm: matched.isLeadForm && !matched.intent.options,
+          };
+        } else {
+          const fallbackText =
+            chatbotKB?.fallbackResponse ||
+            "I can help with Arav Innovations' services, solutions and business technology capabilities. What are you looking to build, improve or transform?";
+
+          botMsg = {
+            id: `bot-${Date.now()}`,
+            sender: "bot",
+            text: fallbackText,
+            options: [
+              { label: locale === "hi" ? "सेवाएं देखें" : locale === "ar" ? "جميع الخدمات" : "Explore Services", action: "all_services" },
+              { label: locale === "hi" ? "बातचीत शुरू करें" : locale === "ar" ? "بدء مشروع" : "Start a Conversation", action: "start_project" },
+            ],
+          };
+        }
       }
 
       setIsTyping(false);
@@ -589,32 +686,15 @@ export function ChatbotWidget() {
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: leadFormState.name,
-          company: "Direct Inquirer (Chatbot)",
-          email: leadFormState.email,
-          phone: leadFormState.phone,
-          service: sessionContext.mentionedService || "General Inquiry (Chatbot)",
-          requirement: leadFormState.requirement || "Inquiry from chatbot assistant",
-          timeline: "1 - 3 Months",
-        }),
-      });
-      setLeadSubmitted(true);
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: `bot-${Date.now()}`,
-          sender: "bot",
-          text: t("leadSubmittedMsg"),
-        },
-      ]);
-    } catch {
-      // ignore
-    }
+    await handleLeadSubmitInternal();
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: `bot-${Date.now()}`,
+        sender: "bot",
+        text: t("leadSubmittedMsg"),
+      },
+    ]);
   };
 
   return (

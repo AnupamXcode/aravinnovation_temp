@@ -95,6 +95,10 @@ export const mainNavigation: NavItem[] = [
     children: servicesNavigation,
   },
   {
+    label: "Industries",
+    href: "/industries",
+  },
+  {
     label: "Products",
     href: "/products",
   },

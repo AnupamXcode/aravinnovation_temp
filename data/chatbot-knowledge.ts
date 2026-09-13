@@ -36,6 +36,7 @@ export interface ChatSessionContext {
   mentionedTopic?: string;
   mentionedBudget?: string;
   lastIntentId?: string;
+  leadStep?: "NAME" | "COMPANY" | "EMAIL" | "REQUIREMENT";
   history: string[];
 }
 
