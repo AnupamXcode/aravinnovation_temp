@@ -2,9 +2,10 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Product } from "@/data/products";
 import { Button } from "@/components/ui/button";
-import { Sparkles, ShieldCheck, CheckCircle2, ExternalLink, ChevronDown, ChevronUp } from "lucide-react";
+import { Sparkles, ShieldCheck, CheckCircle2, ExternalLink, ChevronDown, ChevronUp, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ProductCardProps {
@@ -12,36 +13,57 @@ interface ProductCardProps {
   index?: number;
 }
 
+function OrbitCelestialIcon({ className = "w-6 h-6 text-[#f15e1c]" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="3" />
+      <ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(-30 12 12)" />
+      <ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(30 12 12)" />
+    </svg>
+  );
+}
+
 export function ProductCard({ product }: ProductCardProps) {
   const isLive = product.status === "live";
   const [showAllCapabilities, setShowAllCapabilities] = React.useState(false);
 
-  // Icon selector
+  // Icon selector: Orbit for celestial/astrology products, ShieldCheck for GRC
   const icon =
     product.iconName === "ShieldCheck" ? (
       <ShieldCheck className="w-6 h-6 text-[#f15e1c]" />
+    ) : product.iconName === "Orbit" || product.slug.includes("astrobeams") ? (
+      <OrbitCelestialIcon className="w-6 h-6 text-[#f15e1c]" />
     ) : (
       <Sparkles className="w-6 h-6 text-[#f15e1c]" />
     );
 
-  const visibleFeatures = showAllCapabilities ? product.features : product.features.slice(0, 4);
+  const visibleFeatures = showAllCapabilities ? product.features : product.features.slice(0, 6);
+
+  // Clean heading without appended .store string
+  const displayTitle = product.name.replace(/\.store$/i, "");
 
   return (
-    <div className="group relative h-full rounded-3xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] p-7 sm:p-9 shadow-md hover:shadow-2xl hover:shadow-[#f15e1c]/15 hover:border-[#f15e1c] dark:hover:border-[#f15e1c] hover:bg-[#fefaf5] dark:hover:bg-[#121212] transition-all duration-300 sm:hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden">
+    <div className="group relative h-full rounded-3xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] p-6 sm:p-8 shadow-md hover:shadow-2xl hover:shadow-[#f15e1c]/15 hover:border-[#f15e1c] dark:hover:border-[#f15e1c] hover:bg-[#fefaf5] dark:hover:bg-[#121212] transition-all duration-300 flex flex-col justify-between overflow-hidden">
       {/* Top Accent Line */}
       <div
         className="absolute top-0 inset-x-0 h-1.5 transition-opacity opacity-80 group-hover:opacity-100"
         style={{ backgroundColor: product.badgeColor }}
       />
 
-      <div className="space-y-6">
+      <div className="space-y-5">
         {/* Top Row: Icon & Status Badge */}
         <div className="flex items-center justify-between">
-          <div className="p-3.5 rounded-2xl bg-[#f7d7b0]/30 dark:bg-[#1a1a1a] border border-[#f7d7b0] dark:border-[#1a1a1a] transition-transform duration-300 group-hover:scale-105">
+          <div className="p-3 rounded-2xl bg-[#f7d7b0]/30 dark:bg-[#1a1a1a] border border-[#f7d7b0] dark:border-[#1a1a1a] transition-transform duration-300 group-hover:scale-105">
             {icon}
           </div>
 
           <div className="flex items-center gap-2">
+            {product.domain && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold text-[#2e936f] bg-[#2e936f]/10 border border-[#2e936f]/30">
+                <Globe className="w-3 h-3 text-[#2e936f]" />
+                <span>{product.domain}</span>
+              </span>
+            )}
             <span
               className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider text-white shadow-xs"
               style={{ backgroundColor: product.badgeColor }}
@@ -52,30 +74,43 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
         </div>
 
+        {/* Product Image Banner */}
+        {product.imageUrl && (
+          <div className="relative w-full aspect-[16/8.5] rounded-2xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] bg-[#000000] shadow-sm">
+            <Image
+              src={product.imageUrl}
+              alt={displayTitle}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
+            />
+          </div>
+        )}
+
         {/* Product Heading & Category */}
-        <div className="space-y-2 text-left">
+        <div className="space-y-1.5 text-left">
           <h3 className="text-2xl sm:text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
-            {product.name}
+            {displayTitle}
           </h3>
-          <p className="text-xs sm:text-sm font-bold font-mono text-[#f15e1c] uppercase tracking-wider">
+          <p className="text-xs font-bold font-mono text-[#f15e1c] uppercase tracking-wider">
             {product.category}
           </p>
-          <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+          <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
             {product.description}
           </p>
         </div>
 
         {/* Capabilities List with Compact View Details toggle */}
-        <div className="space-y-3 pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] text-left">
+        <div className="space-y-3 pt-3 border-t border-[#f7d7b0] dark:border-[#1a1a1a] text-left">
           <div className="flex items-center justify-between">
-            <span className="text-xs sm:text-sm font-bold font-mono uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
+            <span className="text-xs font-bold font-mono uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
               Key Capabilities
             </span>
-            {product.features.length > 4 && (
+            {product.features.length > 6 && (
               <button
                 type="button"
                 onClick={() => setShowAllCapabilities(!showAllCapabilities)}
-                className="text-xs sm:text-sm font-bold text-[#f15e1c] hover:underline inline-flex items-center gap-0.5 cursor-pointer"
+                className="text-xs font-bold text-[#f15e1c] hover:underline inline-flex items-center gap-0.5 cursor-pointer"
               >
                 <span>{showAllCapabilities ? "Show Less" : "View All"}</span>
                 {showAllCapabilities ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
@@ -83,11 +118,11 @@ export function ProductCard({ product }: ProductCardProps) {
             )}
           </div>
 
-          <div className="space-y-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {visibleFeatures.map((feature, fIdx) => (
-              <div key={fIdx} className="flex items-start gap-2.5 text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#2e936f] shrink-0 mt-0.5" />
-                <span className="leading-snug font-medium">{feature}</span>
+              <div key={fIdx} className="flex items-center gap-2 p-1.5 rounded-xl bg-[#fefaf5] dark:bg-[#141414] border border-[#f7d7b0]/50 dark:border-[#222222] text-xs text-[#1b2823] dark:text-[#ffffff] font-medium">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
+                <span className="leading-tight line-clamp-1">{feature}</span>
               </div>
             ))}
           </div>
@@ -95,7 +130,7 @@ export function ProductCard({ product }: ProductCardProps) {
       </div>
 
       {/* Footer & Actions */}
-      <div className="mt-8 pt-5 border-t border-[#f7d7b0] dark:border-[#1a1a1a] flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="mt-6 pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] flex flex-col sm:flex-row items-center justify-between gap-3">
         <Link
           href={`/products/${product.slug}`}
           className="text-xs font-bold text-[#4a5c55] dark:text-[#d3eee4] hover:text-[#f15e1c] transition-colors"
@@ -109,7 +144,7 @@ export function ProductCard({ product }: ProductCardProps) {
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto"
-            aria-label={`Explore ${product.name} external platform in a new browser tab`}
+            aria-label={`Explore ${displayTitle} external platform in a new browser tab`}
           >
             <Button
               variant="primary"
@@ -134,3 +169,4 @@ export function ProductCard({ product }: ProductCardProps) {
     </div>
   );
 }
+

@@ -10,15 +10,17 @@ import { cn } from "@/lib/utils";
 interface BlogCardImageProps {
   post: Partial<BlogPost>;
   className?: string;
-  aspectRatio?: string; // e.g. "aspect-video" or "h-48 sm:h-52"
+  aspectRatio?: string; // e.g. "aspect-[16/10]" or "aspect-video"
   sizes?: string;
+  objectFitClass?: string;
 }
 
 export function BlogCardImage({
   post,
   className,
-  aspectRatio = "aspect-video",
+  aspectRatio = "aspect-[16/10]",
   sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
+  objectFitClass = "object-cover object-top sm:object-center",
 }: BlogCardImageProps) {
   const primarySrc = getValidBlogImageUrl(post);
   const fallbackSrc = getBlogCategoryFallback(post.category);
@@ -54,7 +56,10 @@ export function BlogCardImage({
           fill
           unoptimized
           sizes={sizes}
-          className="object-cover object-center group-hover:scale-105 transition-transform duration-500 text-transparent"
+          className={cn(
+            "transition-transform duration-500 text-transparent group-hover:scale-105",
+            objectFitClass
+          )}
           onError={handleImageError}
         />
       ) : (
@@ -67,3 +72,4 @@ export function BlogCardImage({
     </div>
   );
 }
+

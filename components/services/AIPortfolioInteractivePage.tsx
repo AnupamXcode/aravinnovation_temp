@@ -622,6 +622,59 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
         </div>
       </section>
 
+      {/* =====================================================================
+          2.5 AI MVP — PRACTICAL MVP OFFERING
+          ===================================================================== */}
+      <section id="ai-mvp" className="relative z-10 w-full py-10 sm:py-14 bg-[#fefaf5] dark:bg-[#0a0a0a] border-b border-[#F7D7B0]">
+        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="p-6 sm:p-10 rounded-3xl bg-white dark:bg-[#121212] border-2 border-[#F15E1C]/30 shadow-xl space-y-6">
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+              <div className="space-y-3 max-w-2xl">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F15E1C]/10 border border-[#F15E1C]/30 text-xs font-mono font-bold text-[#F15E1C]">
+                  <Sparkles className="w-3.5 h-3.5 text-[#F15E1C]" />
+                  <span>RAPID AI MVP PROGRAM</span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#1b2823] dark:text-[#ffffff]">
+                  AI MVP Development
+                </h3>
+                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
+                  Turn an AI concept into a practical working MVP. Validate your idea quickly, demonstrate the business workflow to key stakeholders, and establish a solid foundation for future production development.
+                </p>
+              </div>
+
+              <Link href="/contact?intent=ai-mvp">
+                <Button3D variant="primary" size="lg" className="bg-[#F15E1C] text-white hover:bg-[#d8480d]">
+                  Build Your AI MVP →
+                </Button3D>
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-[#F7D7B0]/60">
+              <div className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#181818] border border-[#F7D7B0]/50 space-y-1.5">
+                <div className="text-xs font-mono font-bold text-[#F15E1C] uppercase">01 • Scoping</div>
+                <h4 className="text-sm font-bold text-[#1b2823] dark:text-[#ffffff]">Concept Validation</h4>
+                <p className="text-xs text-gray-600 dark:text-gray-400">Map use-case feasibility and validate core business requirements.</p>
+              </div>
+              <div className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#181818] border border-[#F7D7B0]/50 space-y-1.5">
+                <div className="text-xs font-mono font-bold text-[#2E936F] uppercase">02 • Workflow</div>
+                <h4 className="text-sm font-bold text-[#1b2823] dark:text-[#ffffff]">Demonstrable AI Flow</h4>
+                <p className="text-xs text-gray-600 dark:text-gray-400">Build a functional prototype connected to key data sources.</p>
+              </div>
+              <div className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#181818] border border-[#F7D7B0]/50 space-y-1.5">
+                <div className="text-xs font-mono font-bold text-[#FAB60A] uppercase">03 • Feedback</div>
+                <h4 className="text-sm font-bold text-[#1b2823] dark:text-[#ffffff]">User Testing</h4>
+                <p className="text-xs text-gray-600 dark:text-gray-400">Gather immediate feedback on accuracy, usability, and speed.</p>
+              </div>
+              <div className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#181818] border border-[#F7D7B0]/50 space-y-1.5">
+                <div className="text-xs font-mono font-bold text-[#F15E1C] uppercase">04 • Roadmap</div>
+                <h4 className="text-sm font-bold text-[#1b2823] dark:text-[#ffffff]">Production Scaling</h4>
+                <p className="text-xs text-gray-600 dark:text-gray-400">Establish standard architecture for full enterprise deployment.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <SystemScanTransition />
 
       {/* =====================================================================

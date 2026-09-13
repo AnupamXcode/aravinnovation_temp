@@ -48,7 +48,7 @@ export default async function ProductsListingPage() {
               <Sparkles className="w-3.5 h-3.5" />
               <span>PROPRIETARY TECH PLATFORMS</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight mt-2">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display text-[#2e936f] dark:text-[#2e936f] tracking-tight mt-2">
               Our Products &amp; Platforms
             </h1>
           </ScrollReveal>
