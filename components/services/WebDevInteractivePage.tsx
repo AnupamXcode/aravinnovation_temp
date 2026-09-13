@@ -505,7 +505,7 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
       {/* =========================================================================
           HERO SECTION — DIGITAL PRODUCT ENGINEERING (FULL-BLEED CINEMATIC BACKGROUND)
           ========================================================================= */}
-      <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-10 sm:pb-14 lg:pb-18 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none min-h-[calc(100vh-80px)] flex flex-col justify-start">
+      <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-12 lg:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none flex flex-col justify-start">
         
         {/* Full-Bleed Desktop Background Visual — Crisp Integrated Background Art for PC / DESKTOP VIEW */}
         <div className="absolute inset-0 pointer-events-none hidden lg:block select-none overflow-hidden">

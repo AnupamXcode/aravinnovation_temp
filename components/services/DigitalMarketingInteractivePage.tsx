@@ -487,7 +487,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
       {/* =========================================================================
           1. HERO — DIGITAL GROWTH & BRAND STRATEGY (FULL-BLEED CINEMATIC BACKGROUND)
           ========================================================================= */}
-      <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-10 sm:pb-14 lg:pb-18 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none min-h-[calc(100vh-80px)] flex flex-col justify-start">
+      <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-12 lg:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none flex flex-col justify-start">
         
         {/* Full-Bleed Desktop Background Visual — Crisp Integrated Background Art for PC / DESKTOP VIEW */}
         <div className="absolute inset-0 pointer-events-none hidden lg:block select-none overflow-hidden">
@@ -510,10 +510,10 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
         <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-radial from-[#f15e1c]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
         <div className="absolute bottom-1/3 right-1/4 w-[450px] h-[450px] bg-radial from-[#2e936f]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none lg:hidden" />
 
-        <div className="max-w-[1536px] mx-auto w-full space-y-6 sm:space-y-8 relative z-10">
+        <div className="max-w-[1536px] mx-auto w-full space-y-5 sm:space-y-8 relative z-10">
           
           {/* 2-Column Hero Composition */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start">
             
             {/* LEFT COLUMN: HERO COPY ALIGNED TO THE TOP LEFT */}
             <div className="lg:col-span-7 xl:col-span-6 space-y-4 sm:space-y-5 text-left max-w-2xl">
@@ -537,15 +537,15 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
 
               {/* Main Headline */}
               <AnimatedSection delay={0.1} className="space-y-3">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold font-display tracking-tight leading-[1.12] text-[#1b2823] dark:text-[#ffffff]">
+                <h1 className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold font-display tracking-tight leading-[1.15] text-[#1b2823] dark:text-[#ffffff]">
                   Digital Marketing, SEO &amp;{" "}
                   <span className="text-[#f15e1c]">Answer Engine Optimization (AEO)</span>
                 </h1>
               </AnimatedSection>
 
               {/* Dedicated Cropped Mobile Hero Image Card (Mobile/Tablet Viewports < 1024px) */}
-              <AnimatedSection delay={0.12} className="w-full lg:hidden my-3">
-                <div className="relative w-full aspect-[941/970] rounded-2xl border-2 border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] overflow-hidden shadow-xl">
+              <AnimatedSection delay={0.12} className="w-full lg:hidden my-2">
+                <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-2xl border-2 border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] overflow-hidden shadow-xl">
                   <Image
                     src="/images/digital-marketing-mobile-hero.png"
                     alt="Digital Marketing, SEO and AEO Strategy"
@@ -766,15 +766,15 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
       {/* =========================================================================
           SECTION 02 — DIGITAL GROWTH ENGINE (SMOOTH SLIDING TAB INTERACTION)
           ========================================================================= */}
-      <section id="growth-system" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
-        <div className="max-w-[1536px] mx-auto space-y-10">
+      <section id="growth-system" className="relative py-10 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto space-y-8 sm:space-y-10">
           
           <AnimatedSection>
             <div className="text-center max-w-3xl mx-auto space-y-3">
               <Badge variant="secondary" size="md">
                 CONNECTED ENGINE
               </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-tight">
                 One Growth System. Connected From Discovery to Conversion.
               </h2>
               <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
@@ -785,10 +785,10 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
 
           {/* System Interactive Container */}
           <AnimatedSection delay={0.1}>
-            <div className="rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl p-6 sm:p-10 space-y-8">
+            <div className="rounded-[2rem] sm:rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl p-5 sm:p-8 lg:p-10 space-y-6 sm:space-y-8">
               
               {/* Stage Selector Bar with Animated Background Pill */}
-              <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 relative">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-2.5 relative">
                 {growthEngineStages.map((stg, idx) => {
                   const isSelected = activeStageIdx === idx;
                   return (

@@ -399,7 +399,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
       {/* =====================================================================
           2. HERO SECTION — FULL-BLEED CINEMATIC BACKGROUND WITH DUAL PATHWAY
           ===================================================================== */}
-      <section className="relative pt-3 sm:pt-4 lg:pt-5 pb-8 sm:pb-12 lg:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none min-h-[calc(100vh-80px)] flex flex-col justify-start">
+      <section className="relative pt-3 sm:pt-4 lg:pt-5 pb-8 sm:pb-12 lg:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none flex flex-col justify-start">
         
         {/* Full-Bleed Desktop Background Visual — PC / DESKTOP VIEW ONLY */}
         <div className="absolute inset-0 pointer-events-none hidden lg:block select-none overflow-hidden">
