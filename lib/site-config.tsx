@@ -360,7 +360,7 @@ const defaultConfig: SiteConfig = {
     ctaText: "Connect with Aryan",
   },
   footerConfig: {
-    ctaHeading: "READY TO BUILD WHAT COMES NEXT?",
+    ctaHeading: "READY FOR WHAT'S NEXT?",
     ctaDescription: "From technology strategy to digital growth, Arav Innovations helps organizations build stronger foundations for what's next.",
     ctaPrimaryText: "TALK TO AN EXPERT",
     ctaPrimaryHref: "/contact",

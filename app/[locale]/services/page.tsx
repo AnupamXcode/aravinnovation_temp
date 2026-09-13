@@ -31,7 +31,7 @@ export default async function ServicesHubPage({
   const services = await getServices(locale);
 
   return (
-    <div className="pt-6 sm:pt-10 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300 scroll-mt-24">
+    <div className="pt-6 sm:pt-10 pb-4 sm:pb-8 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300 scroll-mt-24">
       <BreadcrumbSchema items={[{ name: "Services & Practices", url: "/services" }]} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
@@ -43,7 +43,7 @@ export default async function ServicesHubPage({
 
         {/* Hero Banner */}
         <ScrollReveal direction="up" delay={0.1}>
-          <div className="max-w-3xl space-y-4 mb-12 sm:mb-16">
+          <div className="max-w-3xl space-y-4 mb-10 sm:mb-14">
             <Badge variant="secondary" size="md">
               {t("badge")}
             </Badge>
@@ -59,7 +59,7 @@ export default async function ServicesHubPage({
         </ScrollReveal>
 
         {/* Core Practice Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {services.map((service, index) => (
             <ScrollReveal key={service.slug} delay={index * 0.08} direction="up">
               <ServiceCard
@@ -71,18 +71,18 @@ export default async function ServicesHubPage({
         </div>
 
         {/* Bottom Regional Advisory Banner */}
-        <ScrollReveal direction="up" delay={0.3}>
-          <div className="mt-20 rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] p-8 sm:p-12 text-center max-w-4xl mx-auto space-y-6 shadow-xl">
+        <ScrollReveal direction="up" delay={0.2}>
+          <div className="mt-8 sm:mt-14 lg:mt-16 rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] p-6 sm:p-10 text-center max-w-4xl mx-auto space-y-4 sm:space-y-6 shadow-xl">
             <div className="w-12 h-12 rounded-2xl bg-[#f15e1c] text-white mx-auto flex items-center justify-center shadow-xs">
               <Globe2 className="w-6 h-6" />
             </div>
-            <h3 className="text-2xl sm:text-3xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
               {t("customEngagementTitle")}
             </h3>
             <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0] max-w-xl mx-auto leading-relaxed">
               {t("customEngagementDesc")}
             </p>
-            <div className="pt-2">
+            <div className="pt-1 sm:pt-2">
               <Link href="/contact">
                 <Button variant="primary" size="lg" rightIcon={<ArrowRight className="w-4 h-4" />}>
                   {t("discussScope")}

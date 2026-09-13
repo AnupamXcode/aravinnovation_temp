@@ -200,12 +200,12 @@ export function Footer() {
   }
 
   return (
-    <div className="w-full relative pt-6 sm:pt-12 bg-[#FFFDF9] dark:bg-[#000000]">
+    <div className="w-full relative pt-2 sm:pt-6 bg-[#FFFDF9] dark:bg-[#000000]">
       {/* Visual Section Boundary Divider */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent mb-4 sm:mb-6" />
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent mb-3 sm:mb-6" />
 
       {/* Static Enterprise Footer Panel */}
-      <footer className="w-full relative bg-gradient-to-b from-[#d84a0d] via-[#f15e1c] to-[#b83e0a] text-white pt-8 sm:pt-12 pb-8 overflow-hidden select-none rounded-t-[2rem] sm:rounded-t-[3rem] shadow-[0_-20px_50px_rgba(241,94,28,0.25)] border-t border-white/30">
+      <footer className="w-full relative bg-gradient-to-b from-[#d84a0d] via-[#f15e1c] to-[#b83e0a] text-white pt-6 sm:pt-10 pb-6 sm:pb-8 overflow-hidden select-none rounded-t-[2rem] sm:rounded-t-[3rem] shadow-[0_-20px_50px_rgba(241,94,28,0.25)] border-t border-white/30">
         {/* =========================================================================
             SLOW MOVING ATMOSPHERIC GRADIENT (ORANGE + WHITE PALETTE ONLY)
             20–35s Slow Ambient Fields with 0% dark/green elements
@@ -264,7 +264,7 @@ export function Footer() {
         `}</style>
 
         {/* Main Centered Content Container (STATIC & STABLE Z-10) */}
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10 space-y-12">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10 space-y-8 sm:space-y-12">
           
           {/* =========================================================================
               LAYER 1: COMPACT TOP CTA AREA (Vibrant Brand Gradient CTA Card)
@@ -273,18 +273,18 @@ export function Footer() {
             <BorderDrawWrapper
               roundedClass="rounded-2xl"
               rx={16}
-              className="p-6 sm:p-8 bg-gradient-to-r from-white/20 via-white/15 to-white/20 border border-white/40 shadow-2xl backdrop-blur-md flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden text-white"
+              className="p-5 sm:p-8 bg-gradient-to-r from-white/20 via-white/15 to-white/20 border border-white/40 shadow-2xl backdrop-blur-md flex flex-col md:flex-row items-start md:items-center justify-between gap-5 sm:gap-6 relative overflow-hidden text-white"
             >
               {/* Soft Ambient Inner Glow */}
               <div className="absolute -top-12 -left-12 w-48 h-48 bg-white/20 rounded-full blur-2xl pointer-events-none" />
               <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-[#ffec69]/30 rounded-full blur-2xl pointer-events-none" />
 
-              <div className="space-y-2 text-left max-w-2xl relative z-10">
+              <div className="space-y-1.5 sm:space-y-2 text-left max-w-2xl relative z-10">
                 <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/20 border border-white/40 text-[11px] font-mono font-bold text-white shadow-xs">
                   <Sparkles className="w-3.5 h-3.5 text-[#ffec69]" />
                   <span>START YOUR TRANSFORMATION</span>
                 </div>
-                <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold font-display tracking-tight text-white leading-snug">
+                <h2 className="text-base sm:text-2xl lg:text-3xl font-extrabold font-display tracking-tight text-white leading-tight sm:leading-snug">
                   {footerConfig.ctaHeading}
                 </h2>
                 <p className="text-xs sm:text-sm text-white/95 font-medium leading-relaxed">
