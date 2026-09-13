@@ -24,7 +24,7 @@ export default async function SecurityDPDPPage({
   setRequestLocale(locale);
 
   return (
-    <div className="py-24 md:py-32 bg-[#FFFDF9] dark:bg-[#000000] min-h-screen">
+    <div className="py-8 sm:py-12 bg-[#FFFDF9] dark:bg-[#000000]">
       <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Header */}
         <div className="space-y-4 max-w-3xl">

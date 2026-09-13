@@ -32,7 +32,7 @@ export default async function PrivacyPolicyPage({
   setRequestLocale(locale);
 
   return (
-    <div className="py-24 md:py-32 bg-[#FFFDF9] dark:bg-[#000000] min-h-screen">
+    <div className="py-8 sm:py-12 bg-[#FFFDF9] dark:bg-[#000000]">
       <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 space-y-12">
         {/* Policy Header */}
         <ScrollReveal direction="up" delay={0.05}>

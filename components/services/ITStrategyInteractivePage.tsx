@@ -1182,7 +1182,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
             <Badge variant="secondary" size="sm">
               TARGET AUDIENCE
             </Badge>
-            <h2 className="text-2xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+            <h2 className="text-2xl sm:text-4xl font-extrabold font-display tracking-tight text-[#2e936f] dark:text-[#2e936f]">
               Built for Businesses Facing Technology Complexity
             </h2>
             <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4]">

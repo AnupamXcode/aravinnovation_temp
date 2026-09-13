@@ -79,7 +79,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const isLive = product.status === "live";
 
   return (
-    <div className="pt-28 pb-20 bg-[#fefaf5] dark:bg-[#0a0a0a] transition-colors duration-300 min-h-screen">
+    <div className="py-8 sm:py-12 bg-[#fefaf5] dark:bg-[#0a0a0a] transition-colors duration-300">
       <BreadcrumbSchema
         items={[
           { name: "Products", url: "/products" },
@@ -93,7 +93,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         url={`https://aravinnovations.com/products/${product.slug}`}
       />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
         {/* HERO SECTION */}
         <section className="space-y-4 text-center sm:text-left">
           <ScrollReveal direction="up">
@@ -119,7 +119,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight leading-tight mt-3">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display text-[#2e936f] dark:text-[#2e936f] tracking-tight leading-tight mt-3">
               {product.name}
             </h1>
 
