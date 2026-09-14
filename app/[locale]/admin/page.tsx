@@ -1805,10 +1805,20 @@ export default function AdminDashboardPage() {
 
             {/* Default Greeting & Fallback Response Editors */}
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md space-y-4">
-              <h3 className="text-sm font-bold font-display text-[#f15e1c]">Default Messaging &amp; Fallback</h3>
+              <h3 className="text-sm font-bold font-display text-[#f15e1c]">Assistant Persona &amp; Default Messaging</h3>
 
               <div className="space-y-1">
-                <label className="text-xs font-bold">Default Welcome Greeting</label>
+                <label className="text-xs font-bold">Assistant Name / Identity</label>
+                <input
+                  type="text"
+                  value={content.chatbotKB?.assistantName || "Arav Innovations Assistant"}
+                  onChange={(e) => updateChatbotKB({ assistantName: e.target.value })}
+                  className="w-full text-xs p-3 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-bold">Initial Welcome Greeting (Name-First Prompt)</label>
                 <input
                   type="text"
                   value={content.chatbotKB?.defaultGreeting || ""}

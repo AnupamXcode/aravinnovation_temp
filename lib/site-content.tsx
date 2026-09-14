@@ -119,6 +119,7 @@ export interface PublicClaim {
 
 export interface ChatbotKB {
   masterEnabled: boolean;
+  assistantName?: string;
   defaultGreeting: string;
   fallbackResponse: string;
   voiceEnabled?: boolean;
@@ -470,8 +471,9 @@ const defaultChatbotCommands: ChatbotCommandItem[] = [
 
 const defaultChatbotKB: ChatbotKB = {
   masterEnabled: true,
-  defaultGreeting: "Hey there! 👋 Welcome to Arav Innovations. How can our team help accelerate your technology & growth goals today?",
-  fallbackResponse: "I'm here to help with Arav Innovations' services, projects, industries and contact options. Could you tell me what you're looking for?",
+  assistantName: "Arav Innovations Assistant",
+  defaultGreeting: "Hi! 👋 I'm the Arav Innovations assistant.\n\nBefore we begin, what should I call you?",
+  fallbackResponse: "I'm not quite sure what you're looking for yet. Are you exploring a technology project, digital growth, AI, compliance, or something else?",
   voiceEnabled: true,
   autoReadAloud: false,
   speechLanguage: "en-US",
