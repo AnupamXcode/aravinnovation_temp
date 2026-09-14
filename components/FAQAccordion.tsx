@@ -28,27 +28,27 @@ export function FAQAccordion({
   };
 
   return (
-    <section className={cn("py-12 sm:py-16 lg:py-20 bg-[#FFFDF9] dark:bg-[#000000]", className)}>
+    <section className={cn("py-10 sm:py-14 lg:py-16 bg-[#FFFDF9] dark:bg-[#000000]", className)}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-10 sm:mb-12">
+        <div className="text-center mb-6 sm:mb-8">
           {badge && (
-            <span className="inline-block px-4 py-1.5 bg-[#fab60a]/20 text-[#d49700] dark:text-[#fab60a] rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider mb-4">
+            <span className="inline-block px-3.5 py-1 bg-[#fab60a]/20 text-[#d49700] dark:text-[#fab60a] rounded-full text-xs font-bold uppercase tracking-wider mb-2.5">
               {badge}
             </span>
           )}
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight mb-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight mb-3">
             {title}
           </h2>
           {subtitle && (
-            <p className="text-base sm:text-lg text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed max-w-2xl mx-auto">
               {subtitle}
             </p>
           )}
         </div>
 
         {/* FAQ Accordion List */}
-        <div className="space-y-4">
+        <div className="space-y-3">
           {items.map((item, index) => {
             const isOpen = openIndex === index;
             return (
@@ -60,7 +60,7 @@ export function FAQAccordion({
                   type="button"
                   onClick={() => toggleIndex(index)}
                   aria-expanded={isOpen}
-                  className="w-full px-6 sm:px-8 py-5 sm:py-6 flex items-center justify-between text-left hover:bg-[#FBF3EA]/50 dark:hover:bg-[#221D18] transition-colors focus:outline-none focus:ring-2 focus:ring-[#f15e1c]/50 rounded-2xl"
+                  className="w-full px-5 sm:px-7 py-4 sm:py-5 flex items-center justify-between text-left hover:bg-[#FBF3EA]/50 dark:hover:bg-[#221D18] transition-colors focus:outline-none focus:ring-2 focus:ring-[#f15e1c]/50 rounded-2xl"
                 >
                   <span className="text-base sm:text-lg font-semibold text-[#3A2E27] dark:text-[#FAF5EE] pr-4 leading-snug">
                     {item.question}
@@ -70,7 +70,7 @@ export function FAQAccordion({
                     transition={{ duration: 0.2, ease: "easeInOut" }}
                     className="shrink-0 text-[#f15e1c] p-1"
                   >
-                    <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6" />
+                    <ChevronDown className="w-5 h-5" />
                   </motion.div>
                 </button>
 
@@ -81,15 +81,15 @@ export function FAQAccordion({
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      transition={{ duration: 0.25, ease: "easeInOut" }}
                     >
-                      <div className="px-6 sm:px-8 pb-6 pt-2 bg-[#FBF3EA]/30 dark:bg-[#1A1613]/50 border-t border-[#EFE2D6]/60 dark:border-[#1f1f1f]/60 space-y-3">
-                        <p className="text-base sm:text-lg text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed pt-2">
+                      <div className="px-5 sm:px-7 pb-5 pt-1 bg-[#FBF3EA]/30 dark:bg-[#1A1613]/50 border-t border-[#EFE2D6]/60 dark:border-[#1f1f1f]/60 space-y-3">
+                        <p className="text-sm sm:text-base text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed pt-1">
                           {item.answer}
                         </p>
                         {item.category && (
                           <div className="pt-1">
-                            <span className="inline-block px-3 py-1 bg-[#f15e1c]/10 text-[#f15e1c] text-xs sm:text-sm font-semibold rounded-full">
+                            <span className="inline-block px-3 py-1 bg-[#f15e1c]/10 text-[#f15e1c] text-xs font-semibold rounded-full">
                               {item.category}
                             </span>
                           </div>
