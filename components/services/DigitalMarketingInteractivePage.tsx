@@ -1365,37 +1365,37 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
       {/* =========================================================================
           SECTION 10 — CONNECTED SERVICES ECOSYSTEM
           ========================================================================= */}
-      <section className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
-        <div className="max-w-[1536px] mx-auto space-y-8 text-left">
+      <section className="relative py-10 sm:py-14 lg:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto space-y-4 sm:space-y-6 text-left">
           
           <AnimatedSection>
-            <div className="space-y-2">
+            <div className="space-y-1.5">
               <span className="text-xs font-mono font-bold text-[#f15e1c] uppercase tracking-wider block">
                 ARAV SERVICE ECOSYSTEM
               </span>
-              <h3 className="text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
                 Connected Enterprise Capabilities
               </h3>
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {otherServices.map((item, idx) => (
               <AnimatedSection key={idx} delay={idx * 0.04}>
-                <motion.div whileHover={{ y: -4, scale: 1.01 }} transition={{ duration: 0.2 }}>
+                <motion.div whileHover={{ y: -3, scale: 1.01 }} transition={{ duration: 0.2 }}>
                   <Link
                     href={item.href}
-                    className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:shadow-md transition-all flex items-center justify-between group cursor-pointer"
+                    className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:shadow-md transition-all flex items-center justify-between group cursor-pointer min-h-[60px]"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-110 group-hover:border-[#f15e1c]/40 transition-all">
+                      <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-105 group-hover:border-[#f15e1c]/40 transition-all shrink-0">
                         {item.icon}
                       </div>
-                      <span className="text-xs font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
+                      <span className="text-xs sm:text-sm font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug">
                         {item.title}
                       </span>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-[#f15e1c] group-hover:translate-x-1.5 transition-transform shrink-0" />
+                    <ArrowRight className="w-4 h-4 text-[#f15e1c] group-hover:translate-x-1 transition-transform shrink-0 ml-2" />
                   </Link>
                 </motion.div>
               </AnimatedSection>
