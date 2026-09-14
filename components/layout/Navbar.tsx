@@ -49,6 +49,7 @@ const serviceIcons: Record<string, React.ReactNode> = {
   "/services/training-staff-augmentation": <Users2 className="w-4 h-4 text-[#f15e1c]" />,
   "/services/seo-services": <Search className="w-4 h-4 text-[#f15e1c]" />,
   "/services/ai-portfolio": <Cpu className="w-4 h-4 text-[#f15e1c]" />,
+  "/products": <Cpu className="w-4 h-4 text-[#f15e1c]" />,
   // Legacy slug mappings
   "/services/it-strategy-consulting": <Compass className="w-4 h-4 text-[#f15e1c]" />,
   "/services/web-application-development": <Code2 className="w-4 h-4 text-[#f15e1c]" />,

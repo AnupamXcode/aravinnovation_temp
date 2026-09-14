@@ -206,62 +206,8 @@ export function Footer() {
 
       {/* Static Enterprise Footer Panel */}
       <footer className="w-full relative bg-gradient-to-b from-[#d84a0d] via-[#f15e1c] to-[#b83e0a] text-white pt-6 sm:pt-10 pb-6 sm:pb-8 overflow-hidden select-none rounded-t-[2rem] sm:rounded-t-[3rem] shadow-[0_-20px_50px_rgba(241,94,28,0.25)] border-t border-white/30">
-        {/* =========================================================================
-            SLOW MOVING ATMOSPHERIC GRADIENT (ORANGE + WHITE PALETTE ONLY)
-            20–35s Slow Ambient Fields with 0% dark/green elements
-            ========================================================================= */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
-          {/* Layer 1: Soft Pure White Radiant Light Field (Desktop Only to prevent mobile white flash) */}
-          <div
-            className="hidden sm:block absolute -top-36 -left-36 w-[650px] h-[650px] rounded-full bg-white/20 blur-3xl opacity-90"
-            style={{ animation: shouldReduceMotion ? "none" : "floatSlow1 28s ease-in-out infinite alternate" }}
-          />
-
-          {/* Layer 2: Warm Peach Glow Field */}
-          <div
-            className="hidden sm:block absolute -bottom-40 -right-40 w-[700px] h-[700px] rounded-full bg-[#f7d7b0]/25 blur-3xl opacity-80"
-            style={{ animation: shouldReduceMotion ? "none" : "floatSlow2 32s ease-in-out infinite alternate" }}
-          />
-
-          {/* Layer 3: Rich Warm Orange Core Accent */}
-          <div
-            className="hidden sm:block absolute top-1/3 right-1/4 w-[550px] h-[550px] rounded-full bg-[#e04f0f]/35 blur-3xl opacity-85"
-            style={{ animation: shouldReduceMotion ? "none" : "floatSlow3 24s ease-in-out infinite alternate" }}
-          />
-
-          {/* Layer 4: Soft Gold Ambient Lighting */}
-          <div
-            className="hidden sm:block absolute bottom-1/4 left-1/3 w-[500px] h-[500px] rounded-full bg-[#ffec69]/20 blur-3xl opacity-75"
-            style={{ animation: shouldReduceMotion ? "none" : "floatSlow4 30s ease-in-out infinite alternate" }}
-          />
-
-          {/* Clean Overlay for Pure Text Contrast */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#d84a0d]/20 via-transparent to-[#b83e0a]/40 pointer-events-none" />
-        </div>
-
-        {/* Embedded CSS Keyframes for slow, elegant 3D atmospheric movement */}
-        <style jsx global>{`
-          @keyframes floatSlow1 {
-            0% { transform: translate(0px, 0px) scale(1); }
-            50% { transform: translate(45px, 35px) scale(1.08); }
-            100% { transform: translate(-25px, 50px) scale(0.95); }
-          }
-          @keyframes floatSlow2 {
-            0% { transform: translate(0px, 0px) scale(1); }
-            50% { transform: translate(-50px, -30px) scale(1.1); }
-            100% { transform: translate(30px, -45px) scale(0.92); }
-          }
-          @keyframes floatSlow3 {
-            0% { transform: translate(0px, 0px) scale(0.95); }
-            50% { transform: translate(35px, -40px) scale(1.12); }
-            100% { transform: translate(-35px, 25px) scale(1); }
-          }
-          @keyframes floatSlow4 {
-            0% { transform: translate(0px, 0px) scale(1); }
-            50% { transform: translate(-40px, 35px) scale(1.06); }
-            100% { transform: translate(30px, -25px) scale(0.98); }
-          }
-        `}</style>
+        {/* Static Ambient Atmospheric Background (Zero JS, Zero Animation, Zero Scroll Lag) */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none bg-gradient-to-b from-[#d84a0d]/20 via-transparent to-[#b83e0a]/40" />
 
         {/* Main Centered Content Container (STATIC & STABLE Z-10) */}
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10 space-y-8 sm:space-y-12">
