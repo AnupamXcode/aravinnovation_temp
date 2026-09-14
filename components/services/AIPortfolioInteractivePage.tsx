@@ -9,6 +9,8 @@ import {
   useReducedMotion,
   useInView,
 } from "framer-motion";
+import { CEOLeadershipSection } from "@/components/services/CEOLeadershipSection";
+import { BlogCardImage } from "@/components/insights/BlogCardImage";
 import {
   Cpu,
   ArrowRight,
@@ -23,28 +25,23 @@ import {
   Code2,
   Bot,
   FileText,
-  HelpCircle,
   Users,
-  Eye,
   RefreshCw,
   ArrowUpRight,
-} from "lucide-react";
-import { CEOLeadershipSection } from "@/components/services/CEOLeadershipSection";
-import { BlogCardImage } from "@/components/insights/BlogCardImage";
-import {
   Sparkles,
   Search,
-  MessageSquare,
-  Shield,
   Compass,
-  GitBranch,
+  TrendingUp,
+  BarChart3,
+  Users2,
+  Lock,
 } from "lucide-react";
 import { Service } from "@/data/services";
 import { BlogPost, blogPostsData } from "@/data/insights";
 import { Button3D } from "@/components/ui/button-3d";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
-import { TiltCard } from "@/components/motion/TiltCard";
+import { MagneticButton } from "@/components/motion/MagneticButton";
 import { cn } from "@/lib/utils";
 
 interface AIPortfolioPageProps {
@@ -52,1451 +49,946 @@ interface AIPortfolioPageProps {
   relatedPosts?: BlogPost[];
 }
 
-// -----------------------------------------------------------------------------
-// IMAGE PATH CONFIGURATION
-// -----------------------------------------------------------------------------
-export const AI_PORTFOLIO_HERO_IMAGE = "/images/ai-portfolio-main.png";
-export const AI_PORTFOLIO_SECONDARY_IMAGE = "/images/ai-portfolio-secondary.png";
+function AnimatedSection({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-30px" });
+  const shouldReduceMotion = useReducedMotion();
 
-// -----------------------------------------------------------------------------
-// System Scan Transition Line
-// -----------------------------------------------------------------------------
+  if (shouldReduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 16 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+      transition={{ duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 function SystemScanTransition() {
   const ref = React.useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-20px" });
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <div ref={ref} className="relative w-full h-px my-4 overflow-hidden pointer-events-none select-none">
-      <div className="w-full h-full bg-[#F7D7B0]" />
+    <div ref={ref} className="relative w-full h-px my-1 overflow-hidden pointer-events-none select-none">
+      <div className="w-full h-full bg-[#f7d7b0]/30 dark:bg-[#1a1a1a]" />
       {!shouldReduceMotion && (
         <motion.div
           initial={{ x: "-100%" }}
           animate={isInView ? { x: "100%" } : {}}
           transition={{ duration: 1.4, ease: "easeInOut" }}
-          className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-transparent via-[#F15E1C] to-transparent shadow-[0_0_8px_#F15E1C]"
+          className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-transparent via-[#f15e1c] to-transparent shadow-[0_0_10px_#f15e1c]"
         />
       )}
     </div>
   );
 }
 
-// 1. SECTION — AI THAT SOLVES REAL WORK (CEO Blueprint Capabilities)
+function AnimatedDotGrid() {
+  return (
+    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-10 dark:opacity-15 select-none">
+      <svg className="w-full h-full" width="100%" height="100%">
+        <pattern
+          id="ai-dot-matrix-pattern"
+          width="24"
+          height="24"
+          patternUnits="userSpaceOnUse"
+        >
+          <circle cx="2" cy="2" r="1" fill="#f15e1c" opacity="0.6" />
+        </pattern>
+        <rect width="100%" height="100%" fill="url(#ai-dot-matrix-pattern)" />
+      </svg>
+    </div>
+  );
+}
+
+const keywordTags = [
+  "LLM Integration",
+  "AI Workflow Automation",
+  "Document Intelligence",
+  "Enterprise RAG Systems",
+  "AI Governance",
+  "Pragmatic AI",
+];
+
 const realWorkCapabilities = [
   {
     num: "01",
     title: "Custom LLM Solutions & Integrations",
-    desc: "Domain-tailored Large Language Models securely connected to proprietary enterprise data and knowledge repositories.",
-    icon: <Bot className="w-5 h-5 text-[#F15E1C]" />,
+    description:
+      "Domain-tailored Large Language Models securely connected to proprietary enterprise data and knowledge repositories.",
+    icon: <Bot className="w-5 h-5 text-[#f15e1c]" />,
   },
   {
     num: "02",
     title: "AI Workflow Automation",
-    desc: "Cuts manual operational overhead and accelerates decision-making across departments with autonomous agent pipelines.",
-    icon: <Workflow className="w-5 h-5 text-[#2E936F]" />,
+    description:
+      "Reduce operational overhead and accelerate decision-making across departments with structured AI pipelines.",
+    icon: <Workflow className="w-5 h-5 text-[#2e936f]" />,
   },
   {
     num: "03",
     title: "Intelligent Data Processing",
-    desc: "Automated extraction, classification, and structured insights from high-volume complex documents and data streams.",
-    icon: <Database className="w-5 h-5 text-[#FAB60A]" />,
+    description:
+      "Automated extraction, classification, and structured insights from high-volume documents and unstructured data.",
+    icon: <Database className="w-5 h-5 text-[#fab60a]" />,
   },
   {
     num: "04",
-    title: "Process Improvement & AI Consulting",
-    desc: "Strategic roadmaps to adopt safe, scalable AI tools that boost productivity, lower operational costs, and maintain strict governance.",
-    icon: <Cpu className="w-5 h-5 text-[#F15E1C]" />,
+    title: "AI Consulting & Governance",
+    description:
+      "Strategic roadmaps to adopt safe, scalable AI tools that boost productivity while maintaining strict security controls.",
+    icon: <Cpu className="w-5 h-5 text-[#f15e1c]" />,
   },
 ];
 
-// -----------------------------------------------------------------------------
-// 2. UNIQUE AI VISUAL — INTELLIGENCE FLOW (Section 7 in prompt)
-// -----------------------------------------------------------------------------
 const intelligenceFlowNodes = [
   {
+    id: "DATA",
     num: "01",
     title: "DATA",
-    desc: "Business information and signals.",
-    icon: <Database className="w-4 h-4 text-[#F15E1C]" />,
+    subtitle: "Enterprise Signals & Repository",
+    desc: "Ingest structured databases, documents, CRM records, and telemetry into privacy-compliant storage.",
+    deliverables: ["Data Source Pipeline", "Privacy Controls Setup", "Ingestion Connectors"],
   },
   {
+    id: "CONTEXT",
     num: "02",
     title: "CONTEXT",
-    desc: "Knowledge that gives AI meaning.",
-    icon: <Layers className="w-4 h-4 text-[#2E936F]" />,
+    subtitle: "RAG & Knowledge Indexing",
+    desc: "Index business information into semantic vector databases so AI models retrieve accurate context.",
+    deliverables: ["Vector Database Index", "Semantic Search Setup", "Knowledge Base Graph"],
   },
   {
+    id: "INTELLIGENCE",
     num: "03",
     title: "INTELLIGENCE",
-    desc: "AI interprets and reasons.",
-    icon: <Cpu className="w-4 h-4 text-[#FAB60A]" />,
+    subtitle: "Model Reasoning & Prompts",
+    desc: "LLMs analyze query context, evaluate intent, and generate structured responses grounded in enterprise data.",
+    deliverables: ["Custom Model Prompting", "LLM Fine-Tuning Setup", "Guardrail Architecture"],
   },
   {
+    id: "ACTION",
     num: "04",
     title: "ACTION",
-    desc: "Systems assist or execute tasks.",
-    icon: <Zap className="w-4 h-4 text-[#F15E1C]" />,
+    subtitle: "Workflow Execution",
+    desc: "AI assistants and agents execute tasks, update CRM records, or generate drafted output for human review.",
+    deliverables: ["API Task Execution", "Workflow Automation Setup", "Output Draft Generation"],
   },
   {
+    id: "OVERSIGHT",
     num: "05",
     title: "OVERSIGHT",
-    desc: "Humans remain in control.",
-    icon: <Users className="w-4 h-4 text-[#2E936F]" />,
+    subtitle: "Human-in-the-Loop Validation",
+    desc: "Human operators review critical actions, approve outputs, and maintain oversight of automated decisions.",
+    deliverables: ["Human Approval Thresholds", "Audit Event Logging", "Role-Based Access Control"],
   },
   {
+    id: "LEARNING",
     num: "06",
     title: "LEARNING",
-    desc: "The system improves through feedback.",
-    icon: <RefreshCw className="w-4 h-4 text-[#FAB60A]" />,
+    subtitle: "Continuous Improvement",
+    desc: "User feedback and operational telemetry continuously refine model accuracy and system efficiency.",
+    deliverables: ["Feedback Loop Pipeline", "Model Accuracy Benchmarks", "System Performance Telemetry"],
   },
 ];
 
-// -----------------------------------------------------------------------------
-// 3. CAPABILITIES FOR SECONDARY SECTION AROUND IMAGE 2 (Section 9 in prompt)
-// -----------------------------------------------------------------------------
-const secondaryCapabilities = [
-  {
-    name: "AI Assistants",
-    desc: "Role-specific copilots designed for everyday employee tasks.",
-    icon: <MessageSquare className="w-4 h-4 text-[#F15E1C]" />,
-  },
-  {
-    name: "Knowledge Systems",
-    desc: "Semantic retrieval across internal documents, wikis and databases.",
-    icon: <Database className="w-4 h-4 text-[#2E936F]" />,
-  },
-  {
-    name: "Document Intelligence",
-    desc: "Automated extraction from contracts, invoices and unstructured files.",
-    icon: <FileText className="w-4 h-4 text-[#FAB60A]" />,
-  },
-  {
-    name: "Workflow Automation",
-    desc: "End-to-end task automation connected to CRM, ERP and webhooks.",
-    icon: <Workflow className="w-4 h-4 text-[#F15E1C]" />,
-  },
-  {
-    name: "AI Agents",
-    desc: "Goal-driven multi-step execution with human approval thresholds.",
-    icon: <Cpu className="w-4 h-4 text-[#2E936F]" />,
-  },
-  {
-    name: "Decision Support",
-    desc: "Contextual data synthesis helping leadership make informed calls.",
-    icon: <Activity className="w-4 h-4 text-[#FAB60A]" />,
-  },
-];
-
-// -----------------------------------------------------------------------------
-// 4. AI SYSTEM ARCHITECTURE (Section 10 in prompt)
-// -----------------------------------------------------------------------------
 const systemArchitectureLayers = [
+  { layer: "01", name: "User Interface", desc: "Custom React/Next.js interfaces, web copilots, and embedded AI widgets.", icon: <Users className="w-5 h-5 text-[#f15e1c]" /> },
+  { layer: "02", name: "Application Gateway", desc: "API routes, prompt controllers, rate limiting, and session security.", icon: <Code2 className="w-5 h-5 text-[#2e936f]" /> },
+  { layer: "03", name: "LLM & Agent Layer", desc: "Model routing across OpenAI, Anthropic Claude, Gemini, or self-hosted open models.", icon: <Bot className="w-5 h-5 text-[#fab60a]" /> },
+  { layer: "04", name: "Vector & RAG Database", desc: "Pinecone, Qdrant, or PostgreSQL pgvector providing semantic context retrieval.", icon: <Database className="w-5 h-5 text-[#2e936f]" /> },
+  { layer: "05", name: "Enterprise Data Connectors", desc: "Secure connections to ERP, CRM, cloud storage, and internal APIs.", icon: <Workflow className="w-5 h-5 text-[#f15e1c]" /> },
+  { layer: "06", name: "Security & Guardrails", desc: "PII masking, access control, audit logging, and output safety boundaries.", icon: <ShieldCheck className="w-5 h-5 text-[#fab60a]" /> },
+];
+
+const applicableMarkets = [
+  { title: "Enterprise & Corporate", desc: "Knowledge retrieval, document processing, and internal team copilots.", icon: <Database className="w-4 h-4 text-[#f15e1c]" /> },
+  { title: "Financial & Professional Services", desc: "Contract analysis, compliance document audit, and decision support.", icon: <ShieldCheck className="w-4 h-4 text-[#2e936f]" /> },
+  { title: "Technology & SaaS Companies", desc: "Embedded AI features, automated customer support, and API integrations.", icon: <Bot className="w-4 h-4 text-[#fab60a]" /> },
+  { title: "Healthcare & Organizations", desc: "Secure data extraction, research search engines, and administrative automation.", icon: <Activity className="w-4 h-4 text-[#2e936f]" /> },
+];
+
+const whatWeMeasureList = [
+  { title: "Task Time Reduction", desc: "Quantitative reduction in hours spent on manual document processing and research.", icon: <Zap className="w-5 h-5 text-[#f15e1c]" /> },
+  { title: "Retrieval Accuracy (RAG)", desc: "Precision and recall scores of AI knowledge retrieval against ground truth sources.", icon: <CheckCircle2 className="w-5 h-5 text-[#2e936f]" /> },
+  { title: "Human Review Pass Rate", desc: "Percentage of AI-generated drafts approved by human operators without major edit.", icon: <Users className="w-5 h-5 text-[#fab60a]" /> },
+  { title: "System Response Latency", desc: "Fast response times for real-time web copilots and conversational interfaces.", icon: <Activity className="w-5 h-5 text-[#2e936f]" /> },
+  { title: "Data Security Compliance", desc: "Zero data leakage, encrypted vector storage, and full audit logging.", icon: <ShieldCheck className="w-5 h-5 text-[#f15e1c]" /> },
+  { title: "ROI & Operational Velocity", desc: "Measurable commercial ROI derived from automated workflows and decision speed.", icon: <TrendingUp className="w-5 h-5 text-[#fab60a]" /> },
+];
+
+const faqList = [
   {
-    layer: "01",
-    name: "USER",
-    title: "Enterprise Teams & Customers",
-    desc: "The people who interact with the system everyday.",
+    q: "What AI solutions does Arav Innovations build?",
+    a: "We engineer custom LLM integrations, enterprise Retrieval-Augmented Generation (RAG) knowledge systems, document intelligence tools, internal AI copilots, and automated workflow agents.",
   },
   {
-    layer: "02",
-    name: "AI EXPERIENCE",
-    title: "Interfaces & Copilots",
-    desc: "Where people interact with intelligence without needing complex prompts.",
+    q: "How do you ensure enterprise data privacy and security with AI?",
+    a: "We implement strict data isolation, PII redaction, encryption, and private vector storage. Your proprietary data is never used to train public third-party AI models.",
   },
   {
-    layer: "03",
-    name: "AI / AGENT LAYER",
-    title: "Reasoning & Orchestration",
-    desc: "Where models interpret instructions, select tools, and plan actions.",
+    q: "What is Retrieval-Augmented Generation (RAG)?",
+    a: "RAG connects Large Language Models to your internal company databases and documents. When a user asks a question, the system retrieves exact relevant context from your files before generating an accurate, cited response.",
   },
   {
-    layer: "04",
-    name: "KNOWLEDGE + CONTEXT",
-    title: "RAG & Vector Grounding",
-    desc: "Where the AI gets trusted, factual organizational information.",
+    q: "Can AI solutions connect with our existing software?",
+    a: "Yes. We design secure API connectors that integrate AI models directly into your Next.js applications, CRM platforms (Salesforce, HubSpot), ERP systems, and webhooks.",
   },
   {
-    layer: "05",
-    name: "DATA + BUSINESS SYSTEMS",
-    title: "Enterprise Systems",
-    desc: "Where business information lives — CRMs, ERPs, APIs and databases.",
-  },
-  {
-    layer: "06",
-    name: "GOVERNANCE + MONITORING",
-    title: "Controls & Oversight",
-    desc: "Where access, oversight, telemetry and safety boundaries are managed.",
+    q: "Do you keep human oversight in AI workflows?",
+    a: "Yes. We advocate a 'Human-in-the-Loop' architecture. AI automates routine research and drafting, while human operators retain final review and approval authority for critical actions.",
   },
 ];
 
-// -----------------------------------------------------------------------------
-// 5. AI AGENTS SECTION (Section 11 in prompt)
-// -----------------------------------------------------------------------------
-const agentProgressionNodes = [
-  {
-    step: "01",
-    title: "UNDERSTAND",
-    desc: "Interprets instructions, documents, and system status.",
-    example: "Reads ticket or invoice context",
-    connection: "API Data Ingestion",
-    oversight: "Input Validation",
-  },
-  {
-    step: "02",
-    title: "DECIDE",
-    desc: "Formulates a structured execution plan against business rules.",
-    example: "Determines required ERP updates",
-    connection: "Policy Rules Engine",
-    oversight: "Confidence Scoring",
-  },
-  {
-    step: "03",
-    title: "ACT",
-    desc: "Executes verified multi-step tasks across integrated software.",
-    example: "Drafts response & stages records",
-    connection: "CRM & Database Webhooks",
-    oversight: "Action Staging",
-  },
-  {
-    step: "04",
-    title: "ESCALATE",
-    desc: "Routes ambiguous scenarios directly to human specialists.",
-    example: "Requests human sign-off on anomalies",
-    connection: "Team Notification Bridge",
-    oversight: "Mandatory Expert Review",
-  },
-];
-
-// -----------------------------------------------------------------------------
-// 6. RESPONSIBLE AI (Section 12 in prompt)
-// -----------------------------------------------------------------------------
-const responsibleAiLoop = [
-  {
-    point: "DATA",
-    title: "Clean Context",
-    desc: "Only approved, verified company information grounds the system.",
-  },
-  {
-    point: "ACCESS",
-    title: "Role Controls",
-    desc: "Strict permission boundaries protect internal organizational data.",
-  },
-  {
-    point: "GUARDRAILS",
-    title: "Defined Boundaries",
-    desc: "Automated filters block hallucinations and enforce business policies.",
-  },
-  {
-    point: "OVERSIGHT",
-    title: "Human in Control",
-    desc: "High-impact actions require clear approval from human experts.",
-  },
-];
-
-// -----------------------------------------------------------------------------
-// 7. AI DELIVERY TIMELINE (Section 13 in prompt)
-// -----------------------------------------------------------------------------
-const deliveryTimelineStages = [
-  {
-    num: "01",
-    title: "DISCOVER",
-    desc: "Find the business problem and AI opportunity.",
-  },
-  {
-    num: "02",
-    title: "DEFINE",
-    desc: "Select the use case, data and success criteria.",
-  },
-  {
-    num: "03",
-    title: "PROTOTYPE",
-    desc: "Validate the experience and AI behavior.",
-  },
-  {
-    num: "04",
-    title: "INTEGRATE",
-    desc: "Connect AI with knowledge, applications and workflows.",
-  },
-  {
-    num: "05",
-    title: "GOVERN",
-    desc: "Add controls, evaluation and human oversight.",
-  },
-  {
-    num: "06",
-    title: "EVOLVE",
-    desc: "Measure usage and continuously improve.",
-  },
-];
-
-// -----------------------------------------------------------------------------
-// 8. AI LEARNING LOOP (Section 14 in prompt)
-// -----------------------------------------------------------------------------
-const learningLoopSteps = [
-  { stage: "OBSERVE", desc: "Monitor real system telemetry and queries." },
-  { stage: "EVALUATE", desc: "Audit answers against factual standards." },
-  { stage: "IMPROVE", desc: "Refine context grounding and prompt instructions." },
-  { stage: "DEPLOY", desc: "Safely update models and workflow logic." },
-  { stage: "MEASURE", desc: "Track latency, cost and completion metrics." },
-  { stage: "LEARN", desc: "Extract insights from new edge cases." },
-];
-
-// -----------------------------------------------------------------------------
-// 9. ENGAGEMENT MODELS (Section 15 in prompt)
-// -----------------------------------------------------------------------------
-const engagementOptions = [
-  {
-    title: "AI DISCOVERY",
-    tag: "SCOPING & ROADMAP",
-    desc: "Identify valuable AI opportunities and define where AI can create leverage.",
-    deliverables: [
-      "Use-case feasibility assessment",
-      "Data readiness and context review",
-      "Governance and security boundaries",
-      "Technology implementation plan",
-    ],
-  },
-  {
-    title: "AI BUILD",
-    tag: "DESIGN & IMPLEMENTATION",
-    desc: "Design and implement a focused AI capability around a real business workflow.",
-    deliverables: [
-      "Production RAG or agent pipeline",
-      "API integrations to core systems",
-      "Human oversight review gates",
-      "Deployment and operations handoff",
-    ],
-  },
-  {
-    title: "AI EVOLUTION",
-    tag: "OPTIMIZATION & REFINEMENT",
-    desc: "Improve an existing AI system through integration, monitoring and refinement.",
-    deliverables: [
-      "Token telemetry and cost reduction",
-      "Continuous accuracy benchmarking",
-      "Expanding to additional workflows",
-      "Ongoing model performance tuning",
-    ],
-  },
-];
-
-// -----------------------------------------------------------------------------
-// 10. PROOF / WHERE AI CREATES LEVERAGE (Section 16 in prompt)
-// -----------------------------------------------------------------------------
-const leverageAreas = [
-  {
-    title: "AUTOMATION",
-    tag: "OPERATIONAL SPEED",
-    desc: "Turn repetitive work into intelligent workflows.",
-    icon: <Workflow className="w-5 h-5 text-[#F15E1C]" />,
-  },
-  {
-    title: "KNOWLEDGE",
-    tag: "FACTUAL GROUNDING",
-    desc: "Make organizational information easier to use.",
-    icon: <Database className="w-5 h-5 text-[#2E936F]" />,
-  },
-  {
-    title: "DECISIONS",
-    tag: "ACTIONABLE CONTEXT",
-    desc: "Give teams better information at the right moment.",
-    icon: <Zap className="w-5 h-5 text-[#FAB60A]" />,
-  },
-];
-
-// -----------------------------------------------------------------------------
-// 11. FAQ (Section 18 in prompt)
-// -----------------------------------------------------------------------------
-const aiFaqs = [
-  {
-    question: "What types of AI solutions can Arav Innovations build?",
-    answer:
-      "We design practical AI systems including enterprise knowledge bases (RAG), role-specific AI copilots, intelligent document processing pipelines, task-oriented AI agents, and custom applications with embedded intelligence.",
-  },
-  {
-    question: "Can AI connect with our existing business systems?",
-    answer:
-      "Yes. We build secure API integrations connecting AI models directly to your existing databases, CRM platforms, ERP systems, internal portals, and communication tools.",
-  },
-  {
-    question: "Can AI work with our internal documents and knowledge?",
-    answer:
-      "Yes. Using private retrieval-augmented generation (RAG), we index your proprietary PDFs, policies, SOPs, and spreadsheets so models answer strictly based on approved internal context.",
-  },
-  {
-    question: "How do you evaluate AI reliability?",
-    answer:
-      "We build automated evaluation benchmarks to test factual grounding, response accuracy, and latency. Telemetry tracks performance continuously to spot edge cases and improve quality.",
-  },
-  {
-    question: "How do you approach AI governance and human oversight?",
-    answer:
-      "We enforce role-based access control, automated safety boundaries, and clear human-in-the-loop review thresholds for sensitive actions, ensuring operations remain compliant and fully auditable.",
-  },
+const internalServices = [
+  { name: "IT Strategy & Implementation", href: "/services/it-strategy-implementation", icon: <Compass className="w-4 h-4 text-[#f15e1c]" /> },
+  { name: "Digital Marketing & Brand", href: "/services/digital-marketing-brand-development", icon: <TrendingUp className="w-4 h-4 text-[#2e936f]" /> },
+  { name: "Web & Application Development", href: "/services/web-app-development", icon: <Code2 className="w-4 h-4 text-[#2e936f]" /> },
+  { name: "Risk, Compliance & Governance", href: "/services/risk-compliance-governance", icon: <ShieldCheck className="w-4 h-4 text-[#2e936f]" /> },
+  { name: "Audit & Improvement", href: "/services/audit-improvement", icon: <BarChart3 className="w-4 h-4 text-[#f15e1c]" /> },
+  { name: "Training & Staff Augmentation", href: "/services/training-staff-augmentation", icon: <Users2 className="w-4 h-4 text-[#fab60a]" /> },
+  { name: "SEO Services", href: "/services/seo-services", icon: <Search className="w-4 h-4 text-[#2e936f]" /> },
 ];
 
 export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfolioPageProps) {
-  const [activeFlowNode, setActiveFlowNode] = React.useState<number>(0);
-  const [activeSecondaryCap, setActiveSecondaryCap] = React.useState<number>(0);
-  const [activeArchLayer, setActiveArchLayer] = React.useState<number>(0);
-  const [activeAgentNode, setActiveAgentNode] = React.useState<number>(0);
-  const [activeLoopStep, setActiveLoopStep] = React.useState<number>(0);
+  const [activeStageIdx, setActiveStageIdx] = React.useState<number>(0);
   const [openFaqIdx, setOpenFaqIdx] = React.useState<number | null>(0);
 
-  // Form State
-  const [formData, setFormData] = React.useState({
-    name: "",
-    company: "",
-    email: "",
-    useCase: "AI Automation",
-    challenge: "",
-    timeline: "1-3 months",
-  });
-  const [formSubmitted, setFormSubmitted] = React.useState(false);
-
-  // CMS Blog Data
-  const articles = React.useMemo(() => {
+  const displayPosts = React.useMemo(() => {
     if (relatedPosts && relatedPosts.length > 0) {
       return relatedPosts.slice(0, 3);
     }
     return blogPostsData.slice(0, 3);
   }, [relatedPosts]);
 
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormSubmitted(true);
-  };
+  const activeStage = intelligenceFlowNodes[activeStageIdx];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300 overflow-x-hidden selection:bg-[#F15E1C]/20 selection:text-[#F15E1C]">
+    <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#000000] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c] relative">
       
-      {/* =====================================================================
-          1. HERO SECTION (FULL-BLEED CINEMATIC DESKTOP + MOBILE CARD)
-          ===================================================================== */}
-      <section className="relative pt-3 sm:pt-4 lg:pt-5 pb-8 sm:pb-12 lg:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-white dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none flex flex-col justify-start">
-        {/* Full-Bleed Desktop Background Visual — PC / DESKTOP VIEW ONLY */}
+      <AnimatedDotGrid />
+
+      {/* 1. HERO */}
+      <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-12 lg:pb-14 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none flex flex-col justify-start">
+        
         <div className="absolute inset-0 pointer-events-none hidden lg:block select-none overflow-hidden">
           <Image
-            src="/images/ai-portfolio-hero-bg.png"
-            alt="AI Engineering, Automation & Intelligent Systems Strategy"
+            src="/images/ai-portfolio-bg.png"
+            alt="AI Portfolio & Enterprise Solutions"
             fill
             priority
-            className="object-cover object-right opacity-100 dark:opacity-95 transition-opacity duration-500"
+            className="object-cover object-right opacity-95 dark:opacity-90 transition-opacity duration-500"
             sizes="(min-width: 1024px) 100vw, 1px"
           />
-          {/* Light backdrop gradient for text readability while preserving full image opacity */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/60 via-35% to-transparent dark:from-[#000000] dark:via-[#000000]/60 dark:via-35% dark:to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/80 via-45% to-transparent dark:from-[#000000] dark:via-[#000000]/80 dark:via-45% dark:to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#FFFDF9]/20 via-transparent to-[#FFFDF9]/60 dark:from-[#000000]/20 dark:via-transparent dark:to-[#000000]/60 pointer-events-none" />
         </div>
 
-        <div className="max-w-[1536px] mx-auto w-full space-y-6 sm:space-y-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <AnimatedDotGrid />
+
+        <div className="max-w-[1536px] mx-auto w-full space-y-4 sm:space-y-6 relative z-10">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start">
             
-            {/* Hero Text (Desktop 50% / lg:col-span-6 xl:col-span-5) */}
-            <div className="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-left max-w-xl">
+            <div className="lg:col-span-7 xl:col-span-6 space-y-4 sm:space-y-5 text-left max-w-2xl">
               
-              {/* Breadcrumb & Eyebrow Badge */}
-              <div className="space-y-2">
+              <AnimatedSection delay={0.05} className="space-y-2">
                 <Breadcrumb
                   items={[
                     { label: "Services", href: "/services" },
-                    { label: "AI Portfolio", href: "/services/ai-portfolio" },
+                    { label: "AI Portfolio" },
                   ]}
                 />
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
-                  <Sparkles className="w-3.5 h-3.5 text-[#f15e1c]" />
-                  <span>ENTERPRISE AI WORKFLOW AUTOMATION SOLUTIONS</span>
-                </div>
-              </div>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c] shadow-2xs cursor-default transition-all duration-300"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-[#f15e1c] animate-pulse" />
+                  <span>ENTERPRISE AI SOLUTIONS &amp; LLM INTEGRATION</span>
+                </motion.div>
+              </AnimatedSection>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-[1.12]">
-                AI &amp; Intelligent Process Automation
-              </h1>
+              <AnimatedSection delay={0.1} className="space-y-2">
+                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display tracking-tight leading-[1.15] text-[#1b2823] dark:text-[#ffffff]">
+                  AI Portfolio &amp; <span className="text-[#f15e1c]">Enterprise Solutions</span>
+                </h1>
+              </AnimatedSection>
 
-              {/* Dedicated Mobile Hero Visual Card — Mobile View Only */}
-              <div className="lg:hidden w-full my-3">
-                <div className="relative w-full rounded-2xl overflow-hidden border-2 border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] shadow-xl select-none aspect-[1024/1536]">
+              <AnimatedSection delay={0.12} className="w-full lg:hidden my-2">
+                <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-2xl border border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] overflow-hidden shadow-lg">
                   <Image
+                    src="/images/ai-portfolio-mobile-hero.png"
+                    alt="AI Portfolio and Enterprise Solutions"
+                    fill
                     priority
-                    src="/images/ai-portfolio-mobile-cropped.png"
-                    alt="AI Portfolio & Mobile Intelligence Visual"
-                    width={1024}
-                    height={1536}
-                    className="w-full h-auto object-contain object-center rounded-2xl"
-                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 40vw"
+                    className="object-cover object-center"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                 </div>
-              </div>
+              </AnimatedSection>
 
-              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed font-normal">
-                Turn repetitive, manual tasks into streamlined intelligent workflows. We guide organizations through adopting safe, scalable AI tools and custom automation solutions that boost productivity, lower operational costs, and improve customer satisfaction.
-              </p>
-
-              {/* CTAs */}
-              <div className="flex flex-wrap items-center gap-4 pt-1">
-                <a href="#inquire">
-                  <Button3D variant="primary" size="lg" className="flex items-center gap-2 font-semibold bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] hover:opacity-95 transition-all">
-                    Discuss an AI Use Case
-                    <ArrowRight className="w-4 h-4" />
-                  </Button3D>
-                </a>
-                <a href="#capabilities">
-                  <Button3D variant="secondary" size="lg" className="flex items-center gap-2 font-semibold bg-[#2E936F] text-[#FFFFFF] border-[#2E936F] hover:opacity-95 transition-all">
-                    Explore AI Capabilities
-                  </Button3D>
-                </a>
-              </div>
-
-              {/* Compact Capability Line */}
-              <div className="pt-3 border-t border-[#F7D7B0]">
-                <div className="flex flex-wrap items-center gap-2 text-xs font-mono font-bold text-gray-600 dark:text-gray-300">
-                  <span className="px-2 py-0.5 rounded bg-[#F7D7B0]/40 text-[#F15E1C]">AI APPLICATIONS</span>
-                  <span className="text-[#F7D7B0]">•</span>
-                  <span className="px-2 py-0.5 rounded bg-[#F7D7B0]/40 text-[#2E936F]">RAG &amp; KNOWLEDGE</span>
-                  <span className="text-[#F7D7B0]">•</span>
-                  <span className="px-2 py-0.5 rounded bg-[#F7D7B0]/40 text-[#FAB60A]">AI AGENTS</span>
-                  <span className="text-[#F7D7B0]">•</span>
-                  <span className="px-2 py-0.5 rounded bg-[#F7D7B0]/40 text-[#F15E1C]">AUTOMATION</span>
-                  <span className="text-[#F7D7B0]">•</span>
-                  <span className="px-2 py-0.5 rounded bg-[#F7D7B0]/40 text-[#2E936F]">AI INTEGRATION</span>
-                </div>
-              </div>
-            </div>
-
-            {/* HERO VISUAL SPACER — DESKTOP VIEW ONLY (Fills right column to reveal Desktop BG Artwork) */}
-            <div className="lg:col-span-6 xl:col-span-7 w-full hidden lg:flex items-center justify-center pointer-events-none min-h-[300px]" />
-
-          </div>
-        </div>
-      </section>
-
-      <SystemScanTransition />
-
-      {/* =====================================================================
-          2. AI CAPABILITIES — AI THAT SOLVES REAL WORK
-          ===================================================================== */}
-      <section id="capabilities" className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-            <Badge variant="outline" className="mb-2.5 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
-              PRACTICAL CAPABILITIES
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              AI That Solves Real Work.
-            </h2>
-            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
-              We focus on practical AI — systems that understand information, assist decisions and automate meaningful parts of everyday work.
-            </p>
-          </div>
-
-          {/* 4 Concise Capability Areas */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {realWorkCapabilities.map((cap) => (
-              <motion.div
-                key={cap.num}
-                whileHover={{ y: -3 }}
-                className="p-6 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20 hover:shadow-lg transition-all duration-200 shadow-xs space-y-3 flex flex-col justify-between group cursor-pointer"
-              >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-bold text-[#F15E1C] px-2 py-0.5 rounded bg-[#F7D7B0]/40 group-hover:bg-[#F15E1C] group-hover:text-[#FFFFFF] transition-colors">
-                      {cap.num}
-                    </span>
-                    <div className="p-1.5 rounded-lg bg-[#F7D7B0]/30">{cap.icon}</div>
-                  </div>
-                  <h3 className="text-lg font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">
-                    {cap.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                    {cap.desc}
-                  </p>
-                </div>
-
-                <div className="pt-2.5 border-t border-[#F7D7B0]">
-                  <div className="w-full h-0.5 bg-[#F7D7B0] group-hover:bg-[#F15E1C] transition-colors" />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* =====================================================================
-          2.5 AI MVP — PRACTICAL MVP OFFERING
-          ===================================================================== */}
-      <section id="ai-mvp" className="relative z-10 w-full py-10 sm:py-14 bg-[#fefaf5] dark:bg-[#0a0a0a] border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="p-6 sm:p-10 rounded-3xl bg-white dark:bg-[#121212] border-2 border-[#F15E1C]/30 shadow-xl space-y-6">
-            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-              <div className="space-y-3 max-w-2xl">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F15E1C]/10 border border-[#F15E1C]/30 text-xs font-mono font-bold text-[#F15E1C]">
-                  <Sparkles className="w-3.5 h-3.5 text-[#F15E1C]" />
-                  <span>RAPID AI MVP PROGRAM</span>
-                </div>
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#1b2823] dark:text-[#ffffff]">
-                  AI MVP Development
-                </h3>
-                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
-                  Turn an AI concept into a practical working MVP. Validate your idea quickly, demonstrate the business workflow to key stakeholders, and establish a solid foundation for future production development.
+              <AnimatedSection delay={0.14} className="space-y-2">
+                <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-2xl">
+                  Deploy pragmatic AI tools that solve real operational challenges. We build secure RAG knowledge systems, document intelligence pipelines, and automated workflow agents connected to your data.
                 </p>
-              </div>
+              </AnimatedSection>
 
-              <Link href="/contact?intent=ai-mvp">
-                <Button3D variant="primary" size="lg" className="bg-[#F15E1C] text-white hover:bg-[#d8480d]">
-                  Build Your AI MVP →
-                </Button3D>
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-[#F7D7B0]/60">
-              <div className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#181818] border border-[#F7D7B0]/50 space-y-1.5">
-                <div className="text-xs font-mono font-bold text-[#F15E1C] uppercase">01 • Scoping</div>
-                <h4 className="text-sm font-bold text-[#1b2823] dark:text-[#ffffff]">Concept Validation</h4>
-                <p className="text-xs text-gray-600 dark:text-gray-400">Map use-case feasibility and validate core business requirements.</p>
-              </div>
-              <div className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#181818] border border-[#F7D7B0]/50 space-y-1.5">
-                <div className="text-xs font-mono font-bold text-[#2E936F] uppercase">02 • Workflow</div>
-                <h4 className="text-sm font-bold text-[#1b2823] dark:text-[#ffffff]">Demonstrable AI Flow</h4>
-                <p className="text-xs text-gray-600 dark:text-gray-400">Build a functional prototype connected to key data sources.</p>
-              </div>
-              <div className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#181818] border border-[#F7D7B0]/50 space-y-1.5">
-                <div className="text-xs font-mono font-bold text-[#FAB60A] uppercase">03 • Feedback</div>
-                <h4 className="text-sm font-bold text-[#1b2823] dark:text-[#ffffff]">User Testing</h4>
-                <p className="text-xs text-gray-600 dark:text-gray-400">Gather immediate feedback on accuracy, usability, and speed.</p>
-              </div>
-              <div className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#181818] border border-[#F7D7B0]/50 space-y-1.5">
-                <div className="text-xs font-mono font-bold text-[#F15E1C] uppercase">04 • Roadmap</div>
-                <h4 className="text-sm font-bold text-[#1b2823] dark:text-[#ffffff]">Production Scaling</h4>
-                <p className="text-xs text-gray-600 dark:text-gray-400">Establish standard architecture for full enterprise deployment.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <SystemScanTransition />
-
-      {/* =====================================================================
-          3. UNIQUE AI VISUAL — INTELLIGENCE FLOW (From Data to Action)
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-            <Badge variant="outline" className="mb-2.5 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
-              INTELLIGENCE FLOW
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              From Data to Action.
-            </h2>
-            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
-              Every production AI system follows a connected pipeline from raw organizational signals to measured business outcomes.
-            </p>
-          </div>
-
-          {/* Connected AI-System Visualization */}
-          <div className="bg-white dark:bg-[#000000] border border-[#F7D7B0] rounded-3xl p-6 sm:p-8 shadow-lg space-y-6 max-w-5xl mx-auto">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-              {intelligenceFlowNodes.map((node, idx) => {
-                const isActive = activeFlowNode === idx;
-                return (
-                  <button
-                    key={node.num}
-                    onClick={() => setActiveFlowNode(idx)}
-                    onMouseEnter={() => setActiveFlowNode(idx)}
-                    className={cn(
-                      "p-4 rounded-xl text-left transition-all duration-200 border cursor-pointer flex flex-col justify-between h-28 transform",
-                      isActive
-                        ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-0.5"
-                        : "bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
-                    )}
-                  >
-                    <div className="flex items-center justify-between w-full">
-                      <span className={cn("text-[10px] font-mono font-bold", isActive ? "text-[#FFEC69]" : "text-[#F15E1C]")}>
-                        {node.num}
-                      </span>
-                      <div className={cn("p-1 rounded-lg transition-colors", isActive ? "bg-[#FFFFFF] text-[#F15E1C]" : "bg-[#F7D7B0]/30 text-[#F15E1C]")}>
-                        {node.icon}
-                      </div>
-                    </div>
-                    <span className={cn("text-xs font-bold block leading-tight", isActive ? "text-[#FFFFFF]" : "text-[#1b2823] dark:text-[#ffffff]")}>
-                      {node.title}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Active Node Detail */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={intelligenceFlowNodes[activeFlowNode].num}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.2 }}
-                className="p-5 sm:p-6 rounded-2xl border-2 border-[#F15E1C] bg-[#F7D7B0]/20 text-center space-y-1.5"
-              >
-                <span className="text-xs font-mono font-bold text-[#F15E1C] uppercase">
-                  NODE {intelligenceFlowNodes[activeFlowNode].num} &bull; {intelligenceFlowNodes[activeFlowNode].title}
-                </span>
-                <p className="text-base text-gray-600 dark:text-gray-300 font-medium leading-relaxed max-w-2xl mx-auto">
-                  {intelligenceFlowNodes[activeFlowNode].desc}
-                </p>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-        </div>
-      </section>
-
-      <SystemScanTransition />
-
-      {/* =====================================================================
-          4. AI SYSTEM VISUAL (IMAGE 2) — ONE AI SYSTEM. MULTIPLE POSSIBILITIES.
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
-            {/* Left: Text & Capability List (Desktop 40% / lg:col-span-5) */}
-            <div className="lg:col-span-5 space-y-5">
-              <Badge variant="outline" className="border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
-                INTELLIGENT INTEGRATION
-              </Badge>
-
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                One AI System. Multiple Possibilities.
-              </h2>
-
-              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
-                AI becomes valuable when it connects intelligence with the systems and workflows your organization already uses.
-              </p>
-
-              {/* Capability List */}
-              <div className="space-y-2.5 pt-2">
-                {secondaryCapabilities.map((cap, idx) => {
-                  const isActive = activeSecondaryCap === idx;
-                  return (
-                    <div
-                      key={cap.name}
-                      onMouseEnter={() => setActiveSecondaryCap(idx)}
-                      onClick={() => setActiveSecondaryCap(idx)}
-                      className={cn(
-                        "p-3 rounded-xl border transition-all duration-200 cursor-pointer flex items-center justify-between gap-3",
-                        isActive
-                          ? "bg-[#F7D7B0]/30 border-[#F15E1C] shadow-xs translate-x-1"
-                          : "bg-white dark:bg-[#000000] border-[#F7D7B0] hover:border-[#F15E1C]"
-                      )}
+              <AnimatedSection delay={0.16} className="pt-1 flex flex-wrap items-center gap-3">
+                <Link href="/contact">
+                  <MagneticButton>
+                    <Button3D
+                      variant="primary"
+                      size="md"
+                      rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1.5" />}
+                      className="shadow-md shadow-[#f15e1c]/20 hover:-translate-y-0.5 transition-all duration-300"
                     >
-                      <div className="flex items-center gap-3">
-                        <div className={cn("p-1.5 rounded-lg", isActive ? "bg-[#F15E1C] text-[#FFFFFF]" : "bg-[#F7D7B0]/30")}>
-                          {cap.icon}
-                        </div>
-                        <div>
-                          <h4 className="text-xs sm:text-sm font-bold text-[#1b2823] dark:text-[#ffffff]">{cap.name}</h4>
-                          <p className="text-[11px] text-gray-600 dark:text-gray-300">{cap.desc}</p>
-                        </div>
-                      </div>
-                      <ChevronDown className={cn("w-4 h-4 text-[#F15E1C] -rotate-90 transition-transform", isActive ? "opacity-100" : "opacity-30")} />
-                    </div>
-                  );
-                })}
-              </div>
+                      Explore AI Architecture
+                    </Button3D>
+                  </MagneticButton>
+                </Link>
+
+                <Link href="#capabilities">
+                  <MagneticButton>
+                    <Button3D variant="outline" size="md" className="hover:-translate-y-0.5 transition-all duration-300">
+                      Explore Capabilities
+                    </Button3D>
+                  </MagneticButton>
+                </Link>
+              </AnimatedSection>
+
+              <AnimatedSection delay={0.18} className="pt-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  {keywordTags.map((tag, i) => (
+                    <motion.span
+                      key={i}
+                      whileHover={{ scale: 1.04, y: -1 }}
+                      transition={{ duration: 0.2 }}
+                      className="px-3 py-1 rounded-lg bg-[#fefaf5]/90 dark:bg-[#0a0a0a]/90 border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] hover:border-[#f15e1c]/40 transition-all duration-200 cursor-default"
+                    >
+                      {tag}
+                    </motion.span>
+                  ))}
+                </div>
+              </AnimatedSection>
             </div>
 
-            {/* Right: Secondary Visual (Desktop 60% / lg:col-span-7) */}
-            <div className="lg:col-span-7 w-full flex items-center justify-center">
-              <TiltCard className="w-full">
+            <div className="hidden lg:block lg:col-span-5 xl:col-span-6 h-full min-h-[260px]" />
+          </div>
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* 2. VISUAL BREAK 1 */}
+      <section className="relative py-10 sm:py-14 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
+            
+            <div className="lg:col-span-5 w-full flex items-center justify-center">
+              <AnimatedSection delay={0.08} className="w-full">
                 <motion.div
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  transition={{ duration: 0.4 }}
-                  className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-white dark:bg-[#080808] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md group"
+                  whileHover={{ scale: 1.01, y: -2 }}
+                  transition={{ duration: 0.3 }}
+                  className="relative w-full aspect-[16/9] rounded-2xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-white dark:bg-[#080808] shadow-md hover:shadow-xl hover:border-[#f15e1c]/50 transition-all duration-300 group"
                 >
                   <Image
-                    loading="lazy"
-                    src={AI_PORTFOLIO_SECONDARY_IMAGE}
-                    alt="AI portfolio visualization showing intelligent applications, AI agents, data and automation."
+                    src="/images/ai-portfolio-main-1.png"
+                    alt="Arav Innovations AI Solutions & LLM Integration"
                     fill
                     className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                 </motion.div>
-              </TiltCard>
+              </AnimatedSection>
             </div>
 
-          </div>
-        </div>
-      </section>
-
-      <SystemScanTransition />
-
-      {/* =====================================================================
-          5. AI SYSTEM ARCHITECTURE
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-            <Badge variant="outline" className="mb-2.5 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
-              SYSTEM ARCHITECTURE
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Intelligence Needs a System Behind It.
-            </h2>
-            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
-              Every layer of the AI system connects naturally to ensure stability, relevance, and operational governance.
-            </p>
-          </div>
-
-          {/* Architecture Layers */}
-          <div className="max-w-4xl mx-auto space-y-3">
-            {systemArchitectureLayers.map((layer, idx) => {
-              const isActive = activeArchLayer === idx;
-              return (
-                <div
-                  key={layer.layer}
-                  onMouseEnter={() => setActiveArchLayer(idx)}
-                  className={cn(
-                    "p-4 sm:p-4.5 rounded-2xl border transition-all duration-200 cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-3",
-                    isActive
-                      ? "bg-[#F7D7B0]/30 border-[#F15E1C] shadow-xs -translate-y-0.5"
-                      : "bg-white dark:bg-[#000000] border-[#F7D7B0] hover:border-[#F15E1C]"
-                  )}
-                >
-                  <div className="flex items-center gap-3.5">
-                    <span className="p-2 rounded-xl bg-[#F15E1C] text-[#FFFFFF] font-mono font-bold text-xs shrink-0">
-                      LAYER {layer.layer}
-                    </span>
-                    <div>
-                      <span className="text-[10px] font-mono font-bold text-[#F15E1C] uppercase block">{layer.name}</span>
-                      <h3 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff]">{layer.title}</h3>
-                    </div>
-                  </div>
-
-                  <p className="text-xs text-gray-600 dark:text-gray-300 max-w-md sm:text-right">
-                    {layer.desc}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-
-        </div>
-      </section>
-
-      <SystemScanTransition />
-
-      {/* =====================================================================
-          6. AI AGENTS SECTION
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-            <Badge variant="outline" className="mb-2.5 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
-              TASK-ORIENTED AGENTS
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              When AI Can Do More Than Answer.
-            </h2>
-            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
-              AI agents can move beyond responses to perform defined tasks, work across systems and involve people when decisions require human judgment.
-            </p>
-          </div>
-
-          {/* Visual Progression: UNDERSTAND → DECIDE → ACT → ESCALATE */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
-            {agentProgressionNodes.map((agent, idx) => {
-              const isActive = activeAgentNode === idx;
-              return (
-                <div
-                  key={agent.step}
-                  onMouseEnter={() => setActiveAgentNode(idx)}
-                  className={cn(
-                    "p-5 rounded-2xl border transition-all duration-200 cursor-pointer space-y-3 flex flex-col justify-between shadow-xs",
-                    isActive
-                      ? "bg-[#F7D7B0]/20 border-[#F15E1C] shadow-md -translate-y-0.5"
-                      : "bg-white dark:bg-[#000000] border-[#F7D7B0] hover:border-[#F15E1C]"
-                  )}
-                >
-                  <div className="space-y-2">
-                    <span className="text-[10px] font-mono font-bold text-[#F15E1C] px-2 py-0.5 rounded bg-[#F7D7B0]/40 inline-block">
-                      PHASE {agent.step}
-                    </span>
-                    <h3 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff]">{agent.title}</h3>
-                    <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{agent.desc}</p>
-                  </div>
-
-                  <div className="pt-2.5 border-t border-[#F7D7B0] text-[11px] text-gray-600 dark:text-gray-300 space-y-1">
-                    <p><span className="font-semibold text-[#1b2823] dark:text-[#ffffff]">Task:</span> {agent.example}</p>
-                    <p><span className="font-semibold text-[#2E936F]">Control:</span> {agent.oversight}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-        </div>
-      </section>
-
-      <SystemScanTransition />
-
-      {/* =====================================================================
-          7. RESPONSIBLE AI
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-            <Badge variant="outline" className="mb-2.5 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
-              RESPONSIBLE GOVERNANCE
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Intelligence Needs Control.
-            </h2>
-            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
-              Reliable AI requires the right data, clear access, defined boundaries and human oversight.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
-            {responsibleAiLoop.map((pt, idx) => (
-              <motion.div
-                key={pt.point}
-                whileHover={{ y: -3 }}
-                className="p-5 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#2E936F] hover:bg-[#F7D7B0]/20 transition-all duration-300 shadow-xs space-y-2 group cursor-pointer text-center"
-              >
-                <span className="text-xs font-mono font-bold text-[#2E936F] px-2.5 py-0.5 rounded-full bg-[#2E936F]/10 inline-block">
-                  CONTROL 0{idx + 1} &bull; {pt.point}
-                </span>
-                <h3 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2E936F] transition-colors">
-                  {pt.title}
-                </h3>
-                <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {pt.desc}
+            <div className="lg:col-span-7 space-y-4 text-left">
+              <AnimatedSection delay={0.12} className="space-y-2">
+                <Badge variant="secondary" size="md">
+                  PRACTICAL AI SOLUTIONS
+                </Badge>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-tight">
+                  Connecting Artificial Intelligence With Business Workflows
+                </h2>
+                <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed">
+                  AI generates commercial value when it is grounded in your company’s data, integrated into operational workflows, and governed by strict privacy guardrails. We focus on pragmatic tools that save time and improve accuracy.
                 </p>
-              </motion.div>
-            ))}
-          </div>
+              </AnimatedSection>
 
-          {/* Connected Loop Badge */}
-          <div className="mt-8 text-center">
-            <span className="inline-flex items-center gap-2 text-xs font-mono font-bold text-gray-600 dark:text-gray-300 px-4 py-1.5 rounded-full border border-[#F7D7B0] bg-[#F7D7B0]/20">
-              DATA &rarr; ACCESS &rarr; GUARDRAILS &rarr; OVERSIGHT &rarr; IMPROVEMENT
-            </span>
-          </div>
-
-        </div>
-      </section>
-
-      <SystemScanTransition />
-
-      {/* =====================================================================
-          8. AI DELIVERY TIMELINE (VERTICAL SCROLL-CONTROLLED)
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-            <Badge variant="outline" className="mb-2.5 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
-              DELIVERY LIFECYCLE
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              From AI Idea to Working System.
-            </h2>
-            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
-              Our engineering lifecycle moves deliberately from problem discovery to continuous system evolution.
-            </p>
-          </div>
-
-          {/* Central Vertical Timeline */}
-          <div className="relative max-w-4xl mx-auto py-2">
-            <div className="absolute left-4 md:left-1/2 top-4 bottom-10 w-0.5 -translate-x-1/2 bg-[#F7D7B0]" />
-
-            <div className="space-y-8 md:space-y-10">
-              {deliveryTimelineStages.map((stage, idx) => {
-                const isEven = idx % 2 === 0;
-                return (
+              <AnimatedSection delay={0.16}>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
                   <motion.div
-                    key={stage.num}
-                    initial={{ opacity: 0.4, y: 14 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, amount: 0.4 }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                    className={cn(
-                      "relative flex flex-col md:flex-row items-start md:items-center group cursor-pointer",
-                      isEven ? "md:flex-row-reverse" : ""
-                    )}
+                    whileHover={{ y: -2 }}
+                    className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/40 space-y-1 transition-all duration-200 cursor-default group"
                   >
-                    <div className={cn("w-full md:w-1/2 pl-12 md:pl-0", isEven ? "md:pr-10 md:text-right" : "md:pl-10 md:text-left")}>
-                      <div className="p-5 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] group-hover:border-[#F15E1C] group-hover:bg-[#F7D7B0]/20 group-hover:shadow-md group-hover:-translate-y-0.5 transition-all duration-300 shadow-xs space-y-1.5">
-                        <span className="text-xs font-mono font-bold text-[#F15E1C] px-2 py-0.5 rounded bg-[#F7D7B0]/40 group-hover:bg-[#F15E1C] group-hover:text-[#FFFFFF] transition-colors inline-block">
-                          STAGE {stage.num}
-                        </span>
-                        <h3 className="text-lg font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">
-                          {stage.title}
-                        </h3>
-                        <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">
-                          {stage.desc}
-                        </p>
-                      </div>
+                    <div className="flex items-center gap-1.5 text-xs font-bold font-mono text-[#f15e1c]">
+                      <Bot className="w-4 h-4" />
+                      <span>LLM INTEGRATION</span>
                     </div>
-
-                    <div className="absolute left-4 md:left-1/2 top-5 -translate-x-1/2 w-8 h-8 rounded-full bg-white dark:bg-[#000000] border-2 border-[#F7D7B0] group-hover:border-[#F15E1C] group-hover:bg-[#F15E1C] flex items-center justify-center transition-all duration-300 shadow-xs z-10">
-                      <span className="text-[11px] font-mono font-bold text-[#F15E1C] group-hover:text-[#FFFFFF]">
-                        {stage.num}
-                      </span>
-                    </div>
-
-                    <div className="hidden md:block w-1/2" />
+                    <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-normal">
+                      Secure RAG &amp; domain knowledge retrieval.
+                    </p>
                   </motion.div>
-                );
-              })}
+
+                  <motion.div
+                    whileHover={{ y: -2 }}
+                    className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#2e936f]/40 space-y-1 transition-all duration-200 cursor-default group"
+                  >
+                    <div className="flex items-center gap-1.5 text-xs font-bold font-mono text-[#2e936f]">
+                      <Workflow className="w-4 h-4" />
+                      <span>WORKFLOW AGENTS</span>
+                    </div>
+                    <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-normal">
+                      Automated task pipelines &amp; document processing.
+                    </p>
+                  </motion.div>
+
+                  <motion.div
+                    whileHover={{ y: -2 }}
+                    className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#fab60a]/40 space-y-1 transition-all duration-200 cursor-default group"
+                  >
+                    <div className="flex items-center gap-1.5 text-xs font-bold font-mono text-[#fab60a]">
+                      <ShieldCheck className="w-4 h-4" />
+                      <span>PRIVACY &amp; GUARDRAILS</span>
+                    </div>
+                    <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-normal">
+                      Enterprise security &amp; human-in-the-loop controls.
+                    </p>
+                  </motion.div>
+                </div>
+              </AnimatedSection>
             </div>
-          </div>
 
+          </div>
         </div>
       </section>
 
       <SystemScanTransition />
 
-      {/* =====================================================================
-          9. AI LEARNING LOOP
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 3. CAPABILITIES */}
+      <section id="capabilities" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-[1536px] mx-auto space-y-8 sm:space-y-10">
           
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-            <Badge variant="outline" className="mb-2.5 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
-              AI LEARNING LOOP
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              AI Gets Better When the System Learns.
-            </h2>
-            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
-              Hover over each phase of the continuous learning loop that transforms telemetry into ongoing system improvements.
-            </p>
-          </div>
+          <AnimatedSection>
+            <div className="max-w-3xl space-y-3 text-left">
+              <Badge variant="secondary" size="md">
+                AI CAPABILITIES
+              </Badge>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Enterprise AI Capability Areas
+              </h2>
+              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-normal">
+                Pragmatic AI solutions engineered around domain-tailored LLMs, workflow automation, document processing, and strategic consulting.
+              </p>
+            </div>
+          </AnimatedSection>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 max-w-5xl mx-auto">
-            {learningLoopSteps.map((item, idx) => {
-              const isActive = activeLoopStep === idx;
-              return (
-                <button
-                  key={item.stage}
-                  onClick={() => setActiveLoopStep(idx)}
-                  onMouseEnter={() => setActiveLoopStep(idx)}
-                  className={cn(
-                    "p-4 rounded-2xl text-left transition-all duration-200 border cursor-pointer flex flex-col justify-between h-32 transform",
-                    isActive
-                      ? "bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] shadow-md -translate-y-0.5"
-                      : "bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] border-[#F7D7B0] hover:border-[#F15E1C] hover:bg-[#F7D7B0]/20"
-                  )}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-stretch">
+            {realWorkCapabilities.map((cap, idx) => (
+              <AnimatedSection key={cap.num} delay={idx * 0.06} className="h-full">
+                <motion.div
+                  whileHover={{ y: -3 }}
+                  transition={{ duration: 0.2 }}
+                  className="h-full p-6 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:shadow-lg hover:border-[#f15e1c] transition-all duration-300 flex flex-col justify-between text-left group relative overflow-hidden"
                 >
-                  <span className={cn("text-[10px] font-mono font-bold", isActive ? "text-[#FFEC69]" : "text-[#F15E1C]")}>
-                    0{idx + 1}
-                  </span>
-                  <span className={cn("text-xs font-bold block", isActive ? "text-[#FFFFFF]" : "text-[#1b2823] dark:text-[#ffffff]")}>
-                    {item.stage}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="mt-5 max-w-md mx-auto text-center">
-            <p className="text-xs text-gray-600 dark:text-gray-300 font-medium">
-              Phase: <span className="font-bold text-[#1b2823] dark:text-[#ffffff]">{learningLoopSteps[activeLoopStep].stage}</span> &mdash; {learningLoopSteps[activeLoopStep].desc}
-            </p>
-          </div>
-
-        </div>
-      </section>
-
-      <SystemScanTransition />
-
-      {/* =====================================================================
-          10. ENGAGEMENT MODELS
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-            <Badge variant="outline" className="mb-2.5 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
-              STARTING FORMATS
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Start Where Your Business Needs It.
-            </h2>
-            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
-              Choose an engagement format tailored to your current stage of AI exploration and adoption.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {engagementOptions.map((model) => (
-              <motion.div
-                key={model.title}
-                whileHover={{ y: -3 }}
-                className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-xl transition-all duration-300 space-y-5 flex flex-col justify-between group cursor-pointer"
-              >
-                <div className="space-y-3">
-                  <span className="text-[10px] font-mono font-bold text-[#F15E1C] uppercase block">{model.tag}</span>
-                  <h3 className="text-xl font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors">{model.title}</h3>
-                  <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{model.desc}</p>
-
-                  <div className="pt-3 border-t border-[#F7D7B0] space-y-1.5">
-                    <span className="text-[10px] font-mono font-bold text-[#2E936F] uppercase block">Deliverables</span>
-                    {model.deliverables.map((del, dIdx) => (
-                      <div key={dIdx} className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-300">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#F15E1C] shrink-0" />
-                        <span>{del}</span>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-mono font-black text-[#f15e1c] px-2.5 py-0.5 rounded-md bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/30">
+                        {cap.num}
+                      </span>
+                      <div className="w-10 h-10 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                        {cap.icon}
                       </div>
-                    ))}
+                    </div>
+                    <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug">
+                      {cap.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
+                      {cap.description}
+                    </p>
                   </div>
-                </div>
 
-                <div className="pt-2">
-                  <a href="#inquire">
-                    <Button3D variant="secondary" size="md" className="w-full bg-[#2E936F] text-[#FFFFFF] border-[#2E936F]">
-                      Inquire About {model.title}
-                    </Button3D>
-                  </a>
-                </div>
-              </motion.div>
+                  <div className="h-1 w-0 group-hover:w-full bg-[#f15e1c] transition-all duration-300 rounded-full mt-4" />
+                </motion.div>
+              </AnimatedSection>
             ))}
           </div>
-
         </div>
       </section>
 
       <SystemScanTransition />
 
-      {/* =====================================================================
-          11. PROOF — WHERE AI CAN CREATE LEVERAGE
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 4. INTELLIGENCE FLOW PIPELINE */}
+      <section id="process" className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto space-y-8 sm:space-y-10">
           
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-            <Badge variant="outline" className="mb-2.5 border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
-              PROVEN OPPORTUNITIES
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Where AI Can Create Leverage.
-            </h2>
-            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
-              We focus on areas where AI can generate real operational leverage rather than speculative experiments.
-            </p>
-          </div>
+          <AnimatedSection>
+            <div className="text-center max-w-3xl mx-auto space-y-3">
+              <Badge variant="secondary" size="md">
+                INTELLIGENCE PIPELINE
+              </Badge>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-tight">
+                6-Stage Intelligence Flow Architecture
+              </h2>
+              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
+                A disciplined AI progression connecting data ingestion to context indexing, LLM reasoning, workflow execution, human oversight, and continuous feedback learning.
+              </p>
+            </div>
+          </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
-            {leverageAreas.map((item) => (
-              <div key={item.title} className="p-6 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] space-y-2">
-                <div className="flex items-center gap-2">
-                  <div className="p-1.5 rounded-lg bg-[#F7D7B0]/30">{item.icon}</div>
-                  <span className="text-[10px] font-mono font-bold text-[#2E936F]">{item.tag}</span>
-                </div>
-                <h3 className="text-lg font-bold text-[#1b2823] dark:text-[#ffffff]">{item.title}</h3>
-                <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{item.desc}</p>
+          <AnimatedSection delay={0.08}>
+            <div className="rounded-2xl sm:rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg p-4 sm:p-6 lg:p-8 space-y-6">
+              
+              <div className="grid grid-cols-2 xs:grid-cols-3 lg:grid-cols-6 gap-2 relative">
+                {intelligenceFlowNodes.map((stg, idx) => {
+                  const isSelected = activeStageIdx === idx;
+                  return (
+                    <button
+                      key={stg.id}
+                      type="button"
+                      onClick={() => setActiveStageIdx(idx)}
+                      className={cn(
+                        "py-2.5 px-3 rounded-xl text-xs font-extrabold font-display transition-all duration-200 cursor-pointer flex items-center justify-center gap-2 select-none relative z-10 border",
+                        isSelected
+                          ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-sm"
+                          : "bg-white dark:bg-[#000000] text-[#4a5c55] dark:text-[#d3eee4] border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:bg-[#f15e1c]/5"
+                      )}
+                    >
+                      <span className={cn("font-mono text-[10px]", isSelected ? "text-white/80" : "text-[#f15e1c]")}>
+                        {stg.num}.
+                      </span>
+                      <span className="truncate">{stg.title}</span>
+                    </button>
+                  );
+                })}
               </div>
-            ))}
-          </div>
 
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeStage.id}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="p-5 sm:p-7 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] grid grid-cols-1 lg:grid-cols-12 gap-6 items-center"
+                >
+                  <div className="lg:col-span-7 space-y-3 text-left">
+                    <span className="text-xs font-mono font-bold text-[#f15e1c] uppercase tracking-wider block">
+                      STAGE {activeStage.num} &bull; {activeStage.title}
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                      {activeStage.subtitle}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                      {activeStage.desc}
+                    </p>
+                  </div>
+
+                  <div className="lg:col-span-5 space-y-2.5 text-left border-t lg:border-t-0 lg:border-l border-[#f7d7b0]/60 dark:border-[#1a1a1a] pt-4 lg:pt-0 lg:pl-6">
+                    <span className="text-xs font-mono font-bold uppercase text-[#2e936f] block">
+                      Core Stage Deliverables:
+                    </span>
+                    <div className="space-y-2">
+                      {activeStage.deliverables.map((item, i) => (
+                        <div
+                          key={i}
+                          className="flex items-center gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff] p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a]"
+                        >
+                          <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
+                          <span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
       <SystemScanTransition />
 
-      {/* =====================================================================
-          12. AI INSIGHTS
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 5. ARCHITECTURE LAYERS */}
+      <section id="architecture" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-[1536px] mx-auto space-y-8 sm:space-y-10">
           
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-            <Badge variant="outline" className="mb-2.5 border-[#2E936F] text-[#2E936F] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
-              KNOWLEDGE BASE
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              AI Insights.
-            </h2>
-            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
-              Explore our engineering perspectives on practical AI implementation, enterprise RAG, and governance.
-            </p>
-          </div>
+          <AnimatedSection>
+            <div className="text-center max-w-3xl mx-auto space-y-3">
+              <Badge variant="secondary" size="md">
+                SYSTEM ARCHITECTURE
+              </Badge>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Enterprise AI Architecture Layers
+              </h2>
+              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
+                Clean separation across user interfaces, API gateways, LLM routers, vector databases, and enterprise security guardrails.
+              </p>
+            </div>
+          </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {articles.map((post) => (
-              <Link key={post.slug} href={`/insights/${post.slug}`} className="group block">
-                <motion.div whileHover={{ y: -3 }} className="h-full p-6 rounded-2xl bg-white dark:bg-[#000000] border border-[#F7D7B0] hover:border-[#F15E1C] hover:shadow-md transition-all duration-200 shadow-xs flex flex-col justify-between">
-                  <div>
-                    <div className="w-full mb-3 rounded-xl overflow-hidden border border-[#F7D7B0]/60">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch">
+            {systemArchitectureLayers.map((lyr, idx) => (
+              <AnimatedSection key={idx} delay={idx * 0.05} className="h-full">
+                <motion.div
+                  whileHover={{ y: -3 }}
+                  transition={{ duration: 0.2 }}
+                  className="h-full p-5 sm:p-6 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#2e936f] hover:shadow-md transition-all duration-300 space-y-2.5 text-left group"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono font-bold text-[#2e936f] uppercase">
+                      LAYER {lyr.layer}
+                    </span>
+                    <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-105 transition-transform">
+                      {lyr.icon}
+                    </div>
+                  </div>
+                  <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2e936f] transition-colors">
+                    {lyr.name}
+                  </h3>
+                  <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
+                    {lyr.desc}
+                  </p>
+                </motion.div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* 6. APPLICABLE MARKETS */}
+      <section id="markets" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto space-y-8">
+          
+          <AnimatedSection>
+            <div className="max-w-3xl space-y-3 text-left">
+              <Badge variant="secondary" size="md">
+                APPLICABLE MARKETS
+              </Badge>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Tailored Sector AI Applications
+              </h2>
+              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                Pragmatic AI configurations designed around specific operational needs:
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.08}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+              {applicableMarkets.map((mkt, idx) => (
+                <motion.div
+                  key={idx}
+                  whileHover={{ y: -2 }}
+                  transition={{ duration: 0.2 }}
+                  className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:bg-white dark:hover:bg-[#000000] shadow-xs transition-all duration-200 text-left flex flex-col justify-between space-y-2 group"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-2 rounded-xl bg-white dark:bg-[#121212] border border-[#f7d7b0] dark:border-[#222222] shrink-0 group-hover:scale-105 transition-transform">
+                      {mkt.icon}
+                    </div>
+                    <h3 className="text-sm font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
+                      {mkt.title}
+                    </h3>
+                  </div>
+                  <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-normal pl-0.5">
+                    {mkt.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* 7. WHAT WE MEASURE */}
+      <section id="what-we-measure" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-[1536px] mx-auto space-y-8 sm:space-y-10">
+          
+          <AnimatedSection>
+            <div className="text-center max-w-3xl mx-auto space-y-3">
+              <Badge variant="secondary" size="md">
+                AI METRICS
+              </Badge>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Transparent Performance &amp; Accuracy Metrics
+              </h2>
+              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
+                We measure AI implementation success by task time savings, retrieval accuracy, pass rates, and security compliance.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch">
+            {whatWeMeasureList.map((item, idx) => (
+              <AnimatedSection key={idx} delay={idx * 0.04} className="h-full">
+                <motion.div
+                  whileHover={{ y: -3 }}
+                  transition={{ duration: 0.2 }}
+                  className="h-full p-5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#2e936f] hover:shadow-md transition-all duration-300 space-y-2.5 text-left group"
+                >
+                  <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] w-fit group-hover:scale-105 transition-transform">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2e936f] transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
+                    {item.desc}
+                  </p>
+                </motion.div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* 8. BLOGS & INSIGHTS */}
+      <section id="insights" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto space-y-8">
+          
+          <AnimatedSection>
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-4">
+              <div className="space-y-2 text-left">
+                <Badge variant="secondary" size="md">
+                  KNOWLEDGE &amp; STRATEGY
+                </Badge>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                  Enterprise AI Insights
+                </h2>
+              </div>
+              <Link
+                href="/insights"
+                className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#f15e1c] hover:underline shrink-0 group"
+              >
+                <span>Explore All Insights</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+              </Link>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+            {displayPosts.map((post, idx) => (
+              <AnimatedSection key={post.slug} delay={idx * 0.08} className="h-full">
+                <motion.div
+                  whileHover={{ y: -3 }}
+                  transition={{ duration: 0.2 }}
+                  className="h-full p-5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#f15e1c] hover:shadow-lg transition-all duration-300 flex flex-col justify-between text-left space-y-4 group"
+                >
+                  <div className="space-y-3">
+                    <div className="w-full mb-2 rounded-xl overflow-hidden border border-[#f7d7b0]/60">
                       <BlogCardImage post={post} aspectRatio="aspect-video" />
                     </div>
-                    <Badge variant="subtle" className="mb-2.5 text-[10px] bg-[#F7D7B0]/40 text-[#F15E1C] font-semibold">
-                      {post.category}
-                    </Badge>
-                    <h3 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#F15E1C] transition-colors line-clamp-2">
+                    <div className="flex items-center justify-between text-[10px] font-mono font-bold text-[#2e936f]">
+                      <span className="uppercase tracking-wider">{post.category}</span>
+                      <span>{post.publishedAt || post.dateFormatted}</span>
+                    </div>
+                    <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors line-clamp-2">
                       {post.title}
                     </h3>
-                    <p className="mt-1.5 text-xs text-gray-600 dark:text-gray-300 line-clamp-3 leading-relaxed">
+                    <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed line-clamp-3 font-medium">
                       {post.summary}
                     </p>
                   </div>
-                  <div className="pt-3 mt-3 border-t border-[#F7D7B0] flex items-center justify-between text-xs font-semibold text-[#F15E1C]">
-                    <span>Read Article</span>
-                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+
+                  <div className="pt-3 border-t border-[#f7d7b0] dark:border-[#1a1a1a]">
+                    <Link
+                      href={`/insights/${post.slug}`}
+                      className="inline-flex items-center gap-1 text-xs font-mono font-bold text-[#f15e1c] group-hover:underline"
+                    >
+                      <span>Read Article</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    </Link>
                   </div>
                 </motion.div>
-              </Link>
+              </AnimatedSection>
             ))}
           </div>
-
-          <div className="text-center mt-8">
-            <Link href="/insights">
-              <Button3D variant="secondary" size="md" className="bg-[#2E936F] text-[#FFFFFF] border-[#2E936F]">
-                Explore All Insights
-              </Button3D>
-            </Link>
-          </div>
-
         </div>
       </section>
 
       <SystemScanTransition />
 
-      {/* =====================================================================
-          SECTION — ABOUT OUR CEO / LEADERSHIP PERSPECTIVE
-          ===================================================================== */}
-      <CEOLeadershipSection serviceContext="The focus is on applying AI where it can create practical business value, not simply adding AI for the sake of it." />
+      {/* CEO LEADERSHIP */}
+      <CEOLeadershipSection serviceContext="His perspective connects artificial intelligence with practical enterprise execution." />
 
       <SystemScanTransition />
 
-      {/* =====================================================================
-          13. FAQ SECTION (EXACTLY 5 CONCISE FAQS)
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16 border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 9. FAQ */}
+      <section id="faq" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-4xl mx-auto space-y-8 text-left">
           
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-            <Badge variant="outline" className="mb-2.5 border-[#FAB60A] text-[#FAB60A] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
-              QUESTIONS &amp; ANSWERS
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Frequently Asked Questions.
-            </h2>
-            <p className="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
-              Clear answers regarding AI architecture, system integration, internal documents, and governance.
-            </p>
-          </div>
+          <AnimatedSection>
+            <div className="text-center space-y-3">
+              <Badge variant="secondary" size="md">
+                QUESTIONS &amp; ANSWERS
+              </Badge>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Frequently Asked Questions
+              </h2>
+            </div>
+          </AnimatedSection>
 
-          <div className="max-w-3xl mx-auto space-y-3">
-            {aiFaqs.map((faq, index) => {
-              const isOpen = openFaqIdx === index;
+          <div className="space-y-3">
+            {faqList.map((faq, idx) => {
+              const isOpen = openFaqIdx === idx;
               return (
-                <div
-                  key={index}
-                  className="rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#000000] overflow-hidden transition-all hover:border-[#F15E1C] hover:shadow-xs"
-                >
-                  <button
-                    onClick={() => setOpenFaqIdx(isOpen ? null : index)}
-                    className="w-full text-left p-4 flex items-center justify-between font-bold text-sm sm:text-base text-[#1b2823] dark:text-[#ffffff] hover:text-[#F15E1C] transition-colors cursor-pointer"
-                  >
-                    <span>{faq.question}</span>
-                    <ChevronDown className={cn("w-4 h-4 transition-transform duration-200 text-[#F15E1C]", isOpen && "rotate-180")} />
-                  </button>
-
-                  <AnimatePresence>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <div className="p-4 pt-0 text-xs sm:text-sm text-gray-600 dark:text-gray-300 border-t border-[#F7D7B0] leading-relaxed">
-                          {faq.answer}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                <AnimatedSection key={idx} delay={idx * 0.04}>
+                  <div className="rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/60 overflow-hidden transition-all shadow-xs">
+                    <button
+                      type="button"
+                      onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
+                      className="w-full p-5 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer group select-none"
+                    >
+                      <span className="text-sm sm:text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
+                        {faq.q}
+                      </span>
+                      <ChevronDown
+                        className={cn(
+                          "w-5 h-5 text-[#f15e1c] transition-transform duration-300 shrink-0",
+                          isOpen && "rotate-180"
+                        )}
+                      />
+                    </button>
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.25, ease: "easeInOut" }}
+                          className="px-5 pb-5 text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium border-t border-[#f7d7b0]/40 dark:border-[#1a1a1a] pt-3"
+                        >
+                          {faq.a}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </AnimatedSection>
               );
             })}
           </div>
-
         </div>
       </section>
 
       <SystemScanTransition />
 
-      {/* =====================================================================
-          14. CONTACT / LEAD FORM
-          ===================================================================== */}
-      <section id="inquire" className="relative z-10 w-full py-10 sm:py-14 md:py-16 bg-white dark:bg-[#000000] border-b border-[#F7D7B0]">
-        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto rounded-3xl bg-white dark:bg-[#000000] border border-[#F7D7B0] p-6 sm:p-10 shadow-xl space-y-6">
-            
-            <div className="text-center space-y-2">
-              <Badge variant="outline" className="border-[#F15E1C] text-[#F15E1C] bg-[#F7D7B0]/40 px-3 py-1 text-xs">
-                START AN AI INITIATIVE
-              </Badge>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#1b2823] dark:text-[#ffffff]">
-                Discuss an AI Use Case.
+      {/* 10. CONNECTED ECOSYSTEM */}
+      <section className="relative py-10 sm:py-14 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto space-y-4 sm:space-y-6 text-left">
+          
+          <AnimatedSection>
+            <div className="space-y-1.5">
+              <span className="text-xs font-mono font-bold text-[#f15e1c] uppercase tracking-wider block">
+                ARAV SERVICE ECOSYSTEM
+              </span>
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
+                Connected Enterprise Services
+              </h3>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            {internalServices.map((item, idx) => (
+              <AnimatedSection key={idx} delay={idx * 0.04}>
+                <Link
+                  href={item.href}
+                  className="p-3.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:shadow-sm transition-all flex items-center justify-between group cursor-pointer min-h-[56px]"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-105 transition-all shrink-0">
+                      {item.icon}
+                    </div>
+                    <span className="text-xs sm:text-sm font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug">
+                      {item.name}
+                    </span>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-[#f15e1c] group-hover:translate-x-1 transition-transform shrink-0 ml-2" />
+                </Link>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* FINAL CTA */}
+      <section id="contact" className="relative py-14 sm:py-20 px-4 sm:px-6 lg:px-12">
+        <AnimatedSection>
+          <div className="max-w-5xl mx-auto rounded-3xl bg-gradient-to-br from-[#f15e1c] via-[#e55215] to-[#d8480d] text-white p-8 sm:p-14 border-2 border-[#fab60a] shadow-2xl space-y-6 text-center relative overflow-hidden">
+            <div className="relative z-10 max-w-3xl mx-auto space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 border border-white/40 text-xs font-mono font-bold text-white">
+                <Sparkles className="w-3.5 h-3.5 text-[#ffec69]" />
+                <span>BUILD SECURE ENTERPRISE AI SOLUTIONS</span>
+              </div>
+
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display tracking-tight text-white leading-tight">
+                Turn Artificial Intelligence Into Practical Workflow Value
               </h2>
-              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">
-                Share your current challenge or AI goal. Our engineering team will review feasibility and data architecture.
+
+              <p className="text-xs sm:text-sm font-medium text-white/90 leading-relaxed max-w-2xl mx-auto">
+                Discuss your AI integration use cases, RAG context requirements, and workflow automation priorities with our AI engineering leads.
               </p>
             </div>
 
-            {formSubmitted ? (
-              <div className="p-6 rounded-2xl bg-[#F7D7B0]/30 border border-[#2E936F] text-center space-y-3">
-                <CheckCircle2 className="w-8 h-8 text-[#2E936F] mx-auto" />
-                <h3 className="text-lg font-bold text-[#1b2823] dark:text-[#ffffff]">Thank You for Reaching Out.</h3>
-                <p className="text-xs text-gray-600 dark:text-gray-300">
-                  Your AI use case details have been received. An AI solutions engineer will follow up shortly.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleFormSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label className="text-xs font-semibold text-gray-700 dark:text-gray-300">Your Name *</label>
-                    <input
-                      required
-                      type="text"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="e.g. John Doe"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#000000] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
-                    />
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="text-xs font-semibold text-gray-700 dark:text-gray-300">Company Name *</label>
-                    <input
-                      required
-                      type="text"
-                      value={formData.company}
-                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      placeholder="e.g. Acme Corp"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#000000] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label className="text-xs font-semibold text-gray-700 dark:text-gray-300">Work Email *</label>
-                    <input
-                      required
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="name@company.com"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#000000] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
-                    />
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="text-xs font-semibold text-gray-700 dark:text-gray-300">AI Use Case *</label>
-                    <select
-                      value={formData.useCase}
-                      onChange={(e) => setFormData({ ...formData, useCase: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#000000] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
-                    >
-                      <option value="AI Automation">AI Automation</option>
-                      <option value="AI Assistant">AI Assistant</option>
-                      <option value="RAG / Knowledge System">RAG / Knowledge System</option>
-                      <option value="AI Agent">AI Agent</option>
-                      <option value="AI Application">AI Application</option>
-                      <option value="AI Strategy / Discovery">AI Strategy / Discovery</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-xs font-semibold text-gray-700 dark:text-gray-300">Current Challenge / Goal *</label>
-                  <textarea
-                    required
-                    rows={3}
-                    value={formData.challenge}
-                    onChange={(e) => setFormData({ ...formData, challenge: e.target.value })}
-                    placeholder="Describe the workflow friction or AI objective..."
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#000000] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
-                  />
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-xs font-semibold text-gray-700 dark:text-gray-300">Expected Timeline</label>
-                  <select
-                    value={formData.timeline}
-                    onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#F7D7B0] bg-white dark:bg-[#000000] text-sm text-[#1b2823] dark:text-[#ffffff] focus:outline-hidden focus:border-[#F15E1C]"
+            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+              <Link href="/contact">
+                <MagneticButton>
+                  <Button3D
+                    variant="primary"
+                    size="md"
+                    rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1.5" />}
+                    className="w-full sm:w-auto justify-center bg-white text-[#f15e1c] hover:bg-[#f7d7b0] hover:-translate-y-0.5 transition-all duration-300"
                   >
-                    <option value="Immediately">Immediately</option>
-                    <option value="1-3 months">1-3 months</option>
-                    <option value="3-6 months">3-6 months</option>
-                    <option value="Exploratory">Exploratory / Roadmap</option>
-                  </select>
-                </div>
-
-                <div className="pt-2">
-                  <Button3D variant="primary" size="lg" className="w-full bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C]">
-                    Submit AI Use Case Inquiry
+                    Build AI Architecture
                   </Button3D>
-                </div>
-              </form>
-            )}
+                </MagneticButton>
+              </Link>
 
-          </div>
-        </div>
-      </section>
-
-      <SystemScanTransition />
-
-      {/* =====================================================================
-          15. FINAL CTA
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-10 sm:py-14 md:py-16">
-        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative rounded-3xl p-8 sm:p-12 bg-[#2E936F] text-[#FFFFFF] border border-[#2E936F] shadow-2xl overflow-hidden text-center space-y-5">
-            
-            {/* Ambient Accents */}
-            <div className="absolute -top-24 -left-24 w-80 h-80 bg-[#F15E1C]/30 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -right-24 w-80 h-80 bg-[#FAB60A]/25 rounded-full blur-3xl pointer-events-none" />
-
-            <Badge variant="outline" className="border-[#FFFFFF] text-[#FFFFFF] bg-[#FFFFFF]/10 px-3 py-1 font-semibold tracking-wider text-xs">
-              TAKE THE NEXT STEP
-            </Badge>
-
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight max-w-3xl mx-auto leading-tight text-[#FFFFFF]">
-              Have an AI Use Case in Mind?
-            </h2>
-
-            <p className="text-base sm:text-lg text-[#FFEC69] max-w-2xl mx-auto leading-relaxed font-medium">
-              Let&apos;s turn the idea into a practical AI system built around the right data, workflow, integration and controls.
-            </p>
-
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-3">
-              <a href="#inquire">
-                <Button3D variant="primary" size="lg" className="flex items-center gap-2 font-semibold bg-[#F15E1C] text-[#FFFFFF] border-[#F15E1C] hover:opacity-95 transition-all">
-                  Discuss Your AI Use Case
-                  <ArrowRight className="w-4 h-4" />
-                </Button3D>
-              </a>
               <Link href="/services">
-                <Button3D variant="secondary" size="lg" className="flex items-center gap-2 font-medium bg-[#FFFFFF] text-[#2E936F] border-[#FFFFFF] hover:bg-[#F7D7B0] transition-all">
-                  Explore All Services
-                </Button3D>
+                <MagneticButton>
+                  <Button3D variant="outline" size="md" className="w-full sm:w-auto justify-center text-white border-white/60 hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-300">
+                    Explore Services
+                  </Button3D>
+                </MagneticButton>
               </Link>
             </div>
 
+            <div className="relative z-10 pt-4 border-t border-white/20 flex flex-wrap items-center justify-center gap-4 text-xs text-white/90 font-medium">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Secure Enterprise RAG &amp; Vector Databases
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Human-in-the-Loop Governance
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Engineering Teams in Gurgaon &amp; Dubai
+              </span>
+            </div>
           </div>
-        </div>
+        </AnimatedSection>
       </section>
 
     </div>

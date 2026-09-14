@@ -15,9 +15,7 @@ import {
   TrendingUp,
   Code2,
   Layout,
-  ShoppingBag,
   Cpu,
-  Server,
   ArrowRight,
   Sparkles,
   CheckCircle2,
@@ -33,7 +31,6 @@ import {
   LineChart,
   FileCode,
   ShieldCheck,
-  Layers,
   Search,
   Compass,
   BarChart3,
@@ -41,7 +38,6 @@ import {
   ChevronDown,
   ArrowUpRight,
   Terminal,
-  Workflow,
   Wrench,
   GitBranch,
   Smartphone,
@@ -51,7 +47,6 @@ import { BlogPost, blogPostsData } from "@/data/insights";
 import { Button3D } from "@/components/ui/button-3d";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
-import { TiltCard } from "@/components/motion/TiltCard";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { cn } from "@/lib/utils";
 
@@ -60,9 +55,6 @@ interface WebDevPageProps {
   relatedPosts?: BlogPost[];
 }
 
-// -----------------------------------------------------------------------------
-// 1. Scroll-Triggered Section Wrapper Component (Optimized Mobile Viewport Entry)
-// -----------------------------------------------------------------------------
 function AnimatedSection({
   children,
   className = "",
@@ -93,9 +85,6 @@ function AnimatedSection({
   );
 }
 
-// -----------------------------------------------------------------------------
-// 2. System Scan Transition Line (Laser Beam Sweep Effect)
-// -----------------------------------------------------------------------------
 function SystemScanTransition() {
   const ref = React.useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-20px" });
@@ -116,9 +105,6 @@ function SystemScanTransition() {
   );
 }
 
-// -----------------------------------------------------------------------------
-// 3. Dot Grid Pattern Background
-// -----------------------------------------------------------------------------
 function AnimatedDotGrid() {
   return (
     <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-10 dark:opacity-15 select-none">
@@ -137,11 +123,6 @@ function AnimatedDotGrid() {
   );
 }
 
-// -----------------------------------------------------------------------------
-// Data Collections for Digital Product Engineering Page
-// -----------------------------------------------------------------------------
-
-// Hero Keyword Tags
 const keywordTags = [
   "Product Strategy",
   "UX/UI Design",
@@ -151,321 +132,253 @@ const keywordTags = [
   "Performance & Scale",
 ];
 
-// Hero Visual Architecture Flow Nodes (USER -> UI -> APPLICATION -> API -> DATA -> CLOUD)
-const heroProductNodes = [
-  { id: "USER", label: "USER", desc: "End Users & Journeys", icon: <Users2 className="w-4 h-4 text-[#f15e1c]" /> },
-  { id: "UI", label: "UI LAYER", desc: "Next.js & Responsive Interfaces", icon: <Layout className="w-4 h-4 text-[#2e936f]" /> },
-  { id: "APP", label: "APPLICATION", desc: "Business Logic & Workflows", icon: <Code2 className="w-4 h-4 text-[#fab60a]" /> },
-  { id: "API", label: "API GATEWAY", desc: "REST & GraphQL Integrations", icon: <Terminal className="w-4 h-4 text-[#f15e1c]" /> },
-  { id: "DATA", label: "DATA LAYER", desc: "PostgreSQL, Kafka & Redis", icon: <Database className="w-4 h-4 text-[#2e936f]" /> },
-  { id: "CLOUD", label: "CLOUD & DEPLOY", desc: "AWS/Azure & CI/CD Pipelines", icon: <Cloud className="w-4 h-4 text-[#fab60a]" /> },
-];
-
-// Section 1: 3 Concise Supporting Areas (Experience, Engineering, Evolution)
 const experienceAreas = [
   {
     num: "01",
-    title: "Experience",
-    subtitle: "User-Centered Interfaces",
+    title: "User Experience",
+    subtitle: "Intuitive Interfaces",
     description:
-      "Interfaces designed around real users, intuitive journeys, accessibility standards, and high-conversion interaction flows.",
+      "Interfaces designed around accessibility, responsive navigation, and frictionless user flows.",
     icon: <Layout className="w-5 h-5 text-[#f15e1c]" />,
   },
   {
     num: "02",
     title: "Engineering",
-    subtitle: "Robust Full-Stack Foundations",
+    subtitle: "Full-Stack Architecture",
     description:
-      "Reliable frontend, backend, APIs, databases, third-party integrations, and scalable application architecture.",
+      "Reliable frontend components, backend services, API integrations, and database schemas.",
     icon: <Code2 className="w-5 h-5 text-[#2e936f]" />,
   },
   {
     num: "03",
     title: "Evolution",
-    subtitle: "Built to Scale & Adapt",
+    subtitle: "Scalable Infrastructure",
     description:
-      "A resilient product foundation engineered to be monitored, optimized, security-hardened, and extended as business requirements expand.",
+      "Clean codebase engineered for continuous monitoring, automated updates, and feature expansion.",
     icon: <RefreshCw className="w-5 h-5 text-[#fab60a]" />,
   },
 ];
 
-// Section 2: Primary Interactive Visual (8 Connected Architecture Stages)
 const architectureFlowStages = [
   {
     id: "DISCOVER",
     num: "01",
     title: "DISCOVER",
-    subtitle: "Strategy & Requirements Scoping",
-    desc: "Business goals, target user profiles, operational workflows, functional requirements, and technical constraints.",
-    deliverables: ["Product Vision Matrix", "Workflow Requirements Map", "Tech Stack Feasibility Blueprint"],
+    subtitle: "Product Strategy & Scoping",
+    desc: "Business goals, target user profiles, operational workflows, and functional requirements.",
+    deliverables: ["Product Vision Specification", "Workflow Requirements Map", "Architecture Blueprint"],
   },
   {
     id: "DESIGN",
     num: "02",
     title: "DESIGN",
     subtitle: "Information Architecture & UX",
-    desc: "Information architecture, user journey maps, wireframes, interactive prototypes, and reusable design systems.",
-    deliverables: ["Figma Design System", "High-Fidelity Prototypes", "Accessibility (WCAG) Guidelines"],
+    desc: "User journey maps, wireframes, interactive prototypes, and reusable component systems.",
+    deliverables: ["Component Design System", "High-Fidelity Wireframes", "Accessibility Guidelines"],
   },
   {
     id: "EXPERIENCE",
     num: "03",
     title: "EXPERIENCE",
     subtitle: "Frontend Interface Engineering",
-    desc: "Responsive web interfaces, design system components, micro-interactions, client state management, and page performance.",
-    deliverables: ["React / Next.js Component Library", "Responsive Layout Engine", "Client State Architecture"],
+    desc: "Responsive web interfaces, micro-interactions, state management, and page speed.",
+    deliverables: ["React / Next.js Component Library", "Responsive Layout Engine", "Client State Setup"],
   },
   {
     id: "APPLICATION",
     num: "04",
     title: "APPLICATION",
-    subtitle: "Core Business Logic & Services",
-    desc: "Application backend, API routes, authentication/authorization (RBAC/SSO), core business logic, and error handling.",
-    deliverables: ["Serverless API Routes", "RBAC & OAuth Authentication", "Domain Logic Services"],
+    subtitle: "Business Logic & Services",
+    desc: "Backend services, API routes, authentication/authorization controllers, and error handling.",
+    deliverables: ["API Routes", "OAuth & RBAC Controllers", "Core Domain Services"],
   },
   {
     id: "DATA",
     num: "05",
     title: "DATA",
-    subtitle: "Database & Information Pipelines",
-    desc: "Relational and document databases, data modeling, caching strategies, analytics dashboards, and secure storage.",
-    deliverables: ["PostgreSQL / Redis Schema", "Data Access Layer (ORM)", "Analytical Query Engines"],
+    subtitle: "Databases & Storage",
+    desc: "Relational data modeling, in-memory caching, indexing, and secure record storage.",
+    deliverables: ["PostgreSQL Schema", "Redis Caching Layer", "Data Access Pipeline"],
   },
   {
     id: "INTEGRATE",
     num: "06",
     title: "INTEGRATE",
-    subtitle: "Third-Party & Ecosystem Connectors",
-    desc: "Third-party APIs, payment gateways, CRM/ERP connectors, webhooks, event-driven architectures, and external services.",
-    deliverables: ["Stripe / Payment Connectors", "Salesforce / Hubspot CRM Sync", "Webhook Event Bus"],
+    subtitle: "Third-Party Connectors",
+    desc: "Payment processing, CRM integrations, ERP connectors, and asynchronous webhooks.",
+    deliverables: ["Payment Connectors", "CRM & ERP Sync", "Webhook Event Handler"],
   },
   {
     id: "DEPLOY",
     num: "07",
     title: "DEPLOY",
-    subtitle: "Cloud Infrastructure & Releases",
-    desc: "Cloud hosting environments, containerization, Infrastructure-as-Code (Terraform), CI/CD pipelines, and zero-downtime releases.",
-    deliverables: ["AWS / Vercel Production Infrastructure", "Automated CI/CD Workflows", "Environment Configuration"],
+    subtitle: "Cloud Deployment & CI/CD",
+    desc: "Containerization, automated CI/CD build pipelines, and production cloud infrastructure.",
+    deliverables: ["Cloud Production Setup", "Automated CI/CD Pipeline", "Environment Config"],
   },
   {
     id: "IMPROVE",
     num: "08",
     title: "IMPROVE",
-    subtitle: "Continuous Performance & Telemetry",
-    desc: "Application telemetry monitoring, error logging, performance tuning, security patches, and continuous feature iterations.",
-    deliverables: ["Real-User Telemetry Dashboards", "Security Audit Reports", "Continuous Feature Backlog"],
+    subtitle: "Performance Telemetry",
+    desc: "Telemetry monitoring, error logging, performance tuning, and feature iterations.",
+    deliverables: ["Real-User Analytics", "Security & Health Logs", "Feature Roadmap"],
   },
 ];
 
-// Section 3: Core Capabilities (CEO Blueprint)
 const productCapabilities = [
   {
     num: "01",
     title: "Corporate Web Platforms & Portals",
     description:
-      "Enterprise websites, corporate portals, and marketing platforms engineered for lightning speed, technical SEO, and conversion retention.",
-    icon: <Globe2 className="w-7 h-7 text-[#f15e1c] stroke-[2]" />,
-    techLayer: "Frontend & Content Systems",
+      "Enterprise web platforms and corporate portals engineered for fast loading, technical SEO, and conversion retention.",
+    icon: <Globe2 className="w-5 h-5 text-[#f15e1c]" />,
+    techLayer: "Frontend & Content Platforms",
   },
   {
     num: "02",
-    title: "Custom Software & SaaS Development",
+    title: "Custom Software & SaaS Applications",
     description:
-      "Bespoke web applications, SaaS multi-tenant platforms, internal portals, and automated workflow engines tailored to your domain logic.",
-    icon: <Code2 className="w-7 h-7 text-[#2e936f] stroke-[2]" />,
+      "Bespoke web applications, SaaS multi-tenant platforms, internal portals, and automated workflow engines.",
+    icon: <Code2 className="w-5 h-5 text-[#2e936f]" />,
     techLayer: "Full-Stack Application & SaaS",
   },
   {
     num: "03",
-    title: "Mobile Application Development (iOS/Android)",
+    title: "Mobile Application Development",
     description:
-      "Native and cross-platform iOS and Android mobile platforms designed around intuitive user journeys and robust offline capabilities.",
-    icon: <Smartphone className="w-7 h-7 text-[#fab60a] stroke-[2]" />,
+      "iOS and Android mobile platforms designed with clear user flows, offline capability, and reliable backend sync.",
+    icon: <Smartphone className="w-5 h-5 text-[#fab60a]" />,
     techLayer: "iOS & Android Ecosystem",
   },
   {
     num: "04",
-    title: "API & Third-Party System Integration",
+    title: "API & System Integration",
     description:
-      "Connect applications, microservices, databases, CRM/ERP systems, and payment gateways through secure, high-concurrency API architectures.",
-    icon: <Terminal className="w-7 h-7 text-[#f15e1c] stroke-[2]" />,
-    techLayer: "REST, GraphQL & Webhooks",
+      "Connect applications, microservices, databases, CRM/ERP platforms, and payment services through secure API architecture.",
+    icon: <Terminal className="w-5 h-5 text-[#f15e1c]" />,
+    techLayer: "REST & GraphQL Gateways",
   },
 ];
 
-// Section 4: Layered Engineering Architecture
 const layeredArchitecture = [
   {
     layer: "01",
     name: "Frontend Layer",
-    tech: "React / Next.js / TypeScript / Tailwind CSS / Responsive UI / Design Systems",
-    desc: "Component-driven user interfaces designed for accessibility, high performance, and responsive cross-device consistency.",
+    tech: "React / Next.js / TypeScript / Tailwind CSS",
+    desc: "Component-driven interfaces engineered for accessibility, speed, and responsive cross-device consistency.",
     icon: <Layout className="w-5 h-5 text-[#f15e1c]" />,
   },
   {
     layer: "02",
     name: "Application Layer",
-    tech: "Node.js / Next.js Server Components / REST & GraphQL APIs / OAuth & RBAC / Business Logic",
-    desc: "Secure server-side business logic, authentication controllers, role-based authorization, and scalable API endpoints.",
+    tech: "Node.js / Next.js Server Components / REST & GraphQL APIs",
+    desc: "Secure server-side business logic, authentication controllers, and scalable API endpoints.",
     icon: <Code2 className="w-5 h-5 text-[#2e936f]" />,
   },
   {
     layer: "03",
     name: "Data Layer",
-    tech: "PostgreSQL / Redis / Prisma ORM / Data Modeling / Structured Search & Storage",
-    desc: "Optimized relational database schemas, in-memory caching layers, structured indexing, and analytical data queries.",
+    tech: "PostgreSQL / Redis / Prisma ORM",
+    desc: "Optimized relational database schemas, caching layers, and structured data queries.",
     icon: <Database className="w-5 h-5 text-[#fab60a]" />,
   },
   {
     layer: "04",
     name: "Integration Layer",
-    tech: "REST Webhooks / GraphQL / Payment APIs (Stripe) / CRM & ERP Connectors / Webhooks Bus",
-    desc: "Robust third-party service connections, asynchronous message queues, and bidirectional API synchronization.",
+    tech: "REST Webhooks / GraphQL / Payment Connectors / CRM Sync",
+    desc: "Third-party service connections, asynchronous message queues, and bidirectional API synchronization.",
     icon: <GitBranch className="w-5 h-5 text-[#2e936f]" />,
   },
   {
     layer: "05",
     name: "Cloud & Delivery",
-    tech: "AWS / Azure / Vercel / Docker / Terraform (IaC) / GitHub Actions CI/CD / Monitoring",
-    desc: "Reliable cloud infrastructure, automated build pipelines, production deployment, and 24/7 telemetry monitoring.",
+    tech: "AWS / Azure / Vercel / Docker / GitHub Actions",
+    desc: "Cloud infrastructure, automated build pipelines, production deployment, and monitoring.",
     icon: <Cloud className="w-5 h-5 text-[#f15e1c]" />,
   },
 ];
 
-// Section 5: Fast, Accessible, Resilient (4 Focus Areas)
 const engineeringPillars = [
   {
     title: "Performance",
-    desc: "Efficient client/server rendering, asset optimization, code-splitting, and responsive user experiences.",
+    desc: "Fast client/server rendering, asset optimization, code-splitting, and Core Web Vitals speed.",
     icon: <Zap className="w-5 h-5 text-[#f15e1c]" />,
   },
   {
     title: "Accessibility",
-    desc: "Interfaces designed to remain usable and navigable across devices, screen sizes, and input methods (WCAG principles).",
+    desc: "Interfaces designed to remain usable across screen sizes, touch inputs, and assistive technology.",
     icon: <Eye className="w-5 h-5 text-[#2e936f]" />,
   },
   {
     title: "Reliability",
-    desc: "Clear system architecture, automated test validation, error monitoring, and controlled deployment releases.",
+    desc: "Clean architecture, automated validation, error monitoring, and controlled release pipelines.",
     icon: <ShieldCheck className="w-5 h-5 text-[#fab60a]" />,
   },
   {
     title: "Security",
-    desc: "Security-conscious authentication, role-based authorization, encrypted data handling, and input validation.",
+    desc: "Authentication setup, role-based authorization, encrypted data handling, and input validation.",
     icon: <Lock className="w-5 h-5 text-[#f15e1c]" />,
   },
 ];
 
-// Section 6: Animated Product Loop (BUILD -> LAUNCH -> OBSERVE -> LEARN -> IMPROVE -> BUILD)
-const productImprovementLoop = [
-  { step: "01", name: "BUILD", desc: "Develop features according to architecture blueprint & validated user journeys." },
-  { step: "02", name: "LAUNCH", desc: "Deploy controlled releases into production cloud environment with automated validation." },
-  { step: "03", name: "OBSERVE", desc: "Monitor real-user telemetry, system performance, error logs, and user behavior." },
-  { step: "04", name: "LEARN", desc: "Gather user feedback, identify operational friction, and evaluate conversion analytics." },
-  { step: "05", name: "IMPROVE", desc: "Prioritize product enhancements, security updates, and performance optimizations for the next release." },
-];
-
-// Section 7: 6-Stage Process (From First Conversation to Production)
-const productDeliveryProcess = [
-  {
-    step: "01",
-    title: "Understand",
-    detail: "Define the business problem, target users, operational workflows, and commercial success criteria.",
-    outcome: "Product direction & clear requirements specification.",
-  },
-  {
-    step: "02",
-    title: "Architect",
-    detail: "Define the user experience flows, technical system architecture, data models, and integration approach.",
-    outcome: "Detailed technical blueprint & engineering roadmap.",
-  },
-  {
-    step: "03",
-    title: "Design",
-    detail: "Translate requirements into user journeys, wireframes, interactive prototypes, and reusable design patterns.",
-    outcome: "Validated product experience & component design system.",
-  },
-  {
-    step: "04",
-    title: "Engineer",
-    detail: "Build the frontend, backend APIs, data pipelines, third-party integrations, and cloud infrastructure.",
-    outcome: "Working, fully integrated digital product codebase.",
-  },
-  {
-    step: "05",
-    title: "Validate",
-    detail: "Test end-to-end functionality, responsiveness, accessibility, performance, and security controls.",
-    outcome: "Release-ready digital product candidate.",
-  },
-  {
-    step: "06",
-    title: "Launch & Evolve",
-    detail: "Deploy into production, observe real-user telemetry, maintain systems, and continuously improve.",
-    outcome: "Live product & continuous improvement roadmap.",
-  },
-];
-
-// Section 8: 3 Engagement Models
 const engagementModels = [
   {
     title: "PRODUCT BUILD",
     subtitle: "New Product Engineering",
-    description: "For businesses building a new digital product from the ground up.",
-    bestFor: ["New Web Platforms", "MVPs & Custom SaaS", "Customer Portals", "Custom Digital Products"],
+    description: "For organizations building a new digital product from initial scoping to release.",
+    bestFor: ["New Web Platforms", "Custom SaaS Applications", "Customer Portals"],
     icon: <Sparkles className="w-5 h-5 text-[#f15e1c]" />,
   },
   {
     title: "PRODUCT TRANSFORMATION",
     subtitle: "Application Modernization",
-    description: "For improving, refactoring, or modernizing an existing application or legacy web experience.",
-    bestFor: ["Legacy System Refactoring", "UX & UI Modernization", "Performance Optimization", "Architecture Upgrades"],
+    description: "For refactoring, updating, or modernizing existing applications and legacy platforms.",
+    bestFor: ["Legacy System Refactoring", "UX/UI Modernization", "Performance Tuning"],
     icon: <RefreshCw className="w-5 h-5 text-[#2e936f]" />,
   },
   {
-    title: "EXTENDED ENGINEERING TEAM",
+    title: "EXTENDED TEAM",
     subtitle: "Dedicated Developer Squads",
-    description: "For organizations that need additional technical capability to accelerate product delivery.",
-    bestFor: ["Dedicated Developers", "Product Engineering Squads", "Ongoing Feature Delivery", "Specialized Tech Support"],
+    description: "For teams needing dedicated technical capability to accelerate product delivery.",
+    bestFor: ["Dedicated Full-Stack Squads", "Feature Backlog Execution", "Technical Support"],
     icon: <Users2 className="w-5 h-5 text-[#fab60a]" />,
   },
 ];
 
-// Section 9: What We Measure (Verified Engineering Indicators)
 const whatWeMeasureList = [
-  { title: "User Experience", desc: "Intuitive user journeys, Task completion efficiency, and interface usability.", icon: <Eye className="w-5 h-5 text-[#f15e1c]" /> },
-  { title: "Performance", desc: "Client-side rendering speed, asset optimization, and Core Web Vitals.", icon: <Zap className="w-5 h-5 text-[#2e936f]" /> },
-  { title: "Conversion Journeys", desc: "Form completion rates, checkout velocity, and lead capture efficiency.", icon: <LineChart className="w-5 h-5 text-[#fab60a]" /> },
-  { title: "Application Reliability", desc: "Error-free session execution, uptime monitoring, and system stability.", icon: <ShieldCheck className="w-5 h-5 text-[#f15e1c]" /> },
-  { title: "Feature Adoption", desc: "User engagement with key features, portal activity, and workflow usage.", icon: <Activity className="w-5 h-5 text-[#2e936f]" /> },
-  { title: "Technical Quality", desc: "Clean modular codebase, test coverage, and documentation integrity.", icon: <FileCode className="w-5 h-5 text-[#fab60a]" /> },
-  { title: "Operational Efficiency", desc: "Automated business workflows, reduced manual processes, and staff time savings.", icon: <Wrench className="w-5 h-5 text-[#f15e1c]" /> },
+  { title: "User Experience Quality", desc: "Intuitive user journeys, task completion efficiency, and interface usability.", icon: <Eye className="w-5 h-5 text-[#f15e1c]" /> },
+  { title: "Performance Speed", desc: "Fast client-side rendering, asset delivery, and low page load times.", icon: <Zap className="w-5 h-5 text-[#2e936f]" /> },
+  { title: "Conversion Journeys", desc: "Form completion rates, workflow velocity, and user retention.", icon: <LineChart className="w-5 h-5 text-[#fab60a]" /> },
+  { title: "Application Reliability", desc: "Uptime monitoring, error-free session completion, and platform stability.", icon: <ShieldCheck className="w-5 h-5 text-[#f15e1c]" /> },
+  { title: "Feature Utilization", desc: "User interaction with core tools, portal activity, and feature adoption.", icon: <Activity className="w-5 h-5 text-[#2e936f]" /> },
+  { title: "Codebase Maintainability", desc: "Clean component structure, automated test coverage, and documentation.", icon: <FileCode className="w-5 h-5 text-[#fab60a]" /> },
+  { title: "Operational Efficiency", desc: "Automated business workflows and reduced manual processing steps.", icon: <Wrench className="w-5 h-5 text-[#f15e1c]" /> },
 ];
 
-// Section 11: 5 FAQ Items
 const faqList = [
   {
     q: "What types of web applications does Arav Innovations build?",
-    a: "We engineer a wide range of digital products—including custom SaaS platforms, enterprise customer portals, internal workflow dashboards, content platforms, high-converting corporate websites, and custom API-driven business software.",
+    a: "We engineer digital products—including custom SaaS platforms, corporate web platforms, customer portals, internal workflow dashboards, content systems, and custom API-driven software.",
   },
   {
-    q: "Can you improve an existing website or application?",
-    a: "Yes. We frequently audit and modernize existing applications. Our product transformation work ranges from UI/UX refactoring and frontend modernization to backend performance tuning, API integration, and cloud migration.",
+    q: "Can you improve an existing application?",
+    a: "Yes. We audit and modernize existing applications through UI/UX refactoring, frontend upgrades, API integration, database optimization, and cloud migration.",
   },
   {
-    q: "Do you build both frontend and backend?",
-    a: "Yes. We operate as a full-stack digital product engineering team. We handle the entire engineering lifecycle—frontend user interfaces (React/Next.js), server backend logic, databases, API gateways, and cloud deployment infrastructure.",
+    q: "Do you engineer both frontend and backend?",
+    a: "Yes. We operate as a full-stack digital product engineering team covering frontend user interfaces (React/Next.js), server backend logic, databases, API gateways, and cloud deployment infrastructure.",
   },
   {
     q: "Can you integrate third-party systems?",
-    a: "Yes. We design custom integration architectures to connect your application with CRM platforms (Salesforce, HubSpot), payment gateways (Stripe), ERP systems, authentication providers (OAuth/SSO), and custom REST/GraphQL APIs.",
+    a: "Yes. We design custom integration pipelines connecting applications with CRM platforms (Salesforce, HubSpot), payment gateways (Stripe), ERP systems, authentication providers (OAuth/SSO), and REST/GraphQL APIs.",
   },
   {
-    q: "Do you provide support after launch?",
-    a: "Yes. Launch is only a milestone in the product lifecycle. We offer post-launch optimization, continuous feature development, performance monitoring, dependency updates, and dedicated engineering squad support.",
+    q: "Do you provide ongoing support after launch?",
+    a: "Yes. We offer post-launch optimization, feature enhancement, performance monitoring, dependency updates, and dedicated engineering squad support.",
   },
 ];
 
-// Service Ecosystem Links
 const internalServices = [
   { name: "IT Strategy & Implementation", href: "/services/it-strategy-implementation", icon: <Compass className="w-4 h-4 text-[#f15e1c]" /> },
   { name: "Digital Marketing & Brand", href: "/services/digital-marketing-brand-development", icon: <TrendingUp className="w-4 h-4 text-[#2e936f]" /> },
@@ -477,15 +390,9 @@ const internalServices = [
 ];
 
 export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps) {
-  const shouldReduceMotion = useReducedMotion();
-  const [activeHeroNodeIdx, setActiveHeroNodeIdx] = React.useState<number>(1);
   const [activeFlowIdx, setActiveFlowIdx] = React.useState<number>(0);
-  const [activeCapIdx, setActiveCapIdx] = React.useState<number | null>(0);
-  const [activeLoopIdx, setActiveLoopIdx] = React.useState<number>(0);
-  const [activeProcessIdx, setActiveProcessIdx] = React.useState<number>(0);
   const [openFaqIdx, setOpenFaqIdx] = React.useState<number | null>(0);
 
-  // Dynamic Blog Selection
   const displayPosts = React.useMemo(() => {
     if (relatedPosts && relatedPosts.length > 0) {
       return relatedPosts.slice(0, 3);
@@ -494,49 +401,36 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
   }, [relatedPosts]);
 
   const activeFlowStage = architectureFlowStages[activeFlowIdx];
-  const activeProcessStage = productDeliveryProcess[activeProcessIdx];
 
   return (
     <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#000000] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c] relative">
       
-      {/* Background Dot Grid Matrix Pattern */}
       <AnimatedDotGrid />
 
-      {/* =========================================================================
-          HERO SECTION — DIGITAL PRODUCT ENGINEERING (FULL-BLEED CINEMATIC BACKGROUND)
-          ========================================================================= */}
-      <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-12 lg:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none flex flex-col justify-start">
+      {/* 1. HERO */}
+      <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-12 lg:pb-14 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none flex flex-col justify-start">
         
-        {/* Full-Bleed Desktop Background Visual — Crisp Integrated Background Art for PC / DESKTOP VIEW */}
         <div className="absolute inset-0 pointer-events-none hidden lg:block select-none overflow-hidden">
           <Image
             src="/images/web-dev-bg.png"
-            alt="Web &amp; Application Development Strategy"
+            alt="Web & Application Development Strategy"
             fill
             priority
             className="object-cover object-right opacity-95 dark:opacity-90 transition-opacity duration-500"
             sizes="(min-width: 1024px) 100vw, 1px"
           />
-          {/* Subtle minimal gradient overlay providing crisp image clarity with minor soft text backdrop on desktop */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/75 via-45% to-transparent dark:from-[#000000] dark:via-[#000000]/75 dark:via-45% dark:to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/80 via-45% to-transparent dark:from-[#000000] dark:via-[#000000]/80 dark:via-45% dark:to-transparent pointer-events-none" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#FFFDF9]/20 via-transparent to-[#FFFDF9]/60 dark:from-[#000000]/20 dark:via-transparent dark:to-[#000000]/60 pointer-events-none" />
         </div>
 
         <AnimatedDotGrid />
 
-        {/* Ambient Pulsing Background Glows */}
-        <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-radial from-[#f15e1c]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
-        <div className="absolute bottom-1/3 right-1/4 w-[450px] h-[450px] bg-radial from-[#2e936f]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none lg:hidden" />
-
-        <div className="max-w-[1536px] mx-auto w-full space-y-6 sm:space-y-8 relative z-10">
+        <div className="max-w-[1536px] mx-auto w-full space-y-4 sm:space-y-6 relative z-10">
           
-          {/* 2-Column Hero Composition */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start">
             
-            {/* LEFT COLUMN: HERO COPY ALIGNED TO THE TOP LEFT */}
             <div className="lg:col-span-7 xl:col-span-6 space-y-4 sm:space-y-5 text-left max-w-2xl">
               
-              {/* Breadcrumb &amp; Eyebrow Badge */}
               <AnimatedSection delay={0.05} className="space-y-2">
                 <Breadcrumb
                   items={[
@@ -549,23 +443,21 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
                   className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c] shadow-2xs cursor-default transition-all duration-300"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-[#f15e1c] animate-pulse" />
-                  <span>CUSTOM WEB AND MOBILE APPLICATION DEVELOPMENT</span>
+                  <span>CUSTOM WEB &amp; MOBILE APPLICATION DEVELOPMENT</span>
                 </motion.div>
               </AnimatedSection>
 
-              {/* Main H1 Headline */}
-              <AnimatedSection delay={0.1} className="space-y-3">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold font-display tracking-tight leading-[1.12] text-[#1b2823] dark:text-[#ffffff]">
+              <AnimatedSection delay={0.1} className="space-y-2">
+                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display tracking-tight leading-[1.15] text-[#1b2823] dark:text-[#ffffff]">
                   Web &amp; Custom <span className="text-[#f15e1c]">Application Development</span>
                 </h1>
               </AnimatedSection>
 
-              {/* Dedicated Cropped Mobile Hero Image Card (Mobile/Tablet Viewports < 1024px) */}
-              <AnimatedSection delay={0.12} className="w-full lg:hidden my-3">
-                <div className="relative w-full aspect-[941/1036] rounded-2xl border-2 border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] overflow-hidden shadow-xl">
+              <AnimatedSection delay={0.12} className="w-full lg:hidden my-2">
+                <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-2xl border border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] overflow-hidden shadow-lg">
                   <Image
                     src="/images/web-dev-mobile-hero.png"
-                    alt="Web &amp; Application Development Strategy"
+                    alt="Web & Application Development Strategy"
                     fill
                     priority
                     className="object-cover object-center"
@@ -574,14 +466,12 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
                 </div>
               </AnimatedSection>
 
-              {/* Supporting Text */}
-              <AnimatedSection delay={0.14} className="space-y-3">
-                <p className="text-sm sm:text-base lg:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-2xl">
-                  We engineer high-performance websites, custom web applications, and mobile platforms designed around the exact needs of your business and customers. Fast, secure, accessible, and scalable.
+              <AnimatedSection delay={0.14} className="space-y-2">
+                <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-2xl">
+                  We engineer high-performance web platforms, custom applications, and mobile products designed around business workflows. Fast, secure, accessible, and built to scale with your organization.
                 </p>
               </AnimatedSection>
 
-              {/* CTA Buttons */}
               <AnimatedSection delay={0.16} className="pt-1 flex flex-wrap items-center gap-3">
                 <Link href="/contact">
                   <MagneticButton>
@@ -591,29 +481,28 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
                       rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1.5" />}
                       className="shadow-md shadow-[#f15e1c]/20 hover:-translate-y-0.5 transition-all duration-300"
                     >
-                      Build My Digital Product
+                      Build Digital Product
                     </Button3D>
                   </MagneticButton>
                 </Link>
 
-                <Link href="#experience-engineering">
+                <Link href="#capabilities">
                   <MagneticButton>
                     <Button3D variant="outline" size="md" className="hover:-translate-y-0.5 transition-all duration-300">
-                      Explore Our Approach
+                      Explore Capabilities
                     </Button3D>
                   </MagneticButton>
                 </Link>
               </AnimatedSection>
 
-              {/* Capability / Service Indicators */}
               <AnimatedSection delay={0.18} className="pt-1">
                 <div className="flex flex-wrap items-center gap-2">
                   {keywordTags.map((tag, i) => (
                     <motion.span
                       key={i}
-                      whileHover={{ scale: 1.06, y: -2 }}
+                      whileHover={{ scale: 1.04, y: -1 }}
                       transition={{ duration: 0.2 }}
-                      className="px-3 py-1.5 rounded-lg bg-[#fefaf5]/90 dark:bg-[#0a0a0a]/90 backdrop-blur-xs border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] hover:border-[#f15e1c]/40 transition-all duration-200 cursor-default"
+                      className="px-3 py-1 rounded-lg bg-[#fefaf5]/90 dark:bg-[#0a0a0a]/90 border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] hover:border-[#f15e1c]/40 transition-all duration-200 cursor-default"
                     >
                       {tag}
                     </motion.span>
@@ -622,121 +511,150 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
               </AnimatedSection>
             </div>
 
-            {/* RIGHT COLUMN: DESKTOP SPACER REVEALING THE BACKGROUND VISUAL */}
-            <div className="hidden lg:block lg:col-span-5 xl:col-span-6 h-full min-h-[300px]" />
+            <div className="hidden lg:block lg:col-span-5 xl:col-span-6 h-full min-h-[260px]" />
           </div>
         </div>
       </section>
 
-      {/* Laser Scan Beam Section Separator */}
       <SystemScanTransition />
 
-      {/* =========================================================================
-          SECTION 1 — EDITORIAL SPLIT: MAIN IMAGE 1 + INTRODUCTORY CONTENT
-          ========================================================================= */}
-      <section id="experience-engineering" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1536px] mx-auto w-full space-y-12">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      {/* 2. VISUAL BREAK 1 */}
+      <section className="relative py-10 sm:py-14 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
             
-            {/* LEFT COLUMN: INTRODUCTORY TEXT (~45% width) */}
-            <div className="lg:col-span-5 space-y-6 text-left order-2 lg:order-1">
-              <AnimatedSection delay={0.08} className="space-y-4">
-                <Badge variant="secondary" size="md">
-                  DIGITAL PRODUCT ENGINEERING
-                </Badge>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black font-display tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-tight">
-                  From Digital Experience to Business-Critical Product
-                </h2>
-                <p className="text-base sm:text-lg text-[#1b2823] dark:text-[#ffffff] font-bold leading-snug">
-                  Your digital product is the operational backbone your customers use and your teams rely on.
-                </p>
-                <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed">
-                  Arav Innovations unifies UX strategy, Next.js frontend, microservices APIs, database architecture, and automated CI/CD deployment into a single engineering lifecycle designed to perform at scale.
-                </p>
-              </AnimatedSection>
-
-              {/* 3 Crisp Supporting Capability Cards */}
-              <AnimatedSection delay={0.14} className="space-y-3.5 pt-1">
-                {experienceAreas.map((area) => (
-                  <motion.div
-                    key={area.num}
-                    whileHover={{ x: 4 }}
-                    className="p-4 sm:p-5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] transition-all duration-200 flex items-start gap-4 text-left group shadow-xs"
-                  >
-                    <div className="p-2.5 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shrink-0 group-hover:scale-105 transition-transform shadow-2xs">
-                      {area.icon}
-                    </div>
-                    <div className="space-y-1">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-sm sm:text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
-                          {area.title}
-                        </span>
-                        <span className="text-xs font-mono text-[#2e936f] font-bold">
-                          ({area.subtitle})
-                        </span>
-                      </div>
-                      <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
-                        {area.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
-              </AnimatedSection>
-            </div>
-
-            {/* RIGHT COLUMN: MAIN IMAGE 1 (~55% width) */}
-            <div className="lg:col-span-7 w-full flex items-center justify-center order-1 lg:order-2">
-              <AnimatedSection delay={0.12} className="w-full">
+            <div className="lg:col-span-5 w-full flex items-center justify-center">
+              <AnimatedSection delay={0.08} className="w-full">
                 <motion.div
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  transition={{ duration: 0.4 }}
-                  className="relative w-full aspect-[16/9] rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-white dark:bg-[#080808] shadow-lg hover:shadow-2xl hover:border-[#f15e1c]/50 transition-all duration-300 group"
+                  whileHover={{ scale: 1.01, y: -2 }}
+                  transition={{ duration: 0.3 }}
+                  className="relative w-full aspect-[16/9] rounded-2xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-white dark:bg-[#080808] shadow-md hover:shadow-xl hover:border-[#f15e1c]/50 transition-all duration-300 group"
                 >
                   <Image
                     src="/images/web-app-main-1.png"
-                    alt="Arav Innovations Digital Product Engineering & Web Application Architecture"
+                    alt="Arav Innovations Web Application Architecture"
                     fill
-                    priority
                     className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
                   />
                 </motion.div>
               </AnimatedSection>
             </div>
 
+            <div className="lg:col-span-7 space-y-4 text-left">
+              <AnimatedSection delay={0.12} className="space-y-2">
+                <Badge variant="secondary" size="md">
+                  DIGITAL PRODUCT ENGINEERING
+                </Badge>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-tight">
+                  From User Journey to Business-Critical Application
+                </h2>
+                <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed">
+                  Your digital product is the operational backbone your customers use and your team relies on. We unify frontend experience, backend microservices, database architecture, and deployment pipelines into a single development lifecycle.
+                </p>
+              </AnimatedSection>
+
+              <AnimatedSection delay={0.16}>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                  {experienceAreas.map((area) => (
+                    <motion.div
+                      key={area.num}
+                      whileHover={{ y: -2 }}
+                      className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/40 space-y-1 transition-all duration-200 cursor-default group"
+                    >
+                      <div className="flex items-center gap-1.5 text-xs font-bold font-mono text-[#f15e1c]">
+                        {area.icon}
+                        <span>{area.title}</span>
+                      </div>
+                      <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-normal">
+                        {area.description}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
+              </AnimatedSection>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* Laser Scan Beam Section Separator */}
       <SystemScanTransition />
 
-      {/* =========================================================================
-          SECTION 2 — PRIMARY INTERACTIVE VISUAL: ANIMATED ARCHITECTURE FLOW (8 STAGES)
-          ========================================================================= */}
-      <section id="architecture-flow" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
-        <div className="max-w-[1536px] mx-auto space-y-10">
+      {/* 3. CAPABILITIES */}
+      <section id="capabilities" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-[1536px] mx-auto space-y-8 sm:space-y-10">
+          
+          <AnimatedSection>
+            <div className="max-w-3xl space-y-3 text-left">
+              <Badge variant="secondary" size="md">
+                ENGINEERING SCOPE
+              </Badge>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Product Engineering Capabilities
+              </h2>
+              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-normal">
+                End-to-end development services for web platforms, multi-tenant SaaS products, native/cross-platform mobile apps, and integration infrastructure.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-stretch">
+            {productCapabilities.map((cap, idx) => (
+              <AnimatedSection key={cap.num} delay={idx * 0.06} className="h-full">
+                <motion.div
+                  whileHover={{ y: -3 }}
+                  transition={{ duration: 0.2 }}
+                  className="h-full p-6 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:shadow-lg hover:border-[#f15e1c] transition-all duration-300 flex flex-col justify-between text-left group relative overflow-hidden"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-mono font-black text-[#f15e1c] px-2.5 py-0.5 rounded-md bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/30">
+                        {cap.num}
+                      </span>
+                      <div className="w-10 h-10 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                        {cap.icon}
+                      </div>
+                    </div>
+                    <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug">
+                      {cap.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
+                      {cap.description}
+                    </p>
+                  </div>
+
+                  <div className="h-1 w-0 group-hover:w-full bg-[#f15e1c] transition-all duration-300 rounded-full mt-4" />
+                </motion.div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* 4. ARCHITECTURE FLOW PIPELINE */}
+      <section id="architecture-flow" className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto space-y-8 sm:space-y-10">
           
           <AnimatedSection>
             <div className="text-center max-w-3xl mx-auto space-y-3">
               <Badge variant="secondary" size="md">
                 CONNECTED ARCHITECTURE
               </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                One Product. Every Layer Connected.
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-tight">
+                8-Stage Product Architecture Lifecycle
               </h2>
               <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                Hover or click any stage below to explore how discovery, design, experience, application logic, data, integrations, and deployment link together.
+                Select any stage below to explore how discovery, design, frontend, application logic, data, integrations, and deployment link together.
               </p>
             </div>
           </AnimatedSection>
 
-          {/* 8-Stage Architecture Selector Container */}
-          <AnimatedSection delay={0.1}>
-            <div className="rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl p-6 sm:p-10 space-y-8">
+          <AnimatedSection delay={0.08}>
+            <div className="rounded-2xl sm:rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg p-4 sm:p-6 lg:p-8 space-y-6">
               
-              {/* 8-Stage Selector Bar */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 relative">
+              <div className="grid grid-cols-2 xs:grid-cols-4 lg:grid-cols-8 gap-2 relative">
                 {architectureFlowStages.map((stg, idx) => {
                   const isSelected = activeFlowIdx === idx;
                   return (
@@ -744,68 +662,56 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
                       key={stg.id}
                       type="button"
                       onClick={() => setActiveFlowIdx(idx)}
-                      onMouseEnter={() => setActiveFlowIdx(idx)}
                       className={cn(
-                        "relative py-3 px-2 rounded-2xl text-[11px] font-extrabold font-display transition-all duration-250 cursor-pointer flex flex-col items-center justify-center gap-1 select-none z-10",
+                        "py-2.5 px-2 rounded-xl text-xs font-extrabold font-display transition-all duration-200 cursor-pointer flex flex-col items-center justify-center gap-1 select-none relative z-10 border text-center",
                         isSelected
-                          ? "text-white shadow-md"
-                          : "bg-white dark:bg-[#000000] text-[#4a5c55] dark:text-[#d3eee4] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:bg-[#f15e1c]/5"
+                          ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-sm"
+                          : "bg-white dark:bg-[#000000] text-[#4a5c55] dark:text-[#d3eee4] border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:bg-[#f15e1c]/5"
                       )}
                     >
-                      {isSelected && (
-                        <motion.div
-                          layoutId="activeArchitectureStage"
-                          className="absolute inset-0 bg-[#f15e1c] rounded-2xl shadow-md shadow-[#f15e1c]/20 z-[-1]"
-                          transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                        />
-                      )}
-                      <span className="font-mono text-[9px] opacity-80">{stg.num}.</span>
-                      <span className="truncate max-w-full">{stg.title}</span>
+                      <span className={cn("font-mono text-[10px]", isSelected ? "text-white/80" : "text-[#f15e1c]")}>
+                        {stg.num}.
+                      </span>
+                      <span className="truncate w-full">{stg.title}</span>
                     </button>
                   );
                 })}
               </div>
 
-              {/* Active Flow Stage Detail Display Panel */}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeFlowStage.id}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
+                  exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+                  className="p-5 sm:p-7 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] grid grid-cols-1 lg:grid-cols-12 gap-6 items-center"
                 >
                   <div className="lg:col-span-7 space-y-3 text-left">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-mono font-bold text-[#f15e1c] uppercase tracking-wider">
-                        STAGE {activeFlowStage.num} &bull; {activeFlowStage.title}
-                      </span>
-                    </div>
+                    <span className="text-xs font-mono font-bold text-[#f15e1c] uppercase tracking-wider block">
+                      STAGE {activeFlowStage.num} &bull; {activeFlowStage.title}
+                    </span>
                     <h3 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                       {activeFlowStage.subtitle}
                     </h3>
-                    <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
                       {activeFlowStage.desc}
                     </p>
                   </div>
 
-                  <div className="lg:col-span-5 space-y-3 text-left">
+                  <div className="lg:col-span-5 space-y-2.5 text-left border-t lg:border-t-0 lg:border-l border-[#f7d7b0]/60 dark:border-[#1a1a1a] pt-4 lg:pt-0 lg:pl-6">
                     <span className="text-xs font-mono font-bold uppercase text-[#2e936f] block">
-                      Core Stage Output Deliverables:
+                      Key Deliverables:
                     </span>
                     <div className="space-y-2">
                       {activeFlowStage.deliverables.map((item, i) => (
-                        <motion.div
+                        <div
                           key={i}
-                          initial={{ opacity: 0, x: -8 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: i * 0.06 }}
-                          className="flex items-center gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff] p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#2e936f]/40 transition-colors"
+                          className="flex items-center gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff] p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a]"
                         >
                           <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
                           <span>{item}</span>
-                        </motion.div>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -816,537 +722,202 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
         </div>
       </section>
 
-      {/* Laser Scan Beam Section Separator */}
       <SystemScanTransition />
 
-      {/* =========================================================================
-          SECTION 3 — 6 CLEAN INTERACTIVE CAPABILITY AREAS
-          ========================================================================= */}
-      <section id="capabilities" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1536px] mx-auto space-y-10">
+      {/* 5. LAYERED ARCHITECTURE & PILLARS */}
+      <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-[1536px] mx-auto space-y-8 sm:space-y-10">
           
           <AnimatedSection>
             <div className="text-center max-w-3xl mx-auto space-y-3">
               <Badge variant="secondary" size="md">
-                CAPABILITIES
+                TECHNICAL STACK
               </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                Digital Products Built Around Real Business Needs
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Modern Technology Architecture
               </h2>
               <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                Structured engineering capabilities designed for corporate platforms, workflow web applications, custom business tools, and commerce ecosystems.
+                Clean separation of concerns across frontend, application logic, database, integrations, and cloud infrastructure.
               </p>
             </div>
           </AnimatedSection>
 
-          {/* 6 Capabilities Grid (with 3D TiltCard Effect) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {productCapabilities.map((cap, idx) => (
-              <AnimatedSection key={cap.num} delay={idx * 0.06}>
-                <TiltCard maxTilt={5} scale={1.01} glare={true} className="h-full">
-                  <div
-                    onMouseEnter={() => setActiveCapIdx(idx)}
-                    className={cn(
-                      "h-full p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0a0a0a] border transition-all duration-300 space-y-5 flex flex-col justify-between group relative overflow-hidden text-left shadow-md hover:shadow-2xl",
-                      activeCapIdx === idx
-                        ? "border-[#f15e1c] ring-2 ring-[#f15e1c]/30"
-                        : "border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]"
-                    )}
-                  >
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-mono font-black text-[#f15e1c] px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/30">
-                          {cap.num}
-                        </span>
-                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 group-hover:border-[#f15e1c] transition-all duration-300">
-                          {React.cloneElement(cap.icon as React.ReactElement<{ className?: string }>, { className: "w-7 h-7 sm:w-8 sm:h-8 stroke-[2]" })}
-                        </div>
-                      </div>
-                      <div className="space-y-1.5">
-                        <h3 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug break-words">
-                          {cap.title}
-                        </h3>
-                        <p className="text-xs sm:text-sm font-mono font-extrabold text-[#2e936f] uppercase tracking-wider">
-                          {cap.techLayer}
-                        </p>
-                      </div>
-                      <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
-                        {cap.description}
-                      </p>
-                    </div>
-
-                    <div className="pt-4 border-t border-[#f7d7b0]/60 dark:border-[#1a1a1a] flex items-center justify-between text-xs font-mono font-extrabold uppercase tracking-wider text-[#f15e1c]">
-                      <span>Explore Capability</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
-                    </div>
-                  </div>
-                </TiltCard>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Laser Scan Beam Section Separator */}
-      <SystemScanTransition />
-
-      {/* =========================================================================
-          EDITORIAL VISUAL BREAK 2: SECOND IMAGE + INTEGRATION ARCHITECTURE
-          ========================================================================= */}
-      <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#FFFDF9] dark:bg-[#000000]">
-        <div className="max-w-[1536px] mx-auto w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
-            {/* LEFT COLUMN: SECOND IMAGE (~55% width) */}
-            <div className="lg:col-span-7 w-full flex items-center justify-center order-1">
-              <AnimatedSection delay={0.12} className="w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch">
+            {layeredArchitecture.map((lyr, idx) => (
+              <AnimatedSection key={idx} delay={idx * 0.05} className="h-full">
                 <motion.div
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  transition={{ duration: 0.4 }}
-                  className="relative w-full aspect-[16/9] rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-white dark:bg-[#080808] shadow-lg hover:shadow-2xl hover:border-[#f15e1c]/50 transition-all duration-300 group"
+                  whileHover={{ y: -3 }}
+                  transition={{ duration: 0.2 }}
+                  className="h-full p-5 sm:p-6 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#2e936f] hover:shadow-md transition-all duration-300 space-y-2.5 text-left group"
                 >
-                  <Image
-                    src="/images/web-app-main-2.png"
-                    alt="Arav Innovations Full-Stack Web Application Architecture & System Integration"
-                    fill
-                    className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
-                  />
-                </motion.div>
-              </AnimatedSection>
-            </div>
-
-            {/* RIGHT COLUMN: SUPPORTING CONTENT (~45% width) */}
-            <div className="lg:col-span-5 space-y-4 sm:space-y-5 text-left order-2">
-              <AnimatedSection delay={0.08} className="space-y-3">
-                <Badge variant="secondary" size="md">
-                  SYSTEM INTEGRATION
-                </Badge>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-tight">
-                  Connecting Workflows, Systems and User Journeys
-                </h2>
-                <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed">
-                  Modern digital products require clear alignment between user interfaces and complex backend ecosystems. We engineer unified application architectures where data flows seamlessly between APIs, databases, CRM systems, and cloud environments.
-                </p>
-              </AnimatedSection>
-
-              <AnimatedSection delay={0.12} className="space-y-2.5">
-                <motion.div whileHover={{ x: 4 }} className="flex items-center gap-3 p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#2e936f]/40 transition-all">
-                  <CheckCircle2 className="w-5 h-5 text-[#2e936f] shrink-0" />
-                  <span className="text-xs sm:text-sm font-semibold text-[#1b2823] dark:text-[#ffffff]">
-                    Frictionless User Experiences &amp; Enterprise Portals
-                  </span>
-                </motion.div>
-                <motion.div whileHover={{ x: 4 }} className="flex items-center gap-3 p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#2e936f]/40 transition-all">
-                  <CheckCircle2 className="w-5 h-5 text-[#2e936f] shrink-0" />
-                  <span className="text-xs sm:text-sm font-semibold text-[#1b2823] dark:text-[#ffffff]">
-                    Scalable API Connectors &amp; Microservice Gateways
-                  </span>
-                </motion.div>
-                <motion.div whileHover={{ x: 4 }} className="flex items-center gap-3 p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#2e936f]/40 transition-all">
-                  <CheckCircle2 className="w-5 h-5 text-[#2e936f] shrink-0" />
-                  <span className="text-xs sm:text-sm font-semibold text-[#1b2823] dark:text-[#ffffff]">
-                    Resilient Data Storage &amp; Real-Time Telemetry
-                  </span>
-                </motion.div>
-              </AnimatedSection>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          SECTION 4 — DESIGNED FOR THE WORK BEHIND THE SCREEN (LAYERED ARCHITECTURE)
-          ========================================================================= */}
-      <section id="layered-architecture" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
-        <div className="max-w-[1536px] mx-auto space-y-10">
-          
-          <AnimatedSection>
-            <div className="text-center max-w-3xl mx-auto space-y-3">
-              <Badge variant="secondary" size="md">
-                ENGINEERING ARCHITECTURE
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                Designed for the Work Behind the Screen
-              </h2>
-              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                A connected 5-layer engineering stack spanning responsive frontend, server application logic, data modeling, third-party integrations, and cloud deployment.
-              </p>
-            </div>
-          </AnimatedSection>
-
-          {/* Layered Pipeline Cards */}
-          <div className="space-y-4 max-w-5xl mx-auto">
-            {layeredArchitecture.map((layer, idx) => (
-              <AnimatedSection key={layer.layer} delay={idx * 0.06}>
-                <motion.div
-                  whileHover={{ scale: 1.01, x: 4 }}
-                  className="p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] shadow-xs transition-all duration-300 grid grid-cols-1 md:grid-cols-12 gap-4 items-center text-left group"
-                >
-                  <div className="md:col-span-1 flex items-center justify-center">
-                    <span className="text-base font-mono font-black text-[#f15e1c]">
-                      {layer.layer}
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono font-bold text-[#2e936f] uppercase">
+                      LAYER {lyr.layer}
                     </span>
-                  </div>
-                  <div className="md:col-span-4 space-y-1">
-                    <div className="flex items-center gap-2">
-                      <div className="p-1.5 rounded-lg bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-110 transition-transform">
-                        {layer.icon}
-                      </div>
-                      <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
-                        {layer.name}
-                      </h3>
+                    <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-105 transition-transform">
+                      {lyr.icon}
                     </div>
-                    <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed">
-                      {layer.desc}
-                    </p>
                   </div>
-                  <div className="md:col-span-7 p-3 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a]">
-                    <span className="text-[10px] font-mono font-bold text-[#2e936f] block uppercase mb-0.5">
-                      Verified Tech Stack:
-                    </span>
-                    <span className="text-xs font-mono font-semibold text-[#1b2823] dark:text-[#ffffff]">
-                      {layer.tech}
-                    </span>
-                  </div>
+                  <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2e936f] transition-colors">
+                    {lyr.name}
+                  </h3>
+                  <p className="text-xs font-mono text-[#f15e1c] font-bold">
+                    {lyr.tech}
+                  </p>
+                  <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
+                    {lyr.desc}
+                  </p>
                 </motion.div>
               </AnimatedSection>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Laser Scan Beam Section Separator */}
-      <SystemScanTransition />
-
-      {/* =========================================================================
-          SECTION 5 — FAST, ACCESSIBLE, RESILIENT
-          ========================================================================= */}
-      <section id="quality-pillars" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1536px] mx-auto space-y-10">
-          
-          <AnimatedSection>
-            <div className="text-center max-w-3xl mx-auto space-y-3">
-              <Badge variant="secondary" size="md">
-                ENGINEERING QUALITY
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                Fast, Accessible, Resilient
-              </h2>
-              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                Core engineering standards embedded directly into our product development cycle.
-              </p>
-            </div>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {engineeringPillars.map((plr, idx) => (
-              <AnimatedSection key={idx} delay={idx * 0.06}>
-                <TiltCard maxTilt={5} scale={1.01} className="h-full">
-                  <div className="h-full p-6 sm:p-7 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#2e936f] hover:shadow-lg transition-all duration-300 space-y-3 text-left group">
-                    <div className="p-2.5 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] w-fit group-hover:scale-110 group-hover:-rotate-3 group-hover:border-[#2e936f]/40 transition-all duration-300">
-                      {plr.icon}
-                    </div>
-                    <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2e936f] group-hover:translate-x-1 transition-all duration-300">
-                      {plr.title}
-                    </h3>
-                    <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
-                      {plr.desc}
-                    </p>
+          <div className="pt-4 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {engineeringPillars.map((plr, idx) => (
+                <div key={idx} className="p-4 rounded-xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] flex items-start gap-3">
+                  <div className="p-2 rounded-lg bg-[#fefaf5] dark:bg-[#121212] border border-[#f7d7b0] shrink-0">
+                    {plr.icon}
                   </div>
-                </TiltCard>
-              </AnimatedSection>
-            ))}
+                  <div>
+                    <h4 className="text-sm font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">{plr.title}</h4>
+                    <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-normal">{plr.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
+
         </div>
       </section>
 
-      {/* Laser Scan Beam Section Separator */}
       <SystemScanTransition />
 
-      {/* =========================================================================
-          SECTION 6 — PRODUCT IMPROVEMENT LOOP
-          ========================================================================= */}
-      <section id="improvement-loop" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
-        <div className="max-w-[1536px] mx-auto space-y-12">
+      {/* 6. ENGAGEMENT MODELS */}
+      <section id="engagement-models" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto space-y-8 sm:space-y-10">
           
           <AnimatedSection>
             <div className="text-center max-w-3xl mx-auto space-y-3">
               <Badge variant="secondary" size="md">
-                CONTINUOUS EVOLUTION
+                ENGAGEMENT MODELS
               </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                Launch Is a Milestone. Not the Finish Line.
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Flexible Product Delivery Models
               </h2>
               <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                We use post-launch feedback, performance signals, analytics, operational observations and changing business requirements to identify what should be improved next.
+                Choose how we collaborate—from end-to-end product builds to legacy application modernization or dedicated developer squads.
               </p>
             </div>
           </AnimatedSection>
 
-          {/* Loop Stage Selector Bar */}
-          <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 relative">
-            {productImprovementLoop.map((item, idx) => {
-              const isActive = activeLoopIdx === idx;
-              return (
-                <AnimatedSection key={item.step} delay={idx * 0.08}>
-                  <motion.div
-                    onClick={() => setActiveLoopIdx(idx)}
-                    onMouseEnter={() => setActiveLoopIdx(idx)}
-                    whileHover={{ y: -4, scale: 1.02 }}
-                    className={cn(
-                      "p-5 rounded-3xl border-2 transition-all duration-300 cursor-pointer space-y-2 text-left flex flex-col justify-between min-h-[160px] select-none",
-                      isActive
-                        ? "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/20"
-                        : "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] opacity-80 hover:opacity-100 hover:border-[#f15e1c]"
-                    )}
-                  >
-                    <div className="space-y-1">
-                      <span
-                        className={cn(
-                          "text-xs font-mono font-black block transition-colors",
-                          isActive ? "text-[#f15e1c]" : "text-[#7A6A5F]"
-                        )}
-                      >
-                        STEP {item.step}
-                      </span>
-                      <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                        {item.name}
-                      </h3>
-                      <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium pt-1">
-                        {item.desc}
-                      </p>
-                    </div>
-
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeLoopDot"
-                        className="h-1 w-full bg-[#f15e1c] rounded-full mt-2"
-                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                      />
-                    )}
-                  </motion.div>
-                </AnimatedSection>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Laser Scan Beam Section Separator */}
-      <SystemScanTransition />
-
-      {/* =========================================================================
-          SECTION 7 — FROM FIRST CONVERSATION TO PRODUCTION (6-STAGE PROCESS)
-          ========================================================================= */}
-      <section id="delivery-process" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1536px] mx-auto space-y-12">
-          
-          <AnimatedSection>
-            <div className="text-center max-w-3xl mx-auto space-y-3">
-              <Badge variant="secondary" size="md">
-                DELIVERY PROCESS
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                From First Conversation to Production
-              </h2>
-              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                A disciplined 6-stage engineering process designed for transparency, milestone predictability, and software quality.
-              </p>
-            </div>
-          </AnimatedSection>
-
-          {/* 6 Stage Process Steps */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {productDeliveryProcess.map((proc, idx) => {
-              const isSelected = activeProcessIdx === idx;
-              return (
-                <AnimatedSection key={proc.step} delay={idx * 0.06}>
-                  <motion.div
-                    onClick={() => setActiveProcessIdx(idx)}
-                    onMouseEnter={() => setActiveProcessIdx(idx)}
-                    whileHover={{ y: -4, scale: 1.02 }}
-                    className={cn(
-                      "p-6 rounded-3xl border-2 transition-all duration-300 cursor-pointer space-y-3 text-left flex flex-col justify-between min-h-[220px] select-none",
-                      isSelected
-                        ? "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/20"
-                        : "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]"
-                    )}
-                  >
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-mono font-black text-[#f15e1c]">
-                          STAGE {proc.step}
-                        </span>
-                        <div className="p-1.5 rounded-lg bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a]">
-                          <Workflow className="w-4 h-4 text-[#2e936f]" />
-                        </div>
-                      </div>
-                      <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                        {proc.title}
-                      </h3>
-                      <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
-                        {proc.detail}
-                      </p>
-                    </div>
-
-                    <div className="pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a]">
-                      <span className="text-[10px] font-mono font-bold text-[#2e936f] uppercase block mb-0.5">
-                        Key Milestone Outcome:
-                      </span>
-                      <span className="text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]">
-                        {proc.outcome}
-                      </span>
-                    </div>
-                  </motion.div>
-                </AnimatedSection>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Laser Scan Beam Section Separator */}
-      <SystemScanTransition />
-
-      {/* =========================================================================
-          SECTION 8 — THREE ENGAGEMENT MODELS
-          ========================================================================= */}
-      <section id="engagement-models" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
-        <div className="max-w-[1536px] mx-auto space-y-10">
-          
-          <AnimatedSection>
-            <div className="text-center max-w-3xl mx-auto space-y-3">
-              <Badge variant="secondary" size="md">
-                ENGAGEMENT STRUCTURES
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                The Right Team for the Job
-              </h2>
-              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                Flexible, commercially aligned collaboration models tailored to your product stage and technical requirements.
-              </p>
-            </div>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
             {engagementModels.map((model, idx) => (
-              <AnimatedSection key={idx} delay={idx * 0.08}>
-                <TiltCard maxTilt={5} scale={1.01} glare={true} className="h-full">
-                  <div className="h-full p-7 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#f15e1c] hover:shadow-xl transition-all duration-300 space-y-4 text-left flex flex-col justify-between group">
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between">
-                        <div className="p-2.5 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-110 group-hover:rotate-3 transition-transform">
-                          {model.icon}
-                        </div>
-                        <span className="text-[10px] font-mono font-bold text-[#f15e1c] uppercase">
-                          MODEL 0{idx + 1}
-                        </span>
+              <AnimatedSection key={idx} delay={idx * 0.06} className="h-full">
+                <motion.div
+                  whileHover={{ y: -3 }}
+                  transition={{ duration: 0.2 }}
+                  className="h-full p-6 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#f15e1c] hover:shadow-md transition-all duration-300 flex flex-col justify-between text-left group"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a]">
+                        {model.icon}
                       </div>
-                      <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
-                        {model.title}
-                      </h3>
-                      <p className="text-xs font-mono font-bold text-[#2e936f]">
-                        {model.subtitle}
-                      </p>
-                      <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
-                        {model.description}
-                      </p>
-
-                      <div className="pt-2 space-y-2">
-                        <span className="text-[10px] font-mono font-bold uppercase text-[#f15e1c] block">
-                          Best For:
-                        </span>
-                        <div className="space-y-1.5">
-                          {model.bestFor.map((item, i) => (
-                            <div key={i} className="flex items-center gap-2 text-xs font-medium text-[#1b2823] dark:text-[#ffffff]">
-                              <Check className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
-                              <span>{item}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+                      <span className="text-xs font-mono font-bold text-[#f15e1c]">{model.subtitle}</span>
                     </div>
+                    <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
+                      {model.title}
+                    </h3>
+                    <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
+                      {model.description}
+                    </p>
 
-                    <div className="pt-4 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a]">
-                      <Link href="/contact" className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#f15e1c] group-hover:underline">
-                        <span>Discuss This Model</span>
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
-                      </Link>
+                    <div className="pt-2 space-y-2">
+                      <span className="text-[11px] font-mono font-bold uppercase text-[#2e936f] block">Best For:</span>
+                      {model.bestFor.map((item, i) => (
+                        <div key={i} className="flex items-center gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff]">
+                          <Check className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
+                          <span>{item}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                </TiltCard>
+
+                  <div className="pt-4 mt-4 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a]">
+                    <Link
+                      href="/contact"
+                      className="inline-flex items-center gap-1 text-xs font-mono font-bold text-[#f15e1c] group-hover:underline"
+                    >
+                      <span>Discuss Engagement</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                </motion.div>
               </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Laser Scan Beam Section Separator */}
       <SystemScanTransition />
 
-      {/* =========================================================================
-          SECTION 9 — WHAT WE MEASURE (TRANSPARENT METRICS)
-          ========================================================================= */}
-      <section id="what-we-measure" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1536px] mx-auto space-y-10">
+      {/* 7. WHAT WE MEASURE */}
+      <section id="what-we-measure" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-[1536px] mx-auto space-y-8 sm:space-y-10">
           
           <AnimatedSection>
             <div className="text-center max-w-3xl mx-auto space-y-3">
               <Badge variant="secondary" size="md">
-                TRANSPARENT METRICS
+                ENGINEERING METRICS
               </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                Show the Product. Explain the Engineering.
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Product Quality &amp; Performance Indicators
               </h2>
-              <p className="text-base font-mono font-bold text-[#f15e1c] uppercase tracking-wider">
-                What We Measure
-              </p>
-              <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4]">
-                We evaluate product engineering success against verified technical, operational, and user experience indicators.
+              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
+                We measure engineering success through user experience quality, application speed, uptime, and workflow efficiency.
               </p>
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-stretch">
             {whatWeMeasureList.map((item, idx) => (
-              <AnimatedSection key={idx} delay={idx * 0.05}>
-                <TiltCard maxTilt={5} scale={1.01} className="h-full">
-                  <div className="h-full p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#2e936f] hover:shadow-lg transition-all duration-300 space-y-3 text-left group">
-                    <div className="p-2.5 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] w-fit group-hover:scale-110 group-hover:border-[#2e936f]/40 transition-all duration-300">
-                      {item.icon}
-                    </div>
-                    <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2e936f] group-hover:translate-x-1 transition-all duration-300">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
-                      {item.desc}
-                    </p>
+              <AnimatedSection key={idx} delay={idx * 0.04} className="h-full">
+                <motion.div
+                  whileHover={{ y: -3 }}
+                  transition={{ duration: 0.2 }}
+                  className="h-full p-5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#2e936f] hover:shadow-md transition-all duration-300 space-y-2.5 text-left group"
+                >
+                  <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] w-fit group-hover:scale-105 transition-transform">
+                    {item.icon}
                   </div>
-                </TiltCard>
+                  <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2e936f] transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
+                    {item.desc}
+                  </p>
+                </motion.div>
               </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Laser Scan Beam Section Separator */}
       <SystemScanTransition />
 
-      {/* =========================================================================
-          SECTION 10 — DYNAMIC CMS PRODUCT ENGINEERING INSIGHTS
-          ========================================================================= */}
-      <section id="insights" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
-        <div className="max-w-[1536px] mx-auto space-y-10">
+      {/* 8. BLOGS & INSIGHTS */}
+      <section id="insights" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto space-y-8">
           
           <AnimatedSection>
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-4">
               <div className="space-y-2 text-left">
                 <Badge variant="secondary" size="md">
-                  KNOWLEDGE &amp; STRATEGY
+                  PRODUCT INSIGHTS
                 </Badge>
-                <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-                  Product Engineering Insights
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                  Web Engineering &amp; SaaS Insights
                 </h2>
               </div>
               <Link
@@ -1359,87 +930,80 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
             {displayPosts.map((post, idx) => (
-              <AnimatedSection key={post.slug} delay={idx * 0.08}>
-                <TiltCard maxTilt={5} scale={1.01} className="h-full">
-                  <div className="h-full p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#f15e1c] hover:shadow-xl transition-all duration-300 flex flex-col justify-between text-left space-y-4 group">
-                    <div className="space-y-3">
-                      <div className="w-full mb-3 rounded-2xl overflow-hidden border border-[#f7d7b0]/60">
-                        <BlogCardImage post={post} aspectRatio="aspect-video" />
-                      </div>
-                      <div className="flex items-center justify-between text-[10px] font-mono font-bold text-[#2e936f]">
-                        <span className="uppercase tracking-wider">{post.category}</span>
-                        <span>{post.publishedAt || post.dateFormatted}</span>
-                      </div>
-                      <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors line-clamp-2">
-                        {post.title}
-                      </h3>
-                      <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed line-clamp-3 font-medium">
-                        {post.summary}
-                      </p>
+              <AnimatedSection key={post.slug} delay={idx * 0.08} className="h-full">
+                <motion.div
+                  whileHover={{ y: -3 }}
+                  transition={{ duration: 0.2 }}
+                  className="h-full p-5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#f15e1c] hover:shadow-lg transition-all duration-300 flex flex-col justify-between text-left space-y-4 group"
+                >
+                  <div className="space-y-3">
+                    <div className="w-full mb-2 rounded-xl overflow-hidden border border-[#f7d7b0]/60">
+                      <BlogCardImage post={post} aspectRatio="aspect-video" />
                     </div>
-
-                    <div className="pt-3 border-t border-[#f7d7b0] dark:border-[#1a1a1a]">
-                      <Link
-                        href={`/insights/${post.slug}`}
-                        className="inline-flex items-center gap-1 text-xs font-mono font-bold text-[#f15e1c] group-hover:underline"
-                      >
-                        <span>Read Article</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                      </Link>
+                    <div className="flex items-center justify-between text-[10px] font-mono font-bold text-[#2e936f]">
+                      <span className="uppercase tracking-wider">{post.category}</span>
+                      <span>{post.publishedAt || post.dateFormatted}</span>
                     </div>
+                    <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed line-clamp-3 font-medium">
+                      {post.summary}
+                    </p>
                   </div>
-                </TiltCard>
+
+                  <div className="pt-3 border-t border-[#f7d7b0] dark:border-[#1a1a1a]">
+                    <Link
+                      href={`/insights/${post.slug}`}
+                      className="inline-flex items-center gap-1 text-xs font-mono font-bold text-[#f15e1c] group-hover:underline"
+                    >
+                      <span>Read Article</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    </Link>
+                  </div>
+                </motion.div>
               </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Laser Scan Beam Section Separator */}
       <SystemScanTransition />
 
-      {/* =========================================================================
-          SECTION — ABOUT OUR CEO / LEADERSHIP PERSPECTIVE
-          ========================================================================= */}
-      <CEOLeadershipSection serviceContext="The focus is on building technology that remains useful, scalable and aligned with business needs." />
+      {/* CEO LEADERSHIP */}
+      <CEOLeadershipSection serviceContext="His perspective shapes software architecture that supports long-term growth." />
 
-      {/* Laser Scan Beam Section Separator */}
       <SystemScanTransition />
 
-      {/* =========================================================================
-          SECTION 11 — FREQUENTLY ASKED QUESTIONS (5 FAQS)
-          ========================================================================= */}
-      <section id="faq" className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-4xl mx-auto space-y-10 text-left">
+      {/* 9. FAQ */}
+      <section id="faq" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-4xl mx-auto space-y-8 text-left">
           
           <AnimatedSection>
             <div className="text-center space-y-3">
               <Badge variant="secondary" size="md">
                 QUESTIONS &amp; ANSWERS
               </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
                 Frequently Asked Questions
               </h2>
             </div>
           </AnimatedSection>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             {faqList.map((faq, idx) => {
               const isOpen = openFaqIdx === idx;
               return (
-                <AnimatedSection key={idx} delay={idx * 0.05}>
-                  <motion.div
-                    whileHover={{ scale: 1.005 }}
-                    className="rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/60 overflow-hidden transition-all shadow-xs"
-                  >
+                <AnimatedSection key={idx} delay={idx * 0.04}>
+                  <div className="rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/60 overflow-hidden transition-all shadow-xs">
                     <button
                       type="button"
                       onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
-                      className="w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer group select-none"
+                      className="w-full p-5 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer group select-none"
                     >
-                      <span className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
+                      <span className="text-sm sm:text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
                         {faq.q}
                       </span>
                       <ChevronDown
@@ -1455,14 +1019,14 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.3, ease: "easeInOut" }}
-                          className="px-6 pb-6 text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium border-t border-[#f7d7b0]/40 dark:border-[#1a1a1a] pt-4"
+                          transition={{ duration: 0.25, ease: "easeInOut" }}
+                          className="px-5 pb-5 text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium border-t border-[#f7d7b0]/40 dark:border-[#1a1a1a] pt-3"
                         >
                           {faq.a}
                         </motion.div>
                       )}
                     </AnimatePresence>
-                  </motion.div>
+                  </div>
                 </AnimatedSection>
               );
             })}
@@ -1470,13 +1034,10 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
         </div>
       </section>
 
-      {/* Laser Scan Beam Section Separator */}
       <SystemScanTransition />
 
-      {/* =========================================================================
-          SECTION 12 — CONNECTED SERVICES ECOSYSTEM
-          ========================================================================= */}
-      <section className="relative py-10 sm:py-14 lg:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+      {/* 10. CONNECTED ECOSYSTEM */}
+      <section className="relative py-10 sm:py-14 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
         <div className="max-w-[1536px] mx-auto space-y-4 sm:space-y-6 text-left">
           
           <AnimatedSection>
@@ -1485,7 +1046,7 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
                 ARAV SERVICE ECOSYSTEM
               </span>
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
-                Connected Enterprise Capabilities
+                Connected Enterprise Services
               </h3>
             </div>
           </AnimatedSection>
@@ -1493,84 +1054,79 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {internalServices.map((item, idx) => (
               <AnimatedSection key={idx} delay={idx * 0.04}>
-                <motion.div whileHover={{ y: -3, scale: 1.01 }} transition={{ duration: 0.2 }}>
-                  <Link
-                    href={item.href}
-                    className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:shadow-md transition-all flex items-center justify-between group cursor-pointer min-h-[60px]"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-105 group-hover:border-[#f15e1c]/40 transition-all shrink-0">
-                        {item.icon}
-                      </div>
-                      <span className="text-xs sm:text-sm font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug">
-                        {item.name}
-                      </span>
+                <Link
+                  href={item.href}
+                  className="p-3.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:shadow-sm transition-all flex items-center justify-between group cursor-pointer min-h-[56px]"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-105 transition-all shrink-0">
+                      {item.icon}
                     </div>
-                    <ArrowRight className="w-4 h-4 text-[#f15e1c] group-hover:translate-x-1 transition-transform shrink-0 ml-2" />
-                  </Link>
-                </motion.div>
+                    <span className="text-xs sm:text-sm font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug">
+                      {item.name}
+                    </span>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-[#f15e1c] group-hover:translate-x-1 transition-transform shrink-0 ml-2" />
+                </Link>
               </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Laser Scan Beam Section Separator */}
       <SystemScanTransition />
 
-      {/* =========================================================================
-          FINAL CTA — HAVE A PRODUCT IN MIND? LET'S BUILD IT PROPERLY
-          ========================================================================= */}
-      <section id="contact" className="relative py-20 px-4 sm:px-6 lg:px-12">
+      {/* FINAL CTA */}
+      <section id="contact" className="relative py-14 sm:py-20 px-4 sm:px-6 lg:px-12">
         <AnimatedSection>
-          <div className="max-w-5xl mx-auto rounded-[3rem] bg-gradient-to-br from-[#f15e1c] via-[#e55215] to-[#d8480d] text-white p-10 sm:p-16 border-2 border-[#fab60a] shadow-2xl space-y-8 text-center relative overflow-hidden">
-            <div className="relative z-10 max-w-3xl mx-auto space-y-5">
+          <div className="max-w-5xl mx-auto rounded-3xl bg-gradient-to-br from-[#f15e1c] via-[#e55215] to-[#d8480d] text-white p-8 sm:p-14 border-2 border-[#fab60a] shadow-2xl space-y-6 text-center relative overflow-hidden">
+            <div className="relative z-10 max-w-3xl mx-auto space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 border border-white/40 text-xs font-mono font-bold text-white">
-                <Sparkles className="w-3.5 h-3.5 text-[#ffec69] animate-spin" style={{ animationDuration: "6s" }} />
-                <span>READY TO BUILD OR MODERNIZE YOUR DIGITAL PRODUCT?</span>
+                <Sparkles className="w-3.5 h-3.5 text-[#ffec69]" />
+                <span>BUILD YOUR DIGITAL PRODUCT WITH ARAV</span>
               </div>
 
-              <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-white leading-tight">
-                Have a Product in Mind? Let's Build It Properly.
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display tracking-tight text-white leading-tight">
+                Turn Your Product Architecture Into Reality
               </h2>
 
-              <p className="text-sm sm:text-base font-medium text-white/90 leading-relaxed">
-                Tell us what you're trying to build, improve, or scale. We'll help define the right product, architecture and execution path.
+              <p className="text-xs sm:text-sm font-medium text-white/90 leading-relaxed max-w-2xl mx-auto">
+                Discuss your application requirements, technical stack options, and product roadmap with our engineering leads.
               </p>
             </div>
 
-            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
               <Link href="/contact">
                 <MagneticButton>
                   <Button3D
                     variant="primary"
-                    size="lg"
+                    size="md"
                     rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1.5" />}
                     className="w-full sm:w-auto justify-center bg-white text-[#f15e1c] hover:bg-[#f7d7b0] hover:-translate-y-0.5 transition-all duration-300"
                   >
-                    Discuss Your Product
+                    Build My Product
                   </Button3D>
                 </MagneticButton>
               </Link>
 
               <Link href="/services">
                 <MagneticButton>
-                  <Button3D variant="outline" size="lg" className="w-full sm:w-auto justify-center text-white border-white/60 hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-300">
-                    Explore All Services
+                  <Button3D variant="outline" size="md" className="w-full sm:w-auto justify-center text-white border-white/60 hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-300">
+                    Explore Services
                   </Button3D>
                 </MagneticButton>
               </Link>
             </div>
 
-            <div className="relative z-10 pt-6 border-t border-white/20 flex flex-wrap items-center justify-center gap-6 text-xs text-white/90 font-medium">
+            <div className="relative z-10 pt-4 border-t border-white/20 flex flex-wrap items-center justify-center gap-4 text-xs text-white/90 font-medium">
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> 100% Client Ownership of Codebase &amp; Assets
+                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> 100% Source Code &amp; IP Ownership
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Transparent Milestones &amp; Architecture Blueprints
+                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Full-Stack Engineering &amp; CI/CD Pipelines
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Dedicated Product Engineering Squads
+                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Strategy &amp; Engineering Teams in Gurgaon &amp; Dubai
               </span>
             </div>
           </div>

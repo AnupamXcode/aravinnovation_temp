@@ -22,10 +22,8 @@ import {
   Eye,
   FileCheck,
   Zap,
-  Sliders,
   TrendingUp,
   BarChart3,
-  Layers,
   ChevronDown,
   ArrowUpRight,
   Compass,
@@ -35,19 +33,7 @@ import {
   Cpu,
   Target,
   FileText,
-  Clock,
-  HelpCircle,
-  AlertOctagon,
-  CheckSquare,
   Wrench,
-  GitBranch,
-  Filter,
-  ArrowRightLeft,
-  RotateCw,
-  SlidersHorizontal,
-  Crosshair,
-  Maximize2,
-  BookOpen,
 } from "lucide-react";
 import { Service } from "@/data/services";
 import { BlogPost, blogPostsData } from "@/data/insights";
@@ -55,7 +41,6 @@ import { Button3D } from "@/components/ui/button-3d";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
 import { MagneticButton } from "@/components/motion/MagneticButton";
-import { TiltCard } from "@/components/motion/TiltCard";
 import { cn } from "@/lib/utils";
 
 interface AuditPageProps {
@@ -63,9 +48,6 @@ interface AuditPageProps {
   relatedPosts?: BlogPost[];
 }
 
-// -----------------------------------------------------------------------------
-// 1. Scroll-Triggered Section Wrapper Component
-// -----------------------------------------------------------------------------
 function AnimatedSection({
   children,
   className = "",
@@ -96,22 +78,19 @@ function AnimatedSection({
   );
 }
 
-// -----------------------------------------------------------------------------
-// 2. Diagnostic Inspection Line Scanner Effect
-// -----------------------------------------------------------------------------
-function DiagnosticScanTransition() {
+function SystemScanTransition() {
   const ref = React.useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-20px" });
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <div ref={ref} className="relative w-full h-px overflow-hidden pointer-events-none select-none">
+    <div ref={ref} className="relative w-full h-px my-1 overflow-hidden pointer-events-none select-none">
       <div className="w-full h-full bg-[#f7d7b0]/30 dark:bg-[#1a1a1a]" />
       {!shouldReduceMotion && (
         <motion.div
           initial={{ x: "-100%" }}
           animate={isInView ? { x: "100%" } : {}}
-          transition={{ duration: 1.6, ease: "easeInOut" }}
+          transition={{ duration: 1.4, ease: "easeInOut" }}
           className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-transparent via-[#f15e1c] to-transparent shadow-[0_0_10px_#f15e1c]"
         />
       )}
@@ -119,10 +98,7 @@ function DiagnosticScanTransition() {
   );
 }
 
-// -----------------------------------------------------------------------------
-// 3. Diagnostic Matrix Pattern Background
-// -----------------------------------------------------------------------------
-function DiagnosticDotGrid() {
+function AnimatedDotGrid() {
   return (
     <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-10 dark:opacity-15 select-none">
       <svg className="w-full h-full" width="100%" height="100%">
@@ -140,1564 +116,931 @@ function DiagnosticDotGrid() {
   );
 }
 
-// -----------------------------------------------------------------------------
-// Core Business Diagnostic Data
-// -----------------------------------------------------------------------------
-
 const keywordTags = [
   "Operational Audit",
   "Internal Audit Support",
   "Process Improvement",
   "Technology Assessment",
   "Control Review",
-  "Performance Improvement",
+  "Performance Diagnostics",
 ];
 
-// Signature Diagnostic Timeline Stages
-const diagnosticViewStages = [
+const auditCapabilities = [
   {
+    num: "01",
+    title: "Operational Process Audits",
+    description:
+      "Deep-dive evaluations of operational workflows, team handoffs, and resource utilization to isolate bottlenecks.",
+    icon: <Search className="w-5 h-5 text-[#f15e1c]" />,
+  },
+  {
+    num: "02",
+    title: "IT System & Architecture Audits",
+    description:
+      "Technical audits of infrastructure resilience, code quality, database performance, and security controls.",
+    icon: <BarChart3 className="w-5 h-5 text-[#2e936f]" />,
+  },
+  {
+    num: "03",
+    title: "Internal Control Review",
+    description:
+      "Assessment of internal financial, operational, and compliance controls to ensure risk policy compliance.",
+    icon: <FileCheck className="w-5 h-5 text-[#fab60a]" />,
+  },
+  {
+    num: "04",
+    title: "Remediation & Continuous Improvement",
+    description:
+      "Actionable remediation roadmaps, implementation guidance, and re-testing to ensure permanent gap resolution.",
+    icon: <RefreshCw className="w-5 h-5 text-[#f15e1c]" />,
+  },
+];
+
+const diagnosticStages = [
+  {
+    id: "STAGE-01",
     num: "01",
     title: "OBSERVE",
-    question: "How is work actually flowing today?",
+    subtitle: "Current-State Observation & Context",
     desc: "We observe end-to-end workflows, system handoffs, and team practices in operation to document reality rather than assumptions.",
-    output: "Current-State Observation Map & Process Baseline",
-    badge: "Process Context",
+    deliverables: ["Process Baseline Map", "Workflow Friction Inventory", "Stakeholder Interview Notes"],
   },
   {
+    id: "STAGE-02",
     num: "02",
     title: "COLLECT",
-    question: "What evidence exists?",
-    desc: "We gather operational evidence, system integration telemetry, rework logs, policy documentation, and control records.",
-    output: "Empirical Diagnostic Repository",
-    badge: "Data & Telemetry",
+    subtitle: "Evidence & Telemetry Gathering",
+    desc: "We gather operational evidence, system integration logs, defect records, policy documentation, and control execution data.",
+    deliverables: ["Empirical Data Repository", "System Telemetry Log", "Control Verification Data"],
   },
   {
+    id: "STAGE-03",
     num: "03",
     title: "ANALYZE",
-    question: "Where does friction occur?",
+    subtitle: "Root Cause & Bottleneck Isolation",
     desc: "We cross-examine evidence against operating benchmarks to isolate bottlenecks, redundancies, and control vulnerabilities.",
-    output: "Friction & Gap Matrix",
-    badge: "Root Cause Trace",
+    deliverables: ["Root-Cause Analysis Matrix", "Performance Bottleneck Map", "Risk & Control Gap Analysis"],
   },
   {
+    id: "STAGE-04",
     num: "04",
     title: "FIND",
-    question: "What is holding the business back?",
+    subtitle: "Structured Audit Findings Report",
     desc: "We synthesize findings into clear, plain-language insights detailing operational risk, duplication, and performance gaps.",
-    output: "Structured Audit Findings Report",
-    badge: "Executive Insight",
+    deliverables: ["Audit Findings Report", "Executive Risk Summary", "Prioritized Deficiency Register"],
   },
   {
+    id: "STAGE-05",
     num: "05",
     title: "PRIORITIZE",
-    question: "What should be fixed first?",
+    subtitle: "Actionable Remediation Blueprint",
     desc: "We map all findings by business impact and implementation complexity so leadership knows exactly where to focus first.",
-    output: "Impact-Ranked Remediation Roadmap",
-    badge: "Action Sequence",
+    deliverables: ["Remediation Roadmap", "Implementation Resource Plan", "Post-Audit Verification Plan"],
   },
 ];
 
-// Audit -> Decision Transformation Sequence
-const decisionTransformationSteps = [
-  { step: "01", title: "FINDING", desc: "Observed process delay or technology control gap", icon: <AlertTriangle className="w-5 h-5 text-[#f15e1c]" /> },
-  { step: "02", title: "ROOT CAUSE", desc: "Unclear ownership, legacy software, or missing data", icon: <Search className="w-5 h-5 text-[#2e936f]" /> },
-  { step: "03", title: "BUSINESS IMPACT", desc: "Increased cycle time, cost leakage, or risk exposure", icon: <TrendingUp className="w-5 h-5 text-[#fab60a]" /> },
-  { step: "04", title: "PRIORITY", desc: "Categorized as Quick Win or Strategic Focus", icon: <SlidersHorizontal className="w-5 h-5 text-[#f15e1c]" /> },
-  { step: "05", title: "ACTION", desc: "Streamlined approval workflow & updated ownership", icon: <Wrench className="w-5 h-5 text-[#2e936f]" /> },
-  { step: "06", title: "VALIDATION", desc: "Post-implementation check confirming friction reduction", icon: <CheckCircle2 className="w-5 h-5 text-[#fab60a]" /> },
-];
-
-// What We Examine (6 Diagnostic Areas)
-const diagnosticAreas = [
+const whatWeDoServices = [
   {
     num: "01",
-    title: "OPERATIONS",
-    focus: "Processes • workflows • handoffs • resource use",
-    desc: "We examine operational workflows, departmental handoffs, resource allocation, and cycle times to find bottlenecks.",
-    icon: <BarChart3 className="w-6 h-6 text-[#f15e1c]" />,
-    details: ["Workflow step mapping", "Handoff delay analysis", "Resource allocation balance", "Manual workaround identification"],
+    title: "Operational Process Audits",
+    description:
+      "Map actual operational workflows, identify task duplication, measure process velocity, and eliminate unnecessary handoff steps.",
+    icon: <Search className="w-5 h-5 text-[#f15e1c]" />,
   },
   {
     num: "02",
-    title: "TECHNOLOGY",
-    focus: "Systems • integrations • reliability • dependencies",
-    desc: "We evaluate application health, API integration gaps, system outages, and technology debt affecting daily operations.",
-    icon: <Cpu className="w-6 h-6 text-[#2e936f]" />,
-    details: ["Integration architecture checks", "System uptime & reliability logs", "Technical debt hotspots", "Data flow consistency"],
+    title: "IT & Systems Audits",
+    description:
+      "Evaluate software architectures, infrastructure stability, database performance, legacy technical debt, and licensing.",
+    icon: <BarChart3 className="w-5 h-5 text-[#2e936f]" />,
   },
   {
     num: "03",
-    title: "CONTROLS",
-    focus: "Policies • procedures • responsibilities • effectiveness",
-    desc: "We review operational policies, RACI role clarity, control design, and key control testing effectiveness.",
-    icon: <ShieldCheck className="w-6 h-6 text-[#fab60a]" />,
-    details: ["Policy-to-practice alignment", "RACI role clarity", "Control execution testing", "Risk mitigation adequacy"],
+    title: "Internal Control Reviews",
+    description:
+      "Review internal operational controls, authorization flows, and segregation of duties to prevent error and operational leakage.",
+    icon: <FileCheck className="w-5 h-5 text-[#fab60a]" />,
   },
   {
     num: "04",
-    title: "COMPLIANCE",
-    focus: "Requirements • documentation • evidence • readiness",
-    desc: "We audit documentation completeness, evidence readiness, and internal policy adherence to ensure audit readiness.",
-    icon: <FileCheck className="w-6 h-6 text-[#2e936f]" />,
-    details: ["Documentation completeness", "Audit-trail verification", "Evidence collection readiness", "Standards alignment"],
+    title: "Vendor & Partner Audits",
+    description:
+      "Audit third-party SLAs, service quality, vendor compliance, and contractual delivery commitments.",
+    icon: <Users2 className="w-5 h-5 text-[#2e936f]" />,
   },
   {
     num: "05",
-    title: "PERFORMANCE",
-    focus: "KPIs • cycle times • bottlenecks • measurement gaps",
-    desc: "We analyze key performance metrics, SLA breaches, measurement blind spots, and reporting accuracy.",
-    icon: <Activity className="w-6 h-6 text-[#f15e1c]" />,
-    details: ["KPI calculation validity", "Cycle-time variance", "Reporting blind spot identification", "SLA tracking accuracy"],
+    title: "Quality & Compliance Audits",
+    description:
+      "Verify adherence to internal quality standards, industry regulations, and operational policy mandates.",
+    icon: <ShieldCheck className="w-5 h-5 text-[#f15e1c]" />,
   },
   {
     num: "06",
-    title: "CUSTOMER EXPERIENCE",
-    focus: "Journeys • friction points • service processes",
-    desc: "We evaluate front-line service delivery, customer journey friction points, onboarding delays, and support processes.",
-    icon: <Eye className="w-6 h-6 text-[#fab60a]" />,
-    details: ["Service process handoffs", "Onboarding bottleneck mapping", "Support escalation pathways", "Customer effort drivers"],
-  },
-];
-
-// Friction Map Workflow Inspection Points
-const frictionPoints = [
-  {
-    id: "INPUT",
-    stage: "01 INPUT",
-    label: "INTAKE & REQUEST",
-    frictionType: "Unstructured Data Intake",
-    description: "Inconsistent request forms and incomplete information at intake lead to downstream clarifications and delays.",
-    icon: <FileText className="w-4 h-4 text-[#2e936f]" />,
+    title: "Remediation Planning",
+    description:
+      "Translate diagnostic findings into prioritized remediation plans with realistic timelines and resource requirements.",
+    icon: <Wrench className="w-5 h-5 text-[#fab60a]" />,
   },
   {
-    id: "PROCESS",
-    stage: "02 PROCESS",
-    label: "DUPLICATE WORK",
-    frictionType: "Manual Re-keying",
-    description: "Repeated manual activity and data copy-pasting across systems that indicates process or integration inefficiency.",
-    icon: <AlertTriangle className="w-4 h-4 text-[#f15e1c]" />,
-  },
-  {
-    id: "HANDOFF",
-    stage: "03 HANDOFF",
-    label: "HANDOFF DELAY",
-    frictionType: "Unclear RACI Role",
-    description: "Handoff stalls caused by ambiguous operational ownership between functional departments.",
-    icon: <Clock className="w-4 h-4 text-[#fab60a]" />,
-  },
-  {
-    id: "SYSTEM",
-    stage: "04 SYSTEM",
-    label: "SYSTEM DEPENDENCY",
-    frictionType: "Legacy Silos",
-    description: "Manual spreadsheets and isolated tools used to bridge gaps between disconnected enterprise applications.",
-    icon: <Wrench className="w-4 h-4 text-[#2e936f]" />,
-  },
-  {
-    id: "DECISION",
-    stage: "05 DECISION",
-    label: "APPROVAL GAP",
-    frictionType: "Multilayer Approvals",
-    description: "Unnecessary or sequential approval sign-offs causing severe process throughput bottlenecks.",
-    icon: <AlertOctagon className="w-4 h-4 text-[#f15e1c]" />,
-  },
-  {
-    id: "OUTPUT",
-    stage: "06 OUTPUT",
-    label: "REWORK & DEFECT RISK",
-    frictionType: "Quality Variances",
-    description: "Quality defects caught late in the cycle requiring costly post-delivery rework and customer friction.",
-    icon: <CheckSquare className="w-4 h-4 text-[#2e936f]" />,
-  },
-];
-
-// Root-Cause Layered Visual Breakdown (Illustrative Example)
-const rootCauseLayers = [
-  {
-    level: "STAGE 1",
-    label: "VISIBLE PROBLEM",
-    example: "Slow Purchase Order Approval",
-    detail: "Approval cycle takes 14 business days instead of the target 2 days.",
-    color: "border-l-4 border-l-[#f15e1c] bg-[#f15e1c]/5",
-    icon: <Eye className="w-5 h-5 text-[#f15e1c]" />,
-  },
-  {
-    level: "STAGE 2",
-    label: "PROCESS ISSUE",
-    example: "Too Many Sequential Handoffs",
-    detail: "Requests pass linearly through 5 different departmental managers.",
-    color: "border-l-4 border-l-[#fab60a] bg-[#fab60a]/5",
-    icon: <GitBranch className="w-5 h-5 text-[#fab60a]" />,
-  },
-  {
-    level: "STAGE 3",
-    label: "CONTRIBUTING FACTOR",
-    example: "Unclear Approval Thresholds",
-    detail: "Managers review low-value requests due to outdated threshold rules.",
-    color: "border-l-4 border-l-[#2e936f] bg-[#2e936f]/5",
-    icon: <Layers className="w-5 h-5 text-[#2e936f]" />,
-  },
-  {
-    level: "STAGE 4",
-    label: "ROOT CAUSE",
-    example: "Process & Governance Design Gap",
-    detail: "Approval matrix was created 7 years ago and never updated for current operations.",
-    color: "border-l-4 border-l-[#f15e1c] bg-[#f15e1c]/10",
-    icon: <Target className="w-5 h-5 text-[#f15e1c]" />,
-  },
-  {
-    level: "STAGE 5",
-    label: "IMPROVEMENT ACTION",
-    example: "Redesign Approval & Delegated Authority",
-    detail: "Establish automated tiered approvals, raising auto-approval threshold for low-risk spend.",
-    color: "border-l-4 border-l-[#2e936f] bg-[#2e936f]/10",
+    num: "07",
+    title: "Post-Audit Verification",
+    description:
+      "Perform follow-up reviews to verify that recommended fixes have been correctly implemented and deliver expected performance.",
     icon: <CheckCircle2 className="w-5 h-5 text-[#2e936f]" />,
   },
-];
-
-// Global Audit Approach Methodology
-const methodologyStages = [
   {
-    step: "01",
-    name: "DEFINE",
-    desc: "Clarify objectives, scope, stakeholders and evaluation criteria before starting.",
-    outcome: "Agreed Engagement Charter",
-  },
-  {
-    step: "02",
-    name: "UNDERSTAND",
-    desc: "Understand processes, systems, controls and operating context through evidence.",
-    outcome: "Current-State Baseline",
-  },
-  {
-    step: "03",
-    name: "ASSESS",
-    desc: "Review empirical evidence and evaluate current-state practices against standards.",
-    outcome: "Diagnostic Finding Log",
-  },
-  {
-    step: "04",
-    name: "REPORT",
-    desc: "Communicate findings, root causes and practical improvement opportunities clearly.",
-    outcome: "Executive Audit Report",
-  },
-  {
-    step: "05",
-    name: "PRIORITIZE",
-    desc: "Separate urgent operational issues from longer-term strategic improvements.",
-    outcome: "Prioritized Action Matrix",
-  },
-  {
-    step: "06",
-    name: "FOLLOW THROUGH",
-    desc: "Support agreed actions and validate progress where requested.",
-    outcome: "Progress Verification Check",
+    num: "08",
+    title: "Continuous Audit Advisory",
+    description:
+      "Provide ongoing internal audit support, periodic diagnostic reviews, and continuous process monitoring.",
+    icon: <Activity className="w-5 h-5 text-[#f15e1c]" />,
   },
 ];
 
-// Priority Matrix Quadrants
-const priorityQuadrants = [
+const applicableMarkets = [
+  { title: "Enterprise & Manufacturing", desc: "Process bottleneck identification, operational efficiency, and supply chain control.", icon: <Activity className="w-4 h-4 text-[#f15e1c]" /> },
+  { title: "Financial & Professional Services", desc: "Internal control verification, audit-ready compliance evidence, and risk mitigation.", icon: <FileCheck className="w-4 h-4 text-[#2e936f]" /> },
+  { title: "Technology & Software Companies", desc: "Architecture audits, technical debt assessments, and infrastructure health reviews.", icon: <Code2 className="w-4 h-4 text-[#fab60a]" /> },
+  { title: "Healthcare & Organizations", desc: "Operational workflow review, quality assurance audits, and regulatory alignment.", icon: <ShieldCheck className="w-4 h-4 text-[#2e936f]" /> },
+];
+
+const whatWeMeasureList = [
+  { title: "Process Velocity Improvement", desc: "Quantitative reduction in workflow cycle time and operational handoff delays.", icon: <Zap className="w-5 h-5 text-[#f15e1c]" /> },
+  { title: "Deficiency Resolution Rate", desc: "Percentage of identified audit findings fully resolved within the remediation window.", icon: <CheckCircle2 className="w-5 h-5 text-[#2e936f]" /> },
+  { title: "Operational Cost Efficiency", desc: "Elimination of redundant processing steps, rework, and wasted staff effort.", icon: <TrendingUp className="w-5 h-5 text-[#fab60a]" /> },
+  { title: "Control Effectiveness Rating", desc: "Verified score of operational and IT control execution reliability.", icon: <FileCheck className="w-5 h-5 text-[#2e936f]" /> },
+  { title: "Audit Verification Speed", desc: "Time required to conduct diagnostic reviews and generate actionable evidence.", icon: <Activity className="w-5 h-5 text-[#f15e1c]" /> },
+  { title: "Technology Risk Reduction", desc: "Decrease in critical system vulnerabilities, technical debt, and performance risks.", icon: <BarChart3 className="w-5 h-5 text-[#fab60a]" /> },
+];
+
+const faqList = [
   {
-    id: "quick-win",
-    title: "QUICK WIN",
-    position: "High Impact • Low Effort",
-    desc: "Immediate operational improvements that deliver rapid relief with minimal capital or resource commitment.",
-    example: "Automating manual data intake validation to eliminate re-keying errors.",
-    border: "border-[#2e936f]",
-    badgeBg: "bg-[#2e936f]/10 text-[#2e936f]",
+    q: "What types of audits does Arav Innovations perform?",
+    a: "We conduct operational process audits, IT system and architecture reviews, internal control evaluations, third-party vendor audits, and compliance gap assessments.",
   },
   {
-    id: "strategic",
-    title: "STRATEGIC IMPROVEMENT",
-    position: "High Impact • High Effort",
-    desc: "Core structural initiatives that transform key operating capabilities and require dedicated resource allocation.",
-    example: "Replacing legacy ERP integration layer with modern API architecture.",
-    border: "border-[#f15e1c]",
-    badgeBg: "bg-[#f15e1c]/10 text-[#f15e1c]",
+    q: "How does an audit differ from an IT Strategy or Risk service?",
+    a: "Audit & Improvement focuses on empirical diagnostics—measuring how your operations, systems, and controls perform in practice today, identifying exact failure points, and delivering a prioritized remediation blueprint.",
   },
   {
-    id: "operational-fix",
-    title: "OPERATIONAL FIX",
-    position: "Low Impact • Low Effort",
-    desc: "Tactical process cleanups and documentation updates that maintain operating discipline.",
-    example: "Updating standard operating procedure manuals for department handoffs.",
-    border: "border-[#fab60a]",
-    badgeBg: "bg-[#fab60a]/10 text-[#fab60a]",
+    q: "Do you help fix the issues found during an audit?",
+    a: "Yes. In addition to delivering detailed diagnostic reports, we provide remediation blueprints, hands-on implementation guidance, and post-audit verification to confirm issues are resolved.",
   },
   {
-    id: "long-term",
-    title: "LONG-TERM CHANGE",
-    position: "Low Impact • High Effort",
-    desc: "Complex secondary adjustments evaluated carefully to determine if return on effort warrants scheduling.",
-    example: "Consolidating non-critical peripheral reporting tools across regional offices.",
-    border: "border-gray-300 dark:border-gray-700",
-    badgeBg: "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300",
+    q: "How long does a typical operational audit take?",
+    a: "Audit timelines depend on scope. A focused operational or technical diagnostic typically takes 2 to 4 weeks, from initial observation to executive findings presentation.",
+  },
+  {
+    q: "How do you ensure audit findings are objective?",
+    a: "We rely on empirical evidence, telemetry logs, workflow observations, and quantitative benchmarks rather than subjective opinions, delivering unbiased clarity for leadership.",
   },
 ];
 
-// Deliverables List
-const deliverables = [
-  { title: "CURRENT-STATE FINDINGS", desc: "Comprehensive baseline documenting observed workflows, system state, and operating practices." },
-  { title: "ROOT-CAUSE INSIGHTS", desc: "Detailed breakdown of underlying structural, process, or technology drivers behind friction points." },
-  { title: "CONTROL & PROCESS OBSERVATIONS", desc: "Independent assessment of operating policies, RACI role clarity, and control effectiveness." },
-  { title: "PRIORITIZED IMPROVEMENT OPPORTUNITIES", desc: "Ranked remediation actions categorized by commercial value and effort complexity." },
-  { title: "MANAGEMENT INSIGHTS", desc: "Executive debrief highlighting critical risks, resource bottlenecks, and strategic priorities." },
-  { title: "ACTION ROADMAP", desc: "Sequential execution timeline detailing quick wins, milestone dependencies, and validation criteria." },
+const internalServices = [
+  { name: "IT Strategy & Implementation", href: "/services/it-strategy-implementation", icon: <Compass className="w-4 h-4 text-[#f15e1c]" /> },
+  { name: "Digital Marketing & Brand", href: "/services/digital-marketing-brand-development", icon: <TrendingUp className="w-4 h-4 text-[#2e936f]" /> },
+  { name: "Web & Application Development", href: "/services/web-app-development", icon: <Code2 className="w-4 h-4 text-[#2e936f]" /> },
+  { name: "Risk, Compliance & Governance", href: "/services/risk-compliance-governance", icon: <ShieldCheck className="w-4 h-4 text-[#2e936f]" /> },
+  { name: "Training & Staff Augmentation", href: "/services/training-staff-augmentation", icon: <Users2 className="w-4 h-4 text-[#fab60a]" /> },
+  { name: "SEO Services", href: "/services/seo-services", icon: <Search className="w-4 h-4 text-[#2e936f]" /> },
+  { name: "AI Portfolio", href: "/services/ai-portfolio", icon: <Cpu className="w-4 h-4 text-[#f15e1c]" /> },
 ];
 
-// Business Outcomes
-const businessOutcomes = [
-  { title: "CLARITY", desc: "Understand current-state performance with an empirical, objective baseline.", icon: <Eye className="w-5 h-5 text-[#f15e1c]" /> },
-  { title: "EFFICIENCY", desc: "Reduce avoidable friction, manual duplication, and process handoff stalls.", icon: <Zap className="w-5 h-5 text-[#2e936f]" /> },
-  { title: "CONTROL", desc: "Strengthen operational ownership, RACI clarity, and governance discipline.", icon: <ShieldCheck className="w-5 h-5 text-[#fab60a]" /> },
-  { title: "PRIORITY", desc: "Focus management attention and resources where they deliver the greatest impact.", icon: <Target className="w-5 h-5 text-[#f15e1c]" /> },
-  { title: "VISIBILITY", desc: "Make operational gaps and technology dependencies easier to discuss and resolve.", icon: <BarChart3 className="w-5 h-5 text-[#2e936f]" /> },
-  { title: "ADAPTABILITY", desc: "Create a resilient, evidence-backed foundation for continuous business change.", icon: <RefreshCw className="w-5 h-5 text-[#fab60a]" /> },
-];
-
-// What We Can Help Uncover
-const scopeHelpUncover = [
-  { title: "Process Bottlenecks", desc: "Handoff stalls, redundant reviews, and manual workarounds slowing down service delivery." },
-  { title: "Control Gaps", desc: "Unclear role ownership, missing audit trails, or ineffective control execution." },
-  { title: "Technology Friction", desc: "Application disconnects, fragile integrations, and system performance regressions." },
-  { title: "Operational Inefficiencies", desc: "Resource allocation imbalances and duplicate data entry across departments." },
-  { title: "Documentation Gaps", desc: "Outdated standard operating procedures and unmapped technical architectures." },
-  { title: "Performance Blind Spots", desc: "Untracked cycle-time variances and unmeasured operational handoff delays." },
-];
-
-// -----------------------------------------------------------------------------
-// Component Implementation
-// -----------------------------------------------------------------------------
 export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) {
-  const shouldReduceMotion = useReducedMotion();
+  const [activeStageIdx, setActiveStageIdx] = React.useState<number>(0);
+  const [openFaqIdx, setOpenFaqIdx] = React.useState<number | null>(0);
 
-  // State management for interactive features
-  const [activeTimelineStage, setActiveTimelineStage] = React.useState(0);
-  const [activeDecisionStep, setActiveDecisionStep] = React.useState(0);
-  const [activeDomain, setActiveDomain] = React.useState(0);
-  const [activeFrictionPoint, setActiveFrictionPoint] = React.useState(1); // Default: Duplicate Work
-  const [activeRootLayer, setActiveRootLayer] = React.useState(3); // Default: Root Cause
-  const [activeMatrixQuadrant, setActiveMatrixQuadrant] = React.useState<string | null>("quick-win");
-  const [openFaq, setOpenFaq] = React.useState<number | null>(0);
-  const [activeLoopStep, setActiveLoopStep] = React.useState(0);
+  const displayPosts = React.useMemo(() => {
+    if (relatedPosts && relatedPosts.length > 0) {
+      return relatedPosts.slice(0, 3);
+    }
+    return blogPostsData.slice(0, 3);
+  }, [relatedPosts]);
 
-  // Auto-advance loop step for Continuous Improvement Cycle
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveLoopStep((prev) => (prev + 1) % 6);
-    }, 3500);
-    return () => clearInterval(timer);
-  }, []);
-
-  const articles = relatedPosts && relatedPosts.length > 0 ? relatedPosts.slice(0, 4) : blogPostsData.slice(0, 3);
-
-  // FAQ Schema Structured Data
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": service.faqs.map((faq) => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.answer,
-      },
-    })),
-  };
+  const activeStage = diagnosticStages[activeStageIdx];
 
   return (
-    <div className="relative w-full min-h-screen bg-[#ffffff] dark:bg-[#000000] text-[#1b2823] dark:text-[#f3f4f6] font-sans selection:bg-[#f15e1c] selection:text-white overflow-x-hidden min-w-0 box-border">
-      {/* Schema Injection */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      {/* =====================================================================
-          2. HERO SECTION (FULL-BLEED CINEMATIC BACKGROUND)
-          ===================================================================== */}
-      <section className="relative pt-3 sm:pt-4 lg:pt-5 pb-8 sm:pb-12 lg:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none flex flex-col justify-start">
+    <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#000000] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c] relative">
+      
+      <AnimatedDotGrid />
+
+      {/* 1. HERO */}
+      <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-12 lg:pb-14 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none flex flex-col justify-start">
         
-        {/* Full-Bleed Desktop Background Visual — PC / DESKTOP VIEW ONLY */}
         <div className="absolute inset-0 pointer-events-none hidden lg:block select-none overflow-hidden">
           <Image
-            src="/images/audit-improvement-hero-bg.png"
-            alt="Audit & Improvement Strategy & Implementation"
+            src="/images/audit-bg.png"
+            alt="Audit & Improvement Strategy"
             fill
             priority
-            className="object-cover object-right dark:opacity-90"
+            className="object-cover object-right opacity-95 dark:opacity-90 transition-opacity duration-500"
             sizes="(min-width: 1024px) 100vw, 1px"
           />
-          {/* Soft dark-mode enhancement */}
-          <div className="absolute inset-0 hidden dark:block bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/80 via-45% to-transparent dark:from-[#000000] dark:via-[#000000]/80 dark:via-45% dark:to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#FFFDF9]/20 via-transparent to-[#FFFDF9]/60 dark:from-[#000000]/20 dark:via-transparent dark:to-[#000000]/60 pointer-events-none" />
         </div>
 
-        <DiagnosticDotGrid />
+        <AnimatedDotGrid />
 
-        <div className="max-w-[1536px] mx-auto w-full space-y-6 sm:space-y-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div className="max-w-[1536px] mx-auto w-full space-y-4 sm:space-y-6 relative z-10">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start">
             
-            {/* Hero Copy */}
-            <div className="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-left max-w-xl">
+            <div className="lg:col-span-7 xl:col-span-6 space-y-4 sm:space-y-5 text-left max-w-2xl">
               
               <AnimatedSection delay={0.05} className="space-y-2">
                 <Breadcrumb
                   items={[
                     { label: "Services", href: "/services" },
-                    { label: "Audit & Improvement", href: "/services/audit-improvement" },
+                    { label: "Audit & Improvement" },
                   ]}
                 />
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
-                  <Sparkles className="w-3.5 h-3.5 text-[#f15e1c]" />
-                  <span>AUDIT • ASSURANCE • IMPROVEMENT</span>
-                </div>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c] shadow-2xs cursor-default transition-all duration-300"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-[#f15e1c] animate-pulse" />
+                  <span>OPERATIONAL AUDITS &amp; PROCESS IMPROVEMENT</span>
+                </motion.div>
               </AnimatedSection>
 
-              <AnimatedSection delay={0.1} className="space-y-3">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-[1.12]">
-                  See What’s Working. <br className="hidden sm:inline" />
-                  Find What Isn’t. <br className="hidden sm:inline" />
-                  <span className="text-[#f15e1c]">
-                    Improve What Matters.
-                  </span>
+              <AnimatedSection delay={0.1} className="space-y-2">
+                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display tracking-tight leading-[1.15] text-[#1b2823] dark:text-[#ffffff]">
+                  Audit &amp; Operational <span className="text-[#f15e1c]">Improvement</span>
                 </h1>
               </AnimatedSection>
 
-              {/* Dedicated Mobile Hero Visual Card (Placed directly below H1 Headline on Mobile/Tablet Viewports < 1024px) */}
-              <AnimatedSection delay={0.12} className="w-full lg:hidden my-3">
-                <div className="relative w-full max-w-sm sm:max-w-md rounded-2xl border-2 border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] overflow-hidden shadow-xl select-none aspect-[941/1180]">
+              <AnimatedSection delay={0.12} className="w-full lg:hidden my-2">
+                <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-2xl border border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] overflow-hidden shadow-lg">
                   <Image
-                    src="/images/audit-improvement-mobile-cropped.png"
-                    alt="Arav Innovations Audit & Improvement Architecture (Mobile)"
-                    width={941}
-                    height={1180}
+                    src="/images/audit-mobile-hero.png"
+                    alt="Audit & Improvement Strategy"
+                    fill
                     priority
-                    className="w-full h-auto object-contain object-center rounded-2xl"
-                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 40vw"
+                    className="object-cover object-center"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                 </div>
               </AnimatedSection>
 
-              <AnimatedSection delay={0.14} className="space-y-3">
-                <p className="text-sm sm:text-base lg:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-2xl">
-                  We assess processes, technology, controls and operating practices to uncover gaps, understand root causes and turn evidence into practical improvement priorities.
+              <AnimatedSection delay={0.14} className="space-y-2">
+                <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-2xl">
+                  Identify operational bottlenecks, system inefficiencies, and control gaps through empirical diagnostics. We evaluate real workflows and deliver prioritized remediation plans that drive operational performance.
                 </p>
               </AnimatedSection>
 
-              {/* CTAs */}
               <AnimatedSection delay={0.16} className="pt-1 flex flex-wrap items-center gap-3">
                 <Link href="/contact">
                   <MagneticButton>
-                    <Button3D variant="primary" size="md" rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />} className="shadow-md shadow-[#f15e1c]/20">
-                      Start an Assessment
+                    <Button3D
+                      variant="primary"
+                      size="md"
+                      rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1.5" />}
+                      className="shadow-md shadow-[#f15e1c]/20 hover:-translate-y-0.5 transition-all duration-300"
+                    >
+                      Request Diagnostic Review
                     </Button3D>
                   </MagneticButton>
                 </Link>
-                <a href="#diagnostic-view">
+
+                <Link href="#capabilities">
                   <MagneticButton>
-                    <Button3D variant="outline" size="md">
-                      Explore Our Approach
+                    <Button3D variant="outline" size="md" className="hover:-translate-y-0.5 transition-all duration-300">
+                      Explore Audit Scope
                     </Button3D>
                   </MagneticButton>
-                </a>
+                </Link>
               </AnimatedSection>
 
-              {/* Keywords Bar */}
-              <AnimatedSection delay={0.2} className="pt-1">
+              <AnimatedSection delay={0.18} className="pt-1">
                 <div className="flex flex-wrap items-center gap-2">
-                  {keywordTags.map((tag, idx) => (
+                  {keywordTags.map((tag, i) => (
                     <motion.span
-                      key={idx}
-                      whileHover={{ scale: 1.06, y: -2 }}
+                      key={i}
+                      whileHover={{ scale: 1.04, y: -1 }}
                       transition={{ duration: 0.2 }}
-                      className="px-2.5 py-1 rounded-lg bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[11px] font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] hover:border-[#f15e1c]/40 transition-all duration-200 cursor-default"
+                      className="px-3 py-1 rounded-lg bg-[#fefaf5]/90 dark:bg-[#0a0a0a]/90 border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] hover:border-[#f15e1c]/40 transition-all duration-200 cursor-default"
                     >
                       {tag}
                     </motion.span>
                   ))}
                 </div>
               </AnimatedSection>
+            </div>
 
-              {/* Regulatory Positioning Disclaimer */}
-              <AnimatedSection delay={0.22}>
-                <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] italic pt-1">
-                  Note: Arav Innovations provides independent operational, process, and technology diagnostics. We do not act as a statutory financial auditor, regulatory authority, or accredited certification body.
-                </p>
+            <div className="hidden lg:block lg:col-span-5 xl:col-span-6 h-full min-h-[260px]" />
+          </div>
+        </div>
+      </section>
+
+      <SystemScanTransition />
+
+      {/* 2. VISUAL BREAK 1 */}
+      <section className="relative py-10 sm:py-14 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
+            
+            <div className="lg:col-span-5 w-full flex items-center justify-center">
+              <AnimatedSection delay={0.08} className="w-full">
+                <motion.div
+                  whileHover={{ scale: 1.01, y: -2 }}
+                  transition={{ duration: 0.3 }}
+                  className="relative w-full aspect-[16/9] rounded-2xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-white dark:bg-[#080808] shadow-md hover:shadow-xl hover:border-[#f15e1c]/50 transition-all duration-300 group"
+                >
+                  <Image
+                    src="/images/audit-main-1.png"
+                    alt="Arav Innovations Audit & Diagnostic Review"
+                    fill
+                    className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                </motion.div>
               </AnimatedSection>
             </div>
 
-            {/* RIGHT COLUMN: SPACER ON DESKTOP (REVEALING FULL-BLEED BACKGROUND ARTWORK) */}
-            <div className="lg:col-span-6 xl:col-span-7 w-full hidden lg:flex items-center justify-center pointer-events-none min-h-[300px]" />
-          </div>
-        </div>
-      </section>
+            <div className="lg:col-span-7 space-y-4 text-left">
+              <AnimatedSection delay={0.12} className="space-y-2">
+                <Badge variant="secondary" size="md">
+                  EMPIRICAL DIAGNOSTICS
+                </Badge>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-tight">
+                  Turning Observation Into Measurable Performance
+                </h2>
+                <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed">
+                  An audit is valuable when it produces actionable clarity. We analyze how work actually moves through your operations and systems, identifying root causes of inefficiency and establishing prioritized remediation roadmaps.
+                </p>
+              </AnimatedSection>
 
-      <DiagnosticScanTransition />
+              <AnimatedSection delay={0.16}>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                  <motion.div
+                    whileHover={{ y: -2 }}
+                    className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/40 space-y-1 transition-all duration-200 cursor-default group"
+                  >
+                    <div className="flex items-center gap-1.5 text-xs font-bold font-mono text-[#f15e1c]">
+                      <Search className="w-4 h-4" />
+                      <span>PROCESS AUDIT</span>
+                    </div>
+                    <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-normal">
+                      Workflow mapping &amp; bottleneck isolation.
+                    </p>
+                  </motion.div>
 
-      {/* =====================================================================
-          4. NEW SIGNATURE SECTION: THE DIAGNOSTIC VIEW
-          ===================================================================== */}
-      <section id="diagnostic-view" className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-b from-[#ffffff] via-[#fefaf5]/40 to-[#ffffff] dark:from-[#1b2823] dark:via-[#1b2823] dark:to-[#1b2823] border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-          
-          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#2e936f]/40 text-[#2e936f] bg-[#2e936f]/5 px-3 py-1 text-xs">
-              THE DIAGNOSTIC VIEW
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              You Can't Improve What You Can't See.
-            </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              Improvement starts with an accurate view of the current state. We examine evidence, workflows, controls, technology and operating practices to understand where friction, risk, duplication, inconsistency or performance gaps may exist. The result is not simply a report—it is a clearer basis for deciding what to improve next.
-            </p>
-          </AnimatedSection>
+                  <motion.div
+                    whileHover={{ y: -2 }}
+                    className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#2e936f]/40 space-y-1 transition-all duration-200 cursor-default group"
+                  >
+                    <div className="flex items-center gap-1.5 text-xs font-bold font-mono text-[#2e936f]">
+                      <BarChart3 className="w-4 h-4" />
+                      <span>IT AUDIT</span>
+                    </div>
+                    <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-normal">
+                      Technical debt &amp; architecture assessment.
+                    </p>
+                  </motion.div>
 
-          {/* Connected Diagnostic Timeline (OBSERVE -> COLLECT -> ANALYZE -> FIND -> PRIORITIZE) */}
-          <div className="w-full bg-gradient-to-b from-gray-50 to-white dark:from-[#1b2823] dark:to-[#1b2823] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg">
-            
-            {/* Stage Controls Header */}
-            <div className="flex overflow-x-auto gap-2.5 pb-4 md:grid md:grid-cols-5 md:gap-4 sm:pb-8 border-b border-gray-200 dark:border-gray-800 scrollbar-none">
-              {diagnosticViewStages.map((stage, idx) => (
-                <button
-                  key={stage.num}
-                  onClick={() => setActiveTimelineStage(idx)}
-                  className={cn(
-                    "shrink-0 min-w-[130px] sm:min-w-[150px] md:min-w-0 md:shrink p-3.5 sm:p-4 rounded-xl text-left transition-all duration-300 flex flex-col justify-between border cursor-pointer group hover:scale-102 hover:shadow-md",
-                    activeTimelineStage === idx
-                      ? "bg-[#F15E1C] text-[#FFFFFF] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/20"
-                      : "bg-transparent border-transparent hover:bg-gray-100/80 dark:hover:bg-[#1b2823] hover:border-gray-300 dark:hover:border-gray-700"
-                  )}
-                >
-                  <div className="flex items-center justify-between w-full">
-                    <span className={cn(
-                      "text-xs font-mono font-bold px-2 py-0.5 rounded transition-colors",
-                      activeTimelineStage === idx ? "bg-[#f15e1c] text-white" : "bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 group-hover:bg-[#f15e1c]/20 group-hover:text-[#f15e1c]"
-                    )}>
-                      {stage.num}
-                    </span>
-                    <span className="text-[10px] text-gray-400 font-mono">Stage</span>
-                  </div>
-                  <div className="mt-2 text-sm font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
-                    {stage.title}
-                  </div>
-                </button>
-              ))}
+                  <motion.div
+                    whileHover={{ y: -2 }}
+                    className="p-3 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#fab60a]/40 space-y-1 transition-all duration-200 cursor-default group"
+                  >
+                    <div className="flex items-center gap-1.5 text-xs font-bold font-mono text-[#fab60a]">
+                      <RefreshCw className="w-4 h-4" />
+                      <span>REMEDIATION</span>
+                    </div>
+                    <p className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-normal">
+                      Prioritized fix action plan &amp; re-testing.
+                    </p>
+                  </motion.div>
+                </div>
+              </AnimatedSection>
             </div>
 
-            {/* Active Stage Display Panel (Side-by-Side Layout with Image & Text) */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTimelineStage}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.3 }}
-                className="pt-6 sm:pt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
-              >
-                
-                {/* Left Side: Stage Text Details & Deliverables */}
-                <div className="lg:col-span-7 space-y-4">
-                  <div className="inline-flex items-center gap-2">
-                    <Badge variant="subtle" className="bg-[#f15e1c]/10 text-[#f15e1c] font-semibold">
-                      {diagnosticViewStages[activeTimelineStage].badge}
-                    </Badge>
-                    <span className="text-xs text-gray-400 font-mono">
-                      Phase {diagnosticViewStages[activeTimelineStage].num} of 05
-                    </span>
-                  </div>
-
-                  <h3 className="text-2xl sm:text-3xl font-bold text-[#1b2823] dark:text-[#ffffff]">
-                    {diagnosticViewStages[activeTimelineStage].title}: {diagnosticViewStages[activeTimelineStage].question}
-                  </h3>
-
-                  <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                    {diagnosticViewStages[activeTimelineStage].desc}
-                  </p>
-
-                  <div className="p-4 sm:p-5 rounded-xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 flex items-start gap-3 hover:border-[#2e936f]/40 transition-colors shadow-xs">
-                    <FileCheck className="w-5 h-5 text-[#2e936f] shrink-0 mt-0.5" />
-                    <div>
-                      <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider block">
-                        Diagnostic Output
-                      </span>
-                      <span className="text-sm sm:text-base font-bold text-[#1b2823] dark:text-[#ffffff]">
-                        {diagnosticViewStages[activeTimelineStage].output}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right Side: Resized Visual Diagram Side-by-Side with Text */}
-                <div className="lg:col-span-5 flex flex-col items-center justify-center space-y-4">
-                  <div className="relative w-full rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#000000] shadow-md group hover:border-[#f15e1c]/40 transition-all duration-300">
-                    <div className="p-3 bg-gray-50 dark:bg-[#0a0a0a] border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-[#f15e1c] animate-ping" />
-                        <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">
-                          Architecture Map
-                        </span>
-                      </div>
-                      <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider">
-                        Stage {diagnosticViewStages[activeTimelineStage].num} Visual
-                      </span>
-                    </div>
-                    <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-white dark:bg-[#080808]">
-                      <Image
-                        src="/images/audit-and-improvement.png"
-                        alt="Arav Innovations End-to-End Operational Diagnostic View Architecture"
-                        fill
-                        className="object-cover object-center rounded-xl transition-transform duration-500 group-hover:scale-102"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Interactive Timeline Visual Node Indicator */}
-                  <div className="w-full p-3 rounded-xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 text-center flex items-center justify-between text-xs font-medium">
-                    <div className="flex items-center gap-2">
-                      <Search className="w-4 h-4 text-[#f15e1c] animate-pulse" />
-                      <span className="font-bold text-[#1b2823] dark:text-[#ffffff]">{diagnosticViewStages[activeTimelineStage].title} STAGE ACTIVE</span>
-                    </div>
-                    <div className="flex gap-1.5">
-                      {diagnosticViewStages.map((_, i) => (
-                        <span
-                          key={i}
-                          className={cn(
-                            "h-1.5 rounded-full transition-all duration-300",
-                            activeTimelineStage === i ? "w-5 bg-[#f15e1c]" : "w-1.5 bg-gray-300 dark:bg-gray-700"
-                          )}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-              </motion.div>
-            </AnimatePresence>
-
           </div>
         </div>
       </section>
 
-      <DiagnosticScanTransition />
+      <SystemScanTransition />
 
-      {/* =====================================================================
-          5. AUDIT -> DECISION
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      {/* 3. CAPABILITIES */}
+      <section id="capabilities" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-[1536px] mx-auto space-y-8 sm:space-y-10">
           
-          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#fab60a]/40 text-[#fab60a] bg-[#fab60a]/5 px-3 py-1 text-xs">
-              DECISION FRAMEWORK
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              An Audit Should Lead to a Decision.
-            </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              A finding becomes valuable when people understand why it exists, what it affects and what should happen next.
-            </p>
+          <AnimatedSection>
+            <div className="max-w-3xl space-y-3 text-left">
+              <Badge variant="secondary" size="md">
+                AUDIT SCOPE
+              </Badge>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Core Diagnostic Capabilities
+              </h2>
+              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-normal">
+                Independent diagnostic evaluations covering operational workflows, software architecture, internal control execution, and remediation tracking.
+              </p>
+            </div>
           </AnimatedSection>
 
-          {/* Visual Transformation Sequence Flow */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 xl:gap-6">
-            {decisionTransformationSteps.map((stepItem, idx) => (
-              <motion.div
-                key={stepItem.step}
-                whileHover={{ scale: 1.03, y: -4 }}
-                onClick={() => setActiveDecisionStep(idx)}
-                className={cn(
-                  "cursor-pointer p-5 rounded-xl border transition-all duration-300 flex flex-col justify-between relative group hover:shadow-xl",
-                  activeDecisionStep === idx
-                    ? "bg-white dark:bg-[#000000] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/20"
-                    : "bg-gray-50 dark:bg-[#0a0a0a] border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/50 hover:bg-white dark:hover:bg-[#1b2823]"
-                )}
-              >
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-mono font-bold text-[#f15e1c] group-hover:scale-110 transition-transform">
-                    {stepItem.step}
-                  </span>
-                  <div className="p-1.5 rounded-md bg-gray-100 dark:bg-[#0a0a0a] group-hover:bg-[#f15e1c]/10 transition-colors">
-                    {stepItem.icon}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-stretch">
+            {auditCapabilities.map((cap, idx) => (
+              <AnimatedSection key={cap.num} delay={idx * 0.06} className="h-full">
+                <motion.div
+                  whileHover={{ y: -3 }}
+                  transition={{ duration: 0.2 }}
+                  className="h-full p-6 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:shadow-lg hover:border-[#f15e1c] transition-all duration-300 flex flex-col justify-between text-left group relative overflow-hidden"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-mono font-black text-[#f15e1c] px-2.5 py-0.5 rounded-md bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/30">
+                        {cap.num}
+                      </span>
+                      <div className="w-10 h-10 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                        {cap.icon}
+                      </div>
+                    </div>
+                    <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug">
+                      {cap.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
+                      {cap.description}
+                    </p>
                   </div>
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
-                    {stepItem.title}
-                  </h3>
-                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 line-clamp-2">
-                    {stepItem.desc}
-                  </p>
-                </div>
-                {idx < decisionTransformationSteps.length - 1 && (
-                  <ArrowRight className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 z-20 pointer-events-none group-hover:text-[#f15e1c] transition-colors" />
-                )}
-              </motion.div>
+
+                  <div className="h-1 w-0 group-hover:w-full bg-[#f15e1c] transition-all duration-300 rounded-full mt-4" />
+                </motion.div>
+              </AnimatedSection>
             ))}
           </div>
-
         </div>
       </section>
 
-      <DiagnosticScanTransition />
+      <SystemScanTransition />
 
-      {/* =====================================================================
-          6. WHAT WE ASSESS (WHAT WE EXAMINE)
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#0a0a0a]/50 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      {/* 4. DIAGNOSTIC PIPELINE */}
+      <section id="process" className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto space-y-8 sm:space-y-10">
           
-          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5 px-3 py-1 text-xs">
-              WHAT WE EXAMINE
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Look Beyond the Surface.
-            </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              We inspect cross-functional domains to evaluate how processes, technology, and operating discipline work together.
-            </p>
-            <p className="mt-2 text-xs text-gray-500 dark:text-gray-400 italic">
-              Note: Assessment scope is tailored to each engagement based on organizational priorities and objectives. Assessments do not necessarily cover all six domains simultaneously.
-            </p>
+          <AnimatedSection>
+            <div className="text-center max-w-3xl mx-auto space-y-3">
+              <Badge variant="secondary" size="md">
+                DIAGNOSTIC PROCESS
+              </Badge>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-tight">
+                5-Stage Audit &amp; Improvement Framework
+              </h2>
+              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
+                A disciplined diagnostic lifecycle connecting workflow observation to evidence collection, root cause analysis, findings presentation, and action prioritization.
+              </p>
+            </div>
           </AnimatedSection>
 
-          {/* Interactive Diagnostic Map (6 Compact Areas) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-            
-            {/* Navigation Tabs */}
-            <div className="flex overflow-x-auto gap-2.5 pb-3 lg:flex-col lg:space-y-3 lg:gap-0 lg:pb-0 scrollbar-none lg:col-span-5 xl:col-span-4">
-              {diagnosticAreas.map((area, idx) => (
-                <button
-                  key={area.num}
-                  onClick={() => setActiveDomain(idx)}
-                  className={cn(
-                    "shrink-0 min-w-[170px] sm:min-w-[200px] lg:min-w-0 lg:w-full text-left p-3.5 sm:p-4 rounded-xl border transition-all duration-300 flex items-center justify-between cursor-pointer group hover:scale-101 hover:shadow-md",
-                    activeDomain === idx
-                      ? "bg-white dark:bg-[#000000] border-[#f15e1c] shadow-md ring-1 ring-[#f15e1c]"
-                      : "bg-gray-100/70 dark:bg-[#0a0a0a] border-gray-200 dark:border-gray-800 hover:bg-white dark:hover:bg-[#1b2823] hover:border-[#f15e1c]/40"
-                  )}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-gray-100 dark:bg-[#0a0a0a] group-hover:bg-[#f15e1c]/10 transition-colors">
-                      {area.icon}
-                    </div>
-                    <div>
-                      <span className="text-xs font-mono font-bold text-[#f15e1c] block">
-                        {area.num}
+          <AnimatedSection delay={0.08}>
+            <div className="rounded-2xl sm:rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg p-4 sm:p-6 lg:p-8 space-y-6">
+              
+              <div className="grid grid-cols-2 xs:grid-cols-3 lg:grid-cols-5 gap-2 relative">
+                {diagnosticStages.map((stg, idx) => {
+                  const isSelected = activeStageIdx === idx;
+                  return (
+                    <button
+                      key={stg.id}
+                      type="button"
+                      onClick={() => setActiveStageIdx(idx)}
+                      className={cn(
+                        "py-2.5 px-3 rounded-xl text-xs font-extrabold font-display transition-all duration-200 cursor-pointer flex items-center justify-center gap-2 select-none relative z-10 border",
+                        isSelected
+                          ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-sm"
+                          : "bg-white dark:bg-[#000000] text-[#4a5c55] dark:text-[#d3eee4] border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:bg-[#f15e1c]/5"
+                      )}
+                    >
+                      <span className={cn("font-mono text-[10px]", isSelected ? "text-white/80" : "text-[#f15e1c]")}>
+                        {stg.num}.
                       </span>
-                      <span className="text-sm font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
-                        {area.title}
-                      </span>
-                    </div>
-                  </div>
-                  <ArrowRight className={cn("w-4 h-4 transition-transform duration-200 hidden sm:block", activeDomain === idx ? "text-[#f15e1c] translate-x-1" : "text-gray-400 group-hover:text-[#f15e1c] group-hover:translate-x-1")} />
-                </button>
-              ))}
-            </div>
+                      <span className="truncate">{stg.title}</span>
+                    </button>
+                  );
+                })}
+              </div>
 
-            {/* Interactive Domain Detail Viewer (Side-by-Side Image and Points Layout) */}
-            <div className="lg:col-span-7 xl:col-span-8 bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 shadow-lg">
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={activeDomain}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="space-y-6"
+                  key={activeStage.id}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="p-5 sm:p-7 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] grid grid-cols-1 lg:grid-cols-12 gap-6 items-center"
                 >
-                  <div className="flex items-center justify-between pb-6 border-b border-gray-200 dark:border-gray-800">
-                    <div className="flex items-center gap-3">
-                      <div className="p-3 rounded-xl bg-[#f15e1c]/10 text-[#f15e1c]">
-                        {diagnosticAreas[activeDomain].icon}
-                      </div>
-                      <div>
-                        <span className="text-xs font-mono font-bold text-[#f15e1c]">
-                          AREA {diagnosticAreas[activeDomain].num}
-                        </span>
-                        <h3 className="text-xl sm:text-2xl font-bold text-[#1b2823] dark:text-[#ffffff]">
-                          {diagnosticAreas[activeDomain].title}
-                        </h3>
-                      </div>
-                    </div>
-                    <Badge variant="subtle" className="text-xs bg-[#2e936f]/10 text-[#2e936f] font-semibold">
-                      Diagnostic Focus
-                    </Badge>
+                  <div className="lg:col-span-7 space-y-3 text-left">
+                    <span className="text-xs font-mono font-bold text-[#f15e1c] uppercase tracking-wider block">
+                      STAGE {activeStage.num} &bull; {activeStage.title}
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                      {activeStage.subtitle}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                      {activeStage.desc}
+                    </p>
                   </div>
 
-                  <p className="text-sm font-semibold text-[#f15e1c] font-mono">
-                    {diagnosticAreas[activeDomain].focus}
-                  </p>
-                  <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed">
-                    {diagnosticAreas[activeDomain].desc}
-                  </p>
-
-                  {/* Side-by-Side Grid: Left Text Points, Right Compact Image Visual */}
-                  <div className="pt-4 border-t border-gray-200 dark:border-gray-800 grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
-                    
-                    {/* Left Column: Key Examination Points */}
-                    <div className="sm:col-span-7 space-y-3">
-                      <span className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 block">
-                        Key Examination Points
-                      </span>
-                      <div className="space-y-2">
-                        {diagnosticAreas[activeDomain].details.map((item, i) => (
-                          <motion.div
-                            key={i}
-                            whileHover={{ scale: 1.02, x: 4 }}
-                            className="flex items-center gap-2.5 text-xs font-medium text-[#1b2823] dark:text-[#f3f4f6] p-3 rounded-xl bg-gray-50 dark:bg-[#0a0a0a] border border-gray-100 dark:border-gray-800 hover:border-[#2e936f]/50 hover:bg-[#2e936f]/5 transition-all cursor-pointer shadow-xs"
-                          >
-                            <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
-                            <span>{item}</span>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Right Column: Resized Compact Graphic Side-by-Side */}
-                    <div className="sm:col-span-5 flex justify-center">
-                      <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#080808] group hover:border-[#f15e1c]/40 transition-all duration-300 shadow-md">
-                        <Image
-                          src="/images/audit-and-improvement-secondary.png"
-                          alt="Arav Innovations Process, Control & Technology Examination Scope"
-                          fill
-                          className="object-cover object-center rounded-xl transition-transform duration-500 group-hover:scale-102"
-                        />
-                        <div className="p-2 bg-gray-50 dark:bg-[#0a0a0a] text-center border-t border-gray-200 dark:border-gray-800">
-                          <span className="text-[10px] font-mono text-gray-500 dark:text-gray-400">
-                            {diagnosticAreas[activeDomain].title} Inspection Matrix
-                          </span>
+                  <div className="lg:col-span-5 space-y-2.5 text-left border-t lg:border-t-0 lg:border-l border-[#f7d7b0]/60 dark:border-[#1a1a1a] pt-4 lg:pt-0 lg:pl-6">
+                    <span className="text-xs font-mono font-bold uppercase text-[#2e936f] block">
+                      Core Stage Deliverables:
+                    </span>
+                    <div className="space-y-2">
+                      {activeStage.deliverables.map((item, i) => (
+                        <div
+                          key={i}
+                          className="flex items-center gap-2 text-xs font-semibold text-[#1b2823] dark:text-[#ffffff] p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a]"
+                        >
+                          <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
+                          <span>{item}</span>
                         </div>
-                      </div>
+                      ))}
                     </div>
-
                   </div>
                 </motion.div>
               </AnimatePresence>
             </div>
-
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
-      <DiagnosticScanTransition />
+      <SystemScanTransition />
 
-      {/* =====================================================================
-          7. NEW INTERACTIVE ELEMENT — FRICTION MAP
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      {/* 5. SERVICE ITEMS */}
+      <section id="what-we-do" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-[1536px] mx-auto space-y-8 sm:space-y-10">
           
-          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5 px-3 py-1 text-xs">
-              INTERACTIVE DIAGNOSTIC MAP
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Where Does the Friction Live?
-            </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              Click or select inspection points across an illustrative business workflow to reveal common operational friction points.
-            </p>
-            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 italic">
-              Illustrative operational workflow showing sample diagnostic inspection points.
-            </p>
-          </AnimatedSection>
-
-          {/* Workflow Track */}
-          <div className="bg-gradient-to-b from-gray-50 to-white dark:from-[#1b2823] dark:to-[#1b2823] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg">
-            
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-6 pb-6 sm:pb-8">
-              {frictionPoints.map((fp, idx) => (
-                <button
-                  key={fp.id}
-                  onClick={() => setActiveFrictionPoint(idx)}
-                  className={cn(
-                    "p-4 rounded-xl border text-left transition-all duration-300 flex flex-col justify-between relative group cursor-pointer hover:scale-102 hover:shadow-md",
-                    activeFrictionPoint === idx
-                      ? "bg-white dark:bg-[#000000] border-[#f15e1c] shadow-lg ring-2 ring-[#f15e1c]/30"
-                      : "bg-gray-100/70 dark:bg-[#0a0a0a] border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/50 hover:bg-white dark:hover:bg-[#1b2823]"
-                  )}
-                >
-                  <div className="flex items-center justify-between w-full mb-2">
-                    <span className="text-[10px] font-mono font-bold text-gray-500 dark:text-gray-400">
-                      {fp.stage}
-                    </span>
-                    <div className="p-1 rounded bg-white dark:bg-[#000000] group-hover:bg-[#f15e1c]/10 transition-colors">
-                      {fp.icon}
-                    </div>
-                  </div>
-                  <span className="text-xs font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
-                    {fp.label}
-                  </span>
-                  <span className="text-[10px] text-[#f15e1c] font-semibold mt-1 block group-hover:translate-x-0.5 transition-transform">
-                    Inspect →
-                  </span>
-                </button>
-              ))}
+          <AnimatedSection>
+            <div className="text-center max-w-3xl mx-auto space-y-3">
+              <Badge variant="secondary" size="md">
+                SERVICE WORKSTREAMS
+              </Badge>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Audit &amp; Improvement Services
+              </h2>
+              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
+                Targeted diagnostic evaluations covering operational workflows, software architectures, control frameworks, and vendor delivery commitments.
+              </p>
             </div>
+          </AnimatedSection>
 
-            {/* Active Friction Explanation Card */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeFrictionPoint}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.25 }}
-                className="p-6 rounded-xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 flex flex-col sm:flex-row items-start gap-4 hover:border-[#f15e1c]/40 transition-colors shadow-sm"
-              >
-                <div className="p-3 rounded-xl bg-[#f15e1c]/10 text-[#f15e1c] shrink-0">
-                  {frictionPoints[activeFrictionPoint].icon}
-                </div>
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-[#f15e1c]">
-                      INSPECTION POINT: {frictionPoints[activeFrictionPoint].label}
-                    </span>
-                    <Badge variant="subtle" className="text-[10px] bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 font-semibold">
-                      {frictionPoints[activeFrictionPoint].frictionType}
-                    </Badge>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-stretch">
+            {whatWeDoServices.map((svc, idx) => (
+              <AnimatedSection key={svc.num} delay={idx * 0.04} className="h-full">
+                <motion.div
+                  whileHover={{ y: -3 }}
+                  transition={{ duration: 0.2 }}
+                  className="h-full p-5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#f15e1c] hover:shadow-md transition-all duration-300 flex flex-col justify-between text-left group"
+                >
+                  <div className="space-y-2.5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-mono font-black text-[#f15e1c]">
+                        {svc.num}
+                      </span>
+                      <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-105 transition-transform">
+                        {svc.icon}
+                      </div>
+                    </div>
+                    <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
+                      {svc.title}
+                    </h3>
+                    <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
+                      {svc.description}
+                    </p>
                   </div>
-                  <h4 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff]">
-                    {frictionPoints[activeFrictionPoint].frictionType}
-                  </h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                    {frictionPoints[activeFrictionPoint].description}
-                  </p>
-                </div>
-              </motion.div>
-            </AnimatePresence>
 
+                  <div className="pt-3 mt-2 flex items-center justify-between border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a] text-[11px] font-mono font-bold text-[#f15e1c]">
+                    <span>Scope Details</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </motion.div>
+              </AnimatedSection>
+            ))}
           </div>
         </div>
       </section>
 
-      <DiagnosticScanTransition />
+      <SystemScanTransition />
 
-      {/* =====================================================================
-          8. ROOT-CAUSE ANALYSIS
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/40 dark:bg-[#0d121c]/40 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      {/* 6. APPLICABLE MARKETS */}
+      <section id="markets" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto space-y-8">
           
-          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-            <Badge variant="outline" className="mb-3 border-[#2e936f]/40 text-[#2e936f] bg-[#2e936f]/5 px-3 py-1 text-xs">
-              DIAGNOSTIC DEPTH
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Don't Fix the Symptom. Find the Cause.
-            </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              Surface problems are usually symptoms of deeper process, control, or design gaps. We trace issues layer by layer to uncover true root causes.
-            </p>
-            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 italic">
-              Illustrative diagnostic breakdown showing root cause isolation sequence.
-            </p>
+          <AnimatedSection>
+            <div className="max-w-3xl space-y-3 text-left">
+              <Badge variant="secondary" size="md">
+                APPLICABLE MARKETS
+              </Badge>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Tailored Sector Solutions
+              </h2>
+              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                Diagnostic audits tailored to your sector’s operational complexity and regulatory requirements:
+              </p>
+            </div>
           </AnimatedSection>
 
-          {/* Animated Layered Visual Breakdown */}
-          <div className="max-w-5xl mx-auto space-y-3 sm:space-y-4">
-            {rootCauseLayers.map((layer, idx) => (
-              <motion.div
-                key={layer.level}
-                whileHover={{ scale: 1.02, x: 4 }}
-                onClick={() => setActiveRootLayer(idx)}
-                className={cn(
-                  "cursor-pointer p-5 rounded-xl transition-all duration-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border hover:shadow-lg",
-                  layer.color,
-                  activeRootLayer === idx
-                    ? "shadow-lg scale-101 ring-1 ring-gray-400 dark:ring-gray-600"
-                    : "opacity-85 hover:opacity-100"
-                )}
-              >
-                <div className="flex items-center gap-4">
-                  <div className="p-2 rounded-lg bg-white dark:bg-[#000000] shadow-xs shrink-0">
-                    {layer.icon}
-                  </div>
-                  <div>
-                    <span className="text-xs font-mono font-bold text-gray-500 dark:text-gray-400 block">
-                      {layer.level}: {layer.label}
-                    </span>
-                    <h3 className="text-base font-bold text-[#1b2823] dark:text-[#ffffff]">
-                      {layer.example}
+          <AnimatedSection delay={0.08}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+              {applicableMarkets.map((mkt, idx) => (
+                <motion.div
+                  key={idx}
+                  whileHover={{ y: -2 }}
+                  transition={{ duration: 0.2 }}
+                  className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:bg-white dark:hover:bg-[#000000] shadow-xs transition-all duration-200 text-left flex flex-col justify-between space-y-2 group"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-2 rounded-xl bg-white dark:bg-[#121212] border border-[#f7d7b0] dark:border-[#222222] shrink-0 group-hover:scale-105 transition-transform">
+                      {mkt.icon}
+                    </div>
+                    <h3 className="text-sm font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
+                      {mkt.title}
                     </h3>
                   </div>
-                </div>
-
-                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 sm:max-w-md text-left sm:text-right">
-                  {layer.detail}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      <DiagnosticScanTransition />
-
-      {/* =====================================================================
-          9. GLOBAL AUDIT APPROACH
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-          
-          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#fab60a]/40 text-[#fab60a] bg-[#fab60a]/5 px-3 py-1 text-xs">
-              AUDIT METHODOLOGY
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              An Approach Built Around Evidence.
-            </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              Our audit approach applies internationally recognized principles to ensure findings are objective, thorough, and practical.
-            </p>
-            <div className="flex flex-wrap justify-center gap-3 pt-4">
-              <span className="text-xs px-3.5 py-1.5 rounded-full bg-gray-100 dark:bg-[#0a0a0a] text-gray-700 dark:text-gray-300 font-semibold border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/40 transition-colors cursor-pointer">
-                IIA Global Internal Audit Standards Alignment
-              </span>
-              <span className="text-xs px-3.5 py-1.5 rounded-full bg-gray-100 dark:bg-[#0a0a0a] text-gray-700 dark:text-gray-300 font-semibold border border-gray-200 dark:border-gray-800 hover:border-[#2e936f]/40 transition-colors cursor-pointer">
-                ISO 19011 Auditing Principles
-              </span>
-            </div>
-          </AnimatedSection>
-
-          {/* 6-Stage Methodology Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {methodologyStages.map((stage) => (
-              <motion.div
-                key={stage.step}
-                whileHover={{ scale: 1.02, y: -4 }}
-                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/60 hover:shadow-xl transition-all duration-300 shadow-sm flex flex-col justify-between group cursor-pointer"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-mono font-bold text-[#f15e1c] px-2 py-0.5 rounded bg-[#f15e1c]/10 group-hover:bg-[#f15e1c] group-hover:text-white transition-colors">
-                      STAGE {stage.step}
-                    </span>
-                    <Badge variant="subtle" className="text-[10px] bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 font-semibold">
-                      Standardized Step
-                    </Badge>
-                  </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-[#1b2823] dark:text-[#ffffff] mb-2 group-hover:text-[#f15e1c] transition-colors">
-                    {stage.name}
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                    {stage.desc}
-                  </p>
-                </div>
-
-                <div className="pt-4 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between text-xs">
-                  <span className="text-gray-400 font-mono">Deliverable:</span>
-                  <span className="font-semibold text-[#2e936f] group-hover:translate-x-0.5 transition-transform">{stage.outcome}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      <DiagnosticScanTransition />
-
-      {/* =====================================================================
-          10. PRIORITY MATRIX
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#0a0a0a]/50 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-          
-          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5 px-3 py-1 text-xs">
-              ACTION PRIORITIZATION
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Not Every Finding Needs the Same Response.
-            </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              We categorize findings on an Impact vs. Effort matrix to ensure executive focus is directed toward high-value quick wins and essential strategic improvements.
-            </p>
-          </AnimatedSection>
-
-          {/* Clean Interactive 2x2 Matrix */}
-          <div className="bg-gradient-to-b from-gray-50 to-white dark:from-[#1b2823] dark:to-[#1b2823] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg">
-            
-            <div className="text-center mb-6">
-              <span className="text-xs font-mono font-bold text-[#f15e1c] uppercase tracking-wider">
-                Y-AXIS: BUSINESS IMPACT (LOW → HIGH) • X-AXIS: IMPLEMENTATION EFFORT (LOW → HIGH)
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-              {priorityQuadrants.map((quad) => (
-                <div
-                  key={quad.id}
-                  onMouseEnter={() => setActiveMatrixQuadrant(quad.id)}
-                  className={cn(
-                    "p-6 sm:p-8 rounded-xl border-2 transition-all duration-200 cursor-pointer bg-white dark:bg-[#000000]",
-                    quad.border,
-                    activeMatrixQuadrant === quad.id ? "shadow-xl ring-2 ring-[#f15e1c]/20 scale-101" : "opacity-90 hover:opacity-100"
-                  )}
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <span className={cn("text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider", quad.badgeBg)}>
-                      {quad.title}
-                    </span>
-                    <span className="text-xs font-mono text-gray-400">
-                      {quad.position}
-                    </span>
-                  </div>
-                  <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                    {quad.desc}
-                  </p>
-                  <div className="p-3.5 rounded-lg bg-gray-50 dark:bg-[#0a0a0a] border border-gray-100 dark:border-gray-800">
-                    <span className="text-[11px] font-semibold text-gray-400 block uppercase mb-1">Sample Finding:</span>
-                    <span className="text-xs sm:text-sm font-medium text-[#1b2823] dark:text-[#f3f4f6]">{quad.example}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      <DiagnosticScanTransition />
-
-      {/* =====================================================================
-          11. BEFORE -> AFTER
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-          
-          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#2e936f]/40 text-[#2e936f] bg-[#2e936f]/5 px-3 py-1 text-xs">
-              OPERATIONAL TRANSFORMATION
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              From Findings to Better Ways of Working.
-            </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              See how evidence-based diagnostics replace operational uncertainty with structured clarity and defined ownership.
-            </p>
-          </AnimatedSection>
-
-          {/* Interactive Side-by-Side State Comparison */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-            
-            {/* BEFORE CARD */}
-            <motion.div whileHover={{ y: -4 }} className="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-red-50/50 to-white dark:from-[#1a1214] dark:to-[#1b2823] border border-red-200 dark:border-red-900/40 shadow-sm hover:shadow-xl transition-all duration-300 space-y-4">
-              <div className="flex items-center gap-2.5">
-                <span className="w-3 h-3 rounded-full bg-red-500 animate-pulse" />
-                <h3 className="text-xl font-bold text-red-700 dark:text-red-400">
-                  BEFORE ASSESSMENT
-                </h3>
-              </div>
-              <ul className="space-y-3 pt-2">
-                {[
-                  "Limited Visibility into actual workflow bottlenecks",
-                  "Manual Handoffs creating unnecessary delay and errors",
-                  "Unclear Ownership across overlapping department roles",
-                  "Process Friction requiring constant employee workarounds",
-                  "Reactive Decisions based on intuition rather than data",
-                ].map((item, idx) => (
-                  <motion.li key={idx} whileHover={{ x: 4 }} className="flex items-start gap-3 text-sm sm:text-base text-gray-700 dark:text-gray-300 cursor-pointer">
-                    <AlertTriangle className="w-4 h-4 text-red-500 shrink-0 mt-1" />
-                    <span>{item}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-
-            {/* AFTER CARD */}
-            <motion.div whileHover={{ y: -4 }} className="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-emerald-50/50 to-white dark:from-[#0d1c17] dark:to-[#1b2823] border border-emerald-200 dark:border-emerald-900/40 shadow-sm hover:shadow-xl transition-all duration-300 space-y-4">
-              <div className="flex items-center gap-2.5">
-                <span className="w-3 h-3 rounded-full bg-[#2e936f] animate-pulse" />
-                <h3 className="text-xl font-bold text-[#2e936f]">
-                  AFTER IMPROVEMENT
-                </h3>
-              </div>
-              <ul className="space-y-3 pt-2">
-                {[
-                  "Clearer Processes mapped end-to-end with verified baselines",
-                  "Defined Ownership with explicit RACI governance roles",
-                  "Better Visibility across system dependencies and SLA metrics",
-                  "Prioritized Actions focused on high-value quick wins",
-                  "Continuous Improvement embedded into operating rhythms",
-                ].map((item, idx) => (
-                  <motion.li key={idx} whileHover={{ x: 4 }} className="flex items-start gap-3 text-sm sm:text-base text-gray-700 dark:text-gray-300 cursor-pointer">
-                    <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0 mt-1" />
-                    <span>{item}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-
-          </div>
-        </div>
-      </section>
-
-      <DiagnosticScanTransition />
-
-      {/* =====================================================================
-          12. DELIVERABLES
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#0a0a0a]/50 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-          
-          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#fab60a]/40 text-[#fab60a] bg-[#fab60a]/5 px-3 py-1 text-xs">
-              ENGAGEMENT OUTPUTS
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              What You Take Away.
-            </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              Every engagement delivers clear, objective artifacts designed for executive decision-making and team execution.
-            </p>
-            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 italic">
-              Engagement deliverables are tailored to project scope and may include:
-            </p>
-          </AnimatedSection>
-
-          {/* Clean Editorial Deliverables List */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {deliverables.map((del, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ scale: 1.02, y: -4 }}
-                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/60 hover:shadow-xl transition-all duration-300 shadow-sm group cursor-pointer"
-              >
-                <span className="text-xs font-mono font-bold text-[#f15e1c] block mb-2 group-hover:translate-x-0.5 transition-transform">
-                  DELIVERABLE 0{i + 1}
-                </span>
-                <h3 className="text-lg sm:text-xl font-bold text-[#1b2823] dark:text-[#ffffff] mb-2 group-hover:text-[#f15e1c] transition-colors">
-                  {del.title}
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {del.desc}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      <DiagnosticScanTransition />
-
-      {/* =====================================================================
-          13. CONTINUOUS IMPROVEMENT
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-          
-          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#2e936f]/40 text-[#2e936f] bg-[#2e936f]/5 px-3 py-1 text-xs">
-              OPERATIONAL RHYTHM
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Improvement Is a Cycle, Not a Report.
-            </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              The value of an assessment increases when findings lead to action, action is reviewed, and lessons become part of how the organization operates.
-            </p>
-          </AnimatedSection>
-
-          {/* Unique Circular Diagnostic Cycle: SEE -> DECIDE -> CHANGE -> CHECK -> LEARN -> REPEAT */}
-          <div className="bg-gradient-to-b from-gray-50 to-white dark:from-[#1b2823] dark:to-[#1b2823] border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 lg:p-12 shadow-lg">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-6 text-center">
-              {[
-                { title: "SEE", desc: "Observe current state & evidence", icon: <Eye className="w-5 h-5" /> },
-                { title: "DECIDE", desc: "Prioritize high-impact changes", icon: <SlidersHorizontal className="w-5 h-5" /> },
-                { title: "CHANGE", desc: "Execute agreed action plan", icon: <Wrench className="w-5 h-5" /> },
-                { title: "CHECK", desc: "Validate progress & metrics", icon: <CheckCircle2 className="w-5 h-5" /> },
-                { title: "LEARN", desc: "Integrate operating lessons", icon: <BookOpen className="w-5 h-5" /> },
-                { title: "REPEAT", desc: "Maintain continuous cycle", icon: <RotateCw className="w-5 h-5" /> },
-              ].map((cycleStep, i) => (
-                <motion.div
-                  key={cycleStep.title}
-                  whileHover={{ scale: 1.06, y: -4 }}
-                  onClick={() => setActiveLoopStep(i)}
-                  className={cn(
-                    "cursor-pointer p-4 rounded-xl border transition-all duration-300 flex flex-col items-center justify-between h-40 group hover:shadow-xl",
-                    activeLoopStep === i
-                      ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-lg scale-105"
-                      : "bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] border-gray-200 dark:border-gray-800 hover:border-[#f15e1c]/50"
-                  )}
-                >
-                  <div className={cn("p-2 rounded-lg transition-transform group-hover:rotate-6", activeLoopStep === i ? "bg-white/20 text-white" : "bg-gray-100 dark:bg-[#0a0a0a] text-[#f15e1c]")}>
-                    {cycleStep.icon}
-                  </div>
-                  <div>
-                    <span className="text-xs font-mono font-bold block opacity-80">0{i + 1}</span>
-                    <span className="text-sm font-bold block">{cycleStep.title}</span>
-                  </div>
-                  <p className={cn("text-[10px] leading-tight", activeLoopStep === i ? "text-white/90" : "text-gray-500 dark:text-gray-400")}>
-                    {cycleStep.desc}
+                  <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-normal pl-0.5">
+                    {mkt.desc}
                   </p>
                 </motion.div>
               ))}
             </div>
-          </div>
-
+          </AnimatedSection>
         </div>
       </section>
 
-      <DiagnosticScanTransition />
+      <SystemScanTransition />
 
-      {/* =====================================================================
-          14. BUSINESS OUTCOMES
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#0a0a0a]/50 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      {/* 7. WHAT WE MEASURE */}
+      <section id="what-we-measure" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-[1536px] mx-auto space-y-8 sm:space-y-10">
           
-          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5 px-3 py-1 text-xs">
-              VALUE DELIVERED
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              What Better Visibility Enables.
-            </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              Evidence-based diagnostics give leadership the confidence to act on facts rather than assumptions.
-            </p>
+          <AnimatedSection>
+            <div className="text-center max-w-3xl mx-auto space-y-3">
+              <Badge variant="secondary" size="md">
+                DIAGNOSTIC METRICS
+              </Badge>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Operational Improvement Indicators
+              </h2>
+              <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
+                We measure audit success by workflow velocity gains, deficiency resolution speed, and cost efficiency.
+              </p>
+            </div>
           </AnimatedSection>
 
-          {/* 6 Qualitative Outcomes */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {businessOutcomes.map((out) => (
-              <motion.div
-                key={out.title}
-                whileHover={{ scale: 1.02, y: -4 }}
-                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 hover:border-[#2e936f]/60 hover:shadow-xl transition-all duration-300 shadow-sm flex items-start gap-4 group cursor-pointer"
-              >
-                <div className="p-3 rounded-xl bg-gray-50 dark:bg-[#0a0a0a] group-hover:bg-[#2e936f]/10 transition-colors shrink-0">
-                  {out.icon}
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2e936f] transition-colors">
-                    {out.title}
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                    {out.desc}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      <DiagnosticScanTransition />
-
-      {/* =====================================================================
-          15. CASE STUDIES / SCOPE: WHAT WE CAN HELP UNCOVER
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-          
-          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#fab60a]/40 text-[#fab60a] bg-[#fab60a]/5 px-3 py-1 text-xs">
-              DIAGNOSTIC SCOPE
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              What We Can Help Uncover.
-            </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              Our diagnostics help leaders identify hidden operational risks, workflow drag, and system reliability gaps.
-            </p>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {scopeHelpUncover.map((item, idx) => (
-              <motion.div
-                key={idx}
-                whileHover={{ scale: 1.02, y: -4 }}
-                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 hover:border-[#2e936f]/60 hover:shadow-xl transition-all duration-300 shadow-sm space-y-2 group cursor-pointer"
-              >
-                <div className="flex items-center gap-2.5">
-                  <Search className="w-4 h-4 text-[#2e936f] group-hover:scale-110 transition-transform" />
-                  <h3 className="text-base sm:text-lg font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2e936f] transition-colors">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch">
+            {whatWeMeasureList.map((item, idx) => (
+              <AnimatedSection key={idx} delay={idx * 0.04} className="h-full">
+                <motion.div
+                  whileHover={{ y: -3 }}
+                  transition={{ duration: 0.2 }}
+                  className="h-full p-5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#2e936f] hover:shadow-md transition-all duration-300 space-y-2.5 text-left group"
+                >
+                  <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] w-fit group-hover:scale-105 transition-transform">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2e936f] transition-colors">
                     {item.title}
                   </h3>
-                </div>
-                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {item.desc}
-                </p>
-              </motion.div>
+                  <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
+                    {item.desc}
+                  </p>
+                </motion.div>
+              </AnimatedSection>
             ))}
           </div>
-
         </div>
       </section>
 
-      <DiagnosticScanTransition />
+      <SystemScanTransition />
 
-      {/* =====================================================================
-          16. INSIGHTS INTEGRATION
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50/50 dark:bg-[#0a0a0a]/50 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      {/* 8. BLOGS & INSIGHTS */}
+      <section id="insights" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto space-y-8">
           
-          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <Badge variant="outline" className="mb-3 border-[#f15e1c]/40 text-[#f15e1c] bg-[#f15e1c]/5 px-3 py-1 text-xs">
-              KNOWLEDGE BASE
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Audit & Improvement Insights.
-            </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              Read published analysis on operational audits, process optimization, and technology governance.
-            </p>
+          <AnimatedSection>
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-4">
+              <div className="space-y-2 text-left">
+                <Badge variant="secondary" size="md">
+                  KNOWLEDGE &amp; STRATEGY
+                </Badge>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                  Operational Audit &amp; Improvement Insights
+                </h2>
+              </div>
+              <Link
+                href="/insights"
+                className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#f15e1c] hover:underline shrink-0 group"
+              >
+                <span>Explore All Insights</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+              </Link>
+            </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-            {articles.map((post) => (
-              <Link key={post.slug} href={`/insights/${post.slug}`} className="group block">
-                <motion.div whileHover={{ y: -4 }} className="h-full p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#000000] border border-gray-200 dark:border-gray-800 hover:border-[#f15e1c] hover:shadow-xl transition-all duration-300 shadow-sm flex flex-col justify-between">
-                  <div>
-                    <div className="w-full mb-4 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+            {displayPosts.map((post, idx) => (
+              <AnimatedSection key={post.slug} delay={idx * 0.08} className="h-full">
+                <motion.div
+                  whileHover={{ y: -3 }}
+                  transition={{ duration: 0.2 }}
+                  className="h-full p-5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#f15e1c] hover:shadow-lg transition-all duration-300 flex flex-col justify-between text-left space-y-4 group"
+                >
+                  <div className="space-y-3">
+                    <div className="w-full mb-2 rounded-xl overflow-hidden border border-[#f7d7b0]/60">
                       <BlogCardImage post={post} aspectRatio="aspect-video" />
                     </div>
-                    <Badge variant="subtle" className="mb-3 text-[10px] bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-semibold">
-                      {post.category}
-                    </Badge>
-                    <h3 className="text-base sm:text-lg font-bold text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors line-clamp-2">
+                    <div className="flex items-center justify-between text-[10px] font-mono font-bold text-[#2e936f]">
+                      <span className="uppercase tracking-wider">{post.category}</span>
+                      <span>{post.publishedAt || post.dateFormatted}</span>
+                    </div>
+                    <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors line-clamp-2">
                       {post.title}
                     </h3>
-                    <p className="mt-2 text-xs sm:text-sm text-gray-600 dark:text-gray-300 line-clamp-3 leading-relaxed">
+                    <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed line-clamp-3 font-medium">
                       {post.summary}
                     </p>
                   </div>
-                  <div className="pt-4 mt-4 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between text-xs font-semibold text-[#f15e1c]">
-                    <span>Read Article</span>
-                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+
+                  <div className="pt-3 border-t border-[#f7d7b0] dark:border-[#1a1a1a]">
+                    <Link
+                      href={`/insights/${post.slug}`}
+                      className="inline-flex items-center gap-1 text-xs font-mono font-bold text-[#f15e1c] group-hover:underline"
+                    >
+                      <span>Read Article</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    </Link>
                   </div>
                 </motion.div>
-              </Link>
+              </AnimatedSection>
             ))}
           </div>
-
-          <div className="text-center mt-10">
-            <Link href="/insights">
-              <Button3D variant="secondary" size="md">
-                Explore All Insights
-              </Button3D>
-            </Link>
-          </div>
-
         </div>
       </section>
 
-      <DiagnosticScanTransition />
+      <SystemScanTransition />
 
-      {/* =====================================================================
-          SECTION — ABOUT OUR CEO / LEADERSHIP PERSPECTIVE
-          ===================================================================== */}
-      <CEOLeadershipSection serviceContext="The focus is on identifying friction, improving systems and creating a stronger operational foundation." />
+      {/* CEO LEADERSHIP */}
+      <CEOLeadershipSection serviceContext="His perspective shapes diagnostic evaluations focused on measurable operational performance." />
 
-      <DiagnosticScanTransition />
+      <SystemScanTransition />
 
-      {/* =====================================================================
-          17. FAQ SECTION
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24 border-b border-gray-100 dark:border-gray-800/60">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      {/* 9. FAQ */}
+      <section id="faq" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
+        <div className="max-w-4xl mx-auto space-y-8 text-left">
           
-          <AnimatedSection className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-            <Badge variant="outline" className="mb-3 border-[#2e936f]/40 text-[#2e936f] bg-[#2e936f]/5 px-3 py-1 text-xs">
-              QUESTIONS & ANSWERS
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1b2823] dark:text-[#ffffff]">
-              Frequently Asked Questions.
-            </h2>
-            <p className="mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              Concise answers regarding scope, methodology, prioritization, and post-audit support.
-            </p>
+          <AnimatedSection>
+            <div className="text-center space-y-3">
+              <Badge variant="secondary" size="md">
+                QUESTIONS &amp; ANSWERS
+              </Badge>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
+                Frequently Asked Questions
+              </h2>
+            </div>
           </AnimatedSection>
 
-          <div className="max-w-4xl mx-auto space-y-4">
-            {service.faqs.map((faq, index) => {
-              const isOpen = openFaq === index;
+          <div className="space-y-3">
+            {faqList.map((faq, idx) => {
+              const isOpen = openFaqIdx === idx;
               return (
-                <div
-                  key={index}
-                  className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#000000] overflow-hidden transition-all hover:border-[#f15e1c]/40 hover:shadow-md"
-                >
-                  <button
-                    onClick={() => setOpenFaq(isOpen ? null : index)}
-                    className="w-full text-left p-5 flex items-center justify-between font-bold text-sm sm:text-base text-[#1b2823] dark:text-[#ffffff] hover:text-[#f15e1c] transition-colors cursor-pointer"
-                  >
-                    <span>{faq.question}</span>
-                    <ChevronDown className={cn("w-5 h-5 transition-transform duration-200 text-[#f15e1c]", isOpen && "rotate-180")} />
-                  </button>
-
-                  <AnimatePresence>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25 }}
-                      >
-                        <div className="p-5 pt-0 text-sm text-gray-600 dark:text-gray-300 border-t border-gray-100 dark:border-gray-800/60 leading-relaxed">
-                          {faq.answer}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                <AnimatedSection key={idx} delay={idx * 0.04}>
+                  <div className="rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/60 overflow-hidden transition-all shadow-xs">
+                    <button
+                      type="button"
+                      onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
+                      className="w-full p-5 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer group select-none"
+                    >
+                      <span className="text-sm sm:text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
+                        {faq.q}
+                      </span>
+                      <ChevronDown
+                        className={cn(
+                          "w-5 h-5 text-[#f15e1c] transition-transform duration-300 shrink-0",
+                          isOpen && "rotate-180"
+                        )}
+                      />
+                    </button>
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.25, ease: "easeInOut" }}
+                          className="px-5 pb-5 text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium border-t border-[#f7d7b0]/40 dark:border-[#1a1a1a] pt-3"
+                        >
+                          {faq.a}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </AnimatedSection>
               );
             })}
           </div>
-
         </div>
       </section>
 
-      <DiagnosticScanTransition />
+      <SystemScanTransition />
 
-      {/* =====================================================================
-          18. FINAL CTA
-          ===================================================================== */}
-      <section className="relative z-10 w-full py-12 sm:py-16 md:py-20 lg:py-24">
-        <div className="w-full max-w-[1760px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-          <div className="relative rounded-3xl p-8 sm:p-12 lg:p-16 bg-[#1b2823] text-white border border-[#2e936f]/40 shadow-2xl overflow-hidden text-center space-y-6">
-            
-            {/* Ambient Brand Color Glows */}
-            <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#f15e1c]/30 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-[#2e936f]/30 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#fab60a]/15 rounded-full blur-3xl pointer-events-none" />
-
-            <Badge variant="outline" className="border-[#f15e1c] text-[#f15e1c] bg-[#f15e1c]/10 px-3 py-1 font-semibold tracking-wider text-xs">
-              TAKE THE NEXT STEP
-            </Badge>
-
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight max-w-3xl mx-auto leading-tight">
-              Know What Needs to Change Before You Change It.
-            </h2>
-
-            <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
-              Start with evidence, understand the root causes and turn your findings into a practical improvement path.
-            </p>
-
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-              <Link href="/contact">
-                <Button3D variant="primary" size="lg" className="flex items-center gap-2 font-semibold hover:scale-102 transition-transform">
-                  Start an Assessment
-                  <ArrowRight className="w-4 h-4" />
-                </Button3D>
-              </Link>
-              <Link href="/contact">
-                <Button3D variant="secondary" size="lg" className="flex items-center gap-2 font-medium hover:scale-102 transition-transform">
-                  Talk to an Advisor
-                </Button3D>
-              </Link>
+      {/* 10. CONNECTED ECOSYSTEM */}
+      <section className="relative py-10 sm:py-14 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+        <div className="max-w-[1536px] mx-auto space-y-4 sm:space-y-6 text-left">
+          
+          <AnimatedSection>
+            <div className="space-y-1.5">
+              <span className="text-xs font-mono font-bold text-[#f15e1c] uppercase tracking-wider block">
+                ARAV SERVICE ECOSYSTEM
+              </span>
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
+                Connected Enterprise Services
+              </h3>
             </div>
+          </AnimatedSection>
 
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            {internalServices.map((item, idx) => (
+              <AnimatedSection key={idx} delay={idx * 0.04}>
+                <Link
+                  href={item.href}
+                  className="p-3.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:shadow-sm transition-all flex items-center justify-between group cursor-pointer min-h-[56px]"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-105 transition-all shrink-0">
+                      {item.icon}
+                    </div>
+                    <span className="text-xs sm:text-sm font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug">
+                      {item.name}
+                    </span>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-[#f15e1c] group-hover:translate-x-1 transition-transform shrink-0 ml-2" />
+                </Link>
+              </AnimatedSection>
+            ))}
           </div>
         </div>
       </section>
+
+      <SystemScanTransition />
+
+      {/* FINAL CTA */}
+      <section id="contact" className="relative py-14 sm:py-20 px-4 sm:px-6 lg:px-12">
+        <AnimatedSection>
+          <div className="max-w-5xl mx-auto rounded-3xl bg-gradient-to-br from-[#f15e1c] via-[#e55215] to-[#d8480d] text-white p-8 sm:p-14 border-2 border-[#fab60a] shadow-2xl space-y-6 text-center relative overflow-hidden">
+            <div className="relative z-10 max-w-3xl mx-auto space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 border border-white/40 text-xs font-mono font-bold text-white">
+                <Sparkles className="w-3.5 h-3.5 text-[#ffec69]" />
+                <span>REQUEST AN OPERATIONAL AUDIT</span>
+              </div>
+
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display tracking-tight text-white leading-tight">
+                Turn Operational Observations Into Actionable Improvements
+              </h2>
+
+              <p className="text-xs sm:text-sm font-medium text-white/90 leading-relaxed max-w-2xl mx-auto">
+                Discuss your operational bottlenecks, technical debt questions, and process priorities with our diagnostic advisory team.
+              </p>
+            </div>
+
+            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+              <Link href="/contact">
+                <MagneticButton>
+                  <Button3D
+                    variant="primary"
+                    size="md"
+                    rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1.5" />}
+                    className="w-full sm:w-auto justify-center bg-white text-[#f15e1c] hover:bg-[#f7d7b0] hover:-translate-y-0.5 transition-all duration-300"
+                  >
+                    Request Diagnostic Review
+                  </Button3D>
+                </MagneticButton>
+              </Link>
+
+              <Link href="/services">
+                <MagneticButton>
+                  <Button3D variant="outline" size="md" className="w-full sm:w-auto justify-center text-white border-white/60 hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-300">
+                    Explore Services
+                  </Button3D>
+                </MagneticButton>
+              </Link>
+            </div>
+
+            <div className="relative z-10 pt-4 border-t border-white/20 flex flex-wrap items-center justify-center gap-4 text-xs text-white/90 font-medium">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Empirical Data-Driven Diagnostics
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Prioritized Action Roadmaps
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#ffec69]" /> Advisory Teams in Gurgaon &amp; Dubai
+              </span>
+            </div>
+          </div>
+        </AnimatedSection>
+      </section>
+
     </div>
   );
 }
 
+export default AuditInteractivePage;
