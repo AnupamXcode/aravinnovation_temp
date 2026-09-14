@@ -48,14 +48,14 @@ export function CEOLeadershipSection({
   return (
     <section
       ref={containerRef}
-      className={`relative py-16 sm:py-24 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-y border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-gradient-to-b from-[#fefaf5] via-white to-[#fefaf5] dark:from-[#050505] dark:via-[#090909] dark:to-[#050505] overflow-hidden select-none ${className}`}
+      className={`relative py-10 sm:py-16 lg:py-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-y border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-gradient-to-b from-[#fefaf5] via-white to-[#fefaf5] dark:from-[#050505] dark:via-[#090909] dark:to-[#050505] overflow-hidden select-none ${className}`}
     >
       {/* Subtle Ambient Decorative Glows */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-[#f15e1c]/5 dark:bg-[#f15e1c]/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-[#2e936f]/5 dark:bg-[#2e936f]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-[1320px] mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-14 items-center">
           
           {/* =========================================================================
               LEFT COLUMN: CEO Editorial Portrait Box (4 cols on Desktop)

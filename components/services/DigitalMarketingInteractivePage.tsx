@@ -767,14 +767,14 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
           SECTION 02 — DIGITAL GROWTH ENGINE (SMOOTH SLIDING TAB INTERACTION)
           ========================================================================= */}
       <section id="growth-system" className="relative py-10 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
-        <div className="max-w-[1536px] mx-auto space-y-8 sm:space-y-10">
+        <div className="max-w-[1536px] mx-auto space-y-6 sm:space-y-10">
           
           <AnimatedSection>
             <div className="text-center max-w-3xl mx-auto space-y-3">
               <Badge variant="secondary" size="md">
                 CONNECTED ENGINE
               </Badge>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff] leading-tight max-w-2xl mx-auto">
                 One Growth System. Connected From Discovery to Conversion.
               </h2>
               <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
@@ -785,10 +785,10 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
 
           {/* System Interactive Container */}
           <AnimatedSection delay={0.1}>
-            <div className="rounded-[2rem] sm:rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl p-5 sm:p-8 lg:p-10 space-y-6 sm:space-y-8">
+            <div className="rounded-[2rem] sm:rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl p-4 sm:p-8 lg:p-10 space-y-6 sm:space-y-8">
               
               {/* Stage Selector Bar with Animated Background Pill */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-2.5 relative">
+              <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-2.5 relative">
                 {growthEngineStages.map((stg, idx) => {
                   const isSelected = activeStageIdx === idx;
                   return (
