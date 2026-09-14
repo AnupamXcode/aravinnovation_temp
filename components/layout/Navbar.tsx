@@ -454,25 +454,27 @@ export function Navbar() {
               transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
               className="lg:hidden fixed inset-x-0 top-[65px] bottom-0 z-50 bg-white/95 dark:bg-[#000000]/95 backdrop-blur-xl border-t border-[#f7d7b0] dark:border-[#1a1a1a] px-5 py-6 overflow-y-auto shadow-2xl pointer-events-auto"
             >
-              <div className="space-y-6 max-w-lg mx-auto">
-                {/* Mobile Utility Controls */}
-                <div className="sm:hidden flex items-center justify-between pb-4 border-b border-[#EFE2D6] dark:border-[#1f1f1f]">
-                  <span className="text-xs font-bold text-[#5A4A3F] dark:text-[#D4C8BC]">Preferences</span>
+              <div className="space-y-4 max-w-lg mx-auto">
+                {/* Mobile Utility Controls - Preferences */}
+                <div className="flex items-center justify-between pb-3 border-b border-[#EFE2D6] dark:border-[#1f1f1f] min-h-[44px]">
+                  <span className="font-display text-sm sm:text-base font-bold text-[#3A2E27] dark:text-[#FAF5EE]">
+                    Preferences
+                  </span>
                   <LanguageSelector />
                 </div>
 
                 {/* Group 1: What We Do */}
-                <div>
+                <div className="border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-3">
                   <button
                     type="button"
-                    className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#5A4A3F] dark:text-[#D4C8BC] mb-3 py-2 border-b border-transparent focus:outline-none cursor-pointer"
+                    className="flex items-center justify-between w-full min-h-[44px] py-1 focus:outline-none cursor-pointer"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
                       setMobileServicesOpen(!mobileServicesOpen);
                     }}
                   >
-                    <span className="pointer-events-none font-display text-sm font-bold text-[#3A2E27] dark:text-[#FAF5EE]">
+                    <span className="font-display text-sm sm:text-base font-bold text-[#3A2E27] dark:text-[#FAF5EE]">
                       What We Do
                     </span>
                     <ChevronDown
@@ -492,13 +494,13 @@ export function Navbar() {
                         transition={{ duration: 0.25, ease: "easeOut" }}
                         className="overflow-hidden"
                       >
-                        <div className="flex flex-col gap-2 pt-1 pb-2">
+                        <div className="flex flex-col gap-2 pt-2 pb-1">
                           {servicesNavigation.map((s) => (
                             <Link
                               key={s.href}
                               href={s.href}
                               onClick={() => setMobileMenuOpen(false)}
-                              className="flex items-center gap-3 p-3 rounded-xl bg-[#FBF3EA]/80 dark:bg-[#1A1613] hover:bg-[#FCE3D3] dark:hover:bg-[#161616] active:scale-[0.98] transition-all text-sm font-semibold text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#1f1f1f] min-h-[44px]"
+                              className="flex items-center gap-3 p-3 rounded-xl bg-[#FBF3EA]/80 dark:bg-[#1A1613] hover:bg-[#FCE3D3] dark:hover:bg-[#161616] active:scale-[0.98] transition-all text-xs sm:text-sm font-semibold text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#1f1f1f] min-h-[44px]"
                             >
                               <div className="shrink-0">{serviceIcons[s.href]}</div>
                               <span className="truncate">{s.label}</span>
@@ -510,29 +512,30 @@ export function Navbar() {
                   </AnimatePresence>
                 </div>
 
-                {/* Group 2: Products */}
-                <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
+                {/* Group 2: Products & Platforms */}
+                <div className="border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-3">
                   <Link
                     href="/products"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 text-base font-semibold font-display text-[#3A2E27] dark:text-[#FAF5EE] active:scale-[0.99] transition-transform"
+                    className="flex items-center justify-between w-full min-h-[44px] py-1 font-display text-sm sm:text-base font-bold text-[#3A2E27] dark:text-[#FAF5EE] active:scale-[0.99] transition-transform"
                   >
-                    Products & Platforms
+                    <span>Products &amp; Platforms</span>
+                    <ArrowRight className="w-4 h-4 text-[#f15e1c]/60" />
                   </Link>
                 </div>
 
                 {/* Group 3: Working With Us */}
-                <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
+                <div className="border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-3">
                   <button
                     type="button"
-                    className="flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#5A4A3F] dark:text-[#D4C8BC] mb-3 py-2 border-b border-transparent focus:outline-none cursor-pointer"
+                    className="flex items-center justify-between w-full min-h-[44px] py-1 focus:outline-none cursor-pointer"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
                       setMobileWorkingWithUsOpen(!mobileWorkingWithUsOpen);
                     }}
                   >
-                    <span className="pointer-events-none font-display text-sm font-bold text-[#3A2E27] dark:text-[#FAF5EE]">
+                    <span className="font-display text-sm sm:text-base font-bold text-[#3A2E27] dark:text-[#FAF5EE]">
                       Working With Us
                     </span>
                     <ChevronDown
@@ -552,14 +555,14 @@ export function Navbar() {
                         transition={{ duration: 0.25, ease: "easeOut" }}
                         className="overflow-hidden"
                       >
-                        <div className="flex flex-col gap-2 pt-1 pb-2">
+                        <div className="flex flex-col gap-2 pt-2 pb-1">
                           {workingWithUsNavigation.map((item) => (
                             <Link
                               key={item.href}
                               href={item.href}
                               onClick={() => setMobileMenuOpen(false)}
                               className={cn(
-                                "flex items-center gap-3 p-3 rounded-xl text-sm font-medium border border-[#EFE2D6] dark:border-[#1f1f1f] min-h-[44px] active:scale-[0.98] transition-all",
+                                "flex items-center gap-3 p-3 rounded-xl text-xs sm:text-sm font-medium border border-[#EFE2D6] dark:border-[#1f1f1f] min-h-[44px] active:scale-[0.98] transition-all",
                                 item.href === "/contact"
                                   ? "bg-[#FCE3D3]/90 dark:bg-[#2C221B] font-bold text-[#f15e1c]"
                                   : "bg-[#FBF3EA]/80 dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE]"
@@ -576,13 +579,14 @@ export function Navbar() {
                 </div>
 
                 {/* Group 4: Blogs & Insights */}
-                <div className="pt-2 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
+                <div className="border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-3">
                   <Link
                     href="/insights"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 text-base font-semibold font-display text-[#3A2E27] dark:text-[#FAF5EE] active:scale-[0.99] transition-transform"
+                    className="flex items-center justify-between w-full min-h-[44px] py-1 font-display text-sm sm:text-base font-bold text-[#3A2E27] dark:text-[#FAF5EE] active:scale-[0.99] transition-transform"
                   >
-                    Blogs &amp; Insights
+                    <span>Blogs &amp; Insights</span>
+                    <ArrowRight className="w-4 h-4 text-[#f15e1c]/60" />
                   </Link>
                 </div>
 

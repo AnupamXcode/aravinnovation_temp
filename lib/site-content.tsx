@@ -302,8 +302,9 @@ const defaultLanguages: LanguageItem[] = [
   { code: "en", name: "English", nativeName: "English", dir: "ltr", enabled: true, order: 1 },
   { code: "hi", name: "Hindi", nativeName: "हिन्दी", dir: "ltr", enabled: true, order: 2 },
   { code: "ar", name: "Arabic", nativeName: "العربية", dir: "rtl", enabled: true, order: 3 },
-  { code: "fr", name: "French", nativeName: "Français", dir: "ltr", enabled: true, order: 4 },
-  { code: "es", name: "Spanish", nativeName: "Español", dir: "ltr", enabled: true, order: 5 },
+  { code: "de", name: "German", nativeName: "Deutsch", dir: "ltr", enabled: true, order: 4 },
+  { code: "fr", name: "French", nativeName: "Français", dir: "ltr", enabled: true, order: 5 },
+  { code: "es", name: "Spanish", nativeName: "Español", dir: "ltr", enabled: true, order: 6 },
 ];
 
 const defaultChatbotCommands: ChatbotCommandItem[] = [

@@ -5,8 +5,31 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { ShieldCheck, ArrowRight, Lock, Zap } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function EarlyTrustProofSection() {
+  const [activeMobileIdx, setActiveMobileIdx] = React.useState<number | null>(null);
+  const cardRefs = React.useRef<(HTMLDivElement | null)[]>([]);
+
+  React.useEffect(() => {
+    if (typeof window === "undefined" || window.innerWidth >= 768) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const idxStr = entry.target.getAttribute("data-card-idx");
+          if (idxStr !== null && entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+            setActiveMobileIdx(parseInt(idxStr, 10));
+          }
+        });
+      },
+      { root: null, rootMargin: "-20% 0px -20% 0px", threshold: [0.5] }
+    );
+
+    cardRefs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 my-2 sm:my-4 md:my-6">
       <section className="py-4 sm:py-8 md:py-10 px-4 sm:px-10 rounded-2xl sm:rounded-[2rem] bg-gradient-to-r from-[#fefaf5] via-white to-[#fefaf5] dark:from-[#0c0c0c] dark:via-[#121212] dark:to-[#0c0c0c] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg relative overflow-hidden">
@@ -38,7 +61,16 @@ export function EarlyTrustProofSection() {
           {/* Right Column: 3 Verified Proof Pillars */}
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
             <ScrollReveal direction="up" delay={0.1}>
-              <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white dark:bg-[#161616] border border-[#f7d7b0]/80 dark:border-[#262626] space-y-1.5 sm:space-y-2 shadow-xs hover:border-[#f15e1c] transition-all">
+              <div
+                ref={(el) => { cardRefs.current[0] = el; }}
+                data-card-idx="0"
+                className={cn(
+                  "p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white dark:bg-[#161616] border space-y-1.5 sm:space-y-2 shadow-xs transition-all duration-300",
+                  activeMobileIdx === 0
+                    ? "border-[#f15e1c] ring-1 ring-[#f15e1c]/40 bg-[#fffcf9] dark:bg-[#1c1613]"
+                    : "border-[#f7d7b0]/80 dark:border-[#262626] hover:border-[#f15e1c]"
+                )}
+              >
                 <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-[#f15e1c]/10 text-[#f15e1c] flex items-center justify-center">
                   <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </div>
@@ -52,7 +84,16 @@ export function EarlyTrustProofSection() {
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.2}>
-              <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white dark:bg-[#161616] border border-[#f7d7b0]/80 dark:border-[#262626] space-y-1.5 sm:space-y-2 shadow-xs hover:border-[#2e936f] transition-all">
+              <div
+                ref={(el) => { cardRefs.current[1] = el; }}
+                data-card-idx="1"
+                className={cn(
+                  "p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white dark:bg-[#161616] border space-y-1.5 sm:space-y-2 shadow-xs transition-all duration-300",
+                  activeMobileIdx === 1
+                    ? "border-[#2e936f] ring-1 ring-[#2e936f]/40 bg-[#f7fcf9] dark:bg-[#121c17]"
+                    : "border-[#f7d7b0]/80 dark:border-[#262626] hover:border-[#2e936f]"
+                )}
+              >
                 <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-[#2e936f]/10 text-[#2e936f] flex items-center justify-center">
                   <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </div>
@@ -66,7 +107,16 @@ export function EarlyTrustProofSection() {
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.3}>
-              <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white dark:bg-[#161616] border border-[#f7d7b0]/80 dark:border-[#262626] space-y-1.5 sm:space-y-2 shadow-xs hover:border-[#fab60a] transition-all">
+              <div
+                ref={(el) => { cardRefs.current[2] = el; }}
+                data-card-idx="2"
+                className={cn(
+                  "p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white dark:bg-[#161616] border space-y-1.5 sm:space-y-2 shadow-xs transition-all duration-300",
+                  activeMobileIdx === 2
+                    ? "border-[#fab60a] ring-1 ring-[#fab60a]/40 bg-[#fdfcf5] dark:bg-[#1c1a11]"
+                    : "border-[#f7d7b0]/80 dark:border-[#262626] hover:border-[#fab60a]"
+                )}
+              >
                 <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-[#fab60a]/10 text-[#fab60a] flex items-center justify-center">
                   <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </div>

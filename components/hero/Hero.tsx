@@ -23,14 +23,14 @@ export function Hero() {
             <div className="space-y-1.5 sm:space-y-2">
               <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-[#4A3D35] dark:text-[#D8CBC0] justify-start">
                 <span className="w-2 h-2 rounded-full bg-[#f15e1c] shrink-0" />
-                <h1 className="font-mono text-[10px] sm:text-xs font-bold uppercase tracking-[0.14em] sm:tracking-[0.18em] text-[#f15e1c]">
+                <h1 className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.12em] sm:tracking-[0.18em] text-[#f15e1c]">
                   <span className="sm:hidden">ENTERPRISE TECHNOLOGY • AI • DIGITAL GROWTH</span>
                   <span className="hidden sm:inline">Enterprise Technology, AI &amp; Digital Growth Solutions</span>
                 </h1>
               </div>
 
               {/* Main Visual Headline */}
-              <p className="font-display font-extrabold text-2xl xs:text-3xl sm:text-[3.25rem] md:text-6xl lg:text-[66px] xl:text-[74px] 2xl:text-[80px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.1] sm:leading-[1.06]">
+              <p className="font-display font-extrabold text-[26px] xs:text-[32px] sm:text-[3.25rem] md:text-6xl lg:text-[66px] xl:text-[74px] 2xl:text-[80px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.16] sm:leading-[1.06]">
                 <span className="sm:hidden">
                   Technology That<br />
                   Moves <span className="text-[#f15e1c]">Business</span><br />
@@ -44,7 +44,7 @@ export function Hero() {
             </div>
 
             {/* Supporting Description — CEO Blueprint Approved Copy */}
-            <p className="text-xs sm:text-lg lg:text-[18px] text-[#3A2E27] dark:text-[#FAF5EE] max-w-xl leading-relaxed font-medium">
+            <p className="text-sm sm:text-lg lg:text-[18px] text-[#3A2E27] dark:text-[#FAF5EE] max-w-xl leading-relaxed font-medium">
               <span className="sm:hidden">
                 We turn complex technology into smarter systems, stronger digital experiences, and measurable business growth.
               </span>
@@ -54,12 +54,12 @@ export function Hero() {
             </p>
 
             {/* Primary CTAs — CEO Blueprint Text */}
-            <div className="pt-1 sm:pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-2.5 sm:gap-4">
+            <div className="pt-1.5 sm:pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-2.5 sm:gap-4">
               <Link href="/contact" className="w-full sm:w-auto">
                 <Button
                   variant="primary"
                   size="lg"
-                  className="w-full sm:w-auto rounded-full px-7 py-2.5 sm:px-8 sm:py-3.5 text-xs sm:text-sm font-semibold shadow-md hover:shadow-lg shadow-[#f15e1c]/25 bg-[#f15e1c] text-white hover:bg-[#d84e12] transition-all transform hover:-translate-y-0.5"
+                  className="w-full sm:w-auto rounded-full px-7 py-3 sm:px-8 sm:py-3.5 text-sm font-semibold shadow-md hover:shadow-lg shadow-[#f15e1c]/25 bg-[#f15e1c] text-white hover:bg-[#d84e12] transition-all transform hover:-translate-y-0.5 min-h-[48px]"
                   rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
                 >
                   Talk to an Expert
@@ -70,7 +70,7 @@ export function Hero() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="w-full sm:w-auto rounded-full px-7 py-2.5 sm:px-8 sm:py-3.5 text-xs sm:text-sm font-semibold bg-white/70 dark:bg-black/50 backdrop-blur-xs border border-[#3A2E27]/25 dark:border-white/20 text-[#221811] dark:text-[#FAF5EE] hover:bg-white/95 dark:hover:bg-black/80 hover:border-[#f15e1c] hover:text-[#f15e1c] transition-all"
+                  className="w-full sm:w-auto rounded-full px-7 py-3 sm:px-8 sm:py-3.5 text-sm font-semibold bg-white/70 dark:bg-black/50 backdrop-blur-xs border border-[#3A2E27]/25 dark:border-white/20 text-[#221811] dark:text-[#FAF5EE] hover:bg-white/95 dark:hover:bg-black/80 hover:border-[#f15e1c] hover:text-[#f15e1c] transition-all min-h-[48px]"
                 >
                   Explore Our Services
                 </Button>
@@ -78,7 +78,7 @@ export function Hero() {
             </div>
 
             {/* Bottom Proof Row */}
-            <div className="pt-3 sm:pt-6 border-t border-[#3A2E27]/15 dark:border-white/15 flex flex-wrap items-center gap-2.5 sm:gap-8 text-left text-[11px] sm:text-sm font-semibold text-[#2C211A] dark:text-[#EFE2D6]">
+            <div className="pt-3 sm:pt-6 border-t border-[#3A2E27]/15 dark:border-white/15 flex flex-wrap items-center gap-2.5 sm:gap-8 text-left text-[12px] sm:text-sm font-semibold text-[#2C211A] dark:text-[#EFE2D6]">
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <ShieldCheck className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 text-[#f15e1c] shrink-0" />
                 <span className="sm:hidden">One Connected Technology Partner</span>
