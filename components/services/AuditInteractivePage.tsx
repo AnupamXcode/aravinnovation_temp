@@ -330,7 +330,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
         
         <div className="absolute inset-0 pointer-events-none hidden lg:block select-none overflow-hidden">
           <Image
-            src="/images/audit-bg.png"
+            src="/images/audit-improvement-hero-bg.webp"
             alt="Audit & Improvement Strategy"
             fill
             priority
@@ -374,7 +374,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
               <AnimatedSection delay={0.12} className="w-full lg:hidden my-2">
                 <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-2xl border border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] overflow-hidden shadow-lg">
                   <Image
-                    src="/images/audit-mobile-hero.png"
+                    src="/images/audit-improvement-mobile-cropped.webp"
                     alt="Audit & Improvement Strategy"
                     fill
                     priority
@@ -449,7 +449,7 @@ export function AuditInteractivePage({ service, relatedPosts }: AuditPageProps) 
                   className="relative w-full aspect-[16/9] rounded-2xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-white dark:bg-[#080808] shadow-md hover:shadow-xl hover:border-[#f15e1c]/50 transition-all duration-300 group"
                 >
                   <Image
-                    src="/images/audit-main-1.png"
+                    src="/images/audit-and-improvement-main.webp"
                     alt="Arav Innovations Audit & Diagnostic Review"
                     fill
                     className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"

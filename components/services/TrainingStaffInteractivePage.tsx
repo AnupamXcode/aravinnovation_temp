@@ -298,7 +298,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
         
         <div className="absolute inset-0 pointer-events-none hidden lg:block select-none overflow-hidden">
           <Image
-            src="/images/training-staff-bg.png"
+            src="/images/training-staff-hero-bg.webp"
             alt="Training & Staff Augmentation Strategy"
             fill
             priority
@@ -417,7 +417,7 @@ export function TrainingStaffInteractivePage({ service, relatedPosts }: Training
                   className="relative w-full aspect-[16/9] rounded-2xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-white dark:bg-[#080808] shadow-md hover:shadow-xl hover:border-[#fab60a]/50 transition-all duration-300 group"
                 >
                   <Image
-                    src="/images/training-staff-main-1.png"
+                    src="/images/training-staff-main.webp"
                     alt="Arav Innovations Team Capability & Staff Augmentation"
                     fill
                     className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"

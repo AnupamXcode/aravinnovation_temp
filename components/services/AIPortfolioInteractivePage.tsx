@@ -289,7 +289,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
         
         <div className="absolute inset-0 pointer-events-none hidden lg:block select-none overflow-hidden">
           <Image
-            src="/images/ai-portfolio-bg.png"
+            src="/images/ai-portfolio-hero-bg.webp"
             alt="AI Portfolio & Enterprise Solutions"
             fill
             priority
@@ -333,7 +333,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
               <AnimatedSection delay={0.12} className="w-full lg:hidden my-2">
                 <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-2xl border border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] overflow-hidden shadow-lg">
                   <Image
-                    src="/images/ai-portfolio-mobile-hero.png"
+                    src="/images/ai-portfolio-mobile-cropped.webp"
                     alt="AI Portfolio and Enterprise Solutions"
                     fill
                     priority
@@ -408,7 +408,7 @@ export function AIPortfolioInteractivePage({ service, relatedPosts }: AIPortfoli
                   className="relative w-full aspect-[16/9] rounded-2xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-white dark:bg-[#080808] shadow-md hover:shadow-xl hover:border-[#f15e1c]/50 transition-all duration-300 group"
                 >
                   <Image
-                    src="/images/ai-portfolio-main-1.png"
+                    src="/images/ai-portfolio-main.webp"
                     alt="Arav Innovations AI Solutions & LLM Integration"
                     fill
                     className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"

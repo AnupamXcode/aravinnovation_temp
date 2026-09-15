@@ -13,12 +13,24 @@ interface ProductCardProps {
   index?: number;
 }
 
-function OrbitCelestialIcon({ className = "w-6 h-6 text-[#f15e1c]" }: { className?: string }) {
+function AstroBeamsLogoIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="3" />
-      <ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(-30 12 12)" />
-      <ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(30 12 12)" />
+    <svg className={className} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="14" fill="url(#astrobeams-grad)" opacity="0.15" />
+      <circle cx="16" cy="16" r="14" stroke="url(#astrobeams-grad)" strokeWidth="1.5" />
+      {/* Crescent Moon & Star Beam Mark */}
+      <path
+        d="M17.5 7.5C14 7.5 11 10.5 11 14.5C11 18.5 14 21.5 17.5 21.5C16 21.5 13.5 20.5 12.5 19C11.5 17.5 11.5 15.5 12.5 14C13.5 12.5 15.5 11.5 17.5 11.5C18.5 11.5 19.5 11.8 20.2 12.3C19.5 9.5 18.5 7.5 17.5 7.5Z"
+        fill="url(#astrobeams-grad)"
+      />
+      <path d="M16 4V6M16 26V28M4 16H6M26 16H28M7.5 7.5L9 9M23 23L24.5 24.5M24.5 7.5L23 9M9 23L7.5 24.5" stroke="#f15e1c" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="16" cy="16" r="2.5" fill="#fab60a" />
+      <defs>
+        <linearGradient id="astrobeams-grad" x1="4" y1="4" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#f15e1c" />
+          <stop offset="1" stopColor="#fab60a" />
+        </linearGradient>
+      </defs>
     </svg>
   );
 }
@@ -27,12 +39,12 @@ export function ProductCard({ product }: ProductCardProps) {
   const isLive = product.status === "live";
   const [showAllCapabilities, setShowAllCapabilities] = React.useState(false);
 
-  // Icon selector: Orbit for celestial/astrology products, ShieldCheck for GRC
+  // Icon selector: AstroBeams logo for celestial/astrology products, ShieldCheck for GRC
   const icon =
     product.iconName === "ShieldCheck" ? (
       <ShieldCheck className="w-6 h-6 text-[#f15e1c]" />
-    ) : product.iconName === "Orbit" || product.slug.includes("astrobeams") ? (
-      <OrbitCelestialIcon className="w-6 h-6 text-[#f15e1c]" />
+    ) : product.slug.includes("astrobeams") || product.iconName === "Orbit" ? (
+      <AstroBeamsLogoIcon className="w-6 h-6" />
     ) : (
       <Sparkles className="w-6 h-6 text-[#f15e1c]" />
     );

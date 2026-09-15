@@ -107,8 +107,9 @@ export function HeroVideoBackground() {
           onCanPlay={setVideoPlaybackSpeed}
           onPlay={setVideoPlaybackSpeed}
           onError={() => setVideoError(true)}
-          className="absolute inset-0 w-full h-full object-cover object-[65%_center] sm:object-center transform-gpu transition-opacity duration-500 opacity-100"
+          className="absolute inset-0 w-full h-full object-cover object-center sm:object-center transform-gpu transition-opacity duration-500 opacity-100"
         >
+          <source src="/videos/hero-bg-mobile.mp4" media="(max-width: 639px)" type="video/mp4" />
           <source src={videoSrc} type="video/mp4" />
         </video>
       )}

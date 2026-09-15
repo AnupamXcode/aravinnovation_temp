@@ -263,7 +263,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
         
         <div className="absolute inset-0 pointer-events-none hidden lg:block select-none overflow-hidden">
           <Image
-            src="/images/seo-bg.png"
+            src="/images/seo-hero-bg.webp"
             alt="SEO & Search Visibility Strategy"
             fill
             priority
@@ -307,7 +307,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
               <AnimatedSection delay={0.12} className="w-full lg:hidden my-2">
                 <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-2xl border border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] overflow-hidden shadow-lg">
                   <Image
-                    src="/images/seo-mobile-hero.png"
+                    src="/images/seo-mobile-cropped.webp"
                     alt="SEO and Search Visibility Strategy"
                     fill
                     priority
@@ -382,7 +382,7 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
                   className="relative w-full aspect-[16/9] rounded-2xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-white dark:bg-[#080808] shadow-md hover:shadow-xl hover:border-[#2e936f]/50 transition-all duration-300 group"
                 >
                   <Image
-                    src="/images/seo-main-1.png"
+                    src="/images/seo-hero.webp"
                     alt="Arav Innovations SEO Strategy & Visibility Architecture"
                     fill
                     className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
