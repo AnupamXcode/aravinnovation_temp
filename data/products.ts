@@ -38,6 +38,7 @@ export interface Product {
   ctaEnabled: boolean;
   externalUrl?: string;
   iconName: string;
+  iconUrl?: string;
   imageUrl?: string;
   features: string[];
   reports?: string[];
@@ -79,6 +80,7 @@ export const productsData: Product[] = [
     ctaEnabled: true,
     externalUrl: "https://astrobeams.in",
     iconName: "Orbit",
+    iconUrl: "/images/astrobeams-icon.png",
     imageUrl: "/images/astrobeams-main.png",
     features: [
       "AI-Powered Vedic Astrology",
@@ -181,6 +183,7 @@ export const productsData: Product[] = [
     ctaEnabled: true,
     externalUrl: "https://astrobeams.store",
     iconName: "Orbit",
+    iconUrl: "/images/astrobeams-icon.png",
     imageUrl: "/images/astrobeams-main.png",
     features: [
       "Certified expert astrologers available 24/7",

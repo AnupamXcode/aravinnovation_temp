@@ -39,20 +39,29 @@ export function ProductCard({ product }: ProductCardProps) {
   const isLive = product.status === "live";
   const [showAllCapabilities, setShowAllCapabilities] = React.useState(false);
 
-  // Icon selector: AstroBeams logo for celestial/astrology products, ShieldCheck for GRC
-  const icon =
-    product.iconName === "ShieldCheck" ? (
-      <ShieldCheck className="w-6 h-6 text-[#f15e1c]" />
-    ) : product.slug.includes("astrobeams") || product.iconName === "Orbit" ? (
-      <AstroBeamsLogoIcon className="w-6 h-6" />
-    ) : (
-      <Sparkles className="w-6 h-6 text-[#f15e1c]" />
-    );
-
-  const visibleFeatures = showAllCapabilities ? product.features : product.features.slice(0, 6);
-
   // Clean heading without appended .store string
   const displayTitle = product.name.replace(/\.store$/i, "");
+
+  // Icon selector: render product.iconUrl if provided, else fallback to standard icon selector
+  const icon = product.iconUrl ? (
+    <div className="relative w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center">
+      <Image
+        src={product.iconUrl}
+        alt={displayTitle}
+        width={32}
+        height={32}
+        className="w-full h-full object-contain object-center rounded-xl"
+      />
+    </div>
+  ) : product.iconName === "ShieldCheck" ? (
+    <ShieldCheck className="w-6 h-6 text-[#f15e1c]" />
+  ) : product.slug.includes("astrobeams") || product.iconName === "Orbit" ? (
+    <AstroBeamsLogoIcon className="w-6 h-6" />
+  ) : (
+    <Sparkles className="w-6 h-6 text-[#f15e1c]" />
+  );
+
+  const visibleFeatures = showAllCapabilities ? product.features : product.features.slice(0, 6);
 
   return (
     <div className="group relative h-full rounded-3xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] p-6 sm:p-8 shadow-md hover:shadow-2xl hover:shadow-[#f15e1c]/15 hover:border-[#f15e1c] dark:hover:border-[#f15e1c] hover:bg-[#fefaf5] dark:hover:bg-[#121212] transition-all duration-300 flex flex-col justify-between overflow-hidden">
@@ -65,7 +74,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <div className="space-y-5">
         {/* Top Row: Icon & Status Badge */}
         <div className="flex items-center justify-between">
-          <div className="p-3 rounded-2xl bg-[#f7d7b0]/30 dark:bg-[#1a1a1a] border border-[#f7d7b0] dark:border-[#1a1a1a] transition-transform duration-300 group-hover:scale-105">
+          <div className="p-2.5 sm:p-3 rounded-2xl bg-[#f7d7b0]/30 dark:bg-[#1a1a1a] border border-[#f7d7b0] dark:border-[#1a1a1a] transition-transform duration-300 group-hover:scale-105 flex items-center justify-center">
             {icon}
           </div>
 
