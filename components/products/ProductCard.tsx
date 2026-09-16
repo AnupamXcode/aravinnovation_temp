@@ -95,18 +95,6 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
         </div>
 
-        {/* Product Image Banner */}
-        {product.imageUrl && (
-          <div className="relative w-full aspect-[16/8.5] rounded-2xl overflow-hidden border border-[#f7d7b0] dark:border-[#262626] bg-[#000000] shadow-sm">
-            <Image
-              src={product.imageUrl}
-              alt={displayTitle}
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
-            />
-          </div>
-        )}
 
         {/* Product Heading & Category */}
         <div className="space-y-1.5 text-left">

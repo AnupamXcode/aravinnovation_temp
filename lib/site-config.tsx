@@ -314,7 +314,7 @@ const defaultConfig: SiteConfig = {
         description: "AI-powered solutions, automation & intelligent systems built for the future of your business.",
         tone: "#f15e1c", // Primary Orange
         icon: "Cpu",
-        href: "/products",
+        href: "/services/ai-portfolio",
         visible: true,
       },
     ],
