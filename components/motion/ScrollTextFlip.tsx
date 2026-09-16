@@ -14,9 +14,16 @@ export function ScrollTextFlip({
   className = "",
 }: ScrollTextFlipProps) {
   const shouldReduceMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = React.useState(false);
 
-  if (shouldReduceMotion) {
-    return <div className={cn(className)}>{children}</div>;
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsMobile(window.innerWidth < 768);
+    }
+  }, []);
+
+  if (shouldReduceMotion || isMobile) {
+    return <div className={cn("relative overflow-visible", className)}>{children}</div>;
   }
 
   return (

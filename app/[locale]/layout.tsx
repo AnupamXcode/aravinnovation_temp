@@ -20,7 +20,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "600", "700", "800"],
   preload: true,
 });
 
