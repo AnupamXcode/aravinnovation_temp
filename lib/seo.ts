@@ -2,6 +2,7 @@ import { servicesData } from "@/data/services";
 import { productsData } from "@/data/products";
 import { caseStudiesData } from "@/data/case-studies";
 import { blogPostsData } from "@/data/insights";
+import { industriesData } from "@/data/industries";
 
 export interface SEOPageSettings {
   path: string;
@@ -524,6 +525,30 @@ export function getRouteCatalog(): SEOPageSettings[] {
               url: `${SITE_BASE_URL}/logo.png`,
             },
           },
+        },
+        null,
+        2
+      ),
+      imageAltMappings: {},
+    });
+  });
+
+  // Dynamic Industry Solution Pages
+  industriesData.forEach((ind) => {
+    routes.push({
+      path: `/industries/${ind.slug}`,
+      label: `Industry: ${ind.name}`,
+      metaTitle: `${ind.name} Technology Solutions | Arav Innovations`,
+      metaDescription: ind.description,
+      priority: 0.8,
+      robots: "Index, Follow",
+      jsonLdSchema: JSON.stringify(
+        {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          name: ind.name,
+          description: ind.description,
+          url: `${SITE_BASE_URL}/industries/${ind.slug}`,
         },
         null,
         2

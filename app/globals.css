@@ -384,7 +384,7 @@ body {
 
 @media (max-width: 640px) {
   .floating-ui-offset-mobile {
-    bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
   }
 }
 

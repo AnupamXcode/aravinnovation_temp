@@ -86,7 +86,7 @@ export function ProblemToSolutionSection() {
                     <h3 className="text-lg sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug">
                       {pillar.title}
                     </h3>
-                    <p className="text-xs sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
+                    <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
                       {pillar.description}
                     </p>
                   </div>

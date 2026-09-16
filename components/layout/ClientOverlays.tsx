@@ -33,11 +33,6 @@ const ClientChatbot = dynamic(
   { ssr: false }
 );
 
-const MobileStickyCTA = dynamic(
-  () => import("@/components/layout/MobileStickyCTA").then((mod) => mod.MobileStickyCTA),
-  { ssr: false }
-);
-
 export function ClientOverlays({ children }: { children: React.ReactNode }) {
   return (
     <WebsiteShutdownOverlay>
@@ -46,7 +41,6 @@ export function ClientOverlays({ children }: { children: React.ReactNode }) {
       <BackToTop />
       <SetupCall />
       <ClientChatbot />
-      <MobileStickyCTA />
       {(process.env.NODE_ENV === "development" || process.env.VERCEL_ENVIRONMENT === "development") && (
         <MobilePreviewToggle />
       )}

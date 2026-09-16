@@ -265,3 +265,11 @@ export const industriesData: IndustrySolution[] = [
   },
 ];
 
+export function getIndustryBySlug(slug: string): IndustrySolution | undefined {
+  return industriesData.find((ind) => ind.slug === slug);
+}
+
+export function getAllIndustrySlugs(): string[] {
+  return industriesData.map((ind) => ind.slug);
+}
+
