@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Anupam Shrivastava",
+    "company": "Amazon",
+    "email": "anupamshri1906@gmail.com",
+    "phone": "9165108596",
+    "service": "IT Strategy & Implementation",
+    "requirement": "Sir i have to create a website for my company.",
+    "timeline": "1 - 3 Months",
+    "budget": "100",
+    "source": "test_script",
+    "id": "ARAV-1789548223426",
+    "submittedAt": "2026-09-16T08:43:43.426Z",
+    "status": "new"
+  },
+  {
+    "id": "ARAV-1715892000000",
+    "name": "Fatima Al Mansoori",
+    "email": "fatima@apex-global.ae",
+    "company": "Apex Global Enterprises",
+    "phone": "+971 50 123 4567",
+    "service": "Risk, Compliance & Governance",
+    "requirement": "DPDP and UAE Data Privacy readiness assessment and ISO27001 roadmap.",
+    "timeline": "1 - 3 Months",
+    "budget": "$25k-$50k",
+    "source": "website_form",
+    "submittedAt": "2026-09-14T08:43:43.397Z",
+    "status": "new"
+  },
+  {
+    "id": "ARAV-1715805600000",
+    "name": "Rahul Sharma",
+    "email": "rahul.sharma@fintechpro.in",
+    "company": "FintechPro India",
+    "phone": "+91 98765 43210",
+    "service": "IT Strategy & Implementation",
+    "requirement": "Core banking microservices cloud architecture health check and latency optimization.",
+    "timeline": "Immediate (within 2 weeks)",
+    "budget": "Enterprise",
+    "source": "website_form",
+    "submittedAt": "2026-09-11T08:43:43.398Z",
+    "status": "contacted"
+  },
+  {
+    "id": "ARAV-1715719200000",
+    "name": "David Miller",
+    "email": "david@nexuslogistics.com",
+    "company": "Nexus Logistics International",
+    "phone": "+1 415 555 0199",
+    "service": "AI Portfolio",
+    "requirement": "Custom LLM automation for enterprise supply chain documentation processing.",
+    "timeline": "3 - 6 Months",
+    "budget": "$50k+",
+    "source": "chatbot",
+    "submittedAt": "2026-09-08T08:43:43.398Z",
+    "status": "qualified"
+  }
+]

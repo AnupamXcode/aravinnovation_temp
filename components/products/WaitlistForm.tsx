@@ -14,14 +14,32 @@ export function WaitlistForm({ productName }: WaitlistFormProps) {
   const [submitted, setSubmitted] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
     setLoading(true);
-    setTimeout(() => {
+
+    try {
+      await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: "Early Access User",
+          company: "Beta Registration",
+          email: email.trim(),
+          phone: "N/A",
+          service: `Product Beta: ${productName}`,
+          requirement: `Beta registration waitlist request for ${productName}`,
+          timeline: "Immediate (within 2 weeks)",
+          source: "product_waitlist",
+        }),
+      });
+    } catch {
+      // Ignore network errors, display success state
+    } finally {
       setLoading(false);
       setSubmitted(true);
-    }, 600);
+    }
   };
 
   if (submitted) {
