@@ -41,8 +41,8 @@ interface WhyAravDigitalCoreProps {
 
 export function WhyAravDigitalCore({
   pillars = whyAravPillarsData,
-  headline = "Why Leading Businesses Partner With Us",
-  subheadline = "Arav Innovations combines cross-border engineering rigor, AI automation, and performance marketing to deliver predictable business outcomes.",
+  headline = "Why Businesses Work With Arav",
+  subheadline = "We combine technology strategy, engineering, AI automation, and performance growth to deliver clear business outcomes.",
 }: WhyAravDigitalCoreProps) {
   const trackRef = React.useRef<HTMLDivElement>(null);
   const pinnedStageRef = React.useRef<HTMLDivElement>(null);

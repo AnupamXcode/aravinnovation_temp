@@ -34,6 +34,9 @@ const WhoWeHelpSection = dynamic(
 const EarlyTrustProofSection = dynamic(
   () => import("@/components/home/EarlyTrustProofSection").then((m) => m.EarlyTrustProofSection)
 );
+const BusinessChallengesSection = dynamic(
+  () => import("@/components/home/BusinessChallengesSection").then((m) => m.BusinessChallengesSection)
+);
 const DirectAnswerAEOBlock = dynamic(
   () => import("@/components/home/DirectAnswerAEOBlock").then((m) => m.DirectAnswerAEOBlock)
 );
@@ -119,15 +122,18 @@ export default async function HomePage({
         <ScrollReveal direction="up">
           <div className="text-center mb-2 sm:mb-3 px-4">
             <span className="text-[10px] sm:text-[11px] font-bold font-mono uppercase tracking-widest text-[#4a5c55] dark:text-[#d3eee4]">
-              STRATEGY &bull; ENGINEERING &bull; GROWTH &bull; GOVERNANCE &bull; AI
+              TECHNOLOGY &bull; AI &bull; DIGITAL GROWTH &bull; GOVERNANCE &bull; BUSINESS OUTCOMES
             </span>
           </div>
           <MovingLogoStrip />
         </ScrollReveal>
       </section>
 
-      {/* 02.5 — DIRECT ANSWER / AEO BLOCK */}
+      {/* 02.5 — DIRECT ANSWER / ABOUT ARAV */}
       <DirectAnswerAEOBlock />
+
+      {/* 02.75 — BUSINESS CHALLENGES */}
+      <BusinessChallengesSection />
 
       {/* 03 — WHAT WE DO (ENTERPRISE SERVICE PRACTICES) */}
       <div id="services">
@@ -154,7 +160,7 @@ export default async function HomePage({
             </Badge>
             <ScrollTextFlip>
               <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                From Strategy to Scalable Operations
+                From Challenge to Business Outcome
               </h2>
             </ScrollTextFlip>
           </div>

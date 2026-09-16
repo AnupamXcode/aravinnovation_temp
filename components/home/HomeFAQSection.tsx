@@ -4,28 +4,32 @@ import * as React from "react";
 import { Badge } from "@/components/ui/badge";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { ScrollTextFlip } from "@/components/motion/ScrollTextFlip";
-import { ChevronDown, HelpCircle, Sparkles } from "lucide-react";
+import { ChevronDown, HelpCircle } from "lucide-react";
 
 export const homeFaqs = [
   {
-    q: "How does Arav Innovations help businesses combine technology and digital growth?",
-    a: "We unify executive IT consulting, custom software engineering, AI workflow automation, performance marketing, and technical SEO into a single connected ecosystem. Rather than managing disconnected vendors, your business gains a single accountable partner focused on revenue outcomes and system efficiency.",
+    q: "What does Arav Innovations help businesses with?",
+    a: "We help businesses build, improve, and scale their digital ecosystem across four main areas: Technology & Engineering (IT strategy, web & application development), AI Solutions (workflow automation, RAG assistants), Digital Growth (B2B marketing, technical SEO & AEO), and Governance (DPDP compliance, risk & audits).",
   },
   {
-    q: "Which industries does Arav Innovations work with?",
-    a: "We work across 10 high-concurrency and highly regulated sectors including FinTech & Financial Services, B2B SaaS, Healthcare & HealthTech, Professional Services, E-Commerce & Retail, Education & EdTech, Industrial Manufacturing, Real Estate, Logistics & Supply Chain, and High-Growth Scale-Ups across India and the UAE.",
+    q: "Can you build a new website or application?",
+    a: "Yes. We design and build custom, scalable business websites, SaaS platforms, and enterprise web applications tailored to your business workflow, optimized for subsecond performance and high conversion.",
   },
   {
-    q: "How does Arav Innovations approach a new technology or digital transformation project?",
-    a: "Every engagement follows a structured 5-step lifecycle: Discovery & Audit → Architectural Scope → Agile Sprint Engineering → Compliance & Governance Hardening → Production Launch & Continuous Optimization. All intellectual property remains 100% owned by the client.",
+    q: "Can you improve an existing digital platform?",
+    a: "Absolutely. We perform deep technical audits to eliminate bottlenecks, optimize cloud costs (FinOps), modernize legacy code, redesign user interfaces (UX/UI), and accelerate page speed.",
   },
   {
-    q: "Can Arav Innovations work with an existing internal technology or marketing team?",
-    a: "Yes. We frequently embed as specialized staff augmentation pods or fractional practice directors alongside internal CIOs, CTOs, and marketing leads to accelerate release sprints, solve legacy bottlenecks, or scale engineering bandwidth without hiring delays.",
+    q: "Can you help with AI and automation?",
+    a: "Yes. Our AI practice focuses on practical, business-ready AI solutions — automating repetitive internal processes, deploying custom RAG knowledge search assistants, and integrating LLM data pipelines securely.",
   },
   {
-    q: "How can I discuss my requirements with Arav Innovations?",
-    a: "You can initiate a discussion by scheduling a consultation or submitting an inquiry via our contact form. A senior practice director will review your project brief under strict confidentiality (NDA) and respond within 1 business day.",
+    q: "Can you help improve SEO and digital growth?",
+    a: "Yes. We engineer technical SEO strategies, topical authority hubs, and AI Search Engine Optimization (AEO) to capture organic search traffic and drive B2B demand generation.",
+  },
+  {
+    q: "How do I start a project?",
+    a: "You can start by booking a consultation or filling out our contact form. Our senior engineering and strategy team will review your requirement and reach out within 1 business day to schedule an exploratory call.",
   },
 ];
 
@@ -54,7 +58,7 @@ export function HomeFAQSection() {
       <section className="py-5 sm:py-8 md:py-14 px-4 sm:px-12 lg:px-14 rounded-2xl sm:rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300 relative overflow-hidden">
         <div className="text-center max-w-3xl mx-auto mb-5 sm:mb-8 space-y-2 sm:space-y-3">
           <Badge variant="secondary" size="md">
-            DIRECT ANSWERS &bull; AEO &bull; FAQ
+            FREQUENTLY ASKED QUESTIONS
           </Badge>
           <ScrollTextFlip>
             <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
@@ -62,7 +66,7 @@ export function HomeFAQSection() {
             </h2>
           </ScrollTextFlip>
           <p className="text-xs sm:text-base text-[#4a5c55] dark:text-[#d3eee4] font-medium">
-            Clear, verifiable insights into how we engineer technology and accelerate enterprise digital growth.
+            Clear, practical answers about our technology, AI, digital growth, and governance consulting.
           </p>
         </div>
 
@@ -70,12 +74,12 @@ export function HomeFAQSection() {
           {homeFaqs.map((faq, idx) => {
             const isOpen = openIdx === idx;
             return (
-              <ScrollReveal key={idx} direction="up" delay={idx * 0.1}>
+              <ScrollReveal key={idx} direction="up" delay={idx * 0.08}>
                 <div className="rounded-xl sm:rounded-2xl border border-[#f7d7b0] dark:border-[#222222] bg-white dark:bg-[#121212] overflow-hidden shadow-sm transition-all duration-200">
                   <button
                     type="button"
                     onClick={() => setOpenIdx(isOpen ? null : idx)}
-                    className="w-full text-left p-3.5 sm:p-6 flex items-center justify-between gap-3 font-bold text-sm sm:text-lg text-[#1b2823] dark:text-[#ffffff] hover:text-[#f15e1c] dark:hover:text-[#f15e1c] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f15e1c]"
+                    className="w-full text-left p-3.5 sm:p-5 flex items-center justify-between gap-3 font-bold text-sm sm:text-base text-[#1b2823] dark:text-[#ffffff] hover:text-[#f15e1c] dark:hover:text-[#f15e1c] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f15e1c]"
                     aria-expanded={isOpen}
                   >
                     <div className="flex items-center gap-2.5">
@@ -92,8 +96,8 @@ export function HomeFAQSection() {
                   </button>
 
                   {isOpen && (
-                    <div className="px-3.5 pb-4 sm:px-6 sm:pb-6 pt-1 text-xs sm:text-base text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed border-t border-[#f7d7b0]/40 dark:border-[#1a1a1a]">
-                      <div className="pt-2 sm:pt-3">{faq.a}</div>
+                    <div className="px-3.5 pb-4 sm:px-6 sm:pb-5 pt-1 text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed border-t border-[#f7d7b0]/40 dark:border-[#1a1a1a]">
+                      <div className="pt-2">{faq.a}</div>
                     </div>
                   )}
                 </div>

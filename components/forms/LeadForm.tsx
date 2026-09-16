@@ -249,7 +249,7 @@ export function LeadForm({
           isLoading={isSubmitting}
           rightIcon={<ArrowRight className="w-4 h-4" />}
         >
-          Request an Expert Consultation
+          Book a Consultation
         </Button>
       </div>
 
