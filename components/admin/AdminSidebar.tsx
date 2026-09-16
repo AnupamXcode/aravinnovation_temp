@@ -23,6 +23,7 @@ import {
   Zap,
   Activity,
   Sparkles,
+  Bot,
 } from "lucide-react";
 import { BrandLogo } from "@/components/layout/BrandLogo";
 import { cn } from "@/lib/utils";
@@ -76,8 +77,9 @@ export function AdminSidebar({
     {
       groupLabel: "COMMUNICATION",
       items: [
+        { id: "contact", label: "Contacts & Leads", icon: PhoneCall },
+        { id: "chatbot_inquiries", label: "Chatbot Inquiries", icon: Bot },
         { id: "chatbot", label: "Chatbot & KB", icon: MessageSquare },
-        { id: "contact", label: "Contact & Leads", icon: PhoneCall },
       ],
     },
     {

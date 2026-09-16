@@ -99,7 +99,9 @@ export function SubmissionsAdminPanel({
     }
   };
 
-  const filteredSubmissions = submissions.filter((s) => {
+  const webSubmissions = submissions.filter((s) => s.source !== "chatbot");
+
+  const filteredSubmissions = webSubmissions.filter((s) => {
     const matchesFilter = filter === "all" || s.status === filter;
     const matchesSearch =
       !searchTerm ||
@@ -111,10 +113,10 @@ export function SubmissionsAdminPanel({
     return matchesFilter && matchesSearch;
   });
 
-  const totalCount = submissions.length;
-  const newCount = submissions.filter((s) => s.status === "new").length;
-  const contactedCount = submissions.filter((s) => s.status === "contacted").length;
-  const qualifiedCount = submissions.filter((s) => s.status === "qualified").length;
+  const totalCount = webSubmissions.length;
+  const newCount = webSubmissions.filter((s) => s.status === "new").length;
+  const contactedCount = webSubmissions.filter((s) => s.status === "contacted").length;
+  const qualifiedCount = webSubmissions.filter((s) => s.status === "qualified").length;
 
   return (
     <div className="space-y-6">

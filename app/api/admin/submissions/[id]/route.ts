@@ -10,7 +10,7 @@ export async function PATCH(
     const body = await req.json();
     const { status } = body;
 
-    if (!status || !['new', 'contacted', 'qualified', 'archived'].includes(status)) {
+    if (!status || !['new', 'contacted', 'in_progress', 'converted', 'closed', 'qualified', 'archived'].includes(status)) {
       return NextResponse.json(
         { error: 'Invalid status value' },
         { status: 400 }

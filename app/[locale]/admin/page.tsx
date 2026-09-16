@@ -22,6 +22,7 @@ import { NavbarAdminPanel } from "@/components/admin/NavbarAdminPanel";
 import { HeroAdminPanel } from "@/components/admin/HeroAdminPanel";
 import { AdminVerificationPanel } from "@/components/admin/AdminVerificationPanel";
 import { SubmissionsAdminPanel } from "@/components/admin/SubmissionsAdminPanel";
+import { ChatbotInquiriesAdminPanel } from "@/components/admin/ChatbotInquiriesAdminPanel";
 import {
   Shield,
   MessageSquare,
@@ -449,14 +450,14 @@ export default function AdminDashboardPage() {
                 {[
                   { label: "Homepage & Hero", tab: "hero" },
                   { label: "Core Services", tab: "services" },
+                  { label: "Chatbot Inquiries Pipeline", tab: "chatbot_inquiries" },
+                  { label: "Website Contacts & Leads", tab: "contact" },
                   { label: "Industry Solutions", tab: "industries" },
                   { label: "Case Studies", tab: "casestudies" },
                   { label: "5-Step Methodology", tab: "methodology" },
                   { label: "Client Testimonials", tab: "testimonials" },
                   { label: "Footer & Regional CMS", tab: "footer" },
-                  { label: "Chatbot Commands", tab: "chatbot" },
-                  { label: "Social Media URLs", tab: "socials" },
-                  { label: "Global SEO", tab: "seo" },
+                  { label: "Chatbot & KB Config", tab: "chatbot" },
                 ].map((act, i) => (
                   <button
                     key={i}
@@ -471,10 +472,11 @@ export default function AdminDashboardPage() {
             </div>
 
             {/* Live System Indicators */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
               {[
                 { label: "Website Status", value: config.websiteEnabled !== false ? "LIVE (ONLINE)" : "STOPPED (OFFLINE)", active: config.websiteEnabled !== false },
                 { label: "Chatbot Master Switch", value: config.chatbotEnabled && content.chatbotKB?.masterEnabled !== false ? "ON" : "OFF", active: config.chatbotEnabled },
+                { label: "Chatbot Inquiries Pipeline", value: "SEPARATE CRM", active: true },
                 { label: "Active Social Links", value: `${(content.socialLinks || []).filter((s) => s.enabled).length} ACTIVE`, active: true },
                 { label: "Languages Enabled", value: `${(content.languages || []).filter((l) => l.enabled).length} ACTIVE`, active: true },
               ].map((stat, idx) => (
@@ -2130,6 +2132,13 @@ export default function AdminDashboardPage() {
             setFooterForm={setFooterForm}
             updateFooter={updateFooter}
           />
+        )}
+
+        {/* ========================================================================= */}
+        {/* TAB 11.5: CHATBOT INQUIRIES PIPELINE (SEPARATE SECTION) */}
+        {/* ========================================================================= */}
+        {activeTab === "chatbot_inquiries" && (
+          <ChatbotInquiriesAdminPanel showToast={showToast} />
         )}
 
         {/* ========================================================================= */}

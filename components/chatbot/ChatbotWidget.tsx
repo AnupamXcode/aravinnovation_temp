@@ -409,29 +409,127 @@ export function ChatbotWidget() {
     }
   };
 
+  const [isSubmittingLead, setIsSubmittingLead] = React.useState(false);
+
   // Centralized lead submission to backend
   const handleLeadSubmitInternal = async (overrideData?: typeof leadFormState) => {
+    if (isSubmittingLead) return;
+    setIsSubmittingLead(true);
+    setIsTyping(true);
+
     const dataToSend = overrideData || leadFormState;
+    const nameVal = dataToSend.name || sessionContext.userName || "Website Visitor";
+    const companyVal = dataToSend.company || sessionContext.userCompany || "Independent / Enterprise";
+    const emailVal = dataToSend.email || sessionContext.userEmail || "";
+    const phoneVal = dataToSend.phone || sessionContext.userPhone || "N/A";
+    const serviceVal = sessionContext.mentionedService || "IT Strategy & Implementation";
+    const reqVal = dataToSend.requirement || sessionContext.userRequirement || "Inquiry captured via Arav Assistant";
+
+    const userMessages = messages.filter((m) => m.sender === "user").map((m) => m.text);
+    const originalQueryVal = sessionContext.userRequirement || (userMessages.length > 0 ? userMessages[0] : reqVal);
+
+    const contextVal = messages.slice(-6).map((m) => ({
+      sender: m.sender,
+      text: m.text,
+    }));
+
     try {
-      await fetch("/api/lead", {
+      const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: dataToSend.name || sessionContext.userName || "Website Visitor",
-          company: dataToSend.company || sessionContext.userCompany || "Direct Enquiry",
-          email: dataToSend.email || sessionContext.userEmail || "visitor@aravinnovations.com",
-          phone: dataToSend.phone || sessionContext.userPhone || "N/A",
-          service: sessionContext.mentionedService || "Strategy & AI Consultation",
-          requirement: dataToSend.requirement || sessionContext.userRequirement || "Enquiry captured via Arav Assistant",
+          name: nameVal,
+          company: companyVal,
+          email: emailVal,
+          phone: phoneVal,
+          service: serviceVal,
+          industry: dataToSend.industry || sessionContext.mentionedIndustry || undefined,
+          requirement: reqVal,
+          originalQuery: originalQueryVal,
+          conversationContext: contextVal,
           timeline: "1 - 3 Months",
           source: "chatbot",
         }),
       });
-      setLeadSubmitted(true);
-      updateContext({ leadStep: undefined, conversationStage: "RECOMMENDED" });
-      trackEvent({ type: "chatbot_lead", intent: "chatbot_enquiry", service: sessionContext.mentionedService });
+
+      const data = await res.json();
+      setIsTyping(false);
+      setIsSubmittingLead(false);
+
+      if (res.ok && data.success) {
+        setLeadSubmitted(true);
+        updateContext({ leadStep: undefined, conversationStage: "CONFIRMATION_STATE" });
+        trackEvent({ type: "chatbot_lead", intent: "chatbot_enquiry", service: serviceVal });
+
+        const confirmText =
+          locale === "hi"
+            ? "आरव इनोवेशन से संपर्क करने के लिए धन्यवाद! आपकी पूछताछ सफलतापूर्वक दर्ज हो गई है। हमारी टीम आपके अनुरोध की समीक्षा करेगी और जल्द ही आपसे संपर्क करेगी।\n\nयदि आपके कोई अन्य प्रश्न हैं, तो बेझिझक पूछें।"
+            : locale === "de"
+            ? "Vielen Dank für Ihre Kontaktaufnahme mit Arav Innovations! Ihre Anfrage wurde erfolgreich übermittelt. Unser Team wird Ihre Anfrage prüfen und sich in Kürze mit Ihnen in Verbindung setzen.\n\nWenn Sie weitere Fragen haben, können Sie diese gerne stellen."
+            : locale === "ar"
+            ? "شكراً لتواصلك مع آراف إينوفيشينز! تم تقديم استفسارك بنجاح. سيقوم فريقنا بمراجعة طلبك والتواصل معك قريباً.\n\nإذا كان لديك أي أسئلة أخرى، فلا تتردد في السؤال."
+            : "Thank you for reaching out to Arav Innovations! Your query has been successfully submitted. Our team will review your request and get in touch with you soon.\n\nIf you have any further questions, feel free to ask.";
+
+        const confirmMsg: ChatMessage = {
+          id: `bot-confirm-${Date.now()}`,
+          sender: "bot",
+          text: confirmText,
+          options: [
+            {
+              label: locale === "hi" ? "और सेवाएं देखें →" : locale === "de" ? "Weitere Services entdecken →" : locale === "ar" ? "استكشف المزيد من الخدمات →" : "Explore More Services →",
+              action: "navigate",
+              route: "/services",
+            },
+          ],
+        };
+
+        setMessages((prev) => [...prev, confirmMsg]);
+        if (chatbotKB?.autoReadAloud) {
+          toggleReadAloud(confirmMsg.id, confirmMsg.text);
+        }
+      } else {
+        const errorText =
+          locale === "hi"
+            ? "हम अभी आपकी पूछताछ प्रस्तुत नहीं कर सके। कृपया पुनः प्रयास करें।"
+            : locale === "de"
+            ? "Wir konnten Ihre Anfrage derzeit nicht übermitteln. Bitte versuchen Sie es erneut."
+            : locale === "ar"
+            ? "لم نتمكن من تقديم استفسارك الآن. يرجى المحاولة مرة أخرى."
+            : "We couldn't submit your inquiry right now. Please try again.";
+
+        const errorMsg: ChatMessage = {
+          id: `bot-error-${Date.now()}`,
+          sender: "bot",
+          text: errorText,
+          options: [
+            {
+              label: locale === "hi" ? "पुनः प्रयास करें 🔄" : locale === "de" ? "Erneut versuchen 🔄" : "Retry Submission 🔄",
+              action: "intent_trigger",
+              payload: "confirm_submit_lead",
+            },
+          ],
+        };
+
+        setMessages((prev) => [...prev, errorMsg]);
+      }
     } catch {
-      // ignore
+      setIsTyping(false);
+      setIsSubmittingLead(false);
+
+      const errorText = "We couldn't submit your inquiry right now. Please try again.";
+      const errorMsg: ChatMessage = {
+        id: `bot-error-${Date.now()}`,
+        sender: "bot",
+        text: errorText,
+        options: [
+          {
+            label: "Retry Submission 🔄",
+            action: "intent_trigger",
+            payload: "confirm_submit_lead",
+          },
+        ],
+      };
+      setMessages((prev) => [...prev, errorMsg]);
     }
   };
 
@@ -445,6 +543,11 @@ export function ChatbotWidget() {
 
     if (option.route && option.action === "navigate") {
       router.push(option.route);
+      return;
+    }
+
+    if (option.payload === "confirm_submit_lead") {
+      handleLeadSubmitInternal();
       return;
     }
 
@@ -640,20 +743,7 @@ export function ChatbotWidget() {
       // STEP 5: Lead Submission Confirmation
       else if (userText.toLowerCase().includes("confirm_submit_lead") || sessionContext.leadStep === "CONFIRM") {
         handleLeadSubmitInternal();
-        const text =
-          locale === "hi"
-            ? `धन्यवाद, ${sessionContext.userName || ""}! आपकी पूछताछ सफलतापूर्वक आरव टीम को भेज दी गई है। एक वरिष्ठ सलाहकार जल्द ही आपसे संपर्क करेगा।`
-            : locale === "de"
-            ? `Vielen Dank, ${sessionContext.userName || ""}! Ihre Anfrage wurde erfolgreich an das Arav-Team übermittelt.`
-            : `Thanks, ${sessionContext.userName || ""}! Your enquiry has been received. An Arav technical specialist will reach out to you shortly.`;
-
-        botMsg = {
-          id: `bot-${Date.now()}`,
-          sender: "bot",
-          text,
-          options: getGreetingQuickReplies(locale, sessionContext.userName),
-        };
-        updateContext({ leadStep: undefined });
+        return;
       }
       // STEP 6: Intent Matching & Natural Conversation
       else {

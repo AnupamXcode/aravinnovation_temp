@@ -32,6 +32,14 @@ export async function POST(request: Request) {
     const requirementRaw = sanitizeString(rawBody.requirement || rawBody.message || rawBody.details || rawBody.description);
     const timeline = sanitizeString(rawBody.timeline || rawBody.estimatedTimeline || "1 - 3 Months");
     const budget = rawBody.budget || rawBody.projectBudget ? sanitizeString(rawBody.budget || rawBody.projectBudget) : undefined;
+    const industry = rawBody.industry ? sanitizeString(rawBody.industry) : undefined;
+    const originalQuery = rawBody.originalQuery ? sanitizeString(rawBody.originalQuery) : requirementRaw;
+    const conversationContext = Array.isArray(rawBody.conversationContext)
+      ? rawBody.conversationContext.map((c: any) => ({
+          sender: (c.sender === "user" ? "user" : "bot") as "bot" | "user",
+          text: sanitizeString(c.text),
+        }))
+      : undefined;
     const source = rawBody.source ? sanitizeString(rawBody.source) : "website_form";
 
     // Ensure requirement has min 10 chars as per schema
@@ -56,6 +64,9 @@ export async function POST(request: Request) {
     // Save submission to persistent store (guaranteed not to throw filesystem errors)
     const submission = saveSubmission({
       ...validatedData,
+      industry,
+      originalQuery,
+      conversationContext,
       source,
     });
 

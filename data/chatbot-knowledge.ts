@@ -78,7 +78,7 @@ export interface ChatSessionContext {
   mentionedBudget?: string;
   lastIntentId?: string;
   leadStep?: "NAME" | "REQUIREMENT" | "COMPANY" | "INDUSTRY" | "EMAIL" | "PHONE" | "CONFIRM";
-  conversationStage?: "GREETING" | "NAME_SET" | "QUALIFYING" | "RECOMMENDED" | "LEAD_CAPTURE";
+  conversationStage?: "GREETING" | "NAME_SET" | "QUALIFYING" | "RECOMMENDED" | "LEAD_CAPTURE" | "SUBMISSION_SUCCESS" | "CONFIRMATION_STATE";
   history: string[];
 }
 
