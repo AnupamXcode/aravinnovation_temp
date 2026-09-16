@@ -513,8 +513,16 @@ export function Navbar() {
                   </AnimatePresence>
                 </div>
 
-                {/* Group 2: Products & Platforms */}
-                <div className="border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-3">
+                {/* Group 2: Industries & Products */}
+                <div className="border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-3 space-y-2">
+                  <Link
+                    href="/industries"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-between w-full min-h-[44px] py-1 font-display text-sm sm:text-base font-bold text-[#3A2E27] dark:text-[#FAF5EE] active:scale-[0.99] transition-transform"
+                  >
+                    <span>Industries &amp; Vertical Solutions</span>
+                    <ArrowRight className="w-4 h-4 text-[#f15e1c]/60" />
+                  </Link>
                   <Link
                     href="/products"
                     onClick={() => setMobileMenuOpen(false)}

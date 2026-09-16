@@ -209,25 +209,27 @@ export default async function HomePage({
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="contact">
         <Scroll3DContainer variant="cta">
           <section className="py-8 md:py-14 px-6 sm:px-12 lg:px-14 rounded-[2.5rem] bg-gradient-to-br from-[#ffffff] via-[#fefaf5] to-[#f7d7b0]/50 dark:from-[#0a0a0a] dark:via-[#121212] dark:to-[#1a1a1a] border-2 border-[#f15e1c]/40 shadow-2xl transition-all duration-300">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+              {/* LEFT COLUMN: Heading, Supporting Copy, Value Statement & Contact Details */}
               <div className="lg:col-span-5 space-y-6">
                 <Badge variant="secondary" size="md">
                   START A CONVERSATION
                 </Badge>
                 <ScrollTextFlip>
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight mt-3 leading-[1.1]">
-                    Have a Business Challenge or Growth Goal?
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight mt-2 leading-[1.1]">
+                    Let&apos;s Talk About Your Project
                   </h2>
                 </ScrollTextFlip>
                 <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed">
                   Tell us what you&apos;re trying to build, improve or grow. We&apos;ll help you identify the right next step.
                 </p>
 
-                <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] space-y-3.5 mt-6 shadow-md">
-                  <h3 className="text-base font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
+                {/* Value Statement & Engagement Approach */}
+                <div className="p-5 sm:p-6 rounded-3xl bg-white dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] space-y-3 shadow-md">
+                  <h3 className="text-sm sm:text-base font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
                     Our Engagement Approach
                   </h3>
-                  <ul className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] space-y-2.5">
+                  <ul className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] space-y-2">
                     <li className="flex items-center gap-2.5">
                       <CheckCircle className="w-4 h-4 text-[#2e936f] shrink-0" />
                       <span>Initial discovery &amp; architecture review</span>
@@ -242,8 +244,37 @@ export default async function HomePage({
                     </li>
                   </ul>
                 </div>
+
+                {/* Direct Contact Information Strip */}
+                <div className="p-5 sm:p-6 rounded-3xl bg-[#fefaf5] dark:bg-[#111111] border border-[#f7d7b0] dark:border-[#262626] space-y-3">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#f15e1c] block">
+                    Direct Contact Channels
+                  </span>
+
+                  <div className="grid grid-cols-1 gap-2.5 text-xs text-[#1b2823] dark:text-[#ffffff] font-medium">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[#4a5c55] dark:text-[#d3eee4]">India HQ:</span>
+                      <a href="tel:+919650625777" className="font-bold font-mono text-[#f15e1c] hover:underline">
+                        +91 96506 25777
+                      </a>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[#4a5c55] dark:text-[#d3eee4]">UAE Regional Office:</span>
+                      <a href="tel:+971521555792" className="font-bold font-mono text-[#f15e1c] hover:underline">
+                        +971 52 155 5792
+                      </a>
+                    </div>
+                    <div className="flex items-center justify-between pt-1 border-t border-[#f7d7b0]/60 dark:border-[#222222]">
+                      <span className="text-[#4a5c55] dark:text-[#d3eee4]">General Inquiry:</span>
+                      <a href="mailto:Info@aravinnovations.com" className="font-bold text-[#f15e1c] hover:underline">
+                        Info@aravinnovations.com
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
 
+              {/* RIGHT COLUMN: Enquiry Form */}
               <div className="lg:col-span-7">
                 <ScrollReveal direction="left" delay={0.2}>
                   <LeadForm source="homepage_final_cta" />

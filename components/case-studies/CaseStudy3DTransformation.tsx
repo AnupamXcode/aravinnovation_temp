@@ -21,7 +21,8 @@ import { cn } from "@/lib/utils";
 interface TransformationStep {
   step: string;
   title: string;
-  subtitle: string;
+  challenge: string;
+  solution: string;
   metric: string;
   metricLabel: string;
   icon: React.ReactNode;
@@ -32,7 +33,8 @@ const transformationSteps: TransformationStep[] = [
   {
     step: "01",
     title: "LEGACY RESTRUCTURE",
-    subtitle: "Deconstruct Monoliths & Tech Debt",
+    challenge: "Monolithic tech debt & slow build pipelines",
+    solution: "Microservices architecture & Next.js modernization",
     metric: "45%",
     metricLabel: "Latency Reduced",
     icon: <RefreshCw className="w-6 h-6 text-[#f15e1c]" />,
@@ -41,7 +43,8 @@ const transformationSteps: TransformationStep[] = [
   {
     step: "02",
     title: "CLOUD MODERNIZE",
-    subtitle: "Next.js App Router & Microservices",
+    challenge: "Poor page speed & mobile bounce rates",
+    solution: "Edge caching & App Router server components",
     metric: "100/100",
     metricLabel: "Core Web Vitals",
     icon: <Cloud className="w-6 h-6 text-[#2e936f]" />,
@@ -50,7 +53,8 @@ const transformationSteps: TransformationStep[] = [
   {
     step: "03",
     title: "AUTOMATE & COMPLY",
-    subtitle: "DPDP Governance & Continuous CI/CD",
+    challenge: "Strict DPDP India & UAE data privacy requirements",
+    solution: "Automated compliance, audit logs & ISO readiness",
     metric: "100%",
     metricLabel: "DPDP Compliant",
     icon: <ShieldCheck className="w-6 h-6 text-[#fab60a]" />,
@@ -59,7 +63,8 @@ const transformationSteps: TransformationStep[] = [
   {
     step: "04",
     title: "SCALABLE GROWTH",
-    subtitle: "Closed-Loop Demand & High Intent",
+    challenge: "Unfocused B2B demand & low lead conversion",
+    solution: "Closed-loop marketing & high-intent funnel design",
     metric: "3.4x",
     metricLabel: "Conversion Uplift",
     icon: <TrendingUp className="w-6 h-6 text-[#f15e1c]" />,
@@ -166,13 +171,20 @@ export function CaseStudy3DTransformation() {
                 </div>
 
                 {/* Step Body */}
-                <div className="space-y-2.5">
-                  <h3 className="text-xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] dark:group-hover:text-[#f15e1c] transition-colors leading-snug tracking-tight">
+                <div className="space-y-3">
+                  <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] dark:group-hover:text-[#f15e1c] transition-colors leading-snug tracking-tight">
                     {step.title}
                   </h3>
-                  <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                    {step.subtitle}
-                  </p>
+                  <div className="space-y-2 text-xs">
+                    <div className="p-2 rounded-xl bg-red-500/10 dark:bg-red-950/20 text-[#1b2823] dark:text-[#ffffff] border border-red-500/20">
+                      <span className="font-mono font-bold text-red-600 dark:text-red-400 uppercase mr-1">CHALLENGE:</span>
+                      <span>{step.challenge}</span>
+                    </div>
+                    <div className="p-2 rounded-xl bg-[#2e936f]/10 dark:bg-[#2e936f]/20 text-[#1b2823] dark:text-[#ffffff] border border-[#2e936f]/30">
+                      <span className="font-mono font-bold text-[#2e936f] uppercase mr-1">SOLUTION:</span>
+                      <span>{step.solution}</span>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Step Metric Highlight */}

@@ -168,17 +168,15 @@ const serviceLinks = [
 
 const companyLinks = [
   { label: "About Us", href: "/about" },
-  { label: "Working With Us", href: "/#process" },
+  { label: "Our Work", href: "/case-studies" },
   { label: "Careers", href: "/careers" },
   { label: "Contact", href: "/contact" },
 ];
 
 const exploreLinks = [
-  { label: "Our Approach", href: "/about" },
-  { label: "Technology", href: "/services" },
-  { label: "Case Studies", href: "/case-studies" },
-  { label: "Insights", href: "/insights" },
-  { label: "Blog Archive", href: "/blogs" },
+  { label: "Blog / Insights", href: "/insights" },
+  { label: "Case Studies / Our Work", href: "/case-studies" },
+  { label: "FAQs", href: "/#faq" },
 ];
 
 const legalLinks = [
@@ -443,8 +441,8 @@ export function Footer() {
                   </p>
                 </div>
 
-                <div className="text-[11px] font-mono text-[#ffec69] font-bold leading-relaxed">
-                  India &amp; UAE Operations | IT Strategy | Web &amp; App Development | AI &amp; Automation | SEO &amp; AEO Growth | Risk &amp; Governance
+                <div className="text-[11px] font-mono text-[#ffec69] font-bold leading-relaxed uppercase tracking-wider">
+                  Technology &bull; AI &bull; Digital Growth &bull; Governance
                 </div>
               </div>
 
@@ -561,7 +559,7 @@ export function Footer() {
 
             {/* Copyright */}
             <div className="font-mono text-center sm:text-right text-white/90 text-[11px]">
-              &copy; 2024–{new Date().getFullYear()} Arav Innovations. All rights reserved.
+              &copy; 2026 Arav Innovations. All Rights Reserved.
             </div>
           </div>
 
