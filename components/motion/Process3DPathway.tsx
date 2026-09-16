@@ -7,9 +7,9 @@ import {
   Search,
   Code2,
   TrendingUp,
-  Award,
+  Rocket,
+  ShieldCheck,
   CheckCircle2,
-  ArrowRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -26,64 +26,66 @@ interface ProcessStep {
 const steps: ProcessStep[] = [
   {
     number: "01",
-    title: "Understand & Audit",
+    title: "Discover",
     subtitle: "Discovery & Systems Inspection",
-    description:
-      "Comprehensive technical audit of architecture, performance bottlenecks, tech debt, and DPDP compliance requirements.",
-    deliverables: ["Tech Debt Assessment", "Security Risk Matrix", "Architecture Map"],
+    description: "Deep-dive audit of current technology architecture, performance bottlenecks, tech debt, and business growth objectives.",
+    deliverables: ["Architecture Audit", "Security & Risk Matrix", "Growth Bottleneck Analysis"],
     icon: <Search className="w-5 h-5 text-[#f15e1c]" />,
     color: "#f15e1c",
   },
   {
     number: "02",
-    title: "Strategize & Architect",
-    subtitle: "Enterprise Blueprint & SOW",
-    description:
-      "Formulating custom multi-phase roadmaps, cloud component selection, and SLA milestones prior to codebase mutation.",
-    deliverables: ["Cloud Blueprint", "SLA Framework", "Fixed Milestone SOW"],
+    title: "Strategize",
+    subtitle: "Enterprise Blueprint & Roadmap",
+    description: "Formulating custom multi-phase roadmaps, cloud component selection, and SLA milestones aligned with commercial goals.",
+    deliverables: ["Cloud Architecture Blueprint", "SLA Framework", "Phased Execution Roadmap"],
     icon: <Compass className="w-5 h-5 text-[#2e936f]" />,
     color: "#2e936f",
   },
   {
     number: "03",
-    title: "Implement & Engineer",
-    subtitle: "High-Speed Squad Delivery",
-    description:
-      "Full-stack Next.js engineering, microservices API implementation, and continuous automated CI/CD deployment.",
-    deliverables: ["Production Codebase", "TypeScript Strict Build", "CI/CD Pipeline"],
+    title: "Build",
+    subtitle: "High-Performance Engineering",
+    description: "Full-stack Next.js engineering, microservices API implementation, AI integrations, and strict TypeScript pipelines.",
+    deliverables: ["Production Codebase", "TypeScript Strict Build", "Automated CI/CD Pipeline"],
     icon: <Code2 className="w-5 h-5 text-[#fab60a]" />,
     color: "#fab60a",
   },
   {
     number: "04",
-    title: "Optimize & Accelerate",
-    subtitle: "SEO, Performance & Conversion",
-    description:
-      "Sub-second Core Web Vitals optimization, programmatic SEO indexing, and closed-loop B2B demand generation.",
-    deliverables: ["100/100 Core Web Vitals", "Programmatic SEO", "ABM Lead Tracking"],
-    icon: <TrendingUp className="w-5 h-5 text-[#f15e1c]" />,
+    title: "Launch",
+    subtitle: "Production Deployment & Verification",
+    description: "Seamless zero-downtime production deployment, infrastructure monitoring, and end-to-end security verification.",
+    deliverables: ["Production Launch", "Infrastructure Telemetry", "Security Hardening"],
+    icon: <Rocket className="w-5 h-5 text-[#f15e1c]" />,
     color: "#f15e1c",
   },
   {
     number: "05",
-    title: "Deliver & Scale",
-    subtitle: "24/7 SLA Support & Growth",
-    description:
-      "Handover with full IP ownership, team training, SOC-2 readiness, and ongoing 24/7 dedicated engineering support.",
-    deliverables: ["Full IP Ownership", "24/7 Dedicated Squad", "SOC-2 Readiness"],
-    icon: <Award className="w-5 h-5 text-[#2e936f]" />,
+    title: "Optimize",
+    subtitle: "Performance & Growth Tuning",
+    description: "Core Web Vitals optimization, programmatic SEO indexing, conversion funnels, and FinOps cloud spend reduction.",
+    deliverables: ["Subsecond Load Performance", "SEO & AEO Optimization", "FinOps Bill Reduction"],
+    icon: <TrendingUp className="w-5 h-5 text-[#2e936f]" />,
     color: "#2e936f",
+  },
+  {
+    number: "06",
+    title: "Scale",
+    subtitle: "Operational Expansion & SLA",
+    description: "Handover with full IP ownership, team training, SOC-2 readiness, and ongoing 24/7 SLA engineering support.",
+    deliverables: ["Full IP Ownership", "24/7 SLA Pod Support", "Continuous Capacity Scaling"],
+    icon: <ShieldCheck className="w-5 h-5 text-[#fab60a]" />,
+    color: "#fab60a",
   },
 ];
 
 export function Process3DPathway() {
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const cardRefs = React.useRef<(HTMLDivElement | null)[]>([]);
   const shouldReduceMotion = useReducedMotion();
   const [activeStep, setActiveStep] = React.useState<number>(0);
   const [isMobile, setIsMobile] = React.useState<boolean>(false);
 
-  // Detect mobile viewport (< 768px)
   React.useEffect(() => {
     if (typeof window === "undefined") return;
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -99,7 +101,6 @@ export function Process3DPathway() {
 
   const pathHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
-  // Desktop scroll progress listener (runs only when not mobile)
   React.useEffect(() => {
     if (isMobile) return;
     const unsubscribe = scrollYProgress.on("change", (latest) => {
@@ -112,150 +113,72 @@ export function Process3DPathway() {
     return () => unsubscribe();
   }, [scrollYProgress, isMobile]);
 
-  // Mobile focus-zone IntersectionObserver (lightweight, zero scroll-jacking, zero forced reflow)
-  React.useEffect(() => {
-    if (!isMobile || typeof window === "undefined") return;
-
-    const intersectingMap = new Map<number, number>();
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const indexStr = entry.target.getAttribute("data-step-index");
-          if (indexStr !== null) {
-            const index = parseInt(indexStr, 10);
-            if (entry.isIntersecting) {
-              intersectingMap.set(index, entry.intersectionRatio);
-            } else {
-              intersectingMap.delete(index);
-            }
-          }
-        });
-
-        if (intersectingMap.size > 0) {
-          let maxIndex = -1;
-          let maxRatio = -1;
-          intersectingMap.forEach((ratio, idx) => {
-            if (ratio > maxRatio) {
-              maxRatio = ratio;
-              maxIndex = idx;
-            }
-          });
-          if (maxIndex !== -1) {
-            setActiveStep((prev) => (prev !== maxIndex ? maxIndex : prev));
-          }
-        }
-      },
-      {
-        root: null,
-        rootMargin: "-25% 0px -25% 0px",
-        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1.0],
-      }
-    );
-
-    cardRefs.current.forEach((card) => {
-      if (card) observer.observe(card);
-    });
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [isMobile]);
-
   return (
-    <div
-      ref={containerRef}
-      className="relative w-full max-w-5xl mx-auto py-2 sm:py-12 px-0.5 sm:px-6 select-none"
-    >
-      <div className="relative border-l-2 border-[#f7d7b0] dark:border-[#1a1a1a] ml-1.5 sm:ml-8 pl-3 sm:pl-12 space-y-4 sm:space-y-10">
-        {/* Animated 3D Trajectory Orange Line */}
-        <motion.div
-          style={{ height: shouldReduceMotion ? "100%" : pathHeight }}
-          className="absolute top-0 left-[-2px] w-[3px] bg-gradient-to-b from-[#f15e1c] via-[#2e936f] to-[#fab60a] z-10"
-        />
-
-        {steps.map((step, idx) => {
-          const isActive = activeStep === idx;
-          const isPassed = activeStep > idx;
-
-          return (
-            <motion.div
-              key={step.number}
-              ref={(el) => {
-                cardRefs.current[idx] = el;
-              }}
-              data-step-index={idx}
-              initial={{ opacity: 0.85, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.4, delay: idx * 0.05 }}
-              whileHover={{ x: 3 }}
-              onClick={() => setActiveStep(idx)}
-              className={cn(
-                "relative z-20 p-3.5 sm:p-8 rounded-2xl sm:rounded-3xl border transition-all duration-300 cursor-pointer space-y-3 sm:space-y-4 w-full",
-                isActive
-                  ? "bg-white dark:bg-[#000000] border-[#f15e1c] ring-2 ring-[#f15e1c]/40 shadow-lg shadow-[#f15e1c]/15"
-                  : isPassed
-                  ? "bg-white dark:bg-[#0a0a0a] border-[#2e936f]/60 shadow-md"
-                  : "bg-white dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md"
-              )}
-            >
-              {/* Timeline Trajectory Node Dot */}
-              <div
-                className={cn(
-                  "absolute -left-[20px] sm:-left-[33px] top-5 sm:top-8 w-4 h-4 sm:w-6 sm:h-6 rounded-full border-2 flex items-center justify-center transition-all duration-300 z-20",
-                  isActive
-                    ? "bg-[#f15e1c] border-white text-white ring-4 ring-[#f15e1c]/30 scale-110"
-                    : isPassed
-                    ? "bg-[#2e936f] border-white text-white"
-                    : "bg-white dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a]"
-                )}
-              >
-                <div className="w-1 h-1 sm:w-2 sm:h-2 rounded-full bg-current" />
-              </div>
-
-              {/* Step Header */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] pb-3 sm:pb-4">
-                <div className="flex items-center gap-3 sm:gap-4">
-                  <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center shrink-0 shadow-xs">
-                    {React.cloneElement(step.icon as React.ReactElement<{ className?: string }>, { className: "w-5 h-5 sm:w-7 sm:h-7 text-[#f15e1c] stroke-[2]" })}
-                  </div>
-                  <div className="space-y-0.5 sm:space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[10px] sm:text-xs font-mono font-black text-[#c2410c] dark:text-[#f15e1c] px-2.5 sm:px-3 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/30">
-                        STEP {step.number}
-                      </span>
-                    </div>
-                    <h3 className="text-base sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-snug">
-                      {step.title}
-                    </h3>
-                  </div>
-                </div>
-                <span className="text-[11px] sm:text-sm font-mono text-[#1e6b50] dark:text-[#74c4ab] font-extrabold uppercase tracking-wider">
-                  {step.subtitle}
+    <div ref={containerRef} className="relative w-full py-8 sm:py-12">
+      {/* Desktop Horizontal Pathway Grid */}
+      <div className="hidden lg:grid grid-cols-6 gap-4 relative z-10">
+        {steps.map((step, idx) => (
+          <div
+            key={idx}
+            onClick={() => setActiveStep(idx)}
+            className={cn(
+              "p-5 rounded-3xl border transition-all duration-300 cursor-pointer flex flex-col justify-between relative overflow-hidden",
+              activeStep === idx
+                ? "bg-white dark:bg-[#121212] border-[#f15e1c] shadow-xl scale-[1.02]"
+                : "bg-[#FBF3EA] dark:bg-[#0a0a0a] border-[#EFE2D6] dark:border-[#1f1f1f] hover:border-[#f15e1c]"
+            )}
+          >
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="font-mono text-xs font-bold text-[#f15e1c]">
+                  {step.number}
                 </span>
+                <div className="w-8 h-8 rounded-xl bg-[#FBF3EA] dark:bg-[#161310] flex items-center justify-center">
+                  {step.icon}
+                </div>
               </div>
-
-              {/* Step Body */}
-              <p className="text-xs sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
+              <h4 className="text-base font-bold font-display text-[#221811] dark:text-[#FAF5EE] mb-1">
+                {step.title}
+              </h4>
+              <p className="text-[11px] font-mono text-[#7A6A5F] dark:text-[#B8ACA0] mb-2 font-medium">
+                {step.subtitle}
+              </p>
+              <p className="text-xs text-[#3A2E27] dark:text-[#FAF5EE] leading-relaxed mb-4">
                 {step.description}
               </p>
+            </div>
+            <ul className="space-y-1.5 pt-3 border-t border-[#EFE2D6] dark:border-[#1f1f1f]">
+              {step.deliverables.map((item, dIdx) => (
+                <li key={dIdx} className="text-[11px] flex items-center gap-1.5 text-[#3A2E27] dark:text-[#FAF5EE]">
+                  <CheckCircle2 className="w-3 h-3 text-[#2e936f] shrink-0" />
+                  <span className="truncate">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
 
-              {/* Deliverables Badges */}
-              <div className="pt-1 flex flex-wrap items-center gap-1.5 sm:gap-2">
-                {step.deliverables.map((del, dIdx) => (
-                  <div
-                    key={dIdx}
-                    className="inline-flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#262626] text-[11px] sm:text-xs font-semibold text-[#1b2823] dark:text-[#ffffff] shadow-xs"
-                  >
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
-                    <span>{del}</span>
-                  </div>
-                ))}
+      {/* Mobile Vertical Timeline */}
+      <div className="lg:hidden space-y-4 relative">
+        <div className="absolute left-6 top-4 bottom-4 w-0.5 bg-[#EFE2D6] dark:bg-[#1f1f1f]" />
+        {steps.map((step, idx) => (
+          <div
+            key={idx}
+            className="pl-14 relative"
+          >
+            <div className="absolute left-3.5 top-4 w-5 h-5 rounded-full bg-[#f15e1c] text-white flex items-center justify-center text-[10px] font-bold shadow-xs">
+              {idx + 1}
+            </div>
+            <div className="p-4 rounded-2xl bg-[#FBF3EA] dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs font-bold text-[#f15e1c]">{step.number} &bull; {step.subtitle}</span>
               </div>
-            </motion.div>
-          );
-        })}
+              <h4 className="text-base font-bold text-[#221811] dark:text-[#FAF5EE]">{step.title}</h4>
+              <p className="text-xs text-[#3A2E27] dark:text-[#FAF5EE] leading-relaxed">{step.description}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

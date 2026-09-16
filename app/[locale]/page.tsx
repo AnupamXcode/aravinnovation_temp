@@ -210,11 +210,11 @@ export default async function HomePage({
                 </Badge>
                 <ScrollTextFlip>
                   <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight mt-3 leading-[1.1]">
-                    Have a Technology or Growth Challenge?
+                    Have a Business Challenge or Growth Goal?
                   </h2>
                 </ScrollTextFlip>
                 <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed">
-                  Let&apos;s understand the problem, define the right approach and work toward a solution that fits your business.
+                  Tell us what you&apos;re trying to build, improve or grow. We&apos;ll help you identify the right next step.
                 </p>
 
                 <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] space-y-3.5 mt-6 shadow-md">
