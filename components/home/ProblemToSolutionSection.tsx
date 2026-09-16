@@ -54,12 +54,9 @@ export function ProblemToSolutionSection() {
               Technology is only valuable when it solves a real problem.
             </h2>
           </ScrollTextFlip>
-          <p className="text-xs sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed pt-1 sm:pt-2 font-medium">
-            <span className="sm:hidden">
-              We bring together IT strategy, custom engineering, AI workflow automation, digital marketing, SEO, cybersecurity, and talent under one connected ecosystem.
-            </span>
-            <span className="hidden sm:inline">
-              Businesses don&apos;t need more technology for the sake of technology. They need better systems, better digital experiences, better visibility and better ways to grow. That&apos;s where we come in. Arav Innovations brings together technology consulting, software engineering, AI, digital marketing, SEO, cybersecurity, compliance and talent solutions under one connected ecosystem.
+          <p className="text-sm sm:text-base md:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed pt-1 sm:pt-2 font-medium">
+            <span>
+              Arav Innovations brings together technology consulting, software engineering, AI workflow automation, digital marketing, SEO, cybersecurity, compliance, and talent solutions under one connected ecosystem.
             </span>
           </p>
         </div>
