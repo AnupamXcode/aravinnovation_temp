@@ -192,7 +192,7 @@ export default async function RootLayout({
                 <GlobalBackgroundMotion />
                 <ClientOverlays>
                   <Navbar />
-                  <main id="main-content" className="flex-1 w-full pt-16 sm:pt-20">{children}</main>
+                  <main id="main-content" className="flex-1 w-full pt-20 sm:pt-24 lg:pt-20">{children}</main>
                   <Footer />
                 </ClientOverlays>
               </ThemeProvider>
