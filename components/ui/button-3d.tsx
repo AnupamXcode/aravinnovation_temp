@@ -56,10 +56,20 @@ export const Button3D = React.forwardRef<HTMLButtonElement, Button3DProps>(
       }
     }, []);
 
+    const rectRef = useRef<DOMRect | null>(null);
+
+    const handleMouseEnter = () => {
+      if (!isInteractive) return;
+      setIsHovering(true);
+      if (resolvedRef.current) {
+        rectRef.current = resolvedRef.current.getBoundingClientRect();
+      }
+    };
+
     const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
       if (!magneticEffect || isTouchDevice || shouldReduceMotion) return;
 
-      const rect = resolvedRef.current?.getBoundingClientRect();
+      const rect = rectRef.current || resolvedRef.current?.getBoundingClientRect();
       if (!rect) return;
 
       const x = e.clientX - rect.left - rect.width / 2;
@@ -70,6 +80,7 @@ export const Button3D = React.forwardRef<HTMLButtonElement, Button3DProps>(
     };
 
     const handleMouseLeave = () => {
+      rectRef.current = null;
       setMousePosition({ x: 0, y: 0 });
       setIsHovering(false);
     };
@@ -105,7 +116,7 @@ export const Button3D = React.forwardRef<HTMLButtonElement, Button3DProps>(
         disabled={disabled || isLoading}
         aria-label={ariaLabel}
         onMouseMove={handleMouseMove}
-        onMouseEnter={() => isInteractive && setIsHovering(true)}
+        onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         animate={
           shouldReduceMotion || !isInteractive

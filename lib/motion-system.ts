@@ -47,13 +47,23 @@ export function useMagneticHover(distanceThreshold: number = 100, strength: numb
     if (reduceMotion || typeof window === "undefined" || !ref.current) return;
 
     const node = ref.current;
+    let cachedRect: DOMRect | null = null;
     let ticking = false;
+
+    const handleMouseEnter = () => {
+      if (node) {
+        cachedRect = node.getBoundingClientRect();
+      }
+    };
 
     const handleMouseMove = (e: MouseEvent) => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           if (!node) return;
-          const rect = node.getBoundingClientRect();
+          if (!cachedRect) {
+            cachedRect = node.getBoundingClientRect();
+          }
+          const rect = cachedRect;
           const centerX = rect.left + rect.width / 2;
           const centerY = rect.top + rect.height / 2;
 
@@ -75,14 +85,17 @@ export function useMagneticHover(distanceThreshold: number = 100, strength: numb
     };
 
     const handleMouseLeave = () => {
+      cachedRect = null;
       x.set(0);
       y.set(0);
     };
 
+    node.addEventListener("mouseenter", handleMouseEnter, { passive: true } as any);
     node.addEventListener("mousemove", handleMouseMove, { passive: true } as any);
     node.addEventListener("mouseleave", handleMouseLeave, { passive: true } as any);
 
     return () => {
+      node.removeEventListener("mouseenter", handleMouseEnter);
       node.removeEventListener("mousemove", handleMouseMove);
       node.removeEventListener("mouseleave", handleMouseLeave);
     };

@@ -141,14 +141,15 @@ export function ExplodedServicesStack3D() {
       const updateConnectors = () => {
         if (!stack || !stageRef.current || !svg) return;
         const isMobile = window.innerWidth < 768;
-        const stageBox = stageRef.current.getBoundingClientRect();
-        const stackBox = stack.getBoundingClientRect();
 
-        // On mobile, bypass SVG connectors to prevent clutter
+        // On mobile, bypass SVG connectors and DOM measurement to prevent layout thrashing
         if (isMobile) {
           svg.innerHTML = "";
           return;
         }
+
+        const stageBox = stageRef.current.getBoundingClientRect();
+        const stackBox = stack.getBoundingClientRect();
 
         const leftCards: HTMLElement[] = [];
         const rightCards: HTMLElement[] = [];

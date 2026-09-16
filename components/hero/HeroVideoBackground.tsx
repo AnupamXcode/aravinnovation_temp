@@ -86,6 +86,12 @@ export function HeroVideoBackground() {
     };
   }, [prefersReducedMotion, videoSpeed, isVideoEnabled]);
 
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <div
       ref={containerRef}
@@ -93,14 +99,14 @@ export function HeroVideoBackground() {
       aria-hidden="true"
     >
       {/* Single Authoritative Hero Background Video Instance */}
-      {isVideoEnabled && !videoError && !prefersReducedMotion && (
+      {isVideoEnabled && isMounted && !videoError && !prefersReducedMotion && (
         <video
           ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
           tabIndex={-1}
           aria-hidden="true"
           onLoadedMetadata={setVideoPlaybackSpeed}
@@ -110,6 +116,7 @@ export function HeroVideoBackground() {
           className="absolute inset-0 w-full h-full object-cover object-center sm:object-center transform-gpu transition-opacity duration-500 opacity-100"
         >
           <source src="/videos/hero-bg-mobile.mp4" media="(max-width: 639px)" type="video/mp4" />
+          <source src="/videos/hero-bg.webm" type="video/webm" />
           <source src={videoSrc} type="video/mp4" />
         </video>
       )}

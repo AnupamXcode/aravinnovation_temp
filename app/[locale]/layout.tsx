@@ -21,7 +21,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600", "700", "800"],
-  preload: false,
+  preload: true,
 });
 
 const inter = Inter({
@@ -29,7 +29,7 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600", "700"],
-  preload: false,
+  preload: true,
 });
 
 const notoSansArabic = Noto_Sans_Arabic({
