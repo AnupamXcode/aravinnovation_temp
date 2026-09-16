@@ -25,6 +25,8 @@ export function LeadForm({
 }: LeadFormProps) {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isSubmitted, setIsSubmitted] = React.useState(false);
+  const [submittedLeadId, setSubmittedLeadId] = React.useState<string | null>(null);
+  const [submittedEmail, setSubmittedEmail] = React.useState<string>("");
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
 
   const foundService = servicesData.find((s) => s.slug === initialService || s.title === initialService)?.title;
@@ -70,6 +72,8 @@ export function LeadForm({
 
       if (response.ok && result.success) {
         setIsSubmitted(true);
+        setSubmittedLeadId(result.leadId || `ARAV-${Date.now()}`);
+        setSubmittedEmail(data.email);
         trackEvent({
           type: "contact_submitted",
           service: data.service,
@@ -108,21 +112,30 @@ export function LeadForm({
 
   if (isSubmitted) {
     return (
-      <div className="rounded-3xl bg-white dark:bg-[#000000] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-2xl text-center space-y-5">
-        <div className="w-16 h-16 rounded-2xl bg-[#FCE3D3] dark:bg-[#161616] text-[#f15e1c] mx-auto flex items-center justify-center border border-[#F4A97F]/40 dark:border-[#262626] shadow-xs">
+      <div className="rounded-3xl bg-white dark:bg-[#000000] p-8 sm:p-12 border border-[#2e936f]/30 dark:border-[#1f1f1f] shadow-2xl text-center space-y-5">
+        <div className="w-16 h-16 rounded-2xl bg-[#2e936f]/10 text-[#2e936f] mx-auto flex items-center justify-center border border-[#2e936f]/30 shadow-xs">
           <CheckCircle2 className="w-8 h-8" />
         </div>
-        <h3 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-          Requirement Received!
-        </h3>
+        <div className="space-y-1">
+          <h3 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
+            Requirement Received!
+          </h3>
+          {submittedLeadId && (
+            <p className="text-xs font-mono text-[#f15e1c] font-bold">
+              Reference ID: {submittedLeadId}
+            </p>
+          )}
+        </div>
         <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0] max-w-md mx-auto leading-relaxed">
-          Thank you for reaching out to Arav Innovations. Our strategy & engineering team will review your requirements and schedule an exploratory discussion within 1 business day.
+          Thank you for reaching out to Arav Innovations. A confirmation email has been dispatched to <strong className="text-[#3A2E27] dark:text-[#FAF5EE]">{submittedEmail}</strong>.
+          Our expert strategy &amp; engineering team will review your requirements and schedule an exploratory call within 1 business day.
         </p>
         <div className="pt-2">
           <Button
             variant="secondary"
             size="md"
             onClick={() => setIsSubmitted(false)}
+            className="cursor-pointer"
           >
             Submit Another Requirement
           </Button>

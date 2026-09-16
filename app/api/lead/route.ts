@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { leadFormSchema } from "@/lib/validations";
+import { saveSubmission } from "@/lib/submissions";
+import { sendContactEmail } from "@/lib/email";
 
 function sanitizeString(str?: string): string {
   if (!str) return "";
@@ -26,15 +28,33 @@ export async function POST(request: Request) {
 
     const validatedData = leadFormSchema.parse(sanitizedBody);
 
-    // In production, send to CRM webhook / Email service / DB
-    // No client secrets are exposed
-    console.log("[Arav Innovations Lead Captured]:", validatedData);
+    // Save submission to persistent store
+    const submission = saveSubmission(validatedData);
+
+    console.log("[Arav Innovations Lead Saved]:", submission);
+
+    // Trigger asynchronous email notifications (admin notification to jrshrivastava03@gmail.com & user confirmation)
+    Promise.all([
+      sendContactEmail({
+        to: 'jrshrivastava03@gmail.com',
+        submission,
+        type: 'admin',
+      }),
+      sendContactEmail({
+        to: submission.email,
+        submission,
+        type: 'user',
+      }),
+    ]).catch(err => {
+      console.error('[Lead Submission Email Dispatch Error]:', err);
+    });
 
     return NextResponse.json(
       {
         success: true,
         message: "Thank you! Your requirement has been received. Our expert team will review your requirements and provide a clear, actionable roadmap.",
-        leadId: `ARAV-${Date.now()}`,
+        leadId: submission.id,
+        submission,
       },
       { status: 200 }
     );
@@ -51,4 +71,3 @@ export async function POST(request: Request) {
     );
   }
 }
-

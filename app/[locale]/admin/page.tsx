@@ -21,6 +21,7 @@ import { SEOAdminPanel } from "@/components/admin/SEOAdminPanel";
 import { NavbarAdminPanel } from "@/components/admin/NavbarAdminPanel";
 import { HeroAdminPanel } from "@/components/admin/HeroAdminPanel";
 import { AdminVerificationPanel } from "@/components/admin/AdminVerificationPanel";
+import { SubmissionsAdminPanel } from "@/components/admin/SubmissionsAdminPanel";
 import {
   Shield,
   MessageSquare,
@@ -2123,44 +2124,12 @@ export default function AdminDashboardPage() {
         {/* TAB 11: CONTACT INFO & LEADS MANAGER */}
         {/* ========================================================================= */}
         {activeTab === "contact" && (
-          <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-2">
-              <h2 className="text-lg font-bold font-display flex items-center gap-2">
-                <PhoneCall className="w-5 h-5 text-[#f15e1c]" />
-                <span>Contact Info &amp; Lead Inquiries Manager</span>
-              </h2>
-              <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
-                Configure public contact information and manage submitted project inquiries
-              </p>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-md space-y-4">
-              <h3 className="text-sm font-bold font-display text-[#f15e1c]">Public Contact Fields</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1">
-                  <label className="text-xs font-bold">India HQ Phone</label>
-                  <input
-                    type="text"
-                    value={footerForm.indiaPhone}
-                    onChange={(e) => setFooterForm({ ...footerForm, indiaPhone: e.target.value })}
-                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <label className="text-xs font-bold">UAE Office Phone</label>
-                  <input
-                    type="text"
-                    value={footerForm.uaePhone}
-                    onChange={(e) => setFooterForm({ ...footerForm, uaePhone: e.target.value })}
-                    className="w-full text-xs p-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FBF3EA] dark:bg-[#1A1613]"
-                  />
-                </div>
-              </div>
-              <Button type="button" variant="primary" size="sm" onClick={() => { updateFooter(footerForm); showToast("Contact details saved"); }} className="rounded-xl cursor-pointer">
-                Save Contact Details
-              </Button>
-            </div>
-          </div>
+          <SubmissionsAdminPanel
+            showToast={showToast}
+            footerForm={footerForm}
+            setFooterForm={setFooterForm}
+            updateFooter={updateFooter}
+          />
         )}
 
         {/* ========================================================================= */}

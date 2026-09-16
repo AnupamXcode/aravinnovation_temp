@@ -144,9 +144,73 @@
   --color-brand-muted: var(--text-secondary);
   --color-brand-border: var(--border-primary);
 
+  /* Locked Brand Palette Tokens */
+  --color-arav-orange: #f15e1c;
+  --color-arav-green: #2e936f;
+  --color-arav-white: #ffffff;
+  --color-arav-yellow: #ffec69;
+  --color-arav-gold: #fab60a;
+  --color-arav-peach: #f7d7b0;
+  --color-arav-dark: #231b16;
+  --color-arav-text: #3a2e27;
+  --color-arav-text-muted: #7a6a5f;
+
   --font-display: var(--font-display), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-sans: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
+
+/* Text Gradient Helpers */
+.text-gradient-primary {
+  background: linear-gradient(135deg, #f15e1c 0%, #fab60a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-secondary {
+  background: linear-gradient(135deg, #2e936f 0%, #fab60a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-vibrant {
+  background: linear-gradient(135deg, #f15e1c 0%, #2e936f 50%, #fab60a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-warm {
+  background: linear-gradient(135deg, #f15e1c 0%, #f7d7b0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Footer Animation Optimizations - Mobile GPU thrashing prevention */
+@media (min-width: 768px) {
+  .footer-float {
+    animation: footerFloat 6s ease-in-out infinite;
+  }
+
+  @keyframes footerFloat {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .footer-float {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
 
 html {
   background-color: var(--bg-primary);
