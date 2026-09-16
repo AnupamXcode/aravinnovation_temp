@@ -1,21 +1,32 @@
 import * as React from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { MessageSquare, X, Send, Bot, ArrowRight, ExternalLink, Mic, Volume2, VolumeX } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { MessageSquare, X, Send, Bot, ExternalLink, Mic, Volume2, VolumeX, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
 import { useSiteConfig } from "@/lib/site-config";
 import { useSiteContent } from "@/lib/site-content";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
-import { findIntent, chatbotIntents, ChatSessionContext, ChatbotIntentOption } from "@/data/chatbot-knowledge";
+import {
+  findIntent,
+  chatbotIntents,
+  ChatSessionContext,
+  ChatbotIntentOption,
+  serviceCardsData,
+  productCardsData,
+  getGreetingQuickReplies,
+  ServiceCardData,
+  ProductCardData,
+} from "@/data/chatbot-knowledge";
 
 interface ChatMessage {
   id: string;
   sender: "bot" | "user";
   text: string;
   options?: ChatbotIntentOption[];
-  isLeadForm?: boolean;
+  recommendedServiceSlug?: string;
+  recommendedProductSlug?: string;
+  isLeadConfirm?: boolean;
 }
 
 function cleanSpeechText(text: string): string {
@@ -63,7 +74,6 @@ export function ChatbotWidget() {
     }
     return {
       locale,
-      leadStep: "NAME",
       conversationStage: "GREETING",
       history: [],
     };
@@ -82,64 +92,37 @@ export function ChatbotWidget() {
     if (userName) {
       const text =
         locale === "hi"
-          ? `नमस्ते ${userName}! 👋 आपसे मिलकर खुशी हुई।\n\nआज आप आरव इनोवेशन में क्या देखना या बनाना चाहते हैं?`
+          ? `नमस्ते ${userName}! 👋 आपसे मिलकर दोबारा खुशी हुई।\n\nआज आप किस परियोजना या तकनीक पर काम करना चाहते हैं?`
           : locale === "de"
-          ? `Hallo ${userName}! 👋 Schön, Sie kennenzulernen.\n\nWas führt Sie heute zu Arav Innovations?`
+          ? `Hallo ${userName}! 👋 Schön, Sie wiederzusehen.\n\nWobei kann ich Ihnen heute bei Arav Innovations helfen?`
           : locale === "ar"
-          ? `أهلاً ${userName}! 👋 يسعدنا التواصل معك.\n\nما الذي تتطلع لتطويره أو بنائه اليوم؟`
-          : `Hey ${userName}! 👋 Nice to meet you.\n\nWhat brings you to Arav Innovations today?`;
+          ? `أهلاً ${userName}! 👋 يسعدنا التواصل معك مجدداً.\n\nما الذي تتطلع لبنائه أو تحسينه اليوم؟`
+          : `Hi ${userName}! 👋 Great to see you again.\n\nWhat are you working on right now?`;
 
       return {
         id: "welcome-name",
         sender: "bot",
         text,
-        options: getGreetingQuickReplies(),
+        options: getGreetingQuickReplies(locale, userName),
       };
     }
 
     const defaultIntro =
       chatbotKB?.defaultGreeting ||
       (locale === "hi"
-        ? "नमस्ते! 👋 मैं आरव इनोवेशन असिस्टेंट हूँ।\n\nशुरू करने से पहले, मुझे आपको किस नाम से बुलाना चाहिए?"
+        ? "नमस्ते! 👋 मैं आरव इनोवेशन सहायक हूँ।\n\nमैं सही तकनीक, डिजिटल ग्रोथ, एआई या अनुपालन समाधान खोजने में आपकी मदद कर सकता हूँ।\n\nआप अभी किस पर काम कर रहे हैं?"
         : locale === "de"
-        ? "Hallo! 👋 Ich bin der Arav Innovations Assistent.\n\nBevor wir beginnen, wie darf ich Sie nennen?"
+        ? "Hallo! 👋 Ich bin der Arav Innovations Assistent.\n\nIch helfe Ihnen, die richtige Technologie-, Wachstums-, KI- oder Compliance-Lösung zu finden.\n\nWoran arbeiten Sie derzeit?"
         : locale === "ar"
-        ? "مرحباً! 👋 أنا مساعد آراف إينوفيشينز.\n\nقبل أن نبدأ، ما الذي يجب أن أناديك به؟"
-        : "Hi! 👋 I'm the Arav Innovations assistant.\n\nBefore we begin, what should I call you?");
+        ? "مرحباً! 👋 أنا مساعد آراف إينوفيشينز.\n\nيمكنني مساعدتك في تحديد الحل التقني، النمو الرقمي، أو الذكاء الاصطناعي المناسب.\n\nما الذي تعمل عليه الآن؟"
+        : "Hi! 👋 I'm the Arav Innovations assistant.\n\nI can help you figure out the right technology, digital growth, AI, or governance solution.\n\nWhat are you working on right now?");
 
     return {
       id: "welcome",
       sender: "bot",
       text: defaultIntro,
+      options: getGreetingQuickReplies(locale),
     };
-  };
-
-  const getGreetingQuickReplies = (): ChatbotIntentOption[] => {
-    if (locale === "hi") {
-      return [
-        { label: "सेवाएं देखें", action: "intent_trigger", payload: "all_services_vague" },
-        { label: "तकनीकी चुनौती है", action: "intent_trigger", payload: "it_strategy" },
-        { label: "डिजिटल ग्रोथ की तलाश", action: "intent_trigger", payload: "digital_marketing" },
-        { label: "एआई समाधान चाहिए", action: "intent_trigger", payload: "ai_automation" },
-        { label: "कुछ और", action: "intent_trigger", payload: "services_overview" },
-      ];
-    }
-    if (locale === "de") {
-      return [
-        { label: "Leistungen erkunden", action: "intent_trigger", payload: "all_services_vague" },
-        { label: "Technische Herausforderung", action: "intent_trigger", payload: "it_strategy" },
-        { label: "Digitales Wachstum", action: "intent_trigger", payload: "digital_marketing" },
-        { label: "KI-Lösungen", action: "intent_trigger", payload: "ai_automation" },
-        { label: "Etwas anderes", action: "intent_trigger", payload: "services_overview" },
-      ];
-    }
-    return [
-      { label: "Explore our services", action: "intent_trigger", payload: "all_services_vague" },
-      { label: "I have a technology challenge", action: "intent_trigger", payload: "it_strategy" },
-      { label: "Looking for digital growth", action: "intent_trigger", payload: "digital_marketing" },
-      { label: "Looking for AI solutions", action: "intent_trigger", payload: "ai_automation" },
-      { label: "Something else", action: "intent_trigger", payload: "services_overview" },
-    ];
   };
 
   const [messages, setMessages] = React.useState<ChatMessage[]>(() => {
@@ -162,6 +145,8 @@ export function ChatbotWidget() {
   const [inputText, setInputText] = React.useState("");
   const [leadSubmitted, setLeadSubmitted] = React.useState(false);
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
+  const initialInputRef = React.useRef<string>("");
+  const [voiceStatusMsg, setVoiceStatusMsg] = React.useState<string | null>(null);
 
   // Clean up speech synthesis on unmount
   React.useEffect(() => {
@@ -178,9 +163,6 @@ export function ChatbotWidget() {
       }
     };
   }, []);
-
-  const initialInputRef = React.useRef<string>("");
-  const [voiceStatusMsg, setVoiceStatusMsg] = React.useState<string | null>(null);
 
   const updateContext = (newCtx: Partial<ChatSessionContext>) => {
     setSessionContext((prev) => {
@@ -272,7 +254,7 @@ export function ChatbotWidget() {
         const err = event?.error;
         if (err === "aborted") return;
         if (err === "not-allowed") {
-          setVoiceStatusMsg("Microphone access was denied. Please allow microphone access for this site.");
+          setVoiceStatusMsg("Microphone access was denied. Please allow microphone access.");
         } else if (err === "no-speech") {
           setVoiceStatusMsg("No speech detected. Please try again.");
         } else {
@@ -427,32 +409,36 @@ export function ChatbotWidget() {
     }
   };
 
-  const handleLeadSubmitInternal = async (finalData?: typeof leadFormState) => {
-    const dataToSend = finalData || leadFormState;
+  // Centralized lead submission to backend
+  const handleLeadSubmitInternal = async (overrideData?: typeof leadFormState) => {
+    const dataToSend = overrideData || leadFormState;
     try {
       await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: dataToSend.name || sessionContext.userName || "Inquirer",
-          company: dataToSend.company || "Direct Inquirer",
-          email: dataToSend.email || "noreply@aravinnovations.com",
-          phone: dataToSend.phone || "N/A",
-          service: sessionContext.mentionedService || "General Consultation",
-          requirement: dataToSend.requirement || sessionContext.userRequirement || "Inquiry from chatbot assistant",
+          name: dataToSend.name || sessionContext.userName || "Website Visitor",
+          company: dataToSend.company || sessionContext.userCompany || "Direct Enquiry",
+          email: dataToSend.email || sessionContext.userEmail || "visitor@aravinnovations.com",
+          phone: dataToSend.phone || sessionContext.userPhone || "N/A",
+          service: sessionContext.mentionedService || "Strategy & AI Consultation",
+          requirement: dataToSend.requirement || sessionContext.userRequirement || "Enquiry captured via Arav Assistant",
           timeline: "1 - 3 Months",
           source: "chatbot",
         }),
       });
       setLeadSubmitted(true);
-      updateContext({ leadStep: undefined });
+      updateContext({ leadStep: undefined, conversationStage: "RECOMMENDED" });
+      trackEvent({ type: "chatbot_lead", intent: "chatbot_enquiry", service: sessionContext.mentionedService });
     } catch {
       // ignore
     }
   };
 
+  // Handle clicking contextual option chips
   const handleOptionClick = (option: ChatbotIntentOption) => {
     if (option.action === "show_service_link" && option.route) {
+      trackEvent({ type: "service_view", serviceSlug: option.route, serviceTitle: option.label });
       router.push(option.route);
       return;
     }
@@ -480,7 +466,7 @@ export function ChatbotWidget() {
           const langKey = (locale === "hi" ? "hi" : locale === "de" ? "de" : locale === "ar" ? "ar" : "en") as "en" | "hi" | "de" | "ar";
           let text = intentObj.response[langKey] || intentObj.response.en;
 
-          if (sessionContext.userName && !text.includes("👋") && Math.random() < 0.4) {
+          if (sessionContext.userName && !text.includes("👋") && Math.random() < 0.3) {
             const namePrefix = locale === "hi" ? `${sessionContext.userName}, ` : locale === "de" ? `Gut, ${sessionContext.userName}. ` : `Got it, ${sessionContext.userName}. `;
             text = `${namePrefix}${text}`;
           }
@@ -492,44 +478,55 @@ export function ChatbotWidget() {
             sender: "bot",
             text,
             options: opts,
+            recommendedServiceSlug: intentObj.associatedServiceSlug,
+            recommendedProductSlug: intentObj.associatedProductSlug,
           };
-          updateContext({ lastIntentId: intentObj.id, mentionedService: intentObj.associatedServiceSlug });
+          updateContext({
+            lastIntentId: intentObj.id,
+            mentionedService: intentObj.associatedServiceSlug || sessionContext.mentionedService,
+            mentionedProduct: intentObj.associatedProductSlug || sessionContext.mentionedProduct,
+          });
         } else {
           botMsg = {
             id: `bot-${Date.now()}`,
             sender: "bot",
-            text: "I can help you explore our services, products, or connect with our team. What would you like to do?",
-            options: getGreetingQuickReplies(),
+            text: "Let me help you explore our capabilities or connect with our team. What are you looking to achieve?",
+            options: getGreetingQuickReplies(locale, sessionContext.userName),
           };
         }
       } else if (option.action === "progressive_lead") {
-        const prefills = option.payload || "Consultation Request";
+        const prefills = option.payload || "Expert Consultation";
         setLeadFormState((prev) => ({ ...prev, requirement: prefills }));
-        updateContext({ userRequirement: prefills, leadStep: sessionContext.userName ? "COMPANY" : "NAME" });
 
-        const promptText = !sessionContext.userName
-          ? locale === "hi"
-            ? "ज़रूर! मैं आपको हमारी टीम से जोड़ने में मदद करूंगा। शुरू करने से पहले, आपका नाम क्या है?"
-            : locale === "de"
-            ? "Gerne! Ich verbinde Sie mit unserem Team. Wie heißen Sie?"
-            : "Sure! I'd be happy to get that started. Before we begin, what's your name?"
-          : locale === "hi"
-          ? `ज़रूर, ${sessionContext.userName}! आप किस कंपनी या संगठन में काम करते हैं?`
-          : locale === "de"
-          ? `Gerne, ${sessionContext.userName}! Für welches Unternehmen arbeiten Sie?`
-          : `Sure thing, ${sessionContext.userName}! What company or organization are you working with?`;
-
-        botMsg = {
-          id: `bot-${Date.now()}`,
-          sender: "bot",
-          text: promptText,
-        };
+        if (!sessionContext.userName) {
+          updateContext({ userRequirement: prefills, leadStep: "NAME", conversationStage: "LEAD_CAPTURE" });
+          botMsg = {
+            id: `bot-${Date.now()}`,
+            sender: "bot",
+            text: locale === "hi"
+              ? "ज़रूर! मैं आपको हमारी टीम से जोड़ने में मदद करूँगा। 🤝\n\nआगे बढ़ने से पहले, आपका नाम क्या है?"
+              : locale === "de"
+              ? "Gerne! Ich verbinde Sie mit unserem Team. 🤝\n\nWie heißen Sie?"
+              : "Sure! I'd be happy to connect you with an Arav specialist. 🤝\n\nBefore we begin, what should I call you?",
+          };
+        } else {
+          updateContext({ userRequirement: prefills, leadStep: "COMPANY", conversationStage: "LEAD_CAPTURE" });
+          botMsg = {
+            id: `bot-${Date.now()}`,
+            sender: "bot",
+            text: locale === "hi"
+              ? `बहुत बढ़िया, ${sessionContext.userName}! आप किस कंपनी या संगठन का प्रतिनिधित्व करते हैं?`
+              : locale === "de"
+              ? `Wunderbar, ${sessionContext.userName}! Für welches Unternehmen sind Sie tätig?`
+              : `Great, ${sessionContext.userName}! What company or organization do you represent?`,
+          };
+        }
       } else {
         botMsg = {
           id: `bot-${Date.now()}`,
           sender: "bot",
-          text: "What would you like to explore next?",
-          options: getGreetingQuickReplies(),
+          text: "What area would you like to explore next?",
+          options: getGreetingQuickReplies(locale, sessionContext.userName),
         };
       }
 
@@ -541,6 +538,7 @@ export function ChatbotWidget() {
     }, 450);
   };
 
+  // Free-text user input handler & natural language processing
   const handleCustomSend = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputText.trim()) return;
@@ -560,77 +558,56 @@ export function ChatbotWidget() {
     setTimeout(() => {
       let botMsg: ChatMessage;
 
-      // STEP 1: Name Capture (If conversation is awaiting Name)
-      if (sessionContext.leadStep === "NAME" || (!sessionContext.userName && sessionContext.conversationStage === "GREETING")) {
+      // STEP 1: Name Step in Progressive Lead Capture
+      if (sessionContext.leadStep === "NAME") {
         const cleanName = userText.replace(/my name is|i am|iam|call me|myself|this is/gi, "").trim();
         const userName = cleanName || userText;
 
         setLeadFormState((prev) => ({ ...prev, name: userName }));
-        updateContext({ userName, conversationStage: "NAME_SET", leadStep: undefined });
-
-        const greetingText =
-          locale === "hi"
-            ? `नमस्ते ${userName}! 👋 आपसे मिलकर खुशी हुई।\n\nआज आप आरव इनोवेशन में क्या देखना या बनाना चाहते हैं?`
-            : locale === "de"
-            ? `Hallo ${userName}! 👋 Schön, Sie kennenzulernen.\n\nWas führt Sie heute zu Arav Innovations?`
-            : locale === "ar"
-            ? `أهلاً ${userName}! 👋 يسعدنا التواصل معك.\n\nما الذي تتطلع لتطويره أو بنائه اليوم؟`
-            : `Hey ${userName}! 👋 Nice to meet you.\n\nWhat brings you to Arav Innovations today?`;
+        updateContext({ userName, leadStep: "COMPANY" });
 
         botMsg = {
           id: `bot-${Date.now()}`,
           sender: "bot",
-          text: greetingText,
-          options: getGreetingQuickReplies(),
+          text: locale === "hi"
+            ? `धन्यवाद, ${userName}! 🤝 आप किस कंपनी या संगठन में काम करते हैं?`
+            : locale === "de"
+            ? `Vielen Dank, ${userName}! 🤝 Für welches Unternehmen arbeiten Sie?`
+            : `Thanks, ${userName}! 🤝 What company or organization do you represent?`,
         };
       }
-      // STEP 2: Progressive Lead Steps
+      // STEP 2: Company Step
       else if (sessionContext.leadStep === "COMPANY") {
         setLeadFormState((prev) => ({ ...prev, company: userText }));
-        updateContext({ userCompany: userText, leadStep: "INDUSTRY" });
-
-        const text =
-          locale === "hi"
-            ? `समझ गया, ${sessionContext.userName}। आपकी कंपनी किस उद्योग (Industry) में काम करती है?`
-            : locale === "de"
-            ? `Verstanden, ${sessionContext.userName}. In welcher Branche ist Ihr Unternehmen tätig?`
-            : `Got it, ${sessionContext.userName}. Which industry are you working in?`;
+        updateContext({ userCompany: userText, leadStep: "EMAIL" });
 
         botMsg = {
           id: `bot-${Date.now()}`,
           sender: "bot",
-          text,
-          options: [
-            { label: "Technology & SaaS", action: "intent_trigger", payload: "industry_tech" },
-            { label: "Professional Services", action: "intent_trigger", payload: "industry_prof" },
-            { label: "Enterprise / B2B", action: "intent_trigger", payload: "industry_ent" },
-          ],
-        };
-      } else if (sessionContext.leadStep === "INDUSTRY") {
-        setLeadFormState((prev) => ({ ...prev, industry: userText }));
-        updateContext({ userIndustry: userText, leadStep: "EMAIL" });
-
-        const text =
-          locale === "hi"
-            ? `यदि आप चाहते हैं कि आरव टीम आपसे संपर्क करे, तो आपके लिए सबसे अच्छा कार्य ईमेल (Work Email) क्या है?`
+          text: locale === "hi"
+            ? `समझ गया। एक वरिष्ठ विशेषज्ञ द्वारा संपर्क के लिए आपका वर्क ईमेल (Work Email) क्या है?`
             : locale === "de"
-            ? `Welche geschäftliche E-Mail-Adresse ist am besten geeignet, um Sie zu erreichen?`
-            : `If you'd like the Arav team to follow up, what's the best work email for you?`;
-
-        botMsg = { id: `bot-${Date.now()}`, sender: "bot", text };
-      } else if (sessionContext.leadStep === "EMAIL") {
+            ? `Verstanden. Welche geschäftliche E-Mail-Adresse ist am besten geeignet?`
+            : `Got it. What's the best work email for an Arav specialist to reach you?`,
+        };
+      }
+      // STEP 3: Email Step
+      else if (sessionContext.leadStep === "EMAIL") {
         setLeadFormState((prev) => ({ ...prev, email: userText }));
         updateContext({ userEmail: userText, leadStep: "PHONE" });
 
-        const text =
-          locale === "hi"
-            ? `धन्यवाद! और संपर्क के लिए आपका फोन नंबर क्या है?`
+        botMsg = {
+          id: `bot-${Date.now()}`,
+          sender: "bot",
+          text: locale === "hi"
+            ? `धन्यवाद! और त्वरित बातचीत के लिए आपका फोन नंबर क्या है?`
             : locale === "de"
             ? `Vielen Dank! Und wie lautet Ihre Telefonnummer für Rückfragen?`
-            : `Thanks! What is your contact phone number?`;
-
-        botMsg = { id: `bot-${Date.now()}`, sender: "bot", text };
-      } else if (sessionContext.leadStep === "PHONE") {
+            : `Thanks! What is your contact phone number?`,
+        };
+      }
+      // STEP 4: Phone Step & Confirmation Card
+      else if (sessionContext.leadStep === "PHONE") {
         const finalState = { ...leadFormState, phone: userText };
         setLeadFormState(finalState);
         updateContext({ userPhone: userText, leadStep: "CONFIRM" });
@@ -641,37 +618,44 @@ export function ChatbotWidget() {
 
         const text =
           locale === "hi"
-            ? `धन्यवाद, ${nameVal}! मैंने आपके विवरण नोट कर लिए हैं:\n\n• नाम: ${nameVal}\n• कंपनी: ${companyVal}\n• ईमेल: ${emailVal}\n• फोन: ${userText}\n\nक्या आप चाहते हैं कि मैं इस पूछताछ को आरव विशेषज्ञों को भेजूं?`
+            ? `धन्यवाद, ${nameVal}! मैंने आपकी पूछताछ की जानकारी दर्ज कर ली है:\n\n• नाम: ${nameVal}\n• कंपनी: ${companyVal}\n• ईमेल: ${emailVal}\n• फोन: ${userText}\n\nक्या आप चाहते हैं कि मैं इसे आरव विशेषज्ञों को भेजूं?`
             : locale === "de"
             ? `Vielen Dank, ${nameVal}! Ich habe Ihre Details notiert:\n\n• Name: ${nameVal}\n• Firma: ${companyVal}\n• E-Mail: ${emailVal}\n• Telefon: ${userText}\n\nSoll ich Ihre Anfrage an das Arav-Team übermitteln?`
-            : `Thanks, ${nameVal}! I've noted your details:\n\n• Name: ${nameVal}\n• Company: ${companyVal}\n• Email: ${emailVal}\n• Phone: ${userText}\n\nWould you like me to submit this enquiry to an Arav specialist now?`;
+            : `Thanks, ${nameVal}! I've noted your enquiry details:\n\n• Name: ${nameVal}\n• Company: ${companyVal}\n• Email: ${emailVal}\n• Phone: ${userText}\n\nWould you like me to submit this enquiry to an Arav specialist now?`;
 
         botMsg = {
           id: `bot-${Date.now()}`,
           sender: "bot",
           text,
+          isLeadConfirm: true,
           options: [
-            { label: locale === "hi" ? "पूछताछ भेजें →" : locale === "de" ? "Anfrage absenden →" : "Submit Enquiry →", action: "intent_trigger", payload: "confirm_submit_lead" },
+            {
+              label: locale === "hi" ? "पूछताछ भेजें →" : locale === "de" ? "Anfrage absenden →" : "Submit Enquiry →",
+              action: "intent_trigger",
+              payload: "confirm_submit_lead",
+            },
           ],
         };
-      } else if (userText.toLowerCase().includes("confirm_submit_lead") || sessionContext.leadStep === "CONFIRM") {
+      }
+      // STEP 5: Lead Submission Confirmation
+      else if (userText.toLowerCase().includes("confirm_submit_lead") || sessionContext.leadStep === "CONFIRM") {
         handleLeadSubmitInternal();
         const text =
           locale === "hi"
             ? `धन्यवाद, ${sessionContext.userName || ""}! आपकी पूछताछ सफलतापूर्वक आरव टीम को भेज दी गई है। एक वरिष्ठ सलाहकार जल्द ही आपसे संपर्क करेगा।`
             : locale === "de"
             ? `Vielen Dank, ${sessionContext.userName || ""}! Ihre Anfrage wurde erfolgreich an das Arav-Team übermittelt.`
-            : `Thanks, ${sessionContext.userName || ""}! Your enquiry has been received. An Arav specialist will reach out to you shortly.`;
+            : `Thanks, ${sessionContext.userName || ""}! Your enquiry has been received. An Arav technical specialist will reach out to you shortly.`;
 
         botMsg = {
           id: `bot-${Date.now()}`,
           sender: "bot",
           text,
-          options: getGreetingQuickReplies(),
+          options: getGreetingQuickReplies(locale, sessionContext.userName),
         };
         updateContext({ leadStep: undefined });
       }
-      // STEP 3: General Natural Language & Intent Lookup
+      // STEP 6: Intent Matching & Natural Conversation
       else {
         const matched = findIntent(userText, locale, sessionContext);
 
@@ -679,6 +663,7 @@ export function ChatbotWidget() {
           updateContext({
             lastIntentId: matched.intent.id,
             mentionedService: matched.detectedService || sessionContext.mentionedService,
+            mentionedProduct: matched.detectedProduct || sessionContext.mentionedProduct,
           });
 
           const langKey = (locale === "hi" ? "hi" : locale === "de" ? "de" : locale === "ar" ? "ar" : "en") as "en" | "hi" | "de" | "ar";
@@ -689,23 +674,25 @@ export function ChatbotWidget() {
             sender: "bot",
             text: matched.responseText,
             options,
-            isLeadForm: matched.isLeadForm && !options,
+            recommendedServiceSlug: matched.detectedService,
+            recommendedProductSlug: matched.detectedProduct,
           };
         } else {
+          // Dynamic Conversational Fallback with Context Memory
           const nameRef = sessionContext.userName ? `, ${sessionContext.userName}` : "";
           const fallbackText =
             chatbotKB?.fallbackResponse ||
             (locale === "hi"
-              ? `मैं आपकी बात पूरी तरह समझ नहीं पाया${nameRef}।\n\nक्या आप तकनीक, डिजिटल ग्रोथ, एआई या अनुपालन परियोजना की खोज कर रहे हैं?`
+              ? `मैं समझ गया${nameRef}।\n\nयह देखने के लिए कि क्या सबसे उपयुक्त होगा: क्या आप नया प्रोजेक्ट बनाना चाहते हैं, किसी मौजूदा प्रणाली को सुधारना चाहते हैं, या ग्रोथ / अनुपालन में मदद चाहते हैं?`
               : locale === "de"
-              ? `Ich bin mir noch nicht ganz sicher, wonach Sie suchen${nameRef}.\n\nGeht es um Technologie, digitales Wachstum, KI oder Compliance?`
-              : `I'm not quite sure what you're looking for yet${nameRef}.\n\nAre you exploring a technology project, digital growth, AI, compliance, or something else?`);
+              ? `Ich verstehe${nameRef}.\n\nUm die beste Lösung zu finden: Möchten Sie ein neues Projekt bauen, ein bestehendes System verbessern oder suchen Sie nach Wachstum / Compliance?`
+              : `Got it${nameRef}.\n\nTo point you to the right solution: Are you looking to build something new, improve an existing system, grow search traffic, or explore compliance?`);
 
           botMsg = {
             id: `bot-${Date.now()}`,
             sender: "bot",
             text: fallbackText,
-            options: getGreetingQuickReplies(),
+            options: getGreetingQuickReplies(locale, sessionContext.userName),
           };
         }
       }
@@ -731,14 +718,14 @@ export function ChatbotWidget() {
             className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center gap-2.5 sm:gap-3 motion-reduce:transition-none"
             style={{ bottom: "calc(1rem + env(safe-area-inset-bottom, 0px))" }}
           >
-            {/* Rounded Pill Launcher Badge */}
+            {/* Rounded Pill Badge */}
             <button
               type="button"
               onClick={handleOpen}
-              className="hidden sm:flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white dark:bg-[#0a0a0a] text-[#3A2E27] dark:text-[#FAF5EE] text-xs sm:text-sm font-semibold border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl hover:shadow-2xl hover:border-[#f15e1c] dark:hover:border-[#f15e1c] transition-all duration-200 cursor-pointer"
+              className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-full bg-white dark:bg-[#0a0a0a] text-[#3A2E27] dark:text-[#FAF5EE] text-xs sm:text-sm font-semibold border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl hover:shadow-2xl hover:border-[#f15e1c] dark:hover:border-[#f15e1c] transition-all duration-200 cursor-pointer"
             >
-              <span>{locale === "hi" ? "हमसे चैट करें" : locale === "de" ? "Mit uns chatten" : locale === "ar" ? "تحدث معنا" : "Chat with us"}</span>
-              <span className="text-sm sm:text-base">👋</span>
+              <span>{locale === "hi" ? "हमसे बात करें" : locale === "de" ? "Mit uns sprechen" : locale === "ar" ? "تحدث معنا" : "Strategy & AI Assistant"}</span>
+              <span className="text-sm">👋</span>
             </button>
 
             {/* Circular Launcher Button */}
@@ -762,21 +749,21 @@ export function ChatbotWidget() {
         <div
           dir={locale === "ar" ? "rtl" : "ltr"}
           style={{ bottom: "calc(1rem + env(safe-area-inset-bottom, 0px))" }}
-          className="fixed bottom-4 right-3 sm:bottom-6 sm:right-6 z-50 w-[calc(100vw-1.5rem)] sm:w-[400px] h-[540px] max-h-[calc(100vh-5rem)] rounded-3xl bg-[#FFFDF9] dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200"
+          className="fixed bottom-4 right-3 sm:bottom-6 sm:right-6 z-50 w-[calc(100vw-1.5rem)] sm:w-[420px] h-[580px] max-h-[calc(100vh-4.5rem)] rounded-3xl bg-[#FFFDF9] dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200"
         >
           {/* Header */}
           <div className="bg-[#FBF3EA] dark:bg-[#0a0a0a] border-b border-[#EFE2D6] dark:border-[#1f1f1f] px-5 py-3.5 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-[#f15e1c] text-white flex items-center justify-center shadow-xs">
-                <Bot className="w-4 h-4" />
+              <div className="w-9 h-9 rounded-2xl bg-[#f15e1c] text-white flex items-center justify-center shadow-md shadow-[#f15e1c]/20">
+                <Bot className="w-5 h-5" />
               </div>
               <div>
                 <h4 className="text-sm font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-                  {t("headerTitle")}
+                  {t("headerTitle") || "Arav Strategy & AI Consultant"}
                 </h4>
                 <div className="flex items-center gap-1.5 text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0]">
                   <span className="w-2 h-2 rounded-full bg-[#2e936f]" />
-                  <span>{t("onlineStatus")}</span>
+                  <span>{t("onlineStatus") || "Online"}</span>
                 </div>
               </div>
             </div>
@@ -791,93 +778,176 @@ export function ChatbotWidget() {
             </button>
           </div>
 
-          {/* Messages Area */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-3 text-xs">
-            {messages.map((msg) => (
-              <div
-                key={msg.id}
-                className={cn(
-                  "flex flex-col",
-                  msg.sender === "user" ? "items-end" : "items-start"
-                )}
-              >
+          {/* Messages Container */}
+          <div className="flex-1 p-4 overflow-y-auto space-y-3.5 text-xs">
+            {messages.map((msg) => {
+              const serviceCard = msg.recommendedServiceSlug ? serviceCardsData[msg.recommendedServiceSlug] : undefined;
+              const productCard = msg.recommendedProductSlug ? productCardsData[msg.recommendedProductSlug] : undefined;
+
+              return (
                 <div
+                  key={msg.id}
                   className={cn(
-                    "max-w-[85%] rounded-2xl p-3.5 leading-relaxed",
-                    msg.sender === "user"
-                      ? "bg-[#f15e1c] text-white rounded-br-xs font-medium shadow-xs"
-                      : "bg-[#FBF3EA] dark:bg-[#0a0a0a] text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#1f1f1f] rounded-bl-xs whitespace-pre-line font-medium"
+                    "flex flex-col",
+                    msg.sender === "user" ? "items-end" : "items-start"
                   )}
                 >
-                  {msg.text}
-                </div>
-
-                {/* Read Aloud Button for Bot Messages */}
-                {msg.sender === "bot" && (
-                  <button
-                    type="button"
-                    onClick={() => toggleReadAloud(msg.id, msg.text)}
-                    className="mt-1 flex items-center gap-1 text-[10px] font-mono text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] transition-colors cursor-pointer"
-                    title="Read Aloud"
-                  >
-                    {speakingMsgId === msg.id ? (
-                      <>
-                        <VolumeX className="w-3 h-3 text-[#f15e1c] animate-pulse" />
-                        <span className="text-[#f15e1c] font-bold">Stop Speaking</span>
-                      </>
-                    ) : (
-                      <>
-                        <Volume2 className="w-3 h-3 text-[#2e936f]" />
-                        <span>Read Aloud</span>
-                      </>
+                  <div
+                    className={cn(
+                      "max-w-[88%] rounded-2xl p-3.5 leading-relaxed",
+                      msg.sender === "user"
+                        ? "bg-[#f15e1c] text-white rounded-br-xs font-medium shadow-xs"
+                        : "bg-[#FBF3EA] dark:bg-[#0a0a0a] text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#1f1f1f] rounded-bl-xs whitespace-pre-line font-medium"
                     )}
-                  </button>
-                )}
+                  >
+                    {msg.text}
 
-                {/* Option Quick Replies */}
-                {msg.options && (
-                  <div className="flex flex-wrap gap-1.5 mt-2 max-w-[95%]">
-                    {msg.options.map((opt, idx) => (
-                      <button
-                        key={idx}
-                        type="button"
-                        onClick={() => handleOptionClick(opt)}
-                        className={cn(
-                          "text-[11px] px-3 py-1.5 rounded-xl border font-semibold transition-all duration-200 text-left cursor-pointer flex items-center gap-1 shadow-2xs",
-                          opt.route || opt.action === "show_service_link"
-                            ? "bg-[#f15e1c] text-white border-[#f15e1c] hover:bg-[#d4581f] hover:scale-[1.02]"
-                            : "bg-white dark:bg-[#0a0a0a] border-[#EFE2D6] dark:border-[#1f1f1f] hover:border-[#f15e1c] text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#161616]"
-                        )}
-                      >
-                        <span>{opt.label}</span>
-                        {(opt.route || opt.action === "show_service_link") && <ExternalLink className="w-3 h-3 ml-0.5 shrink-0" />}
-                      </button>
-                    ))}
+                    {/* Compact In-Chat Service Recommendation Card */}
+                    {serviceCard && (
+                      <div className="mt-3 p-3 rounded-xl bg-white dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#222222] shadow-sm space-y-2">
+                        <div className="flex items-center gap-1.5 text-[10px] font-bold font-mono text-[#f15e1c]">
+                          <Sparkles className="w-3 h-3" />
+                          <span>RECOMMENDED SERVICE</span>
+                        </div>
+                        <h5 className="text-xs font-bold text-[#3A2E27] dark:text-[#FAF5EE]">
+                          {serviceCard.title}
+                        </h5>
+                        <p className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0] leading-snug">
+                          {serviceCard.tagline}
+                        </p>
+                        <ul className="space-y-1 text-[11px] text-[#3A2E27] dark:text-[#EAE2D9]">
+                          {serviceCard.capabilities.slice(0, 3).map((cap, cIdx) => (
+                            <li key={cIdx} className="flex items-center gap-1.5">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#2e936f] shrink-0" />
+                              <span>{cap}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="pt-2 flex flex-wrap gap-2">
+                          <button
+                            type="button"
+                            onClick={() => router.push(serviceCard.route)}
+                            className="text-[11px] px-3 py-1.5 rounded-lg bg-[#f15e1c] text-white font-bold hover:bg-[#d4581f] transition-all flex items-center gap-1 cursor-pointer"
+                          >
+                            <span>Explore Service</span>
+                            <ArrowRight className="w-3 h-3" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleOptionClick({ label: `Talk to ${serviceCard.title} Expert`, action: "progressive_lead", payload: serviceCard.title })}
+                            className="text-[11px] px-3 py-1.5 rounded-lg bg-[#2e936f] text-white font-bold hover:bg-[#25775a] transition-all cursor-pointer"
+                          >
+                            Talk to Expert
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Compact In-Chat Product Card */}
+                    {productCard && (
+                      <div className="mt-3 p-3 rounded-xl bg-white dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#222222] shadow-sm space-y-2">
+                        <div className="flex items-center gap-1.5 text-[10px] font-bold font-mono text-[#2e936f]">
+                          <Sparkles className="w-3 h-3" />
+                          <span>ARAV PRODUCT PLATFORM</span>
+                        </div>
+                        <h5 className="text-xs font-bold text-[#3A2E27] dark:text-[#FAF5EE]">
+                          {productCard.name} ({productCard.domain || ""})
+                        </h5>
+                        <p className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0] leading-snug">
+                          {productCard.description}
+                        </p>
+                        <div className="pt-1 flex flex-wrap gap-2">
+                          <button
+                            type="button"
+                            onClick={() => router.push(productCard.route)}
+                            className="text-[11px] px-3 py-1.5 rounded-lg bg-[#2e936f] text-white font-bold hover:bg-[#25775a] transition-all flex items-center gap-1 cursor-pointer"
+                          >
+                            <span>View Platform Details</span>
+                            <ArrowRight className="w-3 h-3" />
+                          </button>
+                          {productCard.externalUrl && (
+                            <a
+                              href={productCard.externalUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[11px] px-3 py-1.5 rounded-lg border border-[#EFE2D6] dark:border-[#222222] text-[#3A2E27] dark:text-[#FAF5EE] hover:border-[#f15e1c] transition-all flex items-center gap-1"
+                            >
+                              <span>Visit Site</span>
+                              <ExternalLink className="w-3 h-3" />
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-            ))}
+
+                  {/* Read Aloud Toggle Button */}
+                  {msg.sender === "bot" && (
+                    <button
+                      type="button"
+                      onClick={() => toggleReadAloud(msg.id, msg.text)}
+                      className="mt-1 flex items-center gap-1 text-[10px] font-mono text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#f15e1c] transition-colors cursor-pointer"
+                      title="Read Aloud"
+                    >
+                      {speakingMsgId === msg.id ? (
+                        <>
+                          <VolumeX className="w-3 h-3 text-[#f15e1c] animate-pulse" />
+                          <span className="text-[#f15e1c] font-bold">Stop Speaking</span>
+                        </>
+                      ) : (
+                        <>
+                          <Volume2 className="w-3 h-3 text-[#2e936f]" />
+                          <span>🔊 Read Aloud</span>
+                        </>
+                      )}
+                    </button>
+                  )}
+
+                  {/* Option Quick Reply Chips (Max 2-4 chips) */}
+                  {msg.options && (
+                    <div className="flex flex-wrap gap-1.5 mt-2 max-w-[95%]">
+                      {msg.options.map((opt, idx) => (
+                        <button
+                          key={idx}
+                          type="button"
+                          onClick={() => handleOptionClick(opt)}
+                          className={cn(
+                            "text-[11px] px-3 py-1.5 rounded-xl border font-semibold transition-all duration-200 text-left cursor-pointer flex items-center gap-1 shadow-2xs",
+                            opt.route || opt.action === "show_service_link"
+                              ? "bg-[#f15e1c] text-white border-[#f15e1c] hover:bg-[#d4581f] hover:scale-[1.02]"
+                              : "bg-white dark:bg-[#0a0a0a] border-[#EFE2D6] dark:border-[#1f1f1f] hover:border-[#f15e1c] text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#161616]"
+                          )}
+                        >
+                          <span>{opt.label}</span>
+                          {(opt.route || opt.action === "show_service_link") && <ExternalLink className="w-3 h-3 ml-0.5 shrink-0" />}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
 
             {/* Typing Indicator */}
             {isTyping && (
-              <div className="flex items-center gap-2 p-2 px-3 rounded-2xl bg-[#FBF3EA] dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] w-max text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
+              <div className="flex items-center gap-2 p-2.5 px-3.5 rounded-2xl bg-[#FBF3EA] dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] w-max text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
                 <Bot className="w-4 h-4 text-[#f15e1c] animate-bounce" />
-                <span className="font-mono text-[11px] font-medium">Arav Assistant is typing...</span>
+                <span className="font-mono text-[11px] font-medium">Arav Consultant is thinking...</span>
               </div>
             )}
 
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Listening Overlay Status */}
+          {/* Voice Listening Overlay */}
           {isListening && (
             <div className="px-4 py-2 bg-[#f15e1c] text-white text-[11px] font-mono font-bold flex items-center justify-between animate-pulse">
-              <span>🎙️ Listening... Speak your question now</span>
-              <button type="button" onClick={toggleListening} className="underline text-xs">Cancel</button>
+              <span>🎙️ Listening... Speak your requirement</span>
+              <button type="button" onClick={toggleListening} className="underline text-xs cursor-pointer">Cancel</button>
             </div>
           )}
 
-          {/* Voice Status Warning */}
+          {/* Voice Warning Status */}
           {voiceStatusMsg && !isListening && (
             <div role="status" className="px-4 py-2 bg-[#fab60a]/15 border-t border-[#fab60a]/30 text-[#3A2E27] dark:text-[#ffec69] text-[11px] font-mono font-bold flex items-center justify-between">
               <span>{voiceStatusMsg}</span>
@@ -892,10 +962,10 @@ export function ChatbotWidget() {
           >
             <input
               type="text"
-              placeholder={isListening ? "Listening to your voice..." : t("inputPlaceholder")}
+              placeholder={isListening ? "Listening to your voice..." : t("inputPlaceholder") || "Ask anything or type your answer..."}
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              className="flex-1 text-xs px-3 py-2 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-white dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-1 focus:ring-[#f15e1c]"
+              className="flex-1 text-xs px-3.5 py-2.5 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] bg-white dark:bg-[#161310] text-[#3A2E27] dark:text-[#FAF5EE] focus:outline-none focus:ring-1 focus:ring-[#f15e1c]"
             />
             {/* Voice Microphone Button */}
             <button
@@ -903,7 +973,7 @@ export function ChatbotWidget() {
               onClick={toggleListening}
               aria-pressed={isListening}
               className={cn(
-                "w-8 h-8 rounded-xl flex items-center justify-center transition-all shrink-0 cursor-pointer shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f15e1c]",
+                "w-9 h-9 rounded-xl flex items-center justify-center transition-all shrink-0 cursor-pointer shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f15e1c]",
                 isListening
                   ? "bg-rose-500 text-white animate-pulse shadow-rose-500/40"
                   : "bg-white dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] text-[#f15e1c] hover:bg-[#FCE3D3]/40"
@@ -911,14 +981,14 @@ export function ChatbotWidget() {
               aria-label={isListening ? t("micStopAriaLabel") : t("micStartAriaLabel")}
               title={isListening ? t("micStopTitle") : t("micStartTitle")}
             >
-              <Mic className={cn("w-3.5 h-3.5", isListening && "animate-bounce")} />
+              <Mic className={cn("w-4 h-4", isListening && "animate-bounce")} />
             </button>
             <button
               type="submit"
-              className="w-8 h-8 rounded-xl bg-[#f15e1c] text-white flex items-center justify-center hover:bg-[#d4581f] transition-colors shrink-0 cursor-pointer shadow-xs"
+              className="w-9 h-9 rounded-xl bg-[#f15e1c] text-white flex items-center justify-center hover:bg-[#d4581f] transition-colors shrink-0 cursor-pointer shadow-xs"
               aria-label="Send message"
             >
-              <Send className="w-3.5 h-3.5" />
+              <Send className="w-4 h-4" />
             </button>
           </form>
         </div>
