@@ -115,12 +115,12 @@ export function getRouteCatalog(): SEOPageSettings[] {
     {
       path: "/",
       label: "Homepage",
-      metaTitle: "Enterprise Technology, AI & Digital Growth Solutions | Arav Innovations",
-      metaDescription: "Arav Innovations helps growing enterprises modernize legacy technology, build exceptional digital experiences, automate workflows with AI, strengthen governance, and turn technology investments into predictable revenue growth.",
+      metaTitle: "Arav Innovations | AI, Technology & Digital Marketing Solutions",
+      metaDescription: "Arav Innovations helps businesses grow with web and app development, AI solutions, SEO, digital marketing and performance marketing services.",
       priority: 1.0,
-      ogTitle: "Enterprise Technology, AI & Digital Growth Solutions | Arav Innovations",
+      ogTitle: "Arav Innovations | AI, Technology & Digital Marketing Solutions",
       ogImage: `${SITE_BASE_URL}/og-default.jpg`,
-      ogDescription: "Arav Innovations integrates IT strategy, custom software engineering, AI workflow automation, performance marketing, and enterprise risk & compliance.",
+      ogDescription: "Arav Innovations helps businesses grow with web and app development, AI solutions, SEO, digital marketing and performance marketing services.",
       robots: "Index, Follow",
       jsonLdSchema: JSON.stringify(
         {

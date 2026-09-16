@@ -8,6 +8,8 @@ export type AnalyticsEvent =
   | { type: "chatbot_started" }
   | { type: "chatbot_lead"; intent: string; service?: string }
   | { type: "resource_requested"; resourceName: string }
+  | { type: "phone_click"; region: string; location: string }
+  | { type: "whatsapp_click"; location: string }
   | { type: "book_call"; source: string }
   | { type: "career_application"; role: string };
 

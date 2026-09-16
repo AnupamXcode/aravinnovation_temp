@@ -65,14 +65,17 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+
   return {
     metadataBase: new URL("https://aravinnovations.com"),
     title: {
-      default: "Arav Innovations | Enterprise IT and Growth",
+      default: "Arav Innovations | AI, Technology & Digital Marketing Solutions",
       template: "%s | Arav Innovations",
     },
     description:
-      "Arav Innovations is a multidisciplinary B2B technology consulting, full-stack engineering, digital marketing, risk & governance, and staff augmentation firm operating globally.",
+      "Arav Innovations helps businesses grow with web and app development, AI solutions, SEO, digital marketing and performance marketing services.",
     keywords: [
       "IT Strategy Consulting",
       "Web & App Development",
@@ -83,10 +86,11 @@ export async function generateMetadata({
       "DPDP Compliance India",
       "IT Staff Augmentation",
       "Dubai UAE Tech Agency",
-      "Bengaluru Tech Consulting",
+      "Gurgaon Tech Consulting",
     ],
     authors: [{ name: "Arav Innovations" }],
     creator: "Arav Innovations",
+    verification: googleSiteVerification ? { google: googleSiteVerification } : undefined,
     alternates: {
       canonical: "https://aravinnovations.com",
       languages: {
@@ -100,9 +104,9 @@ export async function generateMetadata({
       locale: "en_US",
       url: "https://aravinnovations.com",
       siteName: "Arav Innovations",
-      title: "Arav Innovations | Enterprise IT and Growth",
+      title: "Arav Innovations | AI, Technology & Digital Marketing Solutions",
       description:
-        "Enterprise IT Strategy, Full-Stack Software Engineering, Performance Marketing, Governance, and Staff Augmentation globally.",
+        "Arav Innovations helps businesses grow with web and app development, AI solutions, SEO, digital marketing and performance marketing services.",
     },
     icons: {
       icon: "/favicon.ico",
@@ -160,6 +164,24 @@ export default async function RootLayout({
       className={`${plusJakartaSans.variable} ${inter.variable} ${notoSansArabic.variable} ${notoSansDevanagari.variable} scroll-smooth`}
     >
       <body className="min-h-screen flex flex-col w-full bg-[#FFFDF9] dark:bg-[#000000] text-[var(--text-primary)] font-sans antialiased selection:bg-[#FCE3D3] dark:selection:bg-[#f15e1c]/30 selection:text-[#f15e1c]">
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
+                  page_path: window.location.pathname,
+                });
+              `}
+            </Script>
+          </>
+        )}
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <OrganizationSchema />
         <SkipToContent />
