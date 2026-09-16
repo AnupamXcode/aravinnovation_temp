@@ -740,7 +740,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
               </span>
               <span className="text-[#2e936f] flex items-center">&rarr;</span>
               <span className="px-3 py-1 rounded-lg bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/40 text-[#f15e1c]">
-                Business Outcome
+                Business Impact
               </span>
             </div>
           </AnimatedSection>

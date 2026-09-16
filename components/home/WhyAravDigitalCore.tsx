@@ -299,11 +299,11 @@ export function WhyAravDigitalCore({
                       {activePillar.description}
                     </p>
 
-                    {/* Target Business Outcome Callout */}
+                    {/* Business Impact Callout */}
                     <div className="p-4 rounded-2xl bg-[#f7d7b0]/40 dark:bg-[#141414] border border-[#f15e1c]/20 space-y-1">
                       <span className="text-xs font-mono font-bold text-[#2e936f] uppercase tracking-wider flex items-center gap-2">
                         <CheckCircle2 className="w-4 h-4 text-[#2e936f]" />
-                        <span>Target Business Outcome</span>
+                        <span>Business Impact</span>
                       </span>
                       <p className="text-sm font-bold font-display text-[#2e936f] dark:text-[#ffffff]">
                         {activePillar.businessOutcome}
@@ -452,7 +452,7 @@ export function WhyAravDigitalCore({
                 <div className="p-3 sm:p-3.5 rounded-xl bg-[#f7d7b0]/40 dark:bg-[#141414] border border-[#f15e1c]/20 space-y-0.5 sm:space-y-1">
                   <span className="text-[10px] font-mono font-bold text-[#1e6b50] dark:text-[#74c4ab] uppercase tracking-wider flex items-center gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#1e6b50] dark:text-[#74c4ab]" />
-                    <span>Target Business Outcome</span>
+                    <span>Business Impact</span>
                   </span>
                   <p className="text-xs font-bold font-display text-[#1e6b50] dark:text-[#ffffff]">
                     {pillar.businessOutcome}

@@ -202,7 +202,7 @@ export function IndustrySolutionsSection({
           <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border-2 border-[#2e936f] dark:border-[#2e936f] shadow-xl space-y-3">
             <span className="text-xs font-mono font-bold text-[#2e936f] dark:text-[#34d399] uppercase tracking-wider flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-[#2e936f] dark:text-[#34d399]" />
-              <span>Target Business Outcome</span>
+              <span>Business Impact</span>
             </span>
             <p className="text-base sm:text-lg font-bold font-display text-[#2e936f] dark:text-[#ffffff] leading-snug">
               {activeIndustry.expectedOutcome ||
