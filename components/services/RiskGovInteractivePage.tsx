@@ -347,7 +347,7 @@ export function RiskGovInteractivePage({ service, relatedPosts }: RiskGovPagePro
       <AnimatedDotGrid />
 
       {/* 1. HERO */}
-      <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-12 lg:pb-14 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none flex flex-col justify-start">
+      <section className="relative pt-6 sm:pt-8 lg:pt-8 pb-8 sm:pb-12 lg:pb-14 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none flex flex-col justify-start">
         
         <div className="absolute inset-0 pointer-events-none hidden lg:block select-none overflow-hidden">
           <Image
