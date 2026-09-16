@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 import {
   Compass,
   Search,
@@ -30,7 +30,7 @@ const steps: ProcessStep[] = [
     subtitle: "Discovery & Systems Inspection",
     description: "Deep-dive audit of current technology architecture, performance bottlenecks, tech debt, and business growth objectives.",
     deliverables: ["Architecture Audit", "Security & Risk Matrix", "Growth Bottleneck Analysis"],
-    icon: <Search className="w-5 h-5" />,
+    icon: <Search className="w-4 h-4" />,
     color: "#f15e1c",
   },
   {
@@ -39,7 +39,7 @@ const steps: ProcessStep[] = [
     subtitle: "Enterprise Blueprint & Roadmap",
     description: "Formulating custom multi-phase roadmaps, cloud component selection, and SLA milestones aligned with commercial goals.",
     deliverables: ["Cloud Architecture Blueprint", "SLA Framework", "Phased Execution Roadmap"],
-    icon: <Compass className="w-5 h-5" />,
+    icon: <Compass className="w-4 h-4" />,
     color: "#2e936f",
   },
   {
@@ -48,7 +48,7 @@ const steps: ProcessStep[] = [
     subtitle: "High-Performance Engineering",
     description: "Full-stack Next.js engineering, microservices API implementation, AI integrations, and strict TypeScript pipelines.",
     deliverables: ["Production Codebase", "TypeScript Strict Build", "Automated CI/CD Pipeline"],
-    icon: <Code2 className="w-5 h-5" />,
+    icon: <Code2 className="w-4 h-4" />,
     color: "#fab60a",
   },
   {
@@ -57,7 +57,7 @@ const steps: ProcessStep[] = [
     subtitle: "Production Deployment & Verification",
     description: "Seamless zero-downtime production deployment, infrastructure monitoring, and end-to-end security verification.",
     deliverables: ["Production Launch", "Infrastructure Telemetry", "Security Hardening"],
-    icon: <Rocket className="w-5 h-5" />,
+    icon: <Rocket className="w-4 h-4" />,
     color: "#f15e1c",
   },
   {
@@ -66,7 +66,7 @@ const steps: ProcessStep[] = [
     subtitle: "Performance & Growth Tuning",
     description: "Core Web Vitals optimization, programmatic SEO indexing, conversion funnels, and FinOps cloud spend reduction.",
     deliverables: ["Subsecond Load Performance", "SEO & AEO Optimization", "FinOps Bill Reduction"],
-    icon: <TrendingUp className="w-5 h-5" />,
+    icon: <TrendingUp className="w-4 h-4" />,
     color: "#2e936f",
   },
   {
@@ -75,7 +75,7 @@ const steps: ProcessStep[] = [
     subtitle: "Operational Expansion & SLA",
     description: "Handover with full IP ownership, team training, SOC-2 readiness, and ongoing 24/7 SLA engineering support.",
     deliverables: ["Full IP Ownership", "24/7 SLA Pod Support", "Continuous Capacity Scaling"],
-    icon: <ShieldCheck className="w-5 h-5" />,
+    icon: <ShieldCheck className="w-4 h-4" />,
     color: "#fab60a",
   },
 ];
@@ -83,18 +83,9 @@ const steps: ProcessStep[] = [
 export function Process3DPathway() {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const stepRefs = React.useRef<(HTMLDivElement | null)[]>([]);
-  const shouldReduceMotion = useReducedMotion();
   const [activeStep, setActiveStep] = React.useState<number>(0);
 
-  // Framer Motion scroll progress across section
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start center", "end center"],
-  });
-
-  const progressHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-
-  // IntersectionObserver to set active step naturally on scroll
+  // IntersectionObserver updates active step naturally during scroll without main thread thrashing
   React.useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -109,7 +100,7 @@ export function Process3DPathway() {
           }
         });
       },
-      { root: null, rootMargin: "-30% 0px -40% 0px", threshold: [0.3] }
+      { root: null, rootMargin: "-25% 0px -35% 0px", threshold: [0.25] }
     );
 
     stepRefs.current.forEach((ref) => {
@@ -127,153 +118,150 @@ export function Process3DPathway() {
     }
   };
 
+  const activePct = (activeStep / (steps.length - 1)) * 100;
+
   return (
-    <div ref={containerRef} className="relative w-full py-4 sm:py-8">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">
-        {/* LEFT COLUMN: Sticky Vertical Progress Bar & Step Index */}
-        <div className="lg:col-span-4 sticky top-24 z-20 bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-md p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs">
-          <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#f7d7b0]/60 dark:border-[#1f1f1f]">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#f15e1c]">
-              Methodology Pathway
-            </span>
-            <span className="text-xs font-mono font-bold text-[#4a5c55] dark:text-[#d3eee4]">
-              Step {activeStep + 1} of {steps.length}
-            </span>
-          </div>
+    <div ref={containerRef} className="relative w-full py-2 sm:py-4">
+      {/* DESKTOP & TABLET CONNECTED TOP TIMELINE NAVIGATION (md:block hidden) */}
+      <div className="hidden md:block sticky top-20 z-30 mb-8 bg-[#FFFDF9]/95 dark:bg-[#0a0a0a]/95 backdrop-blur-md p-4 sm:p-5 rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs">
+        <div className="relative w-full px-4 sm:px-8 py-1">
+          {/* Background Track Line */}
+          <div className="absolute left-8 right-8 top-5 h-1 bg-[#f7d7b0]/50 dark:bg-[#1a1a1a] rounded-full z-0" />
+          
+          {/* Active Progress Fill Line */}
+          <div
+            className="absolute left-8 top-5 h-1 bg-gradient-to-r from-[#f15e1c] via-[#2e936f] to-[#fab60a] rounded-full z-0 transition-all duration-300"
+            style={{ width: `calc(${activePct}% * (100% - 64px) / 100)` }}
+          />
 
-          <div className="relative pl-6 space-y-3 sm:space-y-4">
-            {/* Background Track Line */}
-            <div className="absolute left-[9px] top-2 bottom-2 w-1 bg-[#f7d7b0]/50 dark:bg-[#1f1f1f] rounded-full" />
-
-            {/* Active Progress Fill Line */}
-            {!shouldReduceMotion && (
-              <motion.div
-                className="absolute left-[9px] top-2 w-1 bg-gradient-to-b from-[#f15e1c] via-[#2e936f] to-[#fab60a] rounded-full"
-                style={{ height: progressHeight, maxHeight: "calc(100% - 16px)" }}
-              />
-            )}
-
-            {/* Vertical Nodes List */}
+          {/* 6 Step Nodes Header Strip */}
+          <div className="relative z-10 flex items-center justify-between">
             {steps.map((step, idx) => {
               const isActive = activeStep === idx;
+              const isPassed = activeStep > idx;
+
               return (
                 <button
-                  key={idx}
+                  key={step.number}
+                  type="button"
                   onClick={() => scrollToStep(idx)}
-                  className={cn(
-                    "w-full flex items-center gap-3 text-left transition-all group py-1.5 focus:outline-hidden",
-                    isActive ? "scale-[1.02]" : "opacity-70 hover:opacity-100"
-                  )}
+                  className="flex flex-col items-center gap-1.5 focus:outline-hidden cursor-pointer group transition-all"
+                  aria-label={`Jump to stage ${step.number}: ${step.title}`}
                 >
-                  {/* Circle Dot Node */}
+                  {/* Step Circular Node */}
                   <div
                     className={cn(
-                      "relative z-10 w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300 shrink-0",
+                      "w-9 h-9 rounded-full flex items-center justify-center font-mono text-xs font-bold transition-all duration-300 border-2",
                       isActive
-                        ? "bg-[#f15e1c] text-white ring-4 ring-[#f15e1c]/20 shadow-xs"
-                        : "bg-white dark:bg-[#161616] border-2 border-[#f7d7b0] dark:border-[#262626]"
+                        ? "bg-[#f15e1c] text-white border-[#f15e1c] ring-4 ring-[#f15e1c]/25 scale-110 shadow-md"
+                        : isPassed
+                        ? "bg-[#2e936f] text-white border-[#2e936f]"
+                        : "bg-white dark:bg-[#121212] text-[#4a5c55] dark:text-[#95baad] border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:border-[#f15e1c]"
                     )}
                   >
-                    <div
-                      className={cn(
-                        "w-1.5 h-1.5 rounded-full transition-all",
-                        isActive ? "bg-white" : "bg-[#4a5c55]/40"
-                      )}
-                    />
+                    {step.number}
                   </div>
 
-                  {/* Step Title Label */}
-                  <div className="flex items-center gap-2 overflow-hidden">
-                    <span
-                      className={cn(
-                        "font-mono text-xs font-bold transition-colors",
-                        isActive ? "text-[#f15e1c]" : "text-[#4a5c55] dark:text-[#95baad]"
-                      )}
-                    >
-                      {step.number}
-                    </span>
-                    <span
-                      className={cn(
-                        "text-sm font-bold font-display truncate transition-colors",
-                        isActive
-                          ? "text-[#1b2823] dark:text-[#ffffff]"
-                          : "text-[#4a5c55] dark:text-[#d3eee4]"
-                      )}
-                    >
-                      {step.title}
-                    </span>
-                  </div>
+                  {/* Title Label */}
+                  <span
+                    className={cn(
+                      "text-xs font-bold font-display transition-colors",
+                      isActive
+                        ? "text-[#f15e1c] dark:text-[#f15e1c]"
+                        : isPassed
+                        ? "text-[#2e936f] dark:text-[#2e936f]"
+                        : "text-[#4a5c55] dark:text-[#d3eee4] group-hover:text-[#1b2823] dark:group-hover:text-white"
+                    )}
+                  >
+                    {step.title}
+                  </span>
                 </button>
               );
             })}
           </div>
         </div>
+      </div>
 
-        {/* RIGHT COLUMN: Sequential Step Detail Cards */}
-        <div className="lg:col-span-8 space-y-4 sm:space-y-6">
-          {steps.map((step, idx) => {
-            const isActive = activeStep === idx;
-            return (
-              <div
-                key={idx}
-                ref={(el) => { stepRefs.current[idx] = el; }}
-                data-step-idx={idx}
-                className={cn(
-                  "p-5 sm:p-7 rounded-2xl sm:rounded-3xl border transition-all duration-300 relative overflow-hidden",
-                  isActive
-                    ? "bg-white dark:bg-[#121212] border-[#f15e1c] shadow-lg ring-1 ring-[#f15e1c]/30"
-                    : "bg-[#fefaf5]/60 dark:bg-[#0a0a0a]/60 border-[#f7d7b0]/60 dark:border-[#1a1a1a] hover:border-[#f15e1c]/50"
-                )}
-              >
-                {/* Header Badge & Icon */}
-                <div className="flex items-center justify-between gap-4 mb-3">
-                  <div className="flex items-center gap-2.5">
-                    <span className="font-mono text-xs sm:text-sm font-bold text-[#f15e1c] bg-[#f15e1c]/10 px-2.5 py-1 rounded-lg">
-                      {step.number}
-                    </span>
-                    <span className="text-xs sm:text-sm font-mono font-medium text-[#4a5c55] dark:text-[#d3eee4]">
-                      {step.subtitle}
-                    </span>
-                  </div>
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#f7d7b0]/40 dark:bg-[#161616] text-[#f15e1c] flex items-center justify-center shrink-0">
-                    {step.icon}
-                  </div>
-                </div>
+      {/* FULL-WIDTH METHODOLOGY STAGES GRID (100% Usable Content Width) */}
+      <div className="w-full space-y-4 sm:space-y-6">
+        {steps.map((step, idx) => {
+          const isActive = activeStep === idx;
 
-                {/* Title */}
-                <h3 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] mb-2">
-                  {step.title}
-                </h3>
-
-                {/* Body Description */}
-                <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed mb-4">
-                  {step.description}
-                </p>
-
-                {/* Key Deliverables Grid */}
-                <div className="pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1f1f1f]">
-                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff] block mb-2">
-                    Verified Deliverables:
+          return (
+            <div
+              key={step.number}
+              ref={(el) => { stepRefs.current[idx] = el; }}
+              data-step-idx={idx}
+              className={cn(
+                "w-full p-5 sm:p-7 rounded-2xl sm:rounded-3xl border transition-all duration-300 relative overflow-hidden",
+                isActive
+                  ? "bg-white dark:bg-[#121212] border-[#f15e1c] shadow-xl ring-1 ring-[#f15e1c]/30"
+                  : "bg-[#fefaf5]/70 dark:bg-[#0a0a0a]/70 border-[#f7d7b0]/60 dark:border-[#1a1a1a] hover:border-[#f15e1c]/40"
+              )}
+            >
+              {/* Header Badge & Icon */}
+              <div className="flex items-center justify-between gap-4 mb-3">
+                <div className="flex items-center gap-3">
+                  <span
+                    className={cn(
+                      "font-mono text-xs font-bold px-2.5 py-1 rounded-lg transition-colors",
+                      isActive
+                        ? "bg-[#f15e1c] text-white"
+                        : "bg-[#f7d7b0]/40 dark:bg-[#1f1f1f] text-[#f15e1c]"
+                    )}
+                  >
+                    {step.number} &bull; Stage {idx + 1}
                   </span>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                    {step.deliverables.map((item, dIdx) => (
-                      <div
-                        key={dIdx}
-                        className="flex items-center gap-2 p-2 rounded-lg bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0]/40 dark:border-[#262626]"
-                      >
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
-                        <span className="text-xs font-medium text-[#1b2823] dark:text-[#d3eee4] truncate">
-                          {item}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+                  <span className="text-xs sm:text-sm font-mono font-medium text-[#4a5c55] dark:text-[#d3eee4]">
+                    {step.subtitle}
+                  </span>
+                </div>
+                <div
+                  className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors"
+                  style={{ backgroundColor: `${step.color}15`, color: step.color }}
+                >
+                  {step.icon}
                 </div>
               </div>
-            );
-          })}
-        </div>
+
+              {/* Title & Description Layout */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-6 items-start mb-4">
+                <div className="lg:col-span-4">
+                  <h3 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                    {step.title}
+                  </h3>
+                </div>
+                <div className="lg:col-span-8">
+                  <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
+              </div>
+
+              {/* Verified Deliverables */}
+              <div className="pt-3 border-t border-[#f7d7b0]/50 dark:border-[#1f1f1f]">
+                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff] block mb-2">
+                  Key Stage Deliverables &amp; Outcomes:
+                </span>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  {step.deliverables.map((item, dIdx) => (
+                    <div
+                      key={dIdx}
+                      className="flex items-center gap-2 p-2 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0]/40 dark:border-[#262626]"
+                    >
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
+                      <span className="text-xs font-semibold text-[#1b2823] dark:text-[#d3eee4] truncate">
+                        {item}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
 }
+

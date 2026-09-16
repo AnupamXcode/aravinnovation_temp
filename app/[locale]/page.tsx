@@ -151,10 +151,10 @@ export default async function HomePage({
         <WhyAravDigitalCore />
       </div>
 
-      {/* 06 — TRANSFORMATION JOURNEY (ASSESS -> STRATEGIZE -> BUILD -> OPTIMIZE -> SCALE) */}
-      <div className="w-full px-2 sm:px-8 lg:px-12 xl:px-16" id="process">
-        <section className="py-4 sm:py-6 md:py-14 px-1 sm:px-12 lg:px-14 rounded-2xl md:rounded-[2.5rem] bg-transparent md:bg-[#fefaf5] md:dark:bg-[#0a0a0a] border-0 md:border md:border-[#f7d7b0] md:dark:border-[#1a1a1a] shadow-none md:shadow-2xl transition-all duration-300">
-          <div className="text-center max-w-3xl mx-auto mb-4 sm:mb-10 space-y-1.5 sm:space-y-3 px-2">
+      {/* 06 — TRANSFORMATION JOURNEY (DISCOVER -> STRATEGIZE -> BUILD -> LAUNCH -> OPTIMIZE -> SCALE) */}
+      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="process">
+        <section className="py-6 sm:py-10 md:py-12 px-4 sm:px-8 lg:px-10 rounded-2xl md:rounded-[2.5rem] bg-transparent md:bg-[#fefaf5] md:dark:bg-[#0a0a0a] border-0 md:border md:border-[#f7d7b0] md:dark:border-[#1a1a1a] shadow-none md:shadow-2xl transition-all duration-300">
+          <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8 space-y-2 px-2">
             <Badge variant="secondary" size="md">
               TRANSFORMATION BLUEPRINT
             </Badge>
