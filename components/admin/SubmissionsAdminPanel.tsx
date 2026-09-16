@@ -274,10 +274,17 @@ export function SubmissionsAdminPanel({
                     </td>
 
                     <td className="py-4 px-4 align-top space-y-1.5 max-w-xs">
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#2e936f]/10 text-[#2e936f] border border-[#2e936f]/20">
-                        <Tag className="w-3 h-3" />
-                        {sub.service}
-                      </span>
+                      <div className="flex flex-wrap gap-1 items-center">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#2e936f]/10 text-[#2e936f] border border-[#2e936f]/20">
+                          <Tag className="w-3 h-3" />
+                          {sub.service}
+                        </span>
+                        {sub.source && (
+                          <span className="inline-block px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#FBF3EA] dark:bg-[#1A1613] text-[#f15e1c] border border-[#f15e1c]/30">
+                            Src: {sub.source}
+                          </span>
+                        )}
+                      </div>
                       <p className="text-[10px] text-[#7A6A5F] font-mono">Timeline: {sub.timeline}</p>
                       <p className="text-[11px] text-[#3A2E27] dark:text-[#FAF5EE] bg-[#FBF3EA] dark:bg-[#1A1613] p-2 rounded-xl border border-[#EFE2D6] dark:border-[#1f1f1f] line-clamp-3">
                         {sub.requirement}

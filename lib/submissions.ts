@@ -11,6 +11,7 @@ export interface FormSubmission {
   requirement: string;
   timeline: string;
   budget?: string;
+  source?: string;
   submittedAt: string;
   status: 'new' | 'contacted' | 'qualified' | 'archived';
   ipAddress?: string;

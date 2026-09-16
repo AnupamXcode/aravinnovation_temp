@@ -27,9 +27,13 @@ export async function POST(request: Request) {
     };
 
     const validatedData = leadFormSchema.parse(sanitizedBody);
+    const source = rawBody.source ? sanitizeString(rawBody.source) : "website_form";
 
     // Save submission to persistent store
-    const submission = saveSubmission(validatedData);
+    const submission = saveSubmission({
+      ...validatedData,
+      source,
+    });
 
     console.log("[Arav Innovations Lead Saved]:", submission);
 

@@ -441,6 +441,7 @@ export function ChatbotWidget() {
           service: sessionContext.mentionedService || "General Consultation",
           requirement: dataToSend.requirement || sessionContext.userRequirement || "Inquiry from chatbot assistant",
           timeline: "1 - 3 Months",
+          source: "chatbot",
         }),
       });
       setLeadSubmitted(true);
