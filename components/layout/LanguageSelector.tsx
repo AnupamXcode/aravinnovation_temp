@@ -59,7 +59,7 @@ export function LanguageSelector() {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FFFDF9] dark:bg-[#0a0a0a] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] hover:border-[#f15e1c] transition-colors cursor-pointer shadow-xs"
+        className="inline-flex items-center gap-1.5 px-3 py-2 rounded-full border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FFFDF9] dark:bg-[#0a0a0a] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] hover:border-[#f15e1c] transition-colors cursor-pointer shadow-xs min-h-[44px] min-w-[44px]"
         aria-expanded={isOpen}
         aria-label="Select language / भाषा चुनें"
       >

@@ -14,23 +14,47 @@ export function HeroVideoBackground() {
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const [videoError, setVideoError] = React.useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
+  const [activeVideoSrc, setActiveVideoSrc] = React.useState<string | null>(null);
 
-  const videoSrc = videoConfig.videoUrl || "/videos/Create_a_premium_minimalist_ci.mp4";
+  const desktopVideoSrc = videoConfig.videoUrl || "/videos/Create_a_premium_minimalist_ci.mp4";
 
-  // Check prefers-reduced-motion
+  // Determine single authoritative video source based on screen width and defer loading past initial LCP paint
   React.useEffect(() => {
-    if (typeof window !== "undefined") {
-      const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-      setPrefersReducedMotion(mediaQuery.matches);
+    if (typeof window === "undefined") return;
 
-      const handleChange = (e: MediaQueryListEvent) => {
-        setPrefersReducedMotion(e.matches);
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+
+    // Defer setting video source until after initial paint so H1 paints immediately without network thrashing
+    const isMobile = window.innerWidth < 640;
+    const targetSrc = isMobile ? "/videos/hero-bg-mobile.mp4" : desktopVideoSrc;
+
+    const mountVideo = () => {
+      setActiveVideoSrc(targetSrc);
+    };
+
+    if ("requestIdleCallback" in window) {
+      const handle = (window as any).requestIdleCallback(mountVideo, { timeout: 1500 });
+      return () => {
+        mediaQuery.removeEventListener("change", handleChange);
+        if ("cancelIdleCallback" in window) {
+          (window as any).cancelIdleCallback(handle);
+        }
       };
-
-      mediaQuery.addEventListener("change", handleChange);
-      return () => mediaQuery.removeEventListener("change", handleChange);
+    } else {
+      const timer = setTimeout(mountVideo, 100);
+      return () => {
+        mediaQuery.removeEventListener("change", handleChange);
+        clearTimeout(timer);
+      };
     }
-  }, []);
+  }, [desktopVideoSrc]);
 
   const setVideoPlaybackSpeed = React.useCallback(() => {
     if (videoRef.current) {
@@ -38,9 +62,9 @@ export function HeroVideoBackground() {
     }
   }, [videoSpeed]);
 
-  // Ensure autoplay triggers reliably on initial load, navigation, and page reload
+  // Ensure autoplay triggers reliably once source is mounted
   React.useEffect(() => {
-    if (!videoRef.current || prefersReducedMotion || !isVideoEnabled) return;
+    if (!videoRef.current || prefersReducedMotion || !isVideoEnabled || !activeVideoSrc) return;
 
     const videoNode = videoRef.current;
     videoNode.muted = true;
@@ -55,11 +79,11 @@ export function HeroVideoBackground() {
         // Auto-play policy handled safely
       });
     }
-  }, [prefersReducedMotion, videoSpeed, isVideoEnabled, videoSrc]);
+  }, [prefersReducedMotion, videoSpeed, isVideoEnabled, activeVideoSrc]);
 
   // Pause video when out of viewport to conserve battery/GPU, resume when in viewport
   React.useEffect(() => {
-    if (!containerRef.current || !videoRef.current || prefersReducedMotion || !isVideoEnabled) {
+    if (!containerRef.current || !videoRef.current || prefersReducedMotion || !isVideoEnabled || !activeVideoSrc) {
       return;
     }
 
@@ -84,13 +108,7 @@ export function HeroVideoBackground() {
     return () => {
       observer.disconnect();
     };
-  }, [prefersReducedMotion, videoSpeed, isVideoEnabled]);
-
-  const [isMounted, setIsMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  }, [prefersReducedMotion, videoSpeed, isVideoEnabled, activeVideoSrc]);
 
   return (
     <div
@@ -99,26 +117,23 @@ export function HeroVideoBackground() {
       aria-hidden="true"
     >
       {/* Single Authoritative Hero Background Video Instance */}
-      {isVideoEnabled && isMounted && !videoError && !prefersReducedMotion && (
+      {isVideoEnabled && activeVideoSrc && !videoError && !prefersReducedMotion && (
         <video
           ref={videoRef}
+          src={activeVideoSrc}
           autoPlay
           muted
           loop
           playsInline
-          preload="none"
+          preload="metadata"
           tabIndex={-1}
           aria-hidden="true"
           onLoadedMetadata={setVideoPlaybackSpeed}
           onCanPlay={setVideoPlaybackSpeed}
           onPlay={setVideoPlaybackSpeed}
           onError={() => setVideoError(true)}
-          className="absolute inset-0 w-full h-full object-cover object-center sm:object-center transform-gpu transition-opacity duration-500 opacity-100"
-        >
-          <source src="/videos/hero-bg-mobile.mp4" media="(max-width: 639px)" type="video/mp4" />
-          <source src="/videos/hero-bg.webm" type="video/webm" />
-          <source src={videoSrc} type="video/mp4" />
-        </video>
+          className="absolute inset-0 w-full h-full object-cover object-center transform-gpu transition-opacity duration-500 opacity-100"
+        />
       )}
 
       {/* Vignette Overlay for Text Legibility (No blur, crisp video display with mobile adjustment) */}
@@ -133,5 +148,6 @@ export function HeroVideoBackground() {
     </div>
   );
 }
+
 
 
