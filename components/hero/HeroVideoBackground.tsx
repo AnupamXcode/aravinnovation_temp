@@ -125,13 +125,13 @@ export function HeroVideoBackground() {
           onCanPlay={setVideoPlaybackSpeed}
           onPlay={setVideoPlaybackSpeed}
           onError={() => setVideoError(true)}
-          className="absolute inset-0 w-full h-full object-cover object-center sm:object-right md:object-center transform-gpu transition-opacity duration-500 opacity-100"
+          className="absolute inset-0 w-full h-full object-cover object-center sm:object-[78%_center] transform-gpu transition-opacity duration-500 opacity-100"
         />
       )}
 
       {/* Left-to-Right Contrast Overlay for guaranteed text legibility while cinematic video shows on right */}
       <div
-        className="absolute inset-0 bg-gradient-to-b from-[#FFFDF9]/90 via-[#FFFDF9]/60 to-[#FFFDF9]/90 sm:bg-gradient-to-r sm:from-[#FFFDF9] sm:via-[#FFFDF9]/75 sm:to-transparent dark:hidden pointer-events-none transition-opacity duration-300 z-[1]"
+        className="absolute inset-0 bg-gradient-to-b from-[#FFFDF9]/80 via-[#FFFDF9]/50 to-[#FFFDF9]/80 sm:bg-gradient-to-r sm:from-[#FFFDF9] sm:via-[#FFFDF9]/60 sm:to-transparent dark:hidden pointer-events-none transition-opacity duration-300 z-[1]"
         style={{ opacity: overlayOpacityVal }}
       />
       <div
