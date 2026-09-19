@@ -6,8 +6,12 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { HeroVideoBackground } from "./HeroVideoBackground";
 import { ArrowRight, ShieldCheck, Globe2, Zap } from "lucide-react";
+import { useSiteConfig, defaultHeroPositioningDeviceConfig } from "@/lib/site-config";
 
 export function Hero() {
+  const { config } = useSiteConfig();
+  const positioning = config.heroVideoConfig?.positioning?.desktop || defaultHeroPositioningDeviceConfig;
+
   return (
     <section className="relative w-full min-h-[calc(100vh-80px)] xl:min-h-[90vh] flex flex-col justify-center py-12 sm:py-16 lg:py-20 overflow-hidden bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300">
       {/* Background Video Layer with 3D Rotating Glass Cube on Right */}
@@ -16,15 +20,26 @@ export function Hero() {
       {/* Main Editorial / Enterprise Content Container */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 xl:px-20 my-auto">
         
-        {/* Left-Aligned Content Column Block */}
-        <div className="max-w-xl lg:max-w-2xl text-left flex flex-col items-start justify-start">
+        {/* Left-Aligned Content Column Block with Admin Live Positioning */}
+        <div
+          style={{
+            transform: `translate3d(${positioning.contentX || 0}px, ${positioning.contentY || 0}px, 0)`,
+            maxWidth: positioning.contentWidth ? `${positioning.contentWidth}px` : undefined,
+            textAlign: positioning.contentAlign || "left",
+          }}
+          className="text-left flex flex-col items-start justify-start transition-transform duration-200"
+        >
           
           {/* Main Editorial Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 0.05 }}
-            className="font-display font-extrabold text-3xl sm:text-5xl lg:text-[56px] xl:text-[64px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.08] text-left"
+            style={{
+              transform: `translate3d(${positioning.headingX || 0}px, ${positioning.headingY || 0}px, 0)`,
+              marginBottom: positioning.headingMb !== undefined ? `${positioning.headingMb}px` : undefined,
+            }}
+            className="font-display font-extrabold text-3xl sm:text-5xl lg:text-[56px] xl:text-[64px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.08] text-left transition-all duration-200"
           >
             Build, Grow &amp; Scale With<br />
             Technology , AI &amp; Digital<br />
@@ -36,7 +51,11 @@ export function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 0.1 }}
-            className="mt-6 sm:mt-8 text-base sm:text-lg text-[#3A2E27]/90 dark:text-[#FAF5EE]/90 max-w-xl text-left leading-relaxed font-medium"
+            style={{
+              transform: `translate3d(${positioning.descX || 0}px, ${positioning.descY || 0}px, 0)`,
+              marginBottom: positioning.descMb !== undefined ? `${positioning.descMb}px` : undefined,
+            }}
+            className="text-base sm:text-lg text-[#3A2E27]/90 dark:text-[#FAF5EE]/90 max-w-xl text-left leading-relaxed font-medium transition-all duration-200"
           >
             We help businesses turn technology challenges and growth goals into scalable digital solutions and measurable outcomes.
           </motion.p>
@@ -46,7 +65,12 @@ export function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 0.15 }}
-            className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4 sm:gap-5 w-full sm:w-auto"
+            style={{
+              transform: `translate3d(${positioning.ctaX || 0}px, ${positioning.ctaY || 0}px, 0)`,
+              marginBottom: positioning.ctaMb !== undefined ? `${positioning.ctaMb}px` : undefined,
+              gap: positioning.ctaGap !== undefined ? `${positioning.ctaGap}px` : undefined,
+            }}
+            className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start w-full sm:w-auto transition-all duration-200"
           >
             <Link href="/contact" className="w-full sm:w-auto">
               <Button
@@ -75,9 +99,18 @@ export function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 0.2 }}
-            className="mt-12 lg:mt-16 pt-6 border-t border-[#3A2E27]/15 dark:border-white/15 w-full max-w-2xl"
+            style={{
+              transform: `translate3d(${positioning.capX || 0}px, ${positioning.capY || 0}px, 0)`,
+              marginTop: positioning.capMt !== undefined ? `${positioning.capMt}px` : undefined,
+            }}
+            className="pt-6 border-t border-[#3A2E27]/15 dark:border-white/15 w-full max-w-2xl transition-all duration-200"
           >
-            <div className="flex flex-col sm:flex-row items-start sm:items-center sm:divide-x sm:divide-[#3A2E27]/20 dark:sm:divide-white/20 gap-4 sm:gap-0 justify-start">
+            <div
+              style={{
+                gap: positioning.capGap !== undefined ? `${positioning.capGap}px` : undefined,
+              }}
+              className="flex flex-col sm:flex-row items-start sm:items-center sm:divide-x sm:divide-[#3A2E27]/20 dark:sm:divide-white/20 justify-start"
+            >
               
               <div className="flex items-center gap-2.5 sm:pr-6 text-left justify-start">
                 <div className="w-7 h-7 rounded-lg bg-[#f15e1c]/10 dark:bg-[#f15e1c]/20 flex items-center justify-center shrink-0">

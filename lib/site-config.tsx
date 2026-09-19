@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 
@@ -101,6 +101,88 @@ export const defaultNavbarConfig: NavbarConfig = {
   transitionSpeed: "standard",
 };
 
+export interface HeroPositioningDeviceConfig {
+  contentX: number; // -200 to 200px
+  contentY: number; // -150 to 150px
+  contentWidth: number; // 450 to 800px
+  contentAlign: "left" | "center" | "right";
+
+  headingX: number; // -100 to 100px
+  headingY: number; // -100 to 100px
+  headingMb: number; // 8 to 64px
+  headingSize: number; // 32 to 72px
+
+  descX: number; // -100 to 100px
+  descY: number; // -100 to 100px
+  descMb: number; // 8 to 64px
+
+  ctaX: number; // -100 to 100px
+  ctaY: number; // -100 to 100px
+  ctaMb: number; // 8 to 64px
+  ctaGap: number; // 8 to 40px
+
+  capX: number; // -100 to 100px
+  capY: number; // -100 to 100px
+  capMt: number; // 8 to 96px
+  capGap: number; // 16 to 80px
+
+  dividerY: number; // -50 to 50px
+  dividerWidth: number; // 10 to 100%
+  dividerOpacity: number; // 0 to 100%
+
+  visualX: number; // -200 to 200px
+  visualY: number; // -150 to 150px
+  visualScale: number; // 80 to 130%
+  videoOverlayOpacity: number; // 0 to 100%
+}
+
+export interface HeroPositioningConfig {
+  desktop: HeroPositioningDeviceConfig;
+  tablet: HeroPositioningDeviceConfig;
+  mobile: HeroPositioningDeviceConfig;
+}
+
+export const defaultHeroPositioningDeviceConfig: HeroPositioningDeviceConfig = {
+  contentX: -60,
+  contentY: 0,
+  contentWidth: 640,
+  contentAlign: "left",
+
+  headingX: 0,
+  headingY: 0,
+  headingMb: 24,
+  headingSize: 56,
+
+  descX: 0,
+  descY: 0,
+  descMb: 32,
+
+  ctaX: 0,
+  ctaY: 0,
+  ctaMb: 40,
+  ctaGap: 20,
+
+  capX: 0,
+  capY: 0,
+  capMt: 48,
+  capGap: 24,
+
+  dividerY: 0,
+  dividerWidth: 100,
+  dividerOpacity: 15,
+
+  visualX: 0,
+  visualY: 0,
+  visualScale: 100,
+  videoOverlayOpacity: 45,
+};
+
+export const defaultHeroPositioning: HeroPositioningConfig = {
+  desktop: defaultHeroPositioningDeviceConfig,
+  tablet: { ...defaultHeroPositioningDeviceConfig, contentX: 0, contentWidth: 580 },
+  mobile: { ...defaultHeroPositioningDeviceConfig, contentX: 0, contentY: 0, contentWidth: 420 },
+};
+
 export interface HeroVideoConfig {
   enabled: boolean;
   videoUrl: string;
@@ -109,6 +191,7 @@ export interface HeroVideoConfig {
   textAlignment: "left" | "center" | "right";
   textLayoutPosition: "left" | "center" | "right";
   textMaxWidth: "compact" | "standard" | "wide";
+  positioning?: HeroPositioningConfig;
 }
 
 export const defaultHeroVideoConfig: HeroVideoConfig = {
@@ -119,7 +202,38 @@ export const defaultHeroVideoConfig: HeroVideoConfig = {
   textAlignment: "left",
   textLayoutPosition: "left",
   textMaxWidth: "standard",
+  positioning: defaultHeroPositioning,
 };
+
+export interface CEOSectionConfig {
+  visible: boolean;
+  name: string;
+  designation: string;
+  portrait: string;
+  statement: string;
+  statementSupportingLine: string;
+  biographyParagraph1: string;
+  biographyParagraph2: string;
+  linkedinUrl: string;
+  ctaText: string;
+}
+
+export interface FooterConfig {
+  ctaHeading: string;
+  ctaDescription: string;
+  ctaPrimaryText: string;
+  ctaPrimaryHref: string;
+  ctaSecondaryText: string;
+  ctaSecondaryHref: string;
+  brandStatement: string;
+  addressIndia: string;
+  mapsUrlIndia?: string;
+  addressUAE: string;
+  mapsUrlUAE?: string;
+  phoneIndia: string;
+  phoneUAE: string;
+  supportEmail: string;
+}
 
 export interface SiteConfig {
   websiteEnabled: boolean;
@@ -164,43 +278,13 @@ export interface SiteConfig {
   cardStyle: CardStyleOption;
 }
 
-export interface FooterConfig {
-  ctaHeading: string;
-  ctaDescription: string;
-  ctaPrimaryText: string;
-  ctaPrimaryHref: string;
-  ctaSecondaryText: string;
-  ctaSecondaryHref: string;
-  brandStatement: string;
-  addressIndia: string;
-  mapsUrlIndia?: string;
-  addressUAE: string;
-  mapsUrlUAE?: string;
-  phoneIndia: string;
-  phoneUAE: string;
-  supportEmail: string;
-}
-
-export interface CEOSectionConfig {
-  visible: boolean;
-  name: string;
-  designation: string;
-  portrait: string;
-  statement: string;
-  statementSupportingLine: string;
-  biographyParagraph1: string;
-  biographyParagraph2: string;
-  linkedinUrl: string;
-  ctaText: string;
-}
-
-const defaultConfig: SiteConfig = {
+export const defaultConfig: SiteConfig = {
   websiteEnabled: true,
   brandColors: defaultBrandColors,
   navbarConfig: defaultNavbarConfig,
   heroVideoConfig: defaultHeroVideoConfig,
   chatbotEnabled: true,
-  chatbotDelaySeconds: 10,
+  chatbotDelaySeconds: 4,
   animationsEnabled: true,
   backgroundMotionEnabled: true,
   parallaxEnabled: true,
@@ -228,96 +312,7 @@ const defaultConfig: SiteConfig = {
     backgroundMotionEnabled: true,
     hoverEffectsEnabled: true,
     intensity: "medium",
-    serviceLayers: [
-      {
-        id: 0,
-        slug: "it-strategy-implementation",
-        name: "IT Strategy & Implementation",
-        shortName: "IT Strategy & Implementation",
-        description: "Enterprise roadmaps, cloud strategy, digital transformation & tech modernization.",
-        tone: "#f15e1c", // Primary Orange
-        icon: "Compass",
-        href: "/services/it-strategy-implementation",
-        visible: true,
-      },
-      {
-        id: 1,
-        slug: "digital-marketing-brand-development",
-        name: "Digital Marketing & Brand Development",
-        shortName: "Digital Marketing & Brand Development",
-        description: "Brand strategy, performance marketing & growth campaigns that drive measurable impact.",
-        tone: "#2e936f", // Green
-        icon: "TrendingUp",
-        href: "/services/digital-marketing-brand-development",
-        visible: true,
-      },
-      {
-        id: 2,
-        slug: "web-application-development",
-        name: "Web & Application Development",
-        shortName: "Web & Application Development",
-        description: "Scalable web & mobile apps built with modern frameworks and cloud-native architecture.",
-        tone: "#fab60a", // Gold
-        icon: "Code2",
-        href: "/services/web-application-development",
-        visible: true,
-      },
-      {
-        id: 3,
-        slug: "risk-compliance-governance",
-        name: "Risk, Compliance & Governance",
-        shortName: "Risk, Compliance & Governance",
-        description: "Risk frameworks, compliance automation & governance models for secure and compliant operations.",
-        tone: "#f7d7b0", // Peach
-        icon: "ShieldCheck",
-        href: "/services/risk-compliance-governance",
-        visible: true,
-      },
-      {
-        id: 4,
-        slug: "audit-improvement",
-        name: "Audit & Improvement",
-        shortName: "Audit & Improvement",
-        description: "Technical, operational & process audits with actionable performance improvements.",
-        tone: "#2e936f", // Green
-        icon: "BarChart3",
-        href: "/services/audit-improvement",
-        visible: true,
-      },
-      {
-        id: 5,
-        slug: "training-staff-augmentation",
-        name: "Training & Staff Augmentation",
-        shortName: "Training & Staff Augmentation",
-        description: "Pre-vetted tech talent & training programs to scale your team and capabilities.",
-        tone: "#ffec69", // Yellow
-        icon: "Users2",
-        href: "/services/training-staff-augmentation",
-        visible: true,
-      },
-      {
-        id: 6,
-        slug: "seo-services",
-        name: "SEO Services",
-        shortName: "SEO Services",
-        description: "Technical SEO, content strategy & authority building for long-term organic growth.",
-        tone: "#2e936f", // Green
-        icon: "Search",
-        href: "/services/seo-services",
-        visible: true,
-      },
-      {
-        id: 7,
-        slug: "ai-portfolio",
-        name: "AI Portfolio",
-        shortName: "AI Portfolio",
-        description: "AI-powered solutions, automation & intelligent systems built for the future of your business.",
-        tone: "#f15e1c", // Primary Orange
-        icon: "Cpu",
-        href: "/services/ai-portfolio",
-        visible: true,
-      },
-    ],
+    serviceLayers: [],
   },
   trustedClientsVisible: true,
   servicesVisible: true,
@@ -327,20 +322,20 @@ const defaultConfig: SiteConfig = {
   caseStudiesVisible: true,
   blogVisible: true,
   bannerVisible: false,
-  bannerText: "🚀 Operating Globally across India, UAE, US, EU & Canada Hubs",
+  bannerText: "Welcome to Arav Innovations - Elevating Brands, One Click at a Time",
   phoneIndia: "+91 9650625777",
   phoneUAE: "+971 521555792",
   supportEmail: "Info@aravinnovations.com",
   linkedinUrl: "https://www.linkedin.com/company/aravinnovations/",
   instagramUrl: "https://www.instagram.com/aravinnovations",
-  facebookUrl: "https://www.facebook.com/people/Arav-Innovations/61566419637071/",
-  whatsappUrl: "https://api.whatsapp.com/send?phone=971521555792&text=Hello%20Arav%20Innovations%2C%20I%27d%20like%20to%20discuss%20a%20project.",
-  twitterUrl: "https://x.com/AravInnovations",
-  youtubeUrl: "https://www.youtube.com/@AravInnovations",
+  facebookUrl: "https://facebook.com",
+  whatsappUrl: "https://wa.me/919650625777",
+  twitterUrl: "https://twitter.com",
+  youtubeUrl: "https://youtube.com",
   serviceStates: {
-    "it-strategy-consulting": true,
+    "it-strategy-implementation": true,
+    "digital-marketing-brand-development": true,
     "web-app-development": true,
-    "digital-marketing": true,
     "seo": true,
     "risk-governance-compliance": true,
     "audit-improvement": true,
