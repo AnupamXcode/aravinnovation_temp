@@ -1,8 +1,7 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Compass,
@@ -241,6 +240,16 @@ const renderServiceIcon = (iconName: string) => {
   }
 };
 
+const getServiceGridClass = (count: number) => {
+  if (count >= 3) {
+    return "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 w-full";
+  }
+  if (count === 2) {
+    return "grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto w-full";
+  }
+  return "grid grid-cols-1 max-w-xl mx-auto w-full";
+};
+
 export function InteractiveServiceStack3D() {
   const [selectedGroupIdx, setSelectedGroupIdx] = React.useState<number>(0);
 
@@ -297,7 +306,7 @@ export function InteractiveServiceStack3D() {
           .map((group, gIdx) => (
             <div key={gIdx} className="space-y-6">
               {/* Group Category Heading */}
-              <div className="flex items-center justify-between border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-3">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-3 gap-2">
                 <div className="flex items-center gap-3">
                   <span className="font-mono text-xs font-bold text-[#f15e1c] tracking-widest">
                     {group.groupTag}
@@ -306,24 +315,24 @@ export function InteractiveServiceStack3D() {
                     {group.groupName}
                   </h3>
                 </div>
-                <span className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] hidden sm:inline">
+                <span className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] font-medium">
                   {group.description}
                 </span>
               </div>
 
-              {/* Service Cards Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Controlled Responsive Service Cards Grid */}
+              <div className={getServiceGridClass(group.services.length)}>
                 {group.services.map((service) => (
                   <motion.div
                     key={service.id}
                     whileHover={{ y: -4 }}
                     transition={{ duration: 0.2 }}
-                    className="group rounded-3xl bg-[#FBF3EA] dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] p-5 sm:p-6 flex flex-col justify-between hover:border-[#f15e1c] dark:hover:border-[#f15e1c] hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+                    className="group rounded-3xl bg-[#FBF3EA] dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] p-5 sm:p-7 flex flex-col justify-between hover:border-[#f15e1c] dark:hover:border-[#f15e1c] hover:shadow-xl transition-all duration-300 relative overflow-hidden h-full min-h-[340px]"
                   >
-                    <div>
+                    <div className="flex-1 flex flex-col">
                       {/* Top Bar: Icon + Category Badge */}
                       <div className="flex items-center justify-between mb-4">
-                        <div className="w-10 h-10 rounded-2xl bg-white dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#222222] flex items-center justify-center text-[#f15e1c] shadow-xs group-hover:scale-105 transition-transform">
+                        <div className="w-10 h-10 rounded-2xl bg-white dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#222222] flex items-center justify-center text-[#f15e1c] shadow-xs group-hover:scale-105 transition-transform shrink-0">
                           {renderServiceIcon(service.iconName)}
                         </div>
                         <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#222222] text-[#3A2E27] dark:text-[#FAF5EE]">
@@ -332,31 +341,31 @@ export function InteractiveServiceStack3D() {
                       </div>
 
                       {/* Service Title */}
-                      <h4 className="text-lg font-bold font-display text-[#221811] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors mb-2">
+                      <h4 className="text-lg font-bold font-display text-[#221811] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors mb-2.5 leading-snug">
                         {service.name}
                       </h4>
 
                       {/* Value Proposition */}
-                      <p className="text-xs sm:text-sm text-[#3A2E27] dark:text-[#FAF5EE] leading-relaxed mb-4 font-medium">
+                      <p className="text-xs sm:text-sm text-[#3A2E27]/90 dark:text-[#FAF5EE]/90 leading-relaxed mb-4 font-medium">
                         {service.description}
                       </p>
 
                       {/* 2-4 Capability Points */}
-                      <ul className="space-y-2 mb-6 text-xs text-[#3A2E27] dark:text-[#FAF5EE]">
+                      <ul className="space-y-2 mb-6 text-xs text-[#3A2E27] dark:text-[#FAF5EE] mt-auto">
                         {service.outcomes.map((item, idx) => (
                           <li key={idx} className="flex items-center gap-2">
                             <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
-                            <span>{item}</span>
+                            <span className="font-medium">{item}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    {/* Bottom CTA Link */}
-                    <div className="pt-4 border-t border-[#EFE2D6]/60 dark:border-[#1f1f1f] flex items-center justify-between">
+                    {/* Bottom CTA Link (Aligned consistently at bottom) */}
+                    <div className="pt-4 mt-auto border-t border-[#EFE2D6]/60 dark:border-[#1f1f1f] flex items-center justify-between">
                       <Link
                         href={service.href}
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#f15e1c] hover:underline"
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#f15e1c] hover:underline py-1 min-h-[36px]"
                       >
                         <span>Explore Service</span>
                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
