@@ -513,6 +513,108 @@ const internalServices = [
   { name: "Training & Staff Augmentation", href: "/services/training-staff-augmentation" },
 ];
 
+function ITStrategyHeroBackgroundVideo() {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+  const [activeVideoSrc, setActiveVideoSrc] = React.useState<string | null>(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  React.useEffect(() => {
+    if (typeof window === "undefined" || shouldReduceMotion) return;
+
+    const mountVideo = () => {
+      setActiveVideoSrc("/videos/it-strategy-implementation.mp4");
+    };
+
+    if ("requestIdleCallback" in window) {
+      const handle = (window as any).requestIdleCallback(mountVideo, { timeout: 1500 });
+      return () => {
+        if ("cancelIdleCallback" in window) {
+          (window as any).cancelIdleCallback(handle);
+        }
+      };
+    } else {
+      const timer = setTimeout(mountVideo, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [shouldReduceMotion]);
+
+  React.useEffect(() => {
+    if (!containerRef.current || !videoRef.current || shouldReduceMotion || !activeVideoSrc) {
+      return;
+    }
+
+    const videoNode = videoRef.current;
+    videoNode.muted = true;
+    videoNode.defaultMuted = true;
+    videoNode.setAttribute("muted", "");
+    videoNode.setAttribute("playsinline", "");
+
+    const playPromise = videoNode.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {});
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            videoNode.play().catch(() => {});
+          } else {
+            videoNode.pause();
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [shouldReduceMotion, activeVideoSrc]);
+
+  return (
+    <div
+      ref={containerRef}
+      className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0"
+      aria-hidden="true"
+    >
+      {/* Background Poster Image (sharp fallback while loading or when motion reduced) */}
+      <Image
+        src="/images/it-strategy-hero-bg.png"
+        alt="Enterprise IT Strategy & Implementation"
+        fill
+        priority
+        className={cn(
+          "object-cover object-right md:object-center transition-opacity duration-500",
+          activeVideoSrc ? "opacity-0" : "opacity-100"
+        )}
+        sizes="100vw"
+      />
+
+      {/* Single Authoritative Full-Screen Crisp Background Video Instance */}
+      {activeVideoSrc && !shouldReduceMotion && (
+        <video
+          ref={videoRef}
+          src={activeVideoSrc}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/images/it-strategy-hero-bg.png"
+          tabIndex={-1}
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover object-right md:object-center transform-gpu transition-opacity duration-500 opacity-100"
+        />
+      )}
+
+      {/* Responsive Contrast Gradient Overlay — Crisp Video Display with Guaranteed Copy Legibility */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#FFFFFF]/90 via-[#FFFFFF]/50 to-[#FFFFFF]/90 lg:bg-gradient-to-r lg:from-[#FFFFFF]/95 lg:via-[#FFFFFF]/40 lg:to-transparent dark:hidden pointer-events-none z-[1]" />
+      <div className="hidden dark:block absolute inset-0 bg-gradient-to-b from-[#000000]/90 via-[#000000]/50 to-[#000000]/90 lg:bg-gradient-to-r lg:from-[#000000]/95 lg:via-[#000000]/40 lg:to-transparent pointer-events-none z-[1]" />
+    </div>
+  );
+}
+
 export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStrategyPageProps) {
   const [activeJourneyIdx, setActiveJourneyIdx] = React.useState<number>(0);
   const [activeFaqIdx, setActiveFaqIdx] = React.useState<number | null>(0);
@@ -563,18 +665,8 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
           ========================================================================= */}
       <section className="relative pt-6 sm:pt-10 lg:pt-12 pb-8 sm:pb-12 lg:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFFFF] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none flex flex-col justify-start">
         
-        {/* Full-Bleed Desktop Background Visual — PC / DESKTOP VIEW ONLY */}
-        <div className="absolute inset-0 pointer-events-none hidden lg:block select-none overflow-hidden">
-          <Image
-            src="/images/it-strategy-hero-bg.png"
-            alt="Enterprise IT Strategy & Implementation"
-            fill
-            priority
-            className="object-cover object-right dark:opacity-90"
-            sizes="(min-width: 1024px) 100vw, 1px"
-          />
-          <div className="absolute inset-0 hidden dark:block bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none" />
-        </div>
+        {/* Full-Bleed IT Strategy & Implementation Background Video */}
+        <ITStrategyHeroBackgroundVideo />
 
         <AnimatedDotGrid />
 
@@ -658,18 +750,12 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
               </AnimatedSection>
             </div>
 
-            {/* RIGHT COLUMN: MOBILE / TABLET VIEW HERO IMAGE */}
-            <div className="lg:col-span-6 xl:col-span-7 w-full flex items-center justify-center">
-              <AnimatedSection delay={0.15} className="w-full flex justify-center lg:hidden">
-                <div className="relative w-full rounded-2xl border border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-white dark:bg-[#0a0a0a] overflow-hidden shadow-lg">
-                  <Image
-                    src="/images/it-strategy-mobile-hero.png"
-                    alt="Enterprise IT Strategy & Implementation Roadmap"
-                    width={1200}
-                    height={1200}
-                    priority
-                    className="w-full h-auto object-contain rounded-2xl"
-                  />
+            {/* RIGHT COLUMN: MOBILE / TABLET VIEW HERO SPACE */}
+            <div className="lg:col-span-6 xl:col-span-7 w-full hidden sm:block lg:hidden">
+              <AnimatedSection delay={0.15} className="w-full flex justify-center">
+                <div className="relative w-full aspect-[16/9] rounded-2xl border border-[#f7d7b0]/40 dark:border-[#1a1a1a]/40 bg-white/10 dark:bg-black/10 backdrop-blur-[2px] overflow-hidden shadow-md">
+                  {/* Subtle translucent visual highlight container for tablet/mobile spacing */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#f15e1c]/5 via-transparent to-[#2e936f]/5 pointer-events-none" />
                 </div>
               </AnimatedSection>
             </div>
