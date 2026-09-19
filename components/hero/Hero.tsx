@@ -1,54 +1,58 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { HeroVideoBackground } from "./HeroVideoBackground";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ShieldCheck, Globe2, Zap } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="relative w-full min-h-[580px] sm:min-h-[640px] lg:min-h-[calc(100vh-80px)] xl:min-h-[90vh] flex flex-col items-center justify-center py-16 sm:py-20 lg:py-24 overflow-hidden bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300">
+    <section className="relative w-full min-h-[calc(100vh-80px)] xl:min-h-[90vh] flex flex-col justify-between py-12 sm:py-16 lg:py-20 overflow-hidden bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300">
       {/* Background Video Layer */}
       <HeroVideoBackground />
 
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 my-auto flex flex-col items-center justify-center text-center">
-        <div className="max-w-3xl lg:max-w-4xl mx-auto text-center space-y-6 sm:space-y-8 flex flex-col items-center">
+      {/* Main Editorial / Enterprise Content Container */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 xl:px-20 my-auto flex flex-col justify-center">
+        {/* Left-Aligned Hero Content Block */}
+        <div className="max-w-xl lg:max-w-2xl text-left flex flex-col items-start">
           
           {/* Main Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 0.05 }}
-            className="font-display font-extrabold text-3xl xs:text-4xl sm:text-5xl lg:text-6xl xl:text-[64px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.1] sm:leading-[1.08] max-w-3xl lg:max-w-4xl mx-auto text-center"
+            className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl xl:text-[64px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.1] sm:leading-[1.08] text-left"
           >
-            Build, Grow & Scale With Technology, AI & Digital Growth
+            Build, Grow &amp; Scale With<br className="hidden sm:inline" />{" "}
+            Technology, AI &amp; Digital<br className="hidden sm:inline" />{" "}
+            Growth
           </motion.h1>
 
-          {/* Core Subtitle */}
+          {/* Supporting Paragraph */}
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 0.1 }}
-            className="text-base sm:text-lg lg:text-xl text-[#3A2E27]/90 dark:text-[#FAF5EE]/90 max-w-2xl mx-auto text-center leading-relaxed font-medium"
+            className="mt-6 sm:mt-8 text-base sm:text-lg lg:text-xl text-[#3A2E27]/90 dark:text-[#FAF5EE]/90 max-w-xl text-left leading-relaxed font-medium"
           >
             We help businesses turn technology challenges and growth goals into scalable digital solutions and measurable outcomes.
           </motion.p>
 
           {/* Primary & Secondary CTAs */}
           <motion.div
-            initial={{ opacity: 0, y:  15 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 0.15 }}
-            className="pt-2 sm:pt-3 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 w-full"
+            className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4 sm:gap-5 w-full sm:w-auto"
           >
             <Link href="/contact" className="w-full sm:w-auto">
               <Button
                 variant="primary"
                 size="lg"
-                className="w-full sm:wmauto rounded-full px-8 py-4 text-base font-semibold shadow-md hever:shadow-xl shadow-[#f15e1c]/25 bg-[#f15e1c] text-white hover:bg-[#d84e12] transition-all transform hover:-translate-y-0.5 min-h-[52px] justify-center"
-                rightIcon=<ArrowRight className="w-4 h-4 ml-1" />
+                className="w-full sm:w-auto rounded-full px-8 py-4 text-base font-semibold shadow-md hover:shadow-xl shadow-[#f15e1c]/25 bg-[#f15e1c] text-white hover:bg-[#d84e12] transition-all transform hover:-translate-y-0.5 min-h-[52px] justify-center"
+                rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
               >
                 Book a Consultation
               </Button>
@@ -58,11 +62,50 @@ export function Hero() {
               <Button
                 variant="outline"
                 size="lg"
-                className="w-full sm:wmauto rounded-full px-8 py-4 text-base font-semibold bg-white/80 dark:bg-black/60 backdrop-blur-md border border-[#3A2E27]/20 dark:border-white/20 text-[#221811] dark:text-[#FAF5EE] hover:bg-white dark:hover:bg-black hover:border-[#f15e1c] hover:text-[#f15e1c] transition-all min-h-[52px] justify-center"
+                className="w-full sm:w-auto rounded-full px-8 py-4 text-base font-semibold bg-white/80 dark:bg-black/60 backdrop-blur-md border border-[#3A2E27]/20 dark:border-white/20 text-[#221811] dark:text-[#FAF5EE] hover:bg-white dark:hover:bg-black hover:border-[#f15e1c] hover:text-[#f15e1c] transition-all min-h-[52px] justify-center"
               >
                 Explore Solutions
               </Button>
             </Link>
+          </motion.div>
+
+          {/* Restored Enterprise Capability / Credibility Row */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.2 }}
+            className="mt-12 lg:mt-16 pt-8 border-t border-[#3A2E27]/15 dark:border-white/15 w-full"
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 items-center">
+              
+              <div className="flex items-center gap-3 text-left">
+                <div className="w-8 h-8 rounded-lg bg-[#f15e1c]/10 dark:bg-[#f15e1c]/20 flex items-center justify-center shrink-0">
+                  <ShieldCheck className="w-4 h-4 text-[#f15e1c]" />
+                </div>
+                <span className="text-xs sm:text-sm font-semibold text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-snug">
+                  Enterprise Technology Partner
+                </span>
+              </div>
+
+              <div className="flex items-center gap-3 text-left">
+                <div className="w-8 h-8 rounded-lg bg-[#f15e1c]/10 dark:bg-[#f15e1c]/20 flex items-center justify-center shrink-0">
+                  <Globe2 className="w-4 h-4 text-[#f15e1c]" />
+                </div>
+                <span className="text-xs sm:text-sm font-semibold text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-snug">
+                  India &amp; UAE Strategic Hubs
+                </span>
+              </div>
+
+              <div className="flex items-center gap-3 text-left">
+                <div className="w-8 h-8 rounded-lg bg-[#f15e1c]/10 dark:bg-[#f15e1c]/20 flex items-center justify-center shrink-0">
+                  <Zap className="w-4 h-4 text-[#f15e1c]" />
+                </div>
+                <span className="text-xs sm:text-sm font-semibold text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-snug">
+                  Outcome-Driven Architecture
+                </span>
+              </div>
+
+            </div>
           </motion.div>
 
         </div>

@@ -1,8 +1,8 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { useSiteConfig, defaultHeroVideoConfig } from "@/lib/site-config";
- 
+
 export function HeroVideoBackground() {
   const { config } = useSiteConfig();
   const videoConfig = config.heroVideoConfig || defaultHeroVideoConfig;
@@ -82,6 +82,7 @@ export function HeroVideoBackground() {
     }
 
     const videoNode = videoRef.current;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -124,17 +125,17 @@ export function HeroVideoBackground() {
           onCanPlay={setVideoPlaybackSpeed}
           onPlay={setVideoPlaybackSpeed}
           onError={() => setVideoError(true)}
-          className="absolute inset-0 w-full h-full object-cover object-center transform-gpu transition-opacity duration-500 opacity-100"
+          className="absolute inset-0 w-full h-full object-cover object-center sm:object-right md:object-center transform-gpu transition-opacity duration-500 opacity-100"
         />
       )}
 
-      {/* Centered Legibility Vignette Gradient Overlay */}
+      {/* Left-to-Right Contrast Overlay for guaranteed text legibility while cinematic video shows on right */}
       <div
-        className="absolute inset-0 bg-gradient-to-b from-[#FFFDF9]/90 via-[#FFFDF9]/50 to-[#FFFDF9]/90 dark:hidden pointer-events-none transition-opacity duration-300 z-[1]"
+        className="absolute inset-0 bg-gradient-to-b from-[#FFFDF9]/90 via-[#FFFDF9]/60 to-[#FFFDF9]/90 sm:bg-gradient-to-r sm:from-[#FFFDF9] sm:via-[#FFFDF9]/75 sm:to-transparent dark:hidden pointer-events-none transition-opacity duration-300 z-[1]"
         style={{ opacity: overlayOpacityVal }}
       />
       <div
-        className="hidden dark:block absolute inset-0 bg-gradient-to-b from-[#050505]/90 via-[#050505]/50 to-[#050505]/90 pointer-events-none transition-opacity duration-300 z-[1]"
+        className="hidden dark:block absolute inset-0 bg-gradient-to-b from-[#050505]/90 via-[#050505]/60 to-[#050505]/90 sm:bg-gradient-to-r sm:from-[#050505] sm:via-[#050505]/75 sm:to-transparent pointer-events-none transition-opacity duration-300 z-[1]"
         style={{ opacity: overlayOpacityVal }}
       />
     </div>
