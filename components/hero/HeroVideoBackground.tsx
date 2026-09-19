@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useSiteConfig, defaultHeroVideoConfig } from "@/lib/site-config";
-
+ 
 export function HeroVideoBackground() {
   const { config } = useSiteConfig();
   const videoConfig = config.heroVideoConfig || defaultHeroVideoConfig;
@@ -18,7 +18,6 @@ export function HeroVideoBackground() {
 
   const desktopVideoSrc = videoConfig.videoUrl || "/videos/Create_a_premium_minimalist_ci.mp4";
 
-  // Determine single authoritative video source based on screen width and defer loading past initial LCP paint
   React.useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -31,7 +30,6 @@ export function HeroVideoBackground() {
 
     mediaQuery.addEventListener("change", handleChange);
 
-    // Defer setting video source until after initial paint so H1 paints immediately without network thrashing
     const isMobile = window.innerWidth < 640;
     const targetSrc = isMobile ? "/videos/hero-bg-mobile.mp4" : desktopVideoSrc;
 
@@ -62,7 +60,6 @@ export function HeroVideoBackground() {
     }
   }, [videoSpeed]);
 
-  // Ensure autoplay triggers reliably once source is mounted
   React.useEffect(() => {
     if (!videoRef.current || prefersReducedMotion || !isVideoEnabled || !activeVideoSrc) return;
 
@@ -75,20 +72,16 @@ export function HeroVideoBackground() {
 
     const playPromise = videoNode.play();
     if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        // Auto-play policy handled safely
-      });
+      playPromise.catch(() => {});
     }
   }, [prefersReducedMotion, videoSpeed, isVideoEnabled, activeVideoSrc]);
 
-  // Pause video when out of viewport to conserve battery/GPU, resume when in viewport
   React.useEffect(() => {
     if (!containerRef.current || !videoRef.current || prefersReducedMotion || !isVideoEnabled || !activeVideoSrc) {
       return;
     }
 
     const videoNode = videoRef.current;
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -116,7 +109,6 @@ export function HeroVideoBackground() {
       className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none"
       aria-hidden="true"
     >
-      {/* Single Authoritative Hero Background Video Instance */}
       {isVideoEnabled && activeVideoSrc && !videoError && !prefersReducedMotion && (
         <video
           ref={videoRef}
@@ -136,18 +128,15 @@ export function HeroVideoBackground() {
         />
       )}
 
-      {/* Vignette Overlay for Text Legibility (No blur, crisp video display with mobile adjustment) */}
+      {/* Centered Legibility Vignette Gradient Overlay */}
       <div
-        className="absolute inset-0 bg-gradient-to-b from-[#FFFDF9]/85 via-[#FFFDF9]/40 to-[#FFFDF9]/80 sm:bg-gradient-to-r sm:from-[#FFFDF9] sm:via-[#FFFDF9]/40 sm:to-transparent dark:hidden pointer-events-none transition-opacity duration-300 z-[1]"
+        className="absolute inset-0 bg-gradient-to-b from-[#FFFDF9]/90 via-[#FFFDF9]/50 to-[#FFFDF9]/90 dark:hidden pointer-events-none transition-opacity duration-300 z-[1]"
         style={{ opacity: overlayOpacityVal }}
       />
       <div
-        className="hidden dark:block absolute inset-0 bg-gradient-to-b from-[#050505]/85 via-[#050505]/40 to-[#050505]/80 sm:bg-gradient-to-r sm:from-[#050505] sm:via-[#050505]/40 sm:to-transparent pointer-events-none transition-opacity duration-300 z-[1]"
+        className="hidden dark:block absolute inset-0 bg-gradient-to-b from-[#050505]/90 via-[#050505]/50 to-[#050505]/90 pointer-events-none transition-opacity duration-300 z-[1]"
         style={{ opacity: overlayOpacityVal }}
       />
     </div>
   );
 }
-
-
-
