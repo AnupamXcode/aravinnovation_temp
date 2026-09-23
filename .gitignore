@@ -42,3 +42,8 @@ next-env.d.ts
 
 # admin credentials
 admin-credentials.txt
+
+# powerpoint presentations
+*.pptx
+*.ppt
+

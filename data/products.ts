@@ -263,7 +263,7 @@ export const productsData: Product[] = [
   {
     slug: "omnigrc",
     name: "OMNiGRC",
-    domain: "omnigrc.vercel.app",
+    domain: "app.omnigrc.co",
     category: "Governance, Risk & Compliance",
     status: "live",
     badge: "Live Platform",
@@ -271,11 +271,15 @@ export const productsData: Product[] = [
     tagline: "SaaS Platform for Governance, Risk & Compliance",
     description:
       "A comprehensive SaaS solution designed to streamline governance, risk management, and compliance processes for enterprises. Simplify audits, reduce risk exposure, and ensure regulatory adherence.",
+    positioning:
+      "A unified enterprise SaaS platform for continuous governance, automated compliance audits, and real-time risk monitoring.",
     ctaText: "Visit OMNiGRC →",
-    ctaUrl: "https://omnigrc.vercel.app/",
+    ctaUrl: "https://app.omnigrc.co/",
     ctaEnabled: true,
-    externalUrl: "https://omnigrc.vercel.app/",
+    externalUrl: "https://app.omnigrc.co/",
     iconName: "ShieldCheck",
+    iconUrl: "/images/omni-grc-logo.png",
+    imageUrl: "/images/omni-grc-logo.png",
     features: [
       "Centralized governance dashboard",
       "Real-time risk monitoring and alerts",
@@ -283,8 +287,8 @@ export const productsData: Product[] = [
       "Audit trail and reporting",
     ],
     useCase: "Enterprises and mid-market companies managing complex compliance requirements",
-    pricingModel: "waitlist",
-    pricingNote: "Early access waitlist open for enterprise beta partners.",
+    pricingModel: "live-platform",
+    pricingNote: "Enterprise platform access available for CISOs, audit, risk, and compliance teams.",
     targetAudience: [
       "Enterprises and mid-market companies managing complex compliance requirements",
       "Chief Information Security Officers (CISOs) & Compliance Directors",
@@ -339,18 +343,18 @@ export const productsData: Product[] = [
       },
     ],
     proofPoint: {
-      metric: "Beta",
-      label: "Early Access Program Active",
+      metric: "Live",
+      label: "Enterprise Platform Active",
       detail: "Engineered to cut enterprise compliance audit preparation time by up to 70%.",
     },
     faqs: [
       {
-        question: "When will OMNiGRC be available for public launch?",
-        answer: "OMNiGRC is currently in active development. Join the waitlist to receive priority beta access.",
+        question: "How do I access OMNiGRC?",
+        answer: "Visit app.omnigrc.co to log in or launch your enterprise governance and compliance portal.",
       },
       {
-        question: "What frameworks will OMNiGRC support at launch?",
-        answer: "OMNiGRC will launch with built-in modules for DPDP (India), SOC-2 Type II, ISO 27001, and GDPR.",
+        question: "What frameworks does OMNiGRC support?",
+        answer: "OMNiGRC supports built-in modules for DPDP (India), SOC-2 Type II, ISO 27001, and GDPR.",
       },
     ],
   },
