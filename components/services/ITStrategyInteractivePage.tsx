@@ -663,7 +663,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
       {/* =========================================================================
           SECTION 01 — HERO SECTION (OPTIMIZED COMPOSITION & SPACING)
           ========================================================================= */}
-      <section className="relative pt-8 sm:pt-12 md:pt-14 lg:pt-16 pb-12 sm:pb-16 lg:pb-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFFFF] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none flex flex-col justify-center min-h-[580px] sm:min-h-[640px] lg:min-h-[680px]">
+      <section className="relative py-10 sm:py-14 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFFFF] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none flex flex-col justify-center">
         
         {/* Full-Bleed IT Strategy & Implementation Background Video */}
         <ITStrategyHeroBackgroundVideo />
@@ -674,13 +674,13 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
         <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-radial from-[#f15e1c]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
         <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-radial from-[#2e936f]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none lg:hidden" />
 
-        <div className="max-w-[1440px] mx-auto w-full relative z-10 my-auto">
+        <div className="max-w-[1280px] mx-auto w-full relative z-10 my-auto">
           
           {/* 2-Column Hero Grid Composition with Controlled Width & Gap */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-12 lg:gap-16 xl:gap-20 items-center">
             
-            {/* LEFT COLUMN: HERO COPY (approx 50% width on desktop) */}
-            <div className="lg:col-span-6 xl:col-span-6 space-y-5 text-left max-w-xl lg:max-w-2xl">
+            {/* LEFT COLUMN: HERO COPY (approx 48% width on desktop) */}
+            <div className="lg:col-span-6 xl:col-span-6 space-y-6 text-left max-w-xl lg:max-w-2xl">
               
               {/* Breadcrumb & Eyebrow Badge */}
               <AnimatedSection delay={0.05} className="space-y-3">
@@ -702,7 +702,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                   initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                  className="text-3xl sm:text-4xl lg:text-5xl xl:text-[54px] font-extrabold font-display tracking-tight leading-[1.12] text-[#1b2823] dark:text-[#ffffff] max-w-xl lg:max-w-2xl"
+                  className="text-3xl sm:text-4xl lg:text-5xl xl:text-[52px] font-extrabold font-display tracking-tight leading-[1.14] text-[#1b2823] dark:text-[#ffffff] max-w-xl"
                 >
                   Turn Technology Complexity Into a <span className="text-[#f15e1c]">Clear Path Forward</span>
                 </motion.h1>
@@ -713,7 +713,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
               </AnimatedSection>
 
               {/* CTAs */}
-              <AnimatedSection delay={0.15} className="pt-1 flex flex-wrap items-center gap-3.5">
+              <AnimatedSection delay={0.15} className="pt-2 flex flex-wrap items-center gap-3.5">
                 <a href="#inquire">
                   <MagneticButton>
                     <Button3D
@@ -737,7 +737,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
               </AnimatedSection>
 
               {/* Supporting Statement Strip */}
-              <AnimatedSection delay={0.2} className="pt-2 border-t border-[#f7d7b0]/40 dark:border-white/10 text-xs font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center gap-2.5 flex-wrap">
+              <AnimatedSection delay={0.2} className="pt-3 border-t border-[#f7d7b0]/40 dark:border-white/10 text-xs font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center gap-2.5 flex-wrap">
                 <span>Strategy</span>
                 <span className="text-[#f15e1c]">•</span>
                 <span>Architecture</span>
@@ -751,8 +751,8 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
 
             </div>
 
-            {/* RIGHT COLUMN: ENTERPRISE STRATEGY VISUAL CARD (approx 45% width on desktop) */}
-            <div className="lg:col-span-6 xl:col-span-6 w-full mt-4 lg:mt-0">
+            {/* RIGHT COLUMN: ENTERPRISE STRATEGY VISUAL CARD (approx 52% width on desktop) */}
+            <div className="lg:col-span-6 xl:col-span-6 w-full mt-6 lg:mt-0">
               <AnimatedSection delay={0.18} className="w-full max-w-md mx-auto lg:max-w-lg relative group">
                 
                 {/* Subtle Ambient Glow */}

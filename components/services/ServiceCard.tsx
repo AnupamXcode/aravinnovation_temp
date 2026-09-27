@@ -59,30 +59,32 @@ export function ServiceCard({
           "relative h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-[#0a0a0a] p-6 sm:p-8 border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-[#f15e1c]/15 hover:border-[#f15e1c] dark:hover:border-[#f15e1c] transition-all duration-300"
         )}
       >
-        <div>
-          <div className="flex items-center justify-between mb-5">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl icon-box-hover shadow-xs shrink-0 flex items-center justify-center bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626]">
-              {iconMap[service.icon] || <Compass className="w-7 h-7 stroke-[2]" />}
+        <div className="flex-1 flex flex-col justify-between space-y-4">
+          <div>
+            <div className="flex items-center justify-between mb-5">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl icon-box-hover shadow-xs shrink-0 flex items-center justify-center bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626]">
+                {iconMap[service.icon] || <Compass className="w-7 h-7 stroke-[2]" />}
+              </div>
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#f15e1c] px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/30">
+                Practice
+              </span>
             </div>
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#f15e1c] px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/30">
-              Practice
-            </span>
+
+            <h3 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] dark:group-hover:text-[#f15e1c] transition-colors leading-snug break-words overflow-wrap-break-word min-h-[3.25rem] flex items-center">
+              {service.title}
+            </h3>
+
+            <p className="mt-3 text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium line-clamp-3">
+              {service.description}
+            </p>
           </div>
 
-          <h3 className="text-xl sm:text-2xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] dark:group-hover:text-[#f15e1c] transition-colors leading-snug break-words overflow-wrap-break-word">
-            {service.title}
-          </h3>
-
-          <p className="mt-3 text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
-            {service.description}
-          </p>
-
           {/* Core Capabilities Snippet */}
-          <div className="mt-6 pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] space-y-2">
+          <div className="pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] space-y-2 mt-auto">
             <span className="text-xs font-bold uppercase tracking-wider text-[#2e936f] block font-mono">
               Key Capabilities
             </span>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-1.5 min-h-[52px] items-start">
               {service.capabilities[0]?.items.slice(0, 3).map((item, i) => (
                 <span
                   key={i}
@@ -127,3 +129,4 @@ export function ServiceCard({
     </TiltCard>
   );
 }
+

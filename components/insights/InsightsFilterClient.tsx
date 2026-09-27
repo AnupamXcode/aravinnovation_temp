@@ -20,7 +20,6 @@ interface InsightsFilterClientProps {
 export function InsightsFilterClient({ initialPosts, categories }: InsightsFilterClientProps) {
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [sortBy, setSortBy] = useState<SortOrder>("latest");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
   // Filter and sort articles dynamically
   const filteredArticles = useMemo(() => {
@@ -33,21 +32,21 @@ export function InsightsFilterClient({ initialPosts, categories }: InsightsFilte
   const gridArticles = showFeatured ? filteredArticles.slice(1) : filteredArticles;
 
   return (
-    <div className="space-y-12 w-full">
+    <div className="space-y-10 sm:space-y-12 w-full">
       {/* Category Filter & Sorting Bar */}
-      <div className="w-full bg-[#FBF3EA]/80 dark:bg-[#161310]/80 backdrop-blur-md rounded-3xl p-4 sm:p-6 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm sticky top-20 z-30">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="w-full bg-[#FBF3EA]/90 dark:bg-[#161310]/90 backdrop-blur-md rounded-3xl p-3.5 sm:p-5 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm sticky top-20 z-30">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           
-          {/* Desktop Category Pills */}
-          <div className="hidden md:flex flex-wrap items-center gap-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] mr-2">
+          {/* Responsive Category Pills (Horizontal Scroll Rail on Mobile, Horizontal Wrap on Desktop) */}
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar scrollbar-none py-1 -mx-1 px-1 shrink max-w-full">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] mr-1 shrink-0">
               Practices:
             </span>
             <button
               onClick={() => setActiveCategory("all")}
-              className={`min-h-[44px] px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
+              className={`min-h-[38px] px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer shrink-0 ${
                 activeCategory === "all"
-                  ? "bg-[#f15e1c] text-white shadow-md shadow-[#f15e1c]/30 scale-105"
+                  ? "bg-[#f15e1c] text-white shadow-md shadow-[#f15e1c]/30"
                   : "bg-white dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#1f1f1f] hover:border-[#f15e1c]/40"
               }`}
             >
@@ -57,9 +56,9 @@ export function InsightsFilterClient({ initialPosts, categories }: InsightsFilte
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`min-h-[44px] px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                className={`min-h-[38px] px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer shrink-0 ${
                   activeCategory.toLowerCase() === cat.toLowerCase()
-                    ? "bg-[#f15e1c] text-white shadow-md shadow-[#f15e1c]/30 scale-105"
+                    ? "bg-[#f15e1c] text-white shadow-md shadow-[#f15e1c]/30"
                     : "bg-white dark:bg-[#1A1613] text-[#3A2E27] dark:text-[#FAF5EE] border border-[#EFE2D6] dark:border-[#1f1f1f] hover:border-[#f15e1c]/40"
                 }`}
               >
@@ -68,73 +67,14 @@ export function InsightsFilterClient({ initialPosts, categories }: InsightsFilte
             ))}
           </div>
 
-          {/* Mobile Category Dropdown */}
-          <div className="md:hidden flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 w-full">
-            <div className="relative w-full">
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="w-full min-h-[44px] px-4 py-2.5 rounded-2xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] flex items-center justify-between shadow-sm cursor-pointer"
-              >
-                <span className="flex items-center gap-2">
-                  <Filter className="w-3.5 h-3.5 text-[#f15e1c]" />
-                  <span>
-                    Category: {activeCategory === "all" ? "All Articles" : activeCategory}
-                  </span>
-                </span>
-                <ChevronDown className={`w-4 h-4 text-[#7A6A5F] transition-transform ${mobileMenuOpen ? "rotate-180" : ""}`} />
-              </button>
-
-              <AnimatePresence>
-                {mobileMenuOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] rounded-2xl shadow-xl z-50 overflow-hidden max-h-64 overflow-y-auto"
-                  >
-                    <button
-                      onClick={() => {
-                        setActiveCategory("all");
-                        setMobileMenuOpen(false);
-                      }}
-                      className={`w-full min-h-[44px] text-left px-4 py-3 text-xs font-semibold transition-colors border-b border-[#EFE2D6]/50 dark:border-[#1f1f1f]/50 ${
-                        activeCategory === "all"
-                          ? "bg-[#f15e1c]/10 text-[#f15e1c]"
-                          : "text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FBF3EA] dark:hover:bg-[#161616]"
-                      }`}
-                    >
-                      All Articles ({initialPosts.length})
-                    </button>
-                    {categories.map((cat) => (
-                      <button
-                        key={cat}
-                        onClick={() => {
-                          setActiveCategory(cat);
-                          setMobileMenuOpen(false);
-                        }}
-                        className={`w-full min-h-[44px] text-left px-4 py-3 text-xs font-semibold transition-colors border-b border-[#EFE2D6]/50 dark:border-[#1f1f1f]/50 last:border-0 ${
-                          activeCategory.toLowerCase() === cat.toLowerCase()
-                            ? "bg-[#f15e1c]/10 text-[#f15e1c]"
-                            : "text-[#3A2E27] dark:text-[#FAF5EE] hover:bg-[#FBF3EA] dark:hover:bg-[#161616]"
-                        }`}
-                      >
-                        {cat}
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </div>
-
           {/* Sort Controls */}
-          <div className="flex items-center gap-2 self-end md:self-auto shrink-0">
+          <div className="flex items-center gap-2 shrink-0 self-end lg:self-auto border-t lg:border-t-0 pt-3 lg:pt-0 border-[#EFE2D6] dark:border-[#1f1f1f]">
             <ArrowUpDown className="w-3.5 h-3.5 text-[#f15e1c]" />
             <span className="text-xs font-bold text-[#7A6A5F] dark:text-[#B8ACA0]">Sort:</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as SortOrder)}
-              className="min-h-[44px] px-3.5 py-2.5 rounded-2xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] cursor-pointer shadow-xs focus:outline-none focus:ring-2 focus:ring-[#f15e1c]/50"
+              className="min-h-[38px] px-3 py-1.5 rounded-xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] cursor-pointer shadow-xs focus:outline-none focus:ring-2 focus:ring-[#f15e1c]/50"
             >
               <option value="latest">Latest First</option>
               <option value="oldest">Oldest First</option>
@@ -148,9 +88,9 @@ export function InsightsFilterClient({ initialPosts, categories }: InsightsFilte
       {/* Featured Article Section */}
       {featuredArticle && (
         <ScrollReveal direction="up">
-          <div className="p-8 sm:p-12 rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center shadow-xl">
+          <div className="p-6 sm:p-10 rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center shadow-xl">
             <div className="lg:col-span-8 space-y-4">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 flex-wrap">
                 <Badge variant="primary" size="sm">
                   Featured Insight
                 </Badge>
@@ -172,7 +112,7 @@ export function InsightsFilterClient({ initialPosts, categories }: InsightsFilte
               <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
                 {featuredArticle.summary}
               </p>
-              <div className="pt-3">
+              <div className="pt-2">
                 <Link href={`/insights/${featuredArticle.slug}`}>
                   <Button
                     variant="primary"
@@ -186,7 +126,7 @@ export function InsightsFilterClient({ initialPosts, categories }: InsightsFilte
               </div>
             </div>
 
-            <div className="lg:col-span-4 p-6 rounded-2xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-3 shadow-xs">
+            <div className="lg:col-span-4 p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-3 shadow-xs">
               <span className="text-xs font-bold uppercase tracking-wider text-[#3A2E27] dark:text-[#FAF5EE] block">
                 Key Takeaways
               </span>
@@ -220,33 +160,35 @@ export function InsightsFilterClient({ initialPosts, categories }: InsightsFilte
 
       {/* Articles Grid */}
       {gridArticles.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
           {gridArticles.map((art, idx) => (
             <ScrollReveal key={art.slug} delay={Math.min(idx * 0.05, 0.3)} direction="up" className="h-full">
               <TiltCard maxTilt={4} scale={1.01} className="h-full">
                 <div className="h-full p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:shadow-2xl hover:border-[#f15e1c]/40 transition-all flex flex-col justify-between group">
-                  <div className="space-y-4">
-                    <div className="w-full rounded-2xl overflow-hidden mb-3 border border-[#EFE2D6] dark:border-[#1f1f1f]">
-                      <BlogCardImage post={art} aspectRatio="aspect-video" />
-                    </div>
-                    <div className="flex items-center justify-between gap-2">
-                      <Badge variant="secondary" size="sm" className="truncate max-w-[160px]">
-                        {art.category}
-                      </Badge>
-                      <span className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center gap-1 shrink-0">
-                        <Clock className="w-3 h-3 text-[#f15e1c]" /> {art.readTime}
-                      </span>
-                    </div>
+                  <div className="space-y-4 flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="w-full rounded-2xl overflow-hidden mb-3 border border-[#EFE2D6] dark:border-[#1f1f1f] aspect-video">
+                        <BlogCardImage post={art} aspectRatio="aspect-video" />
+                      </div>
+                      <div className="flex items-center justify-between gap-2 mb-3">
+                        <Badge variant="secondary" size="sm" className="truncate max-w-[160px]">
+                          {art.category}
+                        </Badge>
+                        <span className="text-[11px] text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center gap-1 shrink-0">
+                          <Clock className="w-3 h-3 text-[#f15e1c]" /> {art.readTime}
+                        </span>
+                      </div>
 
-                    <h3 className="text-base sm:text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors line-clamp-3 leading-snug">
-                      <Link href={`/insights/${art.slug}`}>
-                        {art.title}
-                      </Link>
-                    </h3>
+                      <h3 className="text-base sm:text-lg font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors line-clamp-2 leading-snug min-h-[3rem] flex items-center">
+                        <Link href={`/insights/${art.slug}`}>
+                          {art.title}
+                        </Link>
+                      </h3>
 
-                    <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed line-clamp-3">
-                      {art.summary}
-                    </p>
+                      <p className="mt-2 text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed line-clamp-3 min-h-[3.375rem]">
+                        {art.summary}
+                      </p>
+                    </div>
                   </div>
 
                   <div className="mt-6 pt-4 border-t border-[#EFE2D6] dark:border-[#1f1f1f] flex items-center justify-between">
@@ -254,7 +196,7 @@ export function InsightsFilterClient({ initialPosts, categories }: InsightsFilte
                     <Link
                       href={`/insights/${art.slug}`}
                       aria-label={`Read article: ${art.title}`}
-                      className="text-xs font-bold text-[#f15e1c] hover:underline inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform min-h-[44px] items-center"
+                      className="text-xs font-bold text-[#f15e1c] hover:underline inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform min-h-[36px] items-center"
                     >
                       Read Article <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
@@ -282,3 +224,4 @@ export function InsightsFilterClient({ initialPosts, categories }: InsightsFilte
     </div>
   );
 }
+

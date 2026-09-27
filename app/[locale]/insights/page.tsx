@@ -42,8 +42,8 @@ export default async function InsightsPage() {
   return (
     <div className="w-full pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
       <BreadcrumbSchema items={[{ name: "Insights", url: "/insights" }]} />
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 space-y-12">
-        {/* Header */}
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
+        {/* Insights Hero */}
         <div className="max-w-3xl space-y-4">
           <ScrollReveal direction="up">
             <Breadcrumb items={[{ label: "Insights & Perspectives" }]} />
@@ -57,12 +57,12 @@ export default async function InsightsPage() {
             </div>
           </ScrollReveal>
           <ScrollReveal direction="up" delay={0.2}>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] tracking-tight">
-              Insights & Engineering Perspectives
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
+              Insights &amp; Engineering Perspectives
             </h1>
           </ScrollReveal>
           <ScrollReveal direction="up" delay={0.3}>
-            <p className="text-base sm:text-lg text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
+            <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#B8ACA0] leading-relaxed">
               In-depth analysis on modern software architecture, B2B demand generation, regulatory data privacy, and cloud FinOps optimization authored by our global practice leads.
             </p>
           </ScrollReveal>
