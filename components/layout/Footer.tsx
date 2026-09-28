@@ -559,7 +559,7 @@ export function Footer() {
 
             {/* Copyright */}
             <div className="font-mono text-center sm:text-right text-white/90 text-[11px]">
-              &copy; 2026 Arav Innovations. All Rights Reserved.
+              &copy; {new Date().getFullYear()} Arav Innovations. All Rights Reserved.
             </div>
           </div>
 

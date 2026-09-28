@@ -33,6 +33,11 @@ const ClientChatbot = dynamic(
   { ssr: false }
 );
 
+const CookieConsent = dynamic(
+  () => import("@/components/layout/CookieConsent").then((mod) => mod.CookieConsent),
+  { ssr: false }
+);
+
 export function ClientOverlays({ children }: { children: React.ReactNode }) {
   return (
     <WebsiteShutdownOverlay>
@@ -41,6 +46,7 @@ export function ClientOverlays({ children }: { children: React.ReactNode }) {
       <BackToTop />
       <SetupCall />
       <ClientChatbot />
+      <CookieConsent />
       {(process.env.NODE_ENV === "development" || process.env.VERCEL_ENVIRONMENT === "development") && (
         <MobilePreviewToggle />
       )}
