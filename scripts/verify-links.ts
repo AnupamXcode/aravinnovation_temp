@@ -35,6 +35,7 @@ const validRoutes = [
   '/services/training-staff-augmentation',
   '/services/seo-services',
   '/services/ai-portfolio',
+  '/industries',
   '/products/astrobeams',
   '/products/omnigrc',
 ];

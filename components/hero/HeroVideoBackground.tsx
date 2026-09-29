@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import * as React from "react";
 import { useSiteConfig, defaultHeroVideoConfig } from "@/lib/site-config";
@@ -131,11 +131,11 @@ export function HeroVideoBackground() {
 
       {/* Left-to-Right Contrast Overlay for guaranteed text legibility while cinematic video shows on right */}
       <div
-        className="absolute inset-0 bg-gradient-to-b from-[#FFFDF9]/80 via-[#FFFDF9]/50 to-[#FFFDF9]/80 sm:bg-gradient-to-r sm:from-[#FFFDF9] sm:via-[#FFFDF9]/60 sm:to-transparent dark:hidden pointer-events-none transition-opacity duration-300 z-[1]"
+        className="absolute inset-0 bg-gradient-to-b from-[#FFFDF9]/70 via-[#FFFDF9]/30 to-[#FFFDF9]/70 sm:bg-gradient-to-r sm:from-[#FFFDF9] sm:via-[#FFFDF9]/60 sm:to-transparent dark:hidden pointer-events-none transition-opacity duration-300 z-[1]"
         style={{ opacity: overlayOpacityVal }}
       />
       <div
-        className="hidden dark:block absolute inset-0 bg-gradient-to-b from-[#050505]/90 via-[#050505]/60 to-[#050505]/90 sm:bg-gradient-to-r sm:from-[#050505] sm:via-[#050505]/75 sm:to-transparent pointer-events-none transition-opacity duration-300 z-[1]"
+        className="hidden dark:block absolute inset-0 bg-gradient-to-b from-[#050505]/80 via-[#050505]/35 to-[#050505]/80 sm:bg-gradient-to-r sm:from-[#050505] sm:via-[#050505]/75 sm:to-transparent pointer-events-none transition-opacity duration-300 z-[1]"
         style={{ opacity: overlayOpacityVal }}
       />
     </div>
