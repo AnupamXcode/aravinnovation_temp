@@ -87,9 +87,9 @@ export const Button3D = React.forwardRef<HTMLButtonElement, Button3DProps>(
 
     // Size variants
     const sizeMap = {
-      sm: "px-4 py-2 text-xs h-8 gap-1.5",
-      md: "px-6 py-2.5 text-sm h-10 gap-2",
-      lg: "px-8 py-3.5 text-base h-12 gap-2.5 font-semibold",
+      sm: "px-4 py-2 text-xs h-8 gap-1.5 font-sans font-medium",
+      md: "px-6 py-2.5 text-sm h-10 gap-2 font-sans font-semibold",
+      lg: "px-8 py-3.5 text-sm sm:text-base h-12 gap-2.5 font-sans font-semibold",
     };
 
     // Arav Brand Color variants
@@ -143,7 +143,7 @@ export const Button3D = React.forwardRef<HTMLButtonElement, Button3DProps>(
           mass: 0.5,
         }}
         className={cn(
-          "relative inline-flex items-center justify-center font-medium rounded-full select-none tracking-tight",
+          "relative inline-flex items-center justify-center font-sans font-medium rounded-full select-none tracking-tight",
           "transition-colors duration-200 ease-out group",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f15e1c] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[#000000]",
           variant !== "link" && sizeMap[size],

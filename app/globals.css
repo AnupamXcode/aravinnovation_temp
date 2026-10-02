@@ -155,8 +155,8 @@
   --color-arav-text: #3a2e27;
   --color-arav-text-muted: #7a6a5f;
 
-  --font-display: var(--font-display), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-sans: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-display), "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-sans: var(--font-sans), Roboto, system-ui, sans-serif;
 }
 
 /* Text Gradient Helpers */
@@ -277,50 +277,58 @@ body {
 
 /* Enhanced Mobile Typography, Spacing & Card System Helper Classes */
 .mobile-h1 {
-  font-size: clamp(1.75rem, 6vw, 2.375rem); /* 28-38px */
-  line-height: 1.2;
+  font-family: var(--font-display);
+  font-size: clamp(2.125rem, 7vw, 2.5rem); /* 34-40px */
+  line-height: 1.12;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 .mobile-h2 {
-  font-size: clamp(1.625rem, 5vw, 2.125rem); /* 26-34px */
-  line-height: 1.25;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 5.5vw, 2.25rem); /* 28-36px */
+  line-height: 1.18;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
 .mobile-h3 {
-  font-size: clamp(1.3125rem, 4vw, 1.6875rem); /* 21-27px */
-  line-height: 1.3;
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 4vw, 1.625rem); /* 22-26px */
+  line-height: 1.25;
   font-weight: 700;
 }
 
 .mobile-card-title {
-  font-size: clamp(1.25rem, 3.5vw, 1.5625rem); /* 20-25px */
-  line-height: 1.35;
+  font-family: var(--font-display);
+  font-size: clamp(1.1875rem, 3.5vw, 1.3125rem); /* 19-21px */
+  line-height: 1.3;
   font-weight: 700;
 }
 
 .mobile-body {
-  font-size: clamp(1rem, 2.5vw, 1.125rem); /* 16-18px */
+  font-family: var(--font-sans);
+  font-size: clamp(0.9375rem, 2.5vw, 1.0625rem); /* 15-17px */
   line-height: 1.6;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .mobile-subtext {
+  font-family: var(--font-sans);
   font-size: clamp(0.875rem, 2.2vw, 1rem); /* 14-16px */
   line-height: 1.55;
   font-weight: 400;
 }
 
 .mobile-label {
-  font-size: clamp(0.8125rem, 2vw, 0.9375rem); /* 13-15px */
+  font-family: var(--font-sans);
+  font-size: clamp(0.75rem, 2vw, 0.8125rem); /* 12-13px */
   line-height: 1.4;
   font-weight: 600;
 }
 
 .mobile-button {
+  font-family: var(--font-sans);
   font-size: clamp(0.9375rem, 2.4vw, 1.0625rem); /* 15-17px */
   line-height: 1.2;
   font-weight: 600;

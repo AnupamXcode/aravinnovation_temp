@@ -869,7 +869,7 @@ export function ChatbotWidget() {
           </div>
 
           {/* Messages Container */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-3.5 text-xs">
+          <div className="flex-1 p-4 overflow-y-auto space-y-3.5 text-xs sm:text-sm font-sans">
             {messages.map((msg) => {
               const serviceCard = msg.recommendedServiceSlug ? serviceCardsData[msg.recommendedServiceSlug] : undefined;
               const productCard = msg.recommendedProductSlug ? productCardsData[msg.recommendedProductSlug] : undefined;

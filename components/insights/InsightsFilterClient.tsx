@@ -185,7 +185,7 @@ export function InsightsFilterClient({ initialPosts, categories }: InsightsFilte
                         </Link>
                       </h3>
 
-                      <p className="mt-2 text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed line-clamp-3 min-h-[3.375rem]">
+                      <p className="mt-2 text-sm font-sans text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed line-clamp-3 min-h-[3.75rem]">
                         {art.summary}
                       </p>
                     </div>

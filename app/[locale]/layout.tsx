@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Inter, Noto_Sans_Arabic, Noto_Sans_Devanagari } from "next/font/google";
+import { Plus_Jakarta_Sans, Roboto, Noto_Sans_Arabic, Noto_Sans_Devanagari } from "next/font/google";
 import "../globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { SiteConfigProvider } from "@/lib/site-config";
@@ -24,11 +24,11 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   preload: true,
 });
 
-const inter = Inter({
+const roboto = Roboto({
   variable: "--font-sans",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "700"],
   preload: true,
 });
 
@@ -161,7 +161,7 @@ export default async function RootLayout({
       dir={locale === "ar" ? "rtl" : "ltr"}
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={`${plusJakartaSans.variable} ${inter.variable} ${notoSansArabic.variable} ${notoSansDevanagari.variable} scroll-smooth`}
+      className={`${plusJakartaSans.variable} ${roboto.variable} ${notoSansArabic.variable} ${notoSansDevanagari.variable} scroll-smooth`}
     >
       <body className="min-h-screen flex flex-col w-full bg-[#FFFDF9] dark:bg-[#000000] text-[var(--text-primary)] font-sans antialiased selection:bg-[#FCE3D3] dark:selection:bg-[#f15e1c]/30 selection:text-[#f15e1c]">
         {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (

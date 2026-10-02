@@ -64,7 +64,7 @@ export function Hero() {
               transform: isMobile ? "none" : `translate3d(${positioning.headingX || 0}px, ${positioning.headingY || 0}px, 0)`,
               marginBottom: positioning.headingMb !== undefined ? `${positioning.headingMb}px` : undefined,
             }}
-            className="font-display font-extrabold text-[28px] xs:text-3xl sm:text-5xl lg:text-[56px] xl:text-[64px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.12] sm:leading-[1.08] text-left transition-all duration-200 max-w-full break-words"
+            className="font-display font-extrabold text-[34px] xs:text-[36px] sm:text-5xl lg:text-[56px] xl:text-[64px] text-[#221811] dark:text-[#FAF5EE] tracking-tight leading-[1.12] sm:leading-[1.08] text-left transition-all duration-200 max-w-full break-words"
           >
             Build, Grow &amp; Scale With<br className="hidden sm:inline" />{" "}
             Technology, AI &amp; Digital<br className="hidden sm:inline" />{" "}
@@ -80,7 +80,7 @@ export function Hero() {
               transform: isMobile ? "none" : `translate3d(${positioning.descX || 0}px, ${positioning.descY || 0}px, 0)`,
               marginBottom: positioning.descMb !== undefined ? `${positioning.descMb}px` : undefined,
             }}
-            className="text-sm sm:text-lg text-[#3A2E27]/90 dark:text-[#FAF5EE]/90 max-w-xl text-left leading-relaxed font-medium transition-all duration-200 mt-2 sm:mt-0"
+            className="text-base sm:text-lg text-[#3A2E27]/90 dark:text-[#FAF5EE]/90 max-w-xl text-left leading-relaxed font-sans font-normal transition-all duration-200 mt-2 sm:mt-0"
           >
             We help businesses turn technology challenges and growth goals into scalable digital solutions and measurable outcomes.
           </motion.p>
