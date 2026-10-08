@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
 import {
@@ -432,10 +433,21 @@ export function Footer() {
               
               {/* BRAND STATEMENT (4 Cols) */}
               <div className="lg:col-span-4 flex flex-col justify-between space-y-3">
-                <div className="space-y-2">
-                  <span className="text-base font-extrabold font-display text-white uppercase tracking-wider block">
-                    ARAV INNOVATIONS
-                  </span>
+                <div className="space-y-2.5">
+                  <div className="flex items-center gap-3">
+                    <div className="relative w-10 h-10 sm:w-12 sm:h-12 shrink-0">
+                      <Image
+                        src="/logos/arav-logo-footer.png"
+                        alt="Arav Innovations Logo"
+                        fill
+                        sizes="48px"
+                        className="object-contain object-left"
+                      />
+                    </div>
+                    <span className="text-base sm:text-lg font-extrabold font-display text-white uppercase tracking-wider">
+                      ARAV INNOVATIONS
+                    </span>
+                  </div>
                   <p className="text-xs sm:text-sm text-white/95 leading-relaxed font-sans max-w-sm font-medium">
                     {footerConfig.brandStatement}
                   </p>
