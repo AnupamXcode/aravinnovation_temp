@@ -126,7 +126,8 @@ export function ensureExactDate(post: BlogPost): BlogPost {
 }
 
 export async function getBlogPosts(locale = "en"): Promise<BlogPost[]> {
-  const localPosts = wordpressPostsData;
+  const baseLocalPosts = getLocalizedBlogPosts(locale);
+  const localPosts = [...baseLocalPosts, ...wordpressPostsData];
   let allPosts = localPosts;
   if (isVercelBlobConfigured()) {
     const vercelPosts = await fetchBlogsFromVercel();
