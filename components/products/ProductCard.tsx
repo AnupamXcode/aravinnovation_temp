@@ -35,6 +35,22 @@ function AstroBeamsLogoIcon({ className = "w-6 h-6" }: { className?: string }) {
   );
 }
 
+function FashAILogoIcon({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="32" height="32" rx="8" fill="#1b2823" />
+      <path d="M8 8H24M8 15H19M8 22H14" stroke="url(#fashai-grad)" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M21 16L24 19L27 16L24 13L21 16Z" fill="#fab60a" stroke="#f15e1c" strokeWidth="1" />
+      <defs>
+        <linearGradient id="fashai-grad" x1="8" y1="8" x2="24" y2="22" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#f15e1c" />
+          <stop offset="1" stopColor="#fab60a" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
 export function ProductCard({ product }: ProductCardProps) {
   const isLive = product.status === "live";
   const [showAllCapabilities, setShowAllCapabilities] = React.useState(false);
@@ -53,6 +69,12 @@ export function ProductCard({ product }: ProductCardProps) {
         className="w-full h-full object-contain object-center rounded-xl"
       />
     </div>
+  ) : product.slug === "fashai-universal" || product.iconName === "FashAILogo" ? (
+    <FashAILogoIcon className="w-6 h-6" />
+  ) : product.slug === "getastrav" || product.iconName === "GetAstravLogo" ? (
+    <span className="font-extrabold font-display text-xs sm:text-sm text-[#f15e1c] tracking-tight">
+      GetAstrav
+    </span>
   ) : product.iconName === "ShieldCheck" ? (
     <ShieldCheck className="w-6 h-6 text-[#f15e1c]" />
   ) : product.slug.includes("astrobeams") || product.iconName === "Orbit" ? (
@@ -78,7 +100,7 @@ export function ProductCard({ product }: ProductCardProps) {
             {icon}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap justify-end">
             {product.domain && (
               <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold text-[#2e936f] bg-[#2e936f]/10 border border-[#2e936f]/30">
                 <Globe className="w-3 h-3 text-[#2e936f]" />
@@ -89,7 +111,7 @@ export function ProductCard({ product }: ProductCardProps) {
               className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider text-white shadow-xs"
               style={{ backgroundColor: product.badgeColor }}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+              {isLive && <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />}
               {product.badge}
             </span>
           </div>

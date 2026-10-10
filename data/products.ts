@@ -63,6 +63,179 @@ export interface Product {
 
 export const productsData: Product[] = [
   {
+    slug: "fashai-universal",
+    name: "FashAI Universal",
+    domain: "fashaiuniversal.com",
+    category: "INTERNATIONAL LUXURY FASHION & EVENTS PLATFORM",
+    status: "live",
+    badge: "Live",
+    badgeColor: "#2e936f",
+    tagline: "International Fashion & Event Production Platform Powered by AI",
+    description:
+      "FashAI Universal is an international fashion and event production platform powered by Arav Innovation, delivering luxury fashion shows, runway productions, corporate events, brand campaigns, and creative experiences while connecting global fashion talent across the UAE, India, and international markets.",
+    positioning:
+      "An international fashion and luxury event production ecosystem combining AI-driven creative concepts with physical runway and event execution.",
+    ctaText: "Visit FashAIUniversal.com →",
+    ctaUrl: "https://www.fashaiuniversal.com/",
+    ctaEnabled: true,
+    externalUrl: "https://www.fashaiuniversal.com/",
+    iconName: "FashAILogo",
+    features: [
+      "Fashion Shows & Runway Production",
+      "Luxury & Lifestyle Events",
+      "Corporate Summits & Galas",
+      "Brand Shoots & Campaigns",
+      "Global Talent Network",
+      "AI-Powered Creative Concepts",
+    ],
+    useCase: "Fashion houses, luxury brands, corporate sponsors, and creative talent seeking global event production and AI creative concepts.",
+    pricingModel: "live-platform",
+    pricingNote: "Custom production and event management proposals tailored for global fashion and corporate clients.",
+    targetAudience: [
+      "International luxury fashion brands and designers",
+      "Corporate summit and gala organizers in UAE, India & global hubs",
+      "Fashion models, creative directors, and campaign producers",
+      "Brands looking for AI-powered visual production and campaign concepts",
+    ],
+    problemSolved: {
+      title: "Global Luxury Event Production & AI Creative Concepts",
+      points: [
+        "Bridging cross-border talent and logistics between UAE, India, and international fashion capitals.",
+        "Integrating cutting-edge AI creative concepts into physical runway shows and brand campaigns.",
+        "End-to-end execution of high-end corporate summits, galas, and luxury lifestyle experiences.",
+      ],
+    },
+    howItWorks: [
+      {
+        step: 1,
+        title: "Concept & AI Creative Direction",
+        description: "Develop tailored campaign themes, AI visual storyboards, and event architecture.",
+      },
+      {
+        step: 2,
+        title: "Talent & Production Curation",
+        description: "Source international models, designers, technical crews, and venue logistics.",
+      },
+      {
+        step: 3,
+        title: "Live Runway & Media Execution",
+        description: "Deliver world-class fashion shows, live broadcasts, and multi-channel brand media.",
+      },
+    ],
+    featureDetails: [
+      {
+        title: "Runway & Event Production",
+        description: "Full-scale staging, lighting, choreographies, and VIP hospitality management.",
+        iconName: "Sparkles",
+      },
+      {
+        title: "Global Talent Network",
+        description: "Direct access to top models, stylists, photographers, and creative directors.",
+        iconName: "Sparkles",
+      },
+      {
+        title: "AI-Powered Creative Concepts",
+        description: "Hyper-realistic virtual staging, moodboards, and generative brand visuals.",
+        iconName: "Sparkles",
+      },
+    ],
+    proofPoint: {
+      metric: "Global",
+      label: "International Event Production Footprint",
+      detail: "Connecting high-fashion production across UAE, India, and global markets.",
+    },
+    faqs: [
+      {
+        question: "What is FashAI Universal?",
+        answer: "FashAI Universal is an international fashion and event production platform powered by Arav Innovation, delivering runway shows, luxury galas, and AI-assisted creative campaigns.",
+      },
+      {
+        question: "How can brands partner with FashAI Universal?",
+        answer: "Visit fashaiuniversal.com to explore upcoming shows, request event production proposals, or connect with our talent network.",
+      },
+    ],
+  },
+  {
+    slug: "getastrav",
+    name: "GetAstrav",
+    category: "NEXT-GEN AI & DIGITAL SOLUTIONS PLATFORM",
+    status: "in-development",
+    badge: "Coming Soon",
+    badgeColor: "#fab60a",
+    tagline: "Next-Generation Enterprise AI & Intelligent Digital Capabilities",
+    description:
+      "GetAstrav is an upcoming AI and digital innovation platform by Arav Innovations, engineered to empower modern enterprises with next-generation digital capabilities.",
+    positioning:
+      "An upcoming enterprise platform delivering intelligent automation, digital architecture, and next-generation data solutions.",
+    ctaText: "Coming Soon",
+    ctaEnabled: false,
+    iconName: "GetAstravLogo",
+    features: [
+      "AI Workflow Automation",
+      "Enterprise Digital Transformation",
+      "Smart Analytics & Insights",
+      "Cloud Native Architecture",
+      "Secure Governance Controls",
+      "Custom Platform Integrations",
+    ],
+    useCase: "Enterprises seeking advanced AI integration, workflow automation, and digital acceleration.",
+    pricingModel: "waitlist",
+    pricingNote: "Access will be available upon official platform launch.",
+    targetAudience: [
+      "Enterprise technology leaders & CIOs",
+      "Organizations seeking next-gen AI automation solutions",
+      "Digital transformation teams requiring scalable cloud architecture",
+    ],
+    problemSolved: {
+      title: "Accelerating Next-Gen Enterprise AI Capabilities",
+      points: [
+        "Unifying fragmented enterprise workflows through intelligent AI orchestration.",
+        "Simplifying complex legacy migration with cloud-native architectures.",
+        "Enabling data-driven business decisions with real-time smart analytics.",
+      ],
+    },
+    howItWorks: [
+      {
+        step: 1,
+        title: "Platform Unveiling",
+        description: "Official launch details and feature previews will be announced soon.",
+      },
+      {
+        step: 2,
+        title: "Early Access",
+        description: "Selected enterprise partners will receive priority onboarding.",
+      },
+      {
+        step: 3,
+        title: "Enterprise Deployment",
+        description: "Seamless integration into existing corporate digital environments.",
+      },
+    ],
+    featureDetails: [
+      {
+        title: "AI Workflow Automation",
+        description: "Streamlined business logic and automated decision pipelines.",
+        iconName: "Sparkles",
+      },
+      {
+        title: "Smart Analytics",
+        description: "Real-time data intelligence and predictive enterprise metrics.",
+        iconName: "Sparkles",
+      },
+    ],
+    proofPoint: {
+      metric: "Soon",
+      label: "Enterprise Launch Milestone",
+      detail: "Next-generation digital capabilities platform currently in active development.",
+    },
+    faqs: [
+      {
+        question: "When will GetAstrav be launched?",
+        answer: "GetAstrav is currently in active development by Arav Innovations and will be launched soon.",
+      },
+    ],
+  },
+  {
     slug: "astrobeams-ai",
     name: "AstroBeams AI",
     domain: "astrobeams.in",
