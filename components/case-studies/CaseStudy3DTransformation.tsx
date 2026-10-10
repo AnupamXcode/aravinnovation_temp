@@ -35,18 +35,18 @@ const transformationSteps: TransformationStep[] = [
     title: "LEGACY RESTRUCTURE",
     challenge: "Monolithic tech debt & slow build pipelines",
     solution: "Microservices architecture & Next.js modernization",
-    metric: "45%",
-    metricLabel: "Latency Reduced",
+    metric: "Audit",
+    metricLabel: "System Refactoring",
     icon: <RefreshCw className="w-6 h-6 text-[#f15e1c]" />,
     color: "#f15e1c",
   },
   {
     step: "02",
     title: "CLOUD MODERNIZE",
-    challenge: "Poor page speed & mobile bounce rates",
+    challenge: "Suboptimal rendering & infrastructure costs",
     solution: "Edge caching & App Router server components",
-    metric: "Fast",
-    metricLabel: "Core Web Vitals Optimized",
+    metric: "Speed",
+    metricLabel: "Cloud Architecture Tuning",
     icon: <Cloud className="w-6 h-6 text-[#2e936f]" />,
     color: "#2e936f",
   },
@@ -55,8 +55,8 @@ const transformationSteps: TransformationStep[] = [
     title: "AUTOMATE & COMPLY",
     challenge: "Strict DPDP India & UAE data privacy requirements",
     solution: "Automated compliance, audit logs & ISO readiness",
-    metric: "Ready",
-    metricLabel: "DPDP Readiness Support",
+    metric: "Comply",
+    metricLabel: "DPDP Privacy Governance",
     icon: <ShieldCheck className="w-6 h-6 text-[#fab60a]" />,
     color: "#fab60a",
   },
@@ -65,8 +65,8 @@ const transformationSteps: TransformationStep[] = [
     title: "SCALABLE GROWTH",
     challenge: "Unfocused B2B demand & low lead conversion",
     solution: "Closed-loop marketing & high-intent funnel design",
-    metric: "3.4x",
-    metricLabel: "Conversion Uplift",
+    metric: "Growth",
+    metricLabel: "Conversion Funnel Optimization",
     icon: <TrendingUp className="w-6 h-6 text-[#f15e1c]" />,
     color: "#f15e1c",
   },
@@ -212,7 +212,7 @@ export function CaseStudy3DTransformation() {
           <div className="flex items-center gap-4 text-sm sm:text-base text-[#1b2823] dark:text-[#ffffff]">
             <BarChart3 className="w-6 h-6 text-[#f15e1c] shrink-0" />
             <span className="font-semibold">
-              Enterprise Transformation Benchmark: <strong className="text-[#c2410c] dark:text-[#f15e1c]">3.4x Revenue Uplift</strong> &amp; <strong className="text-[#1e6b50] dark:text-[#74c4ab]">DPDP Readiness Support</strong>
+              Enterprise Transformation Practice: <strong className="text-[#c2410c] dark:text-[#f15e1c]">Architecture Modernization</strong> &amp; <strong className="text-[#1e6b50] dark:text-[#74c4ab]">DPDP Compliance Support</strong>
             </span>
           </div>
           <Link href="/contact" className="shrink-0 w-full sm:w-auto">

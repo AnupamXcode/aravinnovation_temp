@@ -127,7 +127,7 @@ export function Hero3DScene() {
               Next.js 16 &amp; Microservices
             </div>
             <div className="text-[9px] font-mono font-bold text-[#f15e1c]">
-              100/100 Core Web Vitals
+              Performance Engineered
             </div>
           </div>
         </motion.div>

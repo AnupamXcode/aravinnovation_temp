@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { MovingLogoStrip } from "@/components/motion/MovingLogoStrip";
+
 import { clientLogos } from "@/data/clients";
 import { productsData } from "@/data/products";
 import { Badge } from "@/components/ui/badge";
@@ -84,14 +84,13 @@ export function TrustProofWeave({
         </div>
       </div>
 
-      {/* Moving Client Logos Strip */}
+      {/* Trust Capability Banner */}
       <div className="space-y-4 pt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a]">
         <div className="text-center">
           <span className="text-[10px] font-extrabold font-mono uppercase tracking-widest text-[#7A6A5F] dark:text-[#B8ACA0]">
-            TRUSTED BY FORWARD-THINKING ENTERPRISES &amp; BRANDS
+            ENTERPRISE TECHNOLOGY &bull; CLOUD ARCHITECTURE &bull; GOVERNANCE &bull; DIGITAL OUTCOMES
           </span>
         </div>
-        <MovingLogoStrip />
       </div>
 
       {/* Platform Platforms Built by Arav Showcase */}

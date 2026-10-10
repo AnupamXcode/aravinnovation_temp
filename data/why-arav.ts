@@ -39,7 +39,7 @@ export const whyAravPillarsData: WhyAravPillar[] = [
     title: "Scalable Foundations",
     subtitle: "Modular Cloud Systems",
     description: "Architecting modular, cloud-native digital systems built to expand smoothly as your user base and transaction volume grow.",
-    businessOutcome: "Smooth system scalability during rapid enterprise expansion",
+    businessOutcome: "Modular cloud architecture designed to support business growth",
     icon: "Cpu",
     accentColor: "#fab60a",
     order: 3,

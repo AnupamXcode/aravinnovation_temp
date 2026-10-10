@@ -3,11 +3,11 @@
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
-import { testimonialsData, Testimonial } from "@/data/testimonials";
+import { approvedTestimonialsData, testimonialsData, Testimonial } from "@/data/testimonials";
 import { cn } from "@/lib/utils";
 
 export function AnimatedTestimonialsCarousel() {
-  const testimonials = testimonialsData.slice(0, 12);
+  const testimonials = approvedTestimonialsData.length > 0 ? approvedTestimonialsData : [testimonialsData[0]];
   const [currentIndex, setCurrentIndex] = React.useState<number>(0);
   const [isHovered, setIsHovered] = React.useState<boolean>(false);
   const [direction, setDirection] = React.useState<number>(1);

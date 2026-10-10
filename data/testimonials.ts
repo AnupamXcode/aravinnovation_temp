@@ -35,6 +35,8 @@ export const testimonialsData: Testimonial[] = [
     service: "Digital Transformation & IT Strategy",
     location: "India",
     rating: 5,
+    verificationStatus: "Needs Verification",
+    permissionStatus: "Needs Verification",
   },
   {
     id: "test-3",
@@ -46,6 +48,8 @@ export const testimonialsData: Testimonial[] = [
     service: "System Audit & Process Improvement",
     location: "India",
     rating: 5,
+    verificationStatus: "Needs Verification",
+    permissionStatus: "Needs Verification",
   },
   {
     id: "test-4",
@@ -57,6 +61,8 @@ export const testimonialsData: Testimonial[] = [
     service: "Enterprise Architecture & Strategy",
     location: "India",
     rating: 5,
+    verificationStatus: "Needs Verification",
+    permissionStatus: "Needs Verification",
   },
   {
     id: "test-5",
@@ -68,6 +74,8 @@ export const testimonialsData: Testimonial[] = [
     service: "Digital Marketing & Growth",
     location: "Global",
     rating: 5,
+    verificationStatus: "Needs Verification",
+    permissionStatus: "Needs Verification",
   },
   {
     id: "test-6",
@@ -79,6 +87,8 @@ export const testimonialsData: Testimonial[] = [
     service: "Web & Application Development",
     location: "Global",
     rating: 5,
+    verificationStatus: "Needs Verification",
+    permissionStatus: "Needs Verification",
   },
   {
     id: "test-7",
@@ -90,6 +100,8 @@ export const testimonialsData: Testimonial[] = [
     service: "SEO & Digital Strategy",
     location: "India",
     rating: 5,
+    verificationStatus: "Needs Verification",
+    permissionStatus: "Needs Verification",
   },
   {
     id: "test-8",
@@ -101,6 +113,8 @@ export const testimonialsData: Testimonial[] = [
     service: "Risk, Compliance & Governance",
     location: "Global",
     rating: 5,
+    verificationStatus: "Needs Verification",
+    permissionStatus: "Needs Verification",
   },
   {
     id: "test-9",
@@ -112,6 +126,8 @@ export const testimonialsData: Testimonial[] = [
     service: "AI & Automation Solutions",
     location: "India",
     rating: 5,
+    verificationStatus: "Needs Verification",
+    permissionStatus: "Needs Verification",
   },
   {
     id: "test-10",
@@ -123,6 +139,8 @@ export const testimonialsData: Testimonial[] = [
     service: "Training & Staff Augmentation",
     location: "Global",
     rating: 5,
+    verificationStatus: "Needs Verification",
+    permissionStatus: "Needs Verification",
   },
   {
     id: "test-11",
@@ -134,6 +152,8 @@ export const testimonialsData: Testimonial[] = [
     service: "System Audit & Process Improvement",
     location: "Global",
     rating: 5,
+    verificationStatus: "Needs Verification",
+    permissionStatus: "Needs Verification",
   },
   {
     id: "test-12",
@@ -145,6 +165,12 @@ export const testimonialsData: Testimonial[] = [
     service: "Strategic Technology Partnership",
     location: "Global",
     rating: 5,
+    verificationStatus: "Needs Verification",
+    permissionStatus: "Needs Verification",
   },
 ];
+
+export const approvedTestimonialsData = testimonialsData.filter(
+  (t) => t.verificationStatus === "Approved for Public Use"
+);
 

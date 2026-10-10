@@ -232,7 +232,7 @@ export function getRouteCatalog(): SEOPageSettings[] {
       path: "/case-studies",
       label: "Case Studies Hub",
       metaTitle: "Case Studies & Results | Arav Innovations",
-      metaDescription: "Read real client transformation case studies delivering 3.4x conversion uplift, 45% latency reduction, and 100% DPDP Act compliance.",
+      metaDescription: "Read transformation case studies detailing cloud engineering, legacy system modernization, and DPDP Act compliance.",
       priority: 0.8,
       robots: "Index, Follow",
       jsonLdSchema: JSON.stringify(

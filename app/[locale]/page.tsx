@@ -5,7 +5,6 @@ import { Hero } from "@/components/hero/Hero";
 import { Badge } from "@/components/ui/badge";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { ScrollTextFlip } from "@/components/motion/ScrollTextFlip";
-import { MovingLogoStrip } from "@/components/motion/MovingLogoStrip";
 import { ShieldCheck, Zap, Users, Award, CheckCircle } from "lucide-react";
 
 // Code-split heavy below-the-fold components
@@ -107,15 +106,14 @@ export default async function HomePage({
       {/* 01 — HERO */}
       <Hero />
 
-      {/* 02 — CLIENT STRIP */}
-      <section className="w-full py-3.5 sm:py-5 md:py-7 bg-[#fefaf5] dark:bg-[#0a0a0a] border-y border-[#f7d7b0] dark:border-[#1a1a1a] shadow-sm transition-all duration-300 overflow-hidden">
+      {/* 02 — CAPABILITIES & DOMAINS */}
+      <section className="w-full py-4 sm:py-5 bg-[#fefaf5] dark:bg-[#0a0a0a] border-y border-[#f7d7b0] dark:border-[#1a1a1a] shadow-sm transition-all duration-300 overflow-hidden">
         <ScrollReveal direction="up">
-          <div className="text-center mb-2 sm:mb-3 px-4">
-            <span className="text-[10px] sm:text-[11px] font-bold font-mono uppercase tracking-widest text-[#4a5c55] dark:text-[#d3eee4]">
+          <div className="text-center px-4">
+            <span className="text-[10px] sm:text-[12px] font-bold font-mono uppercase tracking-widest text-[#4a5c55] dark:text-[#d3eee4]">
               TECHNOLOGY &bull; AI &bull; DIGITAL GROWTH &bull; GOVERNANCE &bull; BUSINESS OUTCOMES
             </span>
           </div>
-          <MovingLogoStrip />
         </ScrollReveal>
       </section>
 
