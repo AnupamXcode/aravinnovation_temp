@@ -121,7 +121,7 @@ function formatDate(dateStr: string): { publishedAt: string; dateFormatted: stri
 }
 
 export function runMigrationPreview() {
-  const xmlPath = path.join(process.cwd(), "wordpress-export", "WordPress.2026-08-30.xml");
+  const xmlPath = path.join(process.cwd(), "wordpress-export", "WordPress.2026-10-10.xml");
   if (!fs.existsSync(xmlPath)) {
     console.error(`[Error] File not found: ${xmlPath}`);
     process.exit(1);
