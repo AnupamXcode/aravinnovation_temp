@@ -5,10 +5,12 @@ export type AnalyticsEvent =
   | { type: "case_study_view"; caseStudySlug: string; title: string }
   | { type: "contact_started"; source: string }
   | { type: "contact_submitted"; service?: string; company?: string }
+  | { type: "form_submit_success"; source: string }
   | { type: "chatbot_started" }
   | { type: "chatbot_lead"; intent: string; service?: string }
   | { type: "resource_requested"; resourceName: string }
   | { type: "phone_click"; region: string; location: string }
+  | { type: "call_click"; location: string; region?: string }
   | { type: "whatsapp_click"; location: string }
   | { type: "book_call"; source: string }
   | { type: "career_application"; role: string };

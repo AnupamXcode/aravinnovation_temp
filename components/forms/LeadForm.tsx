@@ -75,14 +75,16 @@ export function LeadForm({
         setSubmittedLeadId(result.leadId || `ARAV-${Date.now()}`);
         setSubmittedEmail(data.email);
         trackEvent({
+          type: "form_submit_success",
+          source,
+        });
+        trackEvent({
           type: "contact_submitted",
-          service: data.service,
-          company: data.company,
         });
         reset();
       } else {
         setErrorMessage(
-          result.message || "There was an error submitting your request. Please try again."
+          result.message || "There was an error submitting your request. Please check your details and try again."
         );
       }
     } catch {
@@ -92,24 +94,6 @@ export function LeadForm({
     }
   };
 
-  const serviceOptions = [
-    ...servicesData.map((s) => ({
-      value: s.title,
-      label: s.title,
-    })),
-    ...productsData.map((p) => ({
-      value: `Product Demo: ${p.name}`,
-      label: `Product Demo: ${p.name}`,
-    })),
-  ];
-
-  const timelineOptions = [
-    { value: "Immediate (within 2 weeks)", label: "Immediate (within 2 weeks)" },
-    { value: "1 - 3 Months", label: "1 - 3 Months" },
-    { value: "3 - 6 Months", label: "3 - 6 Months" },
-    { value: "Exploring / Long term", label: "Exploring / Long term" },
-  ];
-
   if (isSubmitted) {
     return (
       <div className="rounded-3xl bg-white dark:bg-[#000000] p-8 sm:p-12 border border-[#2e936f]/30 dark:border-[#1f1f1f] shadow-2xl text-center space-y-5">
@@ -117,7 +101,7 @@ export function LeadForm({
           <CheckCircle2 className="w-8 h-8" />
         </div>
         <div className="space-y-1">
-          <h3 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
+          <h3 className="text-2xl font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
             Requirement Received!
           </h3>
           {submittedLeadId && (
@@ -126,9 +110,9 @@ export function LeadForm({
             </p>
           )}
         </div>
-        <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0] max-w-md mx-auto leading-relaxed">
-          Thank you for reaching out to Arav Innovations. A confirmation email has been dispatched to <strong className="text-[#3A2E27] dark:text-[#FAF5EE]">{submittedEmail}</strong>.
-          Our expert strategy &amp; engineering team will review your requirements and schedule an exploratory call within 1 business day.
+        <p className="text-sm text-[#4a5c55] dark:text-[#d3eee4] max-w-md mx-auto leading-relaxed">
+          Thank you for reaching out to Arav Innovations. A confirmation record has been generated for <strong className="text-[#1b2823] dark:text-[#ffffff]">{submittedEmail}</strong>.
+          Our team will review your requirements and follow up promptly.
         </p>
         <div className="pt-2">
           <Button
@@ -147,14 +131,14 @@ export function LeadForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="rounded-3xl bg-white dark:bg-[#000000] p-7 sm:p-10 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-2xl space-y-6"
+      className="rounded-3xl bg-white dark:bg-[#000000] p-6 sm:p-10 border border-[#f7d7b0] dark:border-[#1f1f1f] shadow-2xl space-y-5"
     >
-      <div className="border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-3 space-y-1">
-        <h3 className="text-2xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-          Have a Technology, AI, or Growth Challenge?
+      <div className="border-b border-[#f7d7b0]/60 dark:border-[#1f1f1f] pb-3 space-y-1">
+        <h3 className="text-xl sm:text-2xl font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
+          Book a Free Consultation
         </h3>
-        <p className="text-xs sm:text-sm text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
-          Tell us about your current priorities and goals. Our expert team will review your requirements and provide a clear, actionable roadmap.
+        <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+          Share your current goals or challenges below. Our senior practice leads will review your request.
         </p>
       </div>
 
@@ -165,25 +149,16 @@ export function LeadForm({
         </div>
       )}
 
-      {/* Row 1: Name & Company */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <Input
-          label="Full Name*"
-          placeholder="e.g. Rahul Sharma / Fatima Al Mansoori"
-          required
-          {...register("name")}
-          error={errors.name?.message}
-        />
-        <Input
-          label="Company / Business Name*"
-          placeholder="e.g. Apex Global Solutions"
-          required
-          {...register("company")}
-          error={errors.company?.message}
-        />
-      </div>
+      {/* Primary Field 1: Name */}
+      <Input
+        label="Full Name*"
+        placeholder="e.g. Rahul Sharma / Fatima Al Mansoori"
+        required
+        {...register("name")}
+        error={errors.name?.message}
+      />
 
-      {/* Row 2: Email & Phone */}
+      {/* Primary Field 2 & 3: Work Email & Phone */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Input
           type="email"
@@ -196,51 +171,26 @@ export function LeadForm({
         <Input
           type="tel"
           label="Phone / WhatsApp Number*"
-          placeholder="+91 98765 43210 or +971 50 123 4567"
+          placeholder="+91 96506 25777 or +971 52 155 5792"
           required
           {...register("phone")}
           error={errors.phone?.message}
         />
       </div>
 
-      {/* Row 3: Service Selection & Timeline */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <Select
-          label="Service Required*"
-          options={serviceOptions}
-          required
-          {...register("service")}
-          error={errors.service?.message}
-        />
-        <Select
-          label="Estimated Timeline"
-          options={timelineOptions}
-          {...register("timeline")}
-          error={errors.timeline?.message}
-        />
-      </div>
-
-      {/* Row 4: Requirement Description */}
+      {/* Primary Field 4: Need / How Can We Help? */}
       <Textarea
-        label="Tell Us About Your Requirement*"
-        placeholder="Briefly describe your current challenge, desired deliverables, technology stack (if known), or team expansion goals..."
+        label="Need / How Can We Help?*"
+        placeholder="Describe your current technology goals, software engineering requirements, digital growth bottlenecks, or compliance challenges..."
         required
         rows={4}
         {...register("requirement")}
         error={errors.requirement?.message}
-        helperText="Minimum 10 characters. Confidential."
-      />
-
-      {/* Optional Budget */}
-      <Input
-        label="Project Budget (Optional)"
-        placeholder="e.g. $10k-$25k, $25k-$50k, Enterprise"
-        {...register("budget")}
-        error={errors.budget?.message}
+        helperText="Minimum 10 characters. Strictly confidential."
       />
 
       {/* Submit Action */}
-      <div className="pt-2">
+      <div className="pt-2 text-center space-y-2">
         <Button
           type="submit"
           variant="primary"
@@ -249,11 +199,14 @@ export function LeadForm({
           isLoading={isSubmitting}
           rightIcon={<ArrowRight className="w-4 h-4" />}
         >
-          Get a Free Consultation
+          Book a Free Consultation
         </Button>
+        <span className="text-xs text-[#4a5c55] dark:text-[#d3eee4] font-medium block">
+          We reply within 1 business day.* <span className="text-[10px] text-[#7A6A5F] dark:text-[#B8ACA0] italic">(Pending management confirmation)</span>
+        </span>
       </div>
 
-      <div className="flex items-center justify-center gap-2 text-xs text-[#4a5c55] dark:text-[#d3eee4] text-center pt-1">
+      <div className="flex items-center justify-center gap-2 text-xs text-[#4a5c55] dark:text-[#d3eee4] text-center pt-1 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a]">
         <ShieldCheck className="w-4 h-4 text-[#2e936f]" />
         <span>Strict Confidentiality Guaranteed. Strategic Hubs in India &amp; UAE.</span>
       </div>

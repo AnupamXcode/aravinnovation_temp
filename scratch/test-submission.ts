@@ -19,7 +19,17 @@ try {
   const validated = leadFormSchema.parse(testPayload);
   console.log('✅ Validation Passed:', validated);
 
-  const saved = saveSubmission({ ...validated, source: testPayload.source });
+  const saved = saveSubmission({
+    name: validated.name,
+    company: validated.company || "Independent / Enterprise",
+    email: validated.email,
+    phone: validated.phone,
+    service: validated.service || "IT Strategy & Implementation",
+    requirement: validated.requirement,
+    timeline: validated.timeline || "1 - 3 Months",
+    budget: validated.budget,
+    source: testPayload.source,
+  });
   console.log('✅ Saved Submission:', saved);
 
   const all = getSubmissions();

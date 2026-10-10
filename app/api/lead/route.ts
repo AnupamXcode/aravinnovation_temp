@@ -63,7 +63,14 @@ export async function POST(request: Request) {
 
     // Save submission to persistent store (guaranteed not to throw filesystem errors)
     const submission = saveSubmission({
-      ...validatedData,
+      name: validatedData.name,
+      company: validatedData.company || "Independent / Enterprise",
+      email: validatedData.email,
+      phone: validatedData.phone,
+      service: validatedData.service || "IT Strategy & Implementation",
+      requirement: validatedData.requirement,
+      timeline: validatedData.timeline || "1 - 3 Months",
+      budget: validatedData.budget,
       industry,
       originalQuery,
       conversationContext,

@@ -1,14 +1,14 @@
 import { z } from "zod";
 
 export const leadFormSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  company: z.string().min(2, "Company name is required"),
-  email: z.string().email("Please enter a valid email address"),
-  phone: z.string().min(7, "Please enter a valid phone number with country code"),
-  service: z.string().min(1, "Please select a service"),
-  requirement: z.string().min(10, "Please provide brief details about your requirement (at least 10 characters)"),
-  timeline: z.string().min(1, "Please select an estimated timeline"),
-  budget: z.string().optional(),
+  name: z.string().min(2, "Please enter your full name (at least 2 characters)."),
+  email: z.string().email("Please enter a valid work email address."),
+  phone: z.string().min(7, "Please enter a valid phone number with country code."),
+  requirement: z.string().min(10, "Please describe your need or project goals (at least 10 characters)."),
+  company: z.string().optional().or(z.literal("")),
+  service: z.string().optional().or(z.literal("")),
+  timeline: z.string().optional().or(z.literal("")),
+  budget: z.string().optional().or(z.literal("")),
 });
 
 export type LeadFormData = z.infer<typeof leadFormSchema>;

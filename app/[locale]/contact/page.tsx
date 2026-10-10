@@ -7,6 +7,8 @@ import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { companyContactInfo } from "@/data/navigation";
 import { LocalBusinessSchema, BreadcrumbSchema } from "@/components/seo/StructuredData";
 import { LocationMapsSection } from "@/components/location/LocationMapsSection";
+import { WhatsAppContactButton } from "@/components/ui/WhatsAppContactButton";
+import { TelephoneLink } from "@/components/ui/TelephoneLink";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
   MapPin,
@@ -144,42 +146,56 @@ export default async function ContactPage({
                   </h3>
 
                   {/* India HQ */}
-                  <div className="p-5 rounded-2xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-2">
+                  <div className="p-5 rounded-2xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-3">
                     <div className="flex items-center gap-2 font-bold text-sm text-[#3A2E27] dark:text-[#FAF5EE]">
                       <MapPin className="w-4 h-4 text-[#f15e1c]" />
-                      <span>India Headquarters</span>
+                      <span>India Headquarters (Gurgaon)</span>
                     </div>
                     <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
                       {companyContactInfo.offices[0].address}
                     </p>
-                    <div className="text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] pt-1">
-                      Phone:{" "}
-                      <a
-                        href={`tel:${companyContactInfo.phoneIndiaRaw}`}
-                        className="text-[#f15e1c] hover:underline"
-                      >
-                        {companyContactInfo.phoneIndia}
-                      </a>
+                    <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
+                      <div className="text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
+                        Phone:{" "}
+                        <TelephoneLink
+                          phone={companyContactInfo.phoneIndia}
+                          phoneRaw={companyContactInfo.phoneIndiaRaw}
+                          location="contact_office_india"
+                        />
+                      </div>
+                      <WhatsAppContactButton
+                        region="india"
+                        location="contact_office_india"
+                        variant="compact"
+                        label="WhatsApp HQ"
+                      />
                     </div>
                   </div>
 
                   {/* UAE Hub */}
-                  <div className="p-5 rounded-2xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-2">
+                  <div className="p-5 rounded-2xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-3">
                     <div className="flex items-center gap-2 font-bold text-sm text-[#3A2E27] dark:text-[#FAF5EE]">
                       <MapPin className="w-4 h-4 text-[#f15e1c]" />
-                      <span>UAE &amp; Middle East Hub</span>
+                      <span>UAE &amp; Middle East Hub (Dubai)</span>
                     </div>
                     <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
                       {companyContactInfo.offices[1].address}
                     </p>
-                    <div className="text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE] pt-1">
-                      Phone:{" "}
-                      <a
-                        href={`tel:${companyContactInfo.phoneUAERaw}`}
-                        className="text-[#f15e1c] hover:underline"
-                      >
-                        {companyContactInfo.phoneUAE}
-                      </a>
+                    <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
+                      <div className="text-xs font-semibold text-[#3A2E27] dark:text-[#FAF5EE]">
+                        Phone:{" "}
+                        <TelephoneLink
+                          phone={companyContactInfo.phoneUAE}
+                          phoneRaw={companyContactInfo.phoneUAERaw}
+                          location="contact_office_uae"
+                        />
+                      </div>
+                      <WhatsAppContactButton
+                        region="uae"
+                        location="contact_office_uae"
+                        variant="compact"
+                        label="WhatsApp Dubai"
+                      />
                     </div>
                   </div>
 
