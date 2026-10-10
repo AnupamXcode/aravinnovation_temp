@@ -88,8 +88,8 @@ export function InsightsFilterClient({ initialPosts, categories }: InsightsFilte
       {/* Featured Article Section */}
       {featuredArticle && (
         <ScrollReveal direction="up">
-          <div className="p-6 sm:p-10 rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center shadow-xl">
-            <div className="lg:col-span-8 space-y-4">
+          <div className="p-6 sm:p-8 rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center shadow-xl">
+            <div className="lg:col-span-7 space-y-4">
               <div className="flex items-center gap-3 flex-wrap">
                 <Badge variant="primary" size="sm">
                   Featured Insight
@@ -126,18 +126,25 @@ export function InsightsFilterClient({ initialPosts, categories }: InsightsFilte
               </div>
             </div>
 
-            <div className="lg:col-span-4 p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-3 shadow-xs">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#3A2E27] dark:text-[#FAF5EE] block">
-                Key Takeaways
-              </span>
-              <ul className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] space-y-2.5">
-                {featuredArticle.keyTakeaways.slice(0, 3).map((takeaway, tIdx) => (
-                  <li key={tIdx} className="flex items-start gap-2">
-                    <span className="text-[#f15e1c] font-bold">&bull;</span>
-                    <span>{takeaway}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="lg:col-span-5 space-y-4">
+              <div className="w-full rounded-2xl overflow-hidden border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm">
+                <BlogCardImage post={featuredArticle} aspectRatio="aspect-video" />
+              </div>
+              {featuredArticle.keyTakeaways && featuredArticle.keyTakeaways.length > 0 && (
+                <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#1A1613] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-2.5 shadow-xs">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#3A2E27] dark:text-[#FAF5EE] block">
+                    Key Takeaways
+                  </span>
+                  <ul className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] space-y-2">
+                    {featuredArticle.keyTakeaways.slice(0, 3).map((takeaway, tIdx) => (
+                      <li key={tIdx} className="flex items-start gap-2">
+                        <span className="text-[#f15e1c] font-bold">&bull;</span>
+                        <span className="line-clamp-2">{takeaway}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         </ScrollReveal>

@@ -11105,7 +11105,8 @@ export const wordpressPostsData: BlogPost[] = [
       "buttonText": "Schedule a Consultation",
       "buttonHref": "/contact"
     },
-    "wpPostId": 889
+    "wpPostId": 889,
+    "featuredImageUrl": "https://blog.aravinnovations.com/wp-content/uploads/2026/08/image-18.png"
   },
   {
     "slug": "email-marketing-for-seo",
