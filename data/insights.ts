@@ -98,9 +98,9 @@ export const blogPostsData: BlogPost[] = [
   },
   {
     slug: "nextjs-app-router-subsecond-performance",
-    title: "Architecting Sub-Second Enterprise Portals with Next.js App Router & Cloudflare Edge",
+    title: "Architecting High-Performance Enterprise Portals with Next.js App Router & Cloudflare Edge",
     summary:
-      "How server-side rendering, selective hydration, and edge caching combine to produce perfect 100/100 Core Web Vitals on high-concurrency enterprise web portals.",
+      "How server-side rendering, selective hydration, and edge caching combine to improve Core Web Vitals on high-concurrency enterprise web portals.",
     category: "Web & App Dev",
     readTime: "6 min read",
     publishedAt: "2026-08-04",
@@ -112,7 +112,7 @@ export const blogPostsData: BlogPost[] = [
     tags: ["Next.js", "Core Web Vitals", "React 19", "Cloudflare", "Performance Engineering"],
     keyTakeaways: [
       "Server Components (RSC) drastically reduce client-side JavaScript bundle sizes by rendering on the server.",
-      "Selective hydration and Suspense boundaries prevent layout shifts and deliver sub-500ms Largest Contentful Paint (LCP).",
+      "Selective hydration and Suspense boundaries prevent layout shifts and improve Largest Contentful Paint (LCP).",
       "Layering Cloudflare Edge caching with Next.js incremental static regeneration (ISR) enables global low-latency delivery.",
       "Optimized asset pipelines and modern font loading strategies prevent Cumulative Layout Shift (CLS).",
     ],
@@ -143,9 +143,9 @@ export const blogPostsData: BlogPost[] = [
     featuredImageUrl: "https://blog.aravinnovations.com/wp-content/uploads/2025/03/pexels-pixabay-414837-scaled.jpg",
     cta: {
       badge: "High-Performance Engineering",
-      headline: "Upgrade Your Web Platforms to Sub-Second Next.js Architecture",
+      headline: "Upgrade Your Web Platforms with Next.js Performance Optimization",
       description:
-        "Partner with our specialized engineering squads to modernize your web applications, achieve 100/100 Core Web Vitals, and eliminate technical debt.",
+        "Partner with our specialized engineering squads to modernize your web applications, improve Core Web Vitals performance, and eliminate technical debt.",
       buttonText: "Explore Web Engineering Services",
       buttonHref: "/services/web-app-development",
     },

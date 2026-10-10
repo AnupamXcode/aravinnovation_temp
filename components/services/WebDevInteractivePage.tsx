@@ -359,7 +359,7 @@ const whatWeMeasureList = [
 const faqList = [
   {
     q: "What types of web applications does Arav Innovations build?",
-    a: "We engineer digital products—including custom SaaS platforms, corporate web platforms, customer portals, internal workflow dashboards, content systems, and custom API-driven software.",
+    a: "We engineer digital products: including custom SaaS platforms, corporate web platforms, customer portals, internal workflow dashboards, content systems, and custom API-driven software.",
   },
   {
     q: "Can you improve an existing application?",
@@ -806,7 +806,7 @@ export function WebDevInteractivePage({ service, relatedPosts }: WebDevPageProps
                 Flexible Product Delivery Models
               </h2>
               <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4]">
-                Choose how we collaborate—from end-to-end product builds to legacy application modernization or dedicated developer squads.
+                Choose how we collaborate: from end-to-end product builds to legacy application modernization or dedicated developer squads.
               </p>
             </div>
           </AnimatedSection>

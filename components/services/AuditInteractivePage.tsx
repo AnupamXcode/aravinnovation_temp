@@ -281,7 +281,7 @@ const faqList = [
   },
   {
     q: "How does an audit differ from an IT Strategy or Risk service?",
-    a: "Audit & Improvement focuses on empirical diagnostics—measuring how your operations, systems, and controls perform in practice today, identifying exact failure points, and delivering a prioritized remediation blueprint.",
+    a: "Audit & Improvement focuses on empirical diagnostics: measuring how your operations, systems, and controls perform in practice today, identifying exact failure points, and delivering a prioritized remediation blueprint.",
   },
   {
     q: "Do you help fix the issues found during an audit?",

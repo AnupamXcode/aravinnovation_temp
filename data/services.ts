@@ -373,11 +373,11 @@ export const servicesData: Service[] = [
     ourSolution: {
       title: "Engineering-First Digital Product Development",
       description:
-        "We build with TypeScript, React, Next.js, Node, Python, and cloud-native backends to deliver sub-second performance, modular architecture, and military-grade security.",
+        "We build with TypeScript, React, Next.js, Node, Python, and cloud-native backends to deliver high-performance user experiences, modular architecture, and enterprise-grade security.",
       keyPillars: [
         {
-          title: "Sub-Second Performance & SEO Core",
-          description: "SSR and SSG powered interfaces optimized for maximum Lighthouse scores and search discoverability.",
+          title: "Performance Optimization & SEO Core",
+          description: "SSR and SSG powered interfaces optimized for fast page loads and search discoverability.",
         },
         {
           title: "Modular Component Architecture",
@@ -1083,14 +1083,14 @@ export const servicesData: Service[] = [
     eyebrow: "AI Solutions • Intelligent Automation • Enterprise AI Integration",
     tagline: "Empowering modern enterprises with scalable AI implementation and intelligent workflow automation.",
     description:
-      "We design, build, and deploy production-ready AI solutions, custom LLM integrations, intelligent automation pipelines, and enterprise-grade data workflows tailored to operational efficiency.",
+      "We design, build, and deploy production-ready AI solutions, secure AI workflows that process and use information, intelligent automation, and enterprise data workflows tailored to operational efficiency.",
     icon: "Cpu",
     businessProblem: {
       title: "Bridging the Gap Between AI Hype and Enterprise Execution",
       description:
         "Many organizations struggle to convert artificial intelligence potential into secure, high-ROI business applications and automated workflows.",
       painPoints: [
-        "Unclear pathways to integrate LLMs and AI agents into legacy enterprise software",
+        "Unclear pathways to integrate AI models and intelligent assistants into legacy enterprise software",
         "Data privacy concerns surrounding customer data usage in cloud AI models",
         "Manual, repetitive operational workflows consuming valuable engineering hours",
         "Lack of custom AI tools tailored to specific domain data and business logic",
@@ -1103,14 +1103,14 @@ export const servicesData: Service[] = [
       keyPillars: [
         {
           title: "Intelligent Workflow Automation",
-          description: "Automating complex document processing, lead qualification, and customer operations with custom AI agents.",
+          description: "Automating complex document processing, lead qualification, and customer operations with custom AI workflows.",
         },
         {
           title: "AI Solutions & Enterprise Integration",
-          description: "Connecting OpenAI, Anthropic, and open-source models (Llama) directly into internal APIs, databases, and CRMs.",
+          description: "Connecting OpenAI, Anthropic, and open-source AI models directly into internal APIs, databases, and CRMs.",
         },
         {
-          title: "Private Data & Retrieval Architecture (RAG)",
+          title: "Private Data & Knowledge Search (RAG)",
           description: "Building secure vector search and knowledge base engines that query internal enterprise data with strict access controls.",
         },
       ],
@@ -1119,7 +1119,7 @@ export const servicesData: Service[] = [
       {
         category: "AI Implementation & Solutions",
         items: [
-          "Custom Enterprise AI Solutions & Agent Pipelines",
+          "Custom Enterprise AI Solutions & Workflows",
           "Retrieval-Augmented Generation (RAG) Systems",
           "Intelligent Document Processing & Extraction",
           "AI-Powered B2B Workflow Automation",
@@ -1131,7 +1131,7 @@ export const servicesData: Service[] = [
           "API Integration (OpenAI, Claude, Mistral, HuggingFace)",
           "Vector Database Architecture (Pinecone, Qdrant, Pgvector)",
           "AI Data Privacy & DPDP Compliance Guardrails",
-          "LLM Latency, Caching & Cost Optimization",
+          "AI Workflow Performance & Cost Optimization",
         ],
       },
     ],

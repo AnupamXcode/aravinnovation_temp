@@ -78,7 +78,7 @@ export function EarlyTrustProofSection() {
                   Performance &amp; Scale
                 </h4>
                 <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                  Sub-second edge rendering and zero-downtime microservices architectures.
+                  Edge rendering optimization and high-availability microservices architectures.
                 </p>
               </div>
             </ScrollReveal>

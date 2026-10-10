@@ -427,12 +427,12 @@ const faqItems = [
   {
     question: "How is campaign performance measured and reported?",
     answer:
-      "We report commercial indicators—including qualified inquiries, buyer engagement quality, acquisition cost efficiency (CAC), organic visibility, and content consumption—rather than reporting impression numbers alone.",
+      "We report commercial indicators: including qualified inquiries, buyer engagement quality, acquisition cost efficiency (CAC), organic visibility, and content consumption, rather than reporting impression numbers alone.",
   },
   {
     question: "Do you handle both strategy and full campaign execution?",
     answer:
-      "Yes. We manage the end-to-end growth lifecycle—from initial positioning and technical site setup to content production, ad campaign management, landing page design, and ongoing CRO optimization.",
+      "Yes. We manage the end-to-end growth lifecycle: from initial positioning and technical site setup to content production, ad campaign management, landing page design, and ongoing CRO optimization.",
   },
 ];
 

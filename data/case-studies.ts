@@ -52,29 +52,29 @@ export interface CaseStudy {
 export const caseStudiesData: CaseStudy[] = [
   {
     slug: "enterprise-cloud-transformation",
-    title: "Enterprise Cloud Migration & Architecture Modernization",
-    client: "Confidential Global FinTech & Logistics Enterprise",
+    title: "Enterprise Cloud Migration & Architecture Blueprint",
+    client: "Service Capability Blueprint",
     clientIndustry: "Financial Technology & Logistics",
     serviceCategory: "IT Strategy & Implementation",
     serviceSlug: "it-strategy-implementation",
-    location: "Global",
+    location: "Global Framework",
     verificationStatus: "Approved for Public Use",
     permissionStatus: "Anonymized",
     summary:
-      "Transitioning an on-premise monolithic architecture to a high-availability cloud-native microservices infrastructure.",
+      "Engineering blueprint illustrating cloud migration patterns, containerized microservices, and infrastructure governance.",
     challenge:
-      "The client was experiencing frequent system timeouts during peak business hours and spiraling on-premise maintenance costs with no clear roadmap for cloud adoption.",
+      "Organizations facing fragmented legacy architecture, high server maintenance overhead, and unaligned deployment workflows.",
     objective:
-      "Design a resilient multi-cloud architecture with zero data loss, eliminate single points of failure, and establish automated FinOps governance.",
+      "Architect a resilient multi-cloud framework with automated failover, container orchestration, and cloud cost governance.",
     approach:
-      "Conducted a 4-week architectural discovery audit, established a containerized Kubernetes target state on AWS, and executed a zero-downtime phased database migration.",
+      "Structured 4-week architectural discovery, containerized Kubernetes target topology on AWS, and phased database migration planning.",
     solution:
-      "Implemented modular microservices with automated CI/CD pipelines, containerized orchestration, and multi-region disaster recovery failover.",
+      "Modular microservices architecture with automated CI/CD deployment pipelines and multi-region backup failover.",
     pipelineStages: [
-      { stage: "LEGACY MONOLITH", subtext: "On-Premise Bottleneck" },
-      { stage: "CLOUD ARCHITECTURE", subtext: "AWS Kubernetes Cluster" },
+      { stage: "LEGACY MONOLITH", subtext: "Infrastructure Bottleneck Audit" },
+      { stage: "CLOUD ARCHITECTURE", subtext: "Kubernetes Target State" },
       { stage: "MICROSERVICES", subtext: "Containerized Workloads" },
-      { stage: "AUTOMATED CI/CD", subtext: "Zero-Downtime Releases" },
+      { stage: "AUTOMATED CI/CD", subtext: "Automated Release Pipelines" },
     ],
     outcomes: [
       { direction: "down", label: "Infrastructure complexity" },
@@ -83,112 +83,98 @@ export const caseStudiesData: CaseStudy[] = [
     ],
     results: [
       {
-        metric: "99.99%",
-        label: "System Uptime SLA",
-        description: "Achieved continuous high availability across critical transaction endpoints.",
+        metric: "High Availability",
+        label: "Target Uptime SLA",
+        description: "Architected for continuous availability across transactional service endpoints.",
       },
       {
-        metric: "45%",
-        label: "Cloud Cost Optimization",
-        description: "Reduced monthly infrastructure overhead via automated autoscaling and resource right-sizing.",
+        metric: "FinOps",
+        label: "Cost Governance",
+        description: "Infrastructure right-sizing via automated autoscaling policies.",
       },
       {
-        metric: "3.2x",
-        label: "Deployment Velocity",
-        description: "Accelerated production release frequency through automated CI/CD pipelines.",
+        metric: "CI/CD",
+        label: "Release Automation",
+        description: "Automated deployment pipelines reducing manual release overhead.",
       },
     ],
-    testimonial: {
-      quote:
-        "Arav Innovations modernized our core architecture with zero downtime. Their senior engineering squad delivered ahead of schedule.",
-      author: "Executive Vice President",
-      designation: "Chief Technology Officer",
-      company: "Global Logistics & FinTech Division",
-    },
     technologiesUsed: ["AWS", "Kubernetes", "Docker", "Terraform", "PostgreSQL", "Redis"],
   },
   {
     slug: "saas-portal-engineering",
-    title: "High-Performance Modern Web Platform & Portal Engineering",
-    client: "Confidential B2B Enterprise Software Client",
+    title: "High-Performance Web Platform & Portal Engineering Blueprint",
+    client: "Service Capability Blueprint",
     clientIndustry: "B2B Enterprise Software",
     serviceCategory: "Web & Application Development",
     serviceSlug: "web-app-development",
-    location: "UAE & GCC",
+    location: "UAE & India",
     verificationStatus: "Approved for Public Use",
     permissionStatus: "Anonymized",
     summary:
-      "Architecting a next-generation customer portal with sub-second page loads and seamless enterprise ERP integrations.",
+      "Engineering blueprint for customer portals with responsive Next.js architectures, API gateways, and enterprise integrations.",
     challenge:
-      "The legacy portal had an average load time exceeding 6 seconds, leading to customer frustration, high support tickets, and low feature adoption.",
+      "Legacy web portals experiencing high load latency, brittle frontends, and fragmented user workflows.",
     objective:
-      "Re-engineer the entire frontend into a lightning-fast Next.js application with real-time telemetry, intuitive UX, and mobile responsiveness.",
+      "Re-engineer the frontend into a responsive Next.js application with modular components and clean API data layers.",
     approach:
-      "Created an enterprise design system in Figma, engineered reusable React/Next.js components with TypeScript, and integrated secure GraphQL/REST APIs.",
+      "Created an enterprise design system in Figma, engineered typed React/Next.js components, and integrated REST/GraphQL APIs.",
     solution:
-      "Delivered a modern, accessible web portal powered by Server-Side Rendering (SSR), edge caching, and automated integration testing.",
+      "Modern web portal powered by Server-Side Rendering (SSR), edge caching, and automated integration testing.",
     pipelineStages: [
-      { stage: "LEGACY MONOLITH", subtext: "6s+ Load Latency" },
-      { stage: "NEXT.JS APP ROUTER", subtext: "Sub-Second Edge Rendering" },
+      { stage: "LEGACY REVIEW", subtext: "Performance Bottleneck Audit" },
+      { stage: "NEXT.JS APP ROUTER", subtext: "Edge Rendering Architecture" },
       { stage: "DESIGN SYSTEM", subtext: "Accessible UX Components" },
-      { stage: "INTEGRATED ERP", subtext: "Real-Time Telemetry" },
+      { stage: "INTEGRATED APIS", subtext: "Data Layer Optimization" },
     ],
     outcomes: [
       { direction: "down", label: "Page load latency" },
       { direction: "up", label: "User engagement" },
-      { direction: "down", label: "Support tickets" },
+      { direction: "down", label: "Support overhead" },
     ],
     results: [
       {
-        metric: "98/100",
-        label: "Mobile PageSpeed",
-        description: "Enhanced Core Web Vitals across mobile and desktop devices.",
+        metric: "Optimized",
+        label: "Core Web Vitals",
+        description: "Enhanced page load metrics across mobile and desktop devices.",
       },
       {
-        metric: "2.4x",
-        label: "User Engagement Rate",
-        description: "Increased daily active engagement on self-service customer features.",
+        metric: "Modular",
+        label: "Component Library",
+        description: "Reusable design system accelerating new feature delivery.",
       },
       {
-        metric: "60%",
-        label: "Support Ticket Reduction",
-        description: "Decreased usability-related support inquiries through streamlined workflows.",
+        metric: "Accessible",
+        label: "User Interface",
+        description: "Streamlined navigation reducing user friction.",
       },
     ],
-    testimonial: {
-      quote:
-        "The new Next.js portal built by Arav reduced customer onboarding friction and vastly improved our platform NPS scores.",
-      author: "Head of Digital Products",
-      designation: "VP of Product Engineering",
-      company: "Enterprise Software Division",
-    },
     technologiesUsed: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js", "GraphQL", "PostgreSQL"],
   },
   {
     slug: "b2b-demand-generation",
-    title: "Full-Funnel B2B Demand Generation & Search Expansion",
-    client: "Confidential Industrial & Professional Services Group",
+    title: "Full-Funnel B2B Growth & Technical SEO Strategy Blueprint",
+    client: "Service Capability Blueprint",
     clientIndustry: "Industrial & Professional Services",
     serviceCategory: "Digital Marketing & Brand Development",
     serviceSlug: "digital-marketing-brand-development",
-    location: "India",
+    location: "Global Framework",
     verificationStatus: "Approved for Public Use",
     permissionStatus: "Anonymized",
     summary:
-      "Restructuring paid acquisition and organic search to generate qualified enterprise opportunities with verified multi-touch attribution.",
+      "Growth framework aligning paid search, account-based targeting, technical SEO, and CRM attribution.",
     challenge:
-      "The company was burning ad budget on low-intent generic keywords with no CRM integration or visibility into pipeline revenue.",
+      "Unstructured ad spend on generic keywords with no CRM integration or visibility into buyer journey stages.",
     objective:
-      "Deploy account-based marketing on LinkedIn and high-intent Google Search campaigns while implementing technical SEO to capture organic search traffic.",
+      "Deploy account-based marketing on LinkedIn and high-intent search campaigns while implementing technical SEO.",
     approach:
-      "Audited search queries, rebuilt conversion landing pages, connected HubSpot server-side tracking, and published targeted topical authority content.",
+      "Audited search queries, rebuilt conversion landing pages, connected CRM tracking webhooks, and published targeted content.",
     solution:
-      "A synchronized multi-channel acquisition engine combining paid media with technical SEO and programmatic lead nurturing workflows.",
+      "A synchronized acquisition engine combining paid media with technical SEO and automated lead routing.",
     pipelineStages: [
-      { stage: "UNSTRUCTURED ADS", subtext: "Low-Intent Traffic" },
-      { stage: "TECHNICAL SEO", subtext: "Topical Authority Hubs" },
-      { stage: "ABM CAMPAIGNS", subtext: "High-Intent Enterprise Targeting" },
-      { stage: "CRM ATTRIBUTION", subtext: "Closed-Loop Revenue Funnel" },
+      { stage: "AUDIT & RESEARCH", subtext: "Buyer Journey Mapping" },
+      { stage: "TECHNICAL SEO", subtext: "Topical Authority Strategy" },
+      { stage: "ABM CAMPAIGNS", subtext: "Account-Based Targeting" },
+      { stage: "CRM ATTRIBUTION", subtext: "Closed-Loop Revenue Tracking" },
     ],
     outcomes: [
       { direction: "up", label: "Qualified pipeline" },
@@ -197,29 +183,22 @@ export const caseStudiesData: CaseStudy[] = [
     ],
     results: [
       {
-        metric: "3.4x",
-        label: "Sales Qualified Pipeline",
-        description: "Generated qualified enterprise sales conversations within target accounts.",
+        metric: "Attributed",
+        label: "Pipeline Tracking",
+        description: "Closed-loop CRM tracking connecting campaigns to opportunities.",
       },
       {
-        metric: "35%",
-        label: "CPA Reduction",
-        description: "Reduced acquisition cost per qualified sales meeting.",
+        metric: "Efficient",
+        label: "Ad Acquisition",
+        description: "Refined keyword targeting driving lower cost-per-lead.",
       },
       {
-        metric: "180%",
-        label: "Organic Search Reach",
-        description: "Expanded organic search footprint across high-intent solution keywords.",
+        metric: "Expanded",
+        label: "Search Visibility",
+        description: "Increased organic reach across core solution keywords.",
       },
     ],
-    testimonial: {
-      quote:
-        "Arav Innovations transformed our digital marketing into a measurable lead generation pipeline with clear revenue attribution.",
-      author: "VP of Business Development",
-      designation: "Commercial Operations Director",
-      company: "Industrial Services Group",
-    },
-    technologiesUsed: ["Google Ads", "LinkedIn Campaign Manager", "HubSpot", "GA4", "Next.js CRO Pages"],
+    technologiesUsed: ["Google Ads", "LinkedIn Campaign Manager", "HubSpot", "GA4", "Next.js Landing Pages"],
   },
 ];
 

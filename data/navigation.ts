@@ -45,7 +45,7 @@ export const servicesNavigation: NavItem[] = [
   {
     label: "AI Portfolio",
     href: "/services/ai-portfolio",
-    description: "Enterprise AI solutions, Intelligent Automation pipelines, RAG systems & seamless LLM integrations.",
+    description: "Enterprise AI solutions, intelligent automation workflows, knowledge search assistants, and secure AI data processing.",
   },
 ];
 

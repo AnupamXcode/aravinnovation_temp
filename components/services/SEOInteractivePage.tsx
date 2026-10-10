@@ -226,7 +226,7 @@ const faqList = [
   },
   {
     q: "How do you track and report SEO performance?",
-    a: "We track meaningful commercial metrics—including organic keyword footprint, qualified traffic, Core Web Vitals, AI search citations, and inbound lead volume—through Google Search Console and analytics dashboards.",
+    a: "We track meaningful commercial metrics: including organic keyword footprint, qualified traffic, Core Web Vitals, AI search citations, and inbound lead volume, through Google Search Console and analytics dashboards.",
   },
 ];
 

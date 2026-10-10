@@ -79,7 +79,7 @@ export function TrustProofWeave({
             Measurable Outcomes
           </h3>
           <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4]">
-            Proven SLA uptime (99.99%), sub-second web performance, and 45% infrastructure cost optimizations.
+            Reliable SLA uptime, performance optimization, and verified cloud cost optimizations.
           </p>
         </div>
       </div>

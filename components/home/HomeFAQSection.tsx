@@ -12,24 +12,36 @@ export const homeFaqs = [
     a: "We help businesses build, improve, and scale their digital ecosystem across four main areas: Technology & Engineering (IT strategy, web & application development), AI Solutions (workflow automation, RAG assistants), Digital Growth (B2B marketing, technical SEO & AEO), and Governance (DPDP compliance, risk & audits).",
   },
   {
-    q: "Can you build a new website or application?",
-    a: "Yes. We design and build custom, scalable business websites, SaaS platforms, and enterprise web applications tailored to your business workflow, optimized for subsecond performance and high conversion.",
+    q: "What engagement models and project scopes do you offer?",
+    a: "We offer flexible engagement models tailored to your business stage: dedicated engineering squads (team augmentation), milestone-based fixed-scope projects, fractional CTO advisory retainers, and 14-day technical or compliance audit sprints.",
   },
   {
-    q: "Can you improve an existing digital platform?",
-    a: "Absolutely. We perform deep technical audits to eliminate bottlenecks, optimize cloud costs (FinOps), modernize legacy code, redesign user interfaces (UX/UI), and accelerate page speed.",
+    q: "How are project timelines and pricing factors determined?",
+    a: "Timelines and costs depend directly on architectural scope, compliance requirements, and feature complexity. Fixed-scope discovery sprints typically run 2 to 4 weeks, while full enterprise web platforms and SaaS builds range from 8 to 16 weeks. We provide itemized proposals with clear milestone deliverables.",
   },
   {
-    q: "Can you help with AI and automation?",
-    a: "Yes. Our AI practice focuses on practical, business-ready AI solutions — automating repetitive internal processes, deploying custom RAG knowledge search assistants, and integrating LLM data pipelines securely.",
+    q: "Can you build a new website, SaaS portal, or application?",
+    a: "Yes. We design and build custom, scalable business websites, customer portals, SaaS platforms, and enterprise web applications tailored to your workflow, optimized for sub-second performance and high conversion.",
   },
   {
-    q: "Can you help improve SEO and digital growth?",
-    a: "Yes. We engineer technical SEO strategies, topical authority hubs, and AI Search Engine Optimization (AEO) to capture organic search traffic and drive B2B demand generation.",
+    q: "Can you perform system audits and optimize cloud performance?",
+    a: "Yes. We perform deep technical audits to eliminate architectural bottlenecks, optimize cloud infrastructure costs (Cloud FinOps), modernize legacy codebases, redesign user interfaces (UX/UI), and accelerate Core Web Vitals.",
   },
   {
-    q: "How do I start a project?",
-    a: "You can start by booking a consultation or filling out our contact form. Our senior engineering and strategy team will review your requirement and reach out within 1 business day to schedule an exploratory call.",
+    q: "How does Arav Innovations help with practical AI automation?",
+    a: "Our AI practice focuses on practical, business-ready AI solutions: automating repetitive internal workflows, deploying custom RAG knowledge search assistants, and integrating LLM data pipelines securely without exposing proprietary data.",
+  },
+  {
+    q: "How do you assist with Data Privacy & DPDP compliance readiness?",
+    a: "We conduct comprehensive data mapping audits, establish verifiable consent lifecycle frontends, implement automated Data Subject Access Request (DSAR) workflows, and configure field-level encryption to satisfy India DPDP Act and GCC privacy regulations.",
+  },
+  {
+    q: "Can you improve B2B digital marketing and technical SEO?",
+    a: "Yes. We build revenue-driven growth engines: combining LinkedIn ABM, high-intent Google Search campaigns, technical SEO audits, and closed-loop CRM attribution to turn digital marketing into verified pipeline.",
+  },
+  {
+    q: "How do I start a project or request a strategy review?",
+    a: "You can start by booking a Free 30-Minute Tech & Growth Review or filling out our primary contact form. Our senior practice directors will review your requirement and reach out within 1 business day to schedule an exploratory call.",
   },
 ];
 
