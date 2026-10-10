@@ -15,23 +15,27 @@ import Link from "next/link";
 
 const audienceList = [
   {
-    title: "Growing & Expanding Businesses",
-    desc: "Companies seeking scalable digital infrastructure, clear marketing channels, and predictable technology operations.",
+    title: "Growing & Scaling Enterprises",
+    need: "Business Need: Standardizing technology operations and eliminating architectural roadblocks.",
+    support: "Arav Support: Strategic IT roadmaps, cloud architecture tuning, and guided technical governance.",
     icon: <TrendingUp className="w-6 h-6 text-[#f15e1c]" />,
   },
   {
-    title: "Enterprise Teams",
-    desc: "Established organizations modernizing software architecture, cloud hosting, risk governance, and multi-region engineering.",
+    title: "Enterprise Technology Leaders",
+    need: "Business Need: Modernizing legacy infrastructure and maintaining data privacy compliance.",
+    support: "Arav Support: Next.js microservices refactoring, SOC-2 audit readiness, and DPDP governance.",
     icon: <Building2 className="w-6 h-6 text-[#2e936f]" />,
   },
   {
-    title: "Technology & Software Platforms",
-    desc: "Product and engineering teams looking to accelerate feature velocity, secure APIs, and implement practical AI automation.",
+    title: "Software & SaaS Product Teams",
+    need: "Business Need: Accelerating release velocity, securing APIs, and integrating AI automation.",
+    support: "Arav Support: Dedicated senior engineering squads, full-stack React/Next.js engineering, and AI workflows.",
     icon: <Cpu className="w-6 h-6 text-[#fab60a]" />,
   },
   {
-    title: "Digital & E-Commerce Platforms",
-    desc: "Web platforms expanding organic search authority, conversion performance, and customer acquisition.",
+    title: "Digital & Commerce Platforms",
+    need: "Business Need: Building organic search authority and maximizing conversion rates.",
+    support: "Arav Support: Technical SEO audits, programmatic indexing, and conversion funnel optimization.",
     icon: <Globe className="w-6 h-6 text-[#f15e1c]" />,
   },
 ];
@@ -70,8 +74,11 @@ export function WhoWeHelpSection() {
                   <h3 className="text-base sm:text-lg font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug">
                     {audience.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
-                    {audience.desc}
+                  <p className="text-xs text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed font-medium">
+                    {audience.need}
+                  </p>
+                  <p className="text-xs text-[#2e936f] dark:text-[#2e936f] leading-relaxed font-semibold pt-1 border-t border-[#f7d7b0]/30 dark:border-[#262626]">
+                    {audience.support}
                   </p>
                 </div>
 

@@ -19,6 +19,10 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
+import { CEOLeadershipSection } from "@/components/services/CEOLeadershipSection";
+import { EngagementModelsSection } from "@/components/pricing/EngagementModelsSection";
+import { FreeTechGrowthReviewOffer } from "@/components/offers/FreeTechGrowthReviewOffer";
+
 export const metadata = {
   title: "About Us | Arav Innovations",
   description:
@@ -84,7 +88,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
     <div className="pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
       <BreadcrumbSchema items={[{ name: "About Us", url: "/about" }]} />
       <LocalBusinessSchema location="both" />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 md:space-y-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 md:space-y-24">
         {/* 1. Hero Section */}
         <section className="space-y-6 max-w-3xl">
           <ScrollReveal direction="up">
@@ -110,7 +114,12 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           </ScrollReveal>
         </section>
 
-        {/* 2. Story & Differentiators */}
+        {/* 2. Founder & Leadership Section */}
+        <ScrollReveal direction="up">
+          <CEOLeadershipSection />
+        </ScrollReveal>
+
+        {/* 3. Story & Differentiators */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-6">
             <ScrollReveal direction="up">
@@ -201,7 +210,12 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           </div>
         </section>
 
-        {/* 3. Core Principles Grid */}
+        {/* 4. Pricing & Engagement Models Section */}
+        <ScrollReveal direction="up">
+          <EngagementModelsSection />
+        </ScrollReveal>
+
+        {/* 5. Core Principles Grid */}
         <section className="space-y-12">
           <ScrollReveal direction="up">
             <div className="text-center max-w-2xl mx-auto space-y-3">
@@ -238,23 +252,9 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           </div>
         </section>
 
-        {/* 4. Bottom CTA */}
+        {/* 6. Free Tech & Growth Review Offer Banner */}
         <ScrollReveal direction="up">
-          <section className="rounded-3xl bg-[#FBF3EA] dark:bg-[#161310] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#1f1f1f] text-center max-w-3xl mx-auto space-y-5 shadow-xl">
-            <h3 className="text-2xl sm:text-3xl font-bold font-display text-[#3A2E27] dark:text-[#FAF5EE]">
-              Connect With Our Practice Leadership
-            </h3>
-            <p className="text-sm text-[#7A6A5F] dark:text-[#B8ACA0] leading-relaxed">
-              Ready to explore how Arav Innovations can engineer your next digital platform or optimize your enterprise growth?
-            </p>
-            <div className="pt-2">
-              <Link href="/contact">
-                <Button variant="primary" size="lg" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                  Start a Confidential Discussion
-                </Button>
-              </Link>
-            </div>
-          </section>
+          <FreeTechGrowthReviewOffer />
         </ScrollReveal>
       </div>
     </div>

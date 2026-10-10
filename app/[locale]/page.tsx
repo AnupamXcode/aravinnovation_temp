@@ -188,7 +188,7 @@ export default async function HomePage({
               {/* LEFT COLUMN: Heading, Supporting Copy, Value Statement & Contact Details */}
               <div className="lg:col-span-5 space-y-6">
                 <Badge variant="secondary" size="md">
-                  START A CONVERSATION
+                  FREE 30-MINUTE TECH &amp; GROWTH REVIEW AVAILABLE
                 </Badge>
                 <ScrollTextFlip>
                   <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight mt-2 leading-[1.1]">
@@ -196,7 +196,7 @@ export default async function HomePage({
                   </h2>
                 </ScrollTextFlip>
                 <p className="text-sm sm:text-base text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed">
-                  Tell us what you&apos;re trying to build, improve or grow. We&apos;ll help you identify the right next step.
+                  Book a <strong>free 30-minute Tech &amp; Growth Review</strong> to discuss your current technology infrastructure, digital growth bottlenecks, or process challenges with our senior practice leads.
                 </p>
 
                 {/* Value Statement & Engagement Approach */}
