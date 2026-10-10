@@ -40,7 +40,8 @@ import {
   Cpu,
 } from "lucide-react";
 import { Service } from "@/data/services";
-import { BlogPost, blogPostsData } from "@/data/insights";
+import { BlogPost } from "@/data/insights";
+import { wordpressPostsData } from "@/data/wordpress-posts";
 import { Button3D } from "@/components/ui/button-3d";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
@@ -336,7 +337,7 @@ export function RiskGovInteractivePage({ service, relatedPosts }: RiskGovPagePro
     if (relatedPosts && relatedPosts.length > 0) {
       return relatedPosts.slice(0, 3);
     }
-    return blogPostsData.slice(0, 3);
+    return wordpressPostsData.slice(0, 3);
   }, [relatedPosts]);
 
   const activeStage = uncertaintyToControlFlow[activeStageIdx];

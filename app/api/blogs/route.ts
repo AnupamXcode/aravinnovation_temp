@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { fetchBlogsFromVercel, saveBlogsToVercel, isVercelBlobConfigured } from "@/lib/vercel-blogs";
-import { blogPostsData, BlogPost } from "@/data/insights";
+import { BlogPost } from "@/data/insights";
+import { wordpressPostsData } from "@/data/wordpress-posts";
 
 export async function GET() {
   try {
@@ -10,7 +11,7 @@ export async function GET() {
     const existingSlugs = new Set(vercelBlogs.map((b) => b.slug));
     const mergedBlogs = [
       ...vercelBlogs,
-      ...blogPostsData.filter((localBlog) => !existingSlugs.has(localBlog.slug)),
+      ...wordpressPostsData.filter((localBlog) => !existingSlugs.has(localBlog.slug)),
     ];
 
     return NextResponse.json({
@@ -22,7 +23,7 @@ export async function GET() {
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Failed to retrieve blogs";
     return NextResponse.json(
-      { success: false, error: message, data: blogPostsData },
+      { success: false, error: message, data: wordpressPostsData },
       { status: 500 }
     );
   }
