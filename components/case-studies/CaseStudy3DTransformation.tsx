@@ -45,8 +45,8 @@ const transformationSteps: TransformationStep[] = [
     title: "CLOUD MODERNIZE",
     challenge: "Poor page speed & mobile bounce rates",
     solution: "Edge caching & App Router server components",
-    metric: "100/100",
-    metricLabel: "Core Web Vitals",
+    metric: "Fast",
+    metricLabel: "Core Web Vitals Optimized",
     icon: <Cloud className="w-6 h-6 text-[#2e936f]" />,
     color: "#2e936f",
   },
@@ -55,8 +55,8 @@ const transformationSteps: TransformationStep[] = [
     title: "AUTOMATE & COMPLY",
     challenge: "Strict DPDP India & UAE data privacy requirements",
     solution: "Automated compliance, audit logs & ISO readiness",
-    metric: "100%",
-    metricLabel: "DPDP Compliant",
+    metric: "Ready",
+    metricLabel: "DPDP Readiness Support",
     icon: <ShieldCheck className="w-6 h-6 text-[#fab60a]" />,
     color: "#fab60a",
   },
@@ -212,12 +212,12 @@ export function CaseStudy3DTransformation() {
           <div className="flex items-center gap-4 text-sm sm:text-base text-[#1b2823] dark:text-[#ffffff]">
             <BarChart3 className="w-6 h-6 text-[#f15e1c] shrink-0" />
             <span className="font-semibold">
-              Enterprise Transformation Benchmark: <strong className="text-[#c2410c] dark:text-[#f15e1c]">3.4x Revenue Uplift</strong> &amp; <strong className="text-[#1e6b50] dark:text-[#74c4ab]">100% DPDP Compliance Guaranteed</strong>
+              Enterprise Transformation Benchmark: <strong className="text-[#c2410c] dark:text-[#f15e1c]">3.4x Revenue Uplift</strong> &amp; <strong className="text-[#1e6b50] dark:text-[#74c4ab]">DPDP Readiness Support</strong>
             </span>
           </div>
           <Link href="/contact" className="shrink-0 w-full sm:w-auto">
             <Button3D variant="primary" size="lg" className="w-full sm:w-auto" rightIcon={<ArrowRight className="w-5 h-5 ml-1" />}>
-              Request Technical Audit
+              Book a Free Consultation
             </Button3D>
           </Link>
         </div>

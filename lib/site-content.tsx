@@ -234,7 +234,7 @@ const defaultTestimonials: TestimonialItem[] = [
     author: "Rajesh K. Mehta",
     role: "VP of Engineering",
     designation: "VP of Engineering",
-    company: "Veritas Logistics",
+    company: "Enterprise Logistics Client (Anonymized)",
     location: "Mumbai, India",
     rating: 5,
     service: "Risk & Compliance",

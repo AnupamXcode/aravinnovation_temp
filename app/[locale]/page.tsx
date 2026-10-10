@@ -12,9 +12,6 @@ import { ShieldCheck, Zap, Users, Award, CheckCircle } from "lucide-react";
 const InteractiveServiceStack3D = dynamic(
   () => import("@/components/services/InteractiveServiceStack3D").then((m) => m.InteractiveServiceStack3D)
 );
-const WhyAravDigitalCore = dynamic(
-  () => import("@/components/home/WhyAravDigitalCore").then((m) => m.WhyAravDigitalCore)
-);
 const Process3DPathway = dynamic(
   () => import("@/components/motion/Process3DPathway").then((m) => m.Process3DPathway)
 );
@@ -32,9 +29,6 @@ const WhoWeHelpSection = dynamic(
 );
 const BusinessChallengesSection = dynamic(
   () => import("@/components/home/BusinessChallengesSection").then((m) => m.BusinessChallengesSection)
-);
-const DirectAnswerAEOBlock = dynamic(
-  () => import("@/components/home/DirectAnswerAEOBlock").then((m) => m.DirectAnswerAEOBlock)
 );
 const HomeFAQSection = dynamic(
   () => import("@/components/home/HomeFAQSection").then((m) => m.HomeFAQSection)
@@ -110,10 +104,10 @@ export default async function HomePage({
 
   return (
     <div className="flex flex-col w-full bg-[#ffffff] dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] space-y-4 sm:space-y-6 md:space-y-12 pb-8 transition-colors duration-300 overflow-x-hidden">
-      {/* 01 — CINEMATIC HERO */}
+      {/* 01 — HERO */}
       <Hero />
 
-      {/* 02 — TRUST / CAPABILITY STRIP */}
+      {/* 02 — CLIENT STRIP */}
       <section className="w-full py-3.5 sm:py-5 md:py-7 bg-[#fefaf5] dark:bg-[#0a0a0a] border-y border-[#f7d7b0] dark:border-[#1a1a1a] shadow-sm transition-all duration-300 overflow-hidden">
         <ScrollReveal direction="up">
           <div className="text-center mb-2 sm:mb-3 px-4">
@@ -125,28 +119,20 @@ export default async function HomePage({
         </ScrollReveal>
       </section>
 
-      {/* 02.5 — DIRECT ANSWER / ABOUT ARAV */}
-      <DirectAnswerAEOBlock />
-
-      {/* 02.75 — BUSINESS CHALLENGES */}
+      {/* 03 — WHAT ARE YOU TRYING TO SOLVE? */}
       <BusinessChallengesSection />
 
-      {/* 03 — WHAT WE DO (ENTERPRISE SERVICE PRACTICES) */}
+      {/* 04 — SERVICES: 8 CONCISE SERVICE CARDS ACROSS 4 PILLARS */}
       <div id="services">
         <InteractiveServiceStack3D />
       </div>
 
-      {/* 05 — WHY ARAV INNOVATIONS? */}
-      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="why-arav">
-        <WhyAravDigitalCore />
-      </div>
-
-      {/* 06 — TRANSFORMATION JOURNEY (DISCOVER -> STRATEGIZE -> BUILD -> LAUNCH -> OPTIMIZE -> SCALE) */}
+      {/* 05 — HOW WE WORK: 4 STEPS */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="process">
         <section className="py-6 sm:py-10 md:py-12 px-4 sm:px-8 lg:px-10 rounded-2xl md:rounded-[2.5rem] bg-transparent md:bg-[#fefaf5] md:dark:bg-[#0a0a0a] border-0 md:border md:border-[#f7d7b0] md:dark:border-[#1a1a1a] shadow-none md:shadow-2xl transition-all duration-300">
           <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8 space-y-2 px-2">
             <Badge variant="secondary" size="md">
-              TRANSFORMATION BLUEPRINT
+              HOW WE WORK
             </Badge>
             <ScrollTextFlip>
               <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
@@ -159,43 +145,44 @@ export default async function HomePage({
         </section>
       </div>
 
-      {/* 07 — SELECTED WORK / CASE STUDIES */}
-      <CaseStudy3DTransformation />
+      {/* 06 — PROOF: CASE STUDIES AND REVIEWS */}
+      <div id="proof" className="space-y-6 md:space-y-12">
+        <CaseStudy3DTransformation />
 
-      {/* 08 — WHO WE HELP */}
-      <WhoWeHelpSection />
+        <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="executive-endorsements">
+          <Scroll3DContainer variant="testimonial">
+            <section className="py-5 sm:py-8 md:py-14 px-4 sm:px-12 lg:px-14 rounded-2xl sm:rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300 relative overflow-hidden">
+              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent" />
 
-      {/* 09 — EXECUTIVE ENDORSEMENTS (1 TESTIMONIAL AT A TIME, 12 DOTS, AUTOPLAY) */}
-      <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="executive-endorsements">
-        <Scroll3DContainer variant="testimonial">
-          <section className="py-5 sm:py-8 md:py-14 px-4 sm:px-12 lg:px-14 rounded-2xl sm:rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300 relative overflow-hidden">
-            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent" />
+              <div className="text-center max-w-3xl mx-auto mb-4 sm:mb-6 space-y-2 sm:space-y-3">
+                <Badge variant="secondary" size="md">
+                  EXECUTIVE REVIEWS
+                </Badge>
+                <ScrollTextFlip>
+                  <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+                    What Our Partners Say
+                  </h2>
+                </ScrollTextFlip>
+              </div>
 
-            <div className="text-center max-w-3xl mx-auto mb-4 sm:mb-6 space-y-2 sm:space-y-3">
-              <Badge variant="secondary" size="md">
-                EXECUTIVE REVIEWS
-              </Badge>
-              <ScrollTextFlip>
-                <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                  What Our Partners Say
-                </h2>
-              </ScrollTextFlip>
-            </div>
-
-            <ScrollReveal direction="up" delay={0.2}>
-              <AnimatedTestimonialsCarousel />
-            </ScrollReveal>
-          </section>
-        </Scroll3DContainer>
+              <ScrollReveal direction="up" delay={0.2}>
+                <AnimatedTestimonialsCarousel />
+              </ScrollReveal>
+            </section>
+          </Scroll3DContainer>
+        </div>
       </div>
 
-      {/* 09.5 — AEO / FREQUENTLY ASKED QUESTIONS */}
+      {/* 07 — WHO WE HELP */}
+      <WhoWeHelpSection />
+
+      {/* 08 — FAQ */}
       <HomeFAQSection />
 
-      {/* 10 — INSIGHTS THAT HELP YOU MOVE FORWARD */}
+      {/* 09 — LATEST ARTICLES */}
       <HomeInsightsSection posts={await getHomeBlogPosts(locale)} />
 
-      {/* 11 — FINAL CONVERSION SECTION */}
+      {/* 10 — CONTACT FORM, WHATSAPP, AND OFFICES */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="contact">
         <Scroll3DContainer variant="cta">
           <section className="py-8 md:py-14 px-6 sm:px-12 lg:px-14 rounded-[2.5rem] bg-gradient-to-br from-[#ffffff] via-[#fefaf5] to-[#f7d7b0]/50 dark:from-[#0a0a0a] dark:via-[#121212] dark:to-[#1a1a1a] border-2 border-[#f15e1c]/40 shadow-2xl transition-all duration-300">

@@ -104,7 +104,7 @@ export function Hero() {
                 className="w-full sm:w-auto rounded-full px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-semibold shadow-md hover:shadow-xl shadow-[#f15e1c]/25 bg-[#f15e1c] text-white hover:bg-[#d84e12] transition-all transform hover:-translate-y-0.5 min-h-[48px] sm:min-h-[52px] justify-center"
                 rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
               >
-                Book a Consultation
+                Book a Free Consultation
               </Button>
             </Link>
 
