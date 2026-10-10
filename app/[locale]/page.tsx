@@ -2,7 +2,6 @@ import * as React from "react";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import dynamic from "next/dynamic";
 import { Hero } from "@/components/hero/Hero";
-import { ProblemToSolutionSection } from "@/components/home/ProblemToSolutionSection";
 import { Badge } from "@/components/ui/badge";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { ScrollTextFlip } from "@/components/motion/ScrollTextFlip";
@@ -30,9 +29,6 @@ const LeadForm = dynamic(
 );
 const WhoWeHelpSection = dynamic(
   () => import("@/components/home/WhoWeHelpSection").then((m) => m.WhoWeHelpSection)
-);
-const EarlyTrustProofSection = dynamic(
-  () => import("@/components/home/EarlyTrustProofSection").then((m) => m.EarlyTrustProofSection)
 );
 const BusinessChallengesSection = dynamic(
   () => import("@/components/home/BusinessChallengesSection").then((m) => m.BusinessChallengesSection)
@@ -139,12 +135,6 @@ export default async function HomePage({
       <div id="services">
         <InteractiveServiceStack3D />
       </div>
-
-      {/* 03.5 — EARLY TRUST & PROOF LAYER */}
-      <EarlyTrustProofSection />
-
-      {/* 04 — THINK &bull; BUILD &bull; GROW */}
-      <ProblemToSolutionSection />
 
       {/* 05 — WHY ARAV INNOVATIONS? */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="why-arav">

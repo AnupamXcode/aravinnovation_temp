@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import * as React from "react";
 import Link from "next/link";
@@ -90,7 +90,7 @@ export const groupedServicesData: ServiceCategoryGroup[] = [
         category: "AI & Automation",
         name: "AI Portfolio / AI Solutions",
         shortName: "AI Portfolio",
-        description: "Apply AI and automation to improve processes, customer experiences and business decision-making.",
+        description: "Apply AI, intelligent workflows, and RAG (AI that uses relevant information from a knowledge source) to improve business processes.",
         image: "/images/homepage-services/ai-portfolio-homepage.webp",
         tone: "#f15e1c",
         href: "/services/ai-portfolio",
@@ -176,7 +176,7 @@ export const groupedServicesData: ServiceCategoryGroup[] = [
         category: "System Audits",
         name: "Audit & Improvement",
         shortName: "Audit & Improvement",
-        description: "Identify gaps, improve systems and processes, and create a stronger foundation for continuous improvement.",
+        description: "Identify gaps, optimize system performance and cloud spending (FinOps), and strengthen operational foundation.",
         image: "/images/homepage-services/audit-improvement-homepage.webp",
         tone: "#2e936f",
         href: "/services/audit-improvement",
@@ -327,7 +327,7 @@ export function InteractiveServiceStack3D() {
                     key={service.id}
                     whileHover={{ y: -4 }}
                     transition={{ duration: 0.2 }}
-                    className="group rounded-3xl bg-[#FBF3EA] dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] p-5 sm:p-7 flex flex-col justify-between hover:border-[#f15e1c] dark:hover:border-[#f15e1c] hover:shadow-xl transition-all duration-300 relative overflow-hidden h-full min-h-[340px]"
+                    className="group rounded-3xl bg-[#FBF3EA] dark:bg-[#0a0a0a] border border-[#EFE2D6] dark:border-[#1f1f1f] p-5 sm:p-7 flex flex-col justify-between hover:border-[#f15e1c] dark:hover:border-[#f15e1c] hover:shadow-xl transition-all duration-300 relative overflow-hidden h-full min-h-[220px]"
                   >
                     <div className="flex-1 flex flex-col">
                       {/* Top Bar: Icon + Category Badge */}
@@ -341,24 +341,14 @@ export function InteractiveServiceStack3D() {
                       </div>
 
                       {/* Service Title */}
-                      <h4 className="text-lg font-bold font-display text-[#221811] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors mb-2.5 leading-snug">
+                      <h4 className="text-lg font-bold font-display text-[#221811] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors mb-2 leading-snug">
                         {service.name}
                       </h4>
 
-                      {/* Value Proposition */}
+                      {/* Value Proposition (One short plain-language explanatory sentence) */}
                       <p className="text-xs sm:text-sm text-[#3A2E27]/90 dark:text-[#FAF5EE]/90 leading-relaxed mb-4 font-medium">
                         {service.description}
                       </p>
-
-                      {/* 2-4 Capability Points */}
-                      <ul className="space-y-2 mb-6 text-xs text-[#3A2E27] dark:text-[#FAF5EE] mt-auto">
-                        {service.outcomes.map((item, idx) => (
-                          <li key={idx} className="flex items-center gap-2">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-[#2e936f] shrink-0" />
-                            <span className="font-medium">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
                     </div>
 
                     {/* Bottom CTA Link (Aligned consistently at bottom) */}
