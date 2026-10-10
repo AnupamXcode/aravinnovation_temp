@@ -21,15 +21,15 @@ export const homeFaqs = [
   },
   {
     q: "Can you build a new website, SaaS portal, or application?",
-    a: "Yes. We design and build custom, scalable business websites, customer portals, SaaS platforms, and enterprise web applications tailored to your workflow, optimized for sub-second performance and high conversion.",
+    a: "Yes. We design and build custom, scalable business websites, customer portals, SaaS platforms, and enterprise web applications tailored to your workflow, optimized for fast performance and conversion.",
   },
   {
     q: "Can you perform system audits and optimize cloud performance?",
-    a: "Yes. We perform deep technical audits to eliminate architectural bottlenecks, optimize cloud infrastructure costs (Cloud FinOps), modernize legacy codebases, redesign user interfaces (UX/UI), and accelerate Core Web Vitals.",
+    a: "Yes. We perform deep technical audits to address architectural bottlenecks, optimize cloud infrastructure costs (Cloud FinOps), modernize legacy codebases, redesign user interfaces (UX/UI), and improve Core Web Vitals.",
   },
   {
     q: "How does Arav Innovations help with practical AI automation?",
-    a: "Our AI practice focuses on practical, business-ready AI solutions: automating repetitive internal workflows, deploying custom RAG knowledge search assistants, and integrating LLM data pipelines securely without exposing proprietary data.",
+    a: "Our AI practice focuses on practical, business-ready AI solutions: automating repetitive internal workflows, deploying custom RAG knowledge search assistants, and integrating AI workflows that process and use information securely without exposing proprietary data.",
   },
   {
     q: "How do you assist with Data Privacy & DPDP compliance readiness?",

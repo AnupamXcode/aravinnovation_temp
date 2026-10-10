@@ -431,7 +431,7 @@ export const servicesData: Service[] = [
       {
         step: 4,
         title: "Production Deployment",
-        description: "Zero-downtime deployment, CDN edge caching setup, and observability monitoring.",
+        description: "High-availability deployment, CDN edge caching setup, and observability monitoring.",
         deliverable: "Live Production Release with APM Alerts",
       },
       {

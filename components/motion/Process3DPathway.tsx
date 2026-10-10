@@ -46,7 +46,7 @@ const steps: ProcessStep[] = [
     number: "03",
     title: "Launch & Verify",
     subtitle: "Production Deployment & Security",
-    description: "Zero-downtime production deployment, infrastructure monitoring, security hardening, and end-to-end verification.",
+    description: "Streamlined production deployment, infrastructure monitoring, security hardening, and end-to-end verification.",
     deliverables: ["Production Launch", "Infrastructure Telemetry", "Security Hardening"],
     icon: <Rocket className="w-4 h-4" />,
     color: "#fab60a",

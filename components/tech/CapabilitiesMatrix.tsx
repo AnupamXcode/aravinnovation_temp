@@ -38,7 +38,7 @@ const capabilities: TechCapability[] = [
     color: "#f15e1c",
     accentColor: "#f7d7b0",
     diagramType: "browser",
-    description: "Sub-second Next.js App Router applications, TypeScript strict schemas, and scalable cloud-native web systems.",
+    description: "High-performance Next.js App Router applications, TypeScript strict schemas, and scalable cloud-native web systems.",
     techStack: ["Next.js 16", "React 19", "TypeScript", "Tailwind v4"],
   },
   {

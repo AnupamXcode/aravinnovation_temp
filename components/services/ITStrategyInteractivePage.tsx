@@ -136,7 +136,7 @@ const heroArchitectureFlow = [
   {
     stage: "04",
     label: "IMPLEMENTATION",
-    desc: "Controlled migration & zero-downtime engineering.",
+    desc: "Controlled migration & resilient engineering.",
   },
   {
     stage: "05",
@@ -279,7 +279,7 @@ const coreSolutions = [
   {
     id: "04",
     title: "Cost & Performance Optimization",
-    desc: "Optimize cloud spend, improve system performance, eliminate architectural bottlenecks, and drive predictable technology ROI.",
+    desc: "Optimize cloud spend, improve system performance, address architectural bottlenecks, and drive predictable technology ROI.",
     icon: <Activity className="w-6 h-6 text-[#f15e1c]" />,
     href: "#inquire",
   },
@@ -323,7 +323,7 @@ const transformationJourneyStages = [
     num: "04",
     title: "IMPLEMENT",
     subtitle: "Execute Controlled Delivery",
-    desc: "Modernize legacy systems and deploy cloud infrastructure through structured engineering squads, zero-downtime cutovers, and CI/CD pipelines.",
+    desc: "Modernize legacy systems and deploy cloud infrastructure through structured engineering squads, controlled cutovers, and CI/CD pipelines.",
   },
   {
     num: "05",
@@ -496,7 +496,7 @@ const faqList = [
   },
   {
     q: "Do you support cloud migration and modernization?",
-    a: "Yes. We plan and execute secure, scalable cloud adoption across AWS, Azure, and GCP, incorporating containerized microservices, Infrastructure-as-Code (Terraform), zero-downtime cutover plans, and FinOps cost governance.",
+    a: "Yes. We plan and execute secure, scalable cloud adoption across AWS, Azure, and GCP, incorporating containerized microservices, Infrastructure-as-Code (Terraform), structured cutover plans, and FinOps cost governance.",
   },
   {
     q: "Can Arav Innovations continue supporting the technology after implementation?",

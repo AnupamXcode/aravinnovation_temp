@@ -484,7 +484,7 @@ const defaultChatbotKB: ChatbotKB = {
 const defaultClaims: PublicClaim[] = [
   {
     id: "claim-1",
-    claimText: "Sub-second Next.js SSR performance response benchmarking",
+    claimText: "Optimized Next.js SSR performance response benchmarking",
     category: "Performance",
     metricValue: "< 1.5s LCP",
     verificationSource: "Lighthouse & Core Web Vitals Audits",

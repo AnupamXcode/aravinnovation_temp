@@ -26,7 +26,7 @@ export const industriesData: IndustrySolution[] = [
       "Rigid customer onboarding and slow KYC verification flows",
     ],
     aravApproach:
-      "We design zero-trust financial architecture with built-in audit logging, sub-second API response rates, and automated governance frameworks.",
+      "We design zero-trust financial architecture with built-in audit logging, high-throughput API response rates, and automated governance frameworks.",
     capabilities: [
       "Risk, Compliance & Governance (GRC)",
       "Web & Custom Application Engineering",
@@ -117,7 +117,7 @@ export const industriesData: IndustrySolution[] = [
     slug: "ecommerce-retail",
     name: "Retail & E-Commerce",
     description:
-      "Headless storefronts, sub-second product pages, omnichannel performance marketing, and automated inventory sync architectures.",
+      "Headless storefronts, fast-loading product pages, omnichannel performance marketing, and automated inventory sync architectures.",
     icon: "ShoppingBag",
     challenges: [
       "Slow mobile loading speeds leading to cart abandonment",
@@ -201,7 +201,7 @@ export const industriesData: IndustrySolution[] = [
       "Weak search visibility for premium commercial & residential keywords",
     ],
     aravApproach:
-      "We build sub-second search platforms, implement technical SEO strategies, and integrate automated chatbot lead qualification.",
+      "We build high-performance search platforms, implement technical SEO strategies, and integrate automated chatbot lead qualification.",
     capabilities: [
       "Web & Application Engineering",
       "SEO & Generative Discovery",

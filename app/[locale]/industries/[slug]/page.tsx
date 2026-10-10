@@ -304,10 +304,10 @@ export default async function DynamicIndustryPage({ params }: PageProps) {
                 <TrendingUp className="w-4 h-4" />
               </div>
               <h4 className="text-sm sm:text-base font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
-                SLA &amp; Subsecond Loading
+                SLA &amp; High-Performance Loading
               </h4>
               <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
-                Sub-second edge rendering and dedicated engineering support pods.
+                Edge rendering and dedicated engineering support pods.
               </p>
             </div>
           </div>

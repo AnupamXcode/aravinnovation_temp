@@ -152,7 +152,7 @@ export const productsData: Product[] = [
     proofPoint: {
       metric: "24/7",
       label: "Instant AI Consultation Availability",
-      detail: "Freemium credit-based spiritual advisor platform delivering sub-second cosmic insights.",
+      detail: "Freemium credit-based spiritual advisor platform delivering fast cosmic insights.",
     },
     faqs: [
       {
