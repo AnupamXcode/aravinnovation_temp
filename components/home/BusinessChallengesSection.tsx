@@ -66,8 +66,8 @@ const challengesData: ChallengeItem[] = [
 
 export function BusinessChallengesSection() {
   return (
-    <section className="w-full py-5 sm:py-6 md:py-8 px-4 sm:px-6 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#16221d] text-[#221811] dark:text-[#FAF5EE]">
-      <div className="max-w-7xl mx-auto space-y-5">
+    <section className="w-full py-3 sm:py-4 md:py-5 px-4 sm:px-6 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#16221d] text-[#221811] dark:text-[#FAF5EE]">
+      <div className="max-w-7xl mx-auto space-y-4">
         
         {/* Section Header */}
         <div className="text-center space-y-3 max-w-2xl mx-auto">

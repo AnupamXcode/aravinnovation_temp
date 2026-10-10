@@ -89,9 +89,9 @@ export function CaseStudy3DTransformation() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-4 md:py-6 select-none"
+      className="relative w-full max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 py-1 md:py-2 select-none"
     >
-      <div className="w-full rounded-[3rem] bg-[#ffffff] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-6 sm:p-10 md:p-12 space-y-8 relative overflow-hidden transition-all duration-300">
+      <div className="w-full rounded-[3rem] bg-[#ffffff] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-4 sm:p-6 md:p-6 space-y-6 relative overflow-hidden transition-all duration-300">
         {/* Background Ambient Glow */}
         <div className="absolute top-0 right-0 w-full h-96 bg-radial from-[#f15e1c]/10 via-[#2e936f]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
 

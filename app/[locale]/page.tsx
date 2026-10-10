@@ -102,12 +102,12 @@ export default async function HomePage({
   ];
 
   return (
-    <div className="flex flex-col w-full bg-[#ffffff] dark:bg-[#16221d] text-[#1b2823] dark:text-[#ffffff] space-y-3 sm:space-y-4 md:space-y-4 pb-8 transition-colors duration-300 overflow-x-hidden">
+    <div className="flex flex-col w-full bg-[#ffffff] dark:bg-[#16221d] text-[#1b2823] dark:text-[#ffffff] space-y-1 sm:space-y-2 md:space-y-2 pb-6 transition-colors duration-300 overflow-x-hidden">
       {/* 01 — HERO */}
       <Hero />
 
       {/* 02 — CAPABILITIES & DOMAINS */}
-      <section className="w-full py-3 sm:py-4 bg-[#fefaf5] dark:bg-[#0a0a0a] border-y border-[#f7d7b0] dark:border-[#1a1a1a] shadow-sm transition-all duration-300 overflow-hidden">
+      <section className="w-full py-2 sm:py-2.5 bg-[#fefaf5] dark:bg-[#0a0a0a] border-y border-[#f7d7b0] dark:border-[#1a1a1a] shadow-sm transition-all duration-300 overflow-hidden">
         <ScrollReveal direction="up">
           <div className="text-center px-4">
             <span className="text-[10px] sm:text-[12px] font-bold font-mono uppercase tracking-widest text-[#4a5c55] dark:text-[#d3eee4]">
@@ -127,8 +127,8 @@ export default async function HomePage({
 
       {/* 05 — HOW WE WORK: 4 STEPS */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="process">
-        <section className="py-5 sm:py-6 md:py-8 px-4 sm:px-8 lg:px-10 rounded-2xl md:rounded-[2.5rem] bg-transparent md:bg-[#fefaf5] md:dark:bg-[#0a0a0a] border-0 md:border md:border-[#f7d7b0] md:dark:border-[#1a1a1a] shadow-none md:shadow-2xl transition-all duration-300">
-          <div className="text-center max-w-3xl mx-auto mb-4 sm:mb-6 space-y-2 px-2">
+        <section className="py-3 sm:py-4 md:py-5 px-4 sm:px-8 lg:px-10 rounded-2xl md:rounded-[2.5rem] bg-transparent md:bg-[#fefaf5] md:dark:bg-[#0a0a0a] border-0 md:border md:border-[#f7d7b0] md:dark:border-[#1a1a1a] shadow-none md:shadow-2xl transition-all duration-300">
+          <div className="text-center max-w-3xl mx-auto mb-3 sm:mb-4 space-y-2 px-2">
             <Badge variant="secondary" size="md">
               HOW WE WORK
             </Badge>
@@ -144,15 +144,15 @@ export default async function HomePage({
       </div>
 
       {/* 06 — PROOF: CASE STUDIES AND REVIEWS */}
-      <div id="proof" className="space-y-3 md:space-y-4">
+      <div id="proof" className="space-y-1 md:space-y-2">
         <CaseStudy3DTransformation />
 
         <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="executive-endorsements">
           <Scroll3DContainer variant="testimonial">
-            <section className="py-5 sm:py-6 md:py-8 px-4 sm:px-12 lg:px-14 rounded-2xl sm:rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300 relative overflow-hidden">
+            <section className="py-3 sm:py-4 md:py-5 px-4 sm:px-12 lg:px-14 rounded-2xl sm:rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300 relative overflow-hidden">
               <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent" />
 
-              <div className="text-center max-w-3xl mx-auto mb-4 sm:mb-5 space-y-2">
+              <div className="text-center max-w-3xl mx-auto mb-3 sm:mb-4 space-y-2">
                 <Badge variant="secondary" size="md">
                   EXECUTIVE REVIEWS
                 </Badge>
@@ -183,7 +183,7 @@ export default async function HomePage({
       {/* 10 — CONTACT FORM, WHATSAPP, AND OFFICES */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="contact">
         <Scroll3DContainer variant="cta">
-          <section className="py-6 md:py-8 px-6 sm:px-12 lg:px-14 rounded-[2.5rem] bg-gradient-to-br from-[#ffffff] via-[#fefaf5] to-[#f7d7b0]/50 dark:from-[#0a0a0a] dark:via-[#121212] dark:to-[#1a1a1a] border-2 border-[#f15e1c]/40 shadow-2xl transition-all duration-300">
+          <section className="py-4 md:py-6 px-6 sm:px-12 lg:px-14 rounded-[2.5rem] bg-gradient-to-br from-[#ffffff] via-[#fefaf5] to-[#f7d7b0]/50 dark:from-[#0a0a0a] dark:via-[#121212] dark:to-[#1a1a1a] border-2 border-[#f15e1c]/40 shadow-2xl transition-all duration-300">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
               {/* LEFT COLUMN: Heading, Supporting Copy, Value Statement & Contact Details */}
               <div className="lg:col-span-5 space-y-6">

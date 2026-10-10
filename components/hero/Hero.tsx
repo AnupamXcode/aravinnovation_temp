@@ -38,7 +38,7 @@ export function Hero() {
   const effectiveContentY = isMobile ? 0 : (positioning.contentY || 0);
 
   return (
-    <section className="relative w-full min-h-none sm:min-h-[calc(100vh-80px)] xl:min-h-[90vh] flex flex-col justify-center py-8 sm:py-16 lg:py-20 overflow-hidden bg-[#FFFDF9] dark:bg-[#16221d] transition-colors duration-300">
+    <section className="relative w-full min-h-none sm:min-h-[calc(100vh-80px)] xl:min-h-[85vh] flex flex-col justify-center py-6 sm:py-10 lg:py-12 overflow-hidden bg-[#FFFDF9] dark:bg-[#16221d] transition-colors duration-300">
       {/* Background Video Layer with 3D Rotating Glass Cube on Right */}
       <HeroVideoBackground />
 

@@ -67,7 +67,7 @@ export function HomeFAQSection() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <section className="py-4 sm:py-6 md:py-8 px-4 sm:px-12 lg:px-14 rounded-2xl sm:rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300 relative overflow-hidden">
+      <section className="py-3 sm:py-4 md:py-5 px-4 sm:px-12 lg:px-14 rounded-2xl sm:rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300 relative overflow-hidden">
         <div className="text-center max-w-3xl mx-auto mb-4 sm:mb-5 space-y-2">
           <Badge variant="secondary" size="md">
             FREQUENTLY ASKED QUESTIONS
