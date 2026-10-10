@@ -98,10 +98,9 @@ export const siteOrganizationSchema = {
       email: "Info@aravinnovations.com",
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Business Bay Tower",
+        streetAddress: "55764-001 IFZA Business Park FZCO, Building A1 Dubai Silicon Oasis",
         addressLocality: "Dubai",
         addressRegion: "Dubai",
-        postalCode: "00000",
         addressCountry: "AE",
       },
       url: SITE_BASE_URL,
@@ -472,9 +471,9 @@ export function getRouteCatalog(): SEOPageSettings[] {
   caseStudiesData.forEach((cs) => {
     routes.push({
       path: `/case-studies/${cs.slug}`,
-      label: `Case Study: ${cs.client}`,
-      metaTitle: `Case Study: ${cs.title} | ${cs.client}`,
-      metaDescription: `How Arav Innovations helped ${cs.client} achieve ${cs.results?.[0]?.metric || "scalable growth"} with enterprise software solutions.`,
+      label: `Case Study: ${cs.title}`,
+      metaTitle: `${cs.title} | Capability Blueprint`,
+      metaDescription: cs.summary || `Enterprise capability blueprint illustrating ${cs.title.toLowerCase()} by Arav Innovations.`,
       priority: 0.7,
       robots: "Index, Follow",
       jsonLdSchema: JSON.stringify(

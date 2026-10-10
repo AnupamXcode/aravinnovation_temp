@@ -2,11 +2,18 @@ import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-      disallow: ["/api/", "/admin/", "/admin"],
-    },
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/api/", "/admin/", "/admin"],
+      },
+      {
+        userAgent: ["GPTBot", "ClaudeBot", "PerplexityBot", "Google-Extended", "Bytespider"],
+        allow: "/",
+        disallow: ["/api/", "/admin/"],
+      },
+    ],
     sitemap: "https://aravinnovations.com/sitemap.xml",
   };
 }

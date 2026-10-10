@@ -61,8 +61,16 @@ export async function generateMetadata({
   const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
   const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
+  const isTestDomain =
+    process.env.VERCEL_ENV === "preview" ||
+    process.env.NEXT_PUBLIC_VERCEL_ENV === "preview" ||
+    process.env.IS_TEST_DOMAIN === "true";
+
   return {
     metadataBase: new URL("https://aravinnovations.com"),
+    robots: isTestDomain
+      ? { index: false, follow: false, nocache: true }
+      : { index: true, follow: true },
     title: {
       default: "Arav Innovations | AI, Technology & Digital Marketing Solutions",
       template: "%s | Arav Innovations",
