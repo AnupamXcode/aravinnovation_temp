@@ -43,8 +43,8 @@ const audienceList = [
 export function WhoWeHelpSection() {
   return (
     <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 select-none">
-      <section className="py-5 sm:py-10 md:py-16 px-4 sm:px-12 lg:px-14 rounded-2xl sm:rounded-[2.5rem] bg-[#FFFFFF] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300">
-        <div className="text-center max-w-3xl mx-auto mb-5 sm:mb-10 space-y-2 sm:space-y-3">
+      <section className="py-4 sm:py-6 md:py-8 px-4 sm:px-12 lg:px-14 rounded-2xl sm:rounded-[2.5rem] bg-[#FFFFFF] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300">
+        <div className="text-center max-w-3xl mx-auto mb-4 sm:mb-6 space-y-2">
           <Badge variant="secondary" size="md">
             TARGET ENGAGEMENT AUDIENCE
           </Badge>

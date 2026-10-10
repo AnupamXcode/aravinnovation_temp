@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import * as React from "react";
 import Link from "next/link";
@@ -66,8 +66,8 @@ const challengesData: ChallengeItem[] = [
 
 export function BusinessChallengesSection() {
   return (
-    <section className="w-full py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#16221d] text-[#221811] dark:text-[#FAF5EE]">
-      <div className="max-w-7xl mx-auto space-y-8">
+    <section className="w-full py-5 sm:py-6 md:py-8 px-4 sm:px-6 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#16221d] text-[#221811] dark:text-[#FAF5EE]">
+      <div className="max-w-7xl mx-auto space-y-5">
         
         {/* Section Header */}
         <div className="text-center space-y-3 max-w-2xl mx-auto">

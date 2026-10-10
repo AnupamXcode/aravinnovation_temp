@@ -254,9 +254,9 @@ export function InteractiveServiceStack3D() {
   const [selectedGroupIdx, setSelectedGroupIdx] = React.useState<number>(0);
 
   return (
-    <section className="w-full py-10 sm:py-16 md:py-20 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#16221d] text-[#221811] dark:text-[#FAF5EE]">
+    <section className="w-full py-5 sm:py-6 md:py-8 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#16221d] text-[#221811] dark:text-[#FAF5EE]">
       {/* Header */}
-      <div className="max-w-3xl mx-auto text-center space-y-3 mb-8 sm:mb-12">
+      <div className="max-w-3xl mx-auto text-center space-y-3 mb-5 sm:mb-6">
         <Badge variant="secondary" size="md">
           ENTERPRISE CAPABILITIES
         </Badge>

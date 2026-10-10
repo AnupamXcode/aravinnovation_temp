@@ -20,13 +20,13 @@ export function HomeInsightsSection({ posts }: HomeInsightsSectionProps) {
   }
 
   return (
-    <section className="w-full py-5 sm:py-16 md:py-24 px-4 sm:px-8 lg:px-12 xl:px-16" id="insights">
-      <div className="max-w-7xl mx-auto rounded-2xl sm:rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] p-4 sm:p-10 lg:p-12 shadow-2xl transition-colors duration-300 relative overflow-hidden">
+    <section className="w-full py-4 sm:py-6 md:py-8 px-4 sm:px-8 lg:px-12 xl:px-16" id="insights">
+      <div className="max-w-7xl mx-auto rounded-2xl sm:rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] p-4 sm:p-8 lg:p-10 shadow-2xl transition-colors duration-300 relative overflow-hidden">
         {/* Subtle Brand Accent Header Line */}
         <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#f15e1c] via-[#2e936f] to-[#fab60a]" />
 
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-12 gap-4 sm:gap-6 relative z-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-4 sm:mb-6 gap-4 relative z-10">
           <div className="space-y-2 sm:space-y-3 max-w-2xl">
             <Badge variant="secondary" size="md">
               KNOWLEDGE &amp; INSIGHTS
