@@ -80,6 +80,7 @@ export const productsData: Product[] = [
     ctaEnabled: true,
     externalUrl: "https://www.fashaiuniversal.com/",
     iconName: "FashAILogo",
+    iconUrl: "/images/fashai-logo.png",
     features: [
       "Fashion Shows & Runway Production",
       "Luxury & Lifestyle Events",

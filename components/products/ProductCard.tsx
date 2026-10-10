@@ -60,13 +60,13 @@ export function ProductCard({ product }: ProductCardProps) {
 
   // Icon selector: render product.iconUrl if provided, else fallback to standard icon selector
   const icon = product.iconUrl ? (
-    <div className="relative w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center">
+    <div className="relative w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center">
       <Image
         src={product.iconUrl}
         alt={displayTitle}
-        width={32}
-        height={32}
-        className="w-full h-full object-contain object-center rounded-xl"
+        width={36}
+        height={36}
+        className="w-full h-full object-contain object-center rounded-lg"
       />
     </div>
   ) : product.slug === "fashai-universal" || product.iconName === "FashAILogo" ? (
