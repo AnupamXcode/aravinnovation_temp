@@ -141,7 +141,7 @@ export function BeforeAfterSlider() {
               transformStyle: "preserve-3d",
               willChange: "transform",
             }}
-            className="relative w-full h-[480px] sm:h-[520px] md:h-[560px] rounded-[2.5rem] overflow-hidden select-none border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl bg-[#ffffff] dark:bg-[#000000] cursor-ew-resize focus:outline-none focus:ring-2 focus:ring-[#f15e1c] touch-pan-y transform-gpu"
+            className="relative w-full h-[480px] sm:h-[520px] md:h-[560px] rounded-[2.5rem] overflow-hidden select-none border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xl bg-[#ffffff] dark:bg-[#16221d] cursor-ew-resize focus:outline-none focus:ring-2 focus:ring-[#f15e1c] touch-pan-y transform-gpu"
           >
             {/* AFTER PANEL (Right Layer) */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#ffffff] via-[#fefaf5] to-[#f7d7b0]/60 dark:from-[#0a0a0a] dark:via-[#121212] dark:to-[#1a1a1a] p-6 sm:p-12 md:p-14 flex flex-col justify-between">
@@ -174,7 +174,7 @@ export function BeforeAfterSlider() {
                         "p-3 sm:p-4 rounded-2xl border text-left transition-all duration-200 shadow-xs",
                         isActive
                           ? "bg-white dark:bg-[#161616] border-[#2e936f] shadow-md ring-1 ring-[#2e936f]/40"
-                          : "bg-white/60 dark:bg-[#000000]/60 border-[#2e936f]/20 opacity-70"
+                          : "bg-white/60 dark:bg-[#16221d]/60 border-[#2e936f]/20 opacity-70"
                       )}
                     >
                       <span
@@ -222,7 +222,7 @@ export function BeforeAfterSlider() {
                   ].map((item, idx) => (
                     <div
                       key={idx}
-                      className="p-3 sm:p-4 rounded-2xl bg-white/80 dark:bg-[#000000]/80 border border-[#f7d7b0] dark:border-[#1a1a1a]"
+                      className="p-3 sm:p-4 rounded-2xl bg-white/80 dark:bg-[#16221d]/80 border border-[#f7d7b0] dark:border-[#1a1a1a]"
                     >
                       <span className="text-xs sm:text-sm font-bold text-[#1b2823] dark:text-[#ffffff] block">
                         {item.title}
@@ -242,7 +242,7 @@ export function BeforeAfterSlider() {
               className="absolute top-0 bottom-0 -translate-x-1/2 flex items-center justify-center z-30 pointer-events-none"
             >
               <div className="w-[3px] h-full bg-[#f15e1c] shadow-lg shadow-[#f15e1c]/50" />
-              <div className="absolute w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#f15e1c] text-white shadow-xl shadow-[#f15e1c]/50 flex items-center justify-center border-2 border-white dark:border-[#000000] pointer-events-auto cursor-ew-resize hover:scale-110 active:scale-95 transition-transform">
+              <div className="absolute w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#f15e1c] text-white shadow-xl shadow-[#f15e1c]/50 flex items-center justify-center border-2 border-white dark:border-[#16221d] pointer-events-auto cursor-ew-resize hover:scale-110 active:scale-95 transition-transform">
                 <span className="font-mono text-xs sm:text-sm font-bold tracking-tighter text-white select-none">
                   &larr;&rarr;
                 </span>

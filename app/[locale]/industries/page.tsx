@@ -50,7 +50,7 @@ export default function IndustriesPage() {
   }, [activeSlug]);
 
   return (
-    <div className="pt-20 sm:pt-24 pb-12 sm:pb-16 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
+    <div className="pt-20 sm:pt-24 pb-12 sm:pb-16 bg-[#FFFDF9] dark:bg-[#16221d] transition-colors duration-300">
       <BreadcrumbSchema items={[{ name: "Industries", url: "/industries" }]} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
         {/* Header */}

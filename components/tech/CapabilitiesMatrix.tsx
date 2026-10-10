@@ -111,7 +111,7 @@ export function CapabilitiesMatrix() {
       <div className="rounded-[3rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl p-8 sm:p-12 space-y-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white dark:bg-[#000000] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white dark:bg-[#16221d] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
             <Sparkles className="w-3.5 h-3.5" />
             <span>ENTERPRISE CAPABILITIES MATRIX</span>
           </div>
@@ -129,7 +129,7 @@ export function CapabilitiesMatrix() {
             <motion.div
               key={cap.id}
               whileHover={shouldReduceMotion ? {} : { y: -6, scale: 1.02 }}
-              className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md hover:shadow-2xl hover:border-[#f15e1c]/50 transition-all duration-300 flex flex-col justify-between space-y-6 group"
+              className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16221d] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md hover:shadow-2xl hover:border-[#f15e1c]/50 transition-all duration-300 flex flex-col justify-between space-y-6 group"
             >
               {/* Card Header */}
               <div className="flex items-center justify-between">

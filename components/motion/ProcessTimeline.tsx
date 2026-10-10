@@ -142,7 +142,7 @@ export function ProcessTimeline() {
                 "group relative h-full flex flex-col justify-between rounded-3xl p-6 border transition-all duration-300 cursor-pointer",
                 isActive
                   ? "bg-white dark:bg-[#1C1814] border-[#f15e1c] shadow-2xl shadow-[#f15e1c]/15 ring-2 ring-[#f15e1c]/30 scale-[1.02]"
-                  : "bg-white/80 dark:bg-[#000000] border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:border-[#f15e1c]/50 opacity-90 hover:opacity-100"
+                  : "bg-white/80 dark:bg-[#16221d] border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:border-[#f15e1c]/50 opacity-90 hover:opacity-100"
               )}
             >
               <div>

@@ -157,7 +157,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
   );
 
   return (
-    <div className="pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
+    <div className="pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#16221d] transition-colors duration-300">
       <BreadcrumbSchema
         items={[
           { name: "Services", url: "/services" },
@@ -231,7 +231,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
               <ScrollReveal direction="left" delay={0.2}>
                 <TiltCard maxTilt={5} className="group">
                   <div className="rounded-3xl bg-[#FBF3EA] dark:bg-[#1A1613] p-8 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-6">
-                    <div className="p-4 rounded-2xl bg-white dark:bg-[#000000] w-fit border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-2xs group-hover:bg-[#f15e1c] group-hover:text-white transition-all duration-300 [&>svg]:text-[#f15e1c] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
+                    <div className="p-4 rounded-2xl bg-white dark:bg-[#16221d] w-fit border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-2xs group-hover:bg-[#f15e1c] group-hover:text-white transition-all duration-300 [&>svg]:text-[#f15e1c] [&>svg]:group-hover:text-white [&>svg]:transition-colors [&>svg]:duration-300">
                       {iconMap[service.icon]}
                     </div>
                     <div>
@@ -316,7 +316,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
             {service.ourSolution.keyPillars.map((pillar, idx) => (
               <ScrollReveal key={idx} delay={idx * 0.1} direction="up">
                 <TiltCard maxTilt={5} scale={1.01} className="h-full">
-                  <div className="h-full rounded-3xl bg-white dark:bg-[#000000] p-8 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:shadow-xl hover:border-[#f15e1c]/40 transition-all duration-300 space-y-3">
+                  <div className="h-full rounded-3xl bg-white dark:bg-[#16221d] p-8 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:shadow-xl hover:border-[#f15e1c]/40 transition-all duration-300 space-y-3">
                     <div className="w-10 h-10 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#161616] text-[#f15e1c] flex items-center justify-center font-mono font-bold border border-[#F4A97F]/30 dark:border-[#262626]">
                       0{idx + 1}
                     </div>
@@ -335,7 +335,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
 
         {/* 4. CAPABILITIES BREAKDOWN */}
         <ScrollReveal direction="up">
-          <section className="rounded-3xl bg-[#FFFDF9] dark:bg-[#000000] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm">
+          <section className="rounded-3xl bg-[#FFFDF9] dark:bg-[#16221d] p-8 sm:p-12 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm">
             <div className="max-w-2xl space-y-3 mb-10">
               <Badge variant="secondary" size="md">
                 Full Scope
@@ -391,7 +391,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
             {service.process.map((step, idx) => (
               <ScrollReveal key={step.step} delay={idx * 0.08} direction="up">
                 <TiltCard maxTilt={6} scale={1.02} className="h-full">
-                  <div className="h-full rounded-3xl bg-white dark:bg-[#000000] p-6 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm flex flex-col justify-between">
+                  <div className="h-full rounded-3xl bg-white dark:bg-[#16221d] p-6 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm flex flex-col justify-between">
                     <div>
                       <div className="text-xs font-mono font-bold text-[#f15e1c] mb-3">
                         STEP 0{step.step}
@@ -475,7 +475,7 @@ export default async function DynamicServicePage({ params }: ServicePageProps) {
             {service.engagementModels.map((model, idx) => (
               <ScrollReveal key={idx} delay={idx * 0.1} direction="up">
                 <TiltCard maxTilt={5} scale={1.01} className="h-full">
-                  <div className="h-full rounded-3xl bg-white dark:bg-[#000000] p-8 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:shadow-xl hover:border-[#f15e1c]/40 transition-all flex flex-col justify-between">
+                  <div className="h-full rounded-3xl bg-white dark:bg-[#16221d] p-8 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:shadow-xl hover:border-[#f15e1c]/40 transition-all flex flex-col justify-between">
                     <div className="space-y-4">
                       <div className="p-3 rounded-2xl bg-[#FCE3D3]/60 dark:bg-[#161616] w-fit text-[#f15e1c] border border-[#F4A97F]/30 dark:border-[#262626]">
                         <Briefcase className="w-5 h-5" />

@@ -99,7 +99,7 @@ export async function sendContactEmail({
           <h2 style="color: #f15e1c; margin-top: 0;">Thank You for Contacting Arav Innovations</h2>
           <p>Dear ${submission.name},</p>
           <p>We have successfully received your inquiry regarding <strong>${submission.service}</strong>.</p>
-          <p>Our senior strategy and engineering leadership will review your requirements and get back to you within 1 business day.</p>
+          <p>Our senior strategy and engineering leadership will review your requirements and follow up promptly.</p>
           
           <div style="background: #fefaf5; padding: 16px; border-radius: 8px; border: 1px solid #f7d7b0; margin: 20px 0;">
             <p style="margin: 0 0 8px 0; font-weight: bold; color: #2e936f;">Submission Summary:</p>

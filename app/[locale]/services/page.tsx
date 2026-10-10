@@ -47,7 +47,7 @@ export default async function ServicesHubPage({
   );
 
   return (
-    <div className="pt-6 sm:pt-10 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300 scroll-mt-24">
+    <div className="pt-6 sm:pt-10 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#16221d] transition-colors duration-300 scroll-mt-24">
       <BreadcrumbSchema items={[{ name: "Services & Practices", url: "/services" }]} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-20">
         

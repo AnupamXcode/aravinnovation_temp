@@ -65,7 +65,7 @@ export const buyerFAQs: FAQItem[] = [
   {
     question: "How can I discuss my requirements with Arav Innovations?",
     answer:
-      "You can initiate a discussion by scheduling a consultation or submitting an inquiry via our contact form. A senior practice director will review your project brief under strict confidentiality (NDA) and respond within 1 business day.",
+      "You can initiate a discussion by scheduling a consultation or submitting an inquiry via our contact form. A senior practice director will review your project brief under strict confidentiality (NDA) and follow up promptly.",
     category: "Consultation & Scoping",
   },
 ];

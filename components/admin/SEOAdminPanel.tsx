@@ -363,7 +363,7 @@ export function SEOAdminPanel() {
                 type="text"
                 value={form.metaTitle}
                 onChange={(e) => updateFormField("metaTitle", e.target.value)}
-                className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
+                className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
               />
             </div>
 
@@ -387,7 +387,7 @@ export function SEOAdminPanel() {
                 rows={3}
                 value={form.metaDescription}
                 onChange={(e) => updateFormField("metaDescription", e.target.value)}
-                className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
+                className="w-full px-3.5 py-2.5 text-xs rounded-xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
               />
             </div>
 
@@ -401,7 +401,7 @@ export function SEOAdminPanel() {
                 <select
                   value={form.priority}
                   onChange={(e) => updateFormField("priority", parseFloat(e.target.value))}
-                  className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
                 >
                   <option value={1.0}>1.0 (Highest - Homepage)</option>
                   <option value={0.9}>0.9 (High - Core Practices / Products)</option>
@@ -420,7 +420,7 @@ export function SEOAdminPanel() {
                 <select
                   value={form.robots}
                   onChange={(e) => updateFormField("robots", e.target.value as any)}
-                  className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
                 >
                   <option value="Index, Follow">Index, Follow (Recommended)</option>
                   <option value="Index, NoFollow">Index, NoFollow</option>
@@ -431,7 +431,7 @@ export function SEOAdminPanel() {
             </div>
 
             {/* OG Metadata Section */}
-            <div className="rounded-2xl border border-[#EFE2D6] dark:border-[#1f1f1f] p-4 space-y-4 bg-white/40 dark:bg-[#000000]/40">
+            <div className="rounded-2xl border border-[#EFE2D6] dark:border-[#1f1f1f] p-4 space-y-4 bg-white/40 dark:bg-[#16221d]/40">
               <h4 className="text-xs font-extrabold uppercase tracking-wider text-[#f15e1c] flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5" /> Social Share Card (Open Graph Overrides)
               </h4>
@@ -446,7 +446,7 @@ export function SEOAdminPanel() {
                     placeholder="Same as meta title if empty..."
                     value={form.ogTitle || ""}
                     onChange={(e) => updateFormField("ogTitle", e.target.value)}
-                    className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
+                    className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
                   />
                 </div>
 
@@ -459,7 +459,7 @@ export function SEOAdminPanel() {
                     placeholder="https://aravinnovations.com/og-default.jpg"
                     value={form.ogImage || ""}
                     onChange={(e) => updateFormField("ogImage", e.target.value)}
-                    className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
+                    className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
                   />
                 </div>
               </div>
@@ -473,7 +473,7 @@ export function SEOAdminPanel() {
                   placeholder="Same as meta description if empty..."
                   value={form.ogDescription || ""}
                   onChange={(e) => updateFormField("ogDescription", e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
                 />
               </div>
 
@@ -486,7 +486,7 @@ export function SEOAdminPanel() {
                   placeholder={`Autogenerated defaults to ${SITE_BASE_URL}${form.path}`}
                   value={form.canonicalOverride || ""}
                   onChange={(e) => updateFormField("canonicalOverride", e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] focus:border-[#f15e1c] outline-none text-[#3A2E27] dark:text-[#FAF5EE]"
                 />
               </div>
             </div>

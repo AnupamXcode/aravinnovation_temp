@@ -453,7 +453,7 @@ export function NavbarAdminPanel({ showToast }: NavbarAdminPanelProps) {
             </div>
 
             {/* Device Frame Display Canvas */}
-            <div className="flex justify-center bg-[#1A1613]/5 dark:bg-[#000000]/60 p-4 sm:p-6 rounded-3xl border border-[#EFE2D6] dark:border-[#1f1f1f] overflow-x-auto min-h-[460px]">
+            <div className="flex justify-center bg-[#1A1613]/5 dark:bg-[#16221d]/60 p-4 sm:p-6 rounded-3xl border border-[#EFE2D6] dark:border-[#1f1f1f] overflow-x-auto min-h-[460px]">
               <div
                 className={`transition-all duration-300 rounded-3xl overflow-hidden border shadow-2xl relative flex flex-col ${
                   previewTheme === "dark"

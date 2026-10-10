@@ -84,7 +84,7 @@ export function IndustrySolutionsSection({
                 "px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl text-xs sm:text-sm font-extrabold font-display transition-all duration-300 cursor-pointer border flex items-center gap-2 min-h-[44px]",
                 isSel
                   ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-xl shadow-[#f15e1c]/30 scale-105"
-                  : "bg-white dark:bg-[#000000] text-[#1b2823] dark:text-[#d3eee4] border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] dark:hover:border-[#f15e1c]"
+                  : "bg-white dark:bg-[#16221d] text-[#1b2823] dark:text-[#d3eee4] border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] dark:hover:border-[#f15e1c]"
               )}
             >
               <div
@@ -106,7 +106,7 @@ export function IndustrySolutionsSection({
         {/* Left Column: Industry Challenges & Arav Strategic Approach */}
         <div className="lg:col-span-6 space-y-6">
           {/* Industry Overview Box */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg space-y-3">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16221d] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg space-y-3">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl bg-[#f15e1c]/10 text-[#f15e1c] flex items-center justify-center font-bold shrink-0">
                 {iconMap[activeIndustry.icon] || <Briefcase className="w-6 h-6" />}
@@ -121,7 +121,7 @@ export function IndustrySolutionsSection({
           </div>
 
           {/* Industry Specific Challenges */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg space-y-4">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16221d] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg space-y-4">
             <h4 className="text-sm font-extrabold font-mono text-[#f15e1c] uppercase tracking-wider flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 text-[#f15e1c]" />
               <span>Core Industry Bottlenecks &amp; Pain Points</span>
@@ -161,7 +161,7 @@ export function IndustrySolutionsSection({
         {/* Right Column: Capabilities, Target Outcome & Action CTAs */}
         <div className="lg:col-span-6 space-y-6 flex flex-col justify-between">
           {/* Key Capabilities Grid */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg space-y-4">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16221d] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg space-y-4">
             <h4 className="text-sm font-extrabold font-mono text-[#2e936f] dark:text-[#34d399] uppercase tracking-wider flex items-center gap-2">
               <Layers className="w-4 h-4 text-[#2e936f] dark:text-[#34d399]" />
               <span>Tailored Solution Capabilities</span>
@@ -181,7 +181,7 @@ export function IndustrySolutionsSection({
 
           {/* Recommended Tech Stack Pills */}
           {activeIndustry.recommendedTech && (
-            <div className="p-5 rounded-3xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md space-y-2">
+            <div className="p-5 rounded-3xl bg-white dark:bg-[#16221d] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md space-y-2">
               <span className="text-[10px] font-mono uppercase text-[#2e936f] dark:text-[#34d399] font-extrabold tracking-wider">
                 RECOMMENDED TECH STACK &amp; FRAMEWORKS
               </span>
@@ -199,7 +199,7 @@ export function IndustrySolutionsSection({
           )}
 
           {/* Expected Business Outcome Box */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border-2 border-[#2e936f] dark:border-[#2e936f] shadow-xl space-y-3">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16221d] border-2 border-[#2e936f] dark:border-[#2e936f] shadow-xl space-y-3">
             <span className="text-xs font-mono font-bold text-[#2e936f] dark:text-[#34d399] uppercase tracking-wider flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-[#2e936f] dark:text-[#34d399]" />
               <span>Business Impact</span>

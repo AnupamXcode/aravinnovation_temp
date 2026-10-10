@@ -66,7 +66,7 @@ export function EngagementModelsSection() {
   ];
 
   return (
-    <section className="w-full py-12 sm:py-16 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#ffffff] dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300">
+    <section className="w-full py-12 sm:py-16 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#ffffff] dark:bg-[#16221d] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300">
       <div className="max-w-7xl mx-auto space-y-10 sm:space-y-12">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">

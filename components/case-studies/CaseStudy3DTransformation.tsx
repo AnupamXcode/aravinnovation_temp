@@ -156,7 +156,7 @@ export function CaseStudy3DTransformation() {
                   "relative z-10 p-6 sm:p-8 rounded-3xl border shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between space-y-6 h-full min-h-[280px] group",
                   accentBorderClass,
                   isActive
-                    ? "bg-[#fefaf5] dark:bg-[#000000] border-[#f15e1c] ring-2 ring-[#f15e1c]/30 shadow-[#f15e1c]/20"
+                    ? "bg-[#fefaf5] dark:bg-[#16221d] border-[#f15e1c] ring-2 ring-[#f15e1c]/30 shadow-[#f15e1c]/20"
                     : "bg-white dark:bg-[#1a2622] border-[#f7d7b0] dark:border-[#1a1a1a] hover:bg-[#FBF3EA] dark:hover:bg-[#121c18]"
                 )}
               >
@@ -208,7 +208,7 @@ export function CaseStudy3DTransformation() {
         </div>
 
         {/* Bottom Full-Width Impact Banner */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-[#fefaf5] dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="p-6 sm:p-8 rounded-3xl bg-[#fefaf5] dark:bg-[#16221d] border border-[#f7d7b0] dark:border-[#1a1a1a] flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4 text-sm sm:text-base text-[#1b2823] dark:text-[#ffffff]">
             <BarChart3 className="w-6 h-6 text-[#f15e1c] shrink-0" />
             <span className="font-semibold">

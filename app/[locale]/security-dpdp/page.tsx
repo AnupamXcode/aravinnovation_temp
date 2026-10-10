@@ -24,7 +24,7 @@ export default async function SecurityDPDPPage({
   setRequestLocale(locale);
 
   return (
-    <div className="py-8 sm:py-12 bg-[#FFFDF9] dark:bg-[#000000]">
+    <div className="py-8 sm:py-12 bg-[#FFFDF9] dark:bg-[#16221d]">
       <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Header */}
         <div className="space-y-4 max-w-3xl">
@@ -62,7 +62,7 @@ export default async function SecurityDPDPPage({
           </aside>
 
           {/* Right Column: Policy Body */}
-          <div className="lg:col-span-8 p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-10 text-sm text-[#3A2E27] dark:text-[#FAF5EE] leading-relaxed">
+          <div className="lg:col-span-8 p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-10 text-sm text-[#3A2E27] dark:text-[#FAF5EE] leading-relaxed">
             <p className="text-base text-[#7A6A5F] dark:text-[#B8ACA0]">
               Arav Innovations implements strict organizational and technical security controls (SOC-2, ISO 27001, and DPDP Act 2023) to protect data confidentiality, integrity, and availability across all client operations globally.
             </p>

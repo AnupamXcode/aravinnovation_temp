@@ -96,7 +96,7 @@ export function LeadForm({
 
   if (isSubmitted) {
     return (
-      <div className="rounded-3xl bg-white dark:bg-[#000000] p-8 sm:p-12 border border-[#2e936f]/30 dark:border-[#1f1f1f] shadow-2xl text-center space-y-5">
+      <div className="rounded-3xl bg-white dark:bg-[#16221d] p-8 sm:p-12 border border-[#2e936f]/30 dark:border-[#1f1f1f] shadow-2xl text-center space-y-5">
         <div className="w-16 h-16 rounded-2xl bg-[#2e936f]/10 text-[#2e936f] mx-auto flex items-center justify-center border border-[#2e936f]/30 shadow-xs">
           <CheckCircle2 className="w-8 h-8" />
         </div>
@@ -131,7 +131,7 @@ export function LeadForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="rounded-3xl bg-white dark:bg-[#000000] p-6 sm:p-10 border border-[#f7d7b0] dark:border-[#1f1f1f] shadow-2xl space-y-5"
+      className="rounded-3xl bg-white dark:bg-[#16221d] p-6 sm:p-10 border border-[#f7d7b0] dark:border-[#1f1f1f] shadow-2xl space-y-5"
     >
       <div className="border-b border-[#f7d7b0]/60 dark:border-[#1f1f1f] pb-3 space-y-1">
         <h3 className="text-xl sm:text-2xl font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
@@ -202,11 +202,11 @@ export function LeadForm({
           Book a Free Consultation
         </Button>
         <span className="text-xs text-[#4a5c55] dark:text-[#d3eee4] font-medium block">
-          We reply within 1 business day.* <span className="text-[10px] text-[#7A6A5F] dark:text-[#B8ACA0] italic">(Pending management confirmation)</span>
+          Our team will follow up promptly upon receiving your request.
         </span>
       </div>
 
-      <div className="flex items-center justify-center gap-2 text-xs text-[#4a5c55] dark:text-[#d3eee4] text-center pt-1 border-t border-[#f7d7b0]/50 dark:border-[#1a1a1a]">
+      <div className="flex items-center justify-center gap-2 text-xs text-[#4a5c55] dark:text-[#d3eee4] text-center pt-1 border-t border-[#f7d7b0]/50 dark:border-[#2e936f]/20">
         <ShieldCheck className="w-4 h-4 text-[#2e936f]" />
         <span>Strict Confidentiality Guaranteed. Strategic Hubs in India &amp; UAE.</span>
       </div>

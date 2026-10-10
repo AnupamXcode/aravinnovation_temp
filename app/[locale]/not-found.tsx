@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 
 export default function NotFound() {
   return (
-    <div className="min-h-[80vh] flex items-center justify-center pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#000000] px-4 sm:px-6 lg:px-8 transition-colors duration-300 relative overflow-hidden">
+    <div className="min-h-[80vh] flex items-center justify-center pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#16221d] px-4 sm:px-6 lg:px-8 transition-colors duration-300 relative overflow-hidden">
       {/* Background radial glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#f15e1c]/10 dark:bg-[#f15e1c]/15 rounded-full blur-3xl pointer-events-none" />
 
@@ -26,7 +26,7 @@ export default function NotFound() {
         </div>
 
         {/* Suggested Next Steps */}
-        <div className="p-6 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-4 text-left">
+        <div className="p-6 rounded-3xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-4 text-left">
           <h3 className="text-xs font-bold uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0] px-1">
             Suggested Next Steps
           </h3>

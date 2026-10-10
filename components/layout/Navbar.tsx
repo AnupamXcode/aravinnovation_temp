@@ -442,7 +442,7 @@ export function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.22, ease: "easeInOut" }}
-              className="lg:hidden fixed inset-0 top-[65px] z-40 bg-[#000000]/50 dark:bg-[#000000]/80 backdrop-blur-md pointer-events-auto"
+              className="lg:hidden fixed inset-0 top-[65px] z-40 bg-[#16221d]/50 dark:bg-[#16221d]/80 backdrop-blur-md pointer-events-auto"
               onClick={() => setMobileMenuOpen(false)}
               aria-hidden="true"
             />
@@ -453,7 +453,7 @@ export function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:hidden fixed inset-x-0 top-[65px] bottom-0 z-50 bg-white/95 dark:bg-[#000000]/95 backdrop-blur-xl border-t border-[#f7d7b0] dark:border-[#1a1a1a] px-5 py-6 overflow-y-auto shadow-2xl pointer-events-auto"
+              className="lg:hidden fixed inset-x-0 top-[65px] bottom-0 z-50 bg-white/95 dark:bg-[#16221d]/95 backdrop-blur-xl border-t border-[#f7d7b0] dark:border-[#1a1a1a] px-5 py-6 overflow-y-auto shadow-2xl pointer-events-auto"
             >
               <div className="space-y-4 max-w-lg mx-auto">
                 {/* Mobile Utility Controls - Preferences */}

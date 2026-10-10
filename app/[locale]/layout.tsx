@@ -44,7 +44,7 @@ const notoSansDevanagari = Noto_Sans_Devanagari({
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#FFFDF9" },
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+    { media: "(prefers-color-scheme: dark)", color: "#16221d" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -164,7 +164,7 @@ export default async function RootLayout({
       data-scroll-behavior="smooth"
       className={`${plusJakartaSans.variable} ${roboto.variable} ${notoSansArabic.variable} ${notoSansDevanagari.variable} scroll-smooth`}
     >
-      <body className="min-h-screen flex flex-col w-full bg-[#FFFDF9] dark:bg-[#000000] text-[var(--text-primary)] font-sans antialiased selection:bg-[#FCE3D3] dark:selection:bg-[#f15e1c]/30 selection:text-[#f15e1c]">
+      <body className="min-h-screen flex flex-col w-full bg-[#FFFDF9] dark:bg-[#16221d] text-[var(--text-primary)] font-sans antialiased selection:bg-[#FCE3D3] dark:selection:bg-[#f15e1c]/30 selection:text-[#f15e1c]">
         {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
           <>
             <Script

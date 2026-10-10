@@ -191,7 +191,7 @@ function EnterpriseArchitectureFlow() {
               className={cn(
                 "p-4 rounded-xl border-2 transition-all duration-300 text-left cursor-pointer space-y-1.5 relative group",
                 isActive
-                  ? "bg-white dark:bg-[#000000] border-[#f15e1c] shadow-md ring-2 ring-[#f15e1c]/20"
+                  ? "bg-white dark:bg-[#16221d] border-[#f15e1c] shadow-md ring-2 ring-[#f15e1c]/20"
                   : "bg-white/70 dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c]/50"
               )}
             >
@@ -227,7 +227,7 @@ function EnterpriseArchitectureFlow() {
               className={cn(
                 "p-4 rounded-xl border-2 transition-all duration-300 space-y-1.5 text-left cursor-pointer",
                 isActive
-                  ? "bg-white dark:bg-[#000000] border-[#f15e1c] ring-2 ring-[#f15e1c]/30 shadow-md"
+                  ? "bg-white dark:bg-[#16221d] border-[#f15e1c] ring-2 ring-[#f15e1c]/30 shadow-md"
                   : "bg-white dark:bg-[#0a0a0a] border-[#f7d7b0] dark:border-[#1a1a1a]"
               )}
             >
@@ -610,7 +610,7 @@ function ITStrategyHeroBackgroundVideo() {
 
       {/* Responsive Contrast Gradient Overlay — Crisp Video Display with Guaranteed Copy Legibility */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#FFFFFF]/90 via-[#FFFFFF]/50 to-[#FFFFFF]/90 lg:bg-gradient-to-r lg:from-[#FFFFFF]/95 lg:via-[#FFFFFF]/40 lg:to-transparent dark:hidden pointer-events-none z-[1]" />
-      <div className="hidden dark:block absolute inset-0 bg-gradient-to-b from-[#000000]/90 via-[#000000]/50 to-[#000000]/90 lg:bg-gradient-to-r lg:from-[#000000]/95 lg:via-[#000000]/40 lg:to-transparent pointer-events-none z-[1]" />
+      <div className="hidden dark:block absolute inset-0 bg-gradient-to-b from-[#16221d]/90 via-[#16221d]/50 to-[#16221d]/90 lg:bg-gradient-to-r lg:from-[#16221d]/95 lg:via-[#16221d]/40 lg:to-transparent pointer-events-none z-[1]" />
     </div>
   );
 }
@@ -658,12 +658,12 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
   }, [activeLayerIndex]);
 
   return (
-    <main className="min-h-screen bg-[#FFFFFF] dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c]">
+    <main className="min-h-screen bg-[#FFFFFF] dark:bg-[#16221d] text-[#1b2823] dark:text-[#ffffff] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c]">
       
       {/* =========================================================================
           SECTION 01 — HERO SECTION (OPTIMIZED COMPOSITION & SPACING)
           ========================================================================= */}
-      <section className="relative py-10 sm:py-14 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFFFF] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none flex flex-col justify-center">
+      <section className="relative py-10 sm:py-14 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFFFF] dark:bg-[#16221d] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none flex flex-col justify-center">
         
         {/* Full-Bleed IT Strategy & Implementation Background Video */}
         <ITStrategyHeroBackgroundVideo />
@@ -850,7 +850,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
       {/* =========================================================================
           SECTION 02 — TRANSFORMATION BLUEPRINT / ENTERPRISE ARCHITECTURE FLOW
           ========================================================================= */}
-      <section className="relative py-8 sm:py-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFFFF] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none">
+      <section className="relative py-8 sm:py-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFFFF] dark:bg-[#16221d] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none">
         <div className="max-w-[1536px] mx-auto w-full">
           <AnimatedSection delay={0.1}>
             <div className="p-4 sm:p-6 rounded-2xl sm:rounded-[2rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md space-y-4 relative overflow-hidden w-full">
@@ -863,7 +863,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                     End-to-End Enterprise Architecture Flow
                   </h3>
                 </div>
-                <span className="text-xs font-mono font-bold text-[#2e936f] bg-white dark:bg-[#000000] px-3 py-1 rounded-full border border-[#f7d7b0] dark:border-[#1a1a1a]">
+                <span className="text-xs font-mono font-bold text-[#2e936f] bg-white dark:bg-[#16221d] px-3 py-1 rounded-full border border-[#f7d7b0] dark:border-[#1a1a1a]">
                   STRATEGY &rarr; EXECUTION
                 </span>
               </div>
@@ -883,7 +883,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
       <section className="relative py-8 sm:py-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
         <div className="max-w-[1440px] mx-auto select-none">
           <AnimatedSection className="max-w-4xl lg:max-w-5xl mx-auto p-6 sm:p-8 rounded-2xl sm:rounded-[2rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] space-y-3.5 text-left shadow-xs">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#000000] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#16221d] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
               <Target className="w-3.5 h-3.5" />
               <span>STRATEGIC EXECUTION</span>
             </div>
@@ -897,15 +897,15 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
             </p>
 
             <div className="pt-2 flex flex-wrap gap-2 text-xs font-mono font-bold">
-              <span className="px-3 py-1 rounded-lg bg-white dark:bg-[#000000] border border-[#f7d7b0] text-[#1b2823] dark:text-[#ffffff]">
+              <span className="px-3 py-1 rounded-lg bg-white dark:bg-[#16221d] border border-[#f7d7b0] text-[#1b2823] dark:text-[#ffffff]">
                 Business Goal
               </span>
               <span className="text-[#f15e1c] flex items-center">&rarr;</span>
-              <span className="px-3 py-1 rounded-lg bg-white dark:bg-[#000000] border border-[#f7d7b0] text-[#1b2823] dark:text-[#ffffff]">
+              <span className="px-3 py-1 rounded-lg bg-white dark:bg-[#16221d] border border-[#f7d7b0] text-[#1b2823] dark:text-[#ffffff]">
                 Tech Architecture
               </span>
               <span className="text-[#f15e1c] flex items-center">&rarr;</span>
-              <span className="px-3 py-1 rounded-lg bg-white dark:bg-[#000000] border border-[#f7d7b0] text-[#1b2823] dark:text-[#ffffff]">
+              <span className="px-3 py-1 rounded-lg bg-white dark:bg-[#16221d] border border-[#f7d7b0] text-[#1b2823] dark:text-[#ffffff]">
                 Execution
               </span>
               <span className="text-[#2e936f] flex items-center">&rarr;</span>
@@ -927,7 +927,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
             <AnimatedSection className="lg:col-span-6 w-full order-1">
-              <div className="relative w-full aspect-[16/9] rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#080808] shadow-md overflow-hidden group">
+              <div className="relative w-full aspect-[16/9] rounded-2xl sm:rounded-3xl border border-[#f7d7b0] dark:border-[#1a1a1a] bg-white dark:bg-[#1b2823] shadow-md overflow-hidden group">
                 <Image
                   src="/images/it-strategy-main.png"
                   alt="Arav Innovation Enterprise Technology Strategy Architecture"
@@ -940,7 +940,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
             </AnimatedSection>
 
             <AnimatedSection delay={0.1} className="lg:col-span-6 space-y-4 text-left order-2">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#000000] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#16221d] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
                 <Cpu className="w-3.5 h-3.5" />
                 <span>ARCHITECTURAL FOUNDATION</span>
               </div>
@@ -1077,7 +1077,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                         ? "bg-[#f15e1c] border-white text-white scale-110 shadow-md ring-2 ring-[#f15e1c]/30 z-10"
                         : isPassed
                         ? "bg-[#2e936f] border-white text-white"
-                        : "bg-white dark:bg-[#000000] border-[#f7d7b0] dark:border-[#1a1a1a] text-[#7A6A5F]"
+                        : "bg-white dark:bg-[#16221d] border-[#f7d7b0] dark:border-[#1a1a1a] text-[#7A6A5F]"
                     )}
                   >
                     {isPassed && !isActive ? <Check className="w-3.5 h-3.5 text-white" /> : st.num}
@@ -1096,7 +1096,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
-                className="p-6 rounded-2xl bg-white dark:bg-[#000000] border-2 border-[#f15e1c] shadow-md space-y-3.5 text-left"
+                className="p-6 rounded-2xl bg-white dark:bg-[#16221d] border-2 border-[#f15e1c] shadow-md space-y-3.5 text-left"
               >
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-2.5">
                   <div>
@@ -1159,10 +1159,10 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                     className={cn(
                       "p-3 rounded-xl border-2 transition-all duration-200 flex items-center justify-between gap-4 cursor-pointer hover:border-[#f15e1c]/60",
                       isActive
-                        ? "bg-white dark:bg-[#000000] border-[#f15e1c] shadow-xs"
+                        ? "bg-white dark:bg-[#16221d] border-[#f15e1c] shadow-xs"
                         : isAssembled
-                        ? "bg-white/80 dark:bg-[#000000]/80 border-[#f7d7b0] dark:border-[#1a1a1a]"
-                        : "bg-white/40 dark:bg-[#000000]/40 border-[#f7d7b0]/50 dark:border-[#1a1a1a]/50 opacity-50"
+                        ? "bg-white/80 dark:bg-[#16221d]/80 border-[#f7d7b0] dark:border-[#1a1a1a]"
+                        : "bg-white/40 dark:bg-[#16221d]/40 border-[#f7d7b0]/50 dark:border-[#1a1a1a]/50 opacity-50"
                     )}
                     onClick={() => setCurrentActiveLayer(idx)}
                   >
@@ -1219,7 +1219,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
           <div className="max-w-5xl mx-auto space-y-3">
             {approachSteps.map((step, idx) => (
               <AnimatedSection key={step.num} delay={0.04 * idx}>
-                <div className="p-5 rounded-xl sm:rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] shadow-xs hover:shadow-md transition-all duration-300 space-y-2.5 text-left group">
+                <div className="p-5 rounded-xl sm:rounded-2xl bg-white dark:bg-[#16221d] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] shadow-xs hover:shadow-md transition-all duration-300 space-y-2.5 text-left group">
                   <div className="flex items-center justify-between border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] pb-2">
                     <div className="flex items-center gap-3">
                       <span className="text-xs font-mono font-black px-2.5 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#0a0a0a] text-[#f15e1c]">
@@ -1291,7 +1291,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                   className={cn(
                     "px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-mono font-bold transition-all cursor-pointer flex items-center gap-2 border hover:border-[#f15e1c]/60",
                     activeTechCat === idx
-                      ? "bg-white dark:bg-[#000000] border-[#f15e1c] text-[#f15e1c] shadow-xs ring-2 ring-[#f15e1c]/10 scale-105 z-10"
+                      ? "bg-white dark:bg-[#16221d] border-[#f15e1c] text-[#f15e1c] shadow-xs ring-2 ring-[#f15e1c]/10 scale-105 z-10"
                       : "bg-[#fefaf5] dark:bg-[#0a0a0a] border-[#f7d7b0] text-[#7A6A5F]"
                   )}
                 >
@@ -1311,7 +1311,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                 className="p-6 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] space-y-3.5 text-left shadow-xs"
               >
                 <div className="flex items-center gap-3 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-2.5">
-                  <div className="p-2.5 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0]">
+                  <div className="p-2.5 rounded-xl bg-white dark:bg-[#16221d] border border-[#f7d7b0]">
                     {techArchitectureCategories[activeTechCat].icon}
                   </div>
                   <div>
@@ -1336,7 +1336,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                     {techArchitectureCategories[activeTechCat].meta.map((item, idx) => (
                       <span
                         key={idx}
-                        className="px-3 py-1 rounded-lg bg-white dark:bg-[#000000] border border-[#f7d7b0] text-xs font-mono font-semibold text-[#1b2823] dark:text-[#ffffff]"
+                        className="px-3 py-1 rounded-lg bg-white dark:bg-[#16221d] border border-[#f7d7b0] text-xs font-mono font-semibold text-[#1b2823] dark:text-[#ffffff]"
                       >
                         {item}
                       </span>
@@ -1373,7 +1373,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
             {businessOutcomes.map((out, idx) => (
               <AnimatedSection key={idx} delay={0.04 * idx}>
                 <TiltCard maxTilt={2} scale={1.01}>
-                  <div className="h-full p-5 rounded-2xl bg-white dark:bg-[#000000] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] shadow-xs hover:shadow-md transition-all duration-300 space-y-3 text-left flex flex-col justify-between group">
+                  <div className="h-full p-5 rounded-2xl bg-white dark:bg-[#16221d] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] shadow-xs hover:shadow-md transition-all duration-300 space-y-3 text-left flex flex-col justify-between group">
                     <div className="space-y-2.5">
                       <div className="p-2.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] w-fit group-hover:scale-105 transition-transform">
                         {out.icon}
@@ -1423,7 +1423,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-[1440px] mx-auto">
             {targetScenarios.map((scen, idx) => (
               <AnimatedSection key={idx} delay={0.04 * idx}>
-                <div className="h-full p-5 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] shadow-xs hover:shadow-md transition-all duration-300 space-y-2.5 text-left flex flex-col justify-between">
+                <div className="h-full p-5 rounded-2xl bg-white dark:bg-[#16221d] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] shadow-xs hover:shadow-md transition-all duration-300 space-y-2.5 text-left flex flex-col justify-between">
                   <div className="space-y-2">
                     <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                       {scen.title}
@@ -1523,7 +1523,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
               <Link
                 key={serv.name}
                 href={serv.href}
-                className="px-3.5 py-1.5 rounded-full bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c] hover:text-[#f15e1c] transition-all"
+                className="px-3.5 py-1.5 rounded-full bg-white dark:bg-[#16221d] border border-[#f7d7b0] dark:border-[#1a1a1a] text-xs font-mono font-bold text-[#1b2823] dark:text-[#ffffff] hover:border-[#f15e1c] hover:text-[#f15e1c] transition-all"
               >
                 {serv.name} &rarr;
               </Link>
@@ -1608,7 +1608,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
           <div className="max-w-[1440px] mx-auto space-y-6">
             
             <AnimatedSection className="text-center max-w-4xl mx-auto space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#000000] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#16221d] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
                 <BookOpen className="w-3.5 h-3.5" />
                 <span>EXECUTIVE THOUGHT LEADERSHIP</span>
               </div>
@@ -1624,7 +1624,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
               {relatedPosts.map((post, idx) => (
                 <AnimatedSection key={post.slug} delay={0.04 * idx}>
                   <TiltCard maxTilt={2} scale={1.01}>
-                    <div className="h-full p-5 rounded-2xl bg-white dark:bg-[#000000] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] shadow-xs hover:shadow-md transition-all duration-300 text-left flex flex-col justify-between group">
+                    <div className="h-full p-5 rounded-2xl bg-white dark:bg-[#16221d] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] shadow-xs hover:shadow-md transition-all duration-300 text-left flex flex-col justify-between group">
                       <div className="space-y-2.5">
                         <div className="w-full mb-2 rounded-xl overflow-hidden border border-[#f7d7b0]/60">
                           <BlogCardImage post={post} aspectRatio="aspect-video" />

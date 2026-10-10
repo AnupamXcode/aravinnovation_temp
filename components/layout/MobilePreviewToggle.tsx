@@ -272,7 +272,7 @@ export function MobilePreviewToggle() {
                         height: `${selectedDevice.height}px`,
                         maxHeight: "75vh",
                       }}
-                      className="relative bg-white dark:bg-[#000000] overflow-hidden pt-6"
+                      className="relative bg-white dark:bg-[#16221d] overflow-hidden pt-6"
                     >
                       <iframe
                         key={`mobile-${selectedDevice.id}-${iframeKey}`}
@@ -281,7 +281,7 @@ export function MobilePreviewToggle() {
                           width: `${selectedDevice.width}px`,
                           height: "100%",
                         }}
-                        className="border-0 w-full h-full bg-white dark:bg-[#000000]"
+                        className="border-0 w-full h-full bg-white dark:bg-[#16221d]"
                         title={`Mobile Frame ${selectedDevice.name}`}
                       />
                     </div>

@@ -89,7 +89,7 @@ export default async function InsightPostDetailPage({
   const canonicalUrl = `https://aravinnovations.com/insights/${post.slug}`;
 
   return (
-    <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
+    <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#16221d] transition-colors duration-300">
       <BreadcrumbSchema
         items={[
           { name: "Insights", url: "/insights" },
@@ -162,7 +162,7 @@ export default async function InsightPostDetailPage({
                 </div>
 
                 <div className="hidden sm:flex items-center gap-2">
-                  <span className="text-[10px] font-mono uppercase text-[#7A6A5F] dark:text-[#B8ACA0] bg-white dark:bg-[#000000] px-2.5 py-1 rounded-full border border-[#EFE2D6] dark:border-[#1f1f1f]">
+                  <span className="text-[10px] font-mono uppercase text-[#7A6A5F] dark:text-[#B8ACA0] bg-white dark:bg-[#16221d] px-2.5 py-1 rounded-full border border-[#EFE2D6] dark:border-[#1f1f1f]">
                     Verified Technical Guide
                   </span>
                 </div>
@@ -184,7 +184,7 @@ export default async function InsightPostDetailPage({
 
         {/* Key Takeaways Callout Box */}
         <ScrollReveal direction="up" delay={0.15}>
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#000000] border-2 border-[#f15e1c]/30 dark:border-[#f15e1c]/40 shadow-md space-y-4">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16221d] border-2 border-[#f15e1c]/30 dark:border-[#f15e1c]/40 shadow-md space-y-4">
             <div className="flex items-center gap-2 text-[#f15e1c]">
               <Sparkles className="w-5 h-5" />
               <span className="text-xs font-bold uppercase tracking-wider">
@@ -308,7 +308,7 @@ export default async function InsightPostDetailPage({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {relatedPosts.map((rel) => (
                 <TiltCard key={rel.slug} maxTilt={4} scale={1.01}>
-                  <div className="p-6 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm space-y-3 flex flex-col justify-between h-full group">
+                  <div className="p-6 rounded-3xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm space-y-3 flex flex-col justify-between h-full group">
                     <div className="space-y-2">
                       <Badge variant="secondary" size="sm">
                         {rel.category}

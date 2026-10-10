@@ -85,7 +85,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   ];
 
   return (
-    <div className="pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
+    <div className="pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#16221d] transition-colors duration-300">
       <BreadcrumbSchema items={[{ name: "About Us", url: "/about" }]} />
       <LocalBusinessSchema location="both" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 md:space-y-24">
@@ -180,7 +180,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                   </p>
 
                   <div className="space-y-3 pt-2">
-                    <div className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-1">
+                    <div className="p-4 rounded-2xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-1">
                       <span className="text-xs font-bold text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-1.5">
                         <MapPin className="w-3.5 h-3.5 text-[#f15e1c]" /> India Headquarters
                       </span>
@@ -192,7 +192,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                       </p>
                     </div>
 
-                    <div className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-1">
+                    <div className="p-4 rounded-2xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] space-y-1">
                       <span className="text-xs font-bold text-[#3A2E27] dark:text-[#FAF5EE] flex items-center gap-1.5">
                         <MapPin className="w-3.5 h-3.5 text-[#f15e1c]" /> UAE & Middle East Hub
                       </span>
@@ -235,7 +235,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             {values.map((v, i) => (
               <ScrollReveal key={i} delay={i * 0.1} direction="up">
                 <TiltCard maxTilt={5} scale={1.01} className="h-full group">
-                  <div className="h-full p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:shadow-xl hover:border-[#f15e1c]/40 transition-all space-y-3">
+                  <div className="h-full p-8 rounded-3xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:shadow-xl hover:border-[#f15e1c]/40 transition-all space-y-3">
                     <div className="p-3.5 rounded-2xl icon-box-hover w-fit shadow-xs">
                       {v.icon}
                     </div>

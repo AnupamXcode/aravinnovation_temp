@@ -73,7 +73,7 @@ export default async function CaseStudyDetailPage({
   }
 
   return (
-    <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
+    <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#16221d] transition-colors duration-300">
       <BreadcrumbSchema
         items={[
           { name: "Case Studies", url: "/case-studies" },
@@ -143,7 +143,7 @@ export default async function CaseStudyDetailPage({
 
           <ScrollReveal direction="up" delay={0.2}>
             <TiltCard maxTilt={5} scale={1.01} className="h-full">
-              <div className="h-full p-6 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm space-y-3">
+              <div className="h-full p-6 rounded-3xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm space-y-3">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#f15e1c] block">
                   02. Project Objective
                 </span>
@@ -160,7 +160,7 @@ export default async function CaseStudyDetailPage({
 
         {/* Section 2: Approach & Technical Solution */}
         <ScrollReveal direction="up">
-          <div className="p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm space-y-6">
+          <div className="p-8 rounded-3xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm space-y-6">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-[#f15e1c] block mb-2">
                 03. Strategic Approach
@@ -237,7 +237,7 @@ export default async function CaseStudyDetailPage({
         {/* Testimonial Quote */}
         {caseStudy.testimonial && (
           <ScrollReveal direction="up">
-            <div className="p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm space-y-4">
+            <div className="p-8 rounded-3xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm space-y-4">
               <div className="text-xs font-bold uppercase tracking-wider text-[#f15e1c]">
                 Client Executive Endorsement
               </div>

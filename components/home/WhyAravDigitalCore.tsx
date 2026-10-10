@@ -45,7 +45,7 @@ export function WhyAravDigitalCore({
   subheadline = "We combine technology strategy, software engineering, performance analytics, and compliance advisory to deliver clear business outcomes.",
 }: WhyAravDigitalCoreProps) {
   return (
-    <section className="relative w-full py-8 sm:py-12 md:py-16 bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300" id="why-arav">
+    <section className="relative w-full py-8 sm:py-12 md:py-16 bg-[#FFFDF9] dark:bg-[#16221d] transition-colors duration-300" id="why-arav">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3 px-4">

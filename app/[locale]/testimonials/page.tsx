@@ -33,7 +33,7 @@ export const metadata = {
 
 export default function TestimonialsPage() {
   return (
-    <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
+    <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#16221d] transition-colors duration-300">
       <BreadcrumbSchema items={[{ name: "Testimonials & Reviews", url: "/testimonials" }]} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Header */}
@@ -63,7 +63,7 @@ export default function TestimonialsPage() {
           {testimonialsData.map((test, idx) => (
             <ScrollReveal key={test.id} delay={idx * 0.1} direction="up">
               <TiltCard maxTilt={5} scale={1.01} className="h-full">
-                <div className="h-full p-8 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:shadow-2xl hover:border-[#f15e1c]/40 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
+                <div className="h-full p-8 rounded-3xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:shadow-2xl hover:border-[#f15e1c]/40 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
                   <Quote className="absolute top-6 right-6 w-16 h-16 text-[#FCE3D3]/40 dark:text-[#f15e1c]/10 pointer-events-none" />
 
                   <div>

@@ -119,7 +119,7 @@
     "submitButton": "Submit Project Inquiry",
     "submitting": "Submitting Inquiry...",
     "successTitle": "Requirement Received!",
-    "successMessage": "Thank you for reaching out to Arav Innovations. Our strategy & engineering team will review your requirements and schedule an exploratory discussion within 1 business day.",
+    "successMessage": "Thank you for reaching out to Arav Innovations. Our strategy & engineering team will review your requirements and schedule an exploratory discussion.",
     "submitAnother": "Submit Another Requirement",
     "confidentiality": "Strict Confidentiality Guaranteed. Operating Globally."
   },
@@ -159,7 +159,7 @@
   "ContactPage": {
     "badge": "Global Advisory & Contact",
     "title": "Let's Build & Scale Your Enterprise Technology Capabilities",
-    "description": "Reach out to our senior directors in Gurgaon (India HQ) or Dubai (UAE Regional Office). All inquiries are responded to within 1 business day.",
+    "description": "Reach out to our senior directors in Gurgaon (India HQ) or Dubai (UAE Regional Office). All inquiries are reviewed promptly by our practice leads.",
     "indiaAddress": "Plot No. 44, Sector 44, Gurgaon, Haryana 122003, India",
     "uaeAddress": "Level 14, Boulevard Plaza Tower 1, Sheikh Mohammed bin Rashid Blvd, Downtown Dubai, UAE",
     "phoneLabel": "Phone Support",

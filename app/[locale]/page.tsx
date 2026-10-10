@@ -102,7 +102,7 @@ export default async function HomePage({
   ];
 
   return (
-    <div className="flex flex-col w-full bg-[#ffffff] dark:bg-[#000000] text-[#1b2823] dark:text-[#ffffff] space-y-4 sm:space-y-6 md:space-y-12 pb-8 transition-colors duration-300 overflow-x-hidden">
+    <div className="flex flex-col w-full bg-[#ffffff] dark:bg-[#16221d] text-[#1b2823] dark:text-[#ffffff] space-y-4 sm:space-y-6 md:space-y-12 pb-8 transition-colors duration-300 overflow-x-hidden">
       {/* 01 — HERO */}
       <Hero />
 

@@ -10,10 +10,10 @@ export function DirectAnswerAEOBlock() {
   return (
     <section
       aria-label="About Arav Innovations"
-      className="w-full py-4 sm:py-6 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#050505] transition-colors duration-300"
+      className="w-full py-4 sm:py-6 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#16221d] transition-colors duration-300"
     >
       <ScrollReveal direction="up">
-        <div className="max-w-5xl mx-auto rounded-2xl p-4 sm:p-6 bg-[#fefaf5] dark:bg-[#0c0c0c] border border-[#f7d7b0] dark:border-[#222222] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="max-w-5xl mx-auto rounded-2xl p-4 sm:p-6 bg-[#fefaf5] dark:bg-[#1b2823] border border-[#f7d7b0] dark:border-[#2e936f]/20 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1 max-w-3xl">
             <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#f15e1c]">
               ABOUT ARAV INNOVATIONS

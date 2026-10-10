@@ -199,7 +199,7 @@ export function Footer() {
   }
 
   return (
-    <div className="w-full relative pt-2 sm:pt-6 bg-[#FFFDF9] dark:bg-[#000000]">
+    <div className="w-full relative pt-2 sm:pt-6 bg-[#FFFDF9] dark:bg-[#16221d]">
       {/* Visual Section Boundary Divider */}
       <div className="w-full h-px bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent mb-3 sm:mb-6" />
 

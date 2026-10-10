@@ -41,7 +41,7 @@ export const homeFaqs = [
   },
   {
     q: "How do I start a project or request a strategy review?",
-    a: "You can start by booking a Free 30-Minute Tech & Growth Review or filling out our primary contact form. Our senior practice directors will review your requirement and reach out within 1 business day to schedule an exploratory call.",
+    a: "You can start by booking a Free 30-Minute Tech & Growth Review or filling out our primary contact form. Our senior practice directors will review your requirement and reach out promptly to schedule an exploratory call.",
   },
 ];
 

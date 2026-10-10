@@ -145,7 +145,7 @@ export const Button3D = React.forwardRef<HTMLButtonElement, Button3DProps>(
         className={cn(
           "relative inline-flex items-center justify-center font-sans font-medium rounded-full select-none tracking-tight",
           "transition-colors duration-200 ease-out group",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f15e1c] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[#000000]",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f15e1c] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[#16221d]",
           variant !== "link" && sizeMap[size],
           variantMap[variant],
           !isInteractive ? "opacity-50 cursor-not-allowed" : "cursor-pointer",

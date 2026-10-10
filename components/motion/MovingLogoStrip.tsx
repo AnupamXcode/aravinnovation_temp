@@ -11,8 +11,8 @@ export function MovingLogoStrip({ className }: { className?: string }) {
   return (
     <div className={cn("relative overflow-hidden w-full group py-3", className)}>
       {/* Edge Blur Gradients */}
-      <div className="absolute top-0 left-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-white dark:from-[#000000] to-transparent z-10 pointer-events-none" />
-      <div className="absolute top-0 right-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-white dark:from-[#000000] to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 left-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-white dark:from-[#16221d] to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 right-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-white dark:from-[#16221d] to-transparent z-10 pointer-events-none" />
 
       {/* Marquee Track */}
       <div className="flex w-max items-center gap-4 sm:gap-6 animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none">

@@ -17,7 +17,7 @@ export function CaseStudyCard({ caseStudy }: { caseStudy: CaseStudy }) {
       className="h-full cursor-pointer"
       onClick={() => router.push(`/case-studies/${caseStudy.slug}`)}
     >
-      <div className="h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-[#000000] p-7 sm:p-8 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:shadow-2xl hover:shadow-[#f15e1c]/10 hover:border-[#f15e1c]/40 dark:hover:border-[#f15e1c]/40 transition-all duration-300 group">
+      <div className="h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-[#16221d] p-7 sm:p-8 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:shadow-2xl hover:shadow-[#f15e1c]/10 hover:border-[#f15e1c]/40 dark:hover:border-[#f15e1c]/40 transition-all duration-300 group">
         <div className="space-y-5">
           {/* Header Tags */}
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-4">

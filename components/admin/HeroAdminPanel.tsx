@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import * as React from "react";
 import Link from "next/link";
@@ -483,7 +483,7 @@ export function HeroAdminPanel({ showToast }: HeroAdminPanelProps) {
             </p>
 
             {/* INTERACTIVE REAL-TIME MINI HERO PREVIEW FRAME */}
-            <div className="mt-4 rounded-2xl overflow-hidden border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FFFDF9] dark:bg-[#050505] shadow-inner relative aspect-[4/3] sm:aspect-[16/10] flex flex-col justify-center p-4 select-none">
+            <div className="mt-4 rounded-2xl overflow-hidden border border-[#EFE2D6] dark:border-[#1f1f1f] bg-[#FFFDF9] dark:bg-[#16221d] shadow-inner relative aspect-[4/3] sm:aspect-[16/10] flex flex-col justify-center p-4 select-none">
               
               {/* Background Video / Architectural Image Simulation */}
               <div className="absolute inset-0 z-0 opacity-80 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#f15e1c]/15 via-transparent to-transparent">

@@ -471,7 +471,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
   const activeStage = growthEngineStages[activeStageIdx];
 
   return (
-    <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#000000] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c] relative">
+    <div className="min-h-screen bg-[#FFFDF9] dark:bg-[#16221d] text-[#3A2E27] dark:text-[#FAF5EE] transition-colors duration-300 overflow-x-hidden selection:bg-[#f15e1c]/20 selection:text-[#f15e1c] relative">
       
       {/* Background Dot Grid Matrix Pattern */}
       <AnimatedDotGrid />
@@ -479,7 +479,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
       {/* =========================================================================
           1. HERO — DIGITAL GROWTH & BRAND STRATEGY
           ========================================================================= */}
-      <section className="relative pt-6 sm:pt-8 lg:pt-8 pb-8 sm:pb-12 lg:pb-14 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#000000] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none flex flex-col justify-start">
+      <section className="relative pt-6 sm:pt-8 lg:pt-8 pb-8 sm:pb-12 lg:pb-14 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#16221d] border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] overflow-hidden select-none flex flex-col justify-start">
         
         {/* Full-Bleed Desktop Background Visual */}
         <div className="absolute inset-0 pointer-events-none hidden lg:block select-none overflow-hidden">
@@ -491,8 +491,8 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
             className="object-cover object-right opacity-95 dark:opacity-90 transition-opacity duration-500"
             sizes="(min-width: 1024px) 100vw, 1px"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/80 via-45% to-transparent dark:from-[#000000] dark:via-[#000000]/80 dark:via-45% dark:to-transparent pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#FFFDF9]/20 via-transparent to-[#FFFDF9]/60 dark:from-[#000000]/20 dark:via-transparent dark:to-[#000000]/60 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/80 via-45% to-transparent dark:from-[#16221d] dark:via-[#16221d]/80 dark:via-45% dark:to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#FFFDF9]/20 via-transparent to-[#FFFDF9]/60 dark:from-[#16221d]/20 dark:via-transparent dark:to-[#16221d]/60 pointer-events-none" />
         </div>
 
         <AnimatedDotGrid />
@@ -606,7 +606,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
       {/* =========================================================================
           EDITORIAL VISUAL BREAK 1: BRAND AUTHORITY & VISIBILITY
           ========================================================================= */}
-      <section className="relative py-10 sm:py-14 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+      <section className="relative py-10 sm:py-14 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#16221d]">
         <div className="max-w-[1536px] mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
             
@@ -616,7 +616,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                 <motion.div
                   whileHover={{ scale: 1.01, y: -2 }}
                   transition={{ duration: 0.3 }}
-                  className="relative w-full aspect-[16/9] rounded-2xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-white dark:bg-[#080808] shadow-md hover:shadow-xl hover:border-[#f15e1c]/50 transition-all duration-300 group"
+                  className="relative w-full aspect-[16/9] rounded-2xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-white dark:bg-[#1b2823] shadow-md hover:shadow-xl hover:border-[#f15e1c]/50 transition-all duration-300 group"
                 >
                   <Image
                     src="/images/digital-marketing-main-1.png"
@@ -753,7 +753,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
       {/* =========================================================================
           SECTION 02 — PROCESS & METHODOLOGY PIPELINE (01 to 06)
           ========================================================================= */}
-      <section id="process" className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+      <section id="process" className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#16221d]">
         <div className="max-w-[1536px] mx-auto space-y-8 sm:space-y-10">
           
           <AnimatedSection>
@@ -787,7 +787,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                         "py-2.5 px-3 rounded-xl text-xs font-extrabold font-display transition-all duration-200 cursor-pointer flex items-center justify-center gap-2 select-none relative z-10 border",
                         isSelected
                           ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-sm"
-                          : "bg-white dark:bg-[#000000] text-[#4a5c55] dark:text-[#d3eee4] border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:bg-[#f15e1c]/5"
+                          : "bg-white dark:bg-[#16221d] text-[#4a5c55] dark:text-[#d3eee4] border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:bg-[#f15e1c]/5"
                       )}
                     >
                       <span className={cn("font-mono text-[10px]", isSelected ? "text-white/80" : "text-[#f15e1c]")}>
@@ -807,7 +807,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="p-5 sm:p-7 rounded-2xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] grid grid-cols-1 lg:grid-cols-12 gap-6 items-center"
+                  className="p-5 sm:p-7 rounded-2xl bg-white dark:bg-[#16221d] border border-[#f7d7b0] dark:border-[#1a1a1a] grid grid-cols-1 lg:grid-cols-12 gap-6 items-center"
                 >
                   <div className="lg:col-span-7 space-y-3 text-left">
                     <div className="flex items-center gap-2">
@@ -855,7 +855,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
       {/* =========================================================================
           EDITORIAL VISUAL BREAK 2: CLOSED-LOOP PERFORMANCE
           ========================================================================= */}
-      <section className="relative py-10 sm:py-14 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#FFFDF9] dark:bg-[#000000]">
+      <section className="relative py-10 sm:py-14 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#FFFDF9] dark:bg-[#16221d]">
         <div className="max-w-[1536px] mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
             
@@ -901,7 +901,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                 <motion.div
                   whileHover={{ scale: 1.01, y: -2 }}
                   transition={{ duration: 0.3 }}
-                  className="relative w-full aspect-[16/9] rounded-2xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-white dark:bg-[#080808] shadow-md hover:shadow-xl hover:border-[#f15e1c] transition-all duration-300 group"
+                  className="relative w-full aspect-[16/9] rounded-2xl border border-[#f7d7b0] dark:border-[#1a1a1a] overflow-hidden bg-white dark:bg-[#1b2823] shadow-md hover:shadow-xl hover:border-[#f15e1c] transition-all duration-300 group"
                 >
                   <Image
                     src="/images/digital-marketing-main-2.png"
@@ -954,7 +954,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                       <span className="text-xs font-mono font-black text-[#f15e1c]">
                         {svc.num}
                       </span>
-                      <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-105 transition-transform">
+                      <div className="p-2 rounded-xl bg-white dark:bg-[#16221d] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-105 transition-transform">
                         {svc.icon}
                       </div>
                     </div>
@@ -983,7 +983,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
       {/* =========================================================================
           SECTION 04 — 2026 DIGITAL GROWTH FOCUS AREAS
           ========================================================================= */}
-      <section id="2026-growth" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+      <section id="2026-growth" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#16221d]">
         <div className="max-w-[1536px] mx-auto space-y-8 sm:space-y-10">
           
           <AnimatedSection>
@@ -1008,7 +1008,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                   transition={{ duration: 0.2 }}
                   className="h-full p-5 sm:p-6 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#2e936f] hover:shadow-md transition-all duration-300 space-y-2.5 text-left group"
                 >
-                  <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] w-fit group-hover:scale-105 transition-transform">
+                  <div className="p-2 rounded-xl bg-white dark:bg-[#16221d] border border-[#f7d7b0] dark:border-[#1a1a1a] w-fit group-hover:scale-105 transition-transform">
                     {plr.icon}
                   </div>
                   <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2e936f] transition-colors">
@@ -1055,7 +1055,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                   key={idx}
                   whileHover={{ y: -2 }}
                   transition={{ duration: 0.2 }}
-                  className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:bg-white dark:hover:bg-[#000000] shadow-xs transition-all duration-200 text-left flex flex-col justify-between space-y-2 group"
+                  className="p-4 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:bg-white dark:hover:bg-[#16221d] shadow-xs transition-all duration-200 text-left flex flex-col justify-between space-y-2 group"
                 >
                   <div className="flex items-center gap-2.5">
                     <div className="p-2 rounded-xl bg-white dark:bg-[#121212] border border-[#f7d7b0] dark:border-[#222222] shrink-0 group-hover:scale-105 transition-transform">
@@ -1081,7 +1081,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
       {/* =========================================================================
           SECTION 06 — WHAT WE MEASURE (PROOF & METRICS)
           ========================================================================= */}
-      <section id="what-we-measure" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+      <section id="what-we-measure" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#16221d]">
         <div className="max-w-[1536px] mx-auto space-y-8 sm:space-y-10">
           
           <AnimatedSection>
@@ -1106,7 +1106,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                   transition={{ duration: 0.2 }}
                   className="h-full p-5 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-xs hover:border-[#2e936f] hover:shadow-md transition-all duration-300 space-y-2.5 text-left group"
                 >
-                  <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] w-fit group-hover:scale-105 transition-transform">
+                  <div className="p-2 rounded-xl bg-white dark:bg-[#16221d] border border-[#f7d7b0] dark:border-[#1a1a1a] w-fit group-hover:scale-105 transition-transform">
                     {item.icon}
                   </div>
                   <h3 className="text-base font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2e936f] transition-colors">
@@ -1205,7 +1205,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
       {/* =========================================================================
           SECTION 09 — FREQUENTLY ASKED QUESTIONS
           ========================================================================= */}
-      <section id="faq" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#000000]">
+      <section id="faq" className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-12 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-[#ffffff] dark:bg-[#16221d]">
         <div className="max-w-4xl mx-auto space-y-8 text-left">
           
           <AnimatedSection>
@@ -1289,7 +1289,7 @@ export function DigitalMarketingInteractivePage({ service, relatedPosts }: Digit
                   className="p-3.5 rounded-xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] hover:shadow-sm transition-all flex items-center justify-between group cursor-pointer min-h-[56px]"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-105 transition-all shrink-0">
+                    <div className="p-2 rounded-xl bg-white dark:bg-[#16221d] border border-[#f7d7b0] dark:border-[#1a1a1a] group-hover:scale-105 transition-all shrink-0">
                       {item.icon}
                     </div>
                     <span className="text-xs sm:text-sm font-bold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors leading-snug">

@@ -114,7 +114,7 @@ export function ClientFeedbackEditorialSection() {
 
   return (
     <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="client-feedback">
-      <section className="py-8 md:py-12 px-6 sm:px-12 lg:px-14 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#000000] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300 relative overflow-hidden">
+      <section className="py-8 md:py-12 px-6 sm:px-12 lg:px-14 rounded-[2.5rem] bg-[#ffffff] dark:bg-[#16221d] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300 relative overflow-hidden">
         {/* Subtle Brand Accent Header Line */}
         <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c] to-transparent" />
 
@@ -202,7 +202,7 @@ export function ClientFeedbackEditorialSection() {
             <button
               type="button"
               onClick={handlePrev}
-              className="min-w-[44px] min-h-[44px] p-2.5 sm:px-4 sm:py-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#1b2823] dark:text-[#ffffff] hover:bg-[#f15e1c] hover:text-white hover:border-[#f15e1c] transition-all cursor-pointer active:scale-95 flex items-center justify-center gap-1.5 text-xs font-semibold shrink-0 shadow-xs"
+              className="min-w-[44px] min-h-[44px] p-2.5 sm:px-4 sm:py-2 rounded-xl bg-white dark:bg-[#16221d] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#1b2823] dark:text-[#ffffff] hover:bg-[#f15e1c] hover:text-white hover:border-[#f15e1c] transition-all cursor-pointer active:scale-95 flex items-center justify-center gap-1.5 text-xs font-semibold shrink-0 shadow-xs"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -235,7 +235,7 @@ export function ClientFeedbackEditorialSection() {
             <button
               type="button"
               onClick={handleNext}
-              className="min-w-[44px] min-h-[44px] p-2.5 sm:px-4 sm:py-2 rounded-xl bg-white dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#1b2823] dark:text-[#ffffff] hover:bg-[#f15e1c] hover:text-white hover:border-[#f15e1c] transition-all cursor-pointer active:scale-95 flex items-center justify-center gap-1.5 text-xs font-semibold shrink-0 shadow-xs"
+              className="min-w-[44px] min-h-[44px] p-2.5 sm:px-4 sm:py-2 rounded-xl bg-white dark:bg-[#16221d] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#1b2823] dark:text-[#ffffff] hover:bg-[#f15e1c] hover:text-white hover:border-[#f15e1c] transition-all cursor-pointer active:scale-95 flex items-center justify-center gap-1.5 text-xs font-semibold shrink-0 shadow-xs"
               aria-label="Next testimonial"
             >
               <span className="hidden sm:inline">Next</span>

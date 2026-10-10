@@ -31,7 +31,7 @@ export default async function CaseStudiesPage({
   const caseStudies = await getCaseStudies(locale);
 
   return (
-    <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
+    <div className="pt-28 pb-20 bg-[#FFFDF9] dark:bg-[#16221d] transition-colors duration-300">
       <BreadcrumbSchema items={[{ name: "Case Studies", url: "/case-studies" }]} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Header */}

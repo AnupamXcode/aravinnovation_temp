@@ -51,7 +51,7 @@ export function ClientChatbot() {
           aria-label="Open Arav Assistant Chat"
         >
           <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6 fill-current" />
-          <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#E53E3E] text-white text-[11px] font-bold flex items-center justify-center border-2 border-white dark:border-[#000000] shadow-xs">
+          <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#E53E3E] text-white text-[11px] font-bold flex items-center justify-center border-2 border-white dark:border-[#16221d] shadow-xs">
             1
           </span>
         </button>

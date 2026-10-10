@@ -160,7 +160,7 @@ export function Hero3DScene() {
             transform: "translateZ(30px)",
             transformStyle: "preserve-3d",
           }}
-          className="rounded-3xl bg-white/95 dark:bg-[#000000]/95 backdrop-blur-md p-6 sm:p-8 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-2xl space-y-6 relative overflow-hidden"
+          className="rounded-3xl bg-white/95 dark:bg-[#16221d]/95 backdrop-blur-md p-6 sm:p-8 border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-2xl space-y-6 relative overflow-hidden"
         >
           {/* Card Window Header Bar */}
           <div className="flex items-center justify-between border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-4">
@@ -202,7 +202,7 @@ export function Hero3DScene() {
               style={{
                 translateZ: shouldReduceMotion ? 0 : layer2TranslateZ,
               }}
-              className="p-4 rounded-2xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] flex items-start gap-3.5 shadow-xs transition-shadow hover:shadow-md"
+              className="p-4 rounded-2xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] flex items-start gap-3.5 shadow-xs transition-shadow hover:shadow-md"
             >
               <div className="p-2.5 rounded-xl bg-[#FCE3D3] dark:bg-[#161616] text-[#f15e1c] shrink-0 border border-[#F4A97F]/40 dark:border-[#262626]">
                 <TrendingUp className="w-4 h-4" />

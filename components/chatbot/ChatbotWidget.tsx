@@ -826,7 +826,7 @@ export function ChatbotWidget() {
               aria-label="Open Arav Assistant Chat"
             >
               <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6 fill-current" />
-              <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#2e936f] text-white text-[11px] font-bold flex items-center justify-center border-2 border-white dark:border-[#000000] shadow-xs">
+              <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#2e936f] text-white text-[11px] font-bold flex items-center justify-center border-2 border-white dark:border-[#16221d] shadow-xs">
                 1
               </span>
             </button>
@@ -839,7 +839,7 @@ export function ChatbotWidget() {
         <div
           dir={locale === "ar" ? "rtl" : "ltr"}
           style={{ bottom: "calc(1rem + env(safe-area-inset-bottom, 0px))" }}
-          className="fixed bottom-4 right-3 sm:bottom-6 sm:right-6 z-50 w-[calc(100vw-1.5rem)] sm:w-[420px] h-[580px] max-h-[calc(100vh-4.5rem)] rounded-3xl bg-[#FFFDF9] dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200"
+          className="fixed bottom-4 right-3 sm:bottom-6 sm:right-6 z-50 w-[calc(100vw-1.5rem)] sm:w-[420px] h-[580px] max-h-[calc(100vh-4.5rem)] rounded-3xl bg-[#FFFDF9] dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200"
         >
           {/* Header */}
           <div className="bg-[#FBF3EA] dark:bg-[#0a0a0a] border-b border-[#EFE2D6] dark:border-[#1f1f1f] px-5 py-3.5 flex items-center justify-between">

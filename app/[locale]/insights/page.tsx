@@ -40,7 +40,7 @@ export default async function InsightsPage() {
   const categories = await getBlogCategories();
 
   return (
-    <div className="w-full pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
+    <div className="w-full pt-4 sm:pt-8 pb-12 sm:pb-20 bg-[#FFFDF9] dark:bg-[#16221d] transition-colors duration-300">
       <BreadcrumbSchema items={[{ name: "Insights", url: "/insights" }]} />
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
         {/* Insights Hero */}

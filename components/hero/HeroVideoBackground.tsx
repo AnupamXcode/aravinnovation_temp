@@ -135,7 +135,7 @@ export function HeroVideoBackground() {
         style={{ opacity: overlayOpacityVal }}
       />
       <div
-        className="hidden dark:block absolute inset-0 bg-gradient-to-b from-[#050505]/80 via-[#050505]/35 to-[#050505]/80 sm:bg-gradient-to-r sm:from-[#050505] sm:via-[#050505]/75 sm:to-transparent pointer-events-none transition-opacity duration-300 z-[1]"
+        className="hidden dark:block absolute inset-0 bg-gradient-to-b from-[#16221d]/80 via-[#16221d]/35 to-[#16221d]/80 sm:bg-gradient-to-r sm:from-[#16221d] sm:via-[#16221d]/75 sm:to-transparent pointer-events-none transition-opacity duration-300 z-[1]"
         style={{ opacity: overlayOpacityVal }}
       />
     </div>

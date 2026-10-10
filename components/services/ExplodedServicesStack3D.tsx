@@ -354,7 +354,7 @@ export function ExplodedServicesStack3D() {
         {/* Viewport Stage Container */}
         <div
           ref={stageRef}
-          className="exploded-pinned-stage relative w-full h-auto md:h-screen flex flex-col justify-between py-4 sm:py-6 px-4 sm:px-8 lg:px-12 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300 overflow-hidden"
+          className="exploded-pinned-stage relative w-full h-auto md:h-screen flex flex-col justify-between py-4 sm:py-6 px-4 sm:px-8 lg:px-12 bg-[#FFFDF9] dark:bg-[#16221d] transition-colors duration-300 overflow-hidden"
         >
           {/* Header Title Bar */}
           <div className="relative z-20 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-4 max-w-7xl mx-auto w-full">

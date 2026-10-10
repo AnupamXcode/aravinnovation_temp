@@ -48,7 +48,7 @@ export function CEOLeadershipSection({
   return (
     <section
       ref={containerRef}
-      className={`relative py-10 sm:py-16 lg:py-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-y border-[#f7d7b0]/60 dark:border-[#1a1a1a] bg-gradient-to-b from-[#fefaf5] via-white to-[#fefaf5] dark:from-[#050505] dark:via-[#090909] dark:to-[#050505] overflow-hidden select-none ${className}`}
+      className={`relative py-10 sm:py-16 lg:py-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-y border-[#f7d7b0]/60 dark:border-[#2e936f]/20 bg-gradient-to-b from-[#fefaf5] via-white to-[#fefaf5] dark:from-[#16221d] dark:via-[#1b2823] dark:to-[#16221d] overflow-hidden select-none ${className}`}
     >
       {/* Subtle Ambient Decorative Glows */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-[#f15e1c]/5 dark:bg-[#f15e1c]/10 rounded-full blur-3xl pointer-events-none" />
@@ -137,7 +137,7 @@ export function CEOLeadershipSection({
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#000000] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md relative overflow-hidden space-y-4"
+              className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#16221d] border-2 border-[#f7d7b0] dark:border-[#1a1a1a] shadow-md relative overflow-hidden space-y-4"
             >
               <div className="flex items-center justify-between">
                 <div className="text-xs font-mono text-[#f15e1c] font-bold uppercase tracking-widest flex items-center gap-2">

@@ -516,7 +516,7 @@ export function ChatbotInquiriesAdminPanel({ showToast }: ChatbotInquiriesAdminP
                       className={`p-3 rounded-xl text-xs ${
                         msg.sender === "user"
                           ? "bg-[#f15e1c] text-white ml-6 font-medium"
-                          : "bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] text-[#3A2E27] dark:text-[#FAF5EE] mr-6"
+                          : "bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] text-[#3A2E27] dark:text-[#FAF5EE] mr-6"
                       }`}
                     >
                       <span className="text-[10px] font-mono uppercase font-bold block opacity-70 mb-0.5">

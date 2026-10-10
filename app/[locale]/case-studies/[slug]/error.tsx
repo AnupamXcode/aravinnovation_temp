@@ -16,7 +16,7 @@ export default function CaseStudyError({
   }, [error]);
 
   return (
-    <div className="min-h-[60vh] flex flex-col items-center justify-center bg-[#FFFDF9] dark:bg-[#000000] px-4 text-center">
+    <div className="min-h-[60vh] flex flex-col items-center justify-center bg-[#FFFDF9] dark:bg-[#16221d] px-4 text-center">
       <h2 className="text-2xl sm:text-3xl font-extrabold font-display text-[#3A2E27] dark:text-[#FAF5EE] mb-4">
         Case Study Not Found
       </h2>

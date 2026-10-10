@@ -28,7 +28,7 @@ export function FAQAccordion({
   };
 
   return (
-    <section className={cn("py-10 sm:py-14 lg:py-16 bg-[#FFFDF9] dark:bg-[#000000]", className)}>
+    <section className={cn("py-10 sm:py-14 lg:py-16 bg-[#FFFDF9] dark:bg-[#16221d]", className)}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">

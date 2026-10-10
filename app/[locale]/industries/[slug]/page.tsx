@@ -91,7 +91,7 @@ export default async function DynamicIndustryPage({ params }: PageProps) {
   const IconComponent = iconMap[industry.icon] || Building2;
 
   return (
-    <div className="pt-20 sm:pt-24 pb-16 sm:pb-20 bg-[#FFFDF9] dark:bg-[#000000] transition-colors duration-300">
+    <div className="pt-20 sm:pt-24 pb-16 sm:pb-20 bg-[#FFFDF9] dark:bg-[#16221d] transition-colors duration-300">
       <BreadcrumbSchema
         items={[
           { name: "Industries", url: "/industries" },

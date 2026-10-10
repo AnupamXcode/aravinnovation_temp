@@ -24,7 +24,7 @@ export default async function RefundPolicyPage({
   setRequestLocale(locale);
 
   return (
-    <div className="py-8 sm:py-12 bg-[#FFFDF9] dark:bg-[#000000]">
+    <div className="py-8 sm:py-12 bg-[#FFFDF9] dark:bg-[#16221d]">
       <div className="max-w-7xl lg:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Header */}
         <div className="space-y-4 max-w-3xl">
@@ -62,7 +62,7 @@ export default async function RefundPolicyPage({
           </aside>
 
           {/* Right Column: Policy Document Body */}
-          <div className="lg:col-span-8 p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-10 text-sm text-[#3A2E27] dark:text-[#FAF5EE] leading-relaxed">
+          <div className="lg:col-span-8 p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-10 text-sm text-[#3A2E27] dark:text-[#FAF5EE] leading-relaxed">
             <p className="text-base text-[#7A6A5F] dark:text-[#B8ACA0]">
               At Arav Innovation, we strive to deliver high-quality digital marketing services tailored to your specific needs. Due to the nature of our services, which involve customized strategies, non-tangible deliverables, and substantial resource allocation, we have a strict no refund policy.
             </p>

@@ -30,7 +30,7 @@ All visual elements, backgrounds, texts, borders, badges, and state changes MUST
 
 > [!CAUTION]
 > **COLOR PALETTE ENFORCEMENT**
-> DO NOT introduce external colors (cyan, magenta, neon blue, purple, dark gray, or unapproved gradients). All dark mode elements utilize pure AMOLED black (`#000000` / `#050505` / `#080808`) paired strictly with the 6 brand tokens.
+> DO NOT introduce external colors (cyan, magenta, neon blue, purple, dark gray, or unapproved gradients). All dark mode elements utilize brand-compliant palette tones (`#16221d` / `#1b2823`) paired strictly with the 6 brand tokens (`#f15e1c`, `#2e936f`, `#ffffff`, `#ffec69`, `#fab60a`, `#f7d7b0`).
 
 ---
 

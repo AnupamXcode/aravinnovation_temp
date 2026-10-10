@@ -164,7 +164,7 @@ export function InsightsFilterClient({ initialPosts, categories }: InsightsFilte
           {gridArticles.map((art, idx) => (
             <ScrollReveal key={art.slug} delay={Math.min(idx * 0.05, 0.3)} direction="up" className="h-full">
               <TiltCard maxTilt={4} scale={1.01} className="h-full">
-                <div className="h-full p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#000000] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:shadow-2xl hover:border-[#f15e1c]/40 transition-all flex flex-col justify-between group">
+                <div className="h-full p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#16221d] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-sm hover:shadow-2xl hover:border-[#f15e1c]/40 transition-all flex flex-col justify-between group">
                   <div className="space-y-4 flex-1 flex flex-col justify-between">
                     <div>
                       <div className="w-full rounded-2xl overflow-hidden mb-3 border border-[#EFE2D6] dark:border-[#1f1f1f] aspect-video">

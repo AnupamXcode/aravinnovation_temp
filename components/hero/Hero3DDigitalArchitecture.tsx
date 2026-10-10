@@ -165,7 +165,7 @@ export function Hero3DDigitalArchitecture() {
           <div
             className={cn(
               "absolute inset-0 z-15 pointer-events-none transition-all duration-300",
-              activeNode ? "backdrop-blur-[3px] bg-white/30 dark:bg-[#000000]/30" : "backdrop-blur-none bg-transparent"
+              activeNode ? "backdrop-blur-[3px] bg-white/30 dark:bg-[#16221d]/30" : "backdrop-blur-none bg-transparent"
             )}
           />
 
@@ -226,7 +226,7 @@ export function Hero3DDigitalArchitecture() {
             {/* Central Engine Node */}
             <div
               style={{ transform: "translate3d(-50%, -50%, 30px)" }}
-              className="absolute top-1/2 left-1/2 z-20 flex flex-col items-center justify-center p-5 rounded-3xl bg-white dark:bg-[#000000] border-2 border-[#f15e1c] shadow-2xl shadow-[#f15e1c]/25 text-center min-w-[170px] cursor-pointer hover:scale-105 transition-transform"
+              className="absolute top-1/2 left-1/2 z-20 flex flex-col items-center justify-center p-5 rounded-3xl bg-white dark:bg-[#16221d] border-2 border-[#f15e1c] shadow-2xl shadow-[#f15e1c]/25 text-center min-w-[170px] cursor-pointer hover:scale-105 transition-transform"
             >
               <div className="w-12 h-12 rounded-2xl bg-[#f15e1c] text-white flex items-center justify-center shadow-lg mb-1.5">
                 <Layers className="w-6 h-6 animate-pulse" />
@@ -258,7 +258,7 @@ export function Hero3DDigitalArchitecture() {
                   <Link href={node.href} className="block">
                     <div
                       className={cn(
-                        "p-4 rounded-2xl bg-white dark:bg-[#000000] border shadow-lg flex items-center gap-3 transition-all duration-300 group hover:shadow-2xl",
+                        "p-4 rounded-2xl bg-white dark:bg-[#16221d] border shadow-lg flex items-center gap-3 transition-all duration-300 group hover:shadow-2xl",
                         isActive
                           ? "border-[#f15e1c] ring-4 ring-[#f15e1c]/40 scale-105 shadow-[#f15e1c]/30 z-40"
                           : "border-[#f7d7b0] dark:border-[#1a1a1a]"
@@ -292,7 +292,7 @@ export function Hero3DDigitalArchitecture() {
           {/* Bottom Banner */}
           <div className="relative z-30 pt-4 mt-4 border-t border-[#f7d7b0] dark:border-[#1a1a1a] flex items-center justify-between text-sm min-h-[48px]">
             {activeNode ? (
-              <div className="flex items-center justify-between w-full animate-in fade-in duration-200 bg-[#fce3d3]/50 dark:bg-[#000000] p-3 rounded-2xl border border-[#f7d7b0]">
+              <div className="flex items-center justify-between w-full animate-in fade-in duration-200 bg-[#fce3d3]/50 dark:bg-[#16221d] p-3 rounded-2xl border border-[#f7d7b0]">
                 <div className="truncate pr-3">
                   <span className="font-bold text-[#1b2823] dark:text-[#ffffff]">
                     {activeNode.label}:{" "}
@@ -345,7 +345,7 @@ export function Hero3DDigitalArchitecture() {
               <Link
                 key={node.id}
                 href={node.href}
-                className="flex items-center justify-between p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#000000] border border-[#f7d7b0] dark:border-[#1a1a1a] active:scale-98 transition-all group"
+                className="flex items-center justify-between p-3.5 rounded-2xl bg-[#fefaf5] dark:bg-[#16221d] border border-[#f7d7b0] dark:border-[#1a1a1a] active:scale-98 transition-all group"
               >
                 <div className="flex items-center gap-3">
                   <div
