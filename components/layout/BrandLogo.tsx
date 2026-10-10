@@ -29,12 +29,12 @@ export function BrandLogo({ className, variant = "header" }: BrandLogoProps) {
         )}
       >
         <Image
-          src="/logos/arav-logo.png"
+          src={variant === "footer" ? "/logos/arav-logo-footer.png" : "/logos/arav-logo.png"}
           alt="Arav Innovations Logo"
           fill
           sizes="(max-width: 640px) 200px, 256px"
           className="object-contain object-left"
-          priority
+          priority={variant === "header"}
         />
       </div>
     </Link>

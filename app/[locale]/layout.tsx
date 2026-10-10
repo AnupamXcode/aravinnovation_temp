@@ -20,8 +20,6 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "600", "700", "800"],
-  preload: true,
 });
 
 const roboto = Roboto({
@@ -29,23 +27,18 @@ const roboto = Roboto({
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "700"],
-  preload: true,
 });
 
 const notoSansArabic = Noto_Sans_Arabic({
   variable: "--font-arabic",
   subsets: ["arabic"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
-  preload: false,
 });
 
 const notoSansDevanagari = Noto_Sans_Devanagari({
   variable: "--font-devanagari",
   subsets: ["devanagari"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
-  preload: false,
 });
 
 export const viewport: Viewport = {
