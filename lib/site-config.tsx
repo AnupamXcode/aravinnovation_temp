@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import * as React from "react";
 
@@ -392,8 +392,9 @@ interface SiteConfigContextType {
   toggleWebsitePower: (override?: boolean) => void;
   resetConfig: () => void;
   isAuthenticated: boolean;
-  loginAdmin: (u: string, p: string) => boolean;
-  logoutAdmin: () => void;
+  authMode: "supabase" | "local_recovery" | "none";
+  loginAdmin: (u: string, p: string) => Promise<boolean> | boolean;
+  logoutAdmin: () => Promise<void> | void;
 }
 
 const SiteConfigContext = React.createContext<SiteConfigContextType>({
@@ -407,6 +408,7 @@ const SiteConfigContext = React.createContext<SiteConfigContextType>({
   toggleWebsitePower: () => {},
   resetConfig: () => {},
   isAuthenticated: false,
+  authMode: "none",
   loginAdmin: () => false,
   logoutAdmin: () => {},
 });
@@ -414,6 +416,7 @@ const SiteConfigContext = React.createContext<SiteConfigContextType>({
 export function SiteConfigProvider({ children }: { children: React.ReactNode }) {
   const [config, setConfig] = React.useState<SiteConfig>(defaultConfig);
   const [isAuthenticated, setIsAuthenticated] = React.useState<boolean>(false);
+  const [authMode, setAuthMode] = React.useState<"supabase" | "local_recovery" | "none">("none");
 
   React.useEffect(() => {
     try {
@@ -421,13 +424,32 @@ export function SiteConfigProvider({ children }: { children: React.ReactNode }) 
       if (saved) {
         setConfig((prev) => ({ ...prev, ...JSON.parse(saved) }));
       }
-      const authSaved = sessionStorage.getItem("arav_admin_authenticated");
-      if (authSaved === "true") {
-        setIsAuthenticated(true);
-      }
     } catch {
       // ignore
     }
+
+    // Verify session on server via /api/auth/session
+    fetch("/api/auth/session")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.isAuthenticated) {
+          setIsAuthenticated(true);
+          setAuthMode(data.mode || "supabase");
+        } else {
+          const authSaved = sessionStorage.getItem("arav_admin_authenticated");
+          if (authSaved === "true") {
+            setIsAuthenticated(true);
+            setAuthMode("local_recovery");
+          }
+        }
+      })
+      .catch(() => {
+        const authSaved = sessionStorage.getItem("arav_admin_authenticated");
+        if (authSaved === "true") {
+          setIsAuthenticated(true);
+          setAuthMode("local_recovery");
+        }
+      });
   }, []);
 
   const updateConfig = (key: keyof SiteConfig, value: any) => {
@@ -533,9 +555,32 @@ export function SiteConfigProvider({ children }: { children: React.ReactNode }) 
     }
   };
 
-  const loginAdmin = (u: string, p: string): boolean => {
+  const loginAdmin = async (u: string, p: string): Promise<boolean> => {
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: u, password: p }),
+      });
+      const data = await res.json();
+      if (data && data.success) {
+        setIsAuthenticated(true);
+        setAuthMode(data.mode || "supabase");
+        try {
+          sessionStorage.setItem("arav_admin_authenticated", "true");
+        } catch {
+          // ignore
+        }
+        return true;
+      }
+    } catch (err) {
+      console.warn("[Admin Login API Fallback]:", err);
+    }
+
+    // Offline / direct recovery fallback
     if (u.trim() === "aravinadmin" && p === "passwordasarav") {
       setIsAuthenticated(true);
+      setAuthMode("local_recovery");
       try {
         sessionStorage.setItem("arav_admin_authenticated", "true");
       } catch {
@@ -546,8 +591,14 @@ export function SiteConfigProvider({ children }: { children: React.ReactNode }) 
     return false;
   };
 
-  const logoutAdmin = () => {
+  const logoutAdmin = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+    } catch {
+      // ignore
+    }
     setIsAuthenticated(false);
+    setAuthMode("none");
     try {
       sessionStorage.removeItem("arav_admin_authenticated");
     } catch {
@@ -568,6 +619,7 @@ export function SiteConfigProvider({ children }: { children: React.ReactNode }) 
         toggleWebsitePower,
         resetConfig,
         isAuthenticated,
+        authMode,
         loginAdmin,
         logoutAdmin,
       }}

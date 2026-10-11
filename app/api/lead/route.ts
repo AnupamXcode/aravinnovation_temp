@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { leadFormSchema } from "@/lib/validations";
-import { saveSubmission, updateSubmissionEmailStatus } from "@/lib/submissions";
+import { saveSubmissionAsync, updateSubmissionEmailStatusAsync } from "@/lib/submissions";
 import { sendContactEmail } from "@/lib/email";
 import { z } from "zod";
 
@@ -11,8 +11,39 @@ function sanitizeString(str?: unknown): string {
     .trim();
 }
 
+// In-memory rate limiting map for basic spam protection (10 submissions / 2 min per IP)
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+  if (!entry || now > entry.resetTime) {
+    rateLimitMap.set(ip, { count: 1, resetTime: now + 120000 });
+    return true;
+  }
+  if (entry.count >= 10) {
+    return false;
+  }
+  entry.count += 1;
+  return true;
+}
+
 export async function POST(request: Request) {
   try {
+    // 1. IP & Rate limiting check
+    const forwardedFor = request.headers.get("x-forwarded-for");
+    const clientIp = forwardedFor ? forwardedFor.split(",")[0].trim() : "127.0.0.1";
+
+    if (!checkRateLimit(clientIp)) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Too many submission attempts from this network. Please wait a minute before trying again.",
+        },
+        { status: 429 }
+      );
+    }
+
     let rawBody: Record<string, unknown> = {};
     try {
       rawBody = await request.json();
@@ -20,6 +51,15 @@ export async function POST(request: Request) {
       return NextResponse.json(
         { success: false, message: "Invalid JSON request payload." },
         { status: 400 }
+      );
+    }
+
+    // 2. Honeypot check (hidden spam field)
+    if (rawBody._hp || rawBody.company_website_url_hp) {
+      console.warn("[Spam Honeypot Triggered on /api/lead]:", clientIp);
+      return NextResponse.json(
+        { success: true, message: "Inquiry received." },
+        { status: 200 }
       );
     }
 
@@ -61,8 +101,8 @@ export async function POST(request: Request) {
     // Server-side Zod validation
     const validatedData = leadFormSchema.parse(sanitizedBody);
 
-    // Save submission to persistent store (guaranteed not to throw filesystem errors)
-    const submission = saveSubmission({
+    // 3. Save submission to persistent store (Supabase with local fallback)
+    const { submission, storage, error: storageError } = await saveSubmissionAsync({
       name: validatedData.name,
       company: validatedData.company || "Independent / Enterprise",
       email: validatedData.email,
@@ -75,11 +115,15 @@ export async function POST(request: Request) {
       originalQuery,
       conversationContext,
       source,
+      ipAddress: clientIp,
     });
 
-    console.log("[Arav Innovations Lead Saved]:", submission.id, submission.name, submission.email);
+    console.log(`[Arav Innovations Lead Saved via ${storage}]:`, submission.id, submission.name, submission.email);
+    if (storageError) {
+      console.warn("[Arav Innovations Lead Storage Notice]:", storageError);
+    }
 
-    // Asynchronous background email dispatch (Admin to jrshrivastava03@gmail.com & User confirmation)
+    // 4. Asynchronous background email dispatch (Admin to jrshrivastava03@gmail.com & User confirmation)
     (async () => {
       let companyRes = { success: false };
       let userRes = { success: false };
@@ -106,7 +150,7 @@ export async function POST(request: Request) {
         console.error('[Email User Dispatch Error]:', e);
       }
 
-      updateSubmissionEmailStatus(
+      await updateSubmissionEmailStatusAsync(
         submission.id,
         companyRes.success ? 'SENT' : 'FAILED',
         userRes.success ? 'SENT' : 'FAILED'
@@ -119,6 +163,7 @@ export async function POST(request: Request) {
         message: "Your query has been received. Thank you for reaching out. Our team will review your request and get back to you.",
         leadId: submission.id,
         submission,
+        storageMode: storage,
       },
       { status: 200 }
     );

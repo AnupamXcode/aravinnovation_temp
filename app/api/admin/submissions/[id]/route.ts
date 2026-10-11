@@ -1,11 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { updateSubmissionStatus, deleteSubmission } from '@/lib/submissions';
+import { updateSubmissionStatusAsync, deleteSubmissionAsync } from '@/lib/submissions';
+import { getAdminSession } from '@/lib/admin-auth';
 
 export async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    // 1. Enforce server-side administrator authorization
+    const session = await getAdminSession();
+    if (!session.isAuthenticated) {
+      return NextResponse.json(
+        { error: 'Unauthorized: Admin authentication required.' },
+        { status: 401 }
+      );
+    }
+
     const { id } = await params;
     const body = await req.json();
     const { status } = body;
@@ -17,7 +27,7 @@ export async function PATCH(
       );
     }
 
-    const updated = updateSubmissionStatus(id, status);
+    const updated = await updateSubmissionStatusAsync(id, status);
     if (!updated) {
       return NextResponse.json(
         { error: 'Submission not found' },
@@ -40,8 +50,17 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    // 1. Enforce server-side administrator authorization
+    const session = await getAdminSession();
+    if (!session.isAuthenticated) {
+      return NextResponse.json(
+        { error: 'Unauthorized: Admin authentication required.' },
+        { status: 401 }
+      );
+    }
+
     const { id } = await params;
-    const success = deleteSubmission(id);
+    const success = await deleteSubmissionAsync(id);
     if (!success) {
       return NextResponse.json(
         { error: 'Submission not found' },
