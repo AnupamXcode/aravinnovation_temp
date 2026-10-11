@@ -21,7 +21,6 @@ import { Badge } from "@/components/ui/badge";
 
 export interface ServiceCategoryGroup {
   groupName: string;
-  groupTag: string;
   description: string;
   services: ServiceItem[];
 }
@@ -44,7 +43,6 @@ export interface ServiceItem {
 export const groupedServicesData: ServiceCategoryGroup[] = [
   {
     groupName: "TECHNOLOGY & ENGINEERING",
-    groupTag: "GROUP 01",
     description: "Core strategy, scalable software architecture, and AI-powered enterprise systems.",
     services: [
       {
@@ -105,7 +103,6 @@ export const groupedServicesData: ServiceCategoryGroup[] = [
   },
   {
     groupName: "DIGITAL GROWTH",
-    groupTag: "GROUP 02",
     description: "Data-driven B2B demand generation, brand positioning, and organic search visibility.",
     services: [
       {
@@ -148,7 +145,6 @@ export const groupedServicesData: ServiceCategoryGroup[] = [
   },
   {
     groupName: "GOVERNANCE & ASSURANCE",
-    groupTag: "GROUP 03",
     description: "Risk management frameworks, DPDP compliance, and cloud system architecture audits.",
     services: [
       {
@@ -191,7 +187,6 @@ export const groupedServicesData: ServiceCategoryGroup[] = [
   },
   {
     groupName: "PEOPLE & CAPABILITY",
-    groupTag: "GROUP 04",
     description: "Senior engineering talent pods and technical team upskilling on demand.",
     services: [
       {
@@ -307,14 +302,9 @@ export function InteractiveServiceStack3D() {
             <div key={gIdx} className="space-y-6">
               {/* Group Category Heading */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#EFE2D6] dark:border-[#1f1f1f] pb-3 gap-2">
-                <div className="flex items-center gap-3">
-                  <span className="font-mono text-xs font-bold text-[#f15e1c] tracking-widest">
-                    {group.groupTag}
-                  </span>
-                  <h3 className="text-base sm:text-xl font-bold font-display text-[#221811] dark:text-[#FAF5EE]">
-                    {group.groupName}
-                  </h3>
-                </div>
+                <h3 className="text-base sm:text-xl font-bold font-display text-[#221811] dark:text-[#FAF5EE]">
+                  {group.groupName}
+                </h3>
                 <span className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0] font-medium">
                   {group.description}
                 </span>

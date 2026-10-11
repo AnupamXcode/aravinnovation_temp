@@ -186,13 +186,13 @@ export function Process3DPathway() {
                 <div className="flex items-center gap-3">
                   <span
                     className={cn(
-                      "font-mono text-xs font-bold px-2.5 py-1 rounded-lg transition-colors",
+                      "font-mono text-xs font-bold px-2.5 py-1 rounded-lg transition-colors whitespace-nowrap shrink-0",
                       isActive
                         ? "bg-[#f15e1c] text-white"
                         : "bg-[#f7d7b0]/40 dark:bg-[#1f1f1f] text-[#f15e1c]"
                     )}
                   >
-                    {step.number} &bull; Stage {idx + 1}
+                    Stage {idx + 1}
                   </span>
                   <span className="text-xs sm:text-sm font-mono font-medium text-[#4a5c55] dark:text-[#d3eee4]">
                     {step.subtitle}
