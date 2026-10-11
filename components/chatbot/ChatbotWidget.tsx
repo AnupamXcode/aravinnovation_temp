@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { MessageSquare, X, Send, Bot, ExternalLink, Mic, Volume2, VolumeX, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
+import { MessageSquare, X, Send, Bot, ExternalLink, Mic, Volume2, VolumeX, Sparkles, CheckCircle2, ArrowRight, Square } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
 import { useSiteConfig } from "@/lib/site-config";
@@ -31,11 +31,34 @@ interface ChatMessage {
 
 function cleanSpeechText(text: string): string {
   return text
-    .replace(/https?:\/\/\S+/g, "")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, (_, p1) => p1)
+    .replace(/https?:\/\/[^\s)]+/g, "")
     .replace(/[*_#`~]/g, "")
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/[•●▪]/g, ", ")
+    .replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, "")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function getBestVoiceForLocale(locale: string, targetLang: string): SpeechSynthesisVoice | null {
+  if (typeof window === "undefined" || !("speechSynthesis" in window)) return null;
+  const voices = window.speechSynthesis.getVoices();
+  if (!voices || voices.length === 0) return null;
+
+  const normalizedTarget = targetLang.replace(/_/g, "-").toLowerCase();
+  const langPrefix = normalizedTarget.split("-")[0];
+
+  let match = voices.find((v) => v.lang.replace(/_/g, "-").toLowerCase() === normalizedTarget);
+  if (!match) {
+    match = voices.find((v) => v.lang.replace(/_/g, "-").toLowerCase().startsWith(langPrefix));
+  }
+  if (!match && locale === "hi") {
+    match = voices.find((v) => /hindi|india/i.test(v.name));
+  }
+  if (!match && locale === "ar") {
+    match = voices.find((v) => /arabic/i.test(v.name));
+  }
+  return match || null;
 }
 
 export function ChatbotWidget() {
@@ -57,8 +80,12 @@ export function ChatbotWidget() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isTyping, setIsTyping] = React.useState(false);
   const [isListening, setIsListening] = React.useState(false);
+  const [isSpeaking, setIsSpeaking] = React.useState(false);
   const [speakingMsgId, setSpeakingMsgId] = React.useState<string | null>(null);
+  const [voiceOutputEnabled, setVoiceOutputEnabled] = React.useState(false);
   const recognitionRef = React.useRef<any>(null);
+  const finalTranscriptRef = React.useRef<string>("");
+  const isVoiceTurnRef = React.useRef<boolean>(false);
 
   const [sessionContext, setSessionContext] = React.useState<ChatSessionContext>(() => {
     if (typeof window !== "undefined") {
@@ -148,7 +175,7 @@ export function ChatbotWidget() {
   const initialInputRef = React.useRef<string>("");
   const [voiceStatusMsg, setVoiceStatusMsg] = React.useState<string | null>(null);
 
-  // Clean up speech synthesis on unmount
+  // Clean up speech synthesis and speech recognition on unmount
   React.useEffect(() => {
     return () => {
       if (typeof window !== "undefined" && "speechSynthesis" in window) {
@@ -156,10 +183,25 @@ export function ChatbotWidget() {
       }
       if (recognitionRef.current) {
         try {
-          recognitionRef.current.stop();
+          recognitionRef.current.abort();
         } catch {
           // ignore
         }
+      }
+    };
+  }, []);
+
+  // Listen for browser voices list loading
+  React.useEffect(() => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    const loadVoices = () => {
+      window.speechSynthesis.getVoices();
+    };
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+    return () => {
+      if (window.speechSynthesis) {
+        window.speechSynthesis.onvoiceschanged = null;
       }
     };
   }, []);
@@ -187,7 +229,100 @@ export function ChatbotWidget() {
     }
   }, [messages]);
 
+  const stopSpeaking = React.useCallback(() => {
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
+    setIsSpeaking(false);
+    setSpeakingMsgId(null);
+  }, []);
+
+  const speakMessage = React.useCallback(
+    (msgId: string, rawText: string) => {
+      if (typeof window === "undefined" || !("speechSynthesis" in window)) {
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      const spokenText = cleanSpeechText(rawText);
+      if (!spokenText) {
+        setIsSpeaking(false);
+        setSpeakingMsgId(null);
+        return;
+      }
+
+      const utterance = new SpeechSynthesisUtterance(spokenText);
+      const targetLang =
+        locale === "hi"
+          ? "hi-IN"
+          : locale === "de"
+          ? "de-DE"
+          : locale === "ar"
+          ? "ar-SA"
+          : chatbotKB?.speechLanguage || "en-US";
+
+      utterance.lang = targetLang;
+
+      const voice = getBestVoiceForLocale(locale, targetLang);
+      if (voice) {
+        utterance.voice = voice;
+      }
+
+      utterance.onstart = () => {
+        setIsSpeaking(true);
+        setSpeakingMsgId(msgId);
+      };
+
+      utterance.onend = () => {
+        setIsSpeaking(false);
+        setSpeakingMsgId(null);
+      };
+
+      utterance.onerror = () => {
+        setIsSpeaking(false);
+        setSpeakingMsgId(null);
+      };
+
+      setSpeakingMsgId(msgId);
+      setIsSpeaking(true);
+      window.speechSynthesis.speak(utterance);
+    },
+    [locale, chatbotKB?.speechLanguage]
+  );
+
+  const toggleReadAloud = (msgId: string, rawText: string) => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) {
+      setVoiceStatusMsg("Read Aloud is not supported in this browser.");
+      setTimeout(() => setVoiceStatusMsg(null), 3000);
+      return;
+    }
+
+    if (speakingMsgId === msgId) {
+      stopSpeaking();
+      return;
+    }
+
+    speakMessage(msgId, rawText);
+  };
+
+  const cancelListening = React.useCallback(() => {
+    if (recognitionRef.current) {
+      try {
+        recognitionRef.current.abort();
+      } catch {
+        // ignore
+      }
+    }
+    finalTranscriptRef.current = "";
+    setIsListening(false);
+    setInputText("");
+  }, []);
+
   const toggleListening = async () => {
+    // Stop any ongoing speech playback immediately
+    stopSpeaking();
+
     if (isListening) {
       if (recognitionRef.current) {
         try {
@@ -229,6 +364,7 @@ export function ChatbotWidget() {
     }
 
     try {
+      finalTranscriptRef.current = "";
       initialInputRef.current = inputText.trim();
 
       const recognition = new SpeechRecognition();
@@ -246,35 +382,55 @@ export function ChatbotWidget() {
 
       recognition.lang = speechLang;
 
-      recognition.onstart = () => setIsListening(true);
-      recognition.onend = () => setIsListening(false);
+      recognition.onstart = () => {
+        finalTranscriptRef.current = "";
+        setIsListening(true);
+        setVoiceStatusMsg(null);
+      };
+
+      recognition.onresult = (event: any) => {
+        let interim = "";
+        let final = "";
+        for (let i = 0; i < event.results.length; ++i) {
+          if (event.results[i].isFinal) {
+            final += event.results[i][0].transcript + " ";
+          } else {
+            interim += event.results[i][0].transcript;
+          }
+        }
+        const currentText = (final || interim).trim();
+        if (currentText) {
+          finalTranscriptRef.current = currentText;
+          if (initialInputRef.current) {
+            setInputText(`${initialInputRef.current} ${currentText}`);
+          } else {
+            setInputText(currentText);
+          }
+        }
+      };
 
       recognition.onerror = (event: any) => {
         setIsListening(false);
         const err = event?.error;
         if (err === "aborted") return;
-        if (err === "not-allowed") {
+        if (err === "not-allowed" || err === "service-not-allowed") {
           setVoiceStatusMsg("Microphone access was denied. Please allow microphone access.");
         } else if (err === "no-speech") {
-          setVoiceStatusMsg("No speech detected. Please try again.");
+          setVoiceStatusMsg("No speech detected. Please click the mic and try again.");
         } else {
           setVoiceStatusMsg("Voice input couldn't start. Please try again.");
         }
         setTimeout(() => setVoiceStatusMsg(null), 4000);
       };
 
-      recognition.onresult = (event: any) => {
-        const rawTranscript = Array.from(event.results)
-          .map((res: any) => res[0].transcript)
-          .join("")
-          .trim();
-
-        if (!rawTranscript) return;
-
-        if (initialInputRef.current) {
-          setInputText(`${initialInputRef.current} ${rawTranscript}`);
-        } else {
-          setInputText(rawTranscript);
+      recognition.onend = () => {
+        setIsListening(false);
+        const textToSubmit = finalTranscriptRef.current.trim();
+        if (textToSubmit && textToSubmit.length > 0) {
+          finalTranscriptRef.current = "";
+          setInputText("");
+          // Two-way voice: user spoke, auto-submit message and automatically speak response
+          processUserMessage(textToSubmit, true);
         }
       };
 
@@ -285,57 +441,6 @@ export function ChatbotWidget() {
       setVoiceStatusMsg("Could not start speech recognition. Please try again.");
       setTimeout(() => setVoiceStatusMsg(null), 3000);
     }
-  };
-
-  const toggleReadAloud = (msgId: string, rawText: string) => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) {
-      setVoiceStatusMsg("Read Aloud is not supported in this browser.");
-      setTimeout(() => setVoiceStatusMsg(null), 3000);
-      return;
-    }
-
-    if (speakingMsgId === msgId) {
-      window.speechSynthesis.cancel();
-      setSpeakingMsgId(null);
-      return;
-    }
-
-    window.speechSynthesis.cancel();
-    const spokenText = cleanSpeechText(rawText);
-    if (!spokenText) return;
-
-    const utterance = new SpeechSynthesisUtterance(spokenText);
-    const targetLang =
-      locale === "hi"
-        ? "hi-IN"
-        : locale === "de"
-        ? "de-DE"
-        : locale === "ar"
-        ? "ar-SA"
-        : chatbotKB?.speechLanguage || "en-US";
-
-    utterance.lang = targetLang;
-
-    try {
-      const voices = window.speechSynthesis.getVoices();
-      if (voices && voices.length > 0) {
-        const langPrefix = targetLang.split("-")[0];
-        const match =
-          voices.find((v) => v.lang === targetLang) ||
-          voices.find((v) => v.lang.startsWith(langPrefix));
-        if (match) {
-          utterance.voice = match;
-        }
-      }
-    } catch {
-      // fallback
-    }
-
-    utterance.onend = () => setSpeakingMsgId(null);
-    utterance.onerror = () => setSpeakingMsgId(null);
-
-    setSpeakingMsgId(msgId);
-    window.speechSynthesis.speak(utterance);
   };
 
   // Delayed launcher trigger
@@ -398,10 +503,15 @@ export function ChatbotWidget() {
   const handleMinimize = () => {
     setIsOpen(false);
     setShouldShowLauncher(true);
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      setSpeakingMsgId(null);
+    stopSpeaking();
+    if (recognitionRef.current) {
+      try {
+        recognitionRef.current.abort();
+      } catch {
+        // ignore
+      }
     }
+    setIsListening(false);
     try {
       sessionStorage.setItem("arav_chat_dismissed", "true");
     } catch {
@@ -412,7 +522,7 @@ export function ChatbotWidget() {
   const [isSubmittingLead, setIsSubmittingLead] = React.useState(false);
 
   // Centralized lead submission to backend
-  const handleLeadSubmitInternal = async (overrideData?: typeof leadFormState) => {
+  const handleLeadSubmitInternal = async (overrideData?: typeof leadFormState, isVoiceSubmit?: boolean) => {
     if (isSubmittingLead) return;
     setIsSubmittingLead(true);
     setIsTyping(true);
@@ -484,8 +594,8 @@ export function ChatbotWidget() {
         };
 
         setMessages((prev) => [...prev, confirmMsg]);
-        if (chatbotKB?.autoReadAloud) {
-          toggleReadAloud(confirmMsg.id, confirmMsg.text);
+        if (isVoiceSubmit || isVoiceTurnRef.current || voiceOutputEnabled || chatbotKB?.autoReadAloud) {
+          speakMessage(confirmMsg.id, confirmMsg.text);
         }
       } else {
         const errorText =
@@ -550,6 +660,8 @@ export function ChatbotWidget() {
       handleLeadSubmitInternal();
       return;
     }
+
+    stopSpeaking();
 
     const userMsg: ChatMessage = {
       id: `user-${Date.now()}`,
@@ -635,11 +747,200 @@ export function ChatbotWidget() {
 
       setIsTyping(false);
       setMessages((prev) => [...prev, botMsg]);
-      if (chatbotKB?.autoReadAloud) {
-        toggleReadAloud(botMsg.id, botMsg.text);
+      if (voiceOutputEnabled || chatbotKB?.autoReadAloud) {
+        speakMessage(botMsg.id, botMsg.text);
       }
     }, 450);
   };
+
+  // Centralized user input processing for both text and voice flows
+  const processUserMessage = React.useCallback(
+    (rawText: string, isVoiceTurn: boolean = false) => {
+      const userText = rawText.trim();
+      if (!userText) return;
+
+      isVoiceTurnRef.current = isVoiceTurn;
+      stopSpeaking();
+
+      const userMsg: ChatMessage = {
+        id: `user-${Date.now()}`,
+        sender: "user",
+        text: userText,
+      };
+
+      setMessages((prev) => [...prev, userMsg]);
+      setIsTyping(true);
+
+      setTimeout(() => {
+        let botMsg: ChatMessage;
+
+        // STEP 1: Name Step in Progressive Lead Capture
+        if (sessionContext.leadStep === "NAME") {
+          const cleanName = userText.replace(/my name is|i am|iam|call me|myself|this is/gi, "").trim();
+          const userName = cleanName || userText;
+
+          setLeadFormState((prev) => ({ ...prev, name: userName }));
+          updateContext({ userName, leadStep: "COMPANY" });
+
+          botMsg = {
+            id: `bot-${Date.now()}`,
+            sender: "bot",
+            text:
+              locale === "hi"
+                ? `धन्यवाद, ${userName}! 🤝 आप किस कंपनी या संगठन में काम करते हैं?`
+                : locale === "ar"
+                ? `شكراً لك، ${userName}! 🤝 ما هي الشركة أو المؤسسة التي تمثلها؟`
+                : locale === "de"
+                ? `Vielen Dank, ${userName}! 🤝 Für welches Unternehmen arbeiten Sie?`
+                : `Thanks, ${userName}! 🤝 What company or organization do you represent?`,
+          };
+        }
+        // STEP 2: Company Step
+        else if (sessionContext.leadStep === "COMPANY") {
+          setLeadFormState((prev) => ({ ...prev, company: userText }));
+          updateContext({ userCompany: userText, leadStep: "EMAIL" });
+
+          botMsg = {
+            id: `bot-${Date.now()}`,
+            sender: "bot",
+            text:
+              locale === "hi"
+                ? `समझ गया। एक वरिष्ठ विशेषज्ञ द्वारा संपर्क के लिए आपका वर्क ईमेल (Work Email) क्या है?`
+                : locale === "ar"
+                ? `تم، ما هو أفضل بريد إلكتروني للعمل للتواصل معك؟`
+                : locale === "de"
+                ? `Verstanden. Welche geschäftliche E-Mail-Adresse ist am besten geeignet?`
+                : `Got it. What's the best work email for an Arav specialist to reach you?`,
+          };
+        }
+        // STEP 3: Email Step
+        else if (sessionContext.leadStep === "EMAIL") {
+          setLeadFormState((prev) => ({ ...prev, email: userText }));
+          updateContext({ userEmail: userText, leadStep: "PHONE" });
+
+          botMsg = {
+            id: `bot-${Date.now()}`,
+            sender: "bot",
+            text:
+              locale === "hi"
+                ? `धन्यवाद! और त्वरित बातचीत के लिए आपका फोन नंबर क्या है?`
+                : locale === "ar"
+                ? `شكراً! ما هو رقم هاتفك للتواصل السريع؟`
+                : locale === "de"
+                ? `Vielen Dank! Und wie lautet Ihre Telefonnummer für Rückfragen?`
+                : `Thanks! What is your contact phone number?`,
+          };
+        }
+        // STEP 4: Phone Step & Confirmation Card
+        else if (sessionContext.leadStep === "PHONE") {
+          const finalState = { ...leadFormState, phone: userText };
+          setLeadFormState(finalState);
+          updateContext({ userPhone: userText, leadStep: "CONFIRM" });
+
+          const nameVal = finalState.name || sessionContext.userName || "Client";
+          const companyVal = finalState.company || "Company";
+          const emailVal = finalState.email || "Email";
+
+          const text =
+            locale === "hi"
+              ? `धन्यवाद, ${nameVal}! मैंने आपकी पूछताछ की जानकारी दर्ज कर ली है:\n\n• नाम: ${nameVal}\n• कंपनी: ${companyVal}\n• ईमेल: ${emailVal}\n• फोन: ${userText}\n\nक्या आप चाहते हैं कि मैं इसे आरव विशेषज्ञों को भेजूं?`
+              : locale === "ar"
+              ? `شكراً ${nameVal}! لقد قمت بتسجيل بياناتك:\n\n• الاسم: ${nameVal}\n• الشركة: ${companyVal}\n• البريد: ${emailVal}\n• الهاتف: ${userText}\n\nهل ترغب في إرسال هذا الطلب لفريقنا المتخصص؟`
+              : locale === "de"
+              ? `Vielen Dank, ${nameVal}! Ich habe Ihre Details notiert:\n\n• Name: ${nameVal}\n• Firma: ${companyVal}\n• E-Mail: ${emailVal}\n• Telefon: ${userText}\n\nSoll ich Ihre Anfrage an das Arav-Team übermitteln?`
+              : `Thanks, ${nameVal}! I've noted your enquiry details:\n\n• Name: ${nameVal}\n• Company: ${companyVal}\n• Email: ${emailVal}\n• Phone: ${userText}\n\nWould you like me to submit this enquiry to an Arav specialist now?`;
+
+          botMsg = {
+            id: `bot-${Date.now()}`,
+            sender: "bot",
+            text,
+            isLeadConfirm: true,
+            options: [
+              {
+                label:
+                  locale === "hi"
+                    ? "पूछताछ भेजें →"
+                    : locale === "ar"
+                    ? "إرسال الاستفسار →"
+                    : locale === "de"
+                    ? "Anfrage absenden →"
+                    : "Submit Enquiry →",
+                action: "intent_trigger",
+                payload: "confirm_submit_lead",
+              },
+            ],
+          };
+        }
+        // STEP 5: Lead Submission Confirmation
+        else if (userText.toLowerCase().includes("confirm_submit_lead") || sessionContext.leadStep === "CONFIRM") {
+          handleLeadSubmitInternal(undefined, isVoiceTurn);
+          return;
+        }
+        // STEP 6: Intent Matching & Natural Conversation
+        else {
+          const matched = findIntent(userText, locale, sessionContext);
+
+          if (matched) {
+            updateContext({
+              lastIntentId: matched.intent.id,
+              mentionedService: matched.detectedService || sessionContext.mentionedService,
+              mentionedProduct: matched.detectedProduct || sessionContext.mentionedProduct,
+            });
+
+            const langKey = (locale === "hi" ? "hi" : locale === "de" ? "de" : locale === "ar" ? "ar" : "en") as "en" | "hi" | "de" | "ar";
+            const options = matched.intent.options ? matched.intent.options[langKey] || matched.intent.options.en : undefined;
+
+            botMsg = {
+              id: `bot-${Date.now()}`,
+              sender: "bot",
+              text: matched.responseText,
+              options,
+              recommendedServiceSlug: matched.detectedService,
+              recommendedProductSlug: matched.detectedProduct,
+            };
+          } else {
+            // Dynamic Conversational Fallback with Context Memory
+            const nameRef = sessionContext.userName ? `, ${sessionContext.userName}` : "";
+            const fallbackText =
+              chatbotKB?.fallbackResponse ||
+              (locale === "hi"
+                ? `मैं समझ गया${nameRef}।\n\nयह देखने के लिए कि क्या सबसे उपयुक्त होगा: क्या आप नया प्रोजेक्ट बनाना चाहते हैं, किसी मौजूदा प्रणाली को सुधारना चाहते हैं, या ग्रोथ / अनुपालन में मदद चाहते हैं?`
+                : locale === "ar"
+                ? `فهمت ذلك${nameRef}۔\n\nلمساعدتك في اختيار الحل الأمثل: هل ترغب في بناء مشروع جديد، تحسين نظام قائم، أم تعزيز التواجد والامتثال؟`
+                : locale === "de"
+                ? `Ich verstehe${nameRef}.\n\nUm die beste Lösung zu finden: Möchten Sie ein neues Projekt bauen, ein bestehendes System verbessern oder suchen Sie nach Wachstum / Compliance?`
+                : `Got it${nameRef}.\n\nTo point you to the right solution: Are you looking to build something new, improve an existing system, grow search traffic, or explore compliance?`);
+
+            botMsg = {
+              id: `bot-${Date.now()}`,
+              sender: "bot",
+              text: fallbackText,
+              options: getGreetingQuickReplies(locale, sessionContext.userName),
+            };
+          }
+        }
+
+        setIsTyping(false);
+        setMessages((prev) => [...prev, botMsg]);
+
+        // Two-way voice: automatically read response aloud if voice-initiated or if auto-voice is enabled
+        if (isVoiceTurn || voiceOutputEnabled || chatbotKB?.autoReadAloud) {
+          speakMessage(botMsg.id, botMsg.text);
+        }
+      }, 450);
+    },
+    [
+      locale,
+      sessionContext,
+      leadFormState,
+      chatbotKB,
+      voiceOutputEnabled,
+      speakMessage,
+      stopSpeaking,
+      updateContext,
+      handleLeadSubmitInternal,
+    ]
+  );
 
   // Free-text user input handler & natural language processing
   const handleCustomSend = (e: React.FormEvent) => {
@@ -648,151 +949,7 @@ export function ChatbotWidget() {
 
     const userText = inputText.trim();
     setInputText("");
-
-    const userMsg: ChatMessage = {
-      id: `user-${Date.now()}`,
-      sender: "user",
-      text: userText,
-    };
-
-    setMessages((prev) => [...prev, userMsg]);
-    setIsTyping(true);
-
-    setTimeout(() => {
-      let botMsg: ChatMessage;
-
-      // STEP 1: Name Step in Progressive Lead Capture
-      if (sessionContext.leadStep === "NAME") {
-        const cleanName = userText.replace(/my name is|i am|iam|call me|myself|this is/gi, "").trim();
-        const userName = cleanName || userText;
-
-        setLeadFormState((prev) => ({ ...prev, name: userName }));
-        updateContext({ userName, leadStep: "COMPANY" });
-
-        botMsg = {
-          id: `bot-${Date.now()}`,
-          sender: "bot",
-          text: locale === "hi"
-            ? `धन्यवाद, ${userName}! 🤝 आप किस कंपनी या संगठन में काम करते हैं?`
-            : locale === "de"
-            ? `Vielen Dank, ${userName}! 🤝 Für welches Unternehmen arbeiten Sie?`
-            : `Thanks, ${userName}! 🤝 What company or organization do you represent?`,
-        };
-      }
-      // STEP 2: Company Step
-      else if (sessionContext.leadStep === "COMPANY") {
-        setLeadFormState((prev) => ({ ...prev, company: userText }));
-        updateContext({ userCompany: userText, leadStep: "EMAIL" });
-
-        botMsg = {
-          id: `bot-${Date.now()}`,
-          sender: "bot",
-          text: locale === "hi"
-            ? `समझ गया। एक वरिष्ठ विशेषज्ञ द्वारा संपर्क के लिए आपका वर्क ईमेल (Work Email) क्या है?`
-            : locale === "de"
-            ? `Verstanden. Welche geschäftliche E-Mail-Adresse ist am besten geeignet?`
-            : `Got it. What's the best work email for an Arav specialist to reach you?`,
-        };
-      }
-      // STEP 3: Email Step
-      else if (sessionContext.leadStep === "EMAIL") {
-        setLeadFormState((prev) => ({ ...prev, email: userText }));
-        updateContext({ userEmail: userText, leadStep: "PHONE" });
-
-        botMsg = {
-          id: `bot-${Date.now()}`,
-          sender: "bot",
-          text: locale === "hi"
-            ? `धन्यवाद! और त्वरित बातचीत के लिए आपका फोन नंबर क्या है?`
-            : locale === "de"
-            ? `Vielen Dank! Und wie lautet Ihre Telefonnummer für Rückfragen?`
-            : `Thanks! What is your contact phone number?`,
-        };
-      }
-      // STEP 4: Phone Step & Confirmation Card
-      else if (sessionContext.leadStep === "PHONE") {
-        const finalState = { ...leadFormState, phone: userText };
-        setLeadFormState(finalState);
-        updateContext({ userPhone: userText, leadStep: "CONFIRM" });
-
-        const nameVal = finalState.name || sessionContext.userName || "Client";
-        const companyVal = finalState.company || "Company";
-        const emailVal = finalState.email || "Email";
-
-        const text =
-          locale === "hi"
-            ? `धन्यवाद, ${nameVal}! मैंने आपकी पूछताछ की जानकारी दर्ज कर ली है:\n\n• नाम: ${nameVal}\n• कंपनी: ${companyVal}\n• ईमेल: ${emailVal}\n• फोन: ${userText}\n\nक्या आप चाहते हैं कि मैं इसे आरव विशेषज्ञों को भेजूं?`
-            : locale === "de"
-            ? `Vielen Dank, ${nameVal}! Ich habe Ihre Details notiert:\n\n• Name: ${nameVal}\n• Firma: ${companyVal}\n• E-Mail: ${emailVal}\n• Telefon: ${userText}\n\nSoll ich Ihre Anfrage an das Arav-Team übermitteln?`
-            : `Thanks, ${nameVal}! I've noted your enquiry details:\n\n• Name: ${nameVal}\n• Company: ${companyVal}\n• Email: ${emailVal}\n• Phone: ${userText}\n\nWould you like me to submit this enquiry to an Arav specialist now?`;
-
-        botMsg = {
-          id: `bot-${Date.now()}`,
-          sender: "bot",
-          text,
-          isLeadConfirm: true,
-          options: [
-            {
-              label: locale === "hi" ? "पूछताछ भेजें →" : locale === "de" ? "Anfrage absenden →" : "Submit Enquiry →",
-              action: "intent_trigger",
-              payload: "confirm_submit_lead",
-            },
-          ],
-        };
-      }
-      // STEP 5: Lead Submission Confirmation
-      else if (userText.toLowerCase().includes("confirm_submit_lead") || sessionContext.leadStep === "CONFIRM") {
-        handleLeadSubmitInternal();
-        return;
-      }
-      // STEP 6: Intent Matching & Natural Conversation
-      else {
-        const matched = findIntent(userText, locale, sessionContext);
-
-        if (matched) {
-          updateContext({
-            lastIntentId: matched.intent.id,
-            mentionedService: matched.detectedService || sessionContext.mentionedService,
-            mentionedProduct: matched.detectedProduct || sessionContext.mentionedProduct,
-          });
-
-          const langKey = (locale === "hi" ? "hi" : locale === "de" ? "de" : locale === "ar" ? "ar" : "en") as "en" | "hi" | "de" | "ar";
-          const options = matched.intent.options ? matched.intent.options[langKey] || matched.intent.options.en : undefined;
-
-          botMsg = {
-            id: `bot-${Date.now()}`,
-            sender: "bot",
-            text: matched.responseText,
-            options,
-            recommendedServiceSlug: matched.detectedService,
-            recommendedProductSlug: matched.detectedProduct,
-          };
-        } else {
-          // Dynamic Conversational Fallback with Context Memory
-          const nameRef = sessionContext.userName ? `, ${sessionContext.userName}` : "";
-          const fallbackText =
-            chatbotKB?.fallbackResponse ||
-            (locale === "hi"
-              ? `मैं समझ गया${nameRef}।\n\nयह देखने के लिए कि क्या सबसे उपयुक्त होगा: क्या आप नया प्रोजेक्ट बनाना चाहते हैं, किसी मौजूदा प्रणाली को सुधारना चाहते हैं, या ग्रोथ / अनुपालन में मदद चाहते हैं?`
-              : locale === "de"
-              ? `Ich verstehe${nameRef}.\n\nUm die beste Lösung zu finden: Möchten Sie ein neues Projekt bauen, ein bestehendes System verbessern oder suchen Sie nach Wachstum / Compliance?`
-              : `Got it${nameRef}.\n\nTo point you to the right solution: Are you looking to build something new, improve an existing system, grow search traffic, or explore compliance?`);
-
-          botMsg = {
-            id: `bot-${Date.now()}`,
-            sender: "bot",
-            text: fallbackText,
-            options: getGreetingQuickReplies(locale, sessionContext.userName),
-          };
-        }
-      }
-
-      setIsTyping(false);
-      setMessages((prev) => [...prev, botMsg]);
-      if (chatbotKB?.autoReadAloud) {
-        toggleReadAloud(botMsg.id, botMsg.text);
-      }
-    }, 450);
+    processUserMessage(userText, false);
   };
 
   return (
@@ -858,14 +1015,50 @@ export function ChatbotWidget() {
               </div>
             </div>
 
-            <button
-              type="button"
-              onClick={handleMinimize}
-              className="text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#3A2E27] dark:hover:text-[#FAF5EE] p-1.5 rounded-xl hover:bg-[#FCE3D3]/40 dark:hover:bg-[#161616] cursor-pointer"
-              aria-label="Minimize Chat Window"
-            >
-              <X className="w-5 h-5" />
-            </button>
+            <div className="flex items-center gap-1.5">
+              {/* Voice Output Toggle */}
+              <button
+                type="button"
+                onClick={() => {
+                  if (isSpeaking) {
+                    stopSpeaking();
+                  }
+                  setVoiceOutputEnabled((prev) => !prev);
+                }}
+                className={cn(
+                  "p-1.5 rounded-xl transition-all cursor-pointer",
+                  voiceOutputEnabled
+                    ? "text-[#2e936f] bg-[#2e936f]/15 hover:bg-[#2e936f]/25"
+                    : "text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#3A2E27] dark:hover:text-[#FAF5EE] hover:bg-[#FCE3D3]/40 dark:hover:bg-[#161616]"
+                )}
+                title={
+                  voiceOutputEnabled
+                    ? locale === "hi"
+                      ? "वॉइस उत्तर सक्रिय हैं (म्यूट करने के लिए क्लिक करें)"
+                      : locale === "ar"
+                      ? "الردود الصوتية مفعلة (انقر لكتم الصوت)"
+                      : "Voice replies enabled (Click to mute)"
+                    : locale === "hi"
+                    ? "सभी संदेशों के लिए वॉइस उत्तर सक्षम करें"
+                    : locale === "ar"
+                    ? "تفعيل الردود الصوتية لكافة الرسائل"
+                    : "Enable voice replies for all messages"
+                }
+                aria-label="Toggle voice output"
+              >
+                {voiceOutputEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+              </button>
+
+              {/* Minimize Window */}
+              <button
+                type="button"
+                onClick={handleMinimize}
+                className="text-[#7A6A5F] dark:text-[#B8ACA0] hover:text-[#3A2E27] dark:hover:text-[#FAF5EE] p-1.5 rounded-xl hover:bg-[#FCE3D3]/40 dark:hover:bg-[#161616] cursor-pointer"
+                aria-label="Minimize Chat Window"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
           {/* Messages Container */}
@@ -1032,13 +1225,42 @@ export function ChatbotWidget() {
           {/* Voice Listening Overlay */}
           {isListening && (
             <div className="px-4 py-2 bg-[#f15e1c] text-white text-[11px] font-mono font-bold flex items-center justify-between animate-pulse">
-              <span>🎙️ Listening... Speak your requirement</span>
-              <button type="button" onClick={toggleListening} className="underline text-xs cursor-pointer">Cancel</button>
+              <span>🎙️ {locale === "hi" ? "सुन रहे हैं... अपना प्रश्न बोलें" : locale === "ar" ? "جاري الاستماع... تحدث الآن" : locale === "de" ? "Zuhören... Sprechen Sie jetzt" : "Listening... Speak your requirement"}</span>
+              <button type="button" onClick={cancelListening} className="underline text-xs cursor-pointer">
+                {locale === "hi" ? "रद्द करें" : locale === "ar" ? "إلغاء" : "Cancel"}
+              </button>
+            </div>
+          )}
+
+          {/* Voice Speaking Indicator Banner & Stop Speaking Control */}
+          {isSpeaking && !isListening && (
+            <div className="px-4 py-2 bg-[#2e936f]/15 border-t border-[#2e936f]/30 text-[#16221d] dark:text-[#FAF5EE] text-[11px] font-mono font-bold flex items-center justify-between animate-in fade-in duration-150">
+              <div className="flex items-center gap-2">
+                <Volume2 className="w-4 h-4 text-[#2e936f] animate-pulse shrink-0" />
+                <span>
+                  {locale === "hi"
+                    ? "आरव सहायक बोल रहा है..."
+                    : locale === "ar"
+                    ? "المساعد يتحدث الآن..."
+                    : locale === "de"
+                    ? "Arav Assistent spricht..."
+                    : "Arav Assistant is speaking..."}
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={stopSpeaking}
+                className="px-2.5 py-1 rounded-lg bg-[#f15e1c] text-white text-[10px] font-bold hover:bg-[#d4581f] transition-all flex items-center gap-1 cursor-pointer shrink-0 shadow-xs"
+                aria-label="Stop speaking"
+              >
+                <Square className="w-2.5 h-2.5 fill-current" />
+                <span>{locale === "hi" ? "रोकें" : locale === "ar" ? "إيقاف" : "Stop Speaking"}</span>
+              </button>
             </div>
           )}
 
           {/* Voice Warning Status */}
-          {voiceStatusMsg && !isListening && (
+          {voiceStatusMsg && !isListening && !isSpeaking && (
             <div role="status" className="px-4 py-2 bg-[#fab60a]/15 border-t border-[#fab60a]/30 text-[#3A2E27] dark:text-[#ffec69] text-[11px] font-mono font-bold flex items-center justify-between">
               <span>{voiceStatusMsg}</span>
               <button type="button" onClick={() => setVoiceStatusMsg(null)} aria-label="Dismiss" className="text-xs font-extrabold ml-2">✕</button>
@@ -1065,7 +1287,7 @@ export function ChatbotWidget() {
               className={cn(
                 "w-9 h-9 rounded-xl flex items-center justify-center transition-all shrink-0 cursor-pointer shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f15e1c]",
                 isListening
-                  ? "bg-rose-500 text-white animate-pulse shadow-rose-500/40"
+                  ? "bg-[#f15e1c] text-white animate-pulse shadow-[#f15e1c]/40 ring-2 ring-[#fab60a]"
                   : "bg-white dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] text-[#f15e1c] hover:bg-[#FCE3D3]/40"
               )}
               aria-label={isListening ? t("micStopAriaLabel") : t("micStartAriaLabel")}
