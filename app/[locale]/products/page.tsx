@@ -133,6 +133,17 @@ export default async function ProductsListingPage() {
                 <ExternalLink className="w-3 h-3 text-[#2e936f]" />
               </a>
 
+              <a
+                href="https://www.getastrav.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#f15e1c] text-xs font-bold font-mono hover:bg-[#fefaf5] hover:border-[#f15e1c] hover:-translate-y-0.5 transition-all shadow-xs cursor-pointer"
+              >
+                <Sparkles className="w-4 h-4 text-[#f15e1c]" />
+                <span>Executive Command OS (GetAstrav.com)</span>
+                <ExternalLink className="w-3 h-3 text-[#f15e1c]" />
+              </a>
+
               <Link
                 href="/contact?intent=setup-call"
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#f15e1c] text-xs font-bold font-mono hover:bg-[#fefaf5] hover:border-[#f15e1c] hover:-translate-y-0.5 transition-all shadow-xs cursor-pointer"

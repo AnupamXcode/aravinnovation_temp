@@ -229,6 +229,15 @@ export const productCardsData: Record<string, ProductCardData> = {
     route: "/products/omnigrc",
     externalUrl: "https://omnigrc.vercel.app",
   },
+  getastrav: {
+    slug: "getastrav",
+    name: "GetAstrav",
+    domain: "getastrav.com",
+    tagline: "Executive Command Operating System & Enterprise AI",
+    description: "The goal-driven organization operating system with automated mathematical progress rollups and AI goal decomposition.",
+    route: "/products/getastrav",
+    externalUrl: "https://www.getastrav.com/",
+  },
 };
 
 // GREETING QUICK REPLIES: ALWAYS 2-4 CONTEXTUAL CHIPS

@@ -51,6 +51,22 @@ function FashAILogoIcon({ className = "w-6 h-6" }: { className?: string }) {
   );
 }
 
+function GetAstravLogoIcon({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="32" height="32" rx="8" fill="#1b2823" />
+      <path d="M7 23L16 9L25 23L16 18L7 23Z" fill="url(#getastrav-grad)" />
+      <circle cx="16" cy="9" r="2.5" fill="#ffec69" />
+      <defs>
+        <linearGradient id="getastrav-grad" x1="7" y1="9" x2="25" y2="23" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#f15e1c" />
+          <stop offset="1" stopColor="#fab60a" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
 export function ProductCard({ product }: ProductCardProps) {
   const isLive = product.status === "live";
   const [showAllCapabilities, setShowAllCapabilities] = React.useState(false);
@@ -72,9 +88,12 @@ export function ProductCard({ product }: ProductCardProps) {
   ) : product.slug === "fashai-universal" || product.iconName === "FashAILogo" ? (
     <FashAILogoIcon className="w-6 h-6" />
   ) : product.slug === "getastrav" || product.iconName === "GetAstravLogo" ? (
-    <span className="font-extrabold font-display text-xs sm:text-sm text-[#f15e1c] tracking-tight">
-      GetAstrav
-    </span>
+    <div className="flex items-center gap-1.5">
+      <GetAstravLogoIcon className="w-6 h-6" />
+      <span className="font-extrabold font-display text-xs sm:text-sm text-[#f15e1c] tracking-tight">
+        GetAstrav
+      </span>
+    </div>
   ) : product.iconName === "ShieldCheck" ? (
     <ShieldCheck className="w-6 h-6 text-[#f15e1c]" />
   ) : product.slug.includes("astrobeams") || product.iconName === "Orbit" ? (
@@ -102,10 +121,24 @@ export function ProductCard({ product }: ProductCardProps) {
 
           <div className="flex items-center gap-2 flex-wrap justify-end">
             {product.domain && (
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold text-[#2e936f] bg-[#2e936f]/10 border border-[#2e936f]/30">
-                <Globe className="w-3 h-3 text-[#2e936f]" />
-                <span>{product.domain}</span>
-              </span>
+              product.externalUrl ? (
+                <a
+                  href={product.externalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold text-[#2e936f] bg-[#2e936f]/10 border border-[#2e936f]/30 hover:bg-[#2e936f]/20 transition-colors cursor-pointer"
+                  aria-label={`Visit ${product.domain} in a new tab`}
+                >
+                  <Globe className="w-3 h-3 text-[#2e936f]" />
+                  <span>{product.domain}</span>
+                  <ExternalLink className="w-2.5 h-2.5 text-[#2e936f]" />
+                </a>
+              ) : (
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold text-[#2e936f] bg-[#2e936f]/10 border border-[#2e936f]/30">
+                  <Globe className="w-3 h-3 text-[#2e936f]" />
+                  <span>{product.domain}</span>
+                </span>
+              )
             )}
             <span
               className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider text-white shadow-xs"
@@ -121,7 +154,20 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Product Heading & Category */}
         <div className="space-y-1.5 text-left">
           <h3 className="text-2xl sm:text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#f15e1c] transition-colors">
-            {displayTitle}
+            {product.externalUrl ? (
+              <a
+                href={product.externalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline inline-flex items-center gap-2"
+                aria-label={`Visit ${displayTitle} external platform`}
+              >
+                <span>{displayTitle}</span>
+                <ExternalLink className="w-4 h-4 opacity-70 group-hover:opacity-100 text-[#f15e1c]" />
+              </a>
+            ) : (
+              displayTitle
+            )}
           </h3>
           <p className="text-xs font-bold font-mono text-[#f15e1c] uppercase tracking-wider">
             {product.category}
@@ -169,7 +215,7 @@ export function ProductCard({ product }: ProductCardProps) {
           View Details &rarr;
         </Link>
 
-        {isLive && product.externalUrl ? (
+        {product.externalUrl ? (
           <a
             href={product.externalUrl}
             target="_blank"

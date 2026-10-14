@@ -254,7 +254,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 </h3>
                 <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] max-w-md mx-auto">
                   {isLive
-                    ? "Start instant consultations directly on the AstroBeams platform."
+                    ? `Explore the live ${product.name} platform and experience next-generation digital capabilities.`
                     : "Join our enterprise waitlist to receive priority access upon launch."}
                 </p>
               </div>
