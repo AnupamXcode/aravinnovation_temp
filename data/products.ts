@@ -62,17 +62,210 @@ export interface Product {
 }
 
 export const productsData: Product[] = [
+  // 1. OMNiGRC (Governance, Risk & Compliance)
   {
-    slug: "astrobeams",
-    name: "AstroBeams",
-    domain: "astrobeams.store",
-    category: "Live Astrologer Consultation & Guidance Platform",
+    slug: "omnigrc",
+    name: "OMNiGRC",
+    domain: "omnigrc.co",
+    category: "Governance, Risk & Compliance",
     status: "live",
     badge: "Live Platform",
     badgeColor: "#2e936f",
-    tagline: "Talk to Expert Astrologers Online for Free Predictions & Life Guidance",
+    tagline: "SaaS Platform for Governance, Risk & Compliance",
     description:
-      "Experience accurate astrology services with AstroBeams. Chat or call certified expert astrologers for love, career, marriage, and life guidance. Available 24/7 for chat and voice consultations.",
+      "A comprehensive SaaS solution designed to streamline governance, risk management, and compliance processes for enterprises. Simplify audits, reduce risk exposure, and ensure regulatory adherence.",
+    positioning:
+      "A unified enterprise SaaS platform for continuous governance, automated compliance audits, and real-time risk monitoring.",
+    ctaText: "Visit OMNiGRC →",
+    ctaUrl: "https://omnigrc.co/",
+    ctaEnabled: true,
+    externalUrl: "https://omnigrc.co/",
+    iconName: "ShieldCheck",
+    iconUrl: "/images/omni-grc-logo.png",
+    imageUrl: "/images/omni-grc-logo.png",
+    features: [
+      "Centralized governance dashboard",
+      "Real-time risk monitoring and alerts",
+      "Automated compliance tracking",
+      "Audit trail and reporting",
+      "DPDP, SOC-2, ISO 27001 & GDPR pre-mapped controls",
+      "Continuous third-party security posture telemetry",
+    ],
+    useCase: "Enterprises and mid-market companies managing complex compliance requirements",
+    pricingModel: "live-platform",
+    pricingNote: "Enterprise platform access available for CISOs, audit, risk, and compliance teams.",
+    targetAudience: [
+      "Enterprises and mid-market companies managing complex compliance requirements",
+      "Chief Information Security Officers (CISOs) & Compliance Directors",
+      "Internal Audit, Risk & Legal Teams",
+      "Organizations streamlining DPDP, SOC-2, ISO 27001 & GDPR audit readiness",
+    ],
+    problemSolved: {
+      title: "Streamlining Complex Enterprise Risk & Compliance",
+      points: [
+        "Manual compliance tracking across fragmented spreadsheets and static documents.",
+        "Lack of real-time visibility into continuous regulatory and infrastructure risks.",
+        "Resource-intensive audit cycles requiring weeks of manual evidence collection.",
+      ],
+    },
+    howItWorks: [
+      {
+        step: 1,
+        title: "Centralize Risk Posture",
+        description: "Unify compliance frameworks, security controls, and assets in one dashboard.",
+      },
+      {
+        step: 2,
+        title: "Automate Monitoring",
+        description: "Track policy adherence and receive instant alerts on risk posture changes.",
+      },
+      {
+        step: 3,
+        title: "Export Audit Trails",
+        description: "Generate automated, audit-ready compliance reports with a single click.",
+      },
+    ],
+    featureDetails: [
+      {
+        title: "Governance Dashboard",
+        description: "Single-pane-of-glass overview of security controls and organizational risk.",
+        iconName: "ShieldCheck",
+      },
+      {
+        title: "Risk Monitoring & Alerts",
+        description: "Continuous automated scanning and instant risk notification engine.",
+        iconName: "ShieldCheck",
+      },
+      {
+        title: "Automated Compliance",
+        description: "Pre-mapped controls for DPDP, SOC-2, ISO 27001, and global privacy laws.",
+        iconName: "ShieldCheck",
+      },
+      {
+        title: "Audit Trail & Reporting",
+        description: "Immutable evidence logs and one-click regulatory export readiness.",
+        iconName: "ShieldCheck",
+      },
+    ],
+    proofPoint: {
+      metric: "Live",
+      label: "Enterprise Platform Active",
+      detail: "Engineered to cut enterprise compliance audit preparation time by up to 70%.",
+    },
+    faqs: [
+      {
+        question: "How do I access OMNiGRC?",
+        answer: "Visit omnigrc.co to log in or launch your enterprise governance and compliance portal.",
+      },
+      {
+        question: "What frameworks does OMNiGRC support?",
+        answer: "OMNiGRC supports built-in modules for DPDP (India), SOC-2 Type II, ISO 27001, and GDPR.",
+      },
+    ],
+  },
+
+  // 2. Astrav (Executive Command & Enterprise AI Platform)
+  {
+    slug: "getastrav",
+    name: "Astrav",
+    domain: "getastrav.com",
+    category: "EXECUTIVE COMMAND & ENTERPRISE AI PLATFORM",
+    status: "live",
+    badge: "Live Platform",
+    badgeColor: "#2e936f",
+    tagline: "The Goal-Driven Organization Operating System Powered by Enterprise AI",
+    description:
+      "Astrav is an executive command and organization operating system engineered with automated mathematical progress rollups, AI goal decomposition, and enterprise RBAC.",
+    positioning:
+      "A next-generation enterprise operating system empowering leadership with real-time goal decomposition, automated progress telemetry, and intelligent workflow automation.",
+    ctaText: "Visit Astrav.com →",
+    ctaUrl: "https://www.getastrav.com/",
+    ctaEnabled: true,
+    externalUrl: "https://www.getastrav.com/",
+    iconName: "GetAstravLogo",
+    features: [
+      "AI Goal Decomposition & Rollups",
+      "Executive Command Dashboards",
+      "Automated Progress Telemetry",
+      "Enterprise RBAC Governance",
+      "Cross-Functional Alignment",
+      "Custom Platform Integrations",
+    ],
+    useCase: "Enterprises and executive leaders seeking goal-driven organization operating systems and AI workflow orchestration.",
+    pricingModel: "live-platform",
+    pricingNote: "Enterprise licensing and dedicated deployment architectures.",
+    targetAudience: [
+      "Enterprise technology leaders & CIOs",
+      "Executive leadership teams & founders",
+      "Organizations driving automated goal decomposition",
+      "Digital transformation teams requiring scalable cloud architecture",
+    ],
+    problemSolved: {
+      title: "Eliminating Blindspots with Goal-Driven Enterprise Intelligence",
+      points: [
+        "Unifying fragmented enterprise workflows through intelligent AI orchestration.",
+        "Providing automated mathematical progress rollups across organizational tiers.",
+        "Enabling data-driven business decisions with real-time smart analytics and RBAC.",
+      ],
+    },
+    howItWorks: [
+      {
+        step: 1,
+        title: "Define Strategic Goals",
+        description: "Set top-level executive objectives with mathematical success criteria.",
+      },
+      {
+        step: 2,
+        title: "AI Decomposition & Rollups",
+        description: "Astrav breaks goals into sub-milestones with automated progress rollups.",
+      },
+      {
+        step: 3,
+        title: "Enterprise Execution",
+        description: "Seamless team alignment with real-time telemetry and enterprise RBAC.",
+      },
+    ],
+    featureDetails: [
+      {
+        title: "AI Goal Decomposition",
+        description: "Intelligent breakdown of high-level objectives into actionable execution trees.",
+        iconName: "Sparkles",
+      },
+      {
+        title: "Executive Telemetry",
+        description: "Real-time mathematical progress metrics and predictive organizational health.",
+        iconName: "Sparkles",
+      },
+    ],
+    proofPoint: {
+      metric: "Live",
+      label: "Platform Active",
+      detail: "Executive command operating system empowering forward-looking enterprise teams.",
+    },
+    faqs: [
+      {
+        question: "What is Astrav?",
+        answer: "Astrav is an executive command operating system designed to automate goal decomposition, mathematical progress rollups, and cross-functional enterprise workflows.",
+      },
+      {
+        question: "How can my enterprise access Astrav?",
+        answer: "Visit www.getastrav.com to explore platform capabilities and get started.",
+      },
+    ],
+  },
+
+  // 3. AstroBeams AI (astrobeams.store)
+  {
+    slug: "astrobeams-ai",
+    name: "AstroBeams AI",
+    domain: "astrobeams.store",
+    category: "AI-Powered Astrology & Guidance Platform",
+    status: "live",
+    badge: "Live Platform",
+    badgeColor: "#2e936f",
+    tagline: "Talk to Expert Astrologers Online for Predictions & Life Guidance",
+    description:
+      "Experience accurate astrology services with AstroBeams AI. Chat or call certified expert astrologers and AI guides for love, career, marriage, and life guidance. Available 24/7 for chat and voice consultations.",
     positioning:
       "A next-generation astrology & life guidance platform offering live chat, voice call consultations, birth chart/Kundli analysis, and personalized remedies.",
     ctaText: "Visit AstroBeams.store →",
@@ -148,18 +341,20 @@ export const productsData: Product[] = [
     },
     faqs: [
       {
-        question: "How do I consult an astrologer on AstroBeams?",
+        question: "How do I consult an astrologer on AstroBeams AI?",
         answer: "Visit astrobeams.store, sign up to receive your free initial consultation, select an astrologer, and start live chat or call instantly.",
       },
       {
-        question: "What services are available on AstroBeams?",
-        answer: "AstroBeams provides Kundli matching, horoscopes, gemstone recommendations, career advice, relationship guidance, and annual predictions.",
+        question: "What services are available on AstroBeams AI?",
+        answer: "AstroBeams AI provides Kundli matching, horoscopes, gemstone recommendations, career advice, relationship guidance, and annual predictions.",
       },
     ],
   },
+
+  // 4. AstroBeams (astrobeams.in)
   {
-    slug: "astrobeams-ai",
-    name: "AstroBeams AI",
+    slug: "astrobeams",
+    name: "AstroBeams",
     domain: "astrobeams.in",
     category: "AI-Powered Astrology & Spiritual Guidance Platform",
     status: "live",
@@ -167,7 +362,7 @@ export const productsData: Product[] = [
     badgeColor: "#2e936f",
     tagline: "Personalized AI Cosmic Guidance & Life Reports",
     description:
-      "AstroBeams AI is an AI-powered astrology and spiritual guidance platform that provides personalized cosmic guidance through AI-powered consultations, astrology readings, spiritual tools, compatibility analysis, and personalized life reports.",
+      "AstroBeams is an AI-powered astrology and spiritual guidance platform that provides personalized cosmic guidance through AI-powered consultations, astrology readings, spiritual tools, compatibility analysis, and personalized life reports.",
     positioning:
       "An AI spiritual advisor marketplace where users can receive personalized astrology, numerology, palmistry, and spiritual guidance through conversational AI and digital reports.",
     ctaText: "Visit AstroBeams.in →",
@@ -251,18 +446,20 @@ export const productsData: Product[] = [
     },
     faqs: [
       {
-        question: "How do I start using AstroBeams AI?",
+        question: "How do I start using AstroBeams?",
         answer: "Visit astrobeams.in, sign up to receive initial free questions, choose an AI spiritual advisor, and start your consultation.",
       },
       {
-        question: "What types of reports can I download on AstroBeams AI?",
-        answer: "AstroBeams AI offers PDF reports including Horoscopes, Gemstone Reports, Match-making, Numerology, Varshaphal Annual Reports, and Synastry Reports.",
+        question: "What types of reports can I download on AstroBeams?",
+        answer: "AstroBeams offers PDF reports including Horoscopes, Gemstone Reports, Match-making, Numerology, Varshaphal Annual Reports, and Synastry Reports.",
       },
     ],
   },
+
+  // 5. Fash (International Luxury Fashion & Events Platform)
   {
     slug: "fashai-universal",
-    name: "FashAI Universal",
+    name: "Fash",
     domain: "fashaiuniversal.com",
     category: "INTERNATIONAL LUXURY FASHION & EVENTS PLATFORM",
     status: "live",
@@ -270,7 +467,7 @@ export const productsData: Product[] = [
     badgeColor: "#2e936f",
     tagline: "International Fashion & Event Production Platform Powered by AI",
     description:
-      "FashAI Universal is an international fashion and event production platform powered by Arav Innovation, delivering luxury fashion shows, runway productions, corporate events, brand campaigns, and creative experiences while connecting global fashion talent across the UAE, India, and international markets.",
+      "Fash (FashAI Universal) is an international fashion and event production platform powered by Arav Innovation, delivering luxury fashion shows, runway productions, corporate events, brand campaigns, and creative experiences while connecting global fashion talent across the UAE, India, and international markets.",
     positioning:
       "An international fashion and luxury event production ecosystem combining AI-driven creative concepts with physical runway and event execution.",
     ctaText: "Visit FashAIUniversal.com →",
@@ -345,209 +542,34 @@ export const productsData: Product[] = [
     },
     faqs: [
       {
-        question: "What is FashAI Universal?",
-        answer: "FashAI Universal is an international fashion and event production platform powered by Arav Innovation, delivering runway shows, luxury galas, and AI-assisted creative campaigns.",
+        question: "What is Fash?",
+        answer: "Fash (FashAI Universal) is an international fashion and event production platform powered by Arav Innovation, delivering runway shows, luxury galas, and AI-assisted creative campaigns.",
       },
       {
-        question: "How can brands partner with FashAI Universal?",
+        question: "How can brands partner with Fash?",
         answer: "Visit fashaiuniversal.com to explore upcoming shows, request event production proposals, or connect with our talent network.",
-      },
-    ],
-  },
-  {
-    slug: "getastrav",
-    name: "GetAstrav",
-    domain: "getastrav.com",
-    category: "EXECUTIVE COMMAND & ENTERPRISE AI PLATFORM",
-    status: "live",
-    badge: "Live Platform",
-    badgeColor: "#2e936f",
-    tagline: "The Goal-Driven Organization Operating System Powered by Enterprise AI",
-    description:
-      "GetAstrav is an executive command and organization operating system engineered with automated mathematical progress rollups, AI goal decomposition, and enterprise RBAC.",
-    positioning:
-      "A next-generation enterprise operating system empowering leadership with real-time goal decomposition, automated progress telemetry, and intelligent workflow automation.",
-    ctaText: "Visit GetAstrav.com →",
-    ctaUrl: "https://www.getastrav.com/",
-    ctaEnabled: true,
-    externalUrl: "https://www.getastrav.com/",
-    iconName: "GetAstravLogo",
-    features: [
-      "AI Goal Decomposition & Rollups",
-      "Executive Command Dashboards",
-      "Automated Progress Telemetry",
-      "Enterprise RBAC Governance",
-      "Cross-Functional Alignment",
-      "Custom Platform Integrations",
-    ],
-    useCase: "Enterprises and executive leaders seeking goal-driven organization operating systems and AI workflow orchestration.",
-    pricingModel: "live-platform",
-    pricingNote: "Enterprise licensing and dedicated deployment architectures.",
-    targetAudience: [
-      "Enterprise technology leaders & CIOs",
-      "Executive leadership teams & founders",
-      "Organizations driving automated goal decomposition",
-      "Digital transformation teams requiring scalable cloud architecture",
-    ],
-    problemSolved: {
-      title: "Eliminating Blindspots with Goal-Driven Enterprise Intelligence",
-      points: [
-        "Unifying fragmented enterprise workflows through intelligent AI orchestration.",
-        "Providing automated mathematical progress rollups across organizational tiers.",
-        "Enabling data-driven business decisions with real-time smart analytics and RBAC.",
-      ],
-    },
-    howItWorks: [
-      {
-        step: 1,
-        title: "Define Strategic Goals",
-        description: "Set top-level executive objectives with mathematical success criteria.",
-      },
-      {
-        step: 2,
-        title: "AI Decomposition & Rollups",
-        description: "GetAstrav breaks goals into sub-milestones with automated progress rollups.",
-      },
-      {
-        step: 3,
-        title: "Enterprise Execution",
-        description: "Seamless team alignment with real-time telemetry and enterprise RBAC.",
-      },
-    ],
-    featureDetails: [
-      {
-        title: "AI Goal Decomposition",
-        description: "Intelligent breakdown of high-level objectives into actionable execution trees.",
-        iconName: "Sparkles",
-      },
-      {
-        title: "Executive Telemetry",
-        description: "Real-time mathematical progress metrics and predictive organizational health.",
-        iconName: "Sparkles",
-      },
-    ],
-    proofPoint: {
-      metric: "Live",
-      label: "Platform Active",
-      detail: "Executive command operating system empowering forward-looking enterprise teams.",
-    },
-    faqs: [
-      {
-        question: "What is GetAstrav?",
-        answer: "GetAstrav is an executive command operating system designed to automate goal decomposition, mathematical progress rollups, and cross-functional enterprise workflows.",
-      },
-      {
-        question: "How can my enterprise access GetAstrav?",
-        answer: "Visit www.getastrav.com to explore platform capabilities and get started.",
-      },
-    ],
-  },
-  {
-    slug: "omnigrc",
-    name: "OMNiGRC",
-    domain: "app.omnigrc.co",
-    category: "Governance, Risk & Compliance",
-    status: "live",
-    badge: "Live Platform",
-    badgeColor: "#2e936f",
-    tagline: "SaaS Platform for Governance, Risk & Compliance",
-    description:
-      "A comprehensive SaaS solution designed to streamline governance, risk management, and compliance processes for enterprises. Simplify audits, reduce risk exposure, and ensure regulatory adherence.",
-    positioning:
-      "A unified enterprise SaaS platform for continuous governance, automated compliance audits, and real-time risk monitoring.",
-    ctaText: "Visit OMNiGRC →",
-    ctaUrl: "https://app.omnigrc.co/",
-    ctaEnabled: true,
-    externalUrl: "https://app.omnigrc.co/",
-    iconName: "ShieldCheck",
-    iconUrl: "/images/omni-grc-logo.png",
-    imageUrl: "/images/omni-grc-logo.png",
-    features: [
-      "Centralized governance dashboard",
-      "Real-time risk monitoring and alerts",
-      "Automated compliance tracking",
-      "Audit trail and reporting",
-    ],
-    useCase: "Enterprises and mid-market companies managing complex compliance requirements",
-    pricingModel: "live-platform",
-    pricingNote: "Enterprise platform access available for CISOs, audit, risk, and compliance teams.",
-    targetAudience: [
-      "Enterprises and mid-market companies managing complex compliance requirements",
-      "Chief Information Security Officers (CISOs) & Compliance Directors",
-      "Internal Audit, Risk & Legal Teams",
-      "Organizations streamlining DPDP, SOC-2, ISO 27001 & GDPR audit readiness",
-    ],
-    problemSolved: {
-      title: "Streamlining Complex Enterprise Risk & Compliance",
-      points: [
-        "Manual compliance tracking across fragmented spreadsheets and static documents.",
-        "Lack of real-time visibility into continuous regulatory and infrastructure risks.",
-        "Resource-intensive audit cycles requiring weeks of manual evidence collection.",
-      ],
-    },
-    howItWorks: [
-      {
-        step: 1,
-        title: "Centralize Risk Posture",
-        description: "Unify compliance frameworks, security controls, and assets in one dashboard.",
-      },
-      {
-        step: 2,
-        title: "Automate Monitoring",
-        description: "Track policy adherence and receive instant alerts on risk posture changes.",
-      },
-      {
-        step: 3,
-        title: "Export Audit Trails",
-        description: "Generate automated, audit-ready compliance reports with a single click.",
-      },
-    ],
-    featureDetails: [
-      {
-        title: "Governance Dashboard",
-        description: "Single-pane-of-glass overview of security controls and organizational risk.",
-        iconName: "ShieldCheck",
-      },
-      {
-        title: "Risk Monitoring & Alerts",
-        description: "Continuous automated scanning and instant risk notification engine.",
-        iconName: "ShieldCheck",
-      },
-      {
-        title: "Automated Compliance",
-        description: "Pre-mapped controls for DPDP, SOC-2, ISO 27001, and global privacy laws.",
-        iconName: "ShieldCheck",
-      },
-      {
-        title: "Audit Trail & Reporting",
-        description: "Immutable evidence logs and one-click regulatory export readiness.",
-        iconName: "ShieldCheck",
-      },
-    ],
-    proofPoint: {
-      metric: "Live",
-      label: "Enterprise Platform Active",
-      detail: "Engineered to cut enterprise compliance audit preparation time by up to 70%.",
-    },
-    faqs: [
-      {
-        question: "How do I access OMNiGRC?",
-        answer: "Visit app.omnigrc.co to log in or launch your enterprise governance and compliance portal.",
-      },
-      {
-        question: "What frameworks does OMNiGRC support?",
-        answer: "OMNiGRC supports built-in modules for DPDP (India), SOC-2 Type II, ISO 27001, and GDPR.",
       },
     ],
   },
 ];
 
 const productAliasMap: Record<string, string> = {
+  "omnigrc": "omnigrc",
+  "app.omnigrc.co": "omnigrc",
+  "omnigrc.co": "omnigrc",
+  "astrav": "getastrav",
+  "getastrav": "getastrav",
+  "getastrav.com": "getastrav",
   "astrobeams-ai": "astrobeams-ai",
   "astrobeams.ai": "astrobeams-ai",
-  "astrobeams.in": "astrobeams-ai",
-  "astrobeams-store": "astrobeams",
-  "astrobeams.store": "astrobeams",
+  "astrobeams-store": "astrobeams-ai",
+  "astrobeams.store": "astrobeams-ai",
+  "astrobeams": "astrobeams",
+  "astrobeams.in": "astrobeams",
+  "fash": "fashai-universal",
+  "fashai": "fashai-universal",
+  "fashai-universal": "fashai-universal",
+  "fashaiuniversal.com": "fashai-universal",
 };
 
 export function getProductBySlug(slug: string): Product | undefined {

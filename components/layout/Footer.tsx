@@ -14,6 +14,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { useSiteConfig } from "@/lib/site-config";
+import { BrandLogo } from "./BrandLogo";
 import { cn } from "@/lib/utils";
 
 function LinkedInIcon({ className }: { className?: string }) {
@@ -433,21 +434,8 @@ export function Footer() {
               
               {/* BRAND STATEMENT (4 Cols) */}
               <div className="lg:col-span-4 flex flex-col justify-between space-y-3">
-                <div className="space-y-2.5">
-                  <div className="flex items-center gap-3">
-                    <div className="relative w-10 h-10 sm:w-12 sm:h-12 shrink-0">
-                      <Image
-                        src="/logos/arav-logo-footer.png"
-                        alt="Arav Innovations Logo"
-                        fill
-                        sizes="48px"
-                        className="object-contain object-left"
-                      />
-                    </div>
-                    <span className="text-base sm:text-lg font-extrabold font-display text-white uppercase tracking-wider">
-                      ARAV INNOVATIONS
-                    </span>
-                  </div>
+                <div className="space-y-3">
+                  <BrandLogo variant="footer" />
                   <p className="text-xs sm:text-sm text-white/95 leading-relaxed font-sans max-w-sm font-medium">
                     {footerConfig.brandStatement}
                   </p>

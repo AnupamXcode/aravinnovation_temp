@@ -1000,7 +1000,7 @@ export default function AdminDashboardPage() {
             <div className="p-6 rounded-3xl bg-[#FFFDF9] dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#1f1f1f] shadow-xl space-y-2">
               <h2 className="text-lg font-bold font-display flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-[#f15e1c]" />
-                <span>Products &amp; Platforms CMS (AstroBeams.ai, AstroBeams.store &amp; OMNiGRC)</span>
+                <span>Products &amp; Platforms CMS (OMNiGRC, Astrav, AstroBeams AI, AstroBeams, Fash)</span>
               </h2>
               <p className="text-xs text-[#7A6A5F] dark:text-[#B8ACA0]">
                 Manage product details, categories, descriptions, URLs, tags/capabilities, CTAs, visibility, and display ordering.

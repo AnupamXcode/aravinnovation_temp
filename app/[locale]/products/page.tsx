@@ -7,9 +7,9 @@ import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { BreadcrumbSchema } from "@/components/seo/StructuredData";
 
 export const metadata: Metadata = {
-  title: "Our Products | AstroBeams & OMNiGRC | Arav Innovations",
+  title: "Our Products | OMNiGRC, Astrav & AstroBeams | Arav Innovations",
   description:
-    "Explore Arav Innovations' purpose-built products: AstroBeams (live astrologer consultation platform) and OMNiGRC (SaaS platform for governance, risk & compliance).",
+    "Explore Arav Innovations' purpose-built products: OMNiGRC (SaaS platform for governance, risk & compliance), Astrav, AstroBeams AI, AstroBeams, and Fash.",
   alternates: {
     canonical: "https://aravinnovations.com/products",
   },
@@ -90,46 +90,13 @@ export default async function ProductsListingPage() {
             {/* Functional Device Link Pills */}
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <a
-                href="https://astrobeams.in"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#f15e1c] text-xs font-bold font-mono hover:bg-[#fefaf5] hover:border-[#f15e1c] hover:-translate-y-0.5 transition-all shadow-xs cursor-pointer"
-              >
-                <Sparkles className="w-4 h-4 text-[#f15e1c]" />
-                <span>Live Platform (AstroBeams.in)</span>
-                <ExternalLink className="w-3 h-3 text-[#f15e1c]" />
-              </a>
-
-              <a
-                href="https://www.astrobeams.store/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#2e936f] text-xs font-bold font-mono hover:bg-[#fefaf5] hover:border-[#2e936f] hover:-translate-y-0.5 transition-all shadow-xs cursor-pointer"
-              >
-                <Globe className="w-4 h-4 text-[#2e936f]" />
-                <span>Spiritual Guidance Platform (AstroBeams.store)</span>
-                <ExternalLink className="w-3 h-3 text-[#2e936f]" />
-              </a>
-
-              <a
-                href="https://www.fashaiuniversal.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#f15e1c] text-xs font-bold font-mono hover:bg-[#fefaf5] hover:border-[#f15e1c] hover:-translate-y-0.5 transition-all shadow-xs cursor-pointer"
-              >
-                <Sparkles className="w-4 h-4 text-[#f15e1c]" />
-                <span>Global Fashion Platform (FashAIUniversal.com)</span>
-                <ExternalLink className="w-3 h-3 text-[#f15e1c]" />
-              </a>
-
-              <a
-                href="https://app.omnigrc.co/"
+                href="https://omnigrc.co/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#2e936f] text-xs font-bold font-mono hover:bg-[#fefaf5] hover:border-[#2e936f] hover:-translate-y-0.5 transition-all shadow-xs cursor-pointer"
               >
                 <ShieldCheck className="w-4 h-4 text-[#2e936f]" />
-                <span>Enterprise GRC Console (app.omnigrc.co)</span>
+                <span>Enterprise GRC Platform (omnigrc.co)</span>
                 <ExternalLink className="w-3 h-3 text-[#2e936f]" />
               </a>
 
@@ -140,7 +107,40 @@ export default async function ProductsListingPage() {
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#f15e1c] text-xs font-bold font-mono hover:bg-[#fefaf5] hover:border-[#f15e1c] hover:-translate-y-0.5 transition-all shadow-xs cursor-pointer"
               >
                 <Sparkles className="w-4 h-4 text-[#f15e1c]" />
-                <span>Executive Command OS (GetAstrav.com)</span>
+                <span>Executive Command OS (Astrav.com)</span>
+                <ExternalLink className="w-3 h-3 text-[#f15e1c]" />
+              </a>
+
+              <a
+                href="https://www.astrobeams.store/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#2e936f] text-xs font-bold font-mono hover:bg-[#fefaf5] hover:border-[#2e936f] hover:-translate-y-0.5 transition-all shadow-xs cursor-pointer"
+              >
+                <Globe className="w-4 h-4 text-[#2e936f]" />
+                <span>Spiritual Guidance Platform (AstroBeams AI)</span>
+                <ExternalLink className="w-3 h-3 text-[#2e936f]" />
+              </a>
+
+              <a
+                href="https://astrobeams.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#f15e1c] text-xs font-bold font-mono hover:bg-[#fefaf5] hover:border-[#f15e1c] hover:-translate-y-0.5 transition-all shadow-xs cursor-pointer"
+              >
+                <Sparkles className="w-4 h-4 text-[#f15e1c]" />
+                <span>Live Platform (AstroBeams)</span>
+                <ExternalLink className="w-3 h-3 text-[#f15e1c]" />
+              </a>
+
+              <a
+                href="https://www.fashaiuniversal.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] text-[#f15e1c] text-xs font-bold font-mono hover:bg-[#fefaf5] hover:border-[#f15e1c] hover:-translate-y-0.5 transition-all shadow-xs cursor-pointer"
+              >
+                <Sparkles className="w-4 h-4 text-[#f15e1c]" />
+                <span>Global Fashion Platform (FashAIUniversal.com)</span>
                 <ExternalLink className="w-3 h-3 text-[#f15e1c]" />
               </a>
 

@@ -91,7 +91,7 @@ export function ProductCard({ product }: ProductCardProps) {
     <div className="flex items-center gap-1.5">
       <GetAstravLogoIcon className="w-6 h-6" />
       <span className="font-extrabold font-display text-xs sm:text-sm text-[#f15e1c] tracking-tight">
-        GetAstrav
+        Astrav
       </span>
     </div>
   ) : product.iconName === "ShieldCheck" ? (

@@ -16,6 +16,7 @@ import {
   Lock,
   FileText,
   ArrowRight,
+  ExternalLink,
   Sparkles,
   CheckCircle2,
   Globe2,
@@ -426,6 +427,25 @@ export function RiskGovInteractivePage({ service, relatedPosts }: RiskGovPagePro
                   </MagneticButton>
                 </Link>
 
+                <a
+                  href="https://omnigrc.co/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block"
+                  aria-label="Explore OMNiGRC platform"
+                >
+                  <MagneticButton>
+                    <Button3D
+                      variant="primary"
+                      size="md"
+                      rightIcon={<ExternalLink className="w-4 h-4 ml-1" />}
+                      className="shadow-md shadow-[#f15e1c]/20 bg-[#f15e1c] hover:bg-[#d8480d] text-white hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+                    >
+                      Explore OMNiGRC
+                    </Button3D>
+                  </MagneticButton>
+                </a>
+
                 <Link href="#capabilities">
                   <MagneticButton>
                     <Button3D variant="outline" size="md" className="hover:-translate-y-0.5 transition-all duration-300">
@@ -591,6 +611,48 @@ export function RiskGovInteractivePage({ service, relatedPosts }: RiskGovPagePro
               </AnimatedSection>
             ))}
           </div>
+
+          {/* OMNiGRC Platform Showcase Banner */}
+          <AnimatedSection delay={0.2}>
+            <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#ffffff] via-[#fefaf5] to-[#f7d7b0]/40 dark:from-[#0a0a0a] dark:via-[#121212] dark:to-[#1a1a1a] border-2 border-[#2e936f]/40 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden">
+              <div className="space-y-2 text-left max-w-2xl relative z-10">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2e936f]/10 border border-[#2e936f]/30 text-xs font-mono font-bold text-[#2e936f]">
+                  <ShieldCheck className="w-4 h-4 text-[#2e936f]" />
+                  <span>FLAGSHIP ENTERPRISE GRC PLATFORM</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight">
+                  Accelerate Compliance with OMNiGRC
+                </h3>
+                <p className="text-xs sm:text-sm text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed">
+                  A unified SaaS platform for continuous governance, automated compliance audits (DPDP, SOC-2, ISO 27001, GDPR), and real-time enterprise risk monitoring. Engineered to cut compliance audit preparation time by up to 70%.
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 relative z-10 w-full sm:w-auto">
+                <a
+                  href="https://omnigrc.co/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto"
+                  aria-label="Explore OMNiGRC on omnigrc.co"
+                >
+                  <Button3D
+                    variant="primary"
+                    size="md"
+                    rightIcon={<ExternalLink className="w-4 h-4 ml-1" />}
+                    className="w-full sm:w-auto shadow-md bg-[#2e936f] hover:bg-[#2e936f]/90 text-white cursor-pointer"
+                  >
+                    Explore OMNiGRC (omnigrc.co)
+                  </Button3D>
+                </a>
+                <Link href="/products/omnigrc" className="w-full sm:w-auto">
+                  <Button3D variant="outline" size="md" className="w-full sm:w-auto">
+                    View Product Details
+                  </Button3D>
+                </Link>
+              </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
