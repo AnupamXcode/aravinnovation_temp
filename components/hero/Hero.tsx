@@ -70,24 +70,18 @@ export function Hero() {
       <HeroVideoBackground />
 
       {/* Main Editorial / Enterprise Content Container */}
-      <div className="relative z-10 w-full max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 pt-16 sm:pt-20 pb-8 my-auto box-sizing-border">
+      <div className="relative z-10 w-full max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 pt-16 sm:pt-20 pb-8 my-auto box-sizing-border flex flex-col items-center justify-center">
         
-        {/* Left-Aligned Content Column Block */}
+        {/* Center-Aligned Content Column Block */}
         <div
           style={{
-            transform: `translate3d(${effectiveContentX}px, ${effectiveContentY}px, 0)`,
-            maxWidth: !isMobile && positioning.contentWidth ? `${Math.max(positioning.contentWidth, 920)}px` : "100%",
-            textAlign: isMobile ? "left" : (positioning.contentAlign || "left"),
+            transform: `translate3d(0, ${effectiveContentY}px, 0)`,
           }}
-          className="text-left flex flex-col items-start justify-start w-full transition-transform duration-200"
+          className="text-center flex flex-col items-center justify-center w-full max-w-4xl lg:max-w-5xl mx-auto transition-transform duration-200"
         >
           {/* 01. Main Editorial Headline: Restrained Two-Line Clipped Reveal */}
           <h1
-            style={{
-              transform: isMobile ? "none" : `translate3d(${positioning.headingX || 0}px, ${positioning.headingY || 0}px, 0)`,
-              marginBottom: positioning.headingMb !== undefined ? `${positioning.headingMb}px` : undefined,
-            }}
-            className="font-display font-extrabold text-[34px] xs:text-[38px] sm:text-5xl lg:text-[54px] xl:text-[58px] text-[#221811] dark:text-[#ffffff] tracking-tight leading-[1.12] sm:leading-[1.08] text-left transition-all duration-200 max-w-full break-words space-y-1 mb-4"
+            className="font-display font-extrabold text-[32px] xs:text-[36px] sm:text-5xl lg:text-[54px] xl:text-[58px] text-[#221811] dark:text-[#ffffff] tracking-tight leading-[1.12] sm:leading-[1.08] text-center transition-all duration-200 max-w-full break-words space-y-1 mb-4"
           >
             {/* Line 1 */}
             <span className="block overflow-hidden py-0.5">
@@ -96,7 +90,7 @@ export function Hero() {
                 initial="hidden"
                 animate="visible"
                 variants={lineVariants}
-                className="block whitespace-normal sm:whitespace-nowrap"
+                className="block text-center whitespace-normal sm:whitespace-nowrap"
               >
                 Build, Grow &amp; Scale With
               </motion.span>
@@ -109,7 +103,7 @@ export function Hero() {
                 initial="hidden"
                 animate="visible"
                 variants={lineVariants}
-                className="block text-[#221811] dark:text-[#ffffff] whitespace-normal sm:whitespace-nowrap"
+                className="block text-[#f15e1c] dark:text-[#f15e1c] text-center whitespace-normal sm:whitespace-nowrap"
               >
                 Technology, AI &amp; Digital Growth
               </motion.span>
@@ -122,11 +116,7 @@ export function Hero() {
             initial="hidden"
             animate="visible"
             variants={fadeUpVariants}
-            style={{
-              transform: isMobile ? "none" : `translate3d(${positioning.descX || 0}px, ${positioning.descY || 0}px, 0)`,
-              marginBottom: positioning.descMb !== undefined ? `${positioning.descMb}px` : undefined,
-            }}
-            className="text-base sm:text-lg text-[#3A2E27]/90 dark:text-[#ffffff]/85 max-w-xl lg:max-w-2xl text-left leading-relaxed font-sans font-normal transition-all duration-200 mb-6 sm:mb-8"
+            className="text-base sm:text-lg text-[#3A2E27]/90 dark:text-[#ffffff]/85 max-w-xl sm:max-w-2xl text-center mx-auto leading-relaxed font-sans font-normal transition-all duration-200 mb-6 sm:mb-8"
           >
             We help businesses turn technology challenges and growth goals into
             scalable digital solutions and measurable outcomes.
@@ -138,12 +128,7 @@ export function Hero() {
             initial="hidden"
             animate="visible"
             variants={fadeUpVariants}
-            style={{
-              transform: isMobile ? "none" : `translate3d(${positioning.ctaX || 0}px, ${positioning.ctaY || 0}px, 0)`,
-              marginBottom: positioning.ctaMb !== undefined ? `${positioning.ctaMb}px` : undefined,
-              gap: positioning.ctaGap !== undefined ? `${positioning.ctaGap}px` : undefined,
-            }}
-            className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start w-full sm:w-auto gap-3.5 sm:gap-4 transition-all duration-200 mb-6 sm:mb-8"
+            className="flex flex-col sm:flex-row items-center justify-center w-full sm:w-auto gap-3.5 sm:gap-4 transition-all duration-200 mb-6 sm:mb-8 mx-auto"
           >
             <Link href="/contact" className="w-full sm:w-auto group">
               <Button
@@ -175,19 +160,12 @@ export function Hero() {
             initial="hidden"
             animate="visible"
             variants={fadeUpVariants}
-            style={{
-              transform: isMobile ? "none" : `translate3d(${positioning.capX || 0}px, ${positioning.capY || 0}px, 0)`,
-              marginTop: positioning.capMt !== undefined ? `${positioning.capMt}px` : undefined,
-            }}
-            className="pt-4 sm:pt-6 border-t border-[#f7d7b0]/70 dark:border-[#2a3c35] w-full max-w-2xl transition-all duration-200"
+            className="pt-4 sm:pt-6 border-t border-[#f7d7b0]/70 dark:border-[#2a3c35] w-full max-w-2xl mx-auto transition-all duration-200"
           >
             <div
-              style={{
-                gap: positioning.capGap !== undefined ? `${positioning.capGap}px` : undefined,
-              }}
-              className="flex flex-col sm:flex-row items-start sm:items-center sm:divide-x sm:divide-[#f7d7b0]/80 dark:sm:divide-[#2a3c35] justify-start gap-3 sm:gap-0"
+              className="flex flex-col sm:flex-row items-center sm:divide-x sm:divide-[#f7d7b0]/80 dark:sm:divide-[#2a3c35] justify-center gap-3 sm:gap-0"
             >
-              <div className="flex items-center gap-2.5 sm:pr-6 text-left justify-start py-0.5 sm:py-0">
+              <div className="flex items-center gap-2.5 sm:pr-6 text-center sm:text-left justify-center py-0.5 sm:py-0">
                 <div className="w-7 h-7 rounded-lg bg-[#f15e1c]/10 dark:bg-[#f15e1c]/20 flex items-center justify-center shrink-0">
                   <ShieldCheck className="w-4 h-4 text-[#f15e1c]" />
                 </div>
@@ -196,7 +174,7 @@ export function Hero() {
                 </span>
               </div>
 
-              <div className="flex items-center gap-2.5 sm:px-6 text-left justify-start py-0.5 sm:py-0">
+              <div className="flex items-center gap-2.5 sm:px-6 text-center sm:text-left justify-center py-0.5 sm:py-0">
                 <div className="w-7 h-7 rounded-lg bg-[#2e936f]/10 dark:bg-[#2e936f]/20 flex items-center justify-center shrink-0">
                   <Globe2 className="w-4 h-4 text-[#2e936f]" />
                 </div>
@@ -205,7 +183,7 @@ export function Hero() {
                 </span>
               </div>
 
-              <div className="flex items-center gap-2.5 sm:pl-6 text-left justify-start py-0.5 sm:py-0">
+              <div className="flex items-center gap-2.5 sm:pl-6 text-center sm:text-left justify-center py-0.5 sm:py-0">
                 <div className="w-7 h-7 rounded-lg bg-[#fab60a]/15 dark:bg-[#fab60a]/20 flex items-center justify-center shrink-0">
                   <Zap className="w-4 h-4 text-[#fab60a]" />
                 </div>
