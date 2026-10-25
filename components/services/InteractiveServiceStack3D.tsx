@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import { ServiceCardAnimatedIllustration } from "./ServiceCardAnimatedIllustration";
 
 export interface ServiceCategoryGroup {
   groupName: string;
@@ -346,10 +347,20 @@ export function InteractiveServiceStack3D() {
                       key={service.id}
                       whileHover={{ y: -4 }}
                       transition={{ duration: 0.3, ease: "easeOut" }}
-                      className="group rounded-2xl sm:rounded-[22px] bg-[#FBF3EA] dark:bg-[#0e0c0a] border border-[#EFE2D6] dark:border-[#221e1a] p-5 sm:p-6 flex flex-col justify-between hover:border-[#f15e1c] dark:hover:border-[#f15e1c] hover:bg-[#FFF8F2] dark:hover:bg-[#14100d] hover:shadow-[0_12px_28px_rgba(241,94,28,0.08)] transition-all duration-300 relative overflow-hidden h-full min-h-[200px] sm:min-h-[215px]"
+                      className="group rounded-2xl sm:rounded-[22px] bg-[#FBF3EA] dark:bg-[#0e0c0a] border border-[#EFE2D6] dark:border-[#221e1a] p-5 sm:p-6 flex flex-col justify-between hover:border-[#f15e1c] dark:hover:border-[#f15e1c] hover:bg-[#FFF8F2] dark:hover:bg-[#14100d] hover:shadow-[0_12px_28px_rgba(241,94,28,0.08)] transition-all duration-300 relative overflow-hidden h-full min-h-[210px] sm:min-h-[225px]"
                     >
+                      {/* Independent Animated 3D-Style SVG Illustration */}
+                      <div className="absolute right-0 bottom-2 sm:bottom-3 w-[44%] sm:w-[46%] lg:w-[48%] h-[68%] sm:h-[72%] flex items-center justify-end pointer-events-none select-none overflow-hidden z-0 pr-1 sm:pr-2">
+                        <div className="w-full h-full flex items-center justify-center transform group-hover:scale-105 transition-transform duration-500 ease-out">
+                          <ServiceCardAnimatedIllustration
+                            serviceId={service.id}
+                            className="w-full h-full"
+                          />
+                        </div>
+                      </div>
+
                       {/* Card Content */}
-                      <div className="w-full flex-1 flex flex-col justify-start">
+                      <div className="w-full flex-1 flex flex-col justify-start relative z-10">
                         {/* 1. Service Number & 2. Category Eyebrow */}
                         <div className="flex items-center justify-between gap-2 mb-2 sm:mb-2.5">
                           <span className="font-mono text-xs font-bold text-[#f15e1c] tracking-widest">
@@ -360,19 +371,20 @@ export function InteractiveServiceStack3D() {
                           </span>
                         </div>
 
-                        {/* 3. Service Heading */}
-                        <h4 className="text-base sm:text-[18px] font-bold font-display text-[#221811] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors mb-2 leading-snug tracking-tight">
-                          {service.name}
-                        </h4>
+                        {/* 3. Service Heading & 4. Short Description */}
+                        <div className="max-w-full sm:max-w-[62%] lg:max-w-[60%]">
+                          <h4 className="text-base sm:text-[18px] font-bold font-display text-[#221811] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors mb-2 leading-snug tracking-tight">
+                            {service.name}
+                          </h4>
 
-                        {/* 4. Short Description */}
-                        <p className="text-xs sm:text-[13.5px] text-[#3A2E27] dark:text-[#E8DDD2] leading-relaxed font-normal">
-                          {service.description}
-                        </p>
+                          <p className="text-xs sm:text-[13.5px] text-[#3A2E27] dark:text-[#E8DDD2] leading-relaxed font-normal">
+                            {service.description}
+                          </p>
+                        </div>
                       </div>
 
                       {/* 5. Bottom CTA & 6. Directional Arrow */}
-                      <div className="pt-3.5 mt-4 flex items-center justify-start border-t border-[#EFE2D6]/70 dark:border-[#221e1a]">
+                      <div className="pt-3.5 mt-4 flex items-center justify-start border-t border-[#EFE2D6]/70 dark:border-[#221e1a] relative z-10">
                         <Link
                           href={service.href}
                           className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#f15e1c] hover:underline py-0.5 group/cta"
