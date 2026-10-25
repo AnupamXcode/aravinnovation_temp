@@ -113,11 +113,11 @@ export function ProductCard({ product }: ProductCardProps) {
       />
 
       <div className="space-y-5">
-        {/* Top Row: Icon & Status Badge */}
+        {/* Top Row: Category Eyebrow & Status Badge */}
         <div className="flex items-center justify-between">
-          <div className="p-2.5 sm:p-3 rounded-2xl bg-[#f7d7b0]/30 dark:bg-[#1a1a1a] border border-[#f7d7b0] dark:border-[#1a1a1a] transition-transform duration-300 group-hover:scale-105 flex items-center justify-center">
-            {icon}
-          </div>
+          <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#f15e1c]">
+            {product.category || "Proprietary Platform"}
+          </span>
 
           <div className="flex items-center gap-2 flex-wrap justify-end">
             {product.domain && (

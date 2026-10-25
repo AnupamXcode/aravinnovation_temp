@@ -174,3 +174,103 @@ export const approvedTestimonialsData = testimonialsData.filter(
   (t) => t.verificationStatus === "Approved for Public Use"
 );
 
+export interface StreamTestimonial {
+  id: string;
+  quote: string;
+  clientName: string;
+  designation: string;
+  company: string;
+  companySlug: "nexora" | "kriyan" | "mindforge" | "solvix" | "logitech" | "cloudsphere";
+  companyBrandName: string;
+  rating?: number;
+  isApproved: boolean;
+  isSampleReview: boolean;
+}
+
+/**
+ * Verified & Sample Testimonials for the Continuous Upward Stream
+ * In accordance with brand guidelines, sample placeholders are visibly flagged
+ * and separated from production verified reviews.
+ */
+export const streamTestimonialsData: StreamTestimonial[] = [
+  {
+    id: "stream-nexora",
+    quote:
+      "Arav Innovations helped us streamline our processes and improve efficiency across multiple teams. Their approach is structured and results-focused.",
+    clientName: "Rohit Mehta",
+    designation: "COO",
+    company: "Nexora Technologies",
+    companySlug: "nexora",
+    companyBrandName: "Nexora",
+    rating: 4,
+    isApproved: false,
+    isSampleReview: true,
+  },
+  {
+    id: "stream-kriyan",
+    quote:
+      "Professional team, clear communication, and a strong understanding of our industry challenges. They delivered exactly what we needed, on time.",
+    clientName: "Anjali Rao",
+    designation: "CTO",
+    company: "Kriyan Solutions",
+    companySlug: "kriyan",
+    companyBrandName: "Kriyan Solutions",
+    rating: 4,
+    isApproved: false,
+    isSampleReview: true,
+  },
+  {
+    id: "stream-mindforge",
+    quote:
+      "Their expertise in digital transformation and process automation brought real value to our business. We appreciate their commitment and support.",
+    clientName: "Vikram Sinha",
+    designation: "Founder & CEO",
+    company: "MindForge Systems",
+    companySlug: "mindforge",
+    companyBrandName: "MindForge",
+    rating: 4,
+    isApproved: false,
+    isSampleReview: true,
+  },
+  {
+    id: "stream-solvix",
+    quote:
+      "A reliable partner for our growth journey. Their team is knowledgeable, responsive, and solution-oriented throughout complex modernization steps.",
+    clientName: "Neha Kapoor",
+    designation: "Operations Head",
+    company: "Solvix Global",
+    companySlug: "solvix",
+    companyBrandName: "Solvix",
+    rating: 4,
+    isApproved: false,
+    isSampleReview: true,
+  },
+  {
+    id: "stream-logitech",
+    quote:
+      "They understood our business needs quickly and delivered a solution that was practical and easy to adopt across engineering workflows.",
+    clientName: "Aman Verma",
+    designation: "Head of IT",
+    company: "LogiTech Solutions",
+    companySlug: "logitech",
+    companyBrandName: "LogiTech Solutions",
+    rating: 5,
+    isApproved: false,
+    isSampleReview: true,
+  },
+  {
+    id: "stream-cloudsphere",
+    quote:
+      "Arav Innovations brought structured planning, clear architecture recommendations, and reliable implementation support to our digital initiatives.",
+    clientName: "Kavita Sundaram",
+    designation: "Director of Engineering",
+    company: "CloudSphere Labs",
+    companySlug: "cloudsphere",
+    companyBrandName: "CloudSphere",
+    rating: 5,
+    isApproved: false,
+    isSampleReview: true,
+  },
+];
+
+

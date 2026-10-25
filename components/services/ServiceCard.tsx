@@ -61,12 +61,12 @@ export function ServiceCard({
       >
         <div className="flex-1 flex flex-col justify-between space-y-4">
           <div>
-            <div className="flex items-center justify-between mb-5">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl icon-box-hover shadow-xs shrink-0 flex items-center justify-center bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626]">
-                {iconMap[service.icon] || <Compass className="w-7 h-7 stroke-[2]" />}
-              </div>
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#f15e1c] px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/30">
-                Practice
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#f15e1c]">
+                {service.eyebrow || "Practice"}
+              </span>
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#2e936f] px-3 py-1 rounded-full bg-[#2e936f]/10 border border-[#2e936f]/30">
+                PRACTICE
               </span>
             </div>
 

@@ -999,9 +999,6 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                     className="block h-full p-6 rounded-2xl bg-white dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] hover:border-[#f15e1c] shadow-xs hover:shadow-lg transition-all duration-300 space-y-3 text-left group"
                   >
                     <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform">
-                        {React.cloneElement(card.icon as React.ReactElement<{ className?: string }>, { className: "w-6 h-6 text-[#f15e1c] stroke-[2]" })}
-                      </div>
                       <span className="text-xs font-mono font-black text-[#f15e1c] px-2.5 py-0.5 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/30">
                         {card.id}
                       </span>

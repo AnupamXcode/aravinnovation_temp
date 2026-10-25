@@ -161,9 +161,6 @@ export function CaseStudy3DTransformation() {
                   <span className={cn("text-xs font-mono font-extrabold px-3.5 py-1.5 rounded-full border border-current/20 shadow-xs", accentBadgeBg)}>
                     STEP {step.step}
                   </span>
-                  <div className="w-12 h-12 rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0]/80 dark:border-[#1a1a1a] flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 group-hover:border-current transition-all duration-300">
-                    {step.icon}
-                  </div>
                 </div>
 
                 {/* Step Body */}

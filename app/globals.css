@@ -605,3 +605,26 @@ main#main-content:has([data-admin-root]) {
   padding-top: 0 !important;
 }
 
+/* Continuous Vertical Testimonials Stream */
+@keyframes verticalStreamScroll {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-vertical-stream {
+  animation: verticalStreamScroll linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-vertical-stream {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+

@@ -232,13 +232,6 @@ export function BusinessChallengesSection() {
                     
                     {/* Left-edge soft gradient to dissolve photo seamlessly into card surface */}
                     <div className="absolute inset-y-0 left-0 w-16 sm:w-20 bg-gradient-to-r from-white dark:from-[#1b2823] via-white/80 dark:via-[#1b2823]/80 to-transparent z-10 pointer-events-none" />
-
-                    {/* Top-Right Icon Badge */}
-                    <div
-                      className={`absolute top-3.5 right-3.5 z-20 w-8 h-8 rounded-lg flex items-center justify-center border shadow-xs transition-transform duration-300 group-hover:scale-108 ${item.badgeBg} ${item.badgeBorder} ${item.badgeColor}`}
-                    >
-                      {item.icon}
-                    </div>
                   </div>
                 </Link>
               </motion.div>
@@ -301,13 +294,6 @@ export function BusinessChallengesSection() {
 
                     {/* Left-edge soft gradient to dissolve photo seamlessly into card surface */}
                     <div className="absolute inset-y-0 left-0 w-16 sm:w-20 bg-gradient-to-r from-white dark:from-[#1b2823] via-white/80 dark:via-[#1b2823]/80 to-transparent z-10 pointer-events-none" />
-
-                    {/* Top-Right Icon Badge */}
-                    <div
-                      className={`absolute top-3.5 right-3.5 z-20 w-8 h-8 rounded-lg flex items-center justify-center border shadow-xs transition-transform duration-300 group-hover:scale-108 ${item.badgeBg} ${item.badgeBorder} ${item.badgeColor}`}
-                    >
-                      {item.icon}
-                    </div>
                   </div>
                 </Link>
               </motion.div>

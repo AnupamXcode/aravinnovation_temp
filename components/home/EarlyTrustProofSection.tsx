@@ -71,9 +71,9 @@ export function EarlyTrustProofSection() {
                     : "border-[#f7d7b0]/80 dark:border-[#262626] hover:border-[#f15e1c]"
                 )}
               >
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-[#f15e1c]/10 text-[#f15e1c] flex items-center justify-center">
-                  <Zap className="w-4 h-4 sm:w-5 sm:h-5" />
-                </div>
+                <span className="font-mono text-xs font-bold text-[#f15e1c] tracking-widest block">
+                  01
+                </span>
                 <h4 className="text-sm sm:text-base font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
                   Performance &amp; Scale
                 </h4>
@@ -94,9 +94,9 @@ export function EarlyTrustProofSection() {
                     : "border-[#f7d7b0]/80 dark:border-[#262626] hover:border-[#2e936f]"
                 )}
               >
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-[#2e936f]/10 text-[#2e936f] flex items-center justify-center">
-                  <Lock className="w-4 h-4 sm:w-5 sm:h-5" />
-                </div>
+                <span className="font-mono text-xs font-bold text-[#2e936f] tracking-widest block">
+                  02
+                </span>
                 <h4 className="text-sm sm:text-base font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
                   Governance &amp; Privacy
                 </h4>
@@ -117,9 +117,9 @@ export function EarlyTrustProofSection() {
                     : "border-[#f7d7b0]/80 dark:border-[#262626] hover:border-[#fab60a]"
                 )}
               >
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-[#fab60a]/10 text-[#fab60a] flex items-center justify-center">
-                  <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
-                </div>
+                <span className="font-mono text-xs font-bold text-[#fab60a] tracking-widest block">
+                  03
+                </span>
                 <h4 className="text-sm sm:text-base font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
                   Verified Code Ownership
                 </h4>

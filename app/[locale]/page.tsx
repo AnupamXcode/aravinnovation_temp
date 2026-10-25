@@ -17,8 +17,8 @@ const Process3DPathway = dynamic(
 const CaseStudy3DTransformation = dynamic(
   () => import("@/components/case-studies/CaseStudy3DTransformation").then((m) => m.CaseStudy3DTransformation)
 );
-const AnimatedTestimonialsCarousel = dynamic(
-  () => import("@/components/testimonials/AnimatedTestimonialsCarousel").then((m) => m.AnimatedTestimonialsCarousel)
+const ClientTestimonialsSection = dynamic(
+  () => import("@/components/testimonials/ClientTestimonialsSection").then((m) => m.ClientTestimonialsSection)
 );
 const LeadForm = dynamic(
   () => import("@/components/forms/LeadForm").then((m) => m.LeadForm)
@@ -139,25 +139,8 @@ export default async function HomePage({
       <div id="proof" className="space-y-1 md:space-y-2">
         <CaseStudy3DTransformation />
 
-        <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="executive-endorsements">
-          <Scroll3DContainer variant="testimonial">
-            <section className="max-w-[1760px] mx-auto py-3 sm:py-4 md:py-5 px-4 sm:px-12 lg:px-14 rounded-2xl sm:rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300 relative overflow-hidden">
-              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent" />
-
-              <div className="text-center max-w-3xl mx-auto mb-3 sm:mb-4 space-y-2">
-                <ScrollTextFlip>
-                  <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
-                    What Our Partners Say
-                  </h2>
-                </ScrollTextFlip>
-              </div>
-
-              <ScrollReveal direction="up" delay={0.2}>
-                <AnimatedTestimonialsCarousel />
-              </ScrollReveal>
-            </section>
-          </Scroll3DContainer>
-        </div>
+        {/* 07B — CLIENT TESTIMONIALS (Continuous Stream) */}
+        <ClientTestimonialsSection />
       </div>
 
       {/* 08 — EXECUTIVE LEADERSHIP PROFILE */}

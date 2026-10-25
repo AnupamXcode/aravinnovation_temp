@@ -77,9 +77,6 @@ export function ProblemToSolutionSection() {
                     <span className="text-[10px] sm:text-xs font-mono font-black tracking-widest px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-[#fce3d3] dark:bg-[#161616] text-[#f15e1c] border border-[#f15e1c]/30">
                       {pillar.step} &bull; {pillar.tag}
                     </span>
-                    <div className="w-11 h-11 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform">
-                      {React.cloneElement(pillar.icon, { className: "w-5 h-5 sm:w-8 sm:h-8 stroke-[2]" })}
-                    </div>
                   </div>
 
                   <div className="space-y-1.5 sm:space-y-3">

@@ -18,7 +18,6 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
-import { ServiceCardAnimatedIllustration } from "./ServiceCardAnimatedIllustration";
 
 export interface ServiceCategoryGroup {
   groupName: string;
@@ -345,38 +344,38 @@ export function InteractiveServiceStack3D() {
                   {group.services.map((service) => (
                     <motion.div
                       key={service.id}
-                      whileHover={{ y: -5 }}
-                      transition={{ duration: 0.35, ease: "easeOut" }}
-                      className="group rounded-2xl sm:rounded-3xl bg-[#FBF3EA] dark:bg-[#0e0c0a] border border-[#EFE2D6] dark:border-[#221e1a] p-5 sm:p-6 lg:p-7 flex flex-col justify-between hover:border-[#f15e1c] dark:hover:border-[#f15e1c] hover:bg-[#FFF8F2] dark:hover:bg-[#14100d] hover:shadow-[0_16px_36px_rgba(241,94,28,0.1)] transition-all duration-300 relative overflow-hidden h-full min-h-[250px] sm:min-h-[265px]"
+                      whileHover={{ y: -4 }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
+                      className="group rounded-2xl sm:rounded-[22px] bg-[#FBF3EA] dark:bg-[#0e0c0a] border border-[#EFE2D6] dark:border-[#221e1a] p-5 sm:p-6 flex flex-col justify-between hover:border-[#f15e1c] dark:hover:border-[#f15e1c] hover:bg-[#FFF8F2] dark:hover:bg-[#14100d] hover:shadow-[0_12px_28px_rgba(241,94,28,0.08)] transition-all duration-300 relative overflow-hidden h-full min-h-[200px] sm:min-h-[215px]"
                     >
-                      {/* Independent Animated 3D-Style SVG Illustration (Clean, Crisp, Minimal) */}
-                      <div className="absolute right-0 bottom-0 w-[50%] sm:w-[52%] lg:w-[54%] h-[78%] sm:h-[82%] flex items-center justify-end pointer-events-none select-none overflow-hidden z-0 pr-1 sm:pr-3">
-                        <div className="w-full h-full flex items-center justify-center transform group-hover:scale-108 transition-transform duration-500 ease-out">
-                          <ServiceCardAnimatedIllustration
-                            serviceId={service.id}
-                            className="w-full h-full"
-                          />
-                        </div>
-                      </div>
-
                       {/* Card Content */}
-                      <div className="relative z-10 w-full flex-1 flex flex-col justify-start">
-                        {/* Heading: Kept in ONE LINE across desktop/tablet */}
-                        <h4 className="text-base sm:text-[17px] lg:text-[18px] xl:text-[19px] font-bold font-display text-[#221811] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors mb-3 leading-snug whitespace-normal sm:whitespace-nowrap tracking-tight">
+                      <div className="w-full flex-1 flex flex-col justify-start">
+                        {/* 1. Service Number & 2. Category Eyebrow */}
+                        <div className="flex items-center justify-between gap-2 mb-2 sm:mb-2.5">
+                          <span className="font-mono text-xs font-bold text-[#f15e1c] tracking-widest">
+                            {service.number}
+                          </span>
+                          <span className="text-[11px] font-mono font-medium uppercase tracking-wider text-[#7A6A5F] dark:text-[#B8ACA0]">
+                            {service.category}
+                          </span>
+                        </div>
+
+                        {/* 3. Service Heading */}
+                        <h4 className="text-base sm:text-[18px] font-bold font-display text-[#221811] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors mb-2 leading-snug tracking-tight">
                           {service.name}
                         </h4>
 
-                        {/* Subtext Description (Increased font size and contrast) */}
-                        <p className="text-sm sm:text-[14px] lg:text-[15px] text-[#3A2E27] dark:text-[#E8DDD2] leading-relaxed font-normal max-w-[60%] sm:max-w-[56%] lg:max-w-[58%]">
+                        {/* 4. Short Description */}
+                        <p className="text-xs sm:text-[13.5px] text-[#3A2E27] dark:text-[#E8DDD2] leading-relaxed font-normal">
                           {service.description}
                         </p>
                       </div>
 
-                      {/* Bottom CTA Link (Aligned consistently at bottom-left) */}
-                      <div className="pt-4 mt-auto flex items-center justify-start relative z-10">
+                      {/* 5. Bottom CTA & 6. Directional Arrow */}
+                      <div className="pt-3.5 mt-4 flex items-center justify-start border-t border-[#EFE2D6]/70 dark:border-[#221e1a]">
                         <Link
                           href={service.href}
-                          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#f15e1c] hover:underline py-1 min-h-[32px] group/cta"
+                          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#f15e1c] hover:underline py-0.5 group/cta"
                         >
                           <span>Explore Service</span>
                           <ArrowRight className="w-3.5 h-3.5 group-hover/cta:translate-x-1.5 transition-transform duration-300" />

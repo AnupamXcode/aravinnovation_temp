@@ -486,9 +486,6 @@ export function SEOInteractivePage({ service, relatedPosts }: SEOPageProps) {
                       <span className="text-xs font-mono font-black text-[#2e936f] px-2.5 py-0.5 rounded-md bg-[#e2f2ec] dark:bg-[#161616] border border-[#2e936f]/30">
                         {cap.num}
                       </span>
-                      <div className="w-10 h-10 rounded-xl bg-[#fefaf5] dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                        {cap.icon}
-                      </div>
                     </div>
                     <h3 className="text-lg font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#2e936f] transition-colors leading-snug">
                       {cap.title}

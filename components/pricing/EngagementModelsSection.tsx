@@ -90,9 +90,9 @@ export function EngagementModelsSection() {
               <div className="h-full p-6 sm:p-8 rounded-3xl bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-lg flex flex-col justify-between space-y-6 hover:border-[#f15e1c] transition-all duration-300 group">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <div className="w-12 h-12 rounded-2xl bg-white dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform">
-                      {model.icon}
-                    </div>
+                    <span className="font-mono text-xs font-bold text-[#f15e1c] tracking-widest">
+                      0{idx + 1}
+                    </span>
                     <span className="text-[10px] font-mono font-bold px-3 py-1 rounded-full bg-[#fce3d3] dark:bg-[#161616] text-[#f15e1c] border border-[#f7d7b0] uppercase">
                       {model.badge}
                     </span>
