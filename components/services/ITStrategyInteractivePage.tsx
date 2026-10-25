@@ -46,6 +46,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { MagneticButton } from "@/components/motion/MagneticButton";
+import { CEOLeadershipSection } from "@/components/services/CEOLeadershipSection";
 import { cn } from "@/lib/utils";
 
 interface ITStrategyPageProps {
@@ -1597,6 +1598,11 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
           </AnimatedSection>
         </div>
       </section>
+
+      <SystemScanTransition />
+
+      {/* CEO LEADERSHIP */}
+      <CEOLeadershipSection serviceContext="His perspective shapes technology strategy and architecture designed for enterprise growth." />
 
       <SystemScanTransition />
 

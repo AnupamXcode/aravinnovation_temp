@@ -76,7 +76,8 @@ export function CEOLeadershipSection({
                   src={ceoConfig.portrait}
                   alt={`${ceoConfig.name} - ${ceoConfig.designation}`}
                   fill
-                  sizes="(max-width: 768px) 100vw, 320px"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 400px"
                   className="object-cover object-top filter brightness-[0.98] contrast-[1.02] group-hover:scale-[1.02] transition-transform duration-500 ease-out"
                 />
 

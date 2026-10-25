@@ -63,7 +63,7 @@ export function ServiceCardAnimatedIllustration({
         viewBox="0 0 280 200"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full max-w-[280px] max-h-[200px] overflow-visible drop-shadow-[0_8px_16px_rgba(241,94,28,0.06)]"
+        className="w-full h-full max-w-[360px] max-h-[240px] overflow-visible"
       >
         <defs>
           {/* Universal Palette Linear Gradients */}
@@ -103,11 +103,6 @@ export function ServiceCardAnimatedIllustration({
           </pattern>
         </defs>
 
-        {/* Ambient Soft Glow Behind Illustration */}
-        <circle cx="160" cy="100" r="75" fill="url(#softAmbientBloom)" />
-
-        {/* Dotted Minimal Background Grid Accent */}
-        <rect x="70" y="40" width="80" height="60" fill="url(#dotGridPattern)" opacity="0.6" />
 
         {/* ============================================================== */}
         {/* CARD 01: IT STRATEGY & IMPLEMENTATION                         */}
@@ -443,91 +438,106 @@ export function ServiceCardAnimatedIllustration({
         {/* ============================================================== */}
         {serviceId === 3 && (
           <g>
-            {/* Concentric Radar / Target Discs in Isometric Perspective */}
+            {/* Ambient Warm Gradient Bloom */}
+            <circle cx="165" cy="105" r="60" fill="url(#softAmbientBloom)" />
+
+            {/* Ascending 3D Growth Bars (4 isometric/perspective bars) */}
+            <g>
+              {/* Bar 1 (Shortest) */}
+              <motion.g
+                animate={shouldReduceMotion ? {} : { y: [-2, 2, -2] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                {/* Front face */}
+                <rect x="110" y="112" width="14" height="28" rx="2" fill="url(#aravPeachOrange)" stroke="#f7d7b0" strokeWidth="1" />
+                {/* Top face */}
+                <polygon points="110,112 115,107 129,107 124,112" fill="#ffffff" fillOpacity="0.8" stroke="#f7d7b0" strokeWidth="1" />
+                {/* Side face */}
+                <polygon points="124,112 129,107 129,135 124,140" fill="#fab60a" fillOpacity="0.4" stroke="#f7d7b0" strokeWidth="1" />
+              </motion.g>
+
+              {/* Bar 2 */}
+              <motion.g
+                animate={shouldReduceMotion ? {} : { y: [-3, 3, -3] }}
+                transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+              >
+                <rect x="134" y="96" width="15" height="44" rx="2" fill="url(#aravPeachOrange)" stroke="#fab60a" strokeWidth="1" strokeOpacity="0.8" />
+                <polygon points="134,96 140,90 155,90 149,96" fill="#ffffff" fillOpacity="0.85" stroke="#fab60a" strokeWidth="1" strokeOpacity="0.8" />
+                <polygon points="149,96 155,90 155,134 149,140" fill="#fab60a" fillOpacity="0.45" stroke="#fab60a" strokeWidth="1" strokeOpacity="0.8" />
+              </motion.g>
+
+              {/* Bar 3 */}
+              <motion.g
+                animate={shouldReduceMotion ? {} : { y: [-4, 4, -4] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+              >
+                <rect x="160" y="78" width="16" height="62" rx="2" fill="url(#aravPeachOrange)" stroke="#f15e1c" strokeWidth="1" strokeOpacity="0.7" />
+                <polygon points="160,78 167,71 183,71 176,78" fill="#ffffff" fillOpacity="0.9" stroke="#f15e1c" strokeWidth="1" strokeOpacity="0.7" />
+                <polygon points="176,78 183,71 183,133 176,140" fill="#f15e1c" fillOpacity="0.35" stroke="#f15e1c" strokeWidth="1" strokeOpacity="0.7" />
+              </motion.g>
+
+              {/* Bar 4 (Tallest / Peak Performance) */}
+              <motion.g
+                animate={shouldReduceMotion ? {} : { y: [-5, 5, -5] }}
+                transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+              >
+                <rect x="188" y="58" width="18" height="82" rx="2" fill="url(#aravOrangeGold)" stroke="#f15e1c" strokeWidth="1.2" />
+                <polygon points="188,58 196,50 214,50 206,58" fill="#ffffff" stroke="#f15e1c" strokeWidth="1.2" />
+                <polygon points="206,58 214,50 214,132 206,140" fill="#d8480d" fillOpacity="0.4" stroke="#f15e1c" strokeWidth="1.2" />
+              </motion.g>
+            </g>
+
+            {/* Rising Upward Growth Curve Trajectory */}
+            <motion.path
+              d="M102 135 C125 125, 145 105, 175 75 C190 60, 205 45, 218 36"
+              stroke="#f15e1c"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              fill="none"
+              strokeDasharray="4 3"
+              animate={shouldReduceMotion ? {} : { strokeDashoffset: [0, -28] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+            />
+
+            {/* Ascending 3D Directional Breakthrough Arrow */}
             <motion.g
-              animate={shouldReduceMotion ? {} : { y: [-4, 4, -4] }}
-              transition={slowFloatTransition}
+              animate={shouldReduceMotion ? {} : { y: [-8, 4, -8], x: [3, -2, 3] }}
+              transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut" }}
             >
-              {/* Outer Disc Base */}
-              <ellipse
-                cx="160"
-                cy="110"
-                rx="68"
-                ry="28"
-                fill="url(#aravPeachOrange)"
-                stroke="#f7d7b0"
-                strokeWidth="1.2"
-              />
-
-              {/* Middle Target Ring */}
-              <ellipse
-                cx="160"
-                cy="110"
-                rx="48"
-                ry="20"
-                fill="#ffffff"
-                fillOpacity="0.75"
-                stroke="#fab60a"
-                strokeWidth="1.2"
-                strokeOpacity="0.8"
-              />
-
-              {/* Inner Bullseye Disc */}
-              <ellipse
-                cx="160"
-                cy="110"
-                rx="28"
-                ry="12"
-                fill="#ffffff"
-                stroke="#f15e1c"
-                strokeWidth="1.4"
-              />
-            </motion.g>
-
-            {/* Ascending 3D Growth Arrow Breakthrough */}
-            <motion.g
-              animate={shouldReduceMotion ? {} : { y: [-10, 6, -10], x: [3, -3, 3] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            >
-              {/* Arrow Shaft & Head with Gradient Fill */}
-              <path
-                d="M152 120L172 70L158 72L176 54L192 78L178 76L164 122Z"
-                fill="url(#aravOrangeGold)"
+              <polygon
+                points="218,34 204,44 212,46 206,56 220,44 214,42"
+                fill="#f15e1c"
                 stroke="#ffffff"
                 strokeWidth="1.2"
               />
-              {/* Dimensional Shadow Side on Arrow */}
-              <path
-                d="M164 122L178 76L192 78L176 54L174 58L160 120Z"
-                fill="#d8480d"
-                fillOpacity="0.35"
-              />
             </motion.g>
 
-            {/* Floating Orbiting Conversion Spheres */}
+            {/* Floating Metric & Brand Spheres */}
             <motion.circle
-              cx="118"
-              cy="98"
+              cx="100"
+              cy="125"
+              r="4.5"
+              fill="#2e936f"
+              stroke="#ffffff"
+              strokeWidth="1"
+              animate={shouldReduceMotion ? {} : { y: [-4, 4, -4], x: [-2, 2, -2] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.circle
+              cx="226"
+              cy="95"
               r="5"
               fill="url(#sphereCoreGlow)"
-              animate={shouldReduceMotion ? {} : { y: [-5, 5, -5] }}
-              transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <motion.circle
-              cx="208"
-              cy="92"
-              r="4"
-              fill="#fab60a"
               animate={shouldReduceMotion ? {} : { y: [5, -5, 5] }}
-              transition={{ duration: 5.4, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+              transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
             />
             <motion.circle
-              cx="135"
+              cx="148"
               cy="62"
-              r="3"
-              fill="#f15e1c"
+              r="3.5"
+              fill="#fab60a"
               animate={shouldReduceMotion ? {} : { y: [-3, 3, -3] }}
-              transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
             />
           </g>
         )}

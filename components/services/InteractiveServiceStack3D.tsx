@@ -347,11 +347,11 @@ export function InteractiveServiceStack3D() {
                       key={service.id}
                       whileHover={{ y: -5 }}
                       transition={{ duration: 0.35, ease: "easeOut" }}
-                      className="group rounded-3xl bg-[#FBF3EA] dark:bg-[#0e0c0a] border border-[#EFE2D6] dark:border-[#221e1a] p-5 sm:p-6 lg:p-7 flex flex-col justify-between hover:border-[#f15e1c] dark:hover:border-[#f15e1c] hover:shadow-[0_16px_36px_rgba(241,94,28,0.09)] transition-all duration-300 relative overflow-hidden h-full min-h-[235px] sm:min-h-[245px]"
+                      className="group rounded-2xl sm:rounded-3xl bg-[#FBF3EA] dark:bg-[#0e0c0a] border border-[#EFE2D6] dark:border-[#221e1a] p-5 sm:p-6 lg:p-7 flex flex-col justify-between hover:border-[#f15e1c] dark:hover:border-[#f15e1c] hover:bg-[#FFF8F2] dark:hover:bg-[#14100d] hover:shadow-[0_16px_36px_rgba(241,94,28,0.1)] transition-all duration-300 relative overflow-hidden h-full min-h-[250px] sm:min-h-[265px]"
                     >
-                      {/* Independent Animated 3D-Style SVG Illustration */}
-                      <div className="absolute right-0 bottom-0 top-2 w-[46%] sm:w-[48%] lg:w-[50%] flex items-center justify-end pointer-events-none select-none overflow-hidden z-0 pr-1 sm:pr-2">
-                        <div className="w-full h-full flex items-center justify-center transform group-hover:scale-105 transition-transform duration-500 ease-out">
+                      {/* Independent Animated 3D-Style SVG Illustration (Clean, Crisp, Minimal) */}
+                      <div className="absolute right-0 bottom-0 w-[50%] sm:w-[52%] lg:w-[54%] h-[78%] sm:h-[82%] flex items-center justify-end pointer-events-none select-none overflow-hidden z-0 pr-1 sm:pr-3">
+                        <div className="w-full h-full flex items-center justify-center transform group-hover:scale-108 transition-transform duration-500 ease-out">
                           <ServiceCardAnimatedIllustration
                             serviceId={service.id}
                             className="w-full h-full"
@@ -359,41 +359,28 @@ export function InteractiveServiceStack3D() {
                         </div>
                       </div>
 
-                      <div className="flex-1 flex flex-col relative z-10">
-                        {/* Top Bar: Icon + Category Badge */}
-                        <div className="flex items-center justify-between mb-4">
-                          <div className="w-10 h-10 rounded-2xl bg-white dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2a2622] flex items-center justify-center text-[#f15e1c] shadow-xs group-hover:scale-105 transition-transform shrink-0">
-                            {renderServiceIcon(service.iconName)}
-                          </div>
-                          <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white dark:bg-[#161310] border border-[#EFE2D6] dark:border-[#2a2622] text-[#3A2E27] dark:text-[#FAF5EE]">
-                            {service.category}
-                          </span>
-                        </div>
+                      {/* Card Content */}
+                      <div className="relative z-10 w-full flex-1 flex flex-col justify-start">
+                        {/* Heading: Kept in ONE LINE across desktop/tablet */}
+                        <h4 className="text-base sm:text-[17px] lg:text-[18px] xl:text-[19px] font-bold font-display text-[#221811] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors mb-3 leading-snug whitespace-normal sm:whitespace-nowrap tracking-tight">
+                          {service.name}
+                        </h4>
 
-                        {/* Service Title & Value Proposition (Scoped to ~58-62% width to avoid overlapping illustration) */}
-                        <div className="max-w-[62%] sm:max-w-[58%] lg:max-w-[60%]">
-                          <h4 className="text-base sm:text-lg font-bold font-display text-[#221811] dark:text-[#FAF5EE] group-hover:text-[#f15e1c] transition-colors mb-2 leading-snug">
-                            {service.name}
-                          </h4>
-
-                          <p className="text-xs sm:text-[13px] text-[#3A2E27]/90 dark:text-[#FAF5EE]/90 leading-relaxed mb-4 font-medium">
-                            {service.description}
-                          </p>
-                        </div>
+                        {/* Subtext Description (Increased font size and contrast) */}
+                        <p className="text-sm sm:text-[14px] lg:text-[15px] text-[#3A2E27] dark:text-[#E8DDD2] leading-relaxed font-normal max-w-[60%] sm:max-w-[56%] lg:max-w-[58%]">
+                          {service.description}
+                        </p>
                       </div>
 
-                      {/* Bottom CTA Link (Aligned consistently at bottom) */}
-                      <div className="pt-3.5 mt-auto border-t border-[#EFE2D6]/60 dark:border-[#1f1f1f] flex items-center justify-between relative z-10">
+                      {/* Bottom CTA Link (Aligned consistently at bottom-left) */}
+                      <div className="pt-4 mt-auto flex items-center justify-start relative z-10">
                         <Link
                           href={service.href}
-                          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#f15e1c] hover:underline py-1 min-h-[36px]"
+                          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#f15e1c] hover:underline py-1 min-h-[32px] group/cta"
                         >
                           <span>Explore Service</span>
-                          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-300" />
+                          <ArrowRight className="w-3.5 h-3.5 group-hover/cta:translate-x-1.5 transition-transform duration-300" />
                         </Link>
-                        <span className="font-mono text-[11px] font-bold text-[#7A6A5F] dark:text-[#B8ACA0]">
-                          {service.number}
-                        </span>
                       </div>
                     </motion.div>
                   ))}

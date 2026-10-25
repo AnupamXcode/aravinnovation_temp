@@ -3,7 +3,6 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import dynamic from "next/dynamic";
 import { Hero } from "@/components/hero/Hero";
 import { BusinessChallengesSection } from "@/components/home/BusinessChallengesSection";
-import { Badge } from "@/components/ui/badge";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { ScrollTextFlip } from "@/components/motion/ScrollTextFlip";
 import { ShieldCheck, Zap, Users, Award, CheckCircle } from "lucide-react";
@@ -125,9 +124,6 @@ export default async function HomePage({
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="process">
         <section className="max-w-[1760px] mx-auto py-3 sm:py-4 md:py-5 px-4 sm:px-8 lg:px-10 rounded-2xl md:rounded-[2.5rem] bg-transparent md:bg-[#fefaf5] md:dark:bg-[#0a0a0a] border-0 md:border md:border-[#f7d7b0] md:dark:border-[#1a1a1a] shadow-none md:shadow-2xl transition-all duration-300">
           <div className="text-center w-full max-w-3xl lg:max-w-5xl mx-auto mb-3 sm:mb-4 space-y-2 px-2">
-            <Badge variant="secondary" size="md">
-              HOW WE WORK
-            </Badge>
             <ScrollTextFlip>
               <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] lg:whitespace-nowrap">
                 From Challenge to Business Outcome
@@ -149,9 +145,6 @@ export default async function HomePage({
               <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent" />
 
               <div className="text-center max-w-3xl mx-auto mb-3 sm:mb-4 space-y-2">
-                <Badge variant="secondary" size="md">
-                  EXECUTIVE REVIEWS
-                </Badge>
                 <ScrollTextFlip>
                   <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
                     What Our Partners Say
@@ -188,9 +181,6 @@ export default async function HomePage({
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
               {/* LEFT COLUMN: Heading, Supporting Copy, Value Statement & Contact Details */}
               <div className="lg:col-span-5 space-y-6">
-                <Badge variant="secondary" size="md">
-                  FREE 30-MINUTE TECH &amp; GROWTH REVIEW AVAILABLE
-                </Badge>
                 <ScrollTextFlip>
                   <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight mt-2 leading-[1.1]">
                     Let&apos;s Talk About Your Project

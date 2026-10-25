@@ -2,7 +2,6 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { BlogPost } from "@/data/insights";
-import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Calendar, Tag, BookOpen } from "lucide-react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 
@@ -28,9 +27,6 @@ export function HomeInsightsSection({ posts }: HomeInsightsSectionProps) {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-4 sm:mb-6 gap-4 relative z-10">
           <div className="space-y-2 sm:space-y-3 max-w-2xl">
-            <Badge variant="secondary" size="md">
-              KNOWLEDGE &amp; INSIGHTS
-            </Badge>
             <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight leading-tight">
               Strategic Perspectives on Technology &amp; Engineering
             </h2>

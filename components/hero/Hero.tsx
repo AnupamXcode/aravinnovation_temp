@@ -61,16 +61,18 @@ export function Hero() {
 
   // Ensure horizontal alignment is flush with the page grid, and shift content upwards
   const isMobile = deviceKey === "mobile";
-  const effectiveContentX = 0;
-  const effectiveContentY = isMobile ? -8 : ((positioning.contentY || 0) - 36);
+  const effectiveContentY = isMobile ? -14 : ((positioning.contentY || 0) - 34);
 
   return (
-    <section className="relative w-full h-screen min-h-screen h-[100dvh] min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-[#FFFDF9] dark:bg-[#16221d] transition-colors duration-300">
+    <section className="relative w-full min-h-screen min-h-[100dvh] flex flex-col justify-between overflow-hidden bg-[#FFFDF9] dark:bg-[#16221d] transition-colors duration-300">
       {/* Background Video Layer with Preserved Minimalist Video */}
       <HeroVideoBackground />
 
-      {/* Main Editorial / Enterprise Content Container */}
-      <div className="relative z-10 w-full max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 pt-16 sm:pt-20 pb-8 my-auto box-sizing-border flex flex-col items-center justify-center">
+      {/* Top spacing to account for fixed navbar */}
+      <div className="w-full pt-16 sm:pt-20" aria-hidden="true" />
+
+      {/* Main Editorial / Enterprise Content Container (Centered) */}
+      <div className="relative z-10 w-full max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 my-auto box-sizing-border flex flex-col items-center justify-center">
         
         {/* Center-Aligned Content Column Block */}
         <div
@@ -81,7 +83,7 @@ export function Hero() {
         >
           {/* 01. Main Editorial Headline: Restrained Two-Line Clipped Reveal */}
           <h1
-            className="font-display font-extrabold text-[32px] xs:text-[36px] sm:text-5xl lg:text-[54px] xl:text-[58px] text-[#221811] dark:text-[#ffffff] tracking-tight leading-[1.12] sm:leading-[1.08] text-center transition-all duration-200 max-w-full break-words space-y-1 mb-4"
+            className="font-display font-extrabold text-[34px] xs:text-[38px] sm:text-5xl lg:text-[60px] xl:text-[64px] text-[#221811] dark:text-[#ffffff] tracking-tight leading-[1.12] sm:leading-[1.08] text-center transition-all duration-200 max-w-full break-words space-y-1 mb-3.5 sm:mb-4"
           >
             {/* Line 1 */}
             <span className="block overflow-hidden py-0.5">
@@ -92,7 +94,7 @@ export function Hero() {
                 variants={lineVariants}
                 className="block text-center whitespace-normal sm:whitespace-nowrap"
               >
-                Build, Grow &amp; Scale With
+                Build. Grow. Scale. With
               </motion.span>
             </span>
 
@@ -105,7 +107,7 @@ export function Hero() {
                 variants={lineVariants}
                 className="block text-[#f15e1c] dark:text-[#f15e1c] text-center whitespace-normal sm:whitespace-nowrap"
               >
-                Technology, AI &amp; Digital Growth
+                Technology &amp; AI.
               </motion.span>
             </span>
           </h1>
@@ -118,8 +120,7 @@ export function Hero() {
             variants={fadeUpVariants}
             className="text-base sm:text-lg text-[#3A2E27]/90 dark:text-[#ffffff]/85 max-w-xl sm:max-w-2xl text-center mx-auto leading-relaxed font-sans font-normal transition-all duration-200 mb-6 sm:mb-8"
           >
-            We help businesses turn technology challenges and growth goals into
-            scalable digital solutions and measurable outcomes.
+            We turn business challenges into scalable digital growth.
           </motion.p>
 
           {/* 04. Primary & Secondary Action CTAs */}
@@ -128,7 +129,7 @@ export function Hero() {
             initial="hidden"
             animate="visible"
             variants={fadeUpVariants}
-            className="flex flex-col sm:flex-row items-center justify-center w-full sm:w-auto gap-3.5 sm:gap-4 transition-all duration-200 mb-6 sm:mb-8 mx-auto"
+            className="flex flex-col sm:flex-row items-center justify-center w-full sm:w-auto gap-3.5 sm:gap-4 transition-all duration-200 mx-auto"
           >
             <Link href="/contact" className="w-full sm:w-auto group">
               <Button
@@ -143,78 +144,64 @@ export function Hero() {
               </Button>
             </Link>
 
-            <Link href="#challenges" className="w-full sm:w-auto">
+            <Link href="#challenges" className="w-full sm:w-auto group">
               <Button
                 variant="outline"
                 size="lg"
-                className="w-full sm:w-auto rounded-full px-7 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-semibold bg-white/90 dark:bg-[#1b2823]/80 backdrop-blur-md border border-[#f7d7b0] dark:border-[#2a3c35] text-[#221811] dark:text-[#ffffff] hover:bg-white dark:hover:bg-[#1b2823] hover:border-[#f15e1c] hover:text-[#f15e1c] transition-all duration-300 transform hover:-translate-y-0.5 min-h-[48px] sm:min-h-[52px] justify-center"
+                className="w-full sm:w-auto rounded-full px-7 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-semibold bg-white/95 dark:bg-[#1b2823]/90 backdrop-blur-md border border-[#f15e1c]/40 dark:border-[#f15e1c]/40 text-[#221811] dark:text-[#ffffff] hover:bg-white dark:hover:bg-[#1b2823] hover:border-[#f15e1c] hover:text-[#f15e1c] transition-all duration-300 transform hover:-translate-y-0.5 min-h-[48px] sm:min-h-[52px] justify-center shadow-xs"
+                rightIcon={
+                  <ArrowRight className="w-4 h-4 ml-1 text-[#f15e1c] transition-transform duration-300 group-hover:translate-x-1.5" />
+                }
               >
                 Explore Solutions
               </Button>
             </Link>
           </motion.div>
 
-          {/* 05. Enterprise Credibility Strip with Pipe Dividers */}
-          <motion.div
-            custom={0.65}
-            initial="hidden"
-            animate="visible"
-            variants={fadeUpVariants}
-            className="pt-4 sm:pt-6 border-t border-[#f7d7b0]/70 dark:border-[#2a3c35] w-full max-w-2xl mx-auto transition-all duration-200"
-          >
-            <div
-              className="flex flex-col sm:flex-row items-center sm:divide-x sm:divide-[#f7d7b0]/80 dark:sm:divide-[#2a3c35] justify-center gap-3 sm:gap-0"
-            >
-              <div className="flex items-center gap-2.5 sm:pr-6 text-center sm:text-left justify-center py-0.5 sm:py-0">
-                <div className="w-7 h-7 rounded-lg bg-[#f15e1c]/10 dark:bg-[#f15e1c]/20 flex items-center justify-center shrink-0">
-                  <ShieldCheck className="w-4 h-4 text-[#f15e1c]" />
-                </div>
-                <span className="text-xs sm:text-sm font-semibold text-[#221811] dark:text-[#ffffff] tracking-tight whitespace-normal sm:whitespace-nowrap">
-                  Enterprise Technology Partner
-                </span>
-              </div>
-
-              <div className="flex items-center gap-2.5 sm:px-6 text-center sm:text-left justify-center py-0.5 sm:py-0">
-                <div className="w-7 h-7 rounded-lg bg-[#2e936f]/10 dark:bg-[#2e936f]/20 flex items-center justify-center shrink-0">
-                  <Globe2 className="w-4 h-4 text-[#2e936f]" />
-                </div>
-                <span className="text-xs sm:text-sm font-semibold text-[#221811] dark:text-[#ffffff] tracking-tight whitespace-normal sm:whitespace-nowrap">
-                  India &amp; UAE Strategic Hubs
-                </span>
-              </div>
-
-              <div className="flex items-center gap-2.5 sm:pl-6 text-center sm:text-left justify-center py-0.5 sm:py-0">
-                <div className="w-7 h-7 rounded-lg bg-[#fab60a]/15 dark:bg-[#fab60a]/20 flex items-center justify-center shrink-0">
-                  <Zap className="w-4 h-4 text-[#fab60a]" />
-                </div>
-                <span className="text-xs sm:text-sm font-semibold text-[#221811] dark:text-[#ffffff] tracking-tight whitespace-normal sm:whitespace-nowrap">
-                  Outcome-Driven Architecture
-                </span>
-              </div>
-            </div>
-          </motion.div>
-
         </div>
       </div>
 
-      {/* Floating Scroll Indicator to Next Page */}
-      <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-auto select-none">
-        <Link
-          href="#challenges"
-          className="flex flex-col items-center gap-1.5 text-xs font-mono font-medium text-[#4a5c55] dark:text-[#d3eee4] hover:text-[#f15e1c] transition-colors group cursor-pointer"
-          aria-label="Scroll to explore solutions"
+      {/* 05. Lower Dedicated Trust-Point Row with Generous Breathing Room & Elevated Position */}
+      <div className="relative z-10 w-full max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 pt-2 pb-12 sm:pb-16 lg:pb-20 xl:pb-24">
+        <motion.div
+          custom={0.65}
+          initial="hidden"
+          animate="visible"
+          variants={fadeUpVariants}
+          className="w-full max-w-4xl lg:max-w-5xl mx-auto -translate-y-4 sm:-translate-y-6 lg:-translate-y-8"
         >
-          <span className="text-[10px] sm:text-[11px] uppercase tracking-widest text-[#7A6A5F] dark:text-[#B8ACA0] group-hover:text-[#f15e1c] transition-colors font-bold">
-            Scroll
-          </span>
-          <div className="w-5 h-8 rounded-full border-2 border-[#f7d7b0] dark:border-[#2a3c35] group-hover:border-[#f15e1c] flex items-start justify-center p-1 transition-colors">
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-              className="w-1 h-2 rounded-full bg-[#f15e1c]"
-            />
+          <div className="flex flex-col sm:flex-row items-center justify-center sm:divide-x sm:divide-[#f7d7b0] dark:sm:divide-[#2a3c35] gap-6 sm:gap-0">
+            {/* Trust Point 1 */}
+            <div className="flex flex-col items-center text-center gap-2.5 sm:px-6 md:px-8 lg:px-12 w-full sm:w-1/3">
+              <div className="w-12 h-12 rounded-full bg-[#fef3eb] dark:bg-[#f15e1c]/15 border border-[#f7d7b0] dark:border-[#f15e1c]/30 flex items-center justify-center shadow-xs transition-transform duration-300 hover:scale-108">
+                <ShieldCheck className="w-5 h-5 sm:w-5.5 sm:h-5.5 text-[#f15e1c]" />
+              </div>
+              <span className="text-xs sm:text-sm lg:text-[15px] font-semibold text-[#221811] dark:text-[#ffffff] tracking-tight whitespace-normal sm:whitespace-nowrap">
+                Enterprise Technology Partner
+              </span>
+            </div>
+
+            {/* Trust Point 2 */}
+            <div className="flex flex-col items-center text-center gap-2.5 sm:px-6 md:px-8 lg:px-12 w-full sm:w-1/3">
+              <div className="w-12 h-12 rounded-full bg-[#eaf6f1] dark:bg-[#2e936f]/15 border border-[#2e936f]/30 flex items-center justify-center shadow-xs transition-transform duration-300 hover:scale-108">
+                <Globe2 className="w-5 h-5 sm:w-5.5 sm:h-5.5 text-[#2e936f]" />
+              </div>
+              <span className="text-xs sm:text-sm lg:text-[15px] font-semibold text-[#221811] dark:text-[#ffffff] tracking-tight whitespace-normal sm:whitespace-nowrap">
+                India &amp; UAE Strategic Hubs
+              </span>
+            </div>
+
+            {/* Trust Point 3 */}
+            <div className="flex flex-col items-center text-center gap-2.5 sm:px-6 md:px-8 lg:px-12 w-full sm:w-1/3">
+              <div className="w-12 h-12 rounded-full bg-[#fef9e7] dark:bg-[#fab60a]/15 border border-[#fab60a]/30 flex items-center justify-center shadow-xs transition-transform duration-300 hover:scale-108">
+                <Zap className="w-5 h-5 sm:w-5.5 sm:h-5.5 text-[#fab60a]" />
+              </div>
+              <span className="text-xs sm:text-sm lg:text-[15px] font-semibold text-[#221811] dark:text-[#ffffff] tracking-tight whitespace-normal sm:whitespace-nowrap">
+                Outcome-Driven Architecture
+              </span>
+            </div>
           </div>
-        </Link>
+        </motion.div>
       </div>
     </section>
   );
