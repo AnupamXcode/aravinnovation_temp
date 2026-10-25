@@ -11,6 +11,7 @@ import {
   Battery,
   Monitor,
   Sparkles,
+  GripVertical,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -36,6 +37,30 @@ export function MobilePreviewToggle() {
   const [selectedDevice, setSelectedDevice] = React.useState<DevicePreset>(DEVICE_PRESETS[1]); // Default 390px
   const [iframeKey, setIframeKey] = React.useState(0);
   const [currentUrl, setCurrentUrl] = React.useState<string>("");
+
+  const isDraggingRef = React.useRef(false);
+  const [dragConstraints, setDragConstraints] = React.useState<{
+    left: number;
+    right: number;
+    top: number;
+    bottom: number;
+  }>({ left: -1000, right: 15, top: -800, bottom: 60 });
+
+  React.useEffect(() => {
+    const updateConstraints = () => {
+      if (typeof window !== "undefined") {
+        setDragConstraints({
+          left: -(window.innerWidth - 240),
+          right: 15,
+          top: -(window.innerHeight - 160),
+          bottom: 70,
+        });
+      }
+    };
+    updateConstraints();
+    window.addEventListener("resize", updateConstraints);
+    return () => window.removeEventListener("resize", updateConstraints);
+  }, []);
 
   // Environment & Domain Security Check - Strictly Dev Only
   React.useEffect(() => {
@@ -98,23 +123,40 @@ export function MobilePreviewToggle() {
 
   return (
     <>
-      {/* Floating Trigger Button (Bottom-Right) */}
+      {/* Draggable Movable Floating Trigger Button (Bottom-Right default, movable anywhere) */}
       <motion.button
         type="button"
+        drag
+        dragConstraints={dragConstraints}
+        dragElastic={0.08}
+        dragMomentum={false}
+        whileDrag={{ scale: 1.06, cursor: "grabbing" }}
+        onDragStart={() => {
+          isDraggingRef.current = true;
+        }}
+        onDragEnd={() => {
+          setTimeout(() => {
+            isDraggingRef.current = false;
+          }, 120);
+        }}
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-24 right-6 z-50 flex items-center gap-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-[#f15e1c] via-[#f47d43] to-[#2e936f] text-white shadow-xl hover:shadow-2xl border-2 border-white/40 backdrop-blur-md cursor-pointer font-sans transition-all group"
-        title="Open Side-by-Side Mobile Device Preview (Ctrl+Shift+M)"
+        onClick={() => {
+          if (isDraggingRef.current) return;
+          setIsOpen(true);
+        }}
+        className="fixed bottom-24 right-6 z-50 flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-[#f15e1c] via-[#f47d43] to-[#2e936f] text-white shadow-xl hover:shadow-2xl border-2 border-white/40 backdrop-blur-md cursor-grab active:cursor-grabbing font-sans transition-shadow select-none group touch-none"
+        title="Drag anywhere to reposition • Click or Ctrl+Shift+M to preview"
         aria-label="Open Mobile Device Preview"
       >
-        <Smartphone className="w-5 h-5 text-white animate-pulse" />
+        <GripVertical className="w-3.5 h-3.5 text-white/70 group-hover:text-white transition-colors shrink-0" />
+        <Smartphone className="w-4 h-4 sm:w-5 sm:h-5 text-white animate-pulse shrink-0" />
         <span className="text-xs font-extrabold font-mono uppercase tracking-wider hidden sm:inline-block">
           Mobile Preview
         </span>
-        <span className="px-2 py-0.5 rounded-md bg-black/25 text-[10px] font-mono font-bold text-white/90">
+        <span className="px-1.5 py-0.5 rounded-md bg-black/25 text-[10px] font-mono font-bold text-white/90">
           Ctrl+Shift+M
         </span>
       </motion.button>

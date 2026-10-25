@@ -240,9 +240,9 @@ const getServiceGridClass = (count: number) => {
     return "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 w-full";
   }
   if (count === 2) {
-    return "grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto w-full";
+    return "grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 w-full";
   }
-  return "grid grid-cols-1 max-w-xl mx-auto w-full";
+  return "grid grid-cols-1 max-w-2xl mx-auto w-full";
 };
 
 export function InteractiveServiceStack3D() {
@@ -250,25 +250,23 @@ export function InteractiveServiceStack3D() {
 
   return (
     <section className="w-full py-3 sm:py-4 md:py-5 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#FFFDF9] dark:bg-[#16221d] text-[#221811] dark:text-[#FAF5EE]">
-      {/* Header */}
-      <div className="max-w-3xl mx-auto text-center space-y-2 mb-4 sm:mb-5">
-        <Badge variant="secondary" size="md">
-          ENTERPRISE CAPABILITIES
-        </Badge>
-        <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#221811] dark:text-[#FAF5EE] tracking-tight">
+      <div className="max-w-[1760px] mx-auto w-full space-y-4 sm:space-y-5">
+        {/* Header */}
+        <div className="w-full max-w-3xl lg:max-w-6xl mx-auto text-center space-y-2 mb-3 sm:mb-4">
+        <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#221811] dark:text-[#FAF5EE] tracking-tight lg:whitespace-nowrap">
           Targeted Expertise Across Four Connected Pillars
         </h2>
-        <p className="text-sm sm:text-base text-[#3A2E27] dark:text-[#FAF5EE] font-medium max-w-xl mx-auto">
+        <p className="text-sm sm:text-base text-[#3A2E27] dark:text-[#FAF5EE] font-medium max-w-xl lg:max-w-none mx-auto lg:whitespace-nowrap">
           We structure our capabilities around the specific technology, growth, governance, and talent goals of growing businesses.
         </p>
 
-        {/* Filter Tabs for 4 Organizational Groups */}
-        <div className="flex flex-wrap justify-center gap-2 pt-4">
+        {/* Filter Tabs for 4 Organizational Groups - Single Line on Desktop */}
+        <div className="flex flex-wrap lg:flex-nowrap justify-center items-center gap-2 sm:gap-2.5 pt-3">
           <button
             type="button"
             onClick={() => setSelectedGroupIdx(0)}
             className={cn(
-              "px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer border",
+              "px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer border whitespace-nowrap shrink-0",
               selectedGroupIdx === 0
                 ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-sm"
                 : "bg-white dark:bg-[#121212] text-[#3A2E27] dark:text-[#FAF5EE] border-[#EFE2D6] dark:border-[#222222] hover:border-[#f15e1c]"
@@ -282,7 +280,7 @@ export function InteractiveServiceStack3D() {
               type="button"
               onClick={() => setSelectedGroupIdx(gIdx + 1)}
               className={cn(
-                "px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer border",
+                "px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer border whitespace-nowrap shrink-0",
                 selectedGroupIdx === gIdx + 1
                   ? "bg-[#f15e1c] text-white border-[#f15e1c] shadow-sm"
                   : "bg-white dark:bg-[#121212] text-[#3A2E27] dark:text-[#FAF5EE] border-[#EFE2D6] dark:border-[#222222] hover:border-[#f15e1c]"
@@ -295,7 +293,7 @@ export function InteractiveServiceStack3D() {
       </div>
 
       {/* Render Groups */}
-      <div className="space-y-12 sm:space-y-16">
+      <div className="space-y-6 sm:space-y-8">
         {groupedServicesData
           .filter((_, gIdx) => selectedGroupIdx === 0 || selectedGroupIdx === gIdx + 1)
           .map((group, gIdx) => (
@@ -359,6 +357,7 @@ export function InteractiveServiceStack3D() {
               </div>
             </div>
           ))}
+      </div>
       </div>
     </section>
   );

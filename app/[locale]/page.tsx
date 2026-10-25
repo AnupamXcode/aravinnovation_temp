@@ -2,6 +2,7 @@ import * as React from "react";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import dynamic from "next/dynamic";
 import { Hero } from "@/components/hero/Hero";
+import { BusinessChallengesSection } from "@/components/home/BusinessChallengesSection";
 import { Badge } from "@/components/ui/badge";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { ScrollTextFlip } from "@/components/motion/ScrollTextFlip";
@@ -26,14 +27,17 @@ const LeadForm = dynamic(
 const WhoWeHelpSection = dynamic(
   () => import("@/components/home/WhoWeHelpSection").then((m) => m.WhoWeHelpSection)
 );
-const BusinessChallengesSection = dynamic(
-  () => import("@/components/home/BusinessChallengesSection").then((m) => m.BusinessChallengesSection)
-);
 const HomeFAQSection = dynamic(
   () => import("@/components/home/HomeFAQSection").then((m) => m.HomeFAQSection)
 );
 const HomeInsightsSection = dynamic(
   () => import("@/components/home/HomeInsightsSection").then((m) => m.HomeInsightsSection)
+);
+const ProductEcosystemSection = dynamic(
+  () => import("@/components/home/ProductEcosystemSection").then((m) => m.ProductEcosystemSection)
+);
+const CEOLeadershipSection = dynamic(
+  () => import("@/components/services/CEOLeadershipSection").then((m) => m.CEOLeadershipSection)
 );
 
 import { getSEOForPath, SITE_BASE_URL } from "@/lib/seo";
@@ -106,18 +110,7 @@ export default async function HomePage({
       {/* 01 — HERO */}
       <Hero />
 
-      {/* 02 — CAPABILITIES & DOMAINS */}
-      <section className="w-full py-2 sm:py-2.5 bg-[#fefaf5] dark:bg-[#0a0a0a] border-y border-[#f7d7b0] dark:border-[#1a1a1a] shadow-sm transition-all duration-300 overflow-hidden">
-        <ScrollReveal direction="up">
-          <div className="text-center px-4">
-            <span className="text-[10px] sm:text-[12px] font-bold font-mono uppercase tracking-widest text-[#4a5c55] dark:text-[#d3eee4]">
-              TECHNOLOGY &bull; AI &bull; DIGITAL GROWTH &bull; GOVERNANCE &bull; BUSINESS OUTCOMES
-            </span>
-          </div>
-        </ScrollReveal>
-      </section>
-
-      {/* 03 — WHAT ARE YOU TRYING TO SOLVE? */}
+      {/* 02 — WHAT ARE YOU TRYING TO SOLVE? */}
       <BusinessChallengesSection />
 
       {/* 04 — SERVICES: 8 CONCISE SERVICE CARDS ACROSS 4 PILLARS */}
@@ -125,15 +118,18 @@ export default async function HomePage({
         <InteractiveServiceStack3D />
       </div>
 
-      {/* 05 — HOW WE WORK: 4 STEPS */}
+      {/* 05 — PROPRIETARY PRODUCT ECOSYSTEM */}
+      <ProductEcosystemSection />
+
+      {/* 06 — HOW WE WORK: 4 STEPS */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="process">
-        <section className="py-3 sm:py-4 md:py-5 px-4 sm:px-8 lg:px-10 rounded-2xl md:rounded-[2.5rem] bg-transparent md:bg-[#fefaf5] md:dark:bg-[#0a0a0a] border-0 md:border md:border-[#f7d7b0] md:dark:border-[#1a1a1a] shadow-none md:shadow-2xl transition-all duration-300">
-          <div className="text-center max-w-3xl mx-auto mb-3 sm:mb-4 space-y-2 px-2">
+        <section className="max-w-[1760px] mx-auto py-3 sm:py-4 md:py-5 px-4 sm:px-8 lg:px-10 rounded-2xl md:rounded-[2.5rem] bg-transparent md:bg-[#fefaf5] md:dark:bg-[#0a0a0a] border-0 md:border md:border-[#f7d7b0] md:dark:border-[#1a1a1a] shadow-none md:shadow-2xl transition-all duration-300">
+          <div className="text-center w-full max-w-3xl lg:max-w-5xl mx-auto mb-3 sm:mb-4 space-y-2 px-2">
             <Badge variant="secondary" size="md">
               HOW WE WORK
             </Badge>
             <ScrollTextFlip>
-              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff]">
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] lg:whitespace-nowrap">
                 From Challenge to Business Outcome
               </h2>
             </ScrollTextFlip>
@@ -143,13 +139,13 @@ export default async function HomePage({
         </section>
       </div>
 
-      {/* 06 — PROOF: CASE STUDIES AND REVIEWS */}
+      {/* 07 — PROOF: CASE STUDIES AND REVIEWS */}
       <div id="proof" className="space-y-1 md:space-y-2">
         <CaseStudy3DTransformation />
 
         <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="executive-endorsements">
           <Scroll3DContainer variant="testimonial">
-            <section className="py-3 sm:py-4 md:py-5 px-4 sm:px-12 lg:px-14 rounded-2xl sm:rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300 relative overflow-hidden">
+            <section className="max-w-[1760px] mx-auto py-3 sm:py-4 md:py-5 px-4 sm:px-12 lg:px-14 rounded-2xl sm:rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300 relative overflow-hidden">
               <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f15e1c]/40 to-transparent" />
 
               <div className="text-center max-w-3xl mx-auto mb-3 sm:mb-4 space-y-2">
@@ -171,7 +167,12 @@ export default async function HomePage({
         </div>
       </div>
 
-      {/* 07 — WHO WE HELP */}
+      {/* 08 — EXECUTIVE LEADERSHIP PROFILE */}
+      <div className="w-full" id="leadership">
+        <CEOLeadershipSection />
+      </div>
+
+      {/* 09 — WHO WE HELP */}
       <WhoWeHelpSection />
 
       {/* 08 — FAQ */}
@@ -183,7 +184,7 @@ export default async function HomePage({
       {/* 10 — CONTACT FORM, WHATSAPP, AND OFFICES */}
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16" id="contact">
         <Scroll3DContainer variant="cta">
-          <section className="py-4 md:py-6 px-6 sm:px-12 lg:px-14 rounded-[2.5rem] bg-gradient-to-br from-[#ffffff] via-[#fefaf5] to-[#f7d7b0]/50 dark:from-[#0a0a0a] dark:via-[#121212] dark:to-[#1a1a1a] border-2 border-[#f15e1c]/40 shadow-2xl transition-all duration-300">
+          <section className="max-w-[1760px] mx-auto py-4 md:py-6 px-6 sm:px-12 lg:px-14 rounded-[2.5rem] bg-gradient-to-br from-[#ffffff] via-[#fefaf5] to-[#f7d7b0]/50 dark:from-[#0a0a0a] dark:via-[#121212] dark:to-[#1a1a1a] border-2 border-[#f15e1c]/40 shadow-2xl transition-all duration-300">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
               {/* LEFT COLUMN: Heading, Supporting Copy, Value Statement & Contact Details */}
               <div className="lg:col-span-5 space-y-6">

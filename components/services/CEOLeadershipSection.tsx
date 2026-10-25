@@ -48,13 +48,13 @@ export function CEOLeadershipSection({
   return (
     <section
       ref={containerRef}
-      className={`relative py-10 sm:py-16 lg:py-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-y border-[#f7d7b0]/60 dark:border-[#2e936f]/20 bg-gradient-to-b from-[#fefaf5] via-white to-[#fefaf5] dark:from-[#16221d] dark:via-[#1b2823] dark:to-[#16221d] overflow-hidden select-none ${className}`}
+      className={`relative py-5 sm:py-8 lg:py-10 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-y border-[#f7d7b0]/60 dark:border-[#2e936f]/20 bg-gradient-to-b from-[#fefaf5] via-white to-[#fefaf5] dark:from-[#16221d] dark:via-[#1b2823] dark:to-[#16221d] overflow-hidden select-none ${className}`}
     >
       {/* Subtle Ambient Decorative Glows */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-[#f15e1c]/5 dark:bg-[#f15e1c]/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-[#2e936f]/5 dark:bg-[#2e936f]/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-[1320px] mx-auto relative z-10">
+      <div className="max-w-[1760px] mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-14 items-center">
           
           {/* =========================================================================
@@ -118,11 +118,6 @@ export function CEOLeadershipSection({
               transition={{ duration: 0.5, delay: 0.1 }}
               className="space-y-2"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f15e1c]/10 dark:bg-[#f15e1c]/20 border border-[#f15e1c]/30 text-[#f15e1c] text-xs font-mono font-bold uppercase tracking-wider">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>ABOUT OUR CEO</span>
-              </div>
-
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display tracking-tight text-[#1b2823] dark:text-[#ffffff]">
                 {ceoConfig.name}
               </h2>

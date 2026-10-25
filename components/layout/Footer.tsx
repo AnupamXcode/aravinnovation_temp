@@ -210,7 +210,7 @@ export function Footer() {
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none bg-gradient-to-b from-[#d84a0d]/20 via-transparent to-[#b83e0a]/40" />
 
         {/* Main Centered Content Container (STATIC & STABLE Z-10) */}
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10 space-y-8 sm:space-y-12">
+        <div className="max-w-[1760px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10 space-y-8 sm:space-y-12">
           
           {/* =========================================================================
               LAYER 1: COMPACT TOP CTA AREA (Vibrant Brand Gradient CTA Card)

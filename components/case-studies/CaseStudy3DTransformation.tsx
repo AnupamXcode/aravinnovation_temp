@@ -97,14 +97,8 @@ export function CaseStudy3DTransformation() {
 
         {/* Full-Width Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#f7d7b0] dark:border-[#1a1a1a] pb-6">
-          <div className="space-y-3 max-w-4xl">
-            <div className="flex justify-center md:justify-start">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#161616] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
-                <span className="w-2 h-2 rounded-full bg-[#f15e1c] animate-pulse" />
-                <span>DIGITAL TRANSFORMATION PATHWAY</span>
-              </div>
-            </div>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight leading-[1.1]">
+          <div className="space-y-3 max-w-4xl lg:max-w-none">
+            <h2 className="text-3xl sm:text-5xl lg:text-[40px] xl:text-[48px] 2xl:text-6xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] tracking-tight leading-[1.1] lg:whitespace-nowrap">
               From Legacy Friction to Modern Acceleration
             </h2>
             <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed max-w-3xl">

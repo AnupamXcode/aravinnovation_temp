@@ -67,7 +67,7 @@ export function HomeFAQSection() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <section className="py-3 sm:py-4 md:py-5 px-4 sm:px-12 lg:px-14 rounded-2xl sm:rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300 relative overflow-hidden">
+      <section className="max-w-[1760px] mx-auto py-3 sm:py-4 md:py-5 px-4 sm:px-12 lg:px-14 rounded-2xl sm:rounded-[2.5rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] shadow-2xl transition-all duration-300 relative overflow-hidden">
         <div className="text-center max-w-3xl mx-auto mb-4 sm:mb-5 space-y-2">
           <Badge variant="secondary" size="md">
             FREQUENTLY ASKED QUESTIONS
@@ -82,7 +82,7 @@ export function HomeFAQSection() {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto space-y-3 sm:space-y-4">
+        <div className="max-w-5xl mx-auto space-y-3 sm:space-y-4">
           {homeFaqs.map((faq, idx) => {
             const isOpen = openIdx === idx;
             return (

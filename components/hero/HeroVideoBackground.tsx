@@ -125,7 +125,7 @@ export function HeroVideoBackground() {
           onCanPlay={setVideoPlaybackSpeed}
           onPlay={setVideoPlaybackSpeed}
           onError={() => setVideoError(true)}
-          className="absolute inset-0 w-full h-full object-cover object-center sm:object-[78%_center] transform-gpu transition-opacity duration-500 opacity-100"
+          className="absolute inset-0 w-full h-full object-cover object-center transform-gpu transition-opacity duration-500 opacity-100"
         />
       )}
 

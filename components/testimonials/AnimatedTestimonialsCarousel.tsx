@@ -58,7 +58,7 @@ export function AnimatedTestimonialsCarousel() {
 
   return (
     <div
-      className="relative w-full max-w-4xl mx-auto px-2 sm:px-6 py-4 select-none"
+      className="relative w-full max-w-5xl mx-auto px-2 sm:px-6 py-4 select-none"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onTouchStart={handleTouchStart}
