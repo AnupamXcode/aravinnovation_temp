@@ -34,9 +34,9 @@ export default async function ProductsListingPage() {
   const products = await getProducts();
 
   return (
-    <div className="py-6 sm:py-10 bg-[#fefaf5] dark:bg-[#0a0a0a] transition-colors duration-300">
+    <div className="w-full py-6 sm:py-10 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#fefaf5] dark:bg-[#0a0a0a] transition-colors duration-300">
       <BreadcrumbSchema items={[{ name: "Products", url: "/products" }]} />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div className="max-w-[1760px] mx-auto w-full space-y-10 sm:space-y-12">
         {/* Header */}
         <div className="space-y-3 text-left">
           <ScrollReveal direction="up">
@@ -44,11 +44,7 @@ export default async function ProductsListingPage() {
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={0.1}>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#f15e1c]/10 border border-[#f15e1c]/30 text-xs font-mono font-bold text-[#f15e1c]">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>PROPRIETARY TECH PLATFORMS</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display text-[#2e936f] dark:text-[#2e936f] tracking-tight mt-2">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display text-[#2e936f] dark:text-[#2e936f] tracking-tight">
               Our Products &amp; Platforms
             </h1>
           </ScrollReveal>
@@ -61,7 +57,7 @@ export default async function ProductsListingPage() {
         </div>
 
         {/* Responsive Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8 items-stretch">
           {products.map((product, idx) => (
             <ScrollReveal key={product.slug} delay={idx * 0.1} direction="up" className="h-full">
               <ProductCard product={product} index={idx} />

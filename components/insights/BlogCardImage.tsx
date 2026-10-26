@@ -18,9 +18,9 @@ interface BlogCardImageProps {
 export function BlogCardImage({
   post,
   className,
-  aspectRatio = "aspect-[16/10]",
+  aspectRatio = "aspect-video",
   sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
-  objectFitClass = "object-cover object-top sm:object-center",
+  objectFitClass = "object-cover object-center",
 }: BlogCardImageProps) {
   const primarySrc = getValidBlogImageUrl(post);
   const fallbackSrc = getBlogCategoryFallback(post.category);
@@ -52,12 +52,12 @@ export function BlogCardImage({
       {!hasFailed && currentSrc ? (
         <Image
           src={currentSrc}
-          alt={post.title || "Arav Innovations Blog Article"}
+          alt={post.title ? `Featured cover illustration for ${post.title}` : "Arav Innovations Editorial Article"}
           fill
           unoptimized
           sizes={sizes}
           className={cn(
-            "transition-transform duration-500 text-transparent group-hover:scale-105",
+            "w-full h-full transition-transform duration-300 ease-out group-hover:scale-105",
             objectFitClass
           )}
           onError={handleImageError}

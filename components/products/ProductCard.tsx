@@ -82,13 +82,23 @@ export function ProductCard({ product }: ProductCardProps) {
         alt={displayTitle}
         width={36}
         height={36}
+        unoptimized
         className="w-full h-full object-contain object-center rounded-lg"
       />
     </div>
   ) : product.slug === "fashai-universal" || product.iconName === "FashAILogo" ? (
-    <FashAILogoIcon className="w-6 h-6" />
+    <div className="relative w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center">
+      <Image
+        src="/images/fashai-logo.png"
+        alt={displayTitle}
+        width={36}
+        height={36}
+        unoptimized
+        className="w-full h-full object-contain object-center rounded-lg"
+      />
+    </div>
   ) : product.slug === "getastrav" || product.iconName === "GetAstravLogo" ? (
-    <div className="flex items-center gap-1.5">
+    <div className="flex items-center gap-1.5 px-0.5">
       <GetAstravLogoIcon className="w-6 h-6" />
       <span className="font-extrabold font-display text-xs sm:text-sm text-[#f15e1c] tracking-tight">
         Astrav
@@ -97,7 +107,16 @@ export function ProductCard({ product }: ProductCardProps) {
   ) : product.iconName === "ShieldCheck" ? (
     <ShieldCheck className="w-6 h-6 text-[#f15e1c]" />
   ) : product.slug.includes("astrobeams") || product.iconName === "Orbit" ? (
-    <AstroBeamsLogoIcon className="w-6 h-6" />
+    <div className="relative w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center">
+      <Image
+        src="/images/astrobeams-icon.png"
+        alt={displayTitle}
+        width={36}
+        height={36}
+        unoptimized
+        className="w-full h-full object-contain object-center rounded-lg"
+      />
+    </div>
   ) : (
     <Sparkles className="w-6 h-6 text-[#f15e1c]" />
   );
@@ -113,11 +132,11 @@ export function ProductCard({ product }: ProductCardProps) {
       />
 
       <div className="space-y-5">
-        {/* Top Row: Category Eyebrow & Status Badge */}
-        <div className="flex items-center justify-between">
-          <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#f15e1c]">
-            {product.category || "Proprietary Platform"}
-          </span>
+        {/* Top Row: Restored Product Logo & Status Badge */}
+        <div className="flex items-center justify-between gap-3">
+          <div className="p-2 sm:p-2.5 rounded-2xl bg-white dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#262626] shadow-xs flex items-center justify-center transition-transform duration-300 group-hover:scale-105 shrink-0">
+            {icon}
+          </div>
 
           <div className="flex items-center gap-2 flex-wrap justify-end">
             {product.domain && (

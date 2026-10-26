@@ -135,7 +135,9 @@ export async function getBlogPosts(locale = "en"): Promise<BlogPost[]> {
       allPosts = [...vercelPosts, ...localPosts.filter((p) => !vercelSlugs.has(p.slug))];
     }
   }
-  return allPosts.map(ensureExactDate);
+  return allPosts
+    .map(ensureExactDate)
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 }
 
 export async function getHomeBlogPosts(locale = "en"): Promise<BlogPost[]> {

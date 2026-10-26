@@ -2,7 +2,6 @@ import * as fs from "fs";
 import * as path from "path";
 import { XMLParser } from "fast-xml-parser";
 import { sanitizeArticleHtml } from "../lib/html-sanitizer";
-
 import { BlogPost, BlogPostSection } from "../data/insights";
 
 function stripHtmlTags(str: string): string {
@@ -31,6 +30,19 @@ function calculateReadTime(text: string): string {
   return `${minutes} min read`;
 }
 
+function normalizeUrl(url: string): string {
+  if (!url) return "";
+  let clean = url.trim();
+  if (clean.startsWith("http://blog.aravinnovations.com")) {
+    clean = clean.replace("http://blog.aravinnovations.com", "https://blog.aravinnovations.com");
+  } else if (clean.startsWith("http://aravinnovation.com")) {
+    clean = clean.replace("http://aravinnovation.com", "https://blog.aravinnovations.com");
+  } else if (clean.startsWith("https://aravinnovation.com")) {
+    clean = clean.replace("https://aravinnovation.com", "https://blog.aravinnovations.com");
+  }
+  return clean;
+}
+
 function parseWpContentToSections(htmlContent: string): BlogPostSection[] {
   if (!htmlContent) {
     return [{ heading: "Overview", body: ["No content provided."] }];
@@ -39,11 +51,8 @@ function parseWpContentToSections(htmlContent: string): BlogPostSection[] {
   // Split by headings (h1, h2, h3, h4)
   const headingRegex = /<h[1-4][^>]*>(.*?)<\/h[1-4]>/gi;
   const sections: BlogPostSection[] = [];
-  
-  let match;
-  let lastIndex = 0;
-  let currentHeading = "Overview";
 
+  let match;
   const matches: { heading: string; index: number; length: number }[] = [];
   while ((match = headingRegex.exec(htmlContent)) !== null) {
     matches.push({
@@ -120,8 +129,8 @@ function formatDate(dateStr: string): { publishedAt: string; dateFormatted: stri
   return { publishedAt: isoDate, dateFormatted: formatted };
 }
 
-export function runMigrationPreview() {
-  const xmlPath = path.join(process.cwd(), "wordpress-export", "WordPress.2026-10-10.xml");
+export function runMigration() {
+  const xmlPath = path.join(process.cwd(), "wordpress-export", "WordPress.2026-10-26.xml");
   if (!fs.existsSync(xmlPath)) {
     console.error(`[Error] File not found: ${xmlPath}`);
     process.exit(1);
@@ -144,6 +153,27 @@ export function runMigrationPreview() {
     process.exit(1);
   }
 
+  // Parse Authors
+  const authorsRaw = parsed?.rss?.channel?.["wp:author"] || [];
+  const authorsList = Array.isArray(authorsRaw) ? authorsRaw : [authorsRaw];
+  const authorMap = new Map<string, { name: string; role: string }>();
+
+  for (const a of authorsList) {
+    const login = a["wp:author_login"];
+    const displayName = a["wp:author_display_name"] || login;
+    if (login === "nextgenph.usa@gmail.com") {
+      authorMap.set(login, { name: "Aryan Sayal", role: "Founder & CEO" });
+    } else if (login === "Arav Innovations") {
+      authorMap.set(login, { name: "Arav Innovations Editorial", role: "Editorial Team" });
+    } else if (login === "abrar") {
+      authorMap.set(login, { name: "Abrar Idariya", role: "Practice Contributor" });
+    } else if (login === "shifa") {
+      authorMap.set(login, { name: "Shifa Jaffer", role: "Practice Contributor" });
+    } else {
+      authorMap.set(login, { name: displayName, role: "Author" });
+    }
+  }
+
   // Build attachment metadata lookup (_thumbnail_id to attachment URL)
   const attachmentsMap = new Map<number, string>();
   for (const item of items) {
@@ -151,7 +181,7 @@ export function runMigrationPreview() {
     const postId = parseInt(item["wp:post_id"], 10);
     const attachmentUrl = item["wp:attachment_url"] || item["guid"]?.["#text"] || item["guid"];
     if (postType === "attachment" && postId && typeof attachmentUrl === "string") {
-      attachmentsMap.set(postId, attachmentUrl);
+      attachmentsMap.set(postId, normalizeUrl(attachmentUrl));
     }
   }
 
@@ -165,9 +195,8 @@ export function runMigrationPreview() {
   console.log(`[Parser] Total published posts found: ${publishedPosts.length}`);
 
   const migratedPosts: BlogPost[] = [];
-  const selectedPosts = publishedPosts;
 
-  for (const post of selectedPosts) {
+  for (const post of publishedPosts) {
     const rawTitle = typeof post.title === "string" ? post.title : post.title?.["#text"] || "Untitled Post";
     const title = stripHtmlTags(rawTitle);
     const slug = post["wp:post_name"] || title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
@@ -177,8 +206,13 @@ export function runMigrationPreview() {
     const rawExcerpt = post["excerpt:encoded"] || "";
     const summary = stripHtmlTags(rawExcerpt) || stripHtmlTags(rawContent).substring(0, 160) + "...";
 
-    const { publishedAt, dateFormatted } = formatDate(post["wp:post_date"] || post.pubDate);
-    const creator = post["dc:creator"] || "Arav Innovations Team";
+    const rawDate = post["wp:post_date"] || post.pubDate;
+    const { publishedAt, dateFormatted } = formatDate(rawDate);
+    const creatorLogin = post["dc:creator"] || "Arav Innovations";
+    const author = authorMap.get(creatorLogin) || {
+      name: creatorLogin.includes("@") ? "Arav Innovations Editorial" : creatorLogin,
+      role: "Author",
+    };
 
     // Extract categories & tags
     const categories: string[] = [];
@@ -189,8 +223,10 @@ export function runMigrationPreview() {
       const catList = Array.isArray(catField) ? catField : [catField];
       for (const c of catList) {
         const domain = c["@_domain"];
-        const name = typeof c === "string" ? c : c["#text"] || c["@_nicename"];
+        let name = typeof c === "string" ? c : c["#text"] || c["@_nicename"];
         if (domain === "category" && name && name !== "Uncategorized") {
+          // Normalize common typos in category names
+          if (name.toLowerCase() === "complaince") name = "Compliance";
           categories.push(name);
         } else if (domain === "post_tag" && name) {
           tags.push(name);
@@ -198,7 +234,7 @@ export function runMigrationPreview() {
       }
     }
 
-    const primaryCategory = categories[0] || "Insights";
+    const primaryCategory = categories[0] || "Digital Marketing";
 
     // Extract thumbnail/featured image if available
     let featuredImageUrl: string | undefined = undefined;
@@ -238,10 +274,7 @@ export function runMigrationPreview() {
       readTime,
       publishedAt,
       dateFormatted,
-      author: {
-        name: creator,
-        role: "Author",
-      },
+      author,
       tags: tags.length > 0 ? tags : [primaryCategory],
       keyTakeaways,
       sections,
@@ -260,8 +293,23 @@ export function runMigrationPreview() {
     migratedPosts.push(blogPost);
   }
 
-  // Write output data/wordpress-posts.ts
+  // CRITICAL REQUIREMENT: Sort migrated posts by original publication date, newest first!
+  migratedPosts.sort((a, b) => {
+    const timeA = new Date(a.publishedAt).getTime();
+    const timeB = new Date(b.publishedAt).getTime();
+    return (isNaN(timeB) ? 0 : timeB) - (isNaN(timeA) ? 0 : timeA);
+  });
+
   const outputPath = path.join(process.cwd(), "data", "wordpress-posts.ts");
+  const backupPath = path.join(process.cwd(), "data", "wordpress-posts.ts.bak");
+
+  // Keep a recoverable backup of the current blog data before replacing anything
+  if (fs.existsSync(outputPath)) {
+    fs.copyFileSync(outputPath, backupPath);
+    console.log(`[Parser] Created recoverable backup at: ${backupPath}`);
+  }
+
+  // Write updated data/wordpress-posts.ts
   const fileContent = `import { BlogPost } from "./insights";
 
 export const totalPublishedPostsInXml = ${publishedPosts.length};
@@ -270,7 +318,7 @@ export const wordpressPostsData: BlogPost[] = ${JSON.stringify(migratedPosts, nu
 `;
 
   fs.writeFileSync(outputPath, fileContent, "utf-8");
-  console.log(`[Parser] Successfully migrated all ${migratedPosts.length} posts to: ${outputPath}`);
+  console.log(`[Parser] Successfully migrated all ${migratedPosts.length} posts (newest first) to: ${outputPath}`);
 }
 
-runMigrationPreview();
+runMigration();
