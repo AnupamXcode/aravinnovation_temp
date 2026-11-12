@@ -840,47 +840,7 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
 
       <SystemScanTransition />
 
-      {/* =========================================================================
-          SECTION 03 — STRATEGIC EXECUTION (CONDENSED COPY)
-          ========================================================================= */}
-      <section className="relative py-8 sm:py-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-b border-[#f7d7b0]/60 dark:border-[#1a1a1a]">
-        <div className="max-w-[1440px] mx-auto select-none">
-          <AnimatedSection className="max-w-4xl lg:max-w-5xl mx-auto p-6 sm:p-8 rounded-2xl sm:rounded-[2rem] bg-[#fefaf5] dark:bg-[#0a0a0a] border border-[#f7d7b0] dark:border-[#1a1a1a] space-y-3.5 text-left shadow-xs">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fce3d3] dark:bg-[#16221d] border border-[#f7d7b0] text-xs font-mono font-bold text-[#f15e1c]">
-              <Target className="w-3.5 h-3.5" />
-              <span>STRATEGIC EXECUTION</span>
-            </div>
 
-            <h2 className="text-2xl sm:text-3xl font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] leading-tight">
-              Connecting Business Direction to Technology Architecture
-            </h2>
-
-            <p className="text-xs sm:text-sm md:text-base text-[#4a5c55] dark:text-[#d3eee4] leading-relaxed max-w-4xl font-medium">
-              We translate leadership growth targets into concrete engineering execution — aligning infrastructure, cloud, security, and governance with measurable business outcomes.
-            </p>
-
-            <div className="pt-2 flex flex-wrap gap-2 text-xs font-mono font-bold">
-              <span className="px-3 py-1 rounded-lg bg-white dark:bg-[#16221d] border border-[#f7d7b0] text-[#1b2823] dark:text-[#ffffff]">
-                Business Goal
-              </span>
-              <span className="text-[#f15e1c] flex items-center">&rarr;</span>
-              <span className="px-3 py-1 rounded-lg bg-white dark:bg-[#16221d] border border-[#f7d7b0] text-[#1b2823] dark:text-[#ffffff]">
-                Tech Architecture
-              </span>
-              <span className="text-[#f15e1c] flex items-center">&rarr;</span>
-              <span className="px-3 py-1 rounded-lg bg-white dark:bg-[#16221d] border border-[#f7d7b0] text-[#1b2823] dark:text-[#ffffff]">
-                Execution
-              </span>
-              <span className="text-[#2e936f] flex items-center">&rarr;</span>
-              <span className="px-3 py-1 rounded-lg bg-[#fce3d3] dark:bg-[#161616] border border-[#f15e1c]/40 text-[#f15e1c]">
-                Business Impact
-              </span>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      <SystemScanTransition />
 
       {/* =========================================================================
           SECTION 04 — ARCHITECTURAL FOUNDATION IMAGE + TEXT
