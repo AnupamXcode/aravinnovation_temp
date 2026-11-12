@@ -926,32 +926,27 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
             </p>
           </AnimatedSection>
 
-          {/* 6 Capability Cards — Compact 3 Columns x 2 Rows with Noticeably Stronger Hover */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-6 items-stretch">
+          {/* 6 Capability Cards — Compact & Naturally Proportioned (No Number Badges & Reduced Gap) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4.5 sm:gap-5 lg:gap-5.5 items-stretch">
             {coreSolutions.map((card, idx) => (
               <AnimatedSection key={card.id} delay={0.04 * idx} className="h-full">
                 <a
                   href={card.href}
-                  className="group relative block h-full min-h-[270px] sm:min-h-[285px] lg:min-h-[290px] p-5.5 sm:p-6 lg:p-6.5 rounded-2xl sm:rounded-[22px] bg-gradient-to-br from-[#ffffff] via-[#fffdfb] to-[#fef8f2] dark:from-[#16221d] dark:via-[#182620] dark:to-[#1b2b24] border border-[#f7d7b0] dark:border-[#2a3c35] hover:border-[#f15e1c] hover:bg-gradient-to-br hover:from-[#ffe3d1] hover:via-[#ffd5bd] hover:to-[#ffc69f] dark:hover:from-[#2a1d17] dark:hover:via-[#36251e] dark:hover:to-[#422d24] dark:hover:border-[#f15e1c] shadow-xs hover:shadow-xl hover:shadow-[#f15e1c]/18 hover:-translate-y-1.5 transition-all duration-400 ease-out flex flex-col justify-between overflow-hidden cursor-pointer"
+                  className="group relative block h-full p-5 sm:p-5.5 lg:p-6 rounded-2xl sm:rounded-[20px] bg-gradient-to-br from-[#ffffff] via-[#fffdfb] to-[#fef8f2] dark:from-[#16221d] dark:via-[#182620] dark:to-[#1b2b24] border border-[#f7d7b0] dark:border-[#2a3c35] hover:border-[#f15e1c] hover:bg-gradient-to-br hover:from-[#ffe3d1] hover:via-[#ffd5bd] hover:to-[#ffc69f] dark:hover:from-[#2a1d17] dark:hover:via-[#36251e] dark:hover:to-[#422d24] dark:hover:border-[#f15e1c] shadow-xs hover:shadow-xl hover:shadow-[#f15e1c]/18 hover:-translate-y-1 transition-all duration-300 ease-out flex flex-col justify-between overflow-hidden cursor-pointer"
                 >
-                  {/* Subtle Layered Corner Curves (Smooth hover expansion) */}
-                  <div className="absolute right-0 bottom-0 pointer-events-none transition-transform duration-400 ease-out group-hover:scale-110 group-hover:-translate-x-1.5 group-hover:-translate-y-1.5">
-                    <svg width="125" height="125" viewBox="0 0 125 125" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M125 25 C90 25 25 90 25 125" stroke="#f15e1c" strokeWidth="1.2" strokeOpacity="0.14" className="group-hover:stroke-opacity-35 transition-all duration-400" />
-                      <path d="M125 50 C100 50 50 100 50 125" stroke="#f15e1c" strokeWidth="1.5" strokeOpacity="0.2" className="group-hover:stroke-opacity-45 transition-all duration-400" />
-                      <path d="M125 75 C110 75 75 110 75 125" stroke="#fab60a" strokeWidth="1.2" strokeOpacity="0.22" className="group-hover:stroke-opacity-50 transition-all duration-400" />
+                  {/* Subtle Layered Corner Curves */}
+                  <div className="absolute right-0 bottom-0 pointer-events-none transition-transform duration-400 ease-out group-hover:scale-105 group-hover:-translate-x-1 group-hover:-translate-y-1">
+                    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M100 20 C70 20 20 70 20 100" stroke="#f15e1c" strokeWidth="1.2" strokeOpacity="0.14" className="group-hover:stroke-opacity-35 transition-all duration-300" />
+                      <path d="M100 40 C80 40 40 80 40 100" stroke="#f15e1c" strokeWidth="1.4" strokeOpacity="0.2" className="group-hover:stroke-opacity-45 transition-all duration-300" />
+                      <path d="M100 60 C90 60 60 90 60 100" stroke="#fab60a" strokeWidth="1.2" strokeOpacity="0.22" className="group-hover:stroke-opacity-50 transition-all duration-300" />
                     </svg>
                   </div>
 
-                  {/* Top: Number Badge, Title, Description */}
-                  <div className="space-y-2.5 sm:space-y-3 text-left relative z-10">
-                    {/* Number Badge */}
-                    <div className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-[#fce3d3]/90 dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#2a2a2a] text-xs font-mono font-bold text-[#f15e1c] group-hover:bg-[#f15e1c] group-hover:text-white group-hover:border-[#f15e1c] transition-all duration-300">
-                      {card.id}
-                    </div>
-
+                  {/* Card Content: Title & Description (No Number Badge) */}
+                  <div className="space-y-2 text-left relative z-10">
                     {/* Capability Title */}
-                    <h3 className="text-lg sm:text-[19px] lg:text-[20px] font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#d94f13] dark:group-hover:text-[#ffec69] transition-colors duration-300 leading-snug tracking-tight">
+                    <h3 className="text-lg sm:text-[19px] font-extrabold font-display text-[#1b2823] dark:text-[#ffffff] group-hover:text-[#d94f13] dark:group-hover:text-[#ffec69] transition-colors duration-300 leading-snug tracking-tight">
                       {card.title}
                     </h3>
 
@@ -962,11 +957,11 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
                   </div>
 
                   {/* Bottom: Divider & Explore Capability CTA */}
-                  <div className="pt-3 mt-4 border-t border-[#f7d7b0]/60 dark:border-white/10 group-hover:border-[#f15e1c]/40 flex items-center justify-between text-xs font-mono font-extrabold uppercase tracking-wider text-[#f15e1c] group-hover:text-[#d94f13] dark:group-hover:text-white transition-colors duration-300 relative z-10">
+                  <div className="pt-3 mt-3.5 border-t border-[#f7d7b0]/60 dark:border-white/10 group-hover:border-[#f15e1c]/40 flex items-center justify-between text-xs font-mono font-extrabold uppercase tracking-wider text-[#f15e1c] group-hover:text-[#d94f13] dark:group-hover:text-white transition-colors duration-300 relative z-10">
                     <span>
                       EXPLORE CAPABILITY
                     </span>
-                    <span className="transform transition-transform duration-300 ease-out group-hover:translate-x-2 text-sm font-bold">
+                    <span className="transform transition-transform duration-300 ease-out group-hover:translate-x-1.5 text-sm font-bold">
                       &rarr;
                     </span>
                   </div>
