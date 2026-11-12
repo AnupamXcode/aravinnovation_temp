@@ -38,7 +38,7 @@ export default async function AuditDirectPage({
     description: "Uncover Insights, Drive Excellence.",
     tagline: "Uncover Insights, Drive Excellence",
     icon: "BarChart3",
-    heroImage: "/images/services/audit.jpg",
+    heroImage: "/images/audit-and-improvement.webp",
     businessProblem: { title: "Friction", description: "", painPoints: [] },
     ourSolution: { title: "Solution", description: "", keyPillars: [] },
     capabilities: [],

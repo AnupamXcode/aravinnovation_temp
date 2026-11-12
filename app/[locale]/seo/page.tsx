@@ -38,7 +38,7 @@ export default async function SEODirectPage({
     description: "Turn Search Visibility Into Sustainable Growth.",
     tagline: "Turn Search Visibility Into Sustainable Growth",
     icon: "Search",
-    heroImage: "/images/services/seo.jpg",
+    heroImage: "/images/seo-hero.webp",
     businessProblem: { title: "Friction", description: "", painPoints: [] },
     ourSolution: { title: "Solution", description: "", keyPillars: [] },
     capabilities: [],

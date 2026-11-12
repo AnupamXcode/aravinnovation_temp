@@ -178,6 +178,7 @@ const companyLinks = [
 const exploreLinks = [
   { label: "Blog / Insights", href: "/insights" },
   { label: "Case Studies / Our Work", href: "/case-studies" },
+  { label: "Platforms & Products", href: "/products" },
   { label: "FAQs", href: "/#faq" },
 ];
 
@@ -284,7 +285,7 @@ export function Footer() {
                     <BorderDrawWrapper roundedClass="rounded-lg" rx={8}>
                       <Link
                         href={service.href}
-                        className="group flex items-center justify-between py-2 px-3 rounded-lg bg-white/10 hover:bg-white/20 backdrop-blur-xs transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
+                        className="group flex items-center justify-between py-2 px-3 rounded-lg bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
                       >
                         <span className="text-xs sm:text-sm font-sans font-semibold text-white/95 group-hover:text-white group-hover:translate-x-1 transition-all duration-200">
                           {service.title}
@@ -400,12 +401,12 @@ export function Footer() {
                 </span>
                 <div className="flex items-center gap-2">
                   {[
-                    { name: "LinkedIn", href: config.linkedinUrl || "https://www.linkedin.com/company/aravinnovations/", icon: <LinkedInIcon className="w-3.5 h-3.5" /> },
-                    { name: "Instagram", href: config.instagramUrl || "https://www.instagram.com/aravinnovations", icon: <InstagramIcon className="w-3.5 h-3.5" /> },
-                    { name: "Facebook", href: config.facebookUrl || "https://www.facebook.com/people/Arav-Innovations/61566419637071/", icon: <FacebookIcon className="w-3.5 h-3.5" /> },
-                    { name: "WhatsApp", href: config.whatsappUrl || "https://api.whatsapp.com/send?phone=971521555792", icon: <WhatsAppIcon className="w-3.5 h-3.5" /> },
-                    { name: "Twitter", href: config.twitterUrl || "https://x.com/AravInnovations", icon: <TwitterIcon className="w-3.5 h-3.5" /> },
-                    { name: "YouTube", href: config.youtubeUrl || "https://www.youtube.com/@AravInnovations", icon: <YoutubeIcon className="w-3.5 h-3.5" /> },
+                    { name: "LinkedIn", href: config.linkedinUrl || "https://www.linkedin.com/company/aravinnovations/", icon: <LinkedInIcon className="w-4 h-4" /> },
+                    { name: "Instagram", href: config.instagramUrl || "https://www.instagram.com/aravinnovations", icon: <InstagramIcon className="w-4 h-4" /> },
+                    { name: "Facebook", href: config.facebookUrl || "https://www.facebook.com/people/Arav-Innovations/61566419637071/", icon: <FacebookIcon className="w-4 h-4" /> },
+                    { name: "WhatsApp", href: config.whatsappUrl || "https://api.whatsapp.com/send?phone=971521555792", icon: <WhatsAppIcon className="w-4 h-4" /> },
+                    { name: "Twitter", href: config.twitterUrl || "https://x.com/AravInnovations", icon: <TwitterIcon className="w-4 h-4" /> },
+                    { name: "YouTube", href: config.youtubeUrl || "https://www.youtube.com/@AravInnovations", icon: <YoutubeIcon className="w-4 h-4" /> },
                   ].map((soc) => (
                     <BorderDrawWrapper key={soc.name} roundedClass="rounded-xl" rx={12}>
                       <a
@@ -413,7 +414,7 @@ export function Footer() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={soc.name}
-                        className="w-8.5 h-8.5 rounded-xl bg-white/20 hover:bg-white text-white hover:text-[#d84a0d] flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-xs cursor-pointer"
+                        className="w-9 h-9 rounded-xl bg-white/20 hover:bg-white text-white hover:text-[#d84a0d] flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-sm cursor-pointer"
                       >
                         {soc.icon}
                       </a>
@@ -456,7 +457,7 @@ export function Footer() {
                   
                   {/* INDIA HQ CARD */}
                   <BorderDrawWrapper roundedClass="rounded-xl" rx={12} className="h-full">
-                    <div className="p-4.5 rounded-xl bg-white/15 border border-white/30 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:bg-white/25 hover:-translate-y-1 shadow-xs group">
+                    <div className="p-4 sm:p-5 rounded-xl bg-white/15 border border-white/30 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:bg-white/25 hover:-translate-y-1 shadow-xs group">
                       <a
                         href={footerConfig.mapsUrlIndia || "https://www.google.com/maps/search/?api=1&query=Platinum+Floor%2C+14%2F23%2C+Ardee+City%2C+Sector+52%2C+Gurgaon%2C+122002"}
                         target="_blank"
@@ -492,7 +493,7 @@ export function Footer() {
 
                   {/* UAE REGIONAL OFFICE CARD */}
                   <BorderDrawWrapper roundedClass="rounded-xl" rx={12} className="h-full">
-                    <div className="p-4.5 rounded-xl bg-white/15 border border-white/30 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:bg-white/25 hover:-translate-y-1 shadow-xs group">
+                    <div className="p-4 sm:p-5 rounded-xl bg-white/15 border border-white/30 flex flex-col justify-between h-full space-y-3 transition-all duration-300 hover:bg-white/25 hover:-translate-y-1 shadow-xs group">
                       <a
                         href={footerConfig.mapsUrlUAE || "https://www.google.com/maps/search/?api=1&query=IFZA+Business+Park+Building+A1+Dubai+Silicon+Oasis+Dubai+UAE"}
                         target="_blank"

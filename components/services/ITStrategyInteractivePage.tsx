@@ -24,6 +24,7 @@ import {
   Check,
   ChevronRight,
   Shield,
+  ShieldCheck,
   Cloud,
   Database,
   LayoutGrid,
@@ -47,6 +48,7 @@ import { Badge } from "@/components/ui/badge";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { CEOLeadershipSection } from "@/components/services/CEOLeadershipSection";
+import { ITStrategyVisualization } from "./ITStrategyVisualization";
 import { cn } from "@/lib/utils";
 
 interface ITStrategyPageProps {
@@ -675,172 +677,132 @@ export function ITStrategyInteractivePage({ service, relatedPosts = [] }: ITStra
         <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-radial from-[#f15e1c]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
         <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-radial from-[#2e936f]/10 via-transparent to-transparent blur-3xl rounded-full pointer-events-none lg:hidden" />
 
-        <div className="max-w-[1280px] mx-auto w-full relative z-10 my-auto">
+        <div className="max-w-[1400px] xl:max-w-[1536px] 2xl:max-w-[1680px] mx-auto w-full relative z-10 my-auto">
           
-          {/* 2-Column Hero Grid Composition with Controlled Width & Gap */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-12 lg:gap-16 xl:gap-20 items-center">
+          {/* Proportional 2-Column Hero Flex Composition (43-45% Left / 55-57% Right) */}
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-10 xl:gap-14 2xl:gap-18">
             
-            {/* LEFT COLUMN: HERO COPY (approx 48% width on desktop) */}
-            <div className="lg:col-span-6 xl:col-span-6 space-y-6 text-left max-w-xl lg:max-w-2xl">
+            {/* LEFT COLUMN: HERO COPY & CTAs (~44% width on desktop) */}
+            <div className="w-full lg:w-[45%] xl:w-[44%] 2xl:w-[43%] space-y-6 text-left shrink-0">
               
-              {/* Breadcrumb & Eyebrow Badge */}
-              <AnimatedSection delay={0.05} className="space-y-3">
+              {/* Breadcrumb & Service Identity Row */}
+              <AnimatedSection delay={0.05} className="space-y-4">
                 <Breadcrumb
                   items={[
                     { label: "Services", href: "/services" },
                     { label: "IT Strategy & Implementation" },
                   ]}
                 />
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fce3d3]/80 dark:bg-[#0a0a0a]/90 border border-[#f7d7b0] dark:border-[#222222] text-xs font-mono font-bold text-[#f15e1c] backdrop-blur-xs">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>ENTERPRISE IT STRATEGY CONSULTING</span>
+                
+                {/* Service Identity Row: Icon + Title + Extending Horizontal Line */}
+                <div className="flex items-center gap-3 pt-1">
+                  <div className="flex items-center gap-2.5 shrink-0">
+                    <div className="w-7 h-7 rounded-lg bg-[#fce3d3]/80 dark:bg-[#f15e1c]/15 border border-[#f15e1c]/30 flex items-center justify-center text-[#f15e1c]">
+                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                        <polyline points="2 17 12 22 22 17" />
+                        <polyline points="2 12 12 17 22 12" />
+                      </svg>
+                    </div>
+                    <span className="text-xs sm:text-sm font-bold font-mono uppercase tracking-wider text-[#f15e1c]">
+                      IT Strategy &amp; Implementation
+                    </span>
+                  </div>
+                  <div className="h-px bg-gradient-to-r from-[#f15e1c]/60 via-[#fab60a]/40 to-transparent flex-1 min-w-[40px]" />
                 </div>
               </AnimatedSection>
 
-              {/* Headline & Description with Premium Upward Reveal */}
+              {/* Headline & Description with Exact Typography & Proportions */}
               <AnimatedSection delay={0.1} className="space-y-4">
                 <motion.h1
                   initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                  className="text-3xl sm:text-4xl lg:text-5xl xl:text-[52px] font-extrabold font-display tracking-tight leading-[1.14] text-[#1b2823] dark:text-[#ffffff] max-w-xl"
+                  className="text-4xl sm:text-5xl lg:text-[50px] xl:text-[54px] 2xl:text-[58px] font-extrabold font-display tracking-tight leading-[1.12] text-[#1b2823] dark:text-[#ffffff] max-w-xl"
                 >
-                  Turn Technology Complexity Into a <span className="text-[#f15e1c]">Clear Path Forward</span>
+                  Turn Technology<br className="hidden sm:inline" />
+                  {" "}Complexity Into a<br className="hidden sm:inline" />
+                  {" "}<span className="text-[#f15e1c]">Clear Path Forward</span>
                 </motion.h1>
 
-                <p className="text-sm sm:text-base lg:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-xl">
-                  Technology should support and accelerate business growth, not slow it down. We craft practical, high-impact technology roadmaps that seamlessly connect business goals with modern architecture, cloud infrastructure, and execution plans.
+                <p className="text-base sm:text-lg text-[#4a5c55] dark:text-[#d3eee4] font-medium leading-relaxed max-w-xl">
+                  A practical IT strategy and implementation approach that aligns technology with your business goals, modernizes your architecture, and delivers measurable outcomes.
                 </p>
               </AnimatedSection>
 
-              {/* CTAs */}
-              <AnimatedSection delay={0.15} className="pt-2 flex flex-wrap items-center gap-3.5">
-                <a href="#inquire">
+              {/* Interactive CTAs with Dedicated Spacing & Consistent Heights */}
+              <AnimatedSection delay={0.16} className="pt-2 flex flex-wrap items-center gap-5 sm:gap-6">
+                <a href="#inquire" className="inline-block">
                   <MagneticButton>
-                    <Button3D
-                      variant="primary"
-                      size="md"
-                      rightIcon={<ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />}
-                      className="shadow-md shadow-[#f15e1c]/20 min-h-[48px]"
-                    >
-                      Build My Technology Roadmap
-                    </Button3D>
+                    <button className="h-[50px] sm:h-[52px] px-7 py-3 rounded-full bg-[#f15e1c] hover:bg-[#d94f13] text-white font-bold text-sm sm:text-base shadow-lg shadow-[#f15e1c]/25 transition-all duration-300 hover:shadow-xl hover:shadow-[#f15e1c]/35 hover:-translate-y-0.5 flex items-center justify-center gap-2.5 group cursor-pointer">
+                      <span>Build My Technology Roadmap</span>
+                      <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    </button>
                   </MagneticButton>
                 </a>
 
-                <a href="#our-approach">
+                <a href="#our-approach" className="inline-block">
                   <MagneticButton>
-                    <Button3D variant="outline" size="md" className="min-h-[48px]">
+                    <button className="h-[50px] sm:h-[52px] px-7 py-3 rounded-full bg-white/90 dark:bg-[#16221d]/90 hover:bg-[#fce3d3]/40 dark:hover:bg-[#1b2823] border-2 border-[#f15e1c] text-[#f15e1c] font-bold text-sm sm:text-base transition-all duration-300 hover:-translate-y-0.5 shadow-xs flex items-center justify-center cursor-pointer">
                       Explore Our Approach
-                    </Button3D>
+                    </button>
                   </MagneticButton>
                 </a>
               </AnimatedSection>
 
-              {/* Supporting Statement Strip */}
-              <AnimatedSection delay={0.2} className="pt-3 border-t border-[#f7d7b0]/40 dark:border-white/10 text-xs font-mono font-bold text-[#7A6A5F] dark:text-[#B8ACA0] flex items-center gap-2.5 flex-wrap">
-                <span>Strategy</span>
-                <span className="text-[#f15e1c]">•</span>
-                <span>Architecture</span>
-                <span className="text-[#f15e1c]">•</span>
-                <span>Modernization</span>
-                <span className="text-[#f15e1c]">•</span>
-                <span>Cloud</span>
-                <span className="text-[#f15e1c]">•</span>
-                <span>Governance</span>
-              </AnimatedSection>
-
-            </div>
-
-            {/* RIGHT COLUMN: ENTERPRISE STRATEGY VISUAL CARD (approx 52% width on desktop) */}
-            <div className="lg:col-span-6 xl:col-span-6 w-full mt-6 lg:mt-0">
-              <AnimatedSection delay={0.18} className="w-full max-w-md mx-auto lg:max-w-lg relative group">
-                
-                {/* Subtle Ambient Glow */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#f15e1c]/15 via-[#fab60a]/10 to-[#2e936f]/15 rounded-3xl blur-xl opacity-60 group-hover:opacity-90 transition duration-700 pointer-events-none" />
-
-                {/* Translucent Architecture Card Framing the Background Video */}
-                <div className="relative p-6 sm:p-7 rounded-3xl bg-white/75 dark:bg-[#0a0a0a]/80 backdrop-blur-xl border border-[#f7d7b0] dark:border-[#222222] shadow-xl space-y-4">
+              {/* Bottom Benefit Strip (Strict 4-Column Layout on Desktop, 2x2 on Mobile) */}
+              <AnimatedSection delay={0.22} className="pt-5 border-t border-[#f7d7b0]/50 dark:border-white/10 mt-3">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-2.5 xl:gap-3 items-center">
                   
-                  {/* Card Header */}
-                  <div className="flex items-center justify-between pb-3 border-b border-[#f7d7b0]/70 dark:border-[#202020]">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#f15e1c] animate-pulse" />
-                      <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#1b2823] dark:text-[#ffffff]">
-                        IT STRATEGY ARCHITECTURE
-                      </span>
+                  {/* Item 01 */}
+                  <div className="flex items-center gap-2 sm:pr-2 md:border-r md:border-[#f7d7b0]/60 dark:md:border-white/10 min-w-0">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#f15e1c]/10 text-[#f15e1c] flex items-center justify-center shrink-0">
+                      <Target className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     </div>
-                    <span className="px-2.5 py-1 rounded-full bg-[#fce3d3]/80 dark:bg-[#161616] border border-[#f7d7b0] dark:border-[#282828] text-[10px] font-mono font-bold text-[#f15e1c]">
-                      Enterprise Consulting
+                    <span className="text-xs sm:text-[13px] font-semibold text-[#1b2823] dark:text-[#ffffff] leading-tight">
+                      Align IT with Business Goals
                     </span>
                   </div>
 
-                  {/* 3 Strategic Pillars */}
-                  <div className="space-y-2.5">
-                    <div className="p-3 rounded-2xl bg-[#FFFDF9]/90 dark:bg-[#121212]/90 border border-[#f7d7b0]/60 dark:border-[#222222] flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-xl bg-[#f15e1c]/12 text-[#f15e1c] shrink-0">
-                          <Cpu className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="text-xs font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
-                            Legacy System Modernization
-                          </div>
-                          <div className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4]">
-                            Refactor technical debt &amp; monolithic code
-                          </div>
-                        </div>
-                      </div>
-                      <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
+                  {/* Item 02 */}
+                  <div className="flex items-center gap-2 sm:px-1.5 md:pr-2 md:border-r md:border-[#f7d7b0]/60 dark:md:border-white/10 min-w-0">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#2e936f]/10 text-[#2e936f] flex items-center justify-center shrink-0">
+                      <TrendingUp className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     </div>
-
-                    <div className="p-3 rounded-2xl bg-[#FFFDF9]/90 dark:bg-[#121212]/90 border border-[#f7d7b0]/60 dark:border-[#222222] flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-xl bg-[#2e936f]/12 text-[#2e936f] shrink-0">
-                          <Cloud className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="text-xs font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
-                            Cloud Architecture &amp; FinOps
-                          </div>
-                          <div className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4]">
-                            Multi-cloud scaling &amp; predictable ROI
-                          </div>
-                        </div>
-                      </div>
-                      <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
-                    </div>
-
-                    <div className="p-3 rounded-2xl bg-[#FFFDF9]/90 dark:bg-[#121212]/90 border border-[#f7d7b0]/60 dark:border-[#222222] flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-xl bg-[#fab60a]/15 text-[#fab60a] shrink-0">
-                          <Shield className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="text-xs font-bold font-display text-[#1b2823] dark:text-[#ffffff]">
-                            IT Governance &amp; Compliance
-                          </div>
-                          <div className="text-[11px] text-[#4a5c55] dark:text-[#d3eee4]">
-                            Zero-trust controls &amp; DPDP / SOC-2 readiness
-                          </div>
-                        </div>
-                      </div>
-                      <CheckCircle2 className="w-4 h-4 text-[#2e936f] shrink-0" />
-                    </div>
+                    <span className="text-xs sm:text-[13px] font-semibold text-[#1b2823] dark:text-[#ffffff] leading-tight">
+                      Modernize &amp; Scale
+                    </span>
                   </div>
 
-                  {/* Footer Banner */}
-                  <div className="pt-2 text-center flex items-center justify-between text-[11px] font-mono text-[#4a5c55] dark:text-[#d3eee4] border-t border-[#f7d7b0]/50 dark:border-[#1e1e1e]">
-                    <span className="font-semibold text-[#2e936f] flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#2e936f] inline-block" />
-                      Phased Execution Blueprint
+                  {/* Item 03 */}
+                  <div className="flex items-center gap-2 sm:px-1.5 md:pr-2 md:border-r md:border-[#f7d7b0]/60 dark:md:border-white/10 min-w-0">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#fab60a]/15 text-[#fab60a] flex items-center justify-center shrink-0">
+                      <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                    </div>
+                    <span className="text-xs sm:text-[13px] font-semibold text-[#1b2823] dark:text-[#ffffff] leading-tight">
+                      Strengthen Governance
                     </span>
-                    <span className="font-bold text-[#f15e1c]">
-                      Strategy &rarr; Cloud &rarr; Scale
+                  </div>
+
+                  {/* Item 04 */}
+                  <div className="flex items-center gap-2 sm:pl-1.5 min-w-0">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#f15e1c]/10 text-[#f15e1c] flex items-center justify-center shrink-0">
+                      <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                    </div>
+                    <span className="text-xs sm:text-[13px] font-semibold text-[#1b2823] dark:text-[#ffffff] leading-tight">
+                      Drive Execution
                     </span>
                   </div>
 
                 </div>
+              </AnimatedSection>
+
+            </div>
+
+            {/* RIGHT COLUMN: EXPANDED FULL-WIDTH 3D INTERACTIVE VISUALIZATION (~56% width on desktop) */}
+            <div className="w-full lg:w-[55%] xl:w-[56%] 2xl:w-[57%] mt-8 lg:mt-0 flex items-center justify-center grow">
+              <AnimatedSection delay={0.18} className="w-full">
+                <ITStrategyVisualization />
               </AnimatedSection>
             </div>
 

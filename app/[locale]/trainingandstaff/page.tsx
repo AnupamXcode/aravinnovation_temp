@@ -38,7 +38,7 @@ export default async function TrainingAndStaffDirectPage({
     description: "Empowering Teams, Enhancing Capabilities.",
     tagline: "Empowering Teams, Enhancing Capabilities",
     icon: "GraduationCap",
-    heroImage: "/images/services/training-staffing.jpg",
+    heroImage: "/images/training-staff-main.webp",
     businessProblem: { title: "Friction", description: "", painPoints: [] },
     ourSolution: { title: "Solution", description: "", keyPillars: [] },
     capabilities: [],

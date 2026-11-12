@@ -18,6 +18,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
           en: `${SITE_BASE_URL}${path}`,
           hi: `${SITE_BASE_URL}/hi${path}`,
           ar: `${SITE_BASE_URL}/ar${path}`,
+          de: `${SITE_BASE_URL}/de${path}`,
+          fr: `${SITE_BASE_URL}/fr${path}`,
+          es: `${SITE_BASE_URL}/es${path}`,
         },
       },
     };

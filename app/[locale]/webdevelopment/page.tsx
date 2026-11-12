@@ -38,7 +38,7 @@ export default async function WebDevelopmentDirectPage({
     description: "Full-stack responsive web design, custom mobile applications, e-commerce engines, and ongoing maintenance.",
     tagline: "Innovative Web and App Solutions Tailored for Success",
     icon: "Code2",
-    heroImage: "/images/services/web-development.jpg",
+    heroImage: "/images/web-app-main-1.webp",
     businessProblem: { title: "Friction", description: "", painPoints: [] },
     ourSolution: { title: "Solution", description: "", keyPillars: [] },
     capabilities: [],

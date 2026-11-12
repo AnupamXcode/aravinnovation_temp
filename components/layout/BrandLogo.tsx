@@ -21,13 +21,13 @@ export function BrandLogo({ className, variant = "header" }: BrandLogoProps) {
         )}
         aria-label="Arav Innovations - Technology & Digital Transformation"
       >
-        <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 shrink-0">
+        <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-2xl bg-white p-2 shadow-lg flex items-center justify-center shrink-0 border border-white/60 group-hover:border-white transition-all">
           <Image
             src="/logos/arav-logo-footer.png"
             alt="Arav Innovations Logo"
             fill
-            sizes="(max-width: 640px) 64px, 80px"
-            className="object-contain object-left drop-shadow-md"
+            sizes="(max-width: 640px) 48px, 64px"
+            className="object-contain p-1"
           />
         </div>
         <div className="space-y-0.5 sm:space-y-1">

@@ -38,7 +38,7 @@ export default async function RiskAndGovernanceDirectPage({
     description: "Protecting Your Business with Comprehensive Risk, Compliance, and Governance Solutions.",
     tagline: "Protecting Your Business with Comprehensive Risk, Compliance, and Governance Solutions",
     icon: "ShieldCheck",
-    heroImage: "/images/services/risk-governance.jpg",
+    heroImage: "/images/risk-gov-primary.webp",
     businessProblem: { title: "Friction", description: "", painPoints: [] },
     ourSolution: { title: "Solution", description: "", keyPillars: [] },
     capabilities: [],

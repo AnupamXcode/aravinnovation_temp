@@ -39,7 +39,7 @@ export default async function DigitalMarketingDirectPage({
     description: "Omnichannel performance marketing, technical SEO, and high-intent campaign management.",
     tagline: "Building Brands, Driving Growth",
     icon: "TrendingUp",
-    heroImage: "/images/services/digital-marketing.jpg",
+    heroImage: "/images/digital-marketing-bg.webp",
     businessProblem: { title: "Friction", description: "", painPoints: [] },
     ourSolution: { title: "Solution", description: "", keyPillars: [] },
     capabilities: [],

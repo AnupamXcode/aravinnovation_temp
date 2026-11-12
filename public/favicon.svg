@@ -7,18 +7,18 @@
     </linearGradient>
   </defs>
 
-  {/* Clean Transparent Background - Original Official Brand Emblem Mark */}
+  <!-- Clean Transparent Background - Original Official Brand Emblem Mark -->
   <g transform="translate(-2, -2)">
-    {/* Top-Right Green Corner */}
+    <!-- Top-Right Green Corner -->
     <path d="M 42 16 H 78 C 84.6 16 90 21.4 90 28 V 62" stroke="#2e936f" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
     
-    {/* Middle Orange Arrow Bar */}
+    <!-- Middle Orange Arrow Bar -->
     <path d="M 18 36 H 60 C 65.5 36 70 40.5 70 46 V 70" stroke="url(#fav-orange-grad)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
 
-    {/* Magenta/Pink Corner */}
+    <!-- Magenta/Pink Corner -->
     <path d="M 32 54 H 66 C 72.6 54 78 59.4 78 66 V 88" stroke="#e6007a" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
 
-    {/* 3 Dots */}
+    <!-- 3 Dots -->
     <circle cx="32" cy="54" r="6" fill="#e6007a" />
     <circle cx="28" cy="78" r="6" fill="#f15e1c" />
     <circle cx="16" cy="64" r="6" fill="#fab60a" />
